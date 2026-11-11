@@ -13397,6 +13397,7 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://workspaces.amazonaws.com/api/v1"
                 },
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

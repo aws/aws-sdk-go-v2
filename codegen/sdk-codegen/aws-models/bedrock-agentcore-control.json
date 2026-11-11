@@ -3351,7 +3351,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A reference to a private certificate authority (CA) certificate that the gateway uses to verify TLS connections to the target endpoint. Use this when the target presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>"
+                "smithy.api#documentation": "<p>A reference to a private certificate authority (CA) certificate that AgentCore uses to verify TLS connections to an endpoint, such as a gateway target or an identity provider, that presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList": {
@@ -10020,6 +10020,12 @@
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom JWT authorizer configuration.</p>"
                     }
                 },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>"
+                    }
+                },
                 "allowedWorkloadConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#AllowedWorkloadConfiguration",
                     "traits": {
@@ -10153,6 +10159,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom OAuth2 provider configuration.</p>"
                     }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10197,6 +10209,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PrivateEndpointOverrides",
                     "traits": {
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom OAuth2 provider configuration.</p>"
+                    }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>"
                     }
                 },
                 "privateKeyJwtConfig": {
@@ -21443,6 +21461,7 @@
                 "lifecycleConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
                     "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration for the harness's runtime environment. For a harness, <code>idleRuntimeSessionTimeout</code> and <code>maxLifetime</code> each accept a value between 60 and 28800 seconds (8 hours), and <code>idleRuntimeSessionTimeout</code> must be less than or equal to <code>maxLifetime</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21467,7 +21486,10 @@
             "type": "structure",
             "members": {
                 "lifecycleConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration for the harness's runtime environment. For a harness, <code>idleRuntimeSessionTimeout</code> and <code>maxLifetime</code> each accept a value between 60 and 28800 seconds (8 hours), and <code>idleRuntimeSessionTimeout</code> must be less than or equal to <code>maxLifetime</code>. Values above 28800 seconds are rejected with a <code>ValidationException</code>.</p>"
+                    }
                 },
                 "networkConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#NetworkConfiguration"
@@ -22481,10 +22503,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Custom headers to include when connecting to the remote MCP server.</p>"
                     }
+                },
+                "outboundAuth": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessRemoteMcpOutboundAuth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the harness authenticates to this MCP server. Defaults to no authentication.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for connecting to a remote MCP server.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessRemoteMcpOutboundAuth": {
+            "type": "union",
+            "members": {
+                "awsIam": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#IamCredentialProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sign requests to the remote MCP server with Signature Version 4 (SigV4) using the harness execution role. If you don't specify a Region, the harness Region is used.</p>"
+                    }
+                },
+                "none": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>No authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Authentication method for calling a remote MCP server.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessRemoteMcpUrl": {

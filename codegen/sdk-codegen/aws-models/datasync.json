@@ -3761,6 +3761,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>DataSync</fullname>\n         <p>In addition to the Amazon Web Services Management Console and Amazon Web Services Command Line Interface,\n      you can use the DataSync API to configure and manage DataSync with the\n      <a href=\"http://aws.amazon.com/developer/tools/\">Amazon Web Services SDKs</a>.</p>\n         <p>DataSync is an online data movement service that simplifies data\n      migration and helps you quickly, easily, and securely transfer your file or object data to,\n      from, and between Amazon Web Services storage services.</p>\n         <p>This API interface reference includes documentation for using DataSync\n      programmatically. For complete information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html\">DataSync User\n          Guide</a>\n            </i>.</p>",
                 "smithy.api#title": "AWS DataSync",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

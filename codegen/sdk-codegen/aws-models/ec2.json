@@ -21557,7 +21557,7 @@
                 "TrafficType": {
                     "target": "com.amazonaws.ec2#TrafficType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of traffic to monitor (accepted traffic, rejected traffic, or all traffic).\n            This parameter is not supported for transit gateway resource types. It is required for\n            the other resource types.</p>"
+                        "smithy.api#documentation": "<p>The type of traffic to monitor (accepted traffic, rejected traffic, or all traffic).\n            This parameter is not supported for transit gateway or Cloud WAN resource types. It is\n            required for the other resource types.</p>"
                     }
                 },
                 "LogDestinationType": {
@@ -21575,7 +21575,7 @@
                 "LogFormat": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fields to include in the flow log record. List the fields in the order in which\n            they should appear. If you omit this parameter, the flow log is created using the\n            default format. If you specify this parameter, you must include at least one\n            field. For more information about the available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html\">Flow log records</a> \n            in the <i>Amazon VPC User Guide</i> or <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records\">Transit Gateway Flow Log\n                    records</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>\n         <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces.</p>"
+                        "smithy.api#documentation": "<p>The fields to include in the flow log record. List the fields in the order in which\n            they should appear. If you omit this parameter, the flow log is created using the\n            default format. If you specify this parameter, you must include at least one\n            field. For more information about the available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html\">Flow log records</a> \n            in the <i>Amazon VPC User Guide</i>, <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records\">Transit Gateway Flow Log\n                    records</a> in the <i>Amazon Web Services Transit Gateway Guide</i>,\n            or <a href=\"https://docs.aws.amazon.com/network-manager/latest/cloudwan/cwan-flow-logs.html\">Cloud WAN Flow Log\n                    records</a> in the <i>Amazon Web Services Cloud WAN User Guide</i>.</p>\n         <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -21588,7 +21588,7 @@
                 "MaxAggregationInterval": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. \n            The possible values are 60 seconds (1 minute) or 600 seconds (10 minutes).\n            This parameter must be 60 seconds for transit gateway resource types.</p>\n         <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html\">Nitro-based\n                instance</a>, the aggregation interval is always 60 seconds or less, regardless\n            of the value that you specify.</p>\n         <p>Default: 600</p>"
+                        "smithy.api#documentation": "<p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. \n            The possible values are 60 seconds (1 minute) or 600 seconds (10 minutes).\n            This parameter must be 60 seconds for transit gateway and Cloud WAN resource types.</p>\n         <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html\">Nitro-based\n                instance</a>, the aggregation interval is always 60 seconds or less, regardless\n            of the value that you specify.</p>\n         <p>Default: 600</p>"
                     }
                 },
                 "DestinationOptions": {
@@ -67357,6 +67357,24 @@
                     "traits": {
                         "smithy.api#enumValue": "RegionalNatGateway"
                     }
+                },
+                "CoreNetwork": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CoreNetwork"
+                    }
+                },
+                "CoreNetworkEdge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CoreNetworkEdge"
+                    }
+                },
+                "CoreNetworkAttachment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CoreNetworkAttachment"
+                    }
                 }
             }
         },
@@ -69407,7 +69425,7 @@
                 "target": "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs \n            with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. \n            Based on the information that you provide, we configure resources in the template to do the following:</p>\n         <ul>\n            <li>\n               <p>Create a table in Athena that maps fields to a custom log format</p>\n            </li>\n            <li>\n               <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or\n                    monthly basis</p>\n            </li>\n            <li>\n               <p>Create a table partitioned between two timestamps in the past</p>\n            </li>\n            <li>\n               <p>Create a set of named queries in Athena that you can use to get started quickly</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>GetFlowLogsIntegrationTemplate</code> does not support integration between\n                    Amazon Web Services Transit Gateway Flow Logs and Amazon Athena.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs \n            with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. \n            Based on the information that you provide, we configure resources in the template to do the following:</p>\n         <ul>\n            <li>\n               <p>Create a table in Athena that maps fields to a custom log format</p>\n            </li>\n            <li>\n               <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or\n                    monthly basis</p>\n            </li>\n            <li>\n               <p>Create a table partitioned between two timestamps in the past</p>\n            </li>\n            <li>\n               <p>Create a set of named queries in Athena that you can use to get started quickly</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>GetFlowLogsIntegrationTemplate</code> does not support integration between\n                    Amazon Web Services Transit Gateway Flow Logs or Amazon Web Services Cloud WAN Flow Logs\n                    and Amazon Athena.</p>\n         </note>"
             }
         },
         "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateRequest": {

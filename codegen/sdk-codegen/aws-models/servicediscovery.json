@@ -3870,6 +3870,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>Cloud Map</fullname>\n         <p>With Cloud Map, you can configure public DNS, private DNS, or HTTP namespaces that your\n   microservice applications run in. When an instance becomes available, you can call the Cloud Map\n   API to register the instance with Cloud Map. For public or private DNS namespaces, Cloud Map\n   automatically creates DNS records and an optional health check. Clients that submit public or\n   private DNS queries, or HTTP requests, for the service receive an answer that contains up to\n   eight healthy records. </p>",
                 "smithy.api#title": "AWS Cloud Map",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

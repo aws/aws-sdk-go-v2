@@ -9343,10 +9343,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Custom headers to include when connecting to the remote MCP server.</p>"
                     }
+                },
+                "outboundAuth": {
+                    "target": "com.amazonaws.bedrockagentcore#HarnessRemoteMcpOutboundAuth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the harness authenticates to this MCP server. Defaults to no authentication.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for connecting to a remote MCP server.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#HarnessRemoteMcpOutboundAuth": {
+            "type": "union",
+            "members": {
+                "awsIam": {
+                    "target": "com.amazonaws.bedrockagentcore#IamCredentialProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sign requests to the remote MCP server with Signature Version 4 (SigV4) using the harness execution role. If you don't specify a Region, the harness Region is used.</p>"
+                    }
+                },
+                "none": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>No authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Authentication method for calling a remote MCP server.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#HarnessRemoteMcpUrl": {
@@ -10112,6 +10138,37 @@
         },
         "com.amazonaws.bedrockagentcore#HttpResponseCode": {
             "type": "integer"
+        },
+        "com.amazonaws.bedrockagentcore#IamCredentialProvider": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services service used for SigV4 signing. This value identifies the service to authenticate with when sending requests to the target endpoint.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9._-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region used for SigV4 signing. If not specified, defaults to the Region of the resource that makes the request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 32
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An IAM credential provider for authenticating requests. This structure contains the configuration for authenticating with a target endpoint using IAM credentials and SigV4 signing.</p>"
+            }
         },
         "com.amazonaws.bedrockagentcore#IgnoredReferenceInputField": {
             "type": "string",

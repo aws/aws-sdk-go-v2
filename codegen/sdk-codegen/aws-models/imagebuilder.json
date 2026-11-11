@@ -5054,7 +5054,7 @@
                 "values": {
                     "target": "com.amazonaws.imagebuilder#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter values. Filter values are case-sensitive.</p>"
+                        "smithy.api#documentation": "<p>The filter values. Filter values are case-sensitive.</p>\n         <p>The <code>name</code> filter can use a wildcard: <code>web*</code> matches names that\n\t\t\tbegin with <code>web</code>, and <code>*web*</code> matches names that contain\n\t\t\t<code>web</code>. The wildcard isn't supported in other positions or in other\n\t\t\tfilters.</p>"
                     }
                 }
             },
@@ -5083,7 +5083,7 @@
         "com.amazonaws.imagebuilder#FilterValue": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9a-zA-Z./_ :,{}\"-]{1,1024}$"
+                "smithy.api#pattern": "^[0-9a-zA-Z./_ :,{}\"*-]{1,1024}$"
             }
         },
         "com.amazonaws.imagebuilder#FilterValues": {
@@ -7886,12 +7886,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.imagebuilder#ImageScanFinding"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 25
-                }
             }
         },
         "com.amazonaws.imagebuilder#ImageScanState": {
@@ -10425,7 +10419,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -10594,7 +10588,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -10721,7 +10715,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -10849,7 +10843,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -10991,7 +10985,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -11127,7 +11121,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -11265,7 +11259,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -11404,7 +11398,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -11538,7 +11532,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -11849,7 +11843,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12008,7 +12002,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12147,7 +12141,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12268,7 +12262,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12389,7 +12383,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12526,7 +12520,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12707,7 +12701,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12832,7 +12826,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -12959,7 +12953,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -13153,7 +13147,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -13326,7 +13320,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return in a single request. If you don't specify\n\ta value, Image Builder returns up to 25 items. The largest page size that you can request is 100 items.\n\tA page can contain fewer items than the maximum, with a <code>nextToken</code> to continue paging.</p>"
                     }
                 },
                 "nextToken": {
@@ -14581,7 +14575,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 25
+                    "max": 100
                 }
             }
         },

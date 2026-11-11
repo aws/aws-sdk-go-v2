@@ -5233,6 +5233,7 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "https://route53domains.amazonaws.com/doc/2014-05-15/"
                 },
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

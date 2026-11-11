@@ -319,6 +319,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>Service Catalog</fullname>\n         <p>\n            <a href=\"http://aws.amazon.com/servicecatalog\">Service Catalog</a> enables\n         organizations to create and manage catalogs of IT services that are approved for Amazon Web Services. To\n         get the most out of this documentation, you should be familiar with the terminology\n         discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">Service Catalog\n         Concepts</a>.</p>",
                 "smithy.api#title": "AWS Service Catalog",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {
@@ -6068,7 +6069,20 @@
                     "inputToken": "PageToken",
                     "outputToken": "NextPageToken",
                     "pageSize": "PageSize"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListAcceptedPortfolioSharesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicecatalog#ListAcceptedPortfolioSharesInput": {
@@ -6785,7 +6799,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the plans for the specified provisioned product or all plans to which the user has access.</p>"
+                "smithy.api#documentation": "<p>Lists the plans for the specified provisioned product or all plans to which the user has access.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "PageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "ProvisionedProductPlans",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.servicecatalog#ListProvisionedProductPlansInput": {
@@ -7001,7 +7021,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the specified requests or all performed requests.</p>"
+                "smithy.api#documentation": "<p>Lists the specified requests or all performed requests.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "PageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "RecordDetails",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.servicecatalog#ListRecordHistoryInput": {
@@ -7341,7 +7367,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about stack instances that are associated with the specified <code>CFN_STACKSET</code> type provisioned product. You can filter for stack instances that are associated with a specific Amazon Web Services account name or Region. </p>"
+                "smithy.api#documentation": "<p>Returns summary information about stack instances that are associated with the specified <code>CFN_STACKSET</code> type provisioned product. You can filter for stack instances that are associated with a specific Amazon Web Services account name or Region. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "PageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "StackInstances",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.servicecatalog#ListStackInstancesForProvisionedProductInput": {
@@ -10377,7 +10409,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the provisioned products that are available (not terminated).</p>\n         <p>To use additional filtering, see <a>SearchProvisionedProducts</a>.</p>"
+                "smithy.api#documentation": "<p>Lists the provisioned products that are available (not terminated).</p>\n         <p>To use additional filtering, see <a>SearchProvisionedProducts</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "PageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "ProvisionedProducts",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.servicecatalog#ScanProvisionedProductsInput": {

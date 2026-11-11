@@ -6799,6 +6799,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>Amazon Transcribe offers three main types of batch transcription: <b>Standard</b>, <b>Medical</b>, and\n                <b>Call Analytics</b>.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Standard transcriptions</b> are the most common\n                    option. Refer to  for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Medical transcriptions</b> are tailored to\n                    medical professionals and incorporate medical terms. A common use case for this\n                    service is transcribing doctor-patient dialogue into after-visit notes. Refer to\n                         for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Call Analytics transcriptions</b> are designed\n                    for use with call center audio on two different channels; if you're looking for\n                    insight into customer service calls, use this option. Refer to  for details.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Transcribe Service",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

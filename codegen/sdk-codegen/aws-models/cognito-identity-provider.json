@@ -104,6 +104,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#AdminListUserAuthEvents"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#AdminListUserSessions"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#AdminRemoveUserFromGroup"
                 },
                 {
@@ -111,6 +114,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#AdminRespondToAuthChallenge"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#AdminRevokeUserSession"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#AdminSetUserMFAPreference"
@@ -299,7 +305,13 @@
                     "target": "com.amazonaws.cognitoidentityprovider#GetUserAuthFactors"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetUserPoolClientSessionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#GetUserPoolMfaConfig"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetUserPoolSessionConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#GlobalSignOut"
@@ -344,6 +356,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ListUsers"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ListUserSessions"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ListUsersInGroup"
                 },
                 {
@@ -359,6 +374,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#RevokeToken"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#RevokeUserSession"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#SetLogDeliveryConfiguration"
                 },
                 {
@@ -371,7 +389,13 @@
                     "target": "com.amazonaws.cognitoidentityprovider#SetUserMFAPreference"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#SetUserPoolClientSessionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#SetUserPoolMfaConfig"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#SetUserPoolSessionConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#SetUserSettings"
@@ -3930,6 +3954,133 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#AdminListUserSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#AdminListUserSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#AdminListUserSessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the active sessions for a specified user as an administrator. The response\n            includes both token sessions and SSO sessions. Only active sessions are returned;\n            revoked and expired sessions aren't included. Amazon Cognito returns all of a user's sessions in\n            a single page of up to 125 sessions. The results are eventually consistent, and new\n            sessions are typically included within a few seconds.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example list the active sessions of a user as an administrator",
+                        "documentation": "The following example lists the active sessions for the user testuser. The response contains one token session that originated from an SSO session, and the SSO session it came through.",
+                        "input": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "Username": "testuser"
+                        },
+                        "output": {
+                            "Sessions": [
+                                {
+                                    "SessionId": "tkna7b3c9d2e5f8g1h4j6k0m2n5p",
+                                    "SessionType": "TOKEN",
+                                    "ClientId": "1example23456789",
+                                    "CreateDate": 1.792454400117E9,
+                                    "LastActiveDate": 1.792540800234E9,
+                                    "DeviceType": "Chrome 125 / macOS 15.0",
+                                    "LastIPAddress": "192.0.2.42",
+                                    "LastLocation": {
+                                        "City": "Seattle",
+                                        "Country": "United States"
+                                    },
+                                    "OriginSessionId": "ssoq4r8s2t6u9v3w7x1y5z0a2b4c",
+                                    "IsCurrentSession": false
+                                },
+                                {
+                                    "SessionId": "ssoq4r8s2t6u9v3w7x1y5z0a2b4c",
+                                    "SessionType": "SSO",
+                                    "ClientId": "1example23456789",
+                                    "CreateDate": 1.792368000351E9,
+                                    "LastActiveDate": 1.792537200468E9,
+                                    "DeviceType": "Chrome 125 / macOS 15.0",
+                                    "LastIPAddress": "192.0.2.42",
+                                    "LastLocation": {
+                                        "City": "Seattle",
+                                        "Country": "United States"
+                                    },
+                                    "IsCurrentSession": false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdminListUserSessionsRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the user whose sessions you want to list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that Amazon Cognito returned in a previous response. Use this value to\n            retrieve the next page of results if a <code>NextToken</code> was included in a prior\n            response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdminListUserSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "Sessions": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionsListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the user's active sessions. Each element describes one token session or SSO\n            session.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent request to retrieve the next page of\n            results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#AdminRemoveUserFromGroup": {
             "type": "operation",
             "input": {
@@ -4266,6 +4417,96 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Responds to the authentication challenge, as an administrator.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdminRevokeUserSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#AdminRevokeUserSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#AdminRevokeUserSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Revokes a specific user session as an administrator. Amazon Cognito revokes all refresh and\n            access tokens that are associated with the session and deletes the session record. You\n            can revoke either a token session or an SSO session, and you can optionally cascade the\n            revocation to linked sessions.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example revoke a user session as an administrator",
+                        "documentation": "The following example revokes a token session for the user testuser and cascades the revocation to the parent SSO session that the token session came through.",
+                        "input": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "Username": "testuser",
+                            "SessionId": "tknm5k9p2q7r4s8t1v6w3x0y5z2b",
+                            "RevokeAssociatedSessions": "LINKED"
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdminRevokeUserSessionRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the user who owns the session. The username must match the user\n            associated with the <code>SessionId</code>, to confirm they are the intended target\n            user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session to revoke. This is a 28-character string of lowercase letters\n            and digits, prefixed with <code>tkn</code> for a token session or <code>sso</code> for\n            an SSO session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevokeAssociatedSessions": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RevokeAssociatedSessionsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to also revoke the sessions that are linked to the targeted session.\n            <code>NONE</code>, the default, revokes only the targeted session. <code>LINKED</code>\n            also revokes the directly linked session or sessions, interpreted relative to the type\n            of the targeted session: revoking a token session also revokes the parent SSO session it\n            came through, and revoking an SSO session also revokes the token sessions that came\n            through it. The set of linked sessions is eventually consistent, so associated\n            sessions are typically revoked within a few seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdminRevokeUserSessionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -6003,6 +6244,21 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ClientSSOSessionConfigType": {
+            "type": "structure",
+            "members": {
+                "MaxValidityMinutes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SSOSessionMaxValidityMinutesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of time, in minutes, that this app client silently reuses an\n            existing SSO session, returning a new set of tokens without requiring the user to\n            re-authenticate, measured from the user's last fresh authentication. The minimum value\n            is <code>0</code> and the maximum value is <code>129600</code> (90 days). The default is\n            <code>60</code>. A value of <code>0</code> means that this app client never silently\n            reuses the SSO session and always re-authenticates the user. The SSO session record and\n            its cookie are still created regardless of this value, and other app clients in the same\n            user pool can still reuse the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SSO session settings for a user pool app client.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorListType": {
@@ -12518,6 +12774,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#GetUserPoolClientSessionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetUserPoolClientSessionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetUserPoolClientSessionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the session configuration for a user pool app client. If you have never\n            called <code>SetUserPoolClientSessionConfiguration</code> for the app client, this\n            operation returns the default SSO session maximum validity of <code>60</code>\n            minutes.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example get the session configuration of an app client",
+                        "documentation": "The following example returns the per-client session configuration, showing an SSO session validity of 43200 minutes (30 days).",
+                        "input": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "ClientId": "1example23456789"
+                        },
+                        "output": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "ClientId": "1example23456789",
+                            "SSOSession": {
+                                "MaxValidityMinutes": 43200
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetUserPoolClientSessionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client where you want to retrieve the session\n            configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetUserPoolClientSessionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the app client.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client that the session configuration applies to.</p>"
+                    }
+                },
+                "SSOSession": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSSOSessionConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSO session settings for the app client.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#GetUserPoolMfaConfig": {
             "type": "operation",
             "input": {
@@ -12593,6 +12947,96 @@
                     "target": "com.amazonaws.cognitoidentityprovider#WebAuthnConfigurationType",
                     "traits": {
                         "smithy.api#documentation": "<p>Shows user pool configuration for sign-in with passkey authenticators such as\n            biometric devices and security keys. Includes relying-party configuration,\n            user-verification requirements, and whether passkeys can satisfy MFA\n            requirements.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetUserPoolSessionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetUserPoolSessionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetUserPoolSessionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the session tracking configuration for a user pool, including whether session\n            tracking is enabled and the pool-wide maximum number of active token sessions for\n            each user. If you have never called <code>SetUserPoolSessionConfiguration</code> for the\n            user pool, this operation returns the default values: <code>UserSessionTracking</code> as\n            <code>DISABLED</code> and a <code>MaxPerUser</code> value of <code>20</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example get the session configuration of a user pool",
+                        "documentation": "The following example returns the pool-level session configuration, showing that session tracking is enabled with a maximum of 20 concurrent token sessions per user.",
+                        "input": {
+                            "UserPoolId": "us-east-1_EXAMPLE"
+                        },
+                        "output": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "UserSessionTracking": "ENABLED",
+                            "TokenSession": {
+                                "MaxPerUser": 20
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetUserPoolSessionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool where you want to retrieve the session configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetUserPoolSessionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that the session configuration applies to.</p>"
+                    }
+                },
+                "UserSessionTracking": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserSessionTrackingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether session tracking is enabled for the user pool.</p>"
+                    }
+                },
+                "TokenSession": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolTokenSessionConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pool-wide token session settings for the user pool.</p>"
                     }
                 }
             },
@@ -14610,6 +15054,135 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#ListUserSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#ListUserSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#ListUserSessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotConfirmedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Lists the active sessions for the currently signed-in user. Amazon Cognito authorizes this\n            operation with the user's access token and returns all of the user's active sessions\n            across every app client in the user pool, including both token sessions and SSO\n            sessions. The <code>IsCurrentSession</code> field identifies the session that the\n            calling access token belongs to. The results are eventually consistent, and new\n            sessions are typically included within a few seconds.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example list a user's own active sessions",
+                        "documentation": "The following example lists the active sessions for the user who owns the provided access token. The IsCurrentSession field identifies the session that the access token belongs to.",
+                        "input": {
+                            "AccessToken": "eyJra456defEXAMPLE"
+                        },
+                        "output": {
+                            "Sessions": [
+                                {
+                                    "SessionId": "tknb8c4d0e6f2g8h4j0k6m2n8p4q",
+                                    "SessionType": "TOKEN",
+                                    "ClientId": "1example23456789",
+                                    "CreateDate": 1.792454400117E9,
+                                    "LastActiveDate": 1.792540800234E9,
+                                    "DeviceType": "Chrome 125 / macOS 15.0",
+                                    "LastIPAddress": "192.0.2.42",
+                                    "LastLocation": {
+                                        "City": "Seattle",
+                                        "Country": "United States"
+                                    },
+                                    "IsCurrentSession": true
+                                },
+                                {
+                                    "SessionId": "tknm5k9p2q7r4s8t1v6w3x0y5z2b",
+                                    "SessionType": "TOKEN",
+                                    "ClientId": "1example23456789",
+                                    "CreateDate": 1.792195200351E9,
+                                    "LastActiveDate": 1.792281600468E9,
+                                    "DeviceType": "Chrome 125 / Windows 11",
+                                    "LastIPAddress": "198.51.100.17",
+                                    "LastLocation": {
+                                        "City": "Portland",
+                                        "Country": "United States"
+                                    },
+                                    "IsCurrentSession": false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#optionalAuth": {},
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ListUserSessionsRequest": {
+            "type": "structure",
+            "members": {
+                "AccessToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid access token that Amazon Cognito issued to the user whose sessions you want to list.\n            Amazon Cognito derives the user pool and username from this token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that Amazon Cognito returned in a previous response. Use this value to\n            retrieve the next page of results if a <code>NextToken</code> was included in a prior\n            response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ListUserSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "Sessions": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionsListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the user's active sessions. Each element describes one token session or SSO\n            session.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent request to retrieve the next page of\n            results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#ListUsers": {
             "type": "operation",
             "input": {
@@ -15180,6 +15753,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A managed login branding style that's assigned to a user pool app client.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#MaxSessionsPerUserType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#MessageActionType": {
@@ -16447,6 +17029,26 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#RevokeAssociatedSessionsType": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "LINKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls whether revoking a session also revokes the sessions that are linked to it.\n            <code>NONE</code> revokes only the targeted session. <code>LINKED</code> also revokes\n            the directly linked session or sessions, interpreted relative to the type of the\n            targeted session: revoking a token session also revokes the parent SSO session it came\n            through, and revoking an SSO session also revokes the token sessions that came through\n            it. The set of linked sessions is eventually consistent, so associated sessions are\n            typically revoked within a few seconds.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#RevokeToken": {
             "type": "operation",
             "input": {
@@ -16509,6 +17111,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The client secret of the requested app client, if the client has a secret.</p>"
                     }
+                },
+                "RevokeAssociatedSessions": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RevokeAssociatedSessionsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to also revoke the SSO session that is linked to the token session\n            being revoked. <code>NONE</code>, the default, revokes only the token session that is\n            associated with the refresh token. <code>LINKED</code> also revokes the parent SSO\n            session that the token session came through; the other token sessions that came through\n            that SSO session aren't revoked. <code>LINKED</code> has no effect when session tracking\n            is disabled or when the token session has no parent SSO session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16516,6 +17124,99 @@
             }
         },
         "com.amazonaws.cognitoidentityprovider#RevokeTokenResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#RevokeUserSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#RevokeUserSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#RevokeUserSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotConfirmedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Revokes a specific session for the currently signed-in user. Amazon Cognito authorizes this\n            operation with the user's access token, revokes all refresh and access tokens that are\n            associated with the session, and deletes the session record. You can't revoke the\n            session that the calling access token belongs to.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example revoke one of a user's own sessions",
+                        "documentation": "The following example revokes a single token session that belongs to the user who owns the provided access token, such as signing out a lost or stolen device. Only the targeted session is revoked.",
+                        "input": {
+                            "AccessToken": "eyJra456defEXAMPLE",
+                            "SessionId": "tknm5k9p2q7r4s8t1v6w3x0y5z2b",
+                            "RevokeAssociatedSessions": "NONE"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#RevokeUserSessionRequest": {
+            "type": "structure",
+            "members": {
+                "AccessToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid access token that Amazon Cognito issued to the user. Amazon Cognito uses this token to authorize\n            the request and to identify the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session to revoke. This is a 28-character string of lowercase letters\n            and digits, prefixed with <code>tkn</code> for a token session or <code>sso</code> for\n            an SSO session. This value can't identify the caller's own current session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevokeAssociatedSessions": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RevokeAssociatedSessionsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to also revoke the sessions that are linked to the targeted session.\n            <code>NONE</code>, the default, revokes only the targeted session. <code>LINKED</code>\n            also revokes the directly linked session or sessions, interpreted relative to the type\n            of the targeted session: revoking a token session also revokes the parent SSO session it\n            came through, and revoking an SSO session also revokes the token sessions that came\n            through it. The set of linked sessions is eventually consistent, so associated\n            sessions are typically revoked within a few seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#RevokeUserSessionResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -16712,6 +17413,15 @@
                 "smithy.api#documentation": "<p>A user's preference for using SMS message multi-factor authentication (MFA). Turns SMS\n            MFA on and off, and can set SMS as preferred when other MFA options are available. You\n            can't turn off SMS MFA for any of your users when MFA is required in your user pool; you\n            can only set the type that your user prefers. </p>"
             }
         },
+        "com.amazonaws.cognitoidentityprovider#SSOSessionMaxValidityMinutesType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 129600
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#SchemaAttributeType": {
             "type": "structure",
             "members": {
@@ -16884,6 +17594,141 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cognitoidentityprovider#SessionDescriptionType": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session. This is a 28-character string of lowercase\n            letters and digits, prefixed with <code>tkn</code> for a token session or\n            <code>sso</code> for an SSO session.</p>"
+                    }
+                },
+                "SessionType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionTypeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the session. Valid values are <code>TOKEN</code> and\n            <code>SSO</code>.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client that the session belongs to.</p>"
+                    }
+                },
+                "CreateDate": {
+                    "target": "com.amazonaws.cognitoidentityprovider#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the session was created.</p>"
+                    }
+                },
+                "LastActiveDate": {
+                    "target": "com.amazonaws.cognitoidentityprovider#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of the most recent activity on the session. For a token session,\n            this is the most recent token refresh or rotation; a new authentication creates a new\n            token session rather than updating an existing one. For an SSO session, this is the most\n            recent authentication, token grant, or token rotation.</p>"
+                    }
+                },
+                "DeviceType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionDeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the device associated with the most recent activity on the session,\n            derived from the parsed user agent (operating system and browser or app). Amazon Cognito\n            overwrites this value on each sign-in, refresh, and rotation. The value can be\n            <code>unknown</code>. The maximum length is 1,024 characters.</p>"
+                    }
+                },
+                "LastIPAddress": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address associated with the most recent activity on the session. Amazon Cognito\n            overwrites this value on each refresh and rotation. The maximum length is 128\n            characters.</p>"
+                    }
+                },
+                "LastLocation": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionLocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geographic location of the most recent activity on the session, derived from the\n            IP address.</p>"
+                    }
+                },
+                "OriginSessionId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For a token session, the ID of the SSO session that the token session originated from.\n            This value is null for sessions that were initiated through the API and didn't come\n            through an SSO session. Amazon Cognito returns this value for token sessions only.</p>"
+                    }
+                },
+                "IsCurrentSession": {
+                    "target": "com.amazonaws.cognitoidentityprovider#WrappedBooleanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this session matches the access token supplied in the request. This\n            value is always <code>false</code> for the <code>AdminListUserSessions</code> operation,\n            which doesn't take an access token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an active user session. Amazon Cognito returns this type in the responses of\n            <code>ListUserSessions</code> and <code>AdminListUserSessions</code>, for both token\n            sessions and SSO sessions.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionDeviceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 28,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^(tkn|sso)[a-z0-9]{25}$"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionIpAddressType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionLocationCityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionLocationCountryType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionLocationType": {
+            "type": "structure",
+            "members": {
+                "City": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionLocationCityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of the most recent activity on the session, derived from the IP address. This\n            value can be null if geo-IP resolution fails. The maximum length is 256\n            characters.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.cognitoidentityprovider#SessionLocationCountryType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country of the most recent activity on the session, derived from the IP address\n            and returned in English (for example, <code>United States</code>). This is a country\n            name as returned by the geo-IP database, not an ISO country code, and can be\n            <code>unknown</code> if geo-IP resolution fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The geographic location of the most recent activity on a session, derived from the IP\n            address.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#SessionType": {
             "type": "string",
             "traits": {
@@ -16892,6 +17737,38 @@
                     "max": 4096
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionTypeType": {
+            "type": "enum",
+            "members": {
+                "TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOKEN"
+                    }
+                },
+                "SSO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSO"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a user session. <code>TOKEN</code> identifies a token session, which\n            represents an app's authenticated session for a user and is tied to a refresh token.\n            <code>SSO</code> identifies an SSO session, which is a single sign-on (SSO) session that\n            records an authentication through managed login and can let the user sign in to other\n            apps without re-authenticating.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SessionsListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentityprovider#SessionDescriptionType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 125
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#SetLogDeliveryConfiguration": {
@@ -17226,6 +18103,119 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#SetUserPoolClientSessionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#SetUserPoolClientSessionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#SetUserPoolClientSessionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the session configuration for a user pool app client. The configurable\n            client-level setting is the maximum validity period for silent reuse of an SSO session.\n            This operation performs a full replacement of the client-level session configuration;\n            every request parameter is required, and session tracking must be enabled for the user\n            pool. The user pool must be in the Essentials or Plus tier. Otherwise, this operation\n            returns a <code>FeatureUnavailableInTierException</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example set the SSO session validity for an app client",
+                        "documentation": "The following example configures an app client to silently reuse an SSO session for up to 43200 minutes (30 days) since the last authentication before requiring the user to sign in again.",
+                        "input": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "ClientId": "1example23456789",
+                            "SSOSession": {
+                                "MaxValidityMinutes": 43200
+                            }
+                        },
+                        "output": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "ClientId": "1example23456789",
+                            "SSOSession": {
+                                "MaxValidityMinutes": 43200
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SetUserPoolClientSessionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client that you want to configure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SSOSession": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSSOSessionConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSO session settings for the app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SetUserPoolClientSessionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the app client.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client that the session configuration was applied to.</p>"
+                    }
+                },
+                "SSOSession": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSSOSessionConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSO session settings that were applied to the app client.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#SetUserPoolMfaConfig": {
             "type": "operation",
             "input": {
@@ -17346,6 +18336,119 @@
                     "target": "com.amazonaws.cognitoidentityprovider#WebAuthnConfigurationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of your user pool for passkey, or WebAuthn, sign-in with\n            authenticators such as biometric and security-key devices. Includes relying-party\n            configuration and settings for user-verification requirements.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SetUserPoolSessionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#SetUserPoolSessionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#SetUserPoolSessionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables or disables session tracking for a user pool, and sets the pool-wide maximum\n            number of active token sessions that each user can have. This operation performs a\n            full replacement of the pool-level session configuration; every request parameter is\n            required. The user pool must be in the Essentials or Plus tier. Otherwise, this\n            operation returns a <code>FeatureUnavailableInTierException</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example enable session tracking for a user pool",
+                        "documentation": "The following example enables server-side session tracking for a user pool and sets the pool-wide maximum to 20 concurrent token sessions per user.",
+                        "input": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "UserSessionTracking": "ENABLED",
+                            "TokenSession": {
+                                "MaxPerUser": 20
+                            }
+                        },
+                        "output": {
+                            "UserPoolId": "us-east-1_EXAMPLE",
+                            "UserSessionTracking": "ENABLED",
+                            "TokenSession": {
+                                "MaxPerUser": 20
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SetUserPoolSessionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool where you want to configure session tracking.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserSessionTracking": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserSessionTrackingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Cognito tracks sessions for users in the user pool. Set this value to\n            <code>ENABLED</code> to turn on server-side session tracking, or <code>DISABLED</code>\n            to turn it off. When you set this value to <code>DISABLED</code> while the user pool\n            remains active, existing client-level session configurations are retained but dormant,\n            and are reactivated when you enable tracking again.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TokenSession": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolTokenSessionConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pool-wide token session settings to apply.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#SetUserPoolSessionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that the session configuration was applied to.</p>"
+                    }
+                },
+                "UserSessionTracking": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserSessionTrackingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session tracking setting that was applied to the user pool.</p>"
+                    }
+                },
+                "TokenSession": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolTokenSessionConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pool-wide token session settings that were applied.</p>"
                     }
                 }
             },
@@ -20822,6 +21925,21 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#UserPoolTokenSessionConfigType": {
+            "type": "structure",
+            "members": {
+                "MaxPerUser": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MaxSessionsPerUserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of active token sessions that a user can have across the user\n            pool. The minimum value is <code>1</code> and the maximum value is <code>100</code>. The\n            default is <code>20</code>. When a user reaches this limit, the next successful\n            authentication automatically evicts that user's least recently used token session before\n            it creates the new session. Lowering this value doesn't evict existing sessions on its\n            own; the user is brought back within the limit on their next sign-in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pool-wide token session settings for a user pool.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#UserPoolType": {
             "type": "structure",
             "members": {
@@ -21054,6 +22172,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of a user pool.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UserSessionTrackingType": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserStatusType": {
