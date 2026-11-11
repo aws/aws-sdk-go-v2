@@ -1,8 +1,0 @@
-{
-    "id": "5597814e-711e-47c6-bb40-9b89d9344d07",
-    "type": "feature",
-    "description": "Update list operations to support wildcard name filtering and page sizes up to 100 results via MaxResults",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

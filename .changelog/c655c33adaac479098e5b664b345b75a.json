@@ -1,8 +1,0 @@
-{
-    "id": "c655c33a-daac-4790-98e5-b664b345b75a",
-    "type": "feature",
-    "description": "Adds support for AWS Cloud WAN Flow Logs. The CreateFlowLogs API now accepts CoreNetwork, CoreNetworkEdge, and CoreNetworkAttachment resource types, enabling customers to capture information about IP traffic traversing their Cloud WAN core networks.",
-    "modules": [
-        "service/ec2"
-    ]
-}

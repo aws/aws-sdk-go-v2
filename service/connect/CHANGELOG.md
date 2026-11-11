@@ -1,3 +1,7 @@
+# v1.215.0 (2026-11-11)
+
+* **Feature**: Added support for 96 new languages for AI-powered automated evaluations. Chat interactions support all 96 languages. Voice interactions support 57 languages, those with transcription available through post-call conversational analytics.
+
 # v1.214.0 (2026-11-10)
 
 * **Feature**: Amazon Connect now returns Contact Lens conversational analytics configuration in the DescribeContact API. Customers can retrieve a contact's analytics, redaction, summarization, and sentiment settings, consistent with the configuration already available in contact trace records and contact events.

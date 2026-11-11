@@ -1,3 +1,7 @@
+# v1.69.0 (2026-11-11)
+
+* **Feature**: Update list operations to support wildcard name filtering and page sizes up to 100 results via MaxResults
+
 # v1.68.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

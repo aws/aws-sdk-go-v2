@@ -1,3 +1,7 @@
+# v1.345.0 (2026-11-11)
+
+* **Feature**: Adds support for AWS Cloud WAN Flow Logs. The CreateFlowLogs API now accepts CoreNetwork, CoreNetworkEdge, and CoreNetworkAttachment resource types, enabling customers to capture information about IP traffic traversing their Cloud WAN core networks.
+
 # v1.344.3 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,3 +1,7 @@
+# v1.58.0 (2026-11-11)
+
+* **Feature**: Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+
 # v1.57.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,3 +1,69 @@
+# Release (2026-11-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.57.0](service/acmpca/CHANGELOG.md#v1570-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.58.0](service/bedrockagentcore/CHANGELOG.md#v1580-2026-11-11)
+  * **Feature**: Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.80.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1800-2026-11-11)
+  * **Feature**: Adds private certificate authority (CA) support for AgentCore Identity custom OAuth2.0 credential providers and custom JWT authorizers, enabling connections to IdPs with private CAs. Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.44.0](service/cloudhsmv2/CHANGELOG.md#v1440-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.79.0](service/codebuild/CHANGELOG.md#v1790-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.47.0](service/codedeploy/CHANGELOG.md#v1470-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.57.0](service/codepipeline/CHANGELOG.md#v1570-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.76.0](service/cognitoidentityprovider/CHANGELOG.md#v1760-2026-11-11)
+  * **Feature**: This release adds session management operations that let user pool administrators and users list and revoke active sessions, and configure session tracking, per-user session limits, and SSO session validity per app client.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.50.0](service/comprehend/CHANGELOG.md#v1500-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.75.0](service/configservice/CHANGELOG.md#v1750-2026-11-11)
+  * **Feature**: AWS Config now supports connectors for Google Cloud. PutConnector accepts a Google Cloud connector configuration, and ListConnectors returns Google Cloud connector details.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.215.0](service/connect/CHANGELOG.md#v12150-2026-11-11)
+  * **Feature**: Added support for 96 new languages for AI-powered automated evaluations. Chat interactions support all 96 languages. Voice interactions support 57 languages, those with transcription available through post-call conversational analytics.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.52.0](service/connectcases/CHANGELOG.md#v1520-2026-11-11)
+  * **Feature**: This release adds APIs that allow customers to merge cases to consolidate case history, and get the status of an ongoing case merge operation.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.70.0](service/datasync/CHANGELOG.md#v1700-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.56.0](service/directconnect/CHANGELOG.md#v1560-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.48.0](service/directoryservice/CHANGELOG.md#v1480-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.345.0](service/ec2/CHANGELOG.md#v13450-2026-11-11)
+  * **Feature**: Adds support for AWS Cloud WAN Flow Logs. The CreateFlowLogs API now accepts CoreNetwork, CoreNetworkEdge, and CoreNetworkAttachment resource types, enabling customers to capture information about IP traffic traversing their Cloud WAN core networks.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.50.0](service/identitystore/CHANGELOG.md#v1500-2026-11-11)
+  * **Feature**: Updated ApiRestrictSourceVpcs in NetworkConfiguration to accept VPC ARNs in addition to VPC IDs.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.69.0](service/imagebuilder/CHANGELOG.md#v1690-2026-11-11)
+  * **Feature**: Update list operations to support wildcard name filtering and page sizes up to 100 results via MaxResults
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.48.0](service/kinesisanalyticsv2/CHANGELOG.md#v1480-2026-11-11)
+  * **Feature**: This release adds support for Enhanced Snapshots in Amazon Managed Service for Apache Flink, enabling application state to be managed as a standalone resource that customers can export, import, and reuse across applications.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.47.0](service/marketplacemetering/CHANGELOG.md#v1470-2026-11-11)
+  * **Feature**: AWS Marketplace Metering Service adds decimal quantity support to the MeterUsage and BatchMeterUsage APIs. This includes new request fields UsageQuantityAsDecimal (MeterUsage), QuantityAsDecimal (BatchMeterUsage), and AllocatedUsageQuantityAsDecimal (UsageAllocation for both APIs).
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.53.0](service/mediapackagev2/CHANGELOG.md#v1530-2026-11-11)
+  * **Feature**: This release adds the BandwidthReportingMode setting to DASH manifest configurations, which lets you choose whether the bandwidth attribute of video Representations in the DASH manifest reports the average (default) or peak bitrate of the video track.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.43.0](service/memorydb/CHANGELOG.md#v1430-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.79.0](service/networkfirewall/CHANGELOG.md#v1790-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.42.0](service/resourcegroupstaggingapi/CHANGELOG.md#v1420-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.47.0](service/route53domains/CHANGELOG.md#v1470-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.50.0](service/servicecatalog/CHANGELOG.md#v1500-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.50.0](service/servicediscovery/CHANGELOG.md#v1500-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.44.0](service/shield/CHANGELOG.md#v1440-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.50.0](service/textract/CHANGELOG.md#v1500-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.67.0](service/transcribe/CHANGELOG.md#v1670-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.84.0](service/workspaces/CHANGELOG.md#v1840-2026-11-11)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+
 # Release (2026-11-10)
 
 ## General Highlights

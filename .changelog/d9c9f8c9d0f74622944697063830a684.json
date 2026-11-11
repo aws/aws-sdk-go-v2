@@ -1,8 +1,0 @@
-{
-    "id": "d9c9f8c9-d0f7-4622-9446-97063830a684",
-    "type": "feature",
-    "description": "Updated ApiRestrictSourceVpcs in NetworkConfiguration to accept VPC ARNs in addition to VPC IDs.",
-    "modules": [
-        "service/identitystore"
-    ]
-}

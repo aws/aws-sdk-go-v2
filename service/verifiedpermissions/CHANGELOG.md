@@ -1,3 +1,7 @@
+# v1.44.1 (2026-11-11)
+
+* No change notes available for this release.
+
 # v1.44.0 (2026-11-10)
 
 * **Feature**: Inconsequential changes to model formatting

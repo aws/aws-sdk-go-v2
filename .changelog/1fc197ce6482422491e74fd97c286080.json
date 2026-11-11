@@ -1,8 +1,0 @@
-{
-    "id": "1fc197ce-6482-4224-91e7-4fd97c286080",
-    "type": "feature",
-    "description": "Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

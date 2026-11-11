@@ -1,3 +1,7 @@
+# v1.53.0 (2026-11-11)
+
+* **Feature**: This release adds the BandwidthReportingMode setting to DASH manifest configurations, which lets you choose whether the bandwidth attribute of video Representations in the DASH manifest reports the average (default) or peak bitrate of the video track.
+
 # v1.52.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

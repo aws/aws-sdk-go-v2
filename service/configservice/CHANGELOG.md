@@ -1,3 +1,7 @@
+# v1.75.0 (2026-11-11)
+
+* **Feature**: AWS Config now supports connectors for Google Cloud. PutConnector accepts a Google Cloud connector configuration, and ListConnectors returns Google Cloud connector details.
+
 # v1.74.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

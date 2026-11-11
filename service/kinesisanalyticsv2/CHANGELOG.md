@@ -1,3 +1,7 @@
+# v1.48.0 (2026-11-11)
+
+* **Feature**: This release adds support for Enhanced Snapshots in Amazon Managed Service for Apache Flink, enabling application state to be managed as a standalone resource that customers can export, import, and reuse across applications.
+
 # v1.47.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

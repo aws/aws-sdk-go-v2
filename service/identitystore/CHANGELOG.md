@@ -1,3 +1,7 @@
+# v1.50.0 (2026-11-11)
+
+* **Feature**: Updated ApiRestrictSourceVpcs in NetworkConfiguration to accept VPC ARNs in addition to VPC IDs.
+
 # v1.49.9 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

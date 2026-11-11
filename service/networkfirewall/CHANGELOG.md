@@ -1,3 +1,7 @@
+# v1.79.0 (2026-11-11)
+
+* **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+
 # v1.78.0 (2026-11-10)
 
 * **Feature**: Firewall Policy V2 for Network Firewall

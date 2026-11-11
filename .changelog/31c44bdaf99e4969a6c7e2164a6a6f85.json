@@ -1,8 +1,0 @@
-{
-    "id": "31c44bda-f99e-4969-a6c7-e2164a6a6f85",
-    "type": "feature",
-    "description": "AWS Marketplace Metering Service adds decimal quantity support to the MeterUsage and BatchMeterUsage APIs. This includes new request fields UsageQuantityAsDecimal (MeterUsage), QuantityAsDecimal (BatchMeterUsage), and AllocatedUsageQuantityAsDecimal (UsageAllocation for both APIs).",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

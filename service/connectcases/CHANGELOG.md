@@ -1,3 +1,7 @@
+# v1.52.0 (2026-11-11)
+
+* **Feature**: This release adds APIs that allow customers to merge cases to consolidate case history, and get the status of an ongoing case merge operation.
+
 # v1.51.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

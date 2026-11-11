@@ -1,8 +1,0 @@
-{
-    "id": "f7910a5c-9b34-425f-9ee6-120cda270e27",
-    "type": "feature",
-    "description": "Added support for 96 new languages for AI-powered automated evaluations. Chat interactions support all 96 languages. Voice interactions support 57 languages, those with transcription available through post-call conversational analytics.",
-    "modules": [
-        "service/connect"
-    ]
-}

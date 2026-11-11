@@ -1,3 +1,7 @@
+# v1.76.0 (2026-11-11)
+
+* **Feature**: This release adds session management operations that let user pool administrators and users list and revoke active sessions, and configure session tracking, per-user session limits, and SSO session validity per app client.
+
 # v1.75.11 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.
