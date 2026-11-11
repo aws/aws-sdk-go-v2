@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/CreateBGPPeer
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.CreateBGPPeer
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"newBGPPeer":{"addressFamily":"ipv4","amazonAddress":"__AmazonAddress__","asn":1,"asnLong":1,"authKey":"__AuthKey__","customerAddress":"__CustomerAddress__"},"virtualInterfaceId":"__VirtualInterfaceId__"}
+¿jnewBGPPeer¿maddressFamilydipv4mamazonAddressq__AmazonAddress__casngasnLonggauthKeyk__AuthKey__ocustomerAddresss__CustomerAddress__ÿrvirtualInterfaceIdv__VirtualInterfaceId__ÿ

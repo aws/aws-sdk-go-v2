@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.CreateContainerAssociation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"LimitExceededException","Message":"__Message__"}
+¿f__typevLimitExceededExceptiongMessagek__Message__ÿ

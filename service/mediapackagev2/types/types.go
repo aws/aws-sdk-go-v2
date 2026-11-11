@@ -371,6 +371,23 @@ type CreateDashManifestConfiguration struct {
 	// the default availability start time of 2024-01-01T00:00:00Z .
 	AvailabilityStartTimeConfiguration DashAvailabilityStartTimeConfiguration
 
+	// Specifies how MediaPackage calculates the bandwidth attribute of regular
+	// (non-iFrame) video Representation elements in the DASH manifest. Audio,
+	// subtitle, image, and iFrame-only (trick-play) representations are unchanged.
+	//
+	// The allowed values are:
+	//
+	//   - AVERAGE – MediaPackage reports the average bitrate of the source video
+	//   track. This is the default.
+	//
+	//   - MAX – MediaPackage reports the peak bitrate of the video stream.
+	//
+	// For information about bandwidth reporting, see [DASH bandwidth reporting] in the Elemental MediaPackage
+	// v2 User Guide.
+	//
+	// [DASH bandwidth reporting]: https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-bandwidth-reporting.html
+	BandwidthReportingMode DashBandwidthReportingMode
+
 	// The base URLs to use for retrieving segments.
 	BaseUrls []DashBaseUrl
 
@@ -471,6 +488,9 @@ func (v *CreateDashManifestConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.AvailabilityStartTimeConfiguration != nil {
 		serializeDashAvailabilityStartTimeConfiguration(s, schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
 	}
+	if v.BandwidthReportingMode != "" {
+		s.WriteString(schemas.CreateDashManifestConfiguration_BandwidthReportingMode, string(v.BandwidthReportingMode))
+	}
 	if v.BaseUrls != nil {
 		serializeDashBaseUrls(s, schemas.CreateDashManifestConfiguration_BaseUrls, v.BaseUrls)
 	}
@@ -550,6 +570,13 @@ func (v *CreateDashManifestConfiguration) Deserialize(d smithy.ShapeDeserializer
 			return nil
 		case schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration:
 			return deserializeDashAvailabilityStartTimeConfiguration(d, schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration, &v.AvailabilityStartTimeConfiguration)
+		case schemas.CreateDashManifestConfiguration_BandwidthReportingMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateDashManifestConfiguration_BandwidthReportingMode, &ev); err != nil {
+				return err
+			}
+			v.BandwidthReportingMode = DashBandwidthReportingMode(ev)
+			return nil
 		case schemas.CreateDashManifestConfiguration_BaseUrls:
 			return deserializeDashBaseUrls(d, schemas.CreateDashManifestConfiguration_BaseUrls, &v.BaseUrls)
 		case schemas.CreateDashManifestConfiguration_Compactness:
@@ -1900,6 +1927,23 @@ type GetDashManifestConfiguration struct {
 	// Presentation Description (MPD).
 	AvailabilityStartTimeConfiguration DashAvailabilityStartTimeConfiguration
 
+	// Specifies how MediaPackage calculates the bandwidth attribute of regular
+	// (non-iFrame) video Representation elements in the DASH manifest. Audio,
+	// subtitle, image, and iFrame-only (trick-play) representations are unchanged.
+	//
+	// The allowed values are:
+	//
+	//   - AVERAGE – MediaPackage reports the average bitrate of the source video
+	//   track. This is the default.
+	//
+	//   - MAX – MediaPackage reports the peak bitrate of the video stream.
+	//
+	// For information about bandwidth reporting, see [DASH bandwidth reporting] in the Elemental MediaPackage
+	// v2 User Guide.
+	//
+	// [DASH bandwidth reporting]: https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-bandwidth-reporting.html
+	BandwidthReportingMode DashBandwidthReportingMode
+
 	// The base URL to use for retrieving segments.
 	BaseUrls []DashBaseUrl
 
@@ -1991,6 +2035,9 @@ func (v *GetDashManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.AvailabilityStartTimeConfiguration != nil {
 		serializeDashAvailabilityStartTimeConfiguration(s, schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
 	}
+	if v.BandwidthReportingMode != "" {
+		s.WriteString(schemas.GetDashManifestConfiguration_BandwidthReportingMode, string(v.BandwidthReportingMode))
+	}
 	if v.BaseUrls != nil {
 		serializeDashBaseUrls(s, schemas.GetDashManifestConfiguration_BaseUrls, v.BaseUrls)
 	}
@@ -2073,6 +2120,13 @@ func (v *GetDashManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) e
 			return nil
 		case schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration:
 			return deserializeDashAvailabilityStartTimeConfiguration(d, schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration, &v.AvailabilityStartTimeConfiguration)
+		case schemas.GetDashManifestConfiguration_BandwidthReportingMode:
+			var ev string
+			if err := d.ReadString(schemas.GetDashManifestConfiguration_BandwidthReportingMode, &ev); err != nil {
+				return err
+			}
+			v.BandwidthReportingMode = DashBandwidthReportingMode(ev)
+			return nil
 		case schemas.GetDashManifestConfiguration_BaseUrls:
 			return deserializeDashBaseUrls(d, schemas.GetDashManifestConfiguration_BaseUrls, &v.BaseUrls)
 		case schemas.GetDashManifestConfiguration_Compactness:

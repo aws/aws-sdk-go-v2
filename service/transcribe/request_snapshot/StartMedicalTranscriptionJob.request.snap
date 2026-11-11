@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/StartMedicalTranscriptionJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.StartMedicalTranscriptionJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ContentIdentificationType":"PHI","KMSEncryptionContext":{"key0":"__Value__"},"LanguageCode":"af-ZA","Media":{"MediaFileUri":"__MediaFileUri__","RedactedMediaFileUri":"__RedactedMediaFileUri__"},"MediaFormat":"mp3","MediaSampleRateHertz":1,"MedicalTranscriptionJobName":"__MedicalTranscriptionJobName__","OutputBucketName":"__OutputBucketName__","OutputEncryptionKMSKeyId":"__OutputEncryptionKMSKeyId__","OutputKey":"__OutputKey__","Settings":{"ChannelIdentification":true,"MaxAlternatives":1,"MaxSpeakerLabels":1,"ShowAlternatives":true,"ShowSpeakerLabels":true,"VocabularyName":"__VocabularyName__"},"Specialty":"PRIMARYCARE","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"CONVERSATION"}
+¿xContentIdentificationTypecPHItKMSEncryptionContext¿dkey0i__Value__ÿlLanguageCodeeaf-ZAeMedia¿lMediaFileUrip__MediaFileUri__tRedactedMediaFileUrix__RedactedMediaFileUri__ÿkMediaFormatcmp3tMediaSampleRateHertzxMedicalTranscriptionJobNamex__MedicalTranscriptionJobName__pOutputBucketNamet__OutputBucketName__xOutputEncryptionKMSKeyIdx__OutputEncryptionKMSKeyId__iOutputKeym__OutputKey__hSettings¿uChannelIdentificationõoMaxAlternativespMaxSpeakerLabelspShowAlternativesõqShowSpeakerLabelsõnVocabularyNamer__VocabularyName__ÿiSpecialtykPRIMARYCAREdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿdTypelCONVERSATIONÿ

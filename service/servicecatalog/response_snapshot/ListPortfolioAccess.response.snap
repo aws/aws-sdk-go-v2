@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListPortfolioAccess
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccountIds":["__Member__","__Member__"],"NextPageToken":"__NextPageToken__"}
+¿jAccountIdsŸj__Member__j__Member__ÿmNextPageTokenq__NextPageToken__ÿ

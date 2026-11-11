@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/ListBuildBatches
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.ListBuildBatches
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"filter":{"status":"SUCCEEDED"},"maxResults":1,"nextToken":"__NextToken__","sortOrder":"ASCENDING"}
+¿ffilter¿fstatusiSUCCEEDEDÿjmaxResultsinextTokenm__NextToken__isortOrderiASCENDINGÿ

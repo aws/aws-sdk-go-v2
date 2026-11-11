@@ -59,6 +59,9 @@ import (
 // console. For more information, see [Vendor-metered tagging]and [BatchMeterUsage with usage allocation tagging code example] in the Amazon Web Services Marketplace
 // Seller Guide.
 //
+// To report fractional usage, use QuantityAsDecimal instead of Quantity in each
+// UsageRecord .
+//
 // BatchMeterUsage returns a list of UsageRecordResult objects, which have each
 // UsageRecord . It also returns a list of UnprocessedRecords , which indicate
 // errors on the service side that should be retried.

@@ -19,8 +19,14 @@ import (
 //
 //   - Perform any operations that require the CaseID
 //
+// You can't delete a case while it's part of a merge that is running, as either
+// the primary or the secondary case. The request fails with a ConflictException .
+// For more information, see [StartMergeCases].
+//
 // This action is irreversible. After you delete a case, you cannot recover its
 // data.
+//
+// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
 func (c *Client) DeleteCase(ctx context.Context, params *DeleteCaseInput, optFns ...func(*Options)) (*DeleteCaseOutput, error) {
 	if params == nil {
 		params = &DeleteCaseInput{}

@@ -888,6 +888,7 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -932,6 +933,7 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -1292,6 +1294,7 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 			},
 			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
 				SnapshotsEnabled: ptr.Bool(true),
+				SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
 				RollbackEnabled: ptr.Bool(true),
@@ -1439,6 +1442,44 @@ func TestCheckResponseSnapshot_CreateApplicationSnapshot(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateApplicationSnapshot.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
+	want := &CreateSnapshotOutput{
+		SnapshotArn:             ptr.String("__SnapshotArn__"),
+		SnapshotStatus:          types.SnapshotStatus("CREATING"),
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateSnapshot.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		SnapshotName:        ptr.String("__SnapshotName__"),
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateSnapshot.response", err)
 	}
 }
 
@@ -1630,6 +1671,33 @@ func TestCheckResponseSnapshot_DeleteApplicationVpcConfiguration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteApplicationVpcConfiguration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteSnapshot(t *testing.T) {
+	want := &DeleteSnapshotOutput{
+		SnapshotArn:             ptr.String("__SnapshotArn__"),
+		SnapshotStatus:          types.SnapshotStatus("CREATING"),
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteSnapshot.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{
+		SnapshotName:              ptr.String("__SnapshotName__"),
+		SnapshotCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSnapshot.response", err)
 	}
 }
 
@@ -1891,6 +1959,7 @@ func TestCheckResponseSnapshot_DescribeApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -1935,6 +2004,7 @@ func TestCheckResponseSnapshot_DescribeApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -2389,6 +2459,7 @@ func TestCheckResponseSnapshot_DescribeApplicationVersion(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -2433,6 +2504,7 @@ func TestCheckResponseSnapshot_DescribeApplicationVersion(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -2556,6 +2628,120 @@ func TestCheckResponseSnapshot_DescribeApplicationVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeSnapshot(t *testing.T) {
+	want := &DescribeSnapshotOutput{
+		SnapshotInfoDetails: &types.SnapshotInfoDetails{
+			SnapshotName:              ptr.String("__SnapshotName__"),
+			SnapshotArn:               ptr.String("__SnapshotArn__"),
+			SnapshotDescription:       ptr.String("__SnapshotDescription__"),
+			SnapshotStatus:            types.SnapshotStatus("CREATING"),
+			SnapshotCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RuntimeEnvironment:        types.RuntimeEnvironment("SQL-1_0"),
+			SnapshotSizeInBytes:       1,
+			SnapshotEncryptionConfigurationDescription: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			SnapshotInitiator:          types.SnapshotInitiator("USER"),
+			SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+			SnapshotSourceDescription: &types.SnapshotSourceDescription{
+				S3PrefixLocation: &types.S3PrefixLocation{
+					BucketARN: ptr.String("__BucketARN__"),
+					KeyPrefix: ptr.String("__KeyPrefix__"),
+				},
+				SourceApplicationDescription: &types.SourceApplicationDescription{
+					ApplicationName:              ptr.String("__ApplicationName__"),
+					ApplicationCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ApplicationVersionId:         ptr.Int64(1),
+				},
+			},
+			SnapshotFormat: types.SnapshotFormat("CANONICAL"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeSnapshot.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeSnapshot(context.Background(), &DescribeSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSnapshot.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeSnapshotOperation(t *testing.T) {
+	want := &DescribeSnapshotOperationOutput{
+		SnapshotOperationInfoDetails: &types.SnapshotOperationInfoDetails{
+			SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+			SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+			SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+			SnapshotArn:             ptr.String("__SnapshotArn__"),
+			SourceEncryptionConfigurationDescription: &types.EncryptionConfigurationDescription{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			DestinationEncryptionConfigurationDescription: &types.EncryptionConfigurationDescription{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			SnapshotSourceLocationDescription: &types.SnapshotOperationLocationDescription{
+				LocationType: types.StorageLocationType("S3"),
+				S3PrefixLocation: &types.SnapshotOperationS3PrefixLocation{
+					BucketARN:      ptr.String("__BucketARN__"),
+					KeyPrefix:      ptr.String("__KeyPrefix__"),
+					ExportedPrefix: ptr.String("__ExportedPrefix__"),
+				},
+			},
+			SnapshotDestinationLocationDescription: &types.SnapshotOperationLocationDescription{
+				LocationType: types.StorageLocationType("S3"),
+				S3PrefixLocation: &types.SnapshotOperationS3PrefixLocation{
+					BucketARN:      ptr.String("__BucketARN__"),
+					KeyPrefix:      ptr.String("__KeyPrefix__"),
+					ExportedPrefix: ptr.String("__ExportedPrefix__"),
+				},
+			},
+			ApplicationOperationDescription: &types.ApplicationOperationDescription{
+				ApplicationOperationId: ptr.String("__ApplicationOperationId__"),
+				ApplicationName:        ptr.String("__ApplicationName__"),
+			},
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnapshotOperationFailureDetails: &types.SnapshotOperationFailureDetails{
+				ErrorInfo: &types.SnapshotErrorInfo{
+					ErrorCode:   ptr.String("__ErrorCode__"),
+					ErrorString: ptr.String("__ErrorString__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeSnapshotOperation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeSnapshotOperation(context.Background(), &DescribeSnapshotOperationInput{
+		SnapshotName:        ptr.String("__SnapshotName__"),
+		SnapshotOperationId: ptr.String("__SnapshotOperationId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSnapshotOperation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DiscoverInputSchema(t *testing.T) {
 	want := &DiscoverInputSchemaOutput{
 		InputSchema: &types.SourceSchema{
@@ -2633,6 +2819,96 @@ func TestCheckResponseSnapshot_DiscoverInputSchema(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DiscoverInputSchema.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ExportSnapshot(t *testing.T) {
+	want := &ExportSnapshotOutput{
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ExportSnapshot.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ExportSnapshot(context.Background(), &ExportSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+		ExportDestinationConfiguration: &types.ExportDestinationConfiguration{
+			DestinationType: types.StorageLocationType("S3"),
+			ExportRoleArn:   ptr.String("__ExportRoleArn__"),
+			DestinationEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			DestinationS3PrefixLocation: &types.S3PrefixLocation{
+				BucketARN: ptr.String("__BucketARN__"),
+				KeyPrefix: ptr.String("__KeyPrefix__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ExportSnapshot.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ImportSnapshot(t *testing.T) {
+	want := &ImportSnapshotOutput{
+		SnapshotArn:             ptr.String("__SnapshotArn__"),
+		SnapshotStatus:          types.SnapshotStatus("CREATING"),
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ImportSnapshot.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ImportSnapshot(context.Background(), &ImportSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+		ImportSourceConfiguration: &types.ImportSourceConfiguration{
+			SourceType:    types.StorageLocationType("S3"),
+			ImportRoleArn: ptr.String("__ImportRoleArn__"),
+			SourceEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			SourceS3PrefixLocation: &types.S3PrefixLocation{
+				BucketARN: ptr.String("__BucketARN__"),
+				KeyPrefix: ptr.String("__KeyPrefix__"),
+			},
+		},
+		DestinationEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+			KeyId:   ptr.String("__KeyId__"),
+			KeyType: types.KeyType("AWS_OWNED_KEY"),
+		},
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		SnapshotFormat:      types.SnapshotFormat("CANONICAL"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ImportSnapshot.response", err)
 	}
 }
 
@@ -2802,6 +3078,99 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListApplications.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListSnapshotOperations(t *testing.T) {
+	want := &ListSnapshotOperationsOutput{
+		SnapshotOperationInfoList: []types.SnapshotOperationInfo{
+			{
+				SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+				SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+				SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+				StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+				SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+				SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+				StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSnapshotOperations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSnapshotOperations(context.Background(), &ListSnapshotOperationsInput{
+		SnapshotName:            ptr.String("__SnapshotName__"),
+		SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+		Limit:                   ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSnapshotOperations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListSnapshots(t *testing.T) {
+	want := &ListSnapshotsOutput{
+		SnapshotInfoList: []types.SnapshotInfo{
+			{
+				SnapshotName:               ptr.String("__SnapshotName__"),
+				SnapshotArn:                ptr.String("__SnapshotArn__"),
+				SnapshotStatus:             types.SnapshotStatus("CREATING"),
+				SnapshotCreationTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SnapshotInitiator:          types.SnapshotInitiator("USER"),
+				SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+				SourceApplicationName:      ptr.String("__SourceApplicationName__"),
+				SnapshotFormat:             types.SnapshotFormat("CANONICAL"),
+			},
+			{
+				SnapshotName:               ptr.String("__SnapshotName__"),
+				SnapshotArn:                ptr.String("__SnapshotArn__"),
+				SnapshotStatus:             types.SnapshotStatus("CREATING"),
+				SnapshotCreationTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SnapshotInitiator:          types.SnapshotInitiator("USER"),
+				SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+				SourceApplicationName:      ptr.String("__SourceApplicationName__"),
+				SnapshotFormat:             types.SnapshotFormat("CANONICAL"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSnapshots.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSnapshots(context.Background(), &ListSnapshotsInput{
+		SourceApplicationName:      ptr.String("__SourceApplicationName__"),
+		SnapshotInitiator:          types.SnapshotInitiator("USER"),
+		SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+		SnapshotStatus:             types.SnapshotStatus("CREATING"),
+		Limit:                      ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSnapshots.response", err)
 	}
 }
 
@@ -3095,6 +3464,7 @@ func TestCheckResponseSnapshot_RollbackApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -3139,6 +3509,7 @@ func TestCheckResponseSnapshot_RollbackApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -3298,6 +3669,7 @@ func TestCheckResponseSnapshot_StartApplication(t *testing.T) {
 			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
 				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 				SnapshotName:           ptr.String("__SnapshotName__"),
+				SnapshotArn:            ptr.String("__SnapshotArn__"),
 			},
 		},
 	})
@@ -3647,6 +4019,7 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -3691,6 +4064,7 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -4056,6 +4430,7 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 			},
 			ApplicationSnapshotConfigurationUpdate: &types.ApplicationSnapshotConfigurationUpdate{
 				SnapshotsEnabledUpdate: ptr.Bool(true),
+				SnapshotModeUpdate:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfigurationUpdate: &types.ApplicationSystemRollbackConfigurationUpdate{
 				RollbackEnabledUpdate: ptr.Bool(true),
@@ -4141,6 +4516,7 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
 				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 				SnapshotName:           ptr.String("__SnapshotName__"),
+				SnapshotArn:            ptr.String("__SnapshotArn__"),
 			},
 		},
 		CloudWatchLoggingOptionUpdates: []types.CloudWatchLoggingOptionUpdate{
@@ -4655,6 +5031,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 			},
 			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
 				SnapshotsEnabled: ptr.Bool(true),
+				SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
 				RollbackEnabled: ptr.Bool(true),
@@ -5167,6 +5544,7 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 			},
 			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
 				SnapshotsEnabled: ptr.Bool(true),
+				SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
 				RollbackEnabled: ptr.Bool(true),
@@ -5583,6 +5961,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 			},
 			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
 				SnapshotsEnabled: ptr.Bool(true),
+				SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
 				RollbackEnabled: ptr.Bool(true),

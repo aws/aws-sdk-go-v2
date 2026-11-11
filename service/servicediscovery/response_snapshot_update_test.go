@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -145,7 +145,7 @@ func TestUpdateResponseSnapshot_CreateHttpNamespace(t *testing.T) {
 	want := &CreateHttpNamespaceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHttpNamespace, schemas.CreateHttpNamespaceResponse, schemas.CreateHttpNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -169,7 +169,7 @@ func TestUpdateResponseSnapshot_CreatePrivateDnsNamespace(t *testing.T) {
 	want := &CreatePrivateDnsNamespaceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePrivateDnsNamespace, schemas.CreatePrivateDnsNamespaceResponse, schemas.CreatePrivateDnsNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -193,7 +193,7 @@ func TestUpdateResponseSnapshot_CreatePublicDnsNamespace(t *testing.T) {
 	want := &CreatePublicDnsNamespaceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePublicDnsNamespace, schemas.CreatePublicDnsNamespaceResponse, schemas.CreatePublicDnsNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -251,7 +251,7 @@ func TestUpdateResponseSnapshot_CreateService(t *testing.T) {
 			CreatedByAccount: ptr.String("__CreatedByAccount__"),
 		},
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceResponse, schemas.CreateServiceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -275,7 +275,7 @@ func TestUpdateResponseSnapshot_DeleteNamespace(t *testing.T) {
 	want := &DeleteNamespaceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteNamespace, schemas.DeleteNamespaceResponse, schemas.DeleteNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -297,7 +297,7 @@ func TestUpdateResponseSnapshot_DeleteNamespace(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteService(t *testing.T) {
 	want := &DeleteServiceOutput{}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteService, schemas.DeleteServiceResponse, schemas.DeleteServiceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -319,7 +319,7 @@ func TestUpdateResponseSnapshot_DeleteService(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteServiceAttributes(t *testing.T) {
 	want := &DeleteServiceAttributesOutput{}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteServiceAttributes, schemas.DeleteServiceAttributesResponse, schemas.DeleteServiceAttributesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -343,7 +343,7 @@ func TestUpdateResponseSnapshot_DeregisterInstance(t *testing.T) {
 	want := &DeregisterInstanceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DeregisterInstance, schemas.DeregisterInstanceResponse, schemas.DeregisterInstanceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -387,7 +387,7 @@ func TestUpdateResponseSnapshot_DiscoverInstances(t *testing.T) {
 		},
 		InstancesRevision: ptr.Int64(1),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DiscoverInstances, schemas.DiscoverInstancesResponse, schemas.DiscoverInstancesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -411,7 +411,7 @@ func TestUpdateResponseSnapshot_DiscoverInstancesRevision(t *testing.T) {
 	want := &DiscoverInstancesRevisionOutput{
 		InstancesRevision: ptr.Int64(1),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DiscoverInstancesRevision, schemas.DiscoverInstancesRevisionResponse, schemas.DiscoverInstancesRevisionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -443,7 +443,7 @@ func TestUpdateResponseSnapshot_GetInstance(t *testing.T) {
 			CreatedByAccount: ptr.String("__CreatedByAccount__"),
 		},
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.GetInstance, schemas.GetInstanceResponse, schemas.GetInstanceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -470,7 +470,7 @@ func TestUpdateResponseSnapshot_GetInstancesHealthStatus(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.GetInstancesHealthStatus, schemas.GetInstancesHealthStatusResponse, schemas.GetInstancesHealthStatusResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -515,7 +515,7 @@ func TestUpdateResponseSnapshot_GetNamespace(t *testing.T) {
 			CreatorRequestId: ptr.String("__CreatorRequestId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.GetNamespace, schemas.GetNamespaceResponse, schemas.GetNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -551,7 +551,7 @@ func TestUpdateResponseSnapshot_GetOperation(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.GetOperation, schemas.GetOperationResponse, schemas.GetOperationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -609,7 +609,7 @@ func TestUpdateResponseSnapshot_GetService(t *testing.T) {
 			CreatedByAccount: ptr.String("__CreatedByAccount__"),
 		},
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceResponse, schemas.GetServiceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -639,7 +639,7 @@ func TestUpdateResponseSnapshot_GetServiceAttributes(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.GetServiceAttributes, schemas.GetServiceAttributesResponse, schemas.GetServiceAttributesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -680,7 +680,7 @@ func TestUpdateResponseSnapshot_ListInstances(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.ListInstances, schemas.ListInstancesResponse, schemas.ListInstancesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -748,7 +748,7 @@ func TestUpdateResponseSnapshot_ListNamespaces(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.ListNamespaces, schemas.ListNamespacesResponse, schemas.ListNamespacesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -782,7 +782,7 @@ func TestUpdateResponseSnapshot_ListOperations(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsResponse, schemas.ListOperationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -874,7 +874,7 @@ func TestUpdateResponseSnapshot_ListServices(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesResponse, schemas.ListServicesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -907,7 +907,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -931,7 +931,7 @@ func TestUpdateResponseSnapshot_RegisterInstance(t *testing.T) {
 	want := &RegisterInstanceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterInstance, schemas.RegisterInstanceResponse, schemas.RegisterInstanceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -953,7 +953,7 @@ func TestUpdateResponseSnapshot_RegisterInstance(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -975,7 +975,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -999,7 +999,7 @@ func TestUpdateResponseSnapshot_UpdateHttpNamespace(t *testing.T) {
 	want := &UpdateHttpNamespaceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateHttpNamespace, schemas.UpdateHttpNamespaceResponse, schemas.UpdateHttpNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1021,7 +1021,7 @@ func TestUpdateResponseSnapshot_UpdateHttpNamespace(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateInstanceCustomHealthStatus(t *testing.T) {
 	want := &UpdateInstanceCustomHealthStatusOutput{}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateInstanceCustomHealthStatus, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1045,7 +1045,7 @@ func TestUpdateResponseSnapshot_UpdatePrivateDnsNamespace(t *testing.T) {
 	want := &UpdatePrivateDnsNamespaceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdatePrivateDnsNamespace, schemas.UpdatePrivateDnsNamespaceResponse, schemas.UpdatePrivateDnsNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1069,7 +1069,7 @@ func TestUpdateResponseSnapshot_UpdatePublicDnsNamespace(t *testing.T) {
 	want := &UpdatePublicDnsNamespaceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdatePublicDnsNamespace, schemas.UpdatePublicDnsNamespaceResponse, schemas.UpdatePublicDnsNamespaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1093,7 +1093,7 @@ func TestUpdateResponseSnapshot_UpdateService(t *testing.T) {
 	want := &UpdateServiceOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceResponse, schemas.UpdateServiceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1115,7 +1115,7 @@ func TestUpdateResponseSnapshot_UpdateService(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateServiceAttributes(t *testing.T) {
 	want := &UpdateServiceAttributesOutput{}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateServiceAttributes, schemas.UpdateServiceAttributesResponse, schemas.UpdateServiceAttributesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1139,7 +1139,7 @@ func TestUpdateResponseSnapshot_Error_CustomHealthNotFound(t *testing.T) {
 	want := &types.CustomHealthNotFound{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateInstanceCustomHealthStatus, schemas.CustomHealthNotFound, schemas.CustomHealthNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1154,7 +1154,7 @@ func TestUpdateResponseSnapshot_Error_CustomHealthNotFound(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CustomHealthNotFound.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1165,7 +1165,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateRequest(t *testing.T) {
 		Message:              ptr.String("__Message__"),
 		DuplicateOperationId: ptr.String("__DuplicateOperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHttpNamespace, schemas.DuplicateRequest, schemas.DuplicateRequest)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1180,7 +1180,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateRequest(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DuplicateRequest.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1190,7 +1190,7 @@ func TestUpdateResponseSnapshot_Error_InstanceNotFound(t *testing.T) {
 	want := &types.InstanceNotFound{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DeregisterInstance, schemas.InstanceNotFound, schemas.InstanceNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1205,7 +1205,7 @@ func TestUpdateResponseSnapshot_Error_InstanceNotFound(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InstanceNotFound.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1215,7 @@ func TestUpdateResponseSnapshot_Error_InvalidInput(t *testing.T) {
 	want := &types.InvalidInput{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHttpNamespace, schemas.InvalidInput, schemas.InvalidInput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1230,7 +1230,7 @@ func TestUpdateResponseSnapshot_Error_InvalidInput(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidInput.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1242,7 +1242,7 @@ func TestUpdateResponseSnapshot_Error_NamespaceAlreadyExists(t *testing.T) {
 		CreatorRequestId: ptr.String("__CreatorRequestId__"),
 		NamespaceId:      ptr.String("__NamespaceId__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHttpNamespace, schemas.NamespaceAlreadyExists, schemas.NamespaceAlreadyExists)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1257,7 +1257,7 @@ func TestUpdateResponseSnapshot_Error_NamespaceAlreadyExists(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NamespaceAlreadyExists.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1267,7 +1267,7 @@ func TestUpdateResponseSnapshot_Error_NamespaceNotFound(t *testing.T) {
 	want := &types.NamespaceNotFound{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateService, schemas.NamespaceNotFound, schemas.NamespaceNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1282,7 +1282,7 @@ func TestUpdateResponseSnapshot_Error_NamespaceNotFound(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NamespaceNotFound.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1292,7 +1292,7 @@ func TestUpdateResponseSnapshot_Error_OperationNotFound(t *testing.T) {
 	want := &types.OperationNotFound{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.GetOperation, schemas.OperationNotFound, schemas.OperationNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1307,7 +1307,7 @@ func TestUpdateResponseSnapshot_Error_OperationNotFound(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OperationNotFound.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1317,7 +1317,7 @@ func TestUpdateResponseSnapshot_Error_RequestLimitExceeded(t *testing.T) {
 	want := &types.RequestLimitExceeded{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DiscoverInstances, schemas.RequestLimitExceeded, schemas.RequestLimitExceeded)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1332,7 +1332,7 @@ func TestUpdateResponseSnapshot_Error_RequestLimitExceeded(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("RequestLimitExceeded.error", 429, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1342,7 +1342,7 @@ func TestUpdateResponseSnapshot_Error_ResourceInUse(t *testing.T) {
 	want := &types.ResourceInUse{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteNamespace, schemas.ResourceInUse, schemas.ResourceInUse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1357,7 +1357,7 @@ func TestUpdateResponseSnapshot_Error_ResourceInUse(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceInUse.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1367,7 +1367,7 @@ func TestUpdateResponseSnapshot_Error_ResourceLimitExceeded(t *testing.T) {
 	want := &types.ResourceLimitExceeded{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHttpNamespace, schemas.ResourceLimitExceeded, schemas.ResourceLimitExceeded)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1382,7 +1382,7 @@ func TestUpdateResponseSnapshot_Error_ResourceLimitExceeded(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceLimitExceeded.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1392,7 +1392,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1407,7 +1407,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1420,7 +1420,7 @@ func TestUpdateResponseSnapshot_Error_ServiceAlreadyExists(t *testing.T) {
 		ServiceId:        ptr.String("__ServiceId__"),
 		ServiceArn:       ptr.String("__ServiceArn__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateService, schemas.ServiceAlreadyExists, schemas.ServiceAlreadyExists)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1435,7 +1435,7 @@ func TestUpdateResponseSnapshot_Error_ServiceAlreadyExists(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceAlreadyExists.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1445,7 +1445,7 @@ func TestUpdateResponseSnapshot_Error_ServiceAttributesLimitExceededException(t 
 	want := &types.ServiceAttributesLimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateServiceAttributes, schemas.ServiceAttributesLimitExceededException, schemas.ServiceAttributesLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1460,7 +1460,7 @@ func TestUpdateResponseSnapshot_Error_ServiceAttributesLimitExceededException(t 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceAttributesLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1470,7 +1470,7 @@ func TestUpdateResponseSnapshot_Error_ServiceNotFound(t *testing.T) {
 	want := &types.ServiceNotFound{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteService, schemas.ServiceNotFound, schemas.ServiceNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1485,7 +1485,7 @@ func TestUpdateResponseSnapshot_Error_ServiceNotFound(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceNotFound.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1496,7 +1496,7 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		Message:      ptr.String("__Message__"),
 		ResourceName: ptr.String("__ResourceName__"),
 	}
-	proto := awsjson.New11(schemas.Route53AutoNaming_v20170314)
+	proto := rpcv2.NewCBOR(schemas.Route53AutoNaming_v20170314)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHttpNamespace, schemas.TooManyTagsException, schemas.TooManyTagsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1511,7 +1511,7 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TooManyTagsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

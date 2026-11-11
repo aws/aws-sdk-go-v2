@@ -6478,6 +6478,9 @@ type HarnessRemoteMcpConfig struct {
 	// Custom headers to include when connecting to the remote MCP server.
 	Headers map[string]string
 
+	// How the harness authenticates to this MCP server. Defaults to no authentication.
+	OutboundAuth HarnessRemoteMcpOutboundAuth
+
 	noSmithyDocumentSerde
 }
 
@@ -6491,6 +6494,9 @@ func (v *HarnessRemoteMcpConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Headers != nil {
 		serializeHttpHeadersMap(s, schemas.HarnessRemoteMcpConfig_headers, v.Headers)
 	}
+	if v.OutboundAuth != nil {
+		serializeHarnessRemoteMcpOutboundAuth(s, schemas.HarnessRemoteMcpConfig_outboundAuth, v.OutboundAuth)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.HarnessRemoteMcpConfig_url, *v.Url)
 	}
@@ -6500,12 +6506,60 @@ func (v *HarnessRemoteMcpConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.HarnessRemoteMcpConfig_headers:
 			return deserializeHttpHeadersMap(d, schemas.HarnessRemoteMcpConfig_headers, &v.Headers)
+		case schemas.HarnessRemoteMcpConfig_outboundAuth:
+			return deserializeHarnessRemoteMcpOutboundAuth(d, schemas.HarnessRemoteMcpConfig_outboundAuth, &v.OutboundAuth)
 		case schemas.HarnessRemoteMcpConfig_url:
 			v.Url = new(string)
 			return d.ReadString(schemas.HarnessRemoteMcpConfig_url, v.Url)
 		}
 		return nil
 	})
+}
+
+// Authentication method for calling a remote MCP server.
+//
+// The following types satisfy this interface:
+//
+//	HarnessRemoteMcpOutboundAuthMemberAwsIam
+//	HarnessRemoteMcpOutboundAuthMemberNone
+type HarnessRemoteMcpOutboundAuth interface {
+	isHarnessRemoteMcpOutboundAuth()
+}
+
+// Sign requests to the remote MCP server with Signature Version 4 (SigV4) using
+// the harness execution role. If you don't specify a Region, the harness Region is
+// used.
+type HarnessRemoteMcpOutboundAuthMemberAwsIam struct {
+	Value IamCredentialProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessRemoteMcpOutboundAuthMemberAwsIam) isHarnessRemoteMcpOutboundAuth() {}
+func (v *HarnessRemoteMcpOutboundAuthMemberAwsIam) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HarnessRemoteMcpOutboundAuth_awsIam)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *HarnessRemoteMcpOutboundAuthMemberAwsIam) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// No authentication.
+type HarnessRemoteMcpOutboundAuthMemberNone struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessRemoteMcpOutboundAuthMemberNone) isHarnessRemoteMcpOutboundAuth() {}
+func (v *HarnessRemoteMcpOutboundAuthMemberNone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HarnessRemoteMcpOutboundAuth_none)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *HarnessRemoteMcpOutboundAuthMemberNone) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A skill available to the agent.
@@ -7446,6 +7500,53 @@ func (v *HarnessToolUseBlockStart) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.Type = HarnessToolUseType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// An IAM credential provider for authenticating requests. This structure contains
+// the configuration for authenticating with a target endpoint using IAM
+// credentials and SigV4 signing.
+type IamCredentialProvider struct {
+
+	// The name of the Amazon Web Services service used for SigV4 signing. This value
+	// identifies the service to authenticate with when sending requests to the target
+	// endpoint.
+	//
+	// This member is required.
+	Service *string
+
+	// The Amazon Web Services Region used for SigV4 signing. If not specified,
+	// defaults to the Region of the resource that makes the request.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IamCredentialProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IamCredentialProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IamCredentialProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.IamCredentialProvider_region, *v.Region)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.IamCredentialProvider_service, *v.Service)
+	}
+}
+func (v *IamCredentialProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IamCredentialProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IamCredentialProvider_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.IamCredentialProvider_region, v.Region)
+		case schemas.IamCredentialProvider_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.IamCredentialProvider_service, v.Service)
 		}
 		return nil
 	})
@@ -14859,6 +14960,7 @@ func (*UnknownUnionMember) isHarnessGatewayOutboundAuth()            {}
 func (*UnknownUnionMember) isHarnessModelConfiguration()             {}
 func (*UnknownUnionMember) isHarnessReasoningContentBlock()          {}
 func (*UnknownUnionMember) isHarnessReasoningContentBlockDelta()     {}
+func (*UnknownUnionMember) isHarnessRemoteMcpOutboundAuth()          {}
 func (*UnknownUnionMember) isHarnessSkill()                          {}
 func (*UnknownUnionMember) isHarnessSystemContentBlock()             {}
 func (*UnknownUnionMember) isHarnessToolConfiguration()              {}

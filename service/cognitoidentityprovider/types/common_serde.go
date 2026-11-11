@@ -328,6 +328,16 @@ func serializeSearchedAttributeNamesListType(s smithy.ShapeSerializer, schema *s
 	s.CloseList()
 }
 
+func serializeSessionsListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []SessionDescriptionType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSkippedIPRangeListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1219,6 +1229,28 @@ func deserializeSearchedAttributeNamesListType(d smithy.ShapeDeserializer, s *sm
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSessionsListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SessionDescriptionType) error {
+	*v = make([]SessionDescriptionType, 0)
+	var vv SessionDescriptionType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SessionDescriptionType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SessionDescriptionType{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

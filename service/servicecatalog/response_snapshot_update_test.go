@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -143,7 +143,7 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 }
 func TestUpdateResponseSnapshot_AcceptPortfolioShare(t *testing.T) {
 	want := &AcceptPortfolioShareOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptPortfolioShare, schemas.AcceptPortfolioShareOutput, schemas.AcceptPortfolioShareOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -165,7 +165,7 @@ func TestUpdateResponseSnapshot_AcceptPortfolioShare(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociateBudgetWithResource(t *testing.T) {
 	want := &AssociateBudgetWithResourceOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateBudgetWithResource, schemas.AssociateBudgetWithResourceOutput, schemas.AssociateBudgetWithResourceOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -187,7 +187,7 @@ func TestUpdateResponseSnapshot_AssociateBudgetWithResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociatePrincipalWithPortfolio(t *testing.T) {
 	want := &AssociatePrincipalWithPortfolioOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociatePrincipalWithPortfolio, schemas.AssociatePrincipalWithPortfolioOutput, schemas.AssociatePrincipalWithPortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -209,7 +209,7 @@ func TestUpdateResponseSnapshot_AssociatePrincipalWithPortfolio(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociateProductWithPortfolio(t *testing.T) {
 	want := &AssociateProductWithPortfolioOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateProductWithPortfolio, schemas.AssociateProductWithPortfolioOutput, schemas.AssociateProductWithPortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -231,7 +231,7 @@ func TestUpdateResponseSnapshot_AssociateProductWithPortfolio(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociateServiceActionWithProvisioningArtifact(t *testing.T) {
 	want := &AssociateServiceActionWithProvisioningArtifactOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateServiceActionWithProvisioningArtifact, schemas.AssociateServiceActionWithProvisioningArtifactOutput, schemas.AssociateServiceActionWithProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -253,7 +253,7 @@ func TestUpdateResponseSnapshot_AssociateServiceActionWithProvisioningArtifact(t
 
 func TestUpdateResponseSnapshot_AssociateTagOptionWithResource(t *testing.T) {
 	want := &AssociateTagOptionWithResourceOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateTagOptionWithResource, schemas.AssociateTagOptionWithResourceOutput, schemas.AssociateTagOptionWithResourceOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -292,7 +292,7 @@ func TestUpdateResponseSnapshot_BatchAssociateServiceActionWithProvisioningArtif
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.BatchAssociateServiceActionWithProvisioningArtifact, schemas.BatchAssociateServiceActionWithProvisioningArtifactOutput, schemas.BatchAssociateServiceActionWithProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -331,7 +331,7 @@ func TestUpdateResponseSnapshot_BatchDisassociateServiceActionFromProvisioningAr
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.BatchDisassociateServiceActionFromProvisioningArtifact, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -355,7 +355,7 @@ func TestUpdateResponseSnapshot_CopyProduct(t *testing.T) {
 	want := &CopyProductOutput{
 		CopyProductToken: ptr.String("__CopyProductToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyProduct, schemas.CopyProductOutput, schemas.CopyProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -388,7 +388,7 @@ func TestUpdateResponseSnapshot_CreateConstraint(t *testing.T) {
 		ConstraintParameters: ptr.String("__ConstraintParameters__"),
 		Status:               types.Status("AVAILABLE"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateConstraint, schemas.CreateConstraintOutput, schemas.CreateConstraintOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -429,7 +429,7 @@ func TestUpdateResponseSnapshot_CreatePortfolio(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePortfolio, schemas.CreatePortfolioOutput, schemas.CreatePortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -453,7 +453,7 @@ func TestUpdateResponseSnapshot_CreatePortfolioShare(t *testing.T) {
 	want := &CreatePortfolioShareOutput{
 		PortfolioShareToken: ptr.String("__PortfolioShareToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePortfolioShare, schemas.CreatePortfolioShareOutput, schemas.CreatePortfolioShareOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -532,7 +532,7 @@ func TestUpdateResponseSnapshot_CreateProduct(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProduct, schemas.CreateProductOutput, schemas.CreateProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -560,7 +560,7 @@ func TestUpdateResponseSnapshot_CreateProvisionedProductPlan(t *testing.T) {
 		ProvisionedProductName: ptr.String("__ProvisionedProductName__"),
 		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProvisionedProductPlan, schemas.CreateProvisionedProductPlanOutput, schemas.CreateProvisionedProductPlanOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -597,7 +597,7 @@ func TestUpdateResponseSnapshot_CreateProvisioningArtifact(t *testing.T) {
 		},
 		Status: types.Status("AVAILABLE"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProvisioningArtifact, schemas.CreateProvisioningArtifactOutput, schemas.CreateProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -631,7 +631,7 @@ func TestUpdateResponseSnapshot_CreateServiceAction(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateServiceAction, schemas.CreateServiceActionOutput, schemas.CreateServiceActionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -661,7 +661,7 @@ func TestUpdateResponseSnapshot_CreateTagOption(t *testing.T) {
 			Owner:  ptr.String("__Owner__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTagOption, schemas.CreateTagOptionOutput, schemas.CreateTagOptionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -683,7 +683,7 @@ func TestUpdateResponseSnapshot_CreateTagOption(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteConstraint(t *testing.T) {
 	want := &DeleteConstraintOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteConstraint, schemas.DeleteConstraintOutput, schemas.DeleteConstraintOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -705,7 +705,7 @@ func TestUpdateResponseSnapshot_DeleteConstraint(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeletePortfolio(t *testing.T) {
 	want := &DeletePortfolioOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeletePortfolio, schemas.DeletePortfolioOutput, schemas.DeletePortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -729,7 +729,7 @@ func TestUpdateResponseSnapshot_DeletePortfolioShare(t *testing.T) {
 	want := &DeletePortfolioShareOutput{
 		PortfolioShareToken: ptr.String("__PortfolioShareToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeletePortfolioShare, schemas.DeletePortfolioShareOutput, schemas.DeletePortfolioShareOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -751,7 +751,7 @@ func TestUpdateResponseSnapshot_DeletePortfolioShare(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteProduct(t *testing.T) {
 	want := &DeleteProductOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProduct, schemas.DeleteProductOutput, schemas.DeleteProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -773,7 +773,7 @@ func TestUpdateResponseSnapshot_DeleteProduct(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteProvisionedProductPlan(t *testing.T) {
 	want := &DeleteProvisionedProductPlanOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProvisionedProductPlan, schemas.DeleteProvisionedProductPlanOutput, schemas.DeleteProvisionedProductPlanOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -795,7 +795,7 @@ func TestUpdateResponseSnapshot_DeleteProvisionedProductPlan(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteProvisioningArtifact(t *testing.T) {
 	want := &DeleteProvisioningArtifactOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProvisioningArtifact, schemas.DeleteProvisioningArtifactOutput, schemas.DeleteProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -817,7 +817,7 @@ func TestUpdateResponseSnapshot_DeleteProvisioningArtifact(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteServiceAction(t *testing.T) {
 	want := &DeleteServiceActionOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteServiceAction, schemas.DeleteServiceActionOutput, schemas.DeleteServiceActionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -839,7 +839,7 @@ func TestUpdateResponseSnapshot_DeleteServiceAction(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteTagOption(t *testing.T) {
 	want := &DeleteTagOptionOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTagOption, schemas.DeleteTagOptionOutput, schemas.DeleteTagOptionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -872,7 +872,7 @@ func TestUpdateResponseSnapshot_DescribeConstraint(t *testing.T) {
 		ConstraintParameters: ptr.String("__ConstraintParameters__"),
 		Status:               types.Status("AVAILABLE"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConstraint, schemas.DescribeConstraintOutput, schemas.DescribeConstraintOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -898,7 +898,7 @@ func TestUpdateResponseSnapshot_DescribeCopyProductStatus(t *testing.T) {
 		TargetProductId:   ptr.String("__TargetProductId__"),
 		StatusDetail:      ptr.String("__StatusDetail__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeCopyProductStatus, schemas.DescribeCopyProductStatusOutput, schemas.DescribeCopyProductStatusOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -963,7 +963,7 @@ func TestUpdateResponseSnapshot_DescribePortfolio(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribePortfolio, schemas.DescribePortfolioOutput, schemas.DescribePortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1014,7 +1014,7 @@ func TestUpdateResponseSnapshot_DescribePortfolioShareStatus(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribePortfolioShareStatus, schemas.DescribePortfolioShareStatusOutput, schemas.DescribePortfolioShareStatusOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1054,7 +1054,7 @@ func TestUpdateResponseSnapshot_DescribePortfolioShares(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribePortfolioShares, schemas.DescribePortfolioSharesOutput, schemas.DescribePortfolioSharesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1124,7 +1124,7 @@ func TestUpdateResponseSnapshot_DescribeProduct(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProduct, schemas.DescribeProductOutput, schemas.DescribeProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1237,7 +1237,7 @@ func TestUpdateResponseSnapshot_DescribeProductAsAdmin(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProductAsAdmin, schemas.DescribeProductAsAdminOutput, schemas.DescribeProductAsAdminOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1289,7 +1289,7 @@ func TestUpdateResponseSnapshot_DescribeProductView(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProductView, schemas.DescribeProductViewOutput, schemas.DescribeProductViewOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1336,7 +1336,7 @@ func TestUpdateResponseSnapshot_DescribeProvisionedProduct(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProvisionedProduct, schemas.DescribeProvisionedProductOutput, schemas.DescribeProvisionedProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1464,7 +1464,7 @@ func TestUpdateResponseSnapshot_DescribeProvisionedProductPlan(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProvisionedProductPlan, schemas.DescribeProvisionedProductPlanOutput, schemas.DescribeProvisionedProductPlanOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1541,7 +1541,7 @@ func TestUpdateResponseSnapshot_DescribeProvisioningArtifact(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProvisioningArtifact, schemas.DescribeProvisioningArtifactOutput, schemas.DescribeProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1670,7 +1670,7 @@ func TestUpdateResponseSnapshot_DescribeProvisioningParameters(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProvisioningParameters, schemas.DescribeProvisioningParametersOutput, schemas.DescribeProvisioningParametersOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1740,7 +1740,7 @@ func TestUpdateResponseSnapshot_DescribeRecord(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeRecord, schemas.DescribeRecordOutput, schemas.DescribeRecordOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1774,7 +1774,7 @@ func TestUpdateResponseSnapshot_DescribeServiceAction(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeServiceAction, schemas.DescribeServiceActionOutput, schemas.DescribeServiceActionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1815,7 +1815,7 @@ func TestUpdateResponseSnapshot_DescribeServiceActionExecutionParameters(t *test
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeServiceActionExecutionParameters, schemas.DescribeServiceActionExecutionParametersOutput, schemas.DescribeServiceActionExecutionParametersOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1845,7 +1845,7 @@ func TestUpdateResponseSnapshot_DescribeTagOption(t *testing.T) {
 			Owner:  ptr.String("__Owner__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTagOption, schemas.DescribeTagOptionOutput, schemas.DescribeTagOptionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1867,7 +1867,7 @@ func TestUpdateResponseSnapshot_DescribeTagOption(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableAWSOrganizationsAccess(t *testing.T) {
 	want := &DisableAWSOrganizationsAccessOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DisableAWSOrganizationsAccess, schemas.DisableAWSOrganizationsAccessOutput, schemas.DisableAWSOrganizationsAccessOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1889,7 +1889,7 @@ func TestUpdateResponseSnapshot_DisableAWSOrganizationsAccess(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateBudgetFromResource(t *testing.T) {
 	want := &DisassociateBudgetFromResourceOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateBudgetFromResource, schemas.DisassociateBudgetFromResourceOutput, schemas.DisassociateBudgetFromResourceOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1911,7 +1911,7 @@ func TestUpdateResponseSnapshot_DisassociateBudgetFromResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociatePrincipalFromPortfolio(t *testing.T) {
 	want := &DisassociatePrincipalFromPortfolioOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociatePrincipalFromPortfolio, schemas.DisassociatePrincipalFromPortfolioOutput, schemas.DisassociatePrincipalFromPortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1933,7 +1933,7 @@ func TestUpdateResponseSnapshot_DisassociatePrincipalFromPortfolio(t *testing.T)
 
 func TestUpdateResponseSnapshot_DisassociateProductFromPortfolio(t *testing.T) {
 	want := &DisassociateProductFromPortfolioOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateProductFromPortfolio, schemas.DisassociateProductFromPortfolioOutput, schemas.DisassociateProductFromPortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1955,7 +1955,7 @@ func TestUpdateResponseSnapshot_DisassociateProductFromPortfolio(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateServiceActionFromProvisioningArtifact(t *testing.T) {
 	want := &DisassociateServiceActionFromProvisioningArtifactOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateServiceActionFromProvisioningArtifact, schemas.DisassociateServiceActionFromProvisioningArtifactOutput, schemas.DisassociateServiceActionFromProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1977,7 +1977,7 @@ func TestUpdateResponseSnapshot_DisassociateServiceActionFromProvisioningArtifac
 
 func TestUpdateResponseSnapshot_DisassociateTagOptionFromResource(t *testing.T) {
 	want := &DisassociateTagOptionFromResourceOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateTagOptionFromResource, schemas.DisassociateTagOptionFromResourceOutput, schemas.DisassociateTagOptionFromResourceOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1999,7 +1999,7 @@ func TestUpdateResponseSnapshot_DisassociateTagOptionFromResource(t *testing.T) 
 
 func TestUpdateResponseSnapshot_EnableAWSOrganizationsAccess(t *testing.T) {
 	want := &EnableAWSOrganizationsAccessOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.EnableAWSOrganizationsAccess, schemas.EnableAWSOrganizationsAccessOutput, schemas.EnableAWSOrganizationsAccessOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2056,7 +2056,7 @@ func TestUpdateResponseSnapshot_ExecuteProvisionedProductPlan(t *testing.T) {
 			LaunchRoleArn: ptr.String("__LaunchRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ExecuteProvisionedProductPlan, schemas.ExecuteProvisionedProductPlanOutput, schemas.ExecuteProvisionedProductPlanOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2113,7 +2113,7 @@ func TestUpdateResponseSnapshot_ExecuteProvisionedProductServiceAction(t *testin
 			LaunchRoleArn: ptr.String("__LaunchRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ExecuteProvisionedProductServiceAction, schemas.ExecuteProvisionedProductServiceActionOutput, schemas.ExecuteProvisionedProductServiceActionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2137,7 +2137,7 @@ func TestUpdateResponseSnapshot_GetAWSOrganizationsAccessStatus(t *testing.T) {
 	want := &GetAWSOrganizationsAccessStatusOutput{
 		AccessStatus: types.AccessStatus("ENABLED"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.GetAWSOrganizationsAccessStatus, schemas.GetAWSOrganizationsAccessStatusOutput, schemas.GetAWSOrganizationsAccessStatusOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2173,7 +2173,7 @@ func TestUpdateResponseSnapshot_GetProvisionedProductOutputs(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.GetProvisionedProductOutputs, schemas.GetProvisionedProductOutputsOutput, schemas.GetProvisionedProductOutputsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2230,7 +2230,7 @@ func TestUpdateResponseSnapshot_ImportAsProvisionedProduct(t *testing.T) {
 			LaunchRoleArn: ptr.String("__LaunchRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ImportAsProvisionedProduct, schemas.ImportAsProvisionedProductOutput, schemas.ImportAsProvisionedProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2272,7 +2272,7 @@ func TestUpdateResponseSnapshot_ListAcceptedPortfolioShares(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListAcceptedPortfolioShares, schemas.ListAcceptedPortfolioSharesOutput, schemas.ListAcceptedPortfolioSharesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2304,7 +2304,7 @@ func TestUpdateResponseSnapshot_ListBudgetsForResource(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListBudgetsForResource, schemas.ListBudgetsForResourceOutput, schemas.ListBudgetsForResourceOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2346,7 +2346,7 @@ func TestUpdateResponseSnapshot_ListConstraintsForPortfolio(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListConstraintsForPortfolio, schemas.ListConstraintsForPortfolioOutput, schemas.ListConstraintsForPortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2420,7 +2420,7 @@ func TestUpdateResponseSnapshot_ListLaunchPaths(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListLaunchPaths, schemas.ListLaunchPathsOutput, schemas.ListLaunchPathsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2454,7 +2454,7 @@ func TestUpdateResponseSnapshot_ListOrganizationPortfolioAccess(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListOrganizationPortfolioAccess, schemas.ListOrganizationPortfolioAccessOutput, schemas.ListOrganizationPortfolioAccessOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2482,7 +2482,7 @@ func TestUpdateResponseSnapshot_ListPortfolioAccess(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListPortfolioAccess, schemas.ListPortfolioAccessOutput, schemas.ListPortfolioAccessOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2524,7 +2524,7 @@ func TestUpdateResponseSnapshot_ListPortfolios(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListPortfolios, schemas.ListPortfoliosOutput, schemas.ListPortfoliosOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2566,7 +2566,7 @@ func TestUpdateResponseSnapshot_ListPortfoliosForProduct(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListPortfoliosForProduct, schemas.ListPortfoliosForProductOutput, schemas.ListPortfoliosForProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2600,7 +2600,7 @@ func TestUpdateResponseSnapshot_ListPrincipalsForPortfolio(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListPrincipalsForPortfolio, schemas.ListPrincipalsForPortfolioOutput, schemas.ListPrincipalsForPortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2642,7 +2642,7 @@ func TestUpdateResponseSnapshot_ListProvisionedProductPlans(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListProvisionedProductPlans, schemas.ListProvisionedProductPlansOutput, schemas.ListProvisionedProductPlansOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2688,7 +2688,7 @@ func TestUpdateResponseSnapshot_ListProvisioningArtifacts(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListProvisioningArtifacts, schemas.ListProvisioningArtifactsOutput, schemas.ListProvisioningArtifactsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2758,7 +2758,7 @@ func TestUpdateResponseSnapshot_ListProvisioningArtifactsForServiceAction(t *tes
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListProvisioningArtifactsForServiceAction, schemas.ListProvisioningArtifactsForServiceActionOutput, schemas.ListProvisioningArtifactsForServiceActionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2852,7 +2852,7 @@ func TestUpdateResponseSnapshot_ListRecordHistory(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListRecordHistory, schemas.ListRecordHistoryOutput, schemas.ListRecordHistoryOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2892,7 +2892,7 @@ func TestUpdateResponseSnapshot_ListResourcesForTagOption(t *testing.T) {
 		},
 		PageToken: ptr.String("__PageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListResourcesForTagOption, schemas.ListResourcesForTagOptionOutput, schemas.ListResourcesForTagOptionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2930,7 +2930,7 @@ func TestUpdateResponseSnapshot_ListServiceActions(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListServiceActions, schemas.ListServiceActionsOutput, schemas.ListServiceActionsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2968,7 +2968,7 @@ func TestUpdateResponseSnapshot_ListServiceActionsForProvisioningArtifact(t *tes
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListServiceActionsForProvisioningArtifact, schemas.ListServiceActionsForProvisioningArtifactOutput, schemas.ListServiceActionsForProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3004,7 +3004,7 @@ func TestUpdateResponseSnapshot_ListStackInstancesForProvisionedProduct(t *testi
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListStackInstancesForProvisionedProduct, schemas.ListStackInstancesForProvisionedProductOutput, schemas.ListStackInstancesForProvisionedProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3044,7 +3044,7 @@ func TestUpdateResponseSnapshot_ListTagOptions(t *testing.T) {
 		},
 		PageToken: ptr.String("__PageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagOptions, schemas.ListTagOptionsOutput, schemas.ListTagOptionsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3066,7 +3066,7 @@ func TestUpdateResponseSnapshot_ListTagOptions(t *testing.T) {
 
 func TestUpdateResponseSnapshot_NotifyProvisionProductEngineWorkflowResult(t *testing.T) {
 	want := &NotifyProvisionProductEngineWorkflowResultOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.NotifyProvisionProductEngineWorkflowResult, schemas.NotifyProvisionProductEngineWorkflowResultOutput, schemas.NotifyProvisionProductEngineWorkflowResultOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3088,7 +3088,7 @@ func TestUpdateResponseSnapshot_NotifyProvisionProductEngineWorkflowResult(t *te
 
 func TestUpdateResponseSnapshot_NotifyTerminateProvisionedProductEngineWorkflowResult(t *testing.T) {
 	want := &NotifyTerminateProvisionedProductEngineWorkflowResultOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.NotifyTerminateProvisionedProductEngineWorkflowResult, schemas.NotifyTerminateProvisionedProductEngineWorkflowResultOutput, schemas.NotifyTerminateProvisionedProductEngineWorkflowResultOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3110,7 +3110,7 @@ func TestUpdateResponseSnapshot_NotifyTerminateProvisionedProductEngineWorkflowR
 
 func TestUpdateResponseSnapshot_NotifyUpdateProvisionedProductEngineWorkflowResult(t *testing.T) {
 	want := &NotifyUpdateProvisionedProductEngineWorkflowResultOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.NotifyUpdateProvisionedProductEngineWorkflowResult, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultOutput, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3167,7 +3167,7 @@ func TestUpdateResponseSnapshot_ProvisionProduct(t *testing.T) {
 			LaunchRoleArn: ptr.String("__LaunchRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ProvisionProduct, schemas.ProvisionProductOutput, schemas.ProvisionProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3189,7 +3189,7 @@ func TestUpdateResponseSnapshot_ProvisionProduct(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RejectPortfolioShare(t *testing.T) {
 	want := &RejectPortfolioShareOutput{}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.RejectPortfolioShare, schemas.RejectPortfolioShareOutput, schemas.RejectPortfolioShareOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3247,7 +3247,7 @@ func TestUpdateResponseSnapshot_ScanProvisionedProducts(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.ScanProvisionedProducts, schemas.ScanProvisionedProductsOutput, schemas.ScanProvisionedProductsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3311,7 +3311,7 @@ func TestUpdateResponseSnapshot_SearchProducts(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.SearchProducts, schemas.SearchProductsOutput, schemas.SearchProductsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3409,7 +3409,7 @@ func TestUpdateResponseSnapshot_SearchProductsAsAdmin(t *testing.T) {
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.SearchProductsAsAdmin, schemas.SearchProductsAsAdminOutput, schemas.SearchProductsAsAdminOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3496,7 +3496,7 @@ func TestUpdateResponseSnapshot_SearchProvisionedProducts(t *testing.T) {
 		TotalResultsCount: 1,
 		NextPageToken:     ptr.String("__NextPageToken__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.SearchProvisionedProducts, schemas.SearchProvisionedProductsOutput, schemas.SearchProvisionedProductsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3553,7 +3553,7 @@ func TestUpdateResponseSnapshot_TerminateProvisionedProduct(t *testing.T) {
 			LaunchRoleArn: ptr.String("__LaunchRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.TerminateProvisionedProduct, schemas.TerminateProvisionedProductOutput, schemas.TerminateProvisionedProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3586,7 +3586,7 @@ func TestUpdateResponseSnapshot_UpdateConstraint(t *testing.T) {
 		ConstraintParameters: ptr.String("__ConstraintParameters__"),
 		Status:               types.Status("AVAILABLE"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateConstraint, schemas.UpdateConstraintOutput, schemas.UpdateConstraintOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3627,7 +3627,7 @@ func TestUpdateResponseSnapshot_UpdatePortfolio(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdatePortfolio, schemas.UpdatePortfolioOutput, schemas.UpdatePortfolioOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3652,7 +3652,7 @@ func TestUpdateResponseSnapshot_UpdatePortfolioShare(t *testing.T) {
 		PortfolioShareToken: ptr.String("__PortfolioShareToken__"),
 		Status:              types.ShareStatus("NOT_STARTED"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdatePortfolioShare, schemas.UpdatePortfolioShareOutput, schemas.UpdatePortfolioShareOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3721,7 +3721,7 @@ func TestUpdateResponseSnapshot_UpdateProduct(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProduct, schemas.UpdateProductOutput, schemas.UpdateProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3778,7 +3778,7 @@ func TestUpdateResponseSnapshot_UpdateProvisionedProduct(t *testing.T) {
 			LaunchRoleArn: ptr.String("__LaunchRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProvisionedProduct, schemas.UpdateProvisionedProductOutput, schemas.UpdateProvisionedProductOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3807,7 +3807,7 @@ func TestUpdateResponseSnapshot_UpdateProvisionedProductProperties(t *testing.T)
 		RecordId: ptr.String("__RecordId__"),
 		Status:   types.RecordStatus("CREATED"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProvisionedProductProperties, schemas.UpdateProvisionedProductPropertiesOutput, schemas.UpdateProvisionedProductPropertiesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3844,7 +3844,7 @@ func TestUpdateResponseSnapshot_UpdateProvisioningArtifact(t *testing.T) {
 		},
 		Status: types.Status("AVAILABLE"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProvisioningArtifact, schemas.UpdateProvisioningArtifactOutput, schemas.UpdateProvisioningArtifactOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3878,7 +3878,7 @@ func TestUpdateResponseSnapshot_UpdateServiceAction(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateServiceAction, schemas.UpdateServiceActionOutput, schemas.UpdateServiceActionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3908,7 +3908,7 @@ func TestUpdateResponseSnapshot_UpdateTagOption(t *testing.T) {
 			Owner:  ptr.String("__Owner__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTagOption, schemas.UpdateTagOptionOutput, schemas.UpdateTagOptionOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3932,7 +3932,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateResourceException(t *testing.T) {
 	want := &types.DuplicateResourceException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateBudgetWithResource, schemas.DuplicateResourceException, schemas.DuplicateResourceException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3947,7 +3947,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateResourceException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DuplicateResourceException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3957,7 +3957,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParametersException(t *testing.T) {
 	want := &types.InvalidParametersException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptPortfolioShare, schemas.InvalidParametersException, schemas.InvalidParametersException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3972,7 +3972,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParametersException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParametersException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3982,7 +3982,7 @@ func TestUpdateResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 	want := &types.InvalidStateException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateTagOptionWithResource, schemas.InvalidStateException, schemas.InvalidStateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3997,7 +3997,7 @@ func TestUpdateResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidStateException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4007,7 +4007,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptPortfolioShare, schemas.LimitExceededException, schemas.LimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4022,7 +4022,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4032,7 +4032,7 @@ func TestUpdateResponseSnapshot_Error_OperationNotSupportedException(t *testing.
 	want := &types.OperationNotSupportedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePortfolioShare, schemas.OperationNotSupportedException, schemas.OperationNotSupportedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4047,7 +4047,7 @@ func TestUpdateResponseSnapshot_Error_OperationNotSupportedException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OperationNotSupportedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4057,7 +4057,7 @@ func TestUpdateResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 	want := &types.ResourceInUseException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.DeletePortfolio, schemas.ResourceInUseException, schemas.ResourceInUseException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4072,7 +4072,7 @@ func TestUpdateResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceInUseException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4082,7 +4082,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptPortfolioShare, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4097,7 +4097,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4107,7 +4107,7 @@ func TestUpdateResponseSnapshot_Error_TagOptionNotMigratedException(t *testing.T
 	want := &types.TagOptionNotMigratedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWS242ServiceCatalogService)
+	proto := rpcv2.NewCBOR(schemas.AWS242ServiceCatalogService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateTagOptionWithResource, schemas.TagOptionNotMigratedException, schemas.TagOptionNotMigratedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4122,7 +4122,7 @@ func TestUpdateResponseSnapshot_Error_TagOptionNotMigratedException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TagOptionNotMigratedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

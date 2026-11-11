@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShield_20160616/operation/DescribeAttack
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.DescribeAttack
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AttackId":"__AttackId__"}
+¿hAttackIdl__AttackId__ÿ

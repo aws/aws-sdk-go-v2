@@ -1,0 +1,8 @@
+{
+    "id": "86db4c76-7f0f-493f-9252-2ab6ffac2b35",
+    "type": "feature",
+    "description": "This release adds the BandwidthReportingMode setting to DASH manifest configurations, which lets you choose whether the bandwidth attribute of video Representations in the DASH manifest reports the average (default) or peak bitrate of the video track.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

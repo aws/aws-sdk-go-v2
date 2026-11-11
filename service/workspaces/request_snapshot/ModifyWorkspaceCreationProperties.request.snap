@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifyWorkspaceCreationProperties
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifyWorkspaceCreationProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__","WorkspaceCreationProperties":{"CustomSecurityGroupId":"__CustomSecurityGroupId__","DefaultOu":"__DefaultOu__","EnableInternetAccess":true,"EnableMaintenanceMode":true,"InstanceIamRoleArn":"__InstanceIamRoleArn__","UserEnabledAsLocalAdministrator":true}}
+¿jResourceIdn__ResourceId__xWorkspaceCreationProperties¿uCustomSecurityGroupIdx__CustomSecurityGroupId__iDefaultOum__DefaultOu__tEnableInternetAccessõuEnableMaintenanceModeõrInstanceIamRoleArnv__InstanceIamRoleArn__xUserEnabledAsLocalAdministratorõÿÿ

@@ -884,6 +884,35 @@ func TestCheckRequestSnapshot_AdminListUserAuthEvents(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AdminListUserSessions(t *testing.T) {
+	input := &AdminListUserSessionsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AdminListUserSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminListUserSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AdminRemoveUserFromGroup(t *testing.T) {
 	input := &AdminRemoveUserFromGroupInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -995,6 +1024,36 @@ func TestCheckRequestSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminRespondToAuthChallenge"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_AdminRevokeUserSession(t *testing.T) {
+	input := &AdminRevokeUserSessionInput{
+		UserPoolId:               ptr.String("__UserPoolId__"),
+		Username:                 ptr.String("__Username__"),
+		SessionId:                ptr.String("__SessionId__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AdminRevokeUserSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminRevokeUserSession"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3147,6 +3206,34 @@ func TestCheckRequestSnapshot_GetUserAuthFactors(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetUserPoolClientSessionConfiguration(t *testing.T) {
+	input := &GetUserPoolClientSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUserPoolClientSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserPoolClientSessionConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	input := &GetUserPoolMfaConfigInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -3170,6 +3257,33 @@ func TestCheckRequestSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserPoolMfaConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetUserPoolSessionConfiguration(t *testing.T) {
+	input := &GetUserPoolSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUserPoolSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserPoolSessionConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3592,6 +3706,34 @@ func TestCheckRequestSnapshot_ListUsers(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListUserSessions(t *testing.T) {
+	input := &ListUserSessionsInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		NextToken:   ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListUserSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListUserSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListUsersInGroup(t *testing.T) {
 	input := &ListUsersInGroupInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -3734,9 +3876,10 @@ func TestCheckRequestSnapshot_RespondToAuthChallenge(t *testing.T) {
 
 func TestCheckRequestSnapshot_RevokeToken(t *testing.T) {
 	input := &RevokeTokenInput{
-		Token:        ptr.String("__Token__"),
-		ClientId:     ptr.String("__ClientId__"),
-		ClientSecret: ptr.String("__ClientSecret__"),
+		Token:                    ptr.String("__Token__"),
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3757,6 +3900,35 @@ func TestCheckRequestSnapshot_RevokeToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RevokeUserSession(t *testing.T) {
+	input := &RevokeUserSessionInput{
+		AccessToken:              ptr.String("__AccessToken__"),
+		SessionId:                ptr.String("__SessionId__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeUserSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeUserSession"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3971,6 +4143,37 @@ func TestCheckRequestSnapshot_SetUserMFAPreference(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_SetUserPoolClientSessionConfiguration(t *testing.T) {
+	input := &SetUserPoolClientSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		SSOSession: &types.ClientSSOSessionConfigType{
+			MaxValidityMinutes: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SetUserPoolClientSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetUserPoolClientSessionConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 	input := &SetUserPoolMfaConfigInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -4024,6 +4227,37 @@ func TestCheckRequestSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetUserPoolMfaConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SetUserPoolSessionConfiguration(t *testing.T) {
+	input := &SetUserPoolSessionConfigurationInput{
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		UserSessionTracking: types.UserSessionTrackingType("ENABLED"),
+		TokenSession: &types.UserPoolTokenSessionConfigType{
+			MaxPerUser: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SetUserPoolSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetUserPoolSessionConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5649,6 +5883,35 @@ func TestUpdateRequestSnapshot_AdminListUserAuthEvents(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_AdminListUserSessions(t *testing.T) {
+	input := &AdminListUserSessionsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AdminListUserSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminListUserSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AdminRemoveUserFromGroup(t *testing.T) {
 	input := &AdminRemoveUserFromGroupInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -5760,6 +6023,36 @@ func TestUpdateRequestSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminRespondToAuthChallenge"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AdminRevokeUserSession(t *testing.T) {
+	input := &AdminRevokeUserSessionInput{
+		UserPoolId:               ptr.String("__UserPoolId__"),
+		Username:                 ptr.String("__Username__"),
+		SessionId:                ptr.String("__SessionId__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AdminRevokeUserSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminRevokeUserSession"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7912,6 +8205,34 @@ func TestUpdateRequestSnapshot_GetUserAuthFactors(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetUserPoolClientSessionConfiguration(t *testing.T) {
+	input := &GetUserPoolClientSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUserPoolClientSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserPoolClientSessionConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	input := &GetUserPoolMfaConfigInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -7935,6 +8256,33 @@ func TestUpdateRequestSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserPoolMfaConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetUserPoolSessionConfiguration(t *testing.T) {
+	input := &GetUserPoolSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUserPoolSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUserPoolSessionConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8357,6 +8705,34 @@ func TestUpdateRequestSnapshot_ListUsers(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListUserSessions(t *testing.T) {
+	input := &ListUserSessionsInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		NextToken:   ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListUserSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListUserSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListUsersInGroup(t *testing.T) {
 	input := &ListUsersInGroupInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -8499,9 +8875,10 @@ func TestUpdateRequestSnapshot_RespondToAuthChallenge(t *testing.T) {
 
 func TestUpdateRequestSnapshot_RevokeToken(t *testing.T) {
 	input := &RevokeTokenInput{
-		Token:        ptr.String("__Token__"),
-		ClientId:     ptr.String("__ClientId__"),
-		ClientSecret: ptr.String("__ClientSecret__"),
+		Token:                    ptr.String("__Token__"),
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8522,6 +8899,35 @@ func TestUpdateRequestSnapshot_RevokeToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RevokeUserSession(t *testing.T) {
+	input := &RevokeUserSessionInput{
+		AccessToken:              ptr.String("__AccessToken__"),
+		SessionId:                ptr.String("__SessionId__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeUserSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeUserSession"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8736,6 +9142,37 @@ func TestUpdateRequestSnapshot_SetUserMFAPreference(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_SetUserPoolClientSessionConfiguration(t *testing.T) {
+	input := &SetUserPoolClientSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		SSOSession: &types.ClientSSOSessionConfigType{
+			MaxValidityMinutes: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SetUserPoolClientSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetUserPoolClientSessionConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 	input := &SetUserPoolMfaConfigInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -8789,6 +9226,37 @@ func TestUpdateRequestSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetUserPoolMfaConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SetUserPoolSessionConfiguration(t *testing.T) {
+	input := &SetUserPoolSessionConfigurationInput{
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		UserSessionTracking: types.UserSessionTrackingType("ENABLED"),
+		TokenSession: &types.UserPoolTokenSessionConfigType{
+			MaxPerUser: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SetUserPoolSessionConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SetUserPoolSessionConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }

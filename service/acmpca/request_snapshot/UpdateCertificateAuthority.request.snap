@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/UpdateCertificateAuthority
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.UpdateCertificateAuthority
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CertificateAuthorityArn":"__CertificateAuthorityArn__","RevocationConfiguration":{"CrlConfiguration":{"CrlDistributionPointExtensionConfiguration":{"OmitExtension":true},"CrlType":"COMPLETE","CustomCname":"__CustomCname__","CustomPath":"__CustomPath__","Enabled":true,"ExpirationInDays":1,"S3BucketName":"__S3BucketName__","S3ObjectAcl":"PUBLIC_READ"},"OcspConfiguration":{"Enabled":true,"OcspCustomCname":"__OcspCustomCname__"}},"Status":"CREATING"}
+¿wCertificateAuthorityArnx__CertificateAuthorityArn__wRevocationConfiguration¿pCrlConfiguration¿x*CrlDistributionPointExtensionConfiguration¿mOmitExtensionõÿgCrlTypehCOMPLETEkCustomCnameo__CustomCname__jCustomPathn__CustomPath__gEnabledõpExpirationInDayslS3BucketNamep__S3BucketName__kS3ObjectAclkPUBLIC_READÿqOcspConfiguration¿gEnabledõoOcspCustomCnames__OcspCustomCname__ÿÿfStatushCREATINGÿ

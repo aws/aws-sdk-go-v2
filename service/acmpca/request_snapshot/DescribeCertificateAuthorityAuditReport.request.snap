@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/DescribeCertificateAuthorityAuditReport
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.DescribeCertificateAuthorityAuditReport
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AuditReportId":"__AuditReportId__","CertificateAuthorityArn":"__CertificateAuthorityArn__"}
+¿mAuditReportIdq__AuditReportId__wCertificateAuthorityArnx__CertificateAuthorityArn__ÿ

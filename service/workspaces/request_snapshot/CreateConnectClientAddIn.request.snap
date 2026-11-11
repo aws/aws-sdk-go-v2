@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/CreateConnectClientAddIn
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateConnectClientAddIn
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Name":"__Name__","ResourceId":"__ResourceId__","URL":"__URL__"}
+¿dNameh__Name__jResourceIdn__ResourceId__cURLg__URL__ÿ

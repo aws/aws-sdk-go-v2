@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/AssociateMacSecKey
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.AssociateMacSecKey
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"cak":"__Cak__","ckn":"__Ckn__","connectionId":"__ConnectionId__","secretARN":"__SecretARN__"}
+¿ccakg__Cak__cckng__Ckn__lconnectionIdp__ConnectionId__isecretARNm__SecretARN__ÿ

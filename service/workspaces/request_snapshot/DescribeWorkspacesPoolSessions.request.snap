@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeWorkspacesPoolSessions
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspacesPoolSessions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Limit":1,"NextToken":"__NextToken__","PoolId":"__PoolId__","UserId":"__UserId__"}
+¿eLimitiNextTokenm__NextToken__fPoolIdj__PoolId__fUserIdj__UserId__ÿ

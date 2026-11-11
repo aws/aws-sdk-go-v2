@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/CreatePublicDnsNamespace
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.CreatePublicDnsNamespace
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CreatorRequestId":"__CreatorRequestId__","Description":"__Description__","Name":"__Name__","Properties":{"DnsProperties":{"SOA":{"TTL":1}}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿pCreatorRequestIdt__CreatorRequestId__kDescriptiono__Description__dNameh__Name__jProperties¿mDnsProperties¿cSOA¿cTTLÿÿÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

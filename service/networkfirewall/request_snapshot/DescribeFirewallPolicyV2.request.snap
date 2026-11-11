@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/DescribeFirewallPolicyV2
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DescribeFirewallPolicyV2
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FirewallPolicyV2Arn":"__FirewallPolicyV2Arn__","FirewallPolicyV2Name":"__FirewallPolicyV2Name__","RuleOutputFormat":"FIREWALL_RULES"}
+¿sFirewallPolicyV2Arnw__FirewallPolicyV2Arn__tFirewallPolicyV2Namex__FirewallPolicyV2Name__pRuleOutputFormatnFIREWALL_RULESÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/DetectSyntax
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.DetectSyntax
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"LanguageCode":"en","Text":"__Text__"}
+¿lLanguageCodebendTexth__Text__ÿ

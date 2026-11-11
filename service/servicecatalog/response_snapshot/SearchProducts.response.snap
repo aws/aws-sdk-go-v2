@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.SearchProducts
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextPageToken":"__NextPageToken__","ProductViewAggregations":{"key0":[{"ApproximateCount":1,"Value":"__Value__"},{"ApproximateCount":1,"Value":"__Value__"}]},"ProductViewSummaries":[{"Distributor":"__Distributor__","HasDefaultPath":true,"Id":"__Id__","Name":"__Name__","Owner":"__Owner__","ProductId":"__ProductId__","ShortDescription":"__ShortDescription__","SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__","Type":"CLOUD_FORMATION_TEMPLATE"},{"Distributor":"__Distributor__","HasDefaultPath":true,"Id":"__Id__","Name":"__Name__","Owner":"__Owner__","ProductId":"__ProductId__","ShortDescription":"__ShortDescription__","SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__","Type":"CLOUD_FORMATION_TEMPLATE"}]}
+¿mNextPageTokenq__NextPageToken__wProductViewAggregations¿dkey0Ÿ¿pApproximateCounteValuei__Value__ÿ¿pApproximateCounteValuei__Value__ÿÿÿtProductViewSummariesŸ¿kDistributoro__Distributor__nHasDefaultPathõbIdf__Id__dNameh__Name__eOwneri__Owner__iProductIdm__ProductId__pShortDescriptiont__ShortDescription__rSupportDescriptionv__SupportDescription__lSupportEmailp__SupportEmail__jSupportUrln__SupportUrl__dTypexCLOUD_FORMATION_TEMPLATEÿ¿kDistributoro__Distributor__nHasDefaultPathõbIdf__Id__dNameh__Name__eOwneri__Owner__iProductIdm__ProductId__pShortDescriptiont__ShortDescription__rSupportDescriptionv__SupportDescription__lSupportEmailp__SupportEmail__jSupportUrln__SupportUrl__dTypexCLOUD_FORMATION_TEMPLATEÿÿÿ

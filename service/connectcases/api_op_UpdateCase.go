@@ -16,9 +16,13 @@ import (
 // Updates the values of fields on a case. Fields to be updated are received as an
 // array of id/value pairs identical to the CreateCase input.
 //
+// If the case is the secondary case of a merge that is running, the request fails
+// with a ConflictException . For more information, see [StartMergeCases].
+//
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 //
+// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
 // [connect:DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 func (c *Client) UpdateCase(ctx context.Context, params *UpdateCaseInput, optFns ...func(*Options)) (*UpdateCaseOutput, error) {
 	if params == nil {

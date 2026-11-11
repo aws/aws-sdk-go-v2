@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeCopyProductStatus
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CopyProductStatus":"SUCCEEDED","StatusDetail":"__StatusDetail__","TargetProductId":"__TargetProductId__"}
+¿qCopyProductStatusiSUCCEEDEDlStatusDetailp__StatusDetail__oTargetProductIds__TargetProductId__ÿ

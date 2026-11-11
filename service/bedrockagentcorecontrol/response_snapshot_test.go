@@ -609,6 +609,20 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -1492,6 +1506,20 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -1676,6 +1704,20 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -2352,6 +2394,12 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 							Headers: map[string]string{
 								"key0": "__Value__",
 							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
+							},
 						},
 					},
 				},
@@ -2363,6 +2411,12 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 							Url: ptr.String("__Url__"),
 							Headers: map[string]string{
 								"key0": "__Value__",
+							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
 							},
 						},
 					},
@@ -2493,6 +2547,20 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 								},
+							},
+						},
+					},
+					CertificateConfigurations: []types.CertificateConfiguration{
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							},
+						},
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 							},
 						},
 					},
@@ -2675,6 +2743,20 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -2719,6 +2801,12 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 						Headers: map[string]string{
 							"key0": "__Value__",
 						},
+						OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+							Value: types.IamCredentialProvider{
+								Service: ptr.String("__Service__"),
+								Region:  ptr.String("__Region__"),
+							},
+						},
 					},
 				},
 			},
@@ -2730,6 +2818,12 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 						Url: ptr.String("__Url__"),
 						Headers: map[string]string{
 							"key0": "__Value__",
+						},
+						OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+							Value: types.IamCredentialProvider{
+								Service: ptr.String("__Service__"),
+								Region:  ptr.String("__Region__"),
+							},
 						},
 					},
 				},
@@ -3427,6 +3521,20 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
 					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
 						Value: types.KmsKeySourceType{
@@ -3516,6 +3624,20 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -3832,6 +3954,20 @@ func TestCheckResponseSnapshot_CreatePaymentManager(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -3931,6 +4067,20 @@ func TestCheckResponseSnapshot_CreatePaymentManager(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -4131,6 +4281,20 @@ func TestCheckResponseSnapshot_CreateRegistry(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -4755,6 +4919,12 @@ func TestCheckResponseSnapshot_DeleteHarness(t *testing.T) {
 							Headers: map[string]string{
 								"key0": "__Value__",
 							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
+							},
 						},
 					},
 				},
@@ -4766,6 +4936,12 @@ func TestCheckResponseSnapshot_DeleteHarness(t *testing.T) {
 							Url: ptr.String("__Url__"),
 							Headers: map[string]string{
 								"key0": "__Value__",
+							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
 							},
 						},
 					},
@@ -4896,6 +5072,20 @@ func TestCheckResponseSnapshot_DeleteHarness(t *testing.T) {
 								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 								},
+							},
+						},
+					},
+					CertificateConfigurations: []types.CertificateConfiguration{
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							},
+						},
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 							},
 						},
 					},
@@ -5442,6 +5632,20 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -6310,6 +6514,20 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -6787,6 +7005,12 @@ func TestCheckResponseSnapshot_GetHarness(t *testing.T) {
 							Headers: map[string]string{
 								"key0": "__Value__",
 							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
+							},
 						},
 					},
 				},
@@ -6798,6 +7022,12 @@ func TestCheckResponseSnapshot_GetHarness(t *testing.T) {
 							Url: ptr.String("__Url__"),
 							Headers: map[string]string{
 								"key0": "__Value__",
+							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
 							},
 						},
 					},
@@ -6928,6 +7158,20 @@ func TestCheckResponseSnapshot_GetHarness(t *testing.T) {
 								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 								},
+							},
+						},
+					},
+					CertificateConfigurations: []types.CertificateConfiguration{
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							},
+						},
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 							},
 						},
 					},
@@ -7432,6 +7676,20 @@ func TestCheckResponseSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
 					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
 						Value: types.KmsKeySourceType{
@@ -7730,6 +7988,20 @@ func TestCheckResponseSnapshot_GetPaymentManager(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -8054,6 +8326,20 @@ func TestCheckResponseSnapshot_GetRegistry(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -11088,6 +11374,20 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -11606,6 +11906,20 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -11790,6 +12104,20 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -12467,6 +12795,12 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 							Headers: map[string]string{
 								"key0": "__Value__",
 							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
+							},
 						},
 					},
 				},
@@ -12478,6 +12812,12 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 							Url: ptr.String("__Url__"),
 							Headers: map[string]string{
 								"key0": "__Value__",
+							},
+							OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+								Value: types.IamCredentialProvider{
+									Service: ptr.String("__Service__"),
+									Region:  ptr.String("__Region__"),
+								},
 							},
 						},
 					},
@@ -12608,6 +12948,20 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 								},
+							},
+						},
+					},
+					CertificateConfigurations: []types.CertificateConfiguration{
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							},
+						},
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 							},
 						},
 					},
@@ -12793,6 +13147,20 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 							},
 						},
 					},
+					CertificateConfigurations: []types.CertificateConfiguration{
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							},
+						},
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							},
+						},
+					},
 					AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 						HostingEnvironments: []types.HostingEnvironment{
 							{
@@ -12838,6 +13206,12 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 						Headers: map[string]string{
 							"key0": "__Value__",
 						},
+						OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+							Value: types.IamCredentialProvider{
+								Service: ptr.String("__Service__"),
+								Region:  ptr.String("__Region__"),
+							},
+						},
 					},
 				},
 			},
@@ -12849,6 +13223,12 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 						Url: ptr.String("__Url__"),
 						Headers: map[string]string{
 							"key0": "__Value__",
+						},
+						OutboundAuth: &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{
+							Value: types.IamCredentialProvider{
+								Service: ptr.String("__Service__"),
+								Region:  ptr.String("__Region__"),
+							},
 						},
 					},
 				},
@@ -13765,6 +14145,20 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
 					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
 						Value: types.KmsKeySourceType{
@@ -13856,6 +14250,20 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 								Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 							},
+						},
+					},
+				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -14177,6 +14585,20 @@ func TestCheckResponseSnapshot_UpdatePaymentManager(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -14363,6 +14785,20 @@ func TestCheckResponseSnapshot_UpdateRegistry(t *testing.T) {
 						},
 					},
 				},
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 				AllowedWorkloadConfiguration: &types.AllowedWorkloadConfiguration{
 					HostingEnvironments: []types.HostingEnvironment{
 						{
@@ -14462,6 +14898,20 @@ func TestCheckResponseSnapshot_UpdateRegistry(t *testing.T) {
 								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 								},
+							},
+						},
+					},
+					CertificateConfigurations: []types.CertificateConfiguration{
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							},
+						},
+						&types.CertificateConfigurationMemberS3{
+							Value: types.S3CertificateConfiguration{
+								Uri:                  ptr.String("__Uri__"),
+								BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 							},
 						},
 					},

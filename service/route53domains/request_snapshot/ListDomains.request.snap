@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53Domains_v20140515/operation/ListDomains
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.ListDomains
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FilterConditions":[{"Name":"DomainName","Operator":"LE","Values":["__Member__","__Member__"]},{"Name":"DomainName","Operator":"LE","Values":["__Member__","__Member__"]}],"Marker":"__Marker__","MaxItems":1,"SortCondition":{"Name":"DomainName","SortOrder":"ASC"}}
+¿pFilterConditionsŸ¿dNamejDomainNamehOperatorbLEfValuesŸj__Member__j__Member__ÿÿ¿dNamejDomainNamehOperatorbLEfValuesŸj__Member__j__Member__ÿÿÿfMarkerj__Marker__hMaxItemsmSortCondition¿dNamejDomainNameiSortOrdercASCÿÿ

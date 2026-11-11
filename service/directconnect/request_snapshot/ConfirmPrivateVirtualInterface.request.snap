@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/ConfirmPrivateVirtualInterface
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.ConfirmPrivateVirtualInterface
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"directConnectGatewayId":"__DirectConnectGatewayId__","virtualGatewayId":"__VirtualGatewayId__","virtualInterfaceId":"__VirtualInterfaceId__"}
+¿vdirectConnectGatewayIdx__DirectConnectGatewayId__pvirtualGatewayIdt__VirtualGatewayId__rvirtualInterfaceIdv__VirtualInterfaceId__ÿ

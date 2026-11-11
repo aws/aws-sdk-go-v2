@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeConstraint
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ConstraintDetail":{"ConstraintId":"__ConstraintId__","Description":"__Description__","Owner":"__Owner__","PortfolioId":"__PortfolioId__","ProductId":"__ProductId__","Type":"__Type__"},"ConstraintParameters":"__ConstraintParameters__","Status":"AVAILABLE"}
+¿pConstraintDetail¿lConstraintIdp__ConstraintId__kDescriptiono__Description__eOwneri__Owner__kPortfolioIdo__PortfolioId__iProductIdm__ProductId__dTypeh__Type__ÿtConstraintParametersx__ConstraintParameters__fStatusiAVAILABLEÿ

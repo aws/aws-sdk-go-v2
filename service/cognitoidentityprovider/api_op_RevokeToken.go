@@ -5,6 +5,7 @@ package cognitoidentityprovider
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -51,6 +52,14 @@ type RevokeTokenInput struct {
 	// The client secret of the requested app client, if the client has a secret.
 	ClientSecret *string
 
+	// Specifies whether to also revoke the SSO session that is linked to the token
+	// session being revoked. NONE , the default, revokes only the token session that
+	// is associated with the refresh token. LINKED also revokes the parent SSO
+	// session that the token session came through; the other token sessions that came
+	// through that SSO session aren't revoked. LINKED has no effect when session
+	// tracking is disabled or when the token session has no parent SSO session.
+	RevokeAssociatedSessions types.RevokeAssociatedSessionsType
+
 	noSmithyDocumentSerde
 }
 
@@ -66,6 +75,9 @@ func (v *RevokeTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.RevokeTokenRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.RevokeAssociatedSessions != "" {
+		s.WriteString(schemas.RevokeTokenRequest_RevokeAssociatedSessions, string(v.RevokeAssociatedSessions))
 	}
 	if v.Token != nil {
 		s.WriteString(schemas.RevokeTokenRequest_Token, *v.Token)

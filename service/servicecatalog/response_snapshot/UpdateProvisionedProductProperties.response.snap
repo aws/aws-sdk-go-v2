@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.UpdateProvisionedProductProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ProvisionedProductId":"__ProvisionedProductId__","ProvisionedProductProperties":{"key0":"__Value__"},"RecordId":"__RecordId__","Status":"CREATED"}
+¿tProvisionedProductIdx__ProvisionedProductId__xProvisionedProductProperties¿dkey0i__Value__ÿhRecordIdl__RecordId__fStatusgCREATEDÿ

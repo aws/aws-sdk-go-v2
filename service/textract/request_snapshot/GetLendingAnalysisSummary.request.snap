@@ -1,6 +1,7 @@
-POST /
+POST /service/Textract/operation/GetLendingAnalysisSummary
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.GetLendingAnalysisSummary
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"JobId":"__JobId__"}
+¿eJobIdi__JobId__ÿ

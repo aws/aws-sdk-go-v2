@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeSubnetGroups
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeSubnetGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NextToken":"__NextToken__","SubnetGroupName":"__SubnetGroupName__"}
+¿jMaxResultsiNextTokenm__NextToken__oSubnetGroupNames__SubnetGroupName__ÿ

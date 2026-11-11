@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/DescribeProxyConfiguration
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DescribeProxyConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ProxyConfigurationArn":"__ProxyConfigurationArn__","ProxyConfigurationName":"__ProxyConfigurationName__"}
+¿uProxyConfigurationArnx__ProxyConfigurationArn__vProxyConfigurationNamex__ProxyConfigurationName__ÿ

@@ -2115,11 +2115,11 @@ func (v *Certificate) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A reference to a private certificate authority (CA) certificate that the
-// gateway uses to verify TLS connections to the target endpoint. Use this when the
-// target presents a certificate issued by a private CA that is not trusted by
-// default. Specify exactly one certificate source. The configuration is a
-// reference only and never contains the certificate content.
+// A reference to a private certificate authority (CA) certificate that AgentCore
+// uses to verify TLS connections to an endpoint, such as a gateway target or an
+// identity provider, that presents a certificate issued by a private CA that is
+// not trusted by default. Specify exactly one certificate source. The
+// configuration is a reference only and never contains the certificate content.
 //
 // The following types satisfy this interface:
 //
@@ -4631,6 +4631,14 @@ type CustomJWTAuthorizerConfiguration struct {
 	// targets, and the allowed workloads are AgentCore Gateways.
 	AllowedWorkloadConfiguration *AllowedWorkloadConfiguration
 
+	// The private certificate authority (CA) configurations for the identity
+	// provider. Use this to have AgentCore Identity trust a private CA when
+	// establishing TLS connections to identity provider endpoints. You can specify
+	// only one certificate authority configuration in this list. Provide the
+	// certificate by reference to an Amazon S3 object or an Amazon Web Services
+	// Secrets Manager secret. You can use this only together with privateEndpoint .
+	CertificateConfigurations []CertificateConfiguration
+
 	// An array of objects that define a custom claim validation name, value, and
 	// operation
 	CustomClaims []CustomClaimValidationType
@@ -4669,6 +4677,9 @@ func (v *CustomJWTAuthorizerConfiguration) SerializeMembers(s smithy.ShapeSerial
 		v.AllowedWorkloadConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.CertificateConfigurations != nil {
+		serializeCertificateConfigurationList(s, schemas.CustomJWTAuthorizerConfiguration_certificateConfigurations, v.CertificateConfigurations)
+	}
 	if v.CustomClaims != nil {
 		serializeCustomClaimValidationsType(s, schemas.CustomJWTAuthorizerConfiguration_customClaims, v.CustomClaims)
 	}
@@ -4696,6 +4707,8 @@ func (v *CustomJWTAuthorizerConfiguration) Deserialize(d smithy.ShapeDeserialize
 		case schemas.CustomJWTAuthorizerConfiguration_allowedWorkloadConfiguration:
 			v.AllowedWorkloadConfiguration = &AllowedWorkloadConfiguration{}
 			return v.AllowedWorkloadConfiguration.Deserialize(d)
+		case schemas.CustomJWTAuthorizerConfiguration_certificateConfigurations:
+			return deserializeCertificateConfigurationList(d, schemas.CustomJWTAuthorizerConfiguration_certificateConfigurations, &v.CertificateConfigurations)
 		case schemas.CustomJWTAuthorizerConfiguration_customClaims:
 			return deserializeCustomClaimValidationsType(d, schemas.CustomJWTAuthorizerConfiguration_customClaims, &v.CustomClaims)
 		case schemas.CustomJWTAuthorizerConfiguration_discoveryUrl:
@@ -4809,6 +4822,14 @@ type CustomOauth2ProviderConfigInput struct {
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
 
+	// The private certificate authority (CA) configurations for the identity
+	// provider. Use this to have AgentCore Identity trust a private CA when
+	// establishing TLS connections to identity provider endpoints. You can specify
+	// only one certificate authority configuration in this list. Provide the
+	// certificate by reference to an Amazon S3 object or an Amazon Web Services
+	// Secrets Manager secret. You can use this only together with privateEndpoint .
+	CertificateConfigurations []CertificateConfiguration
+
 	// The client authentication method to use when authenticating with the token
 	// endpoint.
 	ClientAuthenticationMethod ClientAuthenticationMethodType
@@ -4856,6 +4877,9 @@ func (v *CustomOauth2ProviderConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomOauth2ProviderConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateConfigurations != nil {
+		serializeCertificateConfigurationList(s, schemas.CustomOauth2ProviderConfigInput_certificateConfigurations, v.CertificateConfigurations)
+	}
 	if v.ClientAuthenticationMethod != "" {
 		s.WriteString(schemas.CustomOauth2ProviderConfigInput_clientAuthenticationMethod, string(v.ClientAuthenticationMethod))
 	}
@@ -4896,6 +4920,8 @@ func (v *CustomOauth2ProviderConfigInput) SerializeMembers(s smithy.ShapeSeriali
 func (v *CustomOauth2ProviderConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomOauth2ProviderConfigInput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CustomOauth2ProviderConfigInput_certificateConfigurations:
+			return deserializeCertificateConfigurationList(d, schemas.CustomOauth2ProviderConfigInput_certificateConfigurations, &v.CertificateConfigurations)
 		case schemas.CustomOauth2ProviderConfigInput_clientAuthenticationMethod:
 			var ev string
 			if err := d.ReadString(schemas.CustomOauth2ProviderConfigInput_clientAuthenticationMethod, &ev); err != nil {
@@ -4944,6 +4970,14 @@ type CustomOauth2ProviderConfigOutput struct {
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
 
+	// The private certificate authority (CA) configurations for the identity
+	// provider. Use this to have AgentCore Identity trust a private CA when
+	// establishing TLS connections to identity provider endpoints. You can specify
+	// only one certificate authority configuration in this list. Provide the
+	// certificate by reference to an Amazon S3 object or an Amazon Web Services
+	// Secrets Manager secret. You can use this only together with privateEndpoint .
+	CertificateConfigurations []CertificateConfiguration
+
 	// The client authentication method used when authenticating with the token
 	// endpoint.
 	ClientAuthenticationMethod ClientAuthenticationMethodType
@@ -4975,6 +5009,9 @@ func (v *CustomOauth2ProviderConfigOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomOauth2ProviderConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateConfigurations != nil {
+		serializeCertificateConfigurationList(s, schemas.CustomOauth2ProviderConfigOutput_certificateConfigurations, v.CertificateConfigurations)
+	}
 	if v.ClientAuthenticationMethod != "" {
 		s.WriteString(schemas.CustomOauth2ProviderConfigOutput_clientAuthenticationMethod, string(v.ClientAuthenticationMethod))
 	}
@@ -5004,6 +5041,8 @@ func (v *CustomOauth2ProviderConfigOutput) SerializeMembers(s smithy.ShapeSerial
 func (v *CustomOauth2ProviderConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomOauth2ProviderConfigOutput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CustomOauth2ProviderConfigOutput_certificateConfigurations:
+			return deserializeCertificateConfigurationList(d, schemas.CustomOauth2ProviderConfigOutput_certificateConfigurations, &v.CertificateConfigurations)
 		case schemas.CustomOauth2ProviderConfigOutput_clientAuthenticationMethod:
 			var ev string
 			if err := d.ReadString(schemas.CustomOauth2ProviderConfigOutput_clientAuthenticationMethod, &ev); err != nil {
@@ -9223,10 +9262,10 @@ type HarnessAgentCoreRuntimeEnvironment struct {
 	// This member is required.
 	AgentRuntimeName *string
 
-	// LifecycleConfiguration lets you manage the lifecycle of runtime sessions and
-	// resources in AgentCore Runtime. This configuration helps optimize resource
-	// utilization by automatically cleaning up idle sessions and preventing
-	// long-running instances from consuming resources indefinitely.
+	// The lifecycle configuration for the harness's runtime environment. For a
+	// harness, idleRuntimeSessionTimeout and maxLifetime each accept a value between
+	// 60 and 28800 seconds (8 hours), and idleRuntimeSessionTimeout must be less than
+	// or equal to maxLifetime .
 	//
 	// This member is required.
 	LifecycleConfiguration *LifecycleConfiguration
@@ -9303,10 +9342,11 @@ type HarnessAgentCoreRuntimeEnvironmentRequest struct {
 	// The filesystem configurations for the runtime environment.
 	FilesystemConfigurations []FilesystemConfiguration
 
-	// LifecycleConfiguration lets you manage the lifecycle of runtime sessions and
-	// resources in AgentCore Runtime. This configuration helps optimize resource
-	// utilization by automatically cleaning up idle sessions and preventing
-	// long-running instances from consuming resources indefinitely.
+	// The lifecycle configuration for the harness's runtime environment. For a
+	// harness, idleRuntimeSessionTimeout and maxLifetime each accept a value between
+	// 60 and 28800 seconds (8 hours), and idleRuntimeSessionTimeout must be less than
+	// or equal to maxLifetime . Values above 28800 seconds are rejected with a
+	// ValidationException .
 	LifecycleConfiguration *LifecycleConfiguration
 
 	// SecurityConfig for the Agent.
@@ -10667,6 +10707,9 @@ type HarnessRemoteMcpConfig struct {
 	// Custom headers to include when connecting to the remote MCP server.
 	Headers map[string]string
 
+	// How the harness authenticates to this MCP server. Defaults to no authentication.
+	OutboundAuth HarnessRemoteMcpOutboundAuth
+
 	noSmithyDocumentSerde
 }
 
@@ -10680,6 +10723,9 @@ func (v *HarnessRemoteMcpConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Headers != nil {
 		serializeHttpHeadersMap(s, schemas.HarnessRemoteMcpConfig_headers, v.Headers)
 	}
+	if v.OutboundAuth != nil {
+		serializeHarnessRemoteMcpOutboundAuth(s, schemas.HarnessRemoteMcpConfig_outboundAuth, v.OutboundAuth)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.HarnessRemoteMcpConfig_url, *v.Url)
 	}
@@ -10689,12 +10735,60 @@ func (v *HarnessRemoteMcpConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.HarnessRemoteMcpConfig_headers:
 			return deserializeHttpHeadersMap(d, schemas.HarnessRemoteMcpConfig_headers, &v.Headers)
+		case schemas.HarnessRemoteMcpConfig_outboundAuth:
+			return deserializeHarnessRemoteMcpOutboundAuth(d, schemas.HarnessRemoteMcpConfig_outboundAuth, &v.OutboundAuth)
 		case schemas.HarnessRemoteMcpConfig_url:
 			v.Url = new(string)
 			return d.ReadString(schemas.HarnessRemoteMcpConfig_url, v.Url)
 		}
 		return nil
 	})
+}
+
+// Authentication method for calling a remote MCP server.
+//
+// The following types satisfy this interface:
+//
+//	HarnessRemoteMcpOutboundAuthMemberAwsIam
+//	HarnessRemoteMcpOutboundAuthMemberNone
+type HarnessRemoteMcpOutboundAuth interface {
+	isHarnessRemoteMcpOutboundAuth()
+}
+
+// Sign requests to the remote MCP server with Signature Version 4 (SigV4) using
+// the harness execution role. If you don't specify a Region, the harness Region is
+// used.
+type HarnessRemoteMcpOutboundAuthMemberAwsIam struct {
+	Value IamCredentialProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessRemoteMcpOutboundAuthMemberAwsIam) isHarnessRemoteMcpOutboundAuth() {}
+func (v *HarnessRemoteMcpOutboundAuthMemberAwsIam) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HarnessRemoteMcpOutboundAuth_awsIam)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *HarnessRemoteMcpOutboundAuthMemberAwsIam) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// No authentication.
+type HarnessRemoteMcpOutboundAuthMemberNone struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessRemoteMcpOutboundAuthMemberNone) isHarnessRemoteMcpOutboundAuth() {}
+func (v *HarnessRemoteMcpOutboundAuthMemberNone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HarnessRemoteMcpOutboundAuth_none)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *HarnessRemoteMcpOutboundAuthMemberNone) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A skill available to the agent.
@@ -24947,6 +25041,7 @@ func (*UnknownUnionMember) isHarnessHook()                            {}
 func (*UnknownUnionMember) isHarnessHookTarget()                      {}
 func (*UnknownUnionMember) isHarnessMemoryConfiguration()             {}
 func (*UnknownUnionMember) isHarnessModelConfiguration()              {}
+func (*UnknownUnionMember) isHarnessRemoteMcpOutboundAuth()           {}
 func (*UnknownUnionMember) isHarnessSkill()                           {}
 func (*UnknownUnionMember) isHarnessSystemContentBlock()              {}
 func (*UnknownUnionMember) isHarnessToolConfiguration()               {}

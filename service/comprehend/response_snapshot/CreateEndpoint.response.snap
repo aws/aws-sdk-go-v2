@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.CreateEndpoint
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"EndpointArn":"__EndpointArn__","ModelArn":"__ModelArn__"}
+¿kEndpointArno__EndpointArn__hModelArnl__ModelArn__ÿ

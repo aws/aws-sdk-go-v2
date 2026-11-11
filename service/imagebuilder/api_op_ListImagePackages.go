@@ -36,7 +36,10 @@ type ListImagePackagesInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. Use the nextToken value from a
@@ -158,7 +161,10 @@ func (c *Client) addOperationListImagePackagesMiddlewares(stack *middleware.Stac
 
 // ListImagePackagesPaginatorOptions is the paginator options for ListImagePackages
 type ListImagePackagesPaginatorOptions struct {
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

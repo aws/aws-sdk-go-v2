@@ -2493,10 +2493,20 @@ var HarnessReasoningTextBlock_signature *smithy.Schema
 var HarnessRemoteMcpConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "HarnessRemoteMcpConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var HarnessRemoteMcpConfig_url *smithy.Schema
 
 var HarnessRemoteMcpConfig_headers *smithy.Schema
+
+var HarnessRemoteMcpConfig_outboundAuth *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "HarnessRemoteMcpOutboundAuth",
+}, smithy.ShapeTypeUnion, 2)
+var HarnessRemoteMcpOutboundAuth_awsIam *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth_none *smithy.Schema
 
 var _HarnessRemoteMcpUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -2817,6 +2827,14 @@ var _HttpResponseCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "HttpResponseCode",
 }, smithy.ShapeTypeInteger, 0)
+
+var IamCredentialProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "IamCredentialProvider",
+}, smithy.ShapeTypeStructure, 2)
+var IamCredentialProvider_service *smithy.Schema
+
+var IamCredentialProvider_region *smithy.Schema
 
 var _IgnoredReferenceInputField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -8850,9 +8868,19 @@ func init() {
 
 	_HttpHeadersMap_value = _HttpHeadersMap.AddMember("value", _HttpHeaderValue)
 
+	IamCredentialProvider_service = IamCredentialProvider.AddMember("service", smithyprelude.String)
+
+	IamCredentialProvider_region = IamCredentialProvider.AddMember("region", smithyprelude.String)
+
+	HarnessRemoteMcpOutboundAuth_awsIam = HarnessRemoteMcpOutboundAuth.AddMember("awsIam", IamCredentialProvider)
+
+	HarnessRemoteMcpOutboundAuth_none = HarnessRemoteMcpOutboundAuth.AddMember("none", smithyprelude.Unit)
+
 	HarnessRemoteMcpConfig_url = HarnessRemoteMcpConfig.AddMember("url", _HarnessRemoteMcpUrl)
 
 	HarnessRemoteMcpConfig_headers = HarnessRemoteMcpConfig.AddMember("headers", _HttpHeadersMap)
+
+	HarnessRemoteMcpConfig_outboundAuth = HarnessRemoteMcpConfig.AddMember("outboundAuth", HarnessRemoteMcpOutboundAuth)
 
 	HarnessSkillS3Source_uri = HarnessSkillS3Source.AddMember("uri", _HarnessSkillS3Uri)
 

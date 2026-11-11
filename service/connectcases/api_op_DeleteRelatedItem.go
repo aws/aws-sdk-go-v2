@@ -14,7 +14,11 @@ import (
 // This API cannot be used on a FILE type related attachment. To delete this type
 // of file, use the [DeleteAttachedFile]API
 //
+// If the case is the secondary case of a merge that is running, the request fails
+// with a ConflictException . For more information, see [StartMergeCases].
+//
 // [DeleteAttachedFile]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteAttachedFile.html
+// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
 func (c *Client) DeleteRelatedItem(ctx context.Context, params *DeleteRelatedItemInput, optFns ...func(*Options)) (*DeleteRelatedItemOutput, error) {
 	if params == nil {
 		params = &DeleteRelatedItemInput{}

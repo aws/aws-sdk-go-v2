@@ -457,6 +457,23 @@ func serializeHarnessReasoningContentBlockDelta(s smithy.ShapeSerializer, schema
 	}
 }
 
+func serializeHarnessRemoteMcpOutboundAuth(s smithy.ShapeSerializer, schema *smithy.Schema, v types.HarnessRemoteMcpOutboundAuth) {
+	switch vv := v.(type) {
+	case *types.HarnessRemoteMcpOutboundAuthMemberAwsIam:
+		s.WriteUnion(schema, schemas.HarnessRemoteMcpOutboundAuth_awsIam)
+		s.WriteStruct(schemas.HarnessRemoteMcpOutboundAuth_awsIam)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.HarnessRemoteMcpOutboundAuthMemberNone:
+		s.WriteUnion(schema, schemas.HarnessRemoteMcpOutboundAuth_none)
+		s.WriteStruct(schemas.HarnessRemoteMcpOutboundAuth_none)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeHarnessSkill(s smithy.ShapeSerializer, schema *smithy.Schema, v types.HarnessSkill) {
 	switch vv := v.(type) {
 	case *types.HarnessSkillMemberAwsSkills:
@@ -1414,6 +1431,22 @@ func deserializeHarnessReasoningContentBlockDelta(d smithy.ShapeDeserializer, s 
 			return vv.Deserialize(d)
 		case schemas.HarnessReasoningContentBlockDelta_text:
 			vv := &types.HarnessReasoningContentBlockDeltaMemberText{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeHarnessRemoteMcpOutboundAuth(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.HarnessRemoteMcpOutboundAuth) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.HarnessRemoteMcpOutboundAuth_awsIam:
+			vv := &types.HarnessRemoteMcpOutboundAuthMemberAwsIam{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.HarnessRemoteMcpOutboundAuth_none:
+			vv := &types.HarnessRemoteMcpOutboundAuthMemberNone{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

@@ -350,6 +350,18 @@ func TestCheckSnapshot_GetLayout(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMergeCasesStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMergeCasesStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMergeCasesStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTemplate(context.Background(), nil, func(o *Options) {
@@ -499,6 +511,18 @@ func TestCheckSnapshot_SearchRelatedItems(t *testing.T) {
 	_, err := svc.SearchRelatedItems(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchRelatedItems")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartMergeCases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMergeCases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMergeCases")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -889,6 +913,18 @@ func TestUpdateSnapshot_GetLayout(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMergeCasesStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMergeCasesStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMergeCasesStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTemplate(context.Background(), nil, func(o *Options) {
@@ -1038,6 +1074,18 @@ func TestUpdateSnapshot_SearchRelatedItems(t *testing.T) {
 	_, err := svc.SearchRelatedItems(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchRelatedItems")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartMergeCases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMergeCases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMergeCases")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

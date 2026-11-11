@@ -577,6 +577,7 @@ type Provider string
 // Enum values for Provider
 const (
 	ProviderAzure Provider = "AZURE"
+	ProviderGcp   Provider = "GCP"
 )
 
 // Values returns all known values for Provider. Note that this can be expanded in
@@ -586,6 +587,7 @@ const (
 func (Provider) Values() []Provider {
 	return []Provider{
 		"AZURE",
+		"GCP",
 	}
 }
 

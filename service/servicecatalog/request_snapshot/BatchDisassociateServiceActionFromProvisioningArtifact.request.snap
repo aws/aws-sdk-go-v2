@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/BatchDisassociateServiceActionFromProvisioningArtifact
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.BatchDisassociateServiceActionFromProvisioningArtifact
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","ServiceActionAssociations":[{"ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ServiceActionId":"__ServiceActionId__"},{"ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ServiceActionId":"__ServiceActionId__"}]}
+¿nAcceptLanguager__AcceptLanguage__xServiceActionAssociationsŸ¿iProductIdm__ProductId__vProvisioningArtifactIdx__ProvisioningArtifactId__oServiceActionIds__ServiceActionId__ÿ¿iProductIdm__ProductId__vProvisioningArtifactIdx__ProvisioningArtifactId__oServiceActionIds__ServiceActionId__ÿÿÿ

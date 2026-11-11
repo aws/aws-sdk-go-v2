@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.GetCertificate
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Certificate":"__Certificate__","CertificateChain":"__CertificateChain__"}
+¿kCertificateo__Certificate__pCertificateChaint__CertificateChain__ÿ

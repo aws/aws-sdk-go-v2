@@ -1,0 +1,8 @@
+{
+    "id": "296c016c-5dcb-4a08-99db-740e18c9f9a6",
+    "type": "feature",
+    "description": "This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.",
+    "modules": [
+        "service/directoryservice"
+    ]
+}

@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeDeploy_20141006/operation/ListDeploymentInstances
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.ListDeploymentInstances
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"deploymentId":"__DeploymentId__","instanceStatusFilter":["Pending","Pending"],"instanceTypeFilter":["Blue","Blue"],"nextToken":"__NextToken__"}
+¿ldeploymentIdp__DeploymentId__tinstanceStatusFilterŸgPendinggPendingÿrinstanceTypeFilterŸdBluedBlueÿinextTokenm__NextToken__ÿ

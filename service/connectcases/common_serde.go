@@ -1067,6 +1067,14 @@ func serializeCaseFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeCaseIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCaseRuleIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CaseRuleIdentifier) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1154,6 +1162,16 @@ func serializeFieldOptionErrorList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeFieldOptionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FieldOption) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFieldsConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FieldsConfiguration) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1722,6 +1740,27 @@ func deserializeCaseFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	})
 }
 
+func deserializeCaseIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeCaseRuleIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CaseRuleIdentifier) error {
 	*v = make([]types.CaseRuleIdentifier, 0)
 	var vv types.CaseRuleIdentifier
@@ -1931,6 +1970,28 @@ func deserializeFieldOptionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		vv = types.FieldOption{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFieldsConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FieldsConfiguration) error {
+	*v = make([]types.FieldsConfiguration, 0)
+	var vv types.FieldsConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FieldsConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.FieldsConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

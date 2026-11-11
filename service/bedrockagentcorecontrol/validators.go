@@ -5019,6 +5019,11 @@ func validateCustomJWTAuthorizerConfiguration(v *types.CustomJWTAuthorizerConfig
 			invalidParams.AddNested("PrivateEndpointOverrides", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CertificateConfigurations != nil {
+		if err := validateCertificateConfigurationList(v.CertificateConfigurations); err != nil {
+			invalidParams.AddNested("CertificateConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AllowedWorkloadConfiguration != nil {
 		if err := validateAllowedWorkloadConfiguration(v.AllowedWorkloadConfiguration); err != nil {
 			invalidParams.AddNested("AllowedWorkloadConfiguration", err.(smithy.InvalidParamsError))
@@ -5091,6 +5096,11 @@ func validateCustomOauth2ProviderConfigInput(v *types.CustomOauth2ProviderConfig
 	if v.PrivateEndpointOverrides != nil {
 		if err := validatePrivateEndpointOverrides(v.PrivateEndpointOverrides); err != nil {
 			invalidParams.AddNested("PrivateEndpointOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CertificateConfigurations != nil {
+		if err := validateCertificateConfigurationList(v.CertificateConfigurations); err != nil {
+			invalidParams.AddNested("CertificateConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6316,6 +6326,30 @@ func validateHarnessRemoteMcpConfig(v *types.HarnessRemoteMcpConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "HarnessRemoteMcpConfig"}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.OutboundAuth != nil {
+		if err := validateHarnessRemoteMcpOutboundAuth(v.OutboundAuth); err != nil {
+			invalidParams.AddNested("OutboundAuth", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessRemoteMcpOutboundAuth(v types.HarnessRemoteMcpOutboundAuth) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessRemoteMcpOutboundAuth"}
+	switch uv := v.(type) {
+	case *types.HarnessRemoteMcpOutboundAuthMemberAwsIam:
+		if err := validateIamCredentialProvider(&uv.Value); err != nil {
+			invalidParams.AddNested("[awsIam]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

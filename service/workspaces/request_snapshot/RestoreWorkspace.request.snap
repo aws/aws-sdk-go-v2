@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/RestoreWorkspace
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.RestoreWorkspace
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"WorkspaceId":"__WorkspaceId__"}
+¿kWorkspaceIdo__WorkspaceId__ÿ

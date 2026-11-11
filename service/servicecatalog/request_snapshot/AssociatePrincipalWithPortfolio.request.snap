@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/AssociatePrincipalWithPortfolio
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.AssociatePrincipalWithPortfolio
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","PortfolioId":"__PortfolioId__","PrincipalARN":"__PrincipalARN__","PrincipalType":"IAM"}
+¿nAcceptLanguager__AcceptLanguage__kPortfolioIdo__PortfolioId__lPrincipalARNp__PrincipalARN__mPrincipalTypecIAMÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShield_20160616/operation/AssociateProactiveEngagementDetails
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.AssociateProactiveEngagementDetails
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"EmergencyContactList":[{"ContactNotes":"__ContactNotes__","EmailAddress":"__EmailAddress__","PhoneNumber":"__PhoneNumber__"},{"ContactNotes":"__ContactNotes__","EmailAddress":"__EmailAddress__","PhoneNumber":"__PhoneNumber__"}]}
+¿tEmergencyContactListŸ¿lContactNotesp__ContactNotes__lEmailAddressp__EmailAddress__kPhoneNumbero__PhoneNumber__ÿ¿lContactNotesp__ContactNotes__lEmailAddressp__EmailAddress__kPhoneNumbero__PhoneNumber__ÿÿÿ

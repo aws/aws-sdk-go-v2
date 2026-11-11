@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/CreateDataset
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.CreateDataset
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientRequestToken":"__ClientRequestToken__","DatasetName":"__DatasetName__","DatasetType":"TRAIN","Description":"__Description__","FlywheelArn":"__FlywheelArn__","InputDataConfig":{"AugmentedManifests":[{"AnnotationDataS3Uri":"__AnnotationDataS3Uri__","AttributeNames":["__Member__","__Member__"],"DocumentType":"PLAIN_TEXT_DOCUMENT","S3Uri":"__S3Uri__","SourceDocumentsS3Uri":"__SourceDocumentsS3Uri__"},{"AnnotationDataS3Uri":"__AnnotationDataS3Uri__","AttributeNames":["__Member__","__Member__"],"DocumentType":"PLAIN_TEXT_DOCUMENT","S3Uri":"__S3Uri__","SourceDocumentsS3Uri":"__SourceDocumentsS3Uri__"}],"DataFormat":"COMPREHEND_CSV","DocumentClassifierInputDataConfig":{"LabelDelimiter":"__LabelDelimiter__","S3Uri":"__S3Uri__"},"EntityRecognizerInputDataConfig":{"Annotations":{"S3Uri":"__S3Uri__"},"Documents":{"InputFormat":"ONE_DOC_PER_FILE","S3Uri":"__S3Uri__"},"EntityList":{"S3Uri":"__S3Uri__"}}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿rClientRequestTokenv__ClientRequestToken__kDatasetNameo__DatasetName__kDatasetTypeeTRAINkDescriptiono__Description__kFlywheelArno__FlywheelArn__oInputDataConfig¿rAugmentedManifestsŸ¿sAnnotationDataS3Uriw__AnnotationDataS3Uri__nAttributeNamesŸj__Member__j__Member__ÿlDocumentTypesPLAIN_TEXT_DOCUMENTeS3Urii__S3Uri__tSourceDocumentsS3Urix__SourceDocumentsS3Uri__ÿ¿sAnnotationDataS3Uriw__AnnotationDataS3Uri__nAttributeNamesŸj__Member__j__Member__ÿlDocumentTypesPLAIN_TEXT_DOCUMENTeS3Urii__S3Uri__tSourceDocumentsS3Urix__SourceDocumentsS3Uri__ÿÿjDataFormatnCOMPREHEND_CSVx!DocumentClassifierInputDataConfig¿nLabelDelimiterr__LabelDelimiter__eS3Urii__S3Uri__ÿxEntityRecognizerInputDataConfig¿kAnnotations¿eS3Urii__S3Uri__ÿiDocuments¿kInputFormatpONE_DOC_PER_FILEeS3Urii__S3Uri__ÿjEntityList¿eS3Urii__S3Uri__ÿÿÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

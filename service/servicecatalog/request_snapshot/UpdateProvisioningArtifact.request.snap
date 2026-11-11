@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/UpdateProvisioningArtifact
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.UpdateProvisioningArtifact
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","Active":true,"Description":"__Description__","Guidance":"DEFAULT","Name":"__Name__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__"}
+¿nAcceptLanguager__AcceptLanguage__fActiveõkDescriptiono__Description__hGuidancegDEFAULTdNameh__Name__iProductIdm__ProductId__vProvisioningArtifactIdx__ProvisioningArtifactId__ÿ

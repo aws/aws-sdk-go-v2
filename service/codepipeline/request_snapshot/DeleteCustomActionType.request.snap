@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/DeleteCustomActionType
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.DeleteCustomActionType
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"category":"Source","provider":"__Provider__","version":"__Version__"}
+¿hcategoryfSourcehproviderl__Provider__gversionk__Version__ÿ

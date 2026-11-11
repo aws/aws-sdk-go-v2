@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/RegisterInstance
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.RegisterInstance
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Attributes":{"key0":"__Value__"},"CreatorRequestId":"__CreatorRequestId__","InstanceId":"__InstanceId__","ServiceId":"__ServiceId__"}
+¿jAttributes¿dkey0i__Value__ÿpCreatorRequestIdt__CreatorRequestId__jInstanceIdn__InstanceId__iServiceIdm__ServiceId__ÿ

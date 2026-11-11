@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListLaunchPaths
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"LaunchPathSummaries":[{"ConstraintSummaries":[{"Description":"__Description__","Type":"__Type__"},{"Description":"__Description__","Type":"__Type__"}],"Id":"__Id__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"ConstraintSummaries":[{"Description":"__Description__","Type":"__Type__"},{"Description":"__Description__","Type":"__Type__"}],"Id":"__Id__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"NextPageToken":"__NextPageToken__"}
+¿sLaunchPathSummariesŸ¿sConstraintSummariesŸ¿kDescriptiono__Description__dTypeh__Type__ÿ¿kDescriptiono__Description__dTypeh__Type__ÿÿbIdf__Id__dNameh__Name__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ¿sConstraintSummariesŸ¿kDescriptiono__Description__dTypeh__Type__ÿ¿kDescriptiono__Description__dTypeh__Type__ÿÿbIdf__Id__dNameh__Name__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿÿmNextPageTokenq__NextPageToken__ÿ

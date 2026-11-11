@@ -53,6 +53,11 @@ var CreateApplicationSnapshot = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateApplicationSnapshot",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateSnapshot = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "CreateSnapshot",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteApplication = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "DeleteApplication",
@@ -88,6 +93,11 @@ var DeleteApplicationVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteApplicationVpcConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteSnapshot = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DeleteSnapshot",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeApplication = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "DescribeApplication",
@@ -108,9 +118,29 @@ var DescribeApplicationVersion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeApplicationVersion",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeSnapshot = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DescribeSnapshot",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeSnapshotOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DescribeSnapshotOperation",
+}, smithy.ShapeTypeOperation, 0)
+
 var DiscoverInputSchema = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "DiscoverInputSchema",
+}, smithy.ShapeTypeOperation, 0)
+
+var ExportSnapshot = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ExportSnapshot",
+}, smithy.ShapeTypeOperation, 0)
+
+var ImportSnapshot = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ImportSnapshot",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListApplicationOperations = smithy.NewSchema(smithy.ShapeID{
@@ -131,6 +161,16 @@ var ListApplicationSnapshots = smithy.NewSchema(smithy.ShapeID{
 var ListApplicationVersions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ListApplicationVersions",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListSnapshotOperations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshotOperations",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListSnapshots = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshots",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
@@ -378,6 +418,14 @@ var _ApplicationName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ApplicationName",
 }, smithy.ShapeTypeString, 0)
 
+var ApplicationOperationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ApplicationOperationDescription",
+}, smithy.ShapeTypeStructure, 2)
+var ApplicationOperationDescription_ApplicationOperationId *smithy.Schema
+
+var ApplicationOperationDescription_ApplicationName *smithy.Schema
+
 var ApplicationOperationInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ApplicationOperationInfo",
@@ -417,10 +465,12 @@ var _ApplicationOperationInfoList_member *smithy.Schema
 var ApplicationRestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ApplicationRestoreConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ApplicationRestoreConfiguration_ApplicationRestoreType *smithy.Schema
 
 var ApplicationRestoreConfiguration_SnapshotName *smithy.Schema
+
+var ApplicationRestoreConfiguration_SnapshotArn *smithy.Schema
 
 var ApplicationRestoreType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -435,20 +485,26 @@ var ApplicationRestoreType_RESTORE_FROM_CUSTOM_SNAPSHOT *smithy.Schema
 var ApplicationSnapshotConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ApplicationSnapshotConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ApplicationSnapshotConfiguration_SnapshotsEnabled *smithy.Schema
+
+var ApplicationSnapshotConfiguration_SnapshotMode *smithy.Schema
 
 var ApplicationSnapshotConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ApplicationSnapshotConfigurationDescription",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ApplicationSnapshotConfigurationDescription_SnapshotsEnabled *smithy.Schema
+
+var ApplicationSnapshotConfigurationDescription_SnapshotMode *smithy.Schema
 
 var ApplicationSnapshotConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ApplicationSnapshotConfigurationUpdate",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate *smithy.Schema
+
+var ApplicationSnapshotConfigurationUpdate_SnapshotModeUpdate *smithy.Schema
 
 var ApplicationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -817,6 +873,14 @@ var DestinationSchema = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DestinationSchema_RecordFormatType *smithy.Schema
 
+var EncryptionConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "EncryptionConfigurationDescription",
+}, smithy.ShapeTypeStructure, 2)
+var EncryptionConfigurationDescription_KeyId *smithy.Schema
+
+var EncryptionConfigurationDescription_KeyType *smithy.Schema
+
 var EnvironmentProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "EnvironmentProperties",
@@ -850,6 +914,18 @@ var _ErrorString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ErrorString",
 }, smithy.ShapeTypeString, 0)
+
+var ExportDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ExportDestinationConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var ExportDestinationConfiguration_DestinationType *smithy.Schema
+
+var ExportDestinationConfiguration_ExportRoleArn *smithy.Schema
+
+var ExportDestinationConfiguration_DestinationEncryptionConfiguration *smithy.Schema
+
+var ExportDestinationConfiguration_DestinationS3PrefixLocation *smithy.Schema
 
 var _FileKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -916,6 +992,18 @@ var _Id = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "Id",
 }, smithy.ShapeTypeString, 0)
+
+var ImportSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ImportSourceConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var ImportSourceConfiguration_SourceType *smithy.Schema
+
+var ImportSourceConfiguration_ImportRoleArn *smithy.Schema
+
+var ImportSourceConfiguration_SourceEncryptionConfiguration *smithy.Schema
+
+var ImportSourceConfiguration_SourceS3PrefixLocation *smithy.Schema
 
 var _InAppStreamName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -1122,6 +1210,11 @@ var _KeyId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "KeyId",
 }, smithy.ShapeTypeString, 0)
 
+var _KeyPrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "KeyPrefix",
+}, smithy.ShapeTypeString, 0)
+
 var KeyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "KeyType",
@@ -1256,9 +1349,19 @@ var _ListApplicationVersionsInputLimit = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListApplicationVersionsInputLimit",
 }, smithy.ShapeTypeInteger, 0)
 
+var _ListSnapshotOperationsLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshotOperationsLimit",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListSnapshotsInputLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ListSnapshotsInputLimit",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ListSnapshotsLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshotsLimit",
 }, smithy.ShapeTypeInteger, 0)
 
 var LogLevel = smithy.NewSchema(smithy.ShapeID{
@@ -1848,6 +1951,14 @@ var S3ContentLocationUpdate_FileKeyUpdate *smithy.Schema
 
 var S3ContentLocationUpdate_ObjectVersionUpdate *smithy.Schema
 
+var S3PrefixLocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "S3PrefixLocation",
+}, smithy.ShapeTypeStructure, 2)
+var S3PrefixLocation_BucketARN *smithy.Schema
+
+var S3PrefixLocation_KeyPrefix *smithy.Schema
+
 var S3ReferenceDataSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "S3ReferenceDataSource",
@@ -1897,6 +2008,11 @@ var _SessionExpirationDurationInSeconds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SessionExpirationDurationInSeconds",
 }, smithy.ShapeTypeLong, 0)
 
+var _SnapshotArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotArn",
+}, smithy.ShapeTypeString, 0)
+
 var SnapshotDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "SnapshotDetails",
@@ -1913,10 +2029,233 @@ var SnapshotDetails_RuntimeEnvironment *smithy.Schema
 
 var SnapshotDetails_ApplicationEncryptionConfigurationDescription *smithy.Schema
 
+var SnapshotEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotEncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var SnapshotEncryptionConfiguration_KeyId *smithy.Schema
+
+var SnapshotEncryptionConfiguration_KeyType *smithy.Schema
+
+var SnapshotErrorInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotErrorInfo",
+}, smithy.ShapeTypeStructure, 2)
+var SnapshotErrorInfo_ErrorCode *smithy.Schema
+
+var SnapshotErrorInfo_ErrorString *smithy.Schema
+
+var SnapshotFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotFormat",
+}, smithy.ShapeTypeEnum, 1)
+var SnapshotFormat_CANONICAL *smithy.Schema
+
+var SnapshotInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotInfo",
+}, smithy.ShapeTypeStructure, 8)
+var SnapshotInfo_SnapshotName *smithy.Schema
+
+var SnapshotInfo_SnapshotArn *smithy.Schema
+
+var SnapshotInfo_SnapshotStatus *smithy.Schema
+
+var SnapshotInfo_SnapshotCreationTimestamp *smithy.Schema
+
+var SnapshotInfo_SnapshotInitiator *smithy.Schema
+
+var SnapshotInfo_SnapshotInitiatorOperation *smithy.Schema
+
+var SnapshotInfo_SourceApplicationName *smithy.Schema
+
+var SnapshotInfo_SnapshotFormat *smithy.Schema
+
+var SnapshotInfoDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotInfoDetails",
+}, smithy.ShapeTypeStructure, 12)
+var SnapshotInfoDetails_SnapshotName *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotArn *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotDescription *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotStatus *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotCreationTimestamp *smithy.Schema
+
+var SnapshotInfoDetails_RuntimeEnvironment *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotSizeInBytes *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotEncryptionConfigurationDescription *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotInitiator *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotInitiatorOperation *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotSourceDescription *smithy.Schema
+
+var SnapshotInfoDetails_SnapshotFormat *smithy.Schema
+
+var _SnapshotInfoList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotInfoList",
+}, smithy.ShapeTypeList, 1)
+var _SnapshotInfoList_member *smithy.Schema
+
+var SnapshotInitiator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotInitiator",
+}, smithy.ShapeTypeEnum, 2)
+var SnapshotInitiator_USER *smithy.Schema
+
+var SnapshotInitiator_SYSTEM *smithy.Schema
+
+var SnapshotInitiatorOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotInitiatorOperation",
+}, smithy.ShapeTypeEnum, 3)
+var SnapshotInitiatorOperation_CreateSnapshot *smithy.Schema
+
+var SnapshotInitiatorOperation_ImportSnapshot *smithy.Schema
+
+var SnapshotInitiatorOperation_SystemCreateSnapshot *smithy.Schema
+
+var SnapshotMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotMode",
+}, smithy.ShapeTypeEnum, 2)
+var SnapshotMode_APPLICATION_SNAPSHOTS_LEGACY *smithy.Schema
+
+var SnapshotMode_ENHANCED_SNAPSHOTS *smithy.Schema
+
 var _SnapshotName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "SnapshotName",
 }, smithy.ShapeTypeString, 0)
+
+var SnapshotOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperation",
+}, smithy.ShapeTypeEnum, 5)
+var SnapshotOperation_CreateSnapshot *smithy.Schema
+
+var SnapshotOperation_DeleteSnapshot *smithy.Schema
+
+var SnapshotOperation_ImportSnapshot *smithy.Schema
+
+var SnapshotOperation_ExportSnapshot *smithy.Schema
+
+var SnapshotOperation_SystemCreateSnapshot *smithy.Schema
+
+var _SnapshotOperationErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationErrorCode",
+}, smithy.ShapeTypeString, 0)
+
+var SnapshotOperationFailureDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationFailureDetails",
+}, smithy.ShapeTypeStructure, 1)
+var SnapshotOperationFailureDetails_ErrorInfo *smithy.Schema
+
+var _SnapshotOperationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationId",
+}, smithy.ShapeTypeString, 0)
+
+var SnapshotOperationInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationInfo",
+}, smithy.ShapeTypeStructure, 5)
+var SnapshotOperationInfo_SnapshotOperationId *smithy.Schema
+
+var SnapshotOperationInfo_SnapshotOperation *smithy.Schema
+
+var SnapshotOperationInfo_SnapshotOperationStatus *smithy.Schema
+
+var SnapshotOperationInfo_StartTime *smithy.Schema
+
+var SnapshotOperationInfo_EndTime *smithy.Schema
+
+var SnapshotOperationInfoDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationInfoDetails",
+}, smithy.ShapeTypeStructure, 12)
+var SnapshotOperationInfoDetails_SnapshotOperationId *smithy.Schema
+
+var SnapshotOperationInfoDetails_SnapshotOperation *smithy.Schema
+
+var SnapshotOperationInfoDetails_SnapshotOperationStatus *smithy.Schema
+
+var SnapshotOperationInfoDetails_SnapshotArn *smithy.Schema
+
+var SnapshotOperationInfoDetails_SourceEncryptionConfigurationDescription *smithy.Schema
+
+var SnapshotOperationInfoDetails_DestinationEncryptionConfigurationDescription *smithy.Schema
+
+var SnapshotOperationInfoDetails_SnapshotSourceLocationDescription *smithy.Schema
+
+var SnapshotOperationInfoDetails_SnapshotDestinationLocationDescription *smithy.Schema
+
+var SnapshotOperationInfoDetails_ApplicationOperationDescription *smithy.Schema
+
+var SnapshotOperationInfoDetails_StartTime *smithy.Schema
+
+var SnapshotOperationInfoDetails_EndTime *smithy.Schema
+
+var SnapshotOperationInfoDetails_SnapshotOperationFailureDetails *smithy.Schema
+
+var _SnapshotOperationInfoList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationInfoList",
+}, smithy.ShapeTypeList, 1)
+var _SnapshotOperationInfoList_member *smithy.Schema
+
+var SnapshotOperationLocationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationLocationDescription",
+}, smithy.ShapeTypeStructure, 2)
+var SnapshotOperationLocationDescription_LocationType *smithy.Schema
+
+var SnapshotOperationLocationDescription_S3PrefixLocation *smithy.Schema
+
+var SnapshotOperationS3PrefixLocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationS3PrefixLocation",
+}, smithy.ShapeTypeStructure, 3)
+var SnapshotOperationS3PrefixLocation_BucketARN *smithy.Schema
+
+var SnapshotOperationS3PrefixLocation_KeyPrefix *smithy.Schema
+
+var SnapshotOperationS3PrefixLocation_ExportedPrefix *smithy.Schema
+
+var SnapshotOperationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotOperationStatus",
+}, smithy.ShapeTypeEnum, 4)
+var SnapshotOperationStatus_IN_PROGRESS *smithy.Schema
+
+var SnapshotOperationStatus_SUCCESSFUL *smithy.Schema
+
+var SnapshotOperationStatus_FAILED *smithy.Schema
+
+var SnapshotOperationStatus_CANCELLED *smithy.Schema
+
+var _SnapshotSizeInBytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotSizeInBytes",
+}, smithy.ShapeTypeLong, 0)
+
+var SnapshotSourceDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotSourceDescription",
+}, smithy.ShapeTypeStructure, 2)
+var SnapshotSourceDescription_S3PrefixLocation *smithy.Schema
+
+var SnapshotSourceDescription_SourceApplicationDescription *smithy.Schema
 
 var SnapshotStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -1935,6 +2274,26 @@ var _SnapshotSummaries = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SnapshotSummaries",
 }, smithy.ShapeTypeList, 1)
 var _SnapshotSummaries_member *smithy.Schema
+
+var _SnapshotV2Description = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotV2Description",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapshotV2Name = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SnapshotV2Name",
+}, smithy.ShapeTypeString, 0)
+
+var SourceApplicationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "SourceApplicationDescription",
+}, smithy.ShapeTypeStructure, 3)
+var SourceApplicationDescription_ApplicationName *smithy.Schema
+
+var SourceApplicationDescription_ApplicationCreationTimestamp *smithy.Schema
+
+var SourceApplicationDescription_ApplicationVersionId *smithy.Schema
 
 var SourceSchema = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -1989,6 +2348,12 @@ var _SqlRunConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SqlRunConfigurations",
 }, smithy.ShapeTypeList, 1)
 var _SqlRunConfigurations_member *smithy.Schema
+
+var StorageLocationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "StorageLocationType",
+}, smithy.ShapeTypeEnum, 1)
+var StorageLocationType_S3 *smithy.Schema
 
 var _SubnetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -2370,6 +2735,30 @@ var CreateApplicationSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateApplicationSnapshotResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var CreateSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "CreateSnapshotRequest",
+}, smithy.ShapeTypeStructure, 4)
+var CreateSnapshotRequest_ApplicationName *smithy.Schema
+
+var CreateSnapshotRequest_SnapshotName *smithy.Schema
+
+var CreateSnapshotRequest_SnapshotDescription *smithy.Schema
+
+var CreateSnapshotRequest_Tags *smithy.Schema
+
+var CreateSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "CreateSnapshotResponse",
+}, smithy.ShapeTypeStructure, 4)
+var CreateSnapshotResponse_SnapshotArn *smithy.Schema
+
+var CreateSnapshotResponse_SnapshotStatus *smithy.Schema
+
+var CreateSnapshotResponse_SnapshotOperationId *smithy.Schema
+
+var CreateSnapshotResponse_SnapshotOperationStatus *smithy.Schema
+
 var DeleteApplicationCloudWatchLoggingOptionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "DeleteApplicationCloudWatchLoggingOptionRequest",
@@ -2498,6 +2887,26 @@ var DeleteApplicationVpcConfigurationResponse_ApplicationVersionId *smithy.Schem
 
 var DeleteApplicationVpcConfigurationResponse_OperationId *smithy.Schema
 
+var DeleteSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DeleteSnapshotRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSnapshotRequest_SnapshotName *smithy.Schema
+
+var DeleteSnapshotRequest_SnapshotCreationTimestamp *smithy.Schema
+
+var DeleteSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DeleteSnapshotResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DeleteSnapshotResponse_SnapshotArn *smithy.Schema
+
+var DeleteSnapshotResponse_SnapshotStatus *smithy.Schema
+
+var DeleteSnapshotResponse_SnapshotOperationId *smithy.Schema
+
+var DeleteSnapshotResponse_SnapshotOperationStatus *smithy.Schema
+
 var DescribeApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "DescribeApplicationRequest",
@@ -2554,6 +2963,32 @@ var DescribeApplicationVersionResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DescribeApplicationVersionResponse_ApplicationVersionDetail *smithy.Schema
 
+var DescribeSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DescribeSnapshotRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeSnapshotRequest_SnapshotName *smithy.Schema
+
+var DescribeSnapshotOperationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DescribeSnapshotOperationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeSnapshotOperationRequest_SnapshotName *smithy.Schema
+
+var DescribeSnapshotOperationRequest_SnapshotOperationId *smithy.Schema
+
+var DescribeSnapshotOperationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DescribeSnapshotOperationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeSnapshotOperationResponse_SnapshotOperationInfoDetails *smithy.Schema
+
+var DescribeSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "DescribeSnapshotResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeSnapshotResponse_SnapshotInfoDetails *smithy.Schema
+
 var DiscoverInputSchemaRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "DiscoverInputSchemaRequest",
@@ -2579,6 +3014,50 @@ var DiscoverInputSchemaResponse_ParsedInputRecords *smithy.Schema
 var DiscoverInputSchemaResponse_ProcessedInputRecords *smithy.Schema
 
 var DiscoverInputSchemaResponse_RawInputRecords *smithy.Schema
+
+var ExportSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ExportSnapshotRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ExportSnapshotRequest_SnapshotName *smithy.Schema
+
+var ExportSnapshotRequest_ExportDestinationConfiguration *smithy.Schema
+
+var ExportSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ExportSnapshotResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ExportSnapshotResponse_SnapshotOperationId *smithy.Schema
+
+var ExportSnapshotResponse_SnapshotOperationStatus *smithy.Schema
+
+var ImportSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ImportSnapshotRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ImportSnapshotRequest_SnapshotName *smithy.Schema
+
+var ImportSnapshotRequest_ImportSourceConfiguration *smithy.Schema
+
+var ImportSnapshotRequest_DestinationEncryptionConfiguration *smithy.Schema
+
+var ImportSnapshotRequest_SnapshotDescription *smithy.Schema
+
+var ImportSnapshotRequest_SnapshotFormat *smithy.Schema
+
+var ImportSnapshotRequest_Tags *smithy.Schema
+
+var ImportSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ImportSnapshotResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ImportSnapshotResponse_SnapshotArn *smithy.Schema
+
+var ImportSnapshotResponse_SnapshotStatus *smithy.Schema
+
+var ImportSnapshotResponse_SnapshotOperationId *smithy.Schema
+
+var ImportSnapshotResponse_SnapshotOperationStatus *smithy.Schema
 
 var ListApplicationOperationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -2653,6 +3132,52 @@ var ListApplicationVersionsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListApplicationVersionsResponse_ApplicationVersionSummaries *smithy.Schema
 
 var ListApplicationVersionsResponse_NextToken *smithy.Schema
+
+var ListSnapshotOperationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshotOperationsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListSnapshotOperationsRequest_SnapshotName *smithy.Schema
+
+var ListSnapshotOperationsRequest_SnapshotOperation *smithy.Schema
+
+var ListSnapshotOperationsRequest_SnapshotOperationStatus *smithy.Schema
+
+var ListSnapshotOperationsRequest_Limit *smithy.Schema
+
+var ListSnapshotOperationsRequest_NextToken *smithy.Schema
+
+var ListSnapshotOperationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshotOperationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListSnapshotOperationsResponse_SnapshotOperationInfoList *smithy.Schema
+
+var ListSnapshotOperationsResponse_NextToken *smithy.Schema
+
+var ListSnapshotsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshotsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListSnapshotsRequest_SourceApplicationName *smithy.Schema
+
+var ListSnapshotsRequest_SnapshotInitiator *smithy.Schema
+
+var ListSnapshotsRequest_SnapshotInitiatorOperation *smithy.Schema
+
+var ListSnapshotsRequest_SnapshotStatus *smithy.Schema
+
+var ListSnapshotsRequest_Limit *smithy.Schema
+
+var ListSnapshotsRequest_NextToken *smithy.Schema
+
+var ListSnapshotsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesisanalyticsv2",
+	Name:      "ListSnapshotsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListSnapshotsResponse_SnapshotInfoList *smithy.Schema
+
+var ListSnapshotsResponse_NextToken *smithy.Schema
 
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -2991,7 +3516,13 @@ func init() {
 
 	EnvironmentProperties_PropertyGroups = EnvironmentProperties.AddMember("PropertyGroups", _PropertyGroups)
 
+	SnapshotMode_APPLICATION_SNAPSHOTS_LEGACY = SnapshotMode.AddMember("APPLICATION_SNAPSHOTS_LEGACY", smithyprelude.Unit)
+
+	SnapshotMode_ENHANCED_SNAPSHOTS = SnapshotMode.AddMember("ENHANCED_SNAPSHOTS", smithyprelude.Unit)
+
 	ApplicationSnapshotConfiguration_SnapshotsEnabled = ApplicationSnapshotConfiguration.AddMember("SnapshotsEnabled", _BooleanObject)
+
+	ApplicationSnapshotConfiguration_SnapshotMode = ApplicationSnapshotConfiguration.AddMember("SnapshotMode", SnapshotMode)
 
 	ApplicationSystemRollbackConfiguration_RollbackEnabled = ApplicationSystemRollbackConfiguration.AddMember("RollbackEnabled", _BooleanObject)
 
@@ -3171,6 +3702,8 @@ func init() {
 
 	ApplicationRestoreConfiguration_SnapshotName = ApplicationRestoreConfiguration.AddMember("SnapshotName", _SnapshotName)
 
+	ApplicationRestoreConfiguration_SnapshotArn = ApplicationRestoreConfiguration.AddMember("SnapshotArn", _SnapshotArn)
+
 	FlinkRunConfiguration_AllowNonRestoredState = FlinkRunConfiguration.AddMember("AllowNonRestoredState", _BooleanObject)
 
 	RunConfigurationDescription_ApplicationRestoreConfigurationDescription = RunConfigurationDescription.AddMember("ApplicationRestoreConfigurationDescription", ApplicationRestoreConfiguration)
@@ -3212,6 +3745,8 @@ func init() {
 	EnvironmentPropertyDescriptions_PropertyGroupDescriptions = EnvironmentPropertyDescriptions.AddMember("PropertyGroupDescriptions", _PropertyGroups)
 
 	ApplicationSnapshotConfigurationDescription_SnapshotsEnabled = ApplicationSnapshotConfigurationDescription.AddMember("SnapshotsEnabled", _BooleanObject)
+
+	ApplicationSnapshotConfigurationDescription_SnapshotMode = ApplicationSnapshotConfigurationDescription.AddMember("SnapshotMode", SnapshotMode)
 
 	ApplicationSystemRollbackConfigurationDescription_RollbackEnabled = ApplicationSystemRollbackConfigurationDescription.AddMember("RollbackEnabled", _BooleanObject)
 
@@ -3381,6 +3916,8 @@ func init() {
 
 	ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate = ApplicationSnapshotConfigurationUpdate.AddMember("SnapshotsEnabledUpdate", _BooleanObject)
 
+	ApplicationSnapshotConfigurationUpdate_SnapshotModeUpdate = ApplicationSnapshotConfigurationUpdate.AddMember("SnapshotModeUpdate", SnapshotMode)
+
 	ApplicationSystemRollbackConfigurationUpdate_RollbackEnabledUpdate = ApplicationSystemRollbackConfigurationUpdate.AddMember("RollbackEnabledUpdate", _BooleanObject)
 
 	VpcConfigurationUpdate_VpcConfigurationId = VpcConfigurationUpdate.AddMember("VpcConfigurationId", _Id)
@@ -3537,6 +4074,10 @@ func init() {
 
 	ApplicationMaintenanceConfigurationUpdate_ApplicationMaintenanceWindowStartTimeUpdate = ApplicationMaintenanceConfigurationUpdate.AddMember("ApplicationMaintenanceWindowStartTimeUpdate", _ApplicationMaintenanceWindowStartTime)
 
+	ApplicationOperationDescription_ApplicationOperationId = ApplicationOperationDescription.AddMember("ApplicationOperationId", _OperationId)
+
+	ApplicationOperationDescription_ApplicationName = ApplicationOperationDescription.AddMember("ApplicationName", _ApplicationName)
+
 	OperationStatus_IN_PROGRESS = OperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
 
 	OperationStatus_CANCELLED = OperationStatus.AddMember("CANCELLED", smithyprelude.Unit)
@@ -3613,6 +4154,36 @@ func init() {
 
 	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _ErrorMessage)
 
+	EncryptionConfigurationDescription_KeyId = EncryptionConfigurationDescription.AddMember("KeyId", _KeyId)
+
+	EncryptionConfigurationDescription_KeyType = EncryptionConfigurationDescription.AddMember("KeyType", KeyType)
+
+	StorageLocationType_S3 = StorageLocationType.AddMember("S3", smithyprelude.Unit)
+
+	SnapshotEncryptionConfiguration_KeyId = SnapshotEncryptionConfiguration.AddMember("KeyId", _KeyId)
+
+	SnapshotEncryptionConfiguration_KeyType = SnapshotEncryptionConfiguration.AddMember("KeyType", KeyType)
+
+	S3PrefixLocation_BucketARN = S3PrefixLocation.AddMember("BucketARN", _BucketARN)
+
+	S3PrefixLocation_KeyPrefix = S3PrefixLocation.AddMember("KeyPrefix", _KeyPrefix)
+
+	ExportDestinationConfiguration_DestinationType = ExportDestinationConfiguration.AddMember("DestinationType", StorageLocationType)
+
+	ExportDestinationConfiguration_ExportRoleArn = ExportDestinationConfiguration.AddMember("ExportRoleArn", _RoleARN)
+
+	ExportDestinationConfiguration_DestinationEncryptionConfiguration = ExportDestinationConfiguration.AddMember("DestinationEncryptionConfiguration", SnapshotEncryptionConfiguration)
+
+	ExportDestinationConfiguration_DestinationS3PrefixLocation = ExportDestinationConfiguration.AddMember("DestinationS3PrefixLocation", S3PrefixLocation)
+
+	ImportSourceConfiguration_SourceType = ImportSourceConfiguration.AddMember("SourceType", StorageLocationType)
+
+	ImportSourceConfiguration_ImportRoleArn = ImportSourceConfiguration.AddMember("ImportRoleArn", _RoleARN)
+
+	ImportSourceConfiguration_SourceEncryptionConfiguration = ImportSourceConfiguration.AddMember("SourceEncryptionConfiguration", SnapshotEncryptionConfiguration)
+
+	ImportSourceConfiguration_SourceS3PrefixLocation = ImportSourceConfiguration.AddMember("SourceS3PrefixLocation", S3PrefixLocation)
+
 	InvalidApplicationConfigurationException_Message = InvalidApplicationConfigurationException.AddMember("Message", _ErrorMessage)
 
 	InvalidArgumentException_Message = InvalidArgumentException.AddMember("Message", _ErrorMessage)
@@ -3676,6 +4247,140 @@ func init() {
 	SnapshotDetails_RuntimeEnvironment = SnapshotDetails.AddMember("RuntimeEnvironment", RuntimeEnvironment)
 
 	SnapshotDetails_ApplicationEncryptionConfigurationDescription = SnapshotDetails.AddMember("ApplicationEncryptionConfigurationDescription", ApplicationEncryptionConfigurationDescription)
+
+	SnapshotErrorInfo_ErrorCode = SnapshotErrorInfo.AddMember("ErrorCode", _SnapshotOperationErrorCode)
+
+	SnapshotErrorInfo_ErrorString = SnapshotErrorInfo.AddMember("ErrorString", _ErrorString)
+
+	SnapshotFormat_CANONICAL = SnapshotFormat.AddMember("CANONICAL", smithyprelude.Unit)
+
+	SnapshotInitiator_USER = SnapshotInitiator.AddMember("USER", smithyprelude.Unit)
+
+	SnapshotInitiator_SYSTEM = SnapshotInitiator.AddMember("SYSTEM", smithyprelude.Unit)
+
+	SnapshotInitiatorOperation_CreateSnapshot = SnapshotInitiatorOperation.AddMember("CreateSnapshot", smithyprelude.Unit)
+
+	SnapshotInitiatorOperation_ImportSnapshot = SnapshotInitiatorOperation.AddMember("ImportSnapshot", smithyprelude.Unit)
+
+	SnapshotInitiatorOperation_SystemCreateSnapshot = SnapshotInitiatorOperation.AddMember("SystemCreateSnapshot", smithyprelude.Unit)
+
+	SnapshotInfo_SnapshotName = SnapshotInfo.AddMember("SnapshotName", _SnapshotV2Name)
+
+	SnapshotInfo_SnapshotArn = SnapshotInfo.AddMember("SnapshotArn", _SnapshotArn)
+
+	SnapshotInfo_SnapshotStatus = SnapshotInfo.AddMember("SnapshotStatus", SnapshotStatus)
+
+	SnapshotInfo_SnapshotCreationTimestamp = SnapshotInfo.AddMember("SnapshotCreationTimestamp", _Timestamp)
+
+	SnapshotInfo_SnapshotInitiator = SnapshotInfo.AddMember("SnapshotInitiator", SnapshotInitiator)
+
+	SnapshotInfo_SnapshotInitiatorOperation = SnapshotInfo.AddMember("SnapshotInitiatorOperation", SnapshotInitiatorOperation)
+
+	SnapshotInfo_SourceApplicationName = SnapshotInfo.AddMember("SourceApplicationName", _ApplicationName)
+
+	SnapshotInfo_SnapshotFormat = SnapshotInfo.AddMember("SnapshotFormat", SnapshotFormat)
+
+	SourceApplicationDescription_ApplicationName = SourceApplicationDescription.AddMember("ApplicationName", _ApplicationName)
+
+	SourceApplicationDescription_ApplicationCreationTimestamp = SourceApplicationDescription.AddMember("ApplicationCreationTimestamp", _Timestamp)
+
+	SourceApplicationDescription_ApplicationVersionId = SourceApplicationDescription.AddMember("ApplicationVersionId", _ApplicationVersionId)
+
+	SnapshotSourceDescription_S3PrefixLocation = SnapshotSourceDescription.AddMember("S3PrefixLocation", S3PrefixLocation)
+
+	SnapshotSourceDescription_SourceApplicationDescription = SnapshotSourceDescription.AddMember("SourceApplicationDescription", SourceApplicationDescription)
+
+	SnapshotInfoDetails_SnapshotName = SnapshotInfoDetails.AddMember("SnapshotName", _SnapshotV2Name)
+
+	SnapshotInfoDetails_SnapshotArn = SnapshotInfoDetails.AddMember("SnapshotArn", _SnapshotArn)
+
+	SnapshotInfoDetails_SnapshotDescription = SnapshotInfoDetails.AddMember("SnapshotDescription", _SnapshotV2Description)
+
+	SnapshotInfoDetails_SnapshotStatus = SnapshotInfoDetails.AddMember("SnapshotStatus", SnapshotStatus)
+
+	SnapshotInfoDetails_SnapshotCreationTimestamp = SnapshotInfoDetails.AddMember("SnapshotCreationTimestamp", _Timestamp)
+
+	SnapshotInfoDetails_RuntimeEnvironment = SnapshotInfoDetails.AddMember("RuntimeEnvironment", RuntimeEnvironment)
+
+	SnapshotInfoDetails_SnapshotSizeInBytes = SnapshotInfoDetails.AddMember("SnapshotSizeInBytes", _SnapshotSizeInBytes)
+
+	SnapshotInfoDetails_SnapshotEncryptionConfigurationDescription = SnapshotInfoDetails.AddMember("SnapshotEncryptionConfigurationDescription", SnapshotEncryptionConfiguration)
+
+	SnapshotInfoDetails_SnapshotInitiator = SnapshotInfoDetails.AddMember("SnapshotInitiator", SnapshotInitiator)
+
+	SnapshotInfoDetails_SnapshotInitiatorOperation = SnapshotInfoDetails.AddMember("SnapshotInitiatorOperation", SnapshotInitiatorOperation)
+
+	SnapshotInfoDetails_SnapshotSourceDescription = SnapshotInfoDetails.AddMember("SnapshotSourceDescription", SnapshotSourceDescription)
+
+	SnapshotInfoDetails_SnapshotFormat = SnapshotInfoDetails.AddMember("SnapshotFormat", SnapshotFormat)
+
+	_SnapshotInfoList_member = _SnapshotInfoList.AddMember("member", SnapshotInfo)
+
+	SnapshotOperation_CreateSnapshot = SnapshotOperation.AddMember("CreateSnapshot", smithyprelude.Unit)
+
+	SnapshotOperation_DeleteSnapshot = SnapshotOperation.AddMember("DeleteSnapshot", smithyprelude.Unit)
+
+	SnapshotOperation_ImportSnapshot = SnapshotOperation.AddMember("ImportSnapshot", smithyprelude.Unit)
+
+	SnapshotOperation_ExportSnapshot = SnapshotOperation.AddMember("ExportSnapshot", smithyprelude.Unit)
+
+	SnapshotOperation_SystemCreateSnapshot = SnapshotOperation.AddMember("SystemCreateSnapshot", smithyprelude.Unit)
+
+	SnapshotOperationFailureDetails_ErrorInfo = SnapshotOperationFailureDetails.AddMember("ErrorInfo", SnapshotErrorInfo)
+
+	SnapshotOperationStatus_IN_PROGRESS = SnapshotOperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	SnapshotOperationStatus_SUCCESSFUL = SnapshotOperationStatus.AddMember("SUCCESSFUL", smithyprelude.Unit)
+
+	SnapshotOperationStatus_FAILED = SnapshotOperationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	SnapshotOperationStatus_CANCELLED = SnapshotOperationStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	SnapshotOperationInfo_SnapshotOperationId = SnapshotOperationInfo.AddMember("SnapshotOperationId", _SnapshotOperationId)
+
+	SnapshotOperationInfo_SnapshotOperation = SnapshotOperationInfo.AddMember("SnapshotOperation", SnapshotOperation)
+
+	SnapshotOperationInfo_SnapshotOperationStatus = SnapshotOperationInfo.AddMember("SnapshotOperationStatus", SnapshotOperationStatus)
+
+	SnapshotOperationInfo_StartTime = SnapshotOperationInfo.AddMember("StartTime", _Timestamp)
+
+	SnapshotOperationInfo_EndTime = SnapshotOperationInfo.AddMember("EndTime", _Timestamp)
+
+	SnapshotOperationS3PrefixLocation_BucketARN = SnapshotOperationS3PrefixLocation.AddMember("BucketARN", _BucketARN)
+
+	SnapshotOperationS3PrefixLocation_KeyPrefix = SnapshotOperationS3PrefixLocation.AddMember("KeyPrefix", _KeyPrefix)
+
+	SnapshotOperationS3PrefixLocation_ExportedPrefix = SnapshotOperationS3PrefixLocation.AddMember("ExportedPrefix", _KeyPrefix)
+
+	SnapshotOperationLocationDescription_LocationType = SnapshotOperationLocationDescription.AddMember("LocationType", StorageLocationType)
+
+	SnapshotOperationLocationDescription_S3PrefixLocation = SnapshotOperationLocationDescription.AddMember("S3PrefixLocation", SnapshotOperationS3PrefixLocation)
+
+	SnapshotOperationInfoDetails_SnapshotOperationId = SnapshotOperationInfoDetails.AddMember("SnapshotOperationId", _SnapshotOperationId)
+
+	SnapshotOperationInfoDetails_SnapshotOperation = SnapshotOperationInfoDetails.AddMember("SnapshotOperation", SnapshotOperation)
+
+	SnapshotOperationInfoDetails_SnapshotOperationStatus = SnapshotOperationInfoDetails.AddMember("SnapshotOperationStatus", SnapshotOperationStatus)
+
+	SnapshotOperationInfoDetails_SnapshotArn = SnapshotOperationInfoDetails.AddMember("SnapshotArn", _SnapshotArn)
+
+	SnapshotOperationInfoDetails_SourceEncryptionConfigurationDescription = SnapshotOperationInfoDetails.AddMember("SourceEncryptionConfigurationDescription", EncryptionConfigurationDescription)
+
+	SnapshotOperationInfoDetails_DestinationEncryptionConfigurationDescription = SnapshotOperationInfoDetails.AddMember("DestinationEncryptionConfigurationDescription", EncryptionConfigurationDescription)
+
+	SnapshotOperationInfoDetails_SnapshotSourceLocationDescription = SnapshotOperationInfoDetails.AddMember("SnapshotSourceLocationDescription", SnapshotOperationLocationDescription)
+
+	SnapshotOperationInfoDetails_SnapshotDestinationLocationDescription = SnapshotOperationInfoDetails.AddMember("SnapshotDestinationLocationDescription", SnapshotOperationLocationDescription)
+
+	SnapshotOperationInfoDetails_ApplicationOperationDescription = SnapshotOperationInfoDetails.AddMember("ApplicationOperationDescription", ApplicationOperationDescription)
+
+	SnapshotOperationInfoDetails_StartTime = SnapshotOperationInfoDetails.AddMember("StartTime", _Timestamp)
+
+	SnapshotOperationInfoDetails_EndTime = SnapshotOperationInfoDetails.AddMember("EndTime", _Timestamp)
+
+	SnapshotOperationInfoDetails_SnapshotOperationFailureDetails = SnapshotOperationInfoDetails.AddMember("SnapshotOperationFailureDetails", SnapshotOperationFailureDetails)
+
+	_SnapshotOperationInfoList_member = _SnapshotOperationInfoList.AddMember("member", SnapshotOperationInfo)
 
 	_SnapshotSummaries_member = _SnapshotSummaries.AddMember("member", SnapshotDetails)
 
@@ -3815,6 +4520,22 @@ func init() {
 
 	CreateApplicationSnapshotRequest_SnapshotName = CreateApplicationSnapshotRequest.AddMember("SnapshotName", _SnapshotName)
 
+	CreateSnapshotRequest_ApplicationName = CreateSnapshotRequest.AddMember("ApplicationName", _ApplicationName)
+
+	CreateSnapshotRequest_SnapshotName = CreateSnapshotRequest.AddMember("SnapshotName", _SnapshotV2Name)
+
+	CreateSnapshotRequest_SnapshotDescription = CreateSnapshotRequest.AddMember("SnapshotDescription", _SnapshotV2Description)
+
+	CreateSnapshotRequest_Tags = CreateSnapshotRequest.AddMember("Tags", _Tags)
+
+	CreateSnapshotResponse_SnapshotArn = CreateSnapshotResponse.AddMember("SnapshotArn", _SnapshotArn)
+
+	CreateSnapshotResponse_SnapshotStatus = CreateSnapshotResponse.AddMember("SnapshotStatus", SnapshotStatus)
+
+	CreateSnapshotResponse_SnapshotOperationId = CreateSnapshotResponse.AddMember("SnapshotOperationId", _SnapshotOperationId)
+
+	CreateSnapshotResponse_SnapshotOperationStatus = CreateSnapshotResponse.AddMember("SnapshotOperationStatus", SnapshotOperationStatus)
+
 	DeleteApplicationCloudWatchLoggingOptionRequest_ApplicationName = DeleteApplicationCloudWatchLoggingOptionRequest.AddMember("ApplicationName", _ApplicationName)
 
 	DeleteApplicationCloudWatchLoggingOptionRequest_CurrentApplicationVersionId = DeleteApplicationCloudWatchLoggingOptionRequest.AddMember("CurrentApplicationVersionId", _ApplicationVersionId)
@@ -3885,6 +4606,18 @@ func init() {
 
 	DeleteApplicationVpcConfigurationResponse_OperationId = DeleteApplicationVpcConfigurationResponse.AddMember("OperationId", _OperationId)
 
+	DeleteSnapshotRequest_SnapshotName = DeleteSnapshotRequest.AddMember("SnapshotName", _SnapshotV2Name)
+
+	DeleteSnapshotRequest_SnapshotCreationTimestamp = DeleteSnapshotRequest.AddMember("SnapshotCreationTimestamp", _Timestamp)
+
+	DeleteSnapshotResponse_SnapshotArn = DeleteSnapshotResponse.AddMember("SnapshotArn", _SnapshotArn)
+
+	DeleteSnapshotResponse_SnapshotStatus = DeleteSnapshotResponse.AddMember("SnapshotStatus", SnapshotStatus)
+
+	DeleteSnapshotResponse_SnapshotOperationId = DeleteSnapshotResponse.AddMember("SnapshotOperationId", _SnapshotOperationId)
+
+	DeleteSnapshotResponse_SnapshotOperationStatus = DeleteSnapshotResponse.AddMember("SnapshotOperationStatus", SnapshotOperationStatus)
+
 	DescribeApplicationRequest_ApplicationName = DescribeApplicationRequest.AddMember("ApplicationName", _ApplicationName)
 
 	DescribeApplicationRequest_IncludeAdditionalDetails = DescribeApplicationRequest.AddMember("IncludeAdditionalDetails", _BooleanObject)
@@ -3909,6 +4642,16 @@ func init() {
 
 	DescribeApplicationVersionResponse_ApplicationVersionDetail = DescribeApplicationVersionResponse.AddMember("ApplicationVersionDetail", ApplicationDetail)
 
+	DescribeSnapshotRequest_SnapshotName = DescribeSnapshotRequest.AddMember("SnapshotName", _SnapshotV2Name)
+
+	DescribeSnapshotOperationRequest_SnapshotName = DescribeSnapshotOperationRequest.AddMember("SnapshotName", _SnapshotV2Name)
+
+	DescribeSnapshotOperationRequest_SnapshotOperationId = DescribeSnapshotOperationRequest.AddMember("SnapshotOperationId", _SnapshotOperationId)
+
+	DescribeSnapshotOperationResponse_SnapshotOperationInfoDetails = DescribeSnapshotOperationResponse.AddMember("SnapshotOperationInfoDetails", SnapshotOperationInfoDetails)
+
+	DescribeSnapshotResponse_SnapshotInfoDetails = DescribeSnapshotResponse.AddMember("SnapshotInfoDetails", SnapshotInfoDetails)
+
 	DiscoverInputSchemaRequest_ResourceARN = DiscoverInputSchemaRequest.AddMember("ResourceARN", _ResourceARN)
 
 	DiscoverInputSchemaRequest_ServiceExecutionRole = DiscoverInputSchemaRequest.AddMember("ServiceExecutionRole", _RoleARN)
@@ -3926,6 +4669,34 @@ func init() {
 	DiscoverInputSchemaResponse_ProcessedInputRecords = DiscoverInputSchemaResponse.AddMember("ProcessedInputRecords", _ProcessedInputRecords)
 
 	DiscoverInputSchemaResponse_RawInputRecords = DiscoverInputSchemaResponse.AddMember("RawInputRecords", _RawInputRecords)
+
+	ExportSnapshotRequest_SnapshotName = ExportSnapshotRequest.AddMember("SnapshotName", _SnapshotV2Name)
+
+	ExportSnapshotRequest_ExportDestinationConfiguration = ExportSnapshotRequest.AddMember("ExportDestinationConfiguration", ExportDestinationConfiguration)
+
+	ExportSnapshotResponse_SnapshotOperationId = ExportSnapshotResponse.AddMember("SnapshotOperationId", _SnapshotOperationId)
+
+	ExportSnapshotResponse_SnapshotOperationStatus = ExportSnapshotResponse.AddMember("SnapshotOperationStatus", SnapshotOperationStatus)
+
+	ImportSnapshotRequest_SnapshotName = ImportSnapshotRequest.AddMember("SnapshotName", _SnapshotV2Name)
+
+	ImportSnapshotRequest_ImportSourceConfiguration = ImportSnapshotRequest.AddMember("ImportSourceConfiguration", ImportSourceConfiguration)
+
+	ImportSnapshotRequest_DestinationEncryptionConfiguration = ImportSnapshotRequest.AddMember("DestinationEncryptionConfiguration", SnapshotEncryptionConfiguration)
+
+	ImportSnapshotRequest_SnapshotDescription = ImportSnapshotRequest.AddMember("SnapshotDescription", _SnapshotV2Description)
+
+	ImportSnapshotRequest_SnapshotFormat = ImportSnapshotRequest.AddMember("SnapshotFormat", SnapshotFormat)
+
+	ImportSnapshotRequest_Tags = ImportSnapshotRequest.AddMember("Tags", _Tags)
+
+	ImportSnapshotResponse_SnapshotArn = ImportSnapshotResponse.AddMember("SnapshotArn", _SnapshotArn)
+
+	ImportSnapshotResponse_SnapshotStatus = ImportSnapshotResponse.AddMember("SnapshotStatus", SnapshotStatus)
+
+	ImportSnapshotResponse_SnapshotOperationId = ImportSnapshotResponse.AddMember("SnapshotOperationId", _SnapshotOperationId)
+
+	ImportSnapshotResponse_SnapshotOperationStatus = ImportSnapshotResponse.AddMember("SnapshotOperationStatus", SnapshotOperationStatus)
 
 	ListApplicationOperationsRequest_ApplicationName = ListApplicationOperationsRequest.AddMember("ApplicationName", _ApplicationName)
 
@@ -3968,6 +4739,36 @@ func init() {
 	ListApplicationVersionsResponse_ApplicationVersionSummaries = ListApplicationVersionsResponse.AddMember("ApplicationVersionSummaries", _ApplicationVersionSummaries)
 
 	ListApplicationVersionsResponse_NextToken = ListApplicationVersionsResponse.AddMember("NextToken", _NextToken)
+
+	ListSnapshotOperationsRequest_SnapshotName = ListSnapshotOperationsRequest.AddMember("SnapshotName", _SnapshotV2Name)
+
+	ListSnapshotOperationsRequest_SnapshotOperation = ListSnapshotOperationsRequest.AddMember("SnapshotOperation", SnapshotOperation)
+
+	ListSnapshotOperationsRequest_SnapshotOperationStatus = ListSnapshotOperationsRequest.AddMember("SnapshotOperationStatus", SnapshotOperationStatus)
+
+	ListSnapshotOperationsRequest_Limit = ListSnapshotOperationsRequest.AddMember("Limit", _ListSnapshotOperationsLimit)
+
+	ListSnapshotOperationsRequest_NextToken = ListSnapshotOperationsRequest.AddMember("NextToken", _NextToken)
+
+	ListSnapshotOperationsResponse_SnapshotOperationInfoList = ListSnapshotOperationsResponse.AddMember("SnapshotOperationInfoList", _SnapshotOperationInfoList)
+
+	ListSnapshotOperationsResponse_NextToken = ListSnapshotOperationsResponse.AddMember("NextToken", _NextToken)
+
+	ListSnapshotsRequest_SourceApplicationName = ListSnapshotsRequest.AddMember("SourceApplicationName", _ApplicationName)
+
+	ListSnapshotsRequest_SnapshotInitiator = ListSnapshotsRequest.AddMember("SnapshotInitiator", SnapshotInitiator)
+
+	ListSnapshotsRequest_SnapshotInitiatorOperation = ListSnapshotsRequest.AddMember("SnapshotInitiatorOperation", SnapshotInitiatorOperation)
+
+	ListSnapshotsRequest_SnapshotStatus = ListSnapshotsRequest.AddMember("SnapshotStatus", SnapshotStatus)
+
+	ListSnapshotsRequest_Limit = ListSnapshotsRequest.AddMember("Limit", _ListSnapshotsLimit)
+
+	ListSnapshotsRequest_NextToken = ListSnapshotsRequest.AddMember("NextToken", _NextToken)
+
+	ListSnapshotsResponse_SnapshotInfoList = ListSnapshotsResponse.AddMember("SnapshotInfoList", _SnapshotInfoList)
+
+	ListSnapshotsResponse_NextToken = ListSnapshotsResponse.AddMember("NextToken", _NextToken)
 
 	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _KinesisAnalyticsARN)
 

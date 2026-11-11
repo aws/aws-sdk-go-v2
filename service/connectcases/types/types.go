@@ -30,10 +30,18 @@ type AuditEvent struct {
 	// The type of audit history event.
 	//
 	// Valid Values: Case.Created | Case.Updated | RelatedItem.Created |
-	// RelatedItem.Updated | RelatedItem.Deleted
+	// RelatedItem.Updated | RelatedItem.Deleted | Case.Merged
+	//
+	// Case.Merged summarizes a merge on each of the two cases that took part in it.
 	//
 	// This member is required.
 	Type AuditEventType
+
+	// Information about the merge that produced this audit event. Present only on
+	// audit events produced by a merge. For more information, see [StartMergeCases].
+	//
+	// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
+	MergeMetadata *AuditMergeMetadata
 
 	// Information of the user which performed the audit.
 	PerformedBy *AuditEventPerformedBy
@@ -56,6 +64,11 @@ func (v *AuditEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Fields != nil {
 		serializeAuditEventFieldList(s, schemas.AuditEvent_fields, v.Fields)
+	}
+	if v.MergeMetadata != nil {
+		s.WriteStruct(schemas.AuditEvent_mergeMetadata)
+		v.MergeMetadata.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.PerformedBy != nil {
 		s.WriteStruct(schemas.AuditEvent_performedBy)
@@ -80,6 +93,9 @@ func (v *AuditEvent) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.AuditEvent_eventId, v.EventId)
 		case schemas.AuditEvent_fields:
 			return deserializeAuditEventFieldList(d, schemas.AuditEvent_fields, &v.Fields)
+		case schemas.AuditEvent_mergeMetadata:
+			v.MergeMetadata = &AuditMergeMetadata{}
+			return v.MergeMetadata.Deserialize(d)
 		case schemas.AuditEvent_performedBy:
 			v.PerformedBy = &AuditEventPerformedBy{}
 			return v.PerformedBy.Deserialize(d)
@@ -288,6 +304,63 @@ func (v *AuditEventPerformedBy) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.AuditEventPerformedBy_iamPrincipalArn, v.IamPrincipalArn)
 		case schemas.AuditEventPerformedBy_user:
 			return deserializeUserUnion(d, schemas.AuditEventPerformedBy_user, &v.User)
+		}
+		return nil
+	})
+}
+
+// Information about the merge that produced an audit event.
+type AuditMergeMetadata struct {
+
+	// The unique identifier of the merge. All audit events produced by the same
+	// merge, on both cases, have the same value. Use it to group the changes that a
+	// merge made.
+	//
+	// This member is required.
+	MergeEventId *string
+
+	// The unique identifier of the primary case of the merge.
+	//
+	// This member is required.
+	PrimaryCaseId *string
+
+	// The unique identifier of the secondary case of the merge.
+	//
+	// This member is required.
+	SecondaryCaseId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AuditMergeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditMergeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuditMergeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MergeEventId != nil {
+		s.WriteString(schemas.AuditMergeMetadata_mergeEventId, *v.MergeEventId)
+	}
+	if v.PrimaryCaseId != nil {
+		s.WriteString(schemas.AuditMergeMetadata_primaryCaseId, *v.PrimaryCaseId)
+	}
+	if v.SecondaryCaseId != nil {
+		s.WriteString(schemas.AuditMergeMetadata_secondaryCaseId, *v.SecondaryCaseId)
+	}
+}
+func (v *AuditMergeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuditMergeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuditMergeMetadata_mergeEventId:
+			v.MergeEventId = new(string)
+			return d.ReadString(schemas.AuditMergeMetadata_mergeEventId, v.MergeEventId)
+		case schemas.AuditMergeMetadata_primaryCaseId:
+			v.PrimaryCaseId = new(string)
+			return d.ReadString(schemas.AuditMergeMetadata_primaryCaseId, v.PrimaryCaseId)
+		case schemas.AuditMergeMetadata_secondaryCaseId:
+			v.SecondaryCaseId = new(string)
+			return d.ReadString(schemas.AuditMergeMetadata_secondaryCaseId, v.SecondaryCaseId)
 		}
 		return nil
 	})
@@ -2533,6 +2606,53 @@ func (v *FieldOptionsCaseRule) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies the fields whose values to take from the secondary case when you
+// merge cases.
+type FieldsConfiguration struct {
+
+	// The fields whose values to take from the source case. Each field must exist on
+	// the source case and must be a field that can be merged. Don't list the same
+	// field more than once.
+	//
+	// This member is required.
+	FieldIds []FieldIdentifier
+
+	// The unique identifier of the case to take the field values from. This must be
+	// the secondary case.
+	//
+	// This member is required.
+	SourceCaseId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FieldsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldIds != nil {
+		serializeFieldIdentifierList(s, schemas.FieldsConfiguration_fieldIds, v.FieldIds)
+	}
+	if v.SourceCaseId != nil {
+		s.WriteString(schemas.FieldsConfiguration_sourceCaseId, *v.SourceCaseId)
+	}
+}
+func (v *FieldsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldsConfiguration_fieldIds:
+			return deserializeFieldIdentifierList(d, schemas.FieldsConfiguration_fieldIds, &v.FieldIds)
+		case schemas.FieldsConfiguration_sourceCaseId:
+			v.SourceCaseId = new(string)
+			return d.ReadString(schemas.FieldsConfiguration_sourceCaseId, v.SourceCaseId)
+		}
+		return nil
+	})
+}
+
 // Object for the summarized details of the field.
 type FieldSummary struct {
 
@@ -3719,6 +3839,70 @@ func (v *RelatedItemInputContentMemberSla) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *RelatedItemInputContentMemberSla) Deserialize(d smithy.ShapeDeserializer) error {
 	return deserializeSlaInputContent(d, schemas.RelatedItemInputContent_sla, &v.Value)
+}
+
+// Specifies which types of related items to move from the secondary case to the
+// primary case when you merge cases. Moved related items keep their related item
+// ID, creator, association time, and tags.
+type RelatedItemsConfiguration struct {
+
+	// Whether to move Comment related items to the primary case.
+	Comment *bool
+
+	// Whether to move Case related items to the primary case. If the primary case
+	// already links to the same case, the secondary case's link is removed instead of
+	// moved.
+	ConnectCase *bool
+
+	// Whether to move Contact related items to the primary case. If the same contact
+	// is related to both cases, the primary case keeps its related item and gets any
+	// tag keys that only the secondary case's related item has.
+	Contact *bool
+
+	// Whether to move Custom related items to the primary case.
+	Custom *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *RelatedItemsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedItemsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedItemsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_comment, *v.Comment)
+	}
+	if v.ConnectCase != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_connectCase, *v.ConnectCase)
+	}
+	if v.Contact != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_contact, *v.Contact)
+	}
+	if v.Custom != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_custom, *v.Custom)
+	}
+}
+func (v *RelatedItemsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedItemsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedItemsConfiguration_comment:
+			v.Comment = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_comment, v.Comment)
+		case schemas.RelatedItemsConfiguration_connectCase:
+			v.ConnectCase = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_connectCase, v.ConnectCase)
+		case schemas.RelatedItemsConfiguration_contact:
+			v.Contact = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_contact, v.Contact)
+		case schemas.RelatedItemsConfiguration_custom:
+			v.Custom = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_custom, v.Custom)
+		}
+		return nil
+	})
 }
 
 // The list of types of related items and their parameters to use for filtering.

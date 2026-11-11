@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/GetPipeline
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.GetPipeline
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"name":"__Name__","version":1}
+¿dnameh__Name__gversionÿ

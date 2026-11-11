@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifyAccount
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifyAccount
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DedicatedTenancyManagementCidrRange":"__DedicatedTenancyManagementCidrRange__","DedicatedTenancySupport":"ENABLED"}
+¿x#DedicatedTenancyManagementCidrRangex'__DedicatedTenancyManagementCidrRange__wDedicatedTenancySupportgENABLEDÿ

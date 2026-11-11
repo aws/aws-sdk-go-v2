@@ -964,6 +964,26 @@ func (ReplicaStatusType) Values() []ReplicaStatusType {
 	}
 }
 
+type RevokeAssociatedSessionsType string
+
+// Enum values for RevokeAssociatedSessionsType
+const (
+	RevokeAssociatedSessionsTypeNone   RevokeAssociatedSessionsType = "NONE"
+	RevokeAssociatedSessionsTypeLinked RevokeAssociatedSessionsType = "LINKED"
+)
+
+// Values returns all known values for RevokeAssociatedSessionsType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RevokeAssociatedSessionsType) Values() []RevokeAssociatedSessionsType {
+	return []RevokeAssociatedSessionsType{
+		"NONE",
+		"LINKED",
+	}
+}
+
 type RiskDecisionType string
 
 // Enum values for RiskDecisionType
@@ -1024,6 +1044,25 @@ func (SecurityPolicyType) Values() []SecurityPolicyType {
 		"TLS_V1",
 		"TLS_V1_2_2021",
 		"TLS_V1_3_2025",
+	}
+}
+
+type SessionTypeType string
+
+// Enum values for SessionTypeType
+const (
+	SessionTypeTypeToken SessionTypeType = "TOKEN"
+	SessionTypeTypeSso   SessionTypeType = "SSO"
+)
+
+// Values returns all known values for SessionTypeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionTypeType) Values() []SessionTypeType {
+	return []SessionTypeType{
+		"TOKEN",
+		"SSO",
 	}
 }
 
@@ -1211,6 +1250,25 @@ func (UserPoolTierType) Values() []UserPoolTierType {
 		"LITE",
 		"ESSENTIALS",
 		"PLUS",
+	}
+}
+
+type UserSessionTrackingType string
+
+// Enum values for UserSessionTrackingType
+const (
+	UserSessionTrackingTypeEnabled  UserSessionTrackingType = "ENABLED"
+	UserSessionTrackingTypeDisabled UserSessionTrackingType = "DISABLED"
+)
+
+// Values returns all known values for UserSessionTrackingType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserSessionTrackingType) Values() []UserSessionTrackingType {
+	return []UserSessionTrackingType{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/BatchDeleteBuilds
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.BatchDeleteBuilds
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ids":["__Member__","__Member__"]}
+¿cidsŸj__Member__j__Member__ÿÿ

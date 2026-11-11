@@ -3430,6 +3430,9 @@ const (
 	FlowLogsResourceTypeTransitGateway           FlowLogsResourceType = "TransitGateway"
 	FlowLogsResourceTypeTransitGatewayAttachment FlowLogsResourceType = "TransitGatewayAttachment"
 	FlowLogsResourceTypeRegionalNatGateway       FlowLogsResourceType = "RegionalNatGateway"
+	FlowLogsResourceTypeCoreNetwork              FlowLogsResourceType = "CoreNetwork"
+	FlowLogsResourceTypeCoreNetworkEdge          FlowLogsResourceType = "CoreNetworkEdge"
+	FlowLogsResourceTypeCoreNetworkAttachment    FlowLogsResourceType = "CoreNetworkAttachment"
 )
 
 // Values returns all known values for FlowLogsResourceType. Note that this can be
@@ -3444,6 +3447,9 @@ func (FlowLogsResourceType) Values() []FlowLogsResourceType {
 		"TransitGateway",
 		"TransitGatewayAttachment",
 		"RegionalNatGateway",
+		"CoreNetwork",
+		"CoreNetworkEdge",
+		"CoreNetworkAttachment",
 	}
 }
 

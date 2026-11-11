@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/UpdateMultiRegionCluster
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.UpdateMultiRegionCluster
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Description":"__Description__","EngineVersion":"__EngineVersion__","MultiRegionClusterName":"__MultiRegionClusterName__","MultiRegionParameterGroupName":"__MultiRegionParameterGroupName__","NodeType":"__NodeType__","ShardConfiguration":{"ShardCount":1},"UpdateStrategy":"coordinated"}
+¿kDescriptiono__Description__mEngineVersionq__EngineVersion__vMultiRegionClusterNamex__MultiRegionClusterName__xMultiRegionParameterGroupNamex!__MultiRegionParameterGroupName__hNodeTypel__NodeType__rShardConfiguration¿jShardCountÿnUpdateStrategykcoordinatedÿ

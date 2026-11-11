@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/CreateVocabulary
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.CreateVocabulary
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DataAccessRoleArn":"__DataAccessRoleArn__","EncryptionConfiguration":{"KMSEncryptionContext":{"key0":"__Value__"},"KMSKey":"__KMSKey__"},"LanguageCode":"af-ZA","Phrases":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VocabularyFileUri":"__VocabularyFileUri__","VocabularyName":"__VocabularyName__"}
+¿qDataAccessRoleArnu__DataAccessRoleArn__wEncryptionConfiguration¿tKMSEncryptionContext¿dkey0i__Value__ÿfKMSKeyj__KMSKey__ÿlLanguageCodeeaf-ZAgPhrasesŸj__Member__j__Member__ÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿqVocabularyFileUriu__VocabularyFileUri__nVocabularyNamer__VocabularyName__ÿ

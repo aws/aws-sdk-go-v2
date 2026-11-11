@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/CreateLocationS3
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CreateLocationS3
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AgentArns":["__Member__","__Member__"],"S3BucketArn":"__S3BucketArn__","S3Config":{"BucketAccessRoleArn":"__BucketAccessRoleArn__"},"S3StorageClass":"STANDARD","Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿iAgentArnsŸj__Member__j__Member__ÿkS3BucketArno__S3BucketArn__hS3Config¿sBucketAccessRoleArnw__BucketAccessRoleArn__ÿnS3StorageClasshSTANDARDlSubdirectoryp__Subdirectory__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

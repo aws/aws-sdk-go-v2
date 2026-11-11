@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/DescribeUpdateDirectory
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.DescribeUpdateDirectory
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DirectoryId":"__DirectoryId__","NextToken":"__NextToken__","RegionName":"__RegionName__","UpdateType":"OS"}
+¿kDirectoryIdo__DirectoryId__iNextTokenm__NextToken__jRegionNamen__RegionName__jUpdateTypebOSÿ

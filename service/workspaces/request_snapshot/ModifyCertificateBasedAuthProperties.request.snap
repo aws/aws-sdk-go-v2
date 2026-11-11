@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifyCertificateBasedAuthProperties
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifyCertificateBasedAuthProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CertificateBasedAuthProperties":{"CertificateAuthorityArn":"__CertificateAuthorityArn__","Status":"DISABLED"},"PropertiesToDelete":["CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN","CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"],"ResourceId":"__ResourceId__"}
+¿xCertificateBasedAuthProperties¿wCertificateAuthorityArnx__CertificateAuthorityArn__fStatushDISABLEDÿrPropertiesToDeleteŸx;CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARNx;CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARNÿjResourceIdn__ResourceId__ÿ

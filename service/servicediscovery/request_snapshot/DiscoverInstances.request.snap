@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/DiscoverInstances
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.DiscoverInstances
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"HealthStatus":"HEALTHY","MaxResults":1,"NamespaceName":"__NamespaceName__","OptionalParameters":{"key0":"__Value__"},"OwnerAccount":"__OwnerAccount__","QueryParameters":{"key0":"__Value__"},"ServiceName":"__ServiceName__"}
+¿lHealthStatusgHEALTHYjMaxResultsmNamespaceNameq__NamespaceName__rOptionalParameters¿dkey0i__Value__ÿlOwnerAccountp__OwnerAccount__oQueryParameters¿dkey0i__Value__ÿkServiceNameo__ServiceName__ÿ

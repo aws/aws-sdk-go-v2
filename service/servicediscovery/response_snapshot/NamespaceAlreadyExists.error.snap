@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.CreateHttpNamespace
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"NamespaceAlreadyExists","CreatorRequestId":"__CreatorRequestId__","Message":"__Message__","NamespaceId":"__NamespaceId__"}
+¿f__typevNamespaceAlreadyExistspCreatorRequestIdt__CreatorRequestId__gMessagek__Message__kNamespaceIdo__NamespaceId__ÿ

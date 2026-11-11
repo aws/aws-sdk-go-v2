@@ -818,7 +818,7 @@ type NetworkConfiguration struct {
 	// such IP address exception applies.
 	ApiAllowSourceIps []string
 
-	// A list of virtual private cloud (VPC) IDs that are allowed to access the
+	// A list of virtual private cloud (VPC) ARNs that are allowed to access the
 	// identity store API operations. A request is denied unless it originates from a
 	// VPC in this list, or from an IP address in ApiAllowSourceIps if you specified
 	// one. If you don't specify a value, access isn't restricted to specific VPCs, but
@@ -850,7 +850,7 @@ func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		serializeIpCidrList(s, schemas.NetworkConfiguration_ApiAllowSourceIps, v.ApiAllowSourceIps)
 	}
 	if v.ApiRestrictSourceVpcs != nil {
-		serializeVpcIdList(s, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+		serializeVpcArnList(s, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
 	}
 	if v.ScimAllowSourceIps != nil {
 		serializeIpCidrList(s, schemas.NetworkConfiguration_ScimAllowSourceIps, v.ScimAllowSourceIps)
@@ -865,7 +865,7 @@ func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.NetworkConfiguration_ApiAllowSourceIps:
 			return deserializeIpCidrList(d, schemas.NetworkConfiguration_ApiAllowSourceIps, &v.ApiAllowSourceIps)
 		case schemas.NetworkConfiguration_ApiRestrictSourceVpcs:
-			return deserializeVpcIdList(d, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
+			return deserializeVpcArnList(d, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
 		case schemas.NetworkConfiguration_ScimAllowSourceIps:
 			return deserializeIpCidrList(d, schemas.NetworkConfiguration_ScimAllowSourceIps, &v.ScimAllowSourceIps)
 		case schemas.NetworkConfiguration_VpceAccessRequired:
@@ -895,7 +895,7 @@ type NetworkConfigurationDetails struct {
 	// IP address exception applies.
 	ApiAllowSourceIps []string
 
-	// A list of virtual private cloud (VPC) IDs that are allowed to access the
+	// A list of virtual private cloud (VPC) ARNs that are allowed to access the
 	// identity store API operations. A request is denied unless it originates from a
 	// VPC in this list, or from an IP address in ApiAllowSourceIps if one is
 	// configured. If this field is empty, access isn't restricted to specific VPCs,
@@ -923,7 +923,7 @@ func (v *NetworkConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer)
 		serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, v.ApiAllowSourceIps)
 	}
 	if v.ApiRestrictSourceVpcs != nil {
-		serializeVpcIdList(s, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+		serializeVpcArnList(s, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
 	}
 	if v.ScimAllowSourceIps != nil {
 		serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, v.ScimAllowSourceIps)
@@ -938,7 +938,7 @@ func (v *NetworkConfigurationDetails) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.NetworkConfigurationDetails_ApiAllowSourceIps:
 			return deserializeIpCidrList(d, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, &v.ApiAllowSourceIps)
 		case schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs:
-			return deserializeVpcIdList(d, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
+			return deserializeVpcArnList(d, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
 		case schemas.NetworkConfigurationDetails_ScimAllowSourceIps:
 			return deserializeIpCidrList(d, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, &v.ScimAllowSourceIps)
 		case schemas.NetworkConfigurationDetails_VpceAccessRequired:

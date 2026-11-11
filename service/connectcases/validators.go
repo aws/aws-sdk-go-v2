@@ -490,6 +490,26 @@ func (m *validateOpGetLayout) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMergeCasesStatus struct {
+}
+
+func (*validateOpGetMergeCasesStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMergeCasesStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMergeCasesStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMergeCasesStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTemplate struct {
 }
 
@@ -725,6 +745,26 @@ func (m *validateOpSearchRelatedItems) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchRelatedItemsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartMergeCases struct {
+}
+
+func (*validateOpStartMergeCases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMergeCases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMergeCasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMergeCasesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -986,6 +1026,10 @@ func addOpGetLayoutValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLayout{}, middleware.After)
 }
 
+func addOpGetMergeCasesStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMergeCasesStatus{}, middleware.After)
+}
+
 func addOpGetTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTemplate{}, middleware.After)
 }
@@ -1032,6 +1076,10 @@ func addOpSearchCasesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchRelatedItemsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchRelatedItems{}, middleware.After)
+}
+
+func addOpStartMergeCasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMergeCases{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1798,6 +1846,45 @@ func validateFieldOptionsList(v []types.FieldOption) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FieldOptionsList"}
 	for i := range v {
 		if err := validateFieldOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldsConfiguration(v *types.FieldsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldsConfiguration"}
+	if v.FieldIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldIds"))
+	} else if v.FieldIds != nil {
+		if err := validateFieldIdentifierList(v.FieldIds); err != nil {
+			invalidParams.AddNested("FieldIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceCaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldsConfigurationList(v []types.FieldsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldsConfigurationList"}
+	for i := range v {
+		if err := validateFieldsConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2908,6 +2995,24 @@ func validateOpGetLayoutInput(v *GetLayoutInput) error {
 	}
 }
 
+func validateOpGetMergeCasesStatusInput(v *GetMergeCasesStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMergeCasesStatusInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTemplateInput(v *GetTemplateInput) error {
 	if v == nil {
 		return nil
@@ -3128,6 +3233,32 @@ func validateOpSearchRelatedItemsInput(v *SearchRelatedItemsInput) error {
 	if v.Filters != nil {
 		if err := validateRelatedItemFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMergeCasesInput(v *StartMergeCasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMergeCasesInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if v.SecondaryCaseIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecondaryCaseIds"))
+	}
+	if v.FieldsConfiguration != nil {
+		if err := validateFieldsConfigurationList(v.FieldsConfiguration); err != nil {
+			invalidParams.AddNested("FieldsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

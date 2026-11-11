@@ -1,6 +1,7 @@
-POST /
+POST /service/Textract/operation/StartDocumentTextDetection
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.StartDocumentTextDetection
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientRequestToken":"__ClientRequestToken__","DocumentLocation":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"JobTag":"__JobTag__","KMSKeyId":"__KMSKeyId__","NotificationChannel":{"RoleArn":"__RoleArn__","SNSTopicArn":"__SNSTopicArn__"},"OutputConfig":{"S3Bucket":"__S3Bucket__","S3Prefix":"__S3Prefix__"}}
+¿rClientRequestTokenv__ClientRequestToken__pDocumentLocation¿hS3Object¿fBucketj__Bucket__dNameh__Name__gVersionk__Version__ÿÿfJobTagj__JobTag__hKMSKeyIdl__KMSKeyId__sNotificationChannel¿gRoleArnk__RoleArn__kSNSTopicArno__SNSTopicArn__ÿlOutputConfig¿hS3Bucketl__S3Bucket__hS3Prefixl__S3Prefix__ÿÿ

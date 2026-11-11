@@ -30,13 +30,18 @@ import (
 //     permission on the ARN of the user that you provide.
 //
 // [System case fields]
+//
 //   - cannot be used in a custom related item.
+//
+//   - If the case is the secondary case of a merge that is running, the request
+//     fails with a ConflictException . For more information, see [StartMergeCases].
 //
 // Endpoints: See [Connect Customer endpoints and quotas].
 //
 // [DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 // [Connect Customer Cases quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
 // [System case fields]: https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields
+// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
 // [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) UpdateRelatedItem(ctx context.Context, params *UpdateRelatedItemInput, optFns ...func(*Options)) (*UpdateRelatedItemOutput, error) {
 	if params == nil {

@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/DetachRuleGroupsFromProxyConfiguration
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DetachRuleGroupsFromProxyConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ProxyConfigurationArn":"__ProxyConfigurationArn__","ProxyConfigurationName":"__ProxyConfigurationName__","RuleGroupArns":["__Member__","__Member__"],"RuleGroupNames":["__Member__","__Member__"],"UpdateToken":"__UpdateToken__"}
+¿uProxyConfigurationArnx__ProxyConfigurationArn__vProxyConfigurationNamex__ProxyConfigurationName__mRuleGroupArnsŸj__Member__j__Member__ÿnRuleGroupNamesŸj__Member__j__Member__ÿkUpdateTokeno__UpdateToken__ÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/UpdateProvisionedProduct
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.UpdateProvisionedProduct
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","PathId":"__PathId__","PathName":"__PathName__","ProductId":"__ProductId__","ProductName":"__ProductName__","ProvisionedProductId":"__ProvisionedProductId__","ProvisionedProductName":"__ProvisionedProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ProvisioningArtifactName":"__ProvisioningArtifactName__","ProvisioningParameters":[{"Key":"__Key__","UsePreviousValue":true,"Value":"__Value__"},{"Key":"__Key__","UsePreviousValue":true,"Value":"__Value__"}],"ProvisioningPreferences":{"StackSetAccounts":["__Member__","__Member__"],"StackSetFailureToleranceCount":1,"StackSetFailureTolerancePercentage":1,"StackSetMaxConcurrencyCount":1,"StackSetMaxConcurrencyPercentage":1,"StackSetOperationType":"CREATE","StackSetRegions":["__Member__","__Member__"]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UpdateToken":"__UpdateToken__"}
+¿nAcceptLanguager__AcceptLanguage__fPathIdj__PathId__hPathNamel__PathName__iProductIdm__ProductId__kProductNameo__ProductName__tProvisionedProductIdx__ProvisionedProductId__vProvisionedProductNamex__ProvisionedProductName__vProvisioningArtifactIdx__ProvisioningArtifactId__xProvisioningArtifactNamex__ProvisioningArtifactName__vProvisioningParametersŸ¿cKeyg__Key__pUsePreviousValueõeValuei__Value__ÿ¿cKeyg__Key__pUsePreviousValueõeValuei__Value__ÿÿwProvisioningPreferences¿pStackSetAccountsŸj__Member__j__Member__ÿxStackSetFailureToleranceCountx"StackSetFailureTolerancePercentagexStackSetMaxConcurrencyCountx StackSetMaxConcurrencyPercentageuStackSetOperationTypefCREATEoStackSetRegionsŸj__Member__j__Member__ÿÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿkUpdateTokeno__UpdateToken__ÿ

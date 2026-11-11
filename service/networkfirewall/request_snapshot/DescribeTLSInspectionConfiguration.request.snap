@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/DescribeTLSInspectionConfiguration
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DescribeTLSInspectionConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"TLSInspectionConfigurationArn":"__TLSInspectionConfigurationArn__","TLSInspectionConfigurationName":"__TLSInspectionConfigurationName__"}
+¿xTLSInspectionConfigurationArnx!__TLSInspectionConfigurationArn__xTLSInspectionConfigurationNamex"__TLSInspectionConfigurationName__ÿ

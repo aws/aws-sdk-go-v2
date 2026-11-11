@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	smithy "github.com/aws/smithy-go"
@@ -131,6 +132,9 @@ func (c *Client) addOperationScanProvisionedProductsMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -151,3 +155,94 @@ func (c *Client) addOperationScanProvisionedProductsMiddlewares(stack *middlewar
 	}
 	return nil
 }
+
+// ScanProvisionedProductsPaginatorOptions is the paginator options for
+// ScanProvisionedProducts
+type ScanProvisionedProductsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ScanProvisionedProductsPaginator is a paginator for ScanProvisionedProducts
+type ScanProvisionedProductsPaginator struct {
+	options   ScanProvisionedProductsPaginatorOptions
+	client    ScanProvisionedProductsAPIClient
+	params    *ScanProvisionedProductsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewScanProvisionedProductsPaginator returns a new
+// ScanProvisionedProductsPaginator
+func NewScanProvisionedProductsPaginator(client ScanProvisionedProductsAPIClient, params *ScanProvisionedProductsInput, optFns ...func(*ScanProvisionedProductsPaginatorOptions)) *ScanProvisionedProductsPaginator {
+	if params == nil {
+		params = &ScanProvisionedProductsInput{}
+	}
+
+	options := ScanProvisionedProductsPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ScanProvisionedProductsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.PageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ScanProvisionedProductsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ScanProvisionedProducts page.
+func (p *ScanProvisionedProductsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ScanProvisionedProductsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ScanProvisionedProducts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ScanProvisionedProductsAPIClient is a client that implements the
+// ScanProvisionedProducts operation.
+type ScanProvisionedProductsAPIClient interface {
+	ScanProvisionedProducts(context.Context, *ScanProvisionedProductsInput, ...func(*Options)) (*ScanProvisionedProductsOutput, error)
+}
+
+var _ ScanProvisionedProductsAPIClient = (*Client)(nil)

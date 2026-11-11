@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/GetCertificate
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.GetCertificate
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CertificateArn":"__CertificateArn__","CertificateAuthorityArn":"__CertificateAuthorityArn__"}
+¿nCertificateArnr__CertificateArn__wCertificateAuthorityArnx__CertificateAuthorityArn__ÿ

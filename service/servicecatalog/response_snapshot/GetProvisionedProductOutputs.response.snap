@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.GetProvisionedProductOutputs
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextPageToken":"__NextPageToken__","Outputs":[{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"},{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"}]}
+¿mNextPageTokenq__NextPageToken__gOutputsŸ¿kDescriptiono__Description__iOutputKeym__OutputKey__kOutputValueo__OutputValue__ÿ¿kDescriptiono__Description__iOutputKeym__OutputKey__kOutputValueo__OutputValue__ÿÿÿ

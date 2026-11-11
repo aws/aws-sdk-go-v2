@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/AcceptDirectConnectGatewayAssociationProposal
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.AcceptDirectConnectGatewayAssociationProposal
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"associatedGatewayOwnerAccount":"__AssociatedGatewayOwnerAccount__","directConnectGatewayId":"__DirectConnectGatewayId__","overrideAllowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"proposalId":"__ProposalId__"}
+¿xassociatedGatewayOwnerAccountx!__AssociatedGatewayOwnerAccount__vdirectConnectGatewayIdx__DirectConnectGatewayId__x-overrideAllowedPrefixesToDirectConnectGatewayŸ¿dcidrh__Cidr__ÿ¿dcidrh__Cidr__ÿÿjproposalIdn__ProposalId__ÿ

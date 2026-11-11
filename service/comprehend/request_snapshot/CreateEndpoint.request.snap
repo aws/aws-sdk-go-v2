@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/CreateEndpoint
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.CreateEndpoint
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientRequestToken":"__ClientRequestToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DesiredInferenceUnits":1,"EndpointName":"__EndpointName__","FlywheelArn":"__FlywheelArn__","ModelArn":"__ModelArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿rClientRequestTokenv__ClientRequestToken__qDataAccessRoleArnu__DataAccessRoleArn__uDesiredInferenceUnitslEndpointNamep__EndpointName__kFlywheelArno__FlywheelArn__hModelArnl__ModelArn__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

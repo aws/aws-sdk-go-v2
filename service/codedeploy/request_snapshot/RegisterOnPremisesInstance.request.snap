@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeDeploy_20141006/operation/RegisterOnPremisesInstance
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.RegisterOnPremisesInstance
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"iamSessionArn":"__IamSessionArn__","iamUserArn":"__IamUserArn__","instanceName":"__InstanceName__"}
+¿miamSessionArnq__IamSessionArn__jiamUserArnn__IamUserArn__linstanceNamep__InstanceName__ÿ

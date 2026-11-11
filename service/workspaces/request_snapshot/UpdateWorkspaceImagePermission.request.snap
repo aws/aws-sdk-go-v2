@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/UpdateWorkspaceImagePermission
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.UpdateWorkspaceImagePermission
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AllowCopyImage":true,"ImageId":"__ImageId__","SharedAccountId":"__SharedAccountId__"}
+¿nAllowCopyImageõgImageIdk__ImageId__oSharedAccountIds__SharedAccountId__ÿ

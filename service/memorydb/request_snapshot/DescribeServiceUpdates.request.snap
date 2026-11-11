@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeServiceUpdates
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeServiceUpdates
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterNames":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","ServiceUpdateName":"__ServiceUpdateName__","Status":["available","available"]}
+¿lClusterNamesŸj__Member__j__Member__ÿjMaxResultsiNextTokenm__NextToken__qServiceUpdateNameu__ServiceUpdateName__fStatusŸiavailableiavailableÿÿ

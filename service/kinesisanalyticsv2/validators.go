@@ -190,6 +190,26 @@ func (m *validateOpCreateApplicationSnapshot) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSnapshot struct {
+}
+
+func (*validateOpCreateSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteApplicationCloudWatchLoggingOption struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpDeleteApplicationVpcConfiguration) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteSnapshot struct {
+}
+
+func (*validateOpDeleteSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeApplication struct {
 }
 
@@ -410,6 +450,46 @@ func (m *validateOpDescribeApplicationVersion) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeSnapshot struct {
+}
+
+func (*validateOpDescribeSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSnapshotOperation struct {
+}
+
+func (*validateOpDescribeSnapshotOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSnapshotOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSnapshotOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSnapshotOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDiscoverInputSchema struct {
 }
 
@@ -425,6 +505,46 @@ func (m *validateOpDiscoverInputSchema) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDiscoverInputSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExportSnapshot struct {
+}
+
+func (*validateOpExportSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportSnapshot struct {
+}
+
+func (*validateOpImportSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -485,6 +605,26 @@ func (m *validateOpListApplicationVersions) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListApplicationVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSnapshotOperations struct {
+}
+
+func (*validateOpListSnapshotOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSnapshotOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSnapshotOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSnapshotOperationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -686,6 +826,10 @@ func addOpCreateApplicationSnapshotValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCreateApplicationSnapshot{}, middleware.After)
 }
 
+func addOpCreateSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSnapshot{}, middleware.After)
+}
+
 func addOpDeleteApplicationCloudWatchLoggingOptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApplicationCloudWatchLoggingOption{}, middleware.After)
 }
@@ -714,6 +858,10 @@ func addOpDeleteApplicationVpcConfigurationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpDeleteApplicationVpcConfiguration{}, middleware.After)
 }
 
+func addOpDeleteSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSnapshot{}, middleware.After)
+}
+
 func addOpDescribeApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeApplication{}, middleware.After)
 }
@@ -730,8 +878,24 @@ func addOpDescribeApplicationVersionValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDescribeApplicationVersion{}, middleware.After)
 }
 
+func addOpDescribeSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSnapshot{}, middleware.After)
+}
+
+func addOpDescribeSnapshotOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSnapshotOperation{}, middleware.After)
+}
+
 func addOpDiscoverInputSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDiscoverInputSchema{}, middleware.After)
+}
+
+func addOpExportSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportSnapshot{}, middleware.After)
+}
+
+func addOpImportSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportSnapshot{}, middleware.After)
 }
 
 func addOpListApplicationOperationsValidationMiddleware(stack *middleware.Stack) error {
@@ -744,6 +908,10 @@ func addOpListApplicationSnapshotsValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListApplicationVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListApplicationVersions{}, middleware.After)
+}
+
+func addOpListSnapshotOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSnapshotOperations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1288,6 +1456,36 @@ func validateEnvironmentPropertyUpdates(v *types.EnvironmentPropertyUpdates) err
 	}
 }
 
+func validateExportDestinationConfiguration(v *types.ExportDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDestinationConfiguration"}
+	if len(v.DestinationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationType"))
+	}
+	if v.ExportRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportRoleArn"))
+	}
+	if v.DestinationEncryptionConfiguration != nil {
+		if err := validateSnapshotEncryptionConfiguration(v.DestinationEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("DestinationEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationS3PrefixLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationS3PrefixLocation"))
+	} else if v.DestinationS3PrefixLocation != nil {
+		if err := validateS3PrefixLocation(v.DestinationS3PrefixLocation); err != nil {
+			invalidParams.AddNested("DestinationS3PrefixLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFlinkApplicationConfiguration(v *types.FlinkApplicationConfiguration) error {
 	if v == nil {
 		return nil
@@ -1337,6 +1535,36 @@ func validateGlueDataCatalogConfigurationUpdate(v *types.GlueDataCatalogConfigur
 	invalidParams := smithy.InvalidParamsError{Context: "GlueDataCatalogConfigurationUpdate"}
 	if v.DatabaseARNUpdate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseARNUpdate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImportSourceConfiguration(v *types.ImportSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportSourceConfiguration"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if v.ImportRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportRoleArn"))
+	}
+	if v.SourceEncryptionConfiguration != nil {
+		if err := validateSnapshotEncryptionConfiguration(v.SourceEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("SourceEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceS3PrefixLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceS3PrefixLocation"))
+	} else if v.SourceS3PrefixLocation != nil {
+		if err := validateS3PrefixLocation(v.SourceS3PrefixLocation); err != nil {
+			invalidParams.AddNested("SourceS3PrefixLocation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2161,6 +2389,39 @@ func validateS3ContentLocation(v *types.S3ContentLocation) error {
 	}
 }
 
+func validateS3PrefixLocation(v *types.S3PrefixLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3PrefixLocation"}
+	if v.BucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketARN"))
+	}
+	if v.KeyPrefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyPrefix"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotEncryptionConfiguration(v *types.SnapshotEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotEncryptionConfiguration"}
+	if len(v.KeyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSourceSchema(v *types.SourceSchema) error {
 	if v == nil {
 		return nil
@@ -2683,6 +2944,29 @@ func validateOpCreateApplicationSnapshotInput(v *CreateApplicationSnapshotInput)
 	}
 }
 
+func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteApplicationCloudWatchLoggingOptionInput(v *DeleteApplicationCloudWatchLoggingOptionInput) error {
 	if v == nil {
 		return nil
@@ -2821,6 +3105,24 @@ func validateOpDeleteApplicationVpcConfigurationInput(v *DeleteApplicationVpcCon
 	}
 }
 
+func validateOpDeleteSnapshotInput(v *DeleteSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSnapshotInput"}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if v.SnapshotCreationTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotCreationTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeApplicationInput(v *DescribeApplicationInput) error {
 	if v == nil {
 		return nil
@@ -2890,6 +3192,39 @@ func validateOpDescribeApplicationVersionInput(v *DescribeApplicationVersionInpu
 	}
 }
 
+func validateOpDescribeSnapshotInput(v *DescribeSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSnapshotInput"}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSnapshotOperationInput(v *DescribeSnapshotOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSnapshotOperationInput"}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if v.SnapshotOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotOperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDiscoverInputSchemaInput(v *DiscoverInputSchemaInput) error {
 	if v == nil {
 		return nil
@@ -2906,6 +3241,60 @@ func validateOpDiscoverInputSchemaInput(v *DiscoverInputSchemaInput) error {
 	if v.InputProcessingConfiguration != nil {
 		if err := validateInputProcessingConfiguration(v.InputProcessingConfiguration); err != nil {
 			invalidParams.AddNested("InputProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExportSnapshotInput(v *ExportSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportSnapshotInput"}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if v.ExportDestinationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportDestinationConfiguration"))
+	} else if v.ExportDestinationConfiguration != nil {
+		if err := validateExportDestinationConfiguration(v.ExportDestinationConfiguration); err != nil {
+			invalidParams.AddNested("ExportDestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportSnapshotInput(v *ImportSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportSnapshotInput"}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if v.ImportSourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportSourceConfiguration"))
+	} else if v.ImportSourceConfiguration != nil {
+		if err := validateImportSourceConfiguration(v.ImportSourceConfiguration); err != nil {
+			invalidParams.AddNested("ImportSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationEncryptionConfiguration != nil {
+		if err := validateSnapshotEncryptionConfiguration(v.DestinationEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("DestinationEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2952,6 +3341,21 @@ func validateOpListApplicationVersionsInput(v *ListApplicationVersionsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationVersionsInput"}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSnapshotOperationsInput(v *ListSnapshotOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSnapshotOperationsInput"}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

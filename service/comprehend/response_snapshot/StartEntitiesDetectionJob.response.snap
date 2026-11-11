@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.StartEntitiesDetectionJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"EntityRecognizerArn":"__EntityRecognizerArn__","JobArn":"__JobArn__","JobId":"__JobId__","JobStatus":"SUBMITTED"}
+¿sEntityRecognizerArnw__EntityRecognizerArn__fJobArnj__JobArn__eJobIdi__JobId__iJobStatusiSUBMITTEDÿ

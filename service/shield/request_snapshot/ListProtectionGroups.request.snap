@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShield_20160616/operation/ListProtectionGroups
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.ListProtectionGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"InclusionFilters":{"Aggregations":["SUM","SUM"],"Patterns":["ALL","ALL"],"ProtectionGroupIds":["__Member__","__Member__"],"ResourceTypes":["CLOUDFRONT_DISTRIBUTION","CLOUDFRONT_DISTRIBUTION"]},"MaxResults":1,"NextToken":"__NextToken__"}
+¿pInclusionFilters¿lAggregationsŸcSUMcSUMÿhPatternsŸcALLcALLÿrProtectionGroupIdsŸj__Member__j__Member__ÿmResourceTypesŸwCLOUDFRONT_DISTRIBUTIONwCLOUDFRONT_DISTRIBUTIONÿÿjMaxResultsiNextTokenm__NextToken__ÿ

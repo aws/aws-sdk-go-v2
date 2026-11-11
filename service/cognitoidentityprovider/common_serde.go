@@ -329,6 +329,16 @@ func serializeSearchedAttributeNamesListType(s smithy.ShapeSerializer, schema *s
 	s.CloseList()
 }
 
+func serializeSessionsListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SessionDescriptionType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSkippedIPRangeListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1220,6 +1230,28 @@ func deserializeSearchedAttributeNamesListType(d smithy.ShapeDeserializer, s *sm
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSessionsListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SessionDescriptionType) error {
+	*v = make([]types.SessionDescriptionType, 0)
+	var vv types.SessionDescriptionType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SessionDescriptionType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SessionDescriptionType{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

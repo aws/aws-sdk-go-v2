@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.ImportSnapshot
+
+{"DestinationEncryptionConfiguration":{"KeyId":"__KeyId__","KeyType":"AWS_OWNED_KEY"},"ImportSourceConfiguration":{"ImportRoleArn":"__ImportRoleArn__","SourceEncryptionConfiguration":{"KeyId":"__KeyId__","KeyType":"AWS_OWNED_KEY"},"SourceS3PrefixLocation":{"BucketARN":"__BucketARN__","KeyPrefix":"__KeyPrefix__"},"SourceType":"S3"},"SnapshotDescription":"__SnapshotDescription__","SnapshotFormat":"CANONICAL","SnapshotName":"__SnapshotName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

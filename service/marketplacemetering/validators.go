@@ -146,9 +146,6 @@ func validateUsageAllocation(v *types.UsageAllocation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UsageAllocation"}
-	if v.AllocatedUsageQuantity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AllocatedUsageQuantity"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))

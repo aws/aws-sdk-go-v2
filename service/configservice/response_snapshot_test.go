@@ -3263,6 +3263,11 @@ func TestCheckResponseSnapshot_GetConnector(t *testing.T) {
 					TenantIdentifier: ptr.String("__TenantIdentifier__"),
 					ClientIdentifier: ptr.String("__ClientIdentifier__"),
 				},
+				Gcp: &types.GcpConnectorConfiguration{
+					GcpOrganizationId:            ptr.String("__GcpOrganizationId__"),
+					ServiceAccountEmail:          ptr.String("__ServiceAccountEmail__"),
+					WorkloadIdentityPoolProvider: ptr.String("__WorkloadIdentityPoolProvider__"),
+				},
 			},
 			CreatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -3800,18 +3805,22 @@ func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
 	want := &ListConnectorsOutput{
 		ConnectorSummaries: []types.ConnectorSummary{
 			{
-				Arn:              ptr.String("__Arn__"),
-				Name:             ptr.String("__Name__"),
-				Provider:         types.Provider("AZURE"),
-				TenantIdentifier: ptr.String("__TenantIdentifier__"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                 ptr.String("__Arn__"),
+				Name:                ptr.String("__Name__"),
+				Provider:            types.Provider("AZURE"),
+				TenantIdentifier:    ptr.String("__TenantIdentifier__"),
+				GcpOrganizationId:   ptr.String("__GcpOrganizationId__"),
+				ServiceAccountEmail: ptr.String("__ServiceAccountEmail__"),
+				CreatedTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				Arn:              ptr.String("__Arn__"),
-				Name:             ptr.String("__Name__"),
-				Provider:         types.Provider("AZURE"),
-				TenantIdentifier: ptr.String("__TenantIdentifier__"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                 ptr.String("__Arn__"),
+				Name:                ptr.String("__Name__"),
+				Provider:            types.Provider("AZURE"),
+				TenantIdentifier:    ptr.String("__TenantIdentifier__"),
+				GcpOrganizationId:   ptr.String("__GcpOrganizationId__"),
+				ServiceAccountEmail: ptr.String("__ServiceAccountEmail__"),
+				CreatedTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4427,6 +4436,11 @@ func TestCheckResponseSnapshot_PutConnector(t *testing.T) {
 			Azure: &types.AzureConnectorConfiguration{
 				TenantIdentifier: ptr.String("__TenantIdentifier__"),
 				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+			Gcp: &types.GcpConnectorConfiguration{
+				GcpOrganizationId:            ptr.String("__GcpOrganizationId__"),
+				ServiceAccountEmail:          ptr.String("__ServiceAccountEmail__"),
+				WorkloadIdentityPoolProvider: ptr.String("__WorkloadIdentityPoolProvider__"),
 			},
 		},
 		Tags: []types.Tag{
@@ -6661,6 +6675,11 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfConnectorsExceededException(t *t
 			Azure: &types.AzureConnectorConfiguration{
 				TenantIdentifier: ptr.String("__TenantIdentifier__"),
 				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+			Gcp: &types.GcpConnectorConfiguration{
+				GcpOrganizationId:            ptr.String("__GcpOrganizationId__"),
+				ServiceAccountEmail:          ptr.String("__ServiceAccountEmail__"),
+				WorkloadIdentityPoolProvider: ptr.String("__WorkloadIdentityPoolProvider__"),
 			},
 		},
 		Tags: []types.Tag{

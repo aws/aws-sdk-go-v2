@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.UpdateUser
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"User":{"ACLNames":["__Member__","__Member__"],"ARN":"__ARN__","AccessString":"__AccessString__","Authentication":{"PasswordCount":1,"Type":"password"},"MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","Status":"__Status__"}}
+¿dUser¿hACLNamesŸj__Member__j__Member__ÿcARNg__ARN__lAccessStringp__AccessString__nAuthentication¿mPasswordCountdTypehpasswordÿtMinimumEngineVersionx__MinimumEngineVersion__dNameh__Name__fStatusj__Status__ÿÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/AllocateHostedConnection
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.AllocateHostedConnection
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"bandwidth":"__Bandwidth__","connectionId":"__ConnectionId__","connectionName":"__ConnectionName__","ownerAccount":"__OwnerAccount__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"vlan":1}
+¿ibandwidthm__Bandwidth__lconnectionIdp__ConnectionId__nconnectionNamer__ConnectionName__lownerAccountp__OwnerAccount__dtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿdvlanÿ

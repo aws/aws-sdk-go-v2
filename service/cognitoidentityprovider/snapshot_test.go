@@ -302,6 +302,18 @@ func TestCheckSnapshot_AdminListUserAuthEvents(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AdminListUserSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminListUserSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AdminListUserSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AdminRemoveUserFromGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AdminRemoveUserFromGroup(context.Background(), nil, func(o *Options) {
@@ -331,6 +343,18 @@ func TestCheckSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 	_, err := svc.AdminRespondToAuthChallenge(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "AdminRespondToAuthChallenge")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AdminRevokeUserSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminRevokeUserSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AdminRevokeUserSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1082,11 +1106,35 @@ func TestCheckSnapshot_GetUserAuthFactors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetUserPoolClientSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUserPoolClientSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUserPoolClientSessionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserPoolMfaConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetUserPoolMfaConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetUserPoolSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUserPoolSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUserPoolSessionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1262,6 +1310,18 @@ func TestCheckSnapshot_ListUsers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListUserSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUserSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListUsersInGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUsersInGroup(context.Background(), nil, func(o *Options) {
@@ -1322,6 +1382,18 @@ func TestCheckSnapshot_RevokeToken(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RevokeUserSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeUserSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeUserSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SetLogDeliveryConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetLogDeliveryConfiguration(context.Background(), nil, func(o *Options) {
@@ -1370,11 +1442,35 @@ func TestCheckSnapshot_SetUserMFAPreference(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SetUserPoolClientSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetUserPoolClientSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SetUserPoolClientSessionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetUserPoolMfaConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SetUserPoolMfaConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SetUserPoolSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetUserPoolSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SetUserPoolSessionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1885,6 +1981,18 @@ func TestUpdateSnapshot_AdminListUserAuthEvents(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AdminListUserSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminListUserSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AdminListUserSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AdminRemoveUserFromGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AdminRemoveUserFromGroup(context.Background(), nil, func(o *Options) {
@@ -1914,6 +2022,18 @@ func TestUpdateSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 	_, err := svc.AdminRespondToAuthChallenge(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AdminRespondToAuthChallenge")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AdminRevokeUserSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminRevokeUserSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AdminRevokeUserSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2665,11 +2785,35 @@ func TestUpdateSnapshot_GetUserAuthFactors(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetUserPoolClientSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUserPoolClientSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUserPoolClientSessionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserPoolMfaConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetUserPoolMfaConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetUserPoolSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUserPoolSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUserPoolSessionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2845,6 +2989,18 @@ func TestUpdateSnapshot_ListUsers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListUserSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUserSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListUsersInGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUsersInGroup(context.Background(), nil, func(o *Options) {
@@ -2905,6 +3061,18 @@ func TestUpdateSnapshot_RevokeToken(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RevokeUserSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeUserSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeUserSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SetLogDeliveryConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetLogDeliveryConfiguration(context.Background(), nil, func(o *Options) {
@@ -2953,11 +3121,35 @@ func TestUpdateSnapshot_SetUserMFAPreference(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SetUserPoolClientSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetUserPoolClientSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SetUserPoolClientSessionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetUserPoolMfaConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SetUserPoolMfaConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SetUserPoolSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetUserPoolSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SetUserPoolSessionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

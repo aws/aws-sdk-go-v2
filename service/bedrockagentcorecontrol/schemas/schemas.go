@@ -3008,7 +3008,7 @@ var CustomExtractionConfigurationInput_episodicExtractionOverride *smithy.Schema
 var CustomJWTAuthorizerConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CustomJWTAuthorizerConfiguration",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CustomJWTAuthorizerConfiguration_discoveryUrl *smithy.Schema
 
 var CustomJWTAuthorizerConfiguration_allowedAudience *smithy.Schema
@@ -3024,6 +3024,8 @@ var CustomJWTAuthorizerConfiguration_customClaims *smithy.Schema
 var CustomJWTAuthorizerConfiguration_privateEndpoint *smithy.Schema
 
 var CustomJWTAuthorizerConfiguration_privateEndpointOverrides *smithy.Schema
+
+var CustomJWTAuthorizerConfiguration_certificateConfigurations *smithy.Schema
 
 var CustomJWTAuthorizerConfiguration_allowedWorkloadConfiguration *smithy.Schema
 
@@ -3048,7 +3050,7 @@ var CustomMemoryStrategyInput_recordExpirySpecification *smithy.Schema
 var CustomOauth2ProviderConfigInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CustomOauth2ProviderConfigInput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CustomOauth2ProviderConfigInput_oauthDiscovery *smithy.Schema
 
 var CustomOauth2ProviderConfigInput_clientId *smithy.Schema
@@ -3069,10 +3071,12 @@ var CustomOauth2ProviderConfigInput_privateEndpoint *smithy.Schema
 
 var CustomOauth2ProviderConfigInput_privateEndpointOverrides *smithy.Schema
 
+var CustomOauth2ProviderConfigInput_certificateConfigurations *smithy.Schema
+
 var CustomOauth2ProviderConfigOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CustomOauth2ProviderConfigOutput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CustomOauth2ProviderConfigOutput_oauthDiscovery *smithy.Schema
 
 var CustomOauth2ProviderConfigOutput_clientId *smithy.Schema
@@ -3084,6 +3088,8 @@ var CustomOauth2ProviderConfigOutput_clientAuthenticationMethod *smithy.Schema
 var CustomOauth2ProviderConfigOutput_privateEndpoint *smithy.Schema
 
 var CustomOauth2ProviderConfigOutput_privateEndpointOverrides *smithy.Schema
+
+var CustomOauth2ProviderConfigOutput_certificateConfigurations *smithy.Schema
 
 var CustomOauth2ProviderConfigOutput_privateKeyJwtConfig *smithy.Schema
 
@@ -4997,10 +5003,20 @@ var HarnessOpenAiModelConfig_additionalParams *smithy.Schema
 var HarnessRemoteMcpConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "HarnessRemoteMcpConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var HarnessRemoteMcpConfig_url *smithy.Schema
 
 var HarnessRemoteMcpConfig_headers *smithy.Schema
+
+var HarnessRemoteMcpConfig_outboundAuth *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "HarnessRemoteMcpOutboundAuth",
+}, smithy.ShapeTypeUnion, 2)
+var HarnessRemoteMcpOutboundAuth_awsIam *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth_none *smithy.Schema
 
 var _HarnessRemoteMcpUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -14691,6 +14707,18 @@ func init() {
 
 	_PrivateEndpointOverrides_member = _PrivateEndpointOverrides.AddMember("member", PrivateEndpointOverride)
 
+	S3CertificateConfiguration_uri = S3CertificateConfiguration.AddMember("uri", _CertificateS3Uri)
+
+	S3CertificateConfiguration_bucketOwnerAccountId = S3CertificateConfiguration.AddMember("bucketOwnerAccountId", _CertificateBucketOwnerAccountId)
+
+	SecretsManagerCertificateConfiguration_secretArn = SecretsManagerCertificateConfiguration.AddMember("secretArn", _CertificateSecretArn)
+
+	CertificateConfiguration_s3 = CertificateConfiguration.AddMember("s3", S3CertificateConfiguration)
+
+	CertificateConfiguration_secretsManager = CertificateConfiguration.AddMember("secretsManager", SecretsManagerCertificateConfiguration)
+
+	_CertificateConfigurationList_member = _CertificateConfigurationList.AddMember("member", CertificateConfiguration)
+
 	CustomJWTAuthorizerConfiguration_discoveryUrl = CustomJWTAuthorizerConfiguration.AddMember("discoveryUrl", _DiscoveryUrl)
 
 	CustomJWTAuthorizerConfiguration_allowedAudience = CustomJWTAuthorizerConfiguration.AddMember("allowedAudience", _AllowedAudienceList)
@@ -14706,6 +14734,8 @@ func init() {
 	CustomJWTAuthorizerConfiguration_privateEndpoint = CustomJWTAuthorizerConfiguration.AddMember("privateEndpoint", PrivateEndpoint)
 
 	CustomJWTAuthorizerConfiguration_privateEndpointOverrides = CustomJWTAuthorizerConfiguration.AddMember("privateEndpointOverrides", _PrivateEndpointOverrides)
+
+	CustomJWTAuthorizerConfiguration_certificateConfigurations = CustomJWTAuthorizerConfiguration.AddMember("certificateConfigurations", _CertificateConfigurationList)
 
 	CustomJWTAuthorizerConfiguration_allowedWorkloadConfiguration = CustomJWTAuthorizerConfiguration.AddMember("allowedWorkloadConfiguration", AllowedWorkloadConfiguration)
 
@@ -14940,18 +14970,6 @@ func init() {
 	CertificateLocation_secretsManager = CertificateLocation.AddMember("secretsManager", SecretsManagerLocation)
 
 	Certificate_location = Certificate.AddMember("location", CertificateLocation)
-
-	S3CertificateConfiguration_uri = S3CertificateConfiguration.AddMember("uri", _CertificateS3Uri)
-
-	S3CertificateConfiguration_bucketOwnerAccountId = S3CertificateConfiguration.AddMember("bucketOwnerAccountId", _CertificateBucketOwnerAccountId)
-
-	SecretsManagerCertificateConfiguration_secretArn = SecretsManagerCertificateConfiguration.AddMember("secretArn", _CertificateSecretArn)
-
-	CertificateConfiguration_s3 = CertificateConfiguration.AddMember("s3", S3CertificateConfiguration)
-
-	CertificateConfiguration_secretsManager = CertificateConfiguration.AddMember("secretsManager", SecretsManagerCertificateConfiguration)
-
-	_CertificateConfigurationList_member = _CertificateConfigurationList.AddMember("member", CertificateConfiguration)
 
 	_Certificates_member = _Certificates.AddMember("member", Certificate)
 
@@ -15791,6 +15809,8 @@ func init() {
 
 	CustomOauth2ProviderConfigInput_privateEndpointOverrides = CustomOauth2ProviderConfigInput.AddMember("privateEndpointOverrides", _PrivateEndpointOverrides)
 
+	CustomOauth2ProviderConfigInput_certificateConfigurations = CustomOauth2ProviderConfigInput.AddMember("certificateConfigurations", _CertificateConfigurationList)
+
 	CustomOauth2ProviderConfigOutput_oauthDiscovery = CustomOauth2ProviderConfigOutput.AddMember("oauthDiscovery", Oauth2Discovery)
 
 	CustomOauth2ProviderConfigOutput_clientId = CustomOauth2ProviderConfigOutput.AddMember("clientId", _ClientIdType)
@@ -15802,6 +15822,8 @@ func init() {
 	CustomOauth2ProviderConfigOutput_privateEndpoint = CustomOauth2ProviderConfigOutput.AddMember("privateEndpoint", PrivateEndpoint)
 
 	CustomOauth2ProviderConfigOutput_privateEndpointOverrides = CustomOauth2ProviderConfigOutput.AddMember("privateEndpointOverrides", _PrivateEndpointOverrides)
+
+	CustomOauth2ProviderConfigOutput_certificateConfigurations = CustomOauth2ProviderConfigOutput.AddMember("certificateConfigurations", _CertificateConfigurationList)
 
 	CustomOauth2ProviderConfigOutput_privateKeyJwtConfig = CustomOauth2ProviderConfigOutput.AddMember("privateKeyJwtConfig", PrivateKeyJwtConfig)
 
@@ -16739,9 +16761,15 @@ func init() {
 
 	_HttpHeadersMap_value = _HttpHeadersMap.AddMember("value", _HttpHeaderValue)
 
+	HarnessRemoteMcpOutboundAuth_awsIam = HarnessRemoteMcpOutboundAuth.AddMember("awsIam", IamCredentialProvider)
+
+	HarnessRemoteMcpOutboundAuth_none = HarnessRemoteMcpOutboundAuth.AddMember("none", smithyprelude.Unit)
+
 	HarnessRemoteMcpConfig_url = HarnessRemoteMcpConfig.AddMember("url", _HarnessRemoteMcpUrl)
 
 	HarnessRemoteMcpConfig_headers = HarnessRemoteMcpConfig.AddMember("headers", _HttpHeadersMap)
+
+	HarnessRemoteMcpConfig_outboundAuth = HarnessRemoteMcpConfig.AddMember("outboundAuth", HarnessRemoteMcpOutboundAuth)
 
 	HarnessAgentCoreBrowserConfig_browserArn = HarnessAgentCoreBrowserConfig.AddMember("browserArn", _HarnessBrowserArn)
 

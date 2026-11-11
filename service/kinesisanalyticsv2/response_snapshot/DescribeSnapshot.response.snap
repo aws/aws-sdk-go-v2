@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.DescribeSnapshot
+
+{"SnapshotInfoDetails":{"RuntimeEnvironment":"SQL-1_0","SnapshotArn":"__SnapshotArn__","SnapshotCreationTimestamp":946684800,"SnapshotDescription":"__SnapshotDescription__","SnapshotEncryptionConfigurationDescription":{"KeyId":"__KeyId__","KeyType":"AWS_OWNED_KEY"},"SnapshotFormat":"CANONICAL","SnapshotInitiator":"USER","SnapshotInitiatorOperation":"CreateSnapshot","SnapshotName":"__SnapshotName__","SnapshotSizeInBytes":1,"SnapshotSourceDescription":{"S3PrefixLocation":{"BucketARN":"__BucketARN__","KeyPrefix":"__KeyPrefix__"},"SourceApplicationDescription":{"ApplicationCreationTimestamp":946684800,"ApplicationName":"__ApplicationName__","ApplicationVersionId":1}},"SnapshotStatus":"CREATING"}}

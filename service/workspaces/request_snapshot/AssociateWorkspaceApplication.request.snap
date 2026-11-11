@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/AssociateWorkspaceApplication
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.AssociateWorkspaceApplication
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ApplicationId":"__ApplicationId__","WorkspaceId":"__WorkspaceId__"}
+¿mApplicationIdq__ApplicationId__kWorkspaceIdo__WorkspaceId__ÿ

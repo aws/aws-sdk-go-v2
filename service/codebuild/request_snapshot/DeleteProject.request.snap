@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/DeleteProject
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.DeleteProject
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"name":"__Name__"}
+¿dnameh__Name__ÿ

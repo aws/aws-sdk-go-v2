@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DescribeRuleGroupSummary
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Description":"__Description__","RuleGroupName":"__RuleGroupName__","Summary":{"RuleSummaries":[{"Metadata":"__Metadata__","Msg":"__Msg__","SID":"__SID__"},{"Metadata":"__Metadata__","Msg":"__Msg__","SID":"__SID__"}]}}
+¿kDescriptiono__Description__mRuleGroupNameq__RuleGroupName__gSummary¿mRuleSummariesŸ¿hMetadatal__Metadata__cMsgg__Msg__cSIDg__SID__ÿ¿hMetadatal__Metadata__cMsgg__Msg__cSIDg__SID__ÿÿÿÿ

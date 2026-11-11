@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/UpdateUser
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.UpdateUser
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccessString":"__AccessString__","AuthenticationMode":{"Passwords":["__Member__","__Member__"],"Type":"password"},"UserName":"__UserName__"}
+¿lAccessStringp__AccessString__rAuthenticationMode¿iPasswordsŸj__Member__j__Member__ÿdTypehpasswordÿhUserNamel__UserName__ÿ

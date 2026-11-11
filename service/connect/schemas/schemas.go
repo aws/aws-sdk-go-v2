@@ -7421,7 +7421,7 @@ var _EvaluationFormItemWeight = smithy.NewSchema(smithy.ShapeID{
 var EvaluationFormLanguageCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormLanguageCode",
-}, smithy.ShapeTypeEnum, 10)
+}, smithy.ShapeTypeEnum, 106)
 var EvaluationFormLanguageCode_DE_DE *smithy.Schema
 
 var EvaluationFormLanguageCode_EN_US *smithy.Schema
@@ -7441,6 +7441,198 @@ var EvaluationFormLanguageCode_KO_KR *smithy.Schema
 var EvaluationFormLanguageCode_ZH_CN *smithy.Schema
 
 var EvaluationFormLanguageCode_MS_MY *smithy.Schema
+
+var EvaluationFormLanguageCode_AF_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_SQ_AL *smithy.Schema
+
+var EvaluationFormLanguageCode_AM_ET *smithy.Schema
+
+var EvaluationFormLanguageCode_AR_AE *smithy.Schema
+
+var EvaluationFormLanguageCode_AR_SA *smithy.Schema
+
+var EvaluationFormLanguageCode_HY_AM *smithy.Schema
+
+var EvaluationFormLanguageCode_EU_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_BE_BY *smithy.Schema
+
+var EvaluationFormLanguageCode_BS_BA *smithy.Schema
+
+var EvaluationFormLanguageCode_BG_BG *smithy.Schema
+
+var EvaluationFormLanguageCode_CA_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_CKB_IR *smithy.Schema
+
+var EvaluationFormLanguageCode_CKB_IQ *smithy.Schema
+
+var EvaluationFormLanguageCode_ZH_TW *smithy.Schema
+
+var EvaluationFormLanguageCode_HR_HR *smithy.Schema
+
+var EvaluationFormLanguageCode_CS_CZ *smithy.Schema
+
+var EvaluationFormLanguageCode_DA_DK *smithy.Schema
+
+var EvaluationFormLanguageCode_NL_BE *smithy.Schema
+
+var EvaluationFormLanguageCode_NL_NL *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_AU *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_IE *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_NZ *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_AB *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_SG *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_GB *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_WL *smithy.Schema
+
+var EvaluationFormLanguageCode_FA_IR *smithy.Schema
+
+var EvaluationFormLanguageCode_FA_AF *smithy.Schema
+
+var EvaluationFormLanguageCode_FI_FI *smithy.Schema
+
+var EvaluationFormLanguageCode_FR_BE *smithy.Schema
+
+var EvaluationFormLanguageCode_FR_CA *smithy.Schema
+
+var EvaluationFormLanguageCode_GA_IE *smithy.Schema
+
+var EvaluationFormLanguageCode_GL_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_KA_GE *smithy.Schema
+
+var EvaluationFormLanguageCode_DE_AT *smithy.Schema
+
+var EvaluationFormLanguageCode_DE_CH *smithy.Schema
+
+var EvaluationFormLanguageCode_EL_GR *smithy.Schema
+
+var EvaluationFormLanguageCode_GU_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_HT_HT *smithy.Schema
+
+var EvaluationFormLanguageCode_HE_IL *smithy.Schema
+
+var EvaluationFormLanguageCode_HI_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_HU_HU *smithy.Schema
+
+var EvaluationFormLanguageCode_IS_IS *smithy.Schema
+
+var EvaluationFormLanguageCode_ID_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_JV_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_KM_KH *smithy.Schema
+
+var EvaluationFormLanguageCode_KN_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_KK_KZ *smithy.Schema
+
+var EvaluationFormLanguageCode_LO_LA *smithy.Schema
+
+var EvaluationFormLanguageCode_LV_LV *smithy.Schema
+
+var EvaluationFormLanguageCode_LT_LT *smithy.Schema
+
+var EvaluationFormLanguageCode_MK_MK *smithy.Schema
+
+var EvaluationFormLanguageCode_ML_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_MR_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_NE_NP *smithy.Schema
+
+var EvaluationFormLanguageCode_NO_NO *smithy.Schema
+
+var EvaluationFormLanguageCode_OR_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_PS_AF *smithy.Schema
+
+var EvaluationFormLanguageCode_PL_PL *smithy.Schema
+
+var EvaluationFormLanguageCode_PT_PT *smithy.Schema
+
+var EvaluationFormLanguageCode_PA_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_RO_RO *smithy.Schema
+
+var EvaluationFormLanguageCode_RU_RU *smithy.Schema
+
+var EvaluationFormLanguageCode_SR_RS *smithy.Schema
+
+var EvaluationFormLanguageCode_SI_LK *smithy.Schema
+
+var EvaluationFormLanguageCode_SK_SK *smithy.Schema
+
+var EvaluationFormLanguageCode_SL_SI *smithy.Schema
+
+var EvaluationFormLanguageCode_ES_MX *smithy.Schema
+
+var EvaluationFormLanguageCode_ES_US *smithy.Schema
+
+var EvaluationFormLanguageCode_SU_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_BI *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_KE *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_RW *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_TZ *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_UG *smithy.Schema
+
+var EvaluationFormLanguageCode_SV_SE *smithy.Schema
+
+var EvaluationFormLanguageCode_TL_PH *smithy.Schema
+
+var EvaluationFormLanguageCode_TA_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_TE_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_TH_TH *smithy.Schema
+
+var EvaluationFormLanguageCode_TR_TR *smithy.Schema
+
+var EvaluationFormLanguageCode_UK_UA *smithy.Schema
+
+var EvaluationFormLanguageCode_UZ_UZ *smithy.Schema
+
+var EvaluationFormLanguageCode_VI_VN *smithy.Schema
+
+var EvaluationFormLanguageCode_ZU_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_MY_MM *smithy.Schema
+
+var EvaluationFormLanguageCode_SO_SO *smithy.Schema
+
+var EvaluationFormLanguageCode_YUE_HK *smithy.Schema
+
+var EvaluationFormLanguageCode_ET_EE *smithy.Schema
+
+var EvaluationFormLanguageCode_HMN *smithy.Schema
+
+var EvaluationFormLanguageCode_LG_UG *smithy.Schema
+
+var EvaluationFormLanguageCode_CY_GB *smithy.Schema
+
+var EvaluationFormLanguageCode_XH_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_BN_BD *smithy.Schema
 
 var EvaluationFormLanguageConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -29064,6 +29256,198 @@ func init() {
 	EvaluationFormLanguageCode_ZH_CN = EvaluationFormLanguageCode.AddMember("ZH_CN", smithyprelude.Unit)
 
 	EvaluationFormLanguageCode_MS_MY = EvaluationFormLanguageCode.AddMember("MS_MY", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AF_ZA = EvaluationFormLanguageCode.AddMember("AF_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SQ_AL = EvaluationFormLanguageCode.AddMember("SQ_AL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AM_ET = EvaluationFormLanguageCode.AddMember("AM_ET", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AR_AE = EvaluationFormLanguageCode.AddMember("AR_AE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AR_SA = EvaluationFormLanguageCode.AddMember("AR_SA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HY_AM = EvaluationFormLanguageCode.AddMember("HY_AM", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EU_ES = EvaluationFormLanguageCode.AddMember("EU_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BE_BY = EvaluationFormLanguageCode.AddMember("BE_BY", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BS_BA = EvaluationFormLanguageCode.AddMember("BS_BA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BG_BG = EvaluationFormLanguageCode.AddMember("BG_BG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CA_ES = EvaluationFormLanguageCode.AddMember("CA_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CKB_IR = EvaluationFormLanguageCode.AddMember("CKB_IR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CKB_IQ = EvaluationFormLanguageCode.AddMember("CKB_IQ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ZH_TW = EvaluationFormLanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HR_HR = EvaluationFormLanguageCode.AddMember("HR_HR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CS_CZ = EvaluationFormLanguageCode.AddMember("CS_CZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DA_DK = EvaluationFormLanguageCode.AddMember("DA_DK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NL_BE = EvaluationFormLanguageCode.AddMember("NL_BE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NL_NL = EvaluationFormLanguageCode.AddMember("NL_NL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_AU = EvaluationFormLanguageCode.AddMember("EN_AU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_IN = EvaluationFormLanguageCode.AddMember("EN_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_IE = EvaluationFormLanguageCode.AddMember("EN_IE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_NZ = EvaluationFormLanguageCode.AddMember("EN_NZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_AB = EvaluationFormLanguageCode.AddMember("EN_AB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_SG = EvaluationFormLanguageCode.AddMember("EN_SG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_ZA = EvaluationFormLanguageCode.AddMember("EN_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_GB = EvaluationFormLanguageCode.AddMember("EN_GB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_WL = EvaluationFormLanguageCode.AddMember("EN_WL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FA_IR = EvaluationFormLanguageCode.AddMember("FA_IR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FA_AF = EvaluationFormLanguageCode.AddMember("FA_AF", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FI_FI = EvaluationFormLanguageCode.AddMember("FI_FI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FR_BE = EvaluationFormLanguageCode.AddMember("FR_BE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FR_CA = EvaluationFormLanguageCode.AddMember("FR_CA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GA_IE = EvaluationFormLanguageCode.AddMember("GA_IE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GL_ES = EvaluationFormLanguageCode.AddMember("GL_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KA_GE = EvaluationFormLanguageCode.AddMember("KA_GE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DE_AT = EvaluationFormLanguageCode.AddMember("DE_AT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DE_CH = EvaluationFormLanguageCode.AddMember("DE_CH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EL_GR = EvaluationFormLanguageCode.AddMember("EL_GR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GU_IN = EvaluationFormLanguageCode.AddMember("GU_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HT_HT = EvaluationFormLanguageCode.AddMember("HT_HT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HE_IL = EvaluationFormLanguageCode.AddMember("HE_IL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HI_IN = EvaluationFormLanguageCode.AddMember("HI_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HU_HU = EvaluationFormLanguageCode.AddMember("HU_HU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_IS_IS = EvaluationFormLanguageCode.AddMember("IS_IS", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ID_ID = EvaluationFormLanguageCode.AddMember("ID_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_JV_ID = EvaluationFormLanguageCode.AddMember("JV_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KM_KH = EvaluationFormLanguageCode.AddMember("KM_KH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KN_IN = EvaluationFormLanguageCode.AddMember("KN_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KK_KZ = EvaluationFormLanguageCode.AddMember("KK_KZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LO_LA = EvaluationFormLanguageCode.AddMember("LO_LA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LV_LV = EvaluationFormLanguageCode.AddMember("LV_LV", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LT_LT = EvaluationFormLanguageCode.AddMember("LT_LT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MK_MK = EvaluationFormLanguageCode.AddMember("MK_MK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ML_IN = EvaluationFormLanguageCode.AddMember("ML_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MR_IN = EvaluationFormLanguageCode.AddMember("MR_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NE_NP = EvaluationFormLanguageCode.AddMember("NE_NP", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NO_NO = EvaluationFormLanguageCode.AddMember("NO_NO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_OR_IN = EvaluationFormLanguageCode.AddMember("OR_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PS_AF = EvaluationFormLanguageCode.AddMember("PS_AF", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PL_PL = EvaluationFormLanguageCode.AddMember("PL_PL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PT_PT = EvaluationFormLanguageCode.AddMember("PT_PT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PA_IN = EvaluationFormLanguageCode.AddMember("PA_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_RO_RO = EvaluationFormLanguageCode.AddMember("RO_RO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_RU_RU = EvaluationFormLanguageCode.AddMember("RU_RU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SR_RS = EvaluationFormLanguageCode.AddMember("SR_RS", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SI_LK = EvaluationFormLanguageCode.AddMember("SI_LK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SK_SK = EvaluationFormLanguageCode.AddMember("SK_SK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SL_SI = EvaluationFormLanguageCode.AddMember("SL_SI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ES_MX = EvaluationFormLanguageCode.AddMember("ES_MX", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ES_US = EvaluationFormLanguageCode.AddMember("ES_US", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SU_ID = EvaluationFormLanguageCode.AddMember("SU_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_BI = EvaluationFormLanguageCode.AddMember("SW_BI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_KE = EvaluationFormLanguageCode.AddMember("SW_KE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_RW = EvaluationFormLanguageCode.AddMember("SW_RW", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_TZ = EvaluationFormLanguageCode.AddMember("SW_TZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_UG = EvaluationFormLanguageCode.AddMember("SW_UG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SV_SE = EvaluationFormLanguageCode.AddMember("SV_SE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TL_PH = EvaluationFormLanguageCode.AddMember("TL_PH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TA_IN = EvaluationFormLanguageCode.AddMember("TA_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TE_IN = EvaluationFormLanguageCode.AddMember("TE_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TH_TH = EvaluationFormLanguageCode.AddMember("TH_TH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TR_TR = EvaluationFormLanguageCode.AddMember("TR_TR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_UK_UA = EvaluationFormLanguageCode.AddMember("UK_UA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_UZ_UZ = EvaluationFormLanguageCode.AddMember("UZ_UZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_VI_VN = EvaluationFormLanguageCode.AddMember("VI_VN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ZU_ZA = EvaluationFormLanguageCode.AddMember("ZU_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MY_MM = EvaluationFormLanguageCode.AddMember("MY_MM", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SO_SO = EvaluationFormLanguageCode.AddMember("SO_SO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_YUE_HK = EvaluationFormLanguageCode.AddMember("YUE_HK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ET_EE = EvaluationFormLanguageCode.AddMember("ET_EE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HMN = EvaluationFormLanguageCode.AddMember("HMN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LG_UG = EvaluationFormLanguageCode.AddMember("LG_UG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CY_GB = EvaluationFormLanguageCode.AddMember("CY_GB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_XH_ZA = EvaluationFormLanguageCode.AddMember("XH_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BN_BD = EvaluationFormLanguageCode.AddMember("BN_BD", smithyprelude.Unit)
 
 	EvaluationFormLanguageConfiguration_FormLanguage = EvaluationFormLanguageConfiguration.AddMember("FormLanguage", EvaluationFormLanguageCode)
 

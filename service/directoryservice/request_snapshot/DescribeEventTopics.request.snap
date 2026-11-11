@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/DescribeEventTopics
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.DescribeEventTopics
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DirectoryId":"__DirectoryId__","TopicNames":["__Member__","__Member__"]}
+¿kDirectoryIdo__DirectoryId__jTopicNamesŸj__Member__j__Member__ÿÿ

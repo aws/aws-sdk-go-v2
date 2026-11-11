@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/UpdateVocabulary
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.UpdateVocabulary
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DataAccessRoleArn":"__DataAccessRoleArn__","EncryptionConfiguration":{"KMSEncryptionContext":{"key0":"__Value__"},"KMSKey":"__KMSKey__"},"LanguageCode":"af-ZA","Phrases":["__Member__","__Member__"],"VocabularyFileUri":"__VocabularyFileUri__","VocabularyName":"__VocabularyName__"}
+¿qDataAccessRoleArnu__DataAccessRoleArn__wEncryptionConfiguration¿tKMSEncryptionContext¿dkey0i__Value__ÿfKMSKeyj__KMSKey__ÿlLanguageCodeeaf-ZAgPhrasesŸj__Member__j__Member__ÿqVocabularyFileUriu__VocabularyFileUri__nVocabularyNamer__VocabularyName__ÿ

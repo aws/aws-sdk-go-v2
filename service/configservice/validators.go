@@ -1937,6 +1937,11 @@ func validateConnectorConfiguration(v *types.ConnectorConfiguration) error {
 			invalidParams.AddNested("Azure", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Gcp != nil {
+		if err := validateGcpConnectorConfiguration(v.Gcp); err != nil {
+			invalidParams.AddNested("Gcp", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2019,6 +2024,24 @@ func validateExternalEvaluation(v *types.ExternalEvaluation) error {
 	}
 	if v.OrderingTimestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrderingTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGcpConnectorConfiguration(v *types.GcpConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpConnectorConfiguration"}
+	if v.ServiceAccountEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountEmail"))
+	}
+	if v.WorkloadIdentityPoolProvider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadIdentityPoolProvider"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

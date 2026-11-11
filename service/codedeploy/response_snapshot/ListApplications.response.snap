@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.ListApplications
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"applications":["__Member__","__Member__"],"nextToken":"__NextToken__"}
+¿lapplicationsŸj__Member__j__Member__ÿinextTokenm__NextToken__ÿ

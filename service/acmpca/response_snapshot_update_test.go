@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -145,7 +145,7 @@ func TestUpdateResponseSnapshot_CreateCertificateAuthority(t *testing.T) {
 	want := &CreateCertificateAuthorityOutput{
 		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.CreateCertificateAuthorityResponse, schemas.CreateCertificateAuthorityResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -170,7 +170,7 @@ func TestUpdateResponseSnapshot_CreateCertificateAuthorityAuditReport(t *testing
 		AuditReportId: ptr.String("__AuditReportId__"),
 		S3Key:         ptr.String("__S3Key__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.CreateCertificateAuthorityAuditReportResponse, schemas.CreateCertificateAuthorityAuditReportResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -192,7 +192,7 @@ func TestUpdateResponseSnapshot_CreateCertificateAuthorityAuditReport(t *testing
 
 func TestUpdateResponseSnapshot_CreatePermission(t *testing.T) {
 	want := &CreatePermissionOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePermission, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -214,7 +214,7 @@ func TestUpdateResponseSnapshot_CreatePermission(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteCertificateAuthority(t *testing.T) {
 	want := &DeleteCertificateAuthorityOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteCertificateAuthority, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -236,7 +236,7 @@ func TestUpdateResponseSnapshot_DeleteCertificateAuthority(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeletePermission(t *testing.T) {
 	want := &DeletePermissionOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.DeletePermission, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -258,7 +258,7 @@ func TestUpdateResponseSnapshot_DeletePermission(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeletePolicy(t *testing.T) {
 	want := &DeletePolicyOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.DeletePolicy, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -453,7 +453,7 @@ func TestUpdateResponseSnapshot_DescribeCertificateAuthority(t *testing.T) {
 			UsageMode:                  types.CertificateAuthorityUsageMode("GENERAL_PURPOSE"),
 		},
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeCertificateAuthority, schemas.DescribeCertificateAuthorityResponse, schemas.DescribeCertificateAuthorityResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -480,7 +480,7 @@ func TestUpdateResponseSnapshot_DescribeCertificateAuthorityAuditReport(t *testi
 		S3Key:             ptr.String("__S3Key__"),
 		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeCertificateAuthorityAuditReport, schemas.DescribeCertificateAuthorityAuditReportResponse, schemas.DescribeCertificateAuthorityAuditReportResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -505,7 +505,7 @@ func TestUpdateResponseSnapshot_GetCertificate(t *testing.T) {
 		Certificate:      ptr.String("__Certificate__"),
 		CertificateChain: ptr.String("__CertificateChain__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.GetCertificate, schemas.GetCertificateResponse, schemas.GetCertificateResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -530,7 +530,7 @@ func TestUpdateResponseSnapshot_GetCertificateAuthorityCertificate(t *testing.T)
 		Certificate:      ptr.String("__Certificate__"),
 		CertificateChain: ptr.String("__CertificateChain__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.GetCertificateAuthorityCertificate, schemas.GetCertificateAuthorityCertificateResponse, schemas.GetCertificateAuthorityCertificateResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -554,7 +554,7 @@ func TestUpdateResponseSnapshot_GetCertificateAuthorityCsr(t *testing.T) {
 	want := &GetCertificateAuthorityCsrOutput{
 		Csr: ptr.String("__Csr__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.GetCertificateAuthorityCsr, schemas.GetCertificateAuthorityCsrResponse, schemas.GetCertificateAuthorityCsrResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -578,7 +578,7 @@ func TestUpdateResponseSnapshot_GetPolicy(t *testing.T) {
 	want := &GetPolicyOutput{
 		Policy: ptr.String("__Policy__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyResponse, schemas.GetPolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -600,7 +600,7 @@ func TestUpdateResponseSnapshot_GetPolicy(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ImportCertificateAuthorityCertificate(t *testing.T) {
 	want := &ImportCertificateAuthorityCertificateOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ImportCertificateAuthorityCertificate, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -624,7 +624,7 @@ func TestUpdateResponseSnapshot_IssueCertificate(t *testing.T) {
 	want := &IssueCertificateOutput{
 		CertificateArn: ptr.String("__CertificateArn__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.IssueCertificate, schemas.IssueCertificateResponse, schemas.IssueCertificateResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -994,7 +994,7 @@ func TestUpdateResponseSnapshot_ListCertificateAuthorities(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ListCertificateAuthorities, schemas.ListCertificateAuthoritiesResponse, schemas.ListCertificateAuthoritiesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1042,7 +1042,7 @@ func TestUpdateResponseSnapshot_ListPermissions(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ListPermissions, schemas.ListPermissionsResponse, schemas.ListPermissionsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1076,7 +1076,7 @@ func TestUpdateResponseSnapshot_ListTags(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsResponse, schemas.ListTagsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1098,7 +1098,7 @@ func TestUpdateResponseSnapshot_ListTags(t *testing.T) {
 
 func TestUpdateResponseSnapshot_PutPolicy(t *testing.T) {
 	want := &PutPolicyOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.PutPolicy, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1120,7 +1120,7 @@ func TestUpdateResponseSnapshot_PutPolicy(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RestoreCertificateAuthority(t *testing.T) {
 	want := &RestoreCertificateAuthorityOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.RestoreCertificateAuthority, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1142,7 +1142,7 @@ func TestUpdateResponseSnapshot_RestoreCertificateAuthority(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RevokeCertificate(t *testing.T) {
 	want := &RevokeCertificateOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.RevokeCertificate, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1164,7 +1164,7 @@ func TestUpdateResponseSnapshot_RevokeCertificate(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagCertificateAuthority(t *testing.T) {
 	want := &TagCertificateAuthorityOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.TagCertificateAuthority, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1186,7 +1186,7 @@ func TestUpdateResponseSnapshot_TagCertificateAuthority(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagCertificateAuthority(t *testing.T) {
 	want := &UntagCertificateAuthorityOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.UntagCertificateAuthority, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1208,7 +1208,7 @@ func TestUpdateResponseSnapshot_UntagCertificateAuthority(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateCertificateAuthority(t *testing.T) {
 	want := &UpdateCertificateAuthorityOutput{}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateCertificateAuthority, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1232,7 +1232,7 @@ func TestUpdateResponseSnapshot_Error_CertificateMismatchException(t *testing.T)
 	want := &types.CertificateMismatchException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ImportCertificateAuthorityCertificate, schemas.CertificateMismatchException, schemas.CertificateMismatchException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1247,7 +1247,7 @@ func TestUpdateResponseSnapshot_Error_CertificateMismatchException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CertificateMismatchException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1257,7 +1257,7 @@ func TestUpdateResponseSnapshot_Error_ConcurrentModificationException(t *testing
 	want := &types.ConcurrentModificationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteCertificateAuthority, schemas.ConcurrentModificationException, schemas.ConcurrentModificationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1272,7 +1272,7 @@ func TestUpdateResponseSnapshot_Error_ConcurrentModificationException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConcurrentModificationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1282,7 +1282,7 @@ func TestUpdateResponseSnapshot_Error_InvalidArgsException(t *testing.T) {
 	want := &types.InvalidArgsException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.InvalidArgsException, schemas.InvalidArgsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1297,7 +1297,7 @@ func TestUpdateResponseSnapshot_Error_InvalidArgsException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidArgsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1307,7 +1307,7 @@ func TestUpdateResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 	want := &types.InvalidArnException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.InvalidArnException, schemas.InvalidArnException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1322,7 +1322,7 @@ func TestUpdateResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidArnException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1332,7 +1332,7 @@ func TestUpdateResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 	want := &types.InvalidNextTokenException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ListCertificateAuthorities, schemas.InvalidNextTokenException, schemas.InvalidNextTokenException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1347,7 +1347,7 @@ func TestUpdateResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidNextTokenException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1357,7 +1357,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPolicyException(t *testing.T) {
 	want := &types.InvalidPolicyException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.InvalidPolicyException, schemas.InvalidPolicyException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1372,7 +1372,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPolicyException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidPolicyException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1382,7 +1382,7 @@ func TestUpdateResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 	want := &types.InvalidRequestException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ImportCertificateAuthorityCertificate, schemas.InvalidRequestException, schemas.InvalidRequestException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1397,7 +1397,7 @@ func TestUpdateResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidRequestException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1407,7 +1407,7 @@ func TestUpdateResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 	want := &types.InvalidStateException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.InvalidStateException, schemas.InvalidStateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1422,7 +1422,7 @@ func TestUpdateResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidStateException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1432,7 +1432,7 @@ func TestUpdateResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 	want := &types.InvalidTagException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.InvalidTagException, schemas.InvalidTagException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1447,7 +1447,7 @@ func TestUpdateResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidTagException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1457,7 +1457,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.LimitExceededException, schemas.LimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1472,7 +1472,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1482,7 +1482,7 @@ func TestUpdateResponseSnapshot_Error_LockoutPreventedException(t *testing.T) {
 	want := &types.LockoutPreventedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.DeletePolicy, schemas.LockoutPreventedException, schemas.LockoutPreventedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1497,7 +1497,7 @@ func TestUpdateResponseSnapshot_Error_LockoutPreventedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LockoutPreventedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1507,7 +1507,7 @@ func TestUpdateResponseSnapshot_Error_MalformedCSRException(t *testing.T) {
 	want := &types.MalformedCSRException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.IssueCertificate, schemas.MalformedCSRException, schemas.MalformedCSRException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1522,7 +1522,7 @@ func TestUpdateResponseSnapshot_Error_MalformedCSRException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("MalformedCSRException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1532,7 +1532,7 @@ func TestUpdateResponseSnapshot_Error_MalformedCertificateException(t *testing.T
 	want := &types.MalformedCertificateException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.ImportCertificateAuthorityCertificate, schemas.MalformedCertificateException, schemas.MalformedCertificateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1547,7 +1547,7 @@ func TestUpdateResponseSnapshot_Error_MalformedCertificateException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("MalformedCertificateException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1557,7 +1557,7 @@ func TestUpdateResponseSnapshot_Error_PermissionAlreadyExistsException(t *testin
 	want := &types.PermissionAlreadyExistsException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePermission, schemas.PermissionAlreadyExistsException, schemas.PermissionAlreadyExistsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1572,7 +1572,7 @@ func TestUpdateResponseSnapshot_Error_PermissionAlreadyExistsException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("PermissionAlreadyExistsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1582,7 +1582,7 @@ func TestUpdateResponseSnapshot_Error_RequestAlreadyProcessedException(t *testin
 	want := &types.RequestAlreadyProcessedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.RevokeCertificate, schemas.RequestAlreadyProcessedException, schemas.RequestAlreadyProcessedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1597,7 +1597,7 @@ func TestUpdateResponseSnapshot_Error_RequestAlreadyProcessedException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("RequestAlreadyProcessedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1607,7 +1607,7 @@ func TestUpdateResponseSnapshot_Error_RequestFailedException(t *testing.T) {
 	want := &types.RequestFailedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.RequestFailedException, schemas.RequestFailedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1622,7 +1622,7 @@ func TestUpdateResponseSnapshot_Error_RequestFailedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("RequestFailedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1632,7 +1632,7 @@ func TestUpdateResponseSnapshot_Error_RequestInProgressException(t *testing.T) {
 	want := &types.RequestInProgressException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.RequestInProgressException, schemas.RequestInProgressException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1647,7 +1647,7 @@ func TestUpdateResponseSnapshot_Error_RequestInProgressException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("RequestInProgressException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1657,7 +1657,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1672,7 +1672,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1682,7 +1682,7 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 	want := &types.TooManyTagsException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ACMPrivateCA)
+	proto := rpcv2.NewCBOR(schemas.ACMPrivateCA)
 	opSchema := smithy.NewOperationSchema(schemas.TagCertificateAuthority, schemas.TooManyTagsException, schemas.TooManyTagsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1697,7 +1697,7 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TooManyTagsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

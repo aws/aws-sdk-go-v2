@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.AssociateDRTLogBucket
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"LimitsExceededException","Limit":1,"Type":"__Type__","message":"__Message__"}
+¿f__typewLimitsExceededExceptioneLimitdTypeh__Type__gmessagek__Message__ÿ

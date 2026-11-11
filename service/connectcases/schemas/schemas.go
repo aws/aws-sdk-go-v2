@@ -176,6 +176,13 @@ var GetLayout = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/domains/{domainId}/layouts/{layoutId}",
 	Code: 200})
 
+var GetMergeCasesStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "GetMergeCasesStatus",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/domains/{domainId}/cases/{caseId}/merge-status",
+	Code: 200})
+
 var GetTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "GetTemplate",
@@ -267,6 +274,13 @@ var SearchRelatedItems = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/domains/{domainId}/cases/{caseId}/related-items-search",
 	Code: 200})
 
+var StartMergeCases = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "StartMergeCases",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/domains/{domainId}/cases/{caseId}/merge",
+	Code: 200})
+
 var TagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "TagResource",
@@ -350,7 +364,7 @@ var _AssociationTime = smithy.NewSchema(smithy.ShapeID{
 var AuditEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "AuditEvent",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var AuditEvent_eventId *smithy.Schema
 
 var AuditEvent_type *smithy.Schema
@@ -362,6 +376,8 @@ var AuditEvent_performedTime *smithy.Schema
 var AuditEvent_fields *smithy.Schema
 
 var AuditEvent_performedBy *smithy.Schema
+
+var AuditEvent_mergeMetadata *smithy.Schema
 
 var _AuditEventDateTime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -426,6 +442,16 @@ var _AuditEventType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "AuditEventType",
 }, smithy.ShapeTypeString, 0)
+
+var AuditMergeMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "AuditMergeMetadata",
+}, smithy.ShapeTypeStructure, 3)
+var AuditMergeMetadata_mergeEventId *smithy.Schema
+
+var AuditMergeMetadata_primaryCaseId *smithy.Schema
+
+var AuditMergeMetadata_secondaryCaseId *smithy.Schema
 
 var BasicLayout = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -636,6 +662,12 @@ var CaseIdentifierUnion = smithy.NewSchema(smithy.ShapeID{
 var CaseIdentifierUnion_caseId *smithy.Schema
 
 var CaseIdentifierUnion_referenceId *smithy.Schema
+
+var _CaseIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "CaseIdList",
+}, smithy.ShapeTypeList, 1)
+var _CaseIdList_member *smithy.Schema
 
 var _CaseRuleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -1113,6 +1145,20 @@ var _FieldOptionValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FieldOptionValue",
 }, smithy.ShapeTypeString, 0)
 
+var FieldsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "FieldsConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var FieldsConfiguration_fieldIds *smithy.Schema
+
+var FieldsConfiguration_sourceCaseId *smithy.Schema
+
+var _FieldsConfigurationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "FieldsConfigurationList",
+}, smithy.ShapeTypeList, 1)
+var _FieldsConfigurationList_member *smithy.Schema
+
 var FieldSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "FieldSummary",
@@ -1328,6 +1374,11 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
 
+var _MergeStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "MergeStatus",
+}, smithy.ShapeTypeString, 0)
+
 var _MutableTagKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "MutableTagKey",
@@ -1457,6 +1508,18 @@ var RelatedItemInputContent_sla *smithy.Schema
 var RelatedItemInputContent_connectCase *smithy.Schema
 
 var RelatedItemInputContent_custom *smithy.Schema
+
+var RelatedItemsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "RelatedItemsConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var RelatedItemsConfiguration_comment *smithy.Schema
+
+var RelatedItemsConfiguration_connectCase *smithy.Schema
+
+var RelatedItemsConfiguration_contact *smithy.Schema
+
+var RelatedItemsConfiguration_custom *smithy.Schema
 
 var _RelatedItemType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -2350,6 +2413,24 @@ var GetLayoutResponse_createdTime *smithy.Schema
 
 var GetLayoutResponse_lastModifiedTime *smithy.Schema
 
+var GetMergeCasesStatusRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "GetMergeCasesStatusRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetMergeCasesStatusRequest_domainId *smithy.Schema
+
+var GetMergeCasesStatusRequest_caseId *smithy.Schema
+
+var GetMergeCasesStatusResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "GetMergeCasesStatusResponse",
+}, smithy.ShapeTypeStructure, 3)
+var GetMergeCasesStatusResponse_status *smithy.Schema
+
+var GetMergeCasesStatusResponse_primaryCaseId *smithy.Schema
+
+var GetMergeCasesStatusResponse_secondaryCaseIds *smithy.Schema
+
 var GetTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "GetTemplateRequest",
@@ -2617,6 +2698,27 @@ var SearchRelatedItemsResponse_nextToken *smithy.Schema
 
 var SearchRelatedItemsResponse_relatedItems *smithy.Schema
 
+var StartMergeCasesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "StartMergeCasesRequest",
+}, smithy.ShapeTypeStructure, 6)
+var StartMergeCasesRequest_domainId *smithy.Schema
+
+var StartMergeCasesRequest_caseId *smithy.Schema
+
+var StartMergeCasesRequest_secondaryCaseIds *smithy.Schema
+
+var StartMergeCasesRequest_fieldsConfiguration *smithy.Schema
+
+var StartMergeCasesRequest_relatedItemsConfiguration *smithy.Schema
+
+var StartMergeCasesRequest_performedBy *smithy.Schema
+
+var StartMergeCasesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "StartMergeCasesResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "TagResourceRequest",
@@ -2797,6 +2899,12 @@ func init() {
 
 	AuditEventPerformedBy_iamPrincipalArn = AuditEventPerformedBy.AddMember("iamPrincipalArn", _IamPrincipalArn)
 
+	AuditMergeMetadata_mergeEventId = AuditMergeMetadata.AddMember("mergeEventId", smithyprelude.String)
+
+	AuditMergeMetadata_primaryCaseId = AuditMergeMetadata.AddMember("primaryCaseId", _CaseId)
+
+	AuditMergeMetadata_secondaryCaseId = AuditMergeMetadata.AddMember("secondaryCaseId", _CaseId)
+
 	AuditEvent_eventId = AuditEvent.AddMember("eventId", _AuditEventId)
 
 	AuditEvent_type = AuditEvent.AddMember("type", _AuditEventType)
@@ -2808,6 +2916,8 @@ func init() {
 	AuditEvent_fields = AuditEvent.AddMember("fields", _AuditEventFieldList)
 
 	AuditEvent_performedBy = AuditEvent.AddMember("performedBy", AuditEventPerformedBy)
+
+	AuditEvent_mergeMetadata = AuditEvent.AddMember("mergeMetadata", AuditMergeMetadata)
 
 	_AuditEventsList_member = _AuditEventsList.AddMember("member", AuditEvent)
 
@@ -3053,6 +3163,8 @@ func init() {
 
 	CaseFilter_orAll = CaseFilter.AddMember("orAll", _CaseFilterList)
 
+	_CaseIdList_member = _CaseIdList.AddMember("member", _CaseId)
+
 	CaseRuleIdentifier_id = CaseRuleIdentifier.AddMember("id", _CaseRuleId)
 
 	_CaseRuleIdentifierList_member = _CaseRuleIdentifierList.AddMember("member", CaseRuleIdentifier)
@@ -3162,6 +3274,12 @@ func init() {
 	_FieldOptionErrorList_member = _FieldOptionErrorList.AddMember("member", FieldOptionError)
 
 	_FieldOptionsList_member = _FieldOptionsList.AddMember("member", FieldOption)
+
+	FieldsConfiguration_fieldIds = FieldsConfiguration.AddMember("fieldIds", _FieldIdentifierList)
+
+	FieldsConfiguration_sourceCaseId = FieldsConfiguration.AddMember("sourceCaseId", _CaseId)
+
+	_FieldsConfigurationList_member = _FieldsConfigurationList.AddMember("member", FieldsConfiguration)
 
 	FieldSummary_fieldId = FieldSummary.AddMember("fieldId", _FieldId)
 
@@ -3278,6 +3396,14 @@ func init() {
 	RelatedItemInputContent_connectCase = RelatedItemInputContent.AddMember("connectCase", ConnectCaseInputContent)
 
 	RelatedItemInputContent_custom = RelatedItemInputContent.AddMember("custom", CustomInputContent)
+
+	RelatedItemsConfiguration_comment = RelatedItemsConfiguration.AddMember("comment", smithyprelude.Boolean)
+
+	RelatedItemsConfiguration_connectCase = RelatedItemsConfiguration.AddMember("connectCase", smithyprelude.Boolean)
+
+	RelatedItemsConfiguration_contact = RelatedItemsConfiguration.AddMember("contact", smithyprelude.Boolean)
+
+	RelatedItemsConfiguration_custom = RelatedItemsConfiguration.AddMember("custom", smithyprelude.Boolean)
 
 	RelatedItemUpdateContent_comment = RelatedItemUpdateContent.AddMember("comment", CommentUpdateContent)
 
@@ -3629,6 +3755,16 @@ func init() {
 
 	GetLayoutResponse_lastModifiedTime = GetLayoutResponse.AddMember("lastModifiedTime", _LastModifiedTime)
 
+	GetMergeCasesStatusRequest_domainId = GetMergeCasesStatusRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	GetMergeCasesStatusRequest_caseId = GetMergeCasesStatusRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
+
+	GetMergeCasesStatusResponse_status = GetMergeCasesStatusResponse.AddMember("status", _MergeStatus)
+
+	GetMergeCasesStatusResponse_primaryCaseId = GetMergeCasesStatusResponse.AddMember("primaryCaseId", _CaseId)
+
+	GetMergeCasesStatusResponse_secondaryCaseIds = GetMergeCasesStatusResponse.AddMember("secondaryCaseIds", _CaseIdList)
+
 	GetTemplateRequest_domainId = GetTemplateRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
 
 	GetTemplateRequest_templateId = GetTemplateRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPLabel{})
@@ -3790,6 +3926,18 @@ func init() {
 	SearchRelatedItemsResponse_nextToken = SearchRelatedItemsResponse.AddMember("nextToken", _NextToken)
 
 	SearchRelatedItemsResponse_relatedItems = SearchRelatedItemsResponse.AddMember("relatedItems", _SearchRelatedItemsResponseItemList)
+
+	StartMergeCasesRequest_domainId = StartMergeCasesRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	StartMergeCasesRequest_caseId = StartMergeCasesRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
+
+	StartMergeCasesRequest_secondaryCaseIds = StartMergeCasesRequest.AddMember("secondaryCaseIds", _CaseIdList)
+
+	StartMergeCasesRequest_fieldsConfiguration = StartMergeCasesRequest.AddMember("fieldsConfiguration", _FieldsConfigurationList)
+
+	StartMergeCasesRequest_relatedItemsConfiguration = StartMergeCasesRequest.AddMember("relatedItemsConfiguration", RelatedItemsConfiguration)
+
+	StartMergeCasesRequest_performedBy = StartMergeCasesRequest.AddMember("performedBy", UserUnion)
 
 	TagResourceRequest_arn = TagResourceRequest.AddMember("arn", _Arn, &smithytraits.HTTPLabel{})
 

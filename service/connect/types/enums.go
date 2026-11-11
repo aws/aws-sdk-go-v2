@@ -1411,16 +1411,112 @@ type EvaluationFormLanguageCode string
 
 // Enum values for EvaluationFormLanguageCode
 const (
-	EvaluationFormLanguageCodeDeDe EvaluationFormLanguageCode = "de-DE"
-	EvaluationFormLanguageCodeEnUs EvaluationFormLanguageCode = "en-US"
-	EvaluationFormLanguageCodeEsEs EvaluationFormLanguageCode = "es-ES"
-	EvaluationFormLanguageCodeFrFr EvaluationFormLanguageCode = "fr-FR"
-	EvaluationFormLanguageCodeItIt EvaluationFormLanguageCode = "it-IT"
-	EvaluationFormLanguageCodePtBr EvaluationFormLanguageCode = "pt-BR"
-	EvaluationFormLanguageCodeJaJp EvaluationFormLanguageCode = "ja-JP"
-	EvaluationFormLanguageCodeKoKr EvaluationFormLanguageCode = "ko-KR"
-	EvaluationFormLanguageCodeZhCn EvaluationFormLanguageCode = "zh-CN"
-	EvaluationFormLanguageCodeMsMy EvaluationFormLanguageCode = "ms-MY"
+	EvaluationFormLanguageCodeDeDe  EvaluationFormLanguageCode = "de-DE"
+	EvaluationFormLanguageCodeEnUs  EvaluationFormLanguageCode = "en-US"
+	EvaluationFormLanguageCodeEsEs  EvaluationFormLanguageCode = "es-ES"
+	EvaluationFormLanguageCodeFrFr  EvaluationFormLanguageCode = "fr-FR"
+	EvaluationFormLanguageCodeItIt  EvaluationFormLanguageCode = "it-IT"
+	EvaluationFormLanguageCodePtBr  EvaluationFormLanguageCode = "pt-BR"
+	EvaluationFormLanguageCodeJaJp  EvaluationFormLanguageCode = "ja-JP"
+	EvaluationFormLanguageCodeKoKr  EvaluationFormLanguageCode = "ko-KR"
+	EvaluationFormLanguageCodeZhCn  EvaluationFormLanguageCode = "zh-CN"
+	EvaluationFormLanguageCodeMsMy  EvaluationFormLanguageCode = "ms-MY"
+	EvaluationFormLanguageCodeAfZa  EvaluationFormLanguageCode = "af-ZA"
+	EvaluationFormLanguageCodeSqAl  EvaluationFormLanguageCode = "sq-AL"
+	EvaluationFormLanguageCodeAmEt  EvaluationFormLanguageCode = "am-ET"
+	EvaluationFormLanguageCodeArAe  EvaluationFormLanguageCode = "ar-AE"
+	EvaluationFormLanguageCodeArSa  EvaluationFormLanguageCode = "ar-SA"
+	EvaluationFormLanguageCodeHyAm  EvaluationFormLanguageCode = "hy-AM"
+	EvaluationFormLanguageCodeEuEs  EvaluationFormLanguageCode = "eu-ES"
+	EvaluationFormLanguageCodeBeBy  EvaluationFormLanguageCode = "be-BY"
+	EvaluationFormLanguageCodeBsBa  EvaluationFormLanguageCode = "bs-BA"
+	EvaluationFormLanguageCodeBgBg  EvaluationFormLanguageCode = "bg-BG"
+	EvaluationFormLanguageCodeCaEs  EvaluationFormLanguageCode = "ca-ES"
+	EvaluationFormLanguageCodeCkbIr EvaluationFormLanguageCode = "ckb-IR"
+	EvaluationFormLanguageCodeCkbIq EvaluationFormLanguageCode = "ckb-IQ"
+	EvaluationFormLanguageCodeZhTw  EvaluationFormLanguageCode = "zh-TW"
+	EvaluationFormLanguageCodeHrHr  EvaluationFormLanguageCode = "hr-HR"
+	EvaluationFormLanguageCodeCsCz  EvaluationFormLanguageCode = "cs-CZ"
+	EvaluationFormLanguageCodeDaDk  EvaluationFormLanguageCode = "da-DK"
+	EvaluationFormLanguageCodeNlBe  EvaluationFormLanguageCode = "nl-BE"
+	EvaluationFormLanguageCodeNlNl  EvaluationFormLanguageCode = "nl-NL"
+	EvaluationFormLanguageCodeEnAu  EvaluationFormLanguageCode = "en-AU"
+	EvaluationFormLanguageCodeEnIn  EvaluationFormLanguageCode = "en-IN"
+	EvaluationFormLanguageCodeEnIe  EvaluationFormLanguageCode = "en-IE"
+	EvaluationFormLanguageCodeEnNz  EvaluationFormLanguageCode = "en-NZ"
+	EvaluationFormLanguageCodeEnAb  EvaluationFormLanguageCode = "en-AB"
+	EvaluationFormLanguageCodeEnSg  EvaluationFormLanguageCode = "en-SG"
+	EvaluationFormLanguageCodeEnZa  EvaluationFormLanguageCode = "en-ZA"
+	EvaluationFormLanguageCodeEnGb  EvaluationFormLanguageCode = "en-GB"
+	EvaluationFormLanguageCodeEnWl  EvaluationFormLanguageCode = "en-WL"
+	EvaluationFormLanguageCodeFaIr  EvaluationFormLanguageCode = "fa-IR"
+	EvaluationFormLanguageCodeFaAf  EvaluationFormLanguageCode = "fa-AF"
+	EvaluationFormLanguageCodeFiFi  EvaluationFormLanguageCode = "fi-FI"
+	EvaluationFormLanguageCodeFrBe  EvaluationFormLanguageCode = "fr-BE"
+	EvaluationFormLanguageCodeFrCa  EvaluationFormLanguageCode = "fr-CA"
+	EvaluationFormLanguageCodeGaIe  EvaluationFormLanguageCode = "ga-IE"
+	EvaluationFormLanguageCodeGlEs  EvaluationFormLanguageCode = "gl-ES"
+	EvaluationFormLanguageCodeKaGe  EvaluationFormLanguageCode = "ka-GE"
+	EvaluationFormLanguageCodeDeAt  EvaluationFormLanguageCode = "de-AT"
+	EvaluationFormLanguageCodeDeCh  EvaluationFormLanguageCode = "de-CH"
+	EvaluationFormLanguageCodeElGr  EvaluationFormLanguageCode = "el-GR"
+	EvaluationFormLanguageCodeGuIn  EvaluationFormLanguageCode = "gu-IN"
+	EvaluationFormLanguageCodeHtHt  EvaluationFormLanguageCode = "ht-HT"
+	EvaluationFormLanguageCodeHeIl  EvaluationFormLanguageCode = "he-IL"
+	EvaluationFormLanguageCodeHiIn  EvaluationFormLanguageCode = "hi-IN"
+	EvaluationFormLanguageCodeHuHu  EvaluationFormLanguageCode = "hu-HU"
+	EvaluationFormLanguageCodeIsIs  EvaluationFormLanguageCode = "is-IS"
+	EvaluationFormLanguageCodeIdId  EvaluationFormLanguageCode = "id-ID"
+	EvaluationFormLanguageCodeJvId  EvaluationFormLanguageCode = "jv-ID"
+	EvaluationFormLanguageCodeKmKh  EvaluationFormLanguageCode = "km-KH"
+	EvaluationFormLanguageCodeKnIn  EvaluationFormLanguageCode = "kn-IN"
+	EvaluationFormLanguageCodeKkKz  EvaluationFormLanguageCode = "kk-KZ"
+	EvaluationFormLanguageCodeLoLa  EvaluationFormLanguageCode = "lo-LA"
+	EvaluationFormLanguageCodeLvLv  EvaluationFormLanguageCode = "lv-LV"
+	EvaluationFormLanguageCodeLtLt  EvaluationFormLanguageCode = "lt-LT"
+	EvaluationFormLanguageCodeMkMk  EvaluationFormLanguageCode = "mk-MK"
+	EvaluationFormLanguageCodeMlIn  EvaluationFormLanguageCode = "ml-IN"
+	EvaluationFormLanguageCodeMrIn  EvaluationFormLanguageCode = "mr-IN"
+	EvaluationFormLanguageCodeNeNp  EvaluationFormLanguageCode = "ne-NP"
+	EvaluationFormLanguageCodeNoNo  EvaluationFormLanguageCode = "no-NO"
+	EvaluationFormLanguageCodeOrIn  EvaluationFormLanguageCode = "or-IN"
+	EvaluationFormLanguageCodePsAf  EvaluationFormLanguageCode = "ps-AF"
+	EvaluationFormLanguageCodePlPl  EvaluationFormLanguageCode = "pl-PL"
+	EvaluationFormLanguageCodePtPt  EvaluationFormLanguageCode = "pt-PT"
+	EvaluationFormLanguageCodePaIn  EvaluationFormLanguageCode = "pa-IN"
+	EvaluationFormLanguageCodeRoRo  EvaluationFormLanguageCode = "ro-RO"
+	EvaluationFormLanguageCodeRuRu  EvaluationFormLanguageCode = "ru-RU"
+	EvaluationFormLanguageCodeSrRs  EvaluationFormLanguageCode = "sr-RS"
+	EvaluationFormLanguageCodeSiLk  EvaluationFormLanguageCode = "si-LK"
+	EvaluationFormLanguageCodeSkSk  EvaluationFormLanguageCode = "sk-SK"
+	EvaluationFormLanguageCodeSlSi  EvaluationFormLanguageCode = "sl-SI"
+	EvaluationFormLanguageCodeEsMx  EvaluationFormLanguageCode = "es-MX"
+	EvaluationFormLanguageCodeEsUs  EvaluationFormLanguageCode = "es-US"
+	EvaluationFormLanguageCodeSuId  EvaluationFormLanguageCode = "su-ID"
+	EvaluationFormLanguageCodeSwBi  EvaluationFormLanguageCode = "sw-BI"
+	EvaluationFormLanguageCodeSwKe  EvaluationFormLanguageCode = "sw-KE"
+	EvaluationFormLanguageCodeSwRw  EvaluationFormLanguageCode = "sw-RW"
+	EvaluationFormLanguageCodeSwTz  EvaluationFormLanguageCode = "sw-TZ"
+	EvaluationFormLanguageCodeSwUg  EvaluationFormLanguageCode = "sw-UG"
+	EvaluationFormLanguageCodeSvSe  EvaluationFormLanguageCode = "sv-SE"
+	EvaluationFormLanguageCodeTlPh  EvaluationFormLanguageCode = "tl-PH"
+	EvaluationFormLanguageCodeTaIn  EvaluationFormLanguageCode = "ta-IN"
+	EvaluationFormLanguageCodeTeIn  EvaluationFormLanguageCode = "te-IN"
+	EvaluationFormLanguageCodeThTh  EvaluationFormLanguageCode = "th-TH"
+	EvaluationFormLanguageCodeTrTr  EvaluationFormLanguageCode = "tr-TR"
+	EvaluationFormLanguageCodeUkUa  EvaluationFormLanguageCode = "uk-UA"
+	EvaluationFormLanguageCodeUzUz  EvaluationFormLanguageCode = "uz-UZ"
+	EvaluationFormLanguageCodeViVn  EvaluationFormLanguageCode = "vi-VN"
+	EvaluationFormLanguageCodeZuZa  EvaluationFormLanguageCode = "zu-ZA"
+	EvaluationFormLanguageCodeMyMm  EvaluationFormLanguageCode = "my-MM"
+	EvaluationFormLanguageCodeSoSo  EvaluationFormLanguageCode = "so-SO"
+	EvaluationFormLanguageCodeYueHk EvaluationFormLanguageCode = "yue-HK"
+	EvaluationFormLanguageCodeEtEe  EvaluationFormLanguageCode = "et-EE"
+	EvaluationFormLanguageCodeHmn   EvaluationFormLanguageCode = "hmn"
+	EvaluationFormLanguageCodeLgUg  EvaluationFormLanguageCode = "lg-UG"
+	EvaluationFormLanguageCodeCyGb  EvaluationFormLanguageCode = "cy-GB"
+	EvaluationFormLanguageCodeXhZa  EvaluationFormLanguageCode = "xh-ZA"
+	EvaluationFormLanguageCodeBnBd  EvaluationFormLanguageCode = "bn-BD"
 )
 
 // Values returns all known values for EvaluationFormLanguageCode. Note that this
@@ -1439,6 +1535,102 @@ func (EvaluationFormLanguageCode) Values() []EvaluationFormLanguageCode {
 		"ko-KR",
 		"zh-CN",
 		"ms-MY",
+		"af-ZA",
+		"sq-AL",
+		"am-ET",
+		"ar-AE",
+		"ar-SA",
+		"hy-AM",
+		"eu-ES",
+		"be-BY",
+		"bs-BA",
+		"bg-BG",
+		"ca-ES",
+		"ckb-IR",
+		"ckb-IQ",
+		"zh-TW",
+		"hr-HR",
+		"cs-CZ",
+		"da-DK",
+		"nl-BE",
+		"nl-NL",
+		"en-AU",
+		"en-IN",
+		"en-IE",
+		"en-NZ",
+		"en-AB",
+		"en-SG",
+		"en-ZA",
+		"en-GB",
+		"en-WL",
+		"fa-IR",
+		"fa-AF",
+		"fi-FI",
+		"fr-BE",
+		"fr-CA",
+		"ga-IE",
+		"gl-ES",
+		"ka-GE",
+		"de-AT",
+		"de-CH",
+		"el-GR",
+		"gu-IN",
+		"ht-HT",
+		"he-IL",
+		"hi-IN",
+		"hu-HU",
+		"is-IS",
+		"id-ID",
+		"jv-ID",
+		"km-KH",
+		"kn-IN",
+		"kk-KZ",
+		"lo-LA",
+		"lv-LV",
+		"lt-LT",
+		"mk-MK",
+		"ml-IN",
+		"mr-IN",
+		"ne-NP",
+		"no-NO",
+		"or-IN",
+		"ps-AF",
+		"pl-PL",
+		"pt-PT",
+		"pa-IN",
+		"ro-RO",
+		"ru-RU",
+		"sr-RS",
+		"si-LK",
+		"sk-SK",
+		"sl-SI",
+		"es-MX",
+		"es-US",
+		"su-ID",
+		"sw-BI",
+		"sw-KE",
+		"sw-RW",
+		"sw-TZ",
+		"sw-UG",
+		"sv-SE",
+		"tl-PH",
+		"ta-IN",
+		"te-IN",
+		"th-TH",
+		"tr-TR",
+		"uk-UA",
+		"uz-UZ",
+		"vi-VN",
+		"zu-ZA",
+		"my-MM",
+		"so-SO",
+		"yue-HK",
+		"et-EE",
+		"hmn",
+		"lg-UG",
+		"cy-GB",
+		"xh-ZA",
+		"bn-BD",
 	}
 }
 

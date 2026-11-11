@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/UpdateVocabularyFilter
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.UpdateVocabularyFilter
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DataAccessRoleArn":"__DataAccessRoleArn__","EncryptionConfiguration":{"KMSEncryptionContext":{"key0":"__Value__"},"KMSKey":"__KMSKey__"},"VocabularyFilterFileUri":"__VocabularyFilterFileUri__","VocabularyFilterName":"__VocabularyFilterName__","Words":["__Member__","__Member__"]}
+¿qDataAccessRoleArnu__DataAccessRoleArn__wEncryptionConfiguration¿tKMSEncryptionContext¿dkey0i__Value__ÿfKMSKeyj__KMSKey__ÿwVocabularyFilterFileUrix__VocabularyFilterFileUri__tVocabularyFilterNamex__VocabularyFilterName__eWordsŸj__Member__j__Member__ÿÿ

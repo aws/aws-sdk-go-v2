@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/StartFlowFlush
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.StartFlowFlush
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","FirewallArn":"__FirewallArn__","FlowFilters":[{"DestinationAddress":{"AddressDefinition":"__AddressDefinition__"},"DestinationPort":"__DestinationPort__","Protocols":["__Member__","__Member__"],"SourceAddress":{"AddressDefinition":"__AddressDefinition__"},"SourcePort":"__SourcePort__"},{"DestinationAddress":{"AddressDefinition":"__AddressDefinition__"},"DestinationPort":"__DestinationPort__","Protocols":["__Member__","__Member__"],"SourceAddress":{"AddressDefinition":"__AddressDefinition__"},"SourcePort":"__SourcePort__"}],"MinimumFlowAgeInSeconds":1,"VpcEndpointAssociationArn":"__VpcEndpointAssociationArn__","VpcEndpointId":"__VpcEndpointId__"}
+¿pAvailabilityZonet__AvailabilityZone__rAvailabilityZoneIdv__AvailabilityZoneId__kFirewallArno__FirewallArn__kFlowFiltersŸ¿rDestinationAddress¿qAddressDefinitionu__AddressDefinition__ÿoDestinationPorts__DestinationPort__iProtocolsŸj__Member__j__Member__ÿmSourceAddress¿qAddressDefinitionu__AddressDefinition__ÿjSourcePortn__SourcePort__ÿ¿rDestinationAddress¿qAddressDefinitionu__AddressDefinition__ÿoDestinationPorts__DestinationPort__iProtocolsŸj__Member__j__Member__ÿmSourceAddress¿qAddressDefinitionu__AddressDefinition__ÿjSourcePortn__SourcePort__ÿÿwMinimumFlowAgeInSecondsxVpcEndpointAssociationArnx__VpcEndpointAssociationArn__mVpcEndpointIdq__VpcEndpointId__ÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/CreateLocationFsxOntap
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CreateLocationFsxOntap
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Protocol":{"NFS":{"MountOptions":{"Version":"AUTOMATIC"}},"SMB":{"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"Domain":"__Domain__","ManagedSecretConfig":{"SecretArn":"__SecretArn__"},"MountOptions":{"Version":"AUTOMATIC"},"Password":"__Password__","User":"__User__"}},"SecurityGroupArns":["__Member__","__Member__"],"StorageVirtualMachineArn":"__StorageVirtualMachineArn__","Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿hProtocol¿cNFS¿lMountOptions¿gVersioniAUTOMATICÿÿcSMB¿oCmkSecretConfig¿iKmsKeyArnm__KmsKeyArn__iSecretArnm__SecretArn__ÿrCustomSecretConfig¿sSecretAccessRoleArnw__SecretAccessRoleArn__iSecretArnm__SecretArn__ÿfDomainj__Domain__sManagedSecretConfig¿iSecretArnm__SecretArn__ÿlMountOptions¿gVersioniAUTOMATICÿhPasswordl__Password__dUserh__User__ÿÿqSecurityGroupArnsŸj__Member__j__Member__ÿxStorageVirtualMachineArnx__StorageVirtualMachineArn__lSubdirectoryp__Subdirectory__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/ResourceGroupsTaggingAPI_20170126/operation/TagResources
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.TagResources
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceARNList":["__Member__","__Member__"],"Tags":{"key0":"__Value__"}}
+¿oResourceARNListŸj__Member__j__Member__ÿdTags¿dkey0i__Value__ÿÿ

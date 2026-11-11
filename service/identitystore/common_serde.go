@@ -219,7 +219,7 @@ func serializeUsers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.U
 	s.CloseList()
 }
 
-func serializeVpcIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+func serializeVpcArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -576,7 +576,7 @@ func deserializeUsers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.U
 	})
 }
 
-func deserializeVpcIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+func deserializeVpcArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

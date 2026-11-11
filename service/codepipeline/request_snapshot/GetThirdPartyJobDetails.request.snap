@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/GetThirdPartyJobDetails
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.GetThirdPartyJobDetails
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"clientToken":"__ClientToken__","jobId":"__JobId__"}
+¿kclientTokeno__ClientToken__ejobIdi__JobId__ÿ

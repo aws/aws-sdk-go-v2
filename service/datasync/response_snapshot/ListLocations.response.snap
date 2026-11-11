@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.ListLocations
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Locations":[{"LocationArn":"__LocationArn__","LocationUri":"__LocationUri__"},{"LocationArn":"__LocationArn__","LocationUri":"__LocationUri__"}],"NextToken":"__NextToken__"}
+¿iLocationsŸ¿kLocationArno__LocationArn__kLocationUrio__LocationUri__ÿ¿kLocationArno__LocationArn__kLocationUrio__LocationUri__ÿÿiNextTokenm__NextToken__ÿ

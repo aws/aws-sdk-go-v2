@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.BatchDeleteBuilds
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"buildsDeleted":["__Member__","__Member__"],"buildsNotDeleted":[{"id":"__Id__","statusCode":"__StatusCode__"},{"id":"__Id__","statusCode":"__StatusCode__"}]}
+¿mbuildsDeletedŸj__Member__j__Member__ÿpbuildsNotDeletedŸ¿bidf__Id__jstatusCoden__StatusCode__ÿ¿bidf__Id__jstatusCoden__StatusCode__ÿÿÿ

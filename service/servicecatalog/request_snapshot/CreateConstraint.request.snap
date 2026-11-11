@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/CreateConstraint
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.CreateConstraint
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","Description":"__Description__","IdempotencyToken":"__IdempotencyToken__","Parameters":"__Parameters__","PortfolioId":"__PortfolioId__","ProductId":"__ProductId__","Type":"__Type__"}
+¿nAcceptLanguager__AcceptLanguage__kDescriptiono__Description__pIdempotencyTokent__IdempotencyToken__jParametersn__Parameters__kPortfolioIdo__PortfolioId__iProductIdm__ProductId__dTypeh__Type__ÿ

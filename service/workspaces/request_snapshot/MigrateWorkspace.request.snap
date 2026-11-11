@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/MigrateWorkspace
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.MigrateWorkspace
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"BundleId":"__BundleId__","SourceWorkspaceId":"__SourceWorkspaceId__"}
+¿hBundleIdl__BundleId__qSourceWorkspaceIdu__SourceWorkspaceId__ÿ

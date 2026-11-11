@@ -1,6 +1,7 @@
-POST /
+POST /service/ResourceGroupsTaggingAPI_20170126/operation/StartReportCreation
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.StartReportCreation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"S3Bucket":"__S3Bucket__"}
+¿hS3Bucketl__S3Bucket__ÿ

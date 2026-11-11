@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.DescribeSnapshotOperation
+
+{"SnapshotOperationInfoDetails":{"ApplicationOperationDescription":{"ApplicationName":"__ApplicationName__","ApplicationOperationId":"__ApplicationOperationId__"},"DestinationEncryptionConfigurationDescription":{"KeyId":"__KeyId__","KeyType":"AWS_OWNED_KEY"},"EndTime":946684800,"SnapshotArn":"__SnapshotArn__","SnapshotDestinationLocationDescription":{"LocationType":"S3","S3PrefixLocation":{"BucketARN":"__BucketARN__","ExportedPrefix":"__ExportedPrefix__","KeyPrefix":"__KeyPrefix__"}},"SnapshotOperation":"CreateSnapshot","SnapshotOperationFailureDetails":{"ErrorInfo":{"ErrorCode":"__ErrorCode__","ErrorString":"__ErrorString__"}},"SnapshotOperationId":"__SnapshotOperationId__","SnapshotOperationStatus":"IN_PROGRESS","SnapshotSourceLocationDescription":{"LocationType":"S3","S3PrefixLocation":{"BucketARN":"__BucketARN__","ExportedPrefix":"__ExportedPrefix__","KeyPrefix":"__KeyPrefix__"}},"SourceEncryptionConfigurationDescription":{"KeyId":"__KeyId__","KeyType":"AWS_OWNED_KEY"},"StartTime":946684800}}

@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -145,7 +145,7 @@ func TestUpdateResponseSnapshot_AcceptDomainTransferFromAnotherAwsAccount(t *tes
 	want := &AcceptDomainTransferFromAnotherAwsAccountOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDomainTransferFromAnotherAwsAccount, schemas.AcceptDomainTransferFromAnotherAwsAccountResponse, schemas.AcceptDomainTransferFromAnotherAwsAccountResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -169,7 +169,7 @@ func TestUpdateResponseSnapshot_AssociateDelegationSignerToDomain(t *testing.T) 
 	want := &AssociateDelegationSignerToDomainOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDelegationSignerToDomain, schemas.AssociateDelegationSignerToDomainResponse, schemas.AssociateDelegationSignerToDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -193,7 +193,7 @@ func TestUpdateResponseSnapshot_CancelDomainTransferToAnotherAwsAccount(t *testi
 	want := &CancelDomainTransferToAnotherAwsAccountOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.CancelDomainTransferToAnotherAwsAccount, schemas.CancelDomainTransferToAnotherAwsAccountResponse, schemas.CancelDomainTransferToAnotherAwsAccountResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -222,7 +222,7 @@ func TestUpdateResponseSnapshot_CheckDomainAvailability(t *testing.T) {
 			PriceType: types.PriceType("STANDARD"),
 		},
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.CheckDomainAvailability, schemas.CheckDomainAvailabilityResponse, schemas.CheckDomainAvailabilityResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -254,7 +254,7 @@ func TestUpdateResponseSnapshot_CheckDomainTransferability(t *testing.T) {
 			PriceType: types.PriceType("STANDARD"),
 		},
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.CheckDomainTransferability, schemas.CheckDomainTransferabilityResponse, schemas.CheckDomainTransferabilityResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -278,7 +278,7 @@ func TestUpdateResponseSnapshot_DeleteDomain(t *testing.T) {
 	want := &DeleteDomainOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainResponse, schemas.DeleteDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -300,7 +300,7 @@ func TestUpdateResponseSnapshot_DeleteDomain(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteTagsForDomain(t *testing.T) {
 	want := &DeleteTagsForDomainOutput{}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTagsForDomain, schemas.DeleteTagsForDomainResponse, schemas.DeleteTagsForDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -322,7 +322,7 @@ func TestUpdateResponseSnapshot_DeleteTagsForDomain(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableDomainAutoRenew(t *testing.T) {
 	want := &DisableDomainAutoRenewOutput{}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.DisableDomainAutoRenew, schemas.DisableDomainAutoRenewResponse, schemas.DisableDomainAutoRenewResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -346,7 +346,7 @@ func TestUpdateResponseSnapshot_DisableDomainTransferLock(t *testing.T) {
 	want := &DisableDomainTransferLockOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.DisableDomainTransferLock, schemas.DisableDomainTransferLockResponse, schemas.DisableDomainTransferLockResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -370,7 +370,7 @@ func TestUpdateResponseSnapshot_DisassociateDelegationSignerFromDomain(t *testin
 	want := &DisassociateDelegationSignerFromDomainOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateDelegationSignerFromDomain, schemas.DisassociateDelegationSignerFromDomainResponse, schemas.DisassociateDelegationSignerFromDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -392,7 +392,7 @@ func TestUpdateResponseSnapshot_DisassociateDelegationSignerFromDomain(t *testin
 
 func TestUpdateResponseSnapshot_EnableDomainAutoRenew(t *testing.T) {
 	want := &EnableDomainAutoRenewOutput{}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.EnableDomainAutoRenew, schemas.EnableDomainAutoRenewResponse, schemas.EnableDomainAutoRenewResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -416,7 +416,7 @@ func TestUpdateResponseSnapshot_EnableDomainTransferLock(t *testing.T) {
 	want := &EnableDomainTransferLockOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.EnableDomainTransferLock, schemas.EnableDomainTransferLockResponse, schemas.EnableDomainTransferLockResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -441,7 +441,7 @@ func TestUpdateResponseSnapshot_GetContactReachabilityStatus(t *testing.T) {
 		DomainName: ptr.String("__DomainName__"),
 		Status:     types.ReachabilityStatus("PENDING"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.GetContactReachabilityStatus, schemas.GetContactReachabilityStatusResponse, schemas.GetContactReachabilityStatusResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -621,7 +621,7 @@ func TestUpdateResponseSnapshot_GetDomainDetail(t *testing.T) {
 		},
 		BillingPrivacy: ptr.Bool(true),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.GetDomainDetail, schemas.GetDomainDetailResponse, schemas.GetDomainDetailResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -672,7 +672,7 @@ func TestUpdateResponseSnapshot_GetDomainPrices(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.GetDomainPrices, schemas.GetDomainPricesResponse, schemas.GetDomainPricesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -715,7 +715,7 @@ func TestUpdateResponseSnapshot_GetDomainSuggestions(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.GetDomainSuggestions, schemas.GetDomainSuggestionsResponse, schemas.GetDomainSuggestionsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -746,7 +746,7 @@ func TestUpdateResponseSnapshot_GetOperationDetail(t *testing.T) {
 		LastUpdatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StatusFlag:      types.StatusFlag("PENDING_ACCEPTANCE"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.GetOperationDetail, schemas.GetOperationDetailResponse, schemas.GetOperationDetailResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -784,7 +784,7 @@ func TestUpdateResponseSnapshot_ListDomains(t *testing.T) {
 		},
 		NextPageMarker: ptr.String("__NextPageMarker__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.ListDomains, schemas.ListDomainsResponse, schemas.ListDomainsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -830,7 +830,7 @@ func TestUpdateResponseSnapshot_ListOperations(t *testing.T) {
 		},
 		NextPageMarker: ptr.String("__NextPageMarker__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsResponse, schemas.ListOperationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -912,7 +912,7 @@ func TestUpdateResponseSnapshot_ListPrices(t *testing.T) {
 		},
 		NextPageMarker: ptr.String("__NextPageMarker__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.ListPrices, schemas.ListPricesResponse, schemas.ListPricesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -945,7 +945,7 @@ func TestUpdateResponseSnapshot_ListTagsForDomain(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForDomain, schemas.ListTagsForDomainResponse, schemas.ListTagsForDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -967,7 +967,7 @@ func TestUpdateResponseSnapshot_ListTagsForDomain(t *testing.T) {
 
 func TestUpdateResponseSnapshot_PushDomain(t *testing.T) {
 	want := &PushDomainOutput{}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.PushDomain, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -991,7 +991,7 @@ func TestUpdateResponseSnapshot_RegisterDomain(t *testing.T) {
 	want := &RegisterDomainOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterDomain, schemas.RegisterDomainResponse, schemas.RegisterDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1015,7 +1015,7 @@ func TestUpdateResponseSnapshot_RejectDomainTransferFromAnotherAwsAccount(t *tes
 	want := &RejectDomainTransferFromAnotherAwsAccountOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.RejectDomainTransferFromAnotherAwsAccount, schemas.RejectDomainTransferFromAnotherAwsAccountResponse, schemas.RejectDomainTransferFromAnotherAwsAccountResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1039,7 +1039,7 @@ func TestUpdateResponseSnapshot_RenewDomain(t *testing.T) {
 	want := &RenewDomainOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.RenewDomain, schemas.RenewDomainResponse, schemas.RenewDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1065,7 +1065,7 @@ func TestUpdateResponseSnapshot_ResendContactReachabilityEmail(t *testing.T) {
 		EmailAddress:      ptr.String("__EmailAddress__"),
 		IsAlreadyVerified: ptr.Bool(true),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.ResendContactReachabilityEmail, schemas.ResendContactReachabilityEmailResponse, schemas.ResendContactReachabilityEmailResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1087,7 +1087,7 @@ func TestUpdateResponseSnapshot_ResendContactReachabilityEmail(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ResendOperationAuthorization(t *testing.T) {
 	want := &ResendOperationAuthorizationOutput{}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.ResendOperationAuthorization, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1111,7 +1111,7 @@ func TestUpdateResponseSnapshot_RestoreDomain(t *testing.T) {
 	want := &RestoreDomainOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.RestoreDomain, schemas.RestoreDomainResponse, schemas.RestoreDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1135,7 +1135,7 @@ func TestUpdateResponseSnapshot_RetrieveDomainAuthCode(t *testing.T) {
 	want := &RetrieveDomainAuthCodeOutput{
 		AuthCode: ptr.String("__AuthCode__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.RetrieveDomainAuthCode, schemas.RetrieveDomainAuthCodeResponse, schemas.RetrieveDomainAuthCodeResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1159,7 +1159,7 @@ func TestUpdateResponseSnapshot_TransferDomain(t *testing.T) {
 	want := &TransferDomainOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.TransferDomain, schemas.TransferDomainResponse, schemas.TransferDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1184,7 +1184,7 @@ func TestUpdateResponseSnapshot_TransferDomainToAnotherAwsAccount(t *testing.T) 
 		OperationId: ptr.String("__OperationId__"),
 		Password:    ptr.String("__Password__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.TransferDomainToAnotherAwsAccount, schemas.TransferDomainToAnotherAwsAccountResponse, schemas.TransferDomainToAnotherAwsAccountResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1208,7 +1208,7 @@ func TestUpdateResponseSnapshot_UpdateDomainContact(t *testing.T) {
 	want := &UpdateDomainContactOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateDomainContact, schemas.UpdateDomainContactResponse, schemas.UpdateDomainContactResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1232,7 +1232,7 @@ func TestUpdateResponseSnapshot_UpdateDomainContactPrivacy(t *testing.T) {
 	want := &UpdateDomainContactPrivacyOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateDomainContactPrivacy, schemas.UpdateDomainContactPrivacyResponse, schemas.UpdateDomainContactPrivacyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1256,7 +1256,7 @@ func TestUpdateResponseSnapshot_UpdateDomainNameservers(t *testing.T) {
 	want := &UpdateDomainNameserversOutput{
 		OperationId: ptr.String("__OperationId__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateDomainNameservers, schemas.UpdateDomainNameserversResponse, schemas.UpdateDomainNameserversResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1278,7 +1278,7 @@ func TestUpdateResponseSnapshot_UpdateDomainNameservers(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateTagsForDomain(t *testing.T) {
 	want := &UpdateTagsForDomainOutput{}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTagsForDomain, schemas.UpdateTagsForDomainResponse, schemas.UpdateTagsForDomainResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1318,7 +1318,7 @@ func TestUpdateResponseSnapshot_ViewBilling(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.ViewBilling, schemas.ViewBillingResponse, schemas.ViewBillingResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1342,7 +1342,7 @@ func TestUpdateResponseSnapshot_Error_DnssecLimitExceeded(t *testing.T) {
 	want := &types.DnssecLimitExceeded{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDelegationSignerToDomain, schemas.DnssecLimitExceeded, schemas.DnssecLimitExceeded)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1357,7 +1357,7 @@ func TestUpdateResponseSnapshot_Error_DnssecLimitExceeded(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DnssecLimitExceeded.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1367,7 +1367,7 @@ func TestUpdateResponseSnapshot_Error_DomainLimitExceeded(t *testing.T) {
 	want := &types.DomainLimitExceeded{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDomainTransferFromAnotherAwsAccount, schemas.DomainLimitExceeded, schemas.DomainLimitExceeded)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1382,7 +1382,7 @@ func TestUpdateResponseSnapshot_Error_DomainLimitExceeded(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DomainLimitExceeded.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1393,7 +1393,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateRequest(t *testing.T) {
 		RequestId: ptr.String("__RequestId__"),
 		Message:   ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDelegationSignerToDomain, schemas.DuplicateRequest, schemas.DuplicateRequest)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1408,7 +1408,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateRequest(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DuplicateRequest.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1418,7 +1418,7 @@ func TestUpdateResponseSnapshot_Error_InvalidInput(t *testing.T) {
 	want := &types.InvalidInput{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDomainTransferFromAnotherAwsAccount, schemas.InvalidInput, schemas.InvalidInput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1433,7 +1433,7 @@ func TestUpdateResponseSnapshot_Error_InvalidInput(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidInput.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1443,7 +1443,7 @@ func TestUpdateResponseSnapshot_Error_OperationLimitExceeded(t *testing.T) {
 	want := &types.OperationLimitExceeded{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDomainTransferFromAnotherAwsAccount, schemas.OperationLimitExceeded, schemas.OperationLimitExceeded)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1458,7 +1458,7 @@ func TestUpdateResponseSnapshot_Error_OperationLimitExceeded(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OperationLimitExceeded.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1469,7 +1469,7 @@ func TestUpdateResponseSnapshot_Error_TLDInMaintenance(t *testing.T) {
 		Message: ptr.String("__Message__"),
 		Tld:     ptr.String("__Tld__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.CheckDomainAvailability, schemas.TLDInMaintenance, schemas.TLDInMaintenance)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1484,7 +1484,7 @@ func TestUpdateResponseSnapshot_Error_TLDInMaintenance(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TLDInMaintenance.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1494,7 +1494,7 @@ func TestUpdateResponseSnapshot_Error_TLDRulesViolation(t *testing.T) {
 	want := &types.TLDRulesViolation{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDelegationSignerToDomain, schemas.TLDRulesViolation, schemas.TLDRulesViolation)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1509,7 +1509,7 @@ func TestUpdateResponseSnapshot_Error_TLDRulesViolation(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TLDRulesViolation.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1519,7 +1519,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedTLD(t *testing.T) {
 	want := &types.UnsupportedTLD{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	proto := rpcv2.NewCBOR(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDomainTransferFromAnotherAwsAccount, schemas.UnsupportedTLD, schemas.UnsupportedTLD)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1534,7 +1534,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedTLD(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedTLD.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

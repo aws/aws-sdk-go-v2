@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/CreateTags
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateTags
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿jResourceIdn__ResourceId__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

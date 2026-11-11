@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/RollbackStage
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.RollbackStage
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"pipelineName":"__PipelineName__","stageName":"__StageName__","targetPipelineExecutionId":"__TargetPipelineExecutionId__"}
+¿lpipelineNamep__PipelineName__istageNamem__StageName__xtargetPipelineExecutionIdx__TargetPipelineExecutionId__ÿ

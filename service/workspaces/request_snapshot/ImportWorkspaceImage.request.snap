@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ImportWorkspaceImage
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ImportWorkspaceImage
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Applications":["Microsoft_Office_2016","Microsoft_Office_2016"],"Ec2ImageId":"__Ec2ImageId__","ImageDescription":"__ImageDescription__","ImageName":"__ImageName__","IngestionProcess":"BYOL_REGULAR","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿lApplicationsŸuMicrosoft_Office_2016uMicrosoft_Office_2016ÿjEc2ImageIdn__Ec2ImageId__pImageDescriptiont__ImageDescription__iImageNamem__ImageName__pIngestionProcesslBYOL_REGULARdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

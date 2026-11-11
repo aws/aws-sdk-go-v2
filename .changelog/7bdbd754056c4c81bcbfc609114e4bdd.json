@@ -1,0 +1,8 @@
+{
+    "id": "7bdbd754-056c-4c81-bcbf-c609114e4bdd",
+    "type": "feature",
+    "description": "This release adds APIs that allow customers to merge cases to consolidate case history, and get the status of an ongoing case merge operation.",
+    "modules": [
+        "service/connectcases"
+    ]
+}

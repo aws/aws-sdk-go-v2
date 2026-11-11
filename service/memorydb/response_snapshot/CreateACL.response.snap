@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.CreateACL
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ACL":{"ARN":"__ARN__","Clusters":["__Member__","__Member__"],"MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","PendingChanges":{"UserNamesToAdd":["__Member__","__Member__"],"UserNamesToRemove":["__Member__","__Member__"]},"Status":"__Status__","UserNames":["__Member__","__Member__"]}}
+¿cACL¿cARNg__ARN__hClustersŸj__Member__j__Member__ÿtMinimumEngineVersionx__MinimumEngineVersion__dNameh__Name__nPendingChanges¿nUserNamesToAddŸj__Member__j__Member__ÿqUserNamesToRemoveŸj__Member__j__Member__ÿÿfStatusj__Status__iUserNamesŸj__Member__j__Member__ÿÿÿ

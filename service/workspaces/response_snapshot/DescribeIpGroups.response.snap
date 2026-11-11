@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeIpGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","Result":[{"groupDesc":"__GroupDesc__","groupId":"__GroupId__","groupName":"__GroupName__","userRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]},{"groupDesc":"__GroupDesc__","groupId":"__GroupId__","groupName":"__GroupName__","userRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]}]}
+¿iNextTokenm__NextToken__fResultŸ¿igroupDescm__GroupDesc__ggroupIdk__GroupId__igroupNamem__GroupName__iuserRulesŸ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿÿÿ¿igroupDescm__GroupDesc__ggroupIdk__GroupId__igroupNamem__GroupName__iuserRulesŸ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿÿÿÿÿ

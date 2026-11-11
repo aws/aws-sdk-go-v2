@@ -903,6 +903,11 @@ func TestUpdateResponseSnapshot_GetCaseAuditEvents(t *testing.T) {
 					},
 					IamPrincipalArn: ptr.String("__IamPrincipalArn__"),
 				},
+				MergeMetadata: &types.AuditMergeMetadata{
+					MergeEventId:    ptr.String("__MergeEventId__"),
+					PrimaryCaseId:   ptr.String("__PrimaryCaseId__"),
+					SecondaryCaseId: ptr.String("__SecondaryCaseId__"),
+				},
 			},
 			{
 				EventId:         ptr.String("__EventId__"),
@@ -934,6 +939,11 @@ func TestUpdateResponseSnapshot_GetCaseAuditEvents(t *testing.T) {
 						Value: "__UserUnionMemberUserArn__",
 					},
 					IamPrincipalArn: ptr.String("__IamPrincipalArn__"),
+				},
+				MergeMetadata: &types.AuditMergeMetadata{
+					MergeEventId:    ptr.String("__MergeEventId__"),
+					PrimaryCaseId:   ptr.String("__PrimaryCaseId__"),
+					SecondaryCaseId: ptr.String("__SecondaryCaseId__"),
 				},
 			},
 		},
@@ -1122,6 +1132,35 @@ func TestUpdateResponseSnapshot_GetLayout(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetLayout.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetMergeCasesStatus(t *testing.T) {
+	want := &GetMergeCasesStatusOutput{
+		Status:        types.MergeStatus("IN_PROGRESS"),
+		PrimaryCaseId: ptr.String("__PrimaryCaseId__"),
+		SecondaryCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	proto := restjson1.New(schemas.AmazonConnectCases)
+	opSchema := smithy.NewOperationSchema(schemas.GetMergeCasesStatus, schemas.GetMergeCasesStatusResponse, schemas.GetMergeCasesStatusResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetMergeCasesStatus.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1732,6 +1771,28 @@ func TestUpdateResponseSnapshot_SearchRelatedItems(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("SearchRelatedItems.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartMergeCases(t *testing.T) {
+	want := &StartMergeCasesOutput{}
+	proto := restjson1.New(schemas.AmazonConnectCases)
+	opSchema := smithy.NewOperationSchema(schemas.StartMergeCases, schemas.StartMergeCasesResponse, schemas.StartMergeCasesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartMergeCases.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

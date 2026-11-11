@@ -1127,6 +1127,11 @@ func TestCheckResponseSnapshot_GetCaseAuditEvents(t *testing.T) {
 					},
 					IamPrincipalArn: ptr.String("__IamPrincipalArn__"),
 				},
+				MergeMetadata: &types.AuditMergeMetadata{
+					MergeEventId:    ptr.String("__MergeEventId__"),
+					PrimaryCaseId:   ptr.String("__PrimaryCaseId__"),
+					SecondaryCaseId: ptr.String("__SecondaryCaseId__"),
+				},
 			},
 			{
 				EventId:         ptr.String("__EventId__"),
@@ -1158,6 +1163,11 @@ func TestCheckResponseSnapshot_GetCaseAuditEvents(t *testing.T) {
 						Value: "__UserUnionMemberUserArn__",
 					},
 					IamPrincipalArn: ptr.String("__IamPrincipalArn__"),
+				},
+				MergeMetadata: &types.AuditMergeMetadata{
+					MergeEventId:    ptr.String("__MergeEventId__"),
+					PrimaryCaseId:   ptr.String("__PrimaryCaseId__"),
+					SecondaryCaseId: ptr.String("__SecondaryCaseId__"),
 				},
 			},
 		},
@@ -1347,6 +1357,35 @@ func TestCheckResponseSnapshot_GetLayout(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetLayout.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetMergeCasesStatus(t *testing.T) {
+	want := &GetMergeCasesStatusOutput{
+		Status:        types.MergeStatus("IN_PROGRESS"),
+		PrimaryCaseId: ptr.String("__PrimaryCaseId__"),
+		SecondaryCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetMergeCasesStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetMergeCasesStatus(context.Background(), &GetMergeCasesStatusInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetMergeCasesStatus.response", err)
 	}
 }
 
@@ -2072,6 +2111,65 @@ func TestCheckResponseSnapshot_SearchRelatedItems(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "SearchRelatedItems.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartMergeCases(t *testing.T) {
+	want := &StartMergeCasesOutput{}
+	status, header, body, err := serdeRespReadSnapshot("StartMergeCases.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartMergeCases(context.Background(), &StartMergeCasesInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+		SecondaryCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldsConfiguration: []types.FieldsConfiguration{
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+		},
+		RelatedItemsConfiguration: &types.RelatedItemsConfiguration{
+			Comment:     ptr.Bool(true),
+			ConnectCase: ptr.Bool(true),
+			Contact:     ptr.Bool(true),
+			Custom:      ptr.Bool(true),
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartMergeCases.response", err)
 	}
 }
 

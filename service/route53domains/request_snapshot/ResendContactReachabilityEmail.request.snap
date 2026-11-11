@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53Domains_v20140515/operation/ResendContactReachabilityEmail
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.ResendContactReachabilityEmail
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"domainName":"__DomainName__"}
+¿jdomainNamen__DomainName__ÿ

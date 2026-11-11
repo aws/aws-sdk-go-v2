@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.UpdateProxyRuleGroupPriorities
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ProxyRuleGroups":[{"Priority":1,"ProxyRuleGroupName":"__ProxyRuleGroupName__"},{"Priority":1,"ProxyRuleGroupName":"__ProxyRuleGroupName__"}],"UpdateToken":"__UpdateToken__"}
+¿oProxyRuleGroupsŸ¿hPriorityrProxyRuleGroupNamev__ProxyRuleGroupName__ÿ¿hPriorityrProxyRuleGroupNamev__ProxyRuleGroupName__ÿÿkUpdateTokeno__UpdateToken__ÿ

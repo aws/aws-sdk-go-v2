@@ -3017,8 +3017,12 @@ type ConfigurationRecorderSummary struct {
 	RecordingScope RecordingScope
 
 	// For service-linked configuration recorders that record resources from a
-	// third-party cloud service provider, indicates the cloud service provider.
-	// Currently, AZURE is supported.
+	// third-party cloud service provider, indicates the cloud service provider. Valid
+	// values:
+	//
+	//   - AZURE – The recorder records resources from Microsoft Azure
+	//
+	//   - GCP – The recorder records resources from Google Cloud
 	Provider Provider
 
 	// For service-linked configuration recorders, indicates which Amazon Web Services
@@ -3838,6 +3842,9 @@ type ConnectorConfiguration struct {
 	// The configuration for an Azure connector.
 	Azure *AzureConnectorConfiguration
 
+	// The configuration for a Google Cloud connector.
+	Gcp *GcpConnectorConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -3853,6 +3860,11 @@ func (v *ConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Azure.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Gcp != nil {
+		s.WriteStruct(schemas.ConnectorConfiguration_gcp)
+		v.Gcp.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *ConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectorConfiguration, func(s *smithy.Schema) error {
@@ -3860,6 +3872,9 @@ func (v *ConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ConnectorConfiguration_azure:
 			v.Azure = &AzureConnectorConfiguration{}
 			return v.Azure.Deserialize(d)
+		case schemas.ConnectorConfiguration_gcp:
+			v.Gcp = &GcpConnectorConfiguration{}
+			return v.Gcp.Deserialize(d)
 		}
 		return nil
 	})
@@ -3871,7 +3886,11 @@ type ConnectorFilter struct {
 	// The name of the filter. Currently, only provider is supported.
 	FilterName ConnectorFilterName
 
-	// The value of the filter. For provider , valid values include: AZURE .
+	// The value of the filter. For provider , valid values include:
+	//
+	//   - AZURE – The connector is for Microsoft Azure
+	//
+	//   - GCP – The connector is for Google Cloud
 	FilterValues []string
 
 	noSmithyDocumentSerde
@@ -3926,14 +3945,25 @@ type ConnectorSummary struct {
 	// This member is required.
 	Name *string
 
-	// The third-party cloud service provider. Currently, AZURE is supported.
+	// The third-party cloud service provider. Valid values:
+	//
+	//   - AZURE – The connector is for Microsoft Azure
+	//
+	//   - GCP – The connector is for Google Cloud
 	//
 	// This member is required.
 	Provider Provider
 
-	// The Azure tenant identifier for the connector.
-	//
-	// This member is required.
+	// The Google Cloud organization ID for the connector. Returned only for Google
+	// Cloud connectors.
+	GcpOrganizationId *string
+
+	// The email address of the Google Cloud service account for the connector.
+	// Returned only for Google Cloud connectors.
+	ServiceAccountEmail *string
+
+	// The Azure tenant identifier for the connector. Returned only for Azure
+	// connectors.
 	TenantIdentifier *string
 
 	noSmithyDocumentSerde
@@ -3952,11 +3982,17 @@ func (v *ConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.ConnectorSummary_createdTime, *v.CreatedTime)
 	}
+	if v.GcpOrganizationId != nil {
+		s.WriteString(schemas.ConnectorSummary_gcpOrganizationId, *v.GcpOrganizationId)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ConnectorSummary_name, *v.Name)
 	}
 	if v.Provider != "" {
 		s.WriteString(schemas.ConnectorSummary_provider, string(v.Provider))
+	}
+	if v.ServiceAccountEmail != nil {
+		s.WriteString(schemas.ConnectorSummary_serviceAccountEmail, *v.ServiceAccountEmail)
 	}
 	if v.TenantIdentifier != nil {
 		s.WriteString(schemas.ConnectorSummary_tenantIdentifier, *v.TenantIdentifier)
@@ -3971,6 +4007,9 @@ func (v *ConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ConnectorSummary_createdTime:
 			v.CreatedTime = new(time.Time)
 			return d.ReadTime(schemas.ConnectorSummary_createdTime, v.CreatedTime)
+		case schemas.ConnectorSummary_gcpOrganizationId:
+			v.GcpOrganizationId = new(string)
+			return d.ReadString(schemas.ConnectorSummary_gcpOrganizationId, v.GcpOrganizationId)
 		case schemas.ConnectorSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ConnectorSummary_name, v.Name)
@@ -3981,6 +4020,9 @@ func (v *ConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Provider = Provider(ev)
 			return nil
+		case schemas.ConnectorSummary_serviceAccountEmail:
+			v.ServiceAccountEmail = new(string)
+			return d.ReadString(schemas.ConnectorSummary_serviceAccountEmail, v.ServiceAccountEmail)
 		case schemas.ConnectorSummary_tenantIdentifier:
 			v.TenantIdentifier = new(string)
 			return d.ReadString(schemas.ConnectorSummary_tenantIdentifier, v.TenantIdentifier)
@@ -5009,6 +5051,76 @@ func (v *FieldInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FieldInfo_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.FieldInfo_Name, v.Name)
+		}
+		return nil
+	})
+}
+
+// The configuration details for connecting to Google Cloud.
+type GcpConnectorConfiguration struct {
+
+	// The email address of the Google Cloud service account that Config uses to
+	// access your Google Cloud resources. The format is
+	// SERVICE_ACCOUNT_NAME@PROJECT_ID.iam.gserviceaccount.com .
+	//
+	// The project that contains this service account is the connector's management
+	// project. If the connector has no gcpOrganizationId , it can record only the
+	// management project.
+	//
+	// This member is required.
+	ServiceAccountEmail *string
+
+	// The full resource name of the Google Cloud workload identity pool provider that
+	// trusts Config. The format is
+	// projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID
+	// .
+	//
+	// This member is required.
+	WorkloadIdentityPoolProvider *string
+
+	// The ID of the Google Cloud organization that contains the connector's
+	// management project, which is the project of the service account in
+	// serviceAccountEmail .
+	//
+	// Required if the management project belongs to an organization. A connector
+	// needs an organization ID to record an entire organization or more than one
+	// project. Omit it only if the management project doesn't belong to an
+	// organization. In that case, the connector can record only the management
+	// project.
+	GcpOrganizationId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpConnectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpConnectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GcpOrganizationId != nil {
+		s.WriteString(schemas.GcpConnectorConfiguration_gcpOrganizationId, *v.GcpOrganizationId)
+	}
+	if v.ServiceAccountEmail != nil {
+		s.WriteString(schemas.GcpConnectorConfiguration_serviceAccountEmail, *v.ServiceAccountEmail)
+	}
+	if v.WorkloadIdentityPoolProvider != nil {
+		s.WriteString(schemas.GcpConnectorConfiguration_workloadIdentityPoolProvider, *v.WorkloadIdentityPoolProvider)
+	}
+}
+func (v *GcpConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpConnectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpConnectorConfiguration_gcpOrganizationId:
+			v.GcpOrganizationId = new(string)
+			return d.ReadString(schemas.GcpConnectorConfiguration_gcpOrganizationId, v.GcpOrganizationId)
+		case schemas.GcpConnectorConfiguration_serviceAccountEmail:
+			v.ServiceAccountEmail = new(string)
+			return d.ReadString(schemas.GcpConnectorConfiguration_serviceAccountEmail, v.ServiceAccountEmail)
+		case schemas.GcpConnectorConfiguration_workloadIdentityPoolProvider:
+			v.WorkloadIdentityPoolProvider = new(string)
+			return d.ReadString(schemas.GcpConnectorConfiguration_workloadIdentityPoolProvider, v.WorkloadIdentityPoolProvider)
 		}
 		return nil
 	})
@@ -8158,8 +8270,15 @@ type ScopeConfiguration struct {
 	// This member is required.
 	AllRegions bool
 
-	// The type of scope for the third-party cloud resources. Valid values include
-	// tenant and subscription .
+	// The type of scope for the third-party cloud resources. Valid values include:
+	//
+	//   - tenant – Applies to all resources in an Azure tenant
+	//
+	//   - subscription – Applies to resources in the Azure subscriptions you specify
+	//
+	//   - organization – Applies to all resources in a Google Cloud organization
+	//
+	//   - project – Applies to resources in the Google Cloud projects you specify
 	//
 	// This member is required.
 	ScopeType *string
@@ -8169,7 +8288,8 @@ type ScopeConfiguration struct {
 	IncludedRegions []string
 
 	// The list of specific scope values for the third-party cloud resources. For
-	// example, a list of Azure subscriptions or management groups.
+	// example, a list of Azure subscription IDs, or a list of Google Cloud project
+	// IDs. Don't specify scopeValues when scopeType is tenant or organization .
 	ScopeValues []string
 
 	noSmithyDocumentSerde

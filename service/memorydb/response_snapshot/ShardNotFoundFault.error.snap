@@ -1,5 +1,6 @@
 404
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.FailoverShard
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ShardNotFoundFault","message":"__Message__"}
+¿f__typerShardNotFoundFaultgmessagek__Message__ÿ

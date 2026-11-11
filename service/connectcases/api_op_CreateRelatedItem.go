@@ -48,11 +48,15 @@ import (
 //   - If you provide a value for performedBy.userArn , you must also have [DescribeUser]
 //     permission on the ARN of the user that you provide.
 //
+//   - If the case is the secondary case of a merge that is running, the request
+//     fails with a ConflictException . For more information, see [StartMergeCases].
+//
 // Endpoints: See [Connect Customer endpoints and quotas].
 //
 // [DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 // [DescribeContact]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html
 // [Connect Customer Cases quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
+// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
 // [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) CreateRelatedItem(ctx context.Context, params *CreateRelatedItemInput, optFns ...func(*Options)) (*CreateRelatedItemOutput, error) {
 	if params == nil {

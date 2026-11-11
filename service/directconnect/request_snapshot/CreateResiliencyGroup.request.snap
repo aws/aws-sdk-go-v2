@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/CreateResiliencyGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.CreateResiliencyGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"clientToken":"__ClientToken__","intendedResiliencyModel":"maximum-resiliency","resiliencyGroupName":"__ResiliencyGroupName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}
+¿kclientTokeno__ClientToken__wintendedResiliencyModelrmaximum-resiliencysresiliencyGroupNamew__ResiliencyGroupName__dtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿÿ

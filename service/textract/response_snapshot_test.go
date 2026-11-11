@@ -10689,7 +10689,7 @@ func TestCheckResponseSnapshot_UpdateAdapter(t *testing.T) {
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("AccessDeniedException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10778,7 +10778,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 	want := &types.BadDocumentException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("BadDocumentException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadDocumentException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10867,7 +10867,7 @@ func TestCheckResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ConflictException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10905,7 +10905,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_DocumentTooLargeException(t *testing.T) {
 	want := &types.DocumentTooLargeException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("DocumentTooLargeException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DocumentTooLargeException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10997,7 +10997,7 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 		QuotaCode:    ptr.String("__QuotaCode__"),
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Message:      ptr.String("__Message__"),
-		Code:         ptr.String("HumanLoopQuotaExceededException"),
+		Code:         ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("HumanLoopQuotaExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11086,7 +11086,7 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *testing.T) {
 	want := &types.IdempotentParameterMismatchException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("IdempotentParameterMismatchException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("IdempotentParameterMismatchException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11124,7 +11124,7 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 	want := &types.InternalServerError{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InternalServerError"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerError.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11213,7 +11213,7 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 	want := &types.InvalidJobIdException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidJobIdException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidJobIdException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11243,7 +11243,7 @@ func TestCheckResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 	want := &types.InvalidKMSKeyException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidKMSKeyException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidKMSKeyException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11287,7 +11287,7 @@ func TestCheckResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidParameterException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidParameterException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11376,7 +11376,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 	want := &types.InvalidS3ObjectException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidS3ObjectException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidS3ObjectException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11465,7 +11465,7 @@ func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("LimitExceededException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("LimitExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11503,7 +11503,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *testing.T) {
 	want := &types.ProvisionedThroughputExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ProvisionedThroughputExceededException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ProvisionedThroughputExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11592,7 +11592,7 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ResourceNotFoundException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11636,7 +11636,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
 	want := &types.ServiceQuotaExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ServiceQuotaExceededException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11674,7 +11674,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ThrottlingException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11763,7 +11763,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T) {
 	want := &types.UnsupportedDocumentException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("UnsupportedDocumentException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnsupportedDocumentException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11852,7 +11852,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T) 
 func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ValidationException"),
+		Code:    ptr.String("__Code__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
 	if errors.Is(err, fs.ErrNotExist) {

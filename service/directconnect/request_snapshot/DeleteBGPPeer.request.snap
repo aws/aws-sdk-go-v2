@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DeleteBGPPeer
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DeleteBGPPeer
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"asn":1,"asnLong":1,"bgpPeerId":"__BgpPeerId__","customerAddress":"__CustomerAddress__","virtualInterfaceId":"__VirtualInterfaceId__"}
+¿casngasnLongibgpPeerIdm__BgpPeerId__ocustomerAddresss__CustomerAddress__rvirtualInterfaceIdv__VirtualInterfaceId__ÿ

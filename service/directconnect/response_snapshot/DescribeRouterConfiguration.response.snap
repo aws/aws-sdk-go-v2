@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeRouterConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"customerRouterConfig":"__CustomerRouterConfig__","router":{"platform":"__Platform__","routerTypeIdentifier":"__RouterTypeIdentifier__","software":"__Software__","vendor":"__Vendor__","xsltTemplateName":"__XsltTemplateName__","xsltTemplateNameForMacSec":"__XsltTemplateNameForMacSec__"},"virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceName":"__VirtualInterfaceName__"}
+¿tcustomerRouterConfigx__CustomerRouterConfig__frouter¿hplatforml__Platform__trouterTypeIdentifierx__RouterTypeIdentifier__hsoftwarel__Software__fvendorj__Vendor__pxsltTemplateNamet__XsltTemplateName__xxsltTemplateNameForMacSecx__XsltTemplateNameForMacSec__ÿrvirtualInterfaceIdv__VirtualInterfaceId__tvirtualInterfaceNamex__VirtualInterfaceName__ÿ

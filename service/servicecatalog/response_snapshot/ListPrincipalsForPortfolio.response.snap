@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListPrincipalsForPortfolio
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextPageToken":"__NextPageToken__","Principals":[{"PrincipalARN":"__PrincipalARN__","PrincipalType":"IAM"},{"PrincipalARN":"__PrincipalARN__","PrincipalType":"IAM"}]}
+¿mNextPageTokenq__NextPageToken__jPrincipalsŸ¿lPrincipalARNp__PrincipalARN__mPrincipalTypecIAMÿ¿lPrincipalARNp__PrincipalARN__mPrincipalTypecIAMÿÿÿ

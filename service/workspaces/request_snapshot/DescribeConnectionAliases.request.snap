@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeConnectionAliases
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeConnectionAliases
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AliasIds":["__Member__","__Member__"],"Limit":1,"NextToken":"__NextToken__","ResourceId":"__ResourceId__"}
+¿hAliasIdsŸj__Member__j__Member__ÿeLimitiNextTokenm__NextToken__jResourceIdn__ResourceId__ÿ

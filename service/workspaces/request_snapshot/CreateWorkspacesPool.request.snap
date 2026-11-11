@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/CreateWorkspacesPool
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateWorkspacesPool
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ApplicationSettings":{"SettingsGroup":"__SettingsGroup__","Status":"DISABLED"},"BundleId":"__BundleId__","Capacity":{"DesiredUserSessions":1},"Description":"__Description__","DirectoryId":"__DirectoryId__","PoolName":"__PoolName__","RunningMode":"AUTO_STOP","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TimeoutSettings":{"DisconnectTimeoutInSeconds":1,"IdleDisconnectTimeoutInSeconds":1,"MaxUserDurationInSeconds":1}}
+¿sApplicationSettings¿mSettingsGroupq__SettingsGroup__fStatushDISABLEDÿhBundleIdl__BundleId__hCapacity¿sDesiredUserSessionsÿkDescriptiono__Description__kDirectoryIdo__DirectoryId__hPoolNamel__PoolName__kRunningModeiAUTO_STOPdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿoTimeoutSettings¿xDisconnectTimeoutInSecondsxIdleDisconnectTimeoutInSecondsxMaxUserDurationInSecondsÿÿ

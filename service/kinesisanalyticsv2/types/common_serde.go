@@ -244,6 +244,26 @@ func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeSnapshotInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SnapshotInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSnapshotOperationInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SnapshotOperationInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSnapshotSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []SnapshotDetails) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -857,6 +877,50 @@ func deserializeSecurityGroupIds(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapshotInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SnapshotInfo) error {
+	*v = make([]SnapshotInfo, 0)
+	var vv SnapshotInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SnapshotInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SnapshotInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapshotOperationInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SnapshotOperationInfo) error {
+	*v = make([]SnapshotOperationInfo, 0)
+	var vv SnapshotOperationInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SnapshotOperationInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SnapshotOperationInfo{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

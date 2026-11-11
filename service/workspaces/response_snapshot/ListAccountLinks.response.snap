@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ListAccountLinks
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccountLinks":[{"AccountLinkId":"__AccountLinkId__","AccountLinkStatus":"LINKED","SourceAccountId":"__SourceAccountId__","TargetAccountId":"__TargetAccountId__"},{"AccountLinkId":"__AccountLinkId__","AccountLinkStatus":"LINKED","SourceAccountId":"__SourceAccountId__","TargetAccountId":"__TargetAccountId__"}],"NextToken":"__NextToken__"}
+¿lAccountLinksŸ¿mAccountLinkIdq__AccountLinkId__qAccountLinkStatusfLINKEDoSourceAccountIds__SourceAccountId__oTargetAccountIds__TargetAccountId__ÿ¿mAccountLinkIdq__AccountLinkId__qAccountLinkStatusfLINKEDoSourceAccountIds__SourceAccountId__oTargetAccountIds__TargetAccountId__ÿÿiNextTokenm__NextToken__ÿ

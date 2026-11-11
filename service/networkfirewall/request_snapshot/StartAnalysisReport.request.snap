@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/StartAnalysisReport
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.StartAnalysisReport
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AnalysisType":"TLS_SNI","FirewallArn":"__FirewallArn__","FirewallName":"__FirewallName__"}
+¿lAnalysisTypegTLS_SNIkFirewallArno__FirewallArn__lFirewallNamep__FirewallName__ÿ

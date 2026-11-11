@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.AddRegion
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"AccessDeniedException","Message":"__Message__","RequestId":"__RequestId__"}
+¿f__typeuAccessDeniedExceptiongMessagek__Message__iRequestIdm__RequestId__ÿ

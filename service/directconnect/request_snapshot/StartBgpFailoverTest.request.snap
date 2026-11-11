@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/StartBgpFailoverTest
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.StartBgpFailoverTest
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"bgpPeers":["__Member__","__Member__"],"testDurationInMinutes":1,"virtualInterfaceId":"__VirtualInterfaceId__"}
+¿hbgpPeersŸj__Member__j__Member__ÿutestDurationInMinutesrvirtualInterfaceIdv__VirtualInterfaceId__ÿ

@@ -381,7 +381,7 @@ var ContentKeyPeriodTiming_INDEX_WITH_START_END *smithy.Schema
 var CreateDashManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediapackagev2",
 	Name:      "CreateDashManifestConfiguration",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var CreateDashManifestConfiguration_ManifestName *smithy.Schema
 
 var CreateDashManifestConfiguration_ManifestWindowSeconds *smithy.Schema
@@ -413,6 +413,8 @@ var CreateDashManifestConfiguration_ProgramInformation *smithy.Schema
 var CreateDashManifestConfiguration_DvbSettings *smithy.Schema
 
 var CreateDashManifestConfiguration_Compactness *smithy.Schema
+
+var CreateDashManifestConfiguration_BandwidthReportingMode *smithy.Schema
 
 var CreateDashManifestConfiguration_AudioTimelinePattern *smithy.Schema
 
@@ -535,6 +537,14 @@ var DashAvailabilityStartTimeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DashAvailabilityStartTimeConfiguration",
 }, smithy.ShapeTypeUnion, 1)
 var DashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime *smithy.Schema
+
+var DashBandwidthReportingMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediapackagev2",
+	Name:      "DashBandwidthReportingMode",
+}, smithy.ShapeTypeEnum, 2)
+var DashBandwidthReportingMode_AVERAGE *smithy.Schema
+
+var DashBandwidthReportingMode_MAX *smithy.Schema
 
 var DashBaseUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediapackagev2",
@@ -802,7 +812,7 @@ var ForceEndpointErrorConfiguration_EndpointErrorConditions *smithy.Schema
 var GetDashManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediapackagev2",
 	Name:      "GetDashManifestConfiguration",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var GetDashManifestConfiguration_ManifestName *smithy.Schema
 
 var GetDashManifestConfiguration_Url *smithy.Schema
@@ -836,6 +846,8 @@ var GetDashManifestConfiguration_ProgramInformation *smithy.Schema
 var GetDashManifestConfiguration_DvbSettings *smithy.Schema
 
 var GetDashManifestConfiguration_Compactness *smithy.Schema
+
+var GetDashManifestConfiguration_BandwidthReportingMode *smithy.Schema
 
 var GetDashManifestConfiguration_AudioTimelinePattern *smithy.Schema
 
@@ -2955,6 +2967,10 @@ func init() {
 
 	DashCompactness_NONE = DashCompactness.AddMember("NONE", smithyprelude.Unit)
 
+	DashBandwidthReportingMode_AVERAGE = DashBandwidthReportingMode.AddMember("AVERAGE", smithyprelude.Unit)
+
+	DashBandwidthReportingMode_MAX = DashBandwidthReportingMode.AddMember("MAX", smithyprelude.Unit)
+
 	DashAudioTimelinePattern_NONE = DashAudioTimelinePattern.AddMember("NONE", smithyprelude.Unit)
 
 	DashAudioTimelinePattern_PATTERNED = DashAudioTimelinePattern.AddMember("PATTERNED", smithyprelude.Unit)
@@ -3004,6 +3020,8 @@ func init() {
 	CreateDashManifestConfiguration_DvbSettings = CreateDashManifestConfiguration.AddMember("DvbSettings", DashDvbSettings)
 
 	CreateDashManifestConfiguration_Compactness = CreateDashManifestConfiguration.AddMember("Compactness", DashCompactness)
+
+	CreateDashManifestConfiguration_BandwidthReportingMode = CreateDashManifestConfiguration.AddMember("BandwidthReportingMode", DashBandwidthReportingMode)
 
 	CreateDashManifestConfiguration_AudioTimelinePattern = CreateDashManifestConfiguration.AddMember("AudioTimelinePattern", DashAudioTimelinePattern)
 
@@ -3228,6 +3246,8 @@ func init() {
 	GetDashManifestConfiguration_DvbSettings = GetDashManifestConfiguration.AddMember("DvbSettings", DashDvbSettings)
 
 	GetDashManifestConfiguration_Compactness = GetDashManifestConfiguration.AddMember("Compactness", DashCompactness)
+
+	GetDashManifestConfiguration_BandwidthReportingMode = GetDashManifestConfiguration.AddMember("BandwidthReportingMode", DashBandwidthReportingMode)
 
 	GetDashManifestConfiguration_AudioTimelinePattern = GetDashManifestConfiguration.AddMember("AudioTimelinePattern", DashAudioTimelinePattern)
 

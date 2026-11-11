@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/ConfirmCustomerAgreement
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.ConfirmCustomerAgreement
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"agreementName":"__AgreementName__"}
+¿magreementNameq__AgreementName__ÿ

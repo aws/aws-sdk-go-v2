@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/ScanProvisionedProducts
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ScanProvisionedProducts
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","AccessLevelFilter":{"Key":"Account","Value":"__Value__"},"PageSize":1,"PageToken":"__PageToken__"}
+¿nAcceptLanguager__AcceptLanguage__qAccessLevelFilter¿cKeygAccounteValuei__Value__ÿhPageSizeiPageTokenm__PageToken__ÿ

@@ -604,8 +604,9 @@ func TestUpdateResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 						},
 					},
 				},
-				Compactness:          types.DashCompactness("STANDARD"),
-				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				Compactness:            types.DashCompactness("STANDARD"),
+				BandwidthReportingMode: types.DashBandwidthReportingMode("AVERAGE"),
+				AudioTimelinePattern:   types.DashAudioTimelinePattern("NONE"),
 				SubtitleConfiguration: &types.DashSubtitleConfiguration{
 					TtmlConfiguration: &types.DashTtmlConfiguration{
 						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
@@ -694,8 +695,9 @@ func TestUpdateResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 						},
 					},
 				},
-				Compactness:          types.DashCompactness("STANDARD"),
-				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				Compactness:            types.DashCompactness("STANDARD"),
+				BandwidthReportingMode: types.DashBandwidthReportingMode("AVERAGE"),
+				AudioTimelinePattern:   types.DashAudioTimelinePattern("NONE"),
 				SubtitleConfiguration: &types.DashSubtitleConfiguration{
 					TtmlConfiguration: &types.DashTtmlConfiguration{
 						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
@@ -1363,8 +1365,9 @@ func TestUpdateResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 						},
 					},
 				},
-				Compactness:          types.DashCompactness("STANDARD"),
-				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				Compactness:            types.DashCompactness("STANDARD"),
+				BandwidthReportingMode: types.DashBandwidthReportingMode("AVERAGE"),
+				AudioTimelinePattern:   types.DashAudioTimelinePattern("NONE"),
 				SubtitleConfiguration: &types.DashSubtitleConfiguration{
 					TtmlConfiguration: &types.DashTtmlConfiguration{
 						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
@@ -1453,8 +1456,9 @@ func TestUpdateResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 						},
 					},
 				},
-				Compactness:          types.DashCompactness("STANDARD"),
-				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				Compactness:            types.DashCompactness("STANDARD"),
+				BandwidthReportingMode: types.DashBandwidthReportingMode("AVERAGE"),
+				AudioTimelinePattern:   types.DashAudioTimelinePattern("NONE"),
 				SubtitleConfiguration: &types.DashSubtitleConfiguration{
 					TtmlConfiguration: &types.DashTtmlConfiguration{
 						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
@@ -2558,8 +2562,9 @@ func TestUpdateResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 						},
 					},
 				},
-				Compactness:          types.DashCompactness("STANDARD"),
-				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				Compactness:            types.DashCompactness("STANDARD"),
+				BandwidthReportingMode: types.DashBandwidthReportingMode("AVERAGE"),
+				AudioTimelinePattern:   types.DashAudioTimelinePattern("NONE"),
 				SubtitleConfiguration: &types.DashSubtitleConfiguration{
 					TtmlConfiguration: &types.DashTtmlConfiguration{
 						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
@@ -2648,8 +2653,9 @@ func TestUpdateResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 						},
 					},
 				},
-				Compactness:          types.DashCompactness("STANDARD"),
-				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				Compactness:            types.DashCompactness("STANDARD"),
+				BandwidthReportingMode: types.DashBandwidthReportingMode("AVERAGE"),
+				AudioTimelinePattern:   types.DashAudioTimelinePattern("NONE"),
 				SubtitleConfiguration: &types.DashSubtitleConfiguration{
 					TtmlConfiguration: &types.DashTtmlConfiguration{
 						TtmlProfile: types.DashTtmlProfile("IMSC_1"),

@@ -2686,6 +2686,30 @@ func validateHarnessRemoteMcpConfig(v *types.HarnessRemoteMcpConfig) error {
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
 	}
+	if v.OutboundAuth != nil {
+		if err := validateHarnessRemoteMcpOutboundAuth(v.OutboundAuth); err != nil {
+			invalidParams.AddNested("OutboundAuth", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessRemoteMcpOutboundAuth(v types.HarnessRemoteMcpOutboundAuth) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessRemoteMcpOutboundAuth"}
+	switch uv := v.(type) {
+	case *types.HarnessRemoteMcpOutboundAuthMemberAwsIam:
+		if err := validateIamCredentialProvider(&uv.Value); err != nil {
+			invalidParams.AddNested("[awsIam]", err.(smithy.InvalidParamsError))
+		}
+
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2881,6 +2905,21 @@ func validateHarnessToolUseBlock(v *types.HarnessToolUseBlock) error {
 	}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIamCredentialProvider(v *types.IamCredentialProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IamCredentialProvider"}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

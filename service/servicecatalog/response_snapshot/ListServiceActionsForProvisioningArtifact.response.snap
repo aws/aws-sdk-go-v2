@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListServiceActionsForProvisioningArtifact
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextPageToken":"__NextPageToken__","ServiceActionSummaries":[{"DefinitionType":"SSM_AUTOMATION","Description":"__Description__","Id":"__Id__","Name":"__Name__"},{"DefinitionType":"SSM_AUTOMATION","Description":"__Description__","Id":"__Id__","Name":"__Name__"}]}
+¿mNextPageTokenq__NextPageToken__vServiceActionSummariesŸ¿nDefinitionTypenSSM_AUTOMATIONkDescriptiono__Description__bIdf__Id__dNameh__Name__ÿ¿nDefinitionTypenSSM_AUTOMATIONkDescriptiono__Description__bIdf__Id__dNameh__Name__ÿÿÿ

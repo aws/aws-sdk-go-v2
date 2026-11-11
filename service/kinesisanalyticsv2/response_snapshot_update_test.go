@@ -808,6 +808,7 @@ func TestUpdateResponseSnapshot_CreateApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -852,6 +853,7 @@ func TestUpdateResponseSnapshot_CreateApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -1017,6 +1019,33 @@ func TestUpdateResponseSnapshot_CreateApplicationSnapshot(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateApplicationSnapshot.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateSnapshot(t *testing.T) {
+	want := &CreateSnapshotOutput{
+		SnapshotArn:             ptr.String("__SnapshotArn__"),
+		SnapshotStatus:          types.SnapshotStatus("CREATING"),
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.CreateSnapshotResponse, schemas.CreateSnapshotResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateSnapshot.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1200,6 +1229,33 @@ func TestUpdateResponseSnapshot_DeleteApplicationVpcConfiguration(t *testing.T) 
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteApplicationVpcConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteSnapshot(t *testing.T) {
+	want := &DeleteSnapshotOutput{
+		SnapshotArn:             ptr.String("__SnapshotArn__"),
+		SnapshotStatus:          types.SnapshotStatus("CREATING"),
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteSnapshot, schemas.DeleteSnapshotResponse, schemas.DeleteSnapshotResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteSnapshot.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1462,6 +1518,7 @@ func TestUpdateResponseSnapshot_DescribeApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -1506,6 +1563,7 @@ func TestUpdateResponseSnapshot_DescribeApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -1960,6 +2018,7 @@ func TestUpdateResponseSnapshot_DescribeApplicationVersion(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -2004,6 +2063,7 @@ func TestUpdateResponseSnapshot_DescribeApplicationVersion(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -2127,6 +2187,121 @@ func TestUpdateResponseSnapshot_DescribeApplicationVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeSnapshot(t *testing.T) {
+	want := &DescribeSnapshotOutput{
+		SnapshotInfoDetails: &types.SnapshotInfoDetails{
+			SnapshotName:              ptr.String("__SnapshotName__"),
+			SnapshotArn:               ptr.String("__SnapshotArn__"),
+			SnapshotDescription:       ptr.String("__SnapshotDescription__"),
+			SnapshotStatus:            types.SnapshotStatus("CREATING"),
+			SnapshotCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RuntimeEnvironment:        types.RuntimeEnvironment("SQL-1_0"),
+			SnapshotSizeInBytes:       1,
+			SnapshotEncryptionConfigurationDescription: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			SnapshotInitiator:          types.SnapshotInitiator("USER"),
+			SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+			SnapshotSourceDescription: &types.SnapshotSourceDescription{
+				S3PrefixLocation: &types.S3PrefixLocation{
+					BucketARN: ptr.String("__BucketARN__"),
+					KeyPrefix: ptr.String("__KeyPrefix__"),
+				},
+				SourceApplicationDescription: &types.SourceApplicationDescription{
+					ApplicationName:              ptr.String("__ApplicationName__"),
+					ApplicationCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ApplicationVersionId:         ptr.Int64(1),
+				},
+			},
+			SnapshotFormat: types.SnapshotFormat("CANONICAL"),
+		},
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeSnapshot, schemas.DescribeSnapshotResponse, schemas.DescribeSnapshotResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeSnapshot.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeSnapshotOperation(t *testing.T) {
+	want := &DescribeSnapshotOperationOutput{
+		SnapshotOperationInfoDetails: &types.SnapshotOperationInfoDetails{
+			SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+			SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+			SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+			SnapshotArn:             ptr.String("__SnapshotArn__"),
+			SourceEncryptionConfigurationDescription: &types.EncryptionConfigurationDescription{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			DestinationEncryptionConfigurationDescription: &types.EncryptionConfigurationDescription{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			SnapshotSourceLocationDescription: &types.SnapshotOperationLocationDescription{
+				LocationType: types.StorageLocationType("S3"),
+				S3PrefixLocation: &types.SnapshotOperationS3PrefixLocation{
+					BucketARN:      ptr.String("__BucketARN__"),
+					KeyPrefix:      ptr.String("__KeyPrefix__"),
+					ExportedPrefix: ptr.String("__ExportedPrefix__"),
+				},
+			},
+			SnapshotDestinationLocationDescription: &types.SnapshotOperationLocationDescription{
+				LocationType: types.StorageLocationType("S3"),
+				S3PrefixLocation: &types.SnapshotOperationS3PrefixLocation{
+					BucketARN:      ptr.String("__BucketARN__"),
+					KeyPrefix:      ptr.String("__KeyPrefix__"),
+					ExportedPrefix: ptr.String("__ExportedPrefix__"),
+				},
+			},
+			ApplicationOperationDescription: &types.ApplicationOperationDescription{
+				ApplicationOperationId: ptr.String("__ApplicationOperationId__"),
+				ApplicationName:        ptr.String("__ApplicationName__"),
+			},
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnapshotOperationFailureDetails: &types.SnapshotOperationFailureDetails{
+				ErrorInfo: &types.SnapshotErrorInfo{
+					ErrorCode:   ptr.String("__ErrorCode__"),
+					ErrorString: ptr.String("__ErrorString__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeSnapshotOperation, schemas.DescribeSnapshotOperationResponse, schemas.DescribeSnapshotOperationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeSnapshotOperation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DiscoverInputSchema(t *testing.T) {
 	want := &DiscoverInputSchemaOutput{
 		InputSchema: &types.SourceSchema{
@@ -2191,6 +2366,58 @@ func TestUpdateResponseSnapshot_DiscoverInputSchema(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DiscoverInputSchema.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ExportSnapshot(t *testing.T) {
+	want := &ExportSnapshotOutput{
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.ExportSnapshot, schemas.ExportSnapshotResponse, schemas.ExportSnapshotResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ExportSnapshot.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ImportSnapshot(t *testing.T) {
+	want := &ImportSnapshotOutput{
+		SnapshotArn:             ptr.String("__SnapshotArn__"),
+		SnapshotStatus:          types.SnapshotStatus("CREATING"),
+		SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.ImportSnapshot, schemas.ImportSnapshotResponse, schemas.ImportSnapshotResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ImportSnapshot.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2355,6 +2582,92 @@ func TestUpdateResponseSnapshot_ListApplications(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListApplications.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListSnapshotOperations(t *testing.T) {
+	want := &ListSnapshotOperationsOutput{
+		SnapshotOperationInfoList: []types.SnapshotOperationInfo{
+			{
+				SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+				SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+				SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+				StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				SnapshotOperationId:     ptr.String("__SnapshotOperationId__"),
+				SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+				SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+				StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.ListSnapshotOperations, schemas.ListSnapshotOperationsResponse, schemas.ListSnapshotOperationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListSnapshotOperations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListSnapshots(t *testing.T) {
+	want := &ListSnapshotsOutput{
+		SnapshotInfoList: []types.SnapshotInfo{
+			{
+				SnapshotName:               ptr.String("__SnapshotName__"),
+				SnapshotArn:                ptr.String("__SnapshotArn__"),
+				SnapshotStatus:             types.SnapshotStatus("CREATING"),
+				SnapshotCreationTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SnapshotInitiator:          types.SnapshotInitiator("USER"),
+				SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+				SourceApplicationName:      ptr.String("__SourceApplicationName__"),
+				SnapshotFormat:             types.SnapshotFormat("CANONICAL"),
+			},
+			{
+				SnapshotName:               ptr.String("__SnapshotName__"),
+				SnapshotArn:                ptr.String("__SnapshotArn__"),
+				SnapshotStatus:             types.SnapshotStatus("CREATING"),
+				SnapshotCreationTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SnapshotInitiator:          types.SnapshotInitiator("USER"),
+				SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+				SourceApplicationName:      ptr.String("__SourceApplicationName__"),
+				SnapshotFormat:             types.SnapshotFormat("CANONICAL"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.KinesisAnalytics_20180523)
+	opSchema := smithy.NewOperationSchema(schemas.ListSnapshots, schemas.ListSnapshotsResponse, schemas.ListSnapshotsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListSnapshots.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2650,6 +2963,7 @@ func TestUpdateResponseSnapshot_RollbackApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -2694,6 +3008,7 @@ func TestUpdateResponseSnapshot_RollbackApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),
@@ -3168,6 +3483,7 @@ func TestUpdateResponseSnapshot_UpdateApplication(t *testing.T) {
 					ApplicationRestoreConfigurationDescription: &types.ApplicationRestoreConfiguration{
 						ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 						SnapshotName:           ptr.String("__SnapshotName__"),
+						SnapshotArn:            ptr.String("__SnapshotArn__"),
 					},
 					FlinkRunConfigurationDescription: &types.FlinkRunConfiguration{
 						AllowNonRestoredState: ptr.Bool(true),
@@ -3212,6 +3528,7 @@ func TestUpdateResponseSnapshot_UpdateApplication(t *testing.T) {
 				},
 				ApplicationSnapshotConfigurationDescription: &types.ApplicationSnapshotConfigurationDescription{
 					SnapshotsEnabled: ptr.Bool(true),
+					SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 				},
 				ApplicationSystemRollbackConfigurationDescription: &types.ApplicationSystemRollbackConfigurationDescription{
 					RollbackEnabled: ptr.Bool(true),

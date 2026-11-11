@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/DeleteProvisionedProductPlan
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DeleteProvisionedProductPlan
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","IgnoreErrors":true,"PlanId":"__PlanId__"}
+¿nAcceptLanguager__AcceptLanguage__lIgnoreErrorsõfPlanIdj__PlanId__ÿ

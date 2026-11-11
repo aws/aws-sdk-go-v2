@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/DeleteFirewallPolicyV2
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DeleteFirewallPolicyV2
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FirewallPolicyV2Arn":"__FirewallPolicyV2Arn__","FirewallPolicyV2Name":"__FirewallPolicyV2Name__"}
+¿sFirewallPolicyV2Arnw__FirewallPolicyV2Arn__tFirewallPolicyV2Namex__FirewallPolicyV2Name__ÿ

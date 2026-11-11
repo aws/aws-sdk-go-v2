@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/TerminateWorkspacesPoolSession
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.TerminateWorkspacesPoolSession
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"SessionId":"__SessionId__"}
+¿iSessionIdm__SessionId__ÿ

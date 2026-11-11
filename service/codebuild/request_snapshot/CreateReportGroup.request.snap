@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/CreateReportGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.CreateReportGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"exportConfig":{"exportConfigType":"S3","s3Destination":{"bucket":"__Bucket__","bucketOwner":"__BucketOwner__","encryptionDisabled":true,"encryptionKey":"__EncryptionKey__","packaging":"ZIP","path":"__Path__"}},"name":"__Name__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"TEST"}
+¿lexportConfig¿pexportConfigTypebS3ms3Destination¿fbucketj__Bucket__kbucketOwnero__BucketOwner__rencryptionDisabledõmencryptionKeyq__EncryptionKey__ipackagingcZIPdpathh__Path__ÿÿdnameh__Name__dtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿdtypedTESTÿ

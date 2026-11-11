@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/CreateVpcEndpointAssociation
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.CreateVpcEndpointAssociation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Description":"__Description__","FirewallArn":"__FirewallArn__","SubnetMapping":{"IPAddressType":"DUALSTACK","SubnetId":"__SubnetId__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcId":"__VpcId__"}
+¿kDescriptiono__Description__kFirewallArno__FirewallArn__mSubnetMapping¿mIPAddressTypeiDUALSTACKhSubnetIdl__SubnetId__ÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿeVpcIdi__VpcId__ÿ

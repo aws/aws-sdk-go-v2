@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/DescribePortfolioShares
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribePortfolioShares
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PageSize":1,"PageToken":"__PageToken__","PortfolioId":"__PortfolioId__","Type":"ACCOUNT"}
+¿hPageSizeiPageTokenm__PageToken__kPortfolioIdo__PortfolioId__dTypegACCOUNTÿ

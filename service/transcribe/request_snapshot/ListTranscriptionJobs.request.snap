@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/ListTranscriptionJobs
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.ListTranscriptionJobs
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"JobNameContains":"__JobNameContains__","MaxResults":1,"NextToken":"__NextToken__","Status":"QUEUED"}
+¿oJobNameContainss__JobNameContains__jMaxResultsiNextTokenm__NextToken__fStatusfQUEUEDÿ
