@@ -7,9 +7,11 @@ import (
 	"crypto/elliptic"
 	cryptorand "crypto/rand"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
 	"io"
+	"net/http"
 	"os"
 	"strings"
 	"testing"
@@ -40,9 +42,10 @@ func (w *writer) Close() error {
 }
 
 type tokenAPIClient struct {
-	in  *signin.CreateOAuth2TokenInput
-	out *signin.CreateOAuth2TokenOutput
-	err error
+	in   *signin.CreateOAuth2TokenInput
+	opts []func(*signin.Options)
+	out  *signin.CreateOAuth2TokenOutput
+	err  error
 }
 
 func mockTokenAPIClient(out *signin.CreateOAuth2TokenOutput, err error) *tokenAPIClient {
@@ -51,7 +54,18 @@ func mockTokenAPIClient(out *signin.CreateOAuth2TokenOutput, err error) *tokenAP
 
 func (m *tokenAPIClient) CreateOAuth2Token(ctx context.Context, in *signin.CreateOAuth2TokenInput, opts ...func(*signin.Options)) (*signin.CreateOAuth2TokenOutput, error) {
 	m.in = in
+	m.opts = opts
 	return m.out, m.err
+}
+
+// resolvedRegion applies the recorded per-operation options to a client
+// configured for us-east-1 and returns the resulting region.
+func (m *tokenAPIClient) resolvedRegion() string {
+	o := signin.Options{Region: "us-east-1"}
+	for _, fn := range m.opts {
+		fn(&o)
+	}
+	return o.Region
 }
 
 func mockOpenFile(t *loginToken, terr error) func() {
@@ -337,5 +351,142 @@ func TestRetrieve_Failure_Refresh(t *testing.T) {
 	}
 	if !strings.Contains(err.Error(), "create oauth2 token") {
 		t.Errorf("unexpected error: %v", err)
+	}
+}
+
+func mockRefreshOutput() *signin.CreateOAuth2TokenOutput {
+	return &signin.CreateOAuth2TokenOutput{
+		TokenOutput: &types.CreateOAuth2TokenResponseBody{
+			AccessToken: &types.AccessToken{
+				AccessKeyId:     aws.String("NEW_AKID"),
+				SecretAccessKey: aws.String("NEW_SECRET"),
+				SessionToken:    aws.String("NEW_SESSION"),
+			},
+			ExpiresIn:    aws.Int32(900),
+			RefreshToken: aws.String("NewRefreshToken"),
+			TokenType:    aws.String("NewTokenType"),
+			IdToken:      aws.String("NewIdToken"),
+		},
+	}
+}
+
+// Success - refresh uses the token's signInRegion, over any caller region
+func TestRetrieve_OK_Refresh_SignInRegion(t *testing.T) {
+	token, _ := mockToken()
+	token.SignInRegion = "eu-west-1"
+	restoreOpen := mockOpenFile(token, nil)
+	written, restoreCreate := mockCreateFile(nil)
+	restoreNowTime := mockNowTime(time.Unix(60, 0).UTC())
+	defer restoreOpen()
+	defer restoreCreate()
+	defer restoreNowTime()
+
+	svc := mockTokenAPIClient(mockRefreshOutput(), nil)
+	p := New(svc, "mocktokenpath", func(o *Options) {
+		o.ClientOptions = append(o.ClientOptions, func(o *signin.Options) {
+			o.Region = "us-west-2"
+		})
+	})
+	if _, err := p.Retrieve(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+
+	if e, a := "eu-west-1", svc.resolvedRegion(); e != a {
+		t.Errorf("region: %q != %q", e, a)
+	}
+	if !strings.Contains(string(written.p), `"signInRegion":"eu-west-1"`) {
+		t.Errorf("saved token should keep signInRegion: %s", written.p)
+	}
+}
+
+// Success - refresh without signInRegion keeps the client's region
+func TestRetrieve_OK_Refresh_NoSignInRegion(t *testing.T) {
+	token, _ := mockToken()
+	restoreOpen := mockOpenFile(token, nil)
+	written, restoreCreate := mockCreateFile(nil)
+	restoreNowTime := mockNowTime(time.Unix(60, 0).UTC())
+	defer restoreOpen()
+	defer restoreCreate()
+	defer restoreNowTime()
+
+	svc := mockTokenAPIClient(mockRefreshOutput(), nil)
+	p := New(svc, "mocktokenpath")
+	if _, err := p.Retrieve(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+
+	if e, a := "us-east-1", svc.resolvedRegion(); e != a {
+		t.Errorf("region: %q != %q", e, a)
+	}
+	if strings.Contains(string(written.p), "signInRegion") {
+		t.Errorf("saved token should not contain signInRegion: %s", written.p)
+	}
+}
+
+type captureHTTPClient struct {
+	req *http.Request
+}
+
+func (c *captureHTTPClient) Do(r *http.Request) (*http.Response, error) {
+	c.req = r
+	body := `{"accessToken":{"accessKeyId":"NEW_AKID","secretAccessKey":"NEW_SECRET","sessionToken":"NEW_SESSION"},"tokenType":"aws_sigv4","expiresIn":900,"refreshToken":"NewRefreshToken"}`
+	return &http.Response{
+		StatusCode: 200,
+		Status:     "200 OK",
+		Header:     http.Header{"Content-Type": []string{"application/json"}},
+		Body:       io.NopCloser(strings.NewReader(body)),
+		Request:    r,
+	}, nil
+}
+
+// Success - the real client sends the refresh, and signs DPoP htu, for the
+// token's signInRegion
+func TestRetrieve_Refresh_SignInRegion_Endpoint(t *testing.T) {
+	token, _ := mockToken()
+	token.SignInRegion = "eu-west-1"
+	restoreOpen := mockOpenFile(token, nil)
+	_, restoreCreate := mockCreateFile(nil)
+	restoreNowTime := mockNowTime(time.Unix(60, 0).UTC())
+	defer restoreOpen()
+	defer restoreCreate()
+	defer restoreNowTime()
+
+	hc := &captureHTTPClient{}
+	svc := signin.New(signin.Options{
+		Region:      "us-east-1",
+		HTTPClient:  hc,
+		Credentials: aws.AnonymousCredentials{},
+	})
+	p := New(svc, "mocktokenpath")
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if e, a := "NEW_AKID", creds.AccessKeyID; e != a {
+		t.Errorf("akid: %q != %q", e, a)
+	}
+	if hc.req == nil {
+		t.Fatal("no request sent")
+	}
+
+	expectURL := "https://eu-west-1.signin.aws.amazon.com/v1/token"
+	if e, a := expectURL, hc.req.URL.String(); e != a {
+		t.Errorf("url: %q != %q", e, a)
+	}
+
+	parts := strings.Split(hc.req.Header.Get("DPoP"), ".")
+	if len(parts) != 3 {
+		t.Fatalf("malformed dpop header: %q", hc.req.Header.Get("DPoP"))
+	}
+	raw, err := base64.RawURLEncoding.DecodeString(parts[1])
+	if err != nil {
+		t.Fatal(err)
+	}
+	var payload dpopPayload
+	if err := json.Unmarshal(raw, &payload); err != nil {
+		t.Fatal(err)
+	}
+	if e, a := expectURL, payload.Htu; e != a {
+		t.Errorf("htu: %q != %q", e, a)
 	}
 }
