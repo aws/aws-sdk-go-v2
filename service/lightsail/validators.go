@@ -130,6 +130,26 @@ func (m *validateOpAttachStaticIp) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCheckSubdomainAvailability struct {
+}
+
+func (*validateOpCheckSubdomainAvailability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckSubdomainAvailability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckSubdomainAvailabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckSubdomainAvailabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCloseInstancePublicPorts struct {
 }
 
@@ -630,6 +650,26 @@ func (m *validateOpCreateRelationalDatabaseSnapshot) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSubdomain struct {
+}
+
+func (*validateOpCreateSubdomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSubdomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSubdomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSubdomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlarm struct {
 }
 
@@ -1025,6 +1065,26 @@ func (m *validateOpDeleteRelationalDatabaseSnapshot) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRelationalDatabaseSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSubdomain struct {
+}
+
+func (*validateOpDeleteSubdomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSubdomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSubdomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSubdomainInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2450,6 +2510,26 @@ func (m *validateOpUpdateRelationalDatabaseParameters) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSubdomainAssociation struct {
+}
+
+func (*validateOpUpdateSubdomainAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSubdomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSubdomainAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSubdomainAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAllocateStaticIpValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAllocateStaticIp{}, middleware.After)
 }
@@ -2472,6 +2552,10 @@ func addOpAttachLoadBalancerTlsCertificateValidationMiddleware(stack *middleware
 
 func addOpAttachStaticIpValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAttachStaticIp{}, middleware.After)
+}
+
+func addOpCheckSubdomainAvailabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckSubdomainAvailability{}, middleware.After)
 }
 
 func addOpCloseInstancePublicPortsValidationMiddleware(stack *middleware.Stack) error {
@@ -2574,6 +2658,10 @@ func addOpCreateRelationalDatabaseSnapshotValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpCreateRelationalDatabaseSnapshot{}, middleware.After)
 }
 
+func addOpCreateSubdomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSubdomain{}, middleware.After)
+}
+
 func addOpDeleteAlarmValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlarm{}, middleware.After)
 }
@@ -2652,6 +2740,10 @@ func addOpDeleteRelationalDatabaseValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteRelationalDatabaseSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRelationalDatabaseSnapshot{}, middleware.After)
+}
+
+func addOpDeleteSubdomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSubdomain{}, middleware.After)
 }
 
 func addOpDetachCertificateFromDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -2936,6 +3028,10 @@ func addOpUpdateRelationalDatabaseValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateRelationalDatabaseParametersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRelationalDatabaseParameters{}, middleware.After)
+}
+
+func addOpUpdateSubdomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSubdomainAssociation{}, middleware.After)
 }
 
 func validateAddOnRequest(v *types.AddOnRequest) error {
@@ -3245,6 +3341,21 @@ func validateOpAttachStaticIpInput(v *AttachStaticIpInput) error {
 	}
 	if v.InstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCheckSubdomainAvailabilityInput(v *CheckSubdomainAvailabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckSubdomainAvailabilityInput"}
+	if v.SubdomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubdomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3751,6 +3862,21 @@ func validateOpCreateRelationalDatabaseSnapshotInput(v *CreateRelationalDatabase
 	}
 }
 
+func validateOpCreateSubdomainInput(v *CreateSubdomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSubdomainInput"}
+	if v.SubdomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubdomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAlarmInput(v *DeleteAlarmInput) error {
 	if v == nil {
 		return nil
@@ -4058,6 +4184,21 @@ func validateOpDeleteRelationalDatabaseSnapshotInput(v *DeleteRelationalDatabase
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRelationalDatabaseSnapshotInput"}
 	if v.RelationalDatabaseSnapshotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseSnapshotName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSubdomainInput(v *DeleteSubdomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSubdomainInput"}
+	if v.SubdomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubdomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5343,6 +5484,24 @@ func validateOpUpdateRelationalDatabaseParametersInput(v *UpdateRelationalDataba
 	}
 	if v.Parameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSubdomainAssociationInput(v *UpdateSubdomainAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubdomainAssociationInput"}
+	if v.SubdomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubdomainName"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

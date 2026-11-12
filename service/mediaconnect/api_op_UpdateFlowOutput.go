@@ -118,6 +118,11 @@ type UpdateFlowOutputInput struct {
 	// the MediaConnect router and a MediaConnect flow.
 	RouterIntegrationTransitEncryption *types.FlowTransitEncryption
 
+	// The settings for an output that pushes a stream to a destination using the RTMP
+	// (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS
+	// encryption is specified.
+	RtmpPushSettings *types.RtmpPushOutputSettings
+
 	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
@@ -205,6 +210,11 @@ func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RouterIntegrationTransitEncryption != nil {
 		s.WriteStruct(schemas.UpdateFlowOutputRequest_RouterIntegrationTransitEncryption)
 		v.RouterIntegrationTransitEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RtmpPushSettings != nil {
+		s.WriteStruct(schemas.UpdateFlowOutputRequest_RtmpPushSettings)
+		v.RtmpPushSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.SenderControlPort != nil {

@@ -1740,12 +1740,14 @@ func (v *S3MonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 
 // The scheduler configuration for a virtual cluster on Amazon EMR on EKS. It
 // controls how many job runs can run concurrently and how many can wait in the
-// queue. When not set, no concurrency or queue limits are applied.
+// queue. If you omit this configuration, the service applies a default limit of
+// 1,000 concurrent job runs and does not limit queue depth.
 type SchedulerConfiguration struct {
 
 	// The maximum number of job runs that can be in the RUNNING state at any time for
 	// the virtual cluster. As running slots free up, queued job runs start
-	// automatically. If you omit this field, the service applies no concurrency limit.
+	// automatically. If you omit this field, the service applies a default limit of
+	// 1,000 concurrent job runs to the virtual cluster.
 	MaxConcurrentJobRuns *int32
 
 	// The maximum number of job runs that can be in the PENDING or SUBMITTED state at

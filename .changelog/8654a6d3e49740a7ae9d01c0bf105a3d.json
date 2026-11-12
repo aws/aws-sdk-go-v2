@@ -1,0 +1,8 @@
+{
+    "id": "8654a6d3-e497-40a7-ae9d-01c0bf105a3d",
+    "type": "feature",
+    "description": "MediaConnect adds four features. (1) RTMP Push on Router Input and Flows (RTMP, RTMPS, eRTMP). (2) PID Remapping on Router rewrites PIDs inline without transcoding. (3) Key Frame Switching transitions router inputs on video boundaries. (4) SRT Merge Input bonds redundant SRT streams.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

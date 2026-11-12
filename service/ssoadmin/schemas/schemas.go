@@ -587,6 +587,12 @@ var _ApplicationArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ApplicationArn",
 }, smithy.ShapeTypeString, 0)
 
+var _ApplicationArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "ApplicationArnList",
+}, smithy.ShapeTypeList, 1)
+var _ApplicationArnList_member *smithy.Schema
+
 var ApplicationAssignment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "ApplicationAssignment",
@@ -828,6 +834,11 @@ var FederationProtocol_SAML *smithy.Schema
 
 var FederationProtocol_OAUTH *smithy.Schema
 
+var _FirstOrThirdPartyApplicationArnType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "FirstOrThirdPartyApplicationArnType",
+}, smithy.ShapeTypeString, 0)
+
 var Grant = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "Grant",
@@ -972,6 +983,17 @@ var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
+var _IpCidrList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "IpCidrList",
+}, smithy.ShapeTypeList, 1)
+var _IpCidrList_member *smithy.Schema
+
+var _IpCidrType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "IpCidrType",
+}, smithy.ShapeTypeString, 0)
+
 var _IsPrimaryRegion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "IsPrimaryRegion",
@@ -1066,6 +1088,18 @@ var _NameType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "NameType",
 }, smithy.ShapeTypeString, 0)
+
+var NetworkConfigurationInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "NetworkConfigurationInfo",
+}, smithy.ShapeTypeStructure, 4)
+var NetworkConfigurationInfo_VpceAccessRequired *smithy.Schema
+
+var NetworkConfigurationInfo_RestrictSourceVpcs *smithy.Schema
+
+var NetworkConfigurationInfo_AllowSourceIps *smithy.Schema
+
+var NetworkConfigurationInfo_ExcludeApplicationArns *smithy.Schema
 
 var OidcJwtConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
@@ -1575,6 +1609,17 @@ var ValidationExceptionReason_KMS_INVALID_STATE_EXCEPTION *smithy.Schema
 
 var ValidationExceptionReason_KMS_DISABLED_EXCEPTION *smithy.Schema
 
+var _VpcArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "VpcArn",
+}, smithy.ShapeTypeString, 0)
+
+var _VpcArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssoadmin",
+	Name:      "VpcArnList",
+}, smithy.ShapeTypeList, 1)
+var _VpcArnList_member *smithy.Schema
+
 var AddRegionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "AddRegionRequest",
@@ -2026,7 +2071,7 @@ var DescribeInstanceRequest_InstanceArn *smithy.Schema
 var DescribeInstanceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "DescribeInstanceResponse",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var DescribeInstanceResponse_InstanceArn *smithy.Schema
 
 var DescribeInstanceResponse_IdentityStoreId *smithy.Schema
@@ -2048,6 +2093,8 @@ var DescribeInstanceResponse_PrimaryRegion *smithy.Schema
 var DescribeInstanceResponse_Regions *smithy.Schema
 
 var DescribeInstanceResponse_EncryptionConfigurationDetails *smithy.Schema
+
+var DescribeInstanceResponse_NetworkConfigurationDetails *smithy.Schema
 
 var DescribeInstanceResponse_PermissionSetsEnabled *smithy.Schema
 
@@ -2834,7 +2881,7 @@ var UpdateInstanceAccessControlAttributeConfigurationResponse = smithy.NewSchema
 var UpdateInstanceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
 	Name:      "UpdateInstanceRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateInstanceRequest_Name *smithy.Schema
 
 var UpdateInstanceRequest_InstanceArn *smithy.Schema
@@ -2842,6 +2889,8 @@ var UpdateInstanceRequest_InstanceArn *smithy.Schema
 var UpdateInstanceRequest_EncryptionConfiguration *smithy.Schema
 
 var UpdateInstanceRequest_PermissionSetsEnabled *smithy.Schema
+
+var UpdateInstanceRequest_NetworkConfiguration *smithy.Schema
 
 var UpdateInstanceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssoadmin",
@@ -3002,6 +3051,8 @@ func init() {
 	Application_CreatedDate = Application.AddMember("CreatedDate", _Date)
 
 	Application_CreatedFrom = Application.AddMember("CreatedFrom", _RegionName)
+
+	_ApplicationArnList_member = _ApplicationArnList.AddMember("member", _FirstOrThirdPartyApplicationArnType)
 
 	ApplicationAssignment_ApplicationArn = ApplicationAssignment.AddMember("ApplicationArn", _ApplicationArn)
 
@@ -3191,6 +3242,8 @@ func init() {
 
 	InternalServerException_Message = InternalServerException.AddMember("Message", _InternalFailureMessage)
 
+	_IpCidrList_member = _IpCidrList.AddMember("member", _IpCidrType)
+
 	JwksRetrievalOption_OPEN_ID_DISCOVERY = JwksRetrievalOption.AddMember("OPEN_ID_DISCOVERY", smithyprelude.Unit)
 
 	ListAccountAssignmentsFilter_AccountId = ListAccountAssignmentsFilter.AddMember("AccountId", _AccountId)
@@ -3200,6 +3253,16 @@ func init() {
 	ListApplicationsFilter_ApplicationAccount = ListApplicationsFilter.AddMember("ApplicationAccount", _AccountId)
 
 	ListApplicationsFilter_ApplicationProvider = ListApplicationsFilter.AddMember("ApplicationProvider", _ApplicationProviderArn)
+
+	_VpcArnList_member = _VpcArnList.AddMember("member", _VpcArn)
+
+	NetworkConfigurationInfo_VpceAccessRequired = NetworkConfigurationInfo.AddMember("VpceAccessRequired", smithyprelude.Boolean)
+
+	NetworkConfigurationInfo_RestrictSourceVpcs = NetworkConfigurationInfo.AddMember("RestrictSourceVpcs", _VpcArnList)
+
+	NetworkConfigurationInfo_AllowSourceIps = NetworkConfigurationInfo.AddMember("AllowSourceIps", _IpCidrList)
+
+	NetworkConfigurationInfo_ExcludeApplicationArns = NetworkConfigurationInfo.AddMember("ExcludeApplicationArns", _ApplicationArnList)
 
 	OidcJwtConfiguration_IssuerUrl = OidcJwtConfiguration.AddMember("IssuerUrl", _TrustedTokenIssuerUrl)
 
@@ -3568,6 +3631,8 @@ func init() {
 	DescribeInstanceResponse_Regions = DescribeInstanceResponse.AddMember("Regions", _RegionMetadataList)
 
 	DescribeInstanceResponse_EncryptionConfigurationDetails = DescribeInstanceResponse.AddMember("EncryptionConfigurationDetails", EncryptionConfigurationDetails)
+
+	DescribeInstanceResponse_NetworkConfigurationDetails = DescribeInstanceResponse.AddMember("NetworkConfigurationDetails", NetworkConfigurationInfo)
 
 	DescribeInstanceResponse_PermissionSetsEnabled = DescribeInstanceResponse.AddMember("PermissionSetsEnabled", smithyprelude.Boolean)
 
@@ -3984,6 +4049,8 @@ func init() {
 	UpdateInstanceRequest_EncryptionConfiguration = UpdateInstanceRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
 
 	UpdateInstanceRequest_PermissionSetsEnabled = UpdateInstanceRequest.AddMember("PermissionSetsEnabled", smithyprelude.Boolean)
+
+	UpdateInstanceRequest_NetworkConfiguration = UpdateInstanceRequest.AddMember("NetworkConfiguration", NetworkConfigurationInfo)
 
 	UpdatePermissionSetRequest_InstanceArn = UpdatePermissionSetRequest.AddMember("InstanceArn", _InstanceArn)
 

@@ -17120,6 +17120,26 @@ func TestCheckResponseSnapshot_DescribeHub(t *testing.T) {
 		FailureReason:    ptr.String("__FailureReason__"),
 		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
+		LastModifiedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeHub.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -17174,6 +17194,26 @@ func TestCheckResponseSnapshot_DescribeHubContent(t *testing.T) {
 		FailureReason:    ptr.String("__FailureReason__"),
 		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
+		LastModifiedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeHubContent.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -35426,6 +35466,26 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 					FailureReason:    ptr.String("__FailureReason__"),
 					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
+					LastModifiedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
 					Tags: []types.Tag{
 						{
 							Key:   ptr.String("__Key__"),
@@ -40684,6 +40744,26 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 					FailureReason:    ptr.String("__FailureReason__"),
 					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
+					LastModifiedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
 					Tags: []types.Tag{
 						{
 							Key:   ptr.String("__Key__"),

@@ -295,6 +295,16 @@ func TestCheckRequestSnapshot_CreateEnvironment(t *testing.T) {
 		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
 		MinWebservers:       ptr.Int32(1),
 		MaxWebservers:       ptr.Int32(1),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: map[string]types.TeamConfig{
+			"key0": {
+				SourceBucketArn: ptr.String("__SourceBucketArn__"),
+				DagS3Path:       ptr.String("__DagS3Path__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -673,6 +683,22 @@ func TestCheckRequestSnapshot_UpdateEnvironment(t *testing.T) {
 		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
 		WebserverAccessMode:          types.WebserverAccessMode("PRIVATE_ONLY"),
 		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: &types.UpdateTeamsInput{
+			AddOrUpdate: map[string]types.TeamConfig{
+				"key0": {
+					SourceBucketArn: ptr.String("__SourceBucketArn__"),
+					DagS3Path:       ptr.String("__DagS3Path__"),
+				},
+			},
+			Remove: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -784,6 +810,16 @@ func TestUpdateRequestSnapshot_CreateEnvironment(t *testing.T) {
 		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
 		MinWebservers:       ptr.Int32(1),
 		MaxWebservers:       ptr.Int32(1),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: map[string]types.TeamConfig{
+			"key0": {
+				SourceBucketArn: ptr.String("__SourceBucketArn__"),
+				DagS3Path:       ptr.String("__DagS3Path__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1162,6 +1198,22 @@ func TestUpdateRequestSnapshot_UpdateEnvironment(t *testing.T) {
 		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
 		WebserverAccessMode:          types.WebserverAccessMode("PRIVATE_ONLY"),
 		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: &types.UpdateTeamsInput{
+			AddOrUpdate: map[string]types.TeamConfig{
+				"key0": {
+					SourceBucketArn: ptr.String("__SourceBucketArn__"),
+					DagS3Path:       ptr.String("__DagS3Path__"),
+				},
+			},
+			Remove: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

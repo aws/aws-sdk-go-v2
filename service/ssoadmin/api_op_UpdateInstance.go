@@ -21,9 +21,13 @@ import (
 //
 //   - Enable permission sets for the instance by specifying PermissionSetsEnabled .
 //
-// If you specify both EncryptionConfiguration and PermissionSetsEnabled in a
-// request, the request returns a ValidationException . To perform both operations,
-// call UpdateInstance separately for each. You can make the two calls in parallel.
+//   - Update the network configuration of the instance by specifying
+//     NetworkConfiguration .
+//
+// A request that specifies more than one of EncryptionConfiguration ,
+// PermissionSetsEnabled , and NetworkConfiguration returns a ValidationException .
+// To perform more than one of these operations, call UpdateInstance separately
+// for each. The calls can be made in parallel.
 func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput, optFns ...func(*Options)) (*UpdateInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceInput{}
@@ -51,17 +55,30 @@ type UpdateInstanceInput struct {
 	// Specifies the encryption configuration for your IAM Identity Center instance.
 	// You can use this to configure customer managed KMS keys or Amazon Web Services
 	// owned KMS keys for encrypting your instance data.
+	//
+	// You can't set more than one of EncryptionConfiguration , PermissionSetsEnabled ,
+	// and NetworkConfiguration in the same request. To configure more than one of
+	// them, make a separate UpdateInstance call for each. These calls can be made in
+	// parallel.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Updates the instance name.
 	Name *string
 
+	// Specifies the network access controls for your Identity Center instance. Use
+	// this to require that access to your instance and to applications originates from
+	// VPC endpoints, and to optionally restrict which VPCs are permitted, allow
+	// specific IP address ranges that bypass the VPC endpoint requirement, or exempt
+	// specific applications from the controls.
+	//
+	// If you omit NetworkConfiguration , the stored network configuration is
+	// preserved. If you specify NetworkConfiguration , it replaces the stored network
+	// configuration in its entirety. Any list that you omit from the object, or
+	// include as an empty list, is cleared.
+	NetworkConfiguration *types.NetworkConfigurationInfo
+
 	// Enables permission sets for this Identity Center instance. The only accepted
 	// value is true . After permission sets are enabled, they cannot be disabled.
-	//
-	// You can't set EncryptionConfiguration and PermissionSetsEnabled in the same
-	// request. To configure both, make two separate UpdateInstance calls. You can
-	// make these calls in parallel.
 	PermissionSetsEnabled *bool
 
 	noSmithyDocumentSerde
@@ -84,6 +101,11 @@ func (v *UpdateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateInstanceRequest_Name, *v.Name)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateInstanceRequest_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.PermissionSetsEnabled != nil {
 		s.WriteBool(schemas.UpdateInstanceRequest_PermissionSetsEnabled, *v.PermissionSetsEnabled)

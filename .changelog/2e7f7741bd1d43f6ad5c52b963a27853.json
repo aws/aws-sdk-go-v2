@@ -1,0 +1,8 @@
+{
+    "id": "2e7f7741-bd1d-43f6-ad5c-52b963a27853",
+    "type": "feature",
+    "description": "Adds support for saving, retrieving, listing, and deleting CloudWatch metric data query definitions.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

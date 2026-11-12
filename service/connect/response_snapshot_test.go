@@ -13568,6 +13568,8 @@ func TestCheckResponseSnapshot_ListIntegrationAssociations(t *testing.T) {
 				SourceApplicationUrl:      ptr.String("__SourceApplicationUrl__"),
 				SourceApplicationName:     ptr.String("__SourceApplicationName__"),
 				SourceType:                types.SourceType("SALESFORCE"),
+				LastModifiedTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion:        ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				IntegrationAssociationId:  ptr.String("__IntegrationAssociationId__"),
@@ -13578,6 +13580,8 @@ func TestCheckResponseSnapshot_ListIntegrationAssociations(t *testing.T) {
 				SourceApplicationUrl:      ptr.String("__SourceApplicationUrl__"),
 				SourceApplicationName:     ptr.String("__SourceApplicationName__"),
 				SourceType:                types.SourceType("SALESFORCE"),
+				LastModifiedTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion:        ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

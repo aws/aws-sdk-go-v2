@@ -76,6 +76,9 @@ type DescribeHubOutput struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
+	// Information about the user who created the hub.
+	CreatedBy *types.UserContext
+
 	// The failure reason if importing hub content failed.
 	FailureReason *string
 
@@ -87,6 +90,9 @@ type DescribeHubOutput struct {
 
 	// The searchable keywords for the hub.
 	HubSearchKeywords []string
+
+	// Information about the user who last modified the hub.
+	LastModifiedBy *types.UserContext
 
 	// The Amazon S3 storage configuration for the hub.
 	S3StorageConfig *types.HubS3StorageConfig
@@ -104,6 +110,11 @@ func (v *DescribeHubOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeHubResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeHubResponse_CreationTime, *v.CreationTime)
 	}
@@ -128,6 +139,11 @@ func (v *DescribeHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubStatus != "" {
 		s.WriteString(schemas.DescribeHubResponse_HubStatus, string(v.HubStatus))
 	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeHubResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeHubResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -140,6 +156,9 @@ func (v *DescribeHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DescribeHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeHubResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DescribeHubResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
 		case schemas.DescribeHubResponse_CreationTime:
 			v.CreationTime = new(time.Time)
 			return d.ReadTime(schemas.DescribeHubResponse_CreationTime, v.CreationTime)
@@ -167,6 +186,9 @@ func (v *DescribeHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.HubStatus = types.HubStatus(ev)
 			return nil
+		case schemas.DescribeHubResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
 		case schemas.DescribeHubResponse_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.DescribeHubResponse_LastModifiedTime, v.LastModifiedTime)

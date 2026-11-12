@@ -2,4 +2,4 @@ POST /
 
 Content-Type: application/x-www-form-urlencoded
 
-Action=ModifyAccountVpcEncryptionControl&DryRun=true&EgressOnlyInternetGateway=enable&ElasticFileSystem=enable&InternetGateway=enable&Lambda=enable&Mode=unmanaged&NatGateway=enable&Version=2016-11-15&VirtualPrivateGateway=enable&VpcLattice=enable&VpcPeering=enable
+Action=ModifyAccountVpcEncryptionControl&ApiGatewayV2=enable&DryRun=true&EgressOnlyInternetGateway=enable&ElasticFileSystem=enable&GlobalAccelerator=enable&InternetGateway=enable&Lambda=enable&Mode=unmanaged&NatGateway=enable&Version=2016-11-15&VirtualPrivateGateway=enable&VpcLattice=enable&VpcPeering=enable

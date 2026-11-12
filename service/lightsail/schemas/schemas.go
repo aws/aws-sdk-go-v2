@@ -50,6 +50,13 @@ var AttachStaticIp = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/ls/api/2016-11-28/AttachStaticIp",
 	Code: 200})
 
+var CheckSubdomainAvailability = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "CheckSubdomainAvailability",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ls/api/2016-11-28/CheckSubdomainAvailability",
+	Code: 200})
+
 var CloseInstancePublicPorts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "CloseInstancePublicPorts",
@@ -232,6 +239,13 @@ var CreateRelationalDatabaseSnapshot = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/ls/api/2016-11-28/CreateRelationalDatabaseSnapshot",
 	Code: 200})
 
+var CreateSubdomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "CreateSubdomain",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ls/api/2016-11-28/CreateSubdomain",
+	Code: 200})
+
 var DeleteAlarm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "DeleteAlarm",
@@ -377,6 +391,13 @@ var DeleteRelationalDatabaseSnapshot = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteRelationalDatabaseSnapshot",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ls/api/2016-11-28/DeleteRelationalDatabaseSnapshot",
+	Code: 200})
+
+var DeleteSubdomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "DeleteSubdomain",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ls/api/2016-11-28/DeleteSubdomain",
 	Code: 200})
 
 var DetachCertificateFromDistribution = smithy.NewSchema(smithy.ShapeID{
@@ -897,6 +918,13 @@ var GetStaticIps = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/ls/api/2016-11-28/GetStaticIps",
 	Code: 200})
 
+var GetSubdomains = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "GetSubdomains",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ls/api/2016-11-28/GetSubdomains",
+	Code: 200})
+
 var ImportKeyPair = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "ImportKeyPair",
@@ -1140,6 +1168,13 @@ var UpdateRelationalDatabaseParameters = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateRelationalDatabaseParameters",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ls/api/2016-11-28/UpdateRelationalDatabaseParameters",
+	Code: 200})
+
+var UpdateSubdomainAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "UpdateSubdomainAssociation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ls/api/2016-11-28/UpdateSubdomainAssociation",
 	Code: 200})
 
 var _Lightsail_20161128 = smithy.NewSchema(smithy.ShapeID{
@@ -3503,7 +3538,7 @@ var _KeyPairList_member *smithy.Schema
 var LightsailDistribution = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "LightsailDistribution",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var LightsailDistribution_name *smithy.Schema
 
 var LightsailDistribution_arn *smithy.Schema
@@ -3551,6 +3586,32 @@ var LightsailDistribution_defaultRootObject *smithy.Schema
 var LightsailDistribution_customErrorResponses *smithy.Schema
 
 var LightsailDistribution_waf *smithy.Schema
+
+var LightsailDistribution_subdomain *smithy.Schema
+
+var LightsailDistributionSubdomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "LightsailDistributionSubdomain",
+}, smithy.ShapeTypeStructure, 4)
+var LightsailDistributionSubdomain_name *smithy.Schema
+
+var LightsailDistributionSubdomain_state *smithy.Schema
+
+var LightsailDistributionSubdomain_errorCode *smithy.Schema
+
+var LightsailDistributionSubdomain_errorDetails *smithy.Schema
+
+var LightsailDistributionSubdomainStateEnum = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "LightsailDistributionSubdomainStateEnum",
+}, smithy.ShapeTypeEnum, 4)
+var LightsailDistributionSubdomainStateEnum_CREATING *smithy.Schema
+
+var LightsailDistributionSubdomainStateEnum_ATTACHING *smithy.Schema
+
+var LightsailDistributionSubdomainStateEnum_ATTACHED *smithy.Schema
+
+var LightsailDistributionSubdomainStateEnum_ERROR *smithy.Schema
 
 var LoadBalancer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -4244,7 +4305,7 @@ var OperationStatus_Succeeded *smithy.Schema
 var OperationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "OperationType",
-}, smithy.ShapeTypeEnum, 84)
+}, smithy.ShapeTypeEnum, 87)
 var OperationType_DeleteKnownHostKeys *smithy.Schema
 
 var OperationType_DeleteInstance *smithy.Schema
@@ -4412,6 +4473,12 @@ var OperationType_StopGUISession *smithy.Schema
 var OperationType_SetupInstanceHttps *smithy.Schema
 
 var OperationType_GetProfile *smithy.Schema
+
+var OperationType_CreateSubdomain *smithy.Schema
+
+var OperationType_UpdateSubdomainAssociation *smithy.Schema
+
+var OperationType_DeleteSubdomain *smithy.Schema
 
 var Origin = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -5092,7 +5159,7 @@ var _ResourcesBudgetEstimate_member *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 20)
+}, smithy.ShapeTypeEnum, 21)
 var ResourceType_ContainerService *smithy.Schema
 
 var ResourceType_Instance *smithy.Schema
@@ -5132,6 +5199,8 @@ var ResourceType_Distribution *smithy.Schema
 var ResourceType_Certificate *smithy.Schema
 
 var ResourceType_Bucket *smithy.Schema
+
+var ResourceType_Subdomain *smithy.Schema
 
 var _RevocationReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -5364,6 +5433,80 @@ var _StringMax256 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "StringMax256",
 }, smithy.ShapeTypeString, 0)
+
+var Subdomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "Subdomain",
+}, smithy.ShapeTypeStructure, 12)
+var Subdomain_subdomainName *smithy.Schema
+
+var Subdomain_arn *smithy.Schema
+
+var Subdomain_fqdn *smithy.Schema
+
+var Subdomain_depth *smithy.Schema
+
+var Subdomain_state *smithy.Schema
+
+var Subdomain_attachedResource *smithy.Schema
+
+var Subdomain_attachingResource *smithy.Schema
+
+var Subdomain_location *smithy.Schema
+
+var Subdomain_createdAt *smithy.Schema
+
+var Subdomain_parentFqdn *smithy.Schema
+
+var Subdomain_children *smithy.Schema
+
+var Subdomain_tags *smithy.Schema
+
+var SubdomainAssociationAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "SubdomainAssociationAction",
+}, smithy.ShapeTypeEnum, 3)
+var SubdomainAssociationAction_ASSOCIATE *smithy.Schema
+
+var SubdomainAssociationAction_DISASSOCIATE *smithy.Schema
+
+var SubdomainAssociationAction_TRANSFER *smithy.Schema
+
+var SubdomainAttachableResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "SubdomainAttachableResource",
+}, smithy.ShapeTypeStructure, 3)
+var SubdomainAttachableResource_arn *smithy.Schema
+
+var SubdomainAttachableResource_name *smithy.Schema
+
+var SubdomainAttachableResource_attachedAt *smithy.Schema
+
+var _SubdomainList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "SubdomainList",
+}, smithy.ShapeTypeList, 1)
+var _SubdomainList_member *smithy.Schema
+
+var SubdomainState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "SubdomainState",
+}, smithy.ShapeTypeEnum, 8)
+var SubdomainState_CREATING *smithy.Schema
+
+var SubdomainState_CREATE_FAILED *smithy.Schema
+
+var SubdomainState_UNATTACHED *smithy.Schema
+
+var SubdomainState_ATTACHING *smithy.Schema
+
+var SubdomainState_ATTACHED *smithy.Schema
+
+var SubdomainState_DETACHING *smithy.Schema
+
+var SubdomainState_TRANSFERRING *smithy.Schema
+
+var SubdomainState_IMPLICIT *smithy.Schema
 
 var _SubjectAlternativeNameList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -5642,6 +5785,24 @@ var AttachStaticIpResult = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AttachStaticIpResult_operations *smithy.Schema
 
+var CheckSubdomainAvailabilityRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "CheckSubdomainAvailabilityRequest",
+}, smithy.ShapeTypeStructure, 2)
+var CheckSubdomainAvailabilityRequest_subdomainName *smithy.Schema
+
+var CheckSubdomainAvailabilityRequest_reserve *smithy.Schema
+
+var CheckSubdomainAvailabilityResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "CheckSubdomainAvailabilityResult",
+}, smithy.ShapeTypeStructure, 3)
+var CheckSubdomainAvailabilityResult_available *smithy.Schema
+
+var CheckSubdomainAvailabilityResult_reservationExpiresAt *smithy.Schema
+
+var CheckSubdomainAvailabilityResult_subdomainName *smithy.Schema
+
 var CloseInstancePublicPortsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "CloseInstancePublicPortsRequest",
@@ -5880,7 +6041,7 @@ var CreateDiskSnapshotResult_operations *smithy.Schema
 var CreateDistributionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "CreateDistributionRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateDistributionRequest_distributionName *smithy.Schema
 
 var CreateDistributionRequest_origin *smithy.Schema
@@ -5910,6 +6071,8 @@ var CreateDistributionRequest_customErrorResponses *smithy.Schema
 var CreateDistributionRequest_enableWaf *smithy.Schema
 
 var CreateDistributionRequest_wafRules *smithy.Schema
+
+var CreateDistributionRequest_subdomainName *smithy.Schema
 
 var CreateDistributionResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -6193,6 +6356,22 @@ var CreateRelationalDatabaseSnapshotResult = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateRelationalDatabaseSnapshotResult_operations *smithy.Schema
 
+var CreateSubdomainRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "CreateSubdomainRequest",
+}, smithy.ShapeTypeStructure, 2)
+var CreateSubdomainRequest_subdomainName *smithy.Schema
+
+var CreateSubdomainRequest_tags *smithy.Schema
+
+var CreateSubdomainResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "CreateSubdomainResult",
+}, smithy.ShapeTypeStructure, 2)
+var CreateSubdomainResult_subdomain *smithy.Schema
+
+var CreateSubdomainResult_operation *smithy.Schema
+
 var DeleteAlarmRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "DeleteAlarmRequest",
@@ -6466,6 +6645,20 @@ var DeleteRelationalDatabaseSnapshotResult = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteRelationalDatabaseSnapshotResult",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteRelationalDatabaseSnapshotResult_operations *smithy.Schema
+
+var DeleteSubdomainRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "DeleteSubdomainRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteSubdomainRequest_subdomainName *smithy.Schema
+
+var DeleteSubdomainResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "DeleteSubdomainResult",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSubdomainResult_subdomain *smithy.Schema
+
+var DeleteSubdomainResult_operation *smithy.Schema
 
 var DetachCertificateFromDistributionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -7590,6 +7783,22 @@ var GetStaticIpsResult_staticIps *smithy.Schema
 
 var GetStaticIpsResult_nextPageToken *smithy.Schema
 
+var GetSubdomainsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "GetSubdomainsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetSubdomainsRequest_subdomainName *smithy.Schema
+
+var GetSubdomainsRequest_pageToken *smithy.Schema
+
+var GetSubdomainsResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "GetSubdomainsResult",
+}, smithy.ShapeTypeStructure, 2)
+var GetSubdomainsResult_subdomains *smithy.Schema
+
+var GetSubdomainsResult_nextPageToken *smithy.Schema
+
 var ImportKeyPairRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "ImportKeyPairRequest",
@@ -8163,6 +8372,24 @@ var UpdateRelationalDatabaseParametersResult = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateRelationalDatabaseParametersResult_operations *smithy.Schema
 
+var UpdateSubdomainAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "UpdateSubdomainAssociationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateSubdomainAssociationRequest_subdomainName *smithy.Schema
+
+var UpdateSubdomainAssociationRequest_action *smithy.Schema
+
+var UpdateSubdomainAssociationRequest_targetResourceArn *smithy.Schema
+
+var UpdateSubdomainAssociationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "UpdateSubdomainAssociationResult",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateSubdomainAssociationResult_subdomain *smithy.Schema
+
+var UpdateSubdomainAssociationResult_operation *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
@@ -8361,6 +8588,8 @@ func init() {
 	ResourceType_Certificate = ResourceType.AddMember("Certificate", smithyprelude.Unit)
 
 	ResourceType_Bucket = ResourceType.AddMember("Bucket", smithyprelude.Unit)
+
+	ResourceType_Subdomain = ResourceType.AddMember("Subdomain", smithyprelude.Unit)
 
 	MonitoredResourceInfo_arn = MonitoredResourceInfo.AddMember("arn", _ResourceArn)
 
@@ -9516,6 +9745,22 @@ func init() {
 
 	WafConfig_wafRules = WafConfig.AddMember("wafRules", _WafRuleList)
 
+	LightsailDistributionSubdomainStateEnum_CREATING = LightsailDistributionSubdomainStateEnum.AddMember("CREATING", smithyprelude.Unit)
+
+	LightsailDistributionSubdomainStateEnum_ATTACHING = LightsailDistributionSubdomainStateEnum.AddMember("ATTACHING", smithyprelude.Unit)
+
+	LightsailDistributionSubdomainStateEnum_ATTACHED = LightsailDistributionSubdomainStateEnum.AddMember("ATTACHED", smithyprelude.Unit)
+
+	LightsailDistributionSubdomainStateEnum_ERROR = LightsailDistributionSubdomainStateEnum.AddMember("ERROR", smithyprelude.Unit)
+
+	LightsailDistributionSubdomain_name = LightsailDistributionSubdomain.AddMember("name", _string)
+
+	LightsailDistributionSubdomain_state = LightsailDistributionSubdomain.AddMember("state", LightsailDistributionSubdomainStateEnum)
+
+	LightsailDistributionSubdomain_errorCode = LightsailDistributionSubdomain.AddMember("errorCode", _string)
+
+	LightsailDistributionSubdomain_errorDetails = LightsailDistributionSubdomain.AddMember("errorDetails", _string)
+
 	LightsailDistribution_name = LightsailDistribution.AddMember("name", _ResourceName)
 
 	LightsailDistribution_arn = LightsailDistribution.AddMember("arn", _NonEmptyString)
@@ -9563,6 +9808,8 @@ func init() {
 	LightsailDistribution_customErrorResponses = LightsailDistribution.AddMember("customErrorResponses", _DistributionCustomErrorResponseList)
 
 	LightsailDistribution_waf = LightsailDistribution.AddMember("waf", WafConfig)
+
+	LightsailDistribution_subdomain = LightsailDistribution.AddMember("subdomain", LightsailDistributionSubdomain)
 
 	_DistributionList_member = _DistributionList.AddMember("member", LightsailDistribution)
 
@@ -10552,6 +10799,12 @@ func init() {
 
 	OperationType_GetProfile = OperationType.AddMember("GetProfile", smithyprelude.Unit)
 
+	OperationType_CreateSubdomain = OperationType.AddMember("CreateSubdomain", smithyprelude.Unit)
+
+	OperationType_UpdateSubdomainAssociation = OperationType.AddMember("UpdateSubdomainAssociation", smithyprelude.Unit)
+
+	OperationType_DeleteSubdomain = OperationType.AddMember("DeleteSubdomain", smithyprelude.Unit)
+
 	OperationStatus_NotStarted = OperationStatus.AddMember("NotStarted", smithyprelude.Unit)
 
 	OperationStatus_Started = OperationStatus.AddMember("Started", smithyprelude.Unit)
@@ -10978,6 +11231,60 @@ func init() {
 
 	Status_FailedStoppingGUISession = Status.AddMember("FailedStoppingGUISession", smithyprelude.Unit)
 
+	SubdomainState_CREATING = SubdomainState.AddMember("CREATING", smithyprelude.Unit)
+
+	SubdomainState_CREATE_FAILED = SubdomainState.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	SubdomainState_UNATTACHED = SubdomainState.AddMember("UNATTACHED", smithyprelude.Unit)
+
+	SubdomainState_ATTACHING = SubdomainState.AddMember("ATTACHING", smithyprelude.Unit)
+
+	SubdomainState_ATTACHED = SubdomainState.AddMember("ATTACHED", smithyprelude.Unit)
+
+	SubdomainState_DETACHING = SubdomainState.AddMember("DETACHING", smithyprelude.Unit)
+
+	SubdomainState_TRANSFERRING = SubdomainState.AddMember("TRANSFERRING", smithyprelude.Unit)
+
+	SubdomainState_IMPLICIT = SubdomainState.AddMember("IMPLICIT", smithyprelude.Unit)
+
+	SubdomainAttachableResource_arn = SubdomainAttachableResource.AddMember("arn", _NonEmptyString)
+
+	SubdomainAttachableResource_name = SubdomainAttachableResource.AddMember("name", _ResourceName)
+
+	SubdomainAttachableResource_attachedAt = SubdomainAttachableResource.AddMember("attachedAt", _IsoDate)
+
+	_SubdomainList_member = _SubdomainList.AddMember("member", Subdomain)
+
+	Subdomain_subdomainName = Subdomain.AddMember("subdomainName", _string)
+
+	Subdomain_arn = Subdomain.AddMember("arn", _NonEmptyString)
+
+	Subdomain_fqdn = Subdomain.AddMember("fqdn", _string)
+
+	Subdomain_depth = Subdomain.AddMember("depth", _integer)
+
+	Subdomain_state = Subdomain.AddMember("state", SubdomainState)
+
+	Subdomain_attachedResource = Subdomain.AddMember("attachedResource", SubdomainAttachableResource)
+
+	Subdomain_attachingResource = Subdomain.AddMember("attachingResource", SubdomainAttachableResource)
+
+	Subdomain_location = Subdomain.AddMember("location", ResourceLocation)
+
+	Subdomain_createdAt = Subdomain.AddMember("createdAt", _IsoDate)
+
+	Subdomain_parentFqdn = Subdomain.AddMember("parentFqdn", _string)
+
+	Subdomain_children = Subdomain.AddMember("children", _SubdomainList)
+
+	Subdomain_tags = Subdomain.AddMember("tags", _TagList)
+
+	SubdomainAssociationAction_ASSOCIATE = SubdomainAssociationAction.AddMember("ASSOCIATE", smithyprelude.Unit)
+
+	SubdomainAssociationAction_DISASSOCIATE = SubdomainAssociationAction.AddMember("DISASSOCIATE", smithyprelude.Unit)
+
+	SubdomainAssociationAction_TRANSFER = SubdomainAssociationAction.AddMember("TRANSFER", smithyprelude.Unit)
+
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
 	UnauthenticatedException_code = UnauthenticatedException.AddMember("code", _string)
@@ -11033,6 +11340,16 @@ func init() {
 	AttachStaticIpRequest_instanceName = AttachStaticIpRequest.AddMember("instanceName", _ResourceName)
 
 	AttachStaticIpResult_operations = AttachStaticIpResult.AddMember("operations", _OperationList)
+
+	CheckSubdomainAvailabilityRequest_subdomainName = CheckSubdomainAvailabilityRequest.AddMember("subdomainName", _string)
+
+	CheckSubdomainAvailabilityRequest_reserve = CheckSubdomainAvailabilityRequest.AddMember("reserve", _boolean)
+
+	CheckSubdomainAvailabilityResult_available = CheckSubdomainAvailabilityResult.AddMember("available", _boolean)
+
+	CheckSubdomainAvailabilityResult_reservationExpiresAt = CheckSubdomainAvailabilityResult.AddMember("reservationExpiresAt", _IsoDate)
+
+	CheckSubdomainAvailabilityResult_subdomainName = CheckSubdomainAvailabilityResult.AddMember("subdomainName", _string)
 
 	CloseInstancePublicPortsRequest_portInfo = CloseInstancePublicPortsRequest.AddMember("portInfo", PortInfo)
 
@@ -11193,6 +11510,8 @@ func init() {
 	CreateDistributionRequest_enableWaf = CreateDistributionRequest.AddMember("enableWaf", _boolean)
 
 	CreateDistributionRequest_wafRules = CreateDistributionRequest.AddMember("wafRules", _WafRuleList)
+
+	CreateDistributionRequest_subdomainName = CreateDistributionRequest.AddMember("subdomainName", _string)
 
 	CreateDistributionResult_distribution = CreateDistributionResult.AddMember("distribution", LightsailDistribution)
 
@@ -11376,6 +11695,14 @@ func init() {
 
 	CreateRelationalDatabaseSnapshotResult_operations = CreateRelationalDatabaseSnapshotResult.AddMember("operations", _OperationList)
 
+	CreateSubdomainRequest_subdomainName = CreateSubdomainRequest.AddMember("subdomainName", _string)
+
+	CreateSubdomainRequest_tags = CreateSubdomainRequest.AddMember("tags", _TagList)
+
+	CreateSubdomainResult_subdomain = CreateSubdomainResult.AddMember("subdomain", Subdomain)
+
+	CreateSubdomainResult_operation = CreateSubdomainResult.AddMember("operation", Operation)
+
 	DeleteAlarmRequest_alarmName = DeleteAlarmRequest.AddMember("alarmName", _ResourceName, &smithytraits.HTTPLabel{})
 
 	DeleteAlarmResult_operations = DeleteAlarmResult.AddMember("operations", _OperationList)
@@ -11479,6 +11806,12 @@ func init() {
 	DeleteRelationalDatabaseSnapshotRequest_relationalDatabaseSnapshotName = DeleteRelationalDatabaseSnapshotRequest.AddMember("relationalDatabaseSnapshotName", _ResourceName)
 
 	DeleteRelationalDatabaseSnapshotResult_operations = DeleteRelationalDatabaseSnapshotResult.AddMember("operations", _OperationList)
+
+	DeleteSubdomainRequest_subdomainName = DeleteSubdomainRequest.AddMember("subdomainName", _string)
+
+	DeleteSubdomainResult_subdomain = DeleteSubdomainResult.AddMember("subdomain", Subdomain)
+
+	DeleteSubdomainResult_operation = DeleteSubdomainResult.AddMember("operation", Operation)
 
 	DetachCertificateFromDistributionRequest_distributionName = DetachCertificateFromDistributionRequest.AddMember("distributionName", _ResourceName)
 
@@ -12006,6 +12339,14 @@ func init() {
 
 	GetStaticIpsResult_nextPageToken = GetStaticIpsResult.AddMember("nextPageToken", _string)
 
+	GetSubdomainsRequest_subdomainName = GetSubdomainsRequest.AddMember("subdomainName", _string)
+
+	GetSubdomainsRequest_pageToken = GetSubdomainsRequest.AddMember("pageToken", _string)
+
+	GetSubdomainsResult_subdomains = GetSubdomainsResult.AddMember("subdomains", _SubdomainList)
+
+	GetSubdomainsResult_nextPageToken = GetSubdomainsResult.AddMember("nextPageToken", _string)
+
 	ImportKeyPairRequest_keyPairName = ImportKeyPairRequest.AddMember("keyPairName", _ResourceName)
 
 	ImportKeyPairRequest_publicKeyBase64 = ImportKeyPairRequest.AddMember("publicKeyBase64", _Base64)
@@ -12295,5 +12636,15 @@ func init() {
 	UpdateRelationalDatabaseParametersRequest_parameters = UpdateRelationalDatabaseParametersRequest.AddMember("parameters", _RelationalDatabaseParameterList)
 
 	UpdateRelationalDatabaseParametersResult_operations = UpdateRelationalDatabaseParametersResult.AddMember("operations", _OperationList)
+
+	UpdateSubdomainAssociationRequest_subdomainName = UpdateSubdomainAssociationRequest.AddMember("subdomainName", _string)
+
+	UpdateSubdomainAssociationRequest_action = UpdateSubdomainAssociationRequest.AddMember("action", SubdomainAssociationAction)
+
+	UpdateSubdomainAssociationRequest_targetResourceArn = UpdateSubdomainAssociationRequest.AddMember("targetResourceArn", _string)
+
+	UpdateSubdomainAssociationResult_subdomain = UpdateSubdomainAssociationResult.AddMember("subdomain", Subdomain)
+
+	UpdateSubdomainAssociationResult_operation = UpdateSubdomainAssociationResult.AddMember("operation", Operation)
 
 }

@@ -301,6 +301,11 @@ func (v *ExportFilesMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 // for an existing stream group, call [UpdateStreamGroup]. To add a new location and specify its
 // capacity, call [AddStreamGroupLocations].
 //
+// When you modify capacity for an existing location, always specify
+// AlwaysOnCapacity , MaximumCapacity , and TargetIdleCapacity in the same
+// request. If you omit one or more of these values, the service applies internal
+// defaults for the missing values. These defaults might not match what you intend.
+//
 // [UpdateStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
 // [AddStreamGroupLocations]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AddStreamGroupLocations.html
 type LocationConfiguration struct {

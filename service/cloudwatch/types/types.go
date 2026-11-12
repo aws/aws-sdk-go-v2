@@ -2895,6 +2895,81 @@ func (v *MetricDataQuery) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Summary information about a metric data query definition. To get the
+// expression, call GetMetricDataQueryDefinition .
+type MetricDataQueryDefinitionSummary struct {
+
+	// The ID of the metric data query definition.
+	//
+	// This member is required.
+	Id *string
+
+	// The path of the metric data query definition.
+	//
+	// This member is required.
+	Path *string
+
+	// The language of the expression. Valid values are the following:
+	//
+	//   - PROMQL – A PromQL query.
+	//
+	//   - SQL – A CloudWatch Metrics Insights query.
+	//
+	//   - METRIC_MATH – A metric math expression.
+	//
+	// This member is required.
+	Type QueryType
+
+	// The date and time when you last updated the metric data query definition.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetricDataQueryDefinitionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDataQueryDefinitionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDataQueryDefinitionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.MetricDataQueryDefinitionSummary_Id, *v.Id)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.MetricDataQueryDefinitionSummary_Path, *v.Path)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MetricDataQueryDefinitionSummary_Type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.MetricDataQueryDefinitionSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *MetricDataQueryDefinitionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDataQueryDefinitionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDataQueryDefinitionSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetricDataQueryDefinitionSummary_Id, v.Id)
+		case schemas.MetricDataQueryDefinitionSummary_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.MetricDataQueryDefinitionSummary_Path, v.Path)
+		case schemas.MetricDataQueryDefinitionSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.MetricDataQueryDefinitionSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = QueryType(ev)
+			return nil
+		case schemas.MetricDataQueryDefinitionSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MetricDataQueryDefinitionSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // A GetMetricData call returns an array of MetricDataResult structures. Each of
 // these structures includes the data points for that metric, along with the
 // timestamps of those data points and other identifying information.

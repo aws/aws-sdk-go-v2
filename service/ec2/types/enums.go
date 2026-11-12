@@ -10876,6 +10876,7 @@ const (
 	ResourceTypeCapacityReservationCancellationQuote                   ResourceType = "capacity-reservation-cancellation-quote"
 	ResourceTypeApplicationStatusCheck                                 ResourceType = "application-status-check"
 	ResourceTypeCapacityReservationModificationQuote                   ResourceType = "capacity-reservation-modification-quote"
+	ResourceTypeMetricCategory                                         ResourceType = "metric-category"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -10996,6 +10997,7 @@ func (ResourceType) Values() []ResourceType {
 		"capacity-reservation-cancellation-quote",
 		"application-status-check",
 		"capacity-reservation-modification-quote",
+		"metric-category",
 	}
 }
 

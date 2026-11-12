@@ -828,6 +828,9 @@ func TestCheckResponseSnapshot_GetStreamSession(t *testing.T) {
 				Height: ptr.Int32(1),
 			},
 		},
+		ApplicationStartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingStartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingEndedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetStreamSession.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1387,6 +1390,9 @@ func TestCheckResponseSnapshot_StartStreamSession(t *testing.T) {
 				Height: ptr.Int32(1),
 			},
 		},
+		ApplicationStartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingStartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingEndedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartStreamSession.response")
 	if errors.Is(err, fs.ErrNotExist) {

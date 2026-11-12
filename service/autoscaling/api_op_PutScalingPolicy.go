@@ -174,6 +174,8 @@ type PutScalingPolicyInput struct {
 	//
 	//   - ASGAverageCPUUtilization
 	//
+	//   - ASGAverageCPUUtilizationHighResolution
+	//
 	//   - ASGAverageNetworkIn
 	//
 	//   - ASGAverageNetworkOut

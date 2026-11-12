@@ -37,8 +37,8 @@ type ListPipelinesInput struct {
 	CreatedBefore *time.Time
 
 	// Filters the pipelines by who manages them. Specify AWS to return pipelines that
-	// AWS manages, or CUSTOMER to return pipelines that you created. If you don't
-	// specify a value, the response includes both.
+	// Amazon Web Services manages, or CUSTOMER to return pipelines that you created.
+	// If you don't specify a value, the response includes both.
 	ManagedBy types.PipelineManagedBy
 
 	// The maximum number of pipelines to return in the response.

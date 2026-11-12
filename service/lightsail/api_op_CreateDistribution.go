@@ -119,6 +119,16 @@ type CreateDistributionInput struct {
 	// The default value is dualstack .
 	IpAddressType types.IpAddressType
 
+	// The Lightsail subdomain to create and associate with the distribution (for
+	// example, mysite , for the web address mysite.amazonlightsail.com ).
+	//
+	// After the distribution is deployed, Lightsail creates the subdomain and
+	// associates it with the distribution. If Lightsail can't create or associate the
+	// subdomain, it still creates the distribution, but the CreateDistribution
+	// operation fails and the state of the distribution's subdomain is Error . To
+	// check the status, use the subdomain parameter of the distribution.
+	SubdomainName *string
+
 	// The tag keys and optional values to add to the distribution during create.
 	//
 	// Use the TagResource action to tag a resource after it's created.
@@ -197,6 +207,9 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.CreateDistributionRequest_origin)
 		v.Origin.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.SubdomainName != nil {
+		s.WriteString(schemas.CreateDistributionRequest_subdomainName, *v.SubdomainName)
 	}
 	if v.Tags != nil {
 		serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)

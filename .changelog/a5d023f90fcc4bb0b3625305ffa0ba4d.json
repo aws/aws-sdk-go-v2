@@ -1,0 +1,8 @@
+{
+    "id": "a5d023f9-0fcc-4bb0-b362-5305ffa0ba4d",
+    "type": "feature",
+    "description": "Adds support for Network Controls on IAM Identity Center instances. You can now require that access to your instance and AWS managed applications originate from VPC endpoints in your organization, and optionally narrow that perimeter to specific VPCs, IP ranges, or application exceptions.",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

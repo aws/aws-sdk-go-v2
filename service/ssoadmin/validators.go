@@ -1995,6 +1995,21 @@ func validateInstanceAccessControlAttributeConfiguration(v *types.InstanceAccess
 	}
 }
 
+func validateNetworkConfigurationInfo(v *types.NetworkConfigurationInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkConfigurationInfo"}
+	if v.VpceAccessRequired == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpceAccessRequired"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOidcJwtConfiguration(v *types.OidcJwtConfiguration) error {
 	if v == nil {
 		return nil
@@ -3541,6 +3556,11 @@ func validateOpUpdateInstanceInput(v *UpdateInstanceInput) error {
 	if v.EncryptionConfiguration != nil {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkConfiguration != nil {
+		if err := validateNetworkConfigurationInfo(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

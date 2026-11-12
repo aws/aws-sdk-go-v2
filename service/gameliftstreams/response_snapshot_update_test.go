@@ -755,6 +755,9 @@ func TestUpdateResponseSnapshot_GetStreamSession(t *testing.T) {
 				Height: ptr.Int32(1),
 			},
 		},
+		ApplicationStartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingStartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingEndedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.GameLiftStreams)
 	opSchema := smithy.NewOperationSchema(schemas.GetStreamSession, schemas.GetStreamSessionOutput, schemas.GetStreamSessionOutput)
@@ -1305,6 +1308,9 @@ func TestUpdateResponseSnapshot_StartStreamSession(t *testing.T) {
 				Height: ptr.Int32(1),
 			},
 		},
+		ApplicationStartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingStartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamingEndedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.GameLiftStreams)
 	opSchema := smithy.NewOperationSchema(schemas.StartStreamSession, schemas.StartStreamSessionOutput, schemas.StartStreamSessionOutput)

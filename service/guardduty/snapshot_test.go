@@ -890,6 +890,18 @@ func TestCheckSnapshot_ListFindings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListInvestigationRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigationRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInvestigationRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListInvestigations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListInvestigations(context.Background(), nil, func(o *Options) {
@@ -2106,6 +2118,18 @@ func TestUpdateSnapshot_ListFindings(t *testing.T) {
 	_, err := svc.ListFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInvestigationRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigationRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInvestigationRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

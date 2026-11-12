@@ -10083,7 +10083,7 @@ var _IntegrationAssociationId = smithy.NewSchema(smithy.ShapeID{
 var IntegrationAssociationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "IntegrationAssociationSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var IntegrationAssociationSummary_IntegrationAssociationId *smithy.Schema
 
 var IntegrationAssociationSummary_IntegrationAssociationArn *smithy.Schema
@@ -10099,6 +10099,10 @@ var IntegrationAssociationSummary_SourceApplicationUrl *smithy.Schema
 var IntegrationAssociationSummary_SourceApplicationName *smithy.Schema
 
 var IntegrationAssociationSummary_SourceType *smithy.Schema
+
+var IntegrationAssociationSummary_LastModifiedTime *smithy.Schema
+
+var IntegrationAssociationSummary_LastModifiedRegion *smithy.Schema
 
 var _IntegrationAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -30562,6 +30566,10 @@ func init() {
 	IntegrationAssociationSummary_SourceApplicationName = IntegrationAssociationSummary.AddMember("SourceApplicationName", _SourceApplicationName)
 
 	IntegrationAssociationSummary_SourceType = IntegrationAssociationSummary.AddMember("SourceType", SourceType)
+
+	IntegrationAssociationSummary_LastModifiedTime = IntegrationAssociationSummary.AddMember("LastModifiedTime", _Timestamp)
+
+	IntegrationAssociationSummary_LastModifiedRegion = IntegrationAssociationSummary.AddMember("LastModifiedRegion", _RegionName)
 
 	_IntegrationAssociationSummaryList_member = _IntegrationAssociationSummaryList.AddMember("member", IntegrationAssociationSummary)
 

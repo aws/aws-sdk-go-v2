@@ -7464,6 +7464,10 @@ type LightsailDistribution struct {
 
 	// An array of objects that describe the custom error responses configured for the
 	// distribution.
+	//
+	// This value is returned only when you specify distributionName in your
+	// GetDistributions request. It isn't included in the response when you list all of
+	// your distributions.
 	CustomErrorResponses []DistributionCustomErrorResponse
 
 	// An object that describes the default cache behavior of the distribution.
@@ -7472,6 +7476,10 @@ type LightsailDistribution struct {
 	// The object (for example, index.html ) that the distribution returns when a
 	// viewer requests the root URL of the distribution ( / ) instead of a specific
 	// object.
+	//
+	// This value is returned only when you specify distributionName in your
+	// GetDistributions request. It isn't included in the response when you list all of
+	// your distributions.
 	DefaultRootObject *string
 
 	// The domain name of the distribution.
@@ -7510,6 +7518,10 @@ type LightsailDistribution struct {
 
 	// The status of the distribution.
 	Status *string
+
+	// An object that describes the Lightsail subdomain that's associated with the
+	// distribution, or is being associated with it.
+	Subdomain *LightsailDistributionSubdomain
 
 	// The support code. Include this code in your email to support when you have
 	// questions about your Lightsail distribution. This code enables our support team
@@ -7608,6 +7620,11 @@ func (v *LightsailDistribution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != nil {
 		s.WriteString(schemas.LightsailDistribution_status, *v.Status)
 	}
+	if v.Subdomain != nil {
+		s.WriteStruct(schemas.LightsailDistribution_subdomain)
+		v.Subdomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SupportCode != nil {
 		s.WriteString(schemas.LightsailDistribution_supportCode, *v.SupportCode)
 	}
@@ -7691,6 +7708,9 @@ func (v *LightsailDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LightsailDistribution_status:
 			v.Status = new(string)
 			return d.ReadString(schemas.LightsailDistribution_status, v.Status)
+		case schemas.LightsailDistribution_subdomain:
+			v.Subdomain = &LightsailDistributionSubdomain{}
+			return v.Subdomain.Deserialize(d)
 		case schemas.LightsailDistribution_supportCode:
 			v.SupportCode = new(string)
 			return d.ReadString(schemas.LightsailDistribution_supportCode, v.SupportCode)
@@ -7702,6 +7722,86 @@ func (v *LightsailDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LightsailDistribution_waf:
 			v.Waf = &WafConfig{}
 			return v.Waf.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes the Lightsail subdomain of a distribution. The distribution is
+// reachable at the subdomain's web address, which is the subdomain followed by
+// amazonlightsail.com .
+type LightsailDistributionSubdomain struct {
+
+	// The subdomain (for example, mysite ), not its web address.
+	//
+	// This member is required.
+	Name *string
+
+	// The state of the subdomain for the distribution.
+	//
+	// The following states are possible:
+	//
+	//   - Creating – The subdomain is being created.
+	//
+	//   - Attaching – The subdomain is being associated with the distribution.
+	//
+	//   - Attached – The subdomain is associated with the distribution.
+	//
+	//   - Error – The subdomain couldn't be created or associated with the
+	//   distribution. For more information, see the errorCode and errorDetails
+	//   parameters.
+	//
+	// This member is required.
+	State LightsailDistributionSubdomainStateEnum
+
+	// The error code that describes why the subdomain is in the Error state.
+	ErrorCode *string
+
+	// The details of the error that caused the subdomain to be in the Error state.
+	ErrorDetails *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LightsailDistributionSubdomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LightsailDistributionSubdomain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LightsailDistributionSubdomain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.LightsailDistributionSubdomain_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteString(schemas.LightsailDistributionSubdomain_errorDetails, *v.ErrorDetails)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LightsailDistributionSubdomain_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.LightsailDistributionSubdomain_state, string(v.State))
+	}
+}
+func (v *LightsailDistributionSubdomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LightsailDistributionSubdomain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LightsailDistributionSubdomain_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.LightsailDistributionSubdomain_errorCode, v.ErrorCode)
+		case schemas.LightsailDistributionSubdomain_errorDetails:
+			v.ErrorDetails = new(string)
+			return d.ReadString(schemas.LightsailDistributionSubdomain_errorDetails, v.ErrorDetails)
+		case schemas.LightsailDistributionSubdomain_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LightsailDistributionSubdomain_name, v.Name)
+		case schemas.LightsailDistributionSubdomain_state:
+			var ev string
+			if err := d.ReadString(schemas.LightsailDistributionSubdomain_state, &ev); err != nil {
+				return err
+			}
+			v.State = LightsailDistributionSubdomainStateEnum(ev)
+			return nil
 		}
 		return nil
 	})
@@ -11592,6 +11692,249 @@ func (v *StopInstanceOnIdleRequest) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.StopInstanceOnIdleRequest_threshold:
 			v.Threshold = new(string)
 			return d.ReadString(schemas.StopInstanceOnIdleRequest_threshold, v.Threshold)
+		}
+		return nil
+	})
+}
+
+// Describes a Lightsail subdomain. A subdomain is the name that you choose, such
+// as mysite or blog.mysite . Its web address is the subdomain followed by
+// amazonlightsail.com , such as blog.mysite.amazonlightsail.com . You can
+// associate a subdomain with a Lightsail resource to make the resource reachable
+// at the web address.
+type Subdomain struct {
+
+	// The Amazon Resource Name (ARN) of the subdomain.
+	//
+	// If you create a subdomain with a depth of 2, such as blog.mysite , without first
+	// creating the subdomain with a depth of 1 ( mysite ), Lightsail holds mysite for
+	// your account in the IMPLICIT state. It doesn't have an ARN until you create a
+	// subdomain with that name.
+	Arn *string
+
+	// An object that describes the resource that the subdomain is associated with.
+	//
+	// When the subdomain is in the TRANSFERRING state, this is the resource that the
+	// subdomain is being moved from.
+	AttachedResource *SubdomainAttachableResource
+
+	// An object that describes the resource that the subdomain is being associated
+	// with.
+	//
+	// This parameter is returned only when the subdomain is in the ATTACHING or
+	// TRANSFERRING state.
+	AttachingResource *SubdomainAttachableResource
+
+	// An array of objects that describe the nested subdomains of the subdomain.
+	//
+	// This parameter is returned only by the GetSubdomains action when you don't
+	// specify a subdomain.
+	Children []Subdomain
+
+	// The timestamp when the subdomain was created.
+	CreatedAt *time.Time
+
+	// The number of labels in the subdomain. A top-level subdomain, such as mysite ,
+	// has a depth of 1 . A nested subdomain, such as blog.mysite , has a depth of 2 .
+	Depth *int32
+
+	// The web address of the subdomain, which is the subdomain followed by
+	// amazonlightsail.com (for example, blog.mysite.amazonlightsail.com ).
+	Fqdn *string
+
+	// An object that describes the location of the subdomain, such as the AWS Region.
+	Location *ResourceLocation
+
+	// The web address of the parent subdomain (for example, mysite.amazonlightsail.com
+	// for blog.mysite ).
+	//
+	// This parameter isn't returned for a subdomain with a depth of 1.
+	ParentFqdn *string
+
+	// The state of the subdomain.
+	//
+	// The following states are possible:
+	//
+	//   - CREATING – The subdomain is being created.
+	//
+	//   - CREATE_FAILED – The subdomain couldn't be created. Delete the subdomain, and
+	//   then create it again if the name is still available.
+	//
+	//   - UNATTACHED – The subdomain is ready, and isn't associated with a resource.
+	//
+	//   - ATTACHING – The subdomain is being associated with a resource.
+	//
+	//   - ATTACHED – The subdomain is associated with a resource, and routes traffic
+	//   to it.
+	//
+	//   - DETACHING – The subdomain is being disassociated from a resource.
+	//
+	//   - TRANSFERRING – The subdomain is being moved from one resource to another
+	//   resource.
+	//
+	//   - IMPLICIT – The subdomain is the parent of one or more nested subdomains that
+	//   you created, but you didn't create the parent subdomain itself. You can't
+	//   associate or delete a subdomain in this state. To use it, create it with the
+	//   CreateSubdomain action.
+	State SubdomainState
+
+	// The subdomain (for example, mysite or blog.mysite ). To get the web address, use
+	// the fqdn parameter.
+	SubdomainName *string
+
+	// The tag keys and optional values for the subdomain. For more information about
+	// tags in Lightsail, see the [Lightsail Developer Guide].
+	//
+	// This parameter is returned only by the GetSubdomains action when you specify a
+	// subdomain.
+	//
+	// [Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+func (v *Subdomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subdomain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subdomain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Subdomain_arn, *v.Arn)
+	}
+	if v.AttachedResource != nil {
+		s.WriteStruct(schemas.Subdomain_attachedResource)
+		v.AttachedResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachingResource != nil {
+		s.WriteStruct(schemas.Subdomain_attachingResource)
+		v.AttachingResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Children != nil {
+		serializeSubdomainList(s, schemas.Subdomain_children, v.Children)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Subdomain_createdAt, *v.CreatedAt)
+	}
+	if v.Depth != nil {
+		s.WriteInt32(schemas.Subdomain_depth, *v.Depth)
+	}
+	if v.Fqdn != nil {
+		s.WriteString(schemas.Subdomain_fqdn, *v.Fqdn)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.Subdomain_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentFqdn != nil {
+		s.WriteString(schemas.Subdomain_parentFqdn, *v.ParentFqdn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Subdomain_state, string(v.State))
+	}
+	if v.SubdomainName != nil {
+		s.WriteString(schemas.Subdomain_subdomainName, *v.SubdomainName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Subdomain_tags, v.Tags)
+	}
+}
+func (v *Subdomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subdomain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subdomain_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Subdomain_arn, v.Arn)
+		case schemas.Subdomain_attachedResource:
+			v.AttachedResource = &SubdomainAttachableResource{}
+			return v.AttachedResource.Deserialize(d)
+		case schemas.Subdomain_attachingResource:
+			v.AttachingResource = &SubdomainAttachableResource{}
+			return v.AttachingResource.Deserialize(d)
+		case schemas.Subdomain_children:
+			return deserializeSubdomainList(d, schemas.Subdomain_children, &v.Children)
+		case schemas.Subdomain_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Subdomain_createdAt, v.CreatedAt)
+		case schemas.Subdomain_depth:
+			v.Depth = new(int32)
+			return d.ReadInt32(schemas.Subdomain_depth, v.Depth)
+		case schemas.Subdomain_fqdn:
+			v.Fqdn = new(string)
+			return d.ReadString(schemas.Subdomain_fqdn, v.Fqdn)
+		case schemas.Subdomain_location:
+			v.Location = &ResourceLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.Subdomain_parentFqdn:
+			v.ParentFqdn = new(string)
+			return d.ReadString(schemas.Subdomain_parentFqdn, v.ParentFqdn)
+		case schemas.Subdomain_state:
+			var ev string
+			if err := d.ReadString(schemas.Subdomain_state, &ev); err != nil {
+				return err
+			}
+			v.State = SubdomainState(ev)
+			return nil
+		case schemas.Subdomain_subdomainName:
+			v.SubdomainName = new(string)
+			return d.ReadString(schemas.Subdomain_subdomainName, v.SubdomainName)
+		case schemas.Subdomain_tags:
+			return deserializeTagList(d, schemas.Subdomain_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Describes a Lightsail resource that a subdomain is associated with, or is being
+// associated with.
+type SubdomainAttachableResource struct {
+
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
+
+	// The timestamp when the subdomain was associated with the resource.
+	AttachedAt *time.Time
+
+	// The name of the resource.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubdomainAttachableResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubdomainAttachableResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubdomainAttachableResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SubdomainAttachableResource_arn, *v.Arn)
+	}
+	if v.AttachedAt != nil {
+		s.WriteTime(schemas.SubdomainAttachableResource_attachedAt, *v.AttachedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SubdomainAttachableResource_name, *v.Name)
+	}
+}
+func (v *SubdomainAttachableResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubdomainAttachableResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubdomainAttachableResource_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SubdomainAttachableResource_arn, v.Arn)
+		case schemas.SubdomainAttachableResource_attachedAt:
+			v.AttachedAt = new(time.Time)
+			return d.ReadTime(schemas.SubdomainAttachableResource_attachedAt, v.AttachedAt)
+		case schemas.SubdomainAttachableResource_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SubdomainAttachableResource_name, v.Name)
 		}
 		return nil
 	})

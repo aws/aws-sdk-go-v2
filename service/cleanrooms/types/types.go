@@ -13106,18 +13106,48 @@ func (v *ProtectedJobDirectAnalysisConfigurationDetails) Deserialize(d smithy.Sh
 	})
 }
 
-// The protected job error.
+// Details of the error that caused the protected job to fail.
 type ProtectedJobError struct {
 
-	//  The error code for the protected job.
+	// A code that identifies the category of the failure. Valid values are:
+	//
+	//   - MALFORMED_SCRIPT – The job script or its execution environment is not valid
+	//   (code, imports, entry point, virtual environment, or dependencies).
+	//
+	//   - RESOURCE_NOT_FOUND – A referenced resource doesn't exist.
+	//
+	//   - INVALID_RESOURCE – A referenced resource exists, but you can't use it
+	//   because its configuration, state, or data is not valid.
+	//
+	//   - RESOURCE_ACCESS_DENIED – A required permission is missing for a data source
+	//   or resource.
+	//
+	//   - INSUFFICIENT_COMPUTE – The job exceeded the available compute (memory, disk,
+	//   or time).
+	//
+	//   - TRANSIENT_ERROR – A temporary condition caused the failure, such as
+	//   throttling or a network interruption.
+	//
+	//   - INTERNAL_ERROR – Clean Rooms encountered an unexpected error. If the error
+	//   persists, contact AWS Support.
+	//
+	//   - UNKNOWN_ERROR – The failure couldn't be classified.
+	//
+	// For more information about error codes, see [https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html] in the Clean Rooms User Guide.
+	//
+	// [https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html
 	//
 	// This member is required.
 	Code *string
 
-	//  The message for the protected job error.
+	// A description of why the protected job failed.
 	//
 	// This member is required.
 	Message *string
+
+	// Contains information about whether running the same protected job again might
+	// succeed.
+	Retry *RetryInfo
 
 	noSmithyDocumentSerde
 }
@@ -13135,6 +13165,11 @@ func (v *ProtectedJobError) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ProtectedJobError_message, *v.Message)
 	}
+	if v.Retry != nil {
+		s.WriteStruct(schemas.ProtectedJobError_retry)
+		v.Retry.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *ProtectedJobError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobError, func(s *smithy.Schema) error {
@@ -13145,6 +13180,9 @@ func (v *ProtectedJobError) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProtectedJobError_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.ProtectedJobError_message, v.Message)
+		case schemas.ProtectedJobError_retry:
+			v.Retry = &RetryInfo{}
+			return v.Retry.Deserialize(d)
 		}
 		return nil
 	})
@@ -14183,18 +14221,48 @@ func (v *ProtectedQueryDistributeOutputConfigurationLocationMemberS3) Deserializ
 	return v.Value.Deserialize(d)
 }
 
-// Details of errors thrown by the protected query.
+// Details of the error that caused the protected query to fail.
 type ProtectedQueryError struct {
 
-	// An error code for the error.
+	// A code that identifies the category of the failure. Valid values are:
+	//
+	//   - MALFORMED_QUERY – The query is not valid (syntax, semantics, columns, or an
+	//   unsupported operation).
+	//
+	//   - RESOURCE_NOT_FOUND – A referenced resource doesn't exist.
+	//
+	//   - INVALID_RESOURCE – A referenced resource exists, but you can't use it
+	//   because its configuration, state, or data is not valid.
+	//
+	//   - RESOURCE_ACCESS_DENIED – A required permission is missing for a data source
+	//   or resource.
+	//
+	//   - INSUFFICIENT_COMPUTE – The query exceeded the available compute (memory,
+	//   disk, or time).
+	//
+	//   - TRANSIENT_ERROR – A temporary condition caused the failure, such as
+	//   throttling or a network interruption.
+	//
+	//   - INTERNAL_ERROR – Clean Rooms encountered an unexpected error. If the error
+	//   persists, contact AWS Support.
+	//
+	//   - UNKNOWN_ERROR – The failure couldn't be classified.
+	//
+	// For more information about error codes, see [https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html] in the Clean Rooms User Guide.
+	//
+	// [https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html
 	//
 	// This member is required.
 	Code *string
 
-	// A description of why the query failed.
+	// A description of why the protected query failed.
 	//
 	// This member is required.
 	Message *string
+
+	// Contains information about whether running the same protected query again might
+	// succeed.
+	Retry *RetryInfo
 
 	noSmithyDocumentSerde
 }
@@ -14212,6 +14280,11 @@ func (v *ProtectedQueryError) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ProtectedQueryError_message, *v.Message)
 	}
+	if v.Retry != nil {
+		s.WriteStruct(schemas.ProtectedQueryError_retry)
+		v.Retry.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *ProtectedQueryError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedQueryError, func(s *smithy.Schema) error {
@@ -14222,6 +14295,9 @@ func (v *ProtectedQueryError) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProtectedQueryError_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.ProtectedQueryError_message, v.Message)
+		case schemas.ProtectedQueryError_retry:
+			v.Retry = &RetryInfo{}
+			return v.Retry.Deserialize(d)
 		}
 		return nil
 	})
@@ -14951,6 +15027,40 @@ func (v *ReceiverConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.ReceiverConfiguration_configurationDetails:
 			return deserializeConfigurationDetails(d, schemas.ReceiverConfiguration_configurationDetails, &v.ConfigurationDetails)
+		}
+		return nil
+	})
+}
+
+// Contains information about whether running a failed protected query or
+// protected job again might succeed.
+type RetryInfo struct {
+
+	// Specifies whether running the same request again might succeed. true means that
+	// the failure was transient. false means that running the same request again is
+	// not expected to succeed.
+	Retryable *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *RetryInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Retryable != nil {
+		s.WriteBool(schemas.RetryInfo_retryable, *v.Retryable)
+	}
+}
+func (v *RetryInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryInfo_retryable:
+			v.Retryable = new(bool)
+			return d.ReadBool(schemas.RetryInfo_retryable, v.Retryable)
 		}
 		return nil
 	})

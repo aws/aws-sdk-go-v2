@@ -67,6 +67,11 @@ type DescribeFlowSourceMetadataOutput struct {
 	// media streams for the active NDI sender, and any relevant status messages.
 	NdiInfo *types.NdiSourceMetadataInfo
 
+	// The RTMP (Real-Time Messaging Protocol) specific information about the flow's
+	// source. This includes the application name, the stream name, and the associated
+	// audio and video streams.
+	RtmpInfo *types.RtmpSourceMetadataInfo
+
 	//  The timestamp of the most recent change in metadata for this flow’s source.
 	Timestamp *time.Time
 
@@ -97,6 +102,11 @@ func (v *DescribeFlowSourceMetadataOutput) SerializeMembers(s smithy.ShapeSerial
 		v.NdiInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.RtmpInfo != nil {
+		s.WriteStruct(schemas.DescribeFlowSourceMetadataResponse_RtmpInfo)
+		v.RtmpInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.DescribeFlowSourceMetadataResponse_Timestamp, *v.Timestamp)
 	}
@@ -117,6 +127,9 @@ func (v *DescribeFlowSourceMetadataOutput) Deserialize(d smithy.ShapeDeserialize
 		case schemas.DescribeFlowSourceMetadataResponse_NdiInfo:
 			v.NdiInfo = &types.NdiSourceMetadataInfo{}
 			return v.NdiInfo.Deserialize(d)
+		case schemas.DescribeFlowSourceMetadataResponse_RtmpInfo:
+			v.RtmpInfo = &types.RtmpSourceMetadataInfo{}
+			return v.RtmpInfo.Deserialize(d)
 		case schemas.DescribeFlowSourceMetadataResponse_Timestamp:
 			v.Timestamp = new(time.Time)
 			return d.ReadTime(schemas.DescribeFlowSourceMetadataResponse_Timestamp, v.Timestamp)

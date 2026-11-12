@@ -1,0 +1,8 @@
+{
+    "id": "b4b7b17a-2a40-4cb1-8a68-29c4a4f12e6f",
+    "type": "feature",
+    "description": "Adds support for cross-account replication with the new AssociateCrossAccountReplica, DisassociateCrossAccountReplica, and ListResourcePolicies APIs, CrossAccountPrimaryARN in CreateSecret, cross-account replication status in DescribeSecret, and PolicyName in the resource policy APIs.",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

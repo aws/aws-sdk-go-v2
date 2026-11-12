@@ -498,6 +498,16 @@ func TestCheckRequestSnapshot_AddFlowOutputs(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 			{
 				CidrAllowList: []string{
@@ -597,6 +607,16 @@ func TestCheckRequestSnapshot_AddFlowOutputs(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -716,6 +736,14 @@ func TestCheckRequestSnapshot_AddFlowSources(t *testing.T) {
 						},
 					},
 				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
+						},
+					},
+				},
 			},
 			{
 				Decryption: &types.Encryption{
@@ -803,6 +831,14 @@ func TestCheckRequestSnapshot_AddFlowSources(t *testing.T) {
 						Value: types.SecretsManagerEncryptionKeyConfiguration{
 							SecretArn: ptr.String("__SecretArn__"),
 							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
 						},
 					},
 				},
@@ -1371,6 +1407,16 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 			{
 				CidrAllowList: []string{
@@ -1470,6 +1516,16 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 		},
 		Source: &types.SetSourceRequest{
@@ -1558,6 +1614,14 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 					Value: types.SecretsManagerEncryptionKeyConfiguration{
 						SecretArn: ptr.String("__SecretArn__"),
 						RoleArn:   ptr.String("__RoleArn__"),
+					},
+				},
+			},
+			RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+				NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+					Value: types.ManualRtmpPushNamingConfiguration{
+						ApplicationName: ptr.String("__ApplicationName__"),
+						StreamName:      ptr.String("__StreamName__"),
 					},
 				},
 			},
@@ -1660,6 +1724,14 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 						},
 					},
 				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
+						},
+					},
+				},
 			},
 			{
 				Decryption: &types.Encryption{
@@ -1747,6 +1819,14 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 						Value: types.SecretsManagerEncryptionKeyConfiguration{
 							SecretArn: ptr.String("__SecretArn__"),
 							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
 						},
 					},
 				},
@@ -2069,8 +2149,43 @@ func TestCheckRequestSnapshot_CreateRouterOutput(t *testing.T) {
 		},
 		FabricConfiguration: &types.FabricConfiguration{
 			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			SwitchingMode:       types.FabricSwitchingMode("IMMEDIATE"),
+			SwitchingConfiguration: &types.FabricSwitchingConfigurationMemberImmediate{
+				Value: types.ImmediateFabricSwitchingConfiguration{},
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		Processors: &types.RouterOutputProcessors{
+			SingleProgramTransportStreamPidMap: &types.SingleProgramTransportStreamPidMapConfiguration{
+				Rules: []types.PidMapRule{
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+				},
+				DefaultAction: ptr.String("__DefaultAction__"),
+				TransportStreamId: &types.TransportStreamIdConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramNumber: &types.ProgramNumberConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramMapTablePid: &types.ProgramMapTablePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramClockReferencePid: &types.ProgramClockReferencePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				Auto: &types.AutoPidMapConfiguration{
+					StartPid:       ptr.Int32(1),
+					PidsPerProgram: ptr.Int32(1),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4505,6 +4620,16 @@ func TestCheckRequestSnapshot_UpdateFlowOutput(t *testing.T) {
 		},
 		NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 		NdiAudioReferenceLevel:  ptr.Int32(1),
+		RtmpPushSettings: &types.RtmpPushOutputSettings{
+			ApplicationName: ptr.String("__ApplicationName__"),
+			StreamName:      ptr.String("__StreamName__"),
+			TlsEncryption: &types.TlsEncryption{
+				EncryptionType: types.TlsEncryptionType("PUBLIC"),
+				EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+					Value: types.PublicTlsEncryptionConfiguration{},
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4614,6 +4739,14 @@ func TestCheckRequestSnapshot_UpdateFlowSource(t *testing.T) {
 				Value: types.SecretsManagerEncryptionKeyConfiguration{
 					SecretArn: ptr.String("__SecretArn__"),
 					RoleArn:   ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+			NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+				Value: types.ManualRtmpPushNamingConfiguration{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
 				},
 			},
 		},
@@ -4812,6 +4945,41 @@ func TestCheckRequestSnapshot_UpdateRouterOutput(t *testing.T) {
 		},
 		FabricConfiguration: &types.FabricConfiguration{
 			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			SwitchingMode:       types.FabricSwitchingMode("IMMEDIATE"),
+			SwitchingConfiguration: &types.FabricSwitchingConfigurationMemberImmediate{
+				Value: types.ImmediateFabricSwitchingConfiguration{},
+			},
+		},
+		Processors: &types.RouterOutputProcessors{
+			SingleProgramTransportStreamPidMap: &types.SingleProgramTransportStreamPidMapConfiguration{
+				Rules: []types.PidMapRule{
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+				},
+				DefaultAction: ptr.String("__DefaultAction__"),
+				TransportStreamId: &types.TransportStreamIdConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramNumber: &types.ProgramNumberConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramMapTablePid: &types.ProgramMapTablePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramClockReferencePid: &types.ProgramClockReferencePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				Auto: &types.AutoPidMapConfiguration{
+					StartPid:       ptr.Int32(1),
+					PidsPerProgram: ptr.Int32(1),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5182,6 +5350,16 @@ func TestUpdateRequestSnapshot_AddFlowOutputs(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 			{
 				CidrAllowList: []string{
@@ -5281,6 +5459,16 @@ func TestUpdateRequestSnapshot_AddFlowOutputs(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -5400,6 +5588,14 @@ func TestUpdateRequestSnapshot_AddFlowSources(t *testing.T) {
 						},
 					},
 				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
+						},
+					},
+				},
 			},
 			{
 				Decryption: &types.Encryption{
@@ -5487,6 +5683,14 @@ func TestUpdateRequestSnapshot_AddFlowSources(t *testing.T) {
 						Value: types.SecretsManagerEncryptionKeyConfiguration{
 							SecretArn: ptr.String("__SecretArn__"),
 							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
 						},
 					},
 				},
@@ -6055,6 +6259,16 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 			{
 				CidrAllowList: []string{
@@ -6154,6 +6368,16 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 				NdiAudioReferenceLevel:  ptr.Int32(1),
+				RtmpPushSettings: &types.RtmpPushOutputSettings{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
+					TlsEncryption: &types.TlsEncryption{
+						EncryptionType: types.TlsEncryptionType("PUBLIC"),
+						EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+							Value: types.PublicTlsEncryptionConfiguration{},
+						},
+					},
+				},
 			},
 		},
 		Source: &types.SetSourceRequest{
@@ -6242,6 +6466,14 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 					Value: types.SecretsManagerEncryptionKeyConfiguration{
 						SecretArn: ptr.String("__SecretArn__"),
 						RoleArn:   ptr.String("__RoleArn__"),
+					},
+				},
+			},
+			RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+				NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+					Value: types.ManualRtmpPushNamingConfiguration{
+						ApplicationName: ptr.String("__ApplicationName__"),
+						StreamName:      ptr.String("__StreamName__"),
 					},
 				},
 			},
@@ -6344,6 +6576,14 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 						},
 					},
 				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
+						},
+					},
+				},
 			},
 			{
 				Decryption: &types.Encryption{
@@ -6431,6 +6671,14 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 						Value: types.SecretsManagerEncryptionKeyConfiguration{
 							SecretArn: ptr.String("__SecretArn__"),
 							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+					NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+						Value: types.ManualRtmpPushNamingConfiguration{
+							ApplicationName: ptr.String("__ApplicationName__"),
+							StreamName:      ptr.String("__StreamName__"),
 						},
 					},
 				},
@@ -6753,8 +7001,43 @@ func TestUpdateRequestSnapshot_CreateRouterOutput(t *testing.T) {
 		},
 		FabricConfiguration: &types.FabricConfiguration{
 			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			SwitchingMode:       types.FabricSwitchingMode("IMMEDIATE"),
+			SwitchingConfiguration: &types.FabricSwitchingConfigurationMemberImmediate{
+				Value: types.ImmediateFabricSwitchingConfiguration{},
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		Processors: &types.RouterOutputProcessors{
+			SingleProgramTransportStreamPidMap: &types.SingleProgramTransportStreamPidMapConfiguration{
+				Rules: []types.PidMapRule{
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+				},
+				DefaultAction: ptr.String("__DefaultAction__"),
+				TransportStreamId: &types.TransportStreamIdConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramNumber: &types.ProgramNumberConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramMapTablePid: &types.ProgramMapTablePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramClockReferencePid: &types.ProgramClockReferencePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				Auto: &types.AutoPidMapConfiguration{
+					StartPid:       ptr.Int32(1),
+					PidsPerProgram: ptr.Int32(1),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9189,6 +9472,16 @@ func TestUpdateRequestSnapshot_UpdateFlowOutput(t *testing.T) {
 		},
 		NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
 		NdiAudioReferenceLevel:  ptr.Int32(1),
+		RtmpPushSettings: &types.RtmpPushOutputSettings{
+			ApplicationName: ptr.String("__ApplicationName__"),
+			StreamName:      ptr.String("__StreamName__"),
+			TlsEncryption: &types.TlsEncryption{
+				EncryptionType: types.TlsEncryptionType("PUBLIC"),
+				EncryptionConfiguration: &types.TlsEncryptionConfigurationMemberPublic{
+					Value: types.PublicTlsEncryptionConfiguration{},
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9298,6 +9591,14 @@ func TestUpdateRequestSnapshot_UpdateFlowSource(t *testing.T) {
 				Value: types.SecretsManagerEncryptionKeyConfiguration{
 					SecretArn: ptr.String("__SecretArn__"),
 					RoleArn:   ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		RtmpPushSettings: &types.SetRtmpPushSourceSettings{
+			NamingConfiguration: &types.RtmpPushNamingConfigurationMemberManual{
+				Value: types.ManualRtmpPushNamingConfiguration{
+					ApplicationName: ptr.String("__ApplicationName__"),
+					StreamName:      ptr.String("__StreamName__"),
 				},
 			},
 		},
@@ -9496,6 +9797,41 @@ func TestUpdateRequestSnapshot_UpdateRouterOutput(t *testing.T) {
 		},
 		FabricConfiguration: &types.FabricConfiguration{
 			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			SwitchingMode:       types.FabricSwitchingMode("IMMEDIATE"),
+			SwitchingConfiguration: &types.FabricSwitchingConfigurationMemberImmediate{
+				Value: types.ImmediateFabricSwitchingConfiguration{},
+			},
+		},
+		Processors: &types.RouterOutputProcessors{
+			SingleProgramTransportStreamPidMap: &types.SingleProgramTransportStreamPidMapConfiguration{
+				Rules: []types.PidMapRule{
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+					{
+						MatchExpression: ptr.String("__MatchExpression__"),
+						Action:          ptr.String("__Action__"),
+					},
+				},
+				DefaultAction: ptr.String("__DefaultAction__"),
+				TransportStreamId: &types.TransportStreamIdConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramNumber: &types.ProgramNumberConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramMapTablePid: &types.ProgramMapTablePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				ProgramClockReferencePid: &types.ProgramClockReferencePidConfigurationMemberPassthrough{
+					Value: types.Passthrough{},
+				},
+				Auto: &types.AutoPidMapConfiguration{
+					StartPid:       ptr.Int32(1),
+					PidsPerProgram: ptr.Int32(1),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}

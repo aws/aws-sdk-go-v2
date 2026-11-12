@@ -409,18 +409,26 @@ func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The configuration to use to schedule automated workflow execution using cron
-// expressions. Amazon Managed Workflows for Apache Airflow Serverless integrates
-// with EventBridge Scheduler to provide cost-effective, timezone-aware scheduling
-// capabilities. The service supports both time-based and event-based scheduling
-// (event-based scheduling available post-GA). When a workflow definition includes
-// scheduling information, Amazon Managed Workflows for Apache Airflow Serverless
-// automatically configures the appropriate triggers and ensures only one version
-// of a workflow has an active schedule at any time.
+// Contains the configuration used to schedule automated workflow execution. Only
+// one version of a workflow can have an active schedule at any time.
 type ScheduleConfiguration struct {
 
-	// A cron expression that defines when the workflow is automatically executed.
-	// Uses standard cron syntax.
+	// The schedule expression that determines when the workflow runs, as specified in
+	// the schedule parameter of the workflow's YAML definition. You can specify one
+	// of the following types of schedule expressions:
+	//
+	//   - Apache Airflow cron expression – Five fields, such as 0 12 1 * * .
+	//
+	//   - Apache Airflow schedule preset – @hourly , @daily , @weekly , @monthly ,
+	//   @yearly , or @annually .
+	//
+	//   - EventBridge Scheduler rate expression – For example, rate(5 minutes) .
+	//   Supported units are minutes, hours, and days.
+	//
+	//   - EventBridge Scheduler cron expression – Six fields, such as cron(0 12 * * ?
+	//   *) .
+	//
+	// In a cron expression, specify either a day-of-month or a day-of-week, not both.
 	CronExpression *string
 
 	noSmithyDocumentSerde

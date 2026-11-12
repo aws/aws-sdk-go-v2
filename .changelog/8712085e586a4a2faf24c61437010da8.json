@@ -1,0 +1,8 @@
+{
+    "id": "8712085e-586a-4a2f-af24-c61437010da8",
+    "type": "feature",
+    "description": "This release adds a LastModifiedTime and LastModifiedRegion field to ListIntegrationAssociations so customers can see at what time and in which Region an IntegrationAssociation was last modified in.",
+    "modules": [
+        "service/connect"
+    ]
+}

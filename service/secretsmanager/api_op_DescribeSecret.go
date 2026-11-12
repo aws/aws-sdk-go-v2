@@ -14,6 +14,11 @@ import (
 // Retrieves the details of a secret. It does not include the encrypted secret
 // value. Secrets Manager only returns fields that have a value in the response.
 //
+// The VersionIdsToStages field in the response includes every version ID that has
+// a staging label attached, even if that version doesn't contain a secret value.
+// In contrast, ListSecretVersionIds only returns versions that contain a secret
+// value. To check whether a secret version contains a value, call GetSecretValue.
+//
 // Secrets Manager generates a CloudTrail log entry when you call this action. Do
 // not include sensitive information in request parameters because it might be
 // logged. For more information, see [Logging Secrets Manager events with CloudTrail].
@@ -73,6 +78,17 @@ type DescribeSecretOutput struct {
 
 	// The date the secret was created.
 	CreatedDate *time.Time
+
+	// Information about the primary secret in the other Amazon Web Services account
+	// that this cross-account replica secret replicates from, including the primary
+	// secret ARN and the replication status. This field is omitted if the secret is
+	// not a cross-account replica.
+	CrossAccountPrimary *types.CrossAccountPrimaryType
+
+	// A list of this secret's cross-account replica secrets and their replication
+	// status, if this secret is the primary for cross-account replication. This field
+	// is omitted if the secret has no cross-account replicas.
+	CrossAccountReplicas []types.CrossAccountReplicaEntry
 
 	// The date the secret is scheduled for deletion. If it is not scheduled for
 	// deletion, this field is omitted. When you delete a secret, Secrets Manager
@@ -222,6 +238,14 @@ func (v *DescribeSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.DescribeSecretResponse_CreatedDate, *v.CreatedDate)
 	}
+	if v.CrossAccountPrimary != nil {
+		s.WriteStruct(schemas.DescribeSecretResponse_CrossAccountPrimary)
+		v.CrossAccountPrimary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CrossAccountReplicas != nil {
+		serializeCrossAccountReplicaListType(s, schemas.DescribeSecretResponse_CrossAccountReplicas, v.CrossAccountReplicas)
+	}
 	if v.DeletedDate != nil {
 		s.WriteTime(schemas.DescribeSecretResponse_DeletedDate, *v.DeletedDate)
 	}
@@ -291,6 +315,11 @@ func (v *DescribeSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribeSecretResponse_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.DescribeSecretResponse_CreatedDate, v.CreatedDate)
+		case schemas.DescribeSecretResponse_CrossAccountPrimary:
+			v.CrossAccountPrimary = &types.CrossAccountPrimaryType{}
+			return v.CrossAccountPrimary.Deserialize(d)
+		case schemas.DescribeSecretResponse_CrossAccountReplicas:
+			return deserializeCrossAccountReplicaListType(d, schemas.DescribeSecretResponse_CrossAccountReplicas, &v.CrossAccountReplicas)
 		case schemas.DescribeSecretResponse_DeletedDate:
 			v.DeletedDate = new(time.Time)
 			return d.ReadTime(schemas.DescribeSecretResponse_DeletedDate, v.DeletedDate)

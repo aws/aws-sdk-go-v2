@@ -8,6 +8,11 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var AssociateCrossAccountReplica = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "AssociateCrossAccountReplica",
+}, smithy.ShapeTypeOperation, 0)
+
 var BatchGetSecretValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "BatchGetSecretValue",
@@ -38,6 +43,11 @@ var DescribeSecret = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeSecret",
 }, smithy.ShapeTypeOperation, 0)
 
+var DisassociateCrossAccountReplica = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "DisassociateCrossAccountReplica",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetRandomPassword = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "GetRandomPassword",
@@ -51,6 +61,11 @@ var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 var GetSecretValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "GetSecretValue",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListResourcePolicies = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "ListResourcePolicies",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListSecrets = smithy.NewSchema(smithy.ShapeID{
@@ -171,6 +186,34 @@ var _CreatedDateType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "CreatedDateType",
 }, smithy.ShapeTypeTimestamp, 0)
+
+var CrossAccountPrimaryType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "CrossAccountPrimaryType",
+}, smithy.ShapeTypeStructure, 3)
+var CrossAccountPrimaryType_PrimarySecretARN *smithy.Schema
+
+var CrossAccountPrimaryType_ReplicationStatus *smithy.Schema
+
+var CrossAccountPrimaryType_StatusMessage *smithy.Schema
+
+var CrossAccountReplicaEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "CrossAccountReplicaEntry",
+}, smithy.ShapeTypeStructure, 4)
+var CrossAccountReplicaEntry_ReplicaSecretARN *smithy.Schema
+
+var CrossAccountReplicaEntry_ReplicationRoleARN *smithy.Schema
+
+var CrossAccountReplicaEntry_ReplicationStatus *smithy.Schema
+
+var CrossAccountReplicaEntry_StatusMessage *smithy.Schema
+
+var _CrossAccountReplicaListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "CrossAccountReplicaListType",
+}, smithy.ShapeTypeList, 1)
+var _CrossAccountReplicaListType_member *smithy.Schema
 
 var DecryptionFailure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
@@ -459,6 +502,14 @@ var ReplicaRegionType_Region *smithy.Schema
 
 var ReplicaRegionType_KmsKeyId *smithy.Schema
 
+var ReplicaRestrictionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "ReplicaRestrictionType",
+}, smithy.ShapeTypeEnum, 2)
+var ReplicaRestrictionType_SameOrg *smithy.Schema
+
+var ReplicaRestrictionType_NoRestriction *smithy.Schema
+
 var _ReplicationStatusListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "ReplicationStatusListType",
@@ -495,6 +546,23 @@ var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceNotFoundException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
+
+var _ResourcePolicyNameType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "ResourcePolicyNameType",
+}, smithy.ShapeTypeString, 0)
+
+var ResourcePolicySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "ResourcePolicySummary",
+}, smithy.ShapeTypeStructure, 1)
+var ResourcePolicySummary_PolicyName *smithy.Schema
+
+var _ResourcePolicySummaryListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "ResourcePolicySummaryListType",
+}, smithy.ShapeTypeList, 1)
+var _ResourcePolicySummaryListType_member *smithy.Schema
 
 var _RoleARNType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
@@ -708,12 +776,16 @@ var _StatusMessageType = smithy.NewSchema(smithy.ShapeID{
 var StatusType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "StatusType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 5)
 var StatusType_InSync *smithy.Schema
 
 var StatusType_Failed *smithy.Schema
 
 var StatusType_InProgress *smithy.Schema
+
+var StatusType_Pending *smithy.Schema
+
+var StatusType_Detached *smithy.Schema
 
 var Tag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
@@ -764,6 +836,28 @@ var _ValidationErrorsType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ValidationErrorsType_member *smithy.Schema
 
+var AssociateCrossAccountReplicaRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "AssociateCrossAccountReplicaRequest",
+}, smithy.ShapeTypeStructure, 4)
+var AssociateCrossAccountReplicaRequest_SecretId *smithy.Schema
+
+var AssociateCrossAccountReplicaRequest_CrossAccountReplicaARN *smithy.Schema
+
+var AssociateCrossAccountReplicaRequest_ReplicaRestriction *smithy.Schema
+
+var AssociateCrossAccountReplicaRequest_ReplicationRoleARN *smithy.Schema
+
+var AssociateCrossAccountReplicaResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "AssociateCrossAccountReplicaResponse",
+}, smithy.ShapeTypeStructure, 3)
+var AssociateCrossAccountReplicaResponse_ARN *smithy.Schema
+
+var AssociateCrossAccountReplicaResponse_CrossAccountReplicaARN *smithy.Schema
+
+var AssociateCrossAccountReplicaResponse_ReplicationStatus *smithy.Schema
+
 var BatchGetSecretValueRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "BatchGetSecretValueRequest",
@@ -805,7 +899,7 @@ var CancelRotateSecretResponse_VersionId *smithy.Schema
 var CreateSecretRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "CreateSecretRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateSecretRequest_Name *smithy.Schema
 
 var CreateSecretRequest_ClientRequestToken *smithy.Schema
@@ -826,6 +920,8 @@ var CreateSecretRequest_ForceOverwriteReplicaSecret *smithy.Schema
 
 var CreateSecretRequest_Type *smithy.Schema
 
+var CreateSecretRequest_CrossAccountPrimaryARN *smithy.Schema
+
 var CreateSecretResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "CreateSecretResponse",
@@ -841,16 +937,20 @@ var CreateSecretResponse_ReplicationStatus *smithy.Schema
 var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var DeleteResourcePolicyRequest_SecretId *smithy.Schema
+
+var DeleteResourcePolicyRequest_PolicyName *smithy.Schema
 
 var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DeleteResourcePolicyResponse_ARN *smithy.Schema
 
 var DeleteResourcePolicyResponse_Name *smithy.Schema
+
+var DeleteResourcePolicyResponse_PolicyName *smithy.Schema
 
 var DeleteSecretRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
@@ -881,7 +981,7 @@ var DescribeSecretRequest_SecretId *smithy.Schema
 var DescribeSecretResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "DescribeSecretResponse",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 23)
 var DescribeSecretResponse_ARN *smithy.Schema
 
 var DescribeSecretResponse_Name *smithy.Schema
@@ -924,6 +1024,26 @@ var DescribeSecretResponse_PrimaryRegion *smithy.Schema
 
 var DescribeSecretResponse_ReplicationStatus *smithy.Schema
 
+var DescribeSecretResponse_CrossAccountPrimary *smithy.Schema
+
+var DescribeSecretResponse_CrossAccountReplicas *smithy.Schema
+
+var DisassociateCrossAccountReplicaRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "DisassociateCrossAccountReplicaRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateCrossAccountReplicaRequest_SecretId *smithy.Schema
+
+var DisassociateCrossAccountReplicaRequest_CrossAccountReplicaARN *smithy.Schema
+
+var DisassociateCrossAccountReplicaResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "DisassociateCrossAccountReplicaResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateCrossAccountReplicaResponse_ARN *smithy.Schema
+
+var DisassociateCrossAccountReplicaResponse_CrossAccountReplicaARN *smithy.Schema
+
 var GetRandomPasswordRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "GetRandomPasswordRequest",
@@ -953,18 +1073,22 @@ var GetRandomPasswordResponse_RandomPassword *smithy.Schema
 var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetResourcePolicyRequest_SecretId *smithy.Schema
+
+var GetResourcePolicyRequest_PolicyName *smithy.Schema
 
 var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var GetResourcePolicyResponse_ARN *smithy.Schema
 
 var GetResourcePolicyResponse_Name *smithy.Schema
 
 var GetResourcePolicyResponse_ResourcePolicy *smithy.Schema
+
+var GetResourcePolicyResponse_PolicyName *smithy.Schema
 
 var GetSecretValueRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
@@ -993,6 +1117,24 @@ var GetSecretValueResponse_SecretString *smithy.Schema
 var GetSecretValueResponse_VersionStages *smithy.Schema
 
 var GetSecretValueResponse_CreatedDate *smithy.Schema
+
+var ListResourcePoliciesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "ListResourcePoliciesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListResourcePoliciesRequest_SecretId *smithy.Schema
+
+var ListResourcePoliciesRequest_MaxResults *smithy.Schema
+
+var ListResourcePoliciesRequest_NextToken *smithy.Schema
+
+var ListResourcePoliciesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.secretsmanager",
+	Name:      "ListResourcePoliciesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListResourcePoliciesResponse_ResourcePolicies *smithy.Schema
+
+var ListResourcePoliciesResponse_NextToken *smithy.Schema
 
 var ListSecretsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
@@ -1045,20 +1187,24 @@ var ListSecretVersionIdsResponse_Name *smithy.Schema
 var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var PutResourcePolicyRequest_SecretId *smithy.Schema
 
 var PutResourcePolicyRequest_ResourcePolicy *smithy.Schema
+
+var PutResourcePolicyRequest_PolicyName *smithy.Schema
 
 var PutResourcePolicyRequest_BlockPublicPolicy *smithy.Schema
 
 var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var PutResourcePolicyResponse_ARN *smithy.Schema
 
 var PutResourcePolicyResponse_Name *smithy.Schema
+
+var PutResourcePolicyResponse_PolicyName *smithy.Schema
 
 var PutSecretValueRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
@@ -1273,6 +1419,32 @@ func init() {
 
 	_APIErrorListType_member = _APIErrorListType.AddMember("member", APIErrorType)
 
+	StatusType_InSync = StatusType.AddMember("InSync", smithyprelude.Unit)
+
+	StatusType_Failed = StatusType.AddMember("Failed", smithyprelude.Unit)
+
+	StatusType_InProgress = StatusType.AddMember("InProgress", smithyprelude.Unit)
+
+	StatusType_Pending = StatusType.AddMember("Pending", smithyprelude.Unit)
+
+	StatusType_Detached = StatusType.AddMember("Detached", smithyprelude.Unit)
+
+	CrossAccountPrimaryType_PrimarySecretARN = CrossAccountPrimaryType.AddMember("PrimarySecretARN", _SecretARNType)
+
+	CrossAccountPrimaryType_ReplicationStatus = CrossAccountPrimaryType.AddMember("ReplicationStatus", StatusType)
+
+	CrossAccountPrimaryType_StatusMessage = CrossAccountPrimaryType.AddMember("StatusMessage", _StatusMessageType)
+
+	CrossAccountReplicaEntry_ReplicaSecretARN = CrossAccountReplicaEntry.AddMember("ReplicaSecretARN", _SecretARNType)
+
+	CrossAccountReplicaEntry_ReplicationRoleARN = CrossAccountReplicaEntry.AddMember("ReplicationRoleARN", _RoleARNType)
+
+	CrossAccountReplicaEntry_ReplicationStatus = CrossAccountReplicaEntry.AddMember("ReplicationStatus", StatusType)
+
+	CrossAccountReplicaEntry_StatusMessage = CrossAccountReplicaEntry.AddMember("StatusMessage", _StatusMessageType)
+
+	_CrossAccountReplicaListType_member = _CrossAccountReplicaListType.AddMember("member", CrossAccountReplicaEntry)
+
 	DecryptionFailure_Message = DecryptionFailure.AddMember("Message", _ErrorMessage)
 
 	EncryptionFailure_Message = EncryptionFailure.AddMember("Message", _ErrorMessage)
@@ -1325,11 +1497,9 @@ func init() {
 
 	_RemoveReplicaRegionListType_member = _RemoveReplicaRegionListType.AddMember("member", _RegionType)
 
-	StatusType_InSync = StatusType.AddMember("InSync", smithyprelude.Unit)
+	ReplicaRestrictionType_SameOrg = ReplicaRestrictionType.AddMember("SameOrg", smithyprelude.Unit)
 
-	StatusType_Failed = StatusType.AddMember("Failed", smithyprelude.Unit)
-
-	StatusType_InProgress = StatusType.AddMember("InProgress", smithyprelude.Unit)
+	ReplicaRestrictionType_NoRestriction = ReplicaRestrictionType.AddMember("NoRestriction", smithyprelude.Unit)
 
 	ReplicationStatusType_Region = ReplicationStatusType.AddMember("Region", _RegionType)
 
@@ -1346,6 +1516,10 @@ func init() {
 	ResourceExistsException_Message = ResourceExistsException.AddMember("Message", _ErrorMessage)
 
 	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
+
+	ResourcePolicySummary_PolicyName = ResourcePolicySummary.AddMember("PolicyName", _ResourcePolicyNameType)
+
+	_ResourcePolicySummaryListType_member = _ResourcePolicySummaryListType.AddMember("member", ResourcePolicySummary)
 
 	RotationRulesType_AutomaticallyAfterDays = RotationRulesType.AddMember("AutomaticallyAfterDays", _AutomaticallyRotateAfterDaysType)
 
@@ -1457,6 +1631,20 @@ func init() {
 
 	_ValidationErrorsType_member = _ValidationErrorsType.AddMember("member", ValidationErrorsEntry)
 
+	AssociateCrossAccountReplicaRequest_SecretId = AssociateCrossAccountReplicaRequest.AddMember("SecretId", _SecretIdType)
+
+	AssociateCrossAccountReplicaRequest_CrossAccountReplicaARN = AssociateCrossAccountReplicaRequest.AddMember("CrossAccountReplicaARN", _SecretARNType)
+
+	AssociateCrossAccountReplicaRequest_ReplicaRestriction = AssociateCrossAccountReplicaRequest.AddMember("ReplicaRestriction", ReplicaRestrictionType)
+
+	AssociateCrossAccountReplicaRequest_ReplicationRoleARN = AssociateCrossAccountReplicaRequest.AddMember("ReplicationRoleARN", _RoleARNType)
+
+	AssociateCrossAccountReplicaResponse_ARN = AssociateCrossAccountReplicaResponse.AddMember("ARN", _SecretARNType)
+
+	AssociateCrossAccountReplicaResponse_CrossAccountReplicaARN = AssociateCrossAccountReplicaResponse.AddMember("CrossAccountReplicaARN", _SecretARNType)
+
+	AssociateCrossAccountReplicaResponse_ReplicationStatus = AssociateCrossAccountReplicaResponse.AddMember("ReplicationStatus", StatusType)
+
 	BatchGetSecretValueRequest_SecretIdList = BatchGetSecretValueRequest.AddMember("SecretIdList", _SecretIdListType)
 
 	BatchGetSecretValueRequest_Filters = BatchGetSecretValueRequest.AddMember("Filters", _FiltersListType)
@@ -1499,6 +1687,8 @@ func init() {
 
 	CreateSecretRequest_Type = CreateSecretRequest.AddMember("Type", _MedeaTypeType)
 
+	CreateSecretRequest_CrossAccountPrimaryARN = CreateSecretRequest.AddMember("CrossAccountPrimaryARN", _SecretARNType)
+
 	CreateSecretResponse_ARN = CreateSecretResponse.AddMember("ARN", _SecretARNType)
 
 	CreateSecretResponse_Name = CreateSecretResponse.AddMember("Name", _SecretNameType)
@@ -1509,9 +1699,13 @@ func init() {
 
 	DeleteResourcePolicyRequest_SecretId = DeleteResourcePolicyRequest.AddMember("SecretId", _SecretIdType)
 
+	DeleteResourcePolicyRequest_PolicyName = DeleteResourcePolicyRequest.AddMember("PolicyName", _ResourcePolicyNameType)
+
 	DeleteResourcePolicyResponse_ARN = DeleteResourcePolicyResponse.AddMember("ARN", _SecretARNType)
 
 	DeleteResourcePolicyResponse_Name = DeleteResourcePolicyResponse.AddMember("Name", _NameType)
+
+	DeleteResourcePolicyResponse_PolicyName = DeleteResourcePolicyResponse.AddMember("PolicyName", _ResourcePolicyNameType)
 
 	DeleteSecretRequest_SecretId = DeleteSecretRequest.AddMember("SecretId", _SecretIdType)
 
@@ -1569,6 +1763,18 @@ func init() {
 
 	DescribeSecretResponse_ReplicationStatus = DescribeSecretResponse.AddMember("ReplicationStatus", _ReplicationStatusListType)
 
+	DescribeSecretResponse_CrossAccountPrimary = DescribeSecretResponse.AddMember("CrossAccountPrimary", CrossAccountPrimaryType)
+
+	DescribeSecretResponse_CrossAccountReplicas = DescribeSecretResponse.AddMember("CrossAccountReplicas", _CrossAccountReplicaListType)
+
+	DisassociateCrossAccountReplicaRequest_SecretId = DisassociateCrossAccountReplicaRequest.AddMember("SecretId", _SecretIdType)
+
+	DisassociateCrossAccountReplicaRequest_CrossAccountReplicaARN = DisassociateCrossAccountReplicaRequest.AddMember("CrossAccountReplicaARN", _SecretARNType)
+
+	DisassociateCrossAccountReplicaResponse_ARN = DisassociateCrossAccountReplicaResponse.AddMember("ARN", _SecretARNType)
+
+	DisassociateCrossAccountReplicaResponse_CrossAccountReplicaARN = DisassociateCrossAccountReplicaResponse.AddMember("CrossAccountReplicaARN", _SecretARNType)
+
 	GetRandomPasswordRequest_PasswordLength = GetRandomPasswordRequest.AddMember("PasswordLength", _PasswordLengthType)
 
 	GetRandomPasswordRequest_ExcludeCharacters = GetRandomPasswordRequest.AddMember("ExcludeCharacters", _ExcludeCharactersType)
@@ -1589,11 +1795,15 @@ func init() {
 
 	GetResourcePolicyRequest_SecretId = GetResourcePolicyRequest.AddMember("SecretId", _SecretIdType)
 
+	GetResourcePolicyRequest_PolicyName = GetResourcePolicyRequest.AddMember("PolicyName", _ResourcePolicyNameType)
+
 	GetResourcePolicyResponse_ARN = GetResourcePolicyResponse.AddMember("ARN", _SecretARNType)
 
 	GetResourcePolicyResponse_Name = GetResourcePolicyResponse.AddMember("Name", _NameType)
 
 	GetResourcePolicyResponse_ResourcePolicy = GetResourcePolicyResponse.AddMember("ResourcePolicy", _NonEmptyResourcePolicyType)
+
+	GetResourcePolicyResponse_PolicyName = GetResourcePolicyResponse.AddMember("PolicyName", _ResourcePolicyNameType)
 
 	GetSecretValueRequest_SecretId = GetSecretValueRequest.AddMember("SecretId", _SecretIdType)
 
@@ -1614,6 +1824,16 @@ func init() {
 	GetSecretValueResponse_VersionStages = GetSecretValueResponse.AddMember("VersionStages", _SecretVersionStagesType)
 
 	GetSecretValueResponse_CreatedDate = GetSecretValueResponse.AddMember("CreatedDate", _CreatedDateType)
+
+	ListResourcePoliciesRequest_SecretId = ListResourcePoliciesRequest.AddMember("SecretId", _SecretIdType)
+
+	ListResourcePoliciesRequest_MaxResults = ListResourcePoliciesRequest.AddMember("MaxResults", _MaxResultsType)
+
+	ListResourcePoliciesRequest_NextToken = ListResourcePoliciesRequest.AddMember("NextToken", _NextTokenType)
+
+	ListResourcePoliciesResponse_ResourcePolicies = ListResourcePoliciesResponse.AddMember("ResourcePolicies", _ResourcePolicySummaryListType)
+
+	ListResourcePoliciesResponse_NextToken = ListResourcePoliciesResponse.AddMember("NextToken", _NextTokenType)
 
 	ListSecretsRequest_IncludePlannedDeletion = ListSecretsRequest.AddMember("IncludePlannedDeletion", _BooleanType)
 
@@ -1651,11 +1871,15 @@ func init() {
 
 	PutResourcePolicyRequest_ResourcePolicy = PutResourcePolicyRequest.AddMember("ResourcePolicy", _NonEmptyResourcePolicyType)
 
+	PutResourcePolicyRequest_PolicyName = PutResourcePolicyRequest.AddMember("PolicyName", _ResourcePolicyNameType)
+
 	PutResourcePolicyRequest_BlockPublicPolicy = PutResourcePolicyRequest.AddMember("BlockPublicPolicy", _BooleanType)
 
 	PutResourcePolicyResponse_ARN = PutResourcePolicyResponse.AddMember("ARN", _SecretARNType)
 
 	PutResourcePolicyResponse_Name = PutResourcePolicyResponse.AddMember("Name", _NameType)
+
+	PutResourcePolicyResponse_PolicyName = PutResourcePolicyResponse.AddMember("PolicyName", _ResourcePolicyNameType)
 
 	PutSecretValueRequest_SecretId = PutSecretValueRequest.AddMember("SecretId", _SecretIdType)
 

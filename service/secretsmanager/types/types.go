@@ -61,6 +61,148 @@ func (v *APIErrorType) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about the primary secret that a cross-account replica
+// secret replicates from, including its ARN and replication status. This
+// information is only available for cross-account replica secrets.
+type CrossAccountPrimaryType struct {
+
+	// The ARN of the primary secret replicating into this replica secret.
+	PrimarySecretARN *string
+
+	// The status of replication from the primary secret to this replica. The status
+	// can be:
+	//
+	//   - InSync : Replication to the replica secret is complete.
+	//
+	//   - Failed : Replication to the replica secret was unable to be completed.
+	//
+	//   - InProgress : Replication to the replica secret has started but is not
+	//   complete.
+	//
+	//   - Pending : Replication has not yet started for the replica secret.
+	//
+	//   - Detached : Replication to the replica secret was stopped by the primary.
+	ReplicationStatus StatusType
+
+	// A message that describes the replication status, if Secrets Manager has more
+	// information to provide.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CrossAccountPrimaryType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossAccountPrimaryType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossAccountPrimaryType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrimarySecretARN != nil {
+		s.WriteString(schemas.CrossAccountPrimaryType_PrimarySecretARN, *v.PrimarySecretARN)
+	}
+	if v.ReplicationStatus != "" {
+		s.WriteString(schemas.CrossAccountPrimaryType_ReplicationStatus, string(v.ReplicationStatus))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.CrossAccountPrimaryType_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *CrossAccountPrimaryType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossAccountPrimaryType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossAccountPrimaryType_PrimarySecretARN:
+			v.PrimarySecretARN = new(string)
+			return d.ReadString(schemas.CrossAccountPrimaryType_PrimarySecretARN, v.PrimarySecretARN)
+		case schemas.CrossAccountPrimaryType_ReplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CrossAccountPrimaryType_ReplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ReplicationStatus = StatusType(ev)
+			return nil
+		case schemas.CrossAccountPrimaryType_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.CrossAccountPrimaryType_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
+// Information about a cross-account replica secret. This information is only
+// available for cross-account primary secrets.
+type CrossAccountReplicaEntry struct {
+
+	// The ARN of the replica secret.
+	ReplicaSecretARN *string
+
+	// The ARN of the IAM role that Secrets Manager assumes to replicate to this
+	// replica, if one was specified when the replica was associated.
+	ReplicationRoleARN *string
+
+	// The status of replication from this primary secret. The status can be:
+	//
+	//   - InSync : Replication from the primary secret is complete.
+	//
+	//   - Failed : Replication from the primary secret was unable to be completed.
+	//
+	//   - InProgress : Replication from the primary secret has started but is not
+	//   complete.
+	//
+	//   - Detached : Replication from the primary secret was stopped by the replica.
+	ReplicationStatus StatusType
+
+	// A message that describes the replication status, if Secrets Manager has more
+	// information to provide.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CrossAccountReplicaEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossAccountReplicaEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossAccountReplicaEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicaSecretARN != nil {
+		s.WriteString(schemas.CrossAccountReplicaEntry_ReplicaSecretARN, *v.ReplicaSecretARN)
+	}
+	if v.ReplicationRoleARN != nil {
+		s.WriteString(schemas.CrossAccountReplicaEntry_ReplicationRoleARN, *v.ReplicationRoleARN)
+	}
+	if v.ReplicationStatus != "" {
+		s.WriteString(schemas.CrossAccountReplicaEntry_ReplicationStatus, string(v.ReplicationStatus))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.CrossAccountReplicaEntry_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *CrossAccountReplicaEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossAccountReplicaEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossAccountReplicaEntry_ReplicaSecretARN:
+			v.ReplicaSecretARN = new(string)
+			return d.ReadString(schemas.CrossAccountReplicaEntry_ReplicaSecretARN, v.ReplicaSecretARN)
+		case schemas.CrossAccountReplicaEntry_ReplicationRoleARN:
+			v.ReplicationRoleARN = new(string)
+			return d.ReadString(schemas.CrossAccountReplicaEntry_ReplicationRoleARN, v.ReplicationRoleARN)
+		case schemas.CrossAccountReplicaEntry_ReplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CrossAccountReplicaEntry_ReplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ReplicationStatus = StatusType(ev)
+			return nil
+		case schemas.CrossAccountReplicaEntry_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.CrossAccountReplicaEntry_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // The metadata needed to successfully rotate a managed external secret. A list of
 // key value pairs in JSON format specified by the partner. For more information,
 // see [Managed external secret partners].
@@ -280,6 +422,41 @@ func (v *ReplicationStatusType) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ReplicationStatusType_StatusMessage:
 			v.StatusMessage = new(string)
 			return d.ReadString(schemas.ReplicationStatusType_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
+// A structure that contains details about a resource policy attached to a secret.
+// It does not contain the contents of the resource policy. To view the contents of
+// the policy, use [GetResourcePolicy].
+//
+// [GetResourcePolicy]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetResourcePolicy.html
+type ResourcePolicySummary struct {
+
+	// The name of the resource policy.
+	PolicyName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourcePolicySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePolicySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ResourcePolicySummary_PolicyName, *v.PolicyName)
+	}
+}
+func (v *ResourcePolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePolicySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePolicySummary_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.ResourcePolicySummary_PolicyName, v.PolicyName)
 		}
 		return nil
 	})

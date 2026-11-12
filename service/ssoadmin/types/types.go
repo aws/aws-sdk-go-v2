@@ -1600,6 +1600,80 @@ func (v *ListApplicationsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The network access controls for your Identity Center instance. These controls
+// restrict which networks can reach your instance and applications.
+type NetworkConfigurationInfo struct {
+
+	// Specifies whether access to your Identity Center instance and to applications
+	// must originate from a VPC endpoint. When this value is true and no other field
+	// is specified, access is allowed from any VPC in your organization, or from any
+	// VPC in the Amazon Web Services account for an account instance, and applies to
+	// all applications. When this value is false , no network access control is
+	// enforced and the values of RestrictSourceVpcs , AllowSourceIps , and
+	// ExcludeApplicationArns are cleared.
+	//
+	// This member is required.
+	VpceAccessRequired *bool
+
+	// Allows access from the IPv4 or IPv6 CIDR blocks that you specify, in addition
+	// to the VPCs allowed by RestrictSourceVpcs . If you don't specify this value, no
+	// additional IP address ranges are allowed.
+	AllowSourceIps []string
+
+	// Exempts the applications that you specify from the network access control, so
+	// that access to them is unchanged. You can specify both Amazon Web Services
+	// managed applications and customer managed applications, and you can use
+	// wildcards. These applications are not restricted by RestrictSourceVpcs or
+	// AllowSourceIps . If you don't specify this value, the controls apply to all
+	// applications.
+	ExcludeApplicationArns []string
+
+	// Limits access to the VPC endpoints in the VPCs that you specify. These VPCs
+	// must be in your organization, or in the Amazon Web Services account for an
+	// account instance. If you don't specify this value, access is allowed from any
+	// VPC in your organization or Amazon Web Services account.
+	RestrictSourceVpcs []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfigurationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfigurationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfigurationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowSourceIps != nil {
+		serializeIpCidrList(s, schemas.NetworkConfigurationInfo_AllowSourceIps, v.AllowSourceIps)
+	}
+	if v.ExcludeApplicationArns != nil {
+		serializeApplicationArnList(s, schemas.NetworkConfigurationInfo_ExcludeApplicationArns, v.ExcludeApplicationArns)
+	}
+	if v.RestrictSourceVpcs != nil {
+		serializeVpcArnList(s, schemas.NetworkConfigurationInfo_RestrictSourceVpcs, v.RestrictSourceVpcs)
+	}
+	if v.VpceAccessRequired != nil {
+		s.WriteBool(schemas.NetworkConfigurationInfo_VpceAccessRequired, *v.VpceAccessRequired)
+	}
+}
+func (v *NetworkConfigurationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfigurationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfigurationInfo_AllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfigurationInfo_AllowSourceIps, &v.AllowSourceIps)
+		case schemas.NetworkConfigurationInfo_ExcludeApplicationArns:
+			return deserializeApplicationArnList(d, schemas.NetworkConfigurationInfo_ExcludeApplicationArns, &v.ExcludeApplicationArns)
+		case schemas.NetworkConfigurationInfo_RestrictSourceVpcs:
+			return deserializeVpcArnList(d, schemas.NetworkConfigurationInfo_RestrictSourceVpcs, &v.RestrictSourceVpcs)
+		case schemas.NetworkConfigurationInfo_VpceAccessRequired:
+			v.VpceAccessRequired = new(bool)
+			return d.ReadBool(schemas.NetworkConfigurationInfo_VpceAccessRequired, v.VpceAccessRequired)
+		}
+		return nil
+	})
+}
+
 // A structure that describes configuration settings for a trusted token issuer
 // that supports OpenID Connect (OIDC) and JSON Web Tokens (JWTs).
 type OidcJwtConfiguration struct {

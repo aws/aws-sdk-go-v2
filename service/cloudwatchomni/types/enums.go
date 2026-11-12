@@ -382,6 +382,52 @@ func (IntegrationType) Values() []IntegrationType {
 	}
 }
 
+type MetricAggregationTemporality string
+
+// Enum values for MetricAggregationTemporality
+const (
+	// Each data point contains values accumulated since the preceding reporting
+	// interval.
+	MetricAggregationTemporalityDelta MetricAggregationTemporality = "delta"
+	// Each data point contains values accumulated since a fixed start time or stream
+	// reset.
+	MetricAggregationTemporalityCumulative MetricAggregationTemporality = "cumulative"
+)
+
+// Values returns all known values for MetricAggregationTemporality. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricAggregationTemporality) Values() []MetricAggregationTemporality {
+	return []MetricAggregationTemporality{
+		"delta",
+		"cumulative",
+	}
+}
+
+type MetricMonotonicity string
+
+// Enum values for MetricMonotonicity
+const (
+	// Delta values are non-negative; cumulative values do not decrease except at a
+	// stream reset.
+	MetricMonotonicityMonotonic MetricMonotonicity = "monotonic"
+	// Delta values can be negative; cumulative values can increase or decrease.
+	MetricMonotonicityNonMonotonic MetricMonotonicity = "non_monotonic"
+)
+
+// Values returns all known values for MetricMonotonicity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricMonotonicity) Values() []MetricMonotonicity {
+	return []MetricMonotonicity{
+		"monotonic",
+		"non_monotonic",
+	}
+}
+
 type NodeCategory string
 
 // Enum values for NodeCategory

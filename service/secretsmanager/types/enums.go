@@ -31,6 +31,25 @@ func (FilterNameStringType) Values() []FilterNameStringType {
 	}
 }
 
+type ReplicaRestrictionType string
+
+// Enum values for ReplicaRestrictionType
+const (
+	ReplicaRestrictionTypeSameOrg       ReplicaRestrictionType = "SameOrg"
+	ReplicaRestrictionTypeNoRestriction ReplicaRestrictionType = "NoRestriction"
+)
+
+// Values returns all known values for ReplicaRestrictionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicaRestrictionType) Values() []ReplicaRestrictionType {
+	return []ReplicaRestrictionType{
+		"SameOrg",
+		"NoRestriction",
+	}
+}
+
 type SortByType string
 
 // Enum values for SortByType
@@ -80,6 +99,8 @@ const (
 	StatusTypeInSync     StatusType = "InSync"
 	StatusTypeFailed     StatusType = "Failed"
 	StatusTypeInProgress StatusType = "InProgress"
+	StatusTypePending    StatusType = "Pending"
+	StatusTypeDetached   StatusType = "Detached"
 )
 
 // Values returns all known values for StatusType. Note that this can be expanded
@@ -91,5 +112,7 @@ func (StatusType) Values() []StatusType {
 		"InSync",
 		"Failed",
 		"InProgress",
+		"Pending",
+		"Detached",
 	}
 }

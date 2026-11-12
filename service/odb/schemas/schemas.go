@@ -18,6 +18,11 @@ var AssociateIamRoleToResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateIamRoleToResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var AssociateVirtualMachinesToCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AssociateVirtualMachinesToCloudVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
 var AssociateVirtualMachinesToExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "AssociateVirtualMachinesToExadbVmCluster",
@@ -121,6 +126,11 @@ var DeleteOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
 var DisassociateIamRoleFromResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DisassociateIamRoleFromResource",
+}, smithy.ShapeTypeOperation, 0)
+
+var DisassociateVirtualMachinesFromCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisassociateVirtualMachinesFromCloudVmCluster",
 }, smithy.ShapeTypeOperation, 0)
 
 var DisassociateVirtualMachinesFromExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
@@ -383,9 +393,24 @@ var UpdateAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateAutonomousDatabaseBackup",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateCloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudAutonomousVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "UpdateCloudExadataInfrastructure",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateCloudExadataInfrastructureStorageCapacity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudExadataInfrastructureStorageCapacity",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudVmCluster",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
@@ -1269,7 +1294,7 @@ var CloneType_PARTIAL *smithy.Schema
 var CloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudAutonomousVmCluster",
-}, smithy.ShapeTypeStructure, 52)
+}, smithy.ShapeTypeStructure, 53)
 var CloudAutonomousVmCluster_cloudAutonomousVmClusterId *smithy.Schema
 
 var CloudAutonomousVmCluster_cloudAutonomousVmClusterArn *smithy.Schema
@@ -1346,6 +1371,8 @@ var CloudAutonomousVmCluster_nodeCount *smithy.Schema
 
 var CloudAutonomousVmCluster_nonProvisionableAutonomousContainerDatabases *smithy.Schema
 
+var CloudAutonomousVmCluster_ocpusLowestScaledValue *smithy.Schema
+
 var CloudAutonomousVmCluster_provisionableAutonomousContainerDatabases *smithy.Schema
 
 var CloudAutonomousVmCluster_provisionedAutonomousContainerDatabases *smithy.Schema
@@ -1397,7 +1424,7 @@ var _CloudAutonomousVmClusterResourceDetailsList_member *smithy.Schema
 var CloudAutonomousVmClusterSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudAutonomousVmClusterSummary",
-}, smithy.ShapeTypeStructure, 52)
+}, smithy.ShapeTypeStructure, 53)
 var CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterId *smithy.Schema
 
 var CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterArn *smithy.Schema
@@ -1473,6 +1500,8 @@ var CloudAutonomousVmClusterSummary_memorySizeInGBs *smithy.Schema
 var CloudAutonomousVmClusterSummary_nodeCount *smithy.Schema
 
 var CloudAutonomousVmClusterSummary_nonProvisionableAutonomousContainerDatabases *smithy.Schema
+
+var CloudAutonomousVmClusterSummary_ocpusLowestScaledValue *smithy.Schema
 
 var CloudAutonomousVmClusterSummary_provisionableAutonomousContainerDatabases *smithy.Schema
 
@@ -4166,6 +4195,26 @@ var AssociateIamRoleToResourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateIamRoleToResourceOutput",
 }, smithy.ShapeTypeStructure, 0)
 
+var AssociateVirtualMachinesToCloudVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AssociateVirtualMachinesToCloudVmClusterInput",
+}, smithy.ShapeTypeStructure, 2)
+var AssociateVirtualMachinesToCloudVmClusterInput_cloudVmClusterId *smithy.Schema
+
+var AssociateVirtualMachinesToCloudVmClusterInput_dbServers *smithy.Schema
+
+var AssociateVirtualMachinesToCloudVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AssociateVirtualMachinesToCloudVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var AssociateVirtualMachinesToCloudVmClusterOutput_displayName *smithy.Schema
+
+var AssociateVirtualMachinesToCloudVmClusterOutput_status *smithy.Schema
+
+var AssociateVirtualMachinesToCloudVmClusterOutput_statusReason *smithy.Schema
+
+var AssociateVirtualMachinesToCloudVmClusterOutput_cloudVmClusterId *smithy.Schema
+
 var AssociateVirtualMachinesToExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "AssociateVirtualMachinesToExadbVmClusterInput",
@@ -4781,6 +4830,26 @@ var DisassociateIamRoleFromResourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DisassociateIamRoleFromResourceOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var DisassociateVirtualMachinesFromCloudVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisassociateVirtualMachinesFromCloudVmClusterInput",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateVirtualMachinesFromCloudVmClusterInput_cloudVmClusterId *smithy.Schema
+
+var DisassociateVirtualMachinesFromCloudVmClusterInput_dbServers *smithy.Schema
+
+var DisassociateVirtualMachinesFromCloudVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisassociateVirtualMachinesFromCloudVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var DisassociateVirtualMachinesFromCloudVmClusterOutput_displayName *smithy.Schema
+
+var DisassociateVirtualMachinesFromCloudVmClusterOutput_status *smithy.Schema
+
+var DisassociateVirtualMachinesFromCloudVmClusterOutput_statusReason *smithy.Schema
+
+var DisassociateVirtualMachinesFromCloudVmClusterOutput_cloudVmClusterId *smithy.Schema
 
 var DisassociateVirtualMachinesFromExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -5754,13 +5823,51 @@ var UpdateAutonomousDatabaseOutput_status *smithy.Schema
 
 var UpdateAutonomousDatabaseOutput_statusReason *smithy.Schema
 
+var UpdateCloudAutonomousVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudAutonomousVmClusterInput",
+}, smithy.ShapeTypeStructure, 8)
+var UpdateCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterInput_autonomousDataStorageSizeInTBs *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterInput_cpuCoreCountPerNode *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterInput_description *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterInput_displayName *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterInput_licenseModel *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterInput_maintenanceWindow *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterInput_totalContainerDatabases *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudAutonomousVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateCloudAutonomousVmClusterOutput_displayName *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterOutput_status *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterOutput_statusReason *smithy.Schema
+
+var UpdateCloudAutonomousVmClusterOutput_cloudAutonomousVmClusterId *smithy.Schema
+
 var UpdateCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "UpdateCloudExadataInfrastructureInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateCloudExadataInfrastructureInput_cloudExadataInfrastructureId *smithy.Schema
 
+var UpdateCloudExadataInfrastructureInput_displayName *smithy.Schema
+
+var UpdateCloudExadataInfrastructureInput_computeCount *smithy.Schema
+
 var UpdateCloudExadataInfrastructureInput_maintenanceWindow *smithy.Schema
+
+var UpdateCloudExadataInfrastructureInput_storageCount *smithy.Schema
 
 var UpdateCloudExadataInfrastructureOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -5773,6 +5880,60 @@ var UpdateCloudExadataInfrastructureOutput_status *smithy.Schema
 var UpdateCloudExadataInfrastructureOutput_statusReason *smithy.Schema
 
 var UpdateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId *smithy.Schema
+
+var UpdateCloudExadataInfrastructureStorageCapacityInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudExadataInfrastructureStorageCapacityInput",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateCloudExadataInfrastructureStorageCapacityInput_cloudExadataInfrastructureId *smithy.Schema
+
+var UpdateCloudExadataInfrastructureStorageCapacityOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudExadataInfrastructureStorageCapacityOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateCloudExadataInfrastructureStorageCapacityOutput_displayName *smithy.Schema
+
+var UpdateCloudExadataInfrastructureStorageCapacityOutput_status *smithy.Schema
+
+var UpdateCloudExadataInfrastructureStorageCapacityOutput_statusReason *smithy.Schema
+
+var UpdateCloudExadataInfrastructureStorageCapacityOutput_cloudExadataInfrastructureId *smithy.Schema
+
+var UpdateCloudVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudVmClusterInput",
+}, smithy.ShapeTypeStructure, 10)
+var UpdateCloudVmClusterInput_cloudVmClusterId *smithy.Schema
+
+var UpdateCloudVmClusterInput_cpuCoreCount *smithy.Schema
+
+var UpdateCloudVmClusterInput_dataCollectionOptions *smithy.Schema
+
+var UpdateCloudVmClusterInput_dataStorageSizeInTBs *smithy.Schema
+
+var UpdateCloudVmClusterInput_dbNodeStorageSizeInGBs *smithy.Schema
+
+var UpdateCloudVmClusterInput_displayName *smithy.Schema
+
+var UpdateCloudVmClusterInput_sshPublicKeys *smithy.Schema
+
+var UpdateCloudVmClusterInput_licenseModel *smithy.Schema
+
+var UpdateCloudVmClusterInput_memorySizeInGBs *smithy.Schema
+
+var UpdateCloudVmClusterInput_storageSizeInGBs *smithy.Schema
+
+var UpdateCloudVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateCloudVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateCloudVmClusterOutput_displayName *smithy.Schema
+
+var UpdateCloudVmClusterOutput_status *smithy.Schema
+
+var UpdateCloudVmClusterOutput_statusReason *smithy.Schema
+
+var UpdateCloudVmClusterOutput_cloudVmClusterId *smithy.Schema
 
 var UpdateExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -7087,6 +7248,8 @@ func init() {
 
 	CloudAutonomousVmCluster_nonProvisionableAutonomousContainerDatabases = CloudAutonomousVmCluster.AddMember("nonProvisionableAutonomousContainerDatabases", smithyprelude.Integer)
 
+	CloudAutonomousVmCluster_ocpusLowestScaledValue = CloudAutonomousVmCluster.AddMember("ocpusLowestScaledValue", smithyprelude.Integer)
+
 	CloudAutonomousVmCluster_provisionableAutonomousContainerDatabases = CloudAutonomousVmCluster.AddMember("provisionableAutonomousContainerDatabases", smithyprelude.Integer)
 
 	CloudAutonomousVmCluster_provisionedAutonomousContainerDatabases = CloudAutonomousVmCluster.AddMember("provisionedAutonomousContainerDatabases", smithyprelude.Integer)
@@ -7190,6 +7353,8 @@ func init() {
 	CloudAutonomousVmClusterSummary_nodeCount = CloudAutonomousVmClusterSummary.AddMember("nodeCount", smithyprelude.Integer)
 
 	CloudAutonomousVmClusterSummary_nonProvisionableAutonomousContainerDatabases = CloudAutonomousVmClusterSummary.AddMember("nonProvisionableAutonomousContainerDatabases", smithyprelude.Integer)
+
+	CloudAutonomousVmClusterSummary_ocpusLowestScaledValue = CloudAutonomousVmClusterSummary.AddMember("ocpusLowestScaledValue", smithyprelude.Integer)
 
 	CloudAutonomousVmClusterSummary_provisionableAutonomousContainerDatabases = CloudAutonomousVmClusterSummary.AddMember("provisionableAutonomousContainerDatabases", smithyprelude.Integer)
 
@@ -8731,6 +8896,18 @@ func init() {
 
 	AssociateIamRoleToResourceInput_resourceArn = AssociateIamRoleToResourceInput.AddMember("resourceArn", _Arn)
 
+	AssociateVirtualMachinesToCloudVmClusterInput_cloudVmClusterId = AssociateVirtualMachinesToCloudVmClusterInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	AssociateVirtualMachinesToCloudVmClusterInput_dbServers = AssociateVirtualMachinesToCloudVmClusterInput.AddMember("dbServers", _StringList)
+
+	AssociateVirtualMachinesToCloudVmClusterOutput_displayName = AssociateVirtualMachinesToCloudVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	AssociateVirtualMachinesToCloudVmClusterOutput_status = AssociateVirtualMachinesToCloudVmClusterOutput.AddMember("status", ResourceStatus)
+
+	AssociateVirtualMachinesToCloudVmClusterOutput_statusReason = AssociateVirtualMachinesToCloudVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	AssociateVirtualMachinesToCloudVmClusterOutput_cloudVmClusterId = AssociateVirtualMachinesToCloudVmClusterOutput.AddMember("cloudVmClusterId", smithyprelude.String)
+
 	AssociateVirtualMachinesToExadbVmClusterInput_exadbVmClusterId = AssociateVirtualMachinesToExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
 
 	AssociateVirtualMachinesToExadbVmClusterInput_desiredNodeCount = AssociateVirtualMachinesToExadbVmClusterInput.AddMember("desiredNodeCount", smithyprelude.Integer)
@@ -9168,6 +9345,18 @@ func init() {
 	DisassociateIamRoleFromResourceInput_awsIntegration = DisassociateIamRoleFromResourceInput.AddMember("awsIntegration", SupportedAwsIntegration)
 
 	DisassociateIamRoleFromResourceInput_resourceArn = DisassociateIamRoleFromResourceInput.AddMember("resourceArn", _Arn)
+
+	DisassociateVirtualMachinesFromCloudVmClusterInput_cloudVmClusterId = DisassociateVirtualMachinesFromCloudVmClusterInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	DisassociateVirtualMachinesFromCloudVmClusterInput_dbServers = DisassociateVirtualMachinesFromCloudVmClusterInput.AddMember("dbServers", _StringList)
+
+	DisassociateVirtualMachinesFromCloudVmClusterOutput_displayName = DisassociateVirtualMachinesFromCloudVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	DisassociateVirtualMachinesFromCloudVmClusterOutput_status = DisassociateVirtualMachinesFromCloudVmClusterOutput.AddMember("status", ResourceStatus)
+
+	DisassociateVirtualMachinesFromCloudVmClusterOutput_statusReason = DisassociateVirtualMachinesFromCloudVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	DisassociateVirtualMachinesFromCloudVmClusterOutput_cloudVmClusterId = DisassociateVirtualMachinesFromCloudVmClusterOutput.AddMember("cloudVmClusterId", smithyprelude.String)
 
 	DisassociateVirtualMachinesFromExadbVmClusterInput_exadbVmClusterId = DisassociateVirtualMachinesFromExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
 
@@ -9721,9 +9910,39 @@ func init() {
 
 	UpdateAutonomousDatabaseOutput_statusReason = UpdateAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
 
+	UpdateCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId = UpdateCloudAutonomousVmClusterInput.AddMember("cloudAutonomousVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateCloudAutonomousVmClusterInput_autonomousDataStorageSizeInTBs = UpdateCloudAutonomousVmClusterInput.AddMember("autonomousDataStorageSizeInTBs", smithyprelude.Double)
+
+	UpdateCloudAutonomousVmClusterInput_cpuCoreCountPerNode = UpdateCloudAutonomousVmClusterInput.AddMember("cpuCoreCountPerNode", smithyprelude.Integer)
+
+	UpdateCloudAutonomousVmClusterInput_description = UpdateCloudAutonomousVmClusterInput.AddMember("description", smithyprelude.String)
+
+	UpdateCloudAutonomousVmClusterInput_displayName = UpdateCloudAutonomousVmClusterInput.AddMember("displayName", _ResourceDisplayName)
+
+	UpdateCloudAutonomousVmClusterInput_licenseModel = UpdateCloudAutonomousVmClusterInput.AddMember("licenseModel", LicenseModel)
+
+	UpdateCloudAutonomousVmClusterInput_maintenanceWindow = UpdateCloudAutonomousVmClusterInput.AddMember("maintenanceWindow", MaintenanceWindow)
+
+	UpdateCloudAutonomousVmClusterInput_totalContainerDatabases = UpdateCloudAutonomousVmClusterInput.AddMember("totalContainerDatabases", smithyprelude.Integer)
+
+	UpdateCloudAutonomousVmClusterOutput_displayName = UpdateCloudAutonomousVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateCloudAutonomousVmClusterOutput_status = UpdateCloudAutonomousVmClusterOutput.AddMember("status", ResourceStatus)
+
+	UpdateCloudAutonomousVmClusterOutput_statusReason = UpdateCloudAutonomousVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	UpdateCloudAutonomousVmClusterOutput_cloudAutonomousVmClusterId = UpdateCloudAutonomousVmClusterOutput.AddMember("cloudAutonomousVmClusterId", smithyprelude.String)
+
 	UpdateCloudExadataInfrastructureInput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
 
+	UpdateCloudExadataInfrastructureInput_displayName = UpdateCloudExadataInfrastructureInput.AddMember("displayName", _ResourceDisplayName)
+
+	UpdateCloudExadataInfrastructureInput_computeCount = UpdateCloudExadataInfrastructureInput.AddMember("computeCount", smithyprelude.Integer)
+
 	UpdateCloudExadataInfrastructureInput_maintenanceWindow = UpdateCloudExadataInfrastructureInput.AddMember("maintenanceWindow", MaintenanceWindow)
+
+	UpdateCloudExadataInfrastructureInput_storageCount = UpdateCloudExadataInfrastructureInput.AddMember("storageCount", smithyprelude.Integer)
 
 	UpdateCloudExadataInfrastructureOutput_displayName = UpdateCloudExadataInfrastructureOutput.AddMember("displayName", smithyprelude.String)
 
@@ -9732,6 +9951,44 @@ func init() {
 	UpdateCloudExadataInfrastructureOutput_statusReason = UpdateCloudExadataInfrastructureOutput.AddMember("statusReason", smithyprelude.String)
 
 	UpdateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureOutput.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
+
+	UpdateCloudExadataInfrastructureStorageCapacityInput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureStorageCapacityInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
+
+	UpdateCloudExadataInfrastructureStorageCapacityOutput_displayName = UpdateCloudExadataInfrastructureStorageCapacityOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateCloudExadataInfrastructureStorageCapacityOutput_status = UpdateCloudExadataInfrastructureStorageCapacityOutput.AddMember("status", ResourceStatus)
+
+	UpdateCloudExadataInfrastructureStorageCapacityOutput_statusReason = UpdateCloudExadataInfrastructureStorageCapacityOutput.AddMember("statusReason", smithyprelude.String)
+
+	UpdateCloudExadataInfrastructureStorageCapacityOutput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureStorageCapacityOutput.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
+
+	UpdateCloudVmClusterInput_cloudVmClusterId = UpdateCloudVmClusterInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateCloudVmClusterInput_cpuCoreCount = UpdateCloudVmClusterInput.AddMember("cpuCoreCount", smithyprelude.Integer)
+
+	UpdateCloudVmClusterInput_dataCollectionOptions = UpdateCloudVmClusterInput.AddMember("dataCollectionOptions", DataCollectionOptions)
+
+	UpdateCloudVmClusterInput_dataStorageSizeInTBs = UpdateCloudVmClusterInput.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
+
+	UpdateCloudVmClusterInput_dbNodeStorageSizeInGBs = UpdateCloudVmClusterInput.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
+
+	UpdateCloudVmClusterInput_displayName = UpdateCloudVmClusterInput.AddMember("displayName", _ResourceDisplayName)
+
+	UpdateCloudVmClusterInput_sshPublicKeys = UpdateCloudVmClusterInput.AddMember("sshPublicKeys", _StringList)
+
+	UpdateCloudVmClusterInput_licenseModel = UpdateCloudVmClusterInput.AddMember("licenseModel", LicenseModel)
+
+	UpdateCloudVmClusterInput_memorySizeInGBs = UpdateCloudVmClusterInput.AddMember("memorySizeInGBs", smithyprelude.Integer)
+
+	UpdateCloudVmClusterInput_storageSizeInGBs = UpdateCloudVmClusterInput.AddMember("storageSizeInGBs", smithyprelude.Integer)
+
+	UpdateCloudVmClusterOutput_displayName = UpdateCloudVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateCloudVmClusterOutput_status = UpdateCloudVmClusterOutput.AddMember("status", ResourceStatus)
+
+	UpdateCloudVmClusterOutput_statusReason = UpdateCloudVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	UpdateCloudVmClusterOutput_cloudVmClusterId = UpdateCloudVmClusterOutput.AddMember("cloudVmClusterId", smithyprelude.String)
 
 	UpdateExadbVmClusterInput_exadbVmClusterId = UpdateExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
 

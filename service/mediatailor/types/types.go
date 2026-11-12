@@ -1872,6 +1872,9 @@ type Function struct {
 	// A description of the function.
 	Description *string
 
+	// The configuration for an HLS_TAG_PROCESSOR function.
+	HlsTagProcessorConfiguration *HlsTagProcessorConfiguration
+
 	// The configuration for an HTTP_REQUEST function.
 	HttpRequestConfiguration *HttpRequestConfiguration
 
@@ -1925,6 +1928,11 @@ func (v *Function) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.Function_FunctionType, string(v.FunctionType))
 	}
+	if v.HlsTagProcessorConfiguration != nil {
+		s.WriteStruct(schemas.Function_HlsTagProcessorConfiguration)
+		v.HlsTagProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.HttpRequestConfiguration != nil {
 		s.WriteStruct(schemas.Function_HttpRequestConfiguration)
 		v.HttpRequestConfiguration.SerializeMembers(s)
@@ -1972,6 +1980,9 @@ func (v *Function) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FunctionType = FunctionType(ev)
 			return nil
+		case schemas.Function_HlsTagProcessorConfiguration:
+			v.HlsTagProcessorConfiguration = &HlsTagProcessorConfiguration{}
+			return v.HlsTagProcessorConfiguration.Deserialize(d)
 		case schemas.Function_HttpRequestConfiguration:
 			v.HttpRequestConfiguration = &HttpRequestConfiguration{}
 			return v.HttpRequestConfiguration.Deserialize(d)
@@ -2121,6 +2132,86 @@ func (v *HlsPlaylistSettings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.HlsPlaylistSettings_ManifestWindowSeconds:
 			v.ManifestWindowSeconds = new(int32)
 			return d.ReadInt32(schemas.HlsPlaylistSettings_ManifestWindowSeconds, v.ManifestWindowSeconds)
+		}
+		return nil
+	})
+}
+
+// The configuration for an HLS_TAG_PROCESSOR function. Specifies the HLS tags
+// that trigger evaluation, an optional run condition, and output expressions. Each
+// evaluation must update, remove, or pass through the matching tag and can also
+// write player session parameters or temporary values. For more information, see [HLS_TAG_PROCESSOR]
+// in the MediaTailor User Guide.
+//
+// [HLS_TAG_PROCESSOR]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-hls-tag-processor.html
+type HlsTagProcessorConfiguration struct {
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. The only supported value is JSONATA .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// A list of HLS tag names that trigger function evaluation. Specify
+	// ["EXT-X-DATERANGE"] .
+	//
+	// This member is required.
+	TagFilter []HlsTagName
+
+	// A map of output bindings that MediaTailor evaluates for each HLS tag that
+	// matches TagFilter and, when specified, passes RunCondition . The required tag
+	// binding must return exactly one tag action: $updateTag , $removeTag , or
+	// $passthroughTag . Optional player_params.<name> bindings write strings,
+	// numbers, or booleans that persist for the player session. Optional temp.<name>
+	// bindings hold any JSON value for the current invocation and are not persisted.
+	// For more information about expression syntax, see [JSONata expression reference]in the MediaTailor User Guide.
+	//
+	// [JSONata expression reference]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+	Output map[string]string
+
+	// JSONata expression that must evaluate to true for the processor to run.
+	RunCondition *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *HlsTagProcessorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsTagProcessorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsTagProcessorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.HlsTagProcessorConfiguration_Output, v.Output)
+	}
+	if v.RunCondition != nil {
+		s.WriteString(schemas.HlsTagProcessorConfiguration_RunCondition, *v.RunCondition)
+	}
+	if v.Runtime != "" {
+		s.WriteString(schemas.HlsTagProcessorConfiguration_Runtime, string(v.Runtime))
+	}
+	if v.TagFilter != nil {
+		serializeTagFilterList(s, schemas.HlsTagProcessorConfiguration_TagFilter, v.TagFilter)
+	}
+}
+func (v *HlsTagProcessorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsTagProcessorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsTagProcessorConfiguration_Output:
+			return deserialize__mapOf__string(d, schemas.HlsTagProcessorConfiguration_Output, &v.Output)
+		case schemas.HlsTagProcessorConfiguration_RunCondition:
+			v.RunCondition = new(string)
+			return d.ReadString(schemas.HlsTagProcessorConfiguration_RunCondition, v.RunCondition)
+		case schemas.HlsTagProcessorConfiguration_Runtime:
+			var ev string
+			if err := d.ReadString(schemas.HlsTagProcessorConfiguration_Runtime, &ev); err != nil {
+				return err
+			}
+			v.Runtime = RuntimeType(ev)
+			return nil
+		case schemas.HlsTagProcessorConfiguration_TagFilter:
+			return deserializeTagFilterList(d, schemas.HlsTagProcessorConfiguration_TagFilter, &v.TagFilter)
 		}
 		return nil
 	})
@@ -2965,9 +3056,10 @@ type PlaybackConfiguration struct {
 
 	// A map of lifecycle hook event names to function identifiers. The function
 	// mapping specifies which function MediaTailor executes at each lifecycle hook
-	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION , PRE_ADS_REQUEST
-	// , POST_ADS_RESPONSE , and PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks]
-	// in the MediaTailor User Guide.
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION ,
+	// POST_ORIGIN_RESPONSE , PRE_ADS_REQUEST , POST_ADS_RESPONSE , and
+	// PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks] in the MediaTailor User
+	// Guide.
 	//
 	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
 	FunctionMapping map[string]string

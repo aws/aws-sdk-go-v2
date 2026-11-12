@@ -5123,6 +5123,14 @@ func TestCheckResponseSnapshot_CreateDefaultVpc(t *testing.T) {
 						State:        types.VpcEncryptionControlExclusionState("enabling"),
 						StateMessage: ptr.String("__StateMessage__"),
 					},
+					GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
+					ApiGatewayV2: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
 				},
 				Tags: []types.Tag{
 					{
@@ -8781,6 +8789,10 @@ func TestCheckResponseSnapshot_CreateLaunchTemplate(t *testing.T) {
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.LaunchTemplatesMonitoringRequest{
 				Enabled: ptr.Bool(true),
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			Placement: &types.LaunchTemplatePlacementRequest{
 				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -9277,6 +9289,10 @@ func TestCheckResponseSnapshot_CreateLaunchTemplateVersion(t *testing.T) {
 				KeyName:      ptr.String("__KeyName__"),
 				Monitoring: &types.LaunchTemplatesMonitoring{
 					Enabled: ptr.Bool(true),
+					MetricCategoryIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				Placement: &types.LaunchTemplatePlacement{
 					AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -9756,6 +9772,10 @@ func TestCheckResponseSnapshot_CreateLaunchTemplateVersion(t *testing.T) {
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.LaunchTemplatesMonitoringRequest{
 				Enabled: ptr.Bool(true),
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			Placement: &types.LaunchTemplatePlacementRequest{
 				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -10613,6 +10633,78 @@ func TestCheckResponseSnapshot_CreateManagedPrefixList(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateManagedPrefixList.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateMetricCategory(t *testing.T) {
+	want := &CreateMetricCategoryOutput{
+		MetricCategory: &types.MetricCategory{
+			MetricCategoryId: ptr.String("__MetricCategoryId__"),
+			Metrics: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateMetricCategory.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateMetricCategory(context.Background(), &CreateMetricCategoryInput{
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateMetricCategory.response", err)
 	}
 }
 
@@ -16077,6 +16169,14 @@ func TestCheckResponseSnapshot_CreateVpc(t *testing.T) {
 						State:        types.VpcEncryptionControlExclusionState("enabling"),
 						StateMessage: ptr.String("__StateMessage__"),
 					},
+					GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
+					ApiGatewayV2: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
 				},
 				Tags: []types.Tag{
 					{
@@ -16135,6 +16235,8 @@ func TestCheckResponseSnapshot_CreateVpc(t *testing.T) {
 			LambdaExclusion:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 			VpcLatticeExclusion:                types.VpcEncryptionControlExclusionStateInput("enable"),
 			ElasticFileSystemExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+			GlobalAcceleratorExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+			ApiGatewayV2Exclusion:              types.VpcEncryptionControlExclusionStateInput("enable"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -16287,6 +16389,14 @@ func TestCheckResponseSnapshot_CreateVpcEncryptionControl(t *testing.T) {
 					StateMessage: ptr.String("__StateMessage__"),
 				},
 				ElasticFileSystem: &types.VpcEncryptionControlExclusion{
+					State:        types.VpcEncryptionControlExclusionState("enabling"),
+					StateMessage: ptr.String("__StateMessage__"),
+				},
+				GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+					State:        types.VpcEncryptionControlExclusionState("enabling"),
+					StateMessage: ptr.String("__StateMessage__"),
+				},
+				ApiGatewayV2: &types.VpcEncryptionControlExclusion{
 					State:        types.VpcEncryptionControlExclusionState("enabling"),
 					StateMessage: ptr.String("__StateMessage__"),
 				},
@@ -19078,6 +19188,30 @@ func TestCheckResponseSnapshot_DeleteManagedPrefixList(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteMetricCategory(t *testing.T) {
+	want := &DeleteMetricCategoryOutput{
+		MetricCategoryId: ptr.String("__MetricCategoryId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteMetricCategory.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteMetricCategory(context.Background(), &DeleteMetricCategoryInput{
+		MetricCategoryId: ptr.String("__MetricCategoryId__"),
+		DryRun:           ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteMetricCategory.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteNatGateway(t *testing.T) {
 	want := &DeleteNatGatewayOutput{
 		NatGatewayId: ptr.String("__NatGatewayId__"),
@@ -21073,6 +21207,14 @@ func TestCheckResponseSnapshot_DeleteVpcEncryptionControl(t *testing.T) {
 					State:        types.VpcEncryptionControlExclusionState("enabling"),
 					StateMessage: ptr.String("__StateMessage__"),
 				},
+				GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+					State:        types.VpcEncryptionControlExclusionState("enabling"),
+					StateMessage: ptr.String("__StateMessage__"),
+				},
+				ApiGatewayV2: &types.VpcEncryptionControlExclusion{
+					State:        types.VpcEncryptionControlExclusionState("enabling"),
+					StateMessage: ptr.String("__StateMessage__"),
+				},
 			},
 			Tags: []types.Tag{
 				{
@@ -21693,6 +21835,8 @@ func TestCheckResponseSnapshot_DescribeAccountVpcEncryptionControl(t *testing.T)
 				Lambda:                    types.VpcEncryptionControlExclusionState("enabling"),
 				VpcLattice:                types.VpcEncryptionControlExclusionState("enabling"),
 				ElasticFileSystem:         types.VpcEncryptionControlExclusionState("enabling"),
+				GlobalAccelerator:         types.VpcEncryptionControlExclusionState("enabling"),
+				ApiGatewayV2:              types.VpcEncryptionControlExclusionState("enabling"),
 			},
 			ManagedBy:           types.ManagedBy("account"),
 			LastUpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -32814,6 +32958,10 @@ func TestCheckResponseSnapshot_DescribeInstances(t *testing.T) {
 						RamdiskId: ptr.String("__RamdiskId__"),
 						Platform:  types.PlatformValues("Windows"),
 						Monitoring: &types.Monitoring{
+							MetricCategoryIds: []string{
+								"__Member__",
+								"__Member__",
+							},
 							State: types.MonitoringState("disabled"),
 						},
 						SubnetId:         ptr.String("__SubnetId__"),
@@ -33297,6 +33445,10 @@ func TestCheckResponseSnapshot_DescribeInstances(t *testing.T) {
 						RamdiskId: ptr.String("__RamdiskId__"),
 						Platform:  types.PlatformValues("Windows"),
 						Monitoring: &types.Monitoring{
+							MetricCategoryIds: []string{
+								"__Member__",
+								"__Member__",
+							},
 							State: types.MonitoringState("disabled"),
 						},
 						SubnetId:         ptr.String("__SubnetId__"),
@@ -33797,6 +33949,10 @@ func TestCheckResponseSnapshot_DescribeInstances(t *testing.T) {
 						RamdiskId: ptr.String("__RamdiskId__"),
 						Platform:  types.PlatformValues("Windows"),
 						Monitoring: &types.Monitoring{
+							MetricCategoryIds: []string{
+								"__Member__",
+								"__Member__",
+							},
 							State: types.MonitoringState("disabled"),
 						},
 						SubnetId:         ptr.String("__SubnetId__"),
@@ -34280,6 +34436,10 @@ func TestCheckResponseSnapshot_DescribeInstances(t *testing.T) {
 						RamdiskId: ptr.String("__RamdiskId__"),
 						Platform:  types.PlatformValues("Windows"),
 						Monitoring: &types.Monitoring{
+							MetricCategoryIds: []string{
+								"__Member__",
+								"__Member__",
+							},
 							State: types.MonitoringState("disabled"),
 						},
 						SubnetId:         ptr.String("__SubnetId__"),
@@ -35952,6 +36112,10 @@ func TestCheckResponseSnapshot_DescribeLaunchTemplateVersions(t *testing.T) {
 					KeyName:      ptr.String("__KeyName__"),
 					Monitoring: &types.LaunchTemplatesMonitoring{
 						Enabled: ptr.Bool(true),
+						MetricCategoryIds: []string{
+							"__Member__",
+							"__Member__",
+						},
 					},
 					Placement: &types.LaunchTemplatePlacement{
 						AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -36415,6 +36579,10 @@ func TestCheckResponseSnapshot_DescribeLaunchTemplateVersions(t *testing.T) {
 					KeyName:      ptr.String("__KeyName__"),
 					Monitoring: &types.LaunchTemplatesMonitoring{
 						Enabled: ptr.Bool(true),
+						MetricCategoryIds: []string{
+							"__Member__",
+							"__Member__",
+						},
 					},
 					Placement: &types.LaunchTemplatePlacement{
 						AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -37682,6 +37850,87 @@ func TestCheckResponseSnapshot_DescribeManagedPrefixLists(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeManagedPrefixLists.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeMetricCategories(t *testing.T) {
+	want := &DescribeMetricCategoriesOutput{
+		MetricCategories: []types.MetricCategory{
+			{
+				MetricCategoryId: ptr.String("__MetricCategoryId__"),
+				Metrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				MetricCategoryId: ptr.String("__MetricCategoryId__"),
+				Metrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeMetricCategories.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeMetricCategories(context.Background(), &DescribeMetricCategoriesInput{
+		MetricCategoryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeMetricCategories.response", err)
 	}
 }
 
@@ -55504,6 +55753,10 @@ func TestCheckResponseSnapshot_DescribeSpotInstanceRequests(t *testing.T) {
 						},
 					},
 					Monitoring: &types.RunInstancesMonitoringEnabled{
+						MetricCategoryIds: []string{
+							"__Member__",
+							"__Member__",
+						},
 						Enabled: ptr.Bool(true),
 					},
 				},
@@ -55757,6 +56010,10 @@ func TestCheckResponseSnapshot_DescribeSpotInstanceRequests(t *testing.T) {
 						},
 					},
 					Monitoring: &types.RunInstancesMonitoringEnabled{
+						MetricCategoryIds: []string{
+							"__Member__",
+							"__Member__",
+						},
 						Enabled: ptr.Bool(true),
 					},
 				},
@@ -59802,6 +60059,14 @@ func TestCheckResponseSnapshot_DescribeVpcEncryptionControls(t *testing.T) {
 						State:        types.VpcEncryptionControlExclusionState("enabling"),
 						StateMessage: ptr.String("__StateMessage__"),
 					},
+					GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
+					ApiGatewayV2: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
 				},
 				Tags: []types.Tag{
 					{
@@ -59850,6 +60115,14 @@ func TestCheckResponseSnapshot_DescribeVpcEncryptionControls(t *testing.T) {
 						StateMessage: ptr.String("__StateMessage__"),
 					},
 					ElasticFileSystem: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
+					GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+						State:        types.VpcEncryptionControlExclusionState("enabling"),
+						StateMessage: ptr.String("__StateMessage__"),
+					},
+					ApiGatewayV2: &types.VpcEncryptionControlExclusion{
 						State:        types.VpcEncryptionControlExclusionState("enabling"),
 						StateMessage: ptr.String("__StateMessage__"),
 					},
@@ -61206,6 +61479,14 @@ func TestCheckResponseSnapshot_DescribeVpcs(t *testing.T) {
 							State:        types.VpcEncryptionControlExclusionState("enabling"),
 							StateMessage: ptr.String("__StateMessage__"),
 						},
+						GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+							State:        types.VpcEncryptionControlExclusionState("enabling"),
+							StateMessage: ptr.String("__StateMessage__"),
+						},
+						ApiGatewayV2: &types.VpcEncryptionControlExclusion{
+							State:        types.VpcEncryptionControlExclusionState("enabling"),
+							StateMessage: ptr.String("__StateMessage__"),
+						},
 					},
 					Tags: []types.Tag{
 						{
@@ -61320,6 +61601,14 @@ func TestCheckResponseSnapshot_DescribeVpcs(t *testing.T) {
 							StateMessage: ptr.String("__StateMessage__"),
 						},
 						ElasticFileSystem: &types.VpcEncryptionControlExclusion{
+							State:        types.VpcEncryptionControlExclusionState("enabling"),
+							StateMessage: ptr.String("__StateMessage__"),
+						},
+						GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+							State:        types.VpcEncryptionControlExclusionState("enabling"),
+							StateMessage: ptr.String("__StateMessage__"),
+						},
+						ApiGatewayV2: &types.VpcEncryptionControlExclusion{
 							State:        types.VpcEncryptionControlExclusionState("enabling"),
 							StateMessage: ptr.String("__StateMessage__"),
 						},
@@ -68010,6 +68299,10 @@ func TestCheckResponseSnapshot_GetLaunchTemplateData(t *testing.T) {
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.LaunchTemplatesMonitoring{
 				Enabled: ptr.Bool(true),
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			Placement: &types.LaunchTemplatePlacement{
 				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -75709,6 +76002,8 @@ func TestCheckResponseSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
 				Lambda:                    types.VpcEncryptionControlExclusionState("enabling"),
 				VpcLattice:                types.VpcEncryptionControlExclusionState("enabling"),
 				ElasticFileSystem:         types.VpcEncryptionControlExclusionState("enabling"),
+				GlobalAccelerator:         types.VpcEncryptionControlExclusionState("enabling"),
+				ApiGatewayV2:              types.VpcEncryptionControlExclusionState("enabling"),
 			},
 			ManagedBy:           types.ManagedBy("account"),
 			LastUpdateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -75733,6 +76028,8 @@ func TestCheckResponseSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
 		Lambda:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 		VpcLattice:                types.VpcEncryptionControlExclusionStateInput("enable"),
 		ElasticFileSystem:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		GlobalAccelerator:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		ApiGatewayV2:              types.VpcEncryptionControlExclusionStateInput("enable"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -78466,6 +78763,50 @@ func TestCheckResponseSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ModifyMetricCategory(t *testing.T) {
+	want := &ModifyMetricCategoryOutput{
+		MetricCategory: &types.MetricCategory{
+			MetricCategoryId: ptr.String("__MetricCategoryId__"),
+			Metrics: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyMetricCategory.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyMetricCategory(context.Background(), &ModifyMetricCategoryInput{
+		MetricCategoryId: ptr.String("__MetricCategoryId__"),
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyMetricCategory.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	want := &ModifyNetworkInterfaceAttributeOutput{}
 	status, header, body, err := serdeRespReadSnapshot("ModifyNetworkInterfaceAttribute.response")
@@ -80683,6 +81024,14 @@ func TestCheckResponseSnapshot_ModifyVpcEncryptionControl(t *testing.T) {
 					State:        types.VpcEncryptionControlExclusionState("enabling"),
 					StateMessage: ptr.String("__StateMessage__"),
 				},
+				GlobalAccelerator: &types.VpcEncryptionControlExclusion{
+					State:        types.VpcEncryptionControlExclusionState("enabling"),
+					StateMessage: ptr.String("__StateMessage__"),
+				},
+				ApiGatewayV2: &types.VpcEncryptionControlExclusion{
+					State:        types.VpcEncryptionControlExclusionState("enabling"),
+					StateMessage: ptr.String("__StateMessage__"),
+				},
 			},
 			Tags: []types.Tag{
 				{
@@ -80716,6 +81065,8 @@ func TestCheckResponseSnapshot_ModifyVpcEncryptionControl(t *testing.T) {
 		LambdaExclusion:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 		VpcLatticeExclusion:                types.VpcEncryptionControlExclusionStateInput("enable"),
 		ElasticFileSystemExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		GlobalAcceleratorExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		ApiGatewayV2Exclusion:              types.VpcEncryptionControlExclusionStateInput("enable"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -82176,12 +82527,20 @@ func TestCheckResponseSnapshot_MonitorInstances(t *testing.T) {
 			{
 				InstanceId: ptr.String("__InstanceId__"),
 				Monitoring: &types.Monitoring{
+					MetricCategoryIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					State: types.MonitoringState("disabled"),
 				},
 			},
 			{
 				InstanceId: ptr.String("__InstanceId__"),
 				Monitoring: &types.Monitoring{
+					MetricCategoryIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					State: types.MonitoringState("disabled"),
 				},
 			},
@@ -82197,6 +82556,10 @@ func TestCheckResponseSnapshot_MonitorInstances(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.MonitorInstances(context.Background(), &MonitorInstancesInput{
 		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricCategoryIds: []string{
 			"__Member__",
 			"__Member__",
 		},
@@ -85604,6 +85967,10 @@ func TestCheckResponseSnapshot_RequestSpotInstances(t *testing.T) {
 						},
 					},
 					Monitoring: &types.RunInstancesMonitoringEnabled{
+						MetricCategoryIds: []string{
+							"__Member__",
+							"__Member__",
+						},
 						Enabled: ptr.Bool(true),
 					},
 				},
@@ -85857,6 +86224,10 @@ func TestCheckResponseSnapshot_RequestSpotInstances(t *testing.T) {
 						},
 					},
 					Monitoring: &types.RunInstancesMonitoringEnabled{
+						MetricCategoryIds: []string{
+							"__Member__",
+							"__Member__",
+						},
 						Enabled: ptr.Bool(true),
 					},
 				},
@@ -85959,6 +86330,10 @@ func TestCheckResponseSnapshot_RequestSpotInstances(t *testing.T) {
 			KernelId:     ptr.String("__KernelId__"),
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.RunInstancesMonitoringEnabled{
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				Enabled: ptr.Bool(true),
 			},
 			NetworkInterfaces: []types.InstanceNetworkInterfaceSpecification{
@@ -87612,6 +87987,10 @@ func TestCheckResponseSnapshot_RunInstances(t *testing.T) {
 				RamdiskId: ptr.String("__RamdiskId__"),
 				Platform:  types.PlatformValues("Windows"),
 				Monitoring: &types.Monitoring{
+					MetricCategoryIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					State: types.MonitoringState("disabled"),
 				},
 				SubnetId:         ptr.String("__SubnetId__"),
@@ -88095,6 +88474,10 @@ func TestCheckResponseSnapshot_RunInstances(t *testing.T) {
 				RamdiskId: ptr.String("__RamdiskId__"),
 				Platform:  types.PlatformValues("Windows"),
 				Monitoring: &types.Monitoring{
+					MetricCategoryIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					State: types.MonitoringState("disabled"),
 				},
 				SubnetId:         ptr.String("__SubnetId__"),
@@ -88173,6 +88556,10 @@ func TestCheckResponseSnapshot_RunInstances(t *testing.T) {
 		MaxCount: ptr.Int32(1),
 		MinCount: ptr.Int32(1),
 		Monitoring: &types.RunInstancesMonitoringEnabled{
+			MetricCategoryIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 			Enabled: ptr.Bool(true),
 		},
 		Placement: &types.Placement{
@@ -94747,12 +95134,20 @@ func TestCheckResponseSnapshot_UnmonitorInstances(t *testing.T) {
 			{
 				InstanceId: ptr.String("__InstanceId__"),
 				Monitoring: &types.Monitoring{
+					MetricCategoryIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					State: types.MonitoringState("disabled"),
 				},
 			},
 			{
 				InstanceId: ptr.String("__InstanceId__"),
 				Monitoring: &types.Monitoring{
+					MetricCategoryIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					State: types.MonitoringState("disabled"),
 				},
 			},
@@ -94768,6 +95163,10 @@ func TestCheckResponseSnapshot_UnmonitorInstances(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.UnmonitorInstances(context.Background(), &UnmonitorInstancesInput{
 		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricCategoryIds: []string{
 			"__Member__",
 			"__Member__",
 		},

@@ -7998,6 +7998,76 @@ func (m *awsEc2query_serializeOpCreateManagedPrefixList) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpCreateMetricCategory struct {
+}
+
+func (*awsEc2query_serializeOpCreateMetricCategory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpCreateMetricCategory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateMetricCategoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateMetricCategory")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentCreateMetricCategoryInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpCreateNatGateway struct {
 }
 
@@ -14906,6 +14976,76 @@ func (m *awsEc2query_serializeOpDeleteManagedPrefixList) HandleSerialize(ctx con
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentDeleteManagedPrefixListInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDeleteMetricCategory struct {
+}
+
+func (*awsEc2query_serializeOpDeleteMetricCategory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDeleteMetricCategory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMetricCategoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteMetricCategory")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDeleteMetricCategoryInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -26806,6 +26946,76 @@ func (m *awsEc2query_serializeOpDescribeManagedPrefixLists) HandleSerialize(ctx 
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentDescribeManagedPrefixListsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDescribeMetricCategories struct {
+}
+
+func (*awsEc2query_serializeOpDescribeMetricCategories) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeMetricCategories) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeMetricCategoriesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeMetricCategories")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeMetricCategoriesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -47968,6 +48178,76 @@ func (m *awsEc2query_serializeOpModifyManagedResourceVisibility) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpModifyMetricCategory struct {
+}
+
+func (*awsEc2query_serializeOpModifyMetricCategory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpModifyMetricCategory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyMetricCategoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyMetricCategory")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentModifyMetricCategoryInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpModifyNetworkInterfaceAttribute struct {
 }
 
@@ -63076,6 +63356,13 @@ func awsEc2query_serializeDocumentLaunchTemplatesMonitoringRequest(v *types.Laun
 		objectKey.Boolean(*v.Enabled)
 	}
 
+	if v.MetricCategoryIds != nil {
+		objectKey := object.FlatKey("MetricCategoryId")
+		if err := awsEc2query_serializeDocumentMetricCategoryIdList(v.MetricCategoryIds, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -63544,6 +63831,32 @@ func awsEc2query_serializeDocumentMemoryMiBRequest(v *types.MemoryMiBRequest, va
 		objectKey.Integer(*v.Min)
 	}
 
+	return nil
+}
+
+func awsEc2query_serializeDocumentMetricCategoryIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentMetricCategoryMetricNameList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -66240,6 +66553,13 @@ func awsEc2query_serializeDocumentRunInstancesMonitoringEnabled(v *types.RunInst
 	if v.Enabled != nil {
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(*v.Enabled)
+	}
+
+	if v.MetricCategoryIds != nil {
+		objectKey := object.FlatKey("MetricCategoryId")
+		if err := awsEc2query_serializeDocumentMetricCategoryIdList(v.MetricCategoryIds, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -68942,6 +69262,11 @@ func awsEc2query_serializeDocumentVpcEncryptionControlConfiguration(v *types.Vpc
 	object := value.Object()
 	_ = object
 
+	if len(v.ApiGatewayV2Exclusion) > 0 {
+		objectKey := object.Key("ApiGatewayV2Exclusion")
+		objectKey.String(string(v.ApiGatewayV2Exclusion))
+	}
+
 	if len(v.EgressOnlyInternetGatewayExclusion) > 0 {
 		objectKey := object.Key("EgressOnlyInternetGatewayExclusion")
 		objectKey.String(string(v.EgressOnlyInternetGatewayExclusion))
@@ -68950,6 +69275,11 @@ func awsEc2query_serializeDocumentVpcEncryptionControlConfiguration(v *types.Vpc
 	if len(v.ElasticFileSystemExclusion) > 0 {
 		objectKey := object.Key("ElasticFileSystemExclusion")
 		objectKey.String(string(v.ElasticFileSystemExclusion))
+	}
+
+	if len(v.GlobalAcceleratorExclusion) > 0 {
+		objectKey := object.Key("GlobalAcceleratorExclusion")
+		objectKey.String(string(v.GlobalAcceleratorExclusion))
 	}
 
 	if len(v.InternetGatewayExclusion) > 0 {
@@ -73682,6 +74012,37 @@ func awsEc2query_serializeOpDocumentCreateManagedPrefixListInput(v *CreateManage
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentCreateMetricCategoryInput(v *CreateMetricCategoryInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClientToken != nil {
+		objectKey := object.Key("ClientToken")
+		objectKey.String(*v.ClientToken)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Metrics != nil {
+		objectKey := object.FlatKey("Metric")
+		if err := awsEc2query_serializeDocumentMetricCategoryMetricNameList(v.Metrics, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.FlatKey("TagSpecification")
+		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentCreateNatGatewayInput(v *CreateNatGatewayInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -77250,6 +77611,23 @@ func awsEc2query_serializeOpDocumentDeleteManagedPrefixListInput(v *DeleteManage
 	if v.PrefixListId != nil {
 		objectKey := object.Key("PrefixListId")
 		objectKey.String(*v.PrefixListId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDeleteMetricCategoryInput(v *DeleteMetricCategoryInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.MetricCategoryId != nil {
+		objectKey := object.Key("MetricCategoryId")
+		objectKey.String(*v.MetricCategoryId)
 	}
 
 	return nil
@@ -82088,6 +82466,42 @@ func awsEc2query_serializeOpDocumentDescribeManagedPrefixListsInput(v *DescribeM
 		if err := awsEc2query_serializeDocumentValueStringList(v.PrefixListIds, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDescribeMetricCategoriesInput(v *DescribeMetricCategoriesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filter")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.MetricCategoryIds != nil {
+		objectKey := object.FlatKey("MetricCategoryId")
+		if err := awsEc2query_serializeDocumentMetricCategoryIdList(v.MetricCategoryIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
 	}
 
 	return nil
@@ -89727,6 +90141,11 @@ func awsEc2query_serializeOpDocumentModifyAccountVpcEncryptionControlInput(v *Mo
 	object := value.Object()
 	_ = object
 
+	if len(v.ApiGatewayV2) > 0 {
+		objectKey := object.Key("ApiGatewayV2")
+		objectKey.String(string(v.ApiGatewayV2))
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
@@ -89740,6 +90159,11 @@ func awsEc2query_serializeOpDocumentModifyAccountVpcEncryptionControlInput(v *Mo
 	if len(v.ElasticFileSystem) > 0 {
 		objectKey := object.Key("ElasticFileSystem")
 		objectKey.String(string(v.ElasticFileSystem))
+	}
+
+	if len(v.GlobalAccelerator) > 0 {
+		objectKey := object.Key("GlobalAccelerator")
+		objectKey.String(string(v.GlobalAccelerator))
 	}
 
 	if len(v.InternetGateway) > 0 {
@@ -91494,6 +91918,30 @@ func awsEc2query_serializeOpDocumentModifyManagedResourceVisibilityInput(v *Modi
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentModifyMetricCategoryInput(v *ModifyMetricCategoryInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.MetricCategoryId != nil {
+		objectKey := object.Key("MetricCategoryId")
+		objectKey.String(*v.MetricCategoryId)
+	}
+
+	if v.Metrics != nil {
+		objectKey := object.FlatKey("Metric")
+		if err := awsEc2query_serializeDocumentMetricCategoryMetricNameList(v.Metrics, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentModifyNetworkInterfaceAttributeInput(v *ModifyNetworkInterfaceAttributeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -92680,6 +93128,11 @@ func awsEc2query_serializeOpDocumentModifyVpcEncryptionControlInput(v *ModifyVpc
 	object := value.Object()
 	_ = object
 
+	if len(v.ApiGatewayV2Exclusion) > 0 {
+		objectKey := object.Key("ApiGatewayV2Exclusion")
+		objectKey.String(string(v.ApiGatewayV2Exclusion))
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
@@ -92693,6 +93146,11 @@ func awsEc2query_serializeOpDocumentModifyVpcEncryptionControlInput(v *ModifyVpc
 	if len(v.ElasticFileSystemExclusion) > 0 {
 		objectKey := object.Key("ElasticFileSystemExclusion")
 		objectKey.String(string(v.ElasticFileSystemExclusion))
+	}
+
+	if len(v.GlobalAcceleratorExclusion) > 0 {
+		objectKey := object.Key("GlobalAcceleratorExclusion")
+		objectKey.String(string(v.GlobalAcceleratorExclusion))
 	}
 
 	if len(v.InternetGatewayExclusion) > 0 {
@@ -93233,6 +93691,13 @@ func awsEc2query_serializeOpDocumentMonitorInstancesInput(v *MonitorInstancesInp
 	if v.InstanceIds != nil {
 		objectKey := object.FlatKey("InstanceId")
 		if err := awsEc2query_serializeDocumentInstanceIdStringList(v.InstanceIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricCategoryIds != nil {
+		objectKey := object.FlatKey("MetricCategoryId")
+		if err := awsEc2query_serializeDocumentMetricCategoryIdList(v.MetricCategoryIds, objectKey); err != nil {
 			return err
 		}
 	}
@@ -95705,6 +96170,13 @@ func awsEc2query_serializeOpDocumentUnmonitorInstancesInput(v *UnmonitorInstance
 	if v.InstanceIds != nil {
 		objectKey := object.FlatKey("InstanceId")
 		if err := awsEc2query_serializeDocumentInstanceIdStringList(v.InstanceIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricCategoryIds != nil {
+		objectKey := object.FlatKey("MetricCategoryId")
+		if err := awsEc2query_serializeDocumentMetricCategoryIdList(v.MetricCategoryIds, objectKey); err != nil {
 			return err
 		}
 	}

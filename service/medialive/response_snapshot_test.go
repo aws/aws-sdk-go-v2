@@ -2414,6 +2414,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 										},
 									},
+									CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -3525,6 +3526,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 										},
 									},
+									CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -6028,6 +6030,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -7139,6 +7142,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -11253,6 +11257,7 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -12364,6 +12369,7 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -15532,6 +15538,7 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -16643,6 +16650,7 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -23068,6 +23076,7 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -24179,6 +24188,7 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -26713,6 +26723,7 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -27824,6 +27835,7 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -30770,6 +30782,7 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -31881,6 +31894,7 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -34536,6 +34550,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 										},
 									},
+									CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -35647,6 +35662,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 										},
 									},
+									CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -38150,6 +38166,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -39261,6 +39278,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
+								CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -41771,6 +41789,7 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 										},
 									},
+									CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -42882,6 +42901,7 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 										},
 									},
+									CaptionLanguageSetting: types.MediaPackageV2CaptionLanguageSetting("AUTO"),
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{

@@ -51,6 +51,9 @@ type PutFunctionInput struct {
 	//   - AWS_SERVICE_REQUEST – Makes an authenticated request to a supported AWS
 	//   service API and evaluates output expressions that can reference the response.
 	//
+	//   - HLS_TAG_PROCESSOR – Reads and changes HLS tags in the origin manifest at the
+	//   POST_ORIGIN_RESPONSE lifecycle hook.
+	//
 	//   - VAST_REQUEST – Calls a VAST endpoint, parses the response as VAST, and makes
 	//   the parsed ads available to output expressions.
 	//
@@ -82,6 +85,11 @@ type PutFunctionInput struct {
 
 	// A description of the function.
 	Description *string
+
+	// The configuration for an HLS_TAG_PROCESSOR function. Specifies the runtime, tag
+	// filter, optional run condition, and output expressions. Required when
+	// FunctionType is HLS_TAG_PROCESSOR .
+	HlsTagProcessorConfiguration *types.HlsTagProcessorConfiguration
 
 	// The configuration for an HTTP_REQUEST function. Specifies the HTTP method, URL,
 	// headers, body, timeout, and output expressions. Required when FunctionType is
@@ -139,6 +147,11 @@ func (v *PutFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.PutFunctionRequest_FunctionType, string(v.FunctionType))
 	}
+	if v.HlsTagProcessorConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionRequest_HlsTagProcessorConfiguration)
+		v.HlsTagProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.HttpRequestConfiguration != nil {
 		s.WriteStruct(schemas.PutFunctionRequest_HttpRequestConfiguration)
 		v.HttpRequestConfiguration.SerializeMembers(s)
@@ -187,6 +200,9 @@ type PutFunctionOutput struct {
 
 	// A description of the function.
 	Description *string
+
+	// The configuration for an HLS_TAG_PROCESSOR function.
+	HlsTagProcessorConfiguration *types.HlsTagProcessorConfiguration
 
 	// The configuration for an HTTP_REQUEST function.
 	HttpRequestConfiguration *types.HttpRequestConfiguration
@@ -244,6 +260,11 @@ func (v *PutFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.PutFunctionResponse_FunctionType, string(v.FunctionType))
 	}
+	if v.HlsTagProcessorConfiguration != nil {
+		s.WriteStruct(schemas.PutFunctionResponse_HlsTagProcessorConfiguration)
+		v.HlsTagProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.HttpRequestConfiguration != nil {
 		s.WriteStruct(schemas.PutFunctionResponse_HttpRequestConfiguration)
 		v.HttpRequestConfiguration.SerializeMembers(s)
@@ -291,6 +312,9 @@ func (v *PutFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FunctionType = types.FunctionType(ev)
 			return nil
+		case schemas.PutFunctionResponse_HlsTagProcessorConfiguration:
+			v.HlsTagProcessorConfiguration = &types.HlsTagProcessorConfiguration{}
+			return v.HlsTagProcessorConfiguration.Deserialize(d)
 		case schemas.PutFunctionResponse_HttpRequestConfiguration:
 			v.HttpRequestConfiguration = &types.HttpRequestConfiguration{}
 			return v.HttpRequestConfiguration.Deserialize(d)

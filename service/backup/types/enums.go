@@ -126,36 +126,38 @@ type BackupVaultEvent string
 
 // Enum values for BackupVaultEvent
 const (
-	BackupVaultEventBackupJobStarted            BackupVaultEvent = "BACKUP_JOB_STARTED"
-	BackupVaultEventBackupJobCompleted          BackupVaultEvent = "BACKUP_JOB_COMPLETED"
-	BackupVaultEventBackupJobSuccessful         BackupVaultEvent = "BACKUP_JOB_SUCCESSFUL"
-	BackupVaultEventBackupJobFailed             BackupVaultEvent = "BACKUP_JOB_FAILED"
-	BackupVaultEventBackupJobExpired            BackupVaultEvent = "BACKUP_JOB_EXPIRED"
-	BackupVaultEventRestoreJobStarted           BackupVaultEvent = "RESTORE_JOB_STARTED"
-	BackupVaultEventRestoreJobCompleted         BackupVaultEvent = "RESTORE_JOB_COMPLETED"
-	BackupVaultEventRestoreJobSuccessful        BackupVaultEvent = "RESTORE_JOB_SUCCESSFUL"
-	BackupVaultEventRestoreJobFailed            BackupVaultEvent = "RESTORE_JOB_FAILED"
-	BackupVaultEventCopyJobStarted              BackupVaultEvent = "COPY_JOB_STARTED"
-	BackupVaultEventCopyJobSuccessful           BackupVaultEvent = "COPY_JOB_SUCCESSFUL"
-	BackupVaultEventCopyJobFailed               BackupVaultEvent = "COPY_JOB_FAILED"
-	BackupVaultEventRecoveryPointModified       BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
-	BackupVaultEventBackupPlanCreated           BackupVaultEvent = "BACKUP_PLAN_CREATED"
-	BackupVaultEventBackupPlanModified          BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
-	BackupVaultEventS3BackupObjectFailed        BackupVaultEvent = "S3_BACKUP_OBJECT_FAILED"
-	BackupVaultEventS3RestoreObjectFailed       BackupVaultEvent = "S3_RESTORE_OBJECT_FAILED"
-	BackupVaultEventContinuousBackupInterrupted BackupVaultEvent = "CONTINUOUS_BACKUP_INTERRUPTED"
-	BackupVaultEventRecoveryPointIndexCompleted BackupVaultEvent = "RECOVERY_POINT_INDEX_COMPLETED"
-	BackupVaultEventRecoveryPointIndexDeleted   BackupVaultEvent = "RECOVERY_POINT_INDEX_DELETED"
-	BackupVaultEventRecoveryPointIndexingFailed BackupVaultEvent = "RECOVERY_POINT_INDEXING_FAILED"
-	BackupVaultEventEksRestoreObjectFailed      BackupVaultEvent = "EKS_RESTORE_OBJECT_FAILED"
-	BackupVaultEventEksRestoreObjectSkipped     BackupVaultEvent = "EKS_RESTORE_OBJECT_SKIPPED"
-	BackupVaultEventEksBackupObjectFailed       BackupVaultEvent = "EKS_BACKUP_OBJECT_FAILED"
-	BackupVaultEventAccessPointAvailable        BackupVaultEvent = "ACCESS_POINT_AVAILABLE"
-	BackupVaultEventAccessPointCreationFailed   BackupVaultEvent = "ACCESS_POINT_CREATION_FAILED"
-	BackupVaultEventAccessPointDeleted          BackupVaultEvent = "ACCESS_POINT_DELETED"
-	BackupVaultEventAccessPointDeletionFailed   BackupVaultEvent = "ACCESS_POINT_DELETION_FAILED"
-	BackupVaultEventAccessPointExpired          BackupVaultEvent = "ACCESS_POINT_EXPIRED"
-	BackupVaultEventAccessPointDisassociated    BackupVaultEvent = "ACCESS_POINT_DISASSOCIATED"
+	BackupVaultEventBackupJobStarted              BackupVaultEvent = "BACKUP_JOB_STARTED"
+	BackupVaultEventBackupJobCompleted            BackupVaultEvent = "BACKUP_JOB_COMPLETED"
+	BackupVaultEventBackupJobSuccessful           BackupVaultEvent = "BACKUP_JOB_SUCCESSFUL"
+	BackupVaultEventBackupJobFailed               BackupVaultEvent = "BACKUP_JOB_FAILED"
+	BackupVaultEventBackupJobExpired              BackupVaultEvent = "BACKUP_JOB_EXPIRED"
+	BackupVaultEventRestoreJobStarted             BackupVaultEvent = "RESTORE_JOB_STARTED"
+	BackupVaultEventRestoreJobCompleted           BackupVaultEvent = "RESTORE_JOB_COMPLETED"
+	BackupVaultEventRestoreJobSuccessful          BackupVaultEvent = "RESTORE_JOB_SUCCESSFUL"
+	BackupVaultEventRestoreJobFailed              BackupVaultEvent = "RESTORE_JOB_FAILED"
+	BackupVaultEventCopyJobStarted                BackupVaultEvent = "COPY_JOB_STARTED"
+	BackupVaultEventCopyJobSuccessful             BackupVaultEvent = "COPY_JOB_SUCCESSFUL"
+	BackupVaultEventCopyJobFailed                 BackupVaultEvent = "COPY_JOB_FAILED"
+	BackupVaultEventRecoveryPointModified         BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
+	BackupVaultEventBackupPlanCreated             BackupVaultEvent = "BACKUP_PLAN_CREATED"
+	BackupVaultEventBackupPlanModified            BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
+	BackupVaultEventS3BackupObjectFailed          BackupVaultEvent = "S3_BACKUP_OBJECT_FAILED"
+	BackupVaultEventS3RestoreObjectFailed         BackupVaultEvent = "S3_RESTORE_OBJECT_FAILED"
+	BackupVaultEventContinuousBackupInterrupted   BackupVaultEvent = "CONTINUOUS_BACKUP_INTERRUPTED"
+	BackupVaultEventRecoveryPointIndexCompleted   BackupVaultEvent = "RECOVERY_POINT_INDEX_COMPLETED"
+	BackupVaultEventRecoveryPointIndexDeleted     BackupVaultEvent = "RECOVERY_POINT_INDEX_DELETED"
+	BackupVaultEventRecoveryPointIndexingFailed   BackupVaultEvent = "RECOVERY_POINT_INDEXING_FAILED"
+	BackupVaultEventEksRestoreObjectFailed        BackupVaultEvent = "EKS_RESTORE_OBJECT_FAILED"
+	BackupVaultEventEksRestoreObjectSkipped       BackupVaultEvent = "EKS_RESTORE_OBJECT_SKIPPED"
+	BackupVaultEventEksBackupObjectFailed         BackupVaultEvent = "EKS_BACKUP_OBJECT_FAILED"
+	BackupVaultEventEksRestoreModificationSuccess BackupVaultEvent = "EKS_RESTORE_MODIFICATION_SUCCESS"
+	BackupVaultEventEksRestoreModificationFailed  BackupVaultEvent = "EKS_RESTORE_MODIFICATION_FAILED"
+	BackupVaultEventAccessPointAvailable          BackupVaultEvent = "ACCESS_POINT_AVAILABLE"
+	BackupVaultEventAccessPointCreationFailed     BackupVaultEvent = "ACCESS_POINT_CREATION_FAILED"
+	BackupVaultEventAccessPointDeleted            BackupVaultEvent = "ACCESS_POINT_DELETED"
+	BackupVaultEventAccessPointDeletionFailed     BackupVaultEvent = "ACCESS_POINT_DELETION_FAILED"
+	BackupVaultEventAccessPointExpired            BackupVaultEvent = "ACCESS_POINT_EXPIRED"
+	BackupVaultEventAccessPointDisassociated      BackupVaultEvent = "ACCESS_POINT_DISASSOCIATED"
 )
 
 // Values returns all known values for BackupVaultEvent. Note that this can be
@@ -188,6 +190,8 @@ func (BackupVaultEvent) Values() []BackupVaultEvent {
 		"EKS_RESTORE_OBJECT_FAILED",
 		"EKS_RESTORE_OBJECT_SKIPPED",
 		"EKS_BACKUP_OBJECT_FAILED",
+		"EKS_RESTORE_MODIFICATION_SUCCESS",
+		"EKS_RESTORE_MODIFICATION_FAILED",
 		"ACCESS_POINT_AVAILABLE",
 		"ACCESS_POINT_CREATION_FAILED",
 		"ACCESS_POINT_DELETED",

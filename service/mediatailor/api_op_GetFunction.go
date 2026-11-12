@@ -81,6 +81,9 @@ type GetFunctionOutput struct {
 	// A description of the function.
 	Description *string
 
+	// The configuration for an HLS_TAG_PROCESSOR function.
+	HlsTagProcessorConfiguration *types.HlsTagProcessorConfiguration
+
 	// The configuration for an HTTP_REQUEST function.
 	HttpRequestConfiguration *types.HttpRequestConfiguration
 
@@ -137,6 +140,11 @@ func (v *GetFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.GetFunctionResponse_FunctionType, string(v.FunctionType))
 	}
+	if v.HlsTagProcessorConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_HlsTagProcessorConfiguration)
+		v.HlsTagProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.HttpRequestConfiguration != nil {
 		s.WriteStruct(schemas.GetFunctionResponse_HttpRequestConfiguration)
 		v.HttpRequestConfiguration.SerializeMembers(s)
@@ -184,6 +192,9 @@ func (v *GetFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FunctionType = types.FunctionType(ev)
 			return nil
+		case schemas.GetFunctionResponse_HlsTagProcessorConfiguration:
+			v.HlsTagProcessorConfiguration = &types.HlsTagProcessorConfiguration{}
+			return v.HlsTagProcessorConfiguration.Deserialize(d)
 		case schemas.GetFunctionResponse_HttpRequestConfiguration:
 			v.HttpRequestConfiguration = &types.HttpRequestConfiguration{}
 			return v.HttpRequestConfiguration.Deserialize(d)

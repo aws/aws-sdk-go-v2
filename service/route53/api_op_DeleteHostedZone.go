@@ -44,6 +44,10 @@ import (
 // DNSSEC enabled returns a HostedZoneNotEmpty error. For information about
 // deleting records, see [ChangeResourceRecordSets].
 //
+// You also can't delete a hosted zone that has resource record set protections.
+// To see the protections in a hosted zone, use ListResourceRecordSetProtections .
+// To delete them, use DeleteResourceRecordSetProtections .
+//
 // To verify that the hosted zone has been deleted, do one of the following:
 //
 //   - Use the GetHostedZone action to request information about the hosted zone.

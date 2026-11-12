@@ -66,9 +66,9 @@ type StartPipelineExecutionInput struct {
 	PipelineVersionId *int64
 
 	// The Amazon Resource Name (ARN) of the IAM role that the execution uses. You
-	// must specify this parameter when you start an execution of a pipeline that AWS
-	// manages. You can't specify it for a pipeline that you create, because its
-	// executions use the pipeline's role.
+	// must specify this parameter when you start an execution of a pipeline that
+	// Amazon Web Services manages. You can't specify it for a pipeline that you
+	// create, because its executions use the pipeline's role.
 	RoleArn *string
 
 	// The selective execution configuration applied to the pipeline run.

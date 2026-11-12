@@ -493,6 +493,33 @@ func TestCheckRequestSnapshot_DeleteInsightRules(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteMetricDataQueryDefinition(t *testing.T) {
+	input := &DeleteMetricDataQueryDefinitionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteMetricDataQueryDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetricDataQueryDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteMetricStream(t *testing.T) {
 	input := &DeleteMetricStreamInput{
 		Name: ptr.String("__Name__"),
@@ -1126,6 +1153,33 @@ func TestCheckRequestSnapshot_GetMetricData(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetMetricDataQueryDefinition(t *testing.T) {
+	input := &GetMetricDataQueryDefinitionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMetricDataQueryDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMetricDataQueryDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetMetricStatistics(t *testing.T) {
 	input := &GetMetricStatisticsInput{
 		Namespace:  ptr.String("__Namespace__"),
@@ -1369,6 +1423,34 @@ func TestCheckRequestSnapshot_ListManagedInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListManagedInsightRules"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListMetricDataQueryDefinitions(t *testing.T) {
+	input := &ListMetricDataQueryDefinitionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListMetricDataQueryDefinitions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMetricDataQueryDefinitions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2358,6 +2440,46 @@ func TestCheckRequestSnapshot_PutMetricData(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PutMetricDataQueryDefinition(t *testing.T) {
+	input := &PutMetricDataQueryDefinitionInput{
+		Id:         ptr.String("__Id__"),
+		Path:       ptr.String("__Path__"),
+		Expression: ptr.String("__Expression__"),
+		Type:       types.QueryType("PROMQL"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutMetricDataQueryDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutMetricDataQueryDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PutMetricStream(t *testing.T) {
 	input := &PutMetricStreamInput{
 		Name: ptr.String("__Name__"),
@@ -3104,6 +3226,33 @@ func TestUpdateRequestSnapshot_DeleteInsightRules(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteMetricDataQueryDefinition(t *testing.T) {
+	input := &DeleteMetricDataQueryDefinitionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteMetricDataQueryDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetricDataQueryDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteMetricStream(t *testing.T) {
 	input := &DeleteMetricStreamInput{
 		Name: ptr.String("__Name__"),
@@ -3737,6 +3886,33 @@ func TestUpdateRequestSnapshot_GetMetricData(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetMetricDataQueryDefinition(t *testing.T) {
+	input := &GetMetricDataQueryDefinitionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMetricDataQueryDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMetricDataQueryDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetMetricStatistics(t *testing.T) {
 	input := &GetMetricStatisticsInput{
 		Namespace:  ptr.String("__Namespace__"),
@@ -3980,6 +4156,34 @@ func TestUpdateRequestSnapshot_ListManagedInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListManagedInsightRules"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListMetricDataQueryDefinitions(t *testing.T) {
+	input := &ListMetricDataQueryDefinitionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListMetricDataQueryDefinitions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMetricDataQueryDefinitions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4965,6 +5169,46 @@ func TestUpdateRequestSnapshot_PutMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutMetricData"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutMetricDataQueryDefinition(t *testing.T) {
+	input := &PutMetricDataQueryDefinitionInput{
+		Id:         ptr.String("__Id__"),
+		Path:       ptr.String("__Path__"),
+		Expression: ptr.String("__Expression__"),
+		Type:       types.QueryType("PROMQL"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutMetricDataQueryDefinition(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutMetricDataQueryDefinition"); err != nil {
 		t.Fatal(err)
 	}
 }

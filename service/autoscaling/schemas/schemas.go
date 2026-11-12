@@ -2068,8 +2068,10 @@ var MetricStatistic_Sum *smithy.Schema
 var MetricType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.autoscaling",
 	Name:      "MetricType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var MetricType_ASGAverageCPUUtilization *smithy.Schema
+
+var MetricType_ASGAverageCPUUtilizationHighResolution *smithy.Schema
 
 var MetricType_ASGAverageNetworkIn *smithy.Schema
 
@@ -5355,6 +5357,8 @@ func init() {
 	_Metrics_member = _Metrics.AddMember("member", _XmlStringMaxLen255)
 
 	MetricType_ASGAverageCPUUtilization = MetricType.AddMember("ASGAverageCPUUtilization", smithyprelude.Unit)
+
+	MetricType_ASGAverageCPUUtilizationHighResolution = MetricType.AddMember("ASGAverageCPUUtilizationHighResolution", smithyprelude.Unit)
 
 	MetricType_ASGAverageNetworkIn = MetricType.AddMember("ASGAverageNetworkIn", smithyprelude.Unit)
 

@@ -8,6 +8,13 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var CreateAirflowUiUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "CreateAirflowUiUrl",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/airflow-ui-url",
+	Code: 200})
+
 var CreateWorkflow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "CreateWorkflow",
@@ -127,6 +134,11 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
+var _AuthorizedUrlString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "AuthorizedUrlString",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var Code = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "Code",
@@ -209,6 +221,11 @@ var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ErrorMessage",
 }, smithy.ShapeTypeString, 0)
+
+var _ExpiresInSecondsInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "ExpiresInSecondsInteger",
+}, smithy.ShapeTypeInteger, 0)
 
 var _GenericMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
@@ -358,6 +375,16 @@ var ServiceQuotaExceededException_ResourceType *smithy.Schema
 var ServiceQuotaExceededException_ServiceCode *smithy.Schema
 
 var ServiceQuotaExceededException_QuotaCode *smithy.Schema
+
+var _SessionDurationInSecondsInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "SessionDurationInSecondsInteger",
+}, smithy.ShapeTypeInteger, 0)
+
+var _SessionIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "SessionIdString",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
@@ -664,6 +691,26 @@ var WorkflowVersionSummary_DefinitionS3Location *smithy.Schema
 var WorkflowVersionSummary_ScheduleConfiguration *smithy.Schema
 
 var WorkflowVersionSummary_TriggerMode *smithy.Schema
+
+var CreateAirflowUiUrlRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "CreateAirflowUiUrlRequest",
+}, smithy.ShapeTypeStructure, 2)
+var CreateAirflowUiUrlRequest_ExpiresInSeconds *smithy.Schema
+
+var CreateAirflowUiUrlRequest_SessionDurationInSeconds *smithy.Schema
+
+var CreateAirflowUiUrlResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "CreateAirflowUiUrlResponse",
+}, smithy.ShapeTypeStructure, 4)
+var CreateAirflowUiUrlResponse_AuthorizedUrl *smithy.Schema
+
+var CreateAirflowUiUrlResponse_SessionId *smithy.Schema
+
+var CreateAirflowUiUrlResponse_UrlExpiresAt *smithy.Schema
+
+var CreateAirflowUiUrlResponse_SessionExpiresAt *smithy.Schema
 
 var CreateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
@@ -1305,6 +1352,18 @@ func init() {
 	WorkflowVersionSummary_TriggerMode = WorkflowVersionSummary.AddMember("TriggerMode", _GenericString)
 
 	_WorkflowVersionSummaries_member = _WorkflowVersionSummaries.AddMember("member", WorkflowVersionSummary)
+
+	CreateAirflowUiUrlRequest_ExpiresInSeconds = CreateAirflowUiUrlRequest.AddMember("ExpiresInSeconds", _ExpiresInSecondsInteger)
+
+	CreateAirflowUiUrlRequest_SessionDurationInSeconds = CreateAirflowUiUrlRequest.AddMember("SessionDurationInSeconds", _SessionDurationInSecondsInteger)
+
+	CreateAirflowUiUrlResponse_AuthorizedUrl = CreateAirflowUiUrlResponse.AddMember("AuthorizedUrl", _AuthorizedUrlString)
+
+	CreateAirflowUiUrlResponse_SessionId = CreateAirflowUiUrlResponse.AddMember("SessionId", _SessionIdString)
+
+	CreateAirflowUiUrlResponse_UrlExpiresAt = CreateAirflowUiUrlResponse.AddMember("UrlExpiresAt", _TimestampValue)
+
+	CreateAirflowUiUrlResponse_SessionExpiresAt = CreateAirflowUiUrlResponse.AddMember("SessionExpiresAt", _TimestampValue)
 
 	CreateWorkflowRequest_Name = CreateWorkflowRequest.AddMember("Name", _NameString)
 

@@ -1,0 +1,8 @@
+{
+    "id": "c807a7a1-5b2a-4ff4-aa3a-3bb0cc104e5f",
+    "type": "feature",
+    "description": "This release adds support for multiple features, including EC2 Image Builder image recipes and container recipes in AMI usage reports, Amazon EC2 Detailed Monitoring adds opt-in metrics, and Global Accelerator and API Gateway V2 as resource exclusions for VPC Encryption Control.",
+    "modules": [
+        "service/ec2"
+    ]
+}

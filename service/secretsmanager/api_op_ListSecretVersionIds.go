@@ -16,6 +16,10 @@ import (
 //
 // To list the secrets in the account, use ListSecrets.
 //
+// ListSecretVersionIds only returns versions that contain a secret value. To see
+// all version IDs that have staging labels attached, including ones without a
+// secret value, call DescribeSecret and check VersionIdsToStages .
+//
 // Secrets Manager generates a CloudTrail log entry when you call this action. Do
 // not include sensitive information in request parameters because it might be
 // logged. For more information, see [Logging Secrets Manager events with CloudTrail].

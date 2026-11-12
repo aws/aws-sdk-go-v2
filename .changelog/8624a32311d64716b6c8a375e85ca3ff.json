@@ -1,0 +1,8 @@
+{
+    "id": "8624a323-11d6-4716-b6c8-a375e85ca3ff",
+    "type": "feature",
+    "description": "Add aggregationTemporality and monotonicity to GetContextGraph MetricMetadata",
+    "modules": [
+        "service/cloudwatchomni"
+    ]
+}

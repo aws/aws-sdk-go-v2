@@ -17,6 +17,11 @@ import (
 //
 // Retrieves the results and status of a specific GuardDuty investigation.
 //
+// GuardDuty returns the results, including the summary and the scope of the
+// investigation, only when the investigation status is COMPLETED . By default,
+// GuardDuty returns the summary as text in Summary . To return a typed summary in
+// SummaryData instead, set SummaryFormat to STRUCTURED .
+//
 // An administrator account can retrieve any investigation within the
 // organization. Member accounts can only retrieve investigations that belong to
 // them.
@@ -52,6 +57,15 @@ type GetInvestigationInput struct {
 	// This member is required.
 	InvestigationId *string
 
+	// The format in which to return the investigation summary. Possible values:
+	//
+	//   - STRING – (Default) Returns the summary as text in Summary .
+	//
+	//   - STRUCTURED – Returns a typed summary in SummaryData .
+	//
+	// GuardDuty returns a summary only when the investigation status is COMPLETED .
+	SummaryFormat types.SummaryFormat
+
 	noSmithyDocumentSerde
 }
 
@@ -67,6 +81,9 @@ func (v *GetInvestigationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.InvestigationId != nil {
 		s.WriteString(schemas.GetInvestigationRequest_InvestigationId, *v.InvestigationId)
+	}
+	if v.SummaryFormat != "" {
+		s.WriteString(schemas.GetInvestigationRequest_SummaryFormat, string(v.SummaryFormat))
 	}
 }
 

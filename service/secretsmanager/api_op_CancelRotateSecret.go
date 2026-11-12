@@ -17,7 +17,7 @@ import (
 // the partially created version. You also need to determine whether to roll back
 // to the previous version of the secret by moving the staging label AWSCURRENT to
 // the version that has AWSPENDING . To determine which version has a specific
-// staging label, call ListSecretVersionIds. Then use UpdateSecretVersionStage to change staging labels. For more information,
+// staging label, call DescribeSecret. Then use UpdateSecretVersionStage to change staging labels. For more information,
 // see [How rotation works].
 //
 // To turn on automatic rotation again, call RotateSecret.

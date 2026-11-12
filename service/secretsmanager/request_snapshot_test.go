@@ -205,6 +205,36 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_AssociateCrossAccountReplica(t *testing.T) {
+	input := &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateCrossAccountReplica(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateCrossAccountReplica"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetSecretValue(t *testing.T) {
 	input := &BatchGetSecretValueInput{
 		SecretIdList: []string{
@@ -310,6 +340,7 @@ func TestCheckRequestSnapshot_CreateSecret(t *testing.T) {
 		},
 		ForceOverwriteReplicaSecret: true,
 		Type:                        ptr.String("__Type__"),
+		CrossAccountPrimaryARN:      ptr.String("__CrossAccountPrimaryARN__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -336,7 +367,8 @@ func TestCheckRequestSnapshot_CreateSecret(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 	input := &DeleteResourcePolicyInput{
-		SecretId: ptr.String("__SecretId__"),
+		SecretId:   ptr.String("__SecretId__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -417,6 +449,34 @@ func TestCheckRequestSnapshot_DescribeSecret(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisassociateCrossAccountReplica(t *testing.T) {
+	input := &DisassociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateCrossAccountReplica(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateCrossAccountReplica"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetRandomPassword(t *testing.T) {
 	input := &GetRandomPasswordInput{
 		PasswordLength:          ptr.Int64(1),
@@ -453,7 +513,8 @@ func TestCheckRequestSnapshot_GetRandomPassword(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetResourcePolicy(t *testing.T) {
 	input := &GetResourcePolicyInput{
-		SecretId: ptr.String("__SecretId__"),
+		SecretId:   ptr.String("__SecretId__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -503,6 +564,35 @@ func TestCheckRequestSnapshot_GetSecretValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSecretValue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResourcePolicies(t *testing.T) {
+	input := &ListResourcePoliciesInput{
+		SecretId:   ptr.String("__SecretId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourcePolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcePolicies"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -588,6 +678,7 @@ func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	input := &PutResourcePolicyInput{
 		SecretId:          ptr.String("__SecretId__"),
 		ResourcePolicy:    ptr.String("__ResourcePolicy__"),
+		PolicyName:        ptr.String("__PolicyName__"),
 		BlockPublicPolicy: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
@@ -975,6 +1066,36 @@ func TestCheckRequestSnapshot_ValidateResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_AssociateCrossAccountReplica(t *testing.T) {
+	input := &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateCrossAccountReplica(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateCrossAccountReplica"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchGetSecretValue(t *testing.T) {
 	input := &BatchGetSecretValueInput{
 		SecretIdList: []string{
@@ -1080,6 +1201,7 @@ func TestUpdateRequestSnapshot_CreateSecret(t *testing.T) {
 		},
 		ForceOverwriteReplicaSecret: true,
 		Type:                        ptr.String("__Type__"),
+		CrossAccountPrimaryARN:      ptr.String("__CrossAccountPrimaryARN__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1106,7 +1228,8 @@ func TestUpdateRequestSnapshot_CreateSecret(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 	input := &DeleteResourcePolicyInput{
-		SecretId: ptr.String("__SecretId__"),
+		SecretId:   ptr.String("__SecretId__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1187,6 +1310,34 @@ func TestUpdateRequestSnapshot_DescribeSecret(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisassociateCrossAccountReplica(t *testing.T) {
+	input := &DisassociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateCrossAccountReplica(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateCrossAccountReplica"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetRandomPassword(t *testing.T) {
 	input := &GetRandomPasswordInput{
 		PasswordLength:          ptr.Int64(1),
@@ -1223,7 +1374,8 @@ func TestUpdateRequestSnapshot_GetRandomPassword(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetResourcePolicy(t *testing.T) {
 	input := &GetResourcePolicyInput{
-		SecretId: ptr.String("__SecretId__"),
+		SecretId:   ptr.String("__SecretId__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1273,6 +1425,35 @@ func TestUpdateRequestSnapshot_GetSecretValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSecretValue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResourcePolicies(t *testing.T) {
+	input := &ListResourcePoliciesInput{
+		SecretId:   ptr.String("__SecretId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourcePolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcePolicies"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1358,6 +1539,7 @@ func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	input := &PutResourcePolicyInput{
 		SecretId:          ptr.String("__SecretId__"),
 		ResourcePolicy:    ptr.String("__ResourcePolicy__"),
+		PolicyName:        ptr.String("__PolicyName__"),
 		BlockPublicPolicy: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}

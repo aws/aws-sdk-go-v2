@@ -134,9 +134,10 @@ type GetPlaybackConfigurationOutput struct {
 
 	// A map of lifecycle hook event names to function identifiers. The function
 	// mapping specifies which function MediaTailor executes at each lifecycle hook
-	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION , PRE_ADS_REQUEST
-	// , POST_ADS_RESPONSE , and PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks]
-	// in the MediaTailor User Guide.
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION ,
+	// POST_ORIGIN_RESPONSE , PRE_ADS_REQUEST , POST_ADS_RESPONSE , and
+	// PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks] in the MediaTailor User
+	// Guide.
 	//
 	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
 	FunctionMapping map[string]string

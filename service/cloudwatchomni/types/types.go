@@ -2705,24 +2705,35 @@ func (v *Metadata) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A single metric observed on a context graph node.
+// A single metric observed on a context graph node or edge.
 type MetricMetadata struct {
+
+	// Aggregation temporality for the selected metric stream represented by this
+	// metadata entry. Present when known, including cumulative for OTel Summary
+	// metrics. Absent for Gauge metrics or when the information is unavailable.
+	AggregationTemporality MetricAggregationTemporality
 
 	// Per-metric qualifying attributes used to query this metric's telemetry. Keys
 	// are the metric store's own label names, not bare OTel attribute names: service
 	// identity arrives as "@resource.service.name" and "@resource.service.namespace",
-	// and the instrumentation scope as "@instrumentation.@name", while span-derived
-	// metrics label the service as a bare "service.name". Cloud provider, account and
-	// region are not repeated per metric — read those from the node. Values are RAW,
-	// deliberately NOT the node's normalized or merged identity, so a selector built
-	// from them matches the emitted series. A merged node can carry different values
-	// per metric, which is why these live here rather than on the node.
+	// and the instrumentation scope as "@instrumentation.@name". Span-derived metrics
+	// can additionally carry the service as a bare data point "service.name" label.
+	// Cloud provider, account and region are not repeated per metric — read those from
+	// the node. Values are RAW, deliberately NOT the node's merged identity, so a
+	// selector built from them matches the emitted series. A merged node can carry
+	// different values per metric, which is why these live here rather than on the
+	// node.
 	Attributes map[string]string
 
 	// OTel metric kind: "gauge", "sum", "histogram", "exponential_histogram", or
 	// "summary" (CloudWatch-vended metrics carry the same kinds). Absent when the
 	// producer did not report one.
 	MetricType *string
+
+	// Whether the selected Sum metric stream represented by this metadata entry is a
+	// non-negative accumulation. Absent for metrics other than Sum or when the
+	// information is unavailable.
+	Monotonicity MetricMonotonicity
 
 	// The metric name as emitted, such as "Duration".
 	Name *string
@@ -2744,11 +2755,17 @@ func (v *MetricMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationTemporality != "" {
+		s.WriteString(schemas.MetricMetadata_aggregationTemporality, string(v.AggregationTemporality))
+	}
 	if v.Attributes != nil {
 		serializeMetadataAttributeMap(s, schemas.MetricMetadata_attributes, v.Attributes)
 	}
 	if v.MetricType != nil {
 		s.WriteString(schemas.MetricMetadata_metricType, *v.MetricType)
+	}
+	if v.Monotonicity != "" {
+		s.WriteString(schemas.MetricMetadata_monotonicity, string(v.Monotonicity))
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.MetricMetadata_name, *v.Name)
@@ -2765,11 +2782,25 @@ func (v *MetricMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MetricMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricMetadata, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MetricMetadata_aggregationTemporality:
+			var ev string
+			if err := d.ReadString(schemas.MetricMetadata_aggregationTemporality, &ev); err != nil {
+				return err
+			}
+			v.AggregationTemporality = MetricAggregationTemporality(ev)
+			return nil
 		case schemas.MetricMetadata_attributes:
 			return deserializeMetadataAttributeMap(d, schemas.MetricMetadata_attributes, &v.Attributes)
 		case schemas.MetricMetadata_metricType:
 			v.MetricType = new(string)
 			return d.ReadString(schemas.MetricMetadata_metricType, v.MetricType)
+		case schemas.MetricMetadata_monotonicity:
+			var ev string
+			if err := d.ReadString(schemas.MetricMetadata_monotonicity, &ev); err != nil {
+				return err
+			}
+			v.Monotonicity = MetricMonotonicity(ev)
+			return nil
 		case schemas.MetricMetadata_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.MetricMetadata_name, v.Name)

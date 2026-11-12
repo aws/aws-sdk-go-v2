@@ -307,6 +307,14 @@ func serializeSegmentationDescriptorList(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serializeTagFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HlsTagName) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func deserialize__adsInteractionExcludeEventTypesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AdsInteractionExcludeEventType) error {
 	*v = make([]types.AdsInteractionExcludeEventType, 0)
 	var vv string
@@ -997,6 +1005,27 @@ func deserializeSegmentationDescriptorList(d smithy.ShapeDeserializer, s *smithy
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTagFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HlsTagName) error {
+	*v = make([]types.HlsTagName, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.HlsTagName
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.HlsTagName(vv))
 		return nil
 	})
 }

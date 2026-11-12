@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: secretsmanager.GetResourcePolicy
 
-{"ARN":"__ARN__","Name":"__Name__","ResourcePolicy":"__ResourcePolicy__"}
+{"ARN":"__ARN__","Name":"__Name__","PolicyName":"__PolicyName__","ResourcePolicy":"__ResourcePolicy__"}

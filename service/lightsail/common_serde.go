@@ -847,6 +847,16 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 	s.CloseList()
 }
 
+func serializeSubdomainList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Subdomain) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSubjectAlternativeNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2800,6 +2810,28 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSubdomainList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Subdomain) error {
+	*v = make([]types.Subdomain, 0)
+	var vv types.Subdomain
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Subdomain
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Subdomain{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

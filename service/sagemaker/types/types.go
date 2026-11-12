@@ -23257,6 +23257,9 @@ type HubContent struct {
 	// This member is required.
 	HubName *string
 
+	// Information about the user who created the hub content.
+	CreatedBy *UserContext
+
 	// The failure reason if importing hub content failed.
 	FailureReason *string
 
@@ -23280,6 +23283,9 @@ type HubContent struct {
 
 	// The searchable keywords for the hub content.
 	HubContentSearchKeywords []string
+
+	// Information about the user who last modified the hub content.
+	LastModifiedBy *UserContext
 
 	// The last modified time of the hub content.
 	LastModifiedTime *time.Time
@@ -23306,6 +23312,11 @@ func (v *HubContent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HubContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.HubContent_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.HubContent_CreationTime, *v.CreationTime)
 	}
@@ -23354,6 +23365,11 @@ func (v *HubContent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubName != nil {
 		s.WriteString(schemas.HubContent_HubName, *v.HubName)
 	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.HubContent_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.HubContent_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -23373,6 +23389,9 @@ func (v *HubContent) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *HubContent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HubContent, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.HubContent_CreatedBy:
+			v.CreatedBy = &UserContext{}
+			return v.CreatedBy.Deserialize(d)
 		case schemas.HubContent_CreationTime:
 			v.CreationTime = new(time.Time)
 			return d.ReadTime(schemas.HubContent_CreationTime, v.CreationTime)
@@ -23427,6 +23446,9 @@ func (v *HubContent) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.HubContent_HubName:
 			v.HubName = new(string)
 			return d.ReadString(schemas.HubContent_HubName, v.HubName)
+		case schemas.HubContent_LastModifiedBy:
+			v.LastModifiedBy = &UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
 		case schemas.HubContent_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.HubContent_LastModifiedTime, v.LastModifiedTime)
@@ -59582,7 +59604,8 @@ type UserContext struct {
 	DomainId *string
 
 	// The IAM Identity details associated with the user. These details are associated
-	// with model package groups, model packages, and project entities only.
+	// with model package groups, model packages, project entities, hubs, and hub
+	// content only.
 	IamIdentity *IamIdentity
 
 	// The Amazon Resource Name (ARN) of the user's profile.

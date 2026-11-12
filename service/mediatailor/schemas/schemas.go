@@ -1092,7 +1092,7 @@ var DefaultSegmentDeliveryConfiguration_BaseUrl *smithy.Schema
 var EventName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "EventName",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var EventName_PRE_SESSION_INITIALIZATION *smithy.Schema
 
 var EventName_PRE_ADS_REQUEST *smithy.Schema
@@ -1100,6 +1100,8 @@ var EventName_PRE_ADS_REQUEST *smithy.Schema
 var EventName_POST_ADS_RESPONSE *smithy.Schema
 
 var EventName_PRE_MANIFEST_INSERTION *smithy.Schema
+
+var EventName_POST_ORIGIN_RESPONSE *smithy.Schema
 
 var FillPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -1112,7 +1114,7 @@ var FillPolicy_PARTIAL_AVAIL *smithy.Schema
 var Function = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "Function",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var Function_FunctionId *smithy.Schema
 
 var Function_FunctionType *smithy.Schema
@@ -1130,6 +1132,8 @@ var Function_ConcurrentExecutorConfiguration *smithy.Schema
 var Function_SequentialExecutorConfiguration *smithy.Schema
 
 var Function_VastRequestConfiguration *smithy.Schema
+
+var Function_HlsTagProcessorConfiguration *smithy.Schema
 
 var Function_Tags *smithy.Schema
 
@@ -1156,7 +1160,7 @@ var FunctionRef_Alias *smithy.Schema
 var FunctionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "FunctionType",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var FunctionType_HTTP_REQUEST *smithy.Schema
 
 var FunctionType_AWS_SERVICE_REQUEST *smithy.Schema
@@ -1168,6 +1172,8 @@ var FunctionType_CONCURRENT_EXECUTOR *smithy.Schema
 var FunctionType_SEQUENTIAL_EXECUTOR *smithy.Schema
 
 var FunctionType_VAST_REQUEST *smithy.Schema
+
+var FunctionType_HLS_TAG_PROCESSOR *smithy.Schema
 
 var HlsConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -1184,6 +1190,24 @@ var HlsPlaylistSettings = smithy.NewSchema(smithy.ShapeID{
 var HlsPlaylistSettings_ManifestWindowSeconds *smithy.Schema
 
 var HlsPlaylistSettings_AdMarkupType *smithy.Schema
+
+var HlsTagName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "HlsTagName",
+}, smithy.ShapeTypeEnum, 1)
+var HlsTagName_EXT_X_DATERANGE *smithy.Schema
+
+var HlsTagProcessorConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "HlsTagProcessorConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var HlsTagProcessorConfiguration_Runtime *smithy.Schema
+
+var HlsTagProcessorConfiguration_Output *smithy.Schema
+
+var HlsTagProcessorConfiguration_TagFilter *smithy.Schema
+
+var HlsTagProcessorConfiguration_RunCondition *smithy.Schema
 
 var HttpConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -1350,7 +1374,7 @@ var ManifestProcessingRules_AdMarkerPassthrough *smithy.Schema
 var ManifestServiceExcludeEventType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "ManifestServiceExcludeEventType",
-}, smithy.ShapeTypeEnum, 34)
+}, smithy.ShapeTypeEnum, 36)
 var ManifestServiceExcludeEventType_GENERATED_MANIFEST *smithy.Schema
 
 var ManifestServiceExcludeEventType_ORIGIN_MANIFEST *smithy.Schema
@@ -1419,6 +1443,10 @@ var ManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR *smithy.Schema
 
 var ManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR *smithy.Schema
 
+var ManifestServiceExcludeEventType_POST_ORIGIN_RESPONSE_HOOK_ERROR *smithy.Schema
+
+var ManifestServiceExcludeEventType_POST_ORIGIN_RESPONSE_FUNCTION_ERROR *smithy.Schema
+
 var ManifestServiceInteractionLog = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "ManifestServiceInteractionLog",
@@ -1430,10 +1458,14 @@ var ManifestServiceInteractionLog_ExcludeEventTypes *smithy.Schema
 var ManifestServicePublishOptInEventType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "ManifestServicePublishOptInEventType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 4)
 var ManifestServicePublishOptInEventType_PRE_SESSION_INIT_HOOK_SUMMARY *smithy.Schema
 
 var ManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED *smithy.Schema
+
+var ManifestServicePublishOptInEventType_POST_ORIGIN_RESPONSE_HOOK_SUMMARY *smithy.Schema
+
+var ManifestServicePublishOptInEventType_POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -1901,6 +1933,12 @@ var _StringMap = smithy.NewSchema(smithy.ShapeID{
 var _StringMap_key *smithy.Schema
 
 var _StringMap_value *smithy.Schema
+
+var _TagFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "TagFilterList",
+}, smithy.ShapeTypeList, 1)
+var _TagFilterList_member *smithy.Schema
 
 var Tier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -2628,7 +2666,7 @@ var GetFunctionRequest_FunctionId *smithy.Schema
 var GetFunctionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "GetFunctionResponse",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var GetFunctionResponse_FunctionId *smithy.Schema
 
 var GetFunctionResponse_FunctionType *smithy.Schema
@@ -2646,6 +2684,8 @@ var GetFunctionResponse_ConcurrentExecutorConfiguration *smithy.Schema
 var GetFunctionResponse_SequentialExecutorConfiguration *smithy.Schema
 
 var GetFunctionResponse_VastRequestConfiguration *smithy.Schema
+
+var GetFunctionResponse_HlsTagProcessorConfiguration *smithy.Schema
 
 var GetFunctionResponse_Tags *smithy.Schema
 
@@ -2917,7 +2957,7 @@ var PutChannelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
 var PutFunctionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "PutFunctionRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var PutFunctionRequest_FunctionId *smithy.Schema
 
 var PutFunctionRequest_FunctionType *smithy.Schema
@@ -2936,12 +2976,14 @@ var PutFunctionRequest_SequentialExecutorConfiguration *smithy.Schema
 
 var PutFunctionRequest_VastRequestConfiguration *smithy.Schema
 
+var PutFunctionRequest_HlsTagProcessorConfiguration *smithy.Schema
+
 var PutFunctionRequest_Tags *smithy.Schema
 
 var PutFunctionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "PutFunctionResponse",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var PutFunctionResponse_FunctionId *smithy.Schema
 
 var PutFunctionResponse_FunctionType *smithy.Schema
@@ -2959,6 +3001,8 @@ var PutFunctionResponse_ConcurrentExecutorConfiguration *smithy.Schema
 var PutFunctionResponse_SequentialExecutorConfiguration *smithy.Schema
 
 var PutFunctionResponse_VastRequestConfiguration *smithy.Schema
+
+var PutFunctionResponse_HlsTagProcessorConfiguration *smithy.Schema
 
 var PutFunctionResponse_Tags *smithy.Schema
 
@@ -3615,6 +3659,8 @@ func init() {
 
 	FunctionType_VAST_REQUEST = FunctionType.AddMember("VAST_REQUEST", smithyprelude.Unit)
 
+	FunctionType_HLS_TAG_PROCESSOR = FunctionType.AddMember("HLS_TAG_PROCESSOR", smithyprelude.Unit)
+
 	RuntimeType_JSONATA = RuntimeType.AddMember("JSONATA", smithyprelude.Unit)
 
 	MethodType_GET = MethodType.AddMember("GET", smithyprelude.Unit)
@@ -3701,6 +3747,18 @@ func init() {
 
 	VastRequestConfiguration_Cache = VastRequestConfiguration.AddMember("Cache", HttpRequestCacheConfiguration)
 
+	HlsTagName_EXT_X_DATERANGE = HlsTagName.AddMember("EXT_X_DATERANGE", smithyprelude.Unit)
+
+	_TagFilterList_member = _TagFilterList.AddMember("member", HlsTagName)
+
+	HlsTagProcessorConfiguration_Runtime = HlsTagProcessorConfiguration.AddMember("Runtime", RuntimeType)
+
+	HlsTagProcessorConfiguration_Output = HlsTagProcessorConfiguration.AddMember("Output", ___mapOf__string)
+
+	HlsTagProcessorConfiguration_TagFilter = HlsTagProcessorConfiguration.AddMember("TagFilter", _TagFilterList)
+
+	HlsTagProcessorConfiguration_RunCondition = HlsTagProcessorConfiguration.AddMember("RunCondition", ___string)
+
 	Function_FunctionId = Function.AddMember("FunctionId", ___string)
 
 	Function_FunctionType = Function.AddMember("FunctionType", FunctionType)
@@ -3718,6 +3776,8 @@ func init() {
 	Function_SequentialExecutorConfiguration = Function.AddMember("SequentialExecutorConfiguration", SequentialExecutorConfiguration)
 
 	Function_VastRequestConfiguration = Function.AddMember("VastRequestConfiguration", VastRequestConfiguration)
+
+	Function_HlsTagProcessorConfiguration = Function.AddMember("HlsTagProcessorConfiguration", HlsTagProcessorConfiguration)
 
 	Function_Tags = Function.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
 
@@ -3829,6 +3889,10 @@ func init() {
 
 	ManifestServicePublishOptInEventType_PRE_SESSION_INIT_FUNCTION_COMPLETED = ManifestServicePublishOptInEventType.AddMember("PRE_SESSION_INIT_FUNCTION_COMPLETED", smithyprelude.Unit)
 
+	ManifestServicePublishOptInEventType_POST_ORIGIN_RESPONSE_HOOK_SUMMARY = ManifestServicePublishOptInEventType.AddMember("POST_ORIGIN_RESPONSE_HOOK_SUMMARY", smithyprelude.Unit)
+
+	ManifestServicePublishOptInEventType_POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED = ManifestServicePublishOptInEventType.AddMember("POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED", smithyprelude.Unit)
+
 	___manifestServicePublishOptInEventTypesList_member = ___manifestServicePublishOptInEventTypesList.AddMember("member", ManifestServicePublishOptInEventType)
 
 	ManifestServiceExcludeEventType_GENERATED_MANIFEST = ManifestServiceExcludeEventType.AddMember("GENERATED_MANIFEST", smithyprelude.Unit)
@@ -3898,6 +3962,10 @@ func init() {
 	ManifestServiceExcludeEventType_PRE_SESSION_INIT_HOOK_ERROR = ManifestServiceExcludeEventType.AddMember("PRE_SESSION_INIT_HOOK_ERROR", smithyprelude.Unit)
 
 	ManifestServiceExcludeEventType_PRE_SESSION_INIT_FUNCTION_ERROR = ManifestServiceExcludeEventType.AddMember("PRE_SESSION_INIT_FUNCTION_ERROR", smithyprelude.Unit)
+
+	ManifestServiceExcludeEventType_POST_ORIGIN_RESPONSE_HOOK_ERROR = ManifestServiceExcludeEventType.AddMember("POST_ORIGIN_RESPONSE_HOOK_ERROR", smithyprelude.Unit)
+
+	ManifestServiceExcludeEventType_POST_ORIGIN_RESPONSE_FUNCTION_ERROR = ManifestServiceExcludeEventType.AddMember("POST_ORIGIN_RESPONSE_FUNCTION_ERROR", smithyprelude.Unit)
 
 	___manifestServiceExcludeEventTypesList_member = ___manifestServiceExcludeEventTypesList.AddMember("member", ManifestServiceExcludeEventType)
 
@@ -3978,6 +4046,8 @@ func init() {
 	EventName_POST_ADS_RESPONSE = EventName.AddMember("POST_ADS_RESPONSE", smithyprelude.Unit)
 
 	EventName_PRE_MANIFEST_INSERTION = EventName.AddMember("PRE_MANIFEST_INSERTION", smithyprelude.Unit)
+
+	EventName_POST_ORIGIN_RESPONSE = EventName.AddMember("POST_ORIGIN_RESPONSE", smithyprelude.Unit)
 
 	_FunctionMapping_key = _FunctionMapping.AddMember("key", EventName)
 
@@ -4723,6 +4793,8 @@ func init() {
 
 	GetFunctionResponse_VastRequestConfiguration = GetFunctionResponse.AddMember("VastRequestConfiguration", VastRequestConfiguration)
 
+	GetFunctionResponse_HlsTagProcessorConfiguration = GetFunctionResponse.AddMember("HlsTagProcessorConfiguration", HlsTagProcessorConfiguration)
+
 	GetFunctionResponse_Tags = GetFunctionResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
 
 	GetFunctionResponse_Arn = GetFunctionResponse.AddMember("Arn", ___string)
@@ -4911,6 +4983,8 @@ func init() {
 
 	PutFunctionRequest_VastRequestConfiguration = PutFunctionRequest.AddMember("VastRequestConfiguration", VastRequestConfiguration)
 
+	PutFunctionRequest_HlsTagProcessorConfiguration = PutFunctionRequest.AddMember("HlsTagProcessorConfiguration", HlsTagProcessorConfiguration)
+
 	PutFunctionRequest_Tags = PutFunctionRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
 
 	PutFunctionResponse_FunctionId = PutFunctionResponse.AddMember("FunctionId", ___string)
@@ -4930,6 +5004,8 @@ func init() {
 	PutFunctionResponse_SequentialExecutorConfiguration = PutFunctionResponse.AddMember("SequentialExecutorConfiguration", SequentialExecutorConfiguration)
 
 	PutFunctionResponse_VastRequestConfiguration = PutFunctionResponse.AddMember("VastRequestConfiguration", VastRequestConfiguration)
+
+	PutFunctionResponse_HlsTagProcessorConfiguration = PutFunctionResponse.AddMember("HlsTagProcessorConfiguration", HlsTagProcessorConfiguration)
 
 	PutFunctionResponse_Tags = PutFunctionResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
 

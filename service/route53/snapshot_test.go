@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateQueryLoggingConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateResourceRecordSetProtections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceRecordSetProtections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateResourceRecordSetProtections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateReusableDelegationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateReusableDelegationSet(context.Background(), nil, func(o *Options) {
@@ -307,6 +319,18 @@ func TestCheckSnapshot_DeleteQueryLoggingConfig(t *testing.T) {
 	_, err := svc.DeleteQueryLoggingConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteQueryLoggingConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResourceRecordSetProtections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceRecordSetProtections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourceRecordSetProtections")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -722,6 +746,18 @@ func TestCheckSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListResourceRecordSetProtections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceRecordSetProtections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourceRecordSetProtections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListResourceRecordSets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListResourceRecordSets(context.Background(), nil, func(o *Options) {
@@ -1033,6 +1069,18 @@ func TestUpdateSnapshot_CreateQueryLoggingConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateResourceRecordSetProtections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceRecordSetProtections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateResourceRecordSetProtections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateReusableDelegationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateReusableDelegationSet(context.Background(), nil, func(o *Options) {
@@ -1158,6 +1206,18 @@ func TestUpdateSnapshot_DeleteQueryLoggingConfig(t *testing.T) {
 	_, err := svc.DeleteQueryLoggingConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteQueryLoggingConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResourceRecordSetProtections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceRecordSetProtections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourceRecordSetProtections")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1566,6 +1626,18 @@ func TestUpdateSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 	_, err := svc.ListQueryLoggingConfigs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListQueryLoggingConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourceRecordSetProtections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceRecordSetProtections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourceRecordSetProtections")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

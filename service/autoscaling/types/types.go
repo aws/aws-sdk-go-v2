@@ -5437,6 +5437,9 @@ type PredefinedMetricSpecification struct {
 	//
 	//   - ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling group.
 	//
+	//   - ASGAverageCPUUtilizationHighResolution - Average CPU utilization of the Auto
+	//   Scaling group using a high-resolution metric.
+	//
 	//   - ASGAverageNetworkIn - Average number of bytes received on all network
 	//   interfaces by the Auto Scaling group.
 	//
@@ -5445,6 +5448,11 @@ type PredefinedMetricSpecification struct {
 	//
 	//   - ALBRequestCountPerTarget - Average Application Load Balancer request count
 	//   per target for your Auto Scaling group.
+	//
+	// To help ensure that target tracking has metric data to use for the
+	// ASGAverageCPUUtilizationHighResolution metric type, configure the Auto Scaling
+	// group's launch template and existing instances to publish high-resolution CPU
+	// utilization metrics.
 	//
 	// This member is required.
 	PredefinedMetricType MetricType

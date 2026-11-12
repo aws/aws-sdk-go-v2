@@ -1430,6 +1430,18 @@ func TestCheckSnapshot_CreateManagedPrefixList(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateMetricCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMetricCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateMetricCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateNatGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNatGateway(context.Background(), nil, func(o *Options) {
@@ -2611,6 +2623,18 @@ func TestCheckSnapshot_DeleteManagedPrefixList(t *testing.T) {
 	_, err := svc.DeleteManagedPrefixList(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteManagedPrefixList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteMetricCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMetricCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMetricCategory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4651,6 +4675,18 @@ func TestCheckSnapshot_DescribeManagedPrefixLists(t *testing.T) {
 	_, err := svc.DescribeManagedPrefixLists(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeManagedPrefixLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeMetricCategories(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetricCategories(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMetricCategories")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8282,6 +8318,18 @@ func TestCheckSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyMetricCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyMetricCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyMetricCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyNetworkInterfaceAttribute(context.Background(), nil, func(o *Options) {
@@ -11161,6 +11209,18 @@ func TestUpdateSnapshot_CreateManagedPrefixList(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateMetricCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMetricCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateMetricCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateNatGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNatGateway(context.Background(), nil, func(o *Options) {
@@ -12342,6 +12402,18 @@ func TestUpdateSnapshot_DeleteManagedPrefixList(t *testing.T) {
 	_, err := svc.DeleteManagedPrefixList(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteManagedPrefixList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteMetricCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMetricCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMetricCategory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14382,6 +14454,18 @@ func TestUpdateSnapshot_DescribeManagedPrefixLists(t *testing.T) {
 	_, err := svc.DescribeManagedPrefixLists(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeManagedPrefixLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMetricCategories(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetricCategories(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMetricCategories")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -18006,6 +18090,18 @@ func TestUpdateSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
 	_, err := svc.ModifyManagedResourceVisibility(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyManagedResourceVisibility")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyMetricCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyMetricCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyMetricCategory")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

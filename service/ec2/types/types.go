@@ -171,11 +171,17 @@ type AccountVpcEncryptionControl struct {
 // [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
 type AccountVpcEncryptionControlExclusions struct {
 
+	// The exclusion configuration for Amazon API Gateway V2.
+	ApiGatewayV2 VpcEncryptionControlExclusionState
+
 	// The exclusion configuration for egress-only internet gateway resource.
 	EgressOnlyInternetGateway VpcEncryptionControlExclusionState
 
 	// The exclusion configuration for Elastic File System service.
 	ElasticFileSystem VpcEncryptionControlExclusionState
+
+	// The exclusion configuration for AWS Global Accelerator.
+	GlobalAccelerator VpcEncryptionControlExclusionState
 
 	// The exclusion configuration for internet gateway resource.
 	InternetGateway VpcEncryptionControlExclusionState
@@ -8994,7 +9000,8 @@ type ImageUsageReportEntry struct {
 	// The ID of the report.
 	ReportId *string
 
-	// The type of resource ( ec2:Instance or ec2:LaunchTemplate ).
+	// The type of resource ( ec2:Instance | ec2:LaunchTemplate |
+	// imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe ).
 	ResourceType *string
 
 	// The number of times resources of this type reference this image in the account.
@@ -9009,7 +9016,8 @@ type ImageUsageResourceType struct {
 
 	// The resource type.
 	//
-	// Valid values: ec2:Instance | ec2:LaunchTemplate
+	// Valid values: ec2:Instance | ec2:LaunchTemplate | imagebuilder:ImageRecipe |
+	// imagebuilder:ContainerRecipe
 	ResourceType *string
 
 	// The options that affect the scope of the report. Valid only when ResourceType
@@ -9055,7 +9063,8 @@ type ImageUsageResourceTypeRequest struct {
 
 	// The resource type.
 	//
-	// Valid values: ec2:Instance | ec2:LaunchTemplate
+	// Valid values: ec2:Instance | ec2:LaunchTemplate | imagebuilder:ImageRecipe |
+	// imagebuilder:ContainerRecipe
 	ResourceType *string
 
 	// The options that affect the scope of the report. Valid only when ResourceType
@@ -15584,6 +15593,9 @@ type LaunchTemplatesMonitoring struct {
 	// is enabled.
 	Enabled *bool
 
+	// The IDs of the metric categories to associate with the instance.
+	MetricCategoryIds []string
+
 	noSmithyDocumentSerde
 }
 
@@ -15593,6 +15605,10 @@ type LaunchTemplatesMonitoringRequest struct {
 	// Specify true to enable detailed monitoring. Otherwise, basic monitoring is
 	// enabled.
 	Enabled *bool
+
+	// The IDs of the metric categories to associate with the instance. To specify
+	// metric categories, you must also enable detailed monitoring.
+	MetricCategoryIds []string
 
 	noSmithyDocumentSerde
 }
@@ -16413,6 +16429,22 @@ type MemoryMiBRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a metric category. A metric category is a set of additional metrics
+// that you can associate with an instance that has detailed monitoring enabled.
+type MetricCategory struct {
+
+	// The ID of the metric category.
+	MetricCategoryId *string
+
+	// The names of the metrics in the metric category.
+	Metrics []string
+
+	// Any tags assigned to the metric category.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 //	Contains a single data point from a capacity metrics query, including the
 //
 // dimension values, timestamp, and metric values for that specific combination.
@@ -16926,6 +16958,9 @@ type ModifyVpnTunnelOptionsSpecification struct {
 
 // Describes the monitoring of an instance.
 type Monitoring struct {
+
+	// The IDs of the metric categories that are associated with the instance.
+	MetricCategoryIds []string
 
 	// Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring
 	// is enabled.
@@ -21180,6 +21215,10 @@ type RunInstancesMonitoringEnabled struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	// The IDs of the metric categories to associate with the instance. To specify
+	// metric categories, you must also enable detailed monitoring.
+	MetricCategoryIds []string
 
 	noSmithyDocumentSerde
 }
@@ -27683,6 +27722,10 @@ type VpcEncryptionControlConfiguration struct {
 	// This member is required.
 	Mode VpcEncryptionControlMode
 
+	// Specifies whether to exclude Amazon API Gateway V2 traffic from encryption
+	// enforcement.
+	ApiGatewayV2Exclusion VpcEncryptionControlExclusionStateInput
+
 	// Specifies whether to exclude egress-only internet gateway traffic from
 	// encryption enforcement.
 	EgressOnlyInternetGatewayExclusion VpcEncryptionControlExclusionStateInput
@@ -27690,6 +27733,10 @@ type VpcEncryptionControlConfiguration struct {
 	// Specifies whether to exclude Elastic File System traffic from encryption
 	// enforcement.
 	ElasticFileSystemExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude AWS Global Accelerator traffic from encryption
+	// enforcement.
+	GlobalAcceleratorExclusion VpcEncryptionControlExclusionStateInput
 
 	// Specifies whether to exclude internet gateway traffic from encryption
 	// enforcement.
@@ -27740,11 +27787,17 @@ type VpcEncryptionControlExclusion struct {
 // [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
 type VpcEncryptionControlExclusions struct {
 
+	// The exclusion configuration for Amazon API Gateway V2 traffic.
+	ApiGatewayV2 *VpcEncryptionControlExclusion
+
 	// The exclusion configuration for egress-only internet gateway traffic.
 	EgressOnlyInternetGateway *VpcEncryptionControlExclusion
 
 	// The exclusion configuration for Elastic File System traffic.
 	ElasticFileSystem *VpcEncryptionControlExclusion
+
+	// The exclusion configuration for AWS Global Accelerator traffic.
+	GlobalAccelerator *VpcEncryptionControlExclusion
 
 	// The exclusion configuration for internet gateway traffic.
 	InternetGateway *VpcEncryptionControlExclusion

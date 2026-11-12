@@ -1,0 +1,8 @@
+{
+    "id": "8da48fee-644f-4eb5-8158-573280756271",
+    "type": "feature",
+    "description": "Adds a retry signal to protected query and protected job errors that indicates whether running the same request again might succeed, and defines error codes that identify the category of the failure.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "14375379-ee36-48ab-850d-3c26b8b3bfd1",
+    "type": "feature",
+    "description": "Add post origin manifest hook, add HLS tag processor",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

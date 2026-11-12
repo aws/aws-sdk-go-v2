@@ -264,6 +264,27 @@ func (OTelEnrichmentStatus) Values() []OTelEnrichmentStatus {
 	}
 }
 
+type QueryType string
+
+// Enum values for QueryType
+const (
+	QueryTypePromql     QueryType = "PROMQL"
+	QueryTypeSql        QueryType = "SQL"
+	QueryTypeMetricMath QueryType = "METRIC_MATH"
+)
+
+// Values returns all known values for QueryType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryType) Values() []QueryType {
+	return []QueryType{
+		"PROMQL",
+		"SQL",
+		"METRIC_MATH",
+	}
+}
+
 type RecentlyActive string
 
 // Enum values for RecentlyActive

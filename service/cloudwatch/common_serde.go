@@ -415,6 +415,16 @@ func serializeMetricDataQueries(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeMetricDataQueryDefinitionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MetricDataQueryDefinitionSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeMetricDataResultMessages(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MessageData) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1423,6 +1433,28 @@ func deserializeMetricDataQueries(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		vv = types.MetricDataQuery{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetricDataQueryDefinitionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricDataQueryDefinitionSummary) error {
+	*v = make([]types.MetricDataQueryDefinitionSummary, 0)
+	var vv types.MetricDataQueryDefinitionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetricDataQueryDefinitionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MetricDataQueryDefinitionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

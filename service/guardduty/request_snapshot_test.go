@@ -1792,6 +1792,7 @@ func TestCheckRequestSnapshot_GetInvestigation(t *testing.T) {
 	input := &GetInvestigationInput{
 		DetectorId:      ptr.String("__DetectorId__"),
 		InvestigationId: ptr.String("__InvestigationId__"),
+		SummaryFormat:   types.SummaryFormat("STRING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2557,9 +2558,57 @@ func TestCheckRequestSnapshot_ListFindings(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListInvestigationRecords(t *testing.T) {
+	input := &ListInvestigationRecordsInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		InvestigationId: ptr.String("__InvestigationId__"),
+		RecordTypes: []types.RecordType{
+			types.RecordType("OBSERVATION"),
+			types.RecordType("OBSERVATION"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInvestigationRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInvestigationRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListInvestigations(t *testing.T) {
 	input := &ListInvestigationsInput{
 		DetectorId: ptr.String("__DetectorId__"),
+		FilterCriteria: &types.InvestigationFilterCriteria{
+			Criterion: map[string]types.InvestigationFilterCondition{
+				"key0": {
+					Equals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotEquals: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
 		SortCriteria: &types.InvestigationSortCriteria{
 			AttributeName: types.InvestigationSortField("START_TIME"),
 			OrderBy:       types.OrderBy("ASC"),
@@ -5391,6 +5440,7 @@ func TestUpdateRequestSnapshot_GetInvestigation(t *testing.T) {
 	input := &GetInvestigationInput{
 		DetectorId:      ptr.String("__DetectorId__"),
 		InvestigationId: ptr.String("__InvestigationId__"),
+		SummaryFormat:   types.SummaryFormat("STRING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6156,9 +6206,57 @@ func TestUpdateRequestSnapshot_ListFindings(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListInvestigationRecords(t *testing.T) {
+	input := &ListInvestigationRecordsInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		InvestigationId: ptr.String("__InvestigationId__"),
+		RecordTypes: []types.RecordType{
+			types.RecordType("OBSERVATION"),
+			types.RecordType("OBSERVATION"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInvestigationRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInvestigationRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListInvestigations(t *testing.T) {
 	input := &ListInvestigationsInput{
 		DetectorId: ptr.String("__DetectorId__"),
+		FilterCriteria: &types.InvestigationFilterCriteria{
+			Criterion: map[string]types.InvestigationFilterCondition{
+				"key0": {
+					Equals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotEquals: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
 		SortCriteria: &types.InvestigationSortCriteria{
 			AttributeName: types.InvestigationSortField("START_TIME"),
 			OrderBy:       types.OrderBy("ASC"),

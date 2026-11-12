@@ -1,5 +1,5 @@
 400
 Content-Type: application/x-amz-json-1.1
-X-Amz-Target: secretsmanager.BatchGetSecretValue
+X-Amz-Target: secretsmanager.AssociateCrossAccountReplica
 
 {"__type":"InvalidParameterException","Message":"__Message__"}

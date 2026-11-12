@@ -49,6 +49,11 @@ type DeleteResourcePolicyInput struct {
 	// This member is required.
 	SecretId *string
 
+	// The name of the resource policy to delete. If you don't specify this field,
+	// Secrets Manager uses default . You can only delete the default policy; if you
+	// specify any other name, the operation returns an InvalidParameterException .
+	PolicyName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -59,6 +64,9 @@ func (v *DeleteResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.DeleteResourcePolicyRequest_PolicyName, *v.PolicyName)
+	}
 	if v.SecretId != nil {
 		s.WriteString(schemas.DeleteResourcePolicyRequest_SecretId, *v.SecretId)
 	}
@@ -71,6 +79,10 @@ type DeleteResourcePolicyOutput struct {
 
 	// The name of the secret that the resource-based policy was deleted for.
 	Name *string
+
+	// The name of the deleted resource policy. If you didn't specify PolicyName in
+	// the request, this is default .
+	PolicyName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,6 +103,9 @@ func (v *DeleteResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.DeleteResourcePolicyResponse_Name, *v.Name)
 	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.DeleteResourcePolicyResponse_PolicyName, *v.PolicyName)
+	}
 }
 func (v *DeleteResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteResourcePolicyResponse, func(s *smithy.Schema) error {
@@ -101,6 +116,9 @@ func (v *DeleteResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.DeleteResourcePolicyResponse_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.DeleteResourcePolicyResponse_Name, v.Name)
+		case schemas.DeleteResourcePolicyResponse_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyResponse_PolicyName, v.PolicyName)
 		}
 		return nil
 	})

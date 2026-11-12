@@ -2508,6 +2508,21 @@ func TestCheckRequestSnapshot_UpdateInstance(t *testing.T) {
 			KmsKeyArn: ptr.String("__KmsKeyArn__"),
 		},
 		PermissionSetsEnabled: ptr.Bool(true),
+		NetworkConfiguration: &types.NetworkConfigurationInfo{
+			VpceAccessRequired: ptr.Bool(true),
+			RestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeApplicationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4948,6 +4963,21 @@ func TestUpdateRequestSnapshot_UpdateInstance(t *testing.T) {
 			KmsKeyArn: ptr.String("__KmsKeyArn__"),
 		},
 		PermissionSetsEnabled: ptr.Bool(true),
+		NetworkConfiguration: &types.NetworkConfigurationInfo{
+			VpceAccessRequired: ptr.Bool(true),
+			RestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeApplicationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

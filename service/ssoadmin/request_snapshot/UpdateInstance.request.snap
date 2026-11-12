@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SWBExternalService.UpdateInstance
 
-{"EncryptionConfiguration":{"KeyType":"AWS_OWNED_KMS_KEY","KmsKeyArn":"__KmsKeyArn__"},"InstanceArn":"__InstanceArn__","Name":"__Name__","PermissionSetsEnabled":true}
+{"EncryptionConfiguration":{"KeyType":"AWS_OWNED_KMS_KEY","KmsKeyArn":"__KmsKeyArn__"},"InstanceArn":"__InstanceArn__","Name":"__Name__","NetworkConfiguration":{"AllowSourceIps":["__Member__","__Member__"],"ExcludeApplicationArns":["__Member__","__Member__"],"RestrictSourceVpcs":["__Member__","__Member__"],"VpceAccessRequired":true},"PermissionSetsEnabled":true}

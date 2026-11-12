@@ -210,6 +210,26 @@ func (m *validateOpCreateQueryLoggingConfig) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateResourceRecordSetProtections struct {
+}
+
+func (*validateOpCreateResourceRecordSetProtections) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResourceRecordSetProtections) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResourceRecordSetProtectionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResourceRecordSetProtectionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReusableDelegationSet struct {
 }
 
@@ -425,6 +445,26 @@ func (m *validateOpDeleteQueryLoggingConfig) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteQueryLoggingConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResourceRecordSetProtections struct {
+}
+
+func (*validateOpDeleteResourceRecordSetProtections) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourceRecordSetProtections) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourceRecordSetProtectionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourceRecordSetProtectionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +930,26 @@ func (m *validateOpListHostedZonesByVPC) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListResourceRecordSetProtections struct {
+}
+
+func (*validateOpListResourceRecordSetProtections) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourceRecordSetProtections) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourceRecordSetProtectionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourceRecordSetProtectionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListResourceRecordSets struct {
 }
 
@@ -1190,6 +1250,10 @@ func addOpCreateQueryLoggingConfigValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateQueryLoggingConfig{}, middleware.After)
 }
 
+func addOpCreateResourceRecordSetProtectionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResourceRecordSetProtections{}, middleware.After)
+}
+
 func addOpCreateReusableDelegationSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReusableDelegationSet{}, middleware.After)
 }
@@ -1232,6 +1296,10 @@ func addOpDeleteKeySigningKeyValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteQueryLoggingConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQueryLoggingConfig{}, middleware.After)
+}
+
+func addOpDeleteResourceRecordSetProtectionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourceRecordSetProtections{}, middleware.After)
 }
 
 func addOpDeleteReusableDelegationSetValidationMiddleware(stack *middleware.Stack) error {
@@ -1324,6 +1392,10 @@ func addOpListCidrLocationsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListHostedZonesByVPCValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListHostedZonesByVPC{}, middleware.After)
+}
+
+func addOpListResourceRecordSetProtectionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourceRecordSetProtections{}, middleware.After)
 }
 
 func addOpListResourceRecordSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1653,6 +1725,76 @@ func validateResourceRecordSet(v *types.ResourceRecordSet) error {
 	}
 }
 
+func validateResourceRecordSetProtectionConfig(v *types.ResourceRecordSetProtectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceRecordSetProtectionConfig"}
+	if v.RecordName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordName"))
+	}
+	if len(v.RecordType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceRecordSetProtectionConfigBatch(v []types.ResourceRecordSetProtectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceRecordSetProtectionConfigBatch"}
+	for i := range v {
+		if err := validateResourceRecordSetProtectionConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceRecordSetProtectionKey(v *types.ResourceRecordSetProtectionKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceRecordSetProtectionKey"}
+	if v.RecordName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordName"))
+	}
+	if len(v.RecordType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceRecordSetProtectionKeyBatch(v []types.ResourceRecordSetProtectionKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceRecordSetProtectionKeyBatch"}
+	for i := range v {
+		if err := validateResourceRecordSetProtectionKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpActivateKeySigningKeyInput(v *ActivateKeySigningKeyInput) error {
 	if v == nil {
 		return nil
@@ -1854,6 +1996,28 @@ func validateOpCreateQueryLoggingConfigInput(v *CreateQueryLoggingConfigInput) e
 	}
 }
 
+func validateOpCreateResourceRecordSetProtectionsInput(v *CreateResourceRecordSetProtectionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceRecordSetProtectionsInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.Protections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protections"))
+	} else if v.Protections != nil {
+		if err := validateResourceRecordSetProtectionConfigBatch(v.Protections); err != nil {
+			invalidParams.AddNested("Protections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateReusableDelegationSetInput(v *CreateReusableDelegationSetInput) error {
 	if v == nil {
 		return nil
@@ -2038,6 +2202,28 @@ func validateOpDeleteQueryLoggingConfigInput(v *DeleteQueryLoggingConfigInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteQueryLoggingConfigInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResourceRecordSetProtectionsInput(v *DeleteResourceRecordSetProtectionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceRecordSetProtectionsInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.Protections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protections"))
+	} else if v.Protections != nil {
+		if err := validateResourceRecordSetProtectionKeyBatch(v.Protections); err != nil {
+			invalidParams.AddNested("Protections", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2404,6 +2590,21 @@ func validateOpListHostedZonesByVPCInput(v *ListHostedZonesByVPCInput) error {
 	}
 	if len(v.VPCRegion) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("VPCRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourceRecordSetProtectionsInput(v *ListResourceRecordSetProtectionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourceRecordSetProtectionsInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

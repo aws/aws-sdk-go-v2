@@ -1,5 +1,5 @@
 504
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.CreateWorkflow
+X-Amz-Target: AmazonMWAAServerless.CreateAirflowUiUrl
 
 {"__type":"OperationTimeoutException","Message":"__Message__"}

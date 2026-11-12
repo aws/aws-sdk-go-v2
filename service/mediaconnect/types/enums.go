@@ -486,6 +486,25 @@ func (FabricLatencyMode) Values() []FabricLatencyMode {
 	}
 }
 
+type FabricSwitchingMode string
+
+// Enum values for FabricSwitchingMode
+const (
+	FabricSwitchingModeImmediate FabricSwitchingMode = "IMMEDIATE"
+	FabricSwitchingModeKeyFrame  FabricSwitchingMode = "KEY_FRAME"
+)
+
+// Values returns all known values for FabricSwitchingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FabricSwitchingMode) Values() []FabricSwitchingMode {
+	return []FabricSwitchingMode{
+		"IMMEDIATE",
+		"KEY_FRAME",
+	}
+}
+
 type FailoverInputSourcePriorityMode string
 
 // Enum values for FailoverInputSourcePriorityMode
@@ -913,6 +932,7 @@ const (
 	ProtocolFujitsuQos   Protocol = "fujitsu-qos"
 	ProtocolUdp          Protocol = "udp"
 	ProtocolNdiSpeedHq   Protocol = "ndi-speed-hq"
+	ProtocolRtmpPush     Protocol = "rtmp-push"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -933,6 +953,7 @@ func (Protocol) Values() []Protocol {
 		"fujitsu-qos",
 		"udp",
 		"ndi-speed-hq",
+		"rtmp-push",
 	}
 }
 
@@ -1061,6 +1082,7 @@ const (
 	RouterInputProtocolRist        RouterInputProtocol = "RIST"
 	RouterInputProtocolSrtCaller   RouterInputProtocol = "SRT_CALLER"
 	RouterInputProtocolSrtListener RouterInputProtocol = "SRT_LISTENER"
+	RouterInputProtocolRtmpPush    RouterInputProtocol = "RTMP_PUSH"
 )
 
 // Values returns all known values for RouterInputProtocol. Note that this can be
@@ -1073,6 +1095,7 @@ func (RouterInputProtocol) Values() []RouterInputProtocol {
 		"RIST",
 		"SRT_CALLER",
 		"SRT_LISTENER",
+		"RTMP_PUSH",
 	}
 }
 
@@ -1377,6 +1400,25 @@ func (RoutingScope) Values() []RoutingScope {
 	}
 }
 
+type RtmpPushNamingType string
+
+// Enum values for RtmpPushNamingType
+const (
+	RtmpPushNamingTypeManual    RtmpPushNamingType = "MANUAL"
+	RtmpPushNamingTypeAutomatic RtmpPushNamingType = "AUTOMATIC"
+)
+
+// Values returns all known values for RtmpPushNamingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RtmpPushNamingType) Values() []RtmpPushNamingType {
+	return []RtmpPushNamingType{
+		"MANUAL",
+		"AUTOMATIC",
+	}
+}
+
 type ScanMode string
 
 // Enum values for ScanMode
@@ -1505,6 +1547,29 @@ func (SourceEndpointType) Values() []SourceEndpointType {
 	return []SourceEndpointType{
 		"STANDARD",
 		"ROUTER_OUTPUT",
+	}
+}
+
+type SourceMediaStreamType string
+
+// Enum values for SourceMediaStreamType
+const (
+	SourceMediaStreamTypeVideo   SourceMediaStreamType = "VIDEO"
+	SourceMediaStreamTypeAudio   SourceMediaStreamType = "AUDIO"
+	SourceMediaStreamTypeData    SourceMediaStreamType = "DATA"
+	SourceMediaStreamTypeUnknown SourceMediaStreamType = "UNKNOWN"
+)
+
+// Values returns all known values for SourceMediaStreamType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceMediaStreamType) Values() []SourceMediaStreamType {
+	return []SourceMediaStreamType{
+		"VIDEO",
+		"AUDIO",
+		"DATA",
+		"UNKNOWN",
 	}
 }
 

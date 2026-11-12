@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateCrossAccountReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCrossAccountReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateCrossAccountReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetSecretValue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetSecretValue(context.Background(), nil, func(o *Options) {
@@ -134,6 +146,18 @@ func TestCheckSnapshot_DescribeSecret(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateCrossAccountReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCrossAccountReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateCrossAccountReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRandomPassword(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRandomPassword(context.Background(), nil, func(o *Options) {
@@ -163,6 +187,18 @@ func TestCheckSnapshot_GetSecretValue(t *testing.T) {
 	_, err := svc.GetSecretValue(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSecretValue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourcePolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcePolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourcePolicies")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -337,6 +373,18 @@ func TestCheckSnapshot_ValidateResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateCrossAccountReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCrossAccountReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateCrossAccountReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetSecretValue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetSecretValue(context.Background(), nil, func(o *Options) {
@@ -409,6 +457,18 @@ func TestUpdateSnapshot_DescribeSecret(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateCrossAccountReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCrossAccountReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateCrossAccountReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRandomPassword(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRandomPassword(context.Background(), nil, func(o *Options) {
@@ -438,6 +498,18 @@ func TestUpdateSnapshot_GetSecretValue(t *testing.T) {
 	_, err := svc.GetSecretValue(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSecretValue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourcePolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcePolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourcePolicies")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

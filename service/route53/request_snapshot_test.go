@@ -634,6 +634,45 @@ func TestCheckRequestSnapshot_CreateQueryLoggingConfig(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateResourceRecordSetProtections(t *testing.T) {
+	input := &CreateResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionConfig{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateResourceRecordSetProtections(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateResourceRecordSetProtections"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateReusableDelegationSet(t *testing.T) {
 	input := &CreateReusableDelegationSetInput{
 		CallerReference: ptr.String("__CallerReference__"),
@@ -942,6 +981,43 @@ func TestCheckRequestSnapshot_DeleteQueryLoggingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQueryLoggingConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteResourceRecordSetProtections(t *testing.T) {
+	input := &DeleteResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionKey{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResourceRecordSetProtections(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourceRecordSetProtections"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1887,6 +1963,37 @@ func TestCheckRequestSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueryLoggingConfigs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResourceRecordSetProtections(t *testing.T) {
+	input := &ListResourceRecordSetProtectionsInput{
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+		StartRecordName: ptr.String("__StartRecordName__"),
+		StartRecordType: types.RRType("SOA"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourceRecordSetProtections(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourceRecordSetProtections"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2840,6 +2947,45 @@ func TestUpdateRequestSnapshot_CreateQueryLoggingConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateResourceRecordSetProtections(t *testing.T) {
+	input := &CreateResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionConfig{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateResourceRecordSetProtections(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateResourceRecordSetProtections"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateReusableDelegationSet(t *testing.T) {
 	input := &CreateReusableDelegationSetInput{
 		CallerReference: ptr.String("__CallerReference__"),
@@ -3148,6 +3294,43 @@ func TestUpdateRequestSnapshot_DeleteQueryLoggingConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQueryLoggingConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteResourceRecordSetProtections(t *testing.T) {
+	input := &DeleteResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionKey{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResourceRecordSetProtections(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourceRecordSetProtections"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4093,6 +4276,37 @@ func TestUpdateRequestSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueryLoggingConfigs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResourceRecordSetProtections(t *testing.T) {
+	input := &ListResourceRecordSetProtectionsInput{
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+		StartRecordName: ptr.String("__StartRecordName__"),
+		StartRecordType: types.RRType("SOA"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourceRecordSetProtections(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourceRecordSetProtections"); err != nil {
 		t.Fatal(err)
 	}
 }

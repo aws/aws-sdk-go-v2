@@ -141,6 +141,32 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_AssociateCrossAccountReplica(t *testing.T) {
+	want := &AssociateCrossAccountReplicaOutput{
+		ARN:                    ptr.String("__ARN__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicationStatus:      types.StatusType("InSync"),
+	}
+	proto := awsjson.New11(schemas.Secretsmanager)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateCrossAccountReplica, schemas.AssociateCrossAccountReplicaResponse, schemas.AssociateCrossAccountReplicaResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AssociateCrossAccountReplica.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_BatchGetSecretValue(t *testing.T) {
 	want := &BatchGetSecretValueOutput{
 		SecretValues: []types.SecretValueEntry{
@@ -273,8 +299,9 @@ func TestUpdateResponseSnapshot_CreateSecret(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	want := &DeleteResourcePolicyOutput{
-		ARN:  ptr.String("__ARN__"),
-		Name: ptr.String("__Name__"),
+		ARN:        ptr.String("__ARN__"),
+		Name:       ptr.String("__Name__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyResponse, schemas.DeleteResourcePolicyResponse)
@@ -387,6 +414,25 @@ func TestUpdateResponseSnapshot_DescribeSecret(t *testing.T) {
 				LastAccessedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
+		CrossAccountPrimary: &types.CrossAccountPrimaryType{
+			PrimarySecretARN:  ptr.String("__PrimarySecretARN__"),
+			ReplicationStatus: types.StatusType("InSync"),
+			StatusMessage:     ptr.String("__StatusMessage__"),
+		},
+		CrossAccountReplicas: []types.CrossAccountReplicaEntry{
+			{
+				ReplicaSecretARN:   ptr.String("__ReplicaSecretARN__"),
+				ReplicationRoleARN: ptr.String("__ReplicationRoleARN__"),
+				ReplicationStatus:  types.StatusType("InSync"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+			},
+			{
+				ReplicaSecretARN:   ptr.String("__ReplicaSecretARN__"),
+				ReplicationRoleARN: ptr.String("__ReplicationRoleARN__"),
+				ReplicationStatus:  types.StatusType("InSync"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+			},
+		},
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeSecret, schemas.DescribeSecretResponse, schemas.DescribeSecretResponse)
@@ -404,6 +450,31 @@ func TestUpdateResponseSnapshot_DescribeSecret(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeSecret.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DisassociateCrossAccountReplica(t *testing.T) {
+	want := &DisassociateCrossAccountReplicaOutput{
+		ARN:                    ptr.String("__ARN__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+	}
+	proto := awsjson.New11(schemas.Secretsmanager)
+	opSchema := smithy.NewOperationSchema(schemas.DisassociateCrossAccountReplica, schemas.DisassociateCrossAccountReplicaResponse, schemas.DisassociateCrossAccountReplicaResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisassociateCrossAccountReplica.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -437,6 +508,7 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		ARN:            ptr.String("__ARN__"),
 		Name:           ptr.String("__Name__"),
 		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+		PolicyName:     ptr.String("__PolicyName__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
 	opSchema := smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyResponse, schemas.GetResourcePolicyResponse)
@@ -487,6 +559,38 @@ func TestUpdateResponseSnapshot_GetSecretValue(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetSecretValue.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListResourcePolicies(t *testing.T) {
+	want := &ListResourcePoliciesOutput{
+		ResourcePolicies: []types.ResourcePolicySummary{
+			{
+				PolicyName: ptr.String("__PolicyName__"),
+			},
+			{
+				PolicyName: ptr.String("__PolicyName__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.Secretsmanager)
+	opSchema := smithy.NewOperationSchema(schemas.ListResourcePolicies, schemas.ListResourcePoliciesResponse, schemas.ListResourcePoliciesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListResourcePolicies.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -671,8 +775,9 @@ func TestUpdateResponseSnapshot_ListSecrets(t *testing.T) {
 
 func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	want := &PutResourcePolicyOutput{
-		ARN:  ptr.String("__ARN__"),
-		Name: ptr.String("__Name__"),
+		ARN:        ptr.String("__ARN__"),
+		Name:       ptr.String("__Name__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
 	opSchema := smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyResponse, schemas.PutResourcePolicyResponse)
@@ -1063,7 +1168,7 @@ func TestUpdateResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetSecretValue, schemas.InternalServiceError, schemas.InternalServiceError)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateCrossAccountReplica, schemas.InternalServiceError, schemas.InternalServiceError)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1113,7 +1218,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetSecretValue, schemas.InvalidParameterException, schemas.InvalidParameterException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateCrossAccountReplica, schemas.InvalidParameterException, schemas.InvalidParameterException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1138,7 +1243,7 @@ func TestUpdateResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetSecretValue, schemas.InvalidRequestException, schemas.InvalidRequestException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateCrossAccountReplica, schemas.InvalidRequestException, schemas.InvalidRequestException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1163,7 +1268,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
-	opSchema := smithy.NewOperationSchema(schemas.CreateSecret, schemas.LimitExceededException, schemas.LimitExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateCrossAccountReplica, schemas.LimitExceededException, schemas.LimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1288,7 +1393,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Secretsmanager)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetSecretValue, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateCrossAccountReplica, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

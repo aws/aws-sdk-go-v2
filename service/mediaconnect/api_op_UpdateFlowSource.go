@@ -113,6 +113,9 @@ type UpdateFlowSourceInput struct {
 	// enabled.
 	RouterIntegrationTransitDecryption *types.FlowTransitEncryption
 
+	// The settings for the RTMP (Real-Time Messaging Protocol) source.
+	RtmpPushSettings *types.SetRtmpPushSourceSettings
+
 	// The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
@@ -200,6 +203,11 @@ func (v *UpdateFlowSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RouterIntegrationTransitDecryption != nil {
 		s.WriteStruct(schemas.UpdateFlowSourceRequest_RouterIntegrationTransitDecryption)
 		v.RouterIntegrationTransitDecryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RtmpPushSettings != nil {
+		s.WriteStruct(schemas.UpdateFlowSourceRequest_RtmpPushSettings)
+		v.RtmpPushSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.SenderControlPort != nil {

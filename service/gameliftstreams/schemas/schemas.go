@@ -1416,7 +1416,7 @@ var GetStreamSessionInput_StreamSessionIdentifier *smithy.Schema
 var GetStreamSessionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gameliftstreams",
 	Name:      "GetStreamSessionOutput",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 26)
 var GetStreamSessionOutput_Arn *smithy.Schema
 
 var GetStreamSessionOutput_Description *smithy.Schema
@@ -1462,6 +1462,12 @@ var GetStreamSessionOutput_ExportFilesMetadata *smithy.Schema
 var GetStreamSessionOutput_RoleArn *smithy.Schema
 
 var GetStreamSessionOutput_DisplayConfiguration *smithy.Schema
+
+var GetStreamSessionOutput_ApplicationStartedAt *smithy.Schema
+
+var GetStreamSessionOutput_StreamingStartedAt *smithy.Schema
+
+var GetStreamSessionOutput_StreamingEndedAt *smithy.Schema
 
 var GetStreamUrlInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gameliftstreams",
@@ -1688,7 +1694,7 @@ var StartStreamSessionInput_DisplayConfiguration *smithy.Schema
 var StartStreamSessionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gameliftstreams",
 	Name:      "StartStreamSessionOutput",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 26)
 var StartStreamSessionOutput_Arn *smithy.Schema
 
 var StartStreamSessionOutput_Description *smithy.Schema
@@ -1734,6 +1740,12 @@ var StartStreamSessionOutput_ExportFilesMetadata *smithy.Schema
 var StartStreamSessionOutput_RoleArn *smithy.Schema
 
 var StartStreamSessionOutput_DisplayConfiguration *smithy.Schema
+
+var StartStreamSessionOutput_ApplicationStartedAt *smithy.Schema
+
+var StartStreamSessionOutput_StreamingStartedAt *smithy.Schema
+
+var StartStreamSessionOutput_StreamingEndedAt *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gameliftstreams",
@@ -2544,6 +2556,12 @@ func init() {
 
 	GetStreamSessionOutput_DisplayConfiguration = GetStreamSessionOutput.AddMember("DisplayConfiguration", DisplayConfiguration)
 
+	GetStreamSessionOutput_ApplicationStartedAt = GetStreamSessionOutput.AddMember("ApplicationStartedAt", smithyprelude.Timestamp)
+
+	GetStreamSessionOutput_StreamingStartedAt = GetStreamSessionOutput.AddMember("StreamingStartedAt", smithyprelude.Timestamp)
+
+	GetStreamSessionOutput_StreamingEndedAt = GetStreamSessionOutput.AddMember("StreamingEndedAt", smithyprelude.Timestamp)
+
 	GetStreamUrlInput_Identifier = GetStreamUrlInput.AddMember("Identifier", _Identifier, &smithytraits.HTTPLabel{})
 
 	GetStreamUrlInput_StreamUrlIdentifier = GetStreamUrlInput.AddMember("StreamUrlIdentifier", _Identifier, &smithytraits.HTTPLabel{})
@@ -2735,6 +2753,12 @@ func init() {
 	StartStreamSessionOutput_RoleArn = StartStreamSessionOutput.AddMember("RoleArn", _IamRoleArn)
 
 	StartStreamSessionOutput_DisplayConfiguration = StartStreamSessionOutput.AddMember("DisplayConfiguration", DisplayConfiguration)
+
+	StartStreamSessionOutput_ApplicationStartedAt = StartStreamSessionOutput.AddMember("ApplicationStartedAt", smithyprelude.Timestamp)
+
+	StartStreamSessionOutput_StreamingStartedAt = StartStreamSessionOutput.AddMember("StreamingStartedAt", smithyprelude.Timestamp)
+
+	StartStreamSessionOutput_StreamingEndedAt = StartStreamSessionOutput.AddMember("StreamingEndedAt", smithyprelude.Timestamp)
 
 	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
 

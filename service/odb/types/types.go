@@ -3523,6 +3523,9 @@ type CloudAutonomousVmCluster struct {
 	// The Oracle Cloud Identifier (OCID) of the Autonomous VM cluster.
 	Ocid *string
 
+	// The minimum value to which you can scale down the number of CPU cores.
+	OcpusLowestScaledValue *int32
+
 	// The Amazon Resource Name (ARN) of the ODB network associated with this
 	// Autonomous VM cluster.
 	OdbNetworkArn *string
@@ -3700,6 +3703,9 @@ func (v *CloudAutonomousVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ocid != nil {
 		s.WriteString(schemas.CloudAutonomousVmCluster_ocid, *v.Ocid)
 	}
+	if v.OcpusLowestScaledValue != nil {
+		s.WriteInt32(schemas.CloudAutonomousVmCluster_ocpusLowestScaledValue, *v.OcpusLowestScaledValue)
+	}
 	if v.OdbNetworkArn != nil {
 		s.WriteString(schemas.CloudAutonomousVmCluster_odbNetworkArn, *v.OdbNetworkArn)
 	}
@@ -3866,6 +3872,9 @@ func (v *CloudAutonomousVmCluster) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.CloudAutonomousVmCluster_ocid:
 			v.Ocid = new(string)
 			return d.ReadString(schemas.CloudAutonomousVmCluster_ocid, v.Ocid)
+		case schemas.CloudAutonomousVmCluster_ocpusLowestScaledValue:
+			v.OcpusLowestScaledValue = new(int32)
+			return d.ReadInt32(schemas.CloudAutonomousVmCluster_ocpusLowestScaledValue, v.OcpusLowestScaledValue)
 		case schemas.CloudAutonomousVmCluster_odbNetworkArn:
 			v.OdbNetworkArn = new(string)
 			return d.ReadString(schemas.CloudAutonomousVmCluster_odbNetworkArn, v.OdbNetworkArn)
@@ -4088,6 +4097,9 @@ type CloudAutonomousVmClusterSummary struct {
 	// The Oracle Cloud Identifier (OCID) of the Autonomous VM cluster.
 	Ocid *string
 
+	// The minimum value to which you can scale down the number of CPU cores.
+	OcpusLowestScaledValue *int32
+
 	// The Amazon Resource Name (ARN) of the ODB network associated with this
 	// Autonomous VM cluster.
 	OdbNetworkArn *string
@@ -4265,6 +4277,9 @@ func (v *CloudAutonomousVmClusterSummary) SerializeMembers(s smithy.ShapeSeriali
 	if v.Ocid != nil {
 		s.WriteString(schemas.CloudAutonomousVmClusterSummary_ocid, *v.Ocid)
 	}
+	if v.OcpusLowestScaledValue != nil {
+		s.WriteInt32(schemas.CloudAutonomousVmClusterSummary_ocpusLowestScaledValue, *v.OcpusLowestScaledValue)
+	}
 	if v.OdbNetworkArn != nil {
 		s.WriteString(schemas.CloudAutonomousVmClusterSummary_odbNetworkArn, *v.OdbNetworkArn)
 	}
@@ -4431,6 +4446,9 @@ func (v *CloudAutonomousVmClusterSummary) Deserialize(d smithy.ShapeDeserializer
 		case schemas.CloudAutonomousVmClusterSummary_ocid:
 			v.Ocid = new(string)
 			return d.ReadString(schemas.CloudAutonomousVmClusterSummary_ocid, v.Ocid)
+		case schemas.CloudAutonomousVmClusterSummary_ocpusLowestScaledValue:
+			v.OcpusLowestScaledValue = new(int32)
+			return d.ReadInt32(schemas.CloudAutonomousVmClusterSummary_ocpusLowestScaledValue, v.OcpusLowestScaledValue)
 		case schemas.CloudAutonomousVmClusterSummary_odbNetworkArn:
 			v.OdbNetworkArn = new(string)
 			return d.ReadString(schemas.CloudAutonomousVmClusterSummary_odbNetworkArn, v.OdbNetworkArn)

@@ -2110,6 +2110,17 @@ func TestCheckRequestSnapshot_PutFunction(t *testing.T) {
 				Key:               ptr.String("__Key__"),
 			},
 		},
+		HlsTagProcessorConfiguration: &types.HlsTagProcessorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			TagFilter: []types.HlsTagName{
+				types.HlsTagName("EXT-X-DATERANGE"),
+				types.HlsTagName("EXT-X-DATERANGE"),
+			},
+			RunCondition: ptr.String("__RunCondition__"),
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -5060,6 +5071,17 @@ func TestUpdateRequestSnapshot_PutFunction(t *testing.T) {
 				TtlMaximumSeconds: ptr.Int32(1),
 				Key:               ptr.String("__Key__"),
 			},
+		},
+		HlsTagProcessorConfiguration: &types.HlsTagProcessorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			TagFilter: []types.HlsTagName{
+				types.HlsTagName("EXT-X-DATERANGE"),
+				types.HlsTagName("EXT-X-DATERANGE"),
+			},
+			RunCondition: ptr.String("__RunCondition__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",

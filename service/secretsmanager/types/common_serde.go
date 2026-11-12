@@ -26,6 +26,16 @@ func serializeAPIErrorListType(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeCrossAccountReplicaListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []CrossAccountReplicaEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeExternalSecretRotationMetadataType(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExternalSecretRotationMetadataItem) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -71,6 +81,16 @@ func serializeRemoveReplicaRegionListType(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeReplicationStatusListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplicationStatusType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeResourcePolicySummaryListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourcePolicySummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -189,6 +209,28 @@ func deserializeAPIErrorListType(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		vv = APIErrorType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCrossAccountReplicaListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CrossAccountReplicaEntry) error {
+	*v = make([]CrossAccountReplicaEntry, 0)
+	var vv CrossAccountReplicaEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CrossAccountReplicaEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = CrossAccountReplicaEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -318,6 +360,28 @@ func deserializeReplicationStatusListType(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		vv = ReplicationStatusType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeResourcePolicySummaryListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourcePolicySummary) error {
+	*v = make([]ResourcePolicySummary, 0)
+	var vv ResourcePolicySummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ResourcePolicySummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ResourcePolicySummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

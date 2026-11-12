@@ -491,6 +491,13 @@ var ListFindings = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/detector/{DetectorId}/findings",
 	Code: 200})
 
+var ListInvestigationRecords = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ListInvestigationRecords",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/detector/{DetectorId}/investigation/records",
+	Code: 200})
+
 var ListInvestigations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "ListInvestigations",
@@ -776,6 +783,32 @@ var Account_Uid *smithy.Schema
 
 var Account_Name *smithy.Schema
 
+var AccountAffectedResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AccountAffectedResource",
+}, smithy.ShapeTypeStructure, 3)
+var AccountAffectedResource_Identifier *smithy.Schema
+
+var AccountAffectedResource_Type *smithy.Schema
+
+var AccountAffectedResource_FindingCount *smithy.Schema
+
+var _AccountAffectedResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AccountAffectedResources",
+}, smithy.ShapeTypeList, 1)
+var _AccountAffectedResources_member *smithy.Schema
+
+var AccountAnalysis = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AccountAnalysis",
+}, smithy.ShapeTypeStructure, 3)
+var AccountAnalysis_FindingsSummary *smithy.Schema
+
+var AccountAnalysis_TacticCoverage *smithy.Schema
+
+var AccountAnalysis_AffectedResources *smithy.Schema
+
 var AccountDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "AccountDetail",
@@ -823,6 +856,28 @@ var AccountLevelPermissions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AccountLevelPermissions_BlockPublicAccess *smithy.Schema
 
+var AccountOverview = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AccountOverview",
+}, smithy.ShapeTypeStructure, 9)
+var AccountOverview_AccountId *smithy.Schema
+
+var AccountOverview_AccountStatus *smithy.Schema
+
+var AccountOverview_DetectorId *smithy.Schema
+
+var AccountOverview_Region *smithy.Schema
+
+var AccountOverview_DelegatedAdminAccountId *smithy.Schema
+
+var AccountOverview_TotalMemberAccounts *smithy.Schema
+
+var AccountOverview_TotalFindings *smithy.Schema
+
+var AccountOverview_AffectedAccountCount *smithy.Schema
+
+var AccountOverview_AccountRankings *smithy.Schema
+
 var AccountStatistics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "AccountStatistics",
@@ -832,6 +887,20 @@ var AccountStatistics_AccountId *smithy.Schema
 var AccountStatistics_LastGeneratedAt *smithy.Schema
 
 var AccountStatistics_TotalFindings *smithy.Schema
+
+var _AccountSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AccountSummaries",
+}, smithy.ShapeTypeList, 1)
+var _AccountSummaries_member *smithy.Schema
+
+var AccountSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AccountSummary",
+}, smithy.ShapeTypeStructure, 2)
+var AccountSummary_AccountId *smithy.Schema
+
+var AccountSummary_FindingCount *smithy.Schema
 
 var Action = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -857,6 +926,16 @@ var Action_KubernetesRoleDetails *smithy.Schema
 
 var Action_RdsLoginAttemptAction *smithy.Schema
 
+var ActionPriority = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ActionPriority",
+}, smithy.ShapeTypeEnum, 3)
+var ActionPriority_IMMEDIATE *smithy.Schema
+
+var ActionPriority_SHORT_TERM *smithy.Schema
+
+var ActionPriority_STRATEGIC *smithy.Schema
+
 var _Activities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Activities",
@@ -876,6 +955,14 @@ var ActivityType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ActivityType",
 }, smithy.ShapeTypeEnum, 1)
 var ActivityType_API_CALL *smithy.Schema
+
+var ActivityWindow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ActivityWindow",
+}, smithy.ShapeTypeStructure, 2)
+var ActivityWindow_FirstSeenAt *smithy.Schema
+
+var ActivityWindow_LastSeenAt *smithy.Schema
 
 var Actor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -967,6 +1054,16 @@ var AdminStatus_ENABLED *smithy.Schema
 
 var AdminStatus_DISABLE_IN_PROGRESS *smithy.Schema
 
+var AffectedResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AffectedResource",
+}, smithy.ShapeTypeStructure, 3)
+var AffectedResource_Identifier *smithy.Schema
+
+var AffectedResource_Type *smithy.Schema
+
+var AffectedResource_Arn *smithy.Schema
+
 var _AffectedResources = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "AffectedResources",
@@ -980,6 +1077,48 @@ var AgentDetails = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AgentDetails",
 }, smithy.ShapeTypeStructure, 1)
 var AgentDetails_Version *smithy.Schema
+
+var AnalysisRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AnalysisRecord",
+}, smithy.ShapeTypeStructure, 7)
+var AnalysisRecord_AnalysisType *smithy.Schema
+
+var AnalysisRecord_ThreatAssessment *smithy.Schema
+
+var AnalysisRecord_KubernetesPolicyViolation *smithy.Schema
+
+var AnalysisRecord_S3Analysis *smithy.Schema
+
+var AnalysisRecord_Processes *smithy.Schema
+
+var AnalysisRecord_AccountAnalysis *smithy.Schema
+
+var AnalysisRecord_Indicators *smithy.Schema
+
+var AnalysisType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AnalysisType",
+}, smithy.ShapeTypeEnum, 10)
+var AnalysisType_REPUTATION *smithy.Schema
+
+var AnalysisType_THREAT_ASSESSMENT *smithy.Schema
+
+var AnalysisType_RDS_THREAT_ASSESSMENT *smithy.Schema
+
+var AnalysisType_KUBERNETES_POLICY_VIOLATION *smithy.Schema
+
+var AnalysisType_S3_EXPOSURE *smithy.Schema
+
+var AnalysisType_S3_ACTOR_CONTEXT *smithy.Schema
+
+var AnalysisType_S3_PEN_TEST *smithy.Schema
+
+var AnalysisType_PROCESS_LINEAGE *smithy.Schema
+
+var AnalysisType_TREND *smithy.Schema
+
+var AnalysisType_BASELINE *smithy.Schema
 
 var Anomaly = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -1047,6 +1186,18 @@ var ApiCall_Error *smithy.Schema
 
 var ApiCall_UserAgent *smithy.Schema
 
+var ArchiveDistribution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ArchiveDistribution",
+}, smithy.ShapeTypeStructure, 4)
+var ArchiveDistribution_ArchivedCount *smithy.Schema
+
+var ArchiveDistribution_UnarchivedCount *smithy.Schema
+
+var ArchiveDistribution_ArchivedPercentage *smithy.Schema
+
+var ArchiveDistribution_UnarchivedPercentage *smithy.Schema
+
 var AssociationDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "AssociationDetail",
@@ -1104,6 +1255,72 @@ var _AssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AssociationSummaryList_member *smithy.Schema
 
+var Attack = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Attack",
+}, smithy.ShapeTypeStructure, 4)
+var Attack_Tactic *smithy.Schema
+
+var Attack_Technique *smithy.Schema
+
+var Attack_Findings *smithy.Schema
+
+var Attack_Version *smithy.Schema
+
+var AttackPhase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AttackPhase",
+}, smithy.ShapeTypeStructure, 3)
+var AttackPhase_Phase *smithy.Schema
+
+var AttackPhase_Description *smithy.Schema
+
+var AttackPhase_Attacks *smithy.Schema
+
+var AttackPhaseName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AttackPhaseName",
+}, smithy.ShapeTypeEnum, 14)
+var AttackPhaseName_RECONNAISSANCE *smithy.Schema
+
+var AttackPhaseName_RESOURCE_DEVELOPMENT *smithy.Schema
+
+var AttackPhaseName_INITIAL_ACCESS *smithy.Schema
+
+var AttackPhaseName_EXECUTION *smithy.Schema
+
+var AttackPhaseName_PERSISTENCE *smithy.Schema
+
+var AttackPhaseName_PRIVILEGE_ESCALATION *smithy.Schema
+
+var AttackPhaseName_DEFENSE_EVASION *smithy.Schema
+
+var AttackPhaseName_CREDENTIAL_ACCESS *smithy.Schema
+
+var AttackPhaseName_DISCOVERY *smithy.Schema
+
+var AttackPhaseName_LATERAL_MOVEMENT *smithy.Schema
+
+var AttackPhaseName_COLLECTION *smithy.Schema
+
+var AttackPhaseName_COMMAND_AND_CONTROL *smithy.Schema
+
+var AttackPhaseName_EXFILTRATION *smithy.Schema
+
+var AttackPhaseName_IMPACT *smithy.Schema
+
+var _AttackPhases = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "AttackPhases",
+}, smithy.ShapeTypeList, 1)
+var _AttackPhases_member *smithy.Schema
+
+var _Attacks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Attacks",
+}, smithy.ShapeTypeList, 1)
+var _Attacks_member *smithy.Schema
+
 var AutoEnableMembers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "AutoEnableMembers",
@@ -1158,6 +1375,16 @@ var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException_Message *smithy.Schema
 
 var BadRequestException_Type *smithy.Schema
+
+var Baseline = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Baseline",
+}, smithy.ShapeTypeStructure, 3)
+var Baseline_TotalFindings *smithy.Schema
+
+var Baseline_BaselineFindings *smithy.Schema
+
+var Baseline_AnomalousFindings *smithy.Schema
 
 var BedrockGuardrail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -1247,6 +1474,12 @@ var City = smithy.NewSchema(smithy.ShapeID{
 	Name:      "City",
 }, smithy.ShapeTypeStructure, 1)
 var City_CityName *smithy.Schema
+
+var _CliCommands = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "CliCommands",
+}, smithy.ShapeTypeList, 1)
+var _CliCommands_member *smithy.Schema
 
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -1468,6 +1701,51 @@ var ContinuousScanDetails_StartTime *smithy.Schema
 
 var ContinuousScanDetails_EndTime *smithy.Schema
 
+var CorrelatedFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "CorrelatedFinding",
+}, smithy.ShapeTypeStructure, 7)
+var CorrelatedFinding_FindingType *smithy.Schema
+
+var CorrelatedFinding_Count *smithy.Schema
+
+var CorrelatedFinding_SeverityMax *smithy.Schema
+
+var CorrelatedFinding_CorrelationReasons *smithy.Schema
+
+var CorrelatedFinding_FindingIds *smithy.Schema
+
+var CorrelatedFinding_SharedResources *smithy.Schema
+
+var CorrelatedFinding_SharedBehaviors *smithy.Schema
+
+var _CorrelatedFindings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "CorrelatedFindings",
+}, smithy.ShapeTypeList, 1)
+var _CorrelatedFindings_member *smithy.Schema
+
+var CorrelationReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "CorrelationReason",
+}, smithy.ShapeTypeEnum, 3)
+var CorrelationReason_HIGH_SEVERITY *smithy.Schema
+
+var CorrelationReason_SAME_RESOURCE *smithy.Schema
+
+var CorrelationReason_SAME_BEHAVIOR *smithy.Schema
+
+var _CorrelationReasons = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "CorrelationReasons",
+}, smithy.ShapeTypeList, 1)
+var _CorrelationReasons_member *smithy.Schema
+
+var _Count = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Count",
+}, smithy.ShapeTypeLong, 0)
+
 var _CountByCoverageStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "CountByCoverageStatus",
@@ -1491,6 +1769,50 @@ var _CountBySeverity = smithy.NewSchema(smithy.ShapeID{
 var _CountBySeverity_key *smithy.Schema
 
 var _CountBySeverity_value *smithy.Schema
+
+var Countermeasure = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Countermeasure",
+}, smithy.ShapeTypeStructure, 3)
+var Countermeasure_DefenseTactic *smithy.Schema
+
+var Countermeasure_Actions *smithy.Schema
+
+var Countermeasure_Description *smithy.Schema
+
+var CountermeasureAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "CountermeasureAction",
+}, smithy.ShapeTypeStructure, 9)
+var CountermeasureAction_Title *smithy.Schema
+
+var CountermeasureAction_Description *smithy.Schema
+
+var CountermeasureAction_Priority *smithy.Schema
+
+var CountermeasureAction_DefenseTechnique *smithy.Schema
+
+var CountermeasureAction_Mitigates *smithy.Schema
+
+var CountermeasureAction_CliCommands *smithy.Schema
+
+var CountermeasureAction_DispositionId *smithy.Schema
+
+var CountermeasureAction_Disposition *smithy.Schema
+
+var CountermeasureAction_AffectedResources *smithy.Schema
+
+var _CountermeasureActions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "CountermeasureActions",
+}, smithy.ShapeTypeList, 1)
+var _CountermeasureActions_member *smithy.Schema
+
+var _Countermeasures = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Countermeasures",
+}, smithy.ShapeTypeList, 1)
+var _Countermeasures_member *smithy.Schema
 
 var Country = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -1826,6 +2148,20 @@ var DefaultServerSideEncryption_EncryptionType *smithy.Schema
 
 var DefaultServerSideEncryption_KmsMasterKeyArn *smithy.Schema
 
+var DefenseTactic = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DefenseTactic",
+}, smithy.ShapeTypeEnum, 5)
+var DefenseTactic_ISOLATE *smithy.Schema
+
+var DefenseTactic_EVICT *smithy.Schema
+
+var DefenseTactic_RESTORE *smithy.Schema
+
+var DefenseTactic_HARDEN *smithy.Schema
+
+var DefenseTactic_DETECT *smithy.Schema
+
 var Destination = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Destination",
@@ -1865,6 +2201,18 @@ var Detection = smithy.NewSchema(smithy.ShapeID{
 var Detection_Anomaly *smithy.Schema
 
 var Detection_Sequence *smithy.Schema
+
+var DetectionCoverage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DetectionCoverage",
+}, smithy.ShapeTypeStructure, 4)
+var DetectionCoverage_ProtectionPlans *smithy.Schema
+
+var DetectionCoverage_FoundationalDataSources *smithy.Schema
+
+var DetectionCoverage_CoverageGaps *smithy.Schema
+
+var DetectionCoverage_KeyObservation *smithy.Schema
 
 var _DetectionRuleAccountIds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -2187,6 +2535,64 @@ var DetectorStatus_ENABLED *smithy.Schema
 
 var DetectorStatus_DISABLED *smithy.Schema
 
+var Disposition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Disposition",
+}, smithy.ShapeTypeEnum, 5)
+var Disposition_ISOLATED *smithy.Schema
+
+var Disposition_BLOCKED *smithy.Schema
+
+var Disposition_DELETED *smithy.Schema
+
+var Disposition_ACCESS_REVOKED *smithy.Schema
+
+var Disposition_LOGGED *smithy.Schema
+
+var Distribution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Distribution",
+}, smithy.ShapeTypeStructure, 8)
+var Distribution_Dimension *smithy.Schema
+
+var Distribution_TotalFindings *smithy.Schema
+
+var Distribution_SeverityBreakdown *smithy.Schema
+
+var Distribution_FindingTypes *smithy.Schema
+
+var Distribution_TopFindingTypes *smithy.Schema
+
+var Distribution_Resources *smithy.Schema
+
+var Distribution_AttackVectors *smithy.Schema
+
+var Distribution_Archive *smithy.Schema
+
+var DistributionDimension = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DistributionDimension",
+}, smithy.ShapeTypeEnum, 5)
+var DistributionDimension_SEVERITY *smithy.Schema
+
+var DistributionDimension_TYPE *smithy.Schema
+
+var DistributionDimension_RESOURCE *smithy.Schema
+
+var DistributionDimension_ATTACK_VECTOR *smithy.Schema
+
+var DistributionDimension_ARCHIVE *smithy.Schema
+
+var DnsContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DnsContext",
+}, smithy.ShapeTypeStructure, 3)
+var DnsContext_DomainSuffix *smithy.Schema
+
+var DnsContext_OtherDomains *smithy.Schema
+
+var DnsContext_ResolverHistory *smithy.Schema
+
 var DNSLogsConfigurationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "DNSLogsConfigurationResult",
@@ -2482,6 +2888,18 @@ var _EndpointIds = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _EndpointIds_member *smithy.Schema
 
+var Enrichment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Enrichment",
+}, smithy.ShapeTypeStructure, 4)
+var Enrichment_CountryName *smithy.Schema
+
+var Enrichment_AsnOrg *smithy.Schema
+
+var Enrichment_ThreatListName *smithy.Schema
+
+var Enrichment_ThreatName *smithy.Schema
+
 var _Eq = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Eq",
@@ -2540,6 +2958,172 @@ var Feedback = smithy.NewSchema(smithy.ShapeID{
 var Feedback_USEFUL *smithy.Schema
 
 var Feedback_NOT_USEFUL *smithy.Schema
+
+var _FetchCriteria = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchCriteria",
+}, smithy.ShapeTypeList, 1)
+var _FetchCriteria_member *smithy.Schema
+
+var FetchCriterion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchCriterion",
+}, smithy.ShapeTypeStructure, 3)
+var FetchCriterion_Field *smithy.Schema
+
+var FetchCriterion_Condition *smithy.Schema
+
+var FetchCriterion_Values *smithy.Schema
+
+var FetchCriterionCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchCriterionCondition",
+}, smithy.ShapeTypeEnum, 6)
+var FetchCriterionCondition_EQUALS *smithy.Schema
+
+var FetchCriterionCondition_NOT_EQUALS *smithy.Schema
+
+var FetchCriterionCondition_GREATER_THAN *smithy.Schema
+
+var FetchCriterionCondition_GREATER_THAN_OR_EQUAL *smithy.Schema
+
+var FetchCriterionCondition_LESS_THAN *smithy.Schema
+
+var FetchCriterionCondition_LESS_THAN_OR_EQUAL *smithy.Schema
+
+var _FetchDetectorFeatures = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchDetectorFeatures",
+}, smithy.ShapeTypeList, 1)
+var _FetchDetectorFeatures_member *smithy.Schema
+
+var _FetchDurationInMinutes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchDurationInMinutes",
+}, smithy.ShapeTypeInteger, 0)
+
+var _FetchFieldName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchFieldName",
+}, smithy.ShapeTypeString, 0)
+
+var _FetchFieldValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchFieldValue",
+}, smithy.ShapeTypeString, 0)
+
+var _FetchFieldValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchFieldValues",
+}, smithy.ShapeTypeList, 1)
+var _FetchFieldValues_member *smithy.Schema
+
+var _FetchItemId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchItemId",
+}, smithy.ShapeTypeString, 0)
+
+var _FetchItemIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchItemIds",
+}, smithy.ShapeTypeList, 1)
+var _FetchItemIds_member *smithy.Schema
+
+var _FetchLearnMoreLink = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchLearnMoreLink",
+}, smithy.ShapeTypeString, 0)
+
+var _FetchLearnMoreLinks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchLearnMoreLinks",
+}, smithy.ShapeTypeList, 1)
+var _FetchLearnMoreLinks_member *smithy.Schema
+
+var FetchQuery = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchQuery",
+}, smithy.ShapeTypeStructure, 8)
+var FetchQuery_Criteria *smithy.Schema
+
+var FetchQuery_TimeWindow *smithy.Schema
+
+var FetchQuery_RowLimit *smithy.Schema
+
+var FetchQuery_AccountId *smithy.Schema
+
+var FetchQuery_Indicator *smithy.Schema
+
+var FetchQuery_IndicatorType *smithy.Schema
+
+var FetchQuery_FindingType *smithy.Schema
+
+var FetchQuery_FindingId *smithy.Schema
+
+var FetchRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchRecord",
+}, smithy.ShapeTypeStructure, 3)
+var FetchRecord_FetchType *smithy.Schema
+
+var FetchRecord_Query *smithy.Schema
+
+var FetchRecord_Result *smithy.Schema
+
+var FetchResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchResult",
+}, smithy.ShapeTypeStructure, 5)
+var FetchResult_ItemIds *smithy.Schema
+
+var FetchResult_TotalCount *smithy.Schema
+
+var FetchResult_Features *smithy.Schema
+
+var FetchResult_Verdict *smithy.Schema
+
+var FetchResult_Documentation *smithy.Schema
+
+var _FetchRowLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchRowLimit",
+}, smithy.ShapeTypeInteger, 0)
+
+var FetchTimeWindow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchTimeWindow",
+}, smithy.ShapeTypeStructure, 2)
+var FetchTimeWindow_StartedAt *smithy.Schema
+
+var FetchTimeWindow_DurationInMinutes *smithy.Schema
+
+var FetchType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchType",
+}, smithy.ShapeTypeEnum, 7)
+var FetchType_FINDINGS *smithy.Schema
+
+var FetchType_DETECTOR *smithy.Schema
+
+var FetchType_REPUTATION *smithy.Schema
+
+var FetchType_FINDING_TYPE_DOCUMENTATION *smithy.Schema
+
+var FetchType_CLOUD_TRAIL_RAW_EVENTS *smithy.Schema
+
+var FetchType_RUNTIME_SIGNALS *smithy.Schema
+
+var FetchType_MEMBER_ACCOUNTS *smithy.Schema
+
+var FetchVerdict = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FetchVerdict",
+}, smithy.ShapeTypeEnum, 3)
+var FetchVerdict_THREAT *smithy.Schema
+
+var FetchVerdict_BENIGN *smithy.Schema
+
+var FetchVerdict_NEUTRAL *smithy.Schema
 
 var _FilePaths = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -2673,6 +3257,22 @@ var FindingCriteria = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var FindingCriteria_Criterion *smithy.Schema
 
+var FindingDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingDetail",
+}, smithy.ShapeTypeStructure, 6)
+var FindingDetail_FindingId *smithy.Schema
+
+var FindingDetail_FindingType *smithy.Schema
+
+var FindingDetail_Severity *smithy.Schema
+
+var FindingDetail_AccountId *smithy.Schema
+
+var FindingDetail_Region *smithy.Schema
+
+var FindingDetail_ActivityWindow *smithy.Schema
+
 var _FindingId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "FindingId",
@@ -2693,6 +3293,20 @@ var FindingPublishingFrequency_FIFTEEN_MINUTES *smithy.Schema
 var FindingPublishingFrequency_ONE_HOUR *smithy.Schema
 
 var FindingPublishingFrequency_SIX_HOURS *smithy.Schema
+
+var FindingReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingReference",
+}, smithy.ShapeTypeStructure, 2)
+var FindingReference_FindingType *smithy.Schema
+
+var FindingReference_Uid *smithy.Schema
+
+var _FindingReferences = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingReferences",
+}, smithy.ShapeTypeList, 1)
+var _FindingReferences_member *smithy.Schema
 
 var FindingResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -2756,6 +3370,18 @@ var _Findings = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _Findings_member *smithy.Schema
 
+var FindingsSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingsSummary",
+}, smithy.ShapeTypeStructure, 4)
+var FindingsSummary_TotalFindings *smithy.Schema
+
+var FindingsSummary_SeverityBreakdown *smithy.Schema
+
+var FindingsSummary_TopFindingTypes *smithy.Schema
+
+var FindingsSummary_ByTimeWindow *smithy.Schema
+
 var FindingStatistics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "FindingStatistics",
@@ -2789,6 +3415,62 @@ var _FindingType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FindingType",
 }, smithy.ShapeTypeString, 0)
 
+var FindingTypeClassification = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingTypeClassification",
+}, smithy.ShapeTypeStructure, 5)
+var FindingTypeClassification_FindingType *smithy.Schema
+
+var FindingTypeClassification_Classification *smithy.Schema
+
+var FindingTypeClassification_Count *smithy.Schema
+
+var FindingTypeClassification_Percentage *smithy.Schema
+
+var FindingTypeClassification_Description *smithy.Schema
+
+var _FindingTypeClassifications = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingTypeClassifications",
+}, smithy.ShapeTypeList, 1)
+var _FindingTypeClassifications_member *smithy.Schema
+
+var FindingTypeCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingTypeCount",
+}, smithy.ShapeTypeStructure, 2)
+var FindingTypeCount_FindingType *smithy.Schema
+
+var FindingTypeCount_Count *smithy.Schema
+
+var _FindingTypeCounts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingTypeCounts",
+}, smithy.ShapeTypeList, 1)
+var _FindingTypeCounts_member *smithy.Schema
+
+var FindingTypeDocumentation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingTypeDocumentation",
+}, smithy.ShapeTypeStructure, 6)
+var FindingTypeDocumentation_Description *smithy.Schema
+
+var FindingTypeDocumentation_Severity *smithy.Schema
+
+var FindingTypeDocumentation_Feature *smithy.Schema
+
+var FindingTypeDocumentation_FullDescription *smithy.Schema
+
+var FindingTypeDocumentation_Remediation *smithy.Schema
+
+var FindingTypeDocumentation_LearnMoreLinks *smithy.Schema
+
+var _FindingTypeNames = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FindingTypeNames",
+}, smithy.ShapeTypeList, 1)
+var _FindingTypeNames_member *smithy.Schema
+
 var _FindingTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "FindingTypes",
@@ -2816,6 +3498,12 @@ var FlowLogsConfigurationResult = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FlowLogsConfigurationResult",
 }, smithy.ShapeTypeStructure, 1)
 var FlowLogsConfigurationResult_Status *smithy.Schema
+
+var _FoundationalDataSources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "FoundationalDataSources",
+}, smithy.ShapeTypeList, 1)
+var _FoundationalDataSources_member *smithy.Schema
 
 var FreeTrialFeatureConfigurationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3071,6 +3759,11 @@ var IndicatorType_REACHABILITY *smithy.Schema
 
 var IndicatorType_SENSITIVE_DATA *smithy.Schema
 
+var _IndicatorValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "IndicatorValue",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _IndicatorValues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "IndicatorValues",
@@ -3139,7 +3832,7 @@ var InternalServerErrorException_Type *smithy.Schema
 var Investigation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Investigation",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 15)
 var Investigation_InvestigationId *smithy.Schema
 
 var Investigation_Status *smithy.Schema
@@ -3160,21 +3853,247 @@ var Investigation_Confidence *smithy.Schema
 
 var Investigation_Summary *smithy.Schema
 
+var Investigation_SummaryData *smithy.Schema
+
+var Investigation_Scope *smithy.Schema
+
 var Investigation_StartTime *smithy.Schema
 
 var Investigation_EndTime *smithy.Schema
 
 var Investigation_Error *smithy.Schema
 
+var InvestigationAccountAnalysis = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationAccountAnalysis",
+}, smithy.ShapeTypeStructure, 2)
+var InvestigationAccountAnalysis_Trend *smithy.Schema
+
+var InvestigationAccountAnalysis_Baseline *smithy.Schema
+
+var InvestigationActor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationActor",
+}, smithy.ShapeTypeStructure, 5)
+var InvestigationActor_AccessKeyId *smithy.Schema
+
+var InvestigationActor_PrincipalId *smithy.Schema
+
+var InvestigationActor_UserName *smithy.Schema
+
+var InvestigationActor_UserType *smithy.Schema
+
+var InvestigationActor_UserAgent *smithy.Schema
+
+var _InvestigationCriterion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationCriterion",
+}, smithy.ShapeTypeMap, 2)
+var _InvestigationCriterion_key *smithy.Schema
+
+var _InvestigationCriterion_value *smithy.Schema
+
+var InvestigationDetectorFeature = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationDetectorFeature",
+}, smithy.ShapeTypeEnum, 13)
+var InvestigationDetectorFeature_CLOUD_TRAIL *smithy.Schema
+
+var InvestigationDetectorFeature_DNS_LOGS *smithy.Schema
+
+var InvestigationDetectorFeature_FLOW_LOGS *smithy.Schema
+
+var InvestigationDetectorFeature_S3_DATA_EVENTS *smithy.Schema
+
+var InvestigationDetectorFeature_EKS_AUDIT_LOGS *smithy.Schema
+
+var InvestigationDetectorFeature_EBS_MALWARE_PROTECTION *smithy.Schema
+
+var InvestigationDetectorFeature_RDS_LOGIN_EVENTS *smithy.Schema
+
+var InvestigationDetectorFeature_EKS_RUNTIME_MONITORING *smithy.Schema
+
+var InvestigationDetectorFeature_EKS_ADDON_MANAGEMENT *smithy.Schema
+
+var InvestigationDetectorFeature_LAMBDA_NETWORK_LOGS *smithy.Schema
+
+var InvestigationDetectorFeature_RUNTIME_MONITORING *smithy.Schema
+
+var InvestigationDetectorFeature_ECS_FARGATE_AGENT_MANAGEMENT *smithy.Schema
+
+var InvestigationDetectorFeature_EC2_AGENT_MANAGEMENT *smithy.Schema
+
+var InvestigationDetectorFeatureConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationDetectorFeatureConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var InvestigationDetectorFeatureConfiguration_Name *smithy.Schema
+
+var InvestigationDetectorFeatureConfiguration_Status *smithy.Schema
+
+var InvestigationDetectorFeatureConfiguration_UpdatedAt *smithy.Schema
+
+var InvestigationEc2Instance = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationEc2Instance",
+}, smithy.ShapeTypeStructure, 10)
+var InvestigationEc2Instance_InstanceId *smithy.Schema
+
+var InvestigationEc2Instance_InstanceType *smithy.Schema
+
+var InvestigationEc2Instance_InstanceState *smithy.Schema
+
+var InvestigationEc2Instance_AvailabilityZone *smithy.Schema
+
+var InvestigationEc2Instance_PrivateIpAddress *smithy.Schema
+
+var InvestigationEc2Instance_PublicIp *smithy.Schema
+
+var InvestigationEc2Instance_VpcId *smithy.Schema
+
+var InvestigationEc2Instance_SubnetId *smithy.Schema
+
+var InvestigationEc2Instance_ImageId *smithy.Schema
+
+var InvestigationEc2Instance_LaunchedAt *smithy.Schema
+
+var InvestigationEcsCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationEcsCluster",
+}, smithy.ShapeTypeStructure, 3)
+var InvestigationEcsCluster_Name *smithy.Schema
+
+var InvestigationEcsCluster_Arn *smithy.Schema
+
+var InvestigationEcsCluster_Status *smithy.Schema
+
+var InvestigationEksCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationEksCluster",
+}, smithy.ShapeTypeStructure, 4)
+var InvestigationEksCluster_Name *smithy.Schema
+
+var InvestigationEksCluster_Arn *smithy.Schema
+
+var InvestigationEksCluster_Status *smithy.Schema
+
+var InvestigationEksCluster_VpcId *smithy.Schema
+
 var _InvestigationErrorDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "InvestigationErrorDetails",
 }, smithy.ShapeTypeString, 0)
 
+var InvestigationFilterCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationFilterCondition",
+}, smithy.ShapeTypeStructure, 2)
+var InvestigationFilterCondition_Equals *smithy.Schema
+
+var InvestigationFilterCondition_NotEquals *smithy.Schema
+
+var InvestigationFilterCriteria = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationFilterCriteria",
+}, smithy.ShapeTypeStructure, 1)
+var InvestigationFilterCriteria_Criterion *smithy.Schema
+
+var InvestigationFilterCriterionKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationFilterCriterionKey",
+}, smithy.ShapeTypeEnum, 5)
+var InvestigationFilterCriterionKey_STATUS *smithy.Schema
+
+var InvestigationFilterCriterionKey_RISK_LEVEL *smithy.Schema
+
+var InvestigationFilterCriterionKey_CONFIDENCE *smithy.Schema
+
+var InvestigationFilterCriterionKey_FINDING_ID *smithy.Schema
+
+var InvestigationFilterCriterionKey_INVESTIGATION_TYPE *smithy.Schema
+
 var _InvestigationId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "InvestigationId",
 }, smithy.ShapeTypeString, 0)
+
+var InvestigationIndicator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationIndicator",
+}, smithy.ShapeTypeStructure, 2)
+var InvestigationIndicator_Value *smithy.Schema
+
+var InvestigationIndicator_Type *smithy.Schema
+
+var _InvestigationIndicators = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationIndicators",
+}, smithy.ShapeTypeList, 1)
+var _InvestigationIndicators_member *smithy.Schema
+
+var InvestigationIndicatorType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationIndicatorType",
+}, smithy.ShapeTypeEnum, 3)
+var InvestigationIndicatorType_IP *smithy.Schema
+
+var InvestigationIndicatorType_DOMAIN *smithy.Schema
+
+var InvestigationIndicatorType_FILE *smithy.Schema
+
+var InvestigationKubernetesWorkload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationKubernetesWorkload",
+}, smithy.ShapeTypeStructure, 5)
+var InvestigationKubernetesWorkload_WorkloadType *smithy.Schema
+
+var InvestigationKubernetesWorkload_WorkloadName *smithy.Schema
+
+var InvestigationKubernetesWorkload_Containers *smithy.Schema
+
+var InvestigationKubernetesWorkload_Volumes *smithy.Schema
+
+var InvestigationKubernetesWorkload_SecurityContext *smithy.Schema
+
+var InvestigationMalwareScan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationMalwareScan",
+}, smithy.ShapeTypeStructure, 18)
+var InvestigationMalwareScan_ScanId *smithy.Schema
+
+var InvestigationMalwareScan_ScanType *smithy.Schema
+
+var InvestigationMalwareScan_ScanCategory *smithy.Schema
+
+var InvestigationMalwareScan_TriggerFindingId *smithy.Schema
+
+var InvestigationMalwareScan_EngineSources *smithy.Schema
+
+var InvestigationMalwareScan_ScanStartedAt *smithy.Schema
+
+var InvestigationMalwareScan_ScanCompletedAt *smithy.Schema
+
+var InvestigationMalwareScan_FilesScanned *smithy.Schema
+
+var InvestigationMalwareScan_GigabytesScanned *smithy.Schema
+
+var InvestigationMalwareScan_VolumesScanned *smithy.Schema
+
+var InvestigationMalwareScan_InfectedFileCount *smithy.Schema
+
+var InvestigationMalwareScan_ResourceType *smithy.Schema
+
+var InvestigationMalwareScan_ResourceIdentifier *smithy.Schema
+
+var InvestigationMalwareScan_HighestSeverity *smithy.Schema
+
+var InvestigationMalwareScan_HighestSeverityThreatName *smithy.Schema
+
+var InvestigationMalwareScan_UniqueThreatCount *smithy.Schema
+
+var InvestigationMalwareScan_TotalInfectedItems *smithy.Schema
+
+var InvestigationMalwareScan_Threats *smithy.Schema
 
 var InvestigationMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3183,6 +4102,100 @@ var InvestigationMetadata = smithy.NewSchema(smithy.ShapeID{
 var InvestigationMetadata_Version *smithy.Schema
 
 var InvestigationMetadata_Product *smithy.Schema
+
+var _InvestigationObservations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationObservations",
+}, smithy.ShapeTypeList, 1)
+var _InvestigationObservations_member *smithy.Schema
+
+var InvestigationRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationRecord",
+}, smithy.ShapeTypeStructure, 6)
+var InvestigationRecord_RecordId *smithy.Schema
+
+var InvestigationRecord_Type *smithy.Schema
+
+var InvestigationRecord_Title *smithy.Schema
+
+var InvestigationRecord_Narrative *smithy.Schema
+
+var InvestigationRecord_CreatedAt *smithy.Schema
+
+var InvestigationRecord_SupportingData *smithy.Schema
+
+var InvestigationResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationResource",
+}, smithy.ShapeTypeStructure, 4)
+var InvestigationResource_Uid *smithy.Schema
+
+var InvestigationResource_Name *smithy.Schema
+
+var InvestigationResource_ResourceType *smithy.Schema
+
+var InvestigationResource_Data *smithy.Schema
+
+var InvestigationResourceData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationResourceData",
+}, smithy.ShapeTypeStructure, 6)
+var InvestigationResourceData_Ec2Instance *smithy.Schema
+
+var InvestigationResourceData_LambdaFunction *smithy.Schema
+
+var InvestigationResourceData_RdsDbInstance *smithy.Schema
+
+var InvestigationResourceData_RdsDbUser *smithy.Schema
+
+var InvestigationResourceData_EksCluster *smithy.Schema
+
+var InvestigationResourceData_EcsCluster *smithy.Schema
+
+var InvestigationResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationResourceType",
+}, smithy.ShapeTypeEnum, 13)
+var InvestigationResourceType_EC2_INSTANCE *smithy.Schema
+
+var InvestigationResourceType_EBS_VOLUME *smithy.Schema
+
+var InvestigationResourceType_S3_BUCKET *smithy.Schema
+
+var InvestigationResourceType_IAM_ROLE *smithy.Schema
+
+var InvestigationResourceType_IAM_USER *smithy.Schema
+
+var InvestigationResourceType_IAM_ACCESS_KEY *smithy.Schema
+
+var InvestigationResourceType_LAMBDA_FUNCTION *smithy.Schema
+
+var InvestigationResourceType_EKS_CLUSTER *smithy.Schema
+
+var InvestigationResourceType_ECS_CLUSTER *smithy.Schema
+
+var InvestigationResourceType_KUBERNETES_WORKLOAD *smithy.Schema
+
+var InvestigationResourceType_RDS_INSTANCE *smithy.Schema
+
+var InvestigationResourceType_RDS_DB_USER *smithy.Schema
+
+var InvestigationResourceType_EC2_SECURITY_GROUP *smithy.Schema
+
+var InvestigationScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationScope",
+}, smithy.ShapeTypeStructure, 5)
+var InvestigationScope_InvestigationType *smithy.Schema
+
+var InvestigationScope_FindingId *smithy.Schema
+
+var InvestigationScope_AccountId *smithy.Schema
+
+var InvestigationScope_AdminAccountId *smithy.Schema
+
+var InvestigationScope_QueryTimeWindow *smithy.Schema
 
 var InvestigationSortCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3225,7 +4238,7 @@ var _InvestigationSummaries_member *smithy.Schema
 var InvestigationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "InvestigationSummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 12)
 var InvestigationSummary_InvestigationId *smithy.Schema
 
 var InvestigationSummary_Status *smithy.Schema
@@ -3238,16 +4251,80 @@ var InvestigationSummary_Confidence *smithy.Schema
 
 var InvestigationSummary_Title *smithy.Schema
 
+var InvestigationSummary_InvestigationType *smithy.Schema
+
+var InvestigationSummary_FindingId *smithy.Schema
+
 var InvestigationSummary_AccountId *smithy.Schema
+
+var InvestigationSummary_AdminAccountId *smithy.Schema
 
 var InvestigationSummary_StartTime *smithy.Schema
 
 var InvestigationSummary_EndTime *smithy.Schema
 
+var InvestigationSummaryData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationSummaryData",
+}, smithy.ShapeTypeStructure, 7)
+var InvestigationSummaryData_FindingType *smithy.Schema
+
+var InvestigationSummaryData_ThreatAssessment *smithy.Schema
+
+var InvestigationSummaryData_Countermeasures *smithy.Schema
+
+var InvestigationSummaryData_AccountAnalysis *smithy.Schema
+
+var InvestigationSummaryData_OrganizationAnalysis *smithy.Schema
+
+var InvestigationSummaryData_KeyObservations *smithy.Schema
+
+var InvestigationSummaryData_Recommendations *smithy.Schema
+
+var _InvestigationSummaryText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationSummaryText",
+}, smithy.ShapeTypeString, 0)
+
+var _InvestigationText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationText",
+}, smithy.ShapeTypeString, 0)
+
+var InvestigationThreatAssessment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationThreatAssessment",
+}, smithy.ShapeTypeStructure, 8)
+var InvestigationThreatAssessment_Reputation *smithy.Schema
+
+var InvestigationThreatAssessment_ThreatConfidence *smithy.Schema
+
+var InvestigationThreatAssessment_Classification *smithy.Schema
+
+var InvestigationThreatAssessment_Assessment *smithy.Schema
+
+var InvestigationThreatAssessment_AuthenticationContext *smithy.Schema
+
+var InvestigationThreatAssessment_RdsControlPlaneActivity *smithy.Schema
+
+var InvestigationThreatAssessment_IpAccountActivity *smithy.Schema
+
+var InvestigationThreatAssessment_CredentialCompromise *smithy.Schema
+
 var _InvestigationTitle = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "InvestigationTitle",
 }, smithy.ShapeTypeString, 0)
+
+var InvestigationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "InvestigationType",
+}, smithy.ShapeTypeEnum, 3)
+var InvestigationType_FINDING *smithy.Schema
+
+var InvestigationType_ACCOUNT *smithy.Schema
+
+var InvestigationType_ORGANIZATION *smithy.Schema
 
 var Invitation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3351,6 +4428,70 @@ var _ItemPaths = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ItemPaths_member *smithy.Schema
 
+var KeyObservations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "KeyObservations",
+}, smithy.ShapeTypeStructure, 3)
+var KeyObservations_Title *smithy.Schema
+
+var KeyObservations_Narrative *smithy.Schema
+
+var KeyObservations_Observations *smithy.Schema
+
+var KubernetesActivity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "KubernetesActivity",
+}, smithy.ShapeTypeStructure, 4)
+var KubernetesActivity_ApiCall *smithy.Schema
+
+var KubernetesActivity_Anomaly *smithy.Schema
+
+var KubernetesActivity_Workload *smithy.Schema
+
+var KubernetesActivity_Enrichment *smithy.Schema
+
+var KubernetesAnomaly = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "KubernetesAnomaly",
+}, smithy.ShapeTypeStructure, 4)
+var KubernetesAnomaly_UnusualBehavior *smithy.Schema
+
+var KubernetesAnomaly_BaselineContext *smithy.Schema
+
+var KubernetesAnomaly_AnomalyScore *smithy.Schema
+
+var KubernetesAnomaly_TrainingPeriod *smithy.Schema
+
+var KubernetesApiCall = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "KubernetesApiCall",
+}, smithy.ShapeTypeStructure, 13)
+var KubernetesApiCall_ClusterName *smithy.Schema
+
+var KubernetesApiCall_Username *smithy.Schema
+
+var KubernetesApiCall_UserGroups *smithy.Schema
+
+var KubernetesApiCall_UserId *smithy.Schema
+
+var KubernetesApiCall_Verb *smithy.Schema
+
+var KubernetesApiCall_ResourceType *smithy.Schema
+
+var KubernetesApiCall_ResourceName *smithy.Schema
+
+var KubernetesApiCall_Namespace *smithy.Schema
+
+var KubernetesApiCall_RequestUri *smithy.Schema
+
+var KubernetesApiCall_StatusCode *smithy.Schema
+
+var KubernetesApiCall_SourceIps *smithy.Schema
+
+var KubernetesApiCall_UserAgent *smithy.Schema
+
+var KubernetesApiCall_EventCount *smithy.Schema
+
 var KubernetesApiCallAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "KubernetesApiCallAction",
@@ -3426,6 +4567,22 @@ var KubernetesPermissionCheckedDetails_Resource *smithy.Schema
 var KubernetesPermissionCheckedDetails_Namespace *smithy.Schema
 
 var KubernetesPermissionCheckedDetails_Allowed *smithy.Schema
+
+var KubernetesPolicyViolation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "KubernetesPolicyViolation",
+}, smithy.ShapeTypeStructure, 6)
+var KubernetesPolicyViolation_ViolationType *smithy.Schema
+
+var KubernetesPolicyViolation_AffectedResource *smithy.Schema
+
+var KubernetesPolicyViolation_Subject *smithy.Schema
+
+var KubernetesPolicyViolation_GrantedAccess *smithy.Schema
+
+var KubernetesPolicyViolation_ExposureVector *smithy.Schema
+
+var KubernetesPolicyViolation_MisconfigurationImpact *smithy.Schema
 
 var KubernetesResourcesTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3540,6 +4697,26 @@ var LambdaDetails_Role *smithy.Schema
 var LambdaDetails_VpcConfig *smithy.Schema
 
 var LambdaDetails_Tags *smithy.Schema
+
+var LambdaFunction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "LambdaFunction",
+}, smithy.ShapeTypeStructure, 8)
+var LambdaFunction_FunctionName *smithy.Schema
+
+var LambdaFunction_FunctionArn *smithy.Schema
+
+var LambdaFunction_FunctionVersion *smithy.Schema
+
+var LambdaFunction_Role *smithy.Schema
+
+var LambdaFunction_Description *smithy.Schema
+
+var LambdaFunction_RevisionId *smithy.Schema
+
+var LambdaFunction_UpdatedAt *smithy.Schema
+
+var LambdaFunction_VpcConfigurationSummary *smithy.Schema
 
 var _LaunchTemplateVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3841,6 +5018,24 @@ var _MalwareScans = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _MalwareScans_member *smithy.Schema
 
+var MalwareThreat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MalwareThreat",
+}, smithy.ShapeTypeStructure, 4)
+var MalwareThreat_Name *smithy.Schema
+
+var MalwareThreat_Severity *smithy.Schema
+
+var MalwareThreat_InfectedFileCount *smithy.Schema
+
+var MalwareThreat_SampleFiles *smithy.Schema
+
+var _MalwareThreats = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MalwareThreats",
+}, smithy.ShapeTypeList, 1)
+var _MalwareThreats_member *smithy.Schema
+
 var ManagedBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "ManagedBy",
@@ -3915,6 +5110,26 @@ var Member_InvitedAt *smithy.Schema
 var Member_UpdatedAt *smithy.Schema
 
 var Member_AdministratorId *smithy.Schema
+
+var MemberAccountRanking = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MemberAccountRanking",
+}, smithy.ShapeTypeStructure, 5)
+var MemberAccountRanking_Rank *smithy.Schema
+
+var MemberAccountRanking_AccountId *smithy.Schema
+
+var MemberAccountRanking_FindingCount *smithy.Schema
+
+var MemberAccountRanking_RiskLevel *smithy.Schema
+
+var MemberAccountRanking_RiskRationale *smithy.Schema
+
+var _MemberAccountRankings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MemberAccountRankings",
+}, smithy.ShapeTypeList, 1)
+var _MemberAccountRankings_member *smithy.Schema
 
 var MemberAdditionalConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4012,6 +5227,17 @@ var _MemoryRegionsList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _MemoryRegionsList_member *smithy.Schema
 
+var MetadataRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MetadataRecord",
+}, smithy.ShapeTypeStructure, 1)
+var MetadataRecord_TotalTimeMilliseconds *smithy.Schema
+
+var _MetadataTotalTimeMilliseconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MetadataTotalTimeMilliseconds",
+}, smithy.ShapeTypeLong, 0)
+
 var MfaStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "MfaStatus",
@@ -4028,6 +5254,17 @@ var _MitreTactic = smithy.NewSchema(smithy.ShapeID{
 var _MitreTechnique = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "MitreTechnique",
+}, smithy.ShapeTypeString, 0)
+
+var _MitreTechniqueIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MitreTechniqueIds",
+}, smithy.ShapeTypeList, 1)
+var _MitreTechniqueIds_member *smithy.Schema
+
+var _MitreThreatId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "MitreThreatId",
 }, smithy.ShapeTypeString, 0)
 
 var ModelDetail = smithy.NewSchema(smithy.ShapeID{
@@ -4047,11 +5284,62 @@ var _Name = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Name",
 }, smithy.ShapeTypeString, 0)
 
+var _Narrative = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Narrative",
+}, smithy.ShapeTypeString, 0)
+
 var _Neq = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Neq",
 }, smithy.ShapeTypeList, 1)
 var _Neq_member *smithy.Schema
+
+var NetworkActivity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "NetworkActivity",
+}, smithy.ShapeTypeStructure, 11)
+var NetworkActivity_Protocol *smithy.Schema
+
+var NetworkActivity_Direction *smithy.Schema
+
+var NetworkActivity_Method *smithy.Schema
+
+var NetworkActivity_Blocked *smithy.Schema
+
+var NetworkActivity_Platform *smithy.Schema
+
+var NetworkActivity_Ports *smithy.Schema
+
+var NetworkActivity_Traffic *smithy.Schema
+
+var NetworkActivity_Anomaly *smithy.Schema
+
+var NetworkActivity_Dns *smithy.Schema
+
+var NetworkActivity_Counts *smithy.Schema
+
+var NetworkActivity_Enrichment *smithy.Schema
+
+var NetworkAnomaly = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "NetworkAnomaly",
+}, smithy.ShapeTypeStructure, 8)
+var NetworkAnomaly_BaselineBytes *smithy.Schema
+
+var NetworkAnomaly_Deviation *smithy.Schema
+
+var NetworkAnomaly_ProfileAgeDays *smithy.Schema
+
+var NetworkAnomaly_RemoteService *smithy.Schema
+
+var NetworkAnomaly_RemoteRegion *smithy.Schema
+
+var NetworkAnomaly_Duration *smithy.Schema
+
+var NetworkAnomaly_ResetRatio *smithy.Schema
+
+var NetworkAnomaly_TargetHostCount *smithy.Schema
 
 var NetworkConnection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4078,6 +5366,18 @@ var NetworkConnectionAction_LocalNetworkInterface *smithy.Schema
 var NetworkConnectionAction_RemoteIpDetails *smithy.Schema
 
 var NetworkConnectionAction_RemotePortDetails *smithy.Schema
+
+var NetworkCounts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "NetworkCounts",
+}, smithy.ShapeTypeStructure, 4)
+var NetworkCounts_RequestCount *smithy.Schema
+
+var NetworkCounts_TotalAttempts *smithy.Schema
+
+var NetworkCounts_SuspiciousAttempts *smithy.Schema
+
+var NetworkCounts_ResetAttempts *smithy.Schema
 
 var NetworkDirection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4153,6 +5453,30 @@ var _NetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _NetworkInterfaces_member *smithy.Schema
 
+var NetworkPorts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "NetworkPorts",
+}, smithy.ShapeTypeStructure, 6)
+var NetworkPorts_TargetPort *smithy.Schema
+
+var NetworkPorts_RemotePort *smithy.Schema
+
+var NetworkPorts_ResolverPort *smithy.Schema
+
+var NetworkPorts_Ports *smithy.Schema
+
+var NetworkPorts_PortsUsed *smithy.Schema
+
+var NetworkPorts_PortCount *smithy.Schema
+
+var NetworkTraffic = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "NetworkTraffic",
+}, smithy.ShapeTypeStructure, 2)
+var NetworkTraffic_BytesSent *smithy.Schema
+
+var NetworkTraffic_BytesReceived *smithy.Schema
+
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "NextToken",
@@ -4191,6 +5515,42 @@ var _ObservationNumbers = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ObservationNumbers_member *smithy.Schema
 
+var ObservationRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ObservationRecord",
+}, smithy.ShapeTypeStructure, 16)
+var ObservationRecord_ObservationType *smithy.Schema
+
+var ObservationRecord_FindingDetail *smithy.Schema
+
+var ObservationRecord_Resource *smithy.Schema
+
+var ObservationRecord_NetworkActivity *smithy.Schema
+
+var ObservationRecord_RdsLoginActivity *smithy.Schema
+
+var ObservationRecord_S3Activity *smithy.Schema
+
+var ObservationRecord_KubernetesActivity *smithy.Schema
+
+var ObservationRecord_MalwareScan *smithy.Schema
+
+var ObservationRecord_RelatedFindings *smithy.Schema
+
+var ObservationRecord_DetectionCoverage *smithy.Schema
+
+var ObservationRecord_AccountOverview *smithy.Schema
+
+var ObservationRecord_Recommendations *smithy.Schema
+
+var ObservationRecord_RuntimeSignals *smithy.Schema
+
+var ObservationRecord_Distribution *smithy.Schema
+
+var ObservationRecord_RepresentativeResources *smithy.Schema
+
+var ObservationRecord_Indicators *smithy.Schema
+
 var Observations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Observations",
@@ -4204,6 +5564,56 @@ var _ObservationTexts = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ObservationTexts",
 }, smithy.ShapeTypeList, 1)
 var _ObservationTexts_member *smithy.Schema
+
+var ObservationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ObservationType",
+}, smithy.ShapeTypeEnum, 14)
+var ObservationType_FINDING_DETAIL *smithy.Schema
+
+var ObservationType_RESOURCE *smithy.Schema
+
+var ObservationType_NETWORK_ACTIVITY *smithy.Schema
+
+var ObservationType_RDS_LOGIN_ACTIVITY *smithy.Schema
+
+var ObservationType_S3_ACTIVITY *smithy.Schema
+
+var ObservationType_KUBERNETES_ACTIVITY *smithy.Schema
+
+var ObservationType_MALWARE_SCAN *smithy.Schema
+
+var ObservationType_RELATED_FINDINGS *smithy.Schema
+
+var ObservationType_DETECTION_COVERAGE *smithy.Schema
+
+var ObservationType_ACCOUNT_OVERVIEW *smithy.Schema
+
+var ObservationType_RECOMMENDATION *smithy.Schema
+
+var ObservationType_RUNTIME_SIGNALS *smithy.Schema
+
+var ObservationType_DISTRIBUTION *smithy.Schema
+
+var ObservationType_REPRESENTATIVE_RESOURCE *smithy.Schema
+
+var ObservedFindingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ObservedFindingType",
+}, smithy.ShapeTypeStructure, 4)
+var ObservedFindingType_FindingType *smithy.Schema
+
+var ObservedFindingType_Count *smithy.Schema
+
+var ObservedFindingType_SeverityMax *smithy.Schema
+
+var ObservedFindingType_SharedResources *smithy.Schema
+
+var _ObservedFindingTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ObservedFindingTypes",
+}, smithy.ShapeTypeList, 1)
+var _ObservedFindingTypes_member *smithy.Schema
 
 var OrderBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4252,6 +5662,14 @@ var _OrganizationAdditionalConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OrganizationAdditionalConfigurations",
 }, smithy.ShapeTypeList, 1)
 var _OrganizationAdditionalConfigurations_member *smithy.Schema
+
+var OrganizationAnalysis = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "OrganizationAnalysis",
+}, smithy.ShapeTypeStructure, 2)
+var OrganizationAnalysis_FindingsSummary *smithy.Schema
+
+var OrganizationAnalysis_AccountBreakdown *smithy.Schema
 
 var OrganizationDataSourceConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4354,6 +5772,22 @@ var _OrganizationFeatureStatisticsResults = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OrganizationFeatureStatisticsResults",
 }, smithy.ShapeTypeList, 1)
 var _OrganizationFeatureStatisticsResults_member *smithy.Schema
+
+var OrganizationFindingsSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "OrganizationFindingsSummary",
+}, smithy.ShapeTypeStructure, 6)
+var OrganizationFindingsSummary_TotalFindings *smithy.Schema
+
+var OrganizationFindingsSummary_SeverityBreakdown *smithy.Schema
+
+var OrganizationFindingsSummary_TopFindingTypes *smithy.Schema
+
+var OrganizationFindingsSummary_ByTimeWindow *smithy.Schema
+
+var OrganizationFindingsSummary_TotalAccountCount *smithy.Schema
+
+var OrganizationFindingsSummary_AffectedAccountCount *smithy.Schema
 
 var OrganizationKubernetesAuditLogsConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4477,6 +5911,11 @@ var Owner = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var Owner_Id *smithy.Schema
 
+var _Percentage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Percentage",
+}, smithy.ShapeTypeDouble, 0)
+
 var PermissionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "PermissionConfiguration",
@@ -4528,6 +5967,20 @@ var _PrivateIpAddresses = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _PrivateIpAddresses_member *smithy.Schema
 
+var Process = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Process",
+}, smithy.ShapeTypeStructure, 5)
+var Process_Uuid *smithy.Schema
+
+var Process_Name *smithy.Schema
+
+var Process_Path *smithy.Schema
+
+var Process_ParentUuid *smithy.Schema
+
+var Process_Findings *smithy.Schema
+
 var ProcessDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "ProcessDetails",
@@ -4557,6 +6010,12 @@ var ProcessDetails_UserId *smithy.Schema
 var ProcessDetails_Euid *smithy.Schema
 
 var ProcessDetails_Lineage *smithy.Schema
+
+var _Processes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Processes",
+}, smithy.ShapeTypeList, 1)
+var _Processes_member *smithy.Schema
 
 var _ProcessName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4619,6 +6078,20 @@ var ProfileType_FREQUENCY *smithy.Schema
 
 var ProfileType_VOLUME *smithy.Schema
 
+var ProtectionPlan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ProtectionPlan",
+}, smithy.ShapeTypeStructure, 2)
+var ProtectionPlan_Name *smithy.Schema
+
+var ProtectionPlan_Status *smithy.Schema
+
+var _ProtectionPlans = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ProtectionPlans",
+}, smithy.ShapeTypeList, 1)
+var _ProtectionPlans_member *smithy.Schema
+
 var PublicAccess = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "PublicAccess",
@@ -4675,6 +6148,30 @@ var PublishingStatus_UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY *smithy.Schema
 
 var PublishingStatus_STOPPED *smithy.Schema
 
+var QueryTimeWindow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "QueryTimeWindow",
+}, smithy.ShapeTypeStructure, 2)
+var QueryTimeWindow_StartTime *smithy.Schema
+
+var QueryTimeWindow_EndTime *smithy.Schema
+
+var RdsDbInstance = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RdsDbInstance",
+}, smithy.ShapeTypeStructure, 6)
+var RdsDbInstance_DbInstanceIdentifier *smithy.Schema
+
+var RdsDbInstance_DbClusterIdentifier *smithy.Schema
+
+var RdsDbInstance_DbInstanceArn *smithy.Schema
+
+var RdsDbInstance_DbiResourceId *smithy.Schema
+
+var RdsDbInstance_Engine *smithy.Schema
+
+var RdsDbInstance_EngineVersion *smithy.Schema
+
 var RdsDbInstanceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "RdsDbInstanceDetails",
@@ -4692,6 +6189,20 @@ var RdsDbInstanceDetails_DbInstanceArn *smithy.Schema
 var RdsDbInstanceDetails_DbiResourceId *smithy.Schema
 
 var RdsDbInstanceDetails_Tags *smithy.Schema
+
+var RdsDbUser = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RdsDbUser",
+}, smithy.ShapeTypeStructure, 5)
+var RdsDbUser_User *smithy.Schema
+
+var RdsDbUser_Application *smithy.Schema
+
+var RdsDbUser_Database *smithy.Schema
+
+var RdsDbUser_AuthMethod *smithy.Schema
+
+var RdsDbUser_Ssl *smithy.Schema
 
 var RdsDbUserDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4725,6 +6236,22 @@ var RdsLimitlessDbDetails_DbClusterIdentifier *smithy.Schema
 
 var RdsLimitlessDbDetails_Tags *smithy.Schema
 
+var RdsLoginActivity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RdsLoginActivity",
+}, smithy.ShapeTypeStructure, 6)
+var RdsLoginActivity_Outcome *smithy.Schema
+
+var RdsLoginActivity_Rate *smithy.Schema
+
+var RdsLoginActivity_AnomalyContext *smithy.Schema
+
+var RdsLoginActivity_LoginCount *smithy.Schema
+
+var RdsLoginActivity_ActivityWindow *smithy.Schema
+
+var RdsLoginActivity_Enrichment *smithy.Schema
+
 var RdsLoginAttemptAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "RdsLoginAttemptAction",
@@ -4732,6 +6259,76 @@ var RdsLoginAttemptAction = smithy.NewSchema(smithy.ShapeID{
 var RdsLoginAttemptAction_RemoteIpDetails *smithy.Schema
 
 var RdsLoginAttemptAction_LoginAttributes *smithy.Schema
+
+var Recommendation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Recommendation",
+}, smithy.ShapeTypeStructure, 5)
+var Recommendation_Title *smithy.Schema
+
+var Recommendation_Rationale *smithy.Schema
+
+var Recommendation_Category *smithy.Schema
+
+var Recommendation_Priority *smithy.Schema
+
+var Recommendation_CliCommands *smithy.Schema
+
+var RecommendationCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RecommendationCategory",
+}, smithy.ShapeTypeEnum, 5)
+var RecommendationCategory_ENABLE_PROTECTION *smithy.Schema
+
+var RecommendationCategory_FURTHER_INVESTIGATION *smithy.Schema
+
+var RecommendationCategory_SUPPRESSION_RULE *smithy.Schema
+
+var RecommendationCategory_HARDENING *smithy.Schema
+
+var RecommendationCategory_MONITORING *smithy.Schema
+
+var _Recommendations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Recommendations",
+}, smithy.ShapeTypeList, 1)
+var _Recommendations_member *smithy.Schema
+
+var _RecordId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RecordId",
+}, smithy.ShapeTypeString, 0)
+
+var _Records = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Records",
+}, smithy.ShapeTypeList, 1)
+var _Records_member *smithy.Schema
+
+var _RecordTitle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RecordTitle",
+}, smithy.ShapeTypeString, 0)
+
+var RecordType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RecordType",
+}, smithy.ShapeTypeEnum, 5)
+var RecordType_OBSERVATION *smithy.Schema
+
+var RecordType_ANALYSIS *smithy.Schema
+
+var RecordType_UPDATE *smithy.Schema
+
+var RecordType_FETCH *smithy.Schema
+
+var RecordType_METADATA *smithy.Schema
+
+var _RecordTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RecordTypes",
+}, smithy.ShapeTypeList, 1)
+var _RecordTypes_member *smithy.Schema
 
 var RecoveryPoint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4756,6 +6353,26 @@ var _RelatedFilePathsList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RelatedFilePathsList",
 }, smithy.ShapeTypeList, 1)
 var _RelatedFilePathsList_member *smithy.Schema
+
+var _RelatedFindingIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RelatedFindingIds",
+}, smithy.ShapeTypeList, 1)
+var _RelatedFindingIds_member *smithy.Schema
+
+var RelatedFindings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RelatedFindings",
+}, smithy.ShapeTypeStructure, 2)
+var RelatedFindings_Correlated *smithy.Schema
+
+var RelatedFindings_Observed *smithy.Schema
+
+var _RemediationAffectedResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RemediationAffectedResources",
+}, smithy.ShapeTypeList, 1)
+var _RemediationAffectedResources_member *smithy.Schema
 
 var RemoteAccountDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4790,6 +6407,38 @@ var RemotePortDetails = smithy.NewSchema(smithy.ShapeID{
 var RemotePortDetails_Port *smithy.Schema
 
 var RemotePortDetails_PortName *smithy.Schema
+
+var RepresentativeFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RepresentativeFinding",
+}, smithy.ShapeTypeStructure, 6)
+var RepresentativeFinding_ResourceType *smithy.Schema
+
+var RepresentativeFinding_Identifier *smithy.Schema
+
+var RepresentativeFinding_FindingId *smithy.Schema
+
+var RepresentativeFinding_FindingCount *smithy.Schema
+
+var RepresentativeFinding_RiskLevel *smithy.Schema
+
+var RepresentativeFinding_RiskRationale *smithy.Schema
+
+var _RepresentativeFindings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RepresentativeFindings",
+}, smithy.ShapeTypeList, 1)
+var _RepresentativeFindings_member *smithy.Schema
+
+var Reputation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Reputation",
+}, smithy.ShapeTypeStructure, 3)
+var Reputation_FindingTimeDisposition *smithy.Schema
+
+var Reputation_CurrentDisposition *smithy.Schema
+
+var Reputation_ReputationComparison *smithy.Schema
 
 var Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4879,6 +6528,22 @@ var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceDetails",
 }, smithy.ShapeTypeStructure, 1)
 var ResourceDetails_InstanceArn *smithy.Schema
+
+var ResourceDistribution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ResourceDistribution",
+}, smithy.ShapeTypeStructure, 3)
+var ResourceDistribution_ResourceType *smithy.Schema
+
+var ResourceDistribution_Identifier *smithy.Schema
+
+var ResourceDistribution_Count *smithy.Schema
+
+var _ResourceDistributions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ResourceDistributions",
+}, smithy.ShapeTypeList, 1)
+var _ResourceDistributions_member *smithy.Schema
 
 var _ResourceList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -5142,6 +6807,66 @@ var RuntimeDetails = smithy.NewSchema(smithy.ShapeID{
 var RuntimeDetails_Process *smithy.Schema
 
 var RuntimeDetails_Context *smithy.Schema
+
+var RuntimeSignals = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "RuntimeSignals",
+}, smithy.ShapeTypeStructure, 2)
+var RuntimeSignals_SignalGroups *smithy.Schema
+
+var RuntimeSignals_KeyObservation *smithy.Schema
+
+var S3Activity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "S3Activity",
+}, smithy.ShapeTypeStructure, 10)
+var S3Activity_Api *smithy.Schema
+
+var S3Activity_AffectedBucket *smithy.Schema
+
+var S3Activity_OtherS3Activity *smithy.Schema
+
+var S3Activity_NonS3Activity *smithy.Schema
+
+var S3Activity_SessionAssessment *smithy.Schema
+
+var S3Activity_EventCount *smithy.Schema
+
+var S3Activity_Actor *smithy.Schema
+
+var S3Activity_SourceIp *smithy.Schema
+
+var S3Activity_Enrichment *smithy.Schema
+
+var S3Activity_ActivityWindow *smithy.Schema
+
+var S3Analysis = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "S3Analysis",
+}, smithy.ShapeTypeStructure, 12)
+var S3Analysis_FindingSubtype *smithy.Schema
+
+var S3Analysis_EffectivePermission *smithy.Schema
+
+var S3Analysis_BlockPublicAccessSettings *smithy.Schema
+
+var S3Analysis_Exposure *smithy.Schema
+
+var S3Analysis_UserAgent *smithy.Schema
+
+var S3Analysis_UserAgentClassification *smithy.Schema
+
+var S3Analysis_SourceIp *smithy.Schema
+
+var S3Analysis_IpReputation *smithy.Schema
+
+var S3Analysis_ActorAssessment *smithy.Schema
+
+var S3Analysis_S3ApiActivity *smithy.Schema
+
+var S3Analysis_SourceContext *smithy.Schema
+
+var S3Analysis_AuthorizationAssessment *smithy.Schema
 
 var S3Bucket = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -5671,6 +7396,25 @@ var _SessionNameList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SessionNameList_member *smithy.Schema
 
+var SeverityBreakdown = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SeverityBreakdown",
+}, smithy.ShapeTypeStructure, 5)
+var SeverityBreakdown_Critical *smithy.Schema
+
+var SeverityBreakdown_High *smithy.Schema
+
+var SeverityBreakdown_Medium *smithy.Schema
+
+var SeverityBreakdown_Low *smithy.Schema
+
+var SeverityBreakdown_Info *smithy.Schema
+
+var _SeverityScore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SeverityScore",
+}, smithy.ShapeTypeDouble, 0)
+
 var SeverityStatistics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "SeverityStatistics",
@@ -5680,6 +7424,34 @@ var SeverityStatistics_LastGeneratedAt *smithy.Schema
 var SeverityStatistics_Severity *smithy.Schema
 
 var SeverityStatistics_TotalFindings *smithy.Schema
+
+var SharedBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SharedBehavior",
+}, smithy.ShapeTypeStructure, 2)
+var SharedBehavior_Path *smithy.Schema
+
+var SharedBehavior_Value *smithy.Schema
+
+var _SharedBehaviors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SharedBehaviors",
+}, smithy.ShapeTypeList, 1)
+var _SharedBehaviors_member *smithy.Schema
+
+var SharedResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SharedResource",
+}, smithy.ShapeTypeStructure, 2)
+var SharedResource_ResourceType *smithy.Schema
+
+var SharedResource_Identifier *smithy.Schema
+
+var _SharedResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SharedResources",
+}, smithy.ShapeTypeList, 1)
+var _SharedResources_member *smithy.Schema
 
 var Signal = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -5719,6 +7491,22 @@ var _SignalDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "SignalDescription",
 }, smithy.ShapeTypeString, 0)
+
+var SignalGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SignalGroup",
+}, smithy.ShapeTypeStructure, 3)
+var SignalGroup_FindingType *smithy.Schema
+
+var SignalGroup_Severity *smithy.Schema
+
+var SignalGroup_Count *smithy.Schema
+
+var _SignalGroups = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SignalGroups",
+}, smithy.ShapeTypeList, 1)
+var _SignalGroups_member *smithy.Schema
 
 var _Signals = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -5785,6 +7573,44 @@ var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SubnetIds_member *smithy.Schema
 
+var SummaryFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SummaryFormat",
+}, smithy.ShapeTypeEnum, 2)
+var SummaryFormat_STRING *smithy.Schema
+
+var SummaryFormat_STRUCTURED *smithy.Schema
+
+var SupportingData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "SupportingData",
+}, smithy.ShapeTypeUnion, 4)
+var SupportingData_Fetch *smithy.Schema
+
+var SupportingData_Analysis *smithy.Schema
+
+var SupportingData_Observation *smithy.Schema
+
+var SupportingData_Metadata *smithy.Schema
+
+var TacticCoverage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TacticCoverage",
+}, smithy.ShapeTypeStructure, 4)
+var TacticCoverage_Phase *smithy.Schema
+
+var TacticCoverage_FindingCount *smithy.Schema
+
+var TacticCoverage_FindingTypes *smithy.Schema
+
+var TacticCoverage_Techniques *smithy.Schema
+
+var _TacticCoverages = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TacticCoverages",
+}, smithy.ShapeTypeList, 1)
+var _TacticCoverages_member *smithy.Schema
+
 var Tag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Tag",
@@ -5823,6 +7649,22 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
 
+var TechniqueCoverage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TechniqueCoverage",
+}, smithy.ShapeTypeStructure, 3)
+var TechniqueCoverage_Technique *smithy.Schema
+
+var TechniqueCoverage_FindingCount *smithy.Schema
+
+var TechniqueCoverage_FindingTypes *smithy.Schema
+
+var _TechniqueCoverages = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TechniqueCoverages",
+}, smithy.ShapeTypeList, 1)
+var _TechniqueCoverages_member *smithy.Schema
+
 var Threat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Threat",
@@ -5838,6 +7680,26 @@ var Threat_Count *smithy.Schema
 var Threat_Hash *smithy.Schema
 
 var Threat_ItemDetails *smithy.Schema
+
+var ThreatAssessment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ThreatAssessment",
+}, smithy.ShapeTypeStructure, 2)
+var ThreatAssessment_AttackProgression *smithy.Schema
+
+var ThreatAssessment_ThreatActorProfile *smithy.Schema
+
+var ThreatConfidence = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ThreatConfidence",
+}, smithy.ShapeTypeEnum, 4)
+var ThreatConfidence_VERY_HIGH *smithy.Schema
+
+var ThreatConfidence_HIGH *smithy.Schema
+
+var ThreatConfidence_MEDIUM *smithy.Schema
+
+var ThreatConfidence_LOW *smithy.Schema
 
 var ThreatDetectedByName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -5953,6 +7815,14 @@ var _ThreatNames = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ThreatNames_member *smithy.Schema
 
+var ThreatReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ThreatReference",
+}, smithy.ShapeTypeStructure, 2)
+var ThreatReference_Name *smithy.Schema
+
+var ThreatReference_Uid *smithy.Schema
+
 var _Threats = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Threats",
@@ -5965,10 +7835,36 @@ var ThreatsDetectedItemCount = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ThreatsDetectedItemCount_Files *smithy.Schema
 
+var TimeGranularity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TimeGranularity",
+}, smithy.ShapeTypeEnum, 3)
+var TimeGranularity_DAY *smithy.Schema
+
+var TimeGranularity_WEEK *smithy.Schema
+
+var TimeGranularity_MONTH *smithy.Schema
+
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Timestamp",
 }, smithy.ShapeTypeTimestamp, 0)
+
+var TimeWindowGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TimeWindowGroup",
+}, smithy.ShapeTypeStructure, 3)
+var TimeWindowGroup_StartTime *smithy.Schema
+
+var TimeWindowGroup_EndTime *smithy.Schema
+
+var TimeWindowGroup_FindingCount *smithy.Schema
+
+var _TimeWindowGroups = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TimeWindowGroups",
+}, smithy.ShapeTypeList, 1)
+var _TimeWindowGroups_member *smithy.Schema
 
 var Total = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -5977,6 +7873,20 @@ var Total = smithy.NewSchema(smithy.ShapeID{
 var Total_Amount *smithy.Schema
 
 var Total_Unit *smithy.Schema
+
+var Trend = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "Trend",
+}, smithy.ShapeTypeStructure, 5)
+var Trend_Granularity *smithy.Schema
+
+var Trend_StartedAt *smithy.Schema
+
+var Trend_EndedAt *smithy.Schema
+
+var Trend_TotalFindings *smithy.Schema
+
+var Trend_ByTimeWindow *smithy.Schema
 
 var TriggerDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -6045,6 +7955,24 @@ var TrustedEntitySetStatus_ERROR *smithy.Schema
 var TrustedEntitySetStatus_DELETE_PENDING *smithy.Schema
 
 var TrustedEntitySetStatus_DELETED *smithy.Schema
+
+var TypeDistribution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TypeDistribution",
+}, smithy.ShapeTypeStructure, 4)
+var TypeDistribution_FindingType *smithy.Schema
+
+var TypeDistribution_Count *smithy.Schema
+
+var TypeDistribution_Percentage *smithy.Schema
+
+var TypeDistribution_DominantSeverity *smithy.Schema
+
+var _TypeDistributions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "TypeDistributions",
+}, smithy.ShapeTypeList, 1)
+var _TypeDistributions_member *smithy.Schema
 
 var UnprocessedAccount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -7103,10 +9031,12 @@ var GetFindingsStatisticsResponse_NextToken *smithy.Schema
 var GetInvestigationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "GetInvestigationRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var GetInvestigationRequest_DetectorId *smithy.Schema
 
 var GetInvestigationRequest_InvestigationId *smithy.Schema
+
+var GetInvestigationRequest_SummaryFormat *smithy.Schema
 
 var GetInvestigationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -7559,11 +9489,39 @@ var ListFindingsResponse_FindingIds *smithy.Schema
 
 var ListFindingsResponse_NextToken *smithy.Schema
 
+var ListInvestigationRecordsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ListInvestigationRecordsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListInvestigationRecordsRequest_DetectorId *smithy.Schema
+
+var ListInvestigationRecordsRequest_InvestigationId *smithy.Schema
+
+var ListInvestigationRecordsRequest_RecordTypes *smithy.Schema
+
+var ListInvestigationRecordsRequest_MaxResults *smithy.Schema
+
+var ListInvestigationRecordsRequest_NextToken *smithy.Schema
+
+var ListInvestigationRecordsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ListInvestigationRecordsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListInvestigationRecordsResponse_InvestigationId *smithy.Schema
+
+var ListInvestigationRecordsResponse_Status *smithy.Schema
+
+var ListInvestigationRecordsResponse_Records *smithy.Schema
+
+var ListInvestigationRecordsResponse_NextToken *smithy.Schema
+
 var ListInvestigationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "ListInvestigationsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListInvestigationsRequest_DetectorId *smithy.Schema
+
+var ListInvestigationsRequest_FilterCriteria *smithy.Schema
 
 var ListInvestigationsRequest_SortCriteria *smithy.Schema
 
@@ -8143,6 +10101,130 @@ func init() {
 
 	Account_Name = Account.AddMember("Name", _String, &smithytraits.JSONName{Name: "account"})
 
+	InvestigationResourceType_EC2_INSTANCE = InvestigationResourceType.AddMember("EC2_INSTANCE", smithyprelude.Unit)
+
+	InvestigationResourceType_EBS_VOLUME = InvestigationResourceType.AddMember("EBS_VOLUME", smithyprelude.Unit)
+
+	InvestigationResourceType_S3_BUCKET = InvestigationResourceType.AddMember("S3_BUCKET", smithyprelude.Unit)
+
+	InvestigationResourceType_IAM_ROLE = InvestigationResourceType.AddMember("IAM_ROLE", smithyprelude.Unit)
+
+	InvestigationResourceType_IAM_USER = InvestigationResourceType.AddMember("IAM_USER", smithyprelude.Unit)
+
+	InvestigationResourceType_IAM_ACCESS_KEY = InvestigationResourceType.AddMember("IAM_ACCESS_KEY", smithyprelude.Unit)
+
+	InvestigationResourceType_LAMBDA_FUNCTION = InvestigationResourceType.AddMember("LAMBDA_FUNCTION", smithyprelude.Unit)
+
+	InvestigationResourceType_EKS_CLUSTER = InvestigationResourceType.AddMember("EKS_CLUSTER", smithyprelude.Unit)
+
+	InvestigationResourceType_ECS_CLUSTER = InvestigationResourceType.AddMember("ECS_CLUSTER", smithyprelude.Unit)
+
+	InvestigationResourceType_KUBERNETES_WORKLOAD = InvestigationResourceType.AddMember("KUBERNETES_WORKLOAD", smithyprelude.Unit)
+
+	InvestigationResourceType_RDS_INSTANCE = InvestigationResourceType.AddMember("RDS_INSTANCE", smithyprelude.Unit)
+
+	InvestigationResourceType_RDS_DB_USER = InvestigationResourceType.AddMember("RDS_DB_USER", smithyprelude.Unit)
+
+	InvestigationResourceType_EC2_SECURITY_GROUP = InvestigationResourceType.AddMember("EC2_SECURITY_GROUP", smithyprelude.Unit)
+
+	AccountAffectedResource_Identifier = AccountAffectedResource.AddMember("Identifier", _String, &smithytraits.JSONName{Name: "identifier"})
+
+	AccountAffectedResource_Type = AccountAffectedResource.AddMember("Type", InvestigationResourceType, &smithytraits.JSONName{Name: "type"})
+
+	AccountAffectedResource_FindingCount = AccountAffectedResource.AddMember("FindingCount", _Integer, &smithytraits.JSONName{Name: "findingCount"})
+
+	_AccountAffectedResources_member = _AccountAffectedResources.AddMember("member", AccountAffectedResource)
+
+	SeverityBreakdown_Critical = SeverityBreakdown.AddMember("Critical", _Integer, &smithytraits.JSONName{Name: "critical"})
+
+	SeverityBreakdown_High = SeverityBreakdown.AddMember("High", _Integer, &smithytraits.JSONName{Name: "high"})
+
+	SeverityBreakdown_Medium = SeverityBreakdown.AddMember("Medium", _Integer, &smithytraits.JSONName{Name: "medium"})
+
+	SeverityBreakdown_Low = SeverityBreakdown.AddMember("Low", _Integer, &smithytraits.JSONName{Name: "low"})
+
+	SeverityBreakdown_Info = SeverityBreakdown.AddMember("Info", _Integer, &smithytraits.JSONName{Name: "info"})
+
+	FindingTypeCount_FindingType = FindingTypeCount.AddMember("FindingType", _String, &smithytraits.JSONName{Name: "findingType"})
+
+	FindingTypeCount_Count = FindingTypeCount.AddMember("Count", _Integer, &smithytraits.JSONName{Name: "count"})
+
+	_FindingTypeCounts_member = _FindingTypeCounts.AddMember("member", FindingTypeCount)
+
+	TimeWindowGroup_StartTime = TimeWindowGroup.AddMember("StartTime", _Timestamp, &smithytraits.JSONName{Name: "startTime"})
+
+	TimeWindowGroup_EndTime = TimeWindowGroup.AddMember("EndTime", _Timestamp, &smithytraits.JSONName{Name: "endTime"})
+
+	TimeWindowGroup_FindingCount = TimeWindowGroup.AddMember("FindingCount", _Integer, &smithytraits.JSONName{Name: "findingCount"})
+
+	_TimeWindowGroups_member = _TimeWindowGroups.AddMember("member", TimeWindowGroup)
+
+	FindingsSummary_TotalFindings = FindingsSummary.AddMember("TotalFindings", _Integer, &smithytraits.JSONName{Name: "totalFindings"})
+
+	FindingsSummary_SeverityBreakdown = FindingsSummary.AddMember("SeverityBreakdown", SeverityBreakdown, &smithytraits.JSONName{Name: "severityBreakdown"})
+
+	FindingsSummary_TopFindingTypes = FindingsSummary.AddMember("TopFindingTypes", _FindingTypeCounts, &smithytraits.JSONName{Name: "topFindingTypes"})
+
+	FindingsSummary_ByTimeWindow = FindingsSummary.AddMember("ByTimeWindow", _TimeWindowGroups, &smithytraits.JSONName{Name: "byTimeWindow"})
+
+	AttackPhaseName_RECONNAISSANCE = AttackPhaseName.AddMember("RECONNAISSANCE", smithyprelude.Unit)
+
+	AttackPhaseName_RESOURCE_DEVELOPMENT = AttackPhaseName.AddMember("RESOURCE_DEVELOPMENT", smithyprelude.Unit)
+
+	AttackPhaseName_INITIAL_ACCESS = AttackPhaseName.AddMember("INITIAL_ACCESS", smithyprelude.Unit)
+
+	AttackPhaseName_EXECUTION = AttackPhaseName.AddMember("EXECUTION", smithyprelude.Unit)
+
+	AttackPhaseName_PERSISTENCE = AttackPhaseName.AddMember("PERSISTENCE", smithyprelude.Unit)
+
+	AttackPhaseName_PRIVILEGE_ESCALATION = AttackPhaseName.AddMember("PRIVILEGE_ESCALATION", smithyprelude.Unit)
+
+	AttackPhaseName_DEFENSE_EVASION = AttackPhaseName.AddMember("DEFENSE_EVASION", smithyprelude.Unit)
+
+	AttackPhaseName_CREDENTIAL_ACCESS = AttackPhaseName.AddMember("CREDENTIAL_ACCESS", smithyprelude.Unit)
+
+	AttackPhaseName_DISCOVERY = AttackPhaseName.AddMember("DISCOVERY", smithyprelude.Unit)
+
+	AttackPhaseName_LATERAL_MOVEMENT = AttackPhaseName.AddMember("LATERAL_MOVEMENT", smithyprelude.Unit)
+
+	AttackPhaseName_COLLECTION = AttackPhaseName.AddMember("COLLECTION", smithyprelude.Unit)
+
+	AttackPhaseName_COMMAND_AND_CONTROL = AttackPhaseName.AddMember("COMMAND_AND_CONTROL", smithyprelude.Unit)
+
+	AttackPhaseName_EXFILTRATION = AttackPhaseName.AddMember("EXFILTRATION", smithyprelude.Unit)
+
+	AttackPhaseName_IMPACT = AttackPhaseName.AddMember("IMPACT", smithyprelude.Unit)
+
+	_FindingTypeNames_member = _FindingTypeNames.AddMember("member", _String)
+
+	ThreatReference_Name = ThreatReference.AddMember("Name", _String, &smithytraits.JSONName{Name: "name"})
+
+	ThreatReference_Uid = ThreatReference.AddMember("Uid", _MitreThreatId, &smithytraits.JSONName{Name: "uid"})
+
+	TechniqueCoverage_Technique = TechniqueCoverage.AddMember("Technique", ThreatReference, &smithytraits.JSONName{Name: "technique"})
+
+	TechniqueCoverage_FindingCount = TechniqueCoverage.AddMember("FindingCount", _Integer, &smithytraits.JSONName{Name: "findingCount"})
+
+	TechniqueCoverage_FindingTypes = TechniqueCoverage.AddMember("FindingTypes", _FindingTypeNames, &smithytraits.JSONName{Name: "findingTypes"})
+
+	_TechniqueCoverages_member = _TechniqueCoverages.AddMember("member", TechniqueCoverage)
+
+	TacticCoverage_Phase = TacticCoverage.AddMember("Phase", AttackPhaseName, &smithytraits.JSONName{Name: "phase"})
+
+	TacticCoverage_FindingCount = TacticCoverage.AddMember("FindingCount", _Integer, &smithytraits.JSONName{Name: "findingCount"})
+
+	TacticCoverage_FindingTypes = TacticCoverage.AddMember("FindingTypes", _FindingTypeNames, &smithytraits.JSONName{Name: "findingTypes"})
+
+	TacticCoverage_Techniques = TacticCoverage.AddMember("Techniques", _TechniqueCoverages, &smithytraits.JSONName{Name: "techniques"})
+
+	_TacticCoverages_member = _TacticCoverages.AddMember("member", TacticCoverage)
+
+	AccountAnalysis_FindingsSummary = AccountAnalysis.AddMember("FindingsSummary", FindingsSummary, &smithytraits.JSONName{Name: "findingsSummary"})
+
+	AccountAnalysis_TacticCoverage = AccountAnalysis.AddMember("TacticCoverage", _TacticCoverages, &smithytraits.JSONName{Name: "tacticCoverage"})
+
+	AccountAnalysis_AffectedResources = AccountAnalysis.AddMember("AffectedResources", _AccountAffectedResources, &smithytraits.JSONName{Name: "affectedResources"})
+
 	AccountDetail_AccountId = AccountDetail.AddMember("AccountId", _AccountId, &smithytraits.JSONName{Name: "accountId"})
 
 	AccountDetail_Email = AccountDetail.AddMember("Email", _Email, &smithytraits.JSONName{Name: "email"})
@@ -8217,11 +10299,57 @@ func init() {
 
 	AccountLevelPermissions_BlockPublicAccess = AccountLevelPermissions.AddMember("BlockPublicAccess", BlockPublicAccess, &smithytraits.JSONName{Name: "blockPublicAccess"})
 
+	RiskLevel_INFO = RiskLevel.AddMember("INFO", smithyprelude.Unit)
+
+	RiskLevel_LOW = RiskLevel.AddMember("LOW", smithyprelude.Unit)
+
+	RiskLevel_MEDIUM = RiskLevel.AddMember("MEDIUM", smithyprelude.Unit)
+
+	RiskLevel_HIGH = RiskLevel.AddMember("HIGH", smithyprelude.Unit)
+
+	RiskLevel_CRITICAL = RiskLevel.AddMember("CRITICAL", smithyprelude.Unit)
+
+	MemberAccountRanking_Rank = MemberAccountRanking.AddMember("Rank", _Integer, &smithytraits.JSONName{Name: "rank"})
+
+	MemberAccountRanking_AccountId = MemberAccountRanking.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
+
+	MemberAccountRanking_FindingCount = MemberAccountRanking.AddMember("FindingCount", _Count, &smithytraits.JSONName{Name: "findingCount"})
+
+	MemberAccountRanking_RiskLevel = MemberAccountRanking.AddMember("RiskLevel", RiskLevel, &smithytraits.JSONName{Name: "riskLevel"})
+
+	MemberAccountRanking_RiskRationale = MemberAccountRanking.AddMember("RiskRationale", _InvestigationText, &smithytraits.JSONName{Name: "riskRationale"})
+
+	_MemberAccountRankings_member = _MemberAccountRankings.AddMember("member", MemberAccountRanking)
+
+	AccountOverview_AccountId = AccountOverview.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
+
+	AccountOverview_AccountStatus = AccountOverview.AddMember("AccountStatus", _String, &smithytraits.JSONName{Name: "accountStatus"})
+
+	AccountOverview_DetectorId = AccountOverview.AddMember("DetectorId", _DetectorId, &smithytraits.JSONName{Name: "detectorId"})
+
+	AccountOverview_Region = AccountOverview.AddMember("Region", _String, &smithytraits.JSONName{Name: "region"})
+
+	AccountOverview_DelegatedAdminAccountId = AccountOverview.AddMember("DelegatedAdminAccountId", _String, &smithytraits.JSONName{Name: "delegatedAdminAccountId"})
+
+	AccountOverview_TotalMemberAccounts = AccountOverview.AddMember("TotalMemberAccounts", _Count, &smithytraits.JSONName{Name: "totalMemberAccounts"})
+
+	AccountOverview_TotalFindings = AccountOverview.AddMember("TotalFindings", _Count, &smithytraits.JSONName{Name: "totalFindings"})
+
+	AccountOverview_AffectedAccountCount = AccountOverview.AddMember("AffectedAccountCount", _Count, &smithytraits.JSONName{Name: "affectedAccountCount"})
+
+	AccountOverview_AccountRankings = AccountOverview.AddMember("AccountRankings", _MemberAccountRankings, &smithytraits.JSONName{Name: "accountRankings"})
+
 	AccountStatistics_AccountId = AccountStatistics.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
 
 	AccountStatistics_LastGeneratedAt = AccountStatistics.AddMember("LastGeneratedAt", _Timestamp, &smithytraits.JSONName{Name: "lastGeneratedAt"})
 
 	AccountStatistics_TotalFindings = AccountStatistics.AddMember("TotalFindings", _Integer, &smithytraits.JSONName{Name: "totalFindings"})
+
+	AccountSummary_AccountId = AccountSummary.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
+
+	AccountSummary_FindingCount = AccountSummary.AddMember("FindingCount", _Integer, &smithytraits.JSONName{Name: "findingCount"})
+
+	_AccountSummaries_member = _AccountSummaries.AddMember("member", AccountSummary)
 
 	DomainDetails_Domain = DomainDetails.AddMember("Domain", _String, &smithytraits.JSONName{Name: "domain"})
 
@@ -8415,6 +10543,12 @@ func init() {
 
 	Action_RdsLoginAttemptAction = Action.AddMember("RdsLoginAttemptAction", RdsLoginAttemptAction, &smithytraits.JSONName{Name: "rdsLoginAttemptAction"})
 
+	ActionPriority_IMMEDIATE = ActionPriority.AddMember("IMMEDIATE", smithyprelude.Unit)
+
+	ActionPriority_SHORT_TERM = ActionPriority.AddMember("SHORT_TERM", smithyprelude.Unit)
+
+	ActionPriority_STRATEGIC = ActionPriority.AddMember("STRATEGIC", smithyprelude.Unit)
+
 	ActivityType_API_CALL = ActivityType.AddMember("API_CALL", smithyprelude.Unit)
 
 	ApiCall_Operation = ApiCall.AddMember("Operation", _String, &smithytraits.JSONName{Name: "operation"})
@@ -8430,6 +10564,10 @@ func init() {
 	Activity_Api = Activity.AddMember("Api", ApiCall, &smithytraits.JSONName{Name: "api"})
 
 	_Activities_member = _Activities.AddMember("member", Activity)
+
+	ActivityWindow_FirstSeenAt = ActivityWindow.AddMember("FirstSeenAt", _Timestamp, &smithytraits.JSONName{Name: "firstSeenAt"})
+
+	ActivityWindow_LastSeenAt = ActivityWindow.AddMember("LastSeenAt", _Timestamp, &smithytraits.JSONName{Name: "lastSeenAt"})
 
 	User_Name = User.AddMember("Name", _String, &smithytraits.JSONName{Name: "name"})
 
@@ -8499,7 +10637,181 @@ func init() {
 
 	Administrator_InvitedAt = Administrator.AddMember("InvitedAt", _String, &smithytraits.JSONName{Name: "invitedAt"})
 
+	AffectedResource_Identifier = AffectedResource.AddMember("Identifier", _String, &smithytraits.JSONName{Name: "identifier"})
+
+	AffectedResource_Type = AffectedResource.AddMember("Type", InvestigationResourceType, &smithytraits.JSONName{Name: "type"})
+
+	AffectedResource_Arn = AffectedResource.AddMember("Arn", _String, &smithytraits.JSONName{Name: "arn"})
+
 	AgentDetails_Version = AgentDetails.AddMember("Version", _String, &smithytraits.JSONName{Name: "version"})
+
+	AnalysisType_REPUTATION = AnalysisType.AddMember("REPUTATION", smithyprelude.Unit)
+
+	AnalysisType_THREAT_ASSESSMENT = AnalysisType.AddMember("THREAT_ASSESSMENT", smithyprelude.Unit)
+
+	AnalysisType_RDS_THREAT_ASSESSMENT = AnalysisType.AddMember("RDS_THREAT_ASSESSMENT", smithyprelude.Unit)
+
+	AnalysisType_KUBERNETES_POLICY_VIOLATION = AnalysisType.AddMember("KUBERNETES_POLICY_VIOLATION", smithyprelude.Unit)
+
+	AnalysisType_S3_EXPOSURE = AnalysisType.AddMember("S3_EXPOSURE", smithyprelude.Unit)
+
+	AnalysisType_S3_ACTOR_CONTEXT = AnalysisType.AddMember("S3_ACTOR_CONTEXT", smithyprelude.Unit)
+
+	AnalysisType_S3_PEN_TEST = AnalysisType.AddMember("S3_PEN_TEST", smithyprelude.Unit)
+
+	AnalysisType_PROCESS_LINEAGE = AnalysisType.AddMember("PROCESS_LINEAGE", smithyprelude.Unit)
+
+	AnalysisType_TREND = AnalysisType.AddMember("TREND", smithyprelude.Unit)
+
+	AnalysisType_BASELINE = AnalysisType.AddMember("BASELINE", smithyprelude.Unit)
+
+	Reputation_FindingTimeDisposition = Reputation.AddMember("FindingTimeDisposition", _String, &smithytraits.JSONName{Name: "findingTimeDisposition"})
+
+	Reputation_CurrentDisposition = Reputation.AddMember("CurrentDisposition", _String, &smithytraits.JSONName{Name: "currentDisposition"})
+
+	Reputation_ReputationComparison = Reputation.AddMember("ReputationComparison", _String, &smithytraits.JSONName{Name: "reputationComparison"})
+
+	ThreatConfidence_VERY_HIGH = ThreatConfidence.AddMember("VERY_HIGH", smithyprelude.Unit)
+
+	ThreatConfidence_HIGH = ThreatConfidence.AddMember("HIGH", smithyprelude.Unit)
+
+	ThreatConfidence_MEDIUM = ThreatConfidence.AddMember("MEDIUM", smithyprelude.Unit)
+
+	ThreatConfidence_LOW = ThreatConfidence.AddMember("LOW", smithyprelude.Unit)
+
+	InvestigationThreatAssessment_Reputation = InvestigationThreatAssessment.AddMember("Reputation", Reputation, &smithytraits.JSONName{Name: "reputation"})
+
+	InvestigationThreatAssessment_ThreatConfidence = InvestigationThreatAssessment.AddMember("ThreatConfidence", ThreatConfidence, &smithytraits.JSONName{Name: "threatConfidence"})
+
+	InvestigationThreatAssessment_Classification = InvestigationThreatAssessment.AddMember("Classification", _InvestigationText, &smithytraits.JSONName{Name: "classification"})
+
+	InvestigationThreatAssessment_Assessment = InvestigationThreatAssessment.AddMember("Assessment", _InvestigationText, &smithytraits.JSONName{Name: "assessment"})
+
+	InvestigationThreatAssessment_AuthenticationContext = InvestigationThreatAssessment.AddMember("AuthenticationContext", _InvestigationText, &smithytraits.JSONName{Name: "authenticationContext"})
+
+	InvestigationThreatAssessment_RdsControlPlaneActivity = InvestigationThreatAssessment.AddMember("RdsControlPlaneActivity", _InvestigationText, &smithytraits.JSONName{Name: "rdsControlPlaneActivity"})
+
+	InvestigationThreatAssessment_IpAccountActivity = InvestigationThreatAssessment.AddMember("IpAccountActivity", _InvestigationText, &smithytraits.JSONName{Name: "ipAccountActivity"})
+
+	InvestigationThreatAssessment_CredentialCompromise = InvestigationThreatAssessment.AddMember("CredentialCompromise", _InvestigationText, &smithytraits.JSONName{Name: "credentialCompromise"})
+
+	KubernetesPolicyViolation_ViolationType = KubernetesPolicyViolation.AddMember("ViolationType", _String, &smithytraits.JSONName{Name: "violationType"})
+
+	KubernetesPolicyViolation_AffectedResource = KubernetesPolicyViolation.AddMember("AffectedResource", _String, &smithytraits.JSONName{Name: "affectedResource"})
+
+	KubernetesPolicyViolation_Subject = KubernetesPolicyViolation.AddMember("Subject", _String, &smithytraits.JSONName{Name: "subject"})
+
+	KubernetesPolicyViolation_GrantedAccess = KubernetesPolicyViolation.AddMember("GrantedAccess", _String, &smithytraits.JSONName{Name: "grantedAccess"})
+
+	KubernetesPolicyViolation_ExposureVector = KubernetesPolicyViolation.AddMember("ExposureVector", _InvestigationText, &smithytraits.JSONName{Name: "exposureVector"})
+
+	KubernetesPolicyViolation_MisconfigurationImpact = KubernetesPolicyViolation.AddMember("MisconfigurationImpact", _InvestigationText, &smithytraits.JSONName{Name: "misconfigurationImpact"})
+
+	S3Analysis_FindingSubtype = S3Analysis.AddMember("FindingSubtype", _String, &smithytraits.JSONName{Name: "findingSubtype"})
+
+	S3Analysis_EffectivePermission = S3Analysis.AddMember("EffectivePermission", _String, &smithytraits.JSONName{Name: "effectivePermission"})
+
+	S3Analysis_BlockPublicAccessSettings = S3Analysis.AddMember("BlockPublicAccessSettings", _InvestigationText, &smithytraits.JSONName{Name: "blockPublicAccessSettings"})
+
+	S3Analysis_Exposure = S3Analysis.AddMember("Exposure", _InvestigationText, &smithytraits.JSONName{Name: "exposure"})
+
+	S3Analysis_UserAgent = S3Analysis.AddMember("UserAgent", _String, &smithytraits.JSONName{Name: "userAgent"})
+
+	S3Analysis_UserAgentClassification = S3Analysis.AddMember("UserAgentClassification", _String, &smithytraits.JSONName{Name: "userAgentClassification"})
+
+	S3Analysis_SourceIp = S3Analysis.AddMember("SourceIp", _String, &smithytraits.JSONName{Name: "sourceIp"})
+
+	S3Analysis_IpReputation = S3Analysis.AddMember("IpReputation", _String, &smithytraits.JSONName{Name: "ipReputation"})
+
+	S3Analysis_ActorAssessment = S3Analysis.AddMember("ActorAssessment", _InvestigationText, &smithytraits.JSONName{Name: "actorAssessment"})
+
+	S3Analysis_S3ApiActivity = S3Analysis.AddMember("S3ApiActivity", _InvestigationText, &smithytraits.JSONName{Name: "s3ApiActivity"})
+
+	S3Analysis_SourceContext = S3Analysis.AddMember("SourceContext", _InvestigationText, &smithytraits.JSONName{Name: "sourceContext"})
+
+	S3Analysis_AuthorizationAssessment = S3Analysis.AddMember("AuthorizationAssessment", _InvestigationText, &smithytraits.JSONName{Name: "authorizationAssessment"})
+
+	FindingReference_FindingType = FindingReference.AddMember("FindingType", _String, &smithytraits.JSONName{Name: "findingType"})
+
+	FindingReference_Uid = FindingReference.AddMember("Uid", _FindingId, &smithytraits.JSONName{Name: "uid"})
+
+	_FindingReferences_member = _FindingReferences.AddMember("member", FindingReference)
+
+	Process_Uuid = Process.AddMember("Uuid", _String, &smithytraits.JSONName{Name: "uuid"})
+
+	Process_Name = Process.AddMember("Name", _String, &smithytraits.JSONName{Name: "name"})
+
+	Process_Path = Process.AddMember("Path", _String, &smithytraits.JSONName{Name: "path"})
+
+	Process_ParentUuid = Process.AddMember("ParentUuid", _String, &smithytraits.JSONName{Name: "parentUuid"})
+
+	Process_Findings = Process.AddMember("Findings", _FindingReferences, &smithytraits.JSONName{Name: "findings"})
+
+	_Processes_member = _Processes.AddMember("member", Process)
+
+	TimeGranularity_DAY = TimeGranularity.AddMember("DAY", smithyprelude.Unit)
+
+	TimeGranularity_WEEK = TimeGranularity.AddMember("WEEK", smithyprelude.Unit)
+
+	TimeGranularity_MONTH = TimeGranularity.AddMember("MONTH", smithyprelude.Unit)
+
+	Trend_Granularity = Trend.AddMember("Granularity", TimeGranularity, &smithytraits.JSONName{Name: "granularity"})
+
+	Trend_StartedAt = Trend.AddMember("StartedAt", _Timestamp, &smithytraits.JSONName{Name: "startTime"})
+
+	Trend_EndedAt = Trend.AddMember("EndedAt", _Timestamp, &smithytraits.JSONName{Name: "endTime"})
+
+	Trend_TotalFindings = Trend.AddMember("TotalFindings", _Count, &smithytraits.JSONName{Name: "totalFindings"})
+
+	Trend_ByTimeWindow = Trend.AddMember("ByTimeWindow", _TimeWindowGroups, &smithytraits.JSONName{Name: "byTimeWindow"})
+
+	FindingTypeClassification_FindingType = FindingTypeClassification.AddMember("FindingType", _FindingType, &smithytraits.JSONName{Name: "findingType"})
+
+	FindingTypeClassification_Classification = FindingTypeClassification.AddMember("Classification", _InvestigationText, &smithytraits.JSONName{Name: "classification"})
+
+	FindingTypeClassification_Count = FindingTypeClassification.AddMember("Count", _Count, &smithytraits.JSONName{Name: "count"})
+
+	FindingTypeClassification_Percentage = FindingTypeClassification.AddMember("Percentage", _Percentage, &smithytraits.JSONName{Name: "percentage"})
+
+	FindingTypeClassification_Description = FindingTypeClassification.AddMember("Description", _InvestigationText, &smithytraits.JSONName{Name: "description"})
+
+	_FindingTypeClassifications_member = _FindingTypeClassifications.AddMember("member", FindingTypeClassification)
+
+	Baseline_TotalFindings = Baseline.AddMember("TotalFindings", _Count, &smithytraits.JSONName{Name: "totalFindings"})
+
+	Baseline_BaselineFindings = Baseline.AddMember("BaselineFindings", _FindingTypeClassifications, &smithytraits.JSONName{Name: "baselineFindings"})
+
+	Baseline_AnomalousFindings = Baseline.AddMember("AnomalousFindings", _FindingTypeClassifications, &smithytraits.JSONName{Name: "anomalousFindings"})
+
+	InvestigationAccountAnalysis_Trend = InvestigationAccountAnalysis.AddMember("Trend", Trend, &smithytraits.JSONName{Name: "trend"})
+
+	InvestigationAccountAnalysis_Baseline = InvestigationAccountAnalysis.AddMember("Baseline", Baseline, &smithytraits.JSONName{Name: "baseline"})
+
+	InvestigationIndicatorType_IP = InvestigationIndicatorType.AddMember("IP", smithyprelude.Unit)
+
+	InvestigationIndicatorType_DOMAIN = InvestigationIndicatorType.AddMember("DOMAIN", smithyprelude.Unit)
+
+	InvestigationIndicatorType_FILE = InvestigationIndicatorType.AddMember("FILE", smithyprelude.Unit)
+
+	InvestigationIndicator_Value = InvestigationIndicator.AddMember("Value", _IndicatorValue, &smithytraits.JSONName{Name: "value"})
+
+	InvestigationIndicator_Type = InvestigationIndicator.AddMember("Type", InvestigationIndicatorType, &smithytraits.JSONName{Name: "type"})
+
+	_InvestigationIndicators_member = _InvestigationIndicators.AddMember("member", InvestigationIndicator)
+
+	AnalysisRecord_AnalysisType = AnalysisRecord.AddMember("AnalysisType", AnalysisType, &smithytraits.JSONName{Name: "analysisType"})
+
+	AnalysisRecord_ThreatAssessment = AnalysisRecord.AddMember("ThreatAssessment", InvestigationThreatAssessment, &smithytraits.JSONName{Name: "threatAssessment"})
+
+	AnalysisRecord_KubernetesPolicyViolation = AnalysisRecord.AddMember("KubernetesPolicyViolation", KubernetesPolicyViolation, &smithytraits.JSONName{Name: "kubernetesPolicyViolation"})
+
+	AnalysisRecord_S3Analysis = AnalysisRecord.AddMember("S3Analysis", S3Analysis, &smithytraits.JSONName{Name: "s3Analysis"})
+
+	AnalysisRecord_Processes = AnalysisRecord.AddMember("Processes", _Processes, &smithytraits.JSONName{Name: "processes"})
+
+	AnalysisRecord_AccountAnalysis = AnalysisRecord.AddMember("AccountAnalysis", InvestigationAccountAnalysis, &smithytraits.JSONName{Name: "accountAnalysis"})
+
+	AnalysisRecord_Indicators = AnalysisRecord.AddMember("Indicators", _InvestigationIndicators, &smithytraits.JSONName{Name: "indicators"})
 
 	ProfileType_FREQUENCY = ProfileType.AddMember("FREQUENCY", smithyprelude.Unit)
 
@@ -8555,6 +10867,14 @@ func init() {
 
 	Anomaly_Unusual = Anomaly.AddMember("Unusual", AnomalyUnusual, &smithytraits.JSONName{Name: "unusual"})
 
+	ArchiveDistribution_ArchivedCount = ArchiveDistribution.AddMember("ArchivedCount", _Count, &smithytraits.JSONName{Name: "archivedCount"})
+
+	ArchiveDistribution_UnarchivedCount = ArchiveDistribution.AddMember("UnarchivedCount", _Count, &smithytraits.JSONName{Name: "unarchivedCount"})
+
+	ArchiveDistribution_ArchivedPercentage = ArchiveDistribution.AddMember("ArchivedPercentage", _Percentage, &smithytraits.JSONName{Name: "archivedPercentage"})
+
+	ArchiveDistribution_UnarchivedPercentage = ArchiveDistribution.AddMember("UnarchivedPercentage", _Percentage, &smithytraits.JSONName{Name: "unarchivedPercentage"})
+
 	AssociationMode_LIVE = AssociationMode.AddMember("LIVE", smithyprelude.Unit)
 
 	AssociationMode_DRY_RUN = AssociationMode.AddMember("DRY_RUN", smithyprelude.Unit)
@@ -8590,6 +10910,24 @@ func init() {
 	AssociationSummary_ExpiresAt = AssociationSummary.AddMember("ExpiresAt", _Timestamp, &smithytraits.JSONName{Name: "expiresAt"})
 
 	_AssociationSummaryList_member = _AssociationSummaryList.AddMember("member", AssociationSummary)
+
+	Attack_Tactic = Attack.AddMember("Tactic", ThreatReference, &smithytraits.JSONName{Name: "tactic"})
+
+	Attack_Technique = Attack.AddMember("Technique", ThreatReference, &smithytraits.JSONName{Name: "technique"})
+
+	Attack_Findings = Attack.AddMember("Findings", _FindingReferences, &smithytraits.JSONName{Name: "findings"})
+
+	Attack_Version = Attack.AddMember("Version", _String, &smithytraits.JSONName{Name: "version"})
+
+	_Attacks_member = _Attacks.AddMember("member", Attack)
+
+	AttackPhase_Phase = AttackPhase.AddMember("Phase", AttackPhaseName, &smithytraits.JSONName{Name: "phase"})
+
+	AttackPhase_Description = AttackPhase.AddMember("Description", _String, &smithytraits.JSONName{Name: "description"})
+
+	AttackPhase_Attacks = AttackPhase.AddMember("Attacks", _Attacks, &smithytraits.JSONName{Name: "attacks"})
+
+	_AttackPhases_member = _AttackPhases.AddMember("member", AttackPhase)
 
 	AutoEnableMembers_NEW = AutoEnableMembers.AddMember("NEW", smithyprelude.Unit)
 
@@ -8684,6 +11022,8 @@ func init() {
 	BucketLevelPermissions_BucketPolicy = BucketLevelPermissions.AddMember("BucketPolicy", BucketPolicy, &smithytraits.JSONName{Name: "bucketPolicy"})
 
 	BucketLevelPermissions_BlockPublicAccess = BucketLevelPermissions.AddMember("BlockPublicAccess", BlockPublicAccess, &smithytraits.JSONName{Name: "blockPublicAccess"})
+
+	_CliCommands_member = _CliCommands.AddMember("member", _String)
 
 	CloudProvider_AWS = CloudProvider.AddMember("AWS", smithyprelude.Unit)
 
@@ -8805,6 +11145,44 @@ func init() {
 
 	ContinuousScanDetails_EndTime = ContinuousScanDetails.AddMember("EndTime", _Timestamp, &smithytraits.JSONName{Name: "endTime"})
 
+	CorrelationReason_HIGH_SEVERITY = CorrelationReason.AddMember("HIGH_SEVERITY", smithyprelude.Unit)
+
+	CorrelationReason_SAME_RESOURCE = CorrelationReason.AddMember("SAME_RESOURCE", smithyprelude.Unit)
+
+	CorrelationReason_SAME_BEHAVIOR = CorrelationReason.AddMember("SAME_BEHAVIOR", smithyprelude.Unit)
+
+	_CorrelationReasons_member = _CorrelationReasons.AddMember("member", CorrelationReason)
+
+	_RelatedFindingIds_member = _RelatedFindingIds.AddMember("member", _FindingId)
+
+	SharedResource_ResourceType = SharedResource.AddMember("ResourceType", _String, &smithytraits.JSONName{Name: "resourceType"})
+
+	SharedResource_Identifier = SharedResource.AddMember("Identifier", _String, &smithytraits.JSONName{Name: "identifier"})
+
+	_SharedResources_member = _SharedResources.AddMember("member", SharedResource)
+
+	SharedBehavior_Path = SharedBehavior.AddMember("Path", _String, &smithytraits.JSONName{Name: "path"})
+
+	SharedBehavior_Value = SharedBehavior.AddMember("Value", _String, &smithytraits.JSONName{Name: "value"})
+
+	_SharedBehaviors_member = _SharedBehaviors.AddMember("member", SharedBehavior)
+
+	CorrelatedFinding_FindingType = CorrelatedFinding.AddMember("FindingType", _FindingType, &smithytraits.JSONName{Name: "findingType"})
+
+	CorrelatedFinding_Count = CorrelatedFinding.AddMember("Count", _Count, &smithytraits.JSONName{Name: "count"})
+
+	CorrelatedFinding_SeverityMax = CorrelatedFinding.AddMember("SeverityMax", _SeverityScore, &smithytraits.JSONName{Name: "severityMax"})
+
+	CorrelatedFinding_CorrelationReasons = CorrelatedFinding.AddMember("CorrelationReasons", _CorrelationReasons, &smithytraits.JSONName{Name: "correlationReasons"})
+
+	CorrelatedFinding_FindingIds = CorrelatedFinding.AddMember("FindingIds", _RelatedFindingIds, &smithytraits.JSONName{Name: "findingIds"})
+
+	CorrelatedFinding_SharedResources = CorrelatedFinding.AddMember("SharedResources", _SharedResources, &smithytraits.JSONName{Name: "sharedResources"})
+
+	CorrelatedFinding_SharedBehaviors = CorrelatedFinding.AddMember("SharedBehaviors", _SharedBehaviors, &smithytraits.JSONName{Name: "sharedBehaviors"})
+
+	_CorrelatedFindings_member = _CorrelatedFindings.AddMember("member", CorrelatedFinding)
+
 	CoverageStatus_HEALTHY = CoverageStatus.AddMember("HEALTHY", smithyprelude.Unit)
 
 	CoverageStatus_UNHEALTHY = CoverageStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
@@ -8826,6 +11204,58 @@ func init() {
 	_CountBySeverity_key = _CountBySeverity.AddMember("key", _String)
 
 	_CountBySeverity_value = _CountBySeverity.AddMember("value", _Integer)
+
+	DefenseTactic_ISOLATE = DefenseTactic.AddMember("ISOLATE", smithyprelude.Unit)
+
+	DefenseTactic_EVICT = DefenseTactic.AddMember("EVICT", smithyprelude.Unit)
+
+	DefenseTactic_RESTORE = DefenseTactic.AddMember("RESTORE", smithyprelude.Unit)
+
+	DefenseTactic_HARDEN = DefenseTactic.AddMember("HARDEN", smithyprelude.Unit)
+
+	DefenseTactic_DETECT = DefenseTactic.AddMember("DETECT", smithyprelude.Unit)
+
+	_MitreTechniqueIds_member = _MitreTechniqueIds.AddMember("member", _MitreThreatId)
+
+	Disposition_ISOLATED = Disposition.AddMember("ISOLATED", smithyprelude.Unit)
+
+	Disposition_BLOCKED = Disposition.AddMember("BLOCKED", smithyprelude.Unit)
+
+	Disposition_DELETED = Disposition.AddMember("DELETED", smithyprelude.Unit)
+
+	Disposition_ACCESS_REVOKED = Disposition.AddMember("ACCESS_REVOKED", smithyprelude.Unit)
+
+	Disposition_LOGGED = Disposition.AddMember("LOGGED", smithyprelude.Unit)
+
+	_RemediationAffectedResources_member = _RemediationAffectedResources.AddMember("member", AffectedResource)
+
+	CountermeasureAction_Title = CountermeasureAction.AddMember("Title", _String, &smithytraits.JSONName{Name: "title"})
+
+	CountermeasureAction_Description = CountermeasureAction.AddMember("Description", _String, &smithytraits.JSONName{Name: "description"})
+
+	CountermeasureAction_Priority = CountermeasureAction.AddMember("Priority", ActionPriority, &smithytraits.JSONName{Name: "priority"})
+
+	CountermeasureAction_DefenseTechnique = CountermeasureAction.AddMember("DefenseTechnique", _String, &smithytraits.JSONName{Name: "defenseTechnique"})
+
+	CountermeasureAction_Mitigates = CountermeasureAction.AddMember("Mitigates", _MitreTechniqueIds, &smithytraits.JSONName{Name: "mitigates"})
+
+	CountermeasureAction_CliCommands = CountermeasureAction.AddMember("CliCommands", _CliCommands, &smithytraits.JSONName{Name: "cliCommands"})
+
+	CountermeasureAction_DispositionId = CountermeasureAction.AddMember("DispositionId", _Integer, &smithytraits.JSONName{Name: "dispositionId"})
+
+	CountermeasureAction_Disposition = CountermeasureAction.AddMember("Disposition", Disposition, &smithytraits.JSONName{Name: "disposition"})
+
+	CountermeasureAction_AffectedResources = CountermeasureAction.AddMember("AffectedResources", _RemediationAffectedResources, &smithytraits.JSONName{Name: "affectedResources"})
+
+	_CountermeasureActions_member = _CountermeasureActions.AddMember("member", CountermeasureAction)
+
+	Countermeasure_DefenseTactic = Countermeasure.AddMember("DefenseTactic", DefenseTactic, &smithytraits.JSONName{Name: "defenseTactic"})
+
+	Countermeasure_Actions = Countermeasure.AddMember("Actions", _CountermeasureActions, &smithytraits.JSONName{Name: "actions"})
+
+	Countermeasure_Description = Countermeasure.AddMember("Description", _String, &smithytraits.JSONName{Name: "description"})
+
+	_Countermeasures_member = _Countermeasures.AddMember("member", Countermeasure)
 
 	ManagementType_AUTO_MANAGED = ManagementType.AddMember("AUTO_MANAGED", smithyprelude.Unit)
 
@@ -9521,6 +11951,52 @@ func init() {
 
 	Detection_Sequence = Detection.AddMember("Sequence", Sequence, &smithytraits.JSONName{Name: "sequence"})
 
+	InvestigationDetectorFeature_CLOUD_TRAIL = InvestigationDetectorFeature.AddMember("CLOUD_TRAIL", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_DNS_LOGS = InvestigationDetectorFeature.AddMember("DNS_LOGS", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_FLOW_LOGS = InvestigationDetectorFeature.AddMember("FLOW_LOGS", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_S3_DATA_EVENTS = InvestigationDetectorFeature.AddMember("S3_DATA_EVENTS", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_EKS_AUDIT_LOGS = InvestigationDetectorFeature.AddMember("EKS_AUDIT_LOGS", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_EBS_MALWARE_PROTECTION = InvestigationDetectorFeature.AddMember("EBS_MALWARE_PROTECTION", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_RDS_LOGIN_EVENTS = InvestigationDetectorFeature.AddMember("RDS_LOGIN_EVENTS", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_EKS_RUNTIME_MONITORING = InvestigationDetectorFeature.AddMember("EKS_RUNTIME_MONITORING", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_EKS_ADDON_MANAGEMENT = InvestigationDetectorFeature.AddMember("EKS_ADDON_MANAGEMENT", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_LAMBDA_NETWORK_LOGS = InvestigationDetectorFeature.AddMember("LAMBDA_NETWORK_LOGS", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_RUNTIME_MONITORING = InvestigationDetectorFeature.AddMember("RUNTIME_MONITORING", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_ECS_FARGATE_AGENT_MANAGEMENT = InvestigationDetectorFeature.AddMember("ECS_FARGATE_AGENT_MANAGEMENT", smithyprelude.Unit)
+
+	InvestigationDetectorFeature_EC2_AGENT_MANAGEMENT = InvestigationDetectorFeature.AddMember("EC2_AGENT_MANAGEMENT", smithyprelude.Unit)
+
+	FeatureStatus_ENABLED = FeatureStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	FeatureStatus_DISABLED = FeatureStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	ProtectionPlan_Name = ProtectionPlan.AddMember("Name", InvestigationDetectorFeature, &smithytraits.JSONName{Name: "name"})
+
+	ProtectionPlan_Status = ProtectionPlan.AddMember("Status", FeatureStatus, &smithytraits.JSONName{Name: "status"})
+
+	_ProtectionPlans_member = _ProtectionPlans.AddMember("member", ProtectionPlan)
+
+	_FoundationalDataSources_member = _FoundationalDataSources.AddMember("member", InvestigationDetectorFeature)
+
+	DetectionCoverage_ProtectionPlans = DetectionCoverage.AddMember("ProtectionPlans", _ProtectionPlans, &smithytraits.JSONName{Name: "protectionPlans"})
+
+	DetectionCoverage_FoundationalDataSources = DetectionCoverage.AddMember("FoundationalDataSources", _FoundationalDataSources, &smithytraits.JSONName{Name: "foundationalDataSources"})
+
+	DetectionCoverage_CoverageGaps = DetectionCoverage.AddMember("CoverageGaps", _InvestigationText, &smithytraits.JSONName{Name: "coverageGaps"})
+
+	DetectionCoverage_KeyObservation = DetectionCoverage.AddMember("KeyObservation", _InvestigationText, &smithytraits.JSONName{Name: "keyObservation"})
+
 	_DetectionRuleAccountIds_member = _DetectionRuleAccountIds.AddMember("member", _AccountId)
 
 	DetectionRuleConfigurationStatus_ACTIVE = DetectionRuleConfigurationStatus.AddMember("ACTIVE", smithyprelude.Unit)
@@ -9629,10 +12105,6 @@ func init() {
 
 	FeatureAdditionalConfiguration_RDS_DATA_RISK = FeatureAdditionalConfiguration.AddMember("RDS_DATA_RISK", smithyprelude.Unit)
 
-	FeatureStatus_ENABLED = FeatureStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	FeatureStatus_DISABLED = FeatureStatus.AddMember("DISABLED", smithyprelude.Unit)
-
 	DetectorAdditionalConfiguration_Name = DetectorAdditionalConfiguration.AddMember("Name", FeatureAdditionalConfiguration, &smithytraits.JSONName{Name: "name"})
 
 	DetectorAdditionalConfiguration_Status = DetectorAdditionalConfiguration.AddMember("Status", FeatureStatus, &smithytraits.JSONName{Name: "status"})
@@ -9718,6 +12190,56 @@ func init() {
 	DetectorStatus_ENABLED = DetectorStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	DetectorStatus_DISABLED = DetectorStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	DistributionDimension_SEVERITY = DistributionDimension.AddMember("SEVERITY", smithyprelude.Unit)
+
+	DistributionDimension_TYPE = DistributionDimension.AddMember("TYPE", smithyprelude.Unit)
+
+	DistributionDimension_RESOURCE = DistributionDimension.AddMember("RESOURCE", smithyprelude.Unit)
+
+	DistributionDimension_ATTACK_VECTOR = DistributionDimension.AddMember("ATTACK_VECTOR", smithyprelude.Unit)
+
+	DistributionDimension_ARCHIVE = DistributionDimension.AddMember("ARCHIVE", smithyprelude.Unit)
+
+	TypeDistribution_FindingType = TypeDistribution.AddMember("FindingType", _FindingType, &smithytraits.JSONName{Name: "findingType"})
+
+	TypeDistribution_Count = TypeDistribution.AddMember("Count", _Count, &smithytraits.JSONName{Name: "count"})
+
+	TypeDistribution_Percentage = TypeDistribution.AddMember("Percentage", _Percentage, &smithytraits.JSONName{Name: "percentage"})
+
+	TypeDistribution_DominantSeverity = TypeDistribution.AddMember("DominantSeverity", _String, &smithytraits.JSONName{Name: "dominantSeverity"})
+
+	_TypeDistributions_member = _TypeDistributions.AddMember("member", TypeDistribution)
+
+	ResourceDistribution_ResourceType = ResourceDistribution.AddMember("ResourceType", _String, &smithytraits.JSONName{Name: "resourceType"})
+
+	ResourceDistribution_Identifier = ResourceDistribution.AddMember("Identifier", _String, &smithytraits.JSONName{Name: "identifier"})
+
+	ResourceDistribution_Count = ResourceDistribution.AddMember("Count", _Count, &smithytraits.JSONName{Name: "count"})
+
+	_ResourceDistributions_member = _ResourceDistributions.AddMember("member", ResourceDistribution)
+
+	Distribution_Dimension = Distribution.AddMember("Dimension", DistributionDimension, &smithytraits.JSONName{Name: "dimension"})
+
+	Distribution_TotalFindings = Distribution.AddMember("TotalFindings", _Count, &smithytraits.JSONName{Name: "totalFindings"})
+
+	Distribution_SeverityBreakdown = Distribution.AddMember("SeverityBreakdown", SeverityBreakdown, &smithytraits.JSONName{Name: "severityBreakdown"})
+
+	Distribution_FindingTypes = Distribution.AddMember("FindingTypes", _TypeDistributions, &smithytraits.JSONName{Name: "findingTypes"})
+
+	Distribution_TopFindingTypes = Distribution.AddMember("TopFindingTypes", _FindingTypeCounts, &smithytraits.JSONName{Name: "topFindingTypes"})
+
+	Distribution_Resources = Distribution.AddMember("Resources", _ResourceDistributions, &smithytraits.JSONName{Name: "resources"})
+
+	Distribution_AttackVectors = Distribution.AddMember("AttackVectors", _TacticCoverages, &smithytraits.JSONName{Name: "attackVectors"})
+
+	Distribution_Archive = Distribution.AddMember("Archive", ArchiveDistribution, &smithytraits.JSONName{Name: "archive"})
+
+	DnsContext_DomainSuffix = DnsContext.AddMember("DomainSuffix", _String, &smithytraits.JSONName{Name: "domainSuffix"})
+
+	DnsContext_OtherDomains = DnsContext.AddMember("OtherDomains", _String, &smithytraits.JSONName{Name: "otherDomains"})
+
+	DnsContext_ResolverHistory = DnsContext.AddMember("ResolverHistory", _String, &smithytraits.JSONName{Name: "resolverHistory"})
 
 	EbsSnapshot_DeviceName = EbsSnapshot.AddMember("DeviceName", _NonEmptyString, &smithytraits.JSONName{Name: "deviceName"})
 
@@ -9877,6 +12399,14 @@ func init() {
 
 	EksClusterDetails_CreatedAt = EksClusterDetails.AddMember("CreatedAt", _Timestamp, &smithytraits.JSONName{Name: "createdAt"})
 
+	Enrichment_CountryName = Enrichment.AddMember("CountryName", _String, &smithytraits.JSONName{Name: "countryName"})
+
+	Enrichment_AsnOrg = Enrichment.AddMember("AsnOrg", _String, &smithytraits.JSONName{Name: "asnOrg"})
+
+	Enrichment_ThreatListName = Enrichment.AddMember("ThreatListName", _String, &smithytraits.JSONName{Name: "threatListName"})
+
+	Enrichment_ThreatName = Enrichment.AddMember("ThreatName", _String, &smithytraits.JSONName{Name: "threatName"})
+
 	_ThreatNames_member = _ThreatNames.AddMember("member", _String)
 
 	ThreatIntelligenceDetail_ThreatListName = ThreatIntelligenceDetail.AddMember("ThreatListName", _String, &smithytraits.JSONName{Name: "threatListName"})
@@ -9892,6 +12422,108 @@ func init() {
 	Feedback_USEFUL = Feedback.AddMember("USEFUL", smithyprelude.Unit)
 
 	Feedback_NOT_USEFUL = Feedback.AddMember("NOT_USEFUL", smithyprelude.Unit)
+
+	FetchCriterionCondition_EQUALS = FetchCriterionCondition.AddMember("EQUALS", smithyprelude.Unit)
+
+	FetchCriterionCondition_NOT_EQUALS = FetchCriterionCondition.AddMember("NOT_EQUALS", smithyprelude.Unit)
+
+	FetchCriterionCondition_GREATER_THAN = FetchCriterionCondition.AddMember("GREATER_THAN", smithyprelude.Unit)
+
+	FetchCriterionCondition_GREATER_THAN_OR_EQUAL = FetchCriterionCondition.AddMember("GREATER_THAN_OR_EQUAL", smithyprelude.Unit)
+
+	FetchCriterionCondition_LESS_THAN = FetchCriterionCondition.AddMember("LESS_THAN", smithyprelude.Unit)
+
+	FetchCriterionCondition_LESS_THAN_OR_EQUAL = FetchCriterionCondition.AddMember("LESS_THAN_OR_EQUAL", smithyprelude.Unit)
+
+	_FetchFieldValues_member = _FetchFieldValues.AddMember("member", _FetchFieldValue)
+
+	FetchCriterion_Field = FetchCriterion.AddMember("Field", _FetchFieldName, &smithytraits.JSONName{Name: "field"})
+
+	FetchCriterion_Condition = FetchCriterion.AddMember("Condition", FetchCriterionCondition, &smithytraits.JSONName{Name: "condition"})
+
+	FetchCriterion_Values = FetchCriterion.AddMember("Values", _FetchFieldValues, &smithytraits.JSONName{Name: "values"})
+
+	_FetchCriteria_member = _FetchCriteria.AddMember("member", FetchCriterion)
+
+	InvestigationDetectorFeatureConfiguration_Name = InvestigationDetectorFeatureConfiguration.AddMember("Name", InvestigationDetectorFeature, &smithytraits.JSONName{Name: "name"})
+
+	InvestigationDetectorFeatureConfiguration_Status = InvestigationDetectorFeatureConfiguration.AddMember("Status", FeatureStatus, &smithytraits.JSONName{Name: "status"})
+
+	InvestigationDetectorFeatureConfiguration_UpdatedAt = InvestigationDetectorFeatureConfiguration.AddMember("UpdatedAt", _Timestamp, &smithytraits.JSONName{Name: "updatedAt"})
+
+	_FetchDetectorFeatures_member = _FetchDetectorFeatures.AddMember("member", InvestigationDetectorFeatureConfiguration)
+
+	_FetchItemIds_member = _FetchItemIds.AddMember("member", _FetchItemId)
+
+	_FetchLearnMoreLinks_member = _FetchLearnMoreLinks.AddMember("member", _FetchLearnMoreLink)
+
+	FetchTimeWindow_StartedAt = FetchTimeWindow.AddMember("StartedAt", _Timestamp, &smithytraits.JSONName{Name: "startedAt"})
+
+	FetchTimeWindow_DurationInMinutes = FetchTimeWindow.AddMember("DurationInMinutes", _FetchDurationInMinutes, &smithytraits.JSONName{Name: "durationInMinutes"})
+
+	FetchQuery_Criteria = FetchQuery.AddMember("Criteria", _FetchCriteria, &smithytraits.JSONName{Name: "criteria"})
+
+	FetchQuery_TimeWindow = FetchQuery.AddMember("TimeWindow", FetchTimeWindow, &smithytraits.JSONName{Name: "timeWindow"})
+
+	FetchQuery_RowLimit = FetchQuery.AddMember("RowLimit", _FetchRowLimit, &smithytraits.JSONName{Name: "rowLimit"})
+
+	FetchQuery_AccountId = FetchQuery.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
+
+	FetchQuery_Indicator = FetchQuery.AddMember("Indicator", _IndicatorValue, &smithytraits.JSONName{Name: "indicator"})
+
+	FetchQuery_IndicatorType = FetchQuery.AddMember("IndicatorType", InvestigationIndicatorType, &smithytraits.JSONName{Name: "indicatorType"})
+
+	FetchQuery_FindingType = FetchQuery.AddMember("FindingType", _FindingType, &smithytraits.JSONName{Name: "findingType"})
+
+	FetchQuery_FindingId = FetchQuery.AddMember("FindingId", _FindingId, &smithytraits.JSONName{Name: "findingId"})
+
+	FetchType_FINDINGS = FetchType.AddMember("FINDINGS", smithyprelude.Unit)
+
+	FetchType_DETECTOR = FetchType.AddMember("DETECTOR", smithyprelude.Unit)
+
+	FetchType_REPUTATION = FetchType.AddMember("REPUTATION", smithyprelude.Unit)
+
+	FetchType_FINDING_TYPE_DOCUMENTATION = FetchType.AddMember("FINDING_TYPE_DOCUMENTATION", smithyprelude.Unit)
+
+	FetchType_CLOUD_TRAIL_RAW_EVENTS = FetchType.AddMember("CLOUD_TRAIL_RAW_EVENTS", smithyprelude.Unit)
+
+	FetchType_RUNTIME_SIGNALS = FetchType.AddMember("RUNTIME_SIGNALS", smithyprelude.Unit)
+
+	FetchType_MEMBER_ACCOUNTS = FetchType.AddMember("MEMBER_ACCOUNTS", smithyprelude.Unit)
+
+	FetchVerdict_THREAT = FetchVerdict.AddMember("THREAT", smithyprelude.Unit)
+
+	FetchVerdict_BENIGN = FetchVerdict.AddMember("BENIGN", smithyprelude.Unit)
+
+	FetchVerdict_NEUTRAL = FetchVerdict.AddMember("NEUTRAL", smithyprelude.Unit)
+
+	FindingTypeDocumentation_Description = FindingTypeDocumentation.AddMember("Description", _InvestigationText, &smithytraits.JSONName{Name: "description"})
+
+	FindingTypeDocumentation_Severity = FindingTypeDocumentation.AddMember("Severity", _String, &smithytraits.JSONName{Name: "severity"})
+
+	FindingTypeDocumentation_Feature = FindingTypeDocumentation.AddMember("Feature", _String, &smithytraits.JSONName{Name: "feature"})
+
+	FindingTypeDocumentation_FullDescription = FindingTypeDocumentation.AddMember("FullDescription", _InvestigationText, &smithytraits.JSONName{Name: "fullDescription"})
+
+	FindingTypeDocumentation_Remediation = FindingTypeDocumentation.AddMember("Remediation", _InvestigationText, &smithytraits.JSONName{Name: "remediation"})
+
+	FindingTypeDocumentation_LearnMoreLinks = FindingTypeDocumentation.AddMember("LearnMoreLinks", _FetchLearnMoreLinks, &smithytraits.JSONName{Name: "learnMoreLinks"})
+
+	FetchResult_ItemIds = FetchResult.AddMember("ItemIds", _FetchItemIds, &smithytraits.JSONName{Name: "itemIds"})
+
+	FetchResult_TotalCount = FetchResult.AddMember("TotalCount", _Count, &smithytraits.JSONName{Name: "totalCount"})
+
+	FetchResult_Features = FetchResult.AddMember("Features", _FetchDetectorFeatures, &smithytraits.JSONName{Name: "features"})
+
+	FetchResult_Verdict = FetchResult.AddMember("Verdict", FetchVerdict, &smithytraits.JSONName{Name: "verdict"})
+
+	FetchResult_Documentation = FetchResult.AddMember("Documentation", FindingTypeDocumentation, &smithytraits.JSONName{Name: "documentation"})
+
+	FetchRecord_FetchType = FetchRecord.AddMember("FetchType", FetchType, &smithytraits.JSONName{Name: "fetchType"})
+
+	FetchRecord_Query = FetchRecord.AddMember("Query", FetchQuery, &smithytraits.JSONName{Name: "query"})
+
+	FetchRecord_Result = FetchRecord.AddMember("Result", FetchResult, &smithytraits.JSONName{Name: "result"})
 
 	FilterAction_NOOP = FilterAction.AddMember("NOOP", smithyprelude.Unit)
 
@@ -10405,6 +13037,18 @@ func init() {
 
 	FindingCriteria_Criterion = FindingCriteria.AddMember("Criterion", _Criterion, &smithytraits.JSONName{Name: "criterion"})
 
+	FindingDetail_FindingId = FindingDetail.AddMember("FindingId", _FindingId, &smithytraits.JSONName{Name: "findingId"})
+
+	FindingDetail_FindingType = FindingDetail.AddMember("FindingType", _FindingType, &smithytraits.JSONName{Name: "findingType"})
+
+	FindingDetail_Severity = FindingDetail.AddMember("Severity", _String, &smithytraits.JSONName{Name: "severity"})
+
+	FindingDetail_AccountId = FindingDetail.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
+
+	FindingDetail_Region = FindingDetail.AddMember("Region", _String, &smithytraits.JSONName{Name: "region"})
+
+	FindingDetail_ActivityWindow = FindingDetail.AddMember("ActivityWindow", ActivityWindow, &smithytraits.JSONName{Name: "activityWindow"})
+
 	_FindingIds_member = _FindingIds.AddMember("member", _FindingId)
 
 	FindingPublishingFrequency_FIFTEEN_MINUTES = FindingPublishingFrequency.AddMember("FIFTEEN_MINUTES", smithyprelude.Unit)
@@ -10525,15 +13169,89 @@ func init() {
 
 	InvestigationMetadata_Product = InvestigationMetadata.AddMember("Product", Product, &smithytraits.JSONName{Name: "product"})
 
-	RiskLevel_INFO = RiskLevel.AddMember("INFO", smithyprelude.Unit)
+	ThreatAssessment_AttackProgression = ThreatAssessment.AddMember("AttackProgression", _AttackPhases, &smithytraits.JSONName{Name: "attackProgression"})
 
-	RiskLevel_LOW = RiskLevel.AddMember("LOW", smithyprelude.Unit)
+	ThreatAssessment_ThreatActorProfile = ThreatAssessment.AddMember("ThreatActorProfile", _String, &smithytraits.JSONName{Name: "threatActorProfile"})
 
-	RiskLevel_MEDIUM = RiskLevel.AddMember("MEDIUM", smithyprelude.Unit)
+	OrganizationFindingsSummary_TotalFindings = OrganizationFindingsSummary.AddMember("TotalFindings", _Integer, &smithytraits.JSONName{Name: "totalFindings"})
 
-	RiskLevel_HIGH = RiskLevel.AddMember("HIGH", smithyprelude.Unit)
+	OrganizationFindingsSummary_SeverityBreakdown = OrganizationFindingsSummary.AddMember("SeverityBreakdown", SeverityBreakdown, &smithytraits.JSONName{Name: "severityBreakdown"})
 
-	RiskLevel_CRITICAL = RiskLevel.AddMember("CRITICAL", smithyprelude.Unit)
+	OrganizationFindingsSummary_TopFindingTypes = OrganizationFindingsSummary.AddMember("TopFindingTypes", _FindingTypeCounts, &smithytraits.JSONName{Name: "topFindingTypes"})
+
+	OrganizationFindingsSummary_ByTimeWindow = OrganizationFindingsSummary.AddMember("ByTimeWindow", _TimeWindowGroups, &smithytraits.JSONName{Name: "byTimeWindow"})
+
+	OrganizationFindingsSummary_TotalAccountCount = OrganizationFindingsSummary.AddMember("TotalAccountCount", _Integer, &smithytraits.JSONName{Name: "totalAccountCount"})
+
+	OrganizationFindingsSummary_AffectedAccountCount = OrganizationFindingsSummary.AddMember("AffectedAccountCount", _Integer, &smithytraits.JSONName{Name: "affectedAccountCount"})
+
+	OrganizationAnalysis_FindingsSummary = OrganizationAnalysis.AddMember("FindingsSummary", OrganizationFindingsSummary, &smithytraits.JSONName{Name: "findingsSummary"})
+
+	OrganizationAnalysis_AccountBreakdown = OrganizationAnalysis.AddMember("AccountBreakdown", _AccountSummaries, &smithytraits.JSONName{Name: "accountBreakdown"})
+
+	_InvestigationObservations_member = _InvestigationObservations.AddMember("member", _String)
+
+	KeyObservations_Title = KeyObservations.AddMember("Title", _String, &smithytraits.JSONName{Name: "title"})
+
+	KeyObservations_Narrative = KeyObservations.AddMember("Narrative", _String, &smithytraits.JSONName{Name: "narrative"})
+
+	KeyObservations_Observations = KeyObservations.AddMember("Observations", _InvestigationObservations, &smithytraits.JSONName{Name: "observations"})
+
+	RecommendationCategory_ENABLE_PROTECTION = RecommendationCategory.AddMember("ENABLE_PROTECTION", smithyprelude.Unit)
+
+	RecommendationCategory_FURTHER_INVESTIGATION = RecommendationCategory.AddMember("FURTHER_INVESTIGATION", smithyprelude.Unit)
+
+	RecommendationCategory_SUPPRESSION_RULE = RecommendationCategory.AddMember("SUPPRESSION_RULE", smithyprelude.Unit)
+
+	RecommendationCategory_HARDENING = RecommendationCategory.AddMember("HARDENING", smithyprelude.Unit)
+
+	RecommendationCategory_MONITORING = RecommendationCategory.AddMember("MONITORING", smithyprelude.Unit)
+
+	Recommendation_Title = Recommendation.AddMember("Title", _String, &smithytraits.JSONName{Name: "title"})
+
+	Recommendation_Rationale = Recommendation.AddMember("Rationale", _String, &smithytraits.JSONName{Name: "rationale"})
+
+	Recommendation_Category = Recommendation.AddMember("Category", RecommendationCategory, &smithytraits.JSONName{Name: "category"})
+
+	Recommendation_Priority = Recommendation.AddMember("Priority", ActionPriority, &smithytraits.JSONName{Name: "priority"})
+
+	Recommendation_CliCommands = Recommendation.AddMember("CliCommands", _CliCommands, &smithytraits.JSONName{Name: "cliCommands"})
+
+	_Recommendations_member = _Recommendations.AddMember("member", Recommendation)
+
+	InvestigationSummaryData_FindingType = InvestigationSummaryData.AddMember("FindingType", _String, &smithytraits.JSONName{Name: "findingType"})
+
+	InvestigationSummaryData_ThreatAssessment = InvestigationSummaryData.AddMember("ThreatAssessment", ThreatAssessment, &smithytraits.JSONName{Name: "threatAssessment"})
+
+	InvestigationSummaryData_Countermeasures = InvestigationSummaryData.AddMember("Countermeasures", _Countermeasures, &smithytraits.JSONName{Name: "countermeasures"})
+
+	InvestigationSummaryData_AccountAnalysis = InvestigationSummaryData.AddMember("AccountAnalysis", AccountAnalysis, &smithytraits.JSONName{Name: "accountAnalysis"})
+
+	InvestigationSummaryData_OrganizationAnalysis = InvestigationSummaryData.AddMember("OrganizationAnalysis", OrganizationAnalysis, &smithytraits.JSONName{Name: "organizationAnalysis"})
+
+	InvestigationSummaryData_KeyObservations = InvestigationSummaryData.AddMember("KeyObservations", KeyObservations, &smithytraits.JSONName{Name: "keyObservations"})
+
+	InvestigationSummaryData_Recommendations = InvestigationSummaryData.AddMember("Recommendations", _Recommendations, &smithytraits.JSONName{Name: "recommendations"})
+
+	InvestigationType_FINDING = InvestigationType.AddMember("FINDING", smithyprelude.Unit)
+
+	InvestigationType_ACCOUNT = InvestigationType.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	InvestigationType_ORGANIZATION = InvestigationType.AddMember("ORGANIZATION", smithyprelude.Unit)
+
+	QueryTimeWindow_StartTime = QueryTimeWindow.AddMember("StartTime", _Timestamp, &smithytraits.JSONName{Name: "startTime"})
+
+	QueryTimeWindow_EndTime = QueryTimeWindow.AddMember("EndTime", _Timestamp, &smithytraits.JSONName{Name: "endTime"})
+
+	InvestigationScope_InvestigationType = InvestigationScope.AddMember("InvestigationType", InvestigationType, &smithytraits.JSONName{Name: "investigationType"})
+
+	InvestigationScope_FindingId = InvestigationScope.AddMember("FindingId", _FindingId, &smithytraits.JSONName{Name: "findingId"})
+
+	InvestigationScope_AccountId = InvestigationScope.AddMember("AccountId", _AccountId, &smithytraits.JSONName{Name: "accountId"})
+
+	InvestigationScope_AdminAccountId = InvestigationScope.AddMember("AdminAccountId", _AccountId, &smithytraits.JSONName{Name: "adminAccountId"})
+
+	InvestigationScope_QueryTimeWindow = InvestigationScope.AddMember("QueryTimeWindow", QueryTimeWindow, &smithytraits.JSONName{Name: "queryTimeWindow"})
 
 	Investigation_InvestigationId = Investigation.AddMember("InvestigationId", _InvestigationId, &smithytraits.JSONName{Name: "investigationId"})
 
@@ -10553,13 +13271,463 @@ func init() {
 
 	Investigation_Confidence = Investigation.AddMember("Confidence", Confidence, &smithytraits.JSONName{Name: "confidence"})
 
-	Investigation_Summary = Investigation.AddMember("Summary", _String, &smithytraits.JSONName{Name: "summary"})
+	Investigation_Summary = Investigation.AddMember("Summary", _InvestigationSummaryText, &smithytraits.JSONName{Name: "summary"})
+
+	Investigation_SummaryData = Investigation.AddMember("SummaryData", InvestigationSummaryData, &smithytraits.JSONName{Name: "summaryData"})
+
+	Investigation_Scope = Investigation.AddMember("Scope", InvestigationScope, &smithytraits.JSONName{Name: "scope"})
 
 	Investigation_StartTime = Investigation.AddMember("StartTime", _Timestamp, &smithytraits.JSONName{Name: "startTime"})
 
 	Investigation_EndTime = Investigation.AddMember("EndTime", _Timestamp, &smithytraits.JSONName{Name: "endTime"})
 
 	Investigation_Error = Investigation.AddMember("Error", _InvestigationErrorDetails, &smithytraits.JSONName{Name: "error"})
+
+	InvestigationActor_AccessKeyId = InvestigationActor.AddMember("AccessKeyId", _String, &smithytraits.JSONName{Name: "accessKeyId"})
+
+	InvestigationActor_PrincipalId = InvestigationActor.AddMember("PrincipalId", _String, &smithytraits.JSONName{Name: "principalId"})
+
+	InvestigationActor_UserName = InvestigationActor.AddMember("UserName", _String, &smithytraits.JSONName{Name: "userName"})
+
+	InvestigationActor_UserType = InvestigationActor.AddMember("UserType", _String, &smithytraits.JSONName{Name: "userType"})
+
+	InvestigationActor_UserAgent = InvestigationActor.AddMember("UserAgent", _String, &smithytraits.JSONName{Name: "userAgent"})
+
+	InvestigationFilterCriterionKey_STATUS = InvestigationFilterCriterionKey.AddMember("STATUS", smithyprelude.Unit)
+
+	InvestigationFilterCriterionKey_RISK_LEVEL = InvestigationFilterCriterionKey.AddMember("RISK_LEVEL", smithyprelude.Unit)
+
+	InvestigationFilterCriterionKey_CONFIDENCE = InvestigationFilterCriterionKey.AddMember("CONFIDENCE", smithyprelude.Unit)
+
+	InvestigationFilterCriterionKey_FINDING_ID = InvestigationFilterCriterionKey.AddMember("FINDING_ID", smithyprelude.Unit)
+
+	InvestigationFilterCriterionKey_INVESTIGATION_TYPE = InvestigationFilterCriterionKey.AddMember("INVESTIGATION_TYPE", smithyprelude.Unit)
+
+	InvestigationFilterCondition_Equals = InvestigationFilterCondition.AddMember("Equals", _Equals, &smithytraits.JSONName{Name: "equals"})
+
+	InvestigationFilterCondition_NotEquals = InvestigationFilterCondition.AddMember("NotEquals", _NotEquals, &smithytraits.JSONName{Name: "notEquals"})
+
+	_InvestigationCriterion_key = _InvestigationCriterion.AddMember("key", InvestigationFilterCriterionKey)
+
+	_InvestigationCriterion_value = _InvestigationCriterion.AddMember("value", InvestigationFilterCondition)
+
+	InvestigationEc2Instance_InstanceId = InvestigationEc2Instance.AddMember("InstanceId", _String, &smithytraits.JSONName{Name: "instanceId"})
+
+	InvestigationEc2Instance_InstanceType = InvestigationEc2Instance.AddMember("InstanceType", _String, &smithytraits.JSONName{Name: "instanceType"})
+
+	InvestigationEc2Instance_InstanceState = InvestigationEc2Instance.AddMember("InstanceState", _String, &smithytraits.JSONName{Name: "instanceState"})
+
+	InvestigationEc2Instance_AvailabilityZone = InvestigationEc2Instance.AddMember("AvailabilityZone", _String, &smithytraits.JSONName{Name: "availabilityZone"})
+
+	InvestigationEc2Instance_PrivateIpAddress = InvestigationEc2Instance.AddMember("PrivateIpAddress", _SensitiveString, &smithytraits.JSONName{Name: "privateIpAddress"})
+
+	InvestigationEc2Instance_PublicIp = InvestigationEc2Instance.AddMember("PublicIp", _String, &smithytraits.JSONName{Name: "publicIp"})
+
+	InvestigationEc2Instance_VpcId = InvestigationEc2Instance.AddMember("VpcId", _String, &smithytraits.JSONName{Name: "vpcId"})
+
+	InvestigationEc2Instance_SubnetId = InvestigationEc2Instance.AddMember("SubnetId", _String, &smithytraits.JSONName{Name: "subnetId"})
+
+	InvestigationEc2Instance_ImageId = InvestigationEc2Instance.AddMember("ImageId", _String, &smithytraits.JSONName{Name: "imageId"})
+
+	InvestigationEc2Instance_LaunchedAt = InvestigationEc2Instance.AddMember("LaunchedAt", _Timestamp, &smithytraits.JSONName{Name: "launchedAt"})
+
+	InvestigationEcsCluster_Name = InvestigationEcsCluster.AddMember("Name", _String, &smithytraits.JSONName{Name: "name"})
+
+	InvestigationEcsCluster_Arn = InvestigationEcsCluster.AddMember("Arn", _String, &smithytraits.JSONName{Name: "arn"})
+
+	InvestigationEcsCluster_Status = InvestigationEcsCluster.AddMember("Status", _String, &smithytraits.JSONName{Name: "status"})
+
+	InvestigationEksCluster_Name = InvestigationEksCluster.AddMember("Name", _String, &smithytraits.JSONName{Name: "name"})
+
+	InvestigationEksCluster_Arn = InvestigationEksCluster.AddMember("Arn", _String, &smithytraits.JSONName{Name: "arn"})
+
+	InvestigationEksCluster_Status = InvestigationEksCluster.AddMember("Status", _String, &smithytraits.JSONName{Name: "status"})
+
+	InvestigationEksCluster_VpcId = InvestigationEksCluster.AddMember("VpcId", _String, &smithytraits.JSONName{Name: "vpcId"})
+
+	InvestigationFilterCriteria_Criterion = InvestigationFilterCriteria.AddMember("Criterion", _InvestigationCriterion, &smithytraits.JSONName{Name: "criterion"})
+
+	InvestigationKubernetesWorkload_WorkloadType = InvestigationKubernetesWorkload.AddMember("WorkloadType", _String, &smithytraits.JSONName{Name: "workloadType"})
+
+	InvestigationKubernetesWorkload_WorkloadName = InvestigationKubernetesWorkload.AddMember("WorkloadName", _String, &smithytraits.JSONName{Name: "workloadName"})
+
+	InvestigationKubernetesWorkload_Containers = InvestigationKubernetesWorkload.AddMember("Containers", _String, &smithytraits.JSONName{Name: "containers"})
+
+	InvestigationKubernetesWorkload_Volumes = InvestigationKubernetesWorkload.AddMember("Volumes", _String, &smithytraits.JSONName{Name: "volumes"})
+
+	InvestigationKubernetesWorkload_SecurityContext = InvestigationKubernetesWorkload.AddMember("SecurityContext", _String, &smithytraits.JSONName{Name: "securityContext"})
+
+	MalwareThreat_Name = MalwareThreat.AddMember("Name", _String, &smithytraits.JSONName{Name: "name"})
+
+	MalwareThreat_Severity = MalwareThreat.AddMember("Severity", _String, &smithytraits.JSONName{Name: "severity"})
+
+	MalwareThreat_InfectedFileCount = MalwareThreat.AddMember("InfectedFileCount", _Count, &smithytraits.JSONName{Name: "infectedFileCount"})
+
+	MalwareThreat_SampleFiles = MalwareThreat.AddMember("SampleFiles", _String, &smithytraits.JSONName{Name: "sampleFiles"})
+
+	_MalwareThreats_member = _MalwareThreats.AddMember("member", MalwareThreat)
+
+	InvestigationMalwareScan_ScanId = InvestigationMalwareScan.AddMember("ScanId", _String, &smithytraits.JSONName{Name: "scanId"})
+
+	InvestigationMalwareScan_ScanType = InvestigationMalwareScan.AddMember("ScanType", MalwareProtectionScanType, &smithytraits.JSONName{Name: "scanType"})
+
+	InvestigationMalwareScan_ScanCategory = InvestigationMalwareScan.AddMember("ScanCategory", ScanCategory, &smithytraits.JSONName{Name: "scanCategory"})
+
+	InvestigationMalwareScan_TriggerFindingId = InvestigationMalwareScan.AddMember("TriggerFindingId", _FindingId, &smithytraits.JSONName{Name: "triggerFindingId"})
+
+	InvestigationMalwareScan_EngineSources = InvestigationMalwareScan.AddMember("EngineSources", _String, &smithytraits.JSONName{Name: "engineSources"})
+
+	InvestigationMalwareScan_ScanStartedAt = InvestigationMalwareScan.AddMember("ScanStartedAt", _Timestamp, &smithytraits.JSONName{Name: "scanStartedAt"})
+
+	InvestigationMalwareScan_ScanCompletedAt = InvestigationMalwareScan.AddMember("ScanCompletedAt", _Timestamp, &smithytraits.JSONName{Name: "scanCompletedAt"})
+
+	InvestigationMalwareScan_FilesScanned = InvestigationMalwareScan.AddMember("FilesScanned", _Count, &smithytraits.JSONName{Name: "filesScanned"})
+
+	InvestigationMalwareScan_GigabytesScanned = InvestigationMalwareScan.AddMember("GigabytesScanned", _Double, &smithytraits.JSONName{Name: "gigabytesScanned"})
+
+	InvestigationMalwareScan_VolumesScanned = InvestigationMalwareScan.AddMember("VolumesScanned", _Count, &smithytraits.JSONName{Name: "volumesScanned"})
+
+	InvestigationMalwareScan_InfectedFileCount = InvestigationMalwareScan.AddMember("InfectedFileCount", _Count, &smithytraits.JSONName{Name: "infectedFileCount"})
+
+	InvestigationMalwareScan_ResourceType = InvestigationMalwareScan.AddMember("ResourceType", _String, &smithytraits.JSONName{Name: "resourceType"})
+
+	InvestigationMalwareScan_ResourceIdentifier = InvestigationMalwareScan.AddMember("ResourceIdentifier", _String, &smithytraits.JSONName{Name: "resourceIdentifier"})
+
+	InvestigationMalwareScan_HighestSeverity = InvestigationMalwareScan.AddMember("HighestSeverity", _String, &smithytraits.JSONName{Name: "highestSeverity"})
+
+	InvestigationMalwareScan_HighestSeverityThreatName = InvestigationMalwareScan.AddMember("HighestSeverityThreatName", _String, &smithytraits.JSONName{Name: "highestSeverityThreatName"})
+
+	InvestigationMalwareScan_UniqueThreatCount = InvestigationMalwareScan.AddMember("UniqueThreatCount", _Count, &smithytraits.JSONName{Name: "uniqueThreatCount"})
+
+	InvestigationMalwareScan_TotalInfectedItems = InvestigationMalwareScan.AddMember("TotalInfectedItems", _Count, &smithytraits.JSONName{Name: "totalInfectedItems"})
+
+	InvestigationMalwareScan_Threats = InvestigationMalwareScan.AddMember("Threats", _MalwareThreats, &smithytraits.JSONName{Name: "threats"})
+
+	RecordType_OBSERVATION = RecordType.AddMember("OBSERVATION", smithyprelude.Unit)
+
+	RecordType_ANALYSIS = RecordType.AddMember("ANALYSIS", smithyprelude.Unit)
+
+	RecordType_UPDATE = RecordType.AddMember("UPDATE", smithyprelude.Unit)
+
+	RecordType_FETCH = RecordType.AddMember("FETCH", smithyprelude.Unit)
+
+	RecordType_METADATA = RecordType.AddMember("METADATA", smithyprelude.Unit)
+
+	ObservationType_FINDING_DETAIL = ObservationType.AddMember("FINDING_DETAIL", smithyprelude.Unit)
+
+	ObservationType_RESOURCE = ObservationType.AddMember("RESOURCE", smithyprelude.Unit)
+
+	ObservationType_NETWORK_ACTIVITY = ObservationType.AddMember("NETWORK_ACTIVITY", smithyprelude.Unit)
+
+	ObservationType_RDS_LOGIN_ACTIVITY = ObservationType.AddMember("RDS_LOGIN_ACTIVITY", smithyprelude.Unit)
+
+	ObservationType_S3_ACTIVITY = ObservationType.AddMember("S3_ACTIVITY", smithyprelude.Unit)
+
+	ObservationType_KUBERNETES_ACTIVITY = ObservationType.AddMember("KUBERNETES_ACTIVITY", smithyprelude.Unit)
+
+	ObservationType_MALWARE_SCAN = ObservationType.AddMember("MALWARE_SCAN", smithyprelude.Unit)
+
+	ObservationType_RELATED_FINDINGS = ObservationType.AddMember("RELATED_FINDINGS", smithyprelude.Unit)
+
+	ObservationType_DETECTION_COVERAGE = ObservationType.AddMember("DETECTION_COVERAGE", smithyprelude.Unit)
+
+	ObservationType_ACCOUNT_OVERVIEW = ObservationType.AddMember("ACCOUNT_OVERVIEW", smithyprelude.Unit)
+
+	ObservationType_RECOMMENDATION = ObservationType.AddMember("RECOMMENDATION", smithyprelude.Unit)
+
+	ObservationType_RUNTIME_SIGNALS = ObservationType.AddMember("RUNTIME_SIGNALS", smithyprelude.Unit)
+
+	ObservationType_DISTRIBUTION = ObservationType.AddMember("DISTRIBUTION", smithyprelude.Unit)
+
+	ObservationType_REPRESENTATIVE_RESOURCE = ObservationType.AddMember("REPRESENTATIVE_RESOURCE", smithyprelude.Unit)
+
+	LambdaFunction_FunctionName = LambdaFunction.AddMember("FunctionName", _String, &smithytraits.JSONName{Name: "functionName"})
+
+	LambdaFunction_FunctionArn = LambdaFunction.AddMember("FunctionArn", _String, &smithytraits.JSONName{Name: "functionArn"})
+
+	LambdaFunction_FunctionVersion = LambdaFunction.AddMember("FunctionVersion", _String, &smithytraits.JSONName{Name: "functionVersion"})
+
+	LambdaFunction_Role = LambdaFunction.AddMember("Role", _String, &smithytraits.JSONName{Name: "role"})
+
+	LambdaFunction_Description = LambdaFunction.AddMember("Description", _String, &smithytraits.JSONName{Name: "description"})
+
+	LambdaFunction_RevisionId = LambdaFunction.AddMember("RevisionId", _String, &smithytraits.JSONName{Name: "revisionId"})
+
+	LambdaFunction_UpdatedAt = LambdaFunction.AddMember("UpdatedAt", _Timestamp, &smithytraits.JSONName{Name: "updatedAt"})
+
+	LambdaFunction_VpcConfigurationSummary = LambdaFunction.AddMember("VpcConfigurationSummary", _String, &smithytraits.JSONName{Name: "vpcConfigurationSummary"})
+
+	RdsDbInstance_DbInstanceIdentifier = RdsDbInstance.AddMember("DbInstanceIdentifier", _String, &smithytraits.JSONName{Name: "dbInstanceIdentifier"})
+
+	RdsDbInstance_DbClusterIdentifier = RdsDbInstance.AddMember("DbClusterIdentifier", _String, &smithytraits.JSONName{Name: "dbClusterIdentifier"})
+
+	RdsDbInstance_DbInstanceArn = RdsDbInstance.AddMember("DbInstanceArn", _String, &smithytraits.JSONName{Name: "dbInstanceArn"})
+
+	RdsDbInstance_DbiResourceId = RdsDbInstance.AddMember("DbiResourceId", _String, &smithytraits.JSONName{Name: "dbiResourceId"})
+
+	RdsDbInstance_Engine = RdsDbInstance.AddMember("Engine", _String, &smithytraits.JSONName{Name: "engine"})
+
+	RdsDbInstance_EngineVersion = RdsDbInstance.AddMember("EngineVersion", _String, &smithytraits.JSONName{Name: "engineVersion"})
+
+	RdsDbUser_User = RdsDbUser.AddMember("User", _String, &smithytraits.JSONName{Name: "user"})
+
+	RdsDbUser_Application = RdsDbUser.AddMember("Application", _String, &smithytraits.JSONName{Name: "application"})
+
+	RdsDbUser_Database = RdsDbUser.AddMember("Database", _String, &smithytraits.JSONName{Name: "database"})
+
+	RdsDbUser_AuthMethod = RdsDbUser.AddMember("AuthMethod", _String, &smithytraits.JSONName{Name: "authMethod"})
+
+	RdsDbUser_Ssl = RdsDbUser.AddMember("Ssl", _String, &smithytraits.JSONName{Name: "ssl"})
+
+	InvestigationResourceData_Ec2Instance = InvestigationResourceData.AddMember("Ec2Instance", InvestigationEc2Instance, &smithytraits.JSONName{Name: "ec2Instance"})
+
+	InvestigationResourceData_LambdaFunction = InvestigationResourceData.AddMember("LambdaFunction", LambdaFunction, &smithytraits.JSONName{Name: "lambdaFunction"})
+
+	InvestigationResourceData_RdsDbInstance = InvestigationResourceData.AddMember("RdsDbInstance", RdsDbInstance, &smithytraits.JSONName{Name: "rdsDbInstance"})
+
+	InvestigationResourceData_RdsDbUser = InvestigationResourceData.AddMember("RdsDbUser", RdsDbUser, &smithytraits.JSONName{Name: "rdsDbUser"})
+
+	InvestigationResourceData_EksCluster = InvestigationResourceData.AddMember("EksCluster", InvestigationEksCluster, &smithytraits.JSONName{Name: "eksCluster"})
+
+	InvestigationResourceData_EcsCluster = InvestigationResourceData.AddMember("EcsCluster", InvestigationEcsCluster, &smithytraits.JSONName{Name: "ecsCluster"})
+
+	InvestigationResource_Uid = InvestigationResource.AddMember("Uid", _String, &smithytraits.JSONName{Name: "uid"})
+
+	InvestigationResource_Name = InvestigationResource.AddMember("Name", _String, &smithytraits.JSONName{Name: "name"})
+
+	InvestigationResource_ResourceType = InvestigationResource.AddMember("ResourceType", InvestigationResourceType, &smithytraits.JSONName{Name: "resourceType"})
+
+	InvestigationResource_Data = InvestigationResource.AddMember("Data", InvestigationResourceData, &smithytraits.JSONName{Name: "data"})
+
+	NetworkPorts_TargetPort = NetworkPorts.AddMember("TargetPort", _String, &smithytraits.JSONName{Name: "targetPort"})
+
+	NetworkPorts_RemotePort = NetworkPorts.AddMember("RemotePort", _String, &smithytraits.JSONName{Name: "remotePort"})
+
+	NetworkPorts_ResolverPort = NetworkPorts.AddMember("ResolverPort", _String, &smithytraits.JSONName{Name: "resolverPort"})
+
+	NetworkPorts_Ports = NetworkPorts.AddMember("Ports", _String, &smithytraits.JSONName{Name: "ports"})
+
+	NetworkPorts_PortsUsed = NetworkPorts.AddMember("PortsUsed", _String, &smithytraits.JSONName{Name: "portsUsed"})
+
+	NetworkPorts_PortCount = NetworkPorts.AddMember("PortCount", _Count, &smithytraits.JSONName{Name: "portCount"})
+
+	NetworkTraffic_BytesSent = NetworkTraffic.AddMember("BytesSent", _Count, &smithytraits.JSONName{Name: "bytesSent"})
+
+	NetworkTraffic_BytesReceived = NetworkTraffic.AddMember("BytesReceived", _Count, &smithytraits.JSONName{Name: "bytesReceived"})
+
+	NetworkAnomaly_BaselineBytes = NetworkAnomaly.AddMember("BaselineBytes", _String, &smithytraits.JSONName{Name: "baselineBytes"})
+
+	NetworkAnomaly_Deviation = NetworkAnomaly.AddMember("Deviation", _String, &smithytraits.JSONName{Name: "deviation"})
+
+	NetworkAnomaly_ProfileAgeDays = NetworkAnomaly.AddMember("ProfileAgeDays", _Integer, &smithytraits.JSONName{Name: "profileAgeDays"})
+
+	NetworkAnomaly_RemoteService = NetworkAnomaly.AddMember("RemoteService", _String, &smithytraits.JSONName{Name: "remoteService"})
+
+	NetworkAnomaly_RemoteRegion = NetworkAnomaly.AddMember("RemoteRegion", _String, &smithytraits.JSONName{Name: "remoteRegion"})
+
+	NetworkAnomaly_Duration = NetworkAnomaly.AddMember("Duration", _String, &smithytraits.JSONName{Name: "duration"})
+
+	NetworkAnomaly_ResetRatio = NetworkAnomaly.AddMember("ResetRatio", _String, &smithytraits.JSONName{Name: "resetRatio"})
+
+	NetworkAnomaly_TargetHostCount = NetworkAnomaly.AddMember("TargetHostCount", _Count, &smithytraits.JSONName{Name: "targetHostCount"})
+
+	NetworkCounts_RequestCount = NetworkCounts.AddMember("RequestCount", _Count, &smithytraits.JSONName{Name: "requestCount"})
+
+	NetworkCounts_TotalAttempts = NetworkCounts.AddMember("TotalAttempts", _Count, &smithytraits.JSONName{Name: "totalAttempts"})
+
+	NetworkCounts_SuspiciousAttempts = NetworkCounts.AddMember("SuspiciousAttempts", _Count, &smithytraits.JSONName{Name: "suspiciousAttempts"})
+
+	NetworkCounts_ResetAttempts = NetworkCounts.AddMember("ResetAttempts", _Count, &smithytraits.JSONName{Name: "resetAttempts"})
+
+	NetworkActivity_Protocol = NetworkActivity.AddMember("Protocol", _String, &smithytraits.JSONName{Name: "protocol"})
+
+	NetworkActivity_Direction = NetworkActivity.AddMember("Direction", _String, &smithytraits.JSONName{Name: "direction"})
+
+	NetworkActivity_Method = NetworkActivity.AddMember("Method", _String, &smithytraits.JSONName{Name: "method"})
+
+	NetworkActivity_Blocked = NetworkActivity.AddMember("Blocked", _String, &smithytraits.JSONName{Name: "blocked"})
+
+	NetworkActivity_Platform = NetworkActivity.AddMember("Platform", _String, &smithytraits.JSONName{Name: "platform"})
+
+	NetworkActivity_Ports = NetworkActivity.AddMember("Ports", NetworkPorts, &smithytraits.JSONName{Name: "ports"})
+
+	NetworkActivity_Traffic = NetworkActivity.AddMember("Traffic", NetworkTraffic, &smithytraits.JSONName{Name: "traffic"})
+
+	NetworkActivity_Anomaly = NetworkActivity.AddMember("Anomaly", NetworkAnomaly, &smithytraits.JSONName{Name: "anomaly"})
+
+	NetworkActivity_Dns = NetworkActivity.AddMember("Dns", DnsContext, &smithytraits.JSONName{Name: "dns"})
+
+	NetworkActivity_Counts = NetworkActivity.AddMember("Counts", NetworkCounts, &smithytraits.JSONName{Name: "counts"})
+
+	NetworkActivity_Enrichment = NetworkActivity.AddMember("Enrichment", Enrichment, &smithytraits.JSONName{Name: "enrichment"})
+
+	RdsLoginActivity_Outcome = RdsLoginActivity.AddMember("Outcome", _String, &smithytraits.JSONName{Name: "outcome"})
+
+	RdsLoginActivity_Rate = RdsLoginActivity.AddMember("Rate", _String, &smithytraits.JSONName{Name: "rate"})
+
+	RdsLoginActivity_AnomalyContext = RdsLoginActivity.AddMember("AnomalyContext", _InvestigationText, &smithytraits.JSONName{Name: "anomalyContext"})
+
+	RdsLoginActivity_LoginCount = RdsLoginActivity.AddMember("LoginCount", _Count, &smithytraits.JSONName{Name: "loginCount"})
+
+	RdsLoginActivity_ActivityWindow = RdsLoginActivity.AddMember("ActivityWindow", ActivityWindow, &smithytraits.JSONName{Name: "activityWindow"})
+
+	RdsLoginActivity_Enrichment = RdsLoginActivity.AddMember("Enrichment", Enrichment, &smithytraits.JSONName{Name: "enrichment"})
+
+	S3Activity_Api = S3Activity.AddMember("Api", _String, &smithytraits.JSONName{Name: "api"})
+
+	S3Activity_AffectedBucket = S3Activity.AddMember("AffectedBucket", _String, &smithytraits.JSONName{Name: "affectedBucket"})
+
+	S3Activity_OtherS3Activity = S3Activity.AddMember("OtherS3Activity", _String, &smithytraits.JSONName{Name: "otherS3Activity"})
+
+	S3Activity_NonS3Activity = S3Activity.AddMember("NonS3Activity", _String, &smithytraits.JSONName{Name: "nonS3Activity"})
+
+	S3Activity_SessionAssessment = S3Activity.AddMember("SessionAssessment", _InvestigationText, &smithytraits.JSONName{Name: "sessionAssessment"})
+
+	S3Activity_EventCount = S3Activity.AddMember("EventCount", _Count, &smithytraits.JSONName{Name: "eventCount"})
+
+	S3Activity_Actor = S3Activity.AddMember("Actor", InvestigationActor, &smithytraits.JSONName{Name: "actor"})
+
+	S3Activity_SourceIp = S3Activity.AddMember("SourceIp", _String, &smithytraits.JSONName{Name: "sourceIp"})
+
+	S3Activity_Enrichment = S3Activity.AddMember("Enrichment", Enrichment, &smithytraits.JSONName{Name: "enrichment"})
+
+	S3Activity_ActivityWindow = S3Activity.AddMember("ActivityWindow", ActivityWindow, &smithytraits.JSONName{Name: "activityWindow"})
+
+	KubernetesApiCall_ClusterName = KubernetesApiCall.AddMember("ClusterName", _String, &smithytraits.JSONName{Name: "clusterName"})
+
+	KubernetesApiCall_Username = KubernetesApiCall.AddMember("Username", _String, &smithytraits.JSONName{Name: "username"})
+
+	KubernetesApiCall_UserGroups = KubernetesApiCall.AddMember("UserGroups", _String, &smithytraits.JSONName{Name: "userGroups"})
+
+	KubernetesApiCall_UserId = KubernetesApiCall.AddMember("UserId", _String, &smithytraits.JSONName{Name: "userId"})
+
+	KubernetesApiCall_Verb = KubernetesApiCall.AddMember("Verb", _String, &smithytraits.JSONName{Name: "verb"})
+
+	KubernetesApiCall_ResourceType = KubernetesApiCall.AddMember("ResourceType", _String, &smithytraits.JSONName{Name: "resourceType"})
+
+	KubernetesApiCall_ResourceName = KubernetesApiCall.AddMember("ResourceName", _String, &smithytraits.JSONName{Name: "resourceName"})
+
+	KubernetesApiCall_Namespace = KubernetesApiCall.AddMember("Namespace", _String, &smithytraits.JSONName{Name: "namespace"})
+
+	KubernetesApiCall_RequestUri = KubernetesApiCall.AddMember("RequestUri", _String, &smithytraits.JSONName{Name: "requestUri"})
+
+	KubernetesApiCall_StatusCode = KubernetesApiCall.AddMember("StatusCode", _Integer, &smithytraits.JSONName{Name: "statusCode"})
+
+	KubernetesApiCall_SourceIps = KubernetesApiCall.AddMember("SourceIps", _String, &smithytraits.JSONName{Name: "sourceIPs"})
+
+	KubernetesApiCall_UserAgent = KubernetesApiCall.AddMember("UserAgent", _String, &smithytraits.JSONName{Name: "userAgent"})
+
+	KubernetesApiCall_EventCount = KubernetesApiCall.AddMember("EventCount", _Count, &smithytraits.JSONName{Name: "eventCount"})
+
+	KubernetesAnomaly_UnusualBehavior = KubernetesAnomaly.AddMember("UnusualBehavior", _InvestigationText, &smithytraits.JSONName{Name: "unusualBehavior"})
+
+	KubernetesAnomaly_BaselineContext = KubernetesAnomaly.AddMember("BaselineContext", _InvestigationText, &smithytraits.JSONName{Name: "baselineContext"})
+
+	KubernetesAnomaly_AnomalyScore = KubernetesAnomaly.AddMember("AnomalyScore", _String, &smithytraits.JSONName{Name: "anomalyScore"})
+
+	KubernetesAnomaly_TrainingPeriod = KubernetesAnomaly.AddMember("TrainingPeriod", _String, &smithytraits.JSONName{Name: "trainingPeriod"})
+
+	KubernetesActivity_ApiCall = KubernetesActivity.AddMember("ApiCall", KubernetesApiCall, &smithytraits.JSONName{Name: "apiCall"})
+
+	KubernetesActivity_Anomaly = KubernetesActivity.AddMember("Anomaly", KubernetesAnomaly, &smithytraits.JSONName{Name: "anomaly"})
+
+	KubernetesActivity_Workload = KubernetesActivity.AddMember("Workload", InvestigationKubernetesWorkload, &smithytraits.JSONName{Name: "workload"})
+
+	KubernetesActivity_Enrichment = KubernetesActivity.AddMember("Enrichment", Enrichment, &smithytraits.JSONName{Name: "enrichment"})
+
+	ObservedFindingType_FindingType = ObservedFindingType.AddMember("FindingType", _FindingType, &smithytraits.JSONName{Name: "findingType"})
+
+	ObservedFindingType_Count = ObservedFindingType.AddMember("Count", _Count, &smithytraits.JSONName{Name: "count"})
+
+	ObservedFindingType_SeverityMax = ObservedFindingType.AddMember("SeverityMax", _SeverityScore, &smithytraits.JSONName{Name: "severityMax"})
+
+	ObservedFindingType_SharedResources = ObservedFindingType.AddMember("SharedResources", _SharedResources, &smithytraits.JSONName{Name: "sharedResources"})
+
+	_ObservedFindingTypes_member = _ObservedFindingTypes.AddMember("member", ObservedFindingType)
+
+	RelatedFindings_Correlated = RelatedFindings.AddMember("Correlated", _CorrelatedFindings, &smithytraits.JSONName{Name: "correlated"})
+
+	RelatedFindings_Observed = RelatedFindings.AddMember("Observed", _ObservedFindingTypes, &smithytraits.JSONName{Name: "observed"})
+
+	SignalGroup_FindingType = SignalGroup.AddMember("FindingType", _FindingType, &smithytraits.JSONName{Name: "findingType"})
+
+	SignalGroup_Severity = SignalGroup.AddMember("Severity", _SeverityScore, &smithytraits.JSONName{Name: "severity"})
+
+	SignalGroup_Count = SignalGroup.AddMember("Count", _Count, &smithytraits.JSONName{Name: "count"})
+
+	_SignalGroups_member = _SignalGroups.AddMember("member", SignalGroup)
+
+	RuntimeSignals_SignalGroups = RuntimeSignals.AddMember("SignalGroups", _SignalGroups, &smithytraits.JSONName{Name: "signalGroups"})
+
+	RuntimeSignals_KeyObservation = RuntimeSignals.AddMember("KeyObservation", _InvestigationText, &smithytraits.JSONName{Name: "keyObservation"})
+
+	RepresentativeFinding_ResourceType = RepresentativeFinding.AddMember("ResourceType", _String, &smithytraits.JSONName{Name: "resourceType"})
+
+	RepresentativeFinding_Identifier = RepresentativeFinding.AddMember("Identifier", _String, &smithytraits.JSONName{Name: "identifier"})
+
+	RepresentativeFinding_FindingId = RepresentativeFinding.AddMember("FindingId", _FindingId, &smithytraits.JSONName{Name: "findingId"})
+
+	RepresentativeFinding_FindingCount = RepresentativeFinding.AddMember("FindingCount", _Count, &smithytraits.JSONName{Name: "findingCount"})
+
+	RepresentativeFinding_RiskLevel = RepresentativeFinding.AddMember("RiskLevel", RiskLevel, &smithytraits.JSONName{Name: "riskLevel"})
+
+	RepresentativeFinding_RiskRationale = RepresentativeFinding.AddMember("RiskRationale", _InvestigationText, &smithytraits.JSONName{Name: "riskRationale"})
+
+	_RepresentativeFindings_member = _RepresentativeFindings.AddMember("member", RepresentativeFinding)
+
+	ObservationRecord_ObservationType = ObservationRecord.AddMember("ObservationType", ObservationType, &smithytraits.JSONName{Name: "observationType"})
+
+	ObservationRecord_FindingDetail = ObservationRecord.AddMember("FindingDetail", FindingDetail, &smithytraits.JSONName{Name: "findingDetail"})
+
+	ObservationRecord_Resource = ObservationRecord.AddMember("Resource", InvestigationResource, &smithytraits.JSONName{Name: "resource"})
+
+	ObservationRecord_NetworkActivity = ObservationRecord.AddMember("NetworkActivity", NetworkActivity, &smithytraits.JSONName{Name: "networkActivity"})
+
+	ObservationRecord_RdsLoginActivity = ObservationRecord.AddMember("RdsLoginActivity", RdsLoginActivity, &smithytraits.JSONName{Name: "rdsLoginActivity"})
+
+	ObservationRecord_S3Activity = ObservationRecord.AddMember("S3Activity", S3Activity, &smithytraits.JSONName{Name: "s3Activity"})
+
+	ObservationRecord_KubernetesActivity = ObservationRecord.AddMember("KubernetesActivity", KubernetesActivity, &smithytraits.JSONName{Name: "kubernetesActivity"})
+
+	ObservationRecord_MalwareScan = ObservationRecord.AddMember("MalwareScan", InvestigationMalwareScan, &smithytraits.JSONName{Name: "malwareScan"})
+
+	ObservationRecord_RelatedFindings = ObservationRecord.AddMember("RelatedFindings", RelatedFindings, &smithytraits.JSONName{Name: "relatedFindings"})
+
+	ObservationRecord_DetectionCoverage = ObservationRecord.AddMember("DetectionCoverage", DetectionCoverage, &smithytraits.JSONName{Name: "detectionCoverage"})
+
+	ObservationRecord_AccountOverview = ObservationRecord.AddMember("AccountOverview", AccountOverview, &smithytraits.JSONName{Name: "accountOverview"})
+
+	ObservationRecord_Recommendations = ObservationRecord.AddMember("Recommendations", _Recommendations, &smithytraits.JSONName{Name: "recommendations"})
+
+	ObservationRecord_RuntimeSignals = ObservationRecord.AddMember("RuntimeSignals", RuntimeSignals, &smithytraits.JSONName{Name: "runtimeSignals"})
+
+	ObservationRecord_Distribution = ObservationRecord.AddMember("Distribution", Distribution, &smithytraits.JSONName{Name: "distribution"})
+
+	ObservationRecord_RepresentativeResources = ObservationRecord.AddMember("RepresentativeResources", _RepresentativeFindings, &smithytraits.JSONName{Name: "representativeResources"})
+
+	ObservationRecord_Indicators = ObservationRecord.AddMember("Indicators", _InvestigationIndicators, &smithytraits.JSONName{Name: "indicators"})
+
+	MetadataRecord_TotalTimeMilliseconds = MetadataRecord.AddMember("TotalTimeMilliseconds", _MetadataTotalTimeMilliseconds, &smithytraits.JSONName{Name: "totalTimeMilliseconds"})
+
+	SupportingData_Fetch = SupportingData.AddMember("Fetch", FetchRecord, &smithytraits.JSONName{Name: "fetch"})
+
+	SupportingData_Analysis = SupportingData.AddMember("Analysis", AnalysisRecord, &smithytraits.JSONName{Name: "analysis"})
+
+	SupportingData_Observation = SupportingData.AddMember("Observation", ObservationRecord, &smithytraits.JSONName{Name: "observation"})
+
+	SupportingData_Metadata = SupportingData.AddMember("Metadata", MetadataRecord, &smithytraits.JSONName{Name: "metadata"})
+
+	InvestigationRecord_RecordId = InvestigationRecord.AddMember("RecordId", _RecordId, &smithytraits.JSONName{Name: "recordId"})
+
+	InvestigationRecord_Type = InvestigationRecord.AddMember("Type", RecordType, &smithytraits.JSONName{Name: "type"})
+
+	InvestigationRecord_Title = InvestigationRecord.AddMember("Title", _RecordTitle, &smithytraits.JSONName{Name: "title"})
+
+	InvestigationRecord_Narrative = InvestigationRecord.AddMember("Narrative", _Narrative, &smithytraits.JSONName{Name: "narrative"})
+
+	InvestigationRecord_CreatedAt = InvestigationRecord.AddMember("CreatedAt", _Timestamp, &smithytraits.JSONName{Name: "createdAt"})
+
+	InvestigationRecord_SupportingData = InvestigationRecord.AddMember("SupportingData", SupportingData, &smithytraits.JSONName{Name: "supportingData"})
 
 	InvestigationSortField_START_TIME = InvestigationSortField.AddMember("START_TIME", smithyprelude.Unit)
 
@@ -10587,7 +13755,13 @@ func init() {
 
 	InvestigationSummary_Title = InvestigationSummary.AddMember("Title", _InvestigationTitle, &smithytraits.JSONName{Name: "title"})
 
+	InvestigationSummary_InvestigationType = InvestigationSummary.AddMember("InvestigationType", InvestigationType, &smithytraits.JSONName{Name: "investigationType"})
+
+	InvestigationSummary_FindingId = InvestigationSummary.AddMember("FindingId", _FindingId, &smithytraits.JSONName{Name: "findingId"})
+
 	InvestigationSummary_AccountId = InvestigationSummary.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
+
+	InvestigationSummary_AdminAccountId = InvestigationSummary.AddMember("AdminAccountId", _String, &smithytraits.JSONName{Name: "adminAccountId"})
 
 	InvestigationSummary_StartTime = InvestigationSummary.AddMember("StartTime", _Timestamp, &smithytraits.JSONName{Name: "startTime"})
 
@@ -10925,6 +14099,10 @@ func init() {
 
 	_OrganizationFeaturesConfigurationsResults_member = _OrganizationFeaturesConfigurationsResults.AddMember("member", OrganizationFeatureConfigurationResult)
 
+	_Records_member = _Records.AddMember("member", InvestigationRecord)
+
+	_RecordTypes_member = _RecordTypes.AddMember("member", RecordType)
+
 	RecoveryPoint_BackupVaultName = RecoveryPoint.AddMember("BackupVaultName", _String, &smithytraits.JSONName{Name: "backupVaultName"})
 
 	RecoveryPoint_ContinuousScanDetails = RecoveryPoint.AddMember("ContinuousScanDetails", ContinuousScanDetails, &smithytraits.JSONName{Name: "continuousScanDetails"})
@@ -11142,6 +14320,10 @@ func init() {
 	StartMalwareScanConfiguration_IncrementalScanDetails = StartMalwareScanConfiguration.AddMember("IncrementalScanDetails", IncrementalScanDetails, &smithytraits.JSONName{Name: "incrementalScanDetails"})
 
 	StartMalwareScanConfiguration_RecoveryPoint = StartMalwareScanConfiguration.AddMember("RecoveryPoint", RecoveryPoint, &smithytraits.JSONName{Name: "recoveryPoint"})
+
+	SummaryFormat_STRING = SummaryFormat.AddMember("STRING", smithyprelude.Unit)
+
+	SummaryFormat_STRUCTURED = SummaryFormat.AddMember("STRUCTURED", smithyprelude.Unit)
 
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
@@ -11749,6 +14931,8 @@ func init() {
 
 	GetInvestigationRequest_InvestigationId = GetInvestigationRequest.AddMember("InvestigationId", _InvestigationId, &smithytraits.HTTPLabel{})
 
+	GetInvestigationRequest_SummaryFormat = GetInvestigationRequest.AddMember("SummaryFormat", SummaryFormat, &smithytraits.HTTPQuery{Name: "summaryFormat"})
+
 	GetInvestigationResponse_Investigation = GetInvestigationResponse.AddMember("Investigation", Investigation, &smithytraits.JSONName{Name: "investigation"})
 
 	GetInvitationsCountResponse_InvitationsCount = GetInvitationsCountResponse.AddMember("InvitationsCount", _Integer, &smithytraits.JSONName{Name: "invitationsCount"})
@@ -12023,7 +15207,27 @@ func init() {
 
 	ListFindingsResponse_NextToken = ListFindingsResponse.AddMember("NextToken", _String, &smithytraits.JSONName{Name: "nextToken"})
 
+	ListInvestigationRecordsRequest_DetectorId = ListInvestigationRecordsRequest.AddMember("DetectorId", _DetectorId, &smithytraits.HTTPLabel{})
+
+	ListInvestigationRecordsRequest_InvestigationId = ListInvestigationRecordsRequest.AddMember("InvestigationId", _InvestigationId, &smithytraits.JSONName{Name: "investigationId"})
+
+	ListInvestigationRecordsRequest_RecordTypes = ListInvestigationRecordsRequest.AddMember("RecordTypes", _RecordTypes, &smithytraits.JSONName{Name: "recordTypes"})
+
+	ListInvestigationRecordsRequest_MaxResults = ListInvestigationRecordsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.JSONName{Name: "maxResults"})
+
+	ListInvestigationRecordsRequest_NextToken = ListInvestigationRecordsRequest.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
+
+	ListInvestigationRecordsResponse_InvestigationId = ListInvestigationRecordsResponse.AddMember("InvestigationId", _InvestigationId, &smithytraits.JSONName{Name: "investigationId"})
+
+	ListInvestigationRecordsResponse_Status = ListInvestigationRecordsResponse.AddMember("Status", InvestigationStatus, &smithytraits.JSONName{Name: "status"})
+
+	ListInvestigationRecordsResponse_Records = ListInvestigationRecordsResponse.AddMember("Records", _Records, &smithytraits.JSONName{Name: "records"})
+
+	ListInvestigationRecordsResponse_NextToken = ListInvestigationRecordsResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
+
 	ListInvestigationsRequest_DetectorId = ListInvestigationsRequest.AddMember("DetectorId", _DetectorId, &smithytraits.HTTPLabel{})
+
+	ListInvestigationsRequest_FilterCriteria = ListInvestigationsRequest.AddMember("FilterCriteria", InvestigationFilterCriteria, &smithytraits.JSONName{Name: "filterCriteria"})
 
 	ListInvestigationsRequest_SortCriteria = ListInvestigationsRequest.AddMember("SortCriteria", InvestigationSortCriteria, &smithytraits.JSONName{Name: "sortCriteria"})
 

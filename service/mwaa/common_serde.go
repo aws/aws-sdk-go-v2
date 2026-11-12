@@ -59,6 +59,14 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 	s.CloseList()
 }
 
+func serializeTeamNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func deserializeDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Dimension) error {
 	*v = make([]types.Dimension, 0)
 	var vv types.Dimension
@@ -187,6 +195,27 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	})
 }
 
+func deserializeTeamNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func serializeAirflowConfigurationOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -201,6 +230,17 @@ func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[stri
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
 		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializeTeamMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.TeamConfig) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseMap()
 }
@@ -239,6 +279,28 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeTeamMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.TeamConfig) error {
+	*v = make(map[string]types.TeamConfig)
+	var vv types.TeamConfig
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TeamConfig
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.TeamConfig{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

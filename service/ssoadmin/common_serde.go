@@ -186,6 +186,14 @@ func serializeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 	s.CloseList()
 }
 
+func serializeApplicationArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeApplicationAssignmentListForPrincipal(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ApplicationAssignmentForPrincipal) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -286,6 +294,14 @@ func serializeInstanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeIpCidrList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializePermissionSetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -372,6 +388,14 @@ func serializeTrustedTokenIssuerList(s smithy.ShapeSerializer, schema *smithy.Sc
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeVpcArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -486,6 +510,27 @@ func deserializeAccountAssignmentOperationStatusList(d smithy.ShapeDeserializer,
 }
 
 func deserializeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeApplicationArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
@@ -726,6 +771,27 @@ func deserializeInstanceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	})
 }
 
+func deserializeIpCidrList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePermissionSetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -933,6 +999,27 @@ func deserializeTrustedTokenIssuerList(d smithy.ShapeDeserializer, s *smithy.Sch
 
 		vv = types.TrustedTokenIssuerMetadata{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeVpcArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

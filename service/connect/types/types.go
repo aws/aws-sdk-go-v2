@@ -87,8 +87,11 @@ func (v *AdditionalEmailRecipients) Deserialize(d smithy.ShapeDeserializer) erro
 // Configuration settings for after contact work (ACW) timeout.
 type AfterContactWorkConfig struct {
 
-	// The ACW timeout duration in seconds. Minimum: 1 second. Maximum: 2,000,000
-	// seconds (24 days). Enter 0 for indefinite ACW time.
+	// The after contact work (ACW) timeout duration in seconds. Minimum: 1 second.
+	// Maximum: 2,000,000 seconds (24 days). For the CHAT channel, the maximum for a
+	// specific duration is 5,400 seconds (90 minutes); higher values end ACW after 90
+	// minutes. For all channels, including chat, you can enter 0 for an indefinite
+	// amount of time, meaning agents must manually choose to end ACW.
 	AfterContactWorkTimeLimit int32
 
 	noSmithyDocumentSerde
@@ -19952,6 +19955,13 @@ type IntegrationAssociationSummary struct {
 	// The integration type.
 	IntegrationType IntegrationType
 
+	// The Amazon Web Services Region where the integration association was last
+	// modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the integration association was last modified.
+	LastModifiedTime *time.Time
+
 	// The user-provided, friendly name for the external application.
 	SourceApplicationName *string
 
@@ -19986,6 +19996,12 @@ func (v *IntegrationAssociationSummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.IntegrationType != "" {
 		s.WriteString(schemas.IntegrationAssociationSummary_IntegrationType, string(v.IntegrationType))
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.IntegrationAssociationSummary_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.IntegrationAssociationSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.SourceApplicationName != nil {
 		s.WriteString(schemas.IntegrationAssociationSummary_SourceApplicationName, *v.SourceApplicationName)
 	}
@@ -20018,6 +20034,12 @@ func (v *IntegrationAssociationSummary) Deserialize(d smithy.ShapeDeserializer) 
 			}
 			v.IntegrationType = IntegrationType(ev)
 			return nil
+		case schemas.IntegrationAssociationSummary_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.IntegrationAssociationSummary_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.IntegrationAssociationSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.IntegrationAssociationSummary_LastModifiedTime, v.LastModifiedTime)
 		case schemas.IntegrationAssociationSummary_SourceApplicationName:
 			v.SourceApplicationName = new(string)
 			return d.ReadString(schemas.IntegrationAssociationSummary_SourceApplicationName, v.SourceApplicationName)
@@ -35364,10 +35386,12 @@ func (v *UserNotificationSummary) Deserialize(d smithy.ShapeDeserializer) error 
 type UserPhoneConfig struct {
 
 	// The After Call Work (ACW) timeout setting, in seconds. This parameter has a
-	// minimum value of 0 and a maximum value of 2,000,000 seconds (24 days). Enter 0
-	// if you don't want to allocate a specific amount of ACW time. It essentially
-	// means an indefinite amount of time. When the conversation ends, ACW starts; the
-	// agent must choose Close contact to end ACW.
+	// minimum value of 0 and a maximum value of 2,000,000 seconds (24 days). For the
+	// CHAT channel, the maximum for a specific duration is 5,400 seconds (90 minutes);
+	// higher values end ACW after 90 minutes. For all channels, including chat, you
+	// can enter 0 if you don't want to allocate a specific amount of ACW time. It
+	// essentially means an indefinite amount of time. When the conversation ends, ACW
+	// starts; the agent must choose Close contact to end ACW.
 	//
 	// When returned by a SearchUsers call, AfterContactWorkTimeLimit is returned in
 	// milliseconds.

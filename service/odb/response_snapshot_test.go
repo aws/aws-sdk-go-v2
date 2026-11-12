@@ -151,6 +151,36 @@ func TestCheckResponseSnapshot_AssociateIamRoleToResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AssociateVirtualMachinesToCloudVmCluster(t *testing.T) {
+	want := &AssociateVirtualMachinesToCloudVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateVirtualMachinesToCloudVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateVirtualMachinesToCloudVmCluster(context.Background(), &AssociateVirtualMachinesToCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateVirtualMachinesToCloudVmCluster.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
 	want := &AssociateVirtualMachinesToExadbVmClusterOutput{
 		DisplayName:      ptr.String("__DisplayName__"),
@@ -999,6 +1029,36 @@ func TestCheckResponseSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisassociateVirtualMachinesFromCloudVmCluster(t *testing.T) {
+	want := &DisassociateVirtualMachinesFromCloudVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateVirtualMachinesFromCloudVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateVirtualMachinesFromCloudVmCluster(context.Background(), &DisassociateVirtualMachinesFromCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateVirtualMachinesFromCloudVmCluster.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisassociateVirtualMachinesFromExadbVmCluster(t *testing.T) {
 	want := &DisassociateVirtualMachinesFromExadbVmClusterOutput{
 		DisplayName:      ptr.String("__DisplayName__"),
@@ -1487,6 +1547,7 @@ func TestCheckResponseSnapshot_GetCloudAutonomousVmCluster(t *testing.T) {
 			MemorySizeInGBs:                              ptr.Int32(1),
 			NodeCount:                                    ptr.Int32(1),
 			NonProvisionableAutonomousContainerDatabases: ptr.Int32(1),
+			OcpusLowestScaledValue:                       ptr.Int32(1),
 			ProvisionableAutonomousContainerDatabases:    ptr.Int32(1),
 			ProvisionedAutonomousContainerDatabases:      ptr.Int32(1),
 			ProvisionedCpus:                              ptr.Float32(1.0),
@@ -3740,6 +3801,7 @@ func TestCheckResponseSnapshot_ListCloudAutonomousVmClusters(t *testing.T) {
 				MemorySizeInGBs:                              ptr.Int32(1),
 				NodeCount:                                    ptr.Int32(1),
 				NonProvisionableAutonomousContainerDatabases: ptr.Int32(1),
+				OcpusLowestScaledValue:                       ptr.Int32(1),
 				ProvisionableAutonomousContainerDatabases:    ptr.Int32(1),
 				ProvisionedAutonomousContainerDatabases:      ptr.Int32(1),
 				ProvisionedCpus:                              ptr.Float32(1.0),
@@ -3841,6 +3903,7 @@ func TestCheckResponseSnapshot_ListCloudAutonomousVmClusters(t *testing.T) {
 				MemorySizeInGBs:                              ptr.Int32(1),
 				NodeCount:                                    ptr.Int32(1),
 				NonProvisionableAutonomousContainerDatabases: ptr.Int32(1),
+				OcpusLowestScaledValue:                       ptr.Int32(1),
 				ProvisionableAutonomousContainerDatabases:    ptr.Int32(1),
 				ProvisionedAutonomousContainerDatabases:      ptr.Int32(1),
 				ProvisionedCpus:                              ptr.Float32(1.0),
@@ -5857,14 +5920,14 @@ func TestCheckResponseSnapshot_UpdateAutonomousDatabaseBackup(t *testing.T) {
 	}
 }
 
-func TestCheckResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
-	want := &UpdateCloudExadataInfrastructureOutput{
-		DisplayName:                  ptr.String("__DisplayName__"),
-		Status:                       types.ResourceStatus("AVAILABLE"),
-		StatusReason:                 ptr.String("__StatusReason__"),
-		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+func TestCheckResponseSnapshot_UpdateCloudAutonomousVmCluster(t *testing.T) {
+	want := &UpdateCloudAutonomousVmClusterOutput{
+		DisplayName:                ptr.String("__DisplayName__"),
+		Status:                     types.ResourceStatus("AVAILABLE"),
+		StatusReason:               ptr.String("__StatusReason__"),
+		CloudAutonomousVmClusterId: ptr.String("__CloudAutonomousVmClusterId__"),
 	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateCloudExadataInfrastructure.response")
+	status, header, body, err := serdeRespReadSnapshot("UpdateCloudAutonomousVmCluster.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
 	}
@@ -5872,8 +5935,13 @@ func TestCheckResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCloudExadataInfrastructure(context.Background(), &UpdateCloudExadataInfrastructureInput{
-		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	got, err := svc.UpdateCloudAutonomousVmCluster(context.Background(), &UpdateCloudAutonomousVmClusterInput{
+		CloudAutonomousVmClusterId:     ptr.String("__CloudAutonomousVmClusterId__"),
+		AutonomousDataStorageSizeInTBs: ptr.Float64(1.0),
+		CpuCoreCountPerNode:            ptr.Int32(1),
+		Description:                    ptr.String("__Description__"),
+		DisplayName:                    ptr.String("__DisplayName__"),
+		LicenseModel:                   types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
 		MaintenanceWindow: &types.MaintenanceWindow{
 			CustomActionTimeoutInMins: ptr.Int32(1),
 			DaysOfWeek: []types.DayOfWeek{
@@ -5906,12 +5974,142 @@ func TestCheckResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 				1,
 			},
 		},
+		TotalContainerDatabases: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCloudAutonomousVmCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
+	want := &UpdateCloudExadataInfrastructureOutput{
+		DisplayName:                  ptr.String("__DisplayName__"),
+		Status:                       types.ResourceStatus("AVAILABLE"),
+		StatusReason:                 ptr.String("__StatusReason__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCloudExadataInfrastructure.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCloudExadataInfrastructure(context.Background(), &UpdateCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		DisplayName:                  ptr.String("__DisplayName__"),
+		ComputeCount:                 ptr.Int32(1),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			CustomActionTimeoutInMins: ptr.Int32(1),
+			DaysOfWeek: []types.DayOfWeek{
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+			},
+			HoursOfDay: []int32{
+				1,
+				1,
+			},
+			IsCustomActionTimeoutEnabled: ptr.Bool(true),
+			LeadTimeInWeeks:              ptr.Int32(1),
+			Months: []types.Month{
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+			},
+			PatchingMode: types.PatchingModeType("ROLLING"),
+			Preference:   types.PreferenceType("NO_PREFERENCE"),
+			SkipRu:       ptr.Bool(true),
+			WeeksOfMonth: []int32{
+				1,
+				1,
+			},
+		},
+		StorageCount: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCloudExadataInfrastructure.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateCloudExadataInfrastructureStorageCapacity(t *testing.T) {
+	want := &UpdateCloudExadataInfrastructureStorageCapacityOutput{
+		DisplayName:                  ptr.String("__DisplayName__"),
+		Status:                       types.ResourceStatus("AVAILABLE"),
+		StatusReason:                 ptr.String("__StatusReason__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCloudExadataInfrastructureStorageCapacity.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCloudExadataInfrastructureStorageCapacity(context.Background(), &UpdateCloudExadataInfrastructureStorageCapacityInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCloudExadataInfrastructureStorageCapacity.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateCloudVmCluster(t *testing.T) {
+	want := &UpdateCloudVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCloudVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCloudVmCluster(context.Background(), &UpdateCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		CpuCoreCount:     ptr.Int32(1),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		DataStorageSizeInTBs:   ptr.Float64(1.0),
+		DbNodeStorageSizeInGBs: ptr.Int32(1),
+		DisplayName:            ptr.String("__DisplayName__"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseModel:     types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		MemorySizeInGBs:  ptr.Int32(1),
+		StorageSizeInGBs: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCloudVmCluster.response", err)
 	}
 }
 

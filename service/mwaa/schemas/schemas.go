@@ -171,7 +171,7 @@ var _EndpointManagement = smithy.NewSchema(smithy.ShapeID{
 var Environment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
 	Name:      "Environment",
-}, smithy.ShapeTypeStructure, 34)
+}, smithy.ShapeTypeStructure, 36)
 var Environment_Name *smithy.Schema
 
 var Environment_Status *smithy.Schema
@@ -240,6 +240,10 @@ var Environment_MinWebservers *smithy.Schema
 
 var Environment_MaxWebservers *smithy.Schema
 
+var Environment_IdentityCenterConfiguration *smithy.Schema
+
+var Environment_Teams *smithy.Schema
+
 var _EnvironmentArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
 	Name:      "EnvironmentArn",
@@ -289,6 +293,24 @@ var _IamIdentity = smithy.NewSchema(smithy.ShapeID{
 var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
 	Name:      "IamRoleArn",
+}, smithy.ShapeTypeString, 0)
+
+var IdentityCenterConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "IdentityCenterConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var IdentityCenterConfiguration_StartUrl *smithy.Schema
+
+var IdentityCenterConfiguration_IdentityStoreId *smithy.Schema
+
+var _IdentityCenterIdentityStoreId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "IdentityCenterIdentityStoreId",
+}, smithy.ShapeTypeString, 0)
+
+var _IdentityCenterStartUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "IdentityCenterStartUrl",
 }, smithy.ShapeTypeString, 0)
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
@@ -558,6 +580,33 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
 
+var TeamConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "TeamConfig",
+}, smithy.ShapeTypeStructure, 2)
+var TeamConfig_SourceBucketArn *smithy.Schema
+
+var TeamConfig_DagS3Path *smithy.Schema
+
+var _TeamMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "TeamMap",
+}, smithy.ShapeTypeMap, 2)
+var _TeamMap_key *smithy.Schema
+
+var _TeamMap_value *smithy.Schema
+
+var _TeamNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "TeamNameList",
+}, smithy.ShapeTypeList, 1)
+var _TeamNameList_member *smithy.Schema
+
+var _TeamNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "TeamNameString",
+}, smithy.ShapeTypeString, 0)
+
 var _Token = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
 	Name:      "Token",
@@ -596,6 +645,14 @@ var _UpdateStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
 	Name:      "UpdateStatus",
 }, smithy.ShapeTypeString, 0)
+
+var UpdateTeamsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaa",
+	Name:      "UpdateTeamsInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateTeamsInput_AddOrUpdate *smithy.Schema
+
+var UpdateTeamsInput_Remove *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
@@ -646,7 +703,7 @@ var CreateCliTokenResponse_WebServerHostname *smithy.Schema
 var CreateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
 	Name:      "CreateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 27)
 var CreateEnvironmentInput_Name *smithy.Schema
 
 var CreateEnvironmentInput_ExecutionRoleArn *smithy.Schema
@@ -696,6 +753,10 @@ var CreateEnvironmentInput_EndpointManagement *smithy.Schema
 var CreateEnvironmentInput_MinWebservers *smithy.Schema
 
 var CreateEnvironmentInput_MaxWebservers *smithy.Schema
+
+var CreateEnvironmentInput_IdentityCenterConfiguration *smithy.Schema
+
+var CreateEnvironmentInput_Teams *smithy.Schema
 
 var CreateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
@@ -836,7 +897,7 @@ var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
 var UpdateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
 	Name:      "UpdateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 25)
 var UpdateEnvironmentInput_Name *smithy.Schema
 
 var UpdateEnvironmentInput_ExecutionRoleArn *smithy.Schema
@@ -882,6 +943,10 @@ var UpdateEnvironmentInput_StartupScriptS3ObjectVersion *smithy.Schema
 var UpdateEnvironmentInput_WebserverAccessMode *smithy.Schema
 
 var UpdateEnvironmentInput_WeeklyMaintenanceWindowStart *smithy.Schema
+
+var UpdateEnvironmentInput_IdentityCenterConfiguration *smithy.Schema
+
+var UpdateEnvironmentInput_Teams *smithy.Schema
 
 var UpdateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaa",
@@ -945,6 +1010,18 @@ func init() {
 	_TagMap_key = _TagMap.AddMember("key", _TagKey)
 
 	_TagMap_value = _TagMap.AddMember("value", _TagValue)
+
+	IdentityCenterConfiguration_StartUrl = IdentityCenterConfiguration.AddMember("StartUrl", _IdentityCenterStartUrl)
+
+	IdentityCenterConfiguration_IdentityStoreId = IdentityCenterConfiguration.AddMember("IdentityStoreId", _IdentityCenterIdentityStoreId)
+
+	TeamConfig_SourceBucketArn = TeamConfig.AddMember("SourceBucketArn", _S3BucketArn)
+
+	TeamConfig_DagS3Path = TeamConfig.AddMember("DagS3Path", _RelativePath)
+
+	_TeamMap_key = _TeamMap.AddMember("key", _TeamNameString)
+
+	_TeamMap_value = _TeamMap.AddMember("value", TeamConfig)
 
 	Environment_Name = Environment.AddMember("Name", _EnvironmentName)
 
@@ -1014,6 +1091,10 @@ func init() {
 
 	Environment_MaxWebservers = Environment.AddMember("MaxWebservers", _MaxWebservers)
 
+	Environment_IdentityCenterConfiguration = Environment.AddMember("IdentityCenterConfiguration", IdentityCenterConfiguration)
+
+	Environment_Teams = Environment.AddMember("Teams", _TeamMap)
+
 	_EnvironmentList_member = _EnvironmentList.AddMember("member", _EnvironmentName)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
@@ -1068,7 +1149,13 @@ func init() {
 
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
+	_TeamNameList_member = _TeamNameList.AddMember("member", _TeamNameString)
+
 	UpdateNetworkConfigurationInput_SecurityGroupIds = UpdateNetworkConfigurationInput.AddMember("SecurityGroupIds", _SecurityGroupList)
+
+	UpdateTeamsInput_AddOrUpdate = UpdateTeamsInput.AddMember("AddOrUpdate", _TeamMap)
+
+	UpdateTeamsInput_Remove = UpdateTeamsInput.AddMember("Remove", _TeamNameList)
 
 	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
 
@@ -1127,6 +1214,10 @@ func init() {
 	CreateEnvironmentInput_MinWebservers = CreateEnvironmentInput.AddMember("MinWebservers", _MinWebservers)
 
 	CreateEnvironmentInput_MaxWebservers = CreateEnvironmentInput.AddMember("MaxWebservers", _MaxWebservers)
+
+	CreateEnvironmentInput_IdentityCenterConfiguration = CreateEnvironmentInput.AddMember("IdentityCenterConfiguration", IdentityCenterConfiguration)
+
+	CreateEnvironmentInput_Teams = CreateEnvironmentInput.AddMember("Teams", _TeamMap)
 
 	CreateEnvironmentOutput_Arn = CreateEnvironmentOutput.AddMember("Arn", _EnvironmentArn)
 
@@ -1229,6 +1320,10 @@ func init() {
 	UpdateEnvironmentInput_WebserverAccessMode = UpdateEnvironmentInput.AddMember("WebserverAccessMode", _WebserverAccessMode)
 
 	UpdateEnvironmentInput_WeeklyMaintenanceWindowStart = UpdateEnvironmentInput.AddMember("WeeklyMaintenanceWindowStart", _WeeklyMaintenanceWindowStart)
+
+	UpdateEnvironmentInput_IdentityCenterConfiguration = UpdateEnvironmentInput.AddMember("IdentityCenterConfiguration", IdentityCenterConfiguration)
+
+	UpdateEnvironmentInput_Teams = UpdateEnvironmentInput.AddMember("Teams", UpdateTeamsInput)
 
 	UpdateEnvironmentOutput_Arn = UpdateEnvironmentOutput.AddMember("Arn", _EnvironmentArn)
 

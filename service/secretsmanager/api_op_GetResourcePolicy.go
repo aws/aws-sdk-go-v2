@@ -52,6 +52,11 @@ type GetResourcePolicyInput struct {
 	// This member is required.
 	SecretId *string
 
+	// The name of the resource policy to retrieve. If you don't specify this field,
+	// Secrets Manager uses default . If you specify a name other than default and no
+	// policy with that name exists, the operation returns a ResourceNotFoundException .
+	PolicyName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -62,6 +67,9 @@ func (v *GetResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetResourcePolicyRequest_PolicyName, *v.PolicyName)
+	}
 	if v.SecretId != nil {
 		s.WriteString(schemas.GetResourcePolicyRequest_SecretId, *v.SecretId)
 	}
@@ -74,6 +82,10 @@ type GetResourcePolicyOutput struct {
 
 	// The name of the secret that the resource-based policy was retrieved for.
 	Name *string
+
+	// The name of the resource policy. If you didn't specify PolicyName in the
+	// request, this is default .
+	PolicyName *string
 
 	// A JSON-formatted string that contains the permissions policy attached to the
 	// secret. For more information about permissions policies, see [Authentication and access control for Secrets Manager].
@@ -100,6 +112,9 @@ func (v *GetResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetResourcePolicyResponse_Name, *v.Name)
 	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetResourcePolicyResponse_PolicyName, *v.PolicyName)
+	}
 	if v.ResourcePolicy != nil {
 		s.WriteString(schemas.GetResourcePolicyResponse_ResourcePolicy, *v.ResourcePolicy)
 	}
@@ -113,6 +128,9 @@ func (v *GetResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.GetResourcePolicyResponse_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.GetResourcePolicyResponse_Name, v.Name)
+		case schemas.GetResourcePolicyResponse_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.GetResourcePolicyResponse_PolicyName, v.PolicyName)
 		case schemas.GetResourcePolicyResponse_ResourcePolicy:
 			v.ResourcePolicy = new(string)
 			return d.ReadString(schemas.GetResourcePolicyResponse_ResourcePolicy, v.ResourcePolicy)

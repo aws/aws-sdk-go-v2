@@ -20,6 +20,12 @@ import (
 // first delete the replicas using RemoveRegionsFromReplication, and then delete the primary secret. When you
 // delete a replica, it is deleted immediately.
 //
+// You can't delete a cross-account primary secret that is associated with a
+// cross-account replica secret. You must first disassociate each of the replicas
+// using DisassociateCrossAccountReplica, before deleting the primary secret. Similarly, you can't delete a
+// cross-account replica secret without first stopping replication. Call StopReplicationToReplicato stop
+// replication, and then you can delete the secret.
+//
 // You can't directly delete a version of a secret. Instead, you remove all
 // staging labels from the version using UpdateSecretVersionStage. This marks the version as deprecated,
 // and then Secrets Manager can automatically delete the version in the background.

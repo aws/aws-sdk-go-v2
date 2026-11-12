@@ -1,0 +1,8 @@
+{
+    "id": "9bb06f84-4b75-45de-a4d6-a9dff5b78f33",
+    "type": "feature",
+    "description": "Adds support for ApplicationStartedAt on stream sessions, a timestamp that indicates when the application launched for the stream session, returned by GetStreamSession and StartStreamSession. Also added streamingStartedAt and streamingEndedAt.",
+    "modules": [
+        "service/gameliftstreams"
+    ]
+}

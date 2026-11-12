@@ -4832,7 +4832,7 @@ var CreateMembershipResponse = smithy.NewSchema(smithy.ShapeID{
 var CreatePentestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "CreatePentestInput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreatePentestInput_title *smithy.Schema
 
 var CreatePentestInput_agentSpaceId *smithy.Schema
@@ -4850,6 +4850,8 @@ var CreatePentestInput_vpcConfig *smithy.Schema
 var CreatePentestInput_networkTrafficConfig *smithy.Schema
 
 var CreatePentestInput_codeRemediationStrategy *smithy.Schema
+
+var CreatePentestInput_cleanUpStrategy *smithy.Schema
 
 var CreatePentestInput_disableManagedSkills *smithy.Schema
 
@@ -6212,7 +6214,7 @@ var UpdateIntegrationOutput_secret *smithy.Schema
 var UpdatePentestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "UpdatePentestInput",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var UpdatePentestInput_pentestId *smithy.Schema
 
 var UpdatePentestInput_agentSpaceId *smithy.Schema
@@ -6232,6 +6234,8 @@ var UpdatePentestInput_vpcConfig *smithy.Schema
 var UpdatePentestInput_networkTrafficConfig *smithy.Schema
 
 var UpdatePentestInput_codeRemediationStrategy *smithy.Schema
+
+var UpdatePentestInput_cleanUpStrategy *smithy.Schema
 
 var UpdatePentestInput_disableManagedSkills *smithy.Schema
 
@@ -8872,6 +8876,8 @@ func init() {
 
 	CreatePentestInput_codeRemediationStrategy = CreatePentestInput.AddMember("codeRemediationStrategy", CodeRemediationStrategy)
 
+	CreatePentestInput_cleanUpStrategy = CreatePentestInput.AddMember("cleanUpStrategy", CleanUpStrategy)
+
 	CreatePentestInput_disableManagedSkills = CreatePentestInput.AddMember("disableManagedSkills", _SkillTypeList)
 
 	CreatePentestInput_maxTaskHours = CreatePentestInput.AddMember("maxTaskHours", smithyprelude.Double)
@@ -9765,6 +9771,8 @@ func init() {
 	UpdatePentestInput_networkTrafficConfig = UpdatePentestInput.AddMember("networkTrafficConfig", NetworkTrafficConfig)
 
 	UpdatePentestInput_codeRemediationStrategy = UpdatePentestInput.AddMember("codeRemediationStrategy", CodeRemediationStrategy)
+
+	UpdatePentestInput_cleanUpStrategy = UpdatePentestInput.AddMember("cleanUpStrategy", CleanUpStrategy)
 
 	UpdatePentestInput_disableManagedSkills = UpdatePentestInput.AddMember("disableManagedSkills", _SkillTypeList)
 

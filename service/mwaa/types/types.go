@@ -112,6 +112,10 @@ type Environment struct {
 	// [Amazon MWAA Execution role]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 	ExecutionRoleArn *string
 
+	// The Amazon Web Services IAM Identity Center configuration used to authenticate
+	// users to the Apache Airflow web UI for your environment.
+	IdentityCenterConfiguration *IdentityCenterConfiguration
+
 	// The KMS encryption key used to encrypt the data in your environment.
 	KmsKey *string
 
@@ -303,6 +307,15 @@ type Environment struct {
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
+	// The teams configured for Apache Airflow multi-team support on your Amazon MWAA
+	// environment. Each entry maps a team name to its settings, which define the
+	// Amazon S3 location of that team's DAG code. Each team name matches the display
+	// name of the Amazon Web Services IAM Identity Center group associated with the
+	// team. For more information, refer to [Apache Airflow multi-team environments].
+	//
+	// [Apache Airflow multi-team environments]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+	Teams map[string]TeamConfig
+
 	// The Apache Airflow web server access mode. For more information, refer to [Apache Airflow access modes].
 	//
 	// If set to PUBLIC_AND_PRIVATE , creates both a public network load balancer (NLB)
@@ -366,6 +379,11 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.Environment_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdentityCenterConfiguration != nil {
+		s.WriteStruct(schemas.Environment_IdentityCenterConfiguration)
+		v.IdentityCenterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.KmsKey != nil {
 		s.WriteString(schemas.Environment_KmsKey, *v.KmsKey)
@@ -433,6 +451,9 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Tags != nil {
 		serializeTagMap(s, schemas.Environment_Tags, v.Tags)
 	}
+	if v.Teams != nil {
+		serializeTeamMap(s, schemas.Environment_Teams, v.Teams)
+	}
 	if v.WebserverAccessMode != "" {
 		s.WriteString(schemas.Environment_WebserverAccessMode, string(v.WebserverAccessMode))
 	}
@@ -482,6 +503,9 @@ func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Environment_ExecutionRoleArn:
 			v.ExecutionRoleArn = new(string)
 			return d.ReadString(schemas.Environment_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.Environment_IdentityCenterConfiguration:
+			v.IdentityCenterConfiguration = &IdentityCenterConfiguration{}
+			return v.IdentityCenterConfiguration.Deserialize(d)
 		case schemas.Environment_KmsKey:
 			v.KmsKey = new(string)
 			return d.ReadString(schemas.Environment_KmsKey, v.KmsKey)
@@ -545,6 +569,8 @@ func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.Environment_Tags:
 			return deserializeTagMap(d, schemas.Environment_Tags, &v.Tags)
+		case schemas.Environment_Teams:
+			return deserializeTeamMap(d, schemas.Environment_Teams, &v.Teams)
 		case schemas.Environment_WebserverAccessMode:
 			var ev string
 			if err := d.ReadString(schemas.Environment_WebserverAccessMode, &ev); err != nil {
@@ -561,6 +587,51 @@ func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Environment_WeeklyMaintenanceWindowStart:
 			v.WeeklyMaintenanceWindowStart = new(string)
 			return d.ReadString(schemas.Environment_WeeklyMaintenanceWindowStart, v.WeeklyMaintenanceWindowStart)
+		}
+		return nil
+	})
+}
+
+// Describes the Amazon Web Services IAM Identity Center configuration used to
+// authenticate users to the Apache Airflow web UI for your Amazon MWAA
+// environment.
+type IdentityCenterConfiguration struct {
+
+	// The identifier of the identity store associated with the IAM Identity Center
+	// instance for your environment. For example, d-1234567890 .
+	IdentityStoreId *string
+
+	// The Amazon Web Services access portal URL of the IAM Identity Center instance
+	// associated with your environment. For example,
+	// https://my-portal.awsapps.com/start .
+	StartUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdentityCenterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityCenterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityCenterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.IdentityCenterConfiguration_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.StartUrl != nil {
+		s.WriteString(schemas.IdentityCenterConfiguration_StartUrl, *v.StartUrl)
+	}
+}
+func (v *IdentityCenterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityCenterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityCenterConfiguration_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.IdentityCenterConfiguration_IdentityStoreId, v.IdentityStoreId)
+		case schemas.IdentityCenterConfiguration_StartUrl:
+			v.StartUrl = new(string)
+			return d.ReadString(schemas.IdentityCenterConfiguration_StartUrl, v.StartUrl)
 		}
 		return nil
 	})
@@ -1111,6 +1182,77 @@ func (v *StatisticSet) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes the configuration for a single team in Apache Airflow multi-team
+// support on your Amazon MWAA environment. A team configuration defines the Amazon
+// S3 location of the DAG code for the team. The team name that maps to this
+// configuration must match the display name of an Amazon Web Services IAM Identity
+// Center group associated with your environment. For more information, refer to [Apache Airflow multi-team environments].
+//
+// [Apache Airflow multi-team environments]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+type TeamConfig struct {
+
+	// The relative path to the DAGs folder for the team in the team's Amazon S3
+	// bucket. For example, dags/team-a . For more information, refer to [Adding or updating DAGs].
+	//
+	// DAG folders can't overlap. A team folder can't be inside the global folder or
+	// another team's folder, and the global folder can't be inside a team folder.
+	// Amazon Managed Workflows for Apache Airflow (Amazon MWAA) compares folder paths
+	// as Amazon S3 prefixes, so the trailing slash matters:
+	//
+	//   - s3://amzn-s3-demo-bucket/dags/ and s3://amzn-s3-demo-bucket/dags/team-a/
+	//   overlap, because the first path is a prefix of the second.
+	//
+	//   - s3://amzn-s3-demo-bucket/dags/ and s3://amzn-s3-demo-bucket/dags-team-a/
+	//   don't overlap.
+	//
+	//   - s3://amzn-s3-demo-bucket/teams/team-a/ and
+	//   s3://amzn-s3-demo-bucket/teams/team-b/ don't overlap.
+	//
+	// [Adding or updating DAGs]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
+	//
+	// This member is required.
+	DagS3Path *string
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where the team's DAG
+	// code and supporting files are stored. For example,
+	// arn:aws:s3:::my-airflow-bucket-unique-name . For more information, refer to [Create an Amazon S3 bucket for Amazon MWAA].
+	//
+	// [Create an Amazon S3 bucket for Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
+	//
+	// This member is required.
+	SourceBucketArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TeamConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TeamConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TeamConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DagS3Path != nil {
+		s.WriteString(schemas.TeamConfig_DagS3Path, *v.DagS3Path)
+	}
+	if v.SourceBucketArn != nil {
+		s.WriteString(schemas.TeamConfig_SourceBucketArn, *v.SourceBucketArn)
+	}
+}
+func (v *TeamConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TeamConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TeamConfig_DagS3Path:
+			v.DagS3Path = new(string)
+			return d.ReadString(schemas.TeamConfig_DagS3Path, v.DagS3Path)
+		case schemas.TeamConfig_SourceBucketArn:
+			v.SourceBucketArn = new(string)
+			return d.ReadString(schemas.TeamConfig_SourceBucketArn, v.SourceBucketArn)
+		}
+		return nil
+	})
+}
+
 // Describes the error(s) encountered with the last update of the environment.
 type UpdateError struct {
 
@@ -1185,6 +1327,51 @@ func (v *UpdateNetworkConfigurationInput) Deserialize(d smithy.ShapeDeserializer
 		switch s {
 		case schemas.UpdateNetworkConfigurationInput_SecurityGroupIds:
 			return deserializeSecurityGroupList(d, schemas.UpdateNetworkConfigurationInput_SecurityGroupIds, &v.SecurityGroupIds)
+		}
+		return nil
+	})
+}
+
+// Defines the changes to the teams configured for Apache Airflow multi-team
+// support when you update your Amazon MWAA environment. Use AddOrUpdate to add or
+// modify teams, and Remove to remove teams by name.
+type UpdateTeamsInput struct {
+
+	// A map of teams to add to your environment, or to update if they already exist.
+	// Each entry maps a team name to its settings. Each team name must match the
+	// display name of an Amazon Web Services IAM Identity Center group associated with
+	// your environment. You can configure between 1 and 20 teams.
+	AddOrUpdate map[string]TeamConfig
+
+	// A list of team names to remove from your environment. For example, team-a . You
+	// can remove between 1 and 20 teams in a single update. Removing a team does not
+	// delete the team's DAG code from Amazon S3.
+	Remove []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateTeamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTeamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTeamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddOrUpdate != nil {
+		serializeTeamMap(s, schemas.UpdateTeamsInput_AddOrUpdate, v.AddOrUpdate)
+	}
+	if v.Remove != nil {
+		serializeTeamNameList(s, schemas.UpdateTeamsInput_Remove, v.Remove)
+	}
+}
+func (v *UpdateTeamsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTeamsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTeamsInput_AddOrUpdate:
+			return deserializeTeamMap(d, schemas.UpdateTeamsInput_AddOrUpdate, &v.AddOrUpdate)
+		case schemas.UpdateTeamsInput_Remove:
+			return deserializeTeamNameList(d, schemas.UpdateTeamsInput_Remove, &v.Remove)
 		}
 		return nil
 	})

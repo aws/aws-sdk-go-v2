@@ -1,0 +1,8 @@
+{
+    "id": "ae34f7fa-7128-46ba-8f43-e57883f3f6ff",
+    "type": "feature",
+    "description": "Amazon Lightsail now offers web addresses, so you can quickly make a website or application reachable at a name like mysite.amazonlightsail.com. A web address is free while attached to a Lightsail CDN, with no domain to register and no SSL TLS certificate to create or renew.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

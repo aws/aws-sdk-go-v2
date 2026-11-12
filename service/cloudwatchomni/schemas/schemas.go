@@ -1265,10 +1265,18 @@ var _MetadataAttributeMap_key *smithy.Schema
 
 var _MetadataAttributeMap_value *smithy.Schema
 
+var MetricAggregationTemporality = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "MetricAggregationTemporality",
+}, smithy.ShapeTypeEnum, 2)
+var MetricAggregationTemporality_DELTA *smithy.Schema
+
+var MetricAggregationTemporality_CUMULATIVE *smithy.Schema
+
 var MetricMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "MetricMetadata",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var MetricMetadata_name *smithy.Schema
 
 var MetricMetadata_preferredStat *smithy.Schema
@@ -1279,11 +1287,23 @@ var MetricMetadata_attributes *smithy.Schema
 
 var MetricMetadata_semantics *smithy.Schema
 
+var MetricMetadata_aggregationTemporality *smithy.Schema
+
+var MetricMetadata_monotonicity *smithy.Schema
+
 var _MetricMetadataList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "MetricMetadataList",
 }, smithy.ShapeTypeList, 1)
 var _MetricMetadataList_member *smithy.Schema
+
+var MetricMonotonicity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "MetricMonotonicity",
+}, smithy.ShapeTypeEnum, 2)
+var MetricMonotonicity_MONOTONIC *smithy.Schema
+
+var MetricMonotonicity_NON_MONOTONIC *smithy.Schema
 
 var MetricSemantics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
@@ -3931,6 +3951,14 @@ func init() {
 
 	MetricSemantics_unit = MetricSemantics.AddMember("unit", smithyprelude.String)
 
+	MetricAggregationTemporality_DELTA = MetricAggregationTemporality.AddMember("DELTA", smithyprelude.Unit)
+
+	MetricAggregationTemporality_CUMULATIVE = MetricAggregationTemporality.AddMember("CUMULATIVE", smithyprelude.Unit)
+
+	MetricMonotonicity_MONOTONIC = MetricMonotonicity.AddMember("MONOTONIC", smithyprelude.Unit)
+
+	MetricMonotonicity_NON_MONOTONIC = MetricMonotonicity.AddMember("NON_MONOTONIC", smithyprelude.Unit)
+
 	MetricMetadata_name = MetricMetadata.AddMember("name", smithyprelude.String)
 
 	MetricMetadata_preferredStat = MetricMetadata.AddMember("preferredStat", smithyprelude.String)
@@ -3940,6 +3968,10 @@ func init() {
 	MetricMetadata_attributes = MetricMetadata.AddMember("attributes", _MetadataAttributeMap)
 
 	MetricMetadata_semantics = MetricMetadata.AddMember("semantics", MetricSemantics)
+
+	MetricMetadata_aggregationTemporality = MetricMetadata.AddMember("aggregationTemporality", MetricAggregationTemporality)
+
+	MetricMetadata_monotonicity = MetricMetadata.AddMember("monotonicity", MetricMonotonicity)
 
 	_MetricMetadataList_member = _MetricMetadataList.AddMember("member", MetricMetadata)
 

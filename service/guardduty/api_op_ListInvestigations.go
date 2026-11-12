@@ -17,7 +17,9 @@ import (
 // (London), Europe (Paris), Europe (Stockholm), and Asia Pacific (Tokyo).
 //
 // Returns a list of investigations associated with the specified GuardDuty
-// detector.
+// detector. You can filter the investigations by status, risk level, confidence,
+// finding ID, and investigation type, and sort them by start time, end time,
+// status, risk level, or confidence.
 //
 // An administrator account sees all investigations across the organization.
 // Member accounts see only the investigations that belong to them.
@@ -48,6 +50,10 @@ type ListInvestigationsInput struct {
 	// This member is required.
 	DetectorId *string
 
+	// The criteria used to filter investigations. GuardDuty returns only the
+	// investigations that match all of the specified criteria.
+	FilterCriteria *types.InvestigationFilterCriteria
+
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 50.
 	MaxResults *int32
@@ -73,6 +79,11 @@ func (v *ListInvestigationsInput) Serialize(s smithy.ShapeSerializer) {
 func (v *ListInvestigationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectorId != nil {
 		s.WriteString(schemas.ListInvestigationsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListInvestigationsRequest_FilterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListInvestigationsRequest_MaxResults, *v.MaxResults)

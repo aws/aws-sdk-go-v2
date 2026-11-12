@@ -86,6 +86,12 @@ type DescribeInstanceOutput struct {
 	// Specifies the instance name.
 	Name *string
 
+	// The network access controls configured for your Identity Center instance,
+	// including whether VPC endpoint access is required, and any VPC, IP address
+	// range, or application controls applied to instance traffic. Present only after a
+	// network configuration has been set on the instance.
+	NetworkConfigurationDetails *types.NetworkConfigurationInfo
+
 	// The identifier of the Amazon Web Services account for which the instance was
 	// created.
 	OwnerAccountId *string
@@ -145,6 +151,11 @@ func (v *DescribeInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeInstanceResponse_Name, *v.Name)
 	}
+	if v.NetworkConfigurationDetails != nil {
+		s.WriteStruct(schemas.DescribeInstanceResponse_NetworkConfigurationDetails)
+		v.NetworkConfigurationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.OwnerAccountId != nil {
 		s.WriteString(schemas.DescribeInstanceResponse_OwnerAccountId, *v.OwnerAccountId)
 	}
@@ -185,6 +196,9 @@ func (v *DescribeInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribeInstanceResponse_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.DescribeInstanceResponse_Name, v.Name)
+		case schemas.DescribeInstanceResponse_NetworkConfigurationDetails:
+			v.NetworkConfigurationDetails = &types.NetworkConfigurationInfo{}
+			return v.NetworkConfigurationDetails.Deserialize(d)
 		case schemas.DescribeInstanceResponse_OwnerAccountId:
 			v.OwnerAccountId = new(string)
 			return d.ReadString(schemas.DescribeInstanceResponse_OwnerAccountId, v.OwnerAccountId)

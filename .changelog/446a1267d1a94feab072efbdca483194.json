@@ -1,0 +1,8 @@
+{
+    "id": "446a1267-d1a9-4fea-b072-efbdca483194",
+    "type": "feature",
+    "description": "This release updates range of maxInQueueDepth and maxConcurrency limit from 10000 to 1000.",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

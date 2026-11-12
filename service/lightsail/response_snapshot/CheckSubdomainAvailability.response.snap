@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CheckSubdomainAvailability
+
+{"available":true,"reservationExpiresAt":946684800,"subdomainName":"__SubdomainName__"}

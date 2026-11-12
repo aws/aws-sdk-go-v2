@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.UpdateCloudAutonomousVmCluster
+
+{"autonomousDataStorageSizeInTBs":1,"cloudAutonomousVmClusterId":"__CloudAutonomousVmClusterId__","cpuCoreCountPerNode":1,"description":"__Description__","displayName":"__DisplayName__","licenseModel":"BRING_YOUR_OWN_LICENSE","maintenanceWindow":{"customActionTimeoutInMins":1,"daysOfWeek":[{"name":"MONDAY"},{"name":"MONDAY"}],"hoursOfDay":[1,1],"isCustomActionTimeoutEnabled":true,"leadTimeInWeeks":1,"months":[{"name":"JANUARY"},{"name":"JANUARY"}],"patchingMode":"ROLLING","preference":"NO_PREFERENCE","skipRu":true,"weeksOfMonth":[1,1]},"totalContainerDatabases":1}

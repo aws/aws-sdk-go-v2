@@ -142,6 +142,33 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_CreateAirflowUiUrl(t *testing.T) {
+	want := &CreateAirflowUiUrlOutput{
+		AuthorizedUrl:    ptr.String("__AuthorizedUrl__"),
+		SessionId:        ptr.String("__SessionId__"),
+		UrlExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SessionExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New10(schemas.AmazonMWAAServerless)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAirflowUiUrl, schemas.CreateAirflowUiUrlResponse, schemas.CreateAirflowUiUrlResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateAirflowUiUrl.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateWorkflow(t *testing.T) {
 	want := &CreateWorkflowOutput{
 		WorkflowArn:     ptr.String("__WorkflowArn__"),
@@ -715,7 +742,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.AmazonMWAAServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAirflowUiUrl, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -742,7 +769,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		ResourceType: ptr.String("__ResourceType__"),
 	}
 	proto := awsjson.New10(schemas.AmazonMWAAServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAirflowUiUrl, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -768,7 +795,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		RetryAfterSeconds: ptr.Int32(1),
 	}
 	proto := awsjson.New10(schemas.AmazonMWAAServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAirflowUiUrl, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -793,7 +820,7 @@ func TestUpdateResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.AmazonMWAAServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.OperationTimeoutException, schemas.OperationTimeoutException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAirflowUiUrl, schemas.OperationTimeoutException, schemas.OperationTimeoutException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -877,7 +904,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		RetryAfterSeconds: ptr.Int32(1),
 	}
 	proto := awsjson.New10(schemas.AmazonMWAAServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAirflowUiUrl, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -913,7 +940,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		},
 	}
 	proto := awsjson.New10(schemas.AmazonMWAAServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAirflowUiUrl, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

@@ -92,11 +92,34 @@ func serializeEndpointEncryptionConfiguration(s smithy.ShapeSerializer, schema *
 	}
 }
 
+func serializeFabricSwitchingConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v FabricSwitchingConfiguration) {
+	switch vv := v.(type) {
+	case *FabricSwitchingConfigurationMemberImmediate:
+		s.WriteUnion(schema, schemas.FabricSwitchingConfiguration_Immediate)
+		s.WriteStruct(schemas.FabricSwitchingConfiguration_Immediate)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *FabricSwitchingConfigurationMemberKeyFrame:
+		s.WriteUnion(schema, schemas.FabricSwitchingConfiguration_KeyFrame)
+		s.WriteStruct(schemas.FabricSwitchingConfiguration_KeyFrame)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeFailoverRouterInputProtocolConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v FailoverRouterInputProtocolConfiguration) {
 	switch vv := v.(type) {
 	case *FailoverRouterInputProtocolConfigurationMemberRist:
 		s.WriteUnion(schema, schemas.FailoverRouterInputProtocolConfiguration_Rist)
 		s.WriteStruct(schemas.FailoverRouterInputProtocolConfiguration_Rist)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *FailoverRouterInputProtocolConfigurationMemberRtmpPush:
+		s.WriteUnion(schema, schemas.FailoverRouterInputProtocolConfiguration_RtmpPush)
+		s.WriteStruct(schemas.FailoverRouterInputProtocolConfiguration_RtmpPush)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -197,6 +220,63 @@ func serializeMergeRouterInputProtocolConfiguration(s smithy.ShapeSerializer, sc
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *MergeRouterInputProtocolConfigurationMemberSrtCaller:
+		s.WriteUnion(schema, schemas.MergeRouterInputProtocolConfiguration_SrtCaller)
+		s.WriteStruct(schemas.MergeRouterInputProtocolConfiguration_SrtCaller)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *MergeRouterInputProtocolConfigurationMemberSrtListener:
+		s.WriteUnion(schema, schemas.MergeRouterInputProtocolConfiguration_SrtListener)
+		s.WriteStruct(schemas.MergeRouterInputProtocolConfiguration_SrtListener)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeProgramClockReferencePidConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v ProgramClockReferencePidConfiguration) {
+	switch vv := v.(type) {
+	case *ProgramClockReferencePidConfigurationMemberPassthrough:
+		s.WriteUnion(schema, schemas.ProgramClockReferencePidConfiguration_Passthrough)
+		s.WriteStruct(schemas.ProgramClockReferencePidConfiguration_Passthrough)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ProgramClockReferencePidConfigurationMemberSet:
+		s.WriteUnion(schema, schemas.ProgramClockReferencePidConfiguration_Set)
+		s.WriteInt32(schemas.ProgramClockReferencePidConfiguration_Set, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeProgramMapTablePidConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v ProgramMapTablePidConfiguration) {
+	switch vv := v.(type) {
+	case *ProgramMapTablePidConfigurationMemberPassthrough:
+		s.WriteUnion(schema, schemas.ProgramMapTablePidConfiguration_Passthrough)
+		s.WriteStruct(schemas.ProgramMapTablePidConfiguration_Passthrough)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ProgramMapTablePidConfigurationMemberSet:
+		s.WriteUnion(schema, schemas.ProgramMapTablePidConfiguration_Set)
+		s.WriteInt32(schemas.ProgramMapTablePidConfiguration_Set, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeProgramNumberConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v ProgramNumberConfiguration) {
+	switch vv := v.(type) {
+	case *ProgramNumberConfigurationMemberPassthrough:
+		s.WriteUnion(schema, schemas.ProgramNumberConfiguration_Passthrough)
+		s.WriteStruct(schemas.ProgramNumberConfiguration_Passthrough)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ProgramNumberConfigurationMemberSet:
+		s.WriteUnion(schema, schemas.ProgramNumberConfiguration_Set)
+		s.WriteInt32(schemas.ProgramNumberConfiguration_Set, vv.Value)
+		s.CloseUnion()
 	}
 }
 
@@ -296,6 +376,12 @@ func serializeRouterInputFilter(s smithy.ShapeSerializer, schema *smithy.Schema,
 
 func serializeRouterInputMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v RouterInputMetadata) {
 	switch vv := v.(type) {
+	case *RouterInputMetadataMemberRtmpInfo:
+		s.WriteUnion(schema, schemas.RouterInputMetadata_RtmpInfo)
+		s.WriteStruct(schemas.RouterInputMetadata_RtmpInfo)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *RouterInputMetadataMemberTransportStreamMediaInfo:
 		s.WriteUnion(schema, schemas.RouterInputMetadata_TransportStreamMediaInfo)
 		s.WriteStruct(schemas.RouterInputMetadata_TransportStreamMediaInfo)
@@ -310,6 +396,12 @@ func serializeRouterInputProtocolConfiguration(s smithy.ShapeSerializer, schema 
 	case *RouterInputProtocolConfigurationMemberRist:
 		s.WriteUnion(schema, schemas.RouterInputProtocolConfiguration_Rist)
 		s.WriteStruct(schemas.RouterInputProtocolConfiguration_Rist)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *RouterInputProtocolConfigurationMemberRtmpPush:
+		s.WriteUnion(schema, schemas.RouterInputProtocolConfiguration_RtmpPush)
+		s.WriteStruct(schemas.RouterInputProtocolConfiguration_RtmpPush)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -548,6 +640,23 @@ func serializeRouterOutputStreamDetails(s smithy.ShapeSerializer, schema *smithy
 	}
 }
 
+func serializeRtmpPushNamingConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v RtmpPushNamingConfiguration) {
+	switch vv := v.(type) {
+	case *RtmpPushNamingConfigurationMemberAutomatic:
+		s.WriteUnion(schema, schemas.RtmpPushNamingConfiguration_Automatic)
+		s.WriteStruct(schemas.RtmpPushNamingConfiguration_Automatic)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *RtmpPushNamingConfigurationMemberManual:
+		s.WriteUnion(schema, schemas.RtmpPushNamingConfiguration_Manual)
+		s.WriteStruct(schemas.RtmpPushNamingConfiguration_Manual)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeSourceEndpointAssociatedResourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v SourceEndpointAssociatedResourceDetails) {
 	switch vv := v.(type) {
 	case *SourceEndpointAssociatedResourceDetailsMemberRouterOutput:
@@ -719,6 +828,21 @@ func serializeTlsEncryptionConfiguration(s smithy.ShapeSerializer, schema *smith
 	}
 }
 
+func serializeTransportStreamIdConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v TransportStreamIdConfiguration) {
+	switch vv := v.(type) {
+	case *TransportStreamIdConfigurationMemberPassthrough:
+		s.WriteUnion(schema, schemas.TransportStreamIdConfiguration_Passthrough)
+		s.WriteStruct(schemas.TransportStreamIdConfiguration_Passthrough)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *TransportStreamIdConfigurationMemberSet:
+		s.WriteUnion(schema, schemas.TransportStreamIdConfiguration_Set)
+		s.WriteInt32(schemas.TransportStreamIdConfiguration_Set, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func deserializeDestinationEndpointAssociatedResourceDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *DestinationEndpointAssociatedResourceDetails) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -803,11 +927,31 @@ func deserializeEndpointEncryptionConfiguration(d smithy.ShapeDeserializer, s *s
 	})
 }
 
+func deserializeFabricSwitchingConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *FabricSwitchingConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.FabricSwitchingConfiguration_Immediate:
+			vv := &FabricSwitchingConfigurationMemberImmediate{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FabricSwitchingConfiguration_KeyFrame:
+			vv := &FabricSwitchingConfigurationMemberKeyFrame{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeFailoverRouterInputProtocolConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *FailoverRouterInputProtocolConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
 		case schemas.FailoverRouterInputProtocolConfiguration_Rist:
 			vv := &FailoverRouterInputProtocolConfigurationMemberRist{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FailoverRouterInputProtocolConfiguration_RtmpPush:
+			vv := &FailoverRouterInputProtocolConfigurationMemberRtmpPush{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.FailoverRouterInputProtocolConfiguration_Rtp:
@@ -896,6 +1040,62 @@ func deserializeMergeRouterInputProtocolConfiguration(d smithy.ShapeDeserializer
 			return vv.Deserialize(d)
 		case schemas.MergeRouterInputProtocolConfiguration_Rtp:
 			vv := &MergeRouterInputProtocolConfigurationMemberRtp{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.MergeRouterInputProtocolConfiguration_SrtCaller:
+			vv := &MergeRouterInputProtocolConfigurationMemberSrtCaller{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.MergeRouterInputProtocolConfiguration_SrtListener:
+			vv := &MergeRouterInputProtocolConfigurationMemberSrtListener{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeProgramClockReferencePidConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *ProgramClockReferencePidConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ProgramClockReferencePidConfiguration_Passthrough:
+			vv := &ProgramClockReferencePidConfigurationMemberPassthrough{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ProgramClockReferencePidConfiguration_Set:
+			vv := &ProgramClockReferencePidConfigurationMemberSet{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeProgramMapTablePidConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *ProgramMapTablePidConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ProgramMapTablePidConfiguration_Passthrough:
+			vv := &ProgramMapTablePidConfigurationMemberPassthrough{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ProgramMapTablePidConfiguration_Set:
+			vv := &ProgramMapTablePidConfigurationMemberSet{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeProgramNumberConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *ProgramNumberConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ProgramNumberConfiguration_Passthrough:
+			vv := &ProgramNumberConfigurationMemberPassthrough{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ProgramNumberConfiguration_Set:
+			vv := &ProgramNumberConfigurationMemberSet{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -994,6 +1194,10 @@ func deserializeRouterInputFilter(d smithy.ShapeDeserializer, s *smithy.Schema, 
 func deserializeRouterInputMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *RouterInputMetadata) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.RouterInputMetadata_RtmpInfo:
+			vv := &RouterInputMetadataMemberRtmpInfo{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.RouterInputMetadata_TransportStreamMediaInfo:
 			vv := &RouterInputMetadataMemberTransportStreamMediaInfo{}
 			*v = vv
@@ -1008,6 +1212,10 @@ func deserializeRouterInputProtocolConfiguration(d smithy.ShapeDeserializer, s *
 		switch ms {
 		case schemas.RouterInputProtocolConfiguration_Rist:
 			vv := &RouterInputProtocolConfigurationMemberRist{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RouterInputProtocolConfiguration_RtmpPush:
+			vv := &RouterInputProtocolConfigurationMemberRtmpPush{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.RouterInputProtocolConfiguration_Rtp:
@@ -1219,6 +1427,22 @@ func deserializeRouterOutputStreamDetails(d smithy.ShapeDeserializer, s *smithy.
 	})
 }
 
+func deserializeRtmpPushNamingConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *RtmpPushNamingConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RtmpPushNamingConfiguration_Automatic:
+			vv := &RtmpPushNamingConfigurationMemberAutomatic{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RtmpPushNamingConfiguration_Manual:
+			vv := &RtmpPushNamingConfigurationMemberManual{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeSourceEndpointAssociatedResourceDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *SourceEndpointAssociatedResourceDetails) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -1372,6 +1596,22 @@ func deserializeTlsEncryptionConfiguration(d smithy.ShapeDeserializer, s *smithy
 		switch ms {
 		case schemas.TlsEncryptionConfiguration_Public:
 			vv := &TlsEncryptionConfigurationMemberPublic{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTransportStreamIdConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *TransportStreamIdConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TransportStreamIdConfiguration_Passthrough:
+			vv := &TransportStreamIdConfigurationMemberPassthrough{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.TransportStreamIdConfiguration_Set:
+			vv := &TransportStreamIdConfigurationMemberSet{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1945,6 +2185,16 @@ func serializeNetworkInterfaceRuleList(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseList()
 }
 
+func serializePidMapRules(s smithy.ShapeSerializer, schema *smithy.Schema, v []PidMapRule) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PublicDestinationEndpointNetworkingConfigurationAllowRule) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2091,6 +2341,16 @@ func serializeRoutingScopeList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRtmpMediaStreamInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RtmpMediaStreamInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -3424,6 +3684,28 @@ func deserializeNetworkInterfaceRuleList(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializePidMapRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PidMapRule) error {
+	*v = make([]PidMapRule, 0)
+	var vv PidMapRule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PidMapRule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = PidMapRule{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PublicDestinationEndpointNetworkingConfigurationAllowRule) error {
 	*v = make([]PublicDestinationEndpointNetworkingConfigurationAllowRule, 0)
 	var vv PublicDestinationEndpointNetworkingConfigurationAllowRule
@@ -3784,6 +4066,28 @@ func deserializeRoutingScopeList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		*v = append(*v, RoutingScope(vv))
+		return nil
+	})
+}
+
+func deserializeRtmpMediaStreamInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RtmpMediaStreamInfo) error {
+	*v = make([]RtmpMediaStreamInfo, 0)
+	var vv RtmpMediaStreamInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RtmpMediaStreamInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RtmpMediaStreamInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

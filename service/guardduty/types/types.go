@@ -202,6 +202,111 @@ func (v *Account) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the number of findings associated with a resource.
+type AccountAffectedResource struct {
+
+	// The number of findings associated with the resource.
+	FindingCount *int32
+
+	// The identifier of the resource.
+	Identifier *string
+
+	// The type of the resource. Possible values are EC2_INSTANCE , EBS_VOLUME ,
+	// S3_BUCKET , IAM_ROLE , IAM_USER , IAM_ACCESS_KEY , LAMBDA_FUNCTION , EKS_CLUSTER
+	// , ECS_CLUSTER , KUBERNETES_WORKLOAD , RDS_INSTANCE , RDS_DB_USER , and
+	// EC2_SECURITY_GROUP .
+	Type InvestigationResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccountAffectedResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountAffectedResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountAffectedResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingCount != nil {
+		s.WriteInt32(schemas.AccountAffectedResource_FindingCount, *v.FindingCount)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.AccountAffectedResource_Identifier, *v.Identifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AccountAffectedResource_Type, string(v.Type))
+	}
+}
+func (v *AccountAffectedResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountAffectedResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountAffectedResource_FindingCount:
+			v.FindingCount = new(int32)
+			return d.ReadInt32(schemas.AccountAffectedResource_FindingCount, v.FindingCount)
+		case schemas.AccountAffectedResource_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.AccountAffectedResource_Identifier, v.Identifier)
+		case schemas.AccountAffectedResource_Type:
+			var ev string
+			if err := d.ReadString(schemas.AccountAffectedResource_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = InvestigationResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains an analysis of the findings in an Amazon Web Services account.
+type AccountAnalysis struct {
+
+	// The resources in the account that are associated with findings.
+	AffectedResources []AccountAffectedResource
+
+	// A summary of the findings in the account.
+	FindingsSummary *FindingsSummary
+
+	// The findings in the account, mapped to MITRE ATT&CK tactics and techniques.
+	TacticCoverage []TacticCoverage
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccountAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountAnalysis)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountAnalysis) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedResources != nil {
+		serializeAccountAffectedResources(s, schemas.AccountAnalysis_AffectedResources, v.AffectedResources)
+	}
+	if v.FindingsSummary != nil {
+		s.WriteStruct(schemas.AccountAnalysis_FindingsSummary)
+		v.FindingsSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TacticCoverage != nil {
+		serializeTacticCoverages(s, schemas.AccountAnalysis_TacticCoverage, v.TacticCoverage)
+	}
+}
+func (v *AccountAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountAnalysis, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountAnalysis_AffectedResources:
+			return deserializeAccountAffectedResources(d, schemas.AccountAnalysis_AffectedResources, &v.AffectedResources)
+		case schemas.AccountAnalysis_FindingsSummary:
+			v.FindingsSummary = &FindingsSummary{}
+			return v.FindingsSummary.Deserialize(d)
+		case schemas.AccountAnalysis_TacticCoverage:
+			return deserializeTacticCoverages(d, schemas.AccountAnalysis_TacticCoverage, &v.TacticCoverage)
+		}
+		return nil
+	})
+}
+
 // Contains information about the account.
 type AccountDetail struct {
 
@@ -353,6 +458,109 @@ func (v *AccountLevelPermissions) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Contains overview information about an account, including its findings and, for
+// an organization, its member accounts.
+type AccountOverview struct {
+
+	// The Amazon Web Services account ID.
+	AccountId *string
+
+	// A ranking of member accounts.
+	AccountRankings []MemberAccountRanking
+
+	// The status of the account.
+	AccountStatus *string
+
+	// The number of accounts that have findings.
+	AffectedAccountCount *int64
+
+	// The account ID of the GuardDuty delegated administrator account.
+	DelegatedAdminAccountId *string
+
+	// The ID of the detector of the account.
+	DetectorId *string
+
+	// The Amazon Web Services Region of the detector.
+	Region *string
+
+	// The total number of findings.
+	TotalFindings *int64
+
+	// The total number of member accounts.
+	TotalMemberAccounts *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccountOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountOverview_AccountId, *v.AccountId)
+	}
+	if v.AccountRankings != nil {
+		serializeMemberAccountRankings(s, schemas.AccountOverview_AccountRankings, v.AccountRankings)
+	}
+	if v.AccountStatus != nil {
+		s.WriteString(schemas.AccountOverview_AccountStatus, *v.AccountStatus)
+	}
+	if v.AffectedAccountCount != nil {
+		s.WriteInt64(schemas.AccountOverview_AffectedAccountCount, *v.AffectedAccountCount)
+	}
+	if v.DelegatedAdminAccountId != nil {
+		s.WriteString(schemas.AccountOverview_DelegatedAdminAccountId, *v.DelegatedAdminAccountId)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.AccountOverview_DetectorId, *v.DetectorId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.AccountOverview_Region, *v.Region)
+	}
+	if v.TotalFindings != nil {
+		s.WriteInt64(schemas.AccountOverview_TotalFindings, *v.TotalFindings)
+	}
+	if v.TotalMemberAccounts != nil {
+		s.WriteInt64(schemas.AccountOverview_TotalMemberAccounts, *v.TotalMemberAccounts)
+	}
+}
+func (v *AccountOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountOverview_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountOverview_AccountId, v.AccountId)
+		case schemas.AccountOverview_AccountRankings:
+			return deserializeMemberAccountRankings(d, schemas.AccountOverview_AccountRankings, &v.AccountRankings)
+		case schemas.AccountOverview_AccountStatus:
+			v.AccountStatus = new(string)
+			return d.ReadString(schemas.AccountOverview_AccountStatus, v.AccountStatus)
+		case schemas.AccountOverview_AffectedAccountCount:
+			v.AffectedAccountCount = new(int64)
+			return d.ReadInt64(schemas.AccountOverview_AffectedAccountCount, v.AffectedAccountCount)
+		case schemas.AccountOverview_DelegatedAdminAccountId:
+			v.DelegatedAdminAccountId = new(string)
+			return d.ReadString(schemas.AccountOverview_DelegatedAdminAccountId, v.DelegatedAdminAccountId)
+		case schemas.AccountOverview_DetectorId:
+			v.DetectorId = new(string)
+			return d.ReadString(schemas.AccountOverview_DetectorId, v.DetectorId)
+		case schemas.AccountOverview_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AccountOverview_Region, v.Region)
+		case schemas.AccountOverview_TotalFindings:
+			v.TotalFindings = new(int64)
+			return d.ReadInt64(schemas.AccountOverview_TotalFindings, v.TotalFindings)
+		case schemas.AccountOverview_TotalMemberAccounts:
+			v.TotalMemberAccounts = new(int64)
+			return d.ReadInt64(schemas.AccountOverview_TotalMemberAccounts, v.TotalMemberAccounts)
+		}
+		return nil
+	})
+}
+
 // Represents a list of map of accounts with the number of findings associated
 // with each account.
 type AccountStatistics struct {
@@ -398,6 +606,46 @@ func (v *AccountStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AccountStatistics_TotalFindings:
 			v.TotalFindings = new(int32)
 			return d.ReadInt32(schemas.AccountStatistics_TotalFindings, v.TotalFindings)
+		}
+		return nil
+	})
+}
+
+// Contains the number of findings in an Amazon Web Services account.
+type AccountSummary struct {
+
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
+	// The number of findings in the account.
+	FindingCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccountSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountSummary_AccountId, *v.AccountId)
+	}
+	if v.FindingCount != nil {
+		s.WriteInt32(schemas.AccountSummary_FindingCount, *v.FindingCount)
+	}
+}
+func (v *AccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSummary_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountSummary_AccountId, v.AccountId)
+		case schemas.AccountSummary_FindingCount:
+			v.FindingCount = new(int32)
+			return d.ReadInt32(schemas.AccountSummary_FindingCount, v.FindingCount)
 		}
 		return nil
 	})
@@ -580,6 +828,46 @@ func (v *Activity) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Type = ActivityType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Contains the time range during which activity was observed.
+type ActivityWindow struct {
+
+	// The timestamp at which the activity was first observed.
+	FirstSeenAt *time.Time
+
+	// The timestamp at which the activity was last observed.
+	LastSeenAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ActivityWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirstSeenAt != nil {
+		s.WriteTime(schemas.ActivityWindow_FirstSeenAt, *v.FirstSeenAt)
+	}
+	if v.LastSeenAt != nil {
+		s.WriteTime(schemas.ActivityWindow_LastSeenAt, *v.LastSeenAt)
+	}
+}
+func (v *ActivityWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityWindow_FirstSeenAt:
+			v.FirstSeenAt = new(time.Time)
+			return d.ReadTime(schemas.ActivityWindow_FirstSeenAt, v.FirstSeenAt)
+		case schemas.ActivityWindow_LastSeenAt:
+			v.LastSeenAt = new(time.Time)
+			return d.ReadTime(schemas.ActivityWindow_LastSeenAt, v.LastSeenAt)
 		}
 		return nil
 	})
@@ -892,6 +1180,62 @@ func (v *Administrator) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about a resource that an action applies to.
+type AffectedResource struct {
+
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
+
+	// The identifier of the resource.
+	Identifier *string
+
+	// The type of the resource. Possible values are EC2_INSTANCE , EBS_VOLUME ,
+	// S3_BUCKET , IAM_ROLE , IAM_USER , IAM_ACCESS_KEY , LAMBDA_FUNCTION , EKS_CLUSTER
+	// , ECS_CLUSTER , KUBERNETES_WORKLOAD , RDS_INSTANCE , RDS_DB_USER , and
+	// EC2_SECURITY_GROUP .
+	Type InvestigationResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AffectedResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AffectedResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AffectedResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AffectedResource_Arn, *v.Arn)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.AffectedResource_Identifier, *v.Identifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AffectedResource_Type, string(v.Type))
+	}
+}
+func (v *AffectedResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AffectedResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AffectedResource_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AffectedResource_Arn, v.Arn)
+		case schemas.AffectedResource_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.AffectedResource_Identifier, v.Identifier)
+		case schemas.AffectedResource_Type:
+			var ev string
+			if err := d.ReadString(schemas.AffectedResource_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = InvestigationResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the installed GuardDuty security agent.
 type AgentDetails struct {
 
@@ -918,6 +1262,116 @@ func (v *AgentDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AgentDetails_Version:
 			v.Version = new(string)
 			return d.ReadString(schemas.AgentDetails_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Contains an assessment that GuardDuty derived from the data during an
+// investigation, such as a threat assessment, a comparison against normal
+// behavior, or a process lineage. The record contains at most one of the payload
+// members, the one that corresponds to AnalysisType . Indicators can accompany
+// any analysis type.
+type AnalysisRecord struct {
+
+	// The kind of analysis. The value identifies the payload member that can be set:
+	// REPUTATION , THREAT_ASSESSMENT , and RDS_THREAT_ASSESSMENT ( ThreatAssessment );
+	// KUBERNETES_POLICY_VIOLATION ( KubernetesPolicyViolation ); S3_EXPOSURE ,
+	// S3_ACTOR_CONTEXT , and S3_PEN_TEST ( S3Analysis ); PROCESS_LINEAGE ( Processes
+	// ); and TREND and BASELINE ( AccountAnalysis ).
+	//
+	// This member is required.
+	AnalysisType AnalysisType
+
+	// An analysis of the findings in an account over time. Set when AnalysisType is
+	// TREND or BASELINE .
+	AccountAnalysis *InvestigationAccountAnalysis
+
+	// The threat indicators associated with the analysis, such as an IP address, a
+	// domain, or a file hash.
+	Indicators []InvestigationIndicator
+
+	// An assessment of a Kubernetes policy violation. Set when AnalysisType is
+	// KUBERNETES_POLICY_VIOLATION .
+	KubernetesPolicyViolation *KubernetesPolicyViolation
+
+	// The processes in a process lineage. Set when AnalysisType is PROCESS_LINEAGE .
+	Processes []Process
+
+	// An analysis of Amazon S3 activity or exposure. Set when AnalysisType is
+	// S3_EXPOSURE , S3_ACTOR_CONTEXT , or S3_PEN_TEST .
+	S3Analysis *S3Analysis
+
+	// A threat assessment. Set when AnalysisType is REPUTATION , THREAT_ASSESSMENT ,
+	// or RDS_THREAT_ASSESSMENT .
+	ThreatAssessment *InvestigationThreatAssessment
+
+	noSmithyDocumentSerde
+}
+
+func (v *AnalysisRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAnalysis != nil {
+		s.WriteStruct(schemas.AnalysisRecord_AccountAnalysis)
+		v.AccountAnalysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AnalysisType != "" {
+		s.WriteString(schemas.AnalysisRecord_AnalysisType, string(v.AnalysisType))
+	}
+	if v.Indicators != nil {
+		serializeInvestigationIndicators(s, schemas.AnalysisRecord_Indicators, v.Indicators)
+	}
+	if v.KubernetesPolicyViolation != nil {
+		s.WriteStruct(schemas.AnalysisRecord_KubernetesPolicyViolation)
+		v.KubernetesPolicyViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Processes != nil {
+		serializeProcesses(s, schemas.AnalysisRecord_Processes, v.Processes)
+	}
+	if v.S3Analysis != nil {
+		s.WriteStruct(schemas.AnalysisRecord_S3Analysis)
+		v.S3Analysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThreatAssessment != nil {
+		s.WriteStruct(schemas.AnalysisRecord_ThreatAssessment)
+		v.ThreatAssessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AnalysisRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisRecord_AccountAnalysis:
+			v.AccountAnalysis = &InvestigationAccountAnalysis{}
+			return v.AccountAnalysis.Deserialize(d)
+		case schemas.AnalysisRecord_AnalysisType:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisRecord_AnalysisType, &ev); err != nil {
+				return err
+			}
+			v.AnalysisType = AnalysisType(ev)
+			return nil
+		case schemas.AnalysisRecord_Indicators:
+			return deserializeInvestigationIndicators(d, schemas.AnalysisRecord_Indicators, &v.Indicators)
+		case schemas.AnalysisRecord_KubernetesPolicyViolation:
+			v.KubernetesPolicyViolation = &KubernetesPolicyViolation{}
+			return v.KubernetesPolicyViolation.Deserialize(d)
+		case schemas.AnalysisRecord_Processes:
+			return deserializeProcesses(d, schemas.AnalysisRecord_Processes, &v.Processes)
+		case schemas.AnalysisRecord_S3Analysis:
+			v.S3Analysis = &S3Analysis{}
+			return v.S3Analysis.Deserialize(d)
+		case schemas.AnalysisRecord_ThreatAssessment:
+			v.ThreatAssessment = &InvestigationThreatAssessment{}
+			return v.ThreatAssessment.Deserialize(d)
 		}
 		return nil
 	})
@@ -1107,6 +1561,64 @@ func (v *ApiCall) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ApiCall_UserAgent:
 			v.UserAgent = new(string)
 			return d.ReadString(schemas.ApiCall_UserAgent, v.UserAgent)
+		}
+		return nil
+	})
+}
+
+// Contains the number and percentage of archived and unarchived findings.
+type ArchiveDistribution struct {
+
+	// The number of archived findings.
+	ArchivedCount *int64
+
+	// The percentage of findings that are archived, from 0 to 100.
+	ArchivedPercentage *float64
+
+	// The number of unarchived findings.
+	UnarchivedCount *int64
+
+	// The percentage of findings that are unarchived, from 0 to 100.
+	UnarchivedPercentage *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ArchiveDistribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveDistribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArchiveDistribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchivedCount != nil {
+		s.WriteInt64(schemas.ArchiveDistribution_ArchivedCount, *v.ArchivedCount)
+	}
+	if v.ArchivedPercentage != nil {
+		s.WriteFloat64(schemas.ArchiveDistribution_ArchivedPercentage, *v.ArchivedPercentage)
+	}
+	if v.UnarchivedCount != nil {
+		s.WriteInt64(schemas.ArchiveDistribution_UnarchivedCount, *v.UnarchivedCount)
+	}
+	if v.UnarchivedPercentage != nil {
+		s.WriteFloat64(schemas.ArchiveDistribution_UnarchivedPercentage, *v.UnarchivedPercentage)
+	}
+}
+func (v *ArchiveDistribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveDistribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArchiveDistribution_ArchivedCount:
+			v.ArchivedCount = new(int64)
+			return d.ReadInt64(schemas.ArchiveDistribution_ArchivedCount, v.ArchivedCount)
+		case schemas.ArchiveDistribution_ArchivedPercentage:
+			v.ArchivedPercentage = new(float64)
+			return d.ReadFloat64(schemas.ArchiveDistribution_ArchivedPercentage, v.ArchivedPercentage)
+		case schemas.ArchiveDistribution_UnarchivedCount:
+			v.UnarchivedCount = new(int64)
+			return d.ReadInt64(schemas.ArchiveDistribution_UnarchivedCount, v.UnarchivedCount)
+		case schemas.ArchiveDistribution_UnarchivedPercentage:
+			v.UnarchivedPercentage = new(float64)
+			return d.ReadFloat64(schemas.ArchiveDistribution_UnarchivedPercentage, v.UnarchivedPercentage)
 		}
 		return nil
 	})
@@ -1325,6 +1837,125 @@ func (v *AssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains a MITRE ATT&CK tactic and technique observed during an attack, with
+// the findings that are associated with them.
+type Attack struct {
+
+	// The findings associated with the tactic and technique.
+	Findings []FindingReference
+
+	// The MITRE ATT&CK tactic.
+	Tactic *ThreatReference
+
+	// The MITRE ATT&CK technique.
+	Technique *ThreatReference
+
+	// The version of the attack framework that the tactic and technique
+	// classification uses.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Attack) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attack)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attack) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Findings != nil {
+		serializeFindingReferences(s, schemas.Attack_Findings, v.Findings)
+	}
+	if v.Tactic != nil {
+		s.WriteStruct(schemas.Attack_Tactic)
+		v.Tactic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Technique != nil {
+		s.WriteStruct(schemas.Attack_Technique)
+		v.Technique.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Attack_Version, *v.Version)
+	}
+}
+func (v *Attack) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attack, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attack_Findings:
+			return deserializeFindingReferences(d, schemas.Attack_Findings, &v.Findings)
+		case schemas.Attack_Tactic:
+			v.Tactic = &ThreatReference{}
+			return v.Tactic.Deserialize(d)
+		case schemas.Attack_Technique:
+			v.Technique = &ThreatReference{}
+			return v.Technique.Deserialize(d)
+		case schemas.Attack_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Attack_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Contains information about one phase of an attack.
+type AttackPhase struct {
+
+	// The MITRE ATT&CK tactics and techniques observed in this phase, with the
+	// findings that are associated with them.
+	Attacks []Attack
+
+	// A description of the activity in this phase.
+	Description *string
+
+	// The MITRE ATT&CK tactic of the phase. Possible values are Reconnaissance ,
+	// Resource Development , Initial Access , Execution , Persistence , Privilege
+	// Escalation , Defense Evasion , Credential Access , Discovery , Lateral Movement
+	// , Collection , Command and Control , Exfiltration , and Impact .
+	Phase AttackPhaseName
+
+	noSmithyDocumentSerde
+}
+
+func (v *AttackPhase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackPhase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackPhase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attacks != nil {
+		serializeAttacks(s, schemas.AttackPhase_Attacks, v.Attacks)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AttackPhase_Description, *v.Description)
+	}
+	if v.Phase != "" {
+		s.WriteString(schemas.AttackPhase_Phase, string(v.Phase))
+	}
+}
+func (v *AttackPhase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackPhase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackPhase_Attacks:
+			return deserializeAttacks(d, schemas.AttackPhase_Attacks, &v.Attacks)
+		case schemas.AttackPhase_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AttackPhase_Description, v.Description)
+		case schemas.AttackPhase_Phase:
+			var ev string
+			if err := d.ReadString(schemas.AttackPhase_Phase, &ev); err != nil {
+				return err
+			}
+			v.Phase = AttackPhaseName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the Autonomous System (AS) associated with the
 // network endpoints involved in an attack sequence.
 type AutonomousSystem struct {
@@ -1508,6 +2139,53 @@ func (v *AwsApiCallAction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AwsApiCallAction_UserAgent:
 			v.UserAgent = new(string)
 			return d.ReadString(schemas.AwsApiCallAction_UserAgent, v.UserAgent)
+		}
+		return nil
+	})
+}
+
+// Contains a comparison of findings against the normal behavior of an account.
+type Baseline struct {
+
+	// The finding types that deviate from normal behavior.
+	AnomalousFindings []FindingTypeClassification
+
+	// The finding types that are consistent with normal behavior.
+	BaselineFindings []FindingTypeClassification
+
+	// The total number of findings.
+	TotalFindings *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *Baseline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Baseline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Baseline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalousFindings != nil {
+		serializeFindingTypeClassifications(s, schemas.Baseline_AnomalousFindings, v.AnomalousFindings)
+	}
+	if v.BaselineFindings != nil {
+		serializeFindingTypeClassifications(s, schemas.Baseline_BaselineFindings, v.BaselineFindings)
+	}
+	if v.TotalFindings != nil {
+		s.WriteInt64(schemas.Baseline_TotalFindings, *v.TotalFindings)
+	}
+}
+func (v *Baseline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Baseline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Baseline_AnomalousFindings:
+			return deserializeFindingTypeClassifications(d, schemas.Baseline_AnomalousFindings, &v.AnomalousFindings)
+		case schemas.Baseline_BaselineFindings:
+			return deserializeFindingTypeClassifications(d, schemas.Baseline_BaselineFindings, &v.BaselineFindings)
+		case schemas.Baseline_TotalFindings:
+			v.TotalFindings = new(int64)
+			return d.ReadInt64(schemas.Baseline_TotalFindings, v.TotalFindings)
 		}
 		return nil
 	})
@@ -2480,6 +3158,256 @@ func (v *ContinuousScanDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContinuousScanDetails_StartTime:
 			v.StartTime = new(time.Time)
 			return d.ReadTime(schemas.ContinuousScanDetails_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Contains information about a group of correlated findings that have the same
+// finding type.
+type CorrelatedFinding struct {
+
+	// The reasons why GuardDuty correlated the findings. Possible values are
+	// HIGH_SEVERITY , SAME_RESOURCE , and SAME_BEHAVIOR . A value can appear more than
+	// once.
+	CorrelationReasons []CorrelationReason
+
+	// The number of correlated findings of this type. This value can be greater than
+	// the number of IDs in FindingIds .
+	Count *int64
+
+	// A sample of the IDs of the findings in the group.
+	FindingIds []string
+
+	// The finding type of the group.
+	FindingType *string
+
+	// The highest severity score among the findings in the group, from 0 to 10.
+	SeverityMax *float64
+
+	// The behaviors that the findings in the group share with the investigated
+	// activity.
+	SharedBehaviors []SharedBehavior
+
+	// The resources that the findings in the group share with the investigated
+	// activity.
+	SharedResources []SharedResource
+
+	noSmithyDocumentSerde
+}
+
+func (v *CorrelatedFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CorrelatedFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CorrelatedFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CorrelationReasons != nil {
+		serializeCorrelationReasons(s, schemas.CorrelatedFinding_CorrelationReasons, v.CorrelationReasons)
+	}
+	if v.Count != nil {
+		s.WriteInt64(schemas.CorrelatedFinding_Count, *v.Count)
+	}
+	if v.FindingIds != nil {
+		serializeRelatedFindingIds(s, schemas.CorrelatedFinding_FindingIds, v.FindingIds)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.CorrelatedFinding_FindingType, *v.FindingType)
+	}
+	if v.SeverityMax != nil {
+		s.WriteFloat64(schemas.CorrelatedFinding_SeverityMax, *v.SeverityMax)
+	}
+	if v.SharedBehaviors != nil {
+		serializeSharedBehaviors(s, schemas.CorrelatedFinding_SharedBehaviors, v.SharedBehaviors)
+	}
+	if v.SharedResources != nil {
+		serializeSharedResources(s, schemas.CorrelatedFinding_SharedResources, v.SharedResources)
+	}
+}
+func (v *CorrelatedFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CorrelatedFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CorrelatedFinding_CorrelationReasons:
+			return deserializeCorrelationReasons(d, schemas.CorrelatedFinding_CorrelationReasons, &v.CorrelationReasons)
+		case schemas.CorrelatedFinding_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.CorrelatedFinding_Count, v.Count)
+		case schemas.CorrelatedFinding_FindingIds:
+			return deserializeRelatedFindingIds(d, schemas.CorrelatedFinding_FindingIds, &v.FindingIds)
+		case schemas.CorrelatedFinding_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.CorrelatedFinding_FindingType, v.FindingType)
+		case schemas.CorrelatedFinding_SeverityMax:
+			v.SeverityMax = new(float64)
+			return d.ReadFloat64(schemas.CorrelatedFinding_SeverityMax, v.SeverityMax)
+		case schemas.CorrelatedFinding_SharedBehaviors:
+			return deserializeSharedBehaviors(d, schemas.CorrelatedFinding_SharedBehaviors, &v.SharedBehaviors)
+		case schemas.CorrelatedFinding_SharedResources:
+			return deserializeSharedResources(d, schemas.CorrelatedFinding_SharedResources, &v.SharedResources)
+		}
+		return nil
+	})
+}
+
+// Contains the actions that you can take for one defensive tactic.
+type Countermeasure struct {
+
+	// The actions for the defensive tactic.
+	Actions []CountermeasureAction
+
+	// The defensive tactic. Possible values are Isolate , Evict , Restore , Harden ,
+	// and Detect .
+	DefenseTactic DefenseTactic
+
+	// A description of the countermeasure.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Countermeasure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Countermeasure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Countermeasure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actions != nil {
+		serializeCountermeasureActions(s, schemas.Countermeasure_Actions, v.Actions)
+	}
+	if v.DefenseTactic != "" {
+		s.WriteString(schemas.Countermeasure_DefenseTactic, string(v.DefenseTactic))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Countermeasure_Description, *v.Description)
+	}
+}
+func (v *Countermeasure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Countermeasure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Countermeasure_Actions:
+			return deserializeCountermeasureActions(d, schemas.Countermeasure_Actions, &v.Actions)
+		case schemas.Countermeasure_DefenseTactic:
+			var ev string
+			if err := d.ReadString(schemas.Countermeasure_DefenseTactic, &ev); err != nil {
+				return err
+			}
+			v.DefenseTactic = DefenseTactic(ev)
+			return nil
+		case schemas.Countermeasure_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Countermeasure_Description, v.Description)
+		}
+		return nil
+	})
+}
+
+// Contains an action that you can take to respond to a threat.
+type CountermeasureAction struct {
+
+	// The resources that the action applies to.
+	AffectedResources []AffectedResource
+
+	// CLI commands that you can run to carry out the action.
+	CliCommands []string
+
+	// The defensive technique that the action applies.
+	DefenseTechnique *string
+
+	// A description of the action.
+	Description *string
+
+	// The outcome of the action. Possible values are Isolated , Blocked , Deleted ,
+	// Access Revoked , and Logged .
+	Disposition Disposition
+
+	// The numeric identifier of the action's disposition.
+	DispositionId *int32
+
+	// The MITRE ATT&CK technique IDs that the action mitigates, such as T1059.004 .
+	Mitigates []string
+
+	// The priority of the action. Possible values are IMMEDIATE , SHORT_TERM , and
+	// STRATEGIC .
+	Priority ActionPriority
+
+	// A short title for the action.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CountermeasureAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountermeasureAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountermeasureAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedResources != nil {
+		serializeRemediationAffectedResources(s, schemas.CountermeasureAction_AffectedResources, v.AffectedResources)
+	}
+	if v.CliCommands != nil {
+		serializeCliCommands(s, schemas.CountermeasureAction_CliCommands, v.CliCommands)
+	}
+	if v.DefenseTechnique != nil {
+		s.WriteString(schemas.CountermeasureAction_DefenseTechnique, *v.DefenseTechnique)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CountermeasureAction_Description, *v.Description)
+	}
+	if v.Disposition != "" {
+		s.WriteString(schemas.CountermeasureAction_Disposition, string(v.Disposition))
+	}
+	if v.DispositionId != nil {
+		s.WriteInt32(schemas.CountermeasureAction_DispositionId, *v.DispositionId)
+	}
+	if v.Mitigates != nil {
+		serializeMitreTechniqueIds(s, schemas.CountermeasureAction_Mitigates, v.Mitigates)
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.CountermeasureAction_Priority, string(v.Priority))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CountermeasureAction_Title, *v.Title)
+	}
+}
+func (v *CountermeasureAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CountermeasureAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CountermeasureAction_AffectedResources:
+			return deserializeRemediationAffectedResources(d, schemas.CountermeasureAction_AffectedResources, &v.AffectedResources)
+		case schemas.CountermeasureAction_CliCommands:
+			return deserializeCliCommands(d, schemas.CountermeasureAction_CliCommands, &v.CliCommands)
+		case schemas.CountermeasureAction_DefenseTechnique:
+			v.DefenseTechnique = new(string)
+			return d.ReadString(schemas.CountermeasureAction_DefenseTechnique, v.DefenseTechnique)
+		case schemas.CountermeasureAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CountermeasureAction_Description, v.Description)
+		case schemas.CountermeasureAction_Disposition:
+			var ev string
+			if err := d.ReadString(schemas.CountermeasureAction_Disposition, &ev); err != nil {
+				return err
+			}
+			v.Disposition = Disposition(ev)
+			return nil
+		case schemas.CountermeasureAction_DispositionId:
+			v.DispositionId = new(int32)
+			return d.ReadInt32(schemas.CountermeasureAction_DispositionId, v.DispositionId)
+		case schemas.CountermeasureAction_Mitigates:
+			return deserializeMitreTechniqueIds(d, schemas.CountermeasureAction_Mitigates, &v.Mitigates)
+		case schemas.CountermeasureAction_Priority:
+			var ev string
+			if err := d.ReadString(schemas.CountermeasureAction_Priority, &ev); err != nil {
+				return err
+			}
+			v.Priority = ActionPriority(ev)
+			return nil
+		case schemas.CountermeasureAction_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CountermeasureAction_Title, v.Title)
 		}
 		return nil
 	})
@@ -3750,6 +4678,64 @@ func (v *Detection) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about your detection coverage, such as the status of
+// protection plans and foundational data sources.
+type DetectionCoverage struct {
+
+	// A description of the gaps in detection coverage. A record doesn't include both
+	// CoverageGaps and KeyObservation .
+	CoverageGaps *string
+
+	// The foundational data sources, such as CLOUD_TRAIL , DNS_LOGS , and FLOW_LOGS .
+	FoundationalDataSources []InvestigationDetectorFeature
+
+	// A key observation about detection coverage.
+	KeyObservation *string
+
+	// The protection plans and their status.
+	ProtectionPlans []ProtectionPlan
+
+	noSmithyDocumentSerde
+}
+
+func (v *DetectionCoverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectionCoverage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectionCoverage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoverageGaps != nil {
+		s.WriteString(schemas.DetectionCoverage_CoverageGaps, *v.CoverageGaps)
+	}
+	if v.FoundationalDataSources != nil {
+		serializeFoundationalDataSources(s, schemas.DetectionCoverage_FoundationalDataSources, v.FoundationalDataSources)
+	}
+	if v.KeyObservation != nil {
+		s.WriteString(schemas.DetectionCoverage_KeyObservation, *v.KeyObservation)
+	}
+	if v.ProtectionPlans != nil {
+		serializeProtectionPlans(s, schemas.DetectionCoverage_ProtectionPlans, v.ProtectionPlans)
+	}
+}
+func (v *DetectionCoverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectionCoverage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectionCoverage_CoverageGaps:
+			v.CoverageGaps = new(string)
+			return d.ReadString(schemas.DetectionCoverage_CoverageGaps, v.CoverageGaps)
+		case schemas.DetectionCoverage_FoundationalDataSources:
+			return deserializeFoundationalDataSources(d, schemas.DetectionCoverage_FoundationalDataSources, &v.FoundationalDataSources)
+		case schemas.DetectionCoverage_KeyObservation:
+			v.KeyObservation = new(string)
+			return d.ReadString(schemas.DetectionCoverage_KeyObservation, v.KeyObservation)
+		case schemas.DetectionCoverage_ProtectionPlans:
+			return deserializeProtectionPlans(d, schemas.DetectionCoverage_ProtectionPlans, &v.ProtectionPlans)
+		}
+		return nil
+	})
+}
+
 // The requirements for running a Runtime Monitoring custom detection rule on
 // Amazon EC2.
 type DetectionRuleEc2Requirements struct {
@@ -4496,6 +5482,159 @@ func (v *DetectorFeatureConfigurationResult) Deserialize(d smithy.ShapeDeseriali
 		case schemas.DetectorFeatureConfigurationResult_UpdatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.DetectorFeatureConfigurationResult_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains a breakdown of findings along a dimension, such as severity or finding
+// type.
+type Distribution struct {
+
+	// The dimension of the breakdown. The value identifies the breakdown that the
+	// record describes: SEVERITY ( SeverityBreakdown ), TYPE ( FindingTypes or
+	// TopFindingTypes ), RESOURCE ( Resources ), ATTACK_VECTOR ( AttackVectors ), and
+	// ARCHIVE ( Archive ).
+	//
+	// This member is required.
+	Dimension DistributionDimension
+
+	// The number and percentage of archived and unarchived findings.
+	Archive *ArchiveDistribution
+
+	// The findings broken down by MITRE ATT&CK tactic.
+	AttackVectors []TacticCoverage
+
+	// The findings broken down by finding type, with counts and percentages.
+	FindingTypes []TypeDistribution
+
+	// The findings broken down by affected resource.
+	Resources []ResourceDistribution
+
+	// The number of findings at each severity level.
+	SeverityBreakdown *SeverityBreakdown
+
+	// The finding types that have the most findings, with counts.
+	TopFindingTypes []FindingTypeCount
+
+	// The total number of findings in the breakdown.
+	TotalFindings *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *Distribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Distribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Distribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Archive != nil {
+		s.WriteStruct(schemas.Distribution_Archive)
+		v.Archive.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttackVectors != nil {
+		serializeTacticCoverages(s, schemas.Distribution_AttackVectors, v.AttackVectors)
+	}
+	if v.Dimension != "" {
+		s.WriteString(schemas.Distribution_Dimension, string(v.Dimension))
+	}
+	if v.FindingTypes != nil {
+		serializeTypeDistributions(s, schemas.Distribution_FindingTypes, v.FindingTypes)
+	}
+	if v.Resources != nil {
+		serializeResourceDistributions(s, schemas.Distribution_Resources, v.Resources)
+	}
+	if v.SeverityBreakdown != nil {
+		s.WriteStruct(schemas.Distribution_SeverityBreakdown)
+		v.SeverityBreakdown.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopFindingTypes != nil {
+		serializeFindingTypeCounts(s, schemas.Distribution_TopFindingTypes, v.TopFindingTypes)
+	}
+	if v.TotalFindings != nil {
+		s.WriteInt64(schemas.Distribution_TotalFindings, *v.TotalFindings)
+	}
+}
+func (v *Distribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Distribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Distribution_Archive:
+			v.Archive = &ArchiveDistribution{}
+			return v.Archive.Deserialize(d)
+		case schemas.Distribution_AttackVectors:
+			return deserializeTacticCoverages(d, schemas.Distribution_AttackVectors, &v.AttackVectors)
+		case schemas.Distribution_Dimension:
+			var ev string
+			if err := d.ReadString(schemas.Distribution_Dimension, &ev); err != nil {
+				return err
+			}
+			v.Dimension = DistributionDimension(ev)
+			return nil
+		case schemas.Distribution_FindingTypes:
+			return deserializeTypeDistributions(d, schemas.Distribution_FindingTypes, &v.FindingTypes)
+		case schemas.Distribution_Resources:
+			return deserializeResourceDistributions(d, schemas.Distribution_Resources, &v.Resources)
+		case schemas.Distribution_SeverityBreakdown:
+			v.SeverityBreakdown = &SeverityBreakdown{}
+			return v.SeverityBreakdown.Deserialize(d)
+		case schemas.Distribution_TopFindingTypes:
+			return deserializeFindingTypeCounts(d, schemas.Distribution_TopFindingTypes, &v.TopFindingTypes)
+		case schemas.Distribution_TotalFindings:
+			v.TotalFindings = new(int64)
+			return d.ReadInt64(schemas.Distribution_TotalFindings, v.TotalFindings)
+		}
+		return nil
+	})
+}
+
+// Contains DNS details about network activity.
+type DnsContext struct {
+
+	// The suffix of the domain that was queried.
+	DomainSuffix *string
+
+	// Other domains that were queried.
+	OtherDomains *string
+
+	// The DNS resolution history for the domain.
+	ResolverHistory *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DnsContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainSuffix != nil {
+		s.WriteString(schemas.DnsContext_DomainSuffix, *v.DomainSuffix)
+	}
+	if v.OtherDomains != nil {
+		s.WriteString(schemas.DnsContext_OtherDomains, *v.OtherDomains)
+	}
+	if v.ResolverHistory != nil {
+		s.WriteString(schemas.DnsContext_ResolverHistory, *v.ResolverHistory)
+	}
+}
+func (v *DnsContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsContext_DomainSuffix:
+			v.DomainSuffix = new(string)
+			return d.ReadString(schemas.DnsContext_DomainSuffix, v.DomainSuffix)
+		case schemas.DnsContext_OtherDomains:
+			v.OtherDomains = new(string)
+			return d.ReadString(schemas.DnsContext_OtherDomains, v.OtherDomains)
+		case schemas.DnsContext_ResolverHistory:
+			v.ResolverHistory = new(string)
+			return d.ReadString(schemas.DnsContext_ResolverHistory, v.ResolverHistory)
 		}
 		return nil
 	})
@@ -5668,6 +6807,65 @@ func (v *EksClusterDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains additional context about activity, such as geolocation and threat
+// intelligence information. Not every member is set.
+type Enrichment struct {
+
+	// The name of the organization that owns the autonomous system number (ASN).
+	AsnOrg *string
+
+	// The name of the country associated with the activity.
+	CountryName *string
+
+	// The name of the threat list that contains the indicator.
+	ThreatListName *string
+
+	// The name of the threat.
+	ThreatName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Enrichment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Enrichment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Enrichment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsnOrg != nil {
+		s.WriteString(schemas.Enrichment_AsnOrg, *v.AsnOrg)
+	}
+	if v.CountryName != nil {
+		s.WriteString(schemas.Enrichment_CountryName, *v.CountryName)
+	}
+	if v.ThreatListName != nil {
+		s.WriteString(schemas.Enrichment_ThreatListName, *v.ThreatListName)
+	}
+	if v.ThreatName != nil {
+		s.WriteString(schemas.Enrichment_ThreatName, *v.ThreatName)
+	}
+}
+func (v *Enrichment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Enrichment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Enrichment_AsnOrg:
+			v.AsnOrg = new(string)
+			return d.ReadString(schemas.Enrichment_AsnOrg, v.AsnOrg)
+		case schemas.Enrichment_CountryName:
+			v.CountryName = new(string)
+			return d.ReadString(schemas.Enrichment_CountryName, v.CountryName)
+		case schemas.Enrichment_ThreatListName:
+			v.ThreatListName = new(string)
+			return d.ReadString(schemas.Enrichment_ThreatListName, v.ThreatListName)
+		case schemas.Enrichment_ThreatName:
+			v.ThreatName = new(string)
+			return d.ReadString(schemas.Enrichment_ThreatName, v.ThreatName)
+		}
+		return nil
+	})
+}
+
 // Contains information about the reason that the finding was generated.
 type Evidence struct {
 
@@ -5747,6 +6945,363 @@ func (v *FargateDetails) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ManagementType = ManagementType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Contains a filter condition that GuardDuty applied when it retrieved data.
+type FetchCriterion struct {
+
+	// The comparison operator of the condition. Possible values are EQUALS ,
+	// NOT_EQUALS , GREATER_THAN , GREATER_THAN_OR_EQUAL , LESS_THAN , and
+	// LESS_THAN_OR_EQUAL .
+	//
+	// This member is required.
+	Condition FetchCriterionCondition
+
+	// The name of the field that the condition applies to.
+	//
+	// This member is required.
+	Field *string
+
+	// The values that the field is compared against. Numeric and Boolean values are
+	// represented as strings.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FetchCriterion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FetchCriterion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FetchCriterion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != "" {
+		s.WriteString(schemas.FetchCriterion_Condition, string(v.Condition))
+	}
+	if v.Field != nil {
+		s.WriteString(schemas.FetchCriterion_Field, *v.Field)
+	}
+	if v.Values != nil {
+		serializeFetchFieldValues(s, schemas.FetchCriterion_Values, v.Values)
+	}
+}
+func (v *FetchCriterion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FetchCriterion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FetchCriterion_Condition:
+			var ev string
+			if err := d.ReadString(schemas.FetchCriterion_Condition, &ev); err != nil {
+				return err
+			}
+			v.Condition = FetchCriterionCondition(ev)
+			return nil
+		case schemas.FetchCriterion_Field:
+			v.Field = new(string)
+			return d.ReadString(schemas.FetchCriterion_Field, v.Field)
+		case schemas.FetchCriterion_Values:
+			return deserializeFetchFieldValues(d, schemas.FetchCriterion_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// Contains the parameters of a request that GuardDuty made to retrieve data
+// during an investigation. The members that are set depend on the FetchType of
+// the record.
+type FetchQuery struct {
+
+	// The Amazon Web Services account ID that the request was made for.
+	AccountId *string
+
+	// The filter criteria that GuardDuty applied to the request.
+	Criteria []FetchCriterion
+
+	// The ID of the finding that GuardDuty retrieved.
+	FindingId *string
+
+	// The finding type whose documentation GuardDuty retrieved.
+	FindingType *string
+
+	// The threat indicator that GuardDuty looked up, such as an IP address, a domain,
+	// or a file hash.
+	Indicator *string
+
+	// The type of the threat indicator. Possible values are IP , DOMAIN , and FILE .
+	IndicatorType InvestigationIndicatorType
+
+	// The maximum number of rows that GuardDuty requested. Valid values are 1 to
+	// 1,000.
+	RowLimit *int32
+
+	// The time range of the data that GuardDuty requested.
+	TimeWindow *FetchTimeWindow
+
+	noSmithyDocumentSerde
+}
+
+func (v *FetchQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FetchQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FetchQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.FetchQuery_AccountId, *v.AccountId)
+	}
+	if v.Criteria != nil {
+		serializeFetchCriteria(s, schemas.FetchQuery_Criteria, v.Criteria)
+	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.FetchQuery_FindingId, *v.FindingId)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.FetchQuery_FindingType, *v.FindingType)
+	}
+	if v.Indicator != nil {
+		s.WriteString(schemas.FetchQuery_Indicator, *v.Indicator)
+	}
+	if v.IndicatorType != "" {
+		s.WriteString(schemas.FetchQuery_IndicatorType, string(v.IndicatorType))
+	}
+	if v.RowLimit != nil {
+		s.WriteInt32(schemas.FetchQuery_RowLimit, *v.RowLimit)
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.FetchQuery_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FetchQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FetchQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FetchQuery_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.FetchQuery_AccountId, v.AccountId)
+		case schemas.FetchQuery_Criteria:
+			return deserializeFetchCriteria(d, schemas.FetchQuery_Criteria, &v.Criteria)
+		case schemas.FetchQuery_FindingId:
+			v.FindingId = new(string)
+			return d.ReadString(schemas.FetchQuery_FindingId, v.FindingId)
+		case schemas.FetchQuery_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.FetchQuery_FindingType, v.FindingType)
+		case schemas.FetchQuery_Indicator:
+			v.Indicator = new(string)
+			return d.ReadString(schemas.FetchQuery_Indicator, v.Indicator)
+		case schemas.FetchQuery_IndicatorType:
+			var ev string
+			if err := d.ReadString(schemas.FetchQuery_IndicatorType, &ev); err != nil {
+				return err
+			}
+			v.IndicatorType = InvestigationIndicatorType(ev)
+			return nil
+		case schemas.FetchQuery_RowLimit:
+			v.RowLimit = new(int32)
+			return d.ReadInt32(schemas.FetchQuery_RowLimit, v.RowLimit)
+		case schemas.FetchQuery_TimeWindow:
+			v.TimeWindow = &FetchTimeWindow{}
+			return v.TimeWindow.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains information about data that GuardDuty retrieved during an
+// investigation, including what GuardDuty requested and what it received.
+type FetchRecord struct {
+
+	// The kind of data that GuardDuty retrieved. The value determines which members
+	// of Query and Result can be set. Possible values:
+	//
+	//   - FINDINGS – GuardDuty findings.
+	//
+	//   - DETECTOR – The configuration of a GuardDuty detector.
+	//
+	//   - REPUTATION – Reputation information about a threat indicator, such as an IP
+	//   address, a domain, or a file hash.
+	//
+	//   - FINDING_TYPE_DOCUMENTATION – The documentation for a finding type.
+	//
+	//   - CLOUD_TRAIL_RAW_EVENTS – Amazon Web Services CloudTrail events.
+	//
+	//   - RUNTIME_SIGNALS – Runtime signals.
+	//
+	//   - MEMBER_ACCOUNTS – A list of member accounts.
+	//
+	// This member is required.
+	FetchType FetchType
+
+	// The request that GuardDuty made. Not every record includes a query.
+	Query *FetchQuery
+
+	// The data that GuardDuty received in response to the request. Not every record
+	// includes a result.
+	Result *FetchResult
+
+	noSmithyDocumentSerde
+}
+
+func (v *FetchRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FetchRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FetchRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FetchType != "" {
+		s.WriteString(schemas.FetchRecord_FetchType, string(v.FetchType))
+	}
+	if v.Query != nil {
+		s.WriteStruct(schemas.FetchRecord_Query)
+		v.Query.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Result != nil {
+		s.WriteStruct(schemas.FetchRecord_Result)
+		v.Result.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FetchRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FetchRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FetchRecord_FetchType:
+			var ev string
+			if err := d.ReadString(schemas.FetchRecord_FetchType, &ev); err != nil {
+				return err
+			}
+			v.FetchType = FetchType(ev)
+			return nil
+		case schemas.FetchRecord_Query:
+			v.Query = &FetchQuery{}
+			return v.Query.Deserialize(d)
+		case schemas.FetchRecord_Result:
+			v.Result = &FetchResult{}
+			return v.Result.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains the data that GuardDuty received in response to a request during an
+// investigation. The members that are set depend on the FetchType of the record.
+type FetchResult struct {
+
+	// The documentation for the finding type that GuardDuty retrieved.
+	Documentation *FindingTypeDocumentation
+
+	// The configuration of the detector features that GuardDuty retrieved.
+	Features []InvestigationDetectorFeatureConfiguration
+
+	// The identifiers of the items that were returned, such as finding IDs, event
+	// IDs, signal IDs, or account IDs, depending on FetchType . The list contains at
+	// most 50 identifiers; TotalCount can be larger.
+	ItemIds []string
+
+	// The total number of items that were returned. This value can be greater than
+	// the number of identifiers in ItemIds .
+	TotalCount *int64
+
+	// The reputation verdict for the threat indicator. Possible values are THREAT ,
+	// BENIGN , and NEUTRAL . If the lookup returned more than one result, the verdict
+	// describes the first result.
+	Verdict FetchVerdict
+
+	noSmithyDocumentSerde
+}
+
+func (v *FetchResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FetchResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FetchResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Documentation != nil {
+		s.WriteStruct(schemas.FetchResult_Documentation)
+		v.Documentation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Features != nil {
+		serializeFetchDetectorFeatures(s, schemas.FetchResult_Features, v.Features)
+	}
+	if v.ItemIds != nil {
+		serializeFetchItemIds(s, schemas.FetchResult_ItemIds, v.ItemIds)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.FetchResult_TotalCount, *v.TotalCount)
+	}
+	if v.Verdict != "" {
+		s.WriteString(schemas.FetchResult_Verdict, string(v.Verdict))
+	}
+}
+func (v *FetchResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FetchResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FetchResult_Documentation:
+			v.Documentation = &FindingTypeDocumentation{}
+			return v.Documentation.Deserialize(d)
+		case schemas.FetchResult_Features:
+			return deserializeFetchDetectorFeatures(d, schemas.FetchResult_Features, &v.Features)
+		case schemas.FetchResult_ItemIds:
+			return deserializeFetchItemIds(d, schemas.FetchResult_ItemIds, &v.ItemIds)
+		case schemas.FetchResult_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.FetchResult_TotalCount, v.TotalCount)
+		case schemas.FetchResult_Verdict:
+			var ev string
+			if err := d.ReadString(schemas.FetchResult_Verdict, &ev); err != nil {
+				return err
+			}
+			v.Verdict = FetchVerdict(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains the time range of the data that GuardDuty requested. The range is
+// defined by a start time and a duration.
+type FetchTimeWindow struct {
+
+	// The length of the time range, in minutes. Valid values are 1 to 120.
+	DurationInMinutes *int32
+
+	// The timestamp at which the time range starts.
+	StartedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *FetchTimeWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FetchTimeWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FetchTimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInMinutes != nil {
+		s.WriteInt32(schemas.FetchTimeWindow_DurationInMinutes, *v.DurationInMinutes)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.FetchTimeWindow_StartedAt, *v.StartedAt)
+	}
+}
+func (v *FetchTimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FetchTimeWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FetchTimeWindow_DurationInMinutes:
+			v.DurationInMinutes = new(int32)
+			return d.ReadInt32(schemas.FetchTimeWindow_DurationInMinutes, v.DurationInMinutes)
+		case schemas.FetchTimeWindow_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.FetchTimeWindow_StartedAt, v.StartedAt)
 		}
 		return nil
 	})
@@ -6123,6 +7678,182 @@ func (v *FindingCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains details about a GuardDuty finding.
+type FindingDetail struct {
+
+	// The ID of the Amazon Web Services account in which the finding was generated.
+	AccountId *string
+
+	// The time range of the activity that the finding describes.
+	ActivityWindow *ActivityWindow
+
+	// The ID of the finding.
+	FindingId *string
+
+	// The type of the finding.
+	FindingType *string
+
+	// The Amazon Web Services Region in which the finding was generated.
+	Region *string
+
+	// The severity of the finding.
+	Severity *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.FindingDetail_AccountId, *v.AccountId)
+	}
+	if v.ActivityWindow != nil {
+		s.WriteStruct(schemas.FindingDetail_ActivityWindow)
+		v.ActivityWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.FindingDetail_FindingId, *v.FindingId)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.FindingDetail_FindingType, *v.FindingType)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.FindingDetail_Region, *v.Region)
+	}
+	if v.Severity != nil {
+		s.WriteString(schemas.FindingDetail_Severity, *v.Severity)
+	}
+}
+func (v *FindingDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingDetail_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.FindingDetail_AccountId, v.AccountId)
+		case schemas.FindingDetail_ActivityWindow:
+			v.ActivityWindow = &ActivityWindow{}
+			return v.ActivityWindow.Deserialize(d)
+		case schemas.FindingDetail_FindingId:
+			v.FindingId = new(string)
+			return d.ReadString(schemas.FindingDetail_FindingId, v.FindingId)
+		case schemas.FindingDetail_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.FindingDetail_FindingType, v.FindingType)
+		case schemas.FindingDetail_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.FindingDetail_Region, v.Region)
+		case schemas.FindingDetail_Severity:
+			v.Severity = new(string)
+			return d.ReadString(schemas.FindingDetail_Severity, v.Severity)
+		}
+		return nil
+	})
+}
+
+// Contains a reference to a GuardDuty finding.
+type FindingReference struct {
+
+	// The type of the finding.
+	FindingType *string
+
+	// The ID of the finding.
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingType != nil {
+		s.WriteString(schemas.FindingReference_FindingType, *v.FindingType)
+	}
+	if v.Uid != nil {
+		s.WriteString(schemas.FindingReference_Uid, *v.Uid)
+	}
+}
+func (v *FindingReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingReference_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.FindingReference_FindingType, v.FindingType)
+		case schemas.FindingReference_Uid:
+			v.Uid = new(string)
+			return d.ReadString(schemas.FindingReference_Uid, v.Uid)
+		}
+		return nil
+	})
+}
+
+// Contains a summary of findings.
+type FindingsSummary struct {
+
+	// The number of findings in each time window.
+	ByTimeWindow []TimeWindowGroup
+
+	// The number of findings at each severity level.
+	SeverityBreakdown *SeverityBreakdown
+
+	// The finding types that have the most findings, with counts.
+	TopFindingTypes []FindingTypeCount
+
+	// The total number of findings.
+	TotalFindings *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByTimeWindow != nil {
+		serializeTimeWindowGroups(s, schemas.FindingsSummary_ByTimeWindow, v.ByTimeWindow)
+	}
+	if v.SeverityBreakdown != nil {
+		s.WriteStruct(schemas.FindingsSummary_SeverityBreakdown)
+		v.SeverityBreakdown.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopFindingTypes != nil {
+		serializeFindingTypeCounts(s, schemas.FindingsSummary_TopFindingTypes, v.TopFindingTypes)
+	}
+	if v.TotalFindings != nil {
+		s.WriteInt32(schemas.FindingsSummary_TotalFindings, *v.TotalFindings)
+	}
+}
+func (v *FindingsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingsSummary_ByTimeWindow:
+			return deserializeTimeWindowGroups(d, schemas.FindingsSummary_ByTimeWindow, &v.ByTimeWindow)
+		case schemas.FindingsSummary_SeverityBreakdown:
+			v.SeverityBreakdown = &SeverityBreakdown{}
+			return v.SeverityBreakdown.Deserialize(d)
+		case schemas.FindingsSummary_TopFindingTypes:
+			return deserializeFindingTypeCounts(d, schemas.FindingsSummary_TopFindingTypes, &v.TopFindingTypes)
+		case schemas.FindingsSummary_TotalFindings:
+			v.TotalFindings = new(int32)
+			return d.ReadInt32(schemas.FindingsSummary_TotalFindings, v.TotalFindings)
+		}
+		return nil
+	})
+}
+
 // Contains information about finding statistics.
 type FindingStatistics struct {
 
@@ -6200,6 +7931,189 @@ func (v *FindingStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeGroupedByResource(d, schemas.FindingStatistics_GroupedByResource, &v.GroupedByResource)
 		case schemas.FindingStatistics_GroupedBySeverity:
 			return deserializeGroupedBySeverity(d, schemas.FindingStatistics_GroupedBySeverity, &v.GroupedBySeverity)
+		}
+		return nil
+	})
+}
+
+// Contains information about how a finding type compares with normal behavior.
+type FindingTypeClassification struct {
+
+	// The classification of the finding type.
+	Classification *string
+
+	// The number of findings of this type.
+	Count *int64
+
+	// A description of the classification.
+	Description *string
+
+	// The finding type.
+	FindingType *string
+
+	// The percentage of findings that are of this type, from 0 to 100.
+	Percentage *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingTypeClassification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingTypeClassification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingTypeClassification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Classification != nil {
+		s.WriteString(schemas.FindingTypeClassification_Classification, *v.Classification)
+	}
+	if v.Count != nil {
+		s.WriteInt64(schemas.FindingTypeClassification_Count, *v.Count)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FindingTypeClassification_Description, *v.Description)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.FindingTypeClassification_FindingType, *v.FindingType)
+	}
+	if v.Percentage != nil {
+		s.WriteFloat64(schemas.FindingTypeClassification_Percentage, *v.Percentage)
+	}
+}
+func (v *FindingTypeClassification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingTypeClassification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingTypeClassification_Classification:
+			v.Classification = new(string)
+			return d.ReadString(schemas.FindingTypeClassification_Classification, v.Classification)
+		case schemas.FindingTypeClassification_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.FindingTypeClassification_Count, v.Count)
+		case schemas.FindingTypeClassification_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FindingTypeClassification_Description, v.Description)
+		case schemas.FindingTypeClassification_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.FindingTypeClassification_FindingType, v.FindingType)
+		case schemas.FindingTypeClassification_Percentage:
+			v.Percentage = new(float64)
+			return d.ReadFloat64(schemas.FindingTypeClassification_Percentage, v.Percentage)
+		}
+		return nil
+	})
+}
+
+// Contains the number of findings of a finding type.
+type FindingTypeCount struct {
+
+	// The number of findings of this type.
+	Count *int32
+
+	// The finding type.
+	FindingType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingTypeCount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingTypeCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingTypeCount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.FindingTypeCount_Count, *v.Count)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.FindingTypeCount_FindingType, *v.FindingType)
+	}
+}
+func (v *FindingTypeCount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingTypeCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingTypeCount_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.FindingTypeCount_Count, v.Count)
+		case schemas.FindingTypeCount_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.FindingTypeCount_FindingType, v.FindingType)
+		}
+		return nil
+	})
+}
+
+// Contains information about a finding type from the GuardDuty documentation.
+type FindingTypeDocumentation struct {
+
+	// A short description of the finding type.
+	Description *string
+
+	// The label that the documentation uses for the GuardDuty capability associated
+	// with the finding type. This value isn't a detector feature name.
+	Feature *string
+
+	// The full description of the finding type.
+	FullDescription *string
+
+	// Links to more information about the finding type.
+	LearnMoreLinks []string
+
+	// The recommended steps to remediate the finding type.
+	Remediation *string
+
+	// The severity of the finding type, as stated in the documentation.
+	Severity *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingTypeDocumentation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingTypeDocumentation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingTypeDocumentation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.FindingTypeDocumentation_Description, *v.Description)
+	}
+	if v.Feature != nil {
+		s.WriteString(schemas.FindingTypeDocumentation_Feature, *v.Feature)
+	}
+	if v.FullDescription != nil {
+		s.WriteString(schemas.FindingTypeDocumentation_FullDescription, *v.FullDescription)
+	}
+	if v.LearnMoreLinks != nil {
+		serializeFetchLearnMoreLinks(s, schemas.FindingTypeDocumentation_LearnMoreLinks, v.LearnMoreLinks)
+	}
+	if v.Remediation != nil {
+		s.WriteString(schemas.FindingTypeDocumentation_Remediation, *v.Remediation)
+	}
+	if v.Severity != nil {
+		s.WriteString(schemas.FindingTypeDocumentation_Severity, *v.Severity)
+	}
+}
+func (v *FindingTypeDocumentation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingTypeDocumentation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingTypeDocumentation_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FindingTypeDocumentation_Description, v.Description)
+		case schemas.FindingTypeDocumentation_Feature:
+			v.Feature = new(string)
+			return d.ReadString(schemas.FindingTypeDocumentation_Feature, v.Feature)
+		case schemas.FindingTypeDocumentation_FullDescription:
+			v.FullDescription = new(string)
+			return d.ReadString(schemas.FindingTypeDocumentation_FullDescription, v.FullDescription)
+		case schemas.FindingTypeDocumentation_LearnMoreLinks:
+			return deserializeFetchLearnMoreLinks(d, schemas.FindingTypeDocumentation_LearnMoreLinks, &v.LearnMoreLinks)
+		case schemas.FindingTypeDocumentation_Remediation:
+			v.Remediation = new(string)
+			return d.ReadString(schemas.FindingTypeDocumentation_Remediation, v.Remediation)
+		case schemas.FindingTypeDocumentation_Severity:
+			v.Severity = new(string)
+			return d.ReadString(schemas.FindingTypeDocumentation_Severity, v.Severity)
 		}
 		return nil
 	})
@@ -6951,12 +8865,27 @@ type Investigation struct {
 	// Low , Medium , High , and Critical .
 	RiskLevel RiskLevel
 
+	// Information about what the investigation analyzed, including the investigation
+	// type, the finding, account, or organization that was analyzed, and, for ACCOUNT
+	// and ORGANIZATION investigations, the time window over which the investigation
+	// queried data. Returned only when the investigation status is COMPLETED .
+	Scope *InvestigationScope
+
 	// The timestamp at which the investigation started.
 	StartTime *time.Time
 
-	// A structured summary of the investigation findings, including affected
-	// resources, threat assessment, and recommended remediation steps.
+	// A summary of the investigation results as text, up to 262,144 characters.
+	// Returned only when the investigation status is COMPLETED . When you set
+	// SummaryFormat to STRUCTURED , the summary is returned in SummaryData instead,
+	// unless it isn't available in a structured form, in which case it's returned in
+	// this field.
 	Summary *string
+
+	// A structured summary of the investigation results. GuardDuty returns this field
+	// only when you set SummaryFormat to STRUCTURED , the investigation status is
+	// COMPLETED , and the summary is available in a structured form. When this field
+	// is returned, Summary isn't returned.
+	SummaryData *InvestigationSummaryData
 
 	noSmithyDocumentSerde
 }
@@ -6996,6 +8925,11 @@ func (v *Investigation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RiskLevel != "" {
 		s.WriteString(schemas.Investigation_RiskLevel, string(v.RiskLevel))
 	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.Investigation_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.Investigation_StartTime, *v.StartTime)
 	}
@@ -7004,6 +8938,11 @@ func (v *Investigation) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Summary != nil {
 		s.WriteString(schemas.Investigation_Summary, *v.Summary)
+	}
+	if v.SummaryData != nil {
+		s.WriteStruct(schemas.Investigation_SummaryData)
+		v.SummaryData.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.TriggerPrompt != nil {
 		s.WriteString(schemas.Investigation_TriggerPrompt, *v.TriggerPrompt)
@@ -7047,6 +8986,9 @@ func (v *Investigation) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.RiskLevel = RiskLevel(ev)
 			return nil
+		case schemas.Investigation_Scope:
+			v.Scope = &InvestigationScope{}
+			return v.Scope.Deserialize(d)
 		case schemas.Investigation_StartTime:
 			v.StartTime = new(time.Time)
 			return d.ReadTime(schemas.Investigation_StartTime, v.StartTime)
@@ -7060,12 +9002,801 @@ func (v *Investigation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Investigation_Summary:
 			v.Summary = new(string)
 			return d.ReadString(schemas.Investigation_Summary, v.Summary)
+		case schemas.Investigation_SummaryData:
+			v.SummaryData = &InvestigationSummaryData{}
+			return v.SummaryData.Deserialize(d)
 		case schemas.Investigation_TriggerPrompt:
 			v.TriggerPrompt = new(string)
 			return d.ReadString(schemas.Investigation_TriggerPrompt, v.TriggerPrompt)
 		case schemas.Investigation_TriggeredBy:
 			v.TriggeredBy = new(string)
 			return d.ReadString(schemas.Investigation_TriggeredBy, v.TriggeredBy)
+		}
+		return nil
+	})
+}
+
+// Contains an analysis of the findings in an account. Either Trend or Baseline is
+// set, depending on the AnalysisType of the record.
+type InvestigationAccountAnalysis struct {
+
+	// A comparison of findings against normal behavior. Set when AnalysisType is
+	// BASELINE .
+	Baseline *Baseline
+
+	// The trend of findings over time. Set when AnalysisType is TREND .
+	Trend *Trend
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationAccountAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationAccountAnalysis)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationAccountAnalysis) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Baseline != nil {
+		s.WriteStruct(schemas.InvestigationAccountAnalysis_Baseline)
+		v.Baseline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Trend != nil {
+		s.WriteStruct(schemas.InvestigationAccountAnalysis_Trend)
+		v.Trend.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvestigationAccountAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationAccountAnalysis, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationAccountAnalysis_Baseline:
+			v.Baseline = &Baseline{}
+			return v.Baseline.Deserialize(d)
+		case schemas.InvestigationAccountAnalysis_Trend:
+			v.Trend = &Trend{}
+			return v.Trend.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains information about the identity that performed an activity.
+type InvestigationActor struct {
+
+	// The access key ID that the identity used.
+	AccessKeyId *string
+
+	// The ID of the principal.
+	PrincipalId *string
+
+	// The user agent that the identity used.
+	UserAgent *string
+
+	// The name of the user.
+	UserName *string
+
+	// The type of the identity, such as IAMUser , AssumedRole , or Root .
+	UserType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationActor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationActor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationActor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.InvestigationActor_AccessKeyId, *v.AccessKeyId)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.InvestigationActor_PrincipalId, *v.PrincipalId)
+	}
+	if v.UserAgent != nil {
+		s.WriteString(schemas.InvestigationActor_UserAgent, *v.UserAgent)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.InvestigationActor_UserName, *v.UserName)
+	}
+	if v.UserType != nil {
+		s.WriteString(schemas.InvestigationActor_UserType, *v.UserType)
+	}
+}
+func (v *InvestigationActor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationActor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationActor_AccessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.InvestigationActor_AccessKeyId, v.AccessKeyId)
+		case schemas.InvestigationActor_PrincipalId:
+			v.PrincipalId = new(string)
+			return d.ReadString(schemas.InvestigationActor_PrincipalId, v.PrincipalId)
+		case schemas.InvestigationActor_UserAgent:
+			v.UserAgent = new(string)
+			return d.ReadString(schemas.InvestigationActor_UserAgent, v.UserAgent)
+		case schemas.InvestigationActor_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.InvestigationActor_UserName, v.UserName)
+		case schemas.InvestigationActor_UserType:
+			v.UserType = new(string)
+			return d.ReadString(schemas.InvestigationActor_UserType, v.UserType)
+		}
+		return nil
+	})
+}
+
+// Contains information about the configuration of a detector feature. Each member
+// is optional.
+type InvestigationDetectorFeatureConfiguration struct {
+
+	// The name of the feature. Possible values are CLOUD_TRAIL , DNS_LOGS , FLOW_LOGS
+	// , S3_DATA_EVENTS , EKS_AUDIT_LOGS , EBS_MALWARE_PROTECTION , RDS_LOGIN_EVENTS ,
+	// EKS_RUNTIME_MONITORING , EKS_ADDON_MANAGEMENT , LAMBDA_NETWORK_LOGS ,
+	// RUNTIME_MONITORING , ECS_FARGATE_AGENT_MANAGEMENT , and EC2_AGENT_MANAGEMENT .
+	Name InvestigationDetectorFeature
+
+	// The status of the feature. Possible values are ENABLED and DISABLED .
+	Status FeatureStatus
+
+	// The timestamp at which the feature configuration was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationDetectorFeatureConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationDetectorFeatureConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationDetectorFeatureConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.InvestigationDetectorFeatureConfiguration_Name, string(v.Name))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InvestigationDetectorFeatureConfiguration_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.InvestigationDetectorFeatureConfiguration_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *InvestigationDetectorFeatureConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationDetectorFeatureConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationDetectorFeatureConfiguration_Name:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationDetectorFeatureConfiguration_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = InvestigationDetectorFeature(ev)
+			return nil
+		case schemas.InvestigationDetectorFeatureConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationDetectorFeatureConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FeatureStatus(ev)
+			return nil
+		case schemas.InvestigationDetectorFeatureConfiguration_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestigationDetectorFeatureConfiguration_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains details about an Amazon EC2 instance.
+type InvestigationEc2Instance struct {
+
+	// The Availability Zone of the instance.
+	AvailabilityZone *string
+
+	// The ID of the Amazon Machine Image (AMI) that was used to launch the instance.
+	ImageId *string
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The state of the instance.
+	InstanceState *string
+
+	// The instance type.
+	InstanceType *string
+
+	// The timestamp at which the instance was launched.
+	LaunchedAt *time.Time
+
+	// The private IP address of the instance.
+	PrivateIpAddress *string
+
+	// The public IP address of the instance.
+	PublicIp *string
+
+	// The ID of the subnet in which the instance runs.
+	SubnetId *string
+
+	// The ID of the VPC in which the instance runs.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationEc2Instance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationEc2Instance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationEc2Instance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_ImageId, *v.ImageId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceState != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_InstanceState, *v.InstanceState)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_InstanceType, *v.InstanceType)
+	}
+	if v.LaunchedAt != nil {
+		s.WriteTime(schemas.InvestigationEc2Instance_LaunchedAt, *v.LaunchedAt)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_PrivateIpAddress, *v.PrivateIpAddress)
+	}
+	if v.PublicIp != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_PublicIp, *v.PublicIp)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_SubnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.InvestigationEc2Instance_VpcId, *v.VpcId)
+	}
+}
+func (v *InvestigationEc2Instance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationEc2Instance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationEc2Instance_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_AvailabilityZone, v.AvailabilityZone)
+		case schemas.InvestigationEc2Instance_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_ImageId, v.ImageId)
+		case schemas.InvestigationEc2Instance_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_InstanceId, v.InstanceId)
+		case schemas.InvestigationEc2Instance_InstanceState:
+			v.InstanceState = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_InstanceState, v.InstanceState)
+		case schemas.InvestigationEc2Instance_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_InstanceType, v.InstanceType)
+		case schemas.InvestigationEc2Instance_LaunchedAt:
+			v.LaunchedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestigationEc2Instance_LaunchedAt, v.LaunchedAt)
+		case schemas.InvestigationEc2Instance_PrivateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_PrivateIpAddress, v.PrivateIpAddress)
+		case schemas.InvestigationEc2Instance_PublicIp:
+			v.PublicIp = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_PublicIp, v.PublicIp)
+		case schemas.InvestigationEc2Instance_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_SubnetId, v.SubnetId)
+		case schemas.InvestigationEc2Instance_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.InvestigationEc2Instance_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
+// Contains details about an Amazon ECS cluster.
+type InvestigationEcsCluster struct {
+
+	// The Amazon Resource Name (ARN) of the cluster.
+	Arn *string
+
+	// The name of the cluster.
+	Name *string
+
+	// The status of the cluster.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationEcsCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationEcsCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationEcsCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.InvestigationEcsCluster_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InvestigationEcsCluster_Name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.InvestigationEcsCluster_Status, *v.Status)
+	}
+}
+func (v *InvestigationEcsCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationEcsCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationEcsCluster_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.InvestigationEcsCluster_Arn, v.Arn)
+		case schemas.InvestigationEcsCluster_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InvestigationEcsCluster_Name, v.Name)
+		case schemas.InvestigationEcsCluster_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.InvestigationEcsCluster_Status, v.Status)
+		}
+		return nil
+	})
+}
+
+// Contains details about an Amazon EKS cluster.
+type InvestigationEksCluster struct {
+
+	// The Amazon Resource Name (ARN) of the cluster.
+	Arn *string
+
+	// The name of the cluster.
+	Name *string
+
+	// The status of the cluster.
+	Status *string
+
+	// The ID of the VPC that is associated with the cluster.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationEksCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationEksCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationEksCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.InvestigationEksCluster_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InvestigationEksCluster_Name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.InvestigationEksCluster_Status, *v.Status)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.InvestigationEksCluster_VpcId, *v.VpcId)
+	}
+}
+func (v *InvestigationEksCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationEksCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationEksCluster_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.InvestigationEksCluster_Arn, v.Arn)
+		case schemas.InvestigationEksCluster_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InvestigationEksCluster_Name, v.Name)
+		case schemas.InvestigationEksCluster_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.InvestigationEksCluster_Status, v.Status)
+		case schemas.InvestigationEksCluster_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.InvestigationEksCluster_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
+// Contains the values that an investigation attribute must match. Specify Equals ,
+// NotEquals , or both, each with at least one value. If you specify both, an
+// investigation must match both conditions.
+type InvestigationFilterCondition struct {
+
+	// The values to match. An investigation matches if its attribute value equals any
+	// of the specified values.
+	Equals []string
+
+	// The values to exclude. An investigation matches only if its attribute value
+	// doesn't equal any of the specified values. An investigation that has no value
+	// for the attribute also matches.
+	NotEquals []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationFilterCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationFilterCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationFilterCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Equals != nil {
+		serializeEquals(s, schemas.InvestigationFilterCondition_Equals, v.Equals)
+	}
+	if v.NotEquals != nil {
+		serializeNotEquals(s, schemas.InvestigationFilterCondition_NotEquals, v.NotEquals)
+	}
+}
+func (v *InvestigationFilterCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationFilterCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationFilterCondition_Equals:
+			return deserializeEquals(d, schemas.InvestigationFilterCondition_Equals, &v.Equals)
+		case schemas.InvestigationFilterCondition_NotEquals:
+			return deserializeNotEquals(d, schemas.InvestigationFilterCondition_NotEquals, &v.NotEquals)
+		}
+		return nil
+	})
+}
+
+// Contains the criteria used to filter investigations.
+type InvestigationFilterCriteria struct {
+
+	// A map of investigation attributes to the conditions that they must match. When
+	// you specify more than one attribute, an investigation must match the conditions
+	// for every attribute. Valid attributes and values:
+	//
+	//   - STATUS – RUNNING , COMPLETED , and FAILED .
+	//
+	//   - RISK_LEVEL – Info , Low , Medium , High , and Critical .
+	//
+	//   - CONFIDENCE – Unknown , Low , Medium , and High .
+	//
+	//   - FINDING_ID – A finding ID, which is 32 lowercase hexadecimal characters.
+	//
+	//   - INVESTIGATION_TYPE – FINDING , ACCOUNT , and ORGANIZATION .
+	//
+	// Values are case sensitive. GuardDuty sets the risk level, confidence, and
+	// investigation type of an investigation only when the investigation completes.
+	Criterion map[string]InvestigationFilterCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationFilterCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationFilterCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criterion != nil {
+		serializeInvestigationCriterion(s, schemas.InvestigationFilterCriteria_Criterion, v.Criterion)
+	}
+}
+func (v *InvestigationFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationFilterCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationFilterCriteria_Criterion:
+			return deserializeInvestigationCriterion(d, schemas.InvestigationFilterCriteria_Criterion, &v.Criterion)
+		}
+		return nil
+	})
+}
+
+// Contains a threat indicator, such as an IP address, a domain, or a file hash.
+type InvestigationIndicator struct {
+
+	// The value of the indicator.
+	//
+	// This member is required.
+	Value *string
+
+	// The type of the indicator. Possible values are IP , DOMAIN , and FILE .
+	Type InvestigationIndicatorType
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationIndicator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationIndicator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationIndicator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.InvestigationIndicator_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.InvestigationIndicator_Value, *v.Value)
+	}
+}
+func (v *InvestigationIndicator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationIndicator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationIndicator_Type:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationIndicator_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = InvestigationIndicatorType(ev)
+			return nil
+		case schemas.InvestigationIndicator_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.InvestigationIndicator_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Contains details about a Kubernetes workload.
+type InvestigationKubernetesWorkload struct {
+
+	// The containers in the workload.
+	Containers *string
+
+	// The security context of the workload.
+	SecurityContext *string
+
+	// The volumes of the workload.
+	Volumes *string
+
+	// The name of the workload.
+	WorkloadName *string
+
+	// The type of the workload.
+	WorkloadType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationKubernetesWorkload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationKubernetesWorkload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationKubernetesWorkload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Containers != nil {
+		s.WriteString(schemas.InvestigationKubernetesWorkload_Containers, *v.Containers)
+	}
+	if v.SecurityContext != nil {
+		s.WriteString(schemas.InvestigationKubernetesWorkload_SecurityContext, *v.SecurityContext)
+	}
+	if v.Volumes != nil {
+		s.WriteString(schemas.InvestigationKubernetesWorkload_Volumes, *v.Volumes)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.InvestigationKubernetesWorkload_WorkloadName, *v.WorkloadName)
+	}
+	if v.WorkloadType != nil {
+		s.WriteString(schemas.InvestigationKubernetesWorkload_WorkloadType, *v.WorkloadType)
+	}
+}
+func (v *InvestigationKubernetesWorkload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationKubernetesWorkload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationKubernetesWorkload_Containers:
+			v.Containers = new(string)
+			return d.ReadString(schemas.InvestigationKubernetesWorkload_Containers, v.Containers)
+		case schemas.InvestigationKubernetesWorkload_SecurityContext:
+			v.SecurityContext = new(string)
+			return d.ReadString(schemas.InvestigationKubernetesWorkload_SecurityContext, v.SecurityContext)
+		case schemas.InvestigationKubernetesWorkload_Volumes:
+			v.Volumes = new(string)
+			return d.ReadString(schemas.InvestigationKubernetesWorkload_Volumes, v.Volumes)
+		case schemas.InvestigationKubernetesWorkload_WorkloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.InvestigationKubernetesWorkload_WorkloadName, v.WorkloadName)
+		case schemas.InvestigationKubernetesWorkload_WorkloadType:
+			v.WorkloadType = new(string)
+			return d.ReadString(schemas.InvestigationKubernetesWorkload_WorkloadType, v.WorkloadType)
+		}
+		return nil
+	})
+}
+
+// Contains details about a malware scan.
+type InvestigationMalwareScan struct {
+
+	// The scan engines that the scan used.
+	EngineSources *string
+
+	// The number of files that the scan scanned.
+	FilesScanned *int64
+
+	// The amount of data that the scan scanned, in GB.
+	GigabytesScanned *float64
+
+	// The highest severity among the threats that the scan detected.
+	HighestSeverity *string
+
+	// The name of the threat that has the highest severity.
+	HighestSeverityThreatName *string
+
+	// The number of infected files.
+	InfectedFileCount *int64
+
+	// The identifier of the scanned resource.
+	ResourceIdentifier *string
+
+	// The type of the scanned resource.
+	ResourceType *string
+
+	// The category of the scan. Possible values are FULL_SCAN and INCREMENTAL_SCAN .
+	ScanCategory ScanCategory
+
+	// The timestamp at which the scan completed.
+	ScanCompletedAt *time.Time
+
+	// The ID of the scan.
+	ScanId *string
+
+	// The timestamp at which the scan started.
+	ScanStartedAt *time.Time
+
+	// The type of the scan. Possible values are BACKUP_INITIATED , ON_DEMAND , and
+	// GUARDDUTY_INITIATED .
+	ScanType MalwareProtectionScanType
+
+	// The threats that the scan detected.
+	Threats []MalwareThreat
+
+	// The total number of infected items.
+	TotalInfectedItems *int64
+
+	// The ID of the finding that initiated the scan.
+	TriggerFindingId *string
+
+	// The number of unique threats that the scan detected.
+	UniqueThreatCount *int64
+
+	// The number of volumes that the scan scanned.
+	VolumesScanned *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationMalwareScan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationMalwareScan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationMalwareScan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineSources != nil {
+		s.WriteString(schemas.InvestigationMalwareScan_EngineSources, *v.EngineSources)
+	}
+	if v.FilesScanned != nil {
+		s.WriteInt64(schemas.InvestigationMalwareScan_FilesScanned, *v.FilesScanned)
+	}
+	if v.GigabytesScanned != nil {
+		s.WriteFloat64(schemas.InvestigationMalwareScan_GigabytesScanned, *v.GigabytesScanned)
+	}
+	if v.HighestSeverity != nil {
+		s.WriteString(schemas.InvestigationMalwareScan_HighestSeverity, *v.HighestSeverity)
+	}
+	if v.HighestSeverityThreatName != nil {
+		s.WriteString(schemas.InvestigationMalwareScan_HighestSeverityThreatName, *v.HighestSeverityThreatName)
+	}
+	if v.InfectedFileCount != nil {
+		s.WriteInt64(schemas.InvestigationMalwareScan_InfectedFileCount, *v.InfectedFileCount)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.InvestigationMalwareScan_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.InvestigationMalwareScan_ResourceType, *v.ResourceType)
+	}
+	if v.ScanCategory != "" {
+		s.WriteString(schemas.InvestigationMalwareScan_ScanCategory, string(v.ScanCategory))
+	}
+	if v.ScanCompletedAt != nil {
+		s.WriteTime(schemas.InvestigationMalwareScan_ScanCompletedAt, *v.ScanCompletedAt)
+	}
+	if v.ScanId != nil {
+		s.WriteString(schemas.InvestigationMalwareScan_ScanId, *v.ScanId)
+	}
+	if v.ScanStartedAt != nil {
+		s.WriteTime(schemas.InvestigationMalwareScan_ScanStartedAt, *v.ScanStartedAt)
+	}
+	if v.ScanType != "" {
+		s.WriteString(schemas.InvestigationMalwareScan_ScanType, string(v.ScanType))
+	}
+	if v.Threats != nil {
+		serializeMalwareThreats(s, schemas.InvestigationMalwareScan_Threats, v.Threats)
+	}
+	if v.TotalInfectedItems != nil {
+		s.WriteInt64(schemas.InvestigationMalwareScan_TotalInfectedItems, *v.TotalInfectedItems)
+	}
+	if v.TriggerFindingId != nil {
+		s.WriteString(schemas.InvestigationMalwareScan_TriggerFindingId, *v.TriggerFindingId)
+	}
+	if v.UniqueThreatCount != nil {
+		s.WriteInt64(schemas.InvestigationMalwareScan_UniqueThreatCount, *v.UniqueThreatCount)
+	}
+	if v.VolumesScanned != nil {
+		s.WriteInt64(schemas.InvestigationMalwareScan_VolumesScanned, *v.VolumesScanned)
+	}
+}
+func (v *InvestigationMalwareScan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationMalwareScan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationMalwareScan_EngineSources:
+			v.EngineSources = new(string)
+			return d.ReadString(schemas.InvestigationMalwareScan_EngineSources, v.EngineSources)
+		case schemas.InvestigationMalwareScan_FilesScanned:
+			v.FilesScanned = new(int64)
+			return d.ReadInt64(schemas.InvestigationMalwareScan_FilesScanned, v.FilesScanned)
+		case schemas.InvestigationMalwareScan_GigabytesScanned:
+			v.GigabytesScanned = new(float64)
+			return d.ReadFloat64(schemas.InvestigationMalwareScan_GigabytesScanned, v.GigabytesScanned)
+		case schemas.InvestigationMalwareScan_HighestSeverity:
+			v.HighestSeverity = new(string)
+			return d.ReadString(schemas.InvestigationMalwareScan_HighestSeverity, v.HighestSeverity)
+		case schemas.InvestigationMalwareScan_HighestSeverityThreatName:
+			v.HighestSeverityThreatName = new(string)
+			return d.ReadString(schemas.InvestigationMalwareScan_HighestSeverityThreatName, v.HighestSeverityThreatName)
+		case schemas.InvestigationMalwareScan_InfectedFileCount:
+			v.InfectedFileCount = new(int64)
+			return d.ReadInt64(schemas.InvestigationMalwareScan_InfectedFileCount, v.InfectedFileCount)
+		case schemas.InvestigationMalwareScan_ResourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.InvestigationMalwareScan_ResourceIdentifier, v.ResourceIdentifier)
+		case schemas.InvestigationMalwareScan_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.InvestigationMalwareScan_ResourceType, v.ResourceType)
+		case schemas.InvestigationMalwareScan_ScanCategory:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationMalwareScan_ScanCategory, &ev); err != nil {
+				return err
+			}
+			v.ScanCategory = ScanCategory(ev)
+			return nil
+		case schemas.InvestigationMalwareScan_ScanCompletedAt:
+			v.ScanCompletedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestigationMalwareScan_ScanCompletedAt, v.ScanCompletedAt)
+		case schemas.InvestigationMalwareScan_ScanId:
+			v.ScanId = new(string)
+			return d.ReadString(schemas.InvestigationMalwareScan_ScanId, v.ScanId)
+		case schemas.InvestigationMalwareScan_ScanStartedAt:
+			v.ScanStartedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestigationMalwareScan_ScanStartedAt, v.ScanStartedAt)
+		case schemas.InvestigationMalwareScan_ScanType:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationMalwareScan_ScanType, &ev); err != nil {
+				return err
+			}
+			v.ScanType = MalwareProtectionScanType(ev)
+			return nil
+		case schemas.InvestigationMalwareScan_Threats:
+			return deserializeMalwareThreats(d, schemas.InvestigationMalwareScan_Threats, &v.Threats)
+		case schemas.InvestigationMalwareScan_TotalInfectedItems:
+			v.TotalInfectedItems = new(int64)
+			return d.ReadInt64(schemas.InvestigationMalwareScan_TotalInfectedItems, v.TotalInfectedItems)
+		case schemas.InvestigationMalwareScan_TriggerFindingId:
+			v.TriggerFindingId = new(string)
+			return d.ReadString(schemas.InvestigationMalwareScan_TriggerFindingId, v.TriggerFindingId)
+		case schemas.InvestigationMalwareScan_UniqueThreatCount:
+			v.UniqueThreatCount = new(int64)
+			return d.ReadInt64(schemas.InvestigationMalwareScan_UniqueThreatCount, v.UniqueThreatCount)
+		case schemas.InvestigationMalwareScan_VolumesScanned:
+			v.VolumesScanned = new(int64)
+			return d.ReadInt64(schemas.InvestigationMalwareScan_VolumesScanned, v.VolumesScanned)
 		}
 		return nil
 	})
@@ -7112,6 +9843,363 @@ func (v *InvestigationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InvestigationMetadata_Version:
 			v.Version = new(string)
 			return d.ReadString(schemas.InvestigationMetadata_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Contains information about one step in the reasoning that GuardDuty followed
+// during an investigation.
+type InvestigationRecord struct {
+
+	// The timestamp at which GuardDuty created the record.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the record.
+	//
+	// This member is required.
+	RecordId *string
+
+	// A short title that describes the step.
+	//
+	// This member is required.
+	Title *string
+
+	// The type of the record. Possible values:
+	//
+	//   - UPDATE – A progress milestone, such as the request that started the
+	//   investigation or a response from GuardDuty.
+	//
+	//   - FETCH – Data that GuardDuty retrieved for the investigation, such as a
+	//   finding, a detector configuration, or a list of your member accounts. The record
+	//   includes what GuardDuty requested and what it received.
+	//
+	//   - OBSERVATION – A fact that GuardDuty noted about your environment, such as
+	//   the affected resource, the activity on that resource, or your detection
+	//   coverage.
+	//
+	//   - ANALYSIS – An assessment that GuardDuty derived from the data, such as a
+	//   threat assessment, a comparison against normal behavior, or a process lineage.
+	//
+	//   - METADATA – Operational details about the investigation itself, such as how
+	//   long the investigation took.
+	//
+	// This member is required.
+	Type RecordType
+
+	// A plain-text explanation of the step. A narrative can span several paragraphs.
+	// Not every record includes a narrative.
+	Narrative *string
+
+	// The structured details for the step. The member that is set matches the record
+	// type. UPDATE records never include supporting data, and records of other types
+	// don't always include it.
+	SupportingData SupportingData
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InvestigationRecord_CreatedAt, *v.CreatedAt)
+	}
+	if v.Narrative != nil {
+		s.WriteString(schemas.InvestigationRecord_Narrative, *v.Narrative)
+	}
+	if v.RecordId != nil {
+		s.WriteString(schemas.InvestigationRecord_RecordId, *v.RecordId)
+	}
+	if v.SupportingData != nil {
+		serializeSupportingData(s, schemas.InvestigationRecord_SupportingData, v.SupportingData)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.InvestigationRecord_Title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.InvestigationRecord_Type, string(v.Type))
+	}
+}
+func (v *InvestigationRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationRecord_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InvestigationRecord_CreatedAt, v.CreatedAt)
+		case schemas.InvestigationRecord_Narrative:
+			v.Narrative = new(string)
+			return d.ReadString(schemas.InvestigationRecord_Narrative, v.Narrative)
+		case schemas.InvestigationRecord_RecordId:
+			v.RecordId = new(string)
+			return d.ReadString(schemas.InvestigationRecord_RecordId, v.RecordId)
+		case schemas.InvestigationRecord_SupportingData:
+			return deserializeSupportingData(d, schemas.InvestigationRecord_SupportingData, &v.SupportingData)
+		case schemas.InvestigationRecord_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.InvestigationRecord_Title, v.Title)
+		case schemas.InvestigationRecord_Type:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationRecord_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RecordType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains information about an Amazon Web Services resource that is relevant to
+// an investigation.
+type InvestigationResource struct {
+
+	// The type of the resource. Possible values are EC2_INSTANCE , EBS_VOLUME ,
+	// S3_BUCKET , IAM_ROLE , IAM_USER , IAM_ACCESS_KEY , LAMBDA_FUNCTION , EKS_CLUSTER
+	// , ECS_CLUSTER , KUBERNETES_WORKLOAD , RDS_INSTANCE , RDS_DB_USER , and
+	// EC2_SECURITY_GROUP .
+	//
+	// This member is required.
+	ResourceType InvestigationResourceType
+
+	// The unique identifier of the resource. This is the Amazon Resource Name (ARN)
+	// of the resource when it's available. Otherwise, it's the name or ID of the
+	// resource.
+	//
+	// This member is required.
+	Uid *string
+
+	// Details that are specific to the type of the resource.
+	Data *InvestigationResourceData
+
+	// The name of the resource.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteStruct(schemas.InvestigationResource_Data)
+		v.Data.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InvestigationResource_Name, *v.Name)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.InvestigationResource_ResourceType, string(v.ResourceType))
+	}
+	if v.Uid != nil {
+		s.WriteString(schemas.InvestigationResource_Uid, *v.Uid)
+	}
+}
+func (v *InvestigationResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationResource_Data:
+			v.Data = &InvestigationResourceData{}
+			return v.Data.Deserialize(d)
+		case schemas.InvestigationResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InvestigationResource_Name, v.Name)
+		case schemas.InvestigationResource_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationResource_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = InvestigationResourceType(ev)
+			return nil
+		case schemas.InvestigationResource_Uid:
+			v.Uid = new(string)
+			return d.ReadString(schemas.InvestigationResource_Uid, v.Uid)
+		}
+		return nil
+	})
+}
+
+// Contains details that are specific to the type of a resource. The member that
+// is set matches the ResourceType of the resource, except that RdsDbInstance and
+// RdsDbUser can be set together.
+type InvestigationResourceData struct {
+
+	// Details about an Amazon EC2 instance.
+	Ec2Instance *InvestigationEc2Instance
+
+	// Details about an Amazon ECS cluster.
+	EcsCluster *InvestigationEcsCluster
+
+	// Details about an Amazon EKS cluster.
+	EksCluster *InvestigationEksCluster
+
+	// Details about an Lambda function.
+	LambdaFunction *LambdaFunction
+
+	// Details about an Amazon RDS database instance.
+	RdsDbInstance *RdsDbInstance
+
+	// Details about the user that logged in to an Amazon RDS database instance.
+	RdsDbUser *RdsDbUser
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationResourceData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationResourceData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationResourceData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ec2Instance != nil {
+		s.WriteStruct(schemas.InvestigationResourceData_Ec2Instance)
+		v.Ec2Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcsCluster != nil {
+		s.WriteStruct(schemas.InvestigationResourceData_EcsCluster)
+		v.EcsCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EksCluster != nil {
+		s.WriteStruct(schemas.InvestigationResourceData_EksCluster)
+		v.EksCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunction != nil {
+		s.WriteStruct(schemas.InvestigationResourceData_LambdaFunction)
+		v.LambdaFunction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RdsDbInstance != nil {
+		s.WriteStruct(schemas.InvestigationResourceData_RdsDbInstance)
+		v.RdsDbInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RdsDbUser != nil {
+		s.WriteStruct(schemas.InvestigationResourceData_RdsDbUser)
+		v.RdsDbUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvestigationResourceData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationResourceData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationResourceData_Ec2Instance:
+			v.Ec2Instance = &InvestigationEc2Instance{}
+			return v.Ec2Instance.Deserialize(d)
+		case schemas.InvestigationResourceData_EcsCluster:
+			v.EcsCluster = &InvestigationEcsCluster{}
+			return v.EcsCluster.Deserialize(d)
+		case schemas.InvestigationResourceData_EksCluster:
+			v.EksCluster = &InvestigationEksCluster{}
+			return v.EksCluster.Deserialize(d)
+		case schemas.InvestigationResourceData_LambdaFunction:
+			v.LambdaFunction = &LambdaFunction{}
+			return v.LambdaFunction.Deserialize(d)
+		case schemas.InvestigationResourceData_RdsDbInstance:
+			v.RdsDbInstance = &RdsDbInstance{}
+			return v.RdsDbInstance.Deserialize(d)
+		case schemas.InvestigationResourceData_RdsDbUser:
+			v.RdsDbUser = &RdsDbUser{}
+			return v.RdsDbUser.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains information about what an investigation analyzed. Only the identifier
+// that matches InvestigationType is set.
+type InvestigationScope struct {
+
+	// The ID of the Amazon Web Services account that the investigation analyzed. Set
+	// only when InvestigationType is ACCOUNT .
+	AccountId *string
+
+	// The ID of the administrator account of the organization that the investigation
+	// analyzed. Set only when InvestigationType is ORGANIZATION .
+	AdminAccountId *string
+
+	// The ID of the finding that the investigation analyzed. Set only when
+	// InvestigationType is FINDING .
+	FindingId *string
+
+	// The type of investigation. Possible values:
+	//
+	//   - FINDING – An investigation of a specific GuardDuty finding.
+	//
+	//   - ACCOUNT – An investigation of the threat posture of an Amazon Web Services
+	//   account.
+	//
+	//   - ORGANIZATION – An investigation of your organization's threat posture.
+	InvestigationType InvestigationType
+
+	// The time window over which the investigation queried data, set only when
+	// InvestigationType is ACCOUNT or ORGANIZATION .
+	QueryTimeWindow *QueryTimeWindow
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InvestigationScope_AccountId, *v.AccountId)
+	}
+	if v.AdminAccountId != nil {
+		s.WriteString(schemas.InvestigationScope_AdminAccountId, *v.AdminAccountId)
+	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.InvestigationScope_FindingId, *v.FindingId)
+	}
+	if v.InvestigationType != "" {
+		s.WriteString(schemas.InvestigationScope_InvestigationType, string(v.InvestigationType))
+	}
+	if v.QueryTimeWindow != nil {
+		s.WriteStruct(schemas.InvestigationScope_QueryTimeWindow)
+		v.QueryTimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvestigationScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationScope_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.InvestigationScope_AccountId, v.AccountId)
+		case schemas.InvestigationScope_AdminAccountId:
+			v.AdminAccountId = new(string)
+			return d.ReadString(schemas.InvestigationScope_AdminAccountId, v.AdminAccountId)
+		case schemas.InvestigationScope_FindingId:
+			v.FindingId = new(string)
+			return d.ReadString(schemas.InvestigationScope_FindingId, v.FindingId)
+		case schemas.InvestigationScope_InvestigationType:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationScope_InvestigationType, &ev); err != nil {
+				return err
+			}
+			v.InvestigationType = InvestigationType(ev)
+			return nil
+		case schemas.InvestigationScope_QueryTimeWindow:
+			v.QueryTimeWindow = &QueryTimeWindow{}
+			return v.QueryTimeWindow.Deserialize(d)
 		}
 		return nil
 	})
@@ -7171,14 +10259,27 @@ type InvestigationSummary struct {
 	// The Amazon Web Services account ID associated with the investigation.
 	AccountId *string
 
+	// For an ORGANIZATION investigation, the ID of the administrator account of the
+	// organization that the investigation analyzed. GuardDuty sets this field when the
+	// investigation completes.
+	AdminAccountId *string
+
 	// The confidence level of the investigation's assessment.
 	Confidence Confidence
 
 	// The timestamp at which the investigation completed.
 	EndTime *time.Time
 
+	// For a FINDING investigation, the ID of the finding that the investigation
+	// analyzed. GuardDuty sets this field when the investigation completes.
+	FindingId *string
+
 	// The unique identifier of the investigation.
 	InvestigationId *string
+
+	// The type of investigation. Possible values are FINDING , ACCOUNT , and
+	// ORGANIZATION . GuardDuty sets this field when the investigation completes.
+	InvestigationType InvestigationType
 
 	// The assessed risk level of the investigated threat.
 	RiskLevel RiskLevel
@@ -7208,14 +10309,23 @@ func (v *InvestigationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.InvestigationSummary_AccountId, *v.AccountId)
 	}
+	if v.AdminAccountId != nil {
+		s.WriteString(schemas.InvestigationSummary_AdminAccountId, *v.AdminAccountId)
+	}
 	if v.Confidence != "" {
 		s.WriteString(schemas.InvestigationSummary_Confidence, string(v.Confidence))
 	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.InvestigationSummary_EndTime, *v.EndTime)
 	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.InvestigationSummary_FindingId, *v.FindingId)
+	}
 	if v.InvestigationId != nil {
 		s.WriteString(schemas.InvestigationSummary_InvestigationId, *v.InvestigationId)
+	}
+	if v.InvestigationType != "" {
+		s.WriteString(schemas.InvestigationSummary_InvestigationType, string(v.InvestigationType))
 	}
 	if v.RiskLevel != "" {
 		s.WriteString(schemas.InvestigationSummary_RiskLevel, string(v.RiskLevel))
@@ -7239,6 +10349,9 @@ func (v *InvestigationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InvestigationSummary_AccountId:
 			v.AccountId = new(string)
 			return d.ReadString(schemas.InvestigationSummary_AccountId, v.AccountId)
+		case schemas.InvestigationSummary_AdminAccountId:
+			v.AdminAccountId = new(string)
+			return d.ReadString(schemas.InvestigationSummary_AdminAccountId, v.AdminAccountId)
 		case schemas.InvestigationSummary_Confidence:
 			var ev string
 			if err := d.ReadString(schemas.InvestigationSummary_Confidence, &ev); err != nil {
@@ -7249,9 +10362,19 @@ func (v *InvestigationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InvestigationSummary_EndTime:
 			v.EndTime = new(time.Time)
 			return d.ReadTime(schemas.InvestigationSummary_EndTime, v.EndTime)
+		case schemas.InvestigationSummary_FindingId:
+			v.FindingId = new(string)
+			return d.ReadString(schemas.InvestigationSummary_FindingId, v.FindingId)
 		case schemas.InvestigationSummary_InvestigationId:
 			v.InvestigationId = new(string)
 			return d.ReadString(schemas.InvestigationSummary_InvestigationId, v.InvestigationId)
+		case schemas.InvestigationSummary_InvestigationType:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationSummary_InvestigationType, &ev); err != nil {
+				return err
+			}
+			v.InvestigationType = InvestigationType(ev)
+			return nil
 		case schemas.InvestigationSummary_RiskLevel:
 			var ev string
 			if err := d.ReadString(schemas.InvestigationSummary_RiskLevel, &ev); err != nil {
@@ -7275,6 +10398,207 @@ func (v *InvestigationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InvestigationSummary_TriggerPrompt:
 			v.TriggerPrompt = new(string)
 			return d.ReadString(schemas.InvestigationSummary_TriggerPrompt, v.TriggerPrompt)
+		}
+		return nil
+	})
+}
+
+// Contains the structured summary of a GuardDuty investigation. The fields that
+// are present depend on the investigation type.
+type InvestigationSummaryData struct {
+
+	// For an ACCOUNT investigation, an analysis of the findings in the investigated
+	// account.
+	AccountAnalysis *AccountAnalysis
+
+	// For a FINDING investigation, actions that you can take to respond to the
+	// threat, grouped by defensive tactic.
+	Countermeasures []Countermeasure
+
+	// For a FINDING investigation, the type of the finding that the investigation
+	// analyzed.
+	FindingType *string
+
+	// The key observations of the investigation.
+	KeyObservations *KeyObservations
+
+	// For an ORGANIZATION investigation, an analysis of the findings across the
+	// organization.
+	OrganizationAnalysis *OrganizationAnalysis
+
+	// For an ACCOUNT or ORGANIZATION investigation, the recommended actions.
+	Recommendations []Recommendation
+
+	// For a FINDING investigation, an assessment of the threat, including how the
+	// attack progressed.
+	ThreatAssessment *ThreatAssessment
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationSummaryData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationSummaryData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationSummaryData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAnalysis != nil {
+		s.WriteStruct(schemas.InvestigationSummaryData_AccountAnalysis)
+		v.AccountAnalysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Countermeasures != nil {
+		serializeCountermeasures(s, schemas.InvestigationSummaryData_Countermeasures, v.Countermeasures)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.InvestigationSummaryData_FindingType, *v.FindingType)
+	}
+	if v.KeyObservations != nil {
+		s.WriteStruct(schemas.InvestigationSummaryData_KeyObservations)
+		v.KeyObservations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationAnalysis != nil {
+		s.WriteStruct(schemas.InvestigationSummaryData_OrganizationAnalysis)
+		v.OrganizationAnalysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Recommendations != nil {
+		serializeRecommendations(s, schemas.InvestigationSummaryData_Recommendations, v.Recommendations)
+	}
+	if v.ThreatAssessment != nil {
+		s.WriteStruct(schemas.InvestigationSummaryData_ThreatAssessment)
+		v.ThreatAssessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvestigationSummaryData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationSummaryData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationSummaryData_AccountAnalysis:
+			v.AccountAnalysis = &AccountAnalysis{}
+			return v.AccountAnalysis.Deserialize(d)
+		case schemas.InvestigationSummaryData_Countermeasures:
+			return deserializeCountermeasures(d, schemas.InvestigationSummaryData_Countermeasures, &v.Countermeasures)
+		case schemas.InvestigationSummaryData_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.InvestigationSummaryData_FindingType, v.FindingType)
+		case schemas.InvestigationSummaryData_KeyObservations:
+			v.KeyObservations = &KeyObservations{}
+			return v.KeyObservations.Deserialize(d)
+		case schemas.InvestigationSummaryData_OrganizationAnalysis:
+			v.OrganizationAnalysis = &OrganizationAnalysis{}
+			return v.OrganizationAnalysis.Deserialize(d)
+		case schemas.InvestigationSummaryData_Recommendations:
+			return deserializeRecommendations(d, schemas.InvestigationSummaryData_Recommendations, &v.Recommendations)
+		case schemas.InvestigationSummaryData_ThreatAssessment:
+			v.ThreatAssessment = &ThreatAssessment{}
+			return v.ThreatAssessment.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains a threat assessment. The members that are set depend on the
+// AnalysisType of the record.
+type InvestigationThreatAssessment struct {
+
+	// The assessment of the threat.
+	Assessment *string
+
+	// Context about how the identity involved in the activity authenticated.
+	AuthenticationContext *string
+
+	// The classification of the threat.
+	Classification *string
+
+	// An assessment of whether credentials were compromised.
+	CredentialCompromise *string
+
+	// An assessment of the activity from the IP address in the account.
+	IpAccountActivity *string
+
+	// An assessment of Amazon RDS control plane activity that is related to the
+	// threat.
+	RdsControlPlaneActivity *string
+
+	// Reputation information about a threat indicator. Set when AnalysisType is
+	// REPUTATION .
+	Reputation *Reputation
+
+	// The confidence in the threat assessment. Possible values are VERY_HIGH , HIGH ,
+	// MEDIUM , and LOW .
+	ThreatConfidence ThreatConfidence
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvestigationThreatAssessment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationThreatAssessment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationThreatAssessment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteString(schemas.InvestigationThreatAssessment_Assessment, *v.Assessment)
+	}
+	if v.AuthenticationContext != nil {
+		s.WriteString(schemas.InvestigationThreatAssessment_AuthenticationContext, *v.AuthenticationContext)
+	}
+	if v.Classification != nil {
+		s.WriteString(schemas.InvestigationThreatAssessment_Classification, *v.Classification)
+	}
+	if v.CredentialCompromise != nil {
+		s.WriteString(schemas.InvestigationThreatAssessment_CredentialCompromise, *v.CredentialCompromise)
+	}
+	if v.IpAccountActivity != nil {
+		s.WriteString(schemas.InvestigationThreatAssessment_IpAccountActivity, *v.IpAccountActivity)
+	}
+	if v.RdsControlPlaneActivity != nil {
+		s.WriteString(schemas.InvestigationThreatAssessment_RdsControlPlaneActivity, *v.RdsControlPlaneActivity)
+	}
+	if v.Reputation != nil {
+		s.WriteStruct(schemas.InvestigationThreatAssessment_Reputation)
+		v.Reputation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThreatConfidence != "" {
+		s.WriteString(schemas.InvestigationThreatAssessment_ThreatConfidence, string(v.ThreatConfidence))
+	}
+}
+func (v *InvestigationThreatAssessment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationThreatAssessment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationThreatAssessment_Assessment:
+			v.Assessment = new(string)
+			return d.ReadString(schemas.InvestigationThreatAssessment_Assessment, v.Assessment)
+		case schemas.InvestigationThreatAssessment_AuthenticationContext:
+			v.AuthenticationContext = new(string)
+			return d.ReadString(schemas.InvestigationThreatAssessment_AuthenticationContext, v.AuthenticationContext)
+		case schemas.InvestigationThreatAssessment_Classification:
+			v.Classification = new(string)
+			return d.ReadString(schemas.InvestigationThreatAssessment_Classification, v.Classification)
+		case schemas.InvestigationThreatAssessment_CredentialCompromise:
+			v.CredentialCompromise = new(string)
+			return d.ReadString(schemas.InvestigationThreatAssessment_CredentialCompromise, v.CredentialCompromise)
+		case schemas.InvestigationThreatAssessment_IpAccountActivity:
+			v.IpAccountActivity = new(string)
+			return d.ReadString(schemas.InvestigationThreatAssessment_IpAccountActivity, v.IpAccountActivity)
+		case schemas.InvestigationThreatAssessment_RdsControlPlaneActivity:
+			v.RdsControlPlaneActivity = new(string)
+			return d.ReadString(schemas.InvestigationThreatAssessment_RdsControlPlaneActivity, v.RdsControlPlaneActivity)
+		case schemas.InvestigationThreatAssessment_Reputation:
+			v.Reputation = &Reputation{}
+			return v.Reputation.Deserialize(d)
+		case schemas.InvestigationThreatAssessment_ThreatConfidence:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationThreatAssessment_ThreatConfidence, &ev); err != nil {
+				return err
+			}
+			v.ThreatConfidence = ThreatConfidence(ev)
+			return nil
 		}
 		return nil
 	})
@@ -7434,6 +10758,318 @@ func (v *ItemPath) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ItemPath_NestedItemPath:
 			v.NestedItemPath = new(string)
 			return d.ReadString(schemas.ItemPath_NestedItemPath, v.NestedItemPath)
+		}
+		return nil
+	})
+}
+
+// Contains the key observations of an investigation.
+type KeyObservations struct {
+
+	// A narrative explanation of the key observations.
+	Narrative *string
+
+	// The individual key observations.
+	Observations []string
+
+	// A short title for the key observations.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *KeyObservations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyObservations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyObservations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Narrative != nil {
+		s.WriteString(schemas.KeyObservations_Narrative, *v.Narrative)
+	}
+	if v.Observations != nil {
+		serializeInvestigationObservations(s, schemas.KeyObservations_Observations, v.Observations)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.KeyObservations_Title, *v.Title)
+	}
+}
+func (v *KeyObservations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyObservations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyObservations_Narrative:
+			v.Narrative = new(string)
+			return d.ReadString(schemas.KeyObservations_Narrative, v.Narrative)
+		case schemas.KeyObservations_Observations:
+			return deserializeInvestigationObservations(d, schemas.KeyObservations_Observations, &v.Observations)
+		case schemas.KeyObservations_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.KeyObservations_Title, v.Title)
+		}
+		return nil
+	})
+}
+
+// Contains details about Kubernetes activity. A record contains either ApiCall
+// and Enrichment , or Anomaly and Workload .
+type KubernetesActivity struct {
+
+	// Details about anomalous Kubernetes behavior.
+	Anomaly *KubernetesAnomaly
+
+	// Details about a Kubernetes API call.
+	ApiCall *KubernetesApiCall
+
+	// Additional context about the API call, such as geolocation information.
+	Enrichment *Enrichment
+
+	// The Kubernetes workload that is associated with the anomaly.
+	Workload *InvestigationKubernetesWorkload
+
+	noSmithyDocumentSerde
+}
+
+func (v *KubernetesActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KubernetesActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KubernetesActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Anomaly != nil {
+		s.WriteStruct(schemas.KubernetesActivity_Anomaly)
+		v.Anomaly.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApiCall != nil {
+		s.WriteStruct(schemas.KubernetesActivity_ApiCall)
+		v.ApiCall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Enrichment != nil {
+		s.WriteStruct(schemas.KubernetesActivity_Enrichment)
+		v.Enrichment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Workload != nil {
+		s.WriteStruct(schemas.KubernetesActivity_Workload)
+		v.Workload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KubernetesActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KubernetesActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KubernetesActivity_Anomaly:
+			v.Anomaly = &KubernetesAnomaly{}
+			return v.Anomaly.Deserialize(d)
+		case schemas.KubernetesActivity_ApiCall:
+			v.ApiCall = &KubernetesApiCall{}
+			return v.ApiCall.Deserialize(d)
+		case schemas.KubernetesActivity_Enrichment:
+			v.Enrichment = &Enrichment{}
+			return v.Enrichment.Deserialize(d)
+		case schemas.KubernetesActivity_Workload:
+			v.Workload = &InvestigationKubernetesWorkload{}
+			return v.Workload.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains details about anomalous Kubernetes behavior.
+type KubernetesAnomaly struct {
+
+	// The anomaly score of the behavior.
+	AnomalyScore *string
+
+	// A description of the normal behavior that the activity was compared against.
+	BaselineContext *string
+
+	// The period over which the normal behavior was established.
+	TrainingPeriod *string
+
+	// A description of the unusual behavior.
+	UnusualBehavior *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *KubernetesAnomaly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KubernetesAnomaly)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KubernetesAnomaly) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyScore != nil {
+		s.WriteString(schemas.KubernetesAnomaly_AnomalyScore, *v.AnomalyScore)
+	}
+	if v.BaselineContext != nil {
+		s.WriteString(schemas.KubernetesAnomaly_BaselineContext, *v.BaselineContext)
+	}
+	if v.TrainingPeriod != nil {
+		s.WriteString(schemas.KubernetesAnomaly_TrainingPeriod, *v.TrainingPeriod)
+	}
+	if v.UnusualBehavior != nil {
+		s.WriteString(schemas.KubernetesAnomaly_UnusualBehavior, *v.UnusualBehavior)
+	}
+}
+func (v *KubernetesAnomaly) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KubernetesAnomaly, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KubernetesAnomaly_AnomalyScore:
+			v.AnomalyScore = new(string)
+			return d.ReadString(schemas.KubernetesAnomaly_AnomalyScore, v.AnomalyScore)
+		case schemas.KubernetesAnomaly_BaselineContext:
+			v.BaselineContext = new(string)
+			return d.ReadString(schemas.KubernetesAnomaly_BaselineContext, v.BaselineContext)
+		case schemas.KubernetesAnomaly_TrainingPeriod:
+			v.TrainingPeriod = new(string)
+			return d.ReadString(schemas.KubernetesAnomaly_TrainingPeriod, v.TrainingPeriod)
+		case schemas.KubernetesAnomaly_UnusualBehavior:
+			v.UnusualBehavior = new(string)
+			return d.ReadString(schemas.KubernetesAnomaly_UnusualBehavior, v.UnusualBehavior)
+		}
+		return nil
+	})
+}
+
+// Contains details about a Kubernetes API call.
+type KubernetesApiCall struct {
+
+	// The name of the cluster.
+	ClusterName *string
+
+	// The number of matching API calls.
+	EventCount *int64
+
+	// The Kubernetes namespace of the resource.
+	Namespace *string
+
+	// The URI of the request.
+	RequestUri *string
+
+	// The name of the Kubernetes resource.
+	ResourceName *string
+
+	// The type of the Kubernetes resource.
+	ResourceType *string
+
+	// The source IP addresses of the API call.
+	SourceIps *string
+
+	// The status code of the API call.
+	StatusCode *int32
+
+	// The user agent of the caller.
+	UserAgent *string
+
+	// The Kubernetes groups of the caller.
+	UserGroups *string
+
+	// The ID of the caller.
+	UserId *string
+
+	// The Kubernetes user name of the caller.
+	Username *string
+
+	// The Kubernetes API verb, such as get or create .
+	Verb *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *KubernetesApiCall) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KubernetesApiCall)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KubernetesApiCall) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.KubernetesApiCall_ClusterName, *v.ClusterName)
+	}
+	if v.EventCount != nil {
+		s.WriteInt64(schemas.KubernetesApiCall_EventCount, *v.EventCount)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.KubernetesApiCall_Namespace, *v.Namespace)
+	}
+	if v.RequestUri != nil {
+		s.WriteString(schemas.KubernetesApiCall_RequestUri, *v.RequestUri)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.KubernetesApiCall_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.KubernetesApiCall_ResourceType, *v.ResourceType)
+	}
+	if v.SourceIps != nil {
+		s.WriteString(schemas.KubernetesApiCall_SourceIps, *v.SourceIps)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.KubernetesApiCall_StatusCode, *v.StatusCode)
+	}
+	if v.UserAgent != nil {
+		s.WriteString(schemas.KubernetesApiCall_UserAgent, *v.UserAgent)
+	}
+	if v.UserGroups != nil {
+		s.WriteString(schemas.KubernetesApiCall_UserGroups, *v.UserGroups)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.KubernetesApiCall_UserId, *v.UserId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.KubernetesApiCall_Username, *v.Username)
+	}
+	if v.Verb != nil {
+		s.WriteString(schemas.KubernetesApiCall_Verb, *v.Verb)
+	}
+}
+func (v *KubernetesApiCall) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KubernetesApiCall, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KubernetesApiCall_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_ClusterName, v.ClusterName)
+		case schemas.KubernetesApiCall_EventCount:
+			v.EventCount = new(int64)
+			return d.ReadInt64(schemas.KubernetesApiCall_EventCount, v.EventCount)
+		case schemas.KubernetesApiCall_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_Namespace, v.Namespace)
+		case schemas.KubernetesApiCall_RequestUri:
+			v.RequestUri = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_RequestUri, v.RequestUri)
+		case schemas.KubernetesApiCall_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_ResourceName, v.ResourceName)
+		case schemas.KubernetesApiCall_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_ResourceType, v.ResourceType)
+		case schemas.KubernetesApiCall_SourceIps:
+			v.SourceIps = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_SourceIps, v.SourceIps)
+		case schemas.KubernetesApiCall_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.KubernetesApiCall_StatusCode, v.StatusCode)
+		case schemas.KubernetesApiCall_UserAgent:
+			v.UserAgent = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_UserAgent, v.UserAgent)
+		case schemas.KubernetesApiCall_UserGroups:
+			v.UserGroups = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_UserGroups, v.UserGroups)
+		case schemas.KubernetesApiCall_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_UserId, v.UserId)
+		case schemas.KubernetesApiCall_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_Username, v.Username)
+		case schemas.KubernetesApiCall_Verb:
+			v.Verb = new(string)
+			return d.ReadString(schemas.KubernetesApiCall_Verb, v.Verb)
 		}
 		return nil
 	})
@@ -7838,6 +11474,83 @@ func (v *KubernetesPermissionCheckedDetails) Deserialize(d smithy.ShapeDeseriali
 		case schemas.KubernetesPermissionCheckedDetails_Verb:
 			v.Verb = new(string)
 			return d.ReadString(schemas.KubernetesPermissionCheckedDetails_Verb, v.Verb)
+		}
+		return nil
+	})
+}
+
+// Contains an assessment of a Kubernetes policy violation.
+type KubernetesPolicyViolation struct {
+
+	// The Kubernetes resource that the violation affects.
+	AffectedResource *string
+
+	// How the misconfiguration exposes the resource.
+	ExposureVector *string
+
+	// The access that the violation grants.
+	GrantedAccess *string
+
+	// The potential impact of the misconfiguration.
+	MisconfigurationImpact *string
+
+	// The Kubernetes subject, such as a user, a group, or a service account, that the
+	// violation involves.
+	Subject *string
+
+	// The type of the violation.
+	ViolationType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *KubernetesPolicyViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KubernetesPolicyViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KubernetesPolicyViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedResource != nil {
+		s.WriteString(schemas.KubernetesPolicyViolation_AffectedResource, *v.AffectedResource)
+	}
+	if v.ExposureVector != nil {
+		s.WriteString(schemas.KubernetesPolicyViolation_ExposureVector, *v.ExposureVector)
+	}
+	if v.GrantedAccess != nil {
+		s.WriteString(schemas.KubernetesPolicyViolation_GrantedAccess, *v.GrantedAccess)
+	}
+	if v.MisconfigurationImpact != nil {
+		s.WriteString(schemas.KubernetesPolicyViolation_MisconfigurationImpact, *v.MisconfigurationImpact)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.KubernetesPolicyViolation_Subject, *v.Subject)
+	}
+	if v.ViolationType != nil {
+		s.WriteString(schemas.KubernetesPolicyViolation_ViolationType, *v.ViolationType)
+	}
+}
+func (v *KubernetesPolicyViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KubernetesPolicyViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KubernetesPolicyViolation_AffectedResource:
+			v.AffectedResource = new(string)
+			return d.ReadString(schemas.KubernetesPolicyViolation_AffectedResource, v.AffectedResource)
+		case schemas.KubernetesPolicyViolation_ExposureVector:
+			v.ExposureVector = new(string)
+			return d.ReadString(schemas.KubernetesPolicyViolation_ExposureVector, v.ExposureVector)
+		case schemas.KubernetesPolicyViolation_GrantedAccess:
+			v.GrantedAccess = new(string)
+			return d.ReadString(schemas.KubernetesPolicyViolation_GrantedAccess, v.GrantedAccess)
+		case schemas.KubernetesPolicyViolation_MisconfigurationImpact:
+			v.MisconfigurationImpact = new(string)
+			return d.ReadString(schemas.KubernetesPolicyViolation_MisconfigurationImpact, v.MisconfigurationImpact)
+		case schemas.KubernetesPolicyViolation_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.KubernetesPolicyViolation_Subject, v.Subject)
+		case schemas.KubernetesPolicyViolation_ViolationType:
+			v.ViolationType = new(string)
+			return d.ReadString(schemas.KubernetesPolicyViolation_ViolationType, v.ViolationType)
 		}
 		return nil
 	})
@@ -8296,6 +12009,100 @@ func (v *LambdaDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LambdaDetails_VpcConfig:
 			v.VpcConfig = &VpcConfig{}
 			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains details about an Lambda function.
+type LambdaFunction struct {
+
+	// The description of the function.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the function.
+	FunctionArn *string
+
+	// The name of the function.
+	FunctionName *string
+
+	// The version of the function.
+	FunctionVersion *string
+
+	// The revision ID of the function version.
+	RevisionId *string
+
+	// The execution role of the function.
+	Role *string
+
+	// The timestamp at which the function was last updated.
+	UpdatedAt *time.Time
+
+	// A summary of the VPC configuration of the function, as a single string.
+	VpcConfigurationSummary *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.LambdaFunction_Description, *v.Description)
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.LambdaFunction_FunctionArn, *v.FunctionArn)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.LambdaFunction_FunctionName, *v.FunctionName)
+	}
+	if v.FunctionVersion != nil {
+		s.WriteString(schemas.LambdaFunction_FunctionVersion, *v.FunctionVersion)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.LambdaFunction_RevisionId, *v.RevisionId)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.LambdaFunction_Role, *v.Role)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.LambdaFunction_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.VpcConfigurationSummary != nil {
+		s.WriteString(schemas.LambdaFunction_VpcConfigurationSummary, *v.VpcConfigurationSummary)
+	}
+}
+func (v *LambdaFunction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LambdaFunction_Description, v.Description)
+		case schemas.LambdaFunction_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.LambdaFunction_FunctionArn, v.FunctionArn)
+		case schemas.LambdaFunction_FunctionName:
+			v.FunctionName = new(string)
+			return d.ReadString(schemas.LambdaFunction_FunctionName, v.FunctionName)
+		case schemas.LambdaFunction_FunctionVersion:
+			v.FunctionVersion = new(string)
+			return d.ReadString(schemas.LambdaFunction_FunctionVersion, v.FunctionVersion)
+		case schemas.LambdaFunction_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.LambdaFunction_RevisionId, v.RevisionId)
+		case schemas.LambdaFunction_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.LambdaFunction_Role, v.Role)
+		case schemas.LambdaFunction_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.LambdaFunction_UpdatedAt, v.UpdatedAt)
+		case schemas.LambdaFunction_VpcConfigurationSummary:
+			v.VpcConfigurationSummary = new(string)
+			return d.ReadString(schemas.LambdaFunction_VpcConfigurationSummary, v.VpcConfigurationSummary)
 		}
 		return nil
 	})
@@ -9126,6 +12933,64 @@ func (v *MalwareScanDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about a threat that a malware scan detected.
+type MalwareThreat struct {
+
+	// The number of files that the threat infected.
+	InfectedFileCount *int64
+
+	// The name of the threat.
+	Name *string
+
+	// Examples of files that the threat infected.
+	SampleFiles *string
+
+	// The severity of the threat.
+	Severity *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MalwareThreat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalwareThreat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalwareThreat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InfectedFileCount != nil {
+		s.WriteInt64(schemas.MalwareThreat_InfectedFileCount, *v.InfectedFileCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MalwareThreat_Name, *v.Name)
+	}
+	if v.SampleFiles != nil {
+		s.WriteString(schemas.MalwareThreat_SampleFiles, *v.SampleFiles)
+	}
+	if v.Severity != nil {
+		s.WriteString(schemas.MalwareThreat_Severity, *v.Severity)
+	}
+}
+func (v *MalwareThreat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalwareThreat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalwareThreat_InfectedFileCount:
+			v.InfectedFileCount = new(int64)
+			return d.ReadInt64(schemas.MalwareThreat_InfectedFileCount, v.InfectedFileCount)
+		case schemas.MalwareThreat_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MalwareThreat_Name, v.Name)
+		case schemas.MalwareThreat_SampleFiles:
+			v.SampleFiles = new(string)
+			return d.ReadString(schemas.MalwareThreat_SampleFiles, v.SampleFiles)
+		case schemas.MalwareThreat_Severity:
+			v.Severity = new(string)
+			return d.ReadString(schemas.MalwareThreat_Severity, v.Severity)
+		}
+		return nil
+	})
+}
+
 // Contains information about the administrator account and invitation.
 type Master struct {
 
@@ -9283,6 +13148,78 @@ func (v *Member) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Member_UpdatedAt:
 			v.UpdatedAt = new(string)
 			return d.ReadString(schemas.Member_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains information about the position of a member account in a ranking.
+type MemberAccountRanking struct {
+
+	// The Amazon Web Services account ID of the member account.
+	AccountId *string
+
+	// The number of findings in the account.
+	FindingCount *int64
+
+	// The position of the account in the ranking.
+	Rank *int32
+
+	// The assessed risk level of the account. Possible values are Info , Low , Medium
+	// , High , and Critical .
+	RiskLevel RiskLevel
+
+	// The reason for the assessed risk level.
+	RiskRationale *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MemberAccountRanking) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberAccountRanking)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberAccountRanking) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MemberAccountRanking_AccountId, *v.AccountId)
+	}
+	if v.FindingCount != nil {
+		s.WriteInt64(schemas.MemberAccountRanking_FindingCount, *v.FindingCount)
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.MemberAccountRanking_Rank, *v.Rank)
+	}
+	if v.RiskLevel != "" {
+		s.WriteString(schemas.MemberAccountRanking_RiskLevel, string(v.RiskLevel))
+	}
+	if v.RiskRationale != nil {
+		s.WriteString(schemas.MemberAccountRanking_RiskRationale, *v.RiskRationale)
+	}
+}
+func (v *MemberAccountRanking) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberAccountRanking, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberAccountRanking_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MemberAccountRanking_AccountId, v.AccountId)
+		case schemas.MemberAccountRanking_FindingCount:
+			v.FindingCount = new(int64)
+			return d.ReadInt64(schemas.MemberAccountRanking_FindingCount, v.FindingCount)
+		case schemas.MemberAccountRanking_Rank:
+			v.Rank = new(int32)
+			return d.ReadInt32(schemas.MemberAccountRanking_Rank, v.Rank)
+		case schemas.MemberAccountRanking_RiskLevel:
+			var ev string
+			if err := d.ReadString(schemas.MemberAccountRanking_RiskLevel, &ev); err != nil {
+				return err
+			}
+			v.RiskLevel = RiskLevel(ev)
+			return nil
+		case schemas.MemberAccountRanking_RiskRationale:
+			v.RiskRationale = new(string)
+			return d.ReadString(schemas.MemberAccountRanking_RiskRationale, v.RiskRationale)
 		}
 		return nil
 	})
@@ -9602,6 +13539,37 @@ func (v *MemberFeaturesConfigurationResult) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// Contains operational details about an investigation, such as how long it took.
+type MetadataRecord struct {
+
+	// The total time that the investigation took, in milliseconds.
+	TotalTimeMilliseconds *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetadataRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TotalTimeMilliseconds != nil {
+		s.WriteInt64(schemas.MetadataRecord_TotalTimeMilliseconds, *v.TotalTimeMilliseconds)
+	}
+}
+func (v *MetadataRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataRecord_TotalTimeMilliseconds:
+			v.TotalTimeMilliseconds = new(int64)
+			return d.ReadInt64(schemas.MetadataRecord_TotalTimeMilliseconds, v.TotalTimeMilliseconds)
+		}
+		return nil
+	})
+}
+
 // Contains information about the AI model involved in a finding.
 type ModelDetail struct {
 
@@ -9628,6 +13596,235 @@ func (v *ModelDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ModelDetail_ModelId:
 			v.ModelId = new(string)
 			return d.ReadString(schemas.ModelDetail_ModelId, v.ModelId)
+		}
+		return nil
+	})
+}
+
+// Contains details about network activity.
+type NetworkActivity struct {
+
+	// Details about how the network activity deviates from normal behavior.
+	Anomaly *NetworkAnomaly
+
+	// Indicates whether the network connection was blocked.
+	Blocked *string
+
+	// Counts that describe the network activity, such as the number of requests or
+	// connection attempts.
+	Counts *NetworkCounts
+
+	// The direction of the network connection, such as inbound or outbound.
+	Direction *string
+
+	// DNS details about the network activity.
+	Dns *DnsContext
+
+	// Additional context about the network activity, such as geolocation and threat
+	// intelligence information.
+	Enrichment *Enrichment
+
+	// The method that the network activity used.
+	Method *string
+
+	// The platform on which the network activity was observed.
+	Platform *string
+
+	// The ports that the network activity involved.
+	Ports *NetworkPorts
+
+	// The network protocol of the activity.
+	Protocol *string
+
+	// The amount of data that the network activity transferred.
+	Traffic *NetworkTraffic
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Anomaly != nil {
+		s.WriteStruct(schemas.NetworkActivity_Anomaly)
+		v.Anomaly.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Blocked != nil {
+		s.WriteString(schemas.NetworkActivity_Blocked, *v.Blocked)
+	}
+	if v.Counts != nil {
+		s.WriteStruct(schemas.NetworkActivity_Counts)
+		v.Counts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Direction != nil {
+		s.WriteString(schemas.NetworkActivity_Direction, *v.Direction)
+	}
+	if v.Dns != nil {
+		s.WriteStruct(schemas.NetworkActivity_Dns)
+		v.Dns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Enrichment != nil {
+		s.WriteStruct(schemas.NetworkActivity_Enrichment)
+		v.Enrichment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Method != nil {
+		s.WriteString(schemas.NetworkActivity_Method, *v.Method)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.NetworkActivity_Platform, *v.Platform)
+	}
+	if v.Ports != nil {
+		s.WriteStruct(schemas.NetworkActivity_Ports)
+		v.Ports.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.NetworkActivity_Protocol, *v.Protocol)
+	}
+	if v.Traffic != nil {
+		s.WriteStruct(schemas.NetworkActivity_Traffic)
+		v.Traffic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NetworkActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkActivity_Anomaly:
+			v.Anomaly = &NetworkAnomaly{}
+			return v.Anomaly.Deserialize(d)
+		case schemas.NetworkActivity_Blocked:
+			v.Blocked = new(string)
+			return d.ReadString(schemas.NetworkActivity_Blocked, v.Blocked)
+		case schemas.NetworkActivity_Counts:
+			v.Counts = &NetworkCounts{}
+			return v.Counts.Deserialize(d)
+		case schemas.NetworkActivity_Direction:
+			v.Direction = new(string)
+			return d.ReadString(schemas.NetworkActivity_Direction, v.Direction)
+		case schemas.NetworkActivity_Dns:
+			v.Dns = &DnsContext{}
+			return v.Dns.Deserialize(d)
+		case schemas.NetworkActivity_Enrichment:
+			v.Enrichment = &Enrichment{}
+			return v.Enrichment.Deserialize(d)
+		case schemas.NetworkActivity_Method:
+			v.Method = new(string)
+			return d.ReadString(schemas.NetworkActivity_Method, v.Method)
+		case schemas.NetworkActivity_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.NetworkActivity_Platform, v.Platform)
+		case schemas.NetworkActivity_Ports:
+			v.Ports = &NetworkPorts{}
+			return v.Ports.Deserialize(d)
+		case schemas.NetworkActivity_Protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.NetworkActivity_Protocol, v.Protocol)
+		case schemas.NetworkActivity_Traffic:
+			v.Traffic = &NetworkTraffic{}
+			return v.Traffic.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains information about how network activity deviates from normal behavior.
+type NetworkAnomaly struct {
+
+	// The amount of data that is typical for the normal behavior.
+	BaselineBytes *string
+
+	// How much the activity deviates from normal behavior.
+	Deviation *string
+
+	// The duration of the activity.
+	Duration *string
+
+	// The number of days of activity that the normal behavior is based on.
+	ProfileAgeDays *int32
+
+	// The Region of the remote endpoint.
+	RemoteRegion *string
+
+	// The remote service that the activity involved.
+	RemoteService *string
+
+	// The ratio of connection attempts that were reset.
+	ResetRatio *string
+
+	// The number of target hosts.
+	TargetHostCount *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkAnomaly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAnomaly)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAnomaly) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineBytes != nil {
+		s.WriteString(schemas.NetworkAnomaly_BaselineBytes, *v.BaselineBytes)
+	}
+	if v.Deviation != nil {
+		s.WriteString(schemas.NetworkAnomaly_Deviation, *v.Deviation)
+	}
+	if v.Duration != nil {
+		s.WriteString(schemas.NetworkAnomaly_Duration, *v.Duration)
+	}
+	if v.ProfileAgeDays != nil {
+		s.WriteInt32(schemas.NetworkAnomaly_ProfileAgeDays, *v.ProfileAgeDays)
+	}
+	if v.RemoteRegion != nil {
+		s.WriteString(schemas.NetworkAnomaly_RemoteRegion, *v.RemoteRegion)
+	}
+	if v.RemoteService != nil {
+		s.WriteString(schemas.NetworkAnomaly_RemoteService, *v.RemoteService)
+	}
+	if v.ResetRatio != nil {
+		s.WriteString(schemas.NetworkAnomaly_ResetRatio, *v.ResetRatio)
+	}
+	if v.TargetHostCount != nil {
+		s.WriteInt64(schemas.NetworkAnomaly_TargetHostCount, *v.TargetHostCount)
+	}
+}
+func (v *NetworkAnomaly) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAnomaly, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAnomaly_BaselineBytes:
+			v.BaselineBytes = new(string)
+			return d.ReadString(schemas.NetworkAnomaly_BaselineBytes, v.BaselineBytes)
+		case schemas.NetworkAnomaly_Deviation:
+			v.Deviation = new(string)
+			return d.ReadString(schemas.NetworkAnomaly_Deviation, v.Deviation)
+		case schemas.NetworkAnomaly_Duration:
+			v.Duration = new(string)
+			return d.ReadString(schemas.NetworkAnomaly_Duration, v.Duration)
+		case schemas.NetworkAnomaly_ProfileAgeDays:
+			v.ProfileAgeDays = new(int32)
+			return d.ReadInt32(schemas.NetworkAnomaly_ProfileAgeDays, v.ProfileAgeDays)
+		case schemas.NetworkAnomaly_RemoteRegion:
+			v.RemoteRegion = new(string)
+			return d.ReadString(schemas.NetworkAnomaly_RemoteRegion, v.RemoteRegion)
+		case schemas.NetworkAnomaly_RemoteService:
+			v.RemoteService = new(string)
+			return d.ReadString(schemas.NetworkAnomaly_RemoteService, v.RemoteService)
+		case schemas.NetworkAnomaly_ResetRatio:
+			v.ResetRatio = new(string)
+			return d.ReadString(schemas.NetworkAnomaly_ResetRatio, v.ResetRatio)
+		case schemas.NetworkAnomaly_TargetHostCount:
+			v.TargetHostCount = new(int64)
+			return d.ReadInt64(schemas.NetworkAnomaly_TargetHostCount, v.TargetHostCount)
 		}
 		return nil
 	})
@@ -9768,6 +13965,65 @@ func (v *NetworkConnectionAction) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.NetworkConnectionAction_RemotePortDetails:
 			v.RemotePortDetails = &RemotePortDetails{}
 			return v.RemotePortDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains counts that describe network activity, such as the number of requests
+// or connection attempts.
+type NetworkCounts struct {
+
+	// The number of requests.
+	RequestCount *int64
+
+	// The number of connection attempts that were reset.
+	ResetAttempts *int64
+
+	// The number of connection attempts that were suspicious.
+	SuspiciousAttempts *int64
+
+	// The total number of connection attempts.
+	TotalAttempts *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestCount != nil {
+		s.WriteInt64(schemas.NetworkCounts_RequestCount, *v.RequestCount)
+	}
+	if v.ResetAttempts != nil {
+		s.WriteInt64(schemas.NetworkCounts_ResetAttempts, *v.ResetAttempts)
+	}
+	if v.SuspiciousAttempts != nil {
+		s.WriteInt64(schemas.NetworkCounts_SuspiciousAttempts, *v.SuspiciousAttempts)
+	}
+	if v.TotalAttempts != nil {
+		s.WriteInt64(schemas.NetworkCounts_TotalAttempts, *v.TotalAttempts)
+	}
+}
+func (v *NetworkCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkCounts_RequestCount:
+			v.RequestCount = new(int64)
+			return d.ReadInt64(schemas.NetworkCounts_RequestCount, v.RequestCount)
+		case schemas.NetworkCounts_ResetAttempts:
+			v.ResetAttempts = new(int64)
+			return d.ReadInt64(schemas.NetworkCounts_ResetAttempts, v.ResetAttempts)
+		case schemas.NetworkCounts_SuspiciousAttempts:
+			v.SuspiciousAttempts = new(int64)
+			return d.ReadInt64(schemas.NetworkCounts_SuspiciousAttempts, v.SuspiciousAttempts)
+		case schemas.NetworkCounts_TotalAttempts:
+			v.TotalAttempts = new(int64)
+			return d.ReadInt64(schemas.NetworkCounts_TotalAttempts, v.TotalAttempts)
 		}
 		return nil
 	})
@@ -10042,6 +14298,336 @@ func (v *NetworkInterface) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about the ports that network activity involved. A port
+// value can be a single port, a range such as 51000-51010 , or a comma-separated
+// list such as 443,8080 .
+type NetworkPorts struct {
+
+	// The number of ports that the activity involved.
+	PortCount *int64
+
+	// The ports that the activity involved.
+	Ports *string
+
+	// The ports that the activity used.
+	PortsUsed *string
+
+	// The port on the remote host.
+	RemotePort *string
+
+	// The port of the DNS resolver.
+	ResolverPort *string
+
+	// The port on the target of the activity.
+	TargetPort *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkPorts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkPorts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkPorts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortCount != nil {
+		s.WriteInt64(schemas.NetworkPorts_PortCount, *v.PortCount)
+	}
+	if v.Ports != nil {
+		s.WriteString(schemas.NetworkPorts_Ports, *v.Ports)
+	}
+	if v.PortsUsed != nil {
+		s.WriteString(schemas.NetworkPorts_PortsUsed, *v.PortsUsed)
+	}
+	if v.RemotePort != nil {
+		s.WriteString(schemas.NetworkPorts_RemotePort, *v.RemotePort)
+	}
+	if v.ResolverPort != nil {
+		s.WriteString(schemas.NetworkPorts_ResolverPort, *v.ResolverPort)
+	}
+	if v.TargetPort != nil {
+		s.WriteString(schemas.NetworkPorts_TargetPort, *v.TargetPort)
+	}
+}
+func (v *NetworkPorts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkPorts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkPorts_PortCount:
+			v.PortCount = new(int64)
+			return d.ReadInt64(schemas.NetworkPorts_PortCount, v.PortCount)
+		case schemas.NetworkPorts_Ports:
+			v.Ports = new(string)
+			return d.ReadString(schemas.NetworkPorts_Ports, v.Ports)
+		case schemas.NetworkPorts_PortsUsed:
+			v.PortsUsed = new(string)
+			return d.ReadString(schemas.NetworkPorts_PortsUsed, v.PortsUsed)
+		case schemas.NetworkPorts_RemotePort:
+			v.RemotePort = new(string)
+			return d.ReadString(schemas.NetworkPorts_RemotePort, v.RemotePort)
+		case schemas.NetworkPorts_ResolverPort:
+			v.ResolverPort = new(string)
+			return d.ReadString(schemas.NetworkPorts_ResolverPort, v.ResolverPort)
+		case schemas.NetworkPorts_TargetPort:
+			v.TargetPort = new(string)
+			return d.ReadString(schemas.NetworkPorts_TargetPort, v.TargetPort)
+		}
+		return nil
+	})
+}
+
+// Contains the amount of data that network activity transferred.
+type NetworkTraffic struct {
+
+	// The number of bytes received.
+	BytesReceived *int64
+
+	// The number of bytes sent.
+	BytesSent *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkTraffic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkTraffic)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkTraffic) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BytesReceived != nil {
+		s.WriteInt64(schemas.NetworkTraffic_BytesReceived, *v.BytesReceived)
+	}
+	if v.BytesSent != nil {
+		s.WriteInt64(schemas.NetworkTraffic_BytesSent, *v.BytesSent)
+	}
+}
+func (v *NetworkTraffic) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkTraffic, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkTraffic_BytesReceived:
+			v.BytesReceived = new(int64)
+			return d.ReadInt64(schemas.NetworkTraffic_BytesReceived, v.BytesReceived)
+		case schemas.NetworkTraffic_BytesSent:
+			v.BytesSent = new(int64)
+			return d.ReadInt64(schemas.NetworkTraffic_BytesSent, v.BytesSent)
+		}
+		return nil
+	})
+}
+
+// Contains a fact that GuardDuty noted about your environment during an
+// investigation, such as the affected resource, the activity on that resource, or
+// your detection coverage. The record contains at most one of the payload members,
+// the one that matches ObservationType . Indicators can accompany any observation
+// type.
+type ObservationRecord struct {
+
+	// The kind of observation. The value identifies the payload member that can be
+	// set: FINDING_DETAIL ( FindingDetail ), RESOURCE ( Resource ), NETWORK_ACTIVITY (
+	// NetworkActivity ), RDS_LOGIN_ACTIVITY ( RdsLoginActivity ), S3_ACTIVITY (
+	// S3Activity ), KUBERNETES_ACTIVITY ( KubernetesActivity ), MALWARE_SCAN (
+	// MalwareScan ), RELATED_FINDINGS ( RelatedFindings ), DETECTION_COVERAGE (
+	// DetectionCoverage ), ACCOUNT_OVERVIEW ( AccountOverview ), RECOMMENDATION (
+	// Recommendations ), RUNTIME_SIGNALS ( RuntimeSignals ), DISTRIBUTION (
+	// Distribution ), and REPRESENTATIVE_RESOURCE ( RepresentativeResources ).
+	//
+	// This member is required.
+	ObservationType ObservationType
+
+	// Overview information about an account. Set when ObservationType is
+	// ACCOUNT_OVERVIEW .
+	AccountOverview *AccountOverview
+
+	// Details about your detection coverage. Set when ObservationType is
+	// DETECTION_COVERAGE .
+	DetectionCoverage *DetectionCoverage
+
+	// A breakdown of findings along one dimension. Set when ObservationType is
+	// DISTRIBUTION .
+	Distribution *Distribution
+
+	// Details about a GuardDuty finding. Set when ObservationType is FINDING_DETAIL .
+	FindingDetail *FindingDetail
+
+	// The threat indicators associated with the observation, such as an IP address, a
+	// domain, or a file hash.
+	Indicators []InvestigationIndicator
+
+	// Details about Kubernetes activity. Set when ObservationType is
+	// KUBERNETES_ACTIVITY .
+	KubernetesActivity *KubernetesActivity
+
+	// Details about a malware scan. Set when ObservationType is MALWARE_SCAN .
+	MalwareScan *InvestigationMalwareScan
+
+	// Details about network activity. Set when ObservationType is NETWORK_ACTIVITY .
+	NetworkActivity *NetworkActivity
+
+	// Details about login activity on an Amazon RDS database. Set when ObservationType
+	// is RDS_LOGIN_ACTIVITY .
+	RdsLoginActivity *RdsLoginActivity
+
+	// Recommended actions. Set when ObservationType is RECOMMENDATION .
+	Recommendations []Recommendation
+
+	// Details about findings that are related to the investigated activity. Set when
+	// ObservationType is RELATED_FINDINGS .
+	RelatedFindings *RelatedFindings
+
+	// Representative findings for the affected resources, one finding for each
+	// resource. Set when ObservationType is REPRESENTATIVE_RESOURCE .
+	RepresentativeResources []RepresentativeFinding
+
+	// Details about an affected resource. Set when ObservationType is RESOURCE .
+	Resource *InvestigationResource
+
+	// A summary of runtime signals. Set when ObservationType is RUNTIME_SIGNALS .
+	RuntimeSignals *RuntimeSignals
+
+	// Details about Amazon S3 activity. Set when ObservationType is S3_ACTIVITY .
+	S3Activity *S3Activity
+
+	noSmithyDocumentSerde
+}
+
+func (v *ObservationRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObservationRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObservationRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountOverview != nil {
+		s.WriteStruct(schemas.ObservationRecord_AccountOverview)
+		v.AccountOverview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetectionCoverage != nil {
+		s.WriteStruct(schemas.ObservationRecord_DetectionCoverage)
+		v.DetectionCoverage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Distribution != nil {
+		s.WriteStruct(schemas.ObservationRecord_Distribution)
+		v.Distribution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FindingDetail != nil {
+		s.WriteStruct(schemas.ObservationRecord_FindingDetail)
+		v.FindingDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Indicators != nil {
+		serializeInvestigationIndicators(s, schemas.ObservationRecord_Indicators, v.Indicators)
+	}
+	if v.KubernetesActivity != nil {
+		s.WriteStruct(schemas.ObservationRecord_KubernetesActivity)
+		v.KubernetesActivity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MalwareScan != nil {
+		s.WriteStruct(schemas.ObservationRecord_MalwareScan)
+		v.MalwareScan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkActivity != nil {
+		s.WriteStruct(schemas.ObservationRecord_NetworkActivity)
+		v.NetworkActivity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObservationType != "" {
+		s.WriteString(schemas.ObservationRecord_ObservationType, string(v.ObservationType))
+	}
+	if v.RdsLoginActivity != nil {
+		s.WriteStruct(schemas.ObservationRecord_RdsLoginActivity)
+		v.RdsLoginActivity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Recommendations != nil {
+		serializeRecommendations(s, schemas.ObservationRecord_Recommendations, v.Recommendations)
+	}
+	if v.RelatedFindings != nil {
+		s.WriteStruct(schemas.ObservationRecord_RelatedFindings)
+		v.RelatedFindings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RepresentativeResources != nil {
+		serializeRepresentativeFindings(s, schemas.ObservationRecord_RepresentativeResources, v.RepresentativeResources)
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.ObservationRecord_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeSignals != nil {
+		s.WriteStruct(schemas.ObservationRecord_RuntimeSignals)
+		v.RuntimeSignals.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Activity != nil {
+		s.WriteStruct(schemas.ObservationRecord_S3Activity)
+		v.S3Activity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ObservationRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObservationRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObservationRecord_AccountOverview:
+			v.AccountOverview = &AccountOverview{}
+			return v.AccountOverview.Deserialize(d)
+		case schemas.ObservationRecord_DetectionCoverage:
+			v.DetectionCoverage = &DetectionCoverage{}
+			return v.DetectionCoverage.Deserialize(d)
+		case schemas.ObservationRecord_Distribution:
+			v.Distribution = &Distribution{}
+			return v.Distribution.Deserialize(d)
+		case schemas.ObservationRecord_FindingDetail:
+			v.FindingDetail = &FindingDetail{}
+			return v.FindingDetail.Deserialize(d)
+		case schemas.ObservationRecord_Indicators:
+			return deserializeInvestigationIndicators(d, schemas.ObservationRecord_Indicators, &v.Indicators)
+		case schemas.ObservationRecord_KubernetesActivity:
+			v.KubernetesActivity = &KubernetesActivity{}
+			return v.KubernetesActivity.Deserialize(d)
+		case schemas.ObservationRecord_MalwareScan:
+			v.MalwareScan = &InvestigationMalwareScan{}
+			return v.MalwareScan.Deserialize(d)
+		case schemas.ObservationRecord_NetworkActivity:
+			v.NetworkActivity = &NetworkActivity{}
+			return v.NetworkActivity.Deserialize(d)
+		case schemas.ObservationRecord_ObservationType:
+			var ev string
+			if err := d.ReadString(schemas.ObservationRecord_ObservationType, &ev); err != nil {
+				return err
+			}
+			v.ObservationType = ObservationType(ev)
+			return nil
+		case schemas.ObservationRecord_RdsLoginActivity:
+			v.RdsLoginActivity = &RdsLoginActivity{}
+			return v.RdsLoginActivity.Deserialize(d)
+		case schemas.ObservationRecord_Recommendations:
+			return deserializeRecommendations(d, schemas.ObservationRecord_Recommendations, &v.Recommendations)
+		case schemas.ObservationRecord_RelatedFindings:
+			v.RelatedFindings = &RelatedFindings{}
+			return v.RelatedFindings.Deserialize(d)
+		case schemas.ObservationRecord_RepresentativeResources:
+			return deserializeRepresentativeFindings(d, schemas.ObservationRecord_RepresentativeResources, &v.RepresentativeResources)
+		case schemas.ObservationRecord_Resource:
+			v.Resource = &InvestigationResource{}
+			return v.Resource.Deserialize(d)
+		case schemas.ObservationRecord_RuntimeSignals:
+			v.RuntimeSignals = &RuntimeSignals{}
+			return v.RuntimeSignals.Deserialize(d)
+		case schemas.ObservationRecord_S3Activity:
+			v.S3Activity = &S3Activity{}
+			return v.S3Activity.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information about the observed behavior.
 type Observations struct {
 
@@ -10075,6 +14661,64 @@ func (v *Observations) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeObservationNumbers(d, schemas.Observations_Number, &v.Number)
 		case schemas.Observations_Text:
 			return deserializeObservationTexts(d, schemas.Observations_Text, &v.Text)
+		}
+		return nil
+	})
+}
+
+// Contains information about a finding type that GuardDuty observed.
+type ObservedFindingType struct {
+
+	// The number of findings of this type.
+	Count *int64
+
+	// The finding type.
+	FindingType *string
+
+	// The highest severity score among the findings of this type, from 0 to 10.
+	SeverityMax *float64
+
+	// The resources that the findings of this type share with the investigated
+	// activity.
+	SharedResources []SharedResource
+
+	noSmithyDocumentSerde
+}
+
+func (v *ObservedFindingType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObservedFindingType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObservedFindingType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.ObservedFindingType_Count, *v.Count)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.ObservedFindingType_FindingType, *v.FindingType)
+	}
+	if v.SeverityMax != nil {
+		s.WriteFloat64(schemas.ObservedFindingType_SeverityMax, *v.SeverityMax)
+	}
+	if v.SharedResources != nil {
+		serializeSharedResources(s, schemas.ObservedFindingType_SharedResources, v.SharedResources)
+	}
+}
+func (v *ObservedFindingType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObservedFindingType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObservedFindingType_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.ObservedFindingType_Count, v.Count)
+		case schemas.ObservedFindingType_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.ObservedFindingType_FindingType, v.FindingType)
+		case schemas.ObservedFindingType_SeverityMax:
+			v.SeverityMax = new(float64)
+			return d.ReadFloat64(schemas.ObservedFindingType_SeverityMax, v.SeverityMax)
+		case schemas.ObservedFindingType_SharedResources:
+			return deserializeSharedResources(d, schemas.ObservedFindingType_SharedResources, &v.SharedResources)
 		}
 		return nil
 	})
@@ -10273,6 +14917,48 @@ func (v *OrganizationAdditionalConfigurationResult) Deserialize(d smithy.ShapeDe
 			}
 			v.Name = OrgFeatureAdditionalConfiguration(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Contains an analysis of the findings across an organization.
+type OrganizationAnalysis struct {
+
+	// The accounts in the organization that have findings, with the number of
+	// findings in each.
+	AccountBreakdown []AccountSummary
+
+	// A summary of the findings across the organization.
+	FindingsSummary *OrganizationFindingsSummary
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationAnalysis)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationAnalysis) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountBreakdown != nil {
+		serializeAccountSummaries(s, schemas.OrganizationAnalysis_AccountBreakdown, v.AccountBreakdown)
+	}
+	if v.FindingsSummary != nil {
+		s.WriteStruct(schemas.OrganizationAnalysis_FindingsSummary)
+		v.FindingsSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OrganizationAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationAnalysis, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationAnalysis_AccountBreakdown:
+			return deserializeAccountSummaries(d, schemas.OrganizationAnalysis_AccountBreakdown, &v.AccountBreakdown)
+		case schemas.OrganizationAnalysis_FindingsSummary:
+			v.FindingsSummary = &OrganizationFindingsSummary{}
+			return v.FindingsSummary.Deserialize(d)
 		}
 		return nil
 	})
@@ -10742,6 +15428,82 @@ func (v *OrganizationFeatureStatisticsAdditionalConfiguration) Deserialize(d smi
 			}
 			v.Name = OrgFeatureAdditionalConfiguration(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Contains a summary of findings across an organization.
+type OrganizationFindingsSummary struct {
+
+	// The number of accounts that have findings.
+	AffectedAccountCount *int32
+
+	// The number of findings in each time window.
+	ByTimeWindow []TimeWindowGroup
+
+	// The number of findings at each severity level across the organization.
+	SeverityBreakdown *SeverityBreakdown
+
+	// The finding types that have the most findings, with counts.
+	TopFindingTypes []FindingTypeCount
+
+	// The total number of accounts in the organization.
+	TotalAccountCount *int32
+
+	// The total number of findings across the organization.
+	TotalFindings *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationFindingsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationFindingsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationFindingsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedAccountCount != nil {
+		s.WriteInt32(schemas.OrganizationFindingsSummary_AffectedAccountCount, *v.AffectedAccountCount)
+	}
+	if v.ByTimeWindow != nil {
+		serializeTimeWindowGroups(s, schemas.OrganizationFindingsSummary_ByTimeWindow, v.ByTimeWindow)
+	}
+	if v.SeverityBreakdown != nil {
+		s.WriteStruct(schemas.OrganizationFindingsSummary_SeverityBreakdown)
+		v.SeverityBreakdown.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopFindingTypes != nil {
+		serializeFindingTypeCounts(s, schemas.OrganizationFindingsSummary_TopFindingTypes, v.TopFindingTypes)
+	}
+	if v.TotalAccountCount != nil {
+		s.WriteInt32(schemas.OrganizationFindingsSummary_TotalAccountCount, *v.TotalAccountCount)
+	}
+	if v.TotalFindings != nil {
+		s.WriteInt32(schemas.OrganizationFindingsSummary_TotalFindings, *v.TotalFindings)
+	}
+}
+func (v *OrganizationFindingsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationFindingsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationFindingsSummary_AffectedAccountCount:
+			v.AffectedAccountCount = new(int32)
+			return d.ReadInt32(schemas.OrganizationFindingsSummary_AffectedAccountCount, v.AffectedAccountCount)
+		case schemas.OrganizationFindingsSummary_ByTimeWindow:
+			return deserializeTimeWindowGroups(d, schemas.OrganizationFindingsSummary_ByTimeWindow, &v.ByTimeWindow)
+		case schemas.OrganizationFindingsSummary_SeverityBreakdown:
+			v.SeverityBreakdown = &SeverityBreakdown{}
+			return v.SeverityBreakdown.Deserialize(d)
+		case schemas.OrganizationFindingsSummary_TopFindingTypes:
+			return deserializeFindingTypeCounts(d, schemas.OrganizationFindingsSummary_TopFindingTypes, &v.TopFindingTypes)
+		case schemas.OrganizationFindingsSummary_TotalAccountCount:
+			v.TotalAccountCount = new(int32)
+			return d.ReadInt32(schemas.OrganizationFindingsSummary_TotalAccountCount, v.TotalAccountCount)
+		case schemas.OrganizationFindingsSummary_TotalFindings:
+			v.TotalFindings = new(int32)
+			return d.ReadInt32(schemas.OrganizationFindingsSummary_TotalFindings, v.TotalFindings)
 		}
 		return nil
 	})
@@ -11380,6 +16142,75 @@ func (v *PrivateIpAddressDetails) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Contains information about a process in a process lineage. ParentUuid links
+// each process to its parent process.
+type Process struct {
+
+	// The unique identifier of the process.
+	//
+	// This member is required.
+	Uuid *string
+
+	// The findings associated with this process.
+	Findings []FindingReference
+
+	// The name of the process.
+	Name *string
+
+	// The unique identifier of the parent process. Not set for the root process.
+	ParentUuid *string
+
+	// The path of the process executable.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Process) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Process)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Process) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Findings != nil {
+		serializeFindingReferences(s, schemas.Process_Findings, v.Findings)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Process_Name, *v.Name)
+	}
+	if v.ParentUuid != nil {
+		s.WriteString(schemas.Process_ParentUuid, *v.ParentUuid)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.Process_Path, *v.Path)
+	}
+	if v.Uuid != nil {
+		s.WriteString(schemas.Process_Uuid, *v.Uuid)
+	}
+}
+func (v *Process) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Process, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Process_Findings:
+			return deserializeFindingReferences(d, schemas.Process_Findings, &v.Findings)
+		case schemas.Process_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Process_Name, v.Name)
+		case schemas.Process_ParentUuid:
+			v.ParentUuid = new(string)
+			return d.ReadString(schemas.Process_ParentUuid, v.ParentUuid)
+		case schemas.Process_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.Process_Path, v.Path)
+		case schemas.Process_Uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.Process_Uuid, v.Uuid)
+		}
+		return nil
+	})
+}
+
 // Information about the observed process.
 type ProcessDetails struct {
 
@@ -11601,6 +16432,58 @@ func (v *ProductCode) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about the status of a protection plan.
+type ProtectionPlan struct {
+
+	// The name of the protection plan. Possible values are CLOUD_TRAIL , DNS_LOGS ,
+	// FLOW_LOGS , S3_DATA_EVENTS , EKS_AUDIT_LOGS , EBS_MALWARE_PROTECTION ,
+	// RDS_LOGIN_EVENTS , EKS_RUNTIME_MONITORING , EKS_ADDON_MANAGEMENT ,
+	// LAMBDA_NETWORK_LOGS , RUNTIME_MONITORING , ECS_FARGATE_AGENT_MANAGEMENT , and
+	// EC2_AGENT_MANAGEMENT .
+	Name InvestigationDetectorFeature
+
+	// The status of the protection plan. Possible values are ENABLED and DISABLED .
+	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProtectionPlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectionPlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectionPlan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ProtectionPlan_Name, string(v.Name))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProtectionPlan_Status, string(v.Status))
+	}
+}
+func (v *ProtectionPlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectionPlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectionPlan_Name:
+			var ev string
+			if err := d.ReadString(schemas.ProtectionPlan_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = InvestigationDetectorFeature(ev)
+			return nil
+		case schemas.ProtectionPlan_Status:
+			var ev string
+			if err := d.ReadString(schemas.ProtectionPlan_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FeatureStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the public access policies that apply to the S3 bucket.
 type PublicAccess struct {
 
@@ -11727,6 +16610,122 @@ func (v *PublicAccessConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Contains the start and end of a time window.
+type QueryTimeWindow struct {
+
+	// The timestamp at which the time window ends.
+	EndTime *time.Time
+
+	// The timestamp at which the time window starts.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueryTimeWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryTimeWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryTimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.QueryTimeWindow_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.QueryTimeWindow_StartTime, *v.StartTime)
+	}
+}
+func (v *QueryTimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryTimeWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryTimeWindow_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.QueryTimeWindow_EndTime, v.EndTime)
+		case schemas.QueryTimeWindow_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.QueryTimeWindow_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Contains details about an Amazon RDS database instance.
+type RdsDbInstance struct {
+
+	// The identifier of the database cluster that contains the instance.
+	DbClusterIdentifier *string
+
+	// The Amazon Resource Name (ARN) of the database instance.
+	DbInstanceArn *string
+
+	// The identifier of the database instance.
+	DbInstanceIdentifier *string
+
+	// The unique resource ID of the database instance.
+	DbiResourceId *string
+
+	// The database engine of the instance.
+	Engine *string
+
+	// The version of the database engine.
+	EngineVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RdsDbInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RdsDbInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RdsDbInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterIdentifier != nil {
+		s.WriteString(schemas.RdsDbInstance_DbClusterIdentifier, *v.DbClusterIdentifier)
+	}
+	if v.DbInstanceArn != nil {
+		s.WriteString(schemas.RdsDbInstance_DbInstanceArn, *v.DbInstanceArn)
+	}
+	if v.DbInstanceIdentifier != nil {
+		s.WriteString(schemas.RdsDbInstance_DbInstanceIdentifier, *v.DbInstanceIdentifier)
+	}
+	if v.DbiResourceId != nil {
+		s.WriteString(schemas.RdsDbInstance_DbiResourceId, *v.DbiResourceId)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.RdsDbInstance_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.RdsDbInstance_EngineVersion, *v.EngineVersion)
+	}
+}
+func (v *RdsDbInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RdsDbInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RdsDbInstance_DbClusterIdentifier:
+			v.DbClusterIdentifier = new(string)
+			return d.ReadString(schemas.RdsDbInstance_DbClusterIdentifier, v.DbClusterIdentifier)
+		case schemas.RdsDbInstance_DbInstanceArn:
+			v.DbInstanceArn = new(string)
+			return d.ReadString(schemas.RdsDbInstance_DbInstanceArn, v.DbInstanceArn)
+		case schemas.RdsDbInstance_DbInstanceIdentifier:
+			v.DbInstanceIdentifier = new(string)
+			return d.ReadString(schemas.RdsDbInstance_DbInstanceIdentifier, v.DbInstanceIdentifier)
+		case schemas.RdsDbInstance_DbiResourceId:
+			v.DbiResourceId = new(string)
+			return d.ReadString(schemas.RdsDbInstance_DbiResourceId, v.DbiResourceId)
+		case schemas.RdsDbInstance_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.RdsDbInstance_Engine, v.Engine)
+		case schemas.RdsDbInstance_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.RdsDbInstance_EngineVersion, v.EngineVersion)
+		}
+		return nil
+	})
+}
+
 // Contains information about the resource type RDSDBInstance involved in a
 // GuardDuty finding.
 type RdsDbInstanceDetails struct {
@@ -11811,6 +16810,74 @@ func (v *RdsDbInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.RdsDbInstanceDetails_EngineVersion, v.EngineVersion)
 		case schemas.RdsDbInstanceDetails_Tags:
 			return deserializeTags(d, schemas.RdsDbInstanceDetails_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Contains details about the user that logged in to an Amazon RDS database
+// instance.
+type RdsDbUser struct {
+
+	// The name of the application that was used to log in.
+	Application *string
+
+	// The authentication method that the user used.
+	AuthMethod *string
+
+	// The name of the database that the user logged in to.
+	Database *string
+
+	// The version of Secure Sockets Layer (SSL) that the connection used.
+	Ssl *string
+
+	// The user name that was used to log in.
+	User *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RdsDbUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RdsDbUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RdsDbUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.RdsDbUser_Application, *v.Application)
+	}
+	if v.AuthMethod != nil {
+		s.WriteString(schemas.RdsDbUser_AuthMethod, *v.AuthMethod)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.RdsDbUser_Database, *v.Database)
+	}
+	if v.Ssl != nil {
+		s.WriteString(schemas.RdsDbUser_Ssl, *v.Ssl)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.RdsDbUser_User, *v.User)
+	}
+}
+func (v *RdsDbUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RdsDbUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RdsDbUser_Application:
+			v.Application = new(string)
+			return d.ReadString(schemas.RdsDbUser_Application, v.Application)
+		case schemas.RdsDbUser_AuthMethod:
+			v.AuthMethod = new(string)
+			return d.ReadString(schemas.RdsDbUser_AuthMethod, v.AuthMethod)
+		case schemas.RdsDbUser_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.RdsDbUser_Database, v.Database)
+		case schemas.RdsDbUser_Ssl:
+			v.Ssl = new(string)
+			return d.ReadString(schemas.RdsDbUser_Ssl, v.Ssl)
+		case schemas.RdsDbUser_User:
+			v.User = new(string)
+			return d.ReadString(schemas.RdsDbUser_User, v.User)
 		}
 		return nil
 	})
@@ -11969,6 +17036,86 @@ func (v *RdsLimitlessDbDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains details about login activity on an Amazon RDS database.
+type RdsLoginActivity struct {
+
+	// The time range of the login activity.
+	ActivityWindow *ActivityWindow
+
+	// An explanation of how the login activity deviates from normal behavior.
+	AnomalyContext *string
+
+	// Additional context about the login activity, such as geolocation information.
+	Enrichment *Enrichment
+
+	// The number of login attempts.
+	LoginCount *int64
+
+	// The outcome of the login attempts.
+	Outcome *string
+
+	// The rate of the login attempts.
+	Rate *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RdsLoginActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RdsLoginActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RdsLoginActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityWindow != nil {
+		s.WriteStruct(schemas.RdsLoginActivity_ActivityWindow)
+		v.ActivityWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AnomalyContext != nil {
+		s.WriteString(schemas.RdsLoginActivity_AnomalyContext, *v.AnomalyContext)
+	}
+	if v.Enrichment != nil {
+		s.WriteStruct(schemas.RdsLoginActivity_Enrichment)
+		v.Enrichment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoginCount != nil {
+		s.WriteInt64(schemas.RdsLoginActivity_LoginCount, *v.LoginCount)
+	}
+	if v.Outcome != nil {
+		s.WriteString(schemas.RdsLoginActivity_Outcome, *v.Outcome)
+	}
+	if v.Rate != nil {
+		s.WriteString(schemas.RdsLoginActivity_Rate, *v.Rate)
+	}
+}
+func (v *RdsLoginActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RdsLoginActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RdsLoginActivity_ActivityWindow:
+			v.ActivityWindow = &ActivityWindow{}
+			return v.ActivityWindow.Deserialize(d)
+		case schemas.RdsLoginActivity_AnomalyContext:
+			v.AnomalyContext = new(string)
+			return d.ReadString(schemas.RdsLoginActivity_AnomalyContext, v.AnomalyContext)
+		case schemas.RdsLoginActivity_Enrichment:
+			v.Enrichment = &Enrichment{}
+			return v.Enrichment.Deserialize(d)
+		case schemas.RdsLoginActivity_LoginCount:
+			v.LoginCount = new(int64)
+			return d.ReadInt64(schemas.RdsLoginActivity_LoginCount, v.LoginCount)
+		case schemas.RdsLoginActivity_Outcome:
+			v.Outcome = new(string)
+			return d.ReadString(schemas.RdsLoginActivity_Outcome, v.Outcome)
+		case schemas.RdsLoginActivity_Rate:
+			v.Rate = new(string)
+			return d.ReadString(schemas.RdsLoginActivity_Rate, v.Rate)
+		}
+		return nil
+	})
+}
+
 // Indicates that a login attempt was made to the potentially compromised database
 // from a remote IP address.
 type RdsLoginAttemptAction struct {
@@ -12006,6 +17153,82 @@ func (v *RdsLoginAttemptAction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RdsLoginAttemptAction_RemoteIpDetails:
 			v.RemoteIpDetails = &RemoteIpDetails{}
 			return v.RemoteIpDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains a recommended action.
+type Recommendation struct {
+
+	// The category of the recommendation. Possible values are ENABLE_PROTECTION ,
+	// FURTHER_INVESTIGATION , SUPPRESSION_RULE , HARDENING , and MONITORING .
+	Category RecommendationCategory
+
+	// CLI commands that you can run to carry out the recommendation.
+	CliCommands []string
+
+	// The priority of the recommendation. Possible values are IMMEDIATE , SHORT_TERM ,
+	// and STRATEGIC .
+	Priority ActionPriority
+
+	// The reason for the recommendation.
+	Rationale *string
+
+	// A short title for the recommendation.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Recommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.Recommendation_Category, string(v.Category))
+	}
+	if v.CliCommands != nil {
+		serializeCliCommands(s, schemas.Recommendation_CliCommands, v.CliCommands)
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.Recommendation_Priority, string(v.Priority))
+	}
+	if v.Rationale != nil {
+		s.WriteString(schemas.Recommendation_Rationale, *v.Rationale)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Recommendation_Title, *v.Title)
+	}
+}
+func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Recommendation_Category:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = RecommendationCategory(ev)
+			return nil
+		case schemas.Recommendation_CliCommands:
+			return deserializeCliCommands(d, schemas.Recommendation_CliCommands, &v.CliCommands)
+		case schemas.Recommendation_Priority:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_Priority, &ev); err != nil {
+				return err
+			}
+			v.Priority = ActionPriority(ev)
+			return nil
+		case schemas.Recommendation_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.Recommendation_Rationale, v.Rationale)
+		case schemas.Recommendation_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Recommendation_Title, v.Title)
 		}
 		return nil
 	})
@@ -12106,6 +17329,47 @@ func (v *RecoveryPointDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RecoveryPointDetails_RecoveryPointArn:
 			v.RecoveryPointArn = new(string)
 			return d.ReadString(schemas.RecoveryPointDetails_RecoveryPointArn, v.RecoveryPointArn)
+		}
+		return nil
+	})
+}
+
+// Contains information about findings that are related to the investigated
+// activity.
+type RelatedFindings struct {
+
+	// The findings that GuardDuty correlated with the investigated activity, grouped
+	// by finding type.
+	Correlated []CorrelatedFinding
+
+	// Other finding types that GuardDuty observed, with counts. These entries don't
+	// include finding IDs.
+	Observed []ObservedFindingType
+
+	noSmithyDocumentSerde
+}
+
+func (v *RelatedFindings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedFindings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedFindings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Correlated != nil {
+		serializeCorrelatedFindings(s, schemas.RelatedFindings_Correlated, v.Correlated)
+	}
+	if v.Observed != nil {
+		serializeObservedFindingTypes(s, schemas.RelatedFindings_Observed, v.Observed)
+	}
+}
+func (v *RelatedFindings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedFindings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedFindings_Correlated:
+			return deserializeCorrelatedFindings(d, schemas.RelatedFindings_Correlated, &v.Correlated)
+		case schemas.RelatedFindings_Observed:
+			return deserializeObservedFindingTypes(d, schemas.RelatedFindings_Observed, &v.Observed)
 		}
 		return nil
 	})
@@ -12284,6 +17548,138 @@ func (v *RemotePortDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RemotePortDetails_PortName:
 			v.PortName = new(string)
 			return d.ReadString(schemas.RemotePortDetails_PortName, v.PortName)
+		}
+		return nil
+	})
+}
+
+// Contains a representative finding for an affected resource. GuardDuty selects
+// one finding for each affected resource, based on severity.
+type RepresentativeFinding struct {
+
+	// The number of findings for the resource.
+	FindingCount *int64
+
+	// The ID of the representative finding.
+	FindingId *string
+
+	// The identifier of the affected resource.
+	Identifier *string
+
+	// The type of the affected resource.
+	ResourceType *string
+
+	// The assessed risk level of the resource. Possible values are Info , Low , Medium
+	// , High , and Critical .
+	RiskLevel RiskLevel
+
+	// The reason for the assessed risk level.
+	RiskRationale *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RepresentativeFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepresentativeFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepresentativeFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingCount != nil {
+		s.WriteInt64(schemas.RepresentativeFinding_FindingCount, *v.FindingCount)
+	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.RepresentativeFinding_FindingId, *v.FindingId)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.RepresentativeFinding_Identifier, *v.Identifier)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RepresentativeFinding_ResourceType, *v.ResourceType)
+	}
+	if v.RiskLevel != "" {
+		s.WriteString(schemas.RepresentativeFinding_RiskLevel, string(v.RiskLevel))
+	}
+	if v.RiskRationale != nil {
+		s.WriteString(schemas.RepresentativeFinding_RiskRationale, *v.RiskRationale)
+	}
+}
+func (v *RepresentativeFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepresentativeFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepresentativeFinding_FindingCount:
+			v.FindingCount = new(int64)
+			return d.ReadInt64(schemas.RepresentativeFinding_FindingCount, v.FindingCount)
+		case schemas.RepresentativeFinding_FindingId:
+			v.FindingId = new(string)
+			return d.ReadString(schemas.RepresentativeFinding_FindingId, v.FindingId)
+		case schemas.RepresentativeFinding_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.RepresentativeFinding_Identifier, v.Identifier)
+		case schemas.RepresentativeFinding_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RepresentativeFinding_ResourceType, v.ResourceType)
+		case schemas.RepresentativeFinding_RiskLevel:
+			var ev string
+			if err := d.ReadString(schemas.RepresentativeFinding_RiskLevel, &ev); err != nil {
+				return err
+			}
+			v.RiskLevel = RiskLevel(ev)
+			return nil
+		case schemas.RepresentativeFinding_RiskRationale:
+			v.RiskRationale = new(string)
+			return d.ReadString(schemas.RepresentativeFinding_RiskRationale, v.RiskRationale)
+		}
+		return nil
+	})
+}
+
+// Contains reputation information about a threat indicator.
+type Reputation struct {
+
+	// The current reputation of the indicator.
+	CurrentDisposition *string
+
+	// The reputation of the indicator at the time of the finding.
+	FindingTimeDisposition *string
+
+	// A comparison of the reputation at the time of the finding with the current
+	// reputation.
+	ReputationComparison *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Reputation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Reputation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Reputation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentDisposition != nil {
+		s.WriteString(schemas.Reputation_CurrentDisposition, *v.CurrentDisposition)
+	}
+	if v.FindingTimeDisposition != nil {
+		s.WriteString(schemas.Reputation_FindingTimeDisposition, *v.FindingTimeDisposition)
+	}
+	if v.ReputationComparison != nil {
+		s.WriteString(schemas.Reputation_ReputationComparison, *v.ReputationComparison)
+	}
+}
+func (v *Reputation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Reputation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Reputation_CurrentDisposition:
+			v.CurrentDisposition = new(string)
+			return d.ReadString(schemas.Reputation_CurrentDisposition, v.CurrentDisposition)
+		case schemas.Reputation_FindingTimeDisposition:
+			v.FindingTimeDisposition = new(string)
+			return d.ReadString(schemas.Reputation_FindingTimeDisposition, v.FindingTimeDisposition)
+		case schemas.Reputation_ReputationComparison:
+			v.ReputationComparison = new(string)
+			return d.ReadString(schemas.Reputation_ReputationComparison, v.ReputationComparison)
 		}
 		return nil
 	})
@@ -12757,6 +18153,55 @@ func (v *ResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceDetails_InstanceArn:
 			v.InstanceArn = new(string)
 			return d.ReadString(schemas.ResourceDetails_InstanceArn, v.InstanceArn)
+		}
+		return nil
+	})
+}
+
+// Contains the number of findings for a resource.
+type ResourceDistribution struct {
+
+	// The number of findings for the resource.
+	Count *int64
+
+	// The identifier of the resource.
+	Identifier *string
+
+	// The display name of the resource type, such as Instance .
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceDistribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDistribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceDistribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.ResourceDistribution_Count, *v.Count)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ResourceDistribution_Identifier, *v.Identifier)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourceDistribution_ResourceType, *v.ResourceType)
+	}
+}
+func (v *ResourceDistribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceDistribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceDistribution_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.ResourceDistribution_Count, v.Count)
+		case schemas.ResourceDistribution_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ResourceDistribution_Identifier, v.Identifier)
+		case schemas.ResourceDistribution_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceDistribution_ResourceType, v.ResourceType)
 		}
 		return nil
 	})
@@ -13705,6 +19150,299 @@ func (v *RuntimeDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RuntimeDetails_Process:
 			v.Process = &ProcessDetails{}
 			return v.Process.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains a summary of runtime signals.
+type RuntimeSignals struct {
+
+	// A key observation about the runtime signals.
+	KeyObservation *string
+
+	// The runtime signals, grouped by finding type.
+	SignalGroups []SignalGroup
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeSignals) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeSignals)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeSignals) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyObservation != nil {
+		s.WriteString(schemas.RuntimeSignals_KeyObservation, *v.KeyObservation)
+	}
+	if v.SignalGroups != nil {
+		serializeSignalGroups(s, schemas.RuntimeSignals_SignalGroups, v.SignalGroups)
+	}
+}
+func (v *RuntimeSignals) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeSignals, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeSignals_KeyObservation:
+			v.KeyObservation = new(string)
+			return d.ReadString(schemas.RuntimeSignals_KeyObservation, v.KeyObservation)
+		case schemas.RuntimeSignals_SignalGroups:
+			return deserializeSignalGroups(d, schemas.RuntimeSignals_SignalGroups, &v.SignalGroups)
+		}
+		return nil
+	})
+}
+
+// Contains details about Amazon S3 activity.
+type S3Activity struct {
+
+	// The time range of the activity.
+	ActivityWindow *ActivityWindow
+
+	// The identity that performed the activity.
+	Actor *InvestigationActor
+
+	// The name of the affected bucket, or account-wide if the activity isn't limited
+	// to one bucket.
+	AffectedBucket *string
+
+	// The Amazon S3 API operation that was called.
+	Api *string
+
+	// Additional context about the activity, such as geolocation information.
+	Enrichment *Enrichment
+
+	// The number of events.
+	EventCount *int64
+
+	// Related activity on Amazon Web Services services other than Amazon S3.
+	NonS3Activity *string
+
+	// Other Amazon S3 activity that is related to the observation.
+	OtherS3Activity *string
+
+	// An assessment of the session in which the activity occurred.
+	SessionAssessment *string
+
+	// The source address of the activity, or a description of the source.
+	SourceIp *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3Activity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Activity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Activity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityWindow != nil {
+		s.WriteStruct(schemas.S3Activity_ActivityWindow)
+		v.ActivityWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Actor != nil {
+		s.WriteStruct(schemas.S3Activity_Actor)
+		v.Actor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AffectedBucket != nil {
+		s.WriteString(schemas.S3Activity_AffectedBucket, *v.AffectedBucket)
+	}
+	if v.Api != nil {
+		s.WriteString(schemas.S3Activity_Api, *v.Api)
+	}
+	if v.Enrichment != nil {
+		s.WriteStruct(schemas.S3Activity_Enrichment)
+		v.Enrichment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventCount != nil {
+		s.WriteInt64(schemas.S3Activity_EventCount, *v.EventCount)
+	}
+	if v.NonS3Activity != nil {
+		s.WriteString(schemas.S3Activity_NonS3Activity, *v.NonS3Activity)
+	}
+	if v.OtherS3Activity != nil {
+		s.WriteString(schemas.S3Activity_OtherS3Activity, *v.OtherS3Activity)
+	}
+	if v.SessionAssessment != nil {
+		s.WriteString(schemas.S3Activity_SessionAssessment, *v.SessionAssessment)
+	}
+	if v.SourceIp != nil {
+		s.WriteString(schemas.S3Activity_SourceIp, *v.SourceIp)
+	}
+}
+func (v *S3Activity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Activity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Activity_ActivityWindow:
+			v.ActivityWindow = &ActivityWindow{}
+			return v.ActivityWindow.Deserialize(d)
+		case schemas.S3Activity_Actor:
+			v.Actor = &InvestigationActor{}
+			return v.Actor.Deserialize(d)
+		case schemas.S3Activity_AffectedBucket:
+			v.AffectedBucket = new(string)
+			return d.ReadString(schemas.S3Activity_AffectedBucket, v.AffectedBucket)
+		case schemas.S3Activity_Api:
+			v.Api = new(string)
+			return d.ReadString(schemas.S3Activity_Api, v.Api)
+		case schemas.S3Activity_Enrichment:
+			v.Enrichment = &Enrichment{}
+			return v.Enrichment.Deserialize(d)
+		case schemas.S3Activity_EventCount:
+			v.EventCount = new(int64)
+			return d.ReadInt64(schemas.S3Activity_EventCount, v.EventCount)
+		case schemas.S3Activity_NonS3Activity:
+			v.NonS3Activity = new(string)
+			return d.ReadString(schemas.S3Activity_NonS3Activity, v.NonS3Activity)
+		case schemas.S3Activity_OtherS3Activity:
+			v.OtherS3Activity = new(string)
+			return d.ReadString(schemas.S3Activity_OtherS3Activity, v.OtherS3Activity)
+		case schemas.S3Activity_SessionAssessment:
+			v.SessionAssessment = new(string)
+			return d.ReadString(schemas.S3Activity_SessionAssessment, v.SessionAssessment)
+		case schemas.S3Activity_SourceIp:
+			v.SourceIp = new(string)
+			return d.ReadString(schemas.S3Activity_SourceIp, v.SourceIp)
+		}
+		return nil
+	})
+}
+
+// Contains an analysis of Amazon S3 activity or exposure. The members that can be
+// set depend on AnalysisType : S3_EXPOSURE ( FindingSubtype , EffectivePermission
+// , BlockPublicAccessSettings , and Exposure ), S3_ACTOR_CONTEXT ( UserAgent ,
+// UserAgentClassification , SourceIp , IpReputation , and ActorAssessment ), and
+// S3_PEN_TEST ( UserAgent , S3ApiActivity , SourceContext , and
+// AuthorizationAssessment ).
+type S3Analysis struct {
+
+	// An assessment of the identity that performed the activity.
+	ActorAssessment *string
+
+	// An assessment of whether the activity was authorized.
+	AuthorizationAssessment *string
+
+	// A description of the Amazon S3 Block Public Access settings.
+	BlockPublicAccessSettings *string
+
+	// The effective permission of the Amazon S3 resource.
+	EffectivePermission *string
+
+	// An assessment of the exposure of the Amazon S3 resource.
+	Exposure *string
+
+	// The subtype of the finding.
+	FindingSubtype *string
+
+	// The reputation of the source IP address.
+	IpReputation *string
+
+	// A description of the Amazon S3 API activity.
+	S3ApiActivity *string
+
+	// Context about the source of the activity.
+	SourceContext *string
+
+	// The source address of the activity, or a description of the source.
+	SourceIp *string
+
+	// The user agent of the caller.
+	UserAgent *string
+
+	// The classification of the user agent.
+	UserAgentClassification *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3Analysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Analysis)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Analysis) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorAssessment != nil {
+		s.WriteString(schemas.S3Analysis_ActorAssessment, *v.ActorAssessment)
+	}
+	if v.AuthorizationAssessment != nil {
+		s.WriteString(schemas.S3Analysis_AuthorizationAssessment, *v.AuthorizationAssessment)
+	}
+	if v.BlockPublicAccessSettings != nil {
+		s.WriteString(schemas.S3Analysis_BlockPublicAccessSettings, *v.BlockPublicAccessSettings)
+	}
+	if v.EffectivePermission != nil {
+		s.WriteString(schemas.S3Analysis_EffectivePermission, *v.EffectivePermission)
+	}
+	if v.Exposure != nil {
+		s.WriteString(schemas.S3Analysis_Exposure, *v.Exposure)
+	}
+	if v.FindingSubtype != nil {
+		s.WriteString(schemas.S3Analysis_FindingSubtype, *v.FindingSubtype)
+	}
+	if v.IpReputation != nil {
+		s.WriteString(schemas.S3Analysis_IpReputation, *v.IpReputation)
+	}
+	if v.S3ApiActivity != nil {
+		s.WriteString(schemas.S3Analysis_S3ApiActivity, *v.S3ApiActivity)
+	}
+	if v.SourceContext != nil {
+		s.WriteString(schemas.S3Analysis_SourceContext, *v.SourceContext)
+	}
+	if v.SourceIp != nil {
+		s.WriteString(schemas.S3Analysis_SourceIp, *v.SourceIp)
+	}
+	if v.UserAgent != nil {
+		s.WriteString(schemas.S3Analysis_UserAgent, *v.UserAgent)
+	}
+	if v.UserAgentClassification != nil {
+		s.WriteString(schemas.S3Analysis_UserAgentClassification, *v.UserAgentClassification)
+	}
+}
+func (v *S3Analysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Analysis, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Analysis_ActorAssessment:
+			v.ActorAssessment = new(string)
+			return d.ReadString(schemas.S3Analysis_ActorAssessment, v.ActorAssessment)
+		case schemas.S3Analysis_AuthorizationAssessment:
+			v.AuthorizationAssessment = new(string)
+			return d.ReadString(schemas.S3Analysis_AuthorizationAssessment, v.AuthorizationAssessment)
+		case schemas.S3Analysis_BlockPublicAccessSettings:
+			v.BlockPublicAccessSettings = new(string)
+			return d.ReadString(schemas.S3Analysis_BlockPublicAccessSettings, v.BlockPublicAccessSettings)
+		case schemas.S3Analysis_EffectivePermission:
+			v.EffectivePermission = new(string)
+			return d.ReadString(schemas.S3Analysis_EffectivePermission, v.EffectivePermission)
+		case schemas.S3Analysis_Exposure:
+			v.Exposure = new(string)
+			return d.ReadString(schemas.S3Analysis_Exposure, v.Exposure)
+		case schemas.S3Analysis_FindingSubtype:
+			v.FindingSubtype = new(string)
+			return d.ReadString(schemas.S3Analysis_FindingSubtype, v.FindingSubtype)
+		case schemas.S3Analysis_IpReputation:
+			v.IpReputation = new(string)
+			return d.ReadString(schemas.S3Analysis_IpReputation, v.IpReputation)
+		case schemas.S3Analysis_S3ApiActivity:
+			v.S3ApiActivity = new(string)
+			return d.ReadString(schemas.S3Analysis_S3ApiActivity, v.S3ApiActivity)
+		case schemas.S3Analysis_SourceContext:
+			v.SourceContext = new(string)
+			return d.ReadString(schemas.S3Analysis_SourceContext, v.SourceContext)
+		case schemas.S3Analysis_SourceIp:
+			v.SourceIp = new(string)
+			return d.ReadString(schemas.S3Analysis_SourceIp, v.SourceIp)
+		case schemas.S3Analysis_UserAgent:
+			v.UserAgent = new(string)
+			return d.ReadString(schemas.S3Analysis_UserAgent, v.UserAgent)
+		case schemas.S3Analysis_UserAgentClassification:
+			v.UserAgentClassification = new(string)
+			return d.ReadString(schemas.S3Analysis_UserAgentClassification, v.UserAgentClassification)
 		}
 		return nil
 	})
@@ -15648,6 +21386,73 @@ func (v *Session) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the number of findings at each severity level.
+type SeverityBreakdown struct {
+
+	// The number of findings that have Critical severity.
+	Critical *int32
+
+	// The number of findings that have High severity.
+	High *int32
+
+	// The number of findings that have Info severity.
+	Info *int32
+
+	// The number of findings that have Low severity.
+	Low *int32
+
+	// The number of findings that have Medium severity.
+	Medium *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *SeverityBreakdown) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SeverityBreakdown)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SeverityBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Critical != nil {
+		s.WriteInt32(schemas.SeverityBreakdown_Critical, *v.Critical)
+	}
+	if v.High != nil {
+		s.WriteInt32(schemas.SeverityBreakdown_High, *v.High)
+	}
+	if v.Info != nil {
+		s.WriteInt32(schemas.SeverityBreakdown_Info, *v.Info)
+	}
+	if v.Low != nil {
+		s.WriteInt32(schemas.SeverityBreakdown_Low, *v.Low)
+	}
+	if v.Medium != nil {
+		s.WriteInt32(schemas.SeverityBreakdown_Medium, *v.Medium)
+	}
+}
+func (v *SeverityBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SeverityBreakdown, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SeverityBreakdown_Critical:
+			v.Critical = new(int32)
+			return d.ReadInt32(schemas.SeverityBreakdown_Critical, v.Critical)
+		case schemas.SeverityBreakdown_High:
+			v.High = new(int32)
+			return d.ReadInt32(schemas.SeverityBreakdown_High, v.High)
+		case schemas.SeverityBreakdown_Info:
+			v.Info = new(int32)
+			return d.ReadInt32(schemas.SeverityBreakdown_Info, v.Info)
+		case schemas.SeverityBreakdown_Low:
+			v.Low = new(int32)
+			return d.ReadInt32(schemas.SeverityBreakdown_Low, v.Low)
+		case schemas.SeverityBreakdown_Medium:
+			v.Medium = new(int32)
+			return d.ReadInt32(schemas.SeverityBreakdown_Medium, v.Medium)
+		}
+		return nil
+	})
+}
+
 // Information about severity level for each finding type.
 type SeverityStatistics struct {
 
@@ -15693,6 +21498,87 @@ func (v *SeverityStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SeverityStatistics_TotalFindings:
 			v.TotalFindings = new(int32)
 			return d.ReadInt32(schemas.SeverityStatistics_TotalFindings, v.TotalFindings)
+		}
+		return nil
+	})
+}
+
+// Contains information about a behavior that related findings share.
+type SharedBehavior struct {
+
+	// The JSON path of the finding attribute that matched.
+	Path *string
+
+	// The value that matched.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SharedBehavior) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharedBehavior)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SharedBehavior) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.SharedBehavior_Path, *v.Path)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SharedBehavior_Value, *v.Value)
+	}
+}
+func (v *SharedBehavior) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SharedBehavior, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SharedBehavior_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.SharedBehavior_Path, v.Path)
+		case schemas.SharedBehavior_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SharedBehavior_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Contains information about a resource that related findings share.
+type SharedResource struct {
+
+	// The identifier of the resource.
+	Identifier *string
+
+	// The type of the resource. This value isn't limited to the resource types of
+	// InvestigationResource .
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SharedResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharedResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SharedResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.SharedResource_Identifier, *v.Identifier)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.SharedResource_ResourceType, *v.ResourceType)
+	}
+}
+func (v *SharedResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SharedResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SharedResource_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.SharedResource_Identifier, v.Identifier)
+		case schemas.SharedResource_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.SharedResource_ResourceType, v.ResourceType)
 		}
 		return nil
 	})
@@ -15898,6 +21784,56 @@ func (v *Signal) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about a group of runtime signals that have the same
+// finding type.
+type SignalGroup struct {
+
+	// The number of signals in the group.
+	Count *int64
+
+	// The finding type of the group.
+	FindingType *string
+
+	// The severity score of the signals in the group, from 0 to 10.
+	Severity *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *SignalGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.SignalGroup_Count, *v.Count)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.SignalGroup_FindingType, *v.FindingType)
+	}
+	if v.Severity != nil {
+		s.WriteFloat64(schemas.SignalGroup_Severity, *v.Severity)
+	}
+}
+func (v *SignalGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignalGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignalGroup_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.SignalGroup_Count, v.Count)
+		case schemas.SignalGroup_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.SignalGroup_FindingType, v.FindingType)
+		case schemas.SignalGroup_Severity:
+			v.Severity = new(float64)
+			return d.ReadFloat64(schemas.SignalGroup_Severity, v.Severity)
+		}
+		return nil
+	})
+}
+
 // Contains information about the criteria used for sorting findings.
 type SortCriteria struct {
 
@@ -16000,6 +21936,152 @@ func (v *StartMalwareScanConfiguration) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// Contains the structured details for an investigation record. Only the member
+// that matches the record type is set.
+//
+// The following types satisfy this interface:
+//
+//	SupportingDataMemberAnalysis
+//	SupportingDataMemberFetch
+//	SupportingDataMemberMetadata
+//	SupportingDataMemberObservation
+type SupportingData interface {
+	isSupportingData()
+}
+
+// Details about an assessment that GuardDuty derived from the data. Set for
+// ANALYSIS records.
+type SupportingDataMemberAnalysis struct {
+	Value AnalysisRecord
+
+	noSmithyDocumentSerde
+}
+
+func (*SupportingDataMemberAnalysis) isSupportingData() {}
+func (v *SupportingDataMemberAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportingData_Analysis)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SupportingDataMemberAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Details about data that GuardDuty retrieved. Set for FETCH records.
+type SupportingDataMemberFetch struct {
+	Value FetchRecord
+
+	noSmithyDocumentSerde
+}
+
+func (*SupportingDataMemberFetch) isSupportingData() {}
+func (v *SupportingDataMemberFetch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportingData_Fetch)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SupportingDataMemberFetch) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Operational details about the investigation. Set for METADATA records.
+type SupportingDataMemberMetadata struct {
+	Value MetadataRecord
+
+	noSmithyDocumentSerde
+}
+
+func (*SupportingDataMemberMetadata) isSupportingData() {}
+func (v *SupportingDataMemberMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportingData_Metadata)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SupportingDataMemberMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Details about a fact that GuardDuty noted about your environment. Set for
+// OBSERVATION records.
+type SupportingDataMemberObservation struct {
+	Value ObservationRecord
+
+	noSmithyDocumentSerde
+}
+
+func (*SupportingDataMemberObservation) isSupportingData() {}
+func (v *SupportingDataMemberObservation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportingData_Observation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SupportingDataMemberObservation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains information about the findings associated with a MITRE ATT&CK tactic.
+type TacticCoverage struct {
+
+	// The number of findings associated with the tactic.
+	FindingCount *int32
+
+	// The finding types associated with the tactic.
+	FindingTypes []string
+
+	// The name of the tactic. Possible values are Reconnaissance , Resource
+	// Development , Initial Access , Execution , Persistence , Privilege Escalation ,
+	// Defense Evasion , Credential Access , Discovery , Lateral Movement , Collection
+	// , Command and Control , Exfiltration , and Impact .
+	Phase AttackPhaseName
+
+	// The MITRE ATT&CK techniques within the tactic that are associated with findings.
+	Techniques []TechniqueCoverage
+
+	noSmithyDocumentSerde
+}
+
+func (v *TacticCoverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TacticCoverage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TacticCoverage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingCount != nil {
+		s.WriteInt32(schemas.TacticCoverage_FindingCount, *v.FindingCount)
+	}
+	if v.FindingTypes != nil {
+		serializeFindingTypeNames(s, schemas.TacticCoverage_FindingTypes, v.FindingTypes)
+	}
+	if v.Phase != "" {
+		s.WriteString(schemas.TacticCoverage_Phase, string(v.Phase))
+	}
+	if v.Techniques != nil {
+		serializeTechniqueCoverages(s, schemas.TacticCoverage_Techniques, v.Techniques)
+	}
+}
+func (v *TacticCoverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TacticCoverage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TacticCoverage_FindingCount:
+			v.FindingCount = new(int32)
+			return d.ReadInt32(schemas.TacticCoverage_FindingCount, v.FindingCount)
+		case schemas.TacticCoverage_FindingTypes:
+			return deserializeFindingTypeNames(d, schemas.TacticCoverage_FindingTypes, &v.FindingTypes)
+		case schemas.TacticCoverage_Phase:
+			var ev string
+			if err := d.ReadString(schemas.TacticCoverage_Phase, &ev); err != nil {
+				return err
+			}
+			v.Phase = AttackPhaseName(ev)
+			return nil
+		case schemas.TacticCoverage_Techniques:
+			return deserializeTechniqueCoverages(d, schemas.TacticCoverage_Techniques, &v.Techniques)
+		}
+		return nil
+	})
+}
+
 // Contains information about a tag key-value pair.
 type Tag struct {
 
@@ -16035,6 +22117,57 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Tag_Value:
 			v.Value = new(string)
 			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Contains information about the findings associated with a MITRE ATT&CK
+// technique.
+type TechniqueCoverage struct {
+
+	// The number of findings associated with the technique.
+	FindingCount *int32
+
+	// The finding types associated with the technique.
+	FindingTypes []string
+
+	// The technique.
+	Technique *ThreatReference
+
+	noSmithyDocumentSerde
+}
+
+func (v *TechniqueCoverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TechniqueCoverage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TechniqueCoverage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingCount != nil {
+		s.WriteInt32(schemas.TechniqueCoverage_FindingCount, *v.FindingCount)
+	}
+	if v.FindingTypes != nil {
+		serializeFindingTypeNames(s, schemas.TechniqueCoverage_FindingTypes, v.FindingTypes)
+	}
+	if v.Technique != nil {
+		s.WriteStruct(schemas.TechniqueCoverage_Technique)
+		v.Technique.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TechniqueCoverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TechniqueCoverage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TechniqueCoverage_FindingCount:
+			v.FindingCount = new(int32)
+			return d.ReadInt32(schemas.TechniqueCoverage_FindingCount, v.FindingCount)
+		case schemas.TechniqueCoverage_FindingTypes:
+			return deserializeFindingTypeNames(d, schemas.TechniqueCoverage_FindingTypes, &v.FindingTypes)
+		case schemas.TechniqueCoverage_Technique:
+			v.Technique = &ThreatReference{}
+			return v.Technique.Deserialize(d)
 		}
 		return nil
 	})
@@ -16109,6 +22242,45 @@ func (v *Threat) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Threat_Source:
 			v.Source = new(string)
 			return d.ReadString(schemas.Threat_Source, v.Source)
+		}
+		return nil
+	})
+}
+
+// Contains an assessment of the threat that a FINDING investigation identified.
+type ThreatAssessment struct {
+
+	// The phases of the attack, in terms of MITRE ATT&CK tactics.
+	AttackProgression []AttackPhase
+
+	// A description of the likely threat actor.
+	ThreatActorProfile *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ThreatAssessment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThreatAssessment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThreatAssessment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttackProgression != nil {
+		serializeAttackPhases(s, schemas.ThreatAssessment_AttackProgression, v.AttackProgression)
+	}
+	if v.ThreatActorProfile != nil {
+		s.WriteString(schemas.ThreatAssessment_ThreatActorProfile, *v.ThreatActorProfile)
+	}
+}
+func (v *ThreatAssessment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThreatAssessment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThreatAssessment_AttackProgression:
+			return deserializeAttackPhases(d, schemas.ThreatAssessment_AttackProgression, &v.AttackProgression)
+		case schemas.ThreatAssessment_ThreatActorProfile:
+			v.ThreatActorProfile = new(string)
+			return d.ReadString(schemas.ThreatAssessment_ThreatActorProfile, v.ThreatActorProfile)
 		}
 		return nil
 	})
@@ -16222,6 +22394,47 @@ func (v *ThreatIntelligenceDetail) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// Contains a reference to a MITRE ATT&CK tactic or technique.
+type ThreatReference struct {
+
+	// The name of the tactic or technique.
+	Name *string
+
+	// The MITRE ATT&CK identifier of the tactic or technique, such as TA0002 or
+	// T1059.004 .
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ThreatReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThreatReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThreatReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ThreatReference_Name, *v.Name)
+	}
+	if v.Uid != nil {
+		s.WriteString(schemas.ThreatReference_Uid, *v.Uid)
+	}
+}
+func (v *ThreatReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThreatReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThreatReference_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ThreatReference_Name, v.Name)
+		case schemas.ThreatReference_Uid:
+			v.Uid = new(string)
+			return d.ReadString(schemas.ThreatReference_Uid, v.Uid)
+		}
+		return nil
+	})
+}
+
 // Contains total number of infected files.
 type ThreatsDetectedItemCount struct {
 
@@ -16248,6 +22461,55 @@ func (v *ThreatsDetectedItemCount) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.ThreatsDetectedItemCount_Files:
 			v.Files = new(int32)
 			return d.ReadInt32(schemas.ThreatsDetectedItemCount_Files, v.Files)
+		}
+		return nil
+	})
+}
+
+// Contains the number of findings in a time window.
+type TimeWindowGroup struct {
+
+	// The timestamp at which the time window ends.
+	EndTime *time.Time
+
+	// The number of findings in the time window.
+	FindingCount *int32
+
+	// The timestamp at which the time window starts.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *TimeWindowGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeWindowGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeWindowGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TimeWindowGroup_EndTime, *v.EndTime)
+	}
+	if v.FindingCount != nil {
+		s.WriteInt32(schemas.TimeWindowGroup_FindingCount, *v.FindingCount)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TimeWindowGroup_StartTime, *v.StartTime)
+	}
+}
+func (v *TimeWindowGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeWindowGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeWindowGroup_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TimeWindowGroup_EndTime, v.EndTime)
+		case schemas.TimeWindowGroup_FindingCount:
+			v.FindingCount = new(int32)
+			return d.ReadInt32(schemas.TimeWindowGroup_FindingCount, v.FindingCount)
+		case schemas.TimeWindowGroup_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TimeWindowGroup_StartTime, v.StartTime)
 		}
 		return nil
 	})
@@ -16288,6 +22550,77 @@ func (v *Total) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Total_Unit:
 			v.Unit = new(string)
 			return d.ReadString(schemas.Total_Unit, v.Unit)
+		}
+		return nil
+	})
+}
+
+// Contains information about the number of findings over time.
+type Trend struct {
+
+	// The number of findings in each time window.
+	ByTimeWindow []TimeWindowGroup
+
+	// The timestamp at which the period of the trend ends.
+	EndedAt *time.Time
+
+	// The length of each time window in the trend. Possible values are DAY , WEEK ,
+	// and MONTH .
+	Granularity TimeGranularity
+
+	// The timestamp at which the period of the trend starts.
+	StartedAt *time.Time
+
+	// The total number of findings in the period.
+	TotalFindings *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *Trend) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trend)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Trend) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByTimeWindow != nil {
+		serializeTimeWindowGroups(s, schemas.Trend_ByTimeWindow, v.ByTimeWindow)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.Trend_EndedAt, *v.EndedAt)
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.Trend_Granularity, string(v.Granularity))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.Trend_StartedAt, *v.StartedAt)
+	}
+	if v.TotalFindings != nil {
+		s.WriteInt64(schemas.Trend_TotalFindings, *v.TotalFindings)
+	}
+}
+func (v *Trend) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Trend, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Trend_ByTimeWindow:
+			return deserializeTimeWindowGroups(d, schemas.Trend_ByTimeWindow, &v.ByTimeWindow)
+		case schemas.Trend_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.Trend_EndedAt, v.EndedAt)
+		case schemas.Trend_Granularity:
+			var ev string
+			if err := d.ReadString(schemas.Trend_Granularity, &ev); err != nil {
+				return err
+			}
+			v.Granularity = TimeGranularity(ev)
+			return nil
+		case schemas.Trend_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.Trend_StartedAt, v.StartedAt)
+		case schemas.Trend_TotalFindings:
+			v.TotalFindings = new(int64)
+			return d.ReadInt64(schemas.Trend_TotalFindings, v.TotalFindings)
 		}
 		return nil
 	})
@@ -16341,6 +22674,64 @@ func (v *TriggerDetails) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.TriggerType = TriggerType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Contains the number and percentage of findings of a finding type.
+type TypeDistribution struct {
+
+	// The number of findings of this type.
+	Count *int64
+
+	// The most common severity among findings of this type.
+	DominantSeverity *string
+
+	// The finding type.
+	FindingType *string
+
+	// The percentage of findings that are of this type, from 0 to 100.
+	Percentage *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *TypeDistribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypeDistribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypeDistribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.TypeDistribution_Count, *v.Count)
+	}
+	if v.DominantSeverity != nil {
+		s.WriteString(schemas.TypeDistribution_DominantSeverity, *v.DominantSeverity)
+	}
+	if v.FindingType != nil {
+		s.WriteString(schemas.TypeDistribution_FindingType, *v.FindingType)
+	}
+	if v.Percentage != nil {
+		s.WriteFloat64(schemas.TypeDistribution_Percentage, *v.Percentage)
+	}
+}
+func (v *TypeDistribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypeDistribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypeDistribution_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.TypeDistribution_Count, v.Count)
+		case schemas.TypeDistribution_DominantSeverity:
+			v.DominantSeverity = new(string)
+			return d.ReadString(schemas.TypeDistribution_DominantSeverity, v.DominantSeverity)
+		case schemas.TypeDistribution_FindingType:
+			v.FindingType = new(string)
+			return d.ReadString(schemas.TypeDistribution_FindingType, v.FindingType)
+		case schemas.TypeDistribution_Percentage:
+			v.Percentage = new(float64)
+			return d.ReadFloat64(schemas.TypeDistribution_Percentage, v.Percentage)
 		}
 		return nil
 	})
@@ -17180,3 +23571,14 @@ func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isSupportingData() {}

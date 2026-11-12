@@ -2453,6 +2453,29 @@ func validateAddOutputRequest(v *types.AddOutputRequest) error {
 			invalidParams.AddNested("RouterIntegrationTransitEncryption", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RtmpPushSettings != nil {
+		if err := validateRtmpPushOutputSettings(v.RtmpPushSettings); err != nil {
+			invalidParams.AddNested("RtmpPushSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoPidMapConfiguration(v *types.AutoPidMapConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoPidMapConfiguration"}
+	if v.StartPid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartPid"))
+	}
+	if v.PidsPerProgram == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PidsPerProgram"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2694,6 +2717,11 @@ func validateFailoverRouterInputProtocolConfiguration(v types.FailoverRouterInpu
 			invalidParams.AddNested("[Rist]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.FailoverRouterInputProtocolConfigurationMemberRtmpPush:
+		if err := validateRtmpPushRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[RtmpPush]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.FailoverRouterInputProtocolConfigurationMemberRtp:
 		if err := validateRtpRouterInputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
@@ -2876,6 +2904,24 @@ func validateMaintenanceConfiguration(v types.MaintenanceConfiguration) error {
 			invalidParams.AddNested("[PreferredDayTime]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManualRtmpPushNamingConfiguration(v *types.ManualRtmpPushNamingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManualRtmpPushNamingConfiguration"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3090,6 +3136,16 @@ func validateMergeRouterInputProtocolConfiguration(v types.MergeRouterInputProto
 			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.MergeRouterInputProtocolConfigurationMemberSrtCaller:
+		if err := validateSrtCallerRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtCaller]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MergeRouterInputProtocolConfigurationMemberSrtListener:
+		if err := validateSrtListenerRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtListener]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3157,6 +3213,41 @@ func validateNetworkInterfaceRuleList(v []types.PublicRouterNetworkInterfaceRule
 	invalidParams := smithy.InvalidParamsError{Context: "NetworkInterfaceRuleList"}
 	for i := range v {
 		if err := validatePublicRouterNetworkInterfaceRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePidMapRule(v *types.PidMapRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PidMapRule"}
+	if v.MatchExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchExpression"))
+	}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePidMapRules(v []types.PidMapRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PidMapRules"}
+	for i := range v {
+		if err := validatePidMapRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3482,6 +3573,11 @@ func validateRouterInputProtocolConfiguration(v types.RouterInputProtocolConfigu
 			invalidParams.AddNested("[Rist]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RouterInputProtocolConfigurationMemberRtmpPush:
+		if err := validateRtmpPushRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[RtmpPush]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RouterInputProtocolConfigurationMemberRtp:
 		if err := validateRtpRouterInputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
@@ -3601,6 +3697,23 @@ func validateRouterOutputConfiguration(v types.RouterOutputConfiguration) error 
 	}
 }
 
+func validateRouterOutputProcessors(v *types.RouterOutputProcessors) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterOutputProcessors"}
+	if v.SingleProgramTransportStreamPidMap != nil {
+		if err := validateSingleProgramTransportStreamPidMapConfiguration(v.SingleProgramTransportStreamPidMap); err != nil {
+			invalidParams.AddNested("SingleProgramTransportStreamPidMap", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRouterOutputProtocolConfiguration(v types.RouterOutputProtocolConfiguration) error {
 	if v == nil {
 		return nil
@@ -3647,6 +3760,70 @@ func validateRouterOutputSourceEndpointConfiguration(v *types.RouterOutputSource
 	invalidParams := smithy.InvalidParamsError{Context: "RouterOutputSourceEndpointConfiguration"}
 	if v.RouterOutputArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RouterOutputArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRtmpPushNamingConfiguration(v types.RtmpPushNamingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RtmpPushNamingConfiguration"}
+	switch uv := v.(type) {
+	case *types.RtmpPushNamingConfigurationMemberManual:
+		if err := validateManualRtmpPushNamingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Manual]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRtmpPushOutputSettings(v *types.RtmpPushOutputSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RtmpPushOutputSettings"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	}
+	if v.TlsEncryption != nil {
+		if err := validateTlsEncryption(v.TlsEncryption); err != nil {
+			invalidParams.AddNested("TlsEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRtmpPushRouterInputConfiguration(v *types.RtmpPushRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RtmpPushRouterInputConfiguration"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.NamingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamingConfiguration"))
+	} else if v.NamingConfiguration != nil {
+		if err := validateRtmpPushNamingConfiguration(v.NamingConfiguration); err != nil {
+			invalidParams.AddNested("NamingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3808,6 +3985,25 @@ func validateSetGatewayBridgeSourceRequest(v *types.SetGatewayBridgeSourceReques
 	}
 }
 
+func validateSetRtmpPushSourceSettings(v *types.SetRtmpPushSourceSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetRtmpPushSourceSettings"}
+	if v.NamingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamingConfiguration"))
+	} else if v.NamingConfiguration != nil {
+		if err := validateRtmpPushNamingConfiguration(v.NamingConfiguration); err != nil {
+			invalidParams.AddNested("NamingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSetSourceRequest(v *types.SetSourceRequest) error {
 	if v == nil {
 		return nil
@@ -3833,6 +4029,11 @@ func validateSetSourceRequest(v *types.SetSourceRequest) error {
 			invalidParams.AddNested("RouterIntegrationTransitDecryption", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RtmpPushSettings != nil {
+		if err := validateSetRtmpPushSourceSettings(v.RtmpPushSettings); err != nil {
+			invalidParams.AddNested("RtmpPushSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3850,6 +4051,33 @@ func validateSilentAudioConfiguration(v *types.SilentAudioConfiguration) error {
 	}
 	if v.ThresholdSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThresholdSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSingleProgramTransportStreamPidMapConfiguration(v *types.SingleProgramTransportStreamPidMapConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SingleProgramTransportStreamPidMapConfiguration"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validatePidMapRules(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultAction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultAction"))
+	}
+	if v.Auto != nil {
+		if err := validateAutoPidMapConfiguration(v.Auto); err != nil {
+			invalidParams.AddNested("Auto", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4896,6 +5124,11 @@ func validateOpCreateRouterOutputInput(v *CreateRouterOutputInput) error {
 			invalidParams.AddNested("FabricConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Processors != nil {
+		if err := validateRouterOutputProcessors(v.Processors); err != nil {
+			invalidParams.AddNested("Processors", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5891,6 +6124,11 @@ func validateOpUpdateFlowOutputInput(v *UpdateFlowOutputInput) error {
 			invalidParams.AddNested("RouterIntegrationTransitEncryption", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RtmpPushSettings != nil {
+		if err := validateRtmpPushOutputSettings(v.RtmpPushSettings); err != nil {
+			invalidParams.AddNested("RtmpPushSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5917,6 +6155,11 @@ func validateOpUpdateFlowSourceInput(v *UpdateFlowSourceInput) error {
 	if v.RouterIntegrationTransitDecryption != nil {
 		if err := validateFlowTransitEncryption(v.RouterIntegrationTransitDecryption); err != nil {
 			invalidParams.AddNested("RouterIntegrationTransitDecryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RtmpPushSettings != nil {
+		if err := validateSetRtmpPushSourceSettings(v.RtmpPushSettings); err != nil {
+			invalidParams.AddNested("RtmpPushSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6017,6 +6260,11 @@ func validateOpUpdateRouterOutputInput(v *UpdateRouterOutputInput) error {
 	if v.FabricConfiguration != nil {
 		if err := validateFabricConfiguration(v.FabricConfiguration); err != nil {
 			invalidParams.AddNested("FabricConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Processors != nil {
+		if err := validateRouterOutputProcessors(v.Processors); err != nil {
+			invalidParams.AddNested("Processors", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -7687,6 +7687,14 @@ var MediaPackageV2AbWatermarkerIrdetoSettings_Profile *smithy.Schema
 
 var MediaPackageV2AbWatermarkerIrdetoSettings_WatermarkIdLength *smithy.Schema
 
+var MediaPackageV2CaptionLanguageSetting = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "MediaPackageV2CaptionLanguageSetting",
+}, smithy.ShapeTypeEnum, 2)
+var MediaPackageV2CaptionLanguageSetting_AUTO *smithy.Schema
+
+var MediaPackageV2CaptionLanguageSetting_NONE *smithy.Schema
+
 var MediaPackageV2DestinationSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "MediaPackageV2DestinationSettings",
@@ -7704,7 +7712,7 @@ var MediaPackageV2DestinationSettings_OutputUsage *smithy.Schema
 var MediaPackageV2GroupSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "MediaPackageV2GroupSettings",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var MediaPackageV2GroupSettings_CaptionLanguageMappings *smithy.Schema
 
 var MediaPackageV2GroupSettings_Id3Behavior *smithy.Schema
@@ -7728,6 +7736,8 @@ var MediaPackageV2GroupSettings_TimedMetadataPassthrough *smithy.Schema
 var MediaPackageV2GroupSettings_AdditionalDestinations *smithy.Schema
 
 var MediaPackageV2GroupSettings_WatermarkingSettings *smithy.Schema
+
+var MediaPackageV2GroupSettings_CaptionLanguageSetting *smithy.Schema
 
 var MediaPackageV2WatermarkingSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -17191,6 +17201,10 @@ func init() {
 
 	MediaPackageV2WatermarkingSettings_MediaPackageV2AbWatermarkerIrdetoSettings = MediaPackageV2WatermarkingSettings.AddMember("MediaPackageV2AbWatermarkerIrdetoSettings", MediaPackageV2AbWatermarkerIrdetoSettings, &smithytraits.JSONName{Name: "mediaPackageV2AbWatermarkerIrdetoSettings"})
 
+	MediaPackageV2CaptionLanguageSetting_AUTO = MediaPackageV2CaptionLanguageSetting.AddMember("AUTO", smithyprelude.Unit)
+
+	MediaPackageV2CaptionLanguageSetting_NONE = MediaPackageV2CaptionLanguageSetting.AddMember("NONE", smithyprelude.Unit)
+
 	MediaPackageV2GroupSettings_CaptionLanguageMappings = MediaPackageV2GroupSettings.AddMember("CaptionLanguageMappings", ___listOfCaptionLanguageMapping, &smithytraits.JSONName{Name: "captionLanguageMappings"})
 
 	MediaPackageV2GroupSettings_Id3Behavior = MediaPackageV2GroupSettings.AddMember("Id3Behavior", CmafId3Behavior, &smithytraits.JSONName{Name: "id3Behavior"})
@@ -17214,6 +17228,8 @@ func init() {
 	MediaPackageV2GroupSettings_AdditionalDestinations = MediaPackageV2GroupSettings.AddMember("AdditionalDestinations", ___listOfMediaPackageAdditionalDestinations, &smithytraits.JSONName{Name: "additionalDestinations"})
 
 	MediaPackageV2GroupSettings_WatermarkingSettings = MediaPackageV2GroupSettings.AddMember("WatermarkingSettings", MediaPackageV2WatermarkingSettings, &smithytraits.JSONName{Name: "watermarkingSettings"})
+
+	MediaPackageV2GroupSettings_CaptionLanguageSetting = MediaPackageV2GroupSettings.AddMember("CaptionLanguageSetting", MediaPackageV2CaptionLanguageSetting, &smithytraits.JSONName{Name: "captionLanguageSetting"})
 
 	MediaPackageGroupSettings_Destination = MediaPackageGroupSettings.AddMember("Destination", OutputLocationRef, &smithytraits.JSONName{Name: "destination"})
 

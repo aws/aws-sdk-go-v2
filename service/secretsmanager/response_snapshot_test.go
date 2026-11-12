@@ -107,6 +107,34 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AssociateCrossAccountReplica(t *testing.T) {
+	want := &AssociateCrossAccountReplicaOutput{
+		ARN:                    ptr.String("__ARN__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicationStatus:      types.StatusType("InSync"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateCrossAccountReplica.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateCrossAccountReplica(context.Background(), &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateCrossAccountReplica.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchGetSecretValue(t *testing.T) {
 	want := &BatchGetSecretValueOutput{
 		SecretValues: []types.SecretValueEntry{
@@ -273,6 +301,7 @@ func TestCheckResponseSnapshot_CreateSecret(t *testing.T) {
 		},
 		ForceOverwriteReplicaSecret: true,
 		Type:                        ptr.String("__Type__"),
+		CrossAccountPrimaryARN:      ptr.String("__CrossAccountPrimaryARN__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -284,8 +313,9 @@ func TestCheckResponseSnapshot_CreateSecret(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	want := &DeleteResourcePolicyOutput{
-		ARN:  ptr.String("__ARN__"),
-		Name: ptr.String("__Name__"),
+		ARN:        ptr.String("__ARN__"),
+		Name:       ptr.String("__Name__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteResourcePolicy.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -296,7 +326,8 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
-		SecretId: ptr.String("__SecretId__"),
+		SecretId:   ptr.String("__SecretId__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -398,6 +429,25 @@ func TestCheckResponseSnapshot_DescribeSecret(t *testing.T) {
 				LastAccessedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
+		CrossAccountPrimary: &types.CrossAccountPrimaryType{
+			PrimarySecretARN:  ptr.String("__PrimarySecretARN__"),
+			ReplicationStatus: types.StatusType("InSync"),
+			StatusMessage:     ptr.String("__StatusMessage__"),
+		},
+		CrossAccountReplicas: []types.CrossAccountReplicaEntry{
+			{
+				ReplicaSecretARN:   ptr.String("__ReplicaSecretARN__"),
+				ReplicationRoleARN: ptr.String("__ReplicationRoleARN__"),
+				ReplicationStatus:  types.StatusType("InSync"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+			},
+			{
+				ReplicaSecretARN:   ptr.String("__ReplicaSecretARN__"),
+				ReplicationRoleARN: ptr.String("__ReplicationRoleARN__"),
+				ReplicationStatus:  types.StatusType("InSync"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeSecret.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -415,6 +465,31 @@ func TestCheckResponseSnapshot_DescribeSecret(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSecret.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisassociateCrossAccountReplica(t *testing.T) {
+	want := &DisassociateCrossAccountReplicaOutput{
+		ARN:                    ptr.String("__ARN__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateCrossAccountReplica.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateCrossAccountReplica(context.Background(), &DisassociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateCrossAccountReplica.response", err)
 	}
 }
 
@@ -453,6 +528,7 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		ARN:            ptr.String("__ARN__"),
 		Name:           ptr.String("__Name__"),
 		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+		PolicyName:     ptr.String("__PolicyName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetResourcePolicy.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -463,7 +539,8 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
-		SecretId: ptr.String("__SecretId__"),
+		SecretId:   ptr.String("__SecretId__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -504,6 +581,39 @@ func TestCheckResponseSnapshot_GetSecretValue(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSecretValue.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListResourcePolicies(t *testing.T) {
+	want := &ListResourcePoliciesOutput{
+		ResourcePolicies: []types.ResourcePolicySummary{
+			{
+				PolicyName: ptr.String("__PolicyName__"),
+			},
+			{
+				PolicyName: ptr.String("__PolicyName__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListResourcePolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListResourcePolicies(context.Background(), &ListResourcePoliciesInput{
+		SecretId:   ptr.String("__SecretId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListResourcePolicies.response", err)
 	}
 }
 
@@ -708,8 +818,9 @@ func TestCheckResponseSnapshot_ListSecrets(t *testing.T) {
 
 func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	want := &PutResourcePolicyOutput{
-		ARN:  ptr.String("__ARN__"),
-		Name: ptr.String("__Name__"),
+		ARN:        ptr.String("__ARN__"),
+		Name:       ptr.String("__Name__"),
+		PolicyName: ptr.String("__PolicyName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutResourcePolicy.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -722,6 +833,7 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
 		SecretId:          ptr.String("__SecretId__"),
 		ResourcePolicy:    ptr.String("__ResourcePolicy__"),
+		PolicyName:        ptr.String("__PolicyName__"),
 		BlockPublicPolicy: ptr.Bool(true),
 	})
 	if err != nil {
@@ -1190,6 +1302,7 @@ func TestCheckResponseSnapshot_Error_EncryptionFailure(t *testing.T) {
 		},
 		ForceOverwriteReplicaSecret: true,
 		Type:                        ptr.String("__Type__"),
+		CrossAccountPrimaryARN:      ptr.String("__CrossAccountPrimaryARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1215,29 +1328,11 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
-		SecretIdList: []string{
-			"__Member__",
-			"__Member__",
-		},
-		Filters: []types.Filter{
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+	_, opErr := svc.AssociateCrossAccountReplica(context.Background(), &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1311,29 +1406,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
-		SecretIdList: []string{
-			"__Member__",
-			"__Member__",
-		},
-		Filters: []types.Filter{
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+	_, opErr := svc.AssociateCrossAccountReplica(context.Background(), &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1359,29 +1436,11 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
-		SecretIdList: []string{
-			"__Member__",
-			"__Member__",
-		},
-		Filters: []types.Filter{
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+	_, opErr := svc.AssociateCrossAccountReplica(context.Background(), &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1407,35 +1466,11 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{
-		Name:               ptr.String("__Name__"),
-		ClientRequestToken: ptr.String("__ClientRequestToken__"),
-		Description:        ptr.String("__Description__"),
-		KmsKeyId:           ptr.String("__KmsKeyId__"),
-		SecretBinary:       []byte("blob"),
-		SecretString:       ptr.String("__SecretString__"),
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-		AddReplicaRegions: []types.ReplicaRegionType{
-			{
-				Region:   ptr.String("__Region__"),
-				KmsKeyId: ptr.String("__KmsKeyId__"),
-			},
-			{
-				Region:   ptr.String("__Region__"),
-				KmsKeyId: ptr.String("__KmsKeyId__"),
-			},
-		},
-		ForceOverwriteReplicaSecret: true,
-		Type:                        ptr.String("__Type__"),
+	_, opErr := svc.AssociateCrossAccountReplica(context.Background(), &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1490,6 +1525,7 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		},
 		ForceOverwriteReplicaSecret: true,
 		Type:                        ptr.String("__Type__"),
+		CrossAccountPrimaryARN:      ptr.String("__CrossAccountPrimaryARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1544,6 +1580,7 @@ func TestCheckResponseSnapshot_Error_PreconditionNotMetException(t *testing.T) {
 		},
 		ForceOverwriteReplicaSecret: true,
 		Type:                        ptr.String("__Type__"),
+		CrossAccountPrimaryARN:      ptr.String("__CrossAccountPrimaryARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1572,6 +1609,7 @@ func TestCheckResponseSnapshot_Error_PublicPolicyException(t *testing.T) {
 	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
 		SecretId:          ptr.String("__SecretId__"),
 		ResourcePolicy:    ptr.String("__ResourcePolicy__"),
+		PolicyName:        ptr.String("__PolicyName__"),
 		BlockPublicPolicy: ptr.Bool(true),
 	})
 	if opErr == nil {
@@ -1627,6 +1665,7 @@ func TestCheckResponseSnapshot_Error_ResourceExistsException(t *testing.T) {
 		},
 		ForceOverwriteReplicaSecret: true,
 		Type:                        ptr.String("__Type__"),
+		CrossAccountPrimaryARN:      ptr.String("__CrossAccountPrimaryARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1652,29 +1691,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
-		SecretIdList: []string{
-			"__Member__",
-			"__Member__",
-		},
-		Filters: []types.Filter{
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				Key: types.FilterNameStringType("description"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+	_, opErr := svc.AssociateCrossAccountReplica(context.Background(), &AssociateCrossAccountReplicaInput{
+		SecretId:               ptr.String("__SecretId__"),
+		CrossAccountReplicaARN: ptr.String("__CrossAccountReplicaARN__"),
+		ReplicaRestriction:     types.ReplicaRestrictionType("SameOrg"),
+		ReplicationRoleARN:     ptr.String("__ReplicationRoleARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

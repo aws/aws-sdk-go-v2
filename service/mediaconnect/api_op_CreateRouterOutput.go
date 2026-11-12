@@ -85,6 +85,9 @@ type CreateRouterOutputInput struct {
 	// preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration
 
+	// The processor settings for the router output.
+	Processors *types.RouterOutputProcessors
+
 	// The Amazon Web Services Region for the router output. Defaults to the current
 	// region if not specified.
 	RegionName *string
@@ -124,6 +127,11 @@ func (v *CreateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRouterOutputRequest_Name, *v.Name)
+	}
+	if v.Processors != nil {
+		s.WriteStruct(schemas.CreateRouterOutputRequest_Processors)
+		v.Processors.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.RegionName != nil {
 		s.WriteString(schemas.CreateRouterOutputRequest_RegionName, *v.RegionName)

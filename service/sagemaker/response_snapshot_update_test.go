@@ -9474,6 +9474,26 @@ func TestUpdateResponseSnapshot_DescribeHub(t *testing.T) {
 		FailureReason:    ptr.String("__FailureReason__"),
 		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
+		LastModifiedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
 	}
 	proto := awsjson.New11(schemas.SageMaker)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeHub, schemas.DescribeHubResponse, schemas.DescribeHubResponse)
@@ -9529,6 +9549,26 @@ func TestUpdateResponseSnapshot_DescribeHubContent(t *testing.T) {
 		FailureReason:    ptr.String("__FailureReason__"),
 		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
+		LastModifiedBy: &types.UserContext{
+			UserProfileArn:  ptr.String("__UserProfileArn__"),
+			UserProfileName: ptr.String("__UserProfileName__"),
+			DomainId:        ptr.String("__DomainId__"),
+			IamIdentity: &types.IamIdentity{
+				Arn:            ptr.String("__Arn__"),
+				PrincipalId:    ptr.String("__PrincipalId__"),
+				SourceIdentity: ptr.String("__SourceIdentity__"),
+			},
+		},
 	}
 	proto := awsjson.New11(schemas.SageMaker)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeHubContent, schemas.DescribeHubContentResponse, schemas.DescribeHubContentResponse)
@@ -27177,6 +27217,26 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 					FailureReason:    ptr.String("__FailureReason__"),
 					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
+					LastModifiedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
 					Tags: []types.Tag{
 						{
 							Key:   ptr.String("__Key__"),
@@ -32435,6 +32495,26 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 					FailureReason:    ptr.String("__FailureReason__"),
 					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CreatedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
+					LastModifiedBy: &types.UserContext{
+						UserProfileArn:  ptr.String("__UserProfileArn__"),
+						UserProfileName: ptr.String("__UserProfileName__"),
+						DomainId:        ptr.String("__DomainId__"),
+						IamIdentity: &types.IamIdentity{
+							Arn:            ptr.String("__Arn__"),
+							PrincipalId:    ptr.String("__PrincipalId__"),
+							SourceIdentity: ptr.String("__SourceIdentity__"),
+						},
+					},
 					Tags: []types.Tag{
 						{
 							Key:   ptr.String("__Key__"),

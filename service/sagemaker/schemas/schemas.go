@@ -10893,7 +10893,7 @@ var _HubArn = smithy.NewSchema(smithy.ShapeID{
 var HubContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "HubContent",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 23)
 var HubContent_HubContentName *smithy.Schema
 
 var HubContent_HubContentArn *smithy.Schema
@@ -10933,6 +10933,10 @@ var HubContent_FailureReason *smithy.Schema
 var HubContent_CreationTime *smithy.Schema
 
 var HubContent_LastModifiedTime *smithy.Schema
+
+var HubContent_CreatedBy *smithy.Schema
+
+var HubContent_LastModifiedBy *smithy.Schema
 
 var HubContent_Tags *smithy.Schema
 
@@ -29358,7 +29362,7 @@ var DescribeHubContentRequest_HubContentVersion *smithy.Schema
 var DescribeHubContentResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeHubContentResponse",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 22)
 var DescribeHubContentResponse_HubContentName *smithy.Schema
 
 var DescribeHubContentResponse_HubContentArn *smithy.Schema
@@ -29399,6 +29403,10 @@ var DescribeHubContentResponse_CreationTime *smithy.Schema
 
 var DescribeHubContentResponse_LastModifiedTime *smithy.Schema
 
+var DescribeHubContentResponse_CreatedBy *smithy.Schema
+
+var DescribeHubContentResponse_LastModifiedBy *smithy.Schema
+
 var DescribeHubRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeHubRequest",
@@ -29408,7 +29416,7 @@ var DescribeHubRequest_HubName *smithy.Schema
 var DescribeHubResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeHubResponse",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var DescribeHubResponse_HubName *smithy.Schema
 
 var DescribeHubResponse_HubArn *smithy.Schema
@@ -29428,6 +29436,10 @@ var DescribeHubResponse_FailureReason *smithy.Schema
 var DescribeHubResponse_CreationTime *smithy.Schema
 
 var DescribeHubResponse_LastModifiedTime *smithy.Schema
+
+var DescribeHubResponse_CreatedBy *smithy.Schema
+
+var DescribeHubResponse_LastModifiedBy *smithy.Schema
 
 var DescribeHumanTaskUiRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -43267,6 +43279,10 @@ func init() {
 
 	HubContent_LastModifiedTime = HubContent.AddMember("LastModifiedTime", _Timestamp)
 
+	HubContent_CreatedBy = HubContent.AddMember("CreatedBy", UserContext)
+
+	HubContent_LastModifiedBy = HubContent.AddMember("LastModifiedBy", UserContext)
+
 	HubContent_Tags = HubContent.AddMember("Tags", _TagList)
 
 	HubContentInfo_HubContentName = HubContentInfo.AddMember("HubContentName", _HubContentName)
@@ -51111,6 +51127,10 @@ func init() {
 
 	DescribeHubContentResponse_LastModifiedTime = DescribeHubContentResponse.AddMember("LastModifiedTime", _Timestamp)
 
+	DescribeHubContentResponse_CreatedBy = DescribeHubContentResponse.AddMember("CreatedBy", UserContext)
+
+	DescribeHubContentResponse_LastModifiedBy = DescribeHubContentResponse.AddMember("LastModifiedBy", UserContext)
+
 	DescribeHubRequest_HubName = DescribeHubRequest.AddMember("HubName", _HubNameOrArn)
 
 	DescribeHubResponse_HubName = DescribeHubResponse.AddMember("HubName", _HubName)
@@ -51132,6 +51152,10 @@ func init() {
 	DescribeHubResponse_CreationTime = DescribeHubResponse.AddMember("CreationTime", _Timestamp)
 
 	DescribeHubResponse_LastModifiedTime = DescribeHubResponse.AddMember("LastModifiedTime", _Timestamp)
+
+	DescribeHubResponse_CreatedBy = DescribeHubResponse.AddMember("CreatedBy", UserContext)
+
+	DescribeHubResponse_LastModifiedBy = DescribeHubResponse.AddMember("LastModifiedBy", UserContext)
 
 	DescribeHumanTaskUiRequest_HumanTaskUiName = DescribeHumanTaskUiRequest.AddMember("HumanTaskUiName", _HumanTaskUiName)
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: secretsmanager.AssociateCrossAccountReplica
+
+{"ARN":"__ARN__","CrossAccountReplicaARN":"__CrossAccountReplicaARN__","ReplicationStatus":"InSync"}

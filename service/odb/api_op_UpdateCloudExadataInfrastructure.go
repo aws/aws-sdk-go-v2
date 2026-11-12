@@ -33,9 +33,20 @@ type UpdateCloudExadataInfrastructureInput struct {
 	// This member is required.
 	CloudExadataInfrastructureId *string
 
-	// The scheduling details for the maintenance window. Patching and system updates
-	// take place during the maintenance window.
+	// The number of database servers for the Exadata infrastructure.
+	ComputeCount *int32
+
+	// A new user-friendly name for the Exadata infrastructure.
+	DisplayName *string
+
+	// The maintenance window configuration for the Exadata Cloud infrastructure.
+	//
+	// This allows you to define when maintenance operations such as patching and
+	// updates can be performed on the infrastructure.
 	MaintenanceWindow *types.MaintenanceWindow
+
+	// The number of storage servers to activate for the Exadata infrastructure.
+	StorageCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -50,10 +61,19 @@ func (v *UpdateCloudExadataInfrastructureInput) SerializeMembers(s smithy.ShapeS
 	if v.CloudExadataInfrastructureId != nil {
 		s.WriteString(schemas.UpdateCloudExadataInfrastructureInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
 	}
+	if v.ComputeCount != nil {
+		s.WriteInt32(schemas.UpdateCloudExadataInfrastructureInput_computeCount, *v.ComputeCount)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateCloudExadataInfrastructureInput_displayName, *v.DisplayName)
+	}
 	if v.MaintenanceWindow != nil {
 		s.WriteStruct(schemas.UpdateCloudExadataInfrastructureInput_maintenanceWindow)
 		v.MaintenanceWindow.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.StorageCount != nil {
+		s.WriteInt32(schemas.UpdateCloudExadataInfrastructureInput_storageCount, *v.StorageCount)
 	}
 }
 

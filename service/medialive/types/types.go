@@ -16617,6 +16617,17 @@ type MediaPackageV2GroupSettings struct {
 	// Mapping of up to 4 caption channels to caption languages.
 	CaptionLanguageMappings []CaptionLanguageMapping
 
+	// Applies only to 608 Embedded output captions. Controls the CLOSED-CAPTIONS
+	// signaling that MediaPackage v2 writes into the HLS manifest it delivers. auto:
+	// The default. If captionLanguageMappings is non-empty, the HLS manifest includes
+	// a CLOSED-CAPTIONS line for each mapped caption channel. If
+	// captionLanguageMappings is empty, the HLS manifest omits any CLOSED-CAPTIONS
+	// line. none: The HLS manifest carries CLOSED-CAPTIONS=NONE on each
+	// EXT-X-STREAM-INF tag, which signals to players that the stream has no closed
+	// captions, so they stop offering a CC track. The API rejects none combined with a
+	// non-empty captionLanguageMappings.
+	CaptionLanguageSetting MediaPackageV2CaptionLanguageSetting
+
 	// Set to ENABLED to enable ID3 metadata insertion. To include metadata, you
 	// configure other parameters in the output group, or you add an ID3 action to the
 	// channel schedule.
@@ -16682,6 +16693,9 @@ func (v *MediaPackageV2GroupSettings) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CaptionLanguageMappings != nil {
 		serialize__listOfCaptionLanguageMapping(s, schemas.MediaPackageV2GroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
 	}
+	if v.CaptionLanguageSetting != "" {
+		s.WriteString(schemas.MediaPackageV2GroupSettings_CaptionLanguageSetting, string(v.CaptionLanguageSetting))
+	}
 	if v.Id3Behavior != "" {
 		s.WriteString(schemas.MediaPackageV2GroupSettings_Id3Behavior, string(v.Id3Behavior))
 	}
@@ -16722,6 +16736,13 @@ func (v *MediaPackageV2GroupSettings) Deserialize(d smithy.ShapeDeserializer) er
 			return deserialize__listOfMediaPackageAdditionalDestinations(d, schemas.MediaPackageV2GroupSettings_AdditionalDestinations, &v.AdditionalDestinations)
 		case schemas.MediaPackageV2GroupSettings_CaptionLanguageMappings:
 			return deserialize__listOfCaptionLanguageMapping(d, schemas.MediaPackageV2GroupSettings_CaptionLanguageMappings, &v.CaptionLanguageMappings)
+		case schemas.MediaPackageV2GroupSettings_CaptionLanguageSetting:
+			var ev string
+			if err := d.ReadString(schemas.MediaPackageV2GroupSettings_CaptionLanguageSetting, &ev); err != nil {
+				return err
+			}
+			v.CaptionLanguageSetting = MediaPackageV2CaptionLanguageSetting(ev)
+			return nil
 		case schemas.MediaPackageV2GroupSettings_Id3Behavior:
 			var ev string
 			if err := d.ReadString(schemas.MediaPackageV2GroupSettings_Id3Behavior, &ev); err != nil {

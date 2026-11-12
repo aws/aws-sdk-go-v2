@@ -1947,6 +1947,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 						{
 							Name:          ptr.String("__Name__"),
@@ -1959,6 +1961,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 					},
 					Semantics: &types.NodeSemantics{
@@ -2046,6 +2050,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2058,6 +2064,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{
@@ -2145,6 +2153,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2157,6 +2167,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{
@@ -2249,6 +2261,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 						{
 							Name:          ptr.String("__Name__"),
@@ -2261,6 +2275,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 					},
 					Semantics: &types.NodeSemantics{
@@ -2348,6 +2364,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2360,6 +2378,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{
@@ -2447,6 +2467,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2459,6 +2481,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{

@@ -378,6 +378,34 @@ func TestCheckRequestSnapshot_AttachStaticIp(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CheckSubdomainAvailability(t *testing.T) {
+	input := &CheckSubdomainAvailabilityInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		Reserve:       ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CheckSubdomainAvailability(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CheckSubdomainAvailability"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CloseInstancePublicPorts(t *testing.T) {
 	input := &CloseInstancePublicPortsInput{
 		PortInfo: &types.PortInfo{
@@ -1123,6 +1151,7 @@ func TestCheckRequestSnapshot_CreateDistribution(t *testing.T) {
 				},
 			},
 		},
+		SubdomainName: ptr.String("__SubdomainName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1689,6 +1718,43 @@ func TestCheckRequestSnapshot_CreateRelationalDatabaseSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRelationalDatabaseSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateSubdomain(t *testing.T) {
+	input := &CreateSubdomainInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSubdomain(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSubdomain"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2277,6 +2343,33 @@ func TestCheckRequestSnapshot_DeleteRelationalDatabaseSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRelationalDatabaseSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteSubdomain(t *testing.T) {
+	input := &DeleteSubdomainInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSubdomain(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSubdomain"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4380,6 +4473,34 @@ func TestCheckRequestSnapshot_GetStaticIps(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetSubdomains(t *testing.T) {
+	input := &GetSubdomainsInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		PageToken:     ptr.String("__PageToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSubdomains(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSubdomains"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ImportKeyPair(t *testing.T) {
 	input := &ImportKeyPairInput{
 		KeyPairName:     ptr.String("__KeyPairName__"),
@@ -5700,6 +5821,35 @@ func TestCheckRequestSnapshot_UpdateRelationalDatabaseParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateSubdomainAssociation(t *testing.T) {
+	input := &UpdateSubdomainAssociationInput{
+		SubdomainName:     ptr.String("__SubdomainName__"),
+		Action:            types.SubdomainAssociationAction("ASSOCIATE"),
+		TargetResourceArn: ptr.String("__TargetResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSubdomainAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSubdomainAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_AllocateStaticIp(t *testing.T) {
 	input := &AllocateStaticIpInput{
 		StaticIpName: ptr.String("__StaticIpName__"),
@@ -5868,6 +6018,34 @@ func TestUpdateRequestSnapshot_AttachStaticIp(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AttachStaticIp"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CheckSubdomainAvailability(t *testing.T) {
+	input := &CheckSubdomainAvailabilityInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		Reserve:       ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CheckSubdomainAvailability(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CheckSubdomainAvailability"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6617,6 +6795,7 @@ func TestUpdateRequestSnapshot_CreateDistribution(t *testing.T) {
 				},
 			},
 		},
+		SubdomainName: ptr.String("__SubdomainName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7183,6 +7362,43 @@ func TestUpdateRequestSnapshot_CreateRelationalDatabaseSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRelationalDatabaseSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateSubdomain(t *testing.T) {
+	input := &CreateSubdomainInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSubdomain(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSubdomain"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7771,6 +7987,33 @@ func TestUpdateRequestSnapshot_DeleteRelationalDatabaseSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRelationalDatabaseSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteSubdomain(t *testing.T) {
+	input := &DeleteSubdomainInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSubdomain(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSubdomain"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9874,6 +10117,34 @@ func TestUpdateRequestSnapshot_GetStaticIps(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetSubdomains(t *testing.T) {
+	input := &GetSubdomainsInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		PageToken:     ptr.String("__PageToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSubdomains(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSubdomains"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ImportKeyPair(t *testing.T) {
 	input := &ImportKeyPairInput{
 		KeyPairName:     ptr.String("__KeyPairName__"),
@@ -11191,6 +11462,35 @@ func TestUpdateRequestSnapshot_UpdateRelationalDatabaseParameters(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRelationalDatabaseParameters"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateSubdomainAssociation(t *testing.T) {
+	input := &UpdateSubdomainAssociationInput{
+		SubdomainName:     ptr.String("__SubdomainName__"),
+		Action:            types.SubdomainAssociationAction("ASSOCIATE"),
+		TargetResourceArn: ptr.String("__TargetResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSubdomainAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSubdomainAssociation"); err != nil {
 		t.Fatal(err)
 	}
 }
