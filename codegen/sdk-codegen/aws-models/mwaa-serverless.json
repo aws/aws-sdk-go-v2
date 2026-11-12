@@ -22,6 +22,9 @@
             "version": "2024-07-26",
             "operations": [
                 {
+                    "target": "com.amazonaws.mwaaserverless#CreateAirflowUiUrl"
+                },
+                {
                     "target": "com.amazonaws.mwaaserverless#ListTagsForResource"
                 },
                 {
@@ -407,6 +410,16 @@
                 }
             }
         },
+        "com.amazonaws.mwaaserverless#AuthorizedUrlString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.mwaaserverless#Code": {
             "type": "union",
             "members": {
@@ -449,6 +462,98 @@
                 "smithy.api#documentation": "<p>You cannot create a resource that already exists, or the resource is in a state that prevents the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.mwaaserverless#CreateAirflowUiUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaaserverless#CreateAirflowUiUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaaserverless#CreateAirflowUiUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaaserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mwaaserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mwaaserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaaserverless#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.mwaaserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mwaaserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a launch URL that opens the Apache Airflow UI for your workflows in Amazon Managed Workflows for Apache Airflow Serverless. The UI shows the workflows in your account in the current AWS Region. To start a UI session, open the URL in a browser before it expires.</p> <p>The UI runs with the permissions of the IAM identity that you use to call this operation. You see only the workflows, workflow runs, and logs that the identity can read, and you can start a workflow run only if the identity has permission to start one.</p> <p>The UI session uses the caller's permissions. The session works only from the network address that opened the URL. It ends at <code>SessionExpiresAt</code> or when you sign out from the UI.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/airflow-ui-url"
+                }
+            }
+        },
+        "com.amazonaws.mwaaserverless#CreateAirflowUiUrlRequest": {
+            "type": "structure",
+            "members": {
+                "ExpiresInSeconds": {
+                    "target": "com.amazonaws.mwaaserverless#ExpiresInSecondsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of seconds that the launch URL stays valid. This value limits only the time to open the URL, not the length of the UI session. The default is 300.</p>"
+                    }
+                },
+                "SessionDurationInSeconds": {
+                    "target": "com.amazonaws.mwaaserverless#SessionDurationInSecondsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of seconds that the UI session lasts, starting from when you call this operation. The default is 43200 (12 hours).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mwaaserverless#CreateAirflowUiUrlResponse": {
+            "type": "structure",
+            "members": {
+                "AuthorizedUrl": {
+                    "target": "com.amazonaws.mwaaserverless#AuthorizedUrlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch URL that opens the Airflow UI. Open it in a browser before <code>UrlExpiresAt</code>. The UI session uses the permissions of the identity that called this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.mwaaserverless#SessionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL starts a UI session that has this identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UrlExpiresAt": {
+                    "target": "com.amazonaws.mwaaserverless#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch URL stops being valid at this time. The value is in ISO 8601 date-time format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionExpiresAt": {
+                    "target": "com.amazonaws.mwaaserverless#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UI session ends at this time. The value is in ISO 8601 date-time format. After this time, create a new URL to open the UI again.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mwaaserverless#CreateWorkflow": {
@@ -870,6 +975,15 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.mwaaserverless#ExpiresInSecondsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.mwaaserverless#GenericMap": {
             "type": "map",
             "key": {
@@ -1222,7 +1336,7 @@
                 "ScheduleConfiguration": {
                     "target": "com.amazonaws.mwaaserverless#ScheduleConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule configuration for the workflow, including cron expressions for automated execution. Amazon Managed Workflows for Apache Airflow Serverless uses EventBridge Scheduler for cost-effective, timezone-aware scheduling. When a workflow includes schedule information in its YAML definition, the service automatically configures the appropriate triggers for automated execution. Only one version of a workflow can have an active schedule at any given time.</p>"
+                        "smithy.api#documentation": "<p>The schedule configuration for the workflow. Only one version of a workflow can have an active schedule at any given time.</p>"
                     }
                 },
                 "RoleArn": {
@@ -2142,12 +2256,12 @@
                 "CronExpression": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A cron expression that defines when the workflow is automatically executed. Uses standard cron syntax.</p>"
+                        "smithy.api#documentation": "<p>The schedule expression that determines when the workflow runs, as specified in the <code>schedule</code> parameter of the workflow's YAML definition. You can specify one of the following types of schedule expressions:</p> <ul> <li> <p>Apache Airflow cron expression – Five fields, such as <code>0 12 1 * *</code>.</p> </li> <li> <p>Apache Airflow schedule preset – <code>@hourly</code>, <code>@daily</code>, <code>@weekly</code>, <code>@monthly</code>, <code>@yearly</code>, or <code>@annually</code>.</p> </li> <li> <p>EventBridge Scheduler rate expression – For example, <code>rate(5 minutes)</code>. Supported units are minutes, hours, and days.</p> </li> <li> <p>EventBridge Scheduler cron expression – Six fields, such as <code>cron(0 12 * * ? *)</code>.</p> </li> </ul> <p>In a cron expression, specify either a day-of-month or a day-of-week, not both.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration to use to schedule automated workflow execution using cron expressions. Amazon Managed Workflows for Apache Airflow Serverless integrates with EventBridge Scheduler to provide cost-effective, timezone-aware scheduling capabilities. The service supports both time-based and event-based scheduling (event-based scheduling available post-GA). When a workflow definition includes scheduling information, Amazon Managed Workflows for Apache Airflow Serverless automatically configures the appropriate triggers and ensures only one version of a workflow has an active schedule at any time.</p>"
+                "smithy.api#documentation": "<p>Contains the configuration used to schedule automated workflow execution. Only one version of a workflow can have an active schedule at any time.</p>"
             }
         },
         "com.amazonaws.mwaaserverless#SecurityGroupIds": {
@@ -2208,6 +2322,26 @@
                 "smithy.api#documentation": "<p>The request exceeds the service quota for Amazon Managed Workflows for Apache Airflow Serverless resources. This can occur when you attempt to create more workflows than allowed, exceed concurrent workflow run limits, or surpass task execution limits. Amazon Managed Workflows for Apache Airflow Serverless implements admission control using DynamoDB-based counters to manage resource utilization across the multi-tenant environment. Contact Amazon Web Services Support to request quota increases if you need higher limits for your use case.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.mwaaserverless#SessionDurationInSecondsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 43200
+                }
+            }
+        },
+        "com.amazonaws.mwaaserverless#SessionIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-z0-9]{32}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.mwaaserverless#StartWorkflowRun": {

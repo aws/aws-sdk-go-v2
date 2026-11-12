@@ -1151,6 +1151,22 @@
                         "smithy.api#documentation": "<p>The exclusion configuration for Elastic File System service.</p>",
                         "smithy.api#xmlName": "elasticFileSystem"
                     }
+                },
+                "GlobalAccelerator": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "GlobalAccelerator",
+                        "smithy.api#documentation": "<p>The exclusion configuration for AWS Global Accelerator.</p>",
+                        "smithy.api#xmlName": "globalAccelerator"
+                    }
+                },
+                "ApiGatewayV2": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApiGatewayV2",
+                        "smithy.api#documentation": "<p>The exclusion configuration for Amazon API Gateway V2.</p>",
+                        "smithy.api#xmlName": "apiGatewayV2"
+                    }
                 }
             },
             "traits": {
@@ -3025,6 +3041,9 @@
                     "target": "com.amazonaws.ec2#CreateManagedPrefixList"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateMetricCategory"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateNatGateway"
                 },
                 {
@@ -3320,6 +3339,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteManagedPrefixList"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteMetricCategory"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteNatGateway"
@@ -3830,6 +3852,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeManagedPrefixLists"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeMetricCategories"
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeMovingAddresses"
@@ -4736,6 +4761,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyManagedResourceVisibility"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyMetricCategory"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyNetworkInterfaceAttribute"
@@ -21557,7 +21585,7 @@
                 "TrafficType": {
                     "target": "com.amazonaws.ec2#TrafficType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of traffic to monitor (accepted traffic, rejected traffic, or all traffic).\n            This parameter is not supported for transit gateway or Cloud WAN resource types. It is\n            required for the other resource types.</p>"
+                        "smithy.api#documentation": "<p>The type of traffic to monitor (accepted traffic, rejected traffic, or all traffic).\n            This parameter is not supported for transit gateway resource types. It is required for\n            the other resource types.</p>"
                     }
                 },
                 "LogDestinationType": {
@@ -21575,7 +21603,7 @@
                 "LogFormat": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fields to include in the flow log record. List the fields in the order in which\n            they should appear. If you omit this parameter, the flow log is created using the\n            default format. If you specify this parameter, you must include at least one\n            field. For more information about the available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html\">Flow log records</a> \n            in the <i>Amazon VPC User Guide</i>, <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records\">Transit Gateway Flow Log\n                    records</a> in the <i>Amazon Web Services Transit Gateway Guide</i>,\n            or <a href=\"https://docs.aws.amazon.com/network-manager/latest/cloudwan/cwan-flow-logs.html\">Cloud WAN Flow Log\n                    records</a> in the <i>Amazon Web Services Cloud WAN User Guide</i>.</p>\n         <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces.</p>"
+                        "smithy.api#documentation": "<p>The fields to include in the flow log record. List the fields in the order in which\n            they should appear. If you omit this parameter, the flow log is created using the\n            default format. If you specify this parameter, you must include at least one\n            field. For more information about the available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html\">Flow log records</a> \n            in the <i>Amazon VPC User Guide</i> or <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records\">Transit Gateway Flow Log\n                    records</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>\n         <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -21588,7 +21616,7 @@
                 "MaxAggregationInterval": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. \n            The possible values are 60 seconds (1 minute) or 600 seconds (10 minutes).\n            This parameter must be 60 seconds for transit gateway and Cloud WAN resource types.</p>\n         <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html\">Nitro-based\n                instance</a>, the aggregation interval is always 60 seconds or less, regardless\n            of the value that you specify.</p>\n         <p>Default: 600</p>"
+                        "smithy.api#documentation": "<p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. \n            The possible values are 60 seconds (1 minute) or 600 seconds (10 minutes).\n            This parameter must be 60 seconds for transit gateway resource types.</p>\n         <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html\">Nitro-based\n                instance</a>, the aggregation interval is always 60 seconds or less, regardless\n            of the value that you specify.</p>\n         <p>Default: 600</p>"
                     }
                 },
                 "DestinationOptions": {
@@ -21846,7 +21874,7 @@
                 "target": "com.amazonaws.ec2#CreateImageUsageReportResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a report that shows how your image is used across other Amazon Web Services accounts. The report\n      provides visibility into which accounts are using the specified image, and how many resources\n      (EC2 instances or launch templates) are referencing it.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html\">View your AMI usage</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a report that shows how your image is used across other Amazon Web Services accounts. The report\n      provides visibility into which accounts are using the specified image, and how many resources\n      (EC2 instances, EC2 launch templates, Image Builder image recipes, or Image Builder container\n      recipes) are referencing it.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html\">View your AMI usage</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateImageUsageReportClientToken": {
@@ -24136,6 +24164,71 @@
                         "aws.protocols#ec2QueryName": "PrefixList",
                         "smithy.api#documentation": "<p>Information about the prefix list.</p>",
                         "smithy.api#xmlName": "prefixList"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateMetricCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateMetricCategoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateMetricCategoryResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a metric category. A metric category is a set of additional metrics that you\n            can associate with an instance that has detailed monitoring enabled.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories\">Use metric categories for additional metrics</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateMetricCategoryRequest": {
+            "type": "structure",
+            "members": {
+                "Metrics": {
+                    "target": "com.amazonaws.ec2#MetricCategoryMetricNameList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The names of the metrics to include in the metric category.</p>\n         <p>Specify each metric by its Amazon CloudWatch metric name or its OpenTelemetry metric name. The two\n  names for a measurement are separate entries, and you can include both.</p>\n         <p>In Regions where Amazon CloudWatch OpenTelemetry metrics aren't available, you can't specify\n  OpenTelemetry metric names.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Metric"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the metric category during creation.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensure Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the\n  request, and provides an error response. If you have the required permissions, the error response is\n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateMetricCategoryResult": {
+            "type": "structure",
+            "members": {
+                "MetricCategory": {
+                    "target": "com.amazonaws.ec2#MetricCategory",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricCategory",
+                        "smithy.api#documentation": "<p>Information about the metric category.</p>",
+                        "smithy.api#xmlName": "metricCategory"
                     }
                 }
             },
@@ -33268,6 +33361,56 @@
                         "aws.protocols#ec2QueryName": "PrefixList",
                         "smithy.api#documentation": "<p>Information about the prefix list.</p>",
                         "smithy.api#xmlName": "prefixList"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteMetricCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteMetricCategoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteMetricCategoryResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified metric category. Associations between the metric category and\n            your instances are removed asynchronously.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories\">Use metric categories for additional metrics</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteMetricCategoryRequest": {
+            "type": "structure",
+            "members": {
+                "MetricCategoryId": {
+                    "target": "com.amazonaws.ec2#MetricCategoryId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the metric category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the\n  request, and provides an error response. If you have the required permissions, the error response is\n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteMetricCategoryResult": {
+            "type": "structure",
+            "members": {
+                "MetricCategoryId": {
+                    "target": "com.amazonaws.ec2#MetricCategoryId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricCategoryId",
+                        "smithy.api#documentation": "<p>The ID of the metric category that was deleted.</p>",
+                        "smithy.api#xmlName": "metricCategoryId"
                     }
                 }
             },
@@ -42678,7 +42821,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>account-id</code> - A 12-digit Amazon Web Services account ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>creation-time</code> - The time when the report was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n          <code>2025-11-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2025-11-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-type</code> - The resource type (<code>ec2:Instance</code> |\n          <code>ec2:LaunchTemplate</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>account-id</code> - A 12-digit Amazon Web Services account ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>creation-time</code> - The time when the report was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n          <code>2025-11-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2025-11-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-type</code> - The resource type (<code>ec2:Instance</code> |\n          <code>ec2:LaunchTemplate</code> | <code>imagebuilder:ImageRecipe</code> |\n          <code>imagebuilder:ContainerRecipe</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -47120,6 +47263,97 @@
                         "aws.protocols#ec2QueryName": "PrefixListSet",
                         "smithy.api#documentation": "<p>Information about the prefix lists.</p>",
                         "smithy.api#xmlName": "prefixListSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeMetricCategories": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeMetricCategoriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeMetricCategoriesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified metric categories, or all of your metric categories.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories\">Use metric categories for additional metrics</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "MetricCategories",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeMetricCategoriesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeMetricCategoriesRequest": {
+            "type": "structure",
+            "members": {
+                "MetricCategoryIds": {
+                    "target": "com.amazonaws.ec2#MetricCategoryIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the metric categories. If you specify IDs,\n            you can't specify <code>MaxResults</code> or <code>NextToken</code>.</p>",
+                        "smithy.api#xmlName": "MetricCategoryId"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metric-name</code> - The name of a metric in the metric\n                    category.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeMetricCategoriesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,\n    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>\n         <p>Valid range: 5 - 100.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the\n  request, and provides an error response. If you have the required permissions, the error response is\n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeMetricCategoriesResult": {
+            "type": "structure",
+            "members": {
+                "MetricCategories": {
+                    "target": "com.amazonaws.ec2#MetricCategoryList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricCategorySet",
+                        "smithy.api#documentation": "<p>Information about the metric categories.</p>",
+                        "smithy.api#xmlName": "metricCategorySet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
                     }
                 }
             },
@@ -69425,7 +69659,7 @@
                 "target": "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs \n            with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. \n            Based on the information that you provide, we configure resources in the template to do the following:</p>\n         <ul>\n            <li>\n               <p>Create a table in Athena that maps fields to a custom log format</p>\n            </li>\n            <li>\n               <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or\n                    monthly basis</p>\n            </li>\n            <li>\n               <p>Create a table partitioned between two timestamps in the past</p>\n            </li>\n            <li>\n               <p>Create a set of named queries in Athena that you can use to get started quickly</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>GetFlowLogsIntegrationTemplate</code> does not support integration between\n                    Amazon Web Services Transit Gateway Flow Logs or Amazon Web Services Cloud WAN Flow Logs\n                    and Amazon Athena.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs \n            with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. \n            Based on the information that you provide, we configure resources in the template to do the following:</p>\n         <ul>\n            <li>\n               <p>Create a table in Athena that maps fields to a custom log format</p>\n            </li>\n            <li>\n               <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or\n                    monthly basis</p>\n            </li>\n            <li>\n               <p>Create a table partitioned between two timestamps in the past</p>\n            </li>\n            <li>\n               <p>Create a set of named queries in Athena that you can use to get started quickly</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>GetFlowLogsIntegrationTemplate</code> does not support integration between\n                    Amazon Web Services Transit Gateway Flow Logs and Amazon Athena.</p>\n         </note>"
             }
         },
         "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateRequest": {
@@ -77270,7 +77504,7 @@
                     "target": "com.amazonaws.ec2#ImageUsageResourceTypeName",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceType",
-                        "smithy.api#documentation": "<p>The type of resource (<code>ec2:Instance</code> or\n      <code>ec2:LaunchTemplate</code>).</p>",
+                        "smithy.api#documentation": "<p>The type of resource (<code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code> |\n      <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code>).</p>",
                         "smithy.api#xmlName": "resourceType"
                     }
                 },
@@ -77380,7 +77614,7 @@
                     "target": "com.amazonaws.ec2#ImageUsageResourceTypeName",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceType",
-                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code> |\n      <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code>\n         </p>",
                         "smithy.api#xmlName": "resourceType"
                     }
                 },
@@ -77487,7 +77721,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.ec2#ImageUsageResourceTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code> |\n      <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code>\n         </p>"
                     }
                 },
                 "ResourceTypeOptions": {
@@ -100861,6 +101095,14 @@
                         "smithy.api#documentation": "<p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is\n            enabled.</p>",
                         "smithy.api#xmlName": "enabled"
                     }
+                },
+                "MetricCategoryIds": {
+                    "target": "com.amazonaws.ec2#MetricCategoryIdList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricCategoryIdSet",
+                        "smithy.api#documentation": "<p>The IDs of the metric categories to associate with the instance.</p>",
+                        "smithy.api#xmlName": "metricCategoryIdSet"
+                    }
                 }
             },
             "traits": {
@@ -100874,6 +101116,13 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specify <code>true</code> to enable detailed monitoring. Otherwise, basic monitoring\n            is enabled.</p>"
+                    }
+                },
+                "MetricCategoryIds": {
+                    "target": "com.amazonaws.ec2#MetricCategoryIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the metric categories to associate with the instance. To specify metric\n            categories, you must also enable detailed monitoring.</p>",
+                        "smithy.api#xmlName": "MetricCategoryId"
                     }
                 }
             },
@@ -103820,6 +104069,71 @@
                 }
             }
         },
+        "com.amazonaws.ec2#MetricCategory": {
+            "type": "structure",
+            "members": {
+                "MetricCategoryId": {
+                    "target": "com.amazonaws.ec2#MetricCategoryId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricCategoryId",
+                        "smithy.api#documentation": "<p>The ID of the metric category.</p>",
+                        "smithy.api#xmlName": "metricCategoryId"
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.ec2#MetricCategoryMetricNameList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricSet",
+                        "smithy.api#documentation": "<p>The names of the metrics in the metric category.</p>",
+                        "smithy.api#xmlName": "metricSet"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>Any tags assigned to the metric category.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a metric category. A metric category is a set of additional metrics that\n            you can associate with an instance that has detailed monitoring enabled.</p>"
+            }
+        },
+        "com.amazonaws.ec2#MetricCategoryId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#MetricCategoryIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#MetricCategoryId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#MetricCategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#MetricCategory",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#MetricCategoryMetricName": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#MetricCategoryMetricNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#MetricCategoryMetricName",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#MetricDataResult": {
             "type": "structure",
             "members": {
@@ -104141,6 +104455,18 @@
                     "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to exclude Elastic File System service from account-level encryption enforcement.</p>"
+                    }
+                },
+                "GlobalAccelerator": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude AWS Global Accelerator from account-level encryption enforcement.</p>"
+                    }
+                },
+                "ApiGatewayV2": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Amazon API Gateway V2 from account-level encryption enforcement.</p>"
                     }
                 }
             },
@@ -107560,6 +107886,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#ModifyMetricCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyMetricCategoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyMetricCategoryResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the metrics in the specified metric category. The metrics that you specify\n            replace the existing metrics.</p>\n         <p>Instances that are associated with the metric category are updated\n            asynchronously.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html#detailed-monitoring-metric-categories\">Use metric categories for additional metrics</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyMetricCategoryRequest": {
+            "type": "structure",
+            "members": {
+                "MetricCategoryId": {
+                    "target": "com.amazonaws.ec2#MetricCategoryId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the metric category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.ec2#MetricCategoryMetricNameList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The names of the metrics for the metric category. These metrics replace the existing\n            metrics, and must differ from the current set.</p>\n         <p>Specify each metric by its Amazon CloudWatch metric name or its OpenTelemetry metric name. The two\n  names for a measurement are separate entries, and you can include both.</p>\n         <p>In Regions where Amazon CloudWatch OpenTelemetry metrics aren't available, you can't specify\n  OpenTelemetry metric names.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Metric"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the\n  request, and provides an error response. If you have the required permissions, the error response is\n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyMetricCategoryResult": {
+            "type": "structure",
+            "members": {
+                "MetricCategory": {
+                    "target": "com.amazonaws.ec2#MetricCategory",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricCategory",
+                        "smithy.api#documentation": "<p>Information about the metric category.</p>",
+                        "smithy.api#xmlName": "metricCategory"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyNetworkInterfaceAttribute": {
             "type": "operation",
             "input": {
@@ -110415,6 +110800,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to exclude Elastic File System traffic from encryption enforcement.</p>"
                     }
+                },
+                "GlobalAcceleratorExclusion": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude AWS Global Accelerator traffic from encryption enforcement.</p>"
+                    }
+                },
+                "ApiGatewayV2Exclusion": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Amazon API Gateway V2 traffic from encryption enforcement.</p>"
+                    }
                 }
             },
             "traits": {
@@ -111532,6 +111929,13 @@
                         "smithy.api#xmlName": "InstanceId"
                     }
                 },
+                "MetricCategoryIds": {
+                    "target": "com.amazonaws.ec2#MetricCategoryIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the metric categories to associate with the instances. The specified\n            metric categories are added to any metric categories that are already associated with\n            the instances.</p>",
+                        "smithy.api#xmlName": "MetricCategoryId"
+                    }
+                },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
@@ -111564,6 +111968,14 @@
         "com.amazonaws.ec2#Monitoring": {
             "type": "structure",
             "members": {
+                "MetricCategoryIds": {
+                    "target": "com.amazonaws.ec2#MetricCategoryIdList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MetricCategoryIdSet",
+                        "smithy.api#documentation": "<p>The IDs of the metric categories that are associated with the instance.</p>",
+                        "smithy.api#xmlName": "metricCategoryIdSet"
+                    }
+                },
                 "State": {
                     "target": "com.amazonaws.ec2#MonitoringState",
                     "traits": {
@@ -124483,6 +124895,12 @@
                     "traits": {
                         "smithy.api#enumValue": "capacity-reservation-modification-quote"
                     }
+                },
+                "metric_category": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "metric-category"
+                    }
                 }
             }
         },
@@ -127380,6 +127798,13 @@
         "com.amazonaws.ec2#RunInstancesMonitoringEnabled": {
             "type": "structure",
             "members": {
+                "MetricCategoryIds": {
+                    "target": "com.amazonaws.ec2#MetricCategoryIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the metric categories to associate with the instance. To specify metric\n            categories, you must also enable detailed monitoring.</p>",
+                        "smithy.api#xmlName": "MetricCategoryId"
+                    }
+                },
                 "Enabled": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
@@ -141408,6 +141833,13 @@
                         "smithy.api#xmlName": "InstanceId"
                     }
                 },
+                "MetricCategoryIds": {
+                    "target": "com.amazonaws.ec2#MetricCategoryIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the metric categories to remove from the instances. If you specify\n            metric categories, only those metric categories are removed and detailed monitoring\n            remains enabled. If you don't specify metric categories, detailed monitoring and all\n            metric categories are turned off.</p>",
+                        "smithy.api#xmlName": "MetricCategoryId"
+                    }
+                },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
@@ -146090,6 +146522,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to exclude Elastic File System traffic from encryption enforcement.</p>"
                     }
+                },
+                "GlobalAcceleratorExclusion": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude AWS Global Accelerator traffic from encryption enforcement.</p>"
+                    }
+                },
+                "ApiGatewayV2Exclusion": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Amazon API Gateway V2 traffic from encryption enforcement.</p>"
+                    }
                 }
             },
             "traits": {
@@ -146231,6 +146675,22 @@
                         "aws.protocols#ec2QueryName": "ElasticFileSystem",
                         "smithy.api#documentation": "<p>The exclusion configuration for Elastic File System traffic.</p>",
                         "smithy.api#xmlName": "elasticFileSystem"
+                    }
+                },
+                "GlobalAccelerator": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusion",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "GlobalAccelerator",
+                        "smithy.api#documentation": "<p>The exclusion configuration for AWS Global Accelerator traffic.</p>",
+                        "smithy.api#xmlName": "globalAccelerator"
+                    }
+                },
+                "ApiGatewayV2": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusion",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApiGatewayV2",
+                        "smithy.api#documentation": "<p>The exclusion configuration for Amazon API Gateway V2 traffic.</p>",
+                        "smithy.api#xmlName": "apiGatewayV2"
                     }
                 }
             },

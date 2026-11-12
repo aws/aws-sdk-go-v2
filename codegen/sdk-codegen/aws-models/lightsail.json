@@ -2171,6 +2171,87 @@
                 "target": "com.amazonaws.lightsail#CertificateSummary"
             }
         },
+        "com.amazonaws.lightsail#CheckSubdomainAvailability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#CheckSubdomainAvailabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#CheckSubdomainAvailabilityResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Checks whether a Lightsail subdomain is available to create. Optionally, reserves the\n      subdomain for your account for 15 minutes.</p>\n         <p>If you don't reserve the subdomain, another account can create it before you do.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/CheckSubdomainAvailability",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#CheckSubdomainAvailabilityRequest": {
+            "type": "structure",
+            "members": {
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain to check (for example, <code>mysite</code> or\n        <code>blog.mysite</code>).</p>\n         <p>A subdomain can contain one or two labels separated by a period\n      (<code>.</code>). Each label must start and end with a lowercase letter or a number, and can\n      contain only lowercase letters, numbers, and hyphens (<code>-</code>). The name can be up to\n      39 characters long, including periods. Labels that start with <code>xn--</code> aren't\n      supported, and some names are reserved.</p>\n         <p>Specify only the subdomain. A web address, such as\n        <code>mysite.amazonlightsail.com</code>, isn't accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reserve": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to reserve the subdomain for your account if it's available. A\n      reservation holds the subdomain for 15 minutes so that other accounts can't create it.\n      Checking the subdomain again doesn't extend the reservation.</p>\n         <p>For a nested subdomain, such as <code>blog.mysite</code>, the top-level subdomain\n        (<code>mysite</code>) is reserved.</p>\n         <p>You can have up to 5 active reservations at a time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#CheckSubdomainAvailabilityResult": {
+            "type": "structure",
+            "members": {
+                "available": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether the subdomain is available to create.</p>"
+                    }
+                },
+                "reservationExpiresAt": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the reservation of the subdomain expires.</p>\n         <p>The expiry is returned only when your account holds an active reservation for the\n      subdomain.</p>"
+                    }
+                },
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain that was checked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lightsail#CloseInstancePublicPorts": {
             "type": "operation",
             "input": {
@@ -4555,6 +4636,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the WAF rule groups to enable for the\n      distribution.</p>\n         <p>The WAF rule groups that you can specify depend on the bundle of the\n      distribution:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>medium_1_0</code> – Supports the <code>AWSManagedRulesCommonRuleSet</code>,\n            <code>AWSManagedRulesKnownBadInputsRuleSet</code>, and\n            <code>AWSManagedRulesAnonymousIpList</code> rule groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>large_1_0</code> – Supports the rule groups for <code>medium_1_0</code>, plus\n            <code>AWSManagedRulesAdminProtectionRuleSet</code>,\n            <code>AWSManagedRulesSQLiRuleSet</code>, <code>AWSManagedRulesLinuxRuleSet</code>,\n            <code>AWSManagedRulesUnixRuleSet</code>, <code>AWSManagedRulesWindowsRuleSet</code>,\n            <code>AWSManagedRulesPHPRuleSet</code>, <code>AWSManagedRulesWordPressRuleSet</code>,\n            <code>AWSManagedRulesAmazonIpReputationList</code>,\n            <code>AWSManagedRulesATPRuleSet</code>, <code>AWSManagedRulesACFPRuleSet</code>, and\n            <code>AWSManagedRulesBotControlRuleSet</code> rule groups.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lightsail subdomain to create and associate with the distribution (for example,\n        <code>mysite</code>, for the web address <code>mysite.amazonlightsail.com</code>).</p>\n         <p>After the distribution is deployed, Lightsail creates the subdomain and associates it\n      with the distribution. If Lightsail can't create or associate the subdomain, it still creates\n      the distribution, but the <code>CreateDistribution</code> operation fails and the\n        <code>state</code> of the distribution's <code>subdomain</code> is <code>Error</code>. To\n      check the status, use the <code>subdomain</code> parameter of the distribution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5839,6 +5926,84 @@
                     "target": "com.amazonaws.lightsail#OperationList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lightsail#CreateSubdomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#CreateSubdomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#CreateSubdomainResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Lightsail subdomain, such as <code>mysite</code>, with the web address\n        <code>mysite.amazonlightsail.com</code>. After the subdomain is created, use the\n        <code>UpdateSubdomainAssociation</code> action to associate it with a Lightsail\n      resource.</p>\n         <p>When you create a nested subdomain, such as <code>blog.mysite</code>, and you don't\n      already have the top-level subdomain (<code>mysite</code>), Lightsail adds the top-level\n      subdomain to your account in the <code>IMPLICIT</code> state.</p>\n         <p>You can have up to 30 subdomains in your account. Nested subdomains, subdomains in the\n        <code>CREATE_FAILED</code> state, and deleted subdomains that other accounts can't create yet\n      count toward this quota. Subdomains in the <code>IMPLICIT</code> state don't count toward this\n      quota.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/CreateSubdomain",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#CreateSubdomainRequest": {
+            "type": "structure",
+            "members": {
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain to create (for example, <code>mysite</code> or\n        <code>blog.mysite</code>).</p>\n         <p>A subdomain can contain one or two labels separated by a period\n      (<code>.</code>). Each label must start and end with a lowercase letter or a number, and can\n      contain only lowercase letters, numbers, and hyphens (<code>-</code>). The name can be up to\n      39 characters long, including periods. Labels that start with <code>xn--</code> aren't\n      supported, and some names are reserved.</p>\n         <p>Specify only the subdomain. A web address, such as\n        <code>mysite.amazonlightsail.com</code>, isn't accepted.</p>\n         <p>To create a nested subdomain, you must own the top-level subdomain or be able to create\n      it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values to add to the subdomain during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#CreateSubdomainResult": {
+            "type": "structure",
+            "members": {
+                "subdomain": {
+                    "target": "com.amazonaws.lightsail#Subdomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the subdomain that was created.</p>"
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.lightsail#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
             },
@@ -7383,6 +7548,78 @@
                     "target": "com.amazonaws.lightsail#OperationList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lightsail#DeleteSubdomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#DeleteSubdomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#DeleteSubdomainResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Lightsail subdomain.</p>\n         <p>The subdomain must be in the <code>UNATTACHED</code> or <code>CREATE_FAILED</code>\n      state. To delete a subdomain that's associated with a resource, first disassociate it by using\n      the <code>UpdateSubdomainAssociation</code> action.</p>\n         <p>When you delete a top-level subdomain that has nested subdomains, the nested subdomains\n      continue to work, and the top-level subdomain changes to the <code>IMPLICIT</code>\n      state.</p>\n         <note>\n            <p>After you delete a subdomain that was associated with a resource, the subdomain isn't\n        available to other accounts for at least 30 days.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/DeleteSubdomain",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#DeleteSubdomainRequest": {
+            "type": "structure",
+            "members": {
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain to delete (for example, <code>mysite</code> or\n        <code>blog.mysite</code>), not its web address.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#DeleteSubdomainResult": {
+            "type": "structure",
+            "members": {
+                "subdomain": {
+                    "target": "com.amazonaws.lightsail#Subdomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the top-level subdomain in the <code>IMPLICIT</code> state.</p>\n         <p>This parameter is returned only when you delete a top-level subdomain that has nested\n      subdomains.</p>"
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.lightsail#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
             },
@@ -11166,7 +11403,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about one or more of your Amazon Lightsail content delivery network\n      (CDN) distributions.</p>",
+                "smithy.api#documentation": "<p>Returns information about one or more of your Amazon Lightsail content delivery network\n      (CDN) distributions.</p>\n         <note>\n            <p>The <code>defaultRootObject</code> and <code>customErrorResponses</code> values are\n        returned only when you specify <code>distributionName</code> to retrieve a single\n        distribution. When you call <code>GetDistributions</code> without a distribution name to\n        list all distributions, these two fields aren't included in the response.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetDistributions",
@@ -14288,6 +14525,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lightsail#GetSubdomains": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#GetSubdomainsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#GetSubdomainsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about one or more of your Lightsail subdomains.</p>\n         <p>When you don't specify a subdomain, the response lists your top-level subdomains, and\n      each top-level subdomain includes its nested subdomains.</p>\n         <p>The results are paginated. To get the next page of results, use the <code>pageToken</code>\n      parameter.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/GetSubdomains",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#GetSubdomainsRequest": {
+            "type": "structure",
+            "members": {
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain for which to return information (for example, <code>mysite</code> or\n        <code>blog.mysite</code>), not its web address.</p>\n         <p>When omitted, the response includes all of your subdomains.</p>\n         <p>You can't specify this parameter together with the <code>pageToken</code>\n      parameter.</p>"
+                    }
+                },
+                "pageToken": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetSubdomains</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#GetSubdomainsResult": {
+            "type": "structure",
+            "members": {
+                "subdomains": {
+                    "target": "com.amazonaws.lightsail#SubdomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe your subdomains.</p>"
+                    }
+                },
+                "nextPageToken": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetSubdomains</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lightsail#HeaderEnum": {
             "type": "enum",
             "members": {
@@ -16106,13 +16417,13 @@
                 "defaultRootObject": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object (for example, <code>index.html</code>) that the distribution returns when a\n      viewer requests the root URL of the distribution (<code>/</code>) instead of a specific\n      object.</p>"
+                        "smithy.api#documentation": "<p>The object (for example, <code>index.html</code>) that the distribution returns when a\n      viewer requests the root URL of the distribution (<code>/</code>) instead of a specific\n      object.</p>\n         <p>This value is returned only when you specify <code>distributionName</code> in your\n      <code>GetDistributions</code> request. It isn't included in the response when you list all of\n      your distributions.</p>"
                     }
                 },
                 "customErrorResponses": {
                     "target": "com.amazonaws.lightsail#DistributionCustomErrorResponseList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe the custom error responses configured for the\n      distribution.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that describe the custom error responses configured for the\n      distribution.</p>\n         <p>This value is returned only when you specify <code>distributionName</code> in your\n      <code>GetDistributions</code> request. It isn't included in the response when you list all of\n      your distributions.</p>"
                     }
                 },
                 "waf": {
@@ -16120,10 +16431,79 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the Web Application Firewall (WAF) configuration of the\n      distribution.</p>"
                     }
+                },
+                "subdomain": {
+                    "target": "com.amazonaws.lightsail#LightsailDistributionSubdomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the Lightsail subdomain that's associated with the\n      distribution, or is being associated with it.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an Amazon Lightsail content delivery network (CDN) distribution.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#LightsailDistributionSubdomain": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain (for example, <code>mysite</code>), not its web address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.lightsail#LightsailDistributionSubdomainStateEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the subdomain for the distribution.</p>\n         <p>The following states are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Creating</code> – The subdomain is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Attaching</code> – The subdomain is being associated with the\n          distribution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Attached</code> – The subdomain is associated with the distribution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Error</code> – The subdomain couldn't be created or associated with the\n          distribution. For more information, see the <code>errorCode</code> and\n            <code>errorDetails</code> parameters.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that describes why the subdomain is in the <code>Error</code> state.</p>"
+                    }
+                },
+                "errorDetails": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the error that caused the subdomain to be in the <code>Error</code>\n      state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Lightsail subdomain of a distribution. The distribution is reachable at\n      the subdomain's web address, which is the subdomain followed by\n        <code>amazonlightsail.com</code>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#LightsailDistributionSubdomainStateEnum": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                },
+                "ATTACHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Attaching"
+                    }
+                },
+                "ATTACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Attached"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Error"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#Lightsail_20161128": {
@@ -16147,6 +16527,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#AttachStaticIp"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#CheckSubdomainAvailability"
                 },
                 {
                     "target": "com.amazonaws.lightsail#CloseInstancePublicPorts"
@@ -16227,6 +16610,9 @@
                     "target": "com.amazonaws.lightsail#CreateRelationalDatabaseSnapshot"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#CreateSubdomain"
+                },
+                {
                     "target": "com.amazonaws.lightsail#DeleteAlarm"
                 },
                 {
@@ -16288,6 +16674,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#DeleteRelationalDatabaseSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#DeleteSubdomain"
                 },
                 {
                     "target": "com.amazonaws.lightsail#DetachCertificateFromDistribution"
@@ -16512,6 +16901,9 @@
                     "target": "com.amazonaws.lightsail#GetStaticIps"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#GetSubdomains"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ImportKeyPair"
                 },
                 {
@@ -16615,6 +17007,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#UpdateRelationalDatabaseParameters"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UpdateSubdomainAssociation"
                 }
             ],
             "traits": {
@@ -19847,6 +20242,24 @@
                     "traits": {
                         "smithy.api#enumValue": "GetProfile"
                     }
+                },
+                "CreateSubdomain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreateSubdomain"
+                    }
+                },
+                "UpdateSubdomainAssociation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateSubdomainAssociation"
+                    }
+                },
+                "DeleteSubdomain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeleteSubdomain"
+                    }
                 }
             }
         },
@@ -22220,6 +22633,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Bucket"
                     }
+                },
+                "Subdomain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Subdomain"
+                    }
                 }
             }
         },
@@ -23466,6 +23885,194 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.lightsail#Subdomain": {
+            "type": "structure",
+            "members": {
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain (for example, <code>mysite</code> or <code>blog.mysite</code>). To get the\n      web address, use the <code>fqdn</code> parameter.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the subdomain.</p>\n         <p>If you create a subdomain with a depth of 2, such as <code>blog.mysite</code>, without\n      first creating the subdomain with a depth of 1 (<code>mysite</code>), Lightsail holds\n      <code>mysite</code> for your account in the <code>IMPLICIT</code> state. It doesn't have an\n      ARN until you create a subdomain with that name.</p>"
+                    }
+                },
+                "fqdn": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The web address of the subdomain, which is the subdomain followed by\n        <code>amazonlightsail.com</code> (for example,\n        <code>blog.mysite.amazonlightsail.com</code>).</p>"
+                    }
+                },
+                "depth": {
+                    "target": "com.amazonaws.lightsail#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of labels in the subdomain. A top-level subdomain, such as\n        <code>mysite</code>, has a depth of <code>1</code>. A nested subdomain, such as\n        <code>blog.mysite</code>, has a depth of <code>2</code>.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.lightsail#SubdomainState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the subdomain.</p>\n         <p>The following states are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The subdomain is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The subdomain couldn't be created. Delete the subdomain,\n          and then create it again if the name is still available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNATTACHED</code> – The subdomain is ready, and isn't associated with a\n          resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ATTACHING</code> – The subdomain is being associated with a resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ATTACHED</code> – The subdomain is associated with a resource, and routes traffic\n          to it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETACHING</code> – The subdomain is being disassociated from a resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> – The subdomain is being moved from one resource to another\n          resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPLICIT</code> – The subdomain is the parent of one or more nested subdomains\n          that you created, but you didn't create the parent subdomain itself. You can't associate\n          or delete a subdomain in this state. To use it, create it with the\n            <code>CreateSubdomain</code> action.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "attachedResource": {
+                    "target": "com.amazonaws.lightsail#SubdomainAttachableResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the resource that the subdomain is associated with.</p>\n         <p>When the subdomain is in the <code>TRANSFERRING</code> state, this is the resource that\n      the subdomain is being moved from.</p>"
+                    }
+                },
+                "attachingResource": {
+                    "target": "com.amazonaws.lightsail#SubdomainAttachableResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the resource that the subdomain is being associated with.</p>\n         <p>This parameter is returned only when the subdomain is in the <code>ATTACHING</code> or\n        <code>TRANSFERRING</code> state.</p>"
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.lightsail#ResourceLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the location of the subdomain, such as the AWS Region.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the subdomain was created.</p>"
+                    }
+                },
+                "parentFqdn": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The web address of the parent subdomain (for example,\n        <code>mysite.amazonlightsail.com</code> for <code>blog.mysite</code>).</p>\n         <p>This parameter isn't returned for a subdomain with a depth of 1.</p>"
+                    }
+                },
+                "children": {
+                    "target": "com.amazonaws.lightsail#SubdomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the nested subdomains of the subdomain.</p>\n         <p>This parameter is returned only by the <code>GetSubdomains</code> action when you don't\n      specify a subdomain.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the subdomain. For more information about tags in\n      Lightsail, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags\">Lightsail Developer\n      Guide</a>.</p>\n         <p>This parameter is returned only by the <code>GetSubdomains</code> action when you specify a\n      subdomain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Lightsail subdomain. A subdomain is the name that you choose, such as\n        <code>mysite</code> or <code>blog.mysite</code>. Its web address is the subdomain followed\n      by <code>amazonlightsail.com</code>, such as <code>blog.mysite.amazonlightsail.com</code>. You\n      can associate a subdomain with a Lightsail resource to make the resource reachable at the\n      web address.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#SubdomainAssociationAction": {
+            "type": "enum",
+            "members": {
+                "ASSOCIATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATE"
+                    }
+                },
+                "DISASSOCIATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATE"
+                    }
+                },
+                "TRANSFER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSFER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#SubdomainAttachableResource": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>"
+                    }
+                },
+                "attachedAt": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the subdomain was associated with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Lightsail resource that a subdomain is associated with, or is being\n      associated with.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#SubdomainList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#Subdomain"
+            }
+        },
+        "com.amazonaws.lightsail#SubdomainState": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UNATTACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNATTACHED"
+                    }
+                },
+                "ATTACHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHING"
+                    }
+                },
+                "ATTACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHED"
+                    }
+                },
+                "DETACHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETACHING"
+                    }
+                },
+                "TRANSFERRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSFERRING"
+                    }
+                },
+                "IMPLICIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPLICIT"
+                    }
                 }
             }
         },
@@ -24883,6 +25490,91 @@
                     "target": "com.amazonaws.lightsail#OperationList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lightsail#UpdateSubdomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#UpdateSubdomainAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#UpdateSubdomainAssociationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a Lightsail subdomain with a resource, disassociates it from a resource, or\n      moves it from one resource to another resource.</p>\n         <p>Currently, you can associate a subdomain only with a Lightsail content delivery network\n      (CDN) distribution. A resource can be associated with only one subdomain at a time.</p>\n         <p>When you associate a subdomain with a distribution, Lightsail attaches the subdomain's\n      certificate to the distribution. You can't associate a subdomain with a distribution that uses\n      a custom domain, which is a distribution that has a Lightsail certificate attached.</p>\n         <p>You can transfer each subdomain to another resource only once in a 24-hour period.</p>\n         <p>The update is asynchronous. The response returns the subdomain in the\n        <code>ATTACHING</code>, <code>DETACHING</code>, or <code>TRANSFERRING</code> state, and an\n      operation. To check when the update is complete, use the <code>GetSubdomains</code>\n      action.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/UpdateSubdomainAssociation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#UpdateSubdomainAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "subdomainName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain to update (for example, <code>mysite</code> or\n        <code>blog.mysite</code>), not its web address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.lightsail#SubdomainAssociationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association change to make.</p>\n         <p>The following actions are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ASSOCIATE</code> – Associates the subdomain with the resource that you specify in\n          the <code>targetResourceArn</code> parameter. The subdomain must be in the\n            <code>UNATTACHED</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISASSOCIATE</code> – Disassociates the subdomain from its current resource. The\n          subdomain must be in the <code>ATTACHED</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFER</code> – Moves the subdomain from its current resource to the resource\n          that you specify in the <code>targetResourceArn</code> parameter. The subdomain must be in\n          the <code>ATTACHED</code> state. You can transfer each subdomain only once in a 24-hour\n          period.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceArn": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to associate the subdomain with. The\n      resource must be in your account.</p>\n         <p>This parameter is required when the <code>action</code> is <code>ASSOCIATE</code> or\n        <code>TRANSFER</code>. It's ignored when the <code>action</code> is\n        <code>DISASSOCIATE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#UpdateSubdomainAssociationResult": {
+            "type": "structure",
+            "members": {
+                "subdomain": {
+                    "target": "com.amazonaws.lightsail#Subdomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the subdomain that was updated.</p>"
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.lightsail#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
             },

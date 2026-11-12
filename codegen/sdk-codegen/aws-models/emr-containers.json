@@ -2024,7 +2024,7 @@
                 "schedulerConfiguration": {
                     "target": "com.amazonaws.emrcontainers#SchedulerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scheduler configuration (concurrency and queue limits) to apply to the virtual\n         cluster at creation time. When omitted, no limits are applied.</p>"
+                        "smithy.api#documentation": "<p>The scheduler configuration (concurrency and queue limits) to apply to the virtual\n         cluster at creation time. If you omit this field, the service applies a default limit of\n\t         1,000 concurrent job runs and does not limit queue depth.</p>"
                     }
                 }
             },
@@ -3138,8 +3138,8 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 100,
-                    "max": 10000
+                    "min": 1,
+                    "max": 1000
                 }
             }
         },
@@ -3208,7 +3208,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 10000
+                    "max": 1000
                 }
             }
         },
@@ -4511,12 +4511,12 @@
                 "maxConcurrentJobRuns": {
                     "target": "com.amazonaws.emrcontainers#JobLimitInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of job runs that can be in the <code>RUNNING</code> state at any time\n         for the virtual cluster. As running slots free up, queued job runs start automatically. If\n         you omit this field, the service applies no concurrency limit.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of job runs that can be in the <code>RUNNING</code> state at any time\n         for the virtual cluster. As running slots free up, queued job runs start automatically. If you omit this field, the service applies a default limit of 1,000 concurrent job runs to the virtual cluster.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The scheduler configuration for a virtual cluster on Amazon EMR on EKS. It controls how\n         many job runs can run concurrently and how many can wait in the queue. When not set, no\n         concurrency or queue limits are applied.</p>"
+                "smithy.api#documentation": "<p>The scheduler configuration for a virtual cluster on Amazon EMR on EKS. It controls how\n         many job runs can run concurrently and how many can wait in the queue. If you omit this configuration, the service applies a default limit of 1,000 concurrent job runs and does not limit queue depth.</p>"
             }
         },
         "com.amazonaws.emrcontainers#SchedulerStatus": {
@@ -5262,7 +5262,7 @@
                 "schedulerConfiguration": {
                     "target": "com.amazonaws.emrcontainers#SchedulerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scheduler configuration to apply to the virtual cluster. The new configuration fully\n         replaces the existing one. If you omit a field, the corresponding limit is removed.</p>"
+                        "smithy.api#documentation": "<p>The scheduler configuration to apply to the virtual cluster. The new configuration fully\n         replaces the existing one. If you omit <code>maxInQueueJobRuns</code>, the service removes\n\t         the queue-depth limit. If you omit <code>maxConcurrentJobRuns</code>, the service applies\n\t         the default limit of 1,000 concurrent job runs.</p>"
                     }
                 },
                 "clientToken": {

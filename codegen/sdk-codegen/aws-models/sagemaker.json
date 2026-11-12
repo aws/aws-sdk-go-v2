@@ -30705,6 +30705,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last modified time of the hub content.</p>"
                     }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who created the hub content.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who last modified the hub content.</p>"
+                    }
                 }
             },
             "traits": {
@@ -30798,6 +30810,18 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The date and time that the hub was last modified.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who created the hub.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who last modified the hub.</p>"
                     }
                 }
             },
@@ -34620,7 +34644,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the execution uses. SageMaker returns this value only for executions of pipelines that AWS manages.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the execution uses. SageMaker returns this value only for executions of pipelines that Amazon Web Services manages.</p>"
                     }
                 }
             },
@@ -42813,6 +42837,18 @@
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The last modified time of the hub content.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who created the hub content.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who last modified the hub content.</p>"
                     }
                 },
                 "Tags": {
@@ -57816,7 +57852,7 @@
                 "ManagedBy": {
                     "target": "com.amazonaws.sagemaker#PipelineManagedBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the pipelines by who manages them. Specify <code>AWS</code> to return pipelines that AWS manages, or <code>CUSTOMER</code> to return pipelines that you created. If you don't specify a value, the response includes both.</p>"
+                        "smithy.api#documentation": "<p>Filters the pipelines by who manages them. Specify <code>AWS</code> to return pipelines that Amazon Web Services manages, or <code>CUSTOMER</code> to return pipelines that you created. If you don't specify a value, the response includes both.</p>"
                     }
                 }
             },
@@ -82736,7 +82772,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the execution uses. You must specify this parameter when you start an execution of a pipeline that AWS manages. You can't specify it for a pipeline that you create, because its executions use the pipeline's role.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the execution uses. You must specify this parameter when you start an execution of a pipeline that Amazon Web Services manages. You can't specify it for a pipeline that you create, because its executions use the pipeline's role.</p>"
                     }
                 }
             },
@@ -94936,7 +94972,7 @@
                 "IamIdentity": {
                     "target": "com.amazonaws.sagemaker#IamIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM Identity details associated with the user. These details are associated with model package groups, model packages, and project entities only.</p>"
+                        "smithy.api#documentation": "<p>The IAM Identity details associated with the user. These details are associated with model package groups, model packages, project entities, hubs, and hub content only.</p>"
                     }
                 }
             },

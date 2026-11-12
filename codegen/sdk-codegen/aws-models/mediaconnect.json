@@ -1,6 +1,15 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.mediaconnect#ActionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.mediaconnect#AddBridgeFlowSourceRequest": {
             "type": "structure",
             "members": {
@@ -1101,6 +1110,13 @@
                         "smithy.api#documentation": "<p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect uses <code>-20</code>.</p>",
                         "smithy.api#jsonName": "ndiAudioReferenceLevel"
                     }
+                },
+                "RtmpPushSettings": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified.</p>",
+                        "smithy.api#jsonName": "rtmpPushSettings"
+                    }
                 }
             },
             "traits": {
@@ -1154,6 +1170,34 @@
                 "smithy.api#documentation": "<p> Specifies the configuration for audio stream metrics monitoring.</p>"
             }
         },
+        "com.amazonaws.mediaconnect#AutoPidMapConfiguration": {
+            "type": "structure",
+            "members": {
+                "StartPid": {
+                    "target": "com.amazonaws.mediaconnect#Pid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first PID in the range for automatic PID assignment.</p>",
+                        "smithy.api#jsonName": "startPid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PidsPerProgram": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of PIDs in the range for automatic PID assignment.</p>",
+                        "smithy.api#jsonName": "pidsPerProgram",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 8158
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for automatic Packet ID (PID) assignment. These settings apply to any PID mapping rule that uses the <code>auto</code> action, including the default action.</p>"
+            }
+        },
         "com.amazonaws.mediaconnect#AutomaticEncryptionKeyConfiguration": {
             "type": "structure",
             "members": {},
@@ -1166,6 +1210,13 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>The configuration for automatic endpoint encryption. In this mode, MediaConnect determines the encryption key when the endpoint connects. This type does not require any additional settings.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#AutomaticRtmpPushNamingConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.</p>"
             }
         },
         "com.amazonaws.mediaconnect#BadRequestException": {
@@ -3585,6 +3636,13 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#jsonName": "clientToken"
                     }
+                },
+                "Processors": {
+                    "target": "com.amazonaws.mediaconnect#RouterOutputProcessors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processor settings for the router output.</p>",
+                        "smithy.api#jsonName": "processors"
+                    }
                 }
             },
             "traits": {
@@ -4867,6 +4925,13 @@
                         "smithy.api#documentation": "<p> The NDI® specific information about the flow's source. This includes the current active NDI sender, a list of all discovered NDI senders, the associated media streams for the active NDI sender, and any relevant status messages. </p>",
                         "smithy.api#jsonName": "ndiInfo"
                     }
+                },
+                "RtmpInfo": {
+                    "target": "com.amazonaws.mediaconnect#RtmpSourceMetadataInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RTMP (Real-Time Messaging Protocol) specific information about the flow's source. This includes the application name, the stream name, and the associated audio and video streams.</p>",
+                        "smithy.api#jsonName": "rtmpInfo"
+                    }
                 }
             },
             "traits": {
@@ -5497,6 +5562,7 @@
                 "DecryptionType": {
                     "target": "com.amazonaws.mediaconnect#EndpointEncryptionType",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The type of decryption used for the destination endpoint connection.</p>",
                         "smithy.api#jsonName": "decryptionType"
                     }
@@ -5504,6 +5570,7 @@
                 "DecryptionConfiguration": {
                     "target": "com.amazonaws.mediaconnect#EndpointEncryptionConfiguration",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#jsonName": "decryptionConfiguration"
                     }
                 },
@@ -6514,6 +6581,20 @@
                         "smithy.api#jsonName": "recoveryLatencyMode",
                         "smithy.api#required": {}
                     }
+                },
+                "SwitchingMode": {
+                    "target": "com.amazonaws.mediaconnect#FabricSwitchingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The switching mode that the router output uses when it switches to a new router input. Valid values include the following:</p> <ul> <li> <p> <code>IMMEDIATE</code> (default) – Switches to the new router input immediately.</p> </li> <li> <p> <code>KEY_FRAME</code> – Waits for a key frame on the new router input before it switches.</p> </li> </ul> <p>If you specify it, it must match the switching configuration.</p>",
+                        "smithy.api#jsonName": "switchingMode"
+                    }
+                },
+                "SwitchingConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#FabricSwitchingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the switching mode.</p>",
+                        "smithy.api#jsonName": "switchingConfiguration"
+                    }
                 }
             },
             "traits": {
@@ -6533,6 +6614,45 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LOW_LATENCY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#FabricSwitchingConfiguration": {
+            "type": "union",
+            "members": {
+                "Immediate": {
+                    "target": "com.amazonaws.mediaconnect#ImmediateFabricSwitchingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The switching configuration where the router output switches to the new router input immediately.</p>",
+                        "smithy.api#jsonName": "immediate"
+                    }
+                },
+                "KeyFrame": {
+                    "target": "com.amazonaws.mediaconnect#KeyFrameFabricSwitchingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The switching configuration where the router output waits for a key frame on the new router input before it switches.</p>",
+                        "smithy.api#jsonName": "keyFrame"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for switching between router inputs.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#FabricSwitchingMode": {
+            "type": "enum",
+            "members": {
+                "IMMEDIATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMMEDIATE"
+                    }
+                },
+                "KEY_FRAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY_FRAME"
                     }
                 }
             }
@@ -6667,6 +6787,13 @@
                         "smithy.api#documentation": "<p>The IP address of the source for this indexed stream.</p>",
                         "smithy.api#jsonName": "sourceIpAddress"
                     }
+                },
+                "RtmpPush": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushStreamDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RTMP stream details for this indexed stream, including the application and stream names.</p>",
+                        "smithy.api#jsonName": "rtmpPush"
+                    }
                 }
             },
             "traits": {
@@ -6687,6 +6814,13 @@
                     "target": "com.amazonaws.mediaconnect#SrtListenerRouterInputConfiguration",
                     "traits": {
                         "smithy.api#jsonName": "srtListener"
+                    }
+                },
+                "RtmpPush": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushRouterInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for a failover router input that uses the RTMP protocol.</p>",
+                        "smithy.api#jsonName": "rtmpPush"
                     }
                 },
                 "SrtCaller": {
@@ -9304,6 +9438,13 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediaconnect#ImmediateFabricSwitchingConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The switching configuration where the router output switches to the new router input immediately. This type does not require any additional settings.</p>"
+            }
+        },
         "com.amazonaws.mediaconnect#IngressGatewayBridge": {
             "type": "structure",
             "members": {
@@ -9490,6 +9631,25 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.mediaconnect#KeyFrameFabricSwitchingConfiguration": {
+            "type": "structure",
+            "members": {
+                "KeyFrameWaitMilliseconds": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in milliseconds, that the router output waits for a key frame on the new input before it switches. Set this value to at least the GOP (Group of Pictures) duration of your content, which your upstream encoder determines. If the wait time is shorter than the GOP duration, MediaConnect makes a best effort to switch without a key frame. The default is 3000.</p>",
+                        "smithy.api#jsonName": "keyFrameWaitMilliseconds",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 10000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The switching configuration where the router output waits for a key frame on the new router input before it switches.</p>"
             }
         },
         "com.amazonaws.mediaconnect#KeyType": {
@@ -11887,6 +12047,30 @@
                 }
             }
         },
+        "com.amazonaws.mediaconnect#ManualRtmpPushNamingConfiguration": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern <code>rtmp://ingestAddress/applicationName/streamName</code>.</p>",
+                        "smithy.api#jsonName": "applicationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.</p>",
+                        "smithy.api#jsonName": "streamName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The manual RTMP naming configuration, where you specify the application and stream names.</p>"
+            }
+        },
         "com.amazonaws.mediaconnect#MaxResults": {
             "type": "integer",
             "traits": {
@@ -13625,6 +13809,18 @@
                     "traits": {
                         "smithy.api#jsonName": "rist"
                     }
+                },
+                "SrtListener": {
+                    "target": "com.amazonaws.mediaconnect#SrtListenerRouterInputConfiguration",
+                    "traits": {
+                        "smithy.api#jsonName": "srtListener"
+                    }
+                },
+                "SrtCaller": {
+                    "target": "com.amazonaws.mediaconnect#SrtCallerRouterInputConfiguration",
+                    "traits": {
+                        "smithy.api#jsonName": "srtCaller"
+                    }
                 }
             },
             "traits": {
@@ -14395,6 +14591,61 @@
                 "smithy.api#documentation": "<p>The cross-account sharing details for an endpoint that this account owns and shares with other accounts.</p>"
             }
         },
+        "com.amazonaws.mediaconnect#Passthrough": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that passes through the value from the source. This type does not require any additional settings.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#Pid": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 32,
+                    "max": 8190
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#PidMapRule": {
+            "type": "structure",
+            "members": {
+                "MatchExpression": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An expression that selects the elementary streams that this rule applies to.</p>",
+                        "smithy.api#jsonName": "matchExpression",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.mediaconnect#ActionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to apply to the elementary streams that match this rule.</p>",
+                        "smithy.api#jsonName": "action",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule that selects elementary streams and specifies the action to apply to them.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#PidMapRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconnect#PidMapRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 32
+                }
+            }
+        },
         "com.amazonaws.mediaconnect#PreferredDayTimeMaintenanceConfiguration": {
             "type": "structure",
             "members": {
@@ -14428,6 +14679,76 @@
                         "smithy.api#enumValue": "HOURLY"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediaconnect#ProgramClockReferencePidConfiguration": {
+            "type": "union",
+            "members": {
+                "Passthrough": {
+                    "target": "com.amazonaws.mediaconnect#Passthrough",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PCR PID configuration that passes through the PCR PID from the source.</p>",
+                        "smithy.api#jsonName": "passthrough"
+                    }
+                },
+                "Set": {
+                    "target": "com.amazonaws.mediaconnect#Pid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PCR PID to use for the router output. MediaConnect applies this value only when the PCR is carried on its own PID. If the PCR is carried on an elementary stream, this value has no effect. If you also set the PMT PID, the two values must be different.</p>",
+                        "smithy.api#jsonName": "set"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the Program Clock Reference (PCR) Packet ID (PID).</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#ProgramMapTablePidConfiguration": {
+            "type": "union",
+            "members": {
+                "Passthrough": {
+                    "target": "com.amazonaws.mediaconnect#Passthrough",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PMT PID configuration that passes through the PMT PID from the source.</p>",
+                        "smithy.api#jsonName": "passthrough"
+                    }
+                },
+                "Set": {
+                    "target": "com.amazonaws.mediaconnect#Pid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PMT PID to use for the router output. If you also set the PCR PID, the two values must be different.</p>",
+                        "smithy.api#jsonName": "set"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the Program Map Table (PMT) Packet ID (PID).</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#ProgramNumberConfiguration": {
+            "type": "union",
+            "members": {
+                "Passthrough": {
+                    "target": "com.amazonaws.mediaconnect#Passthrough",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The program number configuration that passes through the program number from the source.</p>",
+                        "smithy.api#jsonName": "passthrough"
+                    }
+                },
+                "Set": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The program number to use for the router output.</p>",
+                        "smithy.api#jsonName": "set",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 65535
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the program number.</p>"
             }
         },
         "com.amazonaws.mediaconnect#Protocol": {
@@ -14536,6 +14857,15 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ndi-speed-hq",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
+                    }
+                },
+                "rtmp_push": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rtmp-push",
                         "smithy.api#suppress": [
                             "EnumShape"
                         ]
@@ -14845,10 +15175,10 @@
                         "smithy.api#documentation": "<p>A description to help you identify the destination endpoint.</p>",
                         "smithy.api#jsonName": "description",
                         "smithy.api#length": {
-                            "min": 1,
+                            "min": 0,
                             "max": 1000
                         },
-                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)\\[\\]*]+$"
+                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)]*$"
                     }
                 },
                 "Configuration": {
@@ -14969,10 +15299,10 @@
                         "smithy.api#documentation": "<p>A description to help you identify the source endpoint.</p>",
                         "smithy.api#jsonName": "description",
                         "smithy.api#length": {
-                            "min": 1,
+                            "min": 0,
                             "max": 1000
                         },
-                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)\\[\\]*]+$"
+                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)]*$"
                     }
                 },
                 "Configuration": {
@@ -16787,6 +17117,13 @@
                     "traits": {
                         "smithy.api#jsonName": "transportStreamMediaInfo"
                     }
+                },
+                "RtmpInfo": {
+                    "target": "com.amazonaws.mediaconnect#RtmpSourceMetadataInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RTMP (Real-Time Messaging Protocol) specific information about the router input's source. This includes the application name, the stream name, and the associated audio and video streams.</p>",
+                        "smithy.api#jsonName": "rtmpInfo"
+                    }
                 }
             },
             "traits": {
@@ -16819,6 +17156,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SRT_LISTENER"
                     }
+                },
+                "RTMP_PUSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RTMP_PUSH"
+                    }
                 }
             }
         },
@@ -16835,6 +17178,13 @@
                     "target": "com.amazonaws.mediaconnect#SrtListenerRouterInputConfiguration",
                     "traits": {
                         "smithy.api#jsonName": "srtListener"
+                    }
+                },
+                "RtmpPush": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushRouterInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for a router input that uses the RTMP protocol.</p>",
+                        "smithy.api#jsonName": "rtmpPush"
                     }
                 },
                 "SrtCaller": {
@@ -17779,6 +18129,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Processors": {
+                    "target": "com.amazonaws.mediaconnect#RouterOutputProcessors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processor settings for the router output.</p>",
+                        "smithy.api#jsonName": "processors"
+                    }
+                },
                 "AssociatedSourceEndpointArns": {
                     "target": "com.amazonaws.mediaconnect#SourceEndpointArnList",
                     "traits": {
@@ -17931,6 +18288,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconnect#RouterOutputMessage"
+            }
+        },
+        "com.amazonaws.mediaconnect#RouterOutputProcessors": {
+            "type": "structure",
+            "members": {
+                "SingleProgramTransportStreamPidMap": {
+                    "target": "com.amazonaws.mediaconnect#SingleProgramTransportStreamPidMapConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for remapping the identification numbers of elementary streams and program identifiers of a single-program transport stream.</p>",
+                        "smithy.api#jsonName": "singleProgramTransportStreamPidMap"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The processor settings for a router output.</p>"
             }
         },
         "com.amazonaws.mediaconnect#RouterOutputProtocol": {
@@ -18390,6 +18762,227 @@
                 "target": "com.amazonaws.mediaconnect#RoutingScope"
             }
         },
+        "com.amazonaws.mediaconnect#RtmpMediaInfo": {
+            "type": "structure",
+            "members": {
+                "Streams": {
+                    "target": "com.amazonaws.mediaconnect#RtmpMediaStreamInfoList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of the individual audio and video streams that make up the RTMP source. This includes details about each stream's codec, resolution, frame rate, audio channels, and other parameters.</p>",
+                        "smithy.api#jsonName": "streams",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about the audio and video media that is part of the RTMP source content. This includes details about the individual streams.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpMediaStreamInfo": {
+            "type": "structure",
+            "members": {
+                "StreamId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique identifier for the stream.</p>",
+                        "smithy.api#jsonName": "streamId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamType": {
+                    "target": "com.amazonaws.mediaconnect#SourceMediaStreamType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of stream (for example, <code>VIDEO</code> or <code>AUDIO</code>).</p>",
+                        "smithy.api#jsonName": "streamType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Codec": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The codec used for the stream.</p>",
+                        "smithy.api#jsonName": "codec",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FrameRate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of video frames displayed per second. Used when the <code>streamType</code> is <code>VIDEO</code>.</p>",
+                        "smithy.api#jsonName": "frameRate"
+                    }
+                },
+                "FrameResolution": {
+                    "target": "com.amazonaws.mediaconnect#FrameResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width and height dimensions of the video frame in pixels. Used when the <code>streamType</code> is <code>VIDEO</code>.</p>",
+                        "smithy.api#jsonName": "frameResolution"
+                    }
+                },
+                "ScanMode": {
+                    "target": "com.amazonaws.mediaconnect#ScanMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method used to display video frames. Used when the <code>streamType</code> is <code>VIDEO</code>.</p>",
+                        "smithy.api#jsonName": "scanMode"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.mediaconnect#ColorInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color signaling of the video stream. Used when the <code>streamType</code> is <code>VIDEO</code>.</p>",
+                        "smithy.api#jsonName": "color"
+                    }
+                },
+                "Channels": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of audio channels in the stream. Used when the <code>streamType</code> is <code>AUDIO</code>.</p>",
+                        "smithy.api#jsonName": "channels"
+                    }
+                },
+                "SampleRate": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of audio samples captured per second. Used when the <code>streamType</code> is <code>AUDIO</code>.</p>",
+                        "smithy.api#jsonName": "sampleRate"
+                    }
+                },
+                "SampleSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample bit size used by the audio stream. Used when the <code>streamType</code> is <code>AUDIO</code>.</p>",
+                        "smithy.api#jsonName": "sampleSize"
+                    }
+                },
+                "Language": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the audio stream. Used when the <code>streamType</code> is <code>AUDIO</code>.</p>",
+                        "smithy.api#jsonName": "language"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a single audio or video stream that is part of an RTMP source. This includes details about the stream type, codec, resolution, frame rate, audio channels, and sample rate.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpMediaStreamInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconnect#RtmpMediaStreamInfo"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpPushNamingConfiguration": {
+            "type": "union",
+            "members": {
+                "Manual": {
+                    "target": "com.amazonaws.mediaconnect#ManualRtmpPushNamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The naming configuration where you specify the application and stream names.</p>",
+                        "smithy.api#jsonName": "manual"
+                    }
+                },
+                "Automatic": {
+                    "target": "com.amazonaws.mediaconnect#AutomaticRtmpPushNamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The naming configuration where MediaConnect generates the application and stream names.</p>",
+                        "smithy.api#jsonName": "automatic"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpPushNamingType": {
+            "type": "enum",
+            "members": {
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                },
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpPushOutputSettings": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern <code>rtmp://destinationAddress/applicationName/streamName</code>.</p>",
+                        "smithy.api#jsonName": "applicationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.</p>",
+                        "smithy.api#jsonName": "streamName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TlsEncryption": {
+                    "target": "com.amazonaws.mediaconnect#TlsEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS encryption settings for the output. When you specify these settings, the output uses RTMPS (RTMP over TLS) to establish a secure, encrypted connection to the destination server.</p>",
+                        "smithy.api#jsonName": "tlsEncryption"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the application and stream names, and optional TLS encryption configuration.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpPushRouterInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "Port": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for the RTMP protocol. The only valid value is <code>1935</code>.</p>",
+                        "smithy.api#jsonName": "port",
+                        "smithy.api#range": {
+                            "min": 1935,
+                            "max": 1935
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "NamingType": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushNamingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The naming type. If you specify it, it must match the naming configuration.</p>",
+                        "smithy.api#jsonName": "namingType"
+                    }
+                },
+                "NamingConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushNamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the application and stream names.</p>",
+                        "smithy.api#jsonName": "namingConfiguration",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for a router input using the RTMP (Real-Time Messaging Protocol) protocol.</p>"
+            }
+        },
         "com.amazonaws.mediaconnect#RtmpPushRouterOutputConfiguration": {
             "type": "structure",
             "members": {
@@ -18439,6 +19032,96 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration settings for a router output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the destination address and port, the application and stream names, and optional TLS encryption configuration.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpPushSourceSettings": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern <code>rtmp://ingestAddress/applicationName/streamName</code>.</p>",
+                        "smithy.api#jsonName": "applicationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.</p>",
+                        "smithy.api#jsonName": "streamName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NamingType": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushNamingType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The naming type that the source uses. With <code>AUTOMATIC</code> naming, MediaConnect generates the application and stream names.</p>",
+                        "smithy.api#jsonName": "namingType",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for the RTMP (Real-Time Messaging Protocol) source.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpPushStreamDetails": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP application.</p>",
+                        "smithy.api#jsonName": "applicationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP stream.</p>",
+                        "smithy.api#jsonName": "streamName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#RtmpSourceMetadataInfo": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP application.</p>",
+                        "smithy.api#jsonName": "applicationName"
+                    }
+                },
+                "StreamName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the RTMP stream.</p>",
+                        "smithy.api#jsonName": "streamName"
+                    }
+                },
+                "MediaInfo": {
+                    "target": "com.amazonaws.mediaconnect#RtmpMediaInfo",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Information about the audio and video streams that are part of the RTMP source.</p>",
+                        "smithy.api#jsonName": "mediaInfo",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the RTMP (Real-Time Messaging Protocol) source. This includes the application name, the stream name, and metadata about the audio and video streams.</p>"
             }
         },
         "com.amazonaws.mediaconnect#RtpRouterInputConfiguration": {
@@ -18702,6 +19385,23 @@
                 "smithy.api#documentation": "<p> The source configuration for cloud flows receiving a stream from a bridge.</p>"
             }
         },
+        "com.amazonaws.mediaconnect#SetRtmpPushSourceSettings": {
+            "type": "structure",
+            "members": {
+                "NamingConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushNamingConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The configuration settings for the application and stream names.</p>",
+                        "smithy.api#jsonName": "namingConfiguration",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for the RTMP (Real-Time Messaging Protocol) source.</p>"
+            }
+        },
         "com.amazonaws.mediaconnect#SetSourceRequest": {
             "type": "structure",
             "members": {
@@ -18866,6 +19566,13 @@
                         "smithy.api#documentation": "<p>The decryption configuration for the flow source when router integration is enabled. Specifies how the source content should be decrypted when router integration is used.</p>",
                         "smithy.api#jsonName": "routerIntegrationTransitDecryption"
                     }
+                },
+                "RtmpPushSettings": {
+                    "target": "com.amazonaws.mediaconnect#SetRtmpPushSourceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the RTMP (Real-Time Messaging Protocol) source.</p>",
+                        "smithy.api#jsonName": "rtmpPushSettings"
+                    }
                 }
             },
             "traits": {
@@ -18916,6 +19623,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Detects silent audio in the router input's source content and reports it through a CloudWatch metric, an EventBridge event, and a router input message.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#SingleProgramTransportStreamPidMapConfiguration": {
+            "type": "structure",
+            "members": {
+                "Rules": {
+                    "target": "com.amazonaws.mediaconnect#PidMapRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of up to 32 rules that determine the action for each elementary stream. MediaConnect applies the first rule that matches.</p>",
+                        "smithy.api#jsonName": "rules",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultAction": {
+                    "target": "com.amazonaws.mediaconnect#ActionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to apply to an elementary stream that doesn't match any rule.</p>",
+                        "smithy.api#jsonName": "defaultAction",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransportStreamId": {
+                    "target": "com.amazonaws.mediaconnect#TransportStreamIdConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transport stream ID (TSID) settings for the router output. By default, the router output passes through the TSID from the source.</p>",
+                        "smithy.api#jsonName": "transportStreamId"
+                    }
+                },
+                "ProgramNumber": {
+                    "target": "com.amazonaws.mediaconnect#ProgramNumberConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The program number settings for the router output. By default, the router output passes through the program number from the source.</p>",
+                        "smithy.api#jsonName": "programNumber"
+                    }
+                },
+                "ProgramMapTablePid": {
+                    "target": "com.amazonaws.mediaconnect#ProgramMapTablePidConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Program Map Table (PMT) PID settings for the router output. By default, the router output passes through the PMT PID from the source.</p>",
+                        "smithy.api#jsonName": "programMapTablePid"
+                    }
+                },
+                "ProgramClockReferencePid": {
+                    "target": "com.amazonaws.mediaconnect#ProgramClockReferencePidConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Program Clock Reference (PCR) PID settings for the router output. By default, the router output passes through the PCR PID from the source.</p>",
+                        "smithy.api#jsonName": "programClockReferencePid"
+                    }
+                },
+                "Auto": {
+                    "target": "com.amazonaws.mediaconnect#AutoPidMapConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for automatic Packet ID (PID) assignment. The default start PID is 512, with 32 PIDs per program.</p>",
+                        "smithy.api#jsonName": "auto"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for remapping the identification numbers of elementary streams and program identifiers of a single-program transport stream.</p>"
             }
         },
         "com.amazonaws.mediaconnect#Source": {
@@ -19225,6 +19991,7 @@
                 "EncryptionType": {
                     "target": "com.amazonaws.mediaconnect#EndpointEncryptionType",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The type of encryption used for the source endpoint connection.</p>",
                         "smithy.api#jsonName": "encryptionType"
                     }
@@ -19232,6 +19999,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.mediaconnect#EndpointEncryptionConfiguration",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#jsonName": "encryptionConfiguration"
                     }
                 },
@@ -19647,6 +20415,35 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconnect#SourceEndpointType"
+            }
+        },
+        "com.amazonaws.mediaconnect#SourceMediaStreamType": {
+            "type": "enum",
+            "members": {
+                "VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO"
+                    }
+                },
+                "AUDIO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO"
+                    }
+                },
+                "DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.mediaconnect#SourcePriority": {
@@ -20278,6 +21075,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The source IP address for the standard router input stream.</p>",
                         "smithy.api#jsonName": "sourceIpAddress"
+                    }
+                },
+                "RtmpPush": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushStreamDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RTMP stream details for the standard router input stream, including the application and stream names.</p>",
+                        "smithy.api#jsonName": "rtmpPush"
                     }
                 }
             },
@@ -21695,6 +22499,20 @@
                         "smithy.api#documentation": "<p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). For NDI outputs, this field is always present and defaults to <code>-20</code>.</p>",
                         "smithy.api#jsonName": "ndiAudioReferenceLevel"
                     }
+                },
+                "RtmpPushSourceSettings": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushSourceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the RTMP (Real-Time Messaging Protocol) source.</p>",
+                        "smithy.api#jsonName": "rtmpPushSourceSettings"
+                    }
+                },
+                "RtmpPushOutputSettings": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified.</p>",
+                        "smithy.api#jsonName": "rtmpPushOutputSettings"
+                    }
                 }
             },
             "traits": {
@@ -21786,6 +22604,13 @@
                         "smithy.api#jsonName": "sampleSize"
                     }
                 },
+                "ScanMode": {
+                    "target": "com.amazonaws.mediaconnect#ScanMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan mode used by the video stream.</p>",
+                        "smithy.api#jsonName": "scanMode"
+                    }
+                },
                 "StreamType": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -21794,10 +22619,43 @@
                         "smithy.api#jsonName": "streamType",
                         "smithy.api#required": {}
                     }
+                },
+                "Language": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the elementary stream.</p>",
+                        "smithy.api#jsonName": "language"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> The metadata of an elementary transport stream.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#TransportStreamIdConfiguration": {
+            "type": "union",
+            "members": {
+                "Passthrough": {
+                    "target": "com.amazonaws.mediaconnect#Passthrough",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TSID configuration that passes through the TSID from the source.</p>",
+                        "smithy.api#jsonName": "passthrough"
+                    }
+                },
+                "Set": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TSID to use for the router output.</p>",
+                        "smithy.api#jsonName": "set",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 65535
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the transport stream ID (TSID).</p>"
             }
         },
         "com.amazonaws.mediaconnect#TransportStreamProgram": {
@@ -22548,10 +23406,10 @@
                         "smithy.api#documentation": "<p>A description to help you identify the destination endpoint.</p>",
                         "smithy.api#jsonName": "description",
                         "smithy.api#length": {
-                            "min": 1,
+                            "min": 0,
                             "max": 1000
                         },
-                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)\\[\\]*]+$"
+                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)]*$"
                     }
                 },
                 "Configuration": {
@@ -23215,6 +24073,13 @@
                         "smithy.api#documentation": "<p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect leaves the value unchanged.</p>",
                         "smithy.api#jsonName": "ndiAudioReferenceLevel"
                     }
+                },
+                "RtmpPushSettings": {
+                    "target": "com.amazonaws.mediaconnect#RtmpPushOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified.</p>",
+                        "smithy.api#jsonName": "rtmpPushSettings"
+                    }
                 }
             },
             "traits": {
@@ -23532,6 +24397,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration for the flow source when router integration is enabled.</p>",
                         "smithy.api#jsonName": "routerIntegrationTransitDecryption"
+                    }
+                },
+                "RtmpPushSettings": {
+                    "target": "com.amazonaws.mediaconnect#SetRtmpPushSourceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the RTMP (Real-Time Messaging Protocol) source.</p>",
+                        "smithy.api#jsonName": "rtmpPushSettings"
                     }
                 }
             },
@@ -24089,6 +24961,13 @@
                         "smithy.api#documentation": "<p>The updated fabric configuration settings for the router output. You cannot update the fabric configuration while the output has an active route. You must unroute the output before updating the fabric configuration.</p>",
                         "smithy.api#jsonName": "fabricConfiguration"
                     }
+                },
+                "Processors": {
+                    "target": "com.amazonaws.mediaconnect#RouterOutputProcessors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated processor settings for the router output. When you update the processors, include every setting that you want to keep. MediaConnect resets the settings that you don't specify to their defaults.</p>",
+                        "smithy.api#jsonName": "processors"
+                    }
                 }
             },
             "traits": {
@@ -24174,10 +25053,10 @@
                         "smithy.api#documentation": "<p>A description to help you identify the source endpoint.</p>",
                         "smithy.api#jsonName": "description",
                         "smithy.api#length": {
-                            "min": 1,
+                            "min": 0,
                             "max": 1000
                         },
-                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)\\[\\]*]+$"
+                        "smithy.api#pattern": "^[ a-zA-Z_0-9\\-.',@:;\\(\\)]*$"
                     }
                 },
                 "Configuration": {

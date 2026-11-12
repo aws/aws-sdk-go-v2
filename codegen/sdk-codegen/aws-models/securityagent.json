@@ -4752,6 +4752,12 @@
                         "smithy.api#documentation": "<p>The code remediation strategy for the pentest. Valid values are AUTOMATIC and DISABLED.</p>"
                     }
                 },
+                "cleanUpStrategy": {
+                    "target": "com.amazonaws.securityagent#CleanUpStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy for cleaning up resources after pentest job completion. Valid values are BEST_EFFORT_DELETE and RETAIN_ALL.</p>"
+                    }
+                },
                 "disableManagedSkills": {
                     "target": "com.amazonaws.securityagent#SkillTypeList",
                     "traits": {
@@ -16841,6 +16847,12 @@
                     "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated code remediation strategy for the pentest.</p>"
+                    }
+                },
+                "cleanUpStrategy": {
+                    "target": "com.amazonaws.securityagent#CleanUpStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated strategy for cleaning up resources after pentest job completion.</p>"
                     }
                 },
                 "disableManagedSkills": {

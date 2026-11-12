@@ -252,6 +252,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#AssociateVirtualMachinesToCloudVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#AssociateVirtualMachinesToCloudVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#AssociateVirtualMachinesToCloudVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds virtual machines to the specified VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#AssociateVirtualMachinesToCloudVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "cloudVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster to add virtual machines to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dbServers": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of database server IDs for the virtual machines to add to the VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#AssociateVirtualMachinesToCloudVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the VM cluster, if applicable.</p>"
+                    }
+                },
+                "cloudVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#AssociateVirtualMachinesToExadbVmCluster": {
             "type": "operation",
             "input": {
@@ -2912,6 +3000,12 @@
                         "smithy.api#documentation": "<p>The number of Autonomous CDBs that can't be provisioned because of resource constraints.</p>"
                     }
                 },
+                "ocpusLowestScaledValue": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value to which you can scale down the number of CPU cores.</p>"
+                    }
+                },
                 "provisionableAutonomousContainerDatabases": {
                     "target": "smithy.api#Integer",
                     "traits": {
@@ -3022,6 +3116,9 @@
             },
             "read": {
                 "target": "com.amazonaws.odb#GetCloudAutonomousVmCluster"
+            },
+            "update": {
+                "target": "com.amazonaws.odb#UpdateCloudAutonomousVmCluster"
             },
             "delete": {
                 "target": "com.amazonaws.odb#DeleteCloudAutonomousVmCluster"
@@ -3299,6 +3396,12 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of Autonomous CDBs that can't be provisioned because of resource constraints.</p>"
+                    }
+                },
+                "ocpusLowestScaledValue": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value to which you can scale down the number of CPU cores.</p>"
                     }
                 },
                 "provisionableAutonomousContainerDatabases": {
@@ -3674,6 +3777,9 @@
                 },
                 {
                     "target": "com.amazonaws.odb#ListDbServers"
+                },
+                {
+                    "target": "com.amazonaws.odb#UpdateCloudExadataInfrastructureStorageCapacity"
                 },
                 {
                     "target": "com.amazonaws.odb#UpdateExascaleCloudExadataInfrastructure"
@@ -4305,12 +4411,23 @@
             "read": {
                 "target": "com.amazonaws.odb#GetCloudVmCluster"
             },
+            "update": {
+                "target": "com.amazonaws.odb#UpdateCloudVmCluster"
+            },
             "delete": {
                 "target": "com.amazonaws.odb#DeleteCloudVmCluster"
             },
             "list": {
                 "target": "com.amazonaws.odb#ListCloudVmClusters"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.odb#AssociateVirtualMachinesToCloudVmCluster"
+                },
+                {
+                    "target": "com.amazonaws.odb#DisassociateVirtualMachinesFromCloudVmCluster"
+                }
+            ],
             "traits": {
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag/${TagKey}"
@@ -8934,6 +9051,94 @@
         "com.amazonaws.odb#DisassociateIamRoleFromResourceOutput": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#DisassociateVirtualMachinesFromCloudVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#DisassociateVirtualMachinesFromCloudVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#DisassociateVirtualMachinesFromCloudVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes virtual machines from the specified VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#DisassociateVirtualMachinesFromCloudVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "cloudVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster to remove virtual machines from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dbServers": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of database server IDs for the virtual machines to remove from the VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#DisassociateVirtualMachinesFromCloudVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the VM cluster, if applicable.</p>"
+                    }
+                },
+                "cloudVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -16249,7 +16454,7 @@
                     "min": 1,
                     "max": 18
                 },
-                "smithy.api#pattern": "^(?:(?:\\d|[01]?\\d\\d|2[0-4]\\d|25[0-5])\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d|\\d)\\/(?:[1-2][0-9]|3[0-2]|[1-9])$"
+                "smithy.api#pattern": "^(?:(?:\\d|[01]?\\d\\d|2[0-4]\\d|25[0-5])\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d|\\d)\\/(?:[1-2][0-9]|3[0-2]|[0-9])$"
             }
         },
         "com.amazonaws.odb#PeeredCidrList": {
@@ -18700,6 +18905,143 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#UpdateCloudAutonomousVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#UpdateCloudAutonomousVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#UpdateCloudAutonomousVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of the specified Autonomous VM cluster.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudAutonomousVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "cloudAutonomousVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Autonomous VM cluster to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "autonomousDataStorageSizeInTBs": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data storage size to allocate for Autonomous Databases in the Autonomous VM cluster, in terabytes (TB).</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "cpuCoreCountPerNode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CPU cores to enable per node in the Autonomous VM cluster. If you don't specify a value, the existing number of CPU cores per node is retained.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-provided description of the Autonomous VM cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 400
+                        }
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new user-friendly name for the Autonomous VM cluster.</p>"
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.odb#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle license model to apply to the Autonomous VM cluster.</p>"
+                    }
+                },
+                "maintenanceWindow": {
+                    "target": "com.amazonaws.odb#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.</p>"
+                    }
+                },
+                "totalContainerDatabases": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of Autonomous Container Databases that can be created in the Autonomous VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudAutonomousVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name of the updated Autonomous VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Autonomous VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the Autonomous VM cluster, if applicable.</p>"
+                    }
+                },
+                "cloudAutonomousVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated Autonomous VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#UpdateCloudExadataInfrastructure": {
             "type": "operation",
             "input": {
@@ -18743,8 +19085,29 @@
                         "smithy.api#required": {}
                     }
                 },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new user-friendly name for the Exadata infrastructure.</p>"
+                    }
+                },
+                "computeCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of database servers for the Exadata infrastructure.</p>"
+                    }
+                },
                 "maintenanceWindow": {
-                    "target": "com.amazonaws.odb#MaintenanceWindow"
+                    "target": "com.amazonaws.odb#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance window configuration for the Exadata Cloud infrastructure.</p> <p>This allows you to define when maintenance operations such as patching and updates can be performed on the infrastructure.</p>"
+                    }
+                },
+                "storageCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of storage servers to activate for the Exadata infrastructure.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18776,6 +19139,237 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the updated Exadata infrastructure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudExadataInfrastructureStorageCapacity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#UpdateCloudExadataInfrastructureStorageCapacityInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#UpdateCloudExadataInfrastructureStorageCapacityOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds storage capacity to the specified Exadata infrastructure.</p>"
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudExadataInfrastructureStorageCapacityInput": {
+            "type": "structure",
+            "members": {
+                "cloudExadataInfrastructureId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier or Amazon Resource Name (ARN) of the Exadata infrastructure to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudExadataInfrastructureStorageCapacityOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name of the updated Exadata infrastructure.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exadata infrastructure.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the Exadata infrastructure, if applicable.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated Exadata infrastructure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#UpdateCloudVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#UpdateCloudVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of the specified VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "cloudVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "cpuCoreCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CPU cores to enable on the VM cluster. If you don't specify a value, the existing number of CPU cores is retained.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "dataCollectionOptions": {
+                    "target": "com.amazonaws.odb#DataCollectionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of preferences for the diagnostic collection options for the VM cluster.</p>"
+                    }
+                },
+                "dataStorageSizeInTBs": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the data disk group, in terabytes (TB), to allocate for the VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "dbNodeStorageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of local node storage, in gigabytes (GB), to allocate for the VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new user-friendly name for the VM cluster.</p>"
+                    }
+                },
+                "sshPublicKeys": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key portion of one or more key pairs used for SSH access to the VM cluster.</p>"
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.odb#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle license model to apply to the VM cluster.</p>"
+                    }
+                },
+                "memorySizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory, in gigabytes (GB), to allocate for the VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "storageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of local node storage, in gigabytes (GB), to allocate to the VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateCloudVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name of the updated VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the VM cluster, if applicable.</p>"
+                    }
+                },
+                "cloudVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated VM cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }

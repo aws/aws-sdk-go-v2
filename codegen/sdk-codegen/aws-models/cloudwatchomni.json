@@ -5497,6 +5497,61 @@
                             ],
                             "nextToken": "eyJvZmZzZXQiOjEwMH0="
                         }
+                    },
+                    {
+                        "title": "Return metric aggregation metadata",
+                        "documentation": "The following example returns aggregation metadata for a metric stream observed on a service over a one-hour window. The metric attributes identify its producing service and instrumentation scope; additional data point dimensions can identify multiple time series. Payloads are shown as JSON; on the wire they are CBOR-encoded.",
+                        "input": {
+                            "nodeFilters": {
+                                "nodeId": "svc:checkout-service"
+                            },
+                            "startTime": "2026-09-16T00:00:00Z",
+                            "endTime": "2026-09-16T01:00:00Z",
+                            "depth": 0,
+                            "maxResults": 1,
+                            "includeMetadata": true
+                        },
+                        "output": {
+                            "nodes": [
+                                {
+                                    "nodeId": "svc:checkout-service",
+                                    "nodeType": "SERVICE",
+                                    "name": "checkout-service",
+                                    "nodeProperties": {
+                                        "region": "us-east-1",
+                                        "cloudProvider": "aws",
+                                        "sourceAccountId": "123456789012",
+                                        "namespace": "ecommerce"
+                                    },
+                                    "signalTypes": [
+                                        "METRICS"
+                                    ],
+                                    "sources": [
+                                        "TELEMETRY"
+                                    ],
+                                    "metadata": {
+                                        "metrics": [
+                                            {
+                                                "name": "traces.span.metrics.calls",
+                                                "metricType": "sum",
+                                                "attributes": {
+                                                    "@resource.service.name": "checkout-service",
+                                                    "@resource.service.namespace": "ecommerce",
+                                                    "@instrumentation.@name": "otel.cloudwatch.spanmetrics"
+                                                },
+                                                "semantics": {
+                                                    "unit": "{request}"
+                                                },
+                                                "aggregationTemporality": "cumulative",
+                                                "monotonicity": "monotonic"
+                                            }
+                                        ]
+                                    },
+                                    "firstObservedAt": "2026-09-16T00:03:00Z",
+                                    "lastObservedAt": "2026-09-16T00:58:00Z"
+                                }
+                            ]
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -8814,6 +8869,28 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchomni#MetricAggregationTemporality": {
+            "type": "enum",
+            "members": {
+                "DELTA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Each data point contains values accumulated since the preceding reporting interval.",
+                        "smithy.api#enumValue": "delta"
+                    }
+                },
+                "CUMULATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Each data point contains values accumulated since a fixed start time or stream reset.",
+                        "smithy.api#enumValue": "cumulative"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Describes how an aggregating metric reports values over time. A delta value covers the\npreceding reporting interval. A cumulative value covers a fixed start time through the\ncurrent reporting time, restarting when the stream resets."
+            }
+        },
         "com.amazonaws.cloudwatchomni#MetricMetadata": {
             "type": "structure",
             "members": {
@@ -8838,7 +8915,7 @@
                 "attributes": {
                     "target": "com.amazonaws.cloudwatchomni#MetadataAttributeMap",
                     "traits": {
-                        "smithy.api#documentation": "Per-metric qualifying attributes used to query this metric's telemetry. Keys are the\nmetric store's own label names, not bare OTel attribute names: service identity arrives\nas \"@resource.service.name\" and \"@resource.service.namespace\", and the instrumentation\nscope as \"@instrumentation.@name\", while span-derived metrics label the service as a\nbare \"service.name\". Cloud provider, account and region are not repeated per metric —\nread those from the node. Values are RAW, deliberately NOT the node's normalized or\nmerged identity, so a selector built from them matches the emitted series. A merged node\ncan carry different values per metric, which is why these live here rather than on the\nnode."
+                        "smithy.api#documentation": "Per-metric qualifying attributes used to query this metric's telemetry. Keys are the\nmetric store's own label names, not bare OTel attribute names: service identity arrives\nas \"@resource.service.name\" and \"@resource.service.namespace\", and the instrumentation\nscope as \"@instrumentation.@name\". Span-derived metrics can additionally carry the service\nas a bare data point \"service.name\" label. Cloud provider, account and region are not\nrepeated per metric — read those from the node. Values are RAW, deliberately NOT the node's\nmerged identity, so a selector built from them matches the emitted series. A merged node\ncan carry different values per metric, which is why these live here rather than on the\nnode."
                     }
                 },
                 "semantics": {
@@ -8846,10 +8923,22 @@
                     "traits": {
                         "smithy.api#documentation": "What the metric means and the unit it is reported in."
                     }
+                },
+                "aggregationTemporality": {
+                    "target": "com.amazonaws.cloudwatchomni#MetricAggregationTemporality",
+                    "traits": {
+                        "smithy.api#documentation": "Aggregation temporality for the selected metric stream represented by this metadata entry.\nPresent when known, including cumulative for OTel Summary metrics. Absent for Gauge metrics\nor when the information is unavailable."
+                    }
+                },
+                "monotonicity": {
+                    "target": "com.amazonaws.cloudwatchomni#MetricMonotonicity",
+                    "traits": {
+                        "smithy.api#documentation": "Whether the selected Sum metric stream represented by this metadata entry is a non-negative\naccumulation. Absent for metrics other than Sum or when the information is unavailable."
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A single metric observed on a context graph node."
+                "smithy.api#documentation": "A single metric observed on a context graph node or edge."
             }
         },
         "com.amazonaws.cloudwatchomni#MetricMetadataList": {
@@ -8858,11 +8947,33 @@
                 "target": "com.amazonaws.cloudwatchomni#MetricMetadata"
             },
             "traits": {
-                "smithy.api#documentation": "Metrics observed on a context graph node. When more are observed than the cap,\nthe backend keeps RED/OTel-semconv names (http/rpc server+client, span-metrics)\nahead of the alphabetical remainder, so the metrics the console charts survive.\nMust match the backend MetricMetadataList cap or entries the backend kept get\nre-truncated here at the frontend boundary.",
+                "smithy.api#documentation": "Metrics observed on a context graph node or edge. When more are observed than the cap,\nthe backend keeps RED/OTel-semconv names (http/rpc server+client, span-metrics)\nahead of the alphabetical remainder, so the metrics the console charts survive.\nMust match the backend MetricMetadataList cap or entries the backend kept get\nre-truncated here at the frontend boundary.",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.cloudwatchomni#MetricMonotonicity": {
+            "type": "enum",
+            "members": {
+                "MONOTONIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Delta values are non-negative; cumulative values do not decrease except at a stream reset.",
+                        "smithy.api#enumValue": "monotonic"
+                    }
+                },
+                "NON_MONOTONIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Delta values can be negative; cumulative values can increase or decrease.",
+                        "smithy.api#enumValue": "non_monotonic"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Describes whether a Sum is a non-negative accumulation. For a monotonic Sum, delta values\nare non-negative and cumulative values do not decrease except when the stream resets. A\nnon-monotonic Sum can report positive or negative changes."
             }
         },
         "com.amazonaws.cloudwatchomni#MetricSemantics": {

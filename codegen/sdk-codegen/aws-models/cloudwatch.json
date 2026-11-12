@@ -1373,6 +1373,26 @@
                 "smithy.api#pattern": "^(default|arn:[a-zA-Z0-9-]+:cloudwatch:[a-zA-Z0-9-]*:\\d{12}:dataset/default)$"
             }
         },
+        "com.amazonaws.cloudwatch#DefinitionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]{1,64}$"
+            }
+        },
+        "com.amazonaws.cloudwatch#DefinitionPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{N}\\p{P}\\p{S}\\p{Zs}]+$"
+            }
+        },
         "com.amazonaws.cloudwatch#DeleteAlarmMuteRule": {
             "type": "operation",
             "input": {
@@ -1627,6 +1647,42 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteMetricDataQueryDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#DeleteMetricDataQueryDefinitionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#DeleteMetricDataQueryDefinitionOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a metric data query definition.</p>\n         <p>This operation is idempotent. If the definition doesn't exist, the operation succeeds\n            without returning an error.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To delete a definition, you need the\n                <code>cloudwatch:DeleteMetricDataQueryDefinition</code> permission on the metric\n            data query definition resource. You can use the <code>aws:ResourceTag/${TagKey}</code>\n            condition key to control access based on the tags of the definition.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteMetricDataQueryDefinitionInput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the metric data query definition to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteMetricDataQueryDefinitionOutput": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -3331,6 +3387,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#GetMetricDataQueryDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#GetMetricDataQueryDefinitionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#GetMetricDataQueryDefinitionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a metric data query definition, including its expression.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To get a definition, you need the\n                <code>cloudwatch:GetMetricDataQueryDefinition</code> permission on the metric data\n            query definition resource. You can use the <code>aws:ResourceTag/${TagKey}</code>\n            condition key to control access based on the tags of the definition.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetMetricDataQueryDefinitionInput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the metric data query definition to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetMetricDataQueryDefinitionOutput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudwatch#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionPath",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The path of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.cloudwatch#MetricExpressionString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The query expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudwatch#QueryType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The language of the expression. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROMQL</code> – A PromQL query.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQL</code> – A CloudWatch Metrics Insights query.</p>\n            </li>\n            <li>\n               <p>\n                  <code>METRIC_MATH</code> – A metric math expression.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time when you created the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time when you last updated the metric data query\n            definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#GetMetricStatistics": {
             "type": "operation",
             "input": {
@@ -3758,6 +3912,9 @@
                     "target": "com.amazonaws.cloudwatch#DeleteInsightRules"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#DeleteMetricDataQueryDefinition"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#DeleteMetricStream"
                 },
                 {
@@ -3812,6 +3969,9 @@
                     "target": "com.amazonaws.cloudwatch#GetMetricData"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#GetMetricDataQueryDefinition"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#GetMetricStatistics"
                 },
                 {
@@ -3834,6 +3994,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#ListManagedInsightRules"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ListMetricDataQueryDefinitions"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#ListMetrics"
@@ -3870,6 +4033,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#PutMetricData"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#PutMetricDataQueryDefinition"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#PutMetricStream"
@@ -5678,6 +5844,67 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#ListMetricDataQueryDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#ListMetricDataQueryDefinitionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#ListMetricDataQueryDefinitionsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the metric data query definitions in your account and Region.</p>\n         <p>The results are summaries that don't include the expression. To get the full\n            definition, call <code>GetMetricDataQueryDefinition</code> with its ID.</p>\n         <p>This operation supports pagination. Use the <code>MaxResults</code> and\n                <code>NextToken</code> parameters to retrieve results in multiple calls.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To list definitions, you need the\n                <code>cloudwatch:ListMetricDataQueryDefinitions</code> permission. This permission\n            applies to all definitions in the account and Region. The results aren't filtered by\n            tags.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#ListMetricDataQueryDefinitionsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudwatch#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of metric data query definitions to return in one call. The\n            default is 100.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#MetricDataQueryDefinitionNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned by a previous call to indicate where to continue retrieving\n            results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#ListMetricDataQueryDefinitionsOutput": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.cloudwatch#MetricDataQueryDefinitionSummaries",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of metric data query definition summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#MetricDataQueryDefinitionNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. If this field is absent,\n            there are no more results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#ListMetricStreams": {
             "type": "operation",
             "input": {
@@ -6197,6 +6424,15 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#MaxReturnedResultsCount": {
             "type": "integer",
             "traits": {
@@ -6556,6 +6792,60 @@
                 "smithy.api#documentation": "<p>This structure is used in both <code>GetMetricData</code> and\n                <code>PutMetricAlarm</code>. The supported use of this structure is different for\n            those two operations.</p>\n         <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and\n            whether this call is just retrieving a batch set of data for one metric, or is\n            performing a Metrics Insights query or a math expression. A single\n                <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code>\n            structures.</p>\n         <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a\n            metric math expression. Each <code>MetricDataQuery</code> in the array specifies either\n            a metric to retrieve, or a math expression to be performed on retrieved metrics. A\n            single <code>PutMetricAlarm</code> call can include up to 20\n                <code>MetricDataQuery</code> structures in the array. The 20 structures can include\n            as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a\n            metric, and as many as 10 structures that contain the <code>Expression</code> parameter\n            to perform a math expression. Of those <code>Expression</code> structures, one must have\n                <code>true</code> as the value for <code>ReturnData</code>. The result of this\n            expression is the value the alarm watches.</p>\n         <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single\n            time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User\n                Guide</i>.</p>\n         <p>Some of the parameters of this structure also have different uses whether you are\n            using this structure in a <code>GetMetricData</code> operation or a\n                <code>PutMetricAlarm</code> operation. These differences are explained in the\n            following parameter list.</p>"
             }
         },
+        "com.amazonaws.cloudwatch#MetricDataQueryDefinitionNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.cloudwatch#MetricDataQueryDefinitionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#MetricDataQueryDefinitionSummary"
+            }
+        },
+        "com.amazonaws.cloudwatch#MetricDataQueryDefinitionSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionPath",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The path of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudwatch#QueryType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The language of the expression. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROMQL</code> – A PromQL query.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQL</code> – A CloudWatch Metrics Insights query.</p>\n            </li>\n            <li>\n               <p>\n                  <code>METRIC_MATH</code> – A metric math expression.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you last updated the metric data query\n            definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a metric data query definition. To get the expression,\n            call <code>GetMetricDataQueryDefinition</code>.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#MetricDataResult": {
             "type": "structure",
             "members": {
@@ -6683,6 +6973,16 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#MetricExpressionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65536
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloudwatch#MetricId": {
@@ -8057,6 +8357,138 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudwatch#PutMetricDataQueryDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#PutMetricDataQueryDefinitionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#PutMetricDataQueryDefinitionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a metric data query definition.</p>\n         <p>A metric data query definition saves a metric query so that you can reuse it later.\n            It includes the query expression, the query language, and a path that names the\n            definition and can organize it into folders. When you save a definition,\n                CloudWatch doesn't validate or run its expression.</p>\n         <p>To create a definition, omit <code>Id</code>. CloudWatch generates the ID and\n            returns it. To update a definition, specify its <code>Id</code>. An update replaces the\n            path, expression, and type, and keeps the creation time.</p>\n         <p>The path must be unique in your account and Region. If another definition already\n            uses the path, the request fails with a <code>ConflictException</code>.</p>\n         <p>You can have up to 1,000 metric data query definitions in each Region of your\n            account. A request that would create more fails with a\n                <code>LimitExceededException</code>.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create or update a definition, you need the\n                <code>cloudwatch:PutMetricDataQueryDefinition</code> permission on the metric data\n            query definition resource. The resource ARN has the format\n                <code>arn:aws:cloudwatch:Region:account-id:metric-query-definition/Id</code>.</p>\n         <p>To add tags when you create a definition, you also need the\n                <code>cloudwatch:TagResource</code> permission. You can use the\n                <code>aws:RequestTag/${TagKey}</code> and <code>aws:TagKeys</code> condition keys\n            to control which tags can be added.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#PutMetricDataQueryDefinitionInput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the metric data query definition to update. Omit this parameter to\n            create a definition. CloudWatch then generates the ID and returns it in the\n            response.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionPath",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the metric data query definition. Use slashes (<code>/</code>) to\n            organize definitions into folders, for example <code>team/web/latency</code>. The path\n            must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>It must be unique in your account and Region.</p>\n            </li>\n            <li>\n               <p>It can't start or end with a slash.</p>\n            </li>\n            <li>\n               <p>It can't contain an empty folder name (<code>//</code>).</p>\n            </li>\n            <li>\n               <p>It can be at most 1,015 bytes when encoded as UTF-8.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.cloudwatch#MetricExpressionString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The query expression, in the language that <code>Type</code> specifies.\n                CloudWatch doesn't validate or run the expression when you save it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudwatch#QueryType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The language of the expression. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROMQL</code> – A PromQL query.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQL</code> – A CloudWatch Metrics Insights query.</p>\n            </li>\n            <li>\n               <p>\n                  <code>METRIC_MATH</code> – A metric math expression.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudwatch#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the metric data query definition. You\n            can use tags to categorize definitions and to control access to them. Tags are applied\n            only when the request creates a definition, that is, when you omit <code>Id</code>. To\n            change the tags of an existing definition, use <code>TagResource</code> and\n                <code>UntagResource</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#PutMetricDataQueryDefinitionOutput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudwatch#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.cloudwatch#DefinitionPath",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The path of the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.cloudwatch#MetricExpressionString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The query expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudwatch#QueryType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The language of the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time when you created the metric data query definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time when you last updated the metric data query\n            definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#PutMetricStream": {
             "type": "operation",
             "input": {
@@ -8201,6 +8633,29 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#QueryType": {
+            "type": "enum",
+            "members": {
+                "PROMQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROMQL"
+                    }
+                },
+                "SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL"
+                    }
+                },
+                "METRIC_MATH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METRIC_MATH"
+                    }
                 }
             }
         },
