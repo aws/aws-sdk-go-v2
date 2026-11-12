@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Lightsail_20161128.StartInstance
 
-{"instanceName":"__InstanceName__"}
+{"attributeUpdates":{"bundleId":"__BundleId__"},"instanceName":"__InstanceName__"}

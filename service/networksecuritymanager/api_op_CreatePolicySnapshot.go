@@ -60,7 +60,9 @@ func (v *CreatePolicySnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyIdentifier != nil {
 		s.WriteString(schemas.CreatePolicySnapshotInput_policyIdentifier, *v.PolicyIdentifier)
 	}
-	serializeTagMap(s, schemas.CreatePolicySnapshotInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePolicySnapshotInput_tags, v.Tags)
+	}
 }
 
 type CreatePolicySnapshotOutput struct {
@@ -142,7 +144,9 @@ func (v *CreatePolicySnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePolicySnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedTemplateAndRuleList(s, schemas.CreatePolicySnapshotOutput_associatedTemplateAndRuleList, v.AssociatedTemplateAndRuleList)
+	if v.AssociatedTemplateAndRuleList != nil {
+		serializeAssociatedTemplateAndRuleList(s, schemas.CreatePolicySnapshotOutput_associatedTemplateAndRuleList, v.AssociatedTemplateAndRuleList)
+	}
 	if v.FirewallType != "" {
 		s.WriteString(schemas.CreatePolicySnapshotOutput_firewallType, string(v.FirewallType))
 	}

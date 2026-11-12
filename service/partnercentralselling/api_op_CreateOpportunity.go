@@ -200,7 +200,9 @@ func (v *CreateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NationalSecurity != "" {
 		s.WriteString(schemas.CreateOpportunityRequest_NationalSecurity, string(v.NationalSecurity))
 	}
-	serializePartnerOpportunityTeamMembersList(s, schemas.CreateOpportunityRequest_OpportunityTeam, v.OpportunityTeam)
+	if v.OpportunityTeam != nil {
+		serializePartnerOpportunityTeamMembersList(s, schemas.CreateOpportunityRequest_OpportunityTeam, v.OpportunityTeam)
+	}
 	if v.OpportunityType != "" {
 		s.WriteString(schemas.CreateOpportunityRequest_OpportunityType, string(v.OpportunityType))
 	}
@@ -210,7 +212,9 @@ func (v *CreateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PartnerOpportunityIdentifier != nil {
 		s.WriteString(schemas.CreateOpportunityRequest_PartnerOpportunityIdentifier, *v.PartnerOpportunityIdentifier)
 	}
-	serializePrimaryNeedsFromAws(s, schemas.CreateOpportunityRequest_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	if v.PrimaryNeedsFromAws != nil {
+		serializePrimaryNeedsFromAws(s, schemas.CreateOpportunityRequest_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	}
 	if v.Project != nil {
 		s.WriteStruct(schemas.CreateOpportunityRequest_Project)
 		v.Project.SerializeMembers(s)
@@ -221,7 +225,9 @@ func (v *CreateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SoftwareRevenue.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateOpportunityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOpportunityRequest_Tags, v.Tags)
+	}
 }
 
 type CreateOpportunityOutput struct {

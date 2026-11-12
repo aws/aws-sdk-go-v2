@@ -110,7 +110,9 @@ func (v *ListSpeakersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSpeakersResponse_NextToken, *v.NextToken)
 	}
-	serializeSpeakerSummaries(s, schemas.ListSpeakersResponse_SpeakerSummaries, v.SpeakerSummaries)
+	if v.SpeakerSummaries != nil {
+		serializeSpeakerSummaries(s, schemas.ListSpeakersResponse_SpeakerSummaries, v.SpeakerSummaries)
+	}
 }
 func (v *ListSpeakersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSpeakersResponse, func(s *smithy.Schema) error {

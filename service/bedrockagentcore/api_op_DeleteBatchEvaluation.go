@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteBatchEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchEvaluationId != nil {
+		s.WriteString(schemas.DeleteBatchEvaluationRequest_batchEvaluationId, *v.BatchEvaluationId)
+	}
+}
+
 type DeleteBatchEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted batch evaluation.
@@ -57,13 +71,48 @@ type DeleteBatchEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchEvaluationArn != nil {
+		s.WriteString(schemas.DeleteBatchEvaluationResponse_batchEvaluationArn, *v.BatchEvaluationArn)
+	}
+	if v.BatchEvaluationId != nil {
+		s.WriteString(schemas.DeleteBatchEvaluationResponse_batchEvaluationId, *v.BatchEvaluationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteBatchEvaluationResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteBatchEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBatchEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBatchEvaluationResponse_batchEvaluationArn:
+			v.BatchEvaluationArn = new(string)
+			return d.ReadString(schemas.DeleteBatchEvaluationResponse_batchEvaluationArn, v.BatchEvaluationArn)
+		case schemas.DeleteBatchEvaluationResponse_batchEvaluationId:
+			v.BatchEvaluationId = new(string)
+			return d.ReadString(schemas.DeleteBatchEvaluationResponse_batchEvaluationId, v.BatchEvaluationId)
+		case schemas.DeleteBatchEvaluationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBatchEvaluationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BatchEvaluationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBatchEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchEvaluation, schemas.DeleteBatchEvaluationRequest, schemas.DeleteBatchEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchEvaluation, schemas.DeleteBatchEvaluationRequest, schemas.DeleteBatchEvaluationResponse), output: &DeleteBatchEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

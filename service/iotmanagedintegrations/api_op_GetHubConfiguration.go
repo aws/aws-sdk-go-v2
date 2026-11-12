@@ -4,6 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -28,6 +30,15 @@ type GetHubConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHubConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHubConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHubConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetHubConfigurationOutput struct {
 
 	// A user-defined integer value that represents the hub token timer expiry setting
@@ -43,13 +54,38 @@ type GetHubConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHubConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHubConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHubConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubTokenTimerExpirySettingInSeconds != nil {
+		s.WriteInt64(schemas.GetHubConfigurationResponse_HubTokenTimerExpirySettingInSeconds, *v.HubTokenTimerExpirySettingInSeconds)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetHubConfigurationResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetHubConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHubConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHubConfigurationResponse_HubTokenTimerExpirySettingInSeconds:
+			v.HubTokenTimerExpirySettingInSeconds = new(int64)
+			return d.ReadInt64(schemas.GetHubConfigurationResponse_HubTokenTimerExpirySettingInSeconds, v.HubTokenTimerExpirySettingInSeconds)
+		case schemas.GetHubConfigurationResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetHubConfigurationResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHubConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHubConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHubConfiguration, schemas.GetHubConfigurationRequest, schemas.GetHubConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetHubConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHubConfiguration, schemas.GetHubConfigurationRequest, schemas.GetHubConfigurationResponse), output: &GetHubConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

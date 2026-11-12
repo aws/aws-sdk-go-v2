@@ -55,7 +55,9 @@ func (v *CreateResourceDefinitionVersionInput) SerializeMembers(s smithy.ShapeSe
 	if v.ResourceDefinitionId != nil {
 		s.WriteString(schemas.CreateResourceDefinitionVersionRequest_ResourceDefinitionId, *v.ResourceDefinitionId)
 	}
-	serialize__listOfResource(s, schemas.CreateResourceDefinitionVersionRequest_Resources, v.Resources)
+	if v.Resources != nil {
+		serialize__listOfResource(s, schemas.CreateResourceDefinitionVersionRequest_Resources, v.Resources)
+	}
 }
 
 type CreateResourceDefinitionVersionOutput struct {

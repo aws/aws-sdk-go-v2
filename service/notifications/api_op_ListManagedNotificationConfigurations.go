@@ -86,7 +86,9 @@ func (v *ListManagedNotificationConfigurationsOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListManagedNotificationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedNotificationConfigurations(s, schemas.ListManagedNotificationConfigurationsResponse_managedNotificationConfigurations, v.ManagedNotificationConfigurations)
+	if v.ManagedNotificationConfigurations != nil {
+		serializeManagedNotificationConfigurations(s, schemas.ListManagedNotificationConfigurationsResponse_managedNotificationConfigurations, v.ManagedNotificationConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedNotificationConfigurationsResponse_nextToken, *v.NextToken)
 	}

@@ -56,7 +56,9 @@ func (v *BatchGetBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncludeParameterSpec != nil {
 		s.WriteBool(schemas.BatchGetBlueprintsRequest_IncludeParameterSpec, *v.IncludeParameterSpec)
 	}
-	serializeBatchGetBlueprintNames(s, schemas.BatchGetBlueprintsRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeBatchGetBlueprintNames(s, schemas.BatchGetBlueprintsRequest_Names, v.Names)
+	}
 }
 
 type BatchGetBlueprintsOutput struct {
@@ -80,8 +82,12 @@ func (v *BatchGetBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprints(s, schemas.BatchGetBlueprintsResponse_Blueprints, v.Blueprints)
-	serializeBlueprintNames(s, schemas.BatchGetBlueprintsResponse_MissingBlueprints, v.MissingBlueprints)
+	if v.Blueprints != nil {
+		serializeBlueprints(s, schemas.BatchGetBlueprintsResponse_Blueprints, v.Blueprints)
+	}
+	if v.MissingBlueprints != nil {
+		serializeBlueprintNames(s, schemas.BatchGetBlueprintsResponse_MissingBlueprints, v.MissingBlueprints)
+	}
 }
 func (v *BatchGetBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetBlueprintsResponse, func(s *smithy.Schema) error {

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,42 @@ type GetCaptureDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaptureDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaptureDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaptureDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteStruct(schemas.GetCaptureDataRequest_endTime)
+		v.EndTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FormatSettings != nil {
+		s.WriteStruct(schemas.GetCaptureDataRequest_formatSettings)
+		v.FormatSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaptureDataRequest_nextToken, *v.NextToken)
+	}
+	if v.PropertyAlias != nil {
+		s.WriteString(schemas.GetCaptureDataRequest_propertyAlias, *v.PropertyAlias)
+	}
+	if v.StartTime != nil {
+		s.WriteStruct(schemas.GetCaptureDataRequest_startTime)
+		v.StartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeSeriesId != nil {
+		s.WriteString(schemas.GetCaptureDataRequest_timeSeriesId, *v.TimeSeriesId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.GetCaptureDataRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response containing the video data.
 type GetCaptureDataOutput struct {
 
@@ -94,13 +132,63 @@ type GetCaptureDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaptureDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaptureDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaptureDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.GetCaptureDataResponse_data, v.Data)
+	}
+	if v.DataType != "" {
+		s.WriteString(schemas.GetCaptureDataResponse_dataType, string(v.DataType))
+	}
+	if v.EndTime != nil {
+		s.WriteStruct(schemas.GetCaptureDataResponse_endTime)
+		v.EndTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaptureDataResponse_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteStruct(schemas.GetCaptureDataResponse_startTime)
+		v.StartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCaptureDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaptureDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaptureDataResponse_data:
+			return d.ReadBlob(schemas.GetCaptureDataResponse_data, &v.Data)
+		case schemas.GetCaptureDataResponse_dataType:
+			var ev string
+			if err := d.ReadString(schemas.GetCaptureDataResponse_dataType, &ev); err != nil {
+				return err
+			}
+			v.DataType = types.VideoDataType(ev)
+			return nil
+		case schemas.GetCaptureDataResponse_endTime:
+			v.EndTime = &types.TimeInNanos{}
+			return v.EndTime.Deserialize(d)
+		case schemas.GetCaptureDataResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCaptureDataResponse_nextToken, v.NextToken)
+		case schemas.GetCaptureDataResponse_startTime:
+			v.StartTime = &types.TimeInNanos{}
+			return v.StartTime.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCaptureDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCaptureData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaptureData, schemas.GetCaptureDataRequest, schemas.GetCaptureDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCaptureData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaptureData, schemas.GetCaptureDataRequest, schemas.GetCaptureDataResponse), output: &GetCaptureDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

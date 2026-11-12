@@ -4,6 +4,8 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type CancelMLModelTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMLModelTransformJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMLModelTransformJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMLModelTransformJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Clean != nil {
+		s.WriteBool(schemas.CancelMLModelTransformJobInput_clean, *v.Clean)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CancelMLModelTransformJobInput_id, *v.Id)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.CancelMLModelTransformJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+}
+
 type CancelMLModelTransformJobOutput struct {
 
 	// the status of the cancelation.
@@ -60,13 +80,32 @@ type CancelMLModelTransformJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMLModelTransformJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMLModelTransformJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMLModelTransformJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.CancelMLModelTransformJobOutput_status, *v.Status)
+	}
+}
+func (v *CancelMLModelTransformJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMLModelTransformJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMLModelTransformJobOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CancelMLModelTransformJobOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMLModelTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelMLModelTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMLModelTransformJob, schemas.CancelMLModelTransformJobInput, schemas.CancelMLModelTransformJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelMLModelTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMLModelTransformJob, schemas.CancelMLModelTransformJobInput, schemas.CancelMLModelTransformJobOutput), output: &CancelMLModelTransformJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

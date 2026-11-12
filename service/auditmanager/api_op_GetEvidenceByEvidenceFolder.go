@@ -98,7 +98,9 @@ func (v *GetEvidenceByEvidenceFolderOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GetEvidenceByEvidenceFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvidenceList(s, schemas.GetEvidenceByEvidenceFolderResponse_evidence, v.Evidence)
+	if v.Evidence != nil {
+		serializeEvidenceList(s, schemas.GetEvidenceByEvidenceFolderResponse_evidence, v.Evidence)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEvidenceByEvidenceFolderResponse_nextToken, *v.NextToken)
 	}

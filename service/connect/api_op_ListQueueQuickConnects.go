@@ -111,7 +111,9 @@ func (v *ListQueueQuickConnectsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueueQuickConnectsResponse_NextToken, *v.NextToken)
 	}
-	serializeQuickConnectSummaryList(s, schemas.ListQueueQuickConnectsResponse_QuickConnectSummaryList, v.QuickConnectSummaryList)
+	if v.QuickConnectSummaryList != nil {
+		serializeQuickConnectSummaryList(s, schemas.ListQueueQuickConnectsResponse_QuickConnectSummaryList, v.QuickConnectSummaryList)
+	}
 }
 func (v *ListQueueQuickConnectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueueQuickConnectsResponse, func(s *smithy.Schema) error {

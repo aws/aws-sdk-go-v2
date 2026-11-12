@@ -62,7 +62,9 @@ func (v *UpdateConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigTypeData(s, schemas.UpdateConfigRequest_configData, v.ConfigData)
+	if v.ConfigData != nil {
+		serializeConfigTypeData(s, schemas.UpdateConfigRequest_configData, v.ConfigData)
+	}
 	if v.ConfigId != nil {
 		s.WriteString(schemas.UpdateConfigRequest_configId, *v.ConfigId)
 	}

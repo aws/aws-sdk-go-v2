@@ -71,11 +71,15 @@ func (v *DescribeCapacityProvidersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCapacityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeCapacityProvidersRequest_capacityProviders, v.CapacityProviders)
+	if v.CapacityProviders != nil {
+		serializeStringList(s, schemas.DescribeCapacityProvidersRequest_capacityProviders, v.CapacityProviders)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.DescribeCapacityProvidersRequest_cluster, *v.Cluster)
 	}
-	serializeCapacityProviderFieldList(s, schemas.DescribeCapacityProvidersRequest_include, v.Include)
+	if v.Include != nil {
+		serializeCapacityProviderFieldList(s, schemas.DescribeCapacityProvidersRequest_include, v.Include)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeCapacityProvidersRequest_maxResults, *v.MaxResults)
 	}
@@ -111,8 +115,12 @@ func (v *DescribeCapacityProvidersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCapacityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviders(s, schemas.DescribeCapacityProvidersResponse_capacityProviders, v.CapacityProviders)
-	serializeFailures(s, schemas.DescribeCapacityProvidersResponse_failures, v.Failures)
+	if v.CapacityProviders != nil {
+		serializeCapacityProviders(s, schemas.DescribeCapacityProvidersResponse_capacityProviders, v.CapacityProviders)
+	}
+	if v.Failures != nil {
+		serializeFailures(s, schemas.DescribeCapacityProvidersResponse_failures, v.Failures)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeCapacityProvidersResponse_nextToken, *v.NextToken)
 	}

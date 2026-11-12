@@ -64,7 +64,9 @@ func (v *GetCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetCaseRequest_domainId, *v.DomainId)
 	}
-	serializeFieldIdentifierList(s, schemas.GetCaseRequest_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldIdentifierList(s, schemas.GetCaseRequest_fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCaseRequest_nextToken, *v.NextToken)
 	}
@@ -104,7 +106,7 @@ type GetCaseOutput struct {
 	// results to return.
 	NextToken *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -121,11 +123,15 @@ func (v *GetCaseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldValueList(s, schemas.GetCaseResponse_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.GetCaseResponse_fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCaseResponse_nextToken, *v.NextToken)
 	}
-	serializeTags(s, schemas.GetCaseResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetCaseResponse_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.GetCaseResponse_templateId, *v.TemplateId)
 	}

@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type DeleteAnalysisSchemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnalysisSchemeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnalysisSchemeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnalysisSchemeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisSchemeName != nil {
+		s.WriteString(schemas.DeleteAnalysisSchemeRequest_AnalysisSchemeName, *v.AnalysisSchemeName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteAnalysisSchemeRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DeleteAnalysisScheme request. Contains the status of the
 // deleted analysis scheme.
 type DeleteAnalysisSchemeOutput struct {
@@ -62,13 +79,34 @@ type DeleteAnalysisSchemeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnalysisSchemeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnalysisSchemeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnalysisSchemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisScheme != nil {
+		s.WriteStruct(schemas.DeleteAnalysisSchemeResponse_AnalysisScheme)
+		v.AnalysisScheme.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAnalysisSchemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnalysisSchemeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAnalysisSchemeResponse_AnalysisScheme:
+			v.AnalysisScheme = &types.AnalysisSchemeStatus{}
+			return v.AnalysisScheme.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnalysisSchemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAnalysisScheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnalysisScheme, schemas.DeleteAnalysisSchemeRequest, schemas.DeleteAnalysisSchemeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteAnalysisScheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnalysisScheme, schemas.DeleteAnalysisSchemeRequest, schemas.DeleteAnalysisSchemeResponse), output: &DeleteAnalysisSchemeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -76,7 +76,9 @@ func (v *UpdateRegistrationsFromBrandProfileInput) SerializeMembers(s smithy.Sha
 	if v.OnAttributeConflict != "" {
 		s.WriteString(schemas.UpdateRegistrationsFromBrandProfileInput_onAttributeConflict, string(v.OnAttributeConflict))
 	}
-	serializeRegistrationIdList(s, schemas.UpdateRegistrationsFromBrandProfileInput_registrationIds, v.RegistrationIds)
+	if v.RegistrationIds != nil {
+		serializeRegistrationIdList(s, schemas.UpdateRegistrationsFromBrandProfileInput_registrationIds, v.RegistrationIds)
+	}
 	if v.SmartMatch != nil {
 		s.WriteBool(schemas.UpdateRegistrationsFromBrandProfileInput_smartMatch, *v.SmartMatch)
 	}
@@ -103,7 +105,9 @@ func (v *UpdateRegistrationsFromBrandProfileOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *UpdateRegistrationsFromBrandProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobResults(s, schemas.UpdateRegistrationsFromBrandProfileOutput_results, v.Results)
+	if v.Results != nil {
+		serializeJobResults(s, schemas.UpdateRegistrationsFromBrandProfileOutput_results, v.Results)
+	}
 }
 func (v *UpdateRegistrationsFromBrandProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRegistrationsFromBrandProfileOutput, func(s *smithy.Schema) error {

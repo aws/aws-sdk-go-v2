@@ -80,7 +80,9 @@ func (v *GetStaticIpsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetStaticIpsResult_nextPageToken, *v.NextPageToken)
 	}
-	serializeStaticIpList(s, schemas.GetStaticIpsResult_staticIps, v.StaticIps)
+	if v.StaticIps != nil {
+		serializeStaticIpList(s, schemas.GetStaticIpsResult_staticIps, v.StaticIps)
+	}
 }
 func (v *GetStaticIpsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetStaticIpsResult, func(s *smithy.Schema) error {

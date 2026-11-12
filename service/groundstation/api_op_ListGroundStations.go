@@ -100,7 +100,9 @@ func (v *ListGroundStationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGroundStationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroundStationList(s, schemas.ListGroundStationsResponse_groundStationList, v.GroundStationList)
+	if v.GroundStationList != nil {
+		serializeGroundStationList(s, schemas.ListGroundStationsResponse_groundStationList, v.GroundStationList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroundStationsResponse_nextToken, *v.NextToken)
 	}

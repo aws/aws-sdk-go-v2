@@ -85,7 +85,9 @@ func (v *CreateMediaPipelineKinesisVideoStreamPoolInput) SerializeMembers(s smit
 		v.StreamConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMediaPipelineKinesisVideoStreamPoolOutput struct {

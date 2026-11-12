@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,8 +32,18 @@ type DescribePoliciesInput struct {
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
 
+	//  Specifies whether to include scaling policies for managed Auto Scaling groups
+	// in the response. When set to true (default), the response includes scaling
+	// policies for managed Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to be returned with each call. The default value is
 	// 50 and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -52,6 +64,56 @@ type DescribePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePoliciesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribePoliciesType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.DescribePoliciesType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribePoliciesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePoliciesType_NextToken, *v.NextToken)
+	}
+	if v.PolicyNames != nil {
+		serializePolicyNames(s, schemas.DescribePoliciesType_PolicyNames, v.PolicyNames)
+	}
+	if v.PolicyTypes != nil {
+		serializePolicyTypes(s, schemas.DescribePoliciesType_PolicyTypes, v.PolicyTypes)
+	}
+}
+func (v *DescribePoliciesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePoliciesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePoliciesType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DescribePoliciesType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DescribePoliciesType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.DescribePoliciesType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.DescribePoliciesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribePoliciesType_MaxRecords, v.MaxRecords)
+		case schemas.DescribePoliciesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePoliciesType_NextToken, v.NextToken)
+		case schemas.DescribePoliciesType_PolicyNames:
+			return deserializePolicyNames(d, schemas.DescribePoliciesType_PolicyNames, &v.PolicyNames)
+		case schemas.DescribePoliciesType_PolicyTypes:
+			return deserializePolicyTypes(d, schemas.DescribePoliciesType_PolicyTypes, &v.PolicyTypes)
+		}
+		return nil
+	})
+}
+
 type DescribePoliciesOutput struct {
 
 	// A string that indicates that the response contains more items than can be
@@ -69,13 +131,37 @@ type DescribePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PoliciesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.PoliciesType_NextToken, *v.NextToken)
+	}
+	if v.ScalingPolicies != nil {
+		serializeScalingPolicies(s, schemas.PoliciesType_ScalingPolicies, v.ScalingPolicies)
+	}
+}
+func (v *DescribePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PoliciesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PoliciesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.PoliciesType_NextToken, v.NextToken)
+		case schemas.PoliciesType_ScalingPolicies:
+			return deserializeScalingPolicies(d, schemas.PoliciesType_ScalingPolicies, &v.ScalingPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePolicies, schemas.DescribePoliciesType, schemas.PoliciesType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePolicies, schemas.DescribePoliciesType, schemas.PoliciesType), output: &DescribePoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -113,6 +199,11 @@ func (c *Client) addOperationDescribePoliciesMiddlewares(stack *middleware.Stack
 type DescribePoliciesPaginatorOptions struct {
 	// The maximum number of items to be returned with each call. The default value is
 	// 50 and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -162,7 +162,9 @@ func (v *StartTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cluster != nil {
 		s.WriteString(schemas.StartTaskRequest_cluster, *v.Cluster)
 	}
-	serializeStringList(s, schemas.StartTaskRequest_containerInstances, v.ContainerInstances)
+	if v.ContainerInstances != nil {
+		serializeStringList(s, schemas.StartTaskRequest_containerInstances, v.ContainerInstances)
+	}
 	if v.EnableECSManagedTags != false {
 		s.WriteBool(schemas.StartTaskRequest_enableECSManagedTags, v.EnableECSManagedTags)
 	}
@@ -191,11 +193,15 @@ func (v *StartTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartedBy != nil {
 		s.WriteString(schemas.StartTaskRequest_startedBy, *v.StartedBy)
 	}
-	serializeTags(s, schemas.StartTaskRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartTaskRequest_tags, v.Tags)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteString(schemas.StartTaskRequest_taskDefinition, *v.TaskDefinition)
 	}
-	serializeTaskVolumeConfigurations(s, schemas.StartTaskRequest_volumeConfigurations, v.VolumeConfigurations)
+	if v.VolumeConfigurations != nil {
+		serializeTaskVolumeConfigurations(s, schemas.StartTaskRequest_volumeConfigurations, v.VolumeConfigurations)
+	}
 }
 
 type StartTaskOutput struct {
@@ -220,8 +226,12 @@ func (v *StartTaskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.StartTaskResponse_failures, v.Failures)
-	serializeTasks(s, schemas.StartTaskResponse_tasks, v.Tasks)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.StartTaskResponse_failures, v.Failures)
+	}
+	if v.Tasks != nil {
+		serializeTasks(s, schemas.StartTaskResponse_tasks, v.Tasks)
+	}
 }
 func (v *StartTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartTaskResponse, func(s *smithy.Schema) error {

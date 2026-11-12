@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type DeleteIndexFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIndexFieldInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIndexFieldRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIndexFieldInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteIndexFieldRequest_DomainName, *v.DomainName)
+	}
+	if v.IndexFieldName != nil {
+		s.WriteString(schemas.DeleteIndexFieldRequest_IndexFieldName, *v.IndexFieldName)
+	}
+}
+
 // The result of a DeleteIndexField request.
 type DeleteIndexFieldOutput struct {
 
@@ -62,13 +79,34 @@ type DeleteIndexFieldOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIndexFieldOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIndexFieldResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIndexFieldOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexField != nil {
+		s.WriteStruct(schemas.DeleteIndexFieldResponse_IndexField)
+		v.IndexField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteIndexFieldOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIndexFieldResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIndexFieldResponse_IndexField:
+			v.IndexField = &types.IndexFieldStatus{}
+			return v.IndexField.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIndexFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteIndexField{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIndexField, schemas.DeleteIndexFieldRequest, schemas.DeleteIndexFieldResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteIndexField{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIndexField, schemas.DeleteIndexFieldRequest, schemas.DeleteIndexFieldResponse), output: &DeleteIndexFieldOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

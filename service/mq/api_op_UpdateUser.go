@@ -72,7 +72,9 @@ func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsoleAccess != nil {
 		s.WriteBool(schemas.UpdateUserRequest_ConsoleAccess, *v.ConsoleAccess)
 	}
-	serialize__listOf__string(s, schemas.UpdateUserRequest_Groups, v.Groups)
+	if v.Groups != nil {
+		serialize__listOf__string(s, schemas.UpdateUserRequest_Groups, v.Groups)
+	}
 	if v.Password != nil {
 		s.WriteString(schemas.UpdateUserRequest_Password, *v.Password)
 	}

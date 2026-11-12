@@ -118,6 +118,11 @@ var DescribeRegistry = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeRegistry",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeReplicationBackfillResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "DescribeReplicationBackfillResults",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeRepositories = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "DescribeRepositories",
@@ -193,6 +198,11 @@ var ListPullTimeUpdateExclusions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListPullTimeUpdateExclusions",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListReplicationBackfills = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ListReplicationBackfills",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ListTagsForResource",
@@ -261,6 +271,16 @@ var StartImageScan = smithy.NewSchema(smithy.ShapeID{
 var StartLifecyclePolicyPreview = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "StartLifecyclePolicyPreview",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartReplicationBackfill = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "StartReplicationBackfill",
+}, smithy.ShapeTypeOperation, 0)
+
+var StopReplicationBackfill = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "StopReplicationBackfill",
 }, smithy.ShapeTypeOperation, 0)
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -1429,6 +1449,11 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NextToken",
 }, smithy.ShapeTypeString, 0)
 
+var _NonNegativeInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "NonNegativeInteger",
+}, smithy.ShapeTypeInteger, 0)
+
 var _PackageManager = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "PackageManager",
@@ -1672,6 +1697,114 @@ var Remediation = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var Remediation_recommendation *smithy.Schema
 
+var _ReplicationBackfillError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillError",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationBackfillId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillId",
+}, smithy.ShapeTypeString, 0)
+
+var ReplicationBackfillInProgressException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillInProgressException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ReplicationBackfillInProgressException_message *smithy.Schema
+
+var ReplicationBackfillInvalidStatusException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillInvalidStatusException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ReplicationBackfillInvalidStatusException_message *smithy.Schema
+
+var ReplicationBackfillNotFoundException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillNotFoundException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ReplicationBackfillNotFoundException_message *smithy.Schema
+
+var ReplicationBackfillProgress = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillProgress",
+}, smithy.ShapeTypeStructure, 4)
+var ReplicationBackfillProgress_totalReplicationCount *smithy.Schema
+
+var ReplicationBackfillProgress_completedReplicationCount *smithy.Schema
+
+var ReplicationBackfillProgress_failedReplicationCount *smithy.Schema
+
+var ReplicationBackfillProgress_failureCodes *smithy.Schema
+
+var ReplicationBackfillResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillResult",
+}, smithy.ShapeTypeStructure, 5)
+var ReplicationBackfillResult_repositoryName *smithy.Schema
+
+var ReplicationBackfillResult_imageId *smithy.Schema
+
+var ReplicationBackfillResult_status *smithy.Schema
+
+var ReplicationBackfillResult_failureCode *smithy.Schema
+
+var ReplicationBackfillResult_subImageFailureCodes *smithy.Schema
+
+var _ReplicationBackfillResultList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillResultList",
+}, smithy.ShapeTypeList, 1)
+var _ReplicationBackfillResultList_member *smithy.Schema
+
+var ReplicationBackfillResultStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillResultStatus",
+}, smithy.ShapeTypeEnum, 2)
+var ReplicationBackfillResultStatus_COMPLETE *smithy.Schema
+
+var ReplicationBackfillResultStatus_FAILED *smithy.Schema
+
+var ReplicationBackfillStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillStatus",
+}, smithy.ShapeTypeEnum, 6)
+var ReplicationBackfillStatus_PREPARING *smithy.Schema
+
+var ReplicationBackfillStatus_IN_PROGRESS *smithy.Schema
+
+var ReplicationBackfillStatus_COMPLETE *smithy.Schema
+
+var ReplicationBackfillStatus_FAILED *smithy.Schema
+
+var ReplicationBackfillStatus_STOPPING *smithy.Schema
+
+var ReplicationBackfillStatus_STOPPED *smithy.Schema
+
+var ReplicationBackfillSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillSummary",
+}, smithy.ShapeTypeStructure, 7)
+var ReplicationBackfillSummary_replicationBackfillId *smithy.Schema
+
+var ReplicationBackfillSummary_destination *smithy.Schema
+
+var ReplicationBackfillSummary_status *smithy.Schema
+
+var ReplicationBackfillSummary_failureCode *smithy.Schema
+
+var ReplicationBackfillSummary_progress *smithy.Schema
+
+var ReplicationBackfillSummary_startedAt *smithy.Schema
+
+var ReplicationBackfillSummary_endedAt *smithy.Schema
+
+var _ReplicationBackfillSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationBackfillSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ReplicationBackfillSummaryList_member *smithy.Schema
+
 var ReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ReplicationConfiguration",
@@ -1696,6 +1829,12 @@ var _ReplicationError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ReplicationError",
 }, smithy.ShapeTypeString, 0)
+
+var _ReplicationErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ReplicationErrorList",
+}, smithy.ShapeTypeList, 1)
+var _ReplicationErrorList_member *smithy.Schema
 
 var ReplicationRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
@@ -2850,6 +2989,44 @@ var DescribeRegistryResponse_registryId *smithy.Schema
 
 var DescribeRegistryResponse_replicationConfiguration *smithy.Schema
 
+var DescribeReplicationBackfillResultsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "DescribeReplicationBackfillResultsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var DescribeReplicationBackfillResultsRequest_registryId *smithy.Schema
+
+var DescribeReplicationBackfillResultsRequest_replicationBackfillId *smithy.Schema
+
+var DescribeReplicationBackfillResultsRequest_resultStatusFilter *smithy.Schema
+
+var DescribeReplicationBackfillResultsRequest_maxResults *smithy.Schema
+
+var DescribeReplicationBackfillResultsRequest_nextToken *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "DescribeReplicationBackfillResultsResponse",
+}, smithy.ShapeTypeStructure, 10)
+var DescribeReplicationBackfillResultsResponse_registryId *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_replicationBackfillId *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_destination *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_status *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_failureCode *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_progress *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_results *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_startedAt *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_endedAt *smithy.Schema
+
+var DescribeReplicationBackfillResultsResponse_nextToken *smithy.Schema
+
 var DescribeRepositoriesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "DescribeRepositoriesRequest",
@@ -3123,6 +3300,26 @@ var ListPullTimeUpdateExclusionsResponse_pullTimeUpdateExclusions *smithy.Schema
 
 var ListPullTimeUpdateExclusionsResponse_nextToken *smithy.Schema
 
+var ListReplicationBackfillsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ListReplicationBackfillsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListReplicationBackfillsRequest_registryId *smithy.Schema
+
+var ListReplicationBackfillsRequest_maxResults *smithy.Schema
+
+var ListReplicationBackfillsRequest_nextToken *smithy.Schema
+
+var ListReplicationBackfillsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "ListReplicationBackfillsResponse",
+}, smithy.ShapeTypeStructure, 3)
+var ListReplicationBackfillsResponse_registryId *smithy.Schema
+
+var ListReplicationBackfillsResponse_backfills *smithy.Schema
+
+var ListReplicationBackfillsResponse_nextToken *smithy.Schema
+
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ListTagsForResourceRequest",
@@ -3368,6 +3565,50 @@ var StartLifecyclePolicyPreviewResponse_repositoryName *smithy.Schema
 var StartLifecyclePolicyPreviewResponse_lifecyclePolicyText *smithy.Schema
 
 var StartLifecyclePolicyPreviewResponse_status *smithy.Schema
+
+var StartReplicationBackfillRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "StartReplicationBackfillRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StartReplicationBackfillRequest_registryId *smithy.Schema
+
+var StartReplicationBackfillRequest_destination *smithy.Schema
+
+var StartReplicationBackfillResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "StartReplicationBackfillResponse",
+}, smithy.ShapeTypeStructure, 5)
+var StartReplicationBackfillResponse_replicationBackfillId *smithy.Schema
+
+var StartReplicationBackfillResponse_registryId *smithy.Schema
+
+var StartReplicationBackfillResponse_destination *smithy.Schema
+
+var StartReplicationBackfillResponse_status *smithy.Schema
+
+var StartReplicationBackfillResponse_startedAt *smithy.Schema
+
+var StopReplicationBackfillRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "StopReplicationBackfillRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StopReplicationBackfillRequest_registryId *smithy.Schema
+
+var StopReplicationBackfillRequest_replicationBackfillId *smithy.Schema
+
+var StopReplicationBackfillResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "StopReplicationBackfillResponse",
+}, smithy.ShapeTypeStructure, 5)
+var StopReplicationBackfillResponse_registryId *smithy.Schema
+
+var StopReplicationBackfillResponse_replicationBackfillId *smithy.Schema
+
+var StopReplicationBackfillResponse_destination *smithy.Schema
+
+var StopReplicationBackfillResponse_status *smithy.Schema
+
+var StopReplicationBackfillResponse_startedAt *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
@@ -4212,9 +4453,69 @@ func init() {
 
 	RegistryScanningConfiguration_rules = RegistryScanningConfiguration.AddMember("rules", _RegistryScanningRuleList)
 
+	ReplicationBackfillInProgressException_message = ReplicationBackfillInProgressException.AddMember("message", _ExceptionMessage)
+
+	ReplicationBackfillInvalidStatusException_message = ReplicationBackfillInvalidStatusException.AddMember("message", _ExceptionMessage)
+
+	ReplicationBackfillNotFoundException_message = ReplicationBackfillNotFoundException.AddMember("message", _ExceptionMessage)
+
+	_ReplicationErrorList_member = _ReplicationErrorList.AddMember("member", _ReplicationError)
+
+	ReplicationBackfillProgress_totalReplicationCount = ReplicationBackfillProgress.AddMember("totalReplicationCount", _NonNegativeInteger)
+
+	ReplicationBackfillProgress_completedReplicationCount = ReplicationBackfillProgress.AddMember("completedReplicationCount", _NonNegativeInteger)
+
+	ReplicationBackfillProgress_failedReplicationCount = ReplicationBackfillProgress.AddMember("failedReplicationCount", _NonNegativeInteger)
+
+	ReplicationBackfillProgress_failureCodes = ReplicationBackfillProgress.AddMember("failureCodes", _ReplicationErrorList)
+
+	ReplicationBackfillResultStatus_COMPLETE = ReplicationBackfillResultStatus.AddMember("COMPLETE", smithyprelude.Unit)
+
+	ReplicationBackfillResultStatus_FAILED = ReplicationBackfillResultStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ReplicationBackfillResult_repositoryName = ReplicationBackfillResult.AddMember("repositoryName", _RepositoryName)
+
+	ReplicationBackfillResult_imageId = ReplicationBackfillResult.AddMember("imageId", ImageIdentifier)
+
+	ReplicationBackfillResult_status = ReplicationBackfillResult.AddMember("status", ReplicationBackfillResultStatus)
+
+	ReplicationBackfillResult_failureCode = ReplicationBackfillResult.AddMember("failureCode", _ReplicationError)
+
+	ReplicationBackfillResult_subImageFailureCodes = ReplicationBackfillResult.AddMember("subImageFailureCodes", _ReplicationErrorList)
+
+	_ReplicationBackfillResultList_member = _ReplicationBackfillResultList.AddMember("member", ReplicationBackfillResult)
+
+	ReplicationBackfillStatus_PREPARING = ReplicationBackfillStatus.AddMember("PREPARING", smithyprelude.Unit)
+
+	ReplicationBackfillStatus_IN_PROGRESS = ReplicationBackfillStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	ReplicationBackfillStatus_COMPLETE = ReplicationBackfillStatus.AddMember("COMPLETE", smithyprelude.Unit)
+
+	ReplicationBackfillStatus_FAILED = ReplicationBackfillStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ReplicationBackfillStatus_STOPPING = ReplicationBackfillStatus.AddMember("STOPPING", smithyprelude.Unit)
+
+	ReplicationBackfillStatus_STOPPED = ReplicationBackfillStatus.AddMember("STOPPED", smithyprelude.Unit)
+
 	ReplicationDestination_region = ReplicationDestination.AddMember("region", _Region)
 
 	ReplicationDestination_registryId = ReplicationDestination.AddMember("registryId", _RegistryId)
+
+	ReplicationBackfillSummary_replicationBackfillId = ReplicationBackfillSummary.AddMember("replicationBackfillId", _ReplicationBackfillId)
+
+	ReplicationBackfillSummary_destination = ReplicationBackfillSummary.AddMember("destination", ReplicationDestination)
+
+	ReplicationBackfillSummary_status = ReplicationBackfillSummary.AddMember("status", ReplicationBackfillStatus)
+
+	ReplicationBackfillSummary_failureCode = ReplicationBackfillSummary.AddMember("failureCode", _ReplicationBackfillError)
+
+	ReplicationBackfillSummary_progress = ReplicationBackfillSummary.AddMember("progress", ReplicationBackfillProgress)
+
+	ReplicationBackfillSummary_startedAt = ReplicationBackfillSummary.AddMember("startedAt", _Date)
+
+	ReplicationBackfillSummary_endedAt = ReplicationBackfillSummary.AddMember("endedAt", _Date)
+
+	_ReplicationBackfillSummaryList_member = _ReplicationBackfillSummaryList.AddMember("member", ReplicationBackfillSummary)
 
 	_ReplicationDestinationList_member = _ReplicationDestinationList.AddMember("member", ReplicationDestination)
 
@@ -4646,6 +4947,36 @@ func init() {
 
 	DescribeRegistryResponse_replicationConfiguration = DescribeRegistryResponse.AddMember("replicationConfiguration", ReplicationConfiguration)
 
+	DescribeReplicationBackfillResultsRequest_registryId = DescribeReplicationBackfillResultsRequest.AddMember("registryId", _RegistryId)
+
+	DescribeReplicationBackfillResultsRequest_replicationBackfillId = DescribeReplicationBackfillResultsRequest.AddMember("replicationBackfillId", _ReplicationBackfillId)
+
+	DescribeReplicationBackfillResultsRequest_resultStatusFilter = DescribeReplicationBackfillResultsRequest.AddMember("resultStatusFilter", ReplicationBackfillResultStatus)
+
+	DescribeReplicationBackfillResultsRequest_maxResults = DescribeReplicationBackfillResultsRequest.AddMember("maxResults", _MaxResults)
+
+	DescribeReplicationBackfillResultsRequest_nextToken = DescribeReplicationBackfillResultsRequest.AddMember("nextToken", _NextToken)
+
+	DescribeReplicationBackfillResultsResponse_registryId = DescribeReplicationBackfillResultsResponse.AddMember("registryId", _RegistryId)
+
+	DescribeReplicationBackfillResultsResponse_replicationBackfillId = DescribeReplicationBackfillResultsResponse.AddMember("replicationBackfillId", _ReplicationBackfillId)
+
+	DescribeReplicationBackfillResultsResponse_destination = DescribeReplicationBackfillResultsResponse.AddMember("destination", ReplicationDestination)
+
+	DescribeReplicationBackfillResultsResponse_status = DescribeReplicationBackfillResultsResponse.AddMember("status", ReplicationBackfillStatus)
+
+	DescribeReplicationBackfillResultsResponse_failureCode = DescribeReplicationBackfillResultsResponse.AddMember("failureCode", _ReplicationBackfillError)
+
+	DescribeReplicationBackfillResultsResponse_progress = DescribeReplicationBackfillResultsResponse.AddMember("progress", ReplicationBackfillProgress)
+
+	DescribeReplicationBackfillResultsResponse_results = DescribeReplicationBackfillResultsResponse.AddMember("results", _ReplicationBackfillResultList)
+
+	DescribeReplicationBackfillResultsResponse_startedAt = DescribeReplicationBackfillResultsResponse.AddMember("startedAt", _Date)
+
+	DescribeReplicationBackfillResultsResponse_endedAt = DescribeReplicationBackfillResultsResponse.AddMember("endedAt", _Date)
+
+	DescribeReplicationBackfillResultsResponse_nextToken = DescribeReplicationBackfillResultsResponse.AddMember("nextToken", _NextToken)
+
 	DescribeRepositoriesRequest_registryId = DescribeRepositoriesRequest.AddMember("registryId", _RegistryId)
 
 	DescribeRepositoriesRequest_repositoryNames = DescribeRepositoriesRequest.AddMember("repositoryNames", _RepositoryNameList)
@@ -4796,6 +5127,18 @@ func init() {
 
 	ListPullTimeUpdateExclusionsResponse_nextToken = ListPullTimeUpdateExclusionsResponse.AddMember("nextToken", _NextToken)
 
+	ListReplicationBackfillsRequest_registryId = ListReplicationBackfillsRequest.AddMember("registryId", _RegistryId)
+
+	ListReplicationBackfillsRequest_maxResults = ListReplicationBackfillsRequest.AddMember("maxResults", _FiftyMaxResults)
+
+	ListReplicationBackfillsRequest_nextToken = ListReplicationBackfillsRequest.AddMember("nextToken", _NextToken)
+
+	ListReplicationBackfillsResponse_registryId = ListReplicationBackfillsResponse.AddMember("registryId", _RegistryId)
+
+	ListReplicationBackfillsResponse_backfills = ListReplicationBackfillsResponse.AddMember("backfills", _ReplicationBackfillSummaryList)
+
+	ListReplicationBackfillsResponse_nextToken = ListReplicationBackfillsResponse.AddMember("nextToken", _NextToken)
+
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn)
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
@@ -4929,6 +5272,34 @@ func init() {
 	StartLifecyclePolicyPreviewResponse_lifecyclePolicyText = StartLifecyclePolicyPreviewResponse.AddMember("lifecyclePolicyText", _LifecyclePolicyText)
 
 	StartLifecyclePolicyPreviewResponse_status = StartLifecyclePolicyPreviewResponse.AddMember("status", LifecyclePolicyPreviewStatus)
+
+	StartReplicationBackfillRequest_registryId = StartReplicationBackfillRequest.AddMember("registryId", _RegistryId)
+
+	StartReplicationBackfillRequest_destination = StartReplicationBackfillRequest.AddMember("destination", ReplicationDestination)
+
+	StartReplicationBackfillResponse_replicationBackfillId = StartReplicationBackfillResponse.AddMember("replicationBackfillId", _ReplicationBackfillId)
+
+	StartReplicationBackfillResponse_registryId = StartReplicationBackfillResponse.AddMember("registryId", _RegistryId)
+
+	StartReplicationBackfillResponse_destination = StartReplicationBackfillResponse.AddMember("destination", ReplicationDestination)
+
+	StartReplicationBackfillResponse_status = StartReplicationBackfillResponse.AddMember("status", ReplicationBackfillStatus)
+
+	StartReplicationBackfillResponse_startedAt = StartReplicationBackfillResponse.AddMember("startedAt", _Date)
+
+	StopReplicationBackfillRequest_registryId = StopReplicationBackfillRequest.AddMember("registryId", _RegistryId)
+
+	StopReplicationBackfillRequest_replicationBackfillId = StopReplicationBackfillRequest.AddMember("replicationBackfillId", _ReplicationBackfillId)
+
+	StopReplicationBackfillResponse_registryId = StopReplicationBackfillResponse.AddMember("registryId", _RegistryId)
+
+	StopReplicationBackfillResponse_replicationBackfillId = StopReplicationBackfillResponse.AddMember("replicationBackfillId", _ReplicationBackfillId)
+
+	StopReplicationBackfillResponse_destination = StopReplicationBackfillResponse.AddMember("destination", ReplicationDestination)
+
+	StopReplicationBackfillResponse_status = StopReplicationBackfillResponse.AddMember("status", ReplicationBackfillStatus)
+
+	StopReplicationBackfillResponse_startedAt = StopReplicationBackfillResponse.AddMember("startedAt", _Date)
 
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn)
 

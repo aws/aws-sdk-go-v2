@@ -7286,7 +7286,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.sfn#TestExecutionStatus": {

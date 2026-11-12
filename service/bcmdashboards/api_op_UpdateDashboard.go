@@ -65,7 +65,9 @@ func (v *UpdateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDashboardRequest_name, *v.Name)
 	}
-	serializeWidgetList(s, schemas.UpdateDashboardRequest_widgets, v.Widgets)
+	if v.Widgets != nil {
+		serializeWidgetList(s, schemas.UpdateDashboardRequest_widgets, v.Widgets)
+	}
 }
 
 type UpdateDashboardOutput struct {

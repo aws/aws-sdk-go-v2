@@ -1,6 +1,7 @@
-POST /
+POST /service/BaldrApiService/operation/CreateHsm
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.CreateHsm
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AvailabilityZone":"__AvailabilityZone__","ClusterId":"__ClusterId__","IpAddress":"__IpAddress__"}
+¿pAvailabilityZonet__AvailabilityZone__iClusterIdm__ClusterId__iIpAddressm__IpAddress__ÿ

@@ -104,7 +104,9 @@ func (v *ListTemplateSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.ListTemplateSharesOutput_TemplateArn, *v.TemplateArn)
 	}
-	serializeTemplateShareSummaries(s, schemas.ListTemplateSharesOutput_TemplateShareSummaries, v.TemplateShareSummaries)
+	if v.TemplateShareSummaries != nil {
+		serializeTemplateShareSummaries(s, schemas.ListTemplateSharesOutput_TemplateShareSummaries, v.TemplateShareSummaries)
+	}
 }
 func (v *ListTemplateSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTemplateSharesOutput, func(s *smithy.Schema) error {

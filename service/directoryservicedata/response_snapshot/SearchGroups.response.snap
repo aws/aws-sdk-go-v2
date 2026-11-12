@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DirectoryId":"__DirectoryId__","Groups":[{"DistinguishedName":"__DistinguishedName__","GroupScope":"DomainLocal","GroupType":"Distribution","OtherAttributes":{"key0":{"S":"__AttributeValueMemberS__"}},"SAMAccountName":"__SAMAccountName__","SID":"__SID__"},{"DistinguishedName":"__DistinguishedName__","GroupScope":"DomainLocal","GroupType":"Distribution","OtherAttributes":{"key0":{"S":"__AttributeValueMemberS__"}},"SAMAccountName":"__SAMAccountName__","SID":"__SID__"}],"NextToken":"__NextToken__","Realm":"__Realm__"}

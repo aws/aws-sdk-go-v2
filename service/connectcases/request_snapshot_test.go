@@ -205,6 +205,54 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_BatchCreateRelatedItem(t *testing.T) {
+	input := &BatchCreateRelatedItemInput{
+		DomainId: ptr.String("__DomainId__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
+			},
+		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchCreateRelatedItem(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchCreateRelatedItem"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetCaseRule(t *testing.T) {
 	input := &BatchGetCaseRuleInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -311,6 +359,70 @@ func TestCheckRequestSnapshot_BatchPutFieldOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchPutFieldOptions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_BatchUpdateCase(t *testing.T) {
+	input := &BatchUpdateCaseInput{
+		DomainId: ptr.String("__DomainId__"),
+		Cases: []types.BatchUpdateCaseIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		Fields: []types.FieldValueInput{
+			{
+				FieldIdentifier: &types.FieldIdentifierUnionMemberId{
+					Value: "__FieldIdentifierUnionMemberId__",
+				},
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+			{
+				FieldIdentifier: &types.FieldIdentifierUnionMemberId{
+					Value: "__FieldIdentifierUnionMemberId__",
+				},
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		Title:       ptr.String("__Title__"),
+		Status:      ptr.String("__Status__"),
+		CustomerId:  ptr.String("__CustomerId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchUpdateCase(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchUpdateCase"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1023,6 +1135,34 @@ func TestCheckRequestSnapshot_GetLayout(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetMergeCasesStatus(t *testing.T) {
+	input := &GetMergeCasesStatusInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMergeCasesStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMergeCasesStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetTemplate(t *testing.T) {
 	input := &GetTemplateInput{
 		DomainId:   ptr.String("__DomainId__"),
@@ -1502,6 +1642,71 @@ func TestCheckRequestSnapshot_SearchRelatedItems(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartMergeCases(t *testing.T) {
+	input := &StartMergeCasesInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+		SecondaryCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldsConfiguration: []types.FieldsConfiguration{
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+		},
+		RelatedItemsConfiguration: &types.RelatedItemsConfiguration{
+			Comment:     ptr.Bool(true),
+			ConnectCase: ptr.Bool(true),
+			Contact:     ptr.Bool(true),
+			Custom:      ptr.Bool(true),
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartMergeCases(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartMergeCases"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		Arn: ptr.String("__Arn__"),
@@ -1898,6 +2103,54 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_BatchCreateRelatedItem(t *testing.T) {
+	input := &BatchCreateRelatedItemInput{
+		DomainId: ptr.String("__DomainId__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
+			},
+		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchCreateRelatedItem(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchCreateRelatedItem"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchGetCaseRule(t *testing.T) {
 	input := &BatchGetCaseRuleInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -2004,6 +2257,70 @@ func TestUpdateRequestSnapshot_BatchPutFieldOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchPutFieldOptions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchUpdateCase(t *testing.T) {
+	input := &BatchUpdateCaseInput{
+		DomainId: ptr.String("__DomainId__"),
+		Cases: []types.BatchUpdateCaseIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		Fields: []types.FieldValueInput{
+			{
+				FieldIdentifier: &types.FieldIdentifierUnionMemberId{
+					Value: "__FieldIdentifierUnionMemberId__",
+				},
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+			{
+				FieldIdentifier: &types.FieldIdentifierUnionMemberId{
+					Value: "__FieldIdentifierUnionMemberId__",
+				},
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		Title:       ptr.String("__Title__"),
+		Status:      ptr.String("__Status__"),
+		CustomerId:  ptr.String("__CustomerId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchUpdateCase(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchUpdateCase"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2716,6 +3033,34 @@ func TestUpdateRequestSnapshot_GetLayout(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetMergeCasesStatus(t *testing.T) {
+	input := &GetMergeCasesStatusInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMergeCasesStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMergeCasesStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetTemplate(t *testing.T) {
 	input := &GetTemplateInput{
 		DomainId:   ptr.String("__DomainId__"),
@@ -3191,6 +3536,71 @@ func TestUpdateRequestSnapshot_SearchRelatedItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchRelatedItems"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartMergeCases(t *testing.T) {
+	input := &StartMergeCasesInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+		SecondaryCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldsConfiguration: []types.FieldsConfiguration{
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+		},
+		RelatedItemsConfiguration: &types.RelatedItemsConfiguration{
+			Comment:     ptr.Bool(true),
+			ConnectCase: ptr.Bool(true),
+			Contact:     ptr.Bool(true),
+			Custom:      ptr.Bool(true),
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartMergeCases(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartMergeCases"); err != nil {
 		t.Fatal(err)
 	}
 }

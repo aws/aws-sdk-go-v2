@@ -109,7 +109,9 @@ func (v *ListMedicalTranscriptionJobsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListMedicalTranscriptionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalTranscriptionJobSummaries(s, schemas.ListMedicalTranscriptionJobsResponse_MedicalTranscriptionJobSummaries, v.MedicalTranscriptionJobSummaries)
+	if v.MedicalTranscriptionJobSummaries != nil {
+		serializeMedicalTranscriptionJobSummaries(s, schemas.ListMedicalTranscriptionJobsResponse_MedicalTranscriptionJobSummaries, v.MedicalTranscriptionJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMedicalTranscriptionJobsResponse_NextToken, *v.NextToken)
 	}
@@ -151,6 +153,9 @@ func (c *Client) addOperationListMedicalTranscriptionJobsMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -104,8 +104,12 @@ func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ordering != "" {
 		s.WriteString(schemas.CreateStreamInput_ordering, string(v.Ordering))
 	}
-	serializeTagMap(s, schemas.CreateStreamInput_tags, v.Tags)
-	serializeTargetDefinition(s, schemas.CreateStreamInput_targetDefinition, v.TargetDefinition)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateStreamInput_tags, v.Tags)
+	}
+	if v.TargetDefinition != nil {
+		serializeTargetDefinition(s, schemas.CreateStreamInput_targetDefinition, v.TargetDefinition)
+	}
 }
 
 // The output of a created stream.

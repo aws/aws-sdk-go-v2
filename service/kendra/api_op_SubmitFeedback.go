@@ -61,14 +61,18 @@ func (v *SubmitFeedbackInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubmitFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClickFeedbackList(s, schemas.SubmitFeedbackRequest_ClickFeedbackItems, v.ClickFeedbackItems)
+	if v.ClickFeedbackItems != nil {
+		serializeClickFeedbackList(s, schemas.SubmitFeedbackRequest_ClickFeedbackItems, v.ClickFeedbackItems)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.SubmitFeedbackRequest_IndexId, *v.IndexId)
 	}
 	if v.QueryId != nil {
 		s.WriteString(schemas.SubmitFeedbackRequest_QueryId, *v.QueryId)
 	}
-	serializeRelevanceFeedbackList(s, schemas.SubmitFeedbackRequest_RelevanceFeedbackItems, v.RelevanceFeedbackItems)
+	if v.RelevanceFeedbackItems != nil {
+		serializeRelevanceFeedbackList(s, schemas.SubmitFeedbackRequest_RelevanceFeedbackItems, v.RelevanceFeedbackItems)
+	}
 }
 
 type SubmitFeedbackOutput struct {

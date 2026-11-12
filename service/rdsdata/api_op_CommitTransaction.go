@@ -4,6 +4,8 @@ package rdsdata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,40 @@ type CommitTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CommitTransactionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommitTransactionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommitTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CommitTransactionRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.CommitTransactionRequest_secretArn, *v.SecretArn)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.CommitTransactionRequest_transactionId, *v.TransactionId)
+	}
+}
+func (v *CommitTransactionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommitTransactionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommitTransactionRequest_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CommitTransactionRequest_resourceArn, v.ResourceArn)
+		case schemas.CommitTransactionRequest_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.CommitTransactionRequest_secretArn, v.SecretArn)
+		case schemas.CommitTransactionRequest_transactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.CommitTransactionRequest_transactionId, v.TransactionId)
+		}
+		return nil
+	})
+}
+
 // The response elements represent the output of a commit transaction request.
 type CommitTransactionOutput struct {
 
@@ -57,13 +93,32 @@ type CommitTransactionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CommitTransactionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommitTransactionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommitTransactionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionStatus != nil {
+		s.WriteString(schemas.CommitTransactionResponse_transactionStatus, *v.TransactionStatus)
+	}
+}
+func (v *CommitTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommitTransactionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommitTransactionResponse_transactionStatus:
+			v.TransactionStatus = new(string)
+			return d.ReadString(schemas.CommitTransactionResponse_transactionStatus, v.TransactionStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCommitTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCommitTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CommitTransaction, schemas.CommitTransactionRequest, schemas.CommitTransactionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCommitTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CommitTransaction, schemas.CommitTransactionRequest, schemas.CommitTransactionResponse), output: &CommitTransactionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

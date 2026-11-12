@@ -891,10 +891,11 @@ func TestCheckResponseSnapshot_Evaluate(t *testing.T) {
 	want := &EvaluateOutput{
 		EvaluationResults: []types.EvaluationResultContent{
 			{
-				EvaluatorArn:  ptr.String("__EvaluatorArn__"),
-				EvaluatorId:   ptr.String("__EvaluatorId__"),
-				EvaluatorName: ptr.String("__EvaluatorName__"),
-				Explanation:   ptr.String("__Explanation__"),
+				EvaluatorArn:            ptr.String("__EvaluatorArn__"),
+				EvaluatorId:             ptr.String("__EvaluatorId__"),
+				EvaluatorName:           ptr.String("__EvaluatorName__"),
+				EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+				Explanation:             ptr.String("__Explanation__"),
 				Context: &types.ContextMemberSpanContext{
 					Value: types.SpanContext{
 						SessionId: ptr.String("__SessionId__"),
@@ -917,10 +918,11 @@ func TestCheckResponseSnapshot_Evaluate(t *testing.T) {
 				},
 			},
 			{
-				EvaluatorArn:  ptr.String("__EvaluatorArn__"),
-				EvaluatorId:   ptr.String("__EvaluatorId__"),
-				EvaluatorName: ptr.String("__EvaluatorName__"),
-				Explanation:   ptr.String("__Explanation__"),
+				EvaluatorArn:            ptr.String("__EvaluatorArn__"),
+				EvaluatorId:             ptr.String("__EvaluatorId__"),
+				EvaluatorName:           ptr.String("__EvaluatorName__"),
+				EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+				Explanation:             ptr.String("__Explanation__"),
 				Context: &types.ContextMemberSpanContext{
 					Value: types.SpanContext{
 						SessionId: ptr.String("__SessionId__"),
@@ -1291,7 +1293,8 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 			NumberOfSessionsIgnored:    ptr.Int32(1),
 			EvaluatorSummaries: []types.EvaluatorSummary{
 				{
-					EvaluatorId: ptr.String("__EvaluatorId__"),
+					EvaluatorId:             ptr.String("__EvaluatorId__"),
+					EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 					Statistics: &types.EvaluatorStatistics{
 						AverageScore: ptr.Float64(1.0),
 					},
@@ -1299,12 +1302,309 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 					TotalFailed:    ptr.Int32(1),
 				},
 				{
-					EvaluatorId: ptr.String("__EvaluatorId__"),
+					EvaluatorId:             ptr.String("__EvaluatorId__"),
+					EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 					Statistics: &types.EvaluatorStatistics{
 						AverageScore: ptr.Float64(1.0),
 					},
 					TotalEvaluated: ptr.Int32(1),
 					TotalFailed:    ptr.Int32(1),
+				},
+			},
+		},
+		InsightResults: []types.InsightResult{
+			{
+				Type:                 types.InsightType("FAILURE"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount: ptr.Int32(1),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+				RootCauses: []types.InsightRootCause{
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:                 types.InsightType("FAILURE"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount: ptr.Int32(1),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+				RootCauses: []types.InsightRootCause{
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -2956,6 +3256,7 @@ func TestCheckResponseSnapshot_IngestData(t *testing.T) {
 func TestCheckResponseSnapshot_InvokeAgentRuntime(t *testing.T) {
 	want := &InvokeAgentRuntimeOutput{
 		RuntimeSessionId:   ptr.String("__RuntimeSessionId__"),
+		SessionEndpointUrl: ptr.String("__SessionEndpointUrl__"),
 		McpSessionId:       ptr.String("__McpSessionId__"),
 		McpProtocolVersion: ptr.String("__McpProtocolVersion__"),
 		TraceId:            ptr.String("__TraceId__"),
@@ -3048,6 +3349,60 @@ func TestCheckResponseSnapshot_InvokeCodeInterpreter(t *testing.T) {
 
 func TestCheckResponseSnapshot_InvokeHarness(t *testing.T) {
 	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_InvokeWebSearch(t *testing.T) {
+	want := &InvokeWebSearchOutput{
+		Results: []types.WebSearchResult{
+			{
+				Title:       ptr.String("__Title__"),
+				Url:         ptr.String("__Url__"),
+				Text:        ptr.String("__Text__"),
+				PublishedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Title:       ptr.String("__Title__"),
+				Url:         ptr.String("__Url__"),
+				Text:        ptr.String("__Text__"),
+				PublishedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvokeWebSearch.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.InvokeWebSearch(context.Background(), &InvokeWebSearchInput{
+		WebSearchId: ptr.String("__WebSearchId__"),
+		SearchQuery: ptr.String("__SearchQuery__"),
+		MaxResults:  ptr.Int32(1),
+		Filters: &types.WebSearchFilters{
+			DomainFilter: &types.DomainFilter{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PublishedDateFilter: &types.PublishedDateFilter{
+				PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "InvokeWebSearch.response", err)
+	}
 }
 
 func TestCheckResponseSnapshot_ListABTests(t *testing.T) {
@@ -3165,7 +3520,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 					NumberOfSessionsIgnored:    ptr.Int32(1),
 					EvaluatorSummaries: []types.EvaluatorSummary{
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3173,7 +3529,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 							TotalFailed:    ptr.Int32(1),
 						},
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3220,7 +3577,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 					NumberOfSessionsIgnored:    ptr.Int32(1),
 					EvaluatorSummaries: []types.EvaluatorSummary{
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3228,7 +3586,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 							TotalFailed:    ptr.Int32(1),
 						},
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -5509,6 +5868,52 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceQuotaExceededException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
+	want := &types.ServiceUnavailableException{
+		Message:           ptr.String("__Message__"),
+		RetryAfterSeconds: ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.InvokeWebSearch(context.Background(), &InvokeWebSearchInput{
+		WebSearchId: ptr.String("__WebSearchId__"),
+		SearchQuery: ptr.String("__SearchQuery__"),
+		MaxResults:  ptr.Int32(1),
+		Filters: &types.WebSearchFilters{
+			DomainFilter: &types.DomainFilter{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PublishedDateFilter: &types.PublishedDateFilter{
+				PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServiceUnavailableException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServiceUnavailableException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceUnavailableException.error", err)
 	}
 }
 

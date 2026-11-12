@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ConfirmSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticateOnUnsubscribe != nil {
+		s.WriteString(schemas.ConfirmSubscriptionInput_AuthenticateOnUnsubscribe, *v.AuthenticateOnUnsubscribe)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.ConfirmSubscriptionInput_Token, *v.Token)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.ConfirmSubscriptionInput_TopicArn, *v.TopicArn)
+	}
+}
+
 // Response for ConfirmSubscriptions action.
 type ConfirmSubscriptionOutput struct {
 
@@ -61,13 +81,32 @@ type ConfirmSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.ConfirmSubscriptionResponse_SubscriptionArn, *v.SubscriptionArn)
+	}
+}
+func (v *ConfirmSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmSubscriptionResponse_SubscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.ConfirmSubscriptionResponse_SubscriptionArn, v.SubscriptionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpConfirmSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmSubscription, schemas.ConfirmSubscriptionInput, schemas.ConfirmSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpConfirmSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmSubscription, schemas.ConfirmSubscriptionInput, schemas.ConfirmSubscriptionResponse), output: &ConfirmSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

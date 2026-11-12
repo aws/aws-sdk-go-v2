@@ -58,7 +58,9 @@ func (v *ChangeMessageVisibilityBatchInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ChangeMessageVisibilityBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeMessageVisibilityBatchRequestEntryList(s, schemas.ChangeMessageVisibilityBatchRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeChangeMessageVisibilityBatchRequestEntryList(s, schemas.ChangeMessageVisibilityBatchRequest_Entries, v.Entries)
+	}
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.ChangeMessageVisibilityBatchRequest_QueueUrl, *v.QueueUrl)
 	}
@@ -91,8 +93,12 @@ func (v *ChangeMessageVisibilityBatchOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ChangeMessageVisibilityBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchResultErrorEntryList(s, schemas.ChangeMessageVisibilityBatchResult_Failed, v.Failed)
-	serializeChangeMessageVisibilityBatchResultEntryList(s, schemas.ChangeMessageVisibilityBatchResult_Successful, v.Successful)
+	if v.Failed != nil {
+		serializeBatchResultErrorEntryList(s, schemas.ChangeMessageVisibilityBatchResult_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeChangeMessageVisibilityBatchResultEntryList(s, schemas.ChangeMessageVisibilityBatchResult_Successful, v.Successful)
+	}
 }
 func (v *ChangeMessageVisibilityBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChangeMessageVisibilityBatchResult, func(s *smithy.Schema) error {

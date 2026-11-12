@@ -1424,6 +1424,9 @@ func TestCheckRequestSnapshot_UpdateSamplingRule(t *testing.T) {
 func TestCheckRequestSnapshot_UpdateTraceSegmentDestination(t *testing.T) {
 	input := &UpdateTraceSegmentDestinationInput{
 		Destination: types.TraceSegmentDestination("XRay"),
+		CloudWatchLogsConfiguration: &types.CloudWatchLogsConfiguration{
+			SpansLogGroupKmsKeyId: ptr.String("__SpansLogGroupKmsKeyId__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2665,6 +2668,9 @@ func TestUpdateRequestSnapshot_UpdateSamplingRule(t *testing.T) {
 func TestUpdateRequestSnapshot_UpdateTraceSegmentDestination(t *testing.T) {
 	input := &UpdateTraceSegmentDestinationInput{
 		Destination: types.TraceSegmentDestination("XRay"),
+		CloudWatchLogsConfiguration: &types.CloudWatchLogsConfiguration{
+			SpansLogGroupKmsKeyId: ptr.String("__SpansLogGroupKmsKeyId__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

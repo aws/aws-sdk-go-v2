@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListGateways
+
+{"gateways":[{"createdAt":946684800,"gatewayArn":"__GatewayArn__","name":"__Name__","status":"ACTIVE"},{"createdAt":946684800,"gatewayArn":"__GatewayArn__","name":"__Name__","status":"ACTIVE"}],"nextToken":"__NextToken__"}

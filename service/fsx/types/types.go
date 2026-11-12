@@ -392,7 +392,9 @@ func (v *AggregateConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AggregateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregates(s, schemas.AggregateConfiguration_Aggregates, v.Aggregates)
+	if v.Aggregates != nil {
+		serializeAggregates(s, schemas.AggregateConfiguration_Aggregates, v.Aggregates)
+	}
 	if v.TotalConstituents != nil {
 		s.WriteInt32(schemas.AggregateConfiguration_TotalConstituents, *v.TotalConstituents)
 	}
@@ -586,7 +588,9 @@ func (v *AutoExportPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutoExportPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventTypes(s, schemas.AutoExportPolicy_Events, v.Events)
+	if v.Events != nil {
+		serializeEventTypes(s, schemas.AutoExportPolicy_Events, v.Events)
+	}
 }
 func (v *AutoExportPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoExportPolicy, func(s *smithy.Schema) error {
@@ -631,7 +635,9 @@ func (v *AutoImportPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutoImportPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventTypes(s, schemas.AutoImportPolicy_Events, v.Events)
+	if v.Events != nil {
+		serializeEventTypes(s, schemas.AutoImportPolicy_Events, v.Events)
+	}
 }
 func (v *AutoImportPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoImportPolicy, func(s *smithy.Schema) error {
@@ -789,7 +795,9 @@ func (v *Backup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceBackupRegion != nil {
 		s.WriteString(schemas.Backup_SourceBackupRegion, *v.SourceBackupRegion)
 	}
-	serializeTags(s, schemas.Backup_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Backup_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Backup_Type, string(v.Type))
 	}
@@ -1010,7 +1018,9 @@ func (v *CreateAggregateConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAggregateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregates(s, schemas.CreateAggregateConfiguration_Aggregates, v.Aggregates)
+	if v.Aggregates != nil {
+		serializeAggregates(s, schemas.CreateAggregateConfiguration_Aggregates, v.Aggregates)
+	}
 	if v.ConstituentsPerAggregate != nil {
 		s.WriteInt32(schemas.CreateAggregateConfiguration_ConstituentsPerAggregate, *v.ConstituentsPerAggregate)
 	}
@@ -1889,7 +1899,9 @@ func (v *CreateFileSystemOntapConfiguration) SerializeMembers(s smithy.ShapeSeri
 	if v.PreferredSubnetId != nil {
 		s.WriteString(schemas.CreateFileSystemOntapConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
 	}
-	serializeRouteTableIds(s, schemas.CreateFileSystemOntapConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.RouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.CreateFileSystemOntapConfiguration_RouteTableIds, v.RouteTableIds)
+	}
 	if v.ThroughputCapacity != nil {
 		s.WriteInt32(schemas.CreateFileSystemOntapConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
 	}
@@ -2126,7 +2138,9 @@ func (v *CreateFileSystemOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSe
 		v.RootVolumeConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTableIds(s, schemas.CreateFileSystemOpenZFSConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.RouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.CreateFileSystemOpenZFSConfiguration_RouteTableIds, v.RouteTableIds)
+	}
 	if v.ThroughputCapacity != nil {
 		s.WriteInt32(schemas.CreateFileSystemOpenZFSConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
 	}
@@ -2317,7 +2331,9 @@ func (v *CreateFileSystemWindowsConfiguration) SerializeMembers(s smithy.ShapeSe
 	if v.ActiveDirectoryId != nil {
 		s.WriteString(schemas.CreateFileSystemWindowsConfiguration_ActiveDirectoryId, *v.ActiveDirectoryId)
 	}
-	serializeAlternateDNSNames(s, schemas.CreateFileSystemWindowsConfiguration_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeAlternateDNSNames(s, schemas.CreateFileSystemWindowsConfiguration_Aliases, v.Aliases)
+	}
 	if v.AuditLogConfiguration != nil {
 		s.WriteStruct(schemas.CreateFileSystemWindowsConfiguration_AuditLogConfiguration)
 		v.AuditLogConfiguration.SerializeMembers(s)
@@ -2827,7 +2843,9 @@ func (v *CreateOpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.DataCompressionType != "" {
 		s.WriteString(schemas.CreateOpenZFSVolumeConfiguration_DataCompressionType, string(v.DataCompressionType))
 	}
-	serializeOpenZFSNfsExports(s, schemas.CreateOpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.NfsExports != nil {
+		serializeOpenZFSNfsExports(s, schemas.CreateOpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	}
 	if v.OriginSnapshot != nil {
 		s.WriteStruct(schemas.CreateOpenZFSVolumeConfiguration_OriginSnapshot)
 		v.OriginSnapshot.SerializeMembers(s)
@@ -2848,7 +2866,9 @@ func (v *CreateOpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.StorageCapacityReservationGiB != nil {
 		s.WriteInt32(schemas.CreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, *v.StorageCapacityReservationGiB)
 	}
-	serializeOpenZFSUserAndGroupQuotas(s, schemas.CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	if v.UserAndGroupQuotas != nil {
+		serializeOpenZFSUserAndGroupQuotas(s, schemas.CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	}
 }
 func (v *CreateOpenZFSVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateOpenZFSVolumeConfiguration, func(s *smithy.Schema) error {
@@ -3251,7 +3271,9 @@ func (v *DataRepositoryAssociation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataRepositoryPath != nil {
 		s.WriteString(schemas.DataRepositoryAssociation_DataRepositoryPath, *v.DataRepositoryPath)
 	}
-	serializeSubDirectoriesPaths(s, schemas.DataRepositoryAssociation_DataRepositorySubdirectories, v.DataRepositorySubdirectories)
+	if v.DataRepositorySubdirectories != nil {
+		serializeSubDirectoriesPaths(s, schemas.DataRepositoryAssociation_DataRepositorySubdirectories, v.DataRepositorySubdirectories)
+	}
 	if v.FailureDetails != nil {
 		s.WriteStruct(schemas.DataRepositoryAssociation_FailureDetails)
 		v.FailureDetails.SerializeMembers(s)
@@ -3288,7 +3310,9 @@ func (v *DataRepositoryAssociation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.S3.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.DataRepositoryAssociation_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DataRepositoryAssociation_Tags, v.Tags)
+	}
 }
 func (v *DataRepositoryAssociation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataRepositoryAssociation, func(s *smithy.Schema) error {
@@ -3680,7 +3704,9 @@ func (v *DataRepositoryTask) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Lifecycle != "" {
 		s.WriteString(schemas.DataRepositoryTask_Lifecycle, string(v.Lifecycle))
 	}
-	serializeDataRepositoryTaskPaths(s, schemas.DataRepositoryTask_Paths, v.Paths)
+	if v.Paths != nil {
+		serializeDataRepositoryTaskPaths(s, schemas.DataRepositoryTask_Paths, v.Paths)
+	}
 	if v.ReleaseConfiguration != nil {
 		s.WriteStruct(schemas.DataRepositoryTask_ReleaseConfiguration)
 		v.ReleaseConfiguration.SerializeMembers(s)
@@ -3702,7 +3728,9 @@ func (v *DataRepositoryTask) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.DataRepositoryTask_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DataRepositoryTask_Tags, v.Tags)
+	}
 	if v.TaskId != nil {
 		s.WriteString(schemas.DataRepositoryTask_TaskId, *v.TaskId)
 	}
@@ -3839,7 +3867,9 @@ func (v *DataRepositoryTaskFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.DataRepositoryTaskFilter_Name, string(v.Name))
 	}
-	serializeDataRepositoryTaskFilterValues(s, schemas.DataRepositoryTaskFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeDataRepositoryTaskFilterValues(s, schemas.DataRepositoryTaskFilter_Values, v.Values)
+	}
 }
 func (v *DataRepositoryTaskFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataRepositoryTaskFilter, func(s *smithy.Schema) error {
@@ -3959,7 +3989,9 @@ func (v *DeleteFileSystemLustreConfiguration) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DeleteFileSystemLustreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.DeleteFileSystemLustreConfiguration_FinalBackupTags, v.FinalBackupTags)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteFileSystemLustreConfiguration_FinalBackupTags, v.FinalBackupTags)
+	}
 	if v.SkipFinalBackup != nil {
 		s.WriteBool(schemas.DeleteFileSystemLustreConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
 	}
@@ -4000,7 +4032,9 @@ func (v *DeleteFileSystemLustreResponse) SerializeMembers(s smithy.ShapeSerializ
 	if v.FinalBackupId != nil {
 		s.WriteString(schemas.DeleteFileSystemLustreResponse_FinalBackupId, *v.FinalBackupId)
 	}
-	serializeTags(s, schemas.DeleteFileSystemLustreResponse_FinalBackupTags, v.FinalBackupTags)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteFileSystemLustreResponse_FinalBackupTags, v.FinalBackupTags)
+	}
 }
 func (v *DeleteFileSystemLustreResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteFileSystemLustreResponse, func(s *smithy.Schema) error {
@@ -4043,8 +4077,12 @@ func (v *DeleteFileSystemOpenZFSConfiguration) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DeleteFileSystemOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.DeleteFileSystemOpenZFSConfiguration_FinalBackupTags, v.FinalBackupTags)
-	serializeDeleteFileSystemOpenZFSOptions(s, schemas.DeleteFileSystemOpenZFSConfiguration_Options, v.Options)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteFileSystemOpenZFSConfiguration_FinalBackupTags, v.FinalBackupTags)
+	}
+	if v.Options != nil {
+		serializeDeleteFileSystemOpenZFSOptions(s, schemas.DeleteFileSystemOpenZFSConfiguration_Options, v.Options)
+	}
 	if v.SkipFinalBackup != nil {
 		s.WriteBool(schemas.DeleteFileSystemOpenZFSConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
 	}
@@ -4087,7 +4125,9 @@ func (v *DeleteFileSystemOpenZFSResponse) SerializeMembers(s smithy.ShapeSeriali
 	if v.FinalBackupId != nil {
 		s.WriteString(schemas.DeleteFileSystemOpenZFSResponse_FinalBackupId, *v.FinalBackupId)
 	}
-	serializeTags(s, schemas.DeleteFileSystemOpenZFSResponse_FinalBackupTags, v.FinalBackupTags)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteFileSystemOpenZFSResponse_FinalBackupTags, v.FinalBackupTags)
+	}
 }
 func (v *DeleteFileSystemOpenZFSResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteFileSystemOpenZFSResponse, func(s *smithy.Schema) error {
@@ -4125,7 +4165,9 @@ func (v *DeleteFileSystemWindowsConfiguration) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DeleteFileSystemWindowsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.DeleteFileSystemWindowsConfiguration_FinalBackupTags, v.FinalBackupTags)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteFileSystemWindowsConfiguration_FinalBackupTags, v.FinalBackupTags)
+	}
 	if v.SkipFinalBackup != nil {
 		s.WriteBool(schemas.DeleteFileSystemWindowsConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
 	}
@@ -4166,7 +4208,9 @@ func (v *DeleteFileSystemWindowsResponse) SerializeMembers(s smithy.ShapeSeriali
 	if v.FinalBackupId != nil {
 		s.WriteString(schemas.DeleteFileSystemWindowsResponse_FinalBackupId, *v.FinalBackupId)
 	}
-	serializeTags(s, schemas.DeleteFileSystemWindowsResponse_FinalBackupTags, v.FinalBackupTags)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteFileSystemWindowsResponse_FinalBackupTags, v.FinalBackupTags)
+	}
 }
 func (v *DeleteFileSystemWindowsResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteFileSystemWindowsResponse, func(s *smithy.Schema) error {
@@ -4217,7 +4261,9 @@ func (v *DeleteVolumeOntapConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.BypassSnaplockEnterpriseRetention != nil {
 		s.WriteBool(schemas.DeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention, *v.BypassSnaplockEnterpriseRetention)
 	}
-	serializeTags(s, schemas.DeleteVolumeOntapConfiguration_FinalBackupTags, v.FinalBackupTags)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteVolumeOntapConfiguration_FinalBackupTags, v.FinalBackupTags)
+	}
 	if v.SkipFinalBackup != nil {
 		s.WriteBool(schemas.DeleteVolumeOntapConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
 	}
@@ -4261,7 +4307,9 @@ func (v *DeleteVolumeOntapResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FinalBackupId != nil {
 		s.WriteString(schemas.DeleteVolumeOntapResponse_FinalBackupId, *v.FinalBackupId)
 	}
-	serializeTags(s, schemas.DeleteVolumeOntapResponse_FinalBackupTags, v.FinalBackupTags)
+	if v.FinalBackupTags != nil {
+		serializeTags(s, schemas.DeleteVolumeOntapResponse_FinalBackupTags, v.FinalBackupTags)
+	}
 }
 func (v *DeleteVolumeOntapResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteVolumeOntapResponse, func(s *smithy.Schema) error {
@@ -4293,7 +4341,9 @@ func (v *DeleteVolumeOpenZFSConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteVolumeOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteOpenZFSVolumeOptions(s, schemas.DeleteVolumeOpenZFSConfiguration_Options, v.Options)
+	if v.Options != nil {
+		serializeDeleteOpenZFSVolumeOptions(s, schemas.DeleteVolumeOpenZFSConfiguration_Options, v.Options)
+	}
 }
 func (v *DeleteVolumeOpenZFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteVolumeOpenZFSConfiguration, func(s *smithy.Schema) error {
@@ -4518,7 +4568,9 @@ func (v *FileCache) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DNSName != nil {
 		s.WriteString(schemas.FileCache_DNSName, *v.DNSName)
 	}
-	serializeDataRepositoryAssociationIds(s, schemas.FileCache_DataRepositoryAssociationIds, v.DataRepositoryAssociationIds)
+	if v.DataRepositoryAssociationIds != nil {
+		serializeDataRepositoryAssociationIds(s, schemas.FileCache_DataRepositoryAssociationIds, v.DataRepositoryAssociationIds)
+	}
 	if v.FailureDetails != nil {
 		s.WriteStruct(schemas.FileCache_FailureDetails)
 		v.FailureDetails.SerializeMembers(s)
@@ -4544,7 +4596,9 @@ func (v *FileCache) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LustreConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNetworkInterfaceIds(s, schemas.FileCache_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.NetworkInterfaceIds != nil {
+		serializeNetworkInterfaceIds(s, schemas.FileCache_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	}
 	if v.OwnerId != nil {
 		s.WriteString(schemas.FileCache_OwnerId, *v.OwnerId)
 	}
@@ -4554,7 +4608,9 @@ func (v *FileCache) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageCapacity != nil {
 		s.WriteInt32(schemas.FileCache_StorageCapacity, *v.StorageCapacity)
 	}
-	serializeSubnetIds(s, schemas.FileCache_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.FileCache_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.FileCache_VpcId, *v.VpcId)
 	}
@@ -4728,7 +4784,9 @@ func (v *FileCacheCreating) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DNSName != nil {
 		s.WriteString(schemas.FileCacheCreating_DNSName, *v.DNSName)
 	}
-	serializeDataRepositoryAssociationIds(s, schemas.FileCacheCreating_DataRepositoryAssociationIds, v.DataRepositoryAssociationIds)
+	if v.DataRepositoryAssociationIds != nil {
+		serializeDataRepositoryAssociationIds(s, schemas.FileCacheCreating_DataRepositoryAssociationIds, v.DataRepositoryAssociationIds)
+	}
 	if v.FailureDetails != nil {
 		s.WriteStruct(schemas.FileCacheCreating_FailureDetails)
 		v.FailureDetails.SerializeMembers(s)
@@ -4754,7 +4812,9 @@ func (v *FileCacheCreating) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LustreConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNetworkInterfaceIds(s, schemas.FileCacheCreating_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.NetworkInterfaceIds != nil {
+		serializeNetworkInterfaceIds(s, schemas.FileCacheCreating_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	}
 	if v.OwnerId != nil {
 		s.WriteString(schemas.FileCacheCreating_OwnerId, *v.OwnerId)
 	}
@@ -4764,8 +4824,12 @@ func (v *FileCacheCreating) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageCapacity != nil {
 		s.WriteInt32(schemas.FileCacheCreating_StorageCapacity, *v.StorageCapacity)
 	}
-	serializeSubnetIds(s, schemas.FileCacheCreating_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.FileCacheCreating_Tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.FileCacheCreating_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.FileCacheCreating_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.FileCacheCreating_VpcId, *v.VpcId)
 	}
@@ -4911,7 +4975,9 @@ func (v *FileCacheDataRepositoryAssociation) SerializeMembers(s smithy.ShapeSeri
 	if v.DataRepositoryPath != nil {
 		s.WriteString(schemas.FileCacheDataRepositoryAssociation_DataRepositoryPath, *v.DataRepositoryPath)
 	}
-	serializeSubDirectoriesPaths(s, schemas.FileCacheDataRepositoryAssociation_DataRepositorySubdirectories, v.DataRepositorySubdirectories)
+	if v.DataRepositorySubdirectories != nil {
+		serializeSubDirectoriesPaths(s, schemas.FileCacheDataRepositoryAssociation_DataRepositorySubdirectories, v.DataRepositorySubdirectories)
+	}
 	if v.FileCachePath != nil {
 		s.WriteString(schemas.FileCacheDataRepositoryAssociation_FileCachePath, *v.FileCachePath)
 	}
@@ -5128,7 +5194,9 @@ func (v *FileCacheNFSConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FileCacheNFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositoryDnsIps(s, schemas.FileCacheNFSConfiguration_DnsIps, v.DnsIps)
+	if v.DnsIps != nil {
+		serializeRepositoryDnsIps(s, schemas.FileCacheNFSConfiguration_DnsIps, v.DnsIps)
+	}
 	if v.Version != "" {
 		s.WriteString(schemas.FileCacheNFSConfiguration_Version, string(v.Version))
 	}
@@ -5299,7 +5367,9 @@ func (v *FileSystem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FileSystem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdministrativeActions(s, schemas.FileSystem_AdministrativeActions, v.AdministrativeActions)
+	if v.AdministrativeActions != nil {
+		serializeAdministrativeActions(s, schemas.FileSystem_AdministrativeActions, v.AdministrativeActions)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.FileSystem_CreationTime, *v.CreationTime)
 	}
@@ -5331,7 +5401,9 @@ func (v *FileSystem) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LustreConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNetworkInterfaceIds(s, schemas.FileSystem_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.NetworkInterfaceIds != nil {
+		serializeNetworkInterfaceIds(s, schemas.FileSystem_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	}
 	if v.NetworkType != "" {
 		s.WriteString(schemas.FileSystem_NetworkType, string(v.NetworkType))
 	}
@@ -5357,8 +5429,12 @@ func (v *FileSystem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.FileSystem_StorageType, string(v.StorageType))
 	}
-	serializeSubnetIds(s, schemas.FileSystem_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.FileSystem_Tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.FileSystem_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.FileSystem_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.FileSystem_VpcId, *v.VpcId)
 	}
@@ -5481,8 +5557,12 @@ func (v *FileSystemEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DNSName != nil {
 		s.WriteString(schemas.FileSystemEndpoint_DNSName, *v.DNSName)
 	}
-	serializeOntapEndpointIpAddresses(s, schemas.FileSystemEndpoint_IpAddresses, v.IpAddresses)
-	serializeOntapEndpointIpAddresses(s, schemas.FileSystemEndpoint_Ipv6Addresses, v.Ipv6Addresses)
+	if v.IpAddresses != nil {
+		serializeOntapEndpointIpAddresses(s, schemas.FileSystemEndpoint_IpAddresses, v.IpAddresses)
+	}
+	if v.Ipv6Addresses != nil {
+		serializeOntapEndpointIpAddresses(s, schemas.FileSystemEndpoint_Ipv6Addresses, v.Ipv6Addresses)
+	}
 }
 func (v *FileSystemEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FileSystemEndpoint, func(s *smithy.Schema) error {
@@ -5663,7 +5743,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.Filter_Name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -6222,7 +6304,9 @@ func (v *LustreRootSquashConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LustreRootSquashConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLustreNoSquashNids(s, schemas.LustreRootSquashConfiguration_NoSquashNids, v.NoSquashNids)
+	if v.NoSquashNids != nil {
+		serializeLustreNoSquashNids(s, schemas.LustreRootSquashConfiguration_NoSquashNids, v.NoSquashNids)
+	}
 	if v.RootSquash != nil {
 		s.WriteString(schemas.LustreRootSquashConfiguration_RootSquash, *v.RootSquash)
 	}
@@ -6275,7 +6359,9 @@ func (v *NFSDataRepositoryConfiguration) SerializeMembers(s smithy.ShapeSerializ
 		v.AutoExportPolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRepositoryDnsIps(s, schemas.NFSDataRepositoryConfiguration_DnsIps, v.DnsIps)
+	if v.DnsIps != nil {
+		serializeRepositoryDnsIps(s, schemas.NFSDataRepositoryConfiguration_DnsIps, v.DnsIps)
+	}
 	if v.Version != "" {
 		s.WriteString(schemas.NFSDataRepositoryConfiguration_Version, string(v.Version))
 	}
@@ -6477,7 +6563,9 @@ func (v *OntapFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.PreferredSubnetId != nil {
 		s.WriteString(schemas.OntapFileSystemConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
 	}
-	serializeRouteTableIds(s, schemas.OntapFileSystemConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.RouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.OntapFileSystemConfiguration_RouteTableIds, v.RouteTableIds)
+	}
 	if v.ThroughputCapacity != nil {
 		s.WriteInt32(schemas.OntapFileSystemConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
 	}
@@ -6961,7 +7049,9 @@ func (v *OpenZFSClientConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Clients != nil {
 		s.WriteString(schemas.OpenZFSClientConfiguration_Clients, *v.Clients)
 	}
-	serializeOpenZFSNfsExportOptions(s, schemas.OpenZFSClientConfiguration_Options, v.Options)
+	if v.Options != nil {
+		serializeOpenZFSNfsExportOptions(s, schemas.OpenZFSClientConfiguration_Options, v.Options)
+	}
 }
 func (v *OpenZFSClientConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpenZFSClientConfiguration, func(s *smithy.Schema) error {
@@ -7039,14 +7129,18 @@ func (v *OpenZFSCreateRootVolumeConfiguration) SerializeMembers(s smithy.ShapeSe
 	if v.DataCompressionType != "" {
 		s.WriteString(schemas.OpenZFSCreateRootVolumeConfiguration_DataCompressionType, string(v.DataCompressionType))
 	}
-	serializeOpenZFSNfsExports(s, schemas.OpenZFSCreateRootVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.NfsExports != nil {
+		serializeOpenZFSNfsExports(s, schemas.OpenZFSCreateRootVolumeConfiguration_NfsExports, v.NfsExports)
+	}
 	if v.ReadOnly != nil {
 		s.WriteBool(schemas.OpenZFSCreateRootVolumeConfiguration_ReadOnly, *v.ReadOnly)
 	}
 	if v.RecordSizeKiB != nil {
 		s.WriteInt32(schemas.OpenZFSCreateRootVolumeConfiguration_RecordSizeKiB, *v.RecordSizeKiB)
 	}
-	serializeOpenZFSUserAndGroupQuotas(s, schemas.OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	if v.UserAndGroupQuotas != nil {
+		serializeOpenZFSUserAndGroupQuotas(s, schemas.OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	}
 }
 func (v *OpenZFSCreateRootVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpenZFSCreateRootVolumeConfiguration, func(s *smithy.Schema) error {
@@ -7220,7 +7314,9 @@ func (v *OpenZFSFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.RootVolumeId != nil {
 		s.WriteString(schemas.OpenZFSFileSystemConfiguration_RootVolumeId, *v.RootVolumeId)
 	}
-	serializeRouteTableIds(s, schemas.OpenZFSFileSystemConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.RouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.OpenZFSFileSystemConfiguration_RouteTableIds, v.RouteTableIds)
+	}
 	if v.ThroughputCapacity != nil {
 		s.WriteInt32(schemas.OpenZFSFileSystemConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
 	}
@@ -7356,7 +7452,9 @@ func (v *OpenZFSNfsExport) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OpenZFSNfsExport) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOpenZFSClientConfigurations(s, schemas.OpenZFSNfsExport_ClientConfigurations, v.ClientConfigurations)
+	if v.ClientConfigurations != nil {
+		serializeOpenZFSClientConfigurations(s, schemas.OpenZFSNfsExport_ClientConfigurations, v.ClientConfigurations)
+	}
 }
 func (v *OpenZFSNfsExport) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpenZFSNfsExport, func(s *smithy.Schema) error {
@@ -7460,7 +7558,9 @@ func (v *OpenZFSPosixFileSystemUser) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Gid != nil {
 		s.WriteInt64(schemas.OpenZFSPosixFileSystemUser_Gid, *v.Gid)
 	}
-	serializeFileSystemSecondaryGIDs(s, schemas.OpenZFSPosixFileSystemUser_SecondaryGids, v.SecondaryGids)
+	if v.SecondaryGids != nil {
+		serializeFileSystemSecondaryGIDs(s, schemas.OpenZFSPosixFileSystemUser_SecondaryGids, v.SecondaryGids)
+	}
 	if v.Uid != nil {
 		s.WriteInt64(schemas.OpenZFSPosixFileSystemUser_Uid, *v.Uid)
 	}
@@ -7738,7 +7838,9 @@ func (v *OpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DestinationSnapshot != nil {
 		s.WriteString(schemas.OpenZFSVolumeConfiguration_DestinationSnapshot, *v.DestinationSnapshot)
 	}
-	serializeOpenZFSNfsExports(s, schemas.OpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.NfsExports != nil {
+		serializeOpenZFSNfsExports(s, schemas.OpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	}
 	if v.OriginSnapshot != nil {
 		s.WriteStruct(schemas.OpenZFSVolumeConfiguration_OriginSnapshot)
 		v.OriginSnapshot.SerializeMembers(s)
@@ -7765,7 +7867,9 @@ func (v *OpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StorageCapacityReservationGiB != nil {
 		s.WriteInt32(schemas.OpenZFSVolumeConfiguration_StorageCapacityReservationGiB, *v.StorageCapacityReservationGiB)
 	}
-	serializeOpenZFSUserAndGroupQuotas(s, schemas.OpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	if v.UserAndGroupQuotas != nil {
+		serializeOpenZFSUserAndGroupQuotas(s, schemas.OpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	}
 	if v.VolumePath != nil {
 		s.WriteString(schemas.OpenZFSVolumeConfiguration_VolumePath, *v.VolumePath)
 	}
@@ -8155,7 +8259,9 @@ func (v *S3AccessPointAttachmentsFilter) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != "" {
 		s.WriteString(schemas.S3AccessPointAttachmentsFilter_Name, string(v.Name))
 	}
-	serializeS3AccessPointAttachmentsFilterValues(s, schemas.S3AccessPointAttachmentsFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeS3AccessPointAttachmentsFilterValues(s, schemas.S3AccessPointAttachmentsFilter_Values, v.Values)
+	}
 }
 func (v *S3AccessPointAttachmentsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3AccessPointAttachmentsFilter, func(s *smithy.Schema) error {
@@ -8391,7 +8497,9 @@ func (v *SelfManagedActiveDirectoryAttributes) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *SelfManagedActiveDirectoryAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsIps(s, schemas.SelfManagedActiveDirectoryAttributes_DnsIps, v.DnsIps)
+	if v.DnsIps != nil {
+		serializeDnsIps(s, schemas.SelfManagedActiveDirectoryAttributes_DnsIps, v.DnsIps)
+	}
 	if v.DomainJoinServiceAccountSecret != nil {
 		s.WriteString(schemas.SelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret, *v.DomainJoinServiceAccountSecret)
 	}
@@ -8514,7 +8622,9 @@ func (v *SelfManagedActiveDirectoryConfiguration) Serialize(s smithy.ShapeSerial
 }
 
 func (v *SelfManagedActiveDirectoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsIps(s, schemas.SelfManagedActiveDirectoryConfiguration_DnsIps, v.DnsIps)
+	if v.DnsIps != nil {
+		serializeDnsIps(s, schemas.SelfManagedActiveDirectoryConfiguration_DnsIps, v.DnsIps)
+	}
 	if v.DomainJoinServiceAccountSecret != nil {
 		s.WriteString(schemas.SelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret, *v.DomainJoinServiceAccountSecret)
 	}
@@ -8613,7 +8723,9 @@ func (v *SelfManagedActiveDirectoryConfigurationUpdates) Serialize(s smithy.Shap
 }
 
 func (v *SelfManagedActiveDirectoryConfigurationUpdates) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsIps(s, schemas.SelfManagedActiveDirectoryConfigurationUpdates_DnsIps, v.DnsIps)
+	if v.DnsIps != nil {
+		serializeDnsIps(s, schemas.SelfManagedActiveDirectoryConfigurationUpdates_DnsIps, v.DnsIps)
+	}
 	if v.DomainJoinServiceAccountSecret != nil {
 		s.WriteString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret, *v.DomainJoinServiceAccountSecret)
 	}
@@ -8913,7 +9025,9 @@ func (v *Snapshot) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdministrativeActions(s, schemas.Snapshot_AdministrativeActions, v.AdministrativeActions)
+	if v.AdministrativeActions != nil {
+		serializeAdministrativeActions(s, schemas.Snapshot_AdministrativeActions, v.AdministrativeActions)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.Snapshot_CreationTime, *v.CreationTime)
 	}
@@ -8934,7 +9048,9 @@ func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnapshotId != nil {
 		s.WriteString(schemas.Snapshot_SnapshotId, *v.SnapshotId)
 	}
-	serializeTags(s, schemas.Snapshot_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Snapshot_Tags, v.Tags)
+	}
 	if v.VolumeId != nil {
 		s.WriteString(schemas.Snapshot_VolumeId, *v.VolumeId)
 	}
@@ -9000,7 +9116,9 @@ func (v *SnapshotFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.SnapshotFilter_Name, string(v.Name))
 	}
-	serializeSnapshotFilterValues(s, schemas.SnapshotFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeSnapshotFilterValues(s, schemas.SnapshotFilter_Values, v.Values)
+	}
 }
 func (v *SnapshotFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SnapshotFilter, func(s *smithy.Schema) error {
@@ -9132,7 +9250,9 @@ func (v *StorageVirtualMachine) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subtype != "" {
 		s.WriteString(schemas.StorageVirtualMachine_Subtype, string(v.Subtype))
 	}
-	serializeTags(s, schemas.StorageVirtualMachine_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StorageVirtualMachine_Tags, v.Tags)
+	}
 	if v.UUID != nil {
 		s.WriteString(schemas.StorageVirtualMachine_UUID, *v.UUID)
 	}
@@ -9220,7 +9340,9 @@ func (v *StorageVirtualMachineFilter) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != "" {
 		s.WriteString(schemas.StorageVirtualMachineFilter_Name, string(v.Name))
 	}
-	serializeStorageVirtualMachineFilterValues(s, schemas.StorageVirtualMachineFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeStorageVirtualMachineFilterValues(s, schemas.StorageVirtualMachineFilter_Values, v.Values)
+	}
 }
 func (v *StorageVirtualMachineFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StorageVirtualMachineFilter, func(s *smithy.Schema) error {
@@ -9313,8 +9435,12 @@ func (v *SvmEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DNSName != nil {
 		s.WriteString(schemas.SvmEndpoint_DNSName, *v.DNSName)
 	}
-	serializeOntapEndpointIpAddresses(s, schemas.SvmEndpoint_IpAddresses, v.IpAddresses)
-	serializeOntapEndpointIpAddresses(s, schemas.SvmEndpoint_Ipv6Addresses, v.Ipv6Addresses)
+	if v.IpAddresses != nil {
+		serializeOntapEndpointIpAddresses(s, schemas.SvmEndpoint_IpAddresses, v.IpAddresses)
+	}
+	if v.Ipv6Addresses != nil {
+		serializeOntapEndpointIpAddresses(s, schemas.SvmEndpoint_Ipv6Addresses, v.Ipv6Addresses)
+	}
 }
 func (v *SvmEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SvmEndpoint, func(s *smithy.Schema) error {
@@ -9959,7 +10085,9 @@ func (v *UpdateFileSystemOntapConfiguration) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateFileSystemOntapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTableIds(s, schemas.UpdateFileSystemOntapConfiguration_AddRouteTableIds, v.AddRouteTableIds)
+	if v.AddRouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.UpdateFileSystemOntapConfiguration_AddRouteTableIds, v.AddRouteTableIds)
+	}
 	if v.AutomaticBackupRetentionDays != nil {
 		s.WriteInt32(schemas.UpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
 	}
@@ -9980,7 +10108,9 @@ func (v *UpdateFileSystemOntapConfiguration) SerializeMembers(s smithy.ShapeSeri
 	if v.HAPairs != nil {
 		s.WriteInt32(schemas.UpdateFileSystemOntapConfiguration_HAPairs, *v.HAPairs)
 	}
-	serializeRouteTableIds(s, schemas.UpdateFileSystemOntapConfiguration_RemoveRouteTableIds, v.RemoveRouteTableIds)
+	if v.RemoveRouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.UpdateFileSystemOntapConfiguration_RemoveRouteTableIds, v.RemoveRouteTableIds)
+	}
 	if v.ThroughputCapacity != nil {
 		s.WriteInt32(schemas.UpdateFileSystemOntapConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
 	}
@@ -10118,7 +10248,9 @@ func (v *UpdateFileSystemOpenZFSConfiguration) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateFileSystemOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTableIds(s, schemas.UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds, v.AddRouteTableIds)
+	if v.AddRouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds, v.AddRouteTableIds)
+	}
 	if v.AutomaticBackupRetentionDays != nil {
 		s.WriteInt32(schemas.UpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
 	}
@@ -10144,7 +10276,9 @@ func (v *UpdateFileSystemOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSe
 		v.ReadCacheConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTableIds(s, schemas.UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds, v.RemoveRouteTableIds)
+	if v.RemoveRouteTableIds != nil {
+		serializeRouteTableIds(s, schemas.UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds, v.RemoveRouteTableIds)
+	}
 	if v.ThroughputCapacity != nil {
 		s.WriteInt32(schemas.UpdateFileSystemOpenZFSConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
 	}
@@ -10519,7 +10653,9 @@ func (v *UpdateOpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.DataCompressionType != "" {
 		s.WriteString(schemas.UpdateOpenZFSVolumeConfiguration_DataCompressionType, string(v.DataCompressionType))
 	}
-	serializeOpenZFSNfsExports(s, schemas.UpdateOpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.NfsExports != nil {
+		serializeOpenZFSNfsExports(s, schemas.UpdateOpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	}
 	if v.ReadOnly != nil {
 		s.WriteBool(schemas.UpdateOpenZFSVolumeConfiguration_ReadOnly, *v.ReadOnly)
 	}
@@ -10532,7 +10668,9 @@ func (v *UpdateOpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.StorageCapacityReservationGiB != nil {
 		s.WriteInt32(schemas.UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, *v.StorageCapacityReservationGiB)
 	}
-	serializeOpenZFSUserAndGroupQuotas(s, schemas.UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	if v.UserAndGroupQuotas != nil {
+		serializeOpenZFSUserAndGroupQuotas(s, schemas.UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	}
 }
 func (v *UpdateOpenZFSVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateOpenZFSVolumeConfiguration, func(s *smithy.Schema) error {
@@ -10781,7 +10919,9 @@ func (v *Volume) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Volume) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdministrativeActions(s, schemas.Volume_AdministrativeActions, v.AdministrativeActions)
+	if v.AdministrativeActions != nil {
+		serializeAdministrativeActions(s, schemas.Volume_AdministrativeActions, v.AdministrativeActions)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.Volume_CreationTime, *v.CreationTime)
 	}
@@ -10812,7 +10952,9 @@ func (v *Volume) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceARN != nil {
 		s.WriteString(schemas.Volume_ResourceARN, *v.ResourceARN)
 	}
-	serializeTags(s, schemas.Volume_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Volume_Tags, v.Tags)
+	}
 	if v.VolumeId != nil {
 		s.WriteString(schemas.Volume_VolumeId, *v.VolumeId)
 	}
@@ -10895,7 +11037,9 @@ func (v *VolumeFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.VolumeFilter_Name, string(v.Name))
 	}
-	serializeVolumeFilterValues(s, schemas.VolumeFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeVolumeFilterValues(s, schemas.VolumeFilter_Values, v.Values)
+	}
 }
 func (v *VolumeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VolumeFilter, func(s *smithy.Schema) error {
@@ -11252,7 +11396,9 @@ func (v *WindowsFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.ActiveDirectoryId != nil {
 		s.WriteString(schemas.WindowsFileSystemConfiguration_ActiveDirectoryId, *v.ActiveDirectoryId)
 	}
-	serializeAliases(s, schemas.WindowsFileSystemConfiguration_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeAliases(s, schemas.WindowsFileSystemConfiguration_Aliases, v.Aliases)
+	}
 	if v.AuditLogConfiguration != nil {
 		s.WriteStruct(schemas.WindowsFileSystemConfiguration_AuditLogConfiguration)
 		v.AuditLogConfiguration.SerializeMembers(s)
@@ -11280,7 +11426,9 @@ func (v *WindowsFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializ
 		v.FsrmConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFileSystemMaintenanceOperations(s, schemas.WindowsFileSystemConfiguration_MaintenanceOperationsInProgress, v.MaintenanceOperationsInProgress)
+	if v.MaintenanceOperationsInProgress != nil {
+		serializeFileSystemMaintenanceOperations(s, schemas.WindowsFileSystemConfiguration_MaintenanceOperationsInProgress, v.MaintenanceOperationsInProgress)
+	}
 	if v.PreferredFileServerIp != nil {
 		s.WriteString(schemas.WindowsFileSystemConfiguration_PreferredFileServerIp, *v.PreferredFileServerIp)
 	}

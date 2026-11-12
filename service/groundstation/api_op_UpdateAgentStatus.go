@@ -68,7 +68,9 @@ func (v *UpdateAgentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AggregateStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeComponentStatusList(s, schemas.UpdateAgentStatusRequest_componentStatuses, v.ComponentStatuses)
+	if v.ComponentStatuses != nil {
+		serializeComponentStatusList(s, schemas.UpdateAgentStatusRequest_componentStatuses, v.ComponentStatuses)
+	}
 	if v.TaskId != nil {
 		s.WriteString(schemas.UpdateAgentStatusRequest_taskId, *v.TaskId)
 	}

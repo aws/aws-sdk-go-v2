@@ -72,7 +72,9 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppBlockArn != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_AppBlockArn, *v.AppBlockArn)
 	}
-	serializeApplicationAttributes(s, schemas.UpdateApplicationRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.AttributesToDelete != nil {
+		serializeApplicationAttributes(s, schemas.UpdateApplicationRequest_AttributesToDelete, v.AttributesToDelete)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_Description, *v.Description)
 	}

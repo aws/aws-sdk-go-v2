@@ -65,7 +65,9 @@ func (v *UpdateIngestionDestinationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AppBundleIdentifier != nil {
 		s.WriteString(schemas.UpdateIngestionDestinationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
 	}
-	serializeDestinationConfiguration(s, schemas.UpdateIngestionDestinationRequest_destinationConfiguration, v.DestinationConfiguration)
+	if v.DestinationConfiguration != nil {
+		serializeDestinationConfiguration(s, schemas.UpdateIngestionDestinationRequest_destinationConfiguration, v.DestinationConfiguration)
+	}
 	if v.IngestionDestinationIdentifier != nil {
 		s.WriteString(schemas.UpdateIngestionDestinationRequest_ingestionDestinationIdentifier, *v.IngestionDestinationIdentifier)
 	}

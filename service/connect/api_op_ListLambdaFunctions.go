@@ -88,7 +88,9 @@ func (v *ListLambdaFunctionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLambdaFunctionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionArnsList(s, schemas.ListLambdaFunctionsResponse_LambdaFunctions, v.LambdaFunctions)
+	if v.LambdaFunctions != nil {
+		serializeFunctionArnsList(s, schemas.ListLambdaFunctionsResponse_LambdaFunctions, v.LambdaFunctions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLambdaFunctionsResponse_NextToken, *v.NextToken)
 	}

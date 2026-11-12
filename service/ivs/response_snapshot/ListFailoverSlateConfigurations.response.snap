@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failoverSlateConfigurations":[{"activationThresholdSeconds":1,"arn":"__Arn__","maxSlateDisplaySeconds":1,"minSlateDisplaySeconds":1,"name":"__Name__","state":"CREATING","tags":{"key0":"__Value__"}},{"activationThresholdSeconds":1,"arn":"__Arn__","maxSlateDisplaySeconds":1,"minSlateDisplaySeconds":1,"name":"__Name__","state":"CREATING","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

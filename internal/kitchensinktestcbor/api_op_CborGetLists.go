@@ -67,10 +67,18 @@ func (v *CborGetListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CborGetListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseIntegerList(s, schemas.CborGetListsOutput_integers, v.Integers)
-	serializeSparseStringList(s, schemas.CborGetListsOutput_sparseStrings, v.SparseStrings)
-	serializeDenseStringList(s, schemas.CborGetListsOutput_strings, v.Strings)
-	serializeDenseStructList(s, schemas.CborGetListsOutput_structs, v.Structs)
+	if v.Integers != nil {
+		serializeDenseIntegerList(s, schemas.CborGetListsOutput_integers, v.Integers)
+	}
+	if v.SparseStrings != nil {
+		serializeSparseStringList(s, schemas.CborGetListsOutput_sparseStrings, v.SparseStrings)
+	}
+	if v.Strings != nil {
+		serializeDenseStringList(s, schemas.CborGetListsOutput_strings, v.Strings)
+	}
+	if v.Structs != nil {
+		serializeDenseStructList(s, schemas.CborGetListsOutput_structs, v.Structs)
+	}
 }
 func (v *CborGetListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CborGetListsOutput, func(s *smithy.Schema) error {

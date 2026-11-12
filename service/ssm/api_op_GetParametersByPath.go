@@ -5,12 +5,26 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
 // Retrieve information about one or more parameters under a specified level in a
 // hierarchy.
+//
+// This operation is authorized against the ssm:GetParametersByPath action for the
+// path that you specify in the request. It isn't authorized against the individual
+// parameters that it returns, and it isn't authorized against ssm:GetParameter . A
+// principal who is allowed to call this operation for the path /a with Recursive
+// set to true receives every parameter under that path, including /a/b , even if a
+// policy explicitly denies access to /a/b .
+//
+// To prevent a parameter from being returned by this operation, deny the
+// ssm:GetParametersByPath action on every ancestor path that could include the
+// parameter in its results. For more information, see [Restricting access to specific parameters and paths]in the Amazon Web Services
+// Systems Manager User Guide.
 //
 // Request results are returned on a best-effort basis. If you specify MaxResults
 // in the request, the response includes information up to the limit specified. The
@@ -24,6 +38,8 @@ import (
 // for the beginning or end of a parameter name. If the specified name for a
 // parameter contains spaces between characters, the request fails with a
 // ValidationException error.
+//
+// [Restricting access to specific parameters and paths]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html
 func (c *Client) GetParametersByPath(ctx context.Context, params *GetParametersByPathInput, optFns ...func(*Options)) (*GetParametersByPathOutput, error) {
 	if params == nil {
 		params = &GetParametersByPathInput{}
@@ -67,18 +83,39 @@ type GetParametersByPathInput struct {
 	ParameterFilters []types.ParameterStringFilter
 
 	// Retrieve all parameters within a hierarchy.
-	//
-	// If a user has access to a path, then the user can access all levels of that
-	// path. For example, if a user has permission to access path /a , then the user
-	// can also access /a/b . Even if a user has explicitly been denied access in IAM
-	// for parameter /a/b , they can still call the GetParametersByPath API operation
-	// recursively for /a and view /a/b .
 	Recursive *bool
 
 	// Retrieve all parameters in a hierarchy with their value decrypted.
 	WithDecryption *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetParametersByPathInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersByPathRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersByPathInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetParametersByPathRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParametersByPathRequest_NextToken, *v.NextToken)
+	}
+	if v.ParameterFilters != nil {
+		serializeParameterStringFilterList(s, schemas.GetParametersByPathRequest_ParameterFilters, v.ParameterFilters)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.GetParametersByPathRequest_Path, *v.Path)
+	}
+	if v.Recursive != nil {
+		s.WriteBool(schemas.GetParametersByPathRequest_Recursive, *v.Recursive)
+	}
+	if v.WithDecryption != nil {
+		s.WriteBool(schemas.GetParametersByPathRequest_WithDecryption, *v.WithDecryption)
+	}
 }
 
 type GetParametersByPathOutput struct {
@@ -96,13 +133,37 @@ type GetParametersByPathOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersByPathOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersByPathResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersByPathOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParametersByPathResult_NextToken, *v.NextToken)
+	}
+	if v.Parameters != nil {
+		serializeParameterList(s, schemas.GetParametersByPathResult_Parameters, v.Parameters)
+	}
+}
+func (v *GetParametersByPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParametersByPathResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParametersByPathResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetParametersByPathResult_NextToken, v.NextToken)
+		case schemas.GetParametersByPathResult_Parameters:
+			return deserializeParameterList(d, schemas.GetParametersByPathResult_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParametersByPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParametersByPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersByPath, schemas.GetParametersByPathRequest, schemas.GetParametersByPathResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParametersByPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersByPath, schemas.GetParametersByPathRequest, schemas.GetParametersByPathResult), output: &GetParametersByPathOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

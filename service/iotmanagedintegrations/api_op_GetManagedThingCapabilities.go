@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetManagedThingCapabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingCapabilitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingCapabilitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingCapabilitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetManagedThingCapabilitiesRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetManagedThingCapabilitiesOutput struct {
 
 	// The capabilities of the device such as light bulb.
@@ -53,13 +67,46 @@ type GetManagedThingCapabilitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingCapabilitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingCapabilitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingCapabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		s.WriteString(schemas.GetManagedThingCapabilitiesResponse_Capabilities, *v.Capabilities)
+	}
+	if v.CapabilityReport != nil {
+		s.WriteStruct(schemas.GetManagedThingCapabilitiesResponse_CapabilityReport)
+		v.CapabilityReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.GetManagedThingCapabilitiesResponse_ManagedThingId, *v.ManagedThingId)
+	}
+}
+func (v *GetManagedThingCapabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedThingCapabilitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedThingCapabilitiesResponse_Capabilities:
+			v.Capabilities = new(string)
+			return d.ReadString(schemas.GetManagedThingCapabilitiesResponse_Capabilities, v.Capabilities)
+		case schemas.GetManagedThingCapabilitiesResponse_CapabilityReport:
+			v.CapabilityReport = &types.CapabilityReport{}
+			return v.CapabilityReport.Deserialize(d)
+		case schemas.GetManagedThingCapabilitiesResponse_ManagedThingId:
+			v.ManagedThingId = new(string)
+			return d.ReadString(schemas.GetManagedThingCapabilitiesResponse_ManagedThingId, v.ManagedThingId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedThingCapabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThingCapabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCapabilities, schemas.GetManagedThingCapabilitiesRequest, schemas.GetManagedThingCapabilitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThingCapabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCapabilities, schemas.GetManagedThingCapabilitiesRequest, schemas.GetManagedThingCapabilitiesResponse), output: &GetManagedThingCapabilitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

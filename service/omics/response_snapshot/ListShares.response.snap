@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","shares":[{"creationTime":"2000-01-01T00:00:00Z","ownerId":"__OwnerId__","principalSubscriber":"__PrincipalSubscriber__","resourceArn":"__ResourceArn__","resourceId":"__ResourceId__","shareId":"__ShareId__","shareName":"__ShareName__","status":"PENDING","statusMessage":"__StatusMessage__","updateTime":"2000-01-01T00:00:00Z"},{"creationTime":"2000-01-01T00:00:00Z","ownerId":"__OwnerId__","principalSubscriber":"__PrincipalSubscriber__","resourceArn":"__ResourceArn__","resourceId":"__ResourceId__","shareId":"__ShareId__","shareName":"__ShareName__","status":"PENDING","statusMessage":"__StatusMessage__","updateTime":"2000-01-01T00:00:00Z"}]}

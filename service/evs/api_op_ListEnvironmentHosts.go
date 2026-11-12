@@ -88,7 +88,9 @@ func (v *ListEnvironmentHostsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentHostsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHostList(s, schemas.ListEnvironmentHostsResponse_environmentHosts, v.EnvironmentHosts)
+	if v.EnvironmentHosts != nil {
+		serializeHostList(s, schemas.ListEnvironmentHostsResponse_environmentHosts, v.EnvironmentHosts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentHostsResponse_nextToken, *v.NextToken)
 	}

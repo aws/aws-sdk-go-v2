@@ -63,8 +63,12 @@ func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDashboardRequest_name, *v.Name)
 	}
-	serializeResourceTagList(s, schemas.CreateDashboardRequest_resourceTags, v.ResourceTags)
-	serializeWidgetList(s, schemas.CreateDashboardRequest_widgets, v.Widgets)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateDashboardRequest_resourceTags, v.ResourceTags)
+	}
+	if v.Widgets != nil {
+		serializeWidgetList(s, schemas.CreateDashboardRequest_widgets, v.Widgets)
+	}
 }
 
 type CreateDashboardOutput struct {

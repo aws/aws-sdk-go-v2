@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"tableARN":"__TableARN__","versionToken":"__VersionToken__"}

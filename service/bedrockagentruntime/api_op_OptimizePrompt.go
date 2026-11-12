@@ -54,7 +54,9 @@ func (v *OptimizePromptInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OptimizePromptInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputPrompt(s, schemas.OptimizePromptRequest_input, v.Input)
+	if v.Input != nil {
+		serializeInputPrompt(s, schemas.OptimizePromptRequest_input, v.Input)
+	}
 	if v.TargetModelId != nil {
 		s.WriteString(schemas.OptimizePromptRequest_targetModelId, *v.TargetModelId)
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.DescribePermissionSet
+
+{"PermissionSet":{"CreatedDate":946684800,"Description":"__Description__","Name":"__Name__","PermissionSetArn":"__PermissionSetArn__","RelayState":"__RelayState__","SessionDuration":"__SessionDuration__"}}

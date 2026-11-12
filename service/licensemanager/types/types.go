@@ -28,8 +28,12 @@ func (v *AndRuleStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AndRuleStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchingRuleStatementList(s, schemas.AndRuleStatement_MatchingRuleStatements, v.MatchingRuleStatements)
-	serializeScriptRuleStatementList(s, schemas.AndRuleStatement_ScriptRuleStatements, v.ScriptRuleStatements)
+	if v.MatchingRuleStatements != nil {
+		serializeMatchingRuleStatementList(s, schemas.AndRuleStatement_MatchingRuleStatements, v.MatchingRuleStatements)
+	}
+	if v.ScriptRuleStatements != nil {
+		serializeScriptRuleStatementList(s, schemas.AndRuleStatement_ScriptRuleStatements, v.ScriptRuleStatements)
+	}
 }
 func (v *AndRuleStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AndRuleStatement, func(s *smithy.Schema) error {
@@ -306,7 +310,9 @@ func (v *CrossRegionDiscoveryStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CrossRegionDiscoveryStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionStatusMap(s, schemas.CrossRegionDiscoveryStatus_Message, v.Message)
+	if v.Message != nil {
+		serializeRegionStatusMap(s, schemas.CrossRegionDiscoveryStatus_Message, v.Message)
+	}
 }
 func (v *CrossRegionDiscoveryStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CrossRegionDiscoveryStatus, func(s *smithy.Schema) error {
@@ -594,7 +600,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_Name, *v.Name)
 	}
-	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -657,6 +665,14 @@ type Grant struct {
 	// This member is required.
 	Version *string
 
+	// The type of the grant. Valid values:
+	//
+	//   - BuyerGrant - Grants the entitlement to use the license.
+	//
+	//   - DelegateGrant - Gives the grantee read-only visibility into the licenses and
+	//   grants distributed to buyers, with no entitlement to use them.
+	GrantType GrantType
+
 	// The options specified for the grant.
 	Options *Options
 
@@ -682,7 +698,12 @@ func (v *Grant) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GrantStatus != "" {
 		s.WriteString(schemas.Grant_GrantStatus, string(v.GrantStatus))
 	}
-	serializeAllowedOperationList(s, schemas.Grant_GrantedOperations, v.GrantedOperations)
+	if v.GrantType != "" {
+		s.WriteString(schemas.Grant_GrantType, string(v.GrantType))
+	}
+	if v.GrantedOperations != nil {
+		serializeAllowedOperationList(s, schemas.Grant_GrantedOperations, v.GrantedOperations)
+	}
 	if v.GranteePrincipalArn != nil {
 		s.WriteString(schemas.Grant_GranteePrincipalArn, *v.GranteePrincipalArn)
 	}
@@ -722,6 +743,13 @@ func (v *Grant) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.GrantStatus = GrantStatus(ev)
+			return nil
+		case schemas.Grant_GrantType:
+			var ev string
+			if err := d.ReadString(schemas.Grant_GrantType, &ev); err != nil {
+				return err
+			}
+			v.GrantType = GrantType(ev)
 			return nil
 		case schemas.Grant_GrantedOperations:
 			return deserializeAllowedOperationList(d, schemas.Grant_GrantedOperations, &v.GrantedOperations)
@@ -821,7 +849,9 @@ func (v *GrantedLicense) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateTime != nil {
 		s.WriteString(schemas.GrantedLicense_CreateTime, *v.CreateTime)
 	}
-	serializeEntitlementList(s, schemas.GrantedLicense_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeEntitlementList(s, schemas.GrantedLicense_Entitlements, v.Entitlements)
+	}
 	if v.HomeRegion != nil {
 		s.WriteString(schemas.GrantedLicense_HomeRegion, *v.HomeRegion)
 	}
@@ -833,7 +863,9 @@ func (v *GrantedLicense) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.GrantedLicense_LicenseArn, *v.LicenseArn)
 	}
-	serializeMetadataList(s, schemas.GrantedLicense_LicenseMetadata, v.LicenseMetadata)
+	if v.LicenseMetadata != nil {
+		serializeMetadataList(s, schemas.GrantedLicense_LicenseMetadata, v.LicenseMetadata)
+	}
 	if v.LicenseName != nil {
 		s.WriteString(schemas.GrantedLicense_LicenseName, *v.LicenseName)
 	}
@@ -1197,7 +1229,9 @@ func (v *License) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateTime != nil {
 		s.WriteString(schemas.License_CreateTime, *v.CreateTime)
 	}
-	serializeEntitlementList(s, schemas.License_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeEntitlementList(s, schemas.License_Entitlements, v.Entitlements)
+	}
 	if v.HomeRegion != nil {
 		s.WriteString(schemas.License_HomeRegion, *v.HomeRegion)
 	}
@@ -1209,7 +1243,9 @@ func (v *License) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.License_LicenseArn, *v.LicenseArn)
 	}
-	serializeMetadataList(s, schemas.License_LicenseMetadata, v.LicenseMetadata)
+	if v.LicenseMetadata != nil {
+		serializeMetadataList(s, schemas.License_LicenseMetadata, v.LicenseMetadata)
+	}
 	if v.LicenseName != nil {
 		s.WriteString(schemas.License_LicenseName, *v.LicenseName)
 	}
@@ -1334,7 +1370,9 @@ func (v *LicenseAssetGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LicenseAssetGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseAssetRulesetArnList(s, schemas.LicenseAssetGroup_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	if v.AssociatedLicenseAssetRulesetARNs != nil {
+		serializeLicenseAssetRulesetArnList(s, schemas.LicenseAssetGroup_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.LicenseAssetGroup_Description, *v.Description)
 	}
@@ -1347,11 +1385,15 @@ func (v *LicenseAssetGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseAssetGroupArn != nil {
 		s.WriteString(schemas.LicenseAssetGroup_LicenseAssetGroupArn, *v.LicenseAssetGroupArn)
 	}
-	serializeLicenseAssetGroupConfigurationList(s, schemas.LicenseAssetGroup_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	if v.LicenseAssetGroupConfigurations != nil {
+		serializeLicenseAssetGroupConfigurationList(s, schemas.LicenseAssetGroup_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.LicenseAssetGroup_Name, *v.Name)
 	}
-	serializeLicenseAssetGroupPropertyList(s, schemas.LicenseAssetGroup_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeLicenseAssetGroupPropertyList(s, schemas.LicenseAssetGroup_Properties, v.Properties)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.LicenseAssetGroup_Status, string(v.Status))
 	}
@@ -1548,7 +1590,9 @@ func (v *LicenseAssetRuleset) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.LicenseAssetRuleset_Name, *v.Name)
 	}
-	serializeLicenseAssetRuleList(s, schemas.LicenseAssetRuleset_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeLicenseAssetRuleList(s, schemas.LicenseAssetRuleset_Rules, v.Rules)
+	}
 }
 func (v *LicenseAssetRuleset) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LicenseAssetRuleset, func(s *smithy.Schema) error {
@@ -1643,7 +1687,9 @@ func (v *LicenseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutomatedDiscoveryInformation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConsumedLicenseSummaryList(s, schemas.LicenseConfiguration_ConsumedLicenseSummaryList, v.ConsumedLicenseSummaryList)
+	if v.ConsumedLicenseSummaryList != nil {
+		serializeConsumedLicenseSummaryList(s, schemas.LicenseConfiguration_ConsumedLicenseSummaryList, v.ConsumedLicenseSummaryList)
+	}
 	if v.ConsumedLicenses != nil {
 		s.WriteInt64(schemas.LicenseConfiguration_ConsumedLicenses, *v.ConsumedLicenses)
 	}
@@ -1671,15 +1717,21 @@ func (v *LicenseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseExpiry != nil {
 		s.WriteInt64(schemas.LicenseConfiguration_LicenseExpiry, *v.LicenseExpiry)
 	}
-	serializeStringList(s, schemas.LicenseConfiguration_LicenseRules, v.LicenseRules)
-	serializeManagedResourceSummaryList(s, schemas.LicenseConfiguration_ManagedResourceSummaryList, v.ManagedResourceSummaryList)
+	if v.LicenseRules != nil {
+		serializeStringList(s, schemas.LicenseConfiguration_LicenseRules, v.LicenseRules)
+	}
+	if v.ManagedResourceSummaryList != nil {
+		serializeManagedResourceSummaryList(s, schemas.LicenseConfiguration_ManagedResourceSummaryList, v.ManagedResourceSummaryList)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.LicenseConfiguration_Name, *v.Name)
 	}
 	if v.OwnerAccountId != nil {
 		s.WriteString(schemas.LicenseConfiguration_OwnerAccountId, *v.OwnerAccountId)
 	}
-	serializeProductInformationList(s, schemas.LicenseConfiguration_ProductInformationList, v.ProductInformationList)
+	if v.ProductInformationList != nil {
+		serializeProductInformationList(s, schemas.LicenseConfiguration_ProductInformationList, v.ProductInformationList)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.LicenseConfiguration_Status, *v.Status)
 	}
@@ -1972,7 +2024,9 @@ func (v *LicenseConversionContext) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LicenseConversionContext) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProductCodeList(s, schemas.LicenseConversionContext_ProductCodes, v.ProductCodes)
+	if v.ProductCodes != nil {
+		serializeProductCodeList(s, schemas.LicenseConversionContext_ProductCodes, v.ProductCodes)
+	}
 	if v.UsageOperation != nil {
 		s.WriteString(schemas.LicenseConversionContext_UsageOperation, *v.UsageOperation)
 	}
@@ -2145,7 +2199,9 @@ func (v *LicenseOperationFailure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureTime != nil {
 		s.WriteTime(schemas.LicenseOperationFailure_FailureTime, *v.FailureTime)
 	}
-	serializeMetadataList(s, schemas.LicenseOperationFailure_MetadataList, v.MetadataList)
+	if v.MetadataList != nil {
+		serializeMetadataList(s, schemas.LicenseOperationFailure_MetadataList, v.MetadataList)
+	}
 	if v.OperationName != nil {
 		s.WriteString(schemas.LicenseOperationFailure_OperationName, *v.OperationName)
 	}
@@ -2310,7 +2366,9 @@ func (v *LicenseUsage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LicenseUsage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntitlementUsageList(s, schemas.LicenseUsage_EntitlementUsages, v.EntitlementUsages)
+	if v.EntitlementUsages != nil {
+		serializeEntitlementUsageList(s, schemas.LicenseUsage_EntitlementUsages, v.EntitlementUsages)
+	}
 }
 func (v *LicenseUsage) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LicenseUsage, func(s *smithy.Schema) error {
@@ -2455,7 +2513,9 @@ func (v *MatchingRuleStatement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyToMatch != nil {
 		s.WriteString(schemas.MatchingRuleStatement_KeyToMatch, *v.KeyToMatch)
 	}
-	serializeStringList(s, schemas.MatchingRuleStatement_ValueToMatch, v.ValueToMatch)
+	if v.ValueToMatch != nil {
+		serializeStringList(s, schemas.MatchingRuleStatement_ValueToMatch, v.ValueToMatch)
+	}
 }
 func (v *MatchingRuleStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MatchingRuleStatement, func(s *smithy.Schema) error {
@@ -2513,17 +2573,19 @@ func (v *Metadata) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The options you can specify when you create a new version of a grant, such as
-// activation override behavior. For more information, see [Granted licenses in License Manager]in the License Manager
-// User Guide.
+// The options you can specify when you create a grant or a new version of a
+// grant, such as activation override behavior. For more information, see [Granted licenses in License Manager]in the
+// License Manager User Guide.
 //
 // [Granted licenses in License Manager]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
 type Options struct {
 
 	// An activation option for your grant that determines the behavior of activating
 	// a grant. Activation options can only be used with granted licenses sourced from
-	// the Amazon Web Services Marketplace. Additionally, the operation must specify
-	// the value of ACTIVE for the Status parameter.
+	// the Amazon Web Services Marketplace. Additionally, the operation must activate
+	// the grant. For the CreateGrantVersion operation, specify ACTIVE for the Status
+	// parameter. For the CreateGrant operation, specify ACTIVE for the DesiredStatus
+	// option.
 	//
 	//   - As a license administrator, you can optionally specify an
 	//   ActivationOverrideBehavior when activating a grant.
@@ -2543,6 +2605,16 @@ type Options struct {
 	// will also replace their previously activated grants with this activated grant.
 	ActivationOverrideBehavior ActivationOverrideBehavior
 
+	// The status of the grant after License Manager creates it. The only supported
+	// value is ACTIVE . Specify ACTIVE to create and activate the grant in one
+	// request.
+	//
+	// You can specify this option only for the CreateGrant operation, and only when
+	// the grant principal is an organization or an organizational unit (OU). To change
+	// the status of an existing grant, use the Status parameter of the
+	// CreateGrantVersion operation.
+	DesiredStatus GrantStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -2556,6 +2628,9 @@ func (v *Options) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActivationOverrideBehavior != "" {
 		s.WriteString(schemas.Options_ActivationOverrideBehavior, string(v.ActivationOverrideBehavior))
 	}
+	if v.DesiredStatus != "" {
+		s.WriteString(schemas.Options_DesiredStatus, string(v.DesiredStatus))
+	}
 }
 func (v *Options) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Options, func(s *smithy.Schema) error {
@@ -2566,6 +2641,13 @@ func (v *Options) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ActivationOverrideBehavior = ActivationOverrideBehavior(ev)
+			return nil
+		case schemas.Options_DesiredStatus:
+			var ev string
+			if err := d.ReadString(schemas.Options_DesiredStatus, &ev); err != nil {
+				return err
+			}
+			v.DesiredStatus = GrantStatus(ev)
 			return nil
 		}
 		return nil
@@ -2621,8 +2703,12 @@ func (v *OrRuleStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrRuleStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchingRuleStatementList(s, schemas.OrRuleStatement_MatchingRuleStatements, v.MatchingRuleStatements)
-	serializeScriptRuleStatementList(s, schemas.OrRuleStatement_ScriptRuleStatements, v.ScriptRuleStatements)
+	if v.MatchingRuleStatements != nil {
+		serializeMatchingRuleStatementList(s, schemas.OrRuleStatement_MatchingRuleStatements, v.MatchingRuleStatements)
+	}
+	if v.ScriptRuleStatements != nil {
+		serializeScriptRuleStatementList(s, schemas.OrRuleStatement_ScriptRuleStatements, v.ScriptRuleStatements)
+	}
 }
 func (v *OrRuleStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OrRuleStatement, func(s *smithy.Schema) error {
@@ -2750,7 +2836,9 @@ func (v *ProductInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProductInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProductInformationFilterList(s, schemas.ProductInformation_ProductInformationFilterList, v.ProductInformationFilterList)
+	if v.ProductInformationFilterList != nil {
+		serializeProductInformationFilterList(s, schemas.ProductInformation_ProductInformationFilterList, v.ProductInformationFilterList)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ProductInformation_ResourceType, *v.ResourceType)
 	}
@@ -2800,7 +2888,9 @@ func (v *ProductInformationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProductInformationFilterName != nil {
 		s.WriteString(schemas.ProductInformationFilter_ProductInformationFilterName, *v.ProductInformationFilterName)
 	}
-	serializeStringList(s, schemas.ProductInformationFilter_ProductInformationFilterValue, v.ProductInformationFilterValue)
+	if v.ProductInformationFilterValue != nil {
+		serializeStringList(s, schemas.ProductInformationFilter_ProductInformationFilterValue, v.ProductInformationFilterValue)
+	}
 }
 func (v *ProductInformationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProductInformationFilter, func(s *smithy.Schema) error {
@@ -2857,6 +2947,14 @@ type ReceivedMetadata struct {
 	// Allowed operations.
 	AllowedOperations []AllowedOperation
 
+	// The type of the grant through which the license was received. Valid values:
+	//
+	//   - BuyerGrant - Grants you the entitlement to use the license.
+	//
+	//   - DelegateGrant - Gives you read-only visibility into the licenses and grants
+	//   distributed to buyers, with no entitlement to use them.
+	GrantType GrantType
+
 	// Received status.
 	ReceivedStatus ReceivedStatus
 
@@ -2873,7 +2971,12 @@ func (v *ReceivedMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReceivedMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedOperationList(s, schemas.ReceivedMetadata_AllowedOperations, v.AllowedOperations)
+	if v.AllowedOperations != nil {
+		serializeAllowedOperationList(s, schemas.ReceivedMetadata_AllowedOperations, v.AllowedOperations)
+	}
+	if v.GrantType != "" {
+		s.WriteString(schemas.ReceivedMetadata_GrantType, string(v.GrantType))
+	}
 	if v.ReceivedStatus != "" {
 		s.WriteString(schemas.ReceivedMetadata_ReceivedStatus, string(v.ReceivedStatus))
 	}
@@ -2886,6 +2989,13 @@ func (v *ReceivedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.ReceivedMetadata_AllowedOperations:
 			return deserializeAllowedOperationList(d, schemas.ReceivedMetadata_AllowedOperations, &v.AllowedOperations)
+		case schemas.ReceivedMetadata_GrantType:
+			var ev string
+			if err := d.ReadString(schemas.ReceivedMetadata_GrantType, &ev); err != nil {
+				return err
+			}
+			v.GrantType = GrantType(ev)
+			return nil
 		case schemas.ReceivedMetadata_ReceivedStatus:
 			var ev string
 			if err := d.ReadString(schemas.ReceivedMetadata_ReceivedStatus, &ev); err != nil {
@@ -2959,8 +3069,12 @@ func (v *ReportContext) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReportContext) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.ReportContext_licenseAssetGroupArns, v.LicenseAssetGroupArns)
-	serializeArnList(s, schemas.ReportContext_licenseConfigurationArns, v.LicenseConfigurationArns)
+	if v.LicenseAssetGroupArns != nil {
+		serializeArnList(s, schemas.ReportContext_licenseAssetGroupArns, v.LicenseAssetGroupArns)
+	}
+	if v.LicenseConfigurationArns != nil {
+		serializeArnList(s, schemas.ReportContext_licenseConfigurationArns, v.LicenseConfigurationArns)
+	}
 	if v.ReportEndDate != nil {
 		s.WriteTime(schemas.ReportContext_reportEndDate, *v.ReportEndDate)
 	}
@@ -3117,13 +3231,17 @@ func (v *ReportGenerator) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReportGeneratorName != nil {
 		s.WriteString(schemas.ReportGenerator_ReportGeneratorName, *v.ReportGeneratorName)
 	}
-	serializeReportTypeList(s, schemas.ReportGenerator_ReportType, v.ReportType)
+	if v.ReportType != nil {
+		serializeReportTypeList(s, schemas.ReportGenerator_ReportType, v.ReportType)
+	}
 	if v.S3Location != nil {
 		s.WriteStruct(schemas.ReportGenerator_S3Location)
 		v.S3Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.ReportGenerator_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ReportGenerator_Tags, v.Tags)
+	}
 }
 func (v *ReportGenerator) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReportGenerator, func(s *smithy.Schema) error {
@@ -3228,7 +3346,9 @@ func (v *ResourceInventory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceType != nil {
 		s.WriteString(schemas.ResourceInventory_InstanceType, *v.InstanceType)
 	}
-	serializeStringList(s, schemas.ResourceInventory_MarketplaceProductCodes, v.MarketplaceProductCodes)
+	if v.MarketplaceProductCodes != nil {
+		serializeStringList(s, schemas.ResourceInventory_MarketplaceProductCodes, v.MarketplaceProductCodes)
+	}
 	if v.Platform != nil {
 		s.WriteString(schemas.ResourceInventory_Platform, *v.Platform)
 	}
@@ -3567,14 +3687,18 @@ func (v *TokenData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.TokenData_LicenseArn, *v.LicenseArn)
 	}
-	serializeArnList(s, schemas.TokenData_RoleArns, v.RoleArns)
+	if v.RoleArns != nil {
+		serializeArnList(s, schemas.TokenData_RoleArns, v.RoleArns)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.TokenData_Status, *v.Status)
 	}
 	if v.TokenId != nil {
 		s.WriteString(schemas.TokenData_TokenId, *v.TokenId)
 	}
-	serializeMaxSize3StringList(s, schemas.TokenData_TokenProperties, v.TokenProperties)
+	if v.TokenProperties != nil {
+		serializeMaxSize3StringList(s, schemas.TokenData_TokenProperties, v.TokenProperties)
+	}
 	if v.TokenType != nil {
 		s.WriteString(schemas.TokenData_TokenType, *v.TokenType)
 	}

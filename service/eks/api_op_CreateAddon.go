@@ -145,14 +145,18 @@ func (v *CreateAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NamespaceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAddonPodIdentityAssociationsList(s, schemas.CreateAddonRequest_podIdentityAssociations, v.PodIdentityAssociations)
+	if v.PodIdentityAssociations != nil {
+		serializeAddonPodIdentityAssociationsList(s, schemas.CreateAddonRequest_podIdentityAssociations, v.PodIdentityAssociations)
+	}
 	if v.ResolveConflicts != "" {
 		s.WriteString(schemas.CreateAddonRequest_resolveConflicts, string(v.ResolveConflicts))
 	}
 	if v.ServiceAccountRoleArn != nil {
 		s.WriteString(schemas.CreateAddonRequest_serviceAccountRoleArn, *v.ServiceAccountRoleArn)
 	}
-	serializeTagMap(s, schemas.CreateAddonRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAddonRequest_tags, v.Tags)
+	}
 }
 
 type CreateAddonOutput struct {

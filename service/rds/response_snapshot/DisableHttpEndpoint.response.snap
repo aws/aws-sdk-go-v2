@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DisableHttpEndpointResponse><DisableHttpEndpointResult><HttpEndpointEnabled>true</HttpEndpointEnabled><ResourceArn>__ResourceArn__</ResourceArn></DisableHttpEndpointResult></DisableHttpEndpointResponse>

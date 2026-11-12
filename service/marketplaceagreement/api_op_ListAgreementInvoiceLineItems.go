@@ -129,7 +129,9 @@ func (v *ListAgreementInvoiceLineItemsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListAgreementInvoiceLineItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgreementInvoiceLineItemGroupSummaries(s, schemas.ListAgreementInvoiceLineItemsOutput_agreementInvoiceLineItemGroupSummaries, v.AgreementInvoiceLineItemGroupSummaries)
+	if v.AgreementInvoiceLineItemGroupSummaries != nil {
+		serializeAgreementInvoiceLineItemGroupSummaries(s, schemas.ListAgreementInvoiceLineItemsOutput_agreementInvoiceLineItemGroupSummaries, v.AgreementInvoiceLineItemGroupSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgreementInvoiceLineItemsOutput_nextToken, *v.NextToken)
 	}

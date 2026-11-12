@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.ListAgents
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Agents":[{"AgentArn":"__AgentArn__","Name":"__Name__","Platform":{"Version":"__Version__"},"Status":"ONLINE"},{"AgentArn":"__AgentArn__","Name":"__Name__","Platform":{"Version":"__Version__"},"Status":"ONLINE"}],"NextToken":"__NextToken__"}
+¿fAgentsŸ¿hAgentArnl__AgentArn__dNameh__Name__hPlatform¿gVersionk__Version__ÿfStatusfONLINEÿ¿hAgentArnl__AgentArn__dNameh__Name__hPlatform¿gVersionk__Version__ÿfStatusfONLINEÿÿiNextTokenm__NextToken__ÿ

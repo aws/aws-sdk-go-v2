@@ -74,7 +74,9 @@ func (v *CreateHttpNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateHttpNamespaceRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateHttpNamespaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHttpNamespaceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateHttpNamespaceOutput struct {
@@ -127,6 +129,9 @@ func (c *Client) addOperationCreateHttpNamespaceMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

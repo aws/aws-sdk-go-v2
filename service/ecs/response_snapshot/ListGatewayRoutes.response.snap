@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListGatewayRoutes
+
+{"gatewayRoutes":[{"clusterArn":"__ClusterArn__","gatewayArn":"__GatewayArn__","gatewayRouteArn":"__GatewayRouteArn__","serviceArn":"__ServiceArn__","serviceContainerPortName":"__ServiceContainerPortName__","status":"ACTIVE"},{"clusterArn":"__ClusterArn__","gatewayArn":"__GatewayArn__","gatewayRouteArn":"__GatewayRouteArn__","serviceArn":"__ServiceArn__","serviceContainerPortName":"__ServiceContainerPortName__","status":"ACTIVE"}],"nextToken":"__NextToken__"}

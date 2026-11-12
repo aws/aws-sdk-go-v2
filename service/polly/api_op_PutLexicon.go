@@ -4,6 +4,8 @@ package polly
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -11,6 +13,11 @@ import (
 // with the same name already exists in the region, it is overwritten by the new
 // lexicon. Lexicon operations have eventual consistency, therefore, it might take
 // some time before the lexicon is available to the SynthesizeSpeech operation.
+//
+// Overwriting a lexicon keeps its existing tags. You can specify tags only when
+// you create a lexicon. If you specify tags for a lexicon that already exists, the
+// request fails with a ValidationException . To change the tags of an existing
+// lexicon, use TagResource and UntagResource .
 //
 // For more information, see [Managing Lexicons].
 //
@@ -37,14 +44,39 @@ type PutLexiconInput struct {
 	// This member is required.
 	Content *string
 
-	// Name of the lexicon. The name must follow the regular express format
+	// Name of the lexicon. The name must follow the regular expression format
 	// [0-9A-Za-z]{1,20}. That is, the name is a case-sensitive alphanumeric string up
 	// to 20 characters long.
 	//
 	// This member is required.
 	Name *string
 
+	// The metadata that you apply to the lexicon to help you categorize and organize
+	// it. Each tag consists of a key and an optional value, both of which you define.
+	// Tag keys can have a maximum character length of 128 characters, and tag values
+	// can have a maximum length of 256 characters. You can't replace the tags of an
+	// existing lexicon by overwriting it with PutLexicon.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
+}
+
+func (v *PutLexiconInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLexiconInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLexiconInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.PutLexiconInput_Content, *v.Content)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutLexiconInput_Name, *v.Name)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutLexiconInput_Tags, v.Tags)
+	}
 }
 
 type PutLexiconOutput struct {
@@ -54,13 +86,26 @@ type PutLexiconOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLexiconOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLexiconOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLexiconOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutLexiconOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLexiconOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLexicon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLexicon, schemas.PutLexiconInput, schemas.PutLexiconOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutLexicon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLexicon, schemas.PutLexiconInput, schemas.PutLexiconOutput), output: &PutLexiconOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

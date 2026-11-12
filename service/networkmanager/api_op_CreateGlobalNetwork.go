@@ -49,7 +49,9 @@ func (v *CreateGlobalNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateGlobalNetworkRequest_Description, *v.Description)
 	}
-	serializeTagList(s, schemas.CreateGlobalNetworkRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGlobalNetworkRequest_Tags, v.Tags)
+	}
 }
 
 type CreateGlobalNetworkOutput struct {

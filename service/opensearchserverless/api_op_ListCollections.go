@@ -108,7 +108,9 @@ func (v *ListCollectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCollectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectionSummaries(s, schemas.ListCollectionsResponse_collectionSummaries, v.CollectionSummaries)
+	if v.CollectionSummaries != nil {
+		serializeCollectionSummaries(s, schemas.ListCollectionsResponse_collectionSummaries, v.CollectionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollectionsResponse_nextToken, *v.NextToken)
 	}

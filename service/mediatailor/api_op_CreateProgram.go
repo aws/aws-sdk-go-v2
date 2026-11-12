@@ -81,8 +81,12 @@ func (v *CreateProgramInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAdBreak(s, schemas.CreateProgramRequest_AdBreaks, v.AdBreaks)
-	serialize__listOfAudienceMedia(s, schemas.CreateProgramRequest_AudienceMedia, v.AudienceMedia)
+	if v.AdBreaks != nil {
+		serialize__listOfAdBreak(s, schemas.CreateProgramRequest_AdBreaks, v.AdBreaks)
+	}
+	if v.AudienceMedia != nil {
+		serialize__listOfAudienceMedia(s, schemas.CreateProgramRequest_AudienceMedia, v.AudienceMedia)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.CreateProgramRequest_ChannelName, *v.ChannelName)
 	}
@@ -100,7 +104,9 @@ func (v *CreateProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateProgramRequest_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateProgramRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateProgramRequest_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.CreateProgramRequest_VodSourceName, *v.VodSourceName)
 	}
@@ -195,11 +201,15 @@ func (v *CreateProgramOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAdBreak(s, schemas.CreateProgramResponse_AdBreaks, v.AdBreaks)
+	if v.AdBreaks != nil {
+		serialize__listOfAdBreak(s, schemas.CreateProgramResponse_AdBreaks, v.AdBreaks)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateProgramResponse_Arn, *v.Arn)
 	}
-	serialize__listOfAudienceMedia(s, schemas.CreateProgramResponse_AudienceMedia, v.AudienceMedia)
+	if v.AudienceMedia != nil {
+		serialize__listOfAudienceMedia(s, schemas.CreateProgramResponse_AudienceMedia, v.AudienceMedia)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.CreateProgramResponse_ChannelName, *v.ChannelName)
 	}
@@ -226,7 +236,9 @@ func (v *CreateProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateProgramResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateProgramResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateProgramResponse_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.CreateProgramResponse_VodSourceName, *v.VodSourceName)
 	}

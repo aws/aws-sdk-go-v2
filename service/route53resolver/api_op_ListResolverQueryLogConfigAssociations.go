@@ -117,7 +117,9 @@ func (v *ListResolverQueryLogConfigAssociationsInput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListResolverQueryLogConfigAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListResolverQueryLogConfigAssociationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListResolverQueryLogConfigAssociationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListResolverQueryLogConfigAssociationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -173,7 +175,9 @@ func (v *ListResolverQueryLogConfigAssociationsOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResolverQueryLogConfigAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeResolverQueryLogConfigAssociationList(s, schemas.ListResolverQueryLogConfigAssociationsResponse_ResolverQueryLogConfigAssociations, v.ResolverQueryLogConfigAssociations)
+	if v.ResolverQueryLogConfigAssociations != nil {
+		serializeResolverQueryLogConfigAssociationList(s, schemas.ListResolverQueryLogConfigAssociationsResponse_ResolverQueryLogConfigAssociations, v.ResolverQueryLogConfigAssociations)
+	}
 	if v.TotalCount != 0 {
 		s.WriteInt32(schemas.ListResolverQueryLogConfigAssociationsResponse_TotalCount, v.TotalCount)
 	}

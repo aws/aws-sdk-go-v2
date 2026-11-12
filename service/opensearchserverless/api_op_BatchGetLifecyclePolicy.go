@@ -46,7 +46,9 @@ func (v *BatchGetLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecyclePolicyIdentifiers(s, schemas.BatchGetLifecyclePolicyRequest_identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeLifecyclePolicyIdentifiers(s, schemas.BatchGetLifecyclePolicyRequest_identifiers, v.Identifiers)
+	}
 }
 
 type BatchGetLifecyclePolicyOutput struct {
@@ -70,8 +72,12 @@ func (v *BatchGetLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecyclePolicyDetails(s, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails, v.LifecyclePolicyDetails)
-	serializeLifecyclePolicyErrorDetails(s, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails, v.LifecyclePolicyErrorDetails)
+	if v.LifecyclePolicyDetails != nil {
+		serializeLifecyclePolicyDetails(s, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails, v.LifecyclePolicyDetails)
+	}
+	if v.LifecyclePolicyErrorDetails != nil {
+		serializeLifecyclePolicyErrorDetails(s, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails, v.LifecyclePolicyErrorDetails)
+	}
 }
 func (v *BatchGetLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetLifecyclePolicyResponse, func(s *smithy.Schema) error {

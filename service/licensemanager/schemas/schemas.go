@@ -345,7 +345,7 @@ var ActivationOverrideBehavior_ALL_GRANTS_PERMITTED_BY_ISSUER *smithy.Schema
 var AllowedOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "AllowedOperation",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 8)
 var AllowedOperation_CREATE_GRANT *smithy.Schema
 
 var AllowedOperation_CHECKOUT_LICENSE *smithy.Schema
@@ -359,6 +359,8 @@ var AllowedOperation_EXTEND_CONSUMPTION_LICENSE *smithy.Schema
 var AllowedOperation_LIST_PURCHASED_LICENSES *smithy.Schema
 
 var AllowedOperation_CREATE_TOKEN *smithy.Schema
+
+var AllowedOperation_LIST_RECEIVED_LICENSES *smithy.Schema
 
 var _AllowedOperationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
@@ -762,7 +764,7 @@ var _FilterValues_member *smithy.Schema
 var Grant = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "Grant",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var Grant_GrantArn *smithy.Schema
 
 var Grant_GrantName *smithy.Schema
@@ -784,6 +786,8 @@ var Grant_Version *smithy.Schema
 var Grant_GrantedOperations *smithy.Schema
 
 var Grant_Options *smithy.Schema
+
+var Grant_GrantType *smithy.Schema
 
 var GrantedLicense = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
@@ -852,6 +856,14 @@ var GrantStatus_PENDING_DELETE *smithy.Schema
 var GrantStatus_DISABLED *smithy.Schema
 
 var GrantStatus_WORKFLOW_COMPLETED *smithy.Schema
+
+var GrantType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.licensemanager",
+	Name:      "GrantType",
+}, smithy.ShapeTypeEnum, 2)
+var GrantType_BUYER_GRANT *smithy.Schema
+
+var GrantType_DELEGATE_GRANT *smithy.Schema
 
 var InstanceRuleStatement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
@@ -1427,8 +1439,10 @@ var NoEntitlementsAllowedException_Message *smithy.Schema
 var Options = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "Options",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var Options_ActivationOverrideBehavior *smithy.Schema
+
+var Options_DesiredStatus *smithy.Schema
 
 var OrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
@@ -1523,12 +1537,14 @@ var RateLimitExceededException_Message *smithy.Schema
 var ReceivedMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "ReceivedMetadata",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ReceivedMetadata_ReceivedStatus *smithy.Schema
 
 var ReceivedMetadata_ReceivedStatusReason *smithy.Schema
 
 var ReceivedMetadata_AllowedOperations *smithy.Schema
+
+var ReceivedMetadata_GrantType *smithy.Schema
 
 var ReceivedStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
@@ -1988,7 +2004,7 @@ var CheckoutLicenseResponse_LicenseArn *smithy.Schema
 var CreateGrantRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "CreateGrantRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var CreateGrantRequest_ClientToken *smithy.Schema
 
 var CreateGrantRequest_GrantName *smithy.Schema
@@ -2002,6 +2018,10 @@ var CreateGrantRequest_HomeRegion *smithy.Schema
 var CreateGrantRequest_AllowedOperations *smithy.Schema
 
 var CreateGrantRequest_Tags *smithy.Schema
+
+var CreateGrantRequest_GrantType *smithy.Schema
+
+var CreateGrantRequest_Options *smithy.Schema
 
 var CreateGrantResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
@@ -3151,6 +3171,8 @@ func init() {
 
 	AllowedOperation_CREATE_TOKEN = AllowedOperation.AddMember("CREATE_TOKEN", smithyprelude.Unit)
 
+	AllowedOperation_LIST_RECEIVED_LICENSES = AllowedOperation.AddMember("LIST_RECEIVED_LICENSES", smithyprelude.Unit)
+
 	_AllowedOperationList_member = _AllowedOperationList.AddMember("member", AllowedOperation)
 
 	_StringList_member = _StringList.AddMember("member", _String)
@@ -3419,6 +3441,12 @@ func init() {
 
 	Options_ActivationOverrideBehavior = Options.AddMember("ActivationOverrideBehavior", ActivationOverrideBehavior)
 
+	Options_DesiredStatus = Options.AddMember("DesiredStatus", GrantStatus)
+
+	GrantType_BUYER_GRANT = GrantType.AddMember("BUYER_GRANT", smithyprelude.Unit)
+
+	GrantType_DELEGATE_GRANT = GrantType.AddMember("DELEGATE_GRANT", smithyprelude.Unit)
+
 	Grant_GrantArn = Grant.AddMember("GrantArn", _Arn)
 
 	Grant_GrantName = Grant.AddMember("GrantName", _String)
@@ -3440,6 +3468,8 @@ func init() {
 	Grant_GrantedOperations = Grant.AddMember("GrantedOperations", _AllowedOperationList)
 
 	Grant_Options = Grant.AddMember("Options", Options)
+
+	Grant_GrantType = Grant.AddMember("GrantType", GrantType)
 
 	IssuerDetails_Name = IssuerDetails.AddMember("Name", _String)
 
@@ -3488,6 +3518,8 @@ func init() {
 	ReceivedMetadata_ReceivedStatusReason = ReceivedMetadata.AddMember("ReceivedStatusReason", _StatusReasonMessage)
 
 	ReceivedMetadata_AllowedOperations = ReceivedMetadata.AddMember("AllowedOperations", _AllowedOperationList)
+
+	ReceivedMetadata_GrantType = ReceivedMetadata.AddMember("GrantType", GrantType)
 
 	GrantedLicense_LicenseArn = GrantedLicense.AddMember("LicenseArn", _Arn)
 
@@ -4048,6 +4080,10 @@ func init() {
 	CreateGrantRequest_AllowedOperations = CreateGrantRequest.AddMember("AllowedOperations", _AllowedOperationList)
 
 	CreateGrantRequest_Tags = CreateGrantRequest.AddMember("Tags", _TagList)
+
+	CreateGrantRequest_GrantType = CreateGrantRequest.AddMember("GrantType", GrantType)
+
+	CreateGrantRequest_Options = CreateGrantRequest.AddMember("Options", Options)
 
 	CreateGrantResponse_GrantArn = CreateGrantResponse.AddMember("GrantArn", _Arn)
 

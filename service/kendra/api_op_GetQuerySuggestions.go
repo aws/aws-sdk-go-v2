@@ -90,7 +90,9 @@ func (v *GetQuerySuggestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryText != nil {
 		s.WriteString(schemas.GetQuerySuggestionsRequest_QueryText, *v.QueryText)
 	}
-	serializeSuggestionTypes(s, schemas.GetQuerySuggestionsRequest_SuggestionTypes, v.SuggestionTypes)
+	if v.SuggestionTypes != nil {
+		serializeSuggestionTypes(s, schemas.GetQuerySuggestionsRequest_SuggestionTypes, v.SuggestionTypes)
+	}
 }
 
 type GetQuerySuggestionsOutput struct {
@@ -117,7 +119,9 @@ func (v *GetQuerySuggestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QuerySuggestionsId != nil {
 		s.WriteString(schemas.GetQuerySuggestionsResponse_QuerySuggestionsId, *v.QuerySuggestionsId)
 	}
-	serializeSuggestionList(s, schemas.GetQuerySuggestionsResponse_Suggestions, v.Suggestions)
+	if v.Suggestions != nil {
+		serializeSuggestionList(s, schemas.GetQuerySuggestionsResponse_Suggestions, v.Suggestions)
+	}
 }
 func (v *GetQuerySuggestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetQuerySuggestionsResponse, func(s *smithy.Schema) error {

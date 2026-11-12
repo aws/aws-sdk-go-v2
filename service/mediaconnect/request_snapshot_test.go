@@ -887,6 +887,36 @@ func TestCheckRequestSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchGetDestinationEndpoint(t *testing.T) {
+	input := &BatchGetDestinationEndpointInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetRouterInput(t *testing.T) {
 	input := &BatchGetRouterInputInput{
 		Arns: []string{
@@ -973,6 +1003,64 @@ func TestCheckRequestSnapshot_BatchGetRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetRouterOutput"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_BatchGetSourceEndpoint(t *testing.T) {
+	input := &BatchGetSourceEndpointInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetSourceEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ConnectEndpoints(t *testing.T) {
+	input := &ConnectEndpointsInput{
+		DestinationEndpointArn: ptr.String("__DestinationEndpointArn__"),
+		SourceEndpointArn:      ptr.String("__SourceEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ConnectEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConnectEndpoints"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1828,16 +1916,18 @@ func TestCheckRequestSnapshot_CreateGateway(t *testing.T) {
 func TestCheckRequestSnapshot_CreateRouterInput(t *testing.T) {
 	input := &CreateRouterInputInput{
 		Name: ptr.String("__Name__"),
-		Configuration: &types.RouterInputConfigurationMemberStandard{
-			Value: types.StandardRouterInputConfiguration{
-				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-					Value: types.RistRouterInputConfiguration{
-						Port:                        ptr.Int32(1),
-						RecoveryLatencyMilliseconds: ptr.Int64(1),
+		Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+			Value: types.DestinationEndpointRouterInputConfiguration{
+				EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
 					},
 				},
-				Protocol: types.RouterInputProtocol("RTP"),
 			},
 		},
 		MaximumBitrate:   ptr.Int64(1),
@@ -2167,6 +2257,33 @@ func TestCheckRequestSnapshot_DeleteRouterOutput(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeregisterDestinationEndpoint(t *testing.T) {
+	input := &DeregisterDestinationEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeregisterDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeregisterDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeregisterGatewayInstance(t *testing.T) {
 	input := &DeregisterGatewayInstanceInput{
 		Force:              ptr.Bool(true),
@@ -2191,6 +2308,33 @@ func TestCheckRequestSnapshot_DeregisterGatewayInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeregisterGatewayInstance"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeregisterSourceEndpoint(t *testing.T) {
+	input := &DeregisterSourceEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeregisterSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeregisterSourceEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2411,6 +2555,61 @@ func TestCheckRequestSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisconnectEndpoints(t *testing.T) {
+	input := &DisconnectEndpointsInput{
+		DestinationEndpointArn: ptr.String("__DestinationEndpointArn__"),
+		SourceEndpointArn:      ptr.String("__SourceEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisconnectEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisconnectEndpoints"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetDestinationEndpoint(t *testing.T) {
+	input := &GetDestinationEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetRouterInput(t *testing.T) {
 	input := &GetRouterInputInput{
 		Arn: ptr.String("__Arn__"),
@@ -2546,6 +2745,33 @@ func TestCheckRequestSnapshot_GetRouterOutput(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetSourceEndpoint(t *testing.T) {
+	input := &GetSourceEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSourceEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GrantFlowEntitlements(t *testing.T) {
 	input := &GrantFlowEntitlementsInput{
 		Entitlements: []types.GrantEntitlementRequest{
@@ -2648,6 +2874,48 @@ func TestCheckRequestSnapshot_ListBridges(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBridges"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListDestinationEndpoints(t *testing.T) {
+	input := &ListDestinationEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.DestinationEndpointFilter{
+			&types.DestinationEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.DestinationEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDestinationEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDestinationEndpoints"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2947,6 +3215,48 @@ func TestCheckRequestSnapshot_ListRouterOutputs(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListSourceEndpoints(t *testing.T) {
+	input := &ListSourceEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.SourceEndpointFilter{
+			&types.SourceEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.SourceEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSourceEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSourceEndpoints"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTagsForGlobalResource(t *testing.T) {
 	input := &ListTagsForGlobalResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -3026,6 +3336,120 @@ func TestCheckRequestSnapshot_PurchaseOffering(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PurchaseOffering"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RegisterDestinationEndpoint(t *testing.T) {
+	input := &RegisterDestinationEndpointInput{
+		Description: ptr.String("__Description__"),
+		Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+			Value: types.StandardDestinationEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicDestinationEndpointNetworkingConfiguration{
+						DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardDestinationEndpointConfiguration{
+						DestinationAddress:    ptr.String("__DestinationAddress__"),
+						DestinationIngestPort: ptr.Int32(1),
+					},
+				},
+				DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+				Protocol:                  types.DestinationEndpointProtocol("RTP"),
+			},
+		},
+		RegionName: ptr.String("__RegionName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RegisterSourceEndpoint(t *testing.T) {
+	input := &RegisterSourceEndpointInput{
+		RegionName:  ptr.String("__RegionName__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.SourceEndpointConfigurationMemberStandard{
+			Value: types.StandardSourceEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicSourceEndpointNetworkingConfiguration{
+						SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardSourceEndpointConfiguration{
+						DestinationIngestPort:       ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+				Protocol:             types.SourceEndpointProtocol("RTP"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterSourceEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3740,6 +4164,59 @@ func TestCheckRequestSnapshot_UpdateBridgeState(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateDestinationEndpoint(t *testing.T) {
+	input := &UpdateDestinationEndpointInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+			Value: types.StandardDestinationEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicDestinationEndpointNetworkingConfiguration{
+						DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardDestinationEndpointConfiguration{
+						DestinationAddress:    ptr.String("__DestinationAddress__"),
+						DestinationIngestPort: ptr.Int32(1),
+					},
+				},
+				DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+				Protocol:                  types.DestinationEndpointProtocol("RTP"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateFlow(t *testing.T) {
 	input := &UpdateFlowInput{
 		FlowArn: ptr.String("__FlowArn__"),
@@ -4196,16 +4673,18 @@ func TestCheckRequestSnapshot_UpdateRouterInput(t *testing.T) {
 	input := &UpdateRouterInputInput{
 		Arn:  ptr.String("__Arn__"),
 		Name: ptr.String("__Name__"),
-		Configuration: &types.RouterInputConfigurationMemberStandard{
-			Value: types.StandardRouterInputConfiguration{
-				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-					Value: types.RistRouterInputConfiguration{
-						Port:                        ptr.Int32(1),
-						RecoveryLatencyMilliseconds: ptr.Int64(1),
+		Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+			Value: types.DestinationEndpointRouterInputConfiguration{
+				EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
 					},
 				},
-				Protocol: types.RouterInputProtocol("RTP"),
 			},
 		},
 		MaximumBitrate: ptr.Int64(1),
@@ -4354,6 +4833,59 @@ func TestCheckRequestSnapshot_UpdateRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRouterOutput"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateSourceEndpoint(t *testing.T) {
+	input := &UpdateSourceEndpointInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.SourceEndpointConfigurationMemberStandard{
+			Value: types.StandardSourceEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicSourceEndpointNetworkingConfiguration{
+						SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardSourceEndpointConfiguration{
+						DestinationIngestPort:       ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+				Protocol:             types.SourceEndpointProtocol("RTP"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSourceEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5039,6 +5571,36 @@ func TestUpdateRequestSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchGetDestinationEndpoint(t *testing.T) {
+	input := &BatchGetDestinationEndpointInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchGetRouterInput(t *testing.T) {
 	input := &BatchGetRouterInputInput{
 		Arns: []string{
@@ -5125,6 +5687,64 @@ func TestUpdateRequestSnapshot_BatchGetRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetRouterOutput"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchGetSourceEndpoint(t *testing.T) {
+	input := &BatchGetSourceEndpointInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetSourceEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ConnectEndpoints(t *testing.T) {
+	input := &ConnectEndpointsInput{
+		DestinationEndpointArn: ptr.String("__DestinationEndpointArn__"),
+		SourceEndpointArn:      ptr.String("__SourceEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ConnectEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConnectEndpoints"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5980,16 +6600,18 @@ func TestUpdateRequestSnapshot_CreateGateway(t *testing.T) {
 func TestUpdateRequestSnapshot_CreateRouterInput(t *testing.T) {
 	input := &CreateRouterInputInput{
 		Name: ptr.String("__Name__"),
-		Configuration: &types.RouterInputConfigurationMemberStandard{
-			Value: types.StandardRouterInputConfiguration{
-				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-					Value: types.RistRouterInputConfiguration{
-						Port:                        ptr.Int32(1),
-						RecoveryLatencyMilliseconds: ptr.Int64(1),
+		Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+			Value: types.DestinationEndpointRouterInputConfiguration{
+				EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
 					},
 				},
-				Protocol: types.RouterInputProtocol("RTP"),
 			},
 		},
 		MaximumBitrate:   ptr.Int64(1),
@@ -6319,6 +6941,33 @@ func TestUpdateRequestSnapshot_DeleteRouterOutput(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeregisterDestinationEndpoint(t *testing.T) {
+	input := &DeregisterDestinationEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeregisterDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeregisterDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeregisterGatewayInstance(t *testing.T) {
 	input := &DeregisterGatewayInstanceInput{
 		Force:              ptr.Bool(true),
@@ -6343,6 +6992,33 @@ func TestUpdateRequestSnapshot_DeregisterGatewayInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeregisterGatewayInstance"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeregisterSourceEndpoint(t *testing.T) {
+	input := &DeregisterSourceEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeregisterSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeregisterSourceEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6563,6 +7239,61 @@ func TestUpdateRequestSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisconnectEndpoints(t *testing.T) {
+	input := &DisconnectEndpointsInput{
+		DestinationEndpointArn: ptr.String("__DestinationEndpointArn__"),
+		SourceEndpointArn:      ptr.String("__SourceEndpointArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisconnectEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisconnectEndpoints"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetDestinationEndpoint(t *testing.T) {
+	input := &GetDestinationEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetRouterInput(t *testing.T) {
 	input := &GetRouterInputInput{
 		Arn: ptr.String("__Arn__"),
@@ -6698,6 +7429,33 @@ func TestUpdateRequestSnapshot_GetRouterOutput(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetSourceEndpoint(t *testing.T) {
+	input := &GetSourceEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSourceEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GrantFlowEntitlements(t *testing.T) {
 	input := &GrantFlowEntitlementsInput{
 		Entitlements: []types.GrantEntitlementRequest{
@@ -6800,6 +7558,48 @@ func TestUpdateRequestSnapshot_ListBridges(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBridges"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListDestinationEndpoints(t *testing.T) {
+	input := &ListDestinationEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.DestinationEndpointFilter{
+			&types.DestinationEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.DestinationEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDestinationEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDestinationEndpoints"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7099,6 +7899,48 @@ func TestUpdateRequestSnapshot_ListRouterOutputs(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListSourceEndpoints(t *testing.T) {
+	input := &ListSourceEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.SourceEndpointFilter{
+			&types.SourceEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.SourceEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSourceEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSourceEndpoints"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTagsForGlobalResource(t *testing.T) {
 	input := &ListTagsForGlobalResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -7178,6 +8020,120 @@ func TestUpdateRequestSnapshot_PurchaseOffering(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PurchaseOffering"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RegisterDestinationEndpoint(t *testing.T) {
+	input := &RegisterDestinationEndpointInput{
+		Description: ptr.String("__Description__"),
+		Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+			Value: types.StandardDestinationEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicDestinationEndpointNetworkingConfiguration{
+						DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardDestinationEndpointConfiguration{
+						DestinationAddress:    ptr.String("__DestinationAddress__"),
+						DestinationIngestPort: ptr.Int32(1),
+					},
+				},
+				DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+				Protocol:                  types.DestinationEndpointProtocol("RTP"),
+			},
+		},
+		RegionName: ptr.String("__RegionName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RegisterSourceEndpoint(t *testing.T) {
+	input := &RegisterSourceEndpointInput{
+		RegionName:  ptr.String("__RegionName__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.SourceEndpointConfigurationMemberStandard{
+			Value: types.StandardSourceEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicSourceEndpointNetworkingConfiguration{
+						SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardSourceEndpointConfiguration{
+						DestinationIngestPort:       ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+				Protocol:             types.SourceEndpointProtocol("RTP"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterSourceEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7892,6 +8848,59 @@ func TestUpdateRequestSnapshot_UpdateBridgeState(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateDestinationEndpoint(t *testing.T) {
+	input := &UpdateDestinationEndpointInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+			Value: types.StandardDestinationEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicDestinationEndpointNetworkingConfiguration{
+						DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardDestinationEndpointConfiguration{
+						DestinationAddress:    ptr.String("__DestinationAddress__"),
+						DestinationIngestPort: ptr.Int32(1),
+					},
+				},
+				DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+				Protocol:                  types.DestinationEndpointProtocol("RTP"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDestinationEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDestinationEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateFlow(t *testing.T) {
 	input := &UpdateFlowInput{
 		FlowArn: ptr.String("__FlowArn__"),
@@ -8348,16 +9357,18 @@ func TestUpdateRequestSnapshot_UpdateRouterInput(t *testing.T) {
 	input := &UpdateRouterInputInput{
 		Arn:  ptr.String("__Arn__"),
 		Name: ptr.String("__Name__"),
-		Configuration: &types.RouterInputConfigurationMemberStandard{
-			Value: types.StandardRouterInputConfiguration{
-				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-					Value: types.RistRouterInputConfiguration{
-						Port:                        ptr.Int32(1),
-						RecoveryLatencyMilliseconds: ptr.Int64(1),
+		Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+			Value: types.DestinationEndpointRouterInputConfiguration{
+				EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
 					},
 				},
-				Protocol: types.RouterInputProtocol("RTP"),
 			},
 		},
 		MaximumBitrate: ptr.Int64(1),
@@ -8506,6 +9517,59 @@ func TestUpdateRequestSnapshot_UpdateRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRouterOutput"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateSourceEndpoint(t *testing.T) {
+	input := &UpdateSourceEndpointInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.SourceEndpointConfigurationMemberStandard{
+			Value: types.StandardSourceEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicSourceEndpointNetworkingConfiguration{
+						SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardSourceEndpointConfiguration{
+						DestinationIngestPort:       ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+				Protocol:             types.SourceEndpointProtocol("RTP"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSourceEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSourceEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }

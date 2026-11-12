@@ -112,7 +112,9 @@ func (v *ListCustomLineItemVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomLineItemVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomLineItemVersionList(s, schemas.ListCustomLineItemVersionsOutput_CustomLineItemVersions, v.CustomLineItemVersions)
+	if v.CustomLineItemVersions != nil {
+		serializeCustomLineItemVersionList(s, schemas.ListCustomLineItemVersionsOutput_CustomLineItemVersions, v.CustomLineItemVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomLineItemVersionsOutput_NextToken, *v.NextToken)
 	}

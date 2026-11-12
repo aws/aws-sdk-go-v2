@@ -58,7 +58,9 @@ func (v *AssociateEntitiesToExperienceInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *AssociateEntitiesToExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociateEntityList(s, schemas.AssociateEntitiesToExperienceRequest_EntityList, v.EntityList)
+	if v.EntityList != nil {
+		serializeAssociateEntityList(s, schemas.AssociateEntitiesToExperienceRequest_EntityList, v.EntityList)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AssociateEntitiesToExperienceRequest_Id, *v.Id)
 	}
@@ -86,7 +88,9 @@ func (v *AssociateEntitiesToExperienceOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *AssociateEntitiesToExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociateEntitiesToExperienceFailedEntityList(s, schemas.AssociateEntitiesToExperienceResponse_FailedEntityList, v.FailedEntityList)
+	if v.FailedEntityList != nil {
+		serializeAssociateEntitiesToExperienceFailedEntityList(s, schemas.AssociateEntitiesToExperienceResponse_FailedEntityList, v.FailedEntityList)
+	}
 }
 func (v *AssociateEntitiesToExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateEntitiesToExperienceResponse, func(s *smithy.Schema) error {

@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,6 +45,21 @@ type GetReferenceMetadataInput struct {
 	ReferenceStoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetReferenceMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReferenceMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReferenceMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetReferenceMetadataRequest_id, *v.Id)
+	}
+	if v.ReferenceStoreId != nil {
+		s.WriteString(schemas.GetReferenceMetadataRequest_referenceStoreId, *v.ReferenceStoreId)
+	}
 }
 
 type GetReferenceMetadataOutput struct {
@@ -101,13 +118,108 @@ type GetReferenceMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReferenceMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReferenceMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReferenceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetReferenceMetadataResponse_arn, *v.Arn)
+	}
+	if v.CreationJobId != nil {
+		s.WriteString(schemas.GetReferenceMetadataResponse_creationJobId, *v.CreationJobId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetReferenceMetadataResponse_creationTime, *v.CreationTime)
+	}
+	if v.CreationType != "" {
+		s.WriteString(schemas.GetReferenceMetadataResponse_creationType, string(v.CreationType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetReferenceMetadataResponse_description, *v.Description)
+	}
+	if v.Files != nil {
+		s.WriteStruct(schemas.GetReferenceMetadataResponse_files)
+		v.Files.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetReferenceMetadataResponse_id, *v.Id)
+	}
+	if v.Md5 != nil {
+		s.WriteString(schemas.GetReferenceMetadataResponse_md5, *v.Md5)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetReferenceMetadataResponse_name, *v.Name)
+	}
+	if v.ReferenceStoreId != nil {
+		s.WriteString(schemas.GetReferenceMetadataResponse_referenceStoreId, *v.ReferenceStoreId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetReferenceMetadataResponse_status, string(v.Status))
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetReferenceMetadataResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *GetReferenceMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReferenceMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReferenceMetadataResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetReferenceMetadataResponse_arn, v.Arn)
+		case schemas.GetReferenceMetadataResponse_creationJobId:
+			v.CreationJobId = new(string)
+			return d.ReadString(schemas.GetReferenceMetadataResponse_creationJobId, v.CreationJobId)
+		case schemas.GetReferenceMetadataResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetReferenceMetadataResponse_creationTime, v.CreationTime)
+		case schemas.GetReferenceMetadataResponse_creationType:
+			var ev string
+			if err := d.ReadString(schemas.GetReferenceMetadataResponse_creationType, &ev); err != nil {
+				return err
+			}
+			v.CreationType = types.ReferenceCreationType(ev)
+			return nil
+		case schemas.GetReferenceMetadataResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetReferenceMetadataResponse_description, v.Description)
+		case schemas.GetReferenceMetadataResponse_files:
+			v.Files = &types.ReferenceFiles{}
+			return v.Files.Deserialize(d)
+		case schemas.GetReferenceMetadataResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetReferenceMetadataResponse_id, v.Id)
+		case schemas.GetReferenceMetadataResponse_md5:
+			v.Md5 = new(string)
+			return d.ReadString(schemas.GetReferenceMetadataResponse_md5, v.Md5)
+		case schemas.GetReferenceMetadataResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetReferenceMetadataResponse_name, v.Name)
+		case schemas.GetReferenceMetadataResponse_referenceStoreId:
+			v.ReferenceStoreId = new(string)
+			return d.ReadString(schemas.GetReferenceMetadataResponse_referenceStoreId, v.ReferenceStoreId)
+		case schemas.GetReferenceMetadataResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetReferenceMetadataResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReferenceStatus(ev)
+			return nil
+		case schemas.GetReferenceMetadataResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetReferenceMetadataResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReferenceMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReferenceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReferenceMetadata, schemas.GetReferenceMetadataRequest, schemas.GetReferenceMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReferenceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReferenceMetadata, schemas.GetReferenceMetadataRequest, schemas.GetReferenceMetadataResponse), output: &GetReferenceMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

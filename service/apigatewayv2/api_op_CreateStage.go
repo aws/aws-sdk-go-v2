@@ -106,12 +106,18 @@ func (v *CreateStageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateStageRequest_Description, *v.Description)
 	}
-	serializeRouteSettingsMap(s, schemas.CreateStageRequest_RouteSettings, v.RouteSettings)
+	if v.RouteSettings != nil {
+		serializeRouteSettingsMap(s, schemas.CreateStageRequest_RouteSettings, v.RouteSettings)
+	}
 	if v.StageName != nil {
 		s.WriteString(schemas.CreateStageRequest_StageName, *v.StageName)
 	}
-	serializeStageVariablesMap(s, schemas.CreateStageRequest_StageVariables, v.StageVariables)
-	serializeTags(s, schemas.CreateStageRequest_Tags, v.Tags)
+	if v.StageVariables != nil {
+		serializeStageVariablesMap(s, schemas.CreateStageRequest_StageVariables, v.StageVariables)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStageRequest_Tags, v.Tags)
+	}
 }
 
 type CreateStageOutput struct {
@@ -213,12 +219,18 @@ func (v *CreateStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.CreateStageResponse_LastUpdatedDate, *v.LastUpdatedDate)
 	}
-	serializeRouteSettingsMap(s, schemas.CreateStageResponse_RouteSettings, v.RouteSettings)
+	if v.RouteSettings != nil {
+		serializeRouteSettingsMap(s, schemas.CreateStageResponse_RouteSettings, v.RouteSettings)
+	}
 	if v.StageName != nil {
 		s.WriteString(schemas.CreateStageResponse_StageName, *v.StageName)
 	}
-	serializeStageVariablesMap(s, schemas.CreateStageResponse_StageVariables, v.StageVariables)
-	serializeTags(s, schemas.CreateStageResponse_Tags, v.Tags)
+	if v.StageVariables != nil {
+		serializeStageVariablesMap(s, schemas.CreateStageResponse_StageVariables, v.StageVariables)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStageResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateStageResponse, func(s *smithy.Schema) error {

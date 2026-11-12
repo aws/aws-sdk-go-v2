@@ -86,7 +86,9 @@ func (v *ListConnectPeersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectPeersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectPeerSummaryList(s, schemas.ListConnectPeersResponse_ConnectPeers, v.ConnectPeers)
+	if v.ConnectPeers != nil {
+		serializeConnectPeerSummaryList(s, schemas.ListConnectPeersResponse_ConnectPeers, v.ConnectPeers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectPeersResponse_NextToken, *v.NextToken)
 	}

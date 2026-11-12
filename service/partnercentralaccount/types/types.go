@@ -336,7 +336,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.Connection_Catalog, *v.Catalog)
 	}
-	serializeConnectionTypeDetailMap(s, schemas.Connection_ConnectionTypes, v.ConnectionTypes)
+	if v.ConnectionTypes != nil {
+		serializeConnectionTypeDetailMap(s, schemas.Connection_ConnectionTypes, v.ConnectionTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Connection_Id, *v.Id)
 	}
@@ -574,7 +576,9 @@ func (v *ConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.ConnectionSummary_Catalog, *v.Catalog)
 	}
-	serializeConnectionTypeSummaryMap(s, schemas.ConnectionSummary_ConnectionTypes, v.ConnectionTypes)
+	if v.ConnectionTypes != nil {
+		serializeConnectionTypeSummaryMap(s, schemas.ConnectionSummary_ConnectionTypes, v.ConnectionTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ConnectionSummary_Id, *v.Id)
 	}
@@ -669,7 +673,9 @@ func (v *ConnectionTypeDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InviterName != nil {
 		s.WriteString(schemas.ConnectionTypeDetail_InviterName, *v.InviterName)
 	}
-	serializeParticipant(s, schemas.ConnectionTypeDetail_OtherParticipant, v.OtherParticipant)
+	if v.OtherParticipant != nil {
+		serializeParticipant(s, schemas.ConnectionTypeDetail_OtherParticipant, v.OtherParticipant)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ConnectionTypeDetail_Status, string(v.Status))
 	}
@@ -729,7 +735,9 @@ func (v *ConnectionTypeSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectionTypeSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipant(s, schemas.ConnectionTypeSummary_OtherParticipant, v.OtherParticipant)
+	if v.OtherParticipant != nil {
+		serializeParticipant(s, schemas.ConnectionTypeSummary_OtherParticipant, v.OtherParticipant)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ConnectionTypeSummary_Status, string(v.Status))
 	}
@@ -1174,8 +1182,12 @@ func (v *PartnerProfile) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Headquarters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIndustrySegmentList(s, schemas.PartnerProfile_IndustrySegments, v.IndustrySegments)
-	serializeLocalizedContentList(s, schemas.PartnerProfile_LocalizedContents, v.LocalizedContents)
+	if v.IndustrySegments != nil {
+		serializeIndustrySegmentList(s, schemas.PartnerProfile_IndustrySegments, v.IndustrySegments)
+	}
+	if v.LocalizedContents != nil {
+		serializeLocalizedContentList(s, schemas.PartnerProfile_LocalizedContents, v.LocalizedContents)
+	}
 	if v.LogoUrl != nil {
 		s.WriteString(schemas.PartnerProfile_LogoUrl, *v.LogoUrl)
 	}
@@ -1626,8 +1638,12 @@ func (v *TaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Headquarters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIndustrySegmentList(s, schemas.TaskDetails_IndustrySegments, v.IndustrySegments)
-	serializeLocalizedContentList(s, schemas.TaskDetails_LocalizedContents, v.LocalizedContents)
+	if v.IndustrySegments != nil {
+		serializeIndustrySegmentList(s, schemas.TaskDetails_IndustrySegments, v.IndustrySegments)
+	}
+	if v.LocalizedContents != nil {
+		serializeLocalizedContentList(s, schemas.TaskDetails_LocalizedContents, v.LocalizedContents)
+	}
 	if v.LogoUrl != nil {
 		s.WriteString(schemas.TaskDetails_LogoUrl, *v.LogoUrl)
 	}

@@ -99,7 +99,9 @@ func (v *ListQualificationRequestsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NumResults != nil {
 		s.WriteInt32(schemas.ListQualificationRequestsResponse_NumResults, *v.NumResults)
 	}
-	serializeQualificationRequestList(s, schemas.ListQualificationRequestsResponse_QualificationRequests, v.QualificationRequests)
+	if v.QualificationRequests != nil {
+		serializeQualificationRequestList(s, schemas.ListQualificationRequestsResponse_QualificationRequests, v.QualificationRequests)
+	}
 }
 func (v *ListQualificationRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQualificationRequestsResponse, func(s *smithy.Schema) error {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"resourcePendingMaintenanceAction":{"pendingMaintenanceActionDetails":[{"action":"__Action__","autoAppliedAfterDate":"__AutoAppliedAfterDate__","currentApplyDate":"__CurrentApplyDate__","description":"__Description__","forcedApplyDate":"__ForcedApplyDate__","optInStatus":"__OptInStatus__"},{"action":"__Action__","autoAppliedAfterDate":"__AutoAppliedAfterDate__","currentApplyDate":"__CurrentApplyDate__","description":"__Description__","forcedApplyDate":"__ForcedApplyDate__","optInStatus":"__OptInStatus__"}],"resourceArn":"__ResourceArn__"}}

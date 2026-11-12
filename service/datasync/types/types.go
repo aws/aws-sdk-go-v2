@@ -128,6 +128,102 @@ func (v *AzureBlobSasConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Specifies federated identity parameters that allow DataSync to obtain an OpenID
+// Connect token for access to customer Azure Blob Storage. The token allows for
+// temporary, short-term access to the storage. DataSync automatically refreshes
+// the token to assure uninterrupted access to the storage.
+//
+// Federated identity parameters are an alternative to the SasConfiguration
+// credentials that are expected to be valid long-term (e.g. at least for the
+// duration of DataSync task execution). Do not specify federated identity and the
+// SAS configuration for the same Azure Blob location.
+type AzureFederatedIdentityConfig struct {
+
+	// Specifies the ARN for an Amazon Web Services role that allows DataSync to
+	// invoke STS GetWebIdentityToken API on behalf of the customer account and to
+	// obtain Amazon Web Services STS JWT (web token).
+	AwsIamRole *string
+
+	// External identity parameters for Azure Blob Storage.
+	AzureOidc *AzureOidcConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureFederatedIdentityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureFederatedIdentityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureFederatedIdentityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsIamRole != nil {
+		s.WriteString(schemas.AzureFederatedIdentityConfig_AwsIamRole, *v.AwsIamRole)
+	}
+	if v.AzureOidc != nil {
+		s.WriteStruct(schemas.AzureFederatedIdentityConfig_AzureOidc)
+		v.AzureOidc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AzureFederatedIdentityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureFederatedIdentityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureFederatedIdentityConfig_AwsIamRole:
+			v.AwsIamRole = new(string)
+			return d.ReadString(schemas.AzureFederatedIdentityConfig_AwsIamRole, v.AwsIamRole)
+		case schemas.AzureFederatedIdentityConfig_AzureOidc:
+			v.AzureOidc = &AzureOidcConfig{}
+			return v.AzureOidc.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// External identity parameters for Azure Blob Storage.
+type AzureOidcConfig struct {
+
+	// Azure client ID string.
+	//
+	// This member is required.
+	ClientId *string
+
+	// Azure tenant ID string.
+	//
+	// This member is required.
+	TenantId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureOidcConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureOidcConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureOidcConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.AzureOidcConfig_ClientId, *v.ClientId)
+	}
+	if v.TenantId != nil {
+		s.WriteString(schemas.AzureOidcConfig_TenantId, *v.TenantId)
+	}
+}
+func (v *AzureOidcConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureOidcConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureOidcConfig_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.AzureOidcConfig_ClientId, v.ClientId)
+		case schemas.AzureOidcConfig_TenantId:
+			v.TenantId = new(string)
+			return d.ReadString(schemas.AzureOidcConfig_TenantId, v.TenantId)
+		}
+		return nil
+	})
+}
+
 // Specifies configuration information for a DataSync-managed secret, such as an
 // authentication token, secret key, password, or Kerberos keytab that DataSync
 // uses to access a specific storage location, with a customer-managed KMS key.
@@ -267,7 +363,9 @@ func (v *Ec2Config) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Ec2Config) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEc2SecurityGroupArnList(s, schemas.Ec2Config_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.Ec2Config_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.SubnetArn != nil {
 		s.WriteString(schemas.Ec2Config_SubnetArn, *v.SubnetArn)
 	}
@@ -714,6 +812,72 @@ func (v *FsxUpdateProtocolSmb) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// External identity parameters for Google Cloud Storage.
+type GoogleOidcConfig struct {
+
+	// Human-readable pool name (e.g. "my-pool").
+	//
+	// This member is required.
+	IdentityPoolName *string
+
+	// Human-readable provider name (e.g. "my-oidc-provider").
+	//
+	// This member is required.
+	IdentityProviderName *string
+
+	// Human-readable project name (e.g. "my-project").
+	//
+	// This member is required.
+	ProjectName *string
+
+	// Numeric project ID as a string (e.g. "123456789").
+	//
+	// This member is required.
+	ProjectNumber *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GoogleOidcConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GoogleOidcConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GoogleOidcConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolName != nil {
+		s.WriteString(schemas.GoogleOidcConfig_IdentityPoolName, *v.IdentityPoolName)
+	}
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.GoogleOidcConfig_IdentityProviderName, *v.IdentityProviderName)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GoogleOidcConfig_ProjectName, *v.ProjectName)
+	}
+	if v.ProjectNumber != nil {
+		s.WriteString(schemas.GoogleOidcConfig_ProjectNumber, *v.ProjectNumber)
+	}
+}
+func (v *GoogleOidcConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GoogleOidcConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GoogleOidcConfig_IdentityPoolName:
+			v.IdentityPoolName = new(string)
+			return d.ReadString(schemas.GoogleOidcConfig_IdentityPoolName, v.IdentityPoolName)
+		case schemas.GoogleOidcConfig_IdentityProviderName:
+			v.IdentityProviderName = new(string)
+			return d.ReadString(schemas.GoogleOidcConfig_IdentityProviderName, v.IdentityProviderName)
+		case schemas.GoogleOidcConfig_ProjectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.GoogleOidcConfig_ProjectName, v.ProjectName)
+		case schemas.GoogleOidcConfig_ProjectNumber:
+			v.ProjectNumber = new(string)
+			return d.ReadString(schemas.GoogleOidcConfig_ProjectNumber, v.ProjectNumber)
+		}
+		return nil
+	})
+}
+
 // The NameNode of the Hadoop Distributed File System (HDFS). The NameNode manages
 // the file system's namespace. The NameNode performs operations such as opening,
 // closing, and renaming files and directories. The NameNode contains the
@@ -806,7 +970,9 @@ func (v *LocationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.LocationFilter_Operator, string(v.Operator))
 	}
-	serializeFilterValues(s, schemas.LocationFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.LocationFilter_Values, v.Values)
+	}
 }
 func (v *LocationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LocationFilter, func(s *smithy.Schema) error {
@@ -1061,6 +1227,95 @@ func (v *NfsMountOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies cloud-provider-specific external identity parameters used when
+// exchanging the Amazon Web Services web token for an OpenID Connect token at the
+// object storage provider.
+type ObjectStorageExternalIdentityConfig struct {
+
+	// External identity parameters for Google Cloud Storage.
+	GoogleOidc *GoogleOidcConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *ObjectStorageExternalIdentityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectStorageExternalIdentityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectStorageExternalIdentityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GoogleOidc != nil {
+		s.WriteStruct(schemas.ObjectStorageExternalIdentityConfig_GoogleOidc)
+		v.GoogleOidc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ObjectStorageExternalIdentityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectStorageExternalIdentityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectStorageExternalIdentityConfig_GoogleOidc:
+			v.GoogleOidc = &GoogleOidcConfig{}
+			return v.GoogleOidc.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies federated identity parameters that allow DataSync to obtain OpenID
+// Connect token for access to customer object storage. The token allows for
+// temporary, short-term access to the storage. DataSync automatically refreshes
+// the token to assure uninterrupted access to the storage.
+//
+// Federated identity parameters are an alternative to the AccessKey / SecretKey
+// credentials that are expected to be valid long-term (e.g. at least for the
+// duration of DataSync task execution). Do not specify federated identity and the
+// key parameters for the same object storage location.
+type ObjectStorageFederatedIdentityConfig struct {
+
+	// Specifies the ARN for an Amazon Web Services role that allows DataSync to
+	// invoke STS GetWebIdentityToken API on behalf of the customer account and to
+	// obtain Amazon Web Services STS JWT (web token).
+	AwsIamRole *string
+
+	// Specifies cloud-provider-specific external identity parameters used when
+	// exchanging the Amazon Web Services web token for an OpenID Connect token at the
+	// object storage provider.
+	ExternalIdentity *ObjectStorageExternalIdentityConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *ObjectStorageFederatedIdentityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectStorageFederatedIdentityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectStorageFederatedIdentityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsIamRole != nil {
+		s.WriteString(schemas.ObjectStorageFederatedIdentityConfig_AwsIamRole, *v.AwsIamRole)
+	}
+	if v.ExternalIdentity != nil {
+		s.WriteStruct(schemas.ObjectStorageFederatedIdentityConfig_ExternalIdentity)
+		v.ExternalIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ObjectStorageFederatedIdentityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectStorageFederatedIdentityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectStorageFederatedIdentityConfig_AwsIamRole:
+			v.AwsIamRole = new(string)
+			return d.ReadString(schemas.ObjectStorageFederatedIdentityConfig_AwsIamRole, v.AwsIamRole)
+		case schemas.ObjectStorageFederatedIdentityConfig_ExternalIdentity:
+			v.ExternalIdentity = &ObjectStorageExternalIdentityConfig{}
+			return v.ExternalIdentity.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The DataSync agents that can connect to your Network File System (NFS) file
 // server.
 type OnPremConfig struct {
@@ -1085,7 +1340,9 @@ func (v *OnPremConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OnPremConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.OnPremConfig_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.OnPremConfig_AgentArns, v.AgentArns)
+	}
 }
 func (v *OnPremConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OnPremConfig, func(s *smithy.Schema) error {
@@ -1608,8 +1865,12 @@ func (v *PrivateLinkConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrivateLinkEndpoint != nil {
 		s.WriteString(schemas.PrivateLinkConfig_PrivateLinkEndpoint, *v.PrivateLinkEndpoint)
 	}
-	serializePLSecurityGroupArnList(s, schemas.PrivateLinkConfig_SecurityGroupArns, v.SecurityGroupArns)
-	serializePLSubnetArnList(s, schemas.PrivateLinkConfig_SubnetArns, v.SubnetArns)
+	if v.SecurityGroupArns != nil {
+		serializePLSecurityGroupArnList(s, schemas.PrivateLinkConfig_SecurityGroupArns, v.SecurityGroupArns)
+	}
+	if v.SubnetArns != nil {
+		serializePLSubnetArnList(s, schemas.PrivateLinkConfig_SubnetArns, v.SubnetArns)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.PrivateLinkConfig_VpcEndpointId, *v.VpcEndpointId)
 	}
@@ -2714,7 +2975,9 @@ func (v *TaskFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.TaskFilter_Operator, string(v.Operator))
 	}
-	serializeFilterValues(s, schemas.TaskFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.TaskFilter_Values, v.Values)
+	}
 }
 func (v *TaskFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaskFilter, func(s *smithy.Schema) error {

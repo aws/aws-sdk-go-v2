@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,33 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachLoadBalancerTargetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachLoadBalancerTargetGroupsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachLoadBalancerTargetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.AttachLoadBalancerTargetGroupsType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.TargetGroupARNs != nil {
+		serializeTargetGroupARNs(s, schemas.AttachLoadBalancerTargetGroupsType_TargetGroupARNs, v.TargetGroupARNs)
+	}
+}
+func (v *AttachLoadBalancerTargetGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachLoadBalancerTargetGroupsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachLoadBalancerTargetGroupsType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.AttachLoadBalancerTargetGroupsType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.AttachLoadBalancerTargetGroupsType_TargetGroupARNs:
+			return deserializeTargetGroupARNs(d, schemas.AttachLoadBalancerTargetGroupsType_TargetGroupARNs, &v.TargetGroupARNs)
+		}
+		return nil
+	})
+}
+
 type AttachLoadBalancerTargetGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +107,26 @@ type AttachLoadBalancerTargetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachLoadBalancerTargetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachLoadBalancerTargetGroupsResultType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachLoadBalancerTargetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AttachLoadBalancerTargetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachLoadBalancerTargetGroupsResultType, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachLoadBalancerTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachLoadBalancerTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachLoadBalancerTargetGroups, schemas.AttachLoadBalancerTargetGroupsType, schemas.AttachLoadBalancerTargetGroupsResultType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAttachLoadBalancerTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachLoadBalancerTargetGroups, schemas.AttachLoadBalancerTargetGroupsType, schemas.AttachLoadBalancerTargetGroupsResultType), output: &AttachLoadBalancerTargetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

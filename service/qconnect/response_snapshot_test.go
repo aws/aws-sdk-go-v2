@@ -185,9 +185,11 @@ func TestCheckResponseSnapshot_CreateAIAgent(t *testing.T) {
 					Locale: ptr.String("__Locale__"),
 				},
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -313,9 +315,11 @@ func TestCheckResponseSnapshot_CreateAIAgentVersion(t *testing.T) {
 					Locale: ptr.String("__Locale__"),
 				},
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -453,8 +457,10 @@ func TestCheckResponseSnapshot_CreateAIGuardrail(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			Status:       types.Status("CREATE_IN_PROGRESS"),
-			ModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:             types.Status("CREATE_IN_PROGRESS"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateAIGuardrail.response")
@@ -684,8 +690,10 @@ func TestCheckResponseSnapshot_CreateAIGuardrailVersion(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			Status:       types.Status("CREATE_IN_PROGRESS"),
-			ModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:             types.Status("CREATE_IN_PROGRESS"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 		VersionNumber: ptr.Int64(1),
 	}
@@ -734,9 +742,11 @@ func TestCheckResponseSnapshot_CreateAIPrompt(t *testing.T) {
 				TopK:              ptr.Int32(1),
 				MaxTokensToSample: ptr.Int32(1),
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -808,9 +818,11 @@ func TestCheckResponseSnapshot_CreateAIPromptVersion(t *testing.T) {
 				TopK:              ptr.Int32(1),
 				MaxTokensToSample: ptr.Int32(1),
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -855,6 +867,14 @@ func TestCheckResponseSnapshot_CreateAssistant(t *testing.T) {
 			},
 			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
 			},
 			IntegrationConfiguration: &types.AssistantIntegrationConfiguration{
 				TopicIntegrationArn: ptr.String("__TopicIntegrationArn__"),
@@ -878,6 +898,9 @@ func TestCheckResponseSnapshot_CreateAssistant(t *testing.T) {
 					OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 				},
 			},
+			LastModifiedTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion:              ptr.String("__LastModifiedRegion__"),
+			AssistantGlobalResiliencyStatus: types.AssistantGlobalResiliencyStatus("ENABLED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateAssistant.response")
@@ -898,6 +921,14 @@ func TestCheckResponseSnapshot_CreateAssistant(t *testing.T) {
 		},
 		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 			KmsKeyId: ptr.String("__KmsKeyId__"),
+			ReplicaKmsKeys: []types.ReplicaKmsKey{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
 		},
 	})
 	if err != nil {
@@ -925,6 +956,8 @@ func TestCheckResponseSnapshot_CreateAssistantAssociation(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateAssistantAssociation.response")
@@ -972,9 +1005,12 @@ func TestCheckResponseSnapshot_CreateContent(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			LinkOutUri: ptr.String("__LinkOutUri__"),
-			Url:        ptr.String("__Url__"),
-			UrlExpiry:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LinkOutUri:         ptr.String("__LinkOutUri__"),
+			Url:                ptr.String("__Url__"),
+			UrlExpiry:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			FileHash:           ptr.String("__FileHash__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateContent.response")
@@ -1114,6 +1150,14 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 			},
 			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
 			},
 			Description: ptr.String("__Description__"),
 			Tags: map[string]string{
@@ -1124,6 +1168,8 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateKnowledgeBase.response")
@@ -1186,6 +1232,14 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 		},
 		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 			KmsKeyId: ptr.String("__KmsKeyId__"),
+			ReplicaKmsKeys: []types.ReplicaKmsKey{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		Tags: map[string]string{
@@ -1724,15 +1778,16 @@ func TestCheckResponseSnapshot_CreateMessageTemplateVersion(t *testing.T) {
 func TestCheckResponseSnapshot_CreateQuickResponse(t *testing.T) {
 	want := &CreateQuickResponseOutput{
 		QuickResponse: &types.QuickResponseData{
-			QuickResponseArn: ptr.String("__QuickResponseArn__"),
-			QuickResponseId:  ptr.String("__QuickResponseId__"),
-			KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
-			KnowledgeBaseId:  ptr.String("__KnowledgeBaseId__"),
-			Name:             ptr.String("__Name__"),
-			ContentType:      ptr.String("__ContentType__"),
-			Status:           types.QuickResponseStatus("CREATE_IN_PROGRESS"),
-			CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			QuickResponseArn:   ptr.String("__QuickResponseArn__"),
+			QuickResponseId:    ptr.String("__QuickResponseId__"),
+			KnowledgeBaseArn:   ptr.String("__KnowledgeBaseArn__"),
+			KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+			Name:               ptr.String("__Name__"),
+			ContentType:        ptr.String("__ContentType__"),
+			Status:             types.QuickResponseStatus("CREATE_IN_PROGRESS"),
+			CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			Contents: &types.QuickResponseContents{
 				PlainText: &types.QuickResponseContentProviderMemberContent{
 					Value: "__QuickResponseContentProviderMemberContent__",
@@ -2302,9 +2357,11 @@ func TestCheckResponseSnapshot_GetAIAgent(t *testing.T) {
 					Locale: ptr.String("__Locale__"),
 				},
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -2440,8 +2497,10 @@ func TestCheckResponseSnapshot_GetAIGuardrail(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			Status:       types.Status("CREATE_IN_PROGRESS"),
-			ModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:             types.Status("CREATE_IN_PROGRESS"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 		VersionNumber: ptr.Int64(1),
 	}
@@ -2488,9 +2547,11 @@ func TestCheckResponseSnapshot_GetAIPrompt(t *testing.T) {
 				TopK:              ptr.Int32(1),
 				MaxTokensToSample: ptr.Int32(1),
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -2533,6 +2594,14 @@ func TestCheckResponseSnapshot_GetAssistant(t *testing.T) {
 			},
 			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
 			},
 			IntegrationConfiguration: &types.AssistantIntegrationConfiguration{
 				TopicIntegrationArn: ptr.String("__TopicIntegrationArn__"),
@@ -2556,6 +2625,9 @@ func TestCheckResponseSnapshot_GetAssistant(t *testing.T) {
 					OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 				},
 			},
+			LastModifiedTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion:              ptr.String("__LastModifiedRegion__"),
+			AssistantGlobalResiliencyStatus: types.AssistantGlobalResiliencyStatus("ENABLED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAssistant.response")
@@ -2594,6 +2666,8 @@ func TestCheckResponseSnapshot_GetAssistantAssociation(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAssistantAssociation.response")
@@ -2634,9 +2708,12 @@ func TestCheckResponseSnapshot_GetContent(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			LinkOutUri: ptr.String("__LinkOutUri__"),
-			Url:        ptr.String("__Url__"),
-			UrlExpiry:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LinkOutUri:         ptr.String("__LinkOutUri__"),
+			Url:                ptr.String("__Url__"),
+			UrlExpiry:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			FileHash:           ptr.String("__FileHash__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetContent.response")
@@ -2718,6 +2795,9 @@ func TestCheckResponseSnapshot_GetContentSummary(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			FileHash:           ptr.String("__FileHash__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetContentSummary.response")
@@ -2844,6 +2924,14 @@ func TestCheckResponseSnapshot_GetKnowledgeBase(t *testing.T) {
 			},
 			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
 			},
 			Description: ptr.String("__Description__"),
 			Tags: map[string]string{
@@ -2854,6 +2942,8 @@ func TestCheckResponseSnapshot_GetKnowledgeBase(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetKnowledgeBase.response")
@@ -3150,15 +3240,16 @@ func TestCheckResponseSnapshot_GetNextMessage(t *testing.T) {
 func TestCheckResponseSnapshot_GetQuickResponse(t *testing.T) {
 	want := &GetQuickResponseOutput{
 		QuickResponse: &types.QuickResponseData{
-			QuickResponseArn: ptr.String("__QuickResponseArn__"),
-			QuickResponseId:  ptr.String("__QuickResponseId__"),
-			KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
-			KnowledgeBaseId:  ptr.String("__KnowledgeBaseId__"),
-			Name:             ptr.String("__Name__"),
-			ContentType:      ptr.String("__ContentType__"),
-			Status:           types.QuickResponseStatus("CREATE_IN_PROGRESS"),
-			CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			QuickResponseArn:   ptr.String("__QuickResponseArn__"),
+			QuickResponseId:    ptr.String("__QuickResponseId__"),
+			KnowledgeBaseArn:   ptr.String("__KnowledgeBaseArn__"),
+			KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+			Name:               ptr.String("__Name__"),
+			ContentType:        ptr.String("__ContentType__"),
+			Status:             types.QuickResponseStatus("CREATE_IN_PROGRESS"),
+			CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			Contents: &types.QuickResponseContents{
 				PlainText: &types.QuickResponseContentProviderMemberContent{
 					Value: "__QuickResponseContentProviderMemberContent__",
@@ -3510,14 +3601,16 @@ func TestCheckResponseSnapshot_ListAIAgentVersions(t *testing.T) {
 		AiAgentVersionSummaries: []types.AIAgentVersionSummary{
 			{
 				AiAgentSummary: &types.AIAgentSummary{
-					Name:             ptr.String("__Name__"),
-					AssistantId:      ptr.String("__AssistantId__"),
-					AssistantArn:     ptr.String("__AssistantArn__"),
-					AiAgentId:        ptr.String("__AiAgentId__"),
-					Type:             types.AIAgentType("MANUAL_SEARCH"),
-					AiAgentArn:       ptr.String("__AiAgentArn__"),
-					ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					VisibilityStatus: types.VisibilityStatus("SAVED"),
+					Name:               ptr.String("__Name__"),
+					AssistantId:        ptr.String("__AssistantId__"),
+					AssistantArn:       ptr.String("__AssistantArn__"),
+					AiAgentId:          ptr.String("__AiAgentId__"),
+					Type:               types.AIAgentType("MANUAL_SEARCH"),
+					AiAgentArn:         ptr.String("__AiAgentArn__"),
+					ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+					VisibilityStatus:   types.VisibilityStatus("SAVED"),
 					Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
 						Value: types.ManualSearchAIAgentConfiguration{
 							AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
@@ -3570,14 +3663,16 @@ func TestCheckResponseSnapshot_ListAIAgentVersions(t *testing.T) {
 			},
 			{
 				AiAgentSummary: &types.AIAgentSummary{
-					Name:             ptr.String("__Name__"),
-					AssistantId:      ptr.String("__AssistantId__"),
-					AssistantArn:     ptr.String("__AssistantArn__"),
-					AiAgentId:        ptr.String("__AiAgentId__"),
-					Type:             types.AIAgentType("MANUAL_SEARCH"),
-					AiAgentArn:       ptr.String("__AiAgentArn__"),
-					ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					VisibilityStatus: types.VisibilityStatus("SAVED"),
+					Name:               ptr.String("__Name__"),
+					AssistantId:        ptr.String("__AssistantId__"),
+					AssistantArn:       ptr.String("__AssistantArn__"),
+					AiAgentId:          ptr.String("__AiAgentId__"),
+					Type:               types.AIAgentType("MANUAL_SEARCH"),
+					AiAgentArn:         ptr.String("__AiAgentArn__"),
+					ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+					VisibilityStatus:   types.VisibilityStatus("SAVED"),
 					Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
 						Value: types.ManualSearchAIAgentConfiguration{
 							AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
@@ -3658,14 +3753,16 @@ func TestCheckResponseSnapshot_ListAIAgents(t *testing.T) {
 	want := &ListAIAgentsOutput{
 		AiAgentSummaries: []types.AIAgentSummary{
 			{
-				Name:             ptr.String("__Name__"),
-				AssistantId:      ptr.String("__AssistantId__"),
-				AssistantArn:     ptr.String("__AssistantArn__"),
-				AiAgentId:        ptr.String("__AiAgentId__"),
-				Type:             types.AIAgentType("MANUAL_SEARCH"),
-				AiAgentArn:       ptr.String("__AiAgentArn__"),
-				ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				VisibilityStatus: types.VisibilityStatus("SAVED"),
+				Name:               ptr.String("__Name__"),
+				AssistantId:        ptr.String("__AssistantId__"),
+				AssistantArn:       ptr.String("__AssistantArn__"),
+				AiAgentId:          ptr.String("__AiAgentId__"),
+				Type:               types.AIAgentType("MANUAL_SEARCH"),
+				AiAgentArn:         ptr.String("__AiAgentArn__"),
+				ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				VisibilityStatus:   types.VisibilityStatus("SAVED"),
 				Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
 					Value: types.ManualSearchAIAgentConfiguration{
 						AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
@@ -3715,14 +3812,16 @@ func TestCheckResponseSnapshot_ListAIAgents(t *testing.T) {
 				},
 			},
 			{
-				Name:             ptr.String("__Name__"),
-				AssistantId:      ptr.String("__AssistantId__"),
-				AssistantArn:     ptr.String("__AssistantArn__"),
-				AiAgentId:        ptr.String("__AiAgentId__"),
-				Type:             types.AIAgentType("MANUAL_SEARCH"),
-				AiAgentArn:       ptr.String("__AiAgentArn__"),
-				ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				VisibilityStatus: types.VisibilityStatus("SAVED"),
+				Name:               ptr.String("__Name__"),
+				AssistantId:        ptr.String("__AssistantId__"),
+				AssistantArn:       ptr.String("__AssistantArn__"),
+				AiAgentId:          ptr.String("__AiAgentId__"),
+				Type:               types.AIAgentType("MANUAL_SEARCH"),
+				AiAgentArn:         ptr.String("__AiAgentArn__"),
+				ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				VisibilityStatus:   types.VisibilityStatus("SAVED"),
 				Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
 					Value: types.ManualSearchAIAgentConfiguration{
 						AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
@@ -3801,15 +3900,17 @@ func TestCheckResponseSnapshot_ListAIGuardrailVersions(t *testing.T) {
 		AiGuardrailVersionSummaries: []types.AIGuardrailVersionSummary{
 			{
 				AiGuardrailSummary: &types.AIGuardrailSummary{
-					Name:             ptr.String("__Name__"),
-					AssistantId:      ptr.String("__AssistantId__"),
-					AssistantArn:     ptr.String("__AssistantArn__"),
-					AiGuardrailId:    ptr.String("__AiGuardrailId__"),
-					AiGuardrailArn:   ptr.String("__AiGuardrailArn__"),
-					ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					VisibilityStatus: types.VisibilityStatus("SAVED"),
-					Description:      ptr.String("__Description__"),
-					Status:           types.Status("CREATE_IN_PROGRESS"),
+					Name:               ptr.String("__Name__"),
+					AssistantId:        ptr.String("__AssistantId__"),
+					AssistantArn:       ptr.String("__AssistantArn__"),
+					AiGuardrailId:      ptr.String("__AiGuardrailId__"),
+					AiGuardrailArn:     ptr.String("__AiGuardrailArn__"),
+					ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+					VisibilityStatus:   types.VisibilityStatus("SAVED"),
+					Description:        ptr.String("__Description__"),
+					Status:             types.Status("CREATE_IN_PROGRESS"),
 					Tags: map[string]string{
 						"key0": "__Value__",
 					},
@@ -3818,15 +3919,17 @@ func TestCheckResponseSnapshot_ListAIGuardrailVersions(t *testing.T) {
 			},
 			{
 				AiGuardrailSummary: &types.AIGuardrailSummary{
-					Name:             ptr.String("__Name__"),
-					AssistantId:      ptr.String("__AssistantId__"),
-					AssistantArn:     ptr.String("__AssistantArn__"),
-					AiGuardrailId:    ptr.String("__AiGuardrailId__"),
-					AiGuardrailArn:   ptr.String("__AiGuardrailArn__"),
-					ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					VisibilityStatus: types.VisibilityStatus("SAVED"),
-					Description:      ptr.String("__Description__"),
-					Status:           types.Status("CREATE_IN_PROGRESS"),
+					Name:               ptr.String("__Name__"),
+					AssistantId:        ptr.String("__AssistantId__"),
+					AssistantArn:       ptr.String("__AssistantArn__"),
+					AiGuardrailId:      ptr.String("__AiGuardrailId__"),
+					AiGuardrailArn:     ptr.String("__AiGuardrailArn__"),
+					ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+					VisibilityStatus:   types.VisibilityStatus("SAVED"),
+					Description:        ptr.String("__Description__"),
+					Status:             types.Status("CREATE_IN_PROGRESS"),
 					Tags: map[string]string{
 						"key0": "__Value__",
 					},
@@ -3862,29 +3965,33 @@ func TestCheckResponseSnapshot_ListAIGuardrails(t *testing.T) {
 	want := &ListAIGuardrailsOutput{
 		AiGuardrailSummaries: []types.AIGuardrailSummary{
 			{
-				Name:             ptr.String("__Name__"),
-				AssistantId:      ptr.String("__AssistantId__"),
-				AssistantArn:     ptr.String("__AssistantArn__"),
-				AiGuardrailId:    ptr.String("__AiGuardrailId__"),
-				AiGuardrailArn:   ptr.String("__AiGuardrailArn__"),
-				ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				VisibilityStatus: types.VisibilityStatus("SAVED"),
-				Description:      ptr.String("__Description__"),
-				Status:           types.Status("CREATE_IN_PROGRESS"),
+				Name:               ptr.String("__Name__"),
+				AssistantId:        ptr.String("__AssistantId__"),
+				AssistantArn:       ptr.String("__AssistantArn__"),
+				AiGuardrailId:      ptr.String("__AiGuardrailId__"),
+				AiGuardrailArn:     ptr.String("__AiGuardrailArn__"),
+				ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				VisibilityStatus:   types.VisibilityStatus("SAVED"),
+				Description:        ptr.String("__Description__"),
+				Status:             types.Status("CREATE_IN_PROGRESS"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
 			},
 			{
-				Name:             ptr.String("__Name__"),
-				AssistantId:      ptr.String("__AssistantId__"),
-				AssistantArn:     ptr.String("__AssistantArn__"),
-				AiGuardrailId:    ptr.String("__AiGuardrailId__"),
-				AiGuardrailArn:   ptr.String("__AiGuardrailArn__"),
-				ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				VisibilityStatus: types.VisibilityStatus("SAVED"),
-				Description:      ptr.String("__Description__"),
-				Status:           types.Status("CREATE_IN_PROGRESS"),
+				Name:               ptr.String("__Name__"),
+				AssistantId:        ptr.String("__AssistantId__"),
+				AssistantArn:       ptr.String("__AssistantArn__"),
+				AiGuardrailId:      ptr.String("__AiGuardrailId__"),
+				AiGuardrailArn:     ptr.String("__AiGuardrailArn__"),
+				ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				VisibilityStatus:   types.VisibilityStatus("SAVED"),
+				Description:        ptr.String("__Description__"),
+				Status:             types.Status("CREATE_IN_PROGRESS"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -3918,20 +4025,22 @@ func TestCheckResponseSnapshot_ListAIPromptVersions(t *testing.T) {
 		AiPromptVersionSummaries: []types.AIPromptVersionSummary{
 			{
 				AiPromptSummary: &types.AIPromptSummary{
-					Name:             ptr.String("__Name__"),
-					AssistantId:      ptr.String("__AssistantId__"),
-					AssistantArn:     ptr.String("__AssistantArn__"),
-					AiPromptId:       ptr.String("__AiPromptId__"),
-					Type:             types.AIPromptType("ANSWER_GENERATION"),
-					AiPromptArn:      ptr.String("__AiPromptArn__"),
-					ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					TemplateType:     types.AIPromptTemplateType("TEXT"),
-					ModelId:          ptr.String("__ModelId__"),
-					ApiFormat:        types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
-					VisibilityStatus: types.VisibilityStatus("SAVED"),
-					Origin:           types.Origin("SYSTEM"),
-					Description:      ptr.String("__Description__"),
-					Status:           types.Status("CREATE_IN_PROGRESS"),
+					Name:               ptr.String("__Name__"),
+					AssistantId:        ptr.String("__AssistantId__"),
+					AssistantArn:       ptr.String("__AssistantArn__"),
+					AiPromptId:         ptr.String("__AiPromptId__"),
+					Type:               types.AIPromptType("ANSWER_GENERATION"),
+					AiPromptArn:        ptr.String("__AiPromptArn__"),
+					ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+					TemplateType:       types.AIPromptTemplateType("TEXT"),
+					ModelId:            ptr.String("__ModelId__"),
+					ApiFormat:          types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
+					VisibilityStatus:   types.VisibilityStatus("SAVED"),
+					Origin:             types.Origin("SYSTEM"),
+					Description:        ptr.String("__Description__"),
+					Status:             types.Status("CREATE_IN_PROGRESS"),
 					Tags: map[string]string{
 						"key0": "__Value__",
 					},
@@ -3940,20 +4049,22 @@ func TestCheckResponseSnapshot_ListAIPromptVersions(t *testing.T) {
 			},
 			{
 				AiPromptSummary: &types.AIPromptSummary{
-					Name:             ptr.String("__Name__"),
-					AssistantId:      ptr.String("__AssistantId__"),
-					AssistantArn:     ptr.String("__AssistantArn__"),
-					AiPromptId:       ptr.String("__AiPromptId__"),
-					Type:             types.AIPromptType("ANSWER_GENERATION"),
-					AiPromptArn:      ptr.String("__AiPromptArn__"),
-					ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					TemplateType:     types.AIPromptTemplateType("TEXT"),
-					ModelId:          ptr.String("__ModelId__"),
-					ApiFormat:        types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
-					VisibilityStatus: types.VisibilityStatus("SAVED"),
-					Origin:           types.Origin("SYSTEM"),
-					Description:      ptr.String("__Description__"),
-					Status:           types.Status("CREATE_IN_PROGRESS"),
+					Name:               ptr.String("__Name__"),
+					AssistantId:        ptr.String("__AssistantId__"),
+					AssistantArn:       ptr.String("__AssistantArn__"),
+					AiPromptId:         ptr.String("__AiPromptId__"),
+					Type:               types.AIPromptType("ANSWER_GENERATION"),
+					AiPromptArn:        ptr.String("__AiPromptArn__"),
+					ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+					TemplateType:       types.AIPromptTemplateType("TEXT"),
+					ModelId:            ptr.String("__ModelId__"),
+					ApiFormat:          types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
+					VisibilityStatus:   types.VisibilityStatus("SAVED"),
+					Origin:             types.Origin("SYSTEM"),
+					Description:        ptr.String("__Description__"),
+					Status:             types.Status("CREATE_IN_PROGRESS"),
 					Tags: map[string]string{
 						"key0": "__Value__",
 					},
@@ -3990,39 +4101,43 @@ func TestCheckResponseSnapshot_ListAIPrompts(t *testing.T) {
 	want := &ListAIPromptsOutput{
 		AiPromptSummaries: []types.AIPromptSummary{
 			{
-				Name:             ptr.String("__Name__"),
-				AssistantId:      ptr.String("__AssistantId__"),
-				AssistantArn:     ptr.String("__AssistantArn__"),
-				AiPromptId:       ptr.String("__AiPromptId__"),
-				Type:             types.AIPromptType("ANSWER_GENERATION"),
-				AiPromptArn:      ptr.String("__AiPromptArn__"),
-				ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				TemplateType:     types.AIPromptTemplateType("TEXT"),
-				ModelId:          ptr.String("__ModelId__"),
-				ApiFormat:        types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
-				VisibilityStatus: types.VisibilityStatus("SAVED"),
-				Origin:           types.Origin("SYSTEM"),
-				Description:      ptr.String("__Description__"),
-				Status:           types.Status("CREATE_IN_PROGRESS"),
+				Name:               ptr.String("__Name__"),
+				AssistantId:        ptr.String("__AssistantId__"),
+				AssistantArn:       ptr.String("__AssistantArn__"),
+				AiPromptId:         ptr.String("__AiPromptId__"),
+				Type:               types.AIPromptType("ANSWER_GENERATION"),
+				AiPromptArn:        ptr.String("__AiPromptArn__"),
+				ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				TemplateType:       types.AIPromptTemplateType("TEXT"),
+				ModelId:            ptr.String("__ModelId__"),
+				ApiFormat:          types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
+				VisibilityStatus:   types.VisibilityStatus("SAVED"),
+				Origin:             types.Origin("SYSTEM"),
+				Description:        ptr.String("__Description__"),
+				Status:             types.Status("CREATE_IN_PROGRESS"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
 			},
 			{
-				Name:             ptr.String("__Name__"),
-				AssistantId:      ptr.String("__AssistantId__"),
-				AssistantArn:     ptr.String("__AssistantArn__"),
-				AiPromptId:       ptr.String("__AiPromptId__"),
-				Type:             types.AIPromptType("ANSWER_GENERATION"),
-				AiPromptArn:      ptr.String("__AiPromptArn__"),
-				ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				TemplateType:     types.AIPromptTemplateType("TEXT"),
-				ModelId:          ptr.String("__ModelId__"),
-				ApiFormat:        types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
-				VisibilityStatus: types.VisibilityStatus("SAVED"),
-				Origin:           types.Origin("SYSTEM"),
-				Description:      ptr.String("__Description__"),
-				Status:           types.Status("CREATE_IN_PROGRESS"),
+				Name:               ptr.String("__Name__"),
+				AssistantId:        ptr.String("__AssistantId__"),
+				AssistantArn:       ptr.String("__AssistantArn__"),
+				AiPromptId:         ptr.String("__AiPromptId__"),
+				Type:               types.AIPromptType("ANSWER_GENERATION"),
+				AiPromptArn:        ptr.String("__AiPromptArn__"),
+				ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				TemplateType:       types.AIPromptTemplateType("TEXT"),
+				ModelId:            ptr.String("__ModelId__"),
+				ApiFormat:          types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
+				VisibilityStatus:   types.VisibilityStatus("SAVED"),
+				Origin:             types.Origin("SYSTEM"),
+				Description:        ptr.String("__Description__"),
+				Status:             types.Status("CREATE_IN_PROGRESS"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -4070,6 +4185,8 @@ func TestCheckResponseSnapshot_ListAssistantAssociations(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				AssistantAssociationId:  ptr.String("__AssistantAssociationId__"),
@@ -4086,6 +4203,8 @@ func TestCheckResponseSnapshot_ListAssistantAssociations(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4126,6 +4245,14 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyId: ptr.String("__KmsKeyId__"),
+					ReplicaKmsKeys: []types.ReplicaKmsKey{
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+					},
 				},
 				IntegrationConfiguration: &types.AssistantIntegrationConfiguration{
 					TopicIntegrationArn: ptr.String("__TopicIntegrationArn__"),
@@ -4149,6 +4276,8 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 						OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 					},
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				AssistantId:  ptr.String("__AssistantId__"),
@@ -4162,6 +4291,14 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyId: ptr.String("__KmsKeyId__"),
+					ReplicaKmsKeys: []types.ReplicaKmsKey{
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+					},
 				},
 				IntegrationConfiguration: &types.AssistantIntegrationConfiguration{
 					TopicIntegrationArn: ptr.String("__TopicIntegrationArn__"),
@@ -4185,6 +4322,8 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 						OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 					},
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4290,6 +4429,9 @@ func TestCheckResponseSnapshot_ListContents(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				FileHash:           ptr.String("__FileHash__"),
 			},
 			{
 				ContentArn:       ptr.String("__ContentArn__"),
@@ -4307,6 +4449,9 @@ func TestCheckResponseSnapshot_ListContents(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				FileHash:           ptr.String("__FileHash__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4458,11 +4603,21 @@ func TestCheckResponseSnapshot_ListKnowledgeBases(t *testing.T) {
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyId: ptr.String("__KmsKeyId__"),
+					ReplicaKmsKeys: []types.ReplicaKmsKey{
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+					},
 				},
 				Description: ptr.String("__Description__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
@@ -4518,11 +4673,21 @@ func TestCheckResponseSnapshot_ListKnowledgeBases(t *testing.T) {
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyId: ptr.String("__KmsKeyId__"),
+					ReplicaKmsKeys: []types.ReplicaKmsKey{
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+						{
+							Arn: ptr.String("__Arn__"),
+						},
+					},
 				},
 				Description: ptr.String("__Description__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4793,9 +4958,10 @@ func TestCheckResponseSnapshot_ListModels(t *testing.T) {
 					types.AIPromptType("ANSWER_GENERATION"),
 					types.AIPromptType("ANSWER_GENERATION"),
 				},
-				ModelLifecycle:     types.ModelLifecycle("ACTIVE"),
-				LegacyTimestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndOfLifeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModelLifecycle:         types.ModelLifecycle("ACTIVE"),
+				LegacyTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndOfLifeTimestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GlobalResiliencyStatus: types.GlobalResiliencyStatus("SUPPORTED"),
 			},
 			{
 				ModelId:               ptr.String("__ModelId__"),
@@ -4806,9 +4972,10 @@ func TestCheckResponseSnapshot_ListModels(t *testing.T) {
 					types.AIPromptType("ANSWER_GENERATION"),
 					types.AIPromptType("ANSWER_GENERATION"),
 				},
-				ModelLifecycle:     types.ModelLifecycle("ACTIVE"),
-				LegacyTimestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndOfLifeTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModelLifecycle:         types.ModelLifecycle("ACTIVE"),
+				LegacyTimestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndOfLifeTimestamp:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GlobalResiliencyStatus: types.GlobalResiliencyStatus("SUPPORTED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4840,18 +5007,19 @@ func TestCheckResponseSnapshot_ListQuickResponses(t *testing.T) {
 	want := &ListQuickResponsesOutput{
 		QuickResponseSummaries: []types.QuickResponseSummary{
 			{
-				QuickResponseArn: ptr.String("__QuickResponseArn__"),
-				QuickResponseId:  ptr.String("__QuickResponseId__"),
-				KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
-				KnowledgeBaseId:  ptr.String("__KnowledgeBaseId__"),
-				Name:             ptr.String("__Name__"),
-				ContentType:      ptr.String("__ContentType__"),
-				Status:           types.QuickResponseStatus("CREATE_IN_PROGRESS"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Description:      ptr.String("__Description__"),
-				LastModifiedBy:   ptr.String("__LastModifiedBy__"),
-				IsActive:         ptr.Bool(true),
+				QuickResponseArn:   ptr.String("__QuickResponseArn__"),
+				QuickResponseId:    ptr.String("__QuickResponseId__"),
+				KnowledgeBaseArn:   ptr.String("__KnowledgeBaseArn__"),
+				KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+				Name:               ptr.String("__Name__"),
+				ContentType:        ptr.String("__ContentType__"),
+				Status:             types.QuickResponseStatus("CREATE_IN_PROGRESS"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Description:        ptr.String("__Description__"),
+				LastModifiedBy:     ptr.String("__LastModifiedBy__"),
+				IsActive:           ptr.Bool(true),
 				Channels: []string{
 					"__Member__",
 					"__Member__",
@@ -4861,18 +5029,19 @@ func TestCheckResponseSnapshot_ListQuickResponses(t *testing.T) {
 				},
 			},
 			{
-				QuickResponseArn: ptr.String("__QuickResponseArn__"),
-				QuickResponseId:  ptr.String("__QuickResponseId__"),
-				KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
-				KnowledgeBaseId:  ptr.String("__KnowledgeBaseId__"),
-				Name:             ptr.String("__Name__"),
-				ContentType:      ptr.String("__ContentType__"),
-				Status:           types.QuickResponseStatus("CREATE_IN_PROGRESS"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Description:      ptr.String("__Description__"),
-				LastModifiedBy:   ptr.String("__LastModifiedBy__"),
-				IsActive:         ptr.Bool(true),
+				QuickResponseArn:   ptr.String("__QuickResponseArn__"),
+				QuickResponseId:    ptr.String("__QuickResponseId__"),
+				KnowledgeBaseArn:   ptr.String("__KnowledgeBaseArn__"),
+				KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+				Name:               ptr.String("__Name__"),
+				ContentType:        ptr.String("__ContentType__"),
+				Status:             types.QuickResponseStatus("CREATE_IN_PROGRESS"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Description:        ptr.String("__Description__"),
+				LastModifiedBy:     ptr.String("__LastModifiedBy__"),
+				IsActive:           ptr.Bool(true),
 				Channels: []string{
 					"__Member__",
 					"__Member__",
@@ -5958,6 +6127,181 @@ func TestCheckResponseSnapshot_QueryAssistant(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RegisterAssistantReplicaKey(t *testing.T) {
+	want := &RegisterAssistantReplicaKeyOutput{
+		Assistant: &types.AssistantData{
+			AssistantId:  ptr.String("__AssistantId__"),
+			AssistantArn: ptr.String("__AssistantArn__"),
+			Name:         ptr.String("__Name__"),
+			Type:         types.AssistantType("AGENT"),
+			Status:       types.AssistantStatus("CREATE_IN_PROGRESS"),
+			Description:  ptr.String("__Description__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
+			},
+			IntegrationConfiguration: &types.AssistantIntegrationConfiguration{
+				TopicIntegrationArn: ptr.String("__TopicIntegrationArn__"),
+			},
+			CapabilityConfiguration: &types.AssistantCapabilityConfiguration{
+				Type: types.AssistantCapabilityType("V1"),
+			},
+			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
+				"key0": {
+					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+			OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
+				{
+					AiAgentId:           ptr.String("__AiAgentId__"),
+					OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+				},
+				{
+					AiAgentId:           ptr.String("__AiAgentId__"),
+					OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+				},
+			},
+			LastModifiedTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion:              ptr.String("__LastModifiedRegion__"),
+			AssistantGlobalResiliencyStatus: types.AssistantGlobalResiliencyStatus("ENABLED"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("RegisterAssistantReplicaKey.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RegisterAssistantReplicaKey(context.Background(), &RegisterAssistantReplicaKeyInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		ReplicaKmsKey: &types.ReplicaKmsKey{
+			Arn: ptr.String("__Arn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RegisterAssistantReplicaKey.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RegisterKnowledgeBaseReplicaKey(t *testing.T) {
+	want := &RegisterKnowledgeBaseReplicaKeyOutput{
+		KnowledgeBase: &types.KnowledgeBaseData{
+			KnowledgeBaseId:             ptr.String("__KnowledgeBaseId__"),
+			KnowledgeBaseArn:            ptr.String("__KnowledgeBaseArn__"),
+			Name:                        ptr.String("__Name__"),
+			KnowledgeBaseType:           types.KnowledgeBaseType("EXTERNAL"),
+			Status:                      types.KnowledgeBaseStatus("CREATE_IN_PROGRESS"),
+			LastContentModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			VectorIngestionConfiguration: &types.VectorIngestionConfiguration{
+				ChunkingConfiguration: &types.ChunkingConfiguration{
+					ChunkingStrategy: types.ChunkingStrategy("FIXED_SIZE"),
+					FixedSizeChunkingConfiguration: &types.FixedSizeChunkingConfiguration{
+						MaxTokens:         ptr.Int32(1),
+						OverlapPercentage: ptr.Int32(1),
+					},
+					HierarchicalChunkingConfiguration: &types.HierarchicalChunkingConfiguration{
+						LevelConfigurations: []types.HierarchicalChunkingLevelConfiguration{
+							{
+								MaxTokens: ptr.Int32(1),
+							},
+							{
+								MaxTokens: ptr.Int32(1),
+							},
+						},
+						OverlapTokens: ptr.Int32(1),
+					},
+					SemanticChunkingConfiguration: &types.SemanticChunkingConfiguration{
+						MaxTokens:                     ptr.Int32(1),
+						BufferSize:                    ptr.Int32(1),
+						BreakpointPercentileThreshold: ptr.Int32(1),
+					},
+				},
+				ParsingConfiguration: &types.ParsingConfiguration{
+					ParsingStrategy: types.ParsingStrategy("BEDROCK_FOUNDATION_MODEL"),
+					BedrockFoundationModelConfiguration: &types.BedrockFoundationModelConfigurationForParsing{
+						ModelArn: ptr.String("__ModelArn__"),
+						ParsingPrompt: &types.ParsingPrompt{
+							ParsingPromptText: ptr.String("__ParsingPromptText__"),
+						},
+					},
+				},
+			},
+			SourceConfiguration: &types.SourceConfigurationMemberAppIntegrations{
+				Value: types.AppIntegrationsConfiguration{
+					AppIntegrationArn: ptr.String("__AppIntegrationArn__"),
+					ObjectFields: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			RenderingConfiguration: &types.RenderingConfiguration{
+				TemplateUri: ptr.String("__TemplateUri__"),
+			},
+			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
+			},
+			Description: ptr.String("__Description__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			IngestionStatus: types.SyncStatus("SYNC_FAILED"),
+			IngestionFailureReasons: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("RegisterKnowledgeBaseReplicaKey.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RegisterKnowledgeBaseReplicaKey(context.Background(), &RegisterKnowledgeBaseReplicaKeyInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ReplicaKmsKey: &types.ReplicaKmsKey{
+			Arn: ptr.String("__Arn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RegisterKnowledgeBaseReplicaKey.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RemoveAssistantAIAgent(t *testing.T) {
 	want := &RemoveAssistantAIAgentOutput{}
 	status, header, body, err := serdeRespReadSnapshot("RemoveAssistantAIAgent.response")
@@ -6258,6 +6602,9 @@ func TestCheckResponseSnapshot_SearchContent(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				FileHash:           ptr.String("__FileHash__"),
 			},
 			{
 				ContentArn:       ptr.String("__ContentArn__"),
@@ -6275,6 +6622,9 @@ func TestCheckResponseSnapshot_SearchContent(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				FileHash:           ptr.String("__FileHash__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -6488,10 +6838,11 @@ func TestCheckResponseSnapshot_SearchQuickResponses(t *testing.T) {
 						Value: "__QuickResponseContentProviderMemberContent__",
 					},
 				},
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				IsActive:         ptr.Bool(true),
-				Description:      ptr.String("__Description__"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				IsActive:           ptr.Bool(true),
+				Description:        ptr.String("__Description__"),
 				GroupingConfiguration: &types.GroupingConfiguration{
 					Criteria: ptr.String("__Criteria__"),
 					Values: []string{
@@ -6534,10 +6885,11 @@ func TestCheckResponseSnapshot_SearchQuickResponses(t *testing.T) {
 						Value: "__QuickResponseContentProviderMemberContent__",
 					},
 				},
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				IsActive:         ptr.Bool(true),
-				Description:      ptr.String("__Description__"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				IsActive:           ptr.Bool(true),
+				Description:        ptr.String("__Description__"),
 				GroupingConfiguration: &types.GroupingConfiguration{
 					Criteria: ptr.String("__Criteria__"),
 					Values: []string{
@@ -6972,9 +7324,11 @@ func TestCheckResponseSnapshot_UpdateAIAgent(t *testing.T) {
 					Locale: ptr.String("__Locale__"),
 				},
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -7153,8 +7507,10 @@ func TestCheckResponseSnapshot_UpdateAIGuardrail(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			Status:       types.Status("CREATE_IN_PROGRESS"),
-			ModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:             types.Status("CREATE_IN_PROGRESS"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateAIGuardrail.response")
@@ -7297,9 +7653,11 @@ func TestCheckResponseSnapshot_UpdateAIPrompt(t *testing.T) {
 				TopK:              ptr.Int32(1),
 				MaxTokensToSample: ptr.Int32(1),
 			},
-			ModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:      ptr.String("__Description__"),
-			VisibilityStatus: types.VisibilityStatus("SAVED"),
+			ModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			Description:        ptr.String("__Description__"),
+			VisibilityStatus:   types.VisibilityStatus("SAVED"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -7356,6 +7714,14 @@ func TestCheckResponseSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 			},
 			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
 			},
 			IntegrationConfiguration: &types.AssistantIntegrationConfiguration{
 				TopicIntegrationArn: ptr.String("__TopicIntegrationArn__"),
@@ -7379,6 +7745,9 @@ func TestCheckResponseSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 					OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 				},
 			},
+			LastModifiedTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion:              ptr.String("__LastModifiedRegion__"),
+			AssistantGlobalResiliencyStatus: types.AssistantGlobalResiliencyStatus("ENABLED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateAssistantAIAgent.response")
@@ -7424,9 +7793,12 @@ func TestCheckResponseSnapshot_UpdateContent(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			LinkOutUri: ptr.String("__LinkOutUri__"),
-			Url:        ptr.String("__Url__"),
-			UrlExpiry:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LinkOutUri:         ptr.String("__LinkOutUri__"),
+			Url:                ptr.String("__Url__"),
+			UrlExpiry:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			FileHash:           ptr.String("__FileHash__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateContent.response")
@@ -7514,6 +7886,14 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBaseTemplateUri(t *testing.T) {
 			},
 			ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 				KmsKeyId: ptr.String("__KmsKeyId__"),
+				ReplicaKmsKeys: []types.ReplicaKmsKey{
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+					{
+						Arn: ptr.String("__Arn__"),
+					},
+				},
 			},
 			Description: ptr.String("__Description__"),
 			Tags: map[string]string{
@@ -7524,6 +7904,8 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBaseTemplateUri(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateKnowledgeBaseTemplateUri.response")
@@ -8010,15 +8392,16 @@ func TestCheckResponseSnapshot_UpdateMessageTemplateMetadata(t *testing.T) {
 func TestCheckResponseSnapshot_UpdateQuickResponse(t *testing.T) {
 	want := &UpdateQuickResponseOutput{
 		QuickResponse: &types.QuickResponseData{
-			QuickResponseArn: ptr.String("__QuickResponseArn__"),
-			QuickResponseId:  ptr.String("__QuickResponseId__"),
-			KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
-			KnowledgeBaseId:  ptr.String("__KnowledgeBaseId__"),
-			Name:             ptr.String("__Name__"),
-			ContentType:      ptr.String("__ContentType__"),
-			Status:           types.QuickResponseStatus("CREATE_IN_PROGRESS"),
-			CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			QuickResponseArn:   ptr.String("__QuickResponseArn__"),
+			QuickResponseId:    ptr.String("__QuickResponseId__"),
+			KnowledgeBaseArn:   ptr.String("__KnowledgeBaseArn__"),
+			KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+			Name:               ptr.String("__Name__"),
+			ContentType:        ptr.String("__ContentType__"),
+			Status:             types.QuickResponseStatus("CREATE_IN_PROGRESS"),
+			CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			Contents: &types.QuickResponseContents{
 				PlainText: &types.QuickResponseContentProviderMemberContent{
 					Value: "__QuickResponseContentProviderMemberContent__",
@@ -8677,6 +9060,7 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_UnprocessableContentException(t *testing.T) {
 	want := &types.UnprocessableContentException{
 		Message: ptr.String("__Message__"),
+		Reason:  types.UnprocessableContentReason("ORCHESTRATION_ERROR"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnprocessableContentException.error")
 	if errors.Is(err, fs.ErrNotExist) {

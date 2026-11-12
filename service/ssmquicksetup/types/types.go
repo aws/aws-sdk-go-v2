@@ -54,7 +54,9 @@ func (v *ConfigurationDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocalDeploymentExecutionRoleName != nil {
 		s.WriteString(schemas.ConfigurationDefinition_LocalDeploymentExecutionRoleName, *v.LocalDeploymentExecutionRoleName)
 	}
-	serializeConfigurationParametersMap(s, schemas.ConfigurationDefinition_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeConfigurationParametersMap(s, schemas.ConfigurationDefinition_Parameters, v.Parameters)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurationDefinition_Type, *v.Type)
 	}
@@ -692,7 +694,9 @@ func (v *ConfigurationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.LocalDeploymentExecutionRoleName != nil {
 		s.WriteString(schemas.ConfigurationDefinitionInput_LocalDeploymentExecutionRoleName, *v.LocalDeploymentExecutionRoleName)
 	}
-	serializeConfigurationParametersMap(s, schemas.ConfigurationDefinitionInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeConfigurationParametersMap(s, schemas.ConfigurationDefinitionInput_Parameters, v.Parameters)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurationDefinitionInput_Type, *v.Type)
 	}
@@ -747,7 +751,9 @@ func (v *ConfigurationDefinitionSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfigurationDefinitionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationParametersMap(s, schemas.ConfigurationDefinitionSummary_FirstClassParameters, v.FirstClassParameters)
+	if v.FirstClassParameters != nil {
+		serializeConfigurationParametersMap(s, schemas.ConfigurationDefinitionSummary_FirstClassParameters, v.FirstClassParameters)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ConfigurationDefinitionSummary_Id, *v.Id)
 	}
@@ -810,7 +816,9 @@ func (v *ConfigurationManagerSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfigurationManagerSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationDefinitionSummariesList(s, schemas.ConfigurationManagerSummary_ConfigurationDefinitionSummaries, v.ConfigurationDefinitionSummaries)
+	if v.ConfigurationDefinitionSummaries != nil {
+		serializeConfigurationDefinitionSummariesList(s, schemas.ConfigurationManagerSummary_ConfigurationDefinitionSummaries, v.ConfigurationDefinitionSummaries)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.ConfigurationManagerSummary_Description, *v.Description)
 	}
@@ -820,7 +828,9 @@ func (v *ConfigurationManagerSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.ConfigurationManagerSummary_Name, *v.Name)
 	}
-	serializeStatusSummariesList(s, schemas.ConfigurationManagerSummary_StatusSummaries, v.StatusSummaries)
+	if v.StatusSummaries != nil {
+		serializeStatusSummariesList(s, schemas.ConfigurationManagerSummary_StatusSummaries, v.StatusSummaries)
+	}
 }
 func (v *ConfigurationManagerSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigurationManagerSummary, func(s *smithy.Schema) error {
@@ -896,7 +906,9 @@ func (v *ConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ConfigurationSummary_CreatedAt, *v.CreatedAt)
 	}
-	serializeConfigurationParametersMap(s, schemas.ConfigurationSummary_FirstClassParameters, v.FirstClassParameters)
+	if v.FirstClassParameters != nil {
+		serializeConfigurationParametersMap(s, schemas.ConfigurationSummary_FirstClassParameters, v.FirstClassParameters)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ConfigurationSummary_Id, *v.Id)
 	}
@@ -906,7 +918,9 @@ func (v *ConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.ConfigurationSummary_Region, *v.Region)
 	}
-	serializeStatusSummariesList(s, schemas.ConfigurationSummary_StatusSummaries, v.StatusSummaries)
+	if v.StatusSummaries != nil {
+		serializeStatusSummariesList(s, schemas.ConfigurationSummary_StatusSummaries, v.StatusSummaries)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurationSummary_Type, *v.Type)
 	}
@@ -976,7 +990,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.Filter_Key, *v.Key)
 	}
-	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -1103,7 +1119,9 @@ func (v *StatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.StatusSummary_Status, string(v.Status))
 	}
-	serializeStatusDetails(s, schemas.StatusSummary_StatusDetails, v.StatusDetails)
+	if v.StatusDetails != nil {
+		serializeStatusDetails(s, schemas.StatusSummary_StatusDetails, v.StatusDetails)
+	}
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.StatusSummary_StatusMessage, *v.StatusMessage)
 	}

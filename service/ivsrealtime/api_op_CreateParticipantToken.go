@@ -66,8 +66,12 @@ func (v *CreateParticipantTokenInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateParticipantTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipantTokenAttributes(s, schemas.CreateParticipantTokenRequest_attributes, v.Attributes)
-	serializeParticipantTokenCapabilities(s, schemas.CreateParticipantTokenRequest_capabilities, v.Capabilities)
+	if v.Attributes != nil {
+		serializeParticipantTokenAttributes(s, schemas.CreateParticipantTokenRequest_attributes, v.Attributes)
+	}
+	if v.Capabilities != nil {
+		serializeParticipantTokenCapabilities(s, schemas.CreateParticipantTokenRequest_capabilities, v.Capabilities)
+	}
 	if v.Duration != nil {
 		s.WriteInt32(schemas.CreateParticipantTokenRequest_duration, *v.Duration)
 	}

@@ -68,6 +68,10 @@ type UpdateTemplateInput struct {
 
 	// A list of fields that must contain a value for a case to be successfully
 	// created with this template.
+	//
+	// To require a Customer Profile when creating cases, include customer_id in this
+	// list. If customer_id is omitted, the Customer Profile field is optional and can
+	// be added, changed, or removed after case creation.
 	RequiredFields []types.RequiredField
 
 	// A list of case rules (also known as [case field conditions]) on a template.
@@ -107,12 +111,18 @@ func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateTemplateRequest_name, *v.Name)
 	}
-	serializeRequiredFieldList(s, schemas.UpdateTemplateRequest_requiredFields, v.RequiredFields)
-	serializeTemplateCaseRuleList(s, schemas.UpdateTemplateRequest_rules, v.Rules)
+	if v.RequiredFields != nil {
+		serializeRequiredFieldList(s, schemas.UpdateTemplateRequest_requiredFields, v.RequiredFields)
+	}
+	if v.Rules != nil {
+		serializeTemplateCaseRuleList(s, schemas.UpdateTemplateRequest_rules, v.Rules)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateTemplateRequest_status, string(v.Status))
 	}
-	serializeTagPropagationConfigurationList(s, schemas.UpdateTemplateRequest_tagPropagationConfigurations, v.TagPropagationConfigurations)
+	if v.TagPropagationConfigurations != nil {
+		serializeTagPropagationConfigurationList(s, schemas.UpdateTemplateRequest_tagPropagationConfigurations, v.TagPropagationConfigurations)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.UpdateTemplateRequest_templateId, *v.TemplateId)
 	}

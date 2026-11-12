@@ -902,6 +902,30 @@ func TestCheckSnapshot_QueryAssistant(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RegisterAssistantReplicaKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterAssistantReplicaKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterAssistantReplicaKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RegisterKnowledgeBaseReplicaKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterKnowledgeBaseReplicaKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterKnowledgeBaseReplicaKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RemoveAssistantAIAgent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RemoveAssistantAIAgent(context.Background(), nil, func(o *Options) {
@@ -2022,6 +2046,30 @@ func TestUpdateSnapshot_QueryAssistant(t *testing.T) {
 	_, err := svc.QueryAssistant(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "QueryAssistant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterAssistantReplicaKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterAssistantReplicaKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterAssistantReplicaKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterKnowledgeBaseReplicaKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterKnowledgeBaseReplicaKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterKnowledgeBaseReplicaKey")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

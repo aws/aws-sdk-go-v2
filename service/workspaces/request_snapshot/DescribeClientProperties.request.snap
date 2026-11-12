@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeClientProperties
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeClientProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceIds":["__Member__","__Member__"]}
+¿kResourceIdsŸj__Member__j__Member__ÿÿ

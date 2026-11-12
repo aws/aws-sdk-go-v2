@@ -89,7 +89,9 @@ func (v *ListProductPagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProductPagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfProductPageSummaryNoBody(s, schemas.ListProductPagesResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfProductPageSummaryNoBody(s, schemas.ListProductPagesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProductPagesResponse_NextToken, *v.NextToken)
 	}

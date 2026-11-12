@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type ModifySnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySnapshotScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifySnapshotScheduleMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySnapshotScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleDefinitions != nil {
+		serializeScheduleDefinitionList(s, schemas.ModifySnapshotScheduleMessage_ScheduleDefinitions, v.ScheduleDefinitions)
+	}
+	if v.ScheduleIdentifier != nil {
+		s.WriteString(schemas.ModifySnapshotScheduleMessage_ScheduleIdentifier, *v.ScheduleIdentifier)
+	}
+}
+
 // Describes a snapshot schedule. You can set a regular interval for creating
 // snapshots of a cluster. You can also schedule snapshots for specific dates.
 type ModifySnapshotScheduleOutput struct {
@@ -74,13 +91,64 @@ type ModifySnapshotScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySnapshotScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotSchedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySnapshotScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedClusterCount != nil {
+		s.WriteInt32(schemas.SnapshotSchedule_AssociatedClusterCount, *v.AssociatedClusterCount)
+	}
+	if v.AssociatedClusters != nil {
+		serializeAssociatedClusterList(s, schemas.SnapshotSchedule_AssociatedClusters, v.AssociatedClusters)
+	}
+	if v.NextInvocations != nil {
+		serializeScheduledSnapshotTimeList(s, schemas.SnapshotSchedule_NextInvocations, v.NextInvocations)
+	}
+	if v.ScheduleDefinitions != nil {
+		serializeScheduleDefinitionList(s, schemas.SnapshotSchedule_ScheduleDefinitions, v.ScheduleDefinitions)
+	}
+	if v.ScheduleDescription != nil {
+		s.WriteString(schemas.SnapshotSchedule_ScheduleDescription, *v.ScheduleDescription)
+	}
+	if v.ScheduleIdentifier != nil {
+		s.WriteString(schemas.SnapshotSchedule_ScheduleIdentifier, *v.ScheduleIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.SnapshotSchedule_Tags, v.Tags)
+	}
+}
+func (v *ModifySnapshotScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotSchedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotSchedule_AssociatedClusterCount:
+			v.AssociatedClusterCount = new(int32)
+			return d.ReadInt32(schemas.SnapshotSchedule_AssociatedClusterCount, v.AssociatedClusterCount)
+		case schemas.SnapshotSchedule_AssociatedClusters:
+			return deserializeAssociatedClusterList(d, schemas.SnapshotSchedule_AssociatedClusters, &v.AssociatedClusters)
+		case schemas.SnapshotSchedule_NextInvocations:
+			return deserializeScheduledSnapshotTimeList(d, schemas.SnapshotSchedule_NextInvocations, &v.NextInvocations)
+		case schemas.SnapshotSchedule_ScheduleDefinitions:
+			return deserializeScheduleDefinitionList(d, schemas.SnapshotSchedule_ScheduleDefinitions, &v.ScheduleDefinitions)
+		case schemas.SnapshotSchedule_ScheduleDescription:
+			v.ScheduleDescription = new(string)
+			return d.ReadString(schemas.SnapshotSchedule_ScheduleDescription, v.ScheduleDescription)
+		case schemas.SnapshotSchedule_ScheduleIdentifier:
+			v.ScheduleIdentifier = new(string)
+			return d.ReadString(schemas.SnapshotSchedule_ScheduleIdentifier, v.ScheduleIdentifier)
+		case schemas.SnapshotSchedule_Tags:
+			return deserializeTagList(d, schemas.SnapshotSchedule_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifySnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifySnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySnapshotSchedule, schemas.ModifySnapshotScheduleMessage, schemas.SnapshotSchedule)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifySnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySnapshotSchedule, schemas.ModifySnapshotScheduleMessage, schemas.SnapshotSchedule), output: &ModifySnapshotScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

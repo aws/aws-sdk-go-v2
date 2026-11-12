@@ -74,7 +74,9 @@ func (v *CopySnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceSnapshotName != nil {
 		s.WriteString(schemas.CopySnapshotRequest_SourceSnapshotName, *v.SourceSnapshotName)
 	}
-	serializeTagList(s, schemas.CopySnapshotRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopySnapshotRequest_Tags, v.Tags)
+	}
 	if v.TargetBucket != nil {
 		s.WriteString(schemas.CopySnapshotRequest_TargetBucket, *v.TargetBucket)
 	}
@@ -133,6 +135,9 @@ func (c *Client) addOperationCopySnapshotMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -121,7 +121,9 @@ func (v *DescribeDraftAppVersionResourcesImportStatusOutput) SerializeMembers(s 
 	if v.AppVersion != nil {
 		s.WriteString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_appVersion, *v.AppVersion)
 	}
-	serializeErrorDetailList(s, schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetailList(s, schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorDetails, v.ErrorDetails)
+	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorMessage, *v.ErrorMessage)
 	}

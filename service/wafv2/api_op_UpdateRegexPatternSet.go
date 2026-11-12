@@ -126,7 +126,9 @@ func (v *UpdateRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRegexPatternSetRequest_Name, *v.Name)
 	}
-	serializeRegularExpressionList(s, schemas.UpdateRegexPatternSetRequest_RegularExpressionList, v.RegularExpressionList)
+	if v.RegularExpressionList != nil {
+		serializeRegularExpressionList(s, schemas.UpdateRegexPatternSetRequest_RegularExpressionList, v.RegularExpressionList)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.UpdateRegexPatternSetRequest_Scope, string(v.Scope))
 	}

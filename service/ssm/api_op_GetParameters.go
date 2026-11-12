@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -12,6 +14,12 @@ import (
 // names.
 //
 // To get information about a single parameter, you can use the GetParameter operation instead.
+//
+// This operation is authorized against the ssm:GetParameters action, not against
+// ssm:GetParameter . Denying ssm:GetParameter for a parameter doesn't prevent a
+// principal from retrieving that parameter with this operation. To restrict access
+// to a parameter value, deny every action that can return it. For more
+// information, see [How Parameter Store authorizes parameter retrieval]in the Amazon Web Services Systems Manager User Guide.
 //
 // Parameter names can't contain spaces. The service removes any spaces specified
 // for the beginning or end of a parameter name. If the specified name for a
@@ -33,6 +41,7 @@ import (
 // ThrottlingException: Rate exceeded errors, enable higher throughput. For more
 // information, see [Changing Parameter Store throughput].
 //
+// [How Parameter Store authorizes parameter retrieval]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
 // [Changing Parameter Store throughput]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
 func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, optFns ...func(*Options)) (*GetParametersOutput, error) {
 	if params == nil {
@@ -76,6 +85,21 @@ type GetParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Names != nil {
+		serializeParameterNameList(s, schemas.GetParametersRequest_Names, v.Names)
+	}
+	if v.WithDecryption != nil {
+		s.WriteBool(schemas.GetParametersRequest_WithDecryption, *v.WithDecryption)
+	}
+}
+
 type GetParametersOutput struct {
 
 	// A list of parameters that aren't formatted correctly or don't run during an
@@ -91,13 +115,36 @@ type GetParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameters != nil {
+		serializeParameterNameList(s, schemas.GetParametersResult_InvalidParameters, v.InvalidParameters)
+	}
+	if v.Parameters != nil {
+		serializeParameterList(s, schemas.GetParametersResult_Parameters, v.Parameters)
+	}
+}
+func (v *GetParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParametersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParametersResult_InvalidParameters:
+			return deserializeParameterNameList(d, schemas.GetParametersResult_InvalidParameters, &v.InvalidParameters)
+		case schemas.GetParametersResult_Parameters:
+			return deserializeParameterList(d, schemas.GetParametersResult_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameters, schemas.GetParametersRequest, schemas.GetParametersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameters, schemas.GetParametersRequest, schemas.GetParametersResult), output: &GetParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

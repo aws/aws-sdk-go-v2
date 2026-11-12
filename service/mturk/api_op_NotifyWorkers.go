@@ -65,7 +65,9 @@ func (v *NotifyWorkersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subject != nil {
 		s.WriteString(schemas.NotifyWorkersRequest_Subject, *v.Subject)
 	}
-	serializeCustomerIdList(s, schemas.NotifyWorkersRequest_WorkerIds, v.WorkerIds)
+	if v.WorkerIds != nil {
+		serializeCustomerIdList(s, schemas.NotifyWorkersRequest_WorkerIds, v.WorkerIds)
+	}
 }
 
 type NotifyWorkersOutput struct {
@@ -87,7 +89,9 @@ func (v *NotifyWorkersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NotifyWorkersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotifyWorkersFailureStatusList(s, schemas.NotifyWorkersResponse_NotifyWorkersFailureStatuses, v.NotifyWorkersFailureStatuses)
+	if v.NotifyWorkersFailureStatuses != nil {
+		serializeNotifyWorkersFailureStatusList(s, schemas.NotifyWorkersResponse_NotifyWorkersFailureStatuses, v.NotifyWorkersFailureStatuses)
+	}
 }
 func (v *NotifyWorkersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NotifyWorkersResponse, func(s *smithy.Schema) error {

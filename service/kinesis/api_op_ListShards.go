@@ -208,7 +208,9 @@ func (v *ListShardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListShardsOutput_NextToken, *v.NextToken)
 	}
-	serializeShardList(s, schemas.ListShardsOutput_Shards, v.Shards)
+	if v.Shards != nil {
+		serializeShardList(s, schemas.ListShardsOutput_Shards, v.Shards)
+	}
 }
 func (v *ListShardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListShardsOutput, func(s *smithy.Schema) error {

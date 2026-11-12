@@ -105,7 +105,9 @@ func (v *DescribeEventSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventSourceConfiguration(s, schemas.DescribeEventSourceResponse_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeEventSourceConfiguration(s, schemas.DescribeEventSourceResponse_Configuration, v.Configuration)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeEventSourceResponse_CreationTime, *v.CreationTime)
 	}

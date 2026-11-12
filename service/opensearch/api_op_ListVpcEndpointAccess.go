@@ -87,7 +87,9 @@ func (v *ListVpcEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVpcEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizedPrincipalList(s, schemas.ListVpcEndpointAccessResponse_AuthorizedPrincipalList, v.AuthorizedPrincipalList)
+	if v.AuthorizedPrincipalList != nil {
+		serializeAuthorizedPrincipalList(s, schemas.ListVpcEndpointAccessResponse_AuthorizedPrincipalList, v.AuthorizedPrincipalList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVpcEndpointAccessResponse_NextToken, *v.NextToken)
 	}

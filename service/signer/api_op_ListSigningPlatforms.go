@@ -103,7 +103,9 @@ func (v *ListSigningPlatformsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSigningPlatformsResponse_nextToken, *v.NextToken)
 	}
-	serializeSigningPlatforms(s, schemas.ListSigningPlatformsResponse_platforms, v.Platforms)
+	if v.Platforms != nil {
+		serializeSigningPlatforms(s, schemas.ListSigningPlatformsResponse_platforms, v.Platforms)
+	}
 }
 func (v *ListSigningPlatformsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSigningPlatformsResponse, func(s *smithy.Schema) error {

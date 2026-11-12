@@ -51,8 +51,15 @@ type ListCoreNetworkRoutingInformationInput struct {
 	// Exact AS path values to match when filtering routing information.
 	ExactAsPathMatches []string
 
+	// Exact prefix values to match when filtering routing information.
+	ExactPrefixMatches []string
+
 	// Local preference values to match when filtering routing information.
 	LocalPreferenceMatches []string
+
+	// Filters routing information based on the longest prefix that matches each
+	// provided IP address.
+	LongestPrefixMatches []string
 
 	// The maximum number of routing information entries to return in a single page.
 	MaxResults *int32
@@ -61,11 +68,44 @@ type ListCoreNetworkRoutingInformationInput struct {
 	// information.
 	MedMatches []string
 
-	// Filters to apply based on next hop information.
+	// Filters to apply based on next hop information. Each filter value must exactly
+	// match the corresponding next hop value. Values for the same filter are joined
+	// with OR, and different filters are joined with AND. The following filters are
+	// supported:
+	//
+	//   - core-network-attachment-id : The ID of the core network attachment for the
+	//   next hop, for example attachment-0123456789abcdef0 .
+	//
+	//   - segment-name : The name of the segment for the next hop.
+	//
+	//   - edge-location : The edge location for the next hop, for example us-east-1 .
+	//
+	//   - resource-id : The ID of the resource for the next hop.
+	//
+	//   - resource-type : The type of resource for the next hop. The possible values
+	//   are vpc , vpn , connect-peer , direct-connect-gateway ,
+	//   transit-gateway-route-table , attachment , and blackhole .
+	//
+	//   - ip-address : The IP address of the next hop. For a Site-to-Site VPN next
+	//   hop, this is the outside IP address of the AWS side of the VPN tunnel. For a
+	//   Connect peer next hop, this is the core network BGP address of the Connect peer.
+	//   The value must be a single IPv4 or IPv6 address.
+	//
+	// You can specify up to 10 filter values in total across NextHopFilters and the
+	// other match parameters in the request. Each filter value can be up to 256
+	// characters.
 	NextHopFilters map[string][]string
 
 	// The token for the next page of results.
 	NextToken *string
+
+	// Prefix values to filter routing information whose prefix is a subnet of the
+	// prefixes provided.
+	SubnetOfMatches []string
+
+	// Prefix values to filter routing information whose prefix is a supernet of the
+	// prefixes provided.
+	SupernetOfMatches []string
 
 	noSmithyDocumentSerde
 }
@@ -77,25 +117,47 @@ func (v *ListCoreNetworkRoutingInformationInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListCoreNetworkRoutingInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_CommunityMatches, v.CommunityMatches)
+	if v.CommunityMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_CommunityMatches, v.CommunityMatches)
+	}
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_CoreNetworkId, *v.CoreNetworkId)
 	}
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_EdgeLocation, *v.EdgeLocation)
 	}
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches, v.ExactAsPathMatches)
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches, v.LocalPreferenceMatches)
+	if v.ExactAsPathMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches, v.ExactAsPathMatches)
+	}
+	if v.ExactPrefixMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches, v.ExactPrefixMatches)
+	}
+	if v.LocalPreferenceMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches, v.LocalPreferenceMatches)
+	}
+	if v.LongestPrefixMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches, v.LongestPrefixMatches)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCoreNetworkRoutingInformationRequest_MaxResults, *v.MaxResults)
 	}
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_MedMatches, v.MedMatches)
-	serializeFilterMap(s, schemas.ListCoreNetworkRoutingInformationRequest_NextHopFilters, v.NextHopFilters)
+	if v.MedMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_MedMatches, v.MedMatches)
+	}
+	if v.NextHopFilters != nil {
+		serializeFilterMap(s, schemas.ListCoreNetworkRoutingInformationRequest_NextHopFilters, v.NextHopFilters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_NextToken, *v.NextToken)
 	}
 	if v.SegmentName != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_SegmentName, *v.SegmentName)
+	}
+	if v.SubnetOfMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SubnetOfMatches, v.SubnetOfMatches)
+	}
+	if v.SupernetOfMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SupernetOfMatches, v.SupernetOfMatches)
 	}
 }
 
@@ -120,7 +182,9 @@ func (v *ListCoreNetworkRoutingInformationOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListCoreNetworkRoutingInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreNetworkRoutingInformationList(s, schemas.ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation, v.CoreNetworkRoutingInformation)
+	if v.CoreNetworkRoutingInformation != nil {
+		serializeCoreNetworkRoutingInformationList(s, schemas.ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation, v.CoreNetworkRoutingInformation)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationResponse_NextToken, *v.NextToken)
 	}

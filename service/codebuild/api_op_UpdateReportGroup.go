@@ -64,7 +64,9 @@ func (v *UpdateReportGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExportConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.UpdateReportGroupInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UpdateReportGroupInput_tags, v.Tags)
+	}
 }
 
 type UpdateReportGroupOutput struct {
@@ -116,6 +118,9 @@ func (c *Client) addOperationUpdateReportGroupMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

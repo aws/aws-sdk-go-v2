@@ -243,7 +243,9 @@ func (v *UpdateBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateBotLocaleResponse_description, *v.Description)
 	}
-	serializeFailureReasons(s, schemas.UpdateBotLocaleResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.UpdateBotLocaleResponse_failureReasons, v.FailureReasons)
+	}
 	if v.GenerativeAISettings != nil {
 		s.WriteStruct(schemas.UpdateBotLocaleResponse_generativeAISettings)
 		v.GenerativeAISettings.SerializeMembers(s)
@@ -261,7 +263,9 @@ func (v *UpdateBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NluIntentConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.UpdateBotLocaleResponse_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
 	}
-	serializeRecommendedActions(s, schemas.UpdateBotLocaleResponse_recommendedActions, v.RecommendedActions)
+	if v.RecommendedActions != nil {
+		serializeRecommendedActions(s, schemas.UpdateBotLocaleResponse_recommendedActions, v.RecommendedActions)
+	}
 	if v.SpeakerDiarizationSettings != nil {
 		s.WriteStruct(schemas.UpdateBotLocaleResponse_speakerDiarizationSettings)
 		v.SpeakerDiarizationSettings.SerializeMembers(s)

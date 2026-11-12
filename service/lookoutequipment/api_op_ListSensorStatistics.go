@@ -15,6 +15,10 @@ import (
 //
 // been successfully ingested in the particular dataset. Can also be used to
 // retreive Sensor Statistics for a previous ingestion job.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListSensorStatistics(ctx context.Context, params *ListSensorStatisticsInput, optFns ...func(*Options)) (*ListSensorStatisticsOutput, error) {
 	if params == nil {
 		params = &ListSensorStatisticsInput{}
@@ -101,7 +105,9 @@ func (v *ListSensorStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSensorStatisticsResponse_NextToken, *v.NextToken)
 	}
-	serializeSensorStatisticsSummaries(s, schemas.ListSensorStatisticsResponse_SensorStatisticsSummaries, v.SensorStatisticsSummaries)
+	if v.SensorStatisticsSummaries != nil {
+		serializeSensorStatisticsSummaries(s, schemas.ListSensorStatisticsResponse_SensorStatisticsSummaries, v.SensorStatisticsSummaries)
+	}
 }
 func (v *ListSensorStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSensorStatisticsResponse, func(s *smithy.Schema) error {

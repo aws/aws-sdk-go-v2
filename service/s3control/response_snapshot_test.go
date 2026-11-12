@@ -2516,6 +2516,7 @@ func TestCheckResponseSnapshot_GetDataAccess(t *testing.T) {
 			GranteeType:       types.GranteeType("DIRECTORY_USER"),
 			GranteeIdentifier: ptr.String("__GranteeIdentifier__"),
 		},
+		MatchedInstanceArn: ptr.String("__MatchedInstanceArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDataAccess.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2533,6 +2534,7 @@ func TestCheckResponseSnapshot_GetDataAccess(t *testing.T) {
 		Privilege:       types.Privilege("Minimal"),
 		TargetType:      types.S3PrefixType("Object"),
 		AuditContext:    ptr.String("__AuditContext__"),
+		InstanceScope:   types.InstanceScope("SELF"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3353,14 +3355,16 @@ func TestCheckResponseSnapshot_ListCallerAccessGrants(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		CallerAccessGrantsList: []types.ListCallerAccessGrantsEntry{
 			{
-				Permission:     types.Permission("READ"),
-				GrantScope:     ptr.String("__GrantScope__"),
-				ApplicationArn: ptr.String("__ApplicationArn__"),
+				Permission:              types.Permission("READ"),
+				GrantScope:              ptr.String("__GrantScope__"),
+				ApplicationArn:          ptr.String("__ApplicationArn__"),
+				AccessGrantsInstanceArn: ptr.String("__AccessGrantsInstanceArn__"),
 			},
 			{
-				Permission:     types.Permission("READ"),
-				GrantScope:     ptr.String("__GrantScope__"),
-				ApplicationArn: ptr.String("__ApplicationArn__"),
+				Permission:              types.Permission("READ"),
+				GrantScope:              ptr.String("__GrantScope__"),
+				ApplicationArn:          ptr.String("__ApplicationArn__"),
+				AccessGrantsInstanceArn: ptr.String("__AccessGrantsInstanceArn__"),
 			},
 		},
 	}
@@ -3378,6 +3382,7 @@ func TestCheckResponseSnapshot_ListCallerAccessGrants(t *testing.T) {
 		NextToken:            ptr.String("__NextToken__"),
 		MaxResults:           1,
 		AllowedByApplication: true,
+		InstanceScope:        types.InstanceScope("SELF"),
 	})
 	if err != nil {
 		t.Fatal(err)

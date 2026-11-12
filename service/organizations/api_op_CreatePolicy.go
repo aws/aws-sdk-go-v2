@@ -143,7 +143,9 @@ func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePolicyRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreatePolicyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePolicyRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreatePolicyRequest_Type, string(v.Type))
 	}

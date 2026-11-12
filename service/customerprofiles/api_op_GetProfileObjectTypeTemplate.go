@@ -4,8 +4,11 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Returns the template information for a specific object type.
@@ -39,6 +42,18 @@ type GetProfileObjectTypeTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileObjectTypeTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileObjectTypeTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileObjectTypeTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateId != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type GetProfileObjectTypeTemplateOutput struct {
 
 	// Indicates whether a profile should be created when data is received if one
@@ -47,6 +62,16 @@ type GetProfileObjectTypeTemplateOutput struct {
 	// standard profile and associate this object with the profile. If it is set to
 	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
+
+	// The default maximum number of objects of this object type that can be stored
+	// per profile. This default applies when you don't set MaxProfileObjectCount on
+	// an object type created from this template. If this value isn't present, no
+	// default limit applies.
+	DefaultMaxProfileObjectCount *int32
+
+	// The timestamp after which DefaultMaxProfileObjectCount takes effect. The
+	// default limit applies only to domains created after this time.
+	DefaultMaxProfileObjectCountEffectiveAfter *time.Time
 
 	// A map of the name and ObjectType field.
 	Fields map[string]types.ObjectTypeField
@@ -63,6 +88,11 @@ type GetProfileObjectTypeTemplateOutput struct {
 	// The source of the object template.
 	SourceObject *string
 
+	// Indicates whether the template is store-only. Objects of an object type created
+	// from a store-only template are ingested and stored, but the object type can't be
+	// used by calculated attributes or event triggers.
+	StoreOnly bool
+
 	// A unique identifier for the object template.
 	TemplateId *string
 
@@ -72,13 +102,82 @@ type GetProfileObjectTypeTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileObjectTypeTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileObjectTypeTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileObjectTypeTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowProfileCreation != false {
+		s.WriteBool(schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation, v.AllowProfileCreation)
+	}
+	if v.DefaultMaxProfileObjectCount != nil {
+		s.WriteInt32(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount, *v.DefaultMaxProfileObjectCount)
+	}
+	if v.DefaultMaxProfileObjectCountEffectiveAfter != nil {
+		s.WriteTime(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter, *v.DefaultMaxProfileObjectCountEffectiveAfter)
+	}
+	if v.Fields != nil {
+		serializeFieldMap(s, schemas.GetProfileObjectTypeTemplateResponse_Fields, v.Fields)
+	}
+	if v.Keys != nil {
+		serializeKeyMap(s, schemas.GetProfileObjectTypeTemplateResponse_Keys, v.Keys)
+	}
+	if v.SourceLastUpdatedTimestampFormat != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceLastUpdatedTimestampFormat, *v.SourceLastUpdatedTimestampFormat)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceName, *v.SourceName)
+	}
+	if v.SourceObject != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceObject, *v.SourceObject)
+	}
+	if v.StoreOnly != false {
+		s.WriteBool(schemas.GetProfileObjectTypeTemplateResponse_StoreOnly, v.StoreOnly)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_TemplateId, *v.TemplateId)
+	}
+}
+func (v *GetProfileObjectTypeTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileObjectTypeTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation:
+			return d.ReadBool(schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation, &v.AllowProfileCreation)
+		case schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount:
+			v.DefaultMaxProfileObjectCount = new(int32)
+			return d.ReadInt32(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount, v.DefaultMaxProfileObjectCount)
+		case schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter:
+			v.DefaultMaxProfileObjectCountEffectiveAfter = new(time.Time)
+			return d.ReadTime(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter, v.DefaultMaxProfileObjectCountEffectiveAfter)
+		case schemas.GetProfileObjectTypeTemplateResponse_Fields:
+			return deserializeFieldMap(d, schemas.GetProfileObjectTypeTemplateResponse_Fields, &v.Fields)
+		case schemas.GetProfileObjectTypeTemplateResponse_Keys:
+			return deserializeKeyMap(d, schemas.GetProfileObjectTypeTemplateResponse_Keys, &v.Keys)
+		case schemas.GetProfileObjectTypeTemplateResponse_SourceLastUpdatedTimestampFormat:
+			v.SourceLastUpdatedTimestampFormat = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_SourceLastUpdatedTimestampFormat, v.SourceLastUpdatedTimestampFormat)
+		case schemas.GetProfileObjectTypeTemplateResponse_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_SourceName, v.SourceName)
+		case schemas.GetProfileObjectTypeTemplateResponse_SourceObject:
+			v.SourceObject = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_SourceObject, v.SourceObject)
+		case schemas.GetProfileObjectTypeTemplateResponse_StoreOnly:
+			return d.ReadBool(schemas.GetProfileObjectTypeTemplateResponse_StoreOnly, &v.StoreOnly)
+		case schemas.GetProfileObjectTypeTemplateResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileObjectTypeTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfileObjectTypeTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileObjectTypeTemplate, schemas.GetProfileObjectTypeTemplateRequest, schemas.GetProfileObjectTypeTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfileObjectTypeTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileObjectTypeTemplate, schemas.GetProfileObjectTypeTemplateRequest, schemas.GetProfileObjectTypeTemplateResponse), output: &GetProfileObjectTypeTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

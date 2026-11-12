@@ -94,7 +94,9 @@ func (v *CreateVirtualClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionEnabled != nil {
 		s.WriteBool(schemas.CreateVirtualClusterRequest_sessionEnabled, *v.SessionEnabled)
 	}
-	serializeTagMap(s, schemas.CreateVirtualClusterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateVirtualClusterRequest_tags, v.Tags)
+	}
 }
 
 type CreateVirtualClusterOutput struct {

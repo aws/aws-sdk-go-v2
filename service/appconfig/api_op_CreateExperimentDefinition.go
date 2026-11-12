@@ -129,8 +129,12 @@ func (v *CreateExperimentDefinitionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.CreateExperimentDefinitionRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateExperimentDefinitionRequest_Tags, v.Tags)
-	serializeTreatmentInputList(s, schemas.CreateExperimentDefinitionRequest_Treatments, v.Treatments)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateExperimentDefinitionRequest_Tags, v.Tags)
+	}
+	if v.Treatments != nil {
+		serializeTreatmentInputList(s, schemas.CreateExperimentDefinitionRequest_Treatments, v.Treatments)
+	}
 }
 
 // Describes an experiment definition, including the target audience, feature
@@ -244,7 +248,9 @@ func (v *CreateExperimentDefinitionOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Status != "" {
 		s.WriteString(schemas.ExperimentDefinition_Status, string(v.Status))
 	}
-	serializeTreatmentList(s, schemas.ExperimentDefinition_Treatments, v.Treatments)
+	if v.Treatments != nil {
+		serializeTreatmentList(s, schemas.ExperimentDefinition_Treatments, v.Treatments)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ExperimentDefinition_UpdatedAt, *v.UpdatedAt)
 	}

@@ -70,7 +70,9 @@ func (v *Action) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGenericMap(s, schemas.Action_Arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeGenericMap(s, schemas.Action_Arguments, v.Arguments)
+	}
 	if v.CrawlerName != nil {
 		s.WriteString(schemas.Action_CrawlerName, *v.CrawlerName)
 	}
@@ -148,9 +150,15 @@ func (v *Aggregate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Aggregate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateOperations(s, schemas.Aggregate_Aggs, v.Aggs)
-	serializeGlueStudioPathList(s, schemas.Aggregate_Groups, v.Groups)
-	serializeOneInput(s, schemas.Aggregate_Inputs, v.Inputs)
+	if v.Aggs != nil {
+		serializeAggregateOperations(s, schemas.Aggregate_Aggs, v.Aggs)
+	}
+	if v.Groups != nil {
+		serializeGlueStudioPathList(s, schemas.Aggregate_Groups, v.Groups)
+	}
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.Aggregate_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Aggregate_Name, *v.Name)
 	}
@@ -204,7 +212,9 @@ func (v *AggregateOperation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggFunc != "" {
 		s.WriteString(schemas.AggregateOperation_AggFunc, string(v.AggFunc))
 	}
-	serializeEnclosedInStringProperties(s, schemas.AggregateOperation_Column, v.Column)
+	if v.Column != nil {
+		serializeEnclosedInStringProperties(s, schemas.AggregateOperation_Column, v.Column)
+	}
 }
 func (v *AggregateOperation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AggregateOperation, func(s *smithy.Schema) error {
@@ -412,7 +422,9 @@ func (v *AmazonRedshiftNodeData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != nil {
 		s.WriteString(schemas.AmazonRedshiftNodeData_Action, *v.Action)
 	}
-	serializeAmazonRedshiftAdvancedOptions(s, schemas.AmazonRedshiftNodeData_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAmazonRedshiftAdvancedOptions(s, schemas.AmazonRedshiftNodeData_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.CatalogDatabase != nil {
 		s.WriteStruct(schemas.AmazonRedshiftNodeData_CatalogDatabase)
 		v.CatalogDatabase.SerializeMembers(s)
@@ -468,7 +480,9 @@ func (v *AmazonRedshiftNodeData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Schema.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOptionList(s, schemas.AmazonRedshiftNodeData_SelectedColumns, v.SelectedColumns)
+	if v.SelectedColumns != nil {
+		serializeOptionList(s, schemas.AmazonRedshiftNodeData_SelectedColumns, v.SelectedColumns)
+	}
 	if v.SourceType != nil {
 		s.WriteString(schemas.AmazonRedshiftNodeData_SourceType, *v.SourceType)
 	}
@@ -483,7 +497,9 @@ func (v *AmazonRedshiftNodeData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TablePrefix != nil {
 		s.WriteString(schemas.AmazonRedshiftNodeData_TablePrefix, *v.TablePrefix)
 	}
-	serializeOptionList(s, schemas.AmazonRedshiftNodeData_TableSchema, v.TableSchema)
+	if v.TableSchema != nil {
+		serializeOptionList(s, schemas.AmazonRedshiftNodeData_TableSchema, v.TableSchema)
+	}
 	if v.TempDir != nil {
 		s.WriteString(schemas.AmazonRedshiftNodeData_TempDir, *v.TempDir)
 	}
@@ -642,7 +658,9 @@ func (v *AmazonRedshiftTarget) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Data.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOneInput(s, schemas.AmazonRedshiftTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.AmazonRedshiftTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AmazonRedshiftTarget_Name, *v.Name)
 	}
@@ -743,8 +761,12 @@ func (v *ApplyMapping) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApplyMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.ApplyMapping_Inputs, v.Inputs)
-	serializeMappings(s, schemas.ApplyMapping_Mapping, v.Mapping)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.ApplyMapping_Inputs, v.Inputs)
+	}
+	if v.Mapping != nil {
+		serializeMappings(s, schemas.ApplyMapping_Mapping, v.Mapping)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ApplyMapping_Name, *v.Name)
 	}
@@ -940,7 +962,9 @@ func (v *AthenaConnectorSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AthenaConnectorSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.AthenaConnectorSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.AthenaConnectorSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.SchemaName != nil {
 		s.WriteString(schemas.AthenaConnectorSource_SchemaName, *v.SchemaName)
 	}
@@ -1001,7 +1025,9 @@ func (v *AuditContext) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllColumnsRequested != nil {
 		s.WriteBool(schemas.AuditContext_AllColumnsRequested, *v.AllColumnsRequested)
 	}
-	serializeAuditColumnNamesList(s, schemas.AuditContext_RequestedColumns, v.RequestedColumns)
+	if v.RequestedColumns != nil {
+		serializeAuditColumnNamesList(s, schemas.AuditContext_RequestedColumns, v.RequestedColumns)
+	}
 }
 func (v *AuditContext) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuditContext, func(s *smithy.Schema) error {
@@ -1058,9 +1084,15 @@ func (v *AuthConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AuthenticationType.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePropertiesMap(s, schemas.AuthConfiguration_BasicAuthenticationProperties, v.BasicAuthenticationProperties)
-	serializePropertiesMap(s, schemas.AuthConfiguration_CustomAuthenticationProperties, v.CustomAuthenticationProperties)
-	serializePropertiesMap(s, schemas.AuthConfiguration_OAuth2Properties, v.OAuth2Properties)
+	if v.BasicAuthenticationProperties != nil {
+		serializePropertiesMap(s, schemas.AuthConfiguration_BasicAuthenticationProperties, v.BasicAuthenticationProperties)
+	}
+	if v.CustomAuthenticationProperties != nil {
+		serializePropertiesMap(s, schemas.AuthConfiguration_CustomAuthenticationProperties, v.CustomAuthenticationProperties)
+	}
+	if v.OAuth2Properties != nil {
+		serializePropertiesMap(s, schemas.AuthConfiguration_OAuth2Properties, v.OAuth2Properties)
+	}
 	if v.SecretArn != nil {
 		s.WriteStruct(schemas.AuthConfiguration_SecretArn)
 		v.SecretArn.SerializeMembers(s)
@@ -1195,7 +1227,9 @@ func (v *AuthenticationConfigurationInput) SerializeMembers(s smithy.ShapeSerial
 		v.BasicAuthenticationCredentials.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCredentialMap(s, schemas.AuthenticationConfigurationInput_CustomAuthenticationCredentials, v.CustomAuthenticationCredentials)
+	if v.CustomAuthenticationCredentials != nil {
+		serializeCredentialMap(s, schemas.AuthenticationConfigurationInput_CustomAuthenticationCredentials, v.CustomAuthenticationCredentials)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.AuthenticationConfigurationInput_KmsKeyArn, *v.KmsKeyArn)
 	}
@@ -1327,6 +1361,71 @@ func (v *AutoDataQuality) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The auto-upgrade assessment information for a job configured with
+// glueVersion=auto.
+type AutoUpgradeMetadata struct {
+
+	// The unique identifier of the auto-upgrade assessment analysis.
+	AnalysisId *string
+
+	// The source Glue runtime version the job was running before auto-version was
+	// enabled.
+	SourceVersion *string
+
+	// The current auto-upgrade lifecycle status (OBSERVING, UPGRADING,
+	// UPGRADE_SUCCEEDED, UPGRADE_FAILED, STOPPED, WAITING_FOR_CONSENT).
+	Status AutoUpgradeStatus
+
+	// The target Glue runtime version the job is being upgraded to.
+	TargetVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoUpgradeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoUpgradeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoUpgradeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.AutoUpgradeMetadata_AnalysisId, *v.AnalysisId)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.AutoUpgradeMetadata_SourceVersion, *v.SourceVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutoUpgradeMetadata_Status, string(v.Status))
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.AutoUpgradeMetadata_TargetVersion, *v.TargetVersion)
+	}
+}
+func (v *AutoUpgradeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoUpgradeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoUpgradeMetadata_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.AutoUpgradeMetadata_AnalysisId, v.AnalysisId)
+		case schemas.AutoUpgradeMetadata_SourceVersion:
+			v.SourceVersion = new(string)
+			return d.ReadString(schemas.AutoUpgradeMetadata_SourceVersion, v.SourceVersion)
+		case schemas.AutoUpgradeMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.AutoUpgradeMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutoUpgradeStatus(ev)
+			return nil
+		case schemas.AutoUpgradeMetadata_TargetVersion:
+			v.TargetVersion = new(string)
+			return d.ReadString(schemas.AutoUpgradeMetadata_TargetVersion, v.TargetVersion)
+		}
+		return nil
+	})
+}
+
 // A list of errors that can occur when registering partition indexes for an
 // existing table.
 //
@@ -1368,7 +1467,9 @@ func (v *BackfillError) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != "" {
 		s.WriteString(schemas.BackfillError_Code, string(v.Code))
 	}
-	serializeBackfillErroredPartitionsList(s, schemas.BackfillError_Partitions, v.Partitions)
+	if v.Partitions != nil {
+		serializeBackfillErroredPartitionsList(s, schemas.BackfillError_Partitions, v.Partitions)
+	}
 }
 func (v *BackfillError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BackfillError, func(s *smithy.Schema) error {
@@ -1514,11 +1615,15 @@ func (v *BasicCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.BasicCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.BasicCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.BasicCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.BasicCatalogTarget_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.BasicCatalogTarget_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.BasicCatalogTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Table != nil {
 		s.WriteString(schemas.BasicCatalogTarget_Table, *v.Table)
 	}
@@ -1858,7 +1963,9 @@ func (v *BatchUpdatePartitionFailureEntry) SerializeMembers(s smithy.ShapeSerial
 		v.ErrorDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBoundedPartitionValueList(s, schemas.BatchUpdatePartitionFailureEntry_PartitionValueList, v.PartitionValueList)
+	if v.PartitionValueList != nil {
+		serializeBoundedPartitionValueList(s, schemas.BatchUpdatePartitionFailureEntry_PartitionValueList, v.PartitionValueList)
+	}
 }
 func (v *BatchUpdatePartitionFailureEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdatePartitionFailureEntry, func(s *smithy.Schema) error {
@@ -1901,7 +2008,9 @@ func (v *BatchUpdatePartitionRequestEntry) SerializeMembers(s smithy.ShapeSerial
 		v.PartitionInput.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBoundedPartitionValueList(s, schemas.BatchUpdatePartitionRequestEntry_PartitionValueList, v.PartitionValueList)
+	if v.PartitionValueList != nil {
+		serializeBoundedPartitionValueList(s, schemas.BatchUpdatePartitionRequestEntry_PartitionValueList, v.PartitionValueList)
+	}
 }
 func (v *BatchUpdatePartitionRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdatePartitionRequestEntry, func(s *smithy.Schema) error {
@@ -2387,9 +2496,15 @@ func (v *Capabilities) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationTypes(s, schemas.Capabilities_SupportedAuthenticationTypes, v.SupportedAuthenticationTypes)
-	serializeComputeEnvironments(s, schemas.Capabilities_SupportedComputeEnvironments, v.SupportedComputeEnvironments)
-	serializeDataOperations(s, schemas.Capabilities_SupportedDataOperations, v.SupportedDataOperations)
+	if v.SupportedAuthenticationTypes != nil {
+		serializeAuthenticationTypes(s, schemas.Capabilities_SupportedAuthenticationTypes, v.SupportedAuthenticationTypes)
+	}
+	if v.SupportedComputeEnvironments != nil {
+		serializeComputeEnvironments(s, schemas.Capabilities_SupportedComputeEnvironments, v.SupportedComputeEnvironments)
+	}
+	if v.SupportedDataOperations != nil {
+		serializeDataOperations(s, schemas.Capabilities_SupportedDataOperations, v.SupportedDataOperations)
+	}
 }
 func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Capabilities, func(s *smithy.Schema) error {
@@ -2484,8 +2599,12 @@ func (v *Catalog) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CatalogProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrincipalPermissionsList(s, schemas.Catalog_CreateDatabaseDefaultPermissions, v.CreateDatabaseDefaultPermissions)
-	serializePrincipalPermissionsList(s, schemas.Catalog_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	if v.CreateDatabaseDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.Catalog_CreateDatabaseDefaultPermissions, v.CreateDatabaseDefaultPermissions)
+	}
+	if v.CreateTableDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.Catalog_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.Catalog_CreateTime, *v.CreateTime)
 	}
@@ -2500,7 +2619,9 @@ func (v *Catalog) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Catalog_Name, *v.Name)
 	}
-	serializeParametersMap(s, schemas.Catalog_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.Catalog_Parameters, v.Parameters)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.Catalog_ResourceArn, *v.ResourceArn)
 	}
@@ -2595,14 +2716,18 @@ func (v *CatalogDeltaSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CatalogDeltaSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.CatalogDeltaSource_AdditionalDeltaOptions, v.AdditionalDeltaOptions)
+	if v.AdditionalDeltaOptions != nil {
+		serializeAdditionalOptions(s, schemas.CatalogDeltaSource_AdditionalDeltaOptions, v.AdditionalDeltaOptions)
+	}
 	if v.Database != nil {
 		s.WriteString(schemas.CatalogDeltaSource_Database, *v.Database)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CatalogDeltaSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.CatalogDeltaSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.CatalogDeltaSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.Table != nil {
 		s.WriteString(schemas.CatalogDeltaSource_Table, *v.Table)
 	}
@@ -2706,14 +2831,18 @@ func (v *CatalogHudiSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CatalogHudiSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.CatalogHudiSource_AdditionalHudiOptions, v.AdditionalHudiOptions)
+	if v.AdditionalHudiOptions != nil {
+		serializeAdditionalOptions(s, schemas.CatalogHudiSource_AdditionalHudiOptions, v.AdditionalHudiOptions)
+	}
 	if v.Database != nil {
 		s.WriteString(schemas.CatalogHudiSource_Database, *v.Database)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CatalogHudiSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.CatalogHudiSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.CatalogHudiSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.Table != nil {
 		s.WriteString(schemas.CatalogHudiSource_Table, *v.Table)
 	}
@@ -2774,14 +2903,18 @@ func (v *CatalogIcebergSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CatalogIcebergSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.CatalogIcebergSource_AdditionalIcebergOptions, v.AdditionalIcebergOptions)
+	if v.AdditionalIcebergOptions != nil {
+		serializeAdditionalOptions(s, schemas.CatalogIcebergSource_AdditionalIcebergOptions, v.AdditionalIcebergOptions)
+	}
 	if v.Database != nil {
 		s.WriteString(schemas.CatalogIcebergSource_Database, *v.Database)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CatalogIcebergSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.CatalogIcebergSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.CatalogIcebergSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.Table != nil {
 		s.WriteString(schemas.CatalogIcebergSource_Table, *v.Table)
 	}
@@ -2915,8 +3048,12 @@ func (v *CatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CatalogProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrincipalPermissionsList(s, schemas.CatalogInput_CreateDatabaseDefaultPermissions, v.CreateDatabaseDefaultPermissions)
-	serializePrincipalPermissionsList(s, schemas.CatalogInput_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	if v.CreateDatabaseDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.CatalogInput_CreateDatabaseDefaultPermissions, v.CreateDatabaseDefaultPermissions)
+	}
+	if v.CreateTableDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.CatalogInput_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CatalogInput_Description, *v.Description)
 	}
@@ -2928,7 +3065,9 @@ func (v *CatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OverwriteChildResourcePermissionsWithDefault != "" {
 		s.WriteString(schemas.CatalogInput_OverwriteChildResourcePermissionsWithDefault, string(v.OverwriteChildResourcePermissionsWithDefault))
 	}
-	serializeParametersMap(s, schemas.CatalogInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.CatalogInput_Parameters, v.Parameters)
+	}
 	if v.TargetRedshiftCatalog != nil {
 		s.WriteStruct(schemas.CatalogInput_TargetRedshiftCatalog)
 		v.TargetRedshiftCatalog.SerializeMembers(s)
@@ -3192,7 +3331,9 @@ func (v *CatalogProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CatalogProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParametersMap(s, schemas.CatalogProperties_CustomProperties, v.CustomProperties)
+	if v.CustomProperties != nil {
+		serializeParametersMap(s, schemas.CatalogProperties_CustomProperties, v.CustomProperties)
+	}
 	if v.DataLakeAccessProperties != nil {
 		s.WriteStruct(schemas.CatalogProperties_DataLakeAccessProperties)
 		v.DataLakeAccessProperties.SerializeMembers(s)
@@ -3247,7 +3388,9 @@ func (v *CatalogPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CatalogPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParametersMap(s, schemas.CatalogPropertiesOutput_CustomProperties, v.CustomProperties)
+	if v.CustomProperties != nil {
+		serializeParametersMap(s, schemas.CatalogPropertiesOutput_CustomProperties, v.CustomProperties)
+	}
 	if v.DataLakeAccessProperties != nil {
 		s.WriteStruct(schemas.CatalogPropertiesOutput_DataLakeAccessProperties)
 		v.DataLakeAccessProperties.SerializeMembers(s)
@@ -3361,7 +3504,9 @@ func (v *CatalogSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CatalogSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.CatalogSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.CatalogSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.PartitionPredicate != nil {
 		s.WriteString(schemas.CatalogSource_PartitionPredicate, *v.PartitionPredicate)
 	}
@@ -3497,7 +3642,9 @@ func (v *CatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventQueueArn != nil {
 		s.WriteString(schemas.CatalogTarget_EventQueueArn, *v.EventQueueArn)
 	}
-	serializeCatalogTablesList(s, schemas.CatalogTarget_Tables, v.Tables)
+	if v.Tables != nil {
+		serializeCatalogTablesList(s, schemas.CatalogTarget_Tables, v.Tables)
+	}
 }
 func (v *CatalogTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CatalogTarget, func(s *smithy.Schema) error {
@@ -3659,7 +3806,9 @@ func (v *ClientCredentialsProperties) SerializeMembers(s smithy.ShapeSerializer)
 		v.TokenUrl.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectorPropertyList(s, schemas.ClientCredentialsProperties_TokenUrlParameters, v.TokenUrlParameters)
+	if v.TokenUrlParameters != nil {
+		serializeConnectorPropertyList(s, schemas.ClientCredentialsProperties_TokenUrlParameters, v.TokenUrlParameters)
+	}
 }
 func (v *ClientCredentialsProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClientCredentialsProperties, func(s *smithy.Schema) error {
@@ -4750,7 +4899,9 @@ func (v *CodeGenNode) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CodeGenNode) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeGenNodeArgs(s, schemas.CodeGenNode_Args, v.Args)
+	if v.Args != nil {
+		serializeCodeGenNodeArgs(s, schemas.CodeGenNode_Args, v.Args)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CodeGenNode_Id, *v.Id)
 	}
@@ -4864,7 +5015,9 @@ func (v *Column) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Column_Name, *v.Name)
 	}
-	serializeParametersMap(s, schemas.Column_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.Column_Parameters, v.Parameters)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Column_Type, *v.Type)
 	}
@@ -5321,7 +5474,9 @@ func (v *ColumnStatisticsTaskRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogID != nil {
 		s.WriteString(schemas.ColumnStatisticsTaskRun_CatalogID, *v.CatalogID)
 	}
-	serializeColumnNameList(s, schemas.ColumnStatisticsTaskRun_ColumnNameList, v.ColumnNameList)
+	if v.ColumnNameList != nil {
+		serializeColumnNameList(s, schemas.ColumnStatisticsTaskRun_ColumnNameList, v.ColumnNameList)
+	}
 	if v.ColumnStatisticsTaskRunId != nil {
 		s.WriteString(schemas.ColumnStatisticsTaskRun_ColumnStatisticsTaskRunId, *v.ColumnStatisticsTaskRunId)
 	}
@@ -5494,7 +5649,9 @@ func (v *ColumnStatisticsTaskSettings) SerializeMembers(s smithy.ShapeSerializer
 	if v.CatalogID != nil {
 		s.WriteString(schemas.ColumnStatisticsTaskSettings_CatalogID, *v.CatalogID)
 	}
-	serializeColumnNameList(s, schemas.ColumnStatisticsTaskSettings_ColumnNameList, v.ColumnNameList)
+	if v.ColumnNameList != nil {
+		serializeColumnNameList(s, schemas.ColumnStatisticsTaskSettings_ColumnNameList, v.ColumnNameList)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.ColumnStatisticsTaskSettings_DatabaseName, *v.DatabaseName)
 	}
@@ -5704,10 +5861,18 @@ func (v *ComputeEnvironmentConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.ComputeEnvironment != "" {
 		s.WriteString(schemas.ComputeEnvironmentConfiguration_ComputeEnvironment, string(v.ComputeEnvironment))
 	}
-	serializePropertyNameOverrides(s, schemas.ComputeEnvironmentConfiguration_ConnectionOptionNameOverrides, v.ConnectionOptionNameOverrides)
-	serializePropertiesMap(s, schemas.ComputeEnvironmentConfiguration_ConnectionOptions, v.ConnectionOptions)
-	serializeListOfString(s, schemas.ComputeEnvironmentConfiguration_ConnectionPropertiesRequiredOverrides, v.ConnectionPropertiesRequiredOverrides)
-	serializePropertyNameOverrides(s, schemas.ComputeEnvironmentConfiguration_ConnectionPropertyNameOverrides, v.ConnectionPropertyNameOverrides)
+	if v.ConnectionOptionNameOverrides != nil {
+		serializePropertyNameOverrides(s, schemas.ComputeEnvironmentConfiguration_ConnectionOptionNameOverrides, v.ConnectionOptionNameOverrides)
+	}
+	if v.ConnectionOptions != nil {
+		serializePropertiesMap(s, schemas.ComputeEnvironmentConfiguration_ConnectionOptions, v.ConnectionOptions)
+	}
+	if v.ConnectionPropertiesRequiredOverrides != nil {
+		serializeListOfString(s, schemas.ComputeEnvironmentConfiguration_ConnectionPropertiesRequiredOverrides, v.ConnectionPropertiesRequiredOverrides)
+	}
+	if v.ConnectionPropertyNameOverrides != nil {
+		serializePropertyNameOverrides(s, schemas.ComputeEnvironmentConfiguration_ConnectionPropertyNameOverrides, v.ConnectionPropertyNameOverrides)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.ComputeEnvironmentConfiguration_Description, *v.Description)
 	}
@@ -5717,7 +5882,9 @@ func (v *ComputeEnvironmentConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.PhysicalConnectionPropertiesRequired != nil {
 		s.WriteBool(schemas.ComputeEnvironmentConfiguration_PhysicalConnectionPropertiesRequired, *v.PhysicalConnectionPropertiesRequired)
 	}
-	serializeAuthenticationTypes(s, schemas.ComputeEnvironmentConfiguration_SupportedAuthenticationTypes, v.SupportedAuthenticationTypes)
+	if v.SupportedAuthenticationTypes != nil {
+		serializeAuthenticationTypes(s, schemas.ComputeEnvironmentConfiguration_SupportedAuthenticationTypes, v.SupportedAuthenticationTypes)
+	}
 }
 func (v *ComputeEnvironmentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComputeEnvironmentConfiguration, func(s *smithy.Schema) error {
@@ -5914,7 +6081,9 @@ func (v *ConfigurationObject) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfigurationObject) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedValuesStringList(s, schemas.ConfigurationObject_AllowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializeAllowedValuesStringList(s, schemas.ConfigurationObject_AllowedValues, v.AllowedValues)
+	}
 	if v.DefaultValue != nil {
 		s.WriteString(schemas.ConfigurationObject_DefaultValue, *v.DefaultValue)
 	}
@@ -6234,14 +6403,20 @@ func (v *Connection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyMap(s, schemas.Connection_AthenaProperties, v.AthenaProperties)
+	if v.AthenaProperties != nil {
+		serializePropertyMap(s, schemas.Connection_AthenaProperties, v.AthenaProperties)
+	}
 	if v.AuthenticationConfiguration != nil {
 		s.WriteStruct(schemas.Connection_AuthenticationConfiguration)
 		v.AuthenticationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeComputeEnvironmentList(s, schemas.Connection_CompatibleComputeEnvironments, v.CompatibleComputeEnvironments)
-	serializeConnectionProperties(s, schemas.Connection_ConnectionProperties, v.ConnectionProperties)
+	if v.CompatibleComputeEnvironments != nil {
+		serializeComputeEnvironmentList(s, schemas.Connection_CompatibleComputeEnvironments, v.CompatibleComputeEnvironments)
+	}
+	if v.ConnectionProperties != nil {
+		serializeConnectionProperties(s, schemas.Connection_ConnectionProperties, v.ConnectionProperties)
+	}
 	if v.ConnectionSchemaVersion != nil {
 		s.WriteInt32(schemas.Connection_ConnectionSchemaVersion, *v.ConnectionSchemaVersion)
 	}
@@ -6263,7 +6438,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.Connection_LastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeMatchCriteria(s, schemas.Connection_MatchCriteria, v.MatchCriteria)
+	if v.MatchCriteria != nil {
+		serializeMatchCriteria(s, schemas.Connection_MatchCriteria, v.MatchCriteria)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Connection_Name, *v.Name)
 	}
@@ -6272,8 +6449,12 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PhysicalConnectionRequirements.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePropertyMap(s, schemas.Connection_PythonProperties, v.PythonProperties)
-	serializePropertyMap(s, schemas.Connection_SparkProperties, v.SparkProperties)
+	if v.PythonProperties != nil {
+		serializePropertyMap(s, schemas.Connection_PythonProperties, v.PythonProperties)
+	}
+	if v.SparkProperties != nil {
+		serializePropertyMap(s, schemas.Connection_SparkProperties, v.SparkProperties)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Connection_Status, string(v.Status))
 	}
@@ -6491,20 +6672,26 @@ func (v *ConnectionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyMap(s, schemas.ConnectionInput_AthenaProperties, v.AthenaProperties)
+	if v.AthenaProperties != nil {
+		serializePropertyMap(s, schemas.ConnectionInput_AthenaProperties, v.AthenaProperties)
+	}
 	if v.AuthenticationConfiguration != nil {
 		s.WriteStruct(schemas.ConnectionInput_AuthenticationConfiguration)
 		v.AuthenticationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectionProperties(s, schemas.ConnectionInput_ConnectionProperties, v.ConnectionProperties)
+	if v.ConnectionProperties != nil {
+		serializeConnectionProperties(s, schemas.ConnectionInput_ConnectionProperties, v.ConnectionProperties)
+	}
 	if v.ConnectionType != "" {
 		s.WriteString(schemas.ConnectionInput_ConnectionType, string(v.ConnectionType))
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.ConnectionInput_Description, *v.Description)
 	}
-	serializeMatchCriteria(s, schemas.ConnectionInput_MatchCriteria, v.MatchCriteria)
+	if v.MatchCriteria != nil {
+		serializeMatchCriteria(s, schemas.ConnectionInput_MatchCriteria, v.MatchCriteria)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ConnectionInput_Name, *v.Name)
 	}
@@ -6513,12 +6700,18 @@ func (v *ConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PhysicalConnectionRequirements.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePropertyMap(s, schemas.ConnectionInput_PythonProperties, v.PythonProperties)
-	serializePropertyMap(s, schemas.ConnectionInput_SparkProperties, v.SparkProperties)
+	if v.PythonProperties != nil {
+		serializePropertyMap(s, schemas.ConnectionInput_PythonProperties, v.PythonProperties)
+	}
+	if v.SparkProperties != nil {
+		serializePropertyMap(s, schemas.ConnectionInput_SparkProperties, v.SparkProperties)
+	}
 	if v.ValidateCredentials != false {
 		s.WriteBool(schemas.ConnectionInput_ValidateCredentials, v.ValidateCredentials)
 	}
-	serializeComputeEnvironmentList(s, schemas.ConnectionInput_ValidateForComputeEnvironments, v.ValidateForComputeEnvironments)
+	if v.ValidateForComputeEnvironments != nil {
+		serializeComputeEnvironmentList(s, schemas.ConnectionInput_ValidateForComputeEnvironments, v.ValidateForComputeEnvironments)
+	}
 }
 func (v *ConnectionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectionInput, func(s *smithy.Schema) error {
@@ -6644,7 +6837,9 @@ func (v *ConnectionPropertiesConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ConnectionPropertiesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorPropertyList(s, schemas.ConnectionPropertiesConfiguration_AdditionalRequestParameters, v.AdditionalRequestParameters)
+	if v.AdditionalRequestParameters != nil {
+		serializeConnectorPropertyList(s, schemas.ConnectionPropertiesConfiguration_AdditionalRequestParameters, v.AdditionalRequestParameters)
+	}
 	if v.Url != nil {
 		s.WriteStruct(schemas.ConnectionPropertiesConfiguration_Url)
 		v.Url.SerializeMembers(s)
@@ -6680,7 +6875,9 @@ func (v *ConnectionsList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectionsList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionStringList(s, schemas.ConnectionsList_Connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionStringList(s, schemas.ConnectionsList_Connections, v.Connections)
+	}
 }
 func (v *ConnectionsList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectionsList, func(s *smithy.Schema) error {
@@ -6741,11 +6938,15 @@ func (v *ConnectionTypeBrief) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Capabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfString(s, schemas.ConnectionTypeBrief_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeListOfString(s, schemas.ConnectionTypeBrief_Categories, v.Categories)
+	}
 	if v.ConnectionType != "" {
 		s.WriteString(schemas.ConnectionTypeBrief_ConnectionType, string(v.ConnectionType))
 	}
-	serializeConnectionTypeVariantList(s, schemas.ConnectionTypeBrief_ConnectionTypeVariants, v.ConnectionTypeVariants)
+	if v.ConnectionTypeVariants != nil {
+		serializeConnectionTypeVariantList(s, schemas.ConnectionTypeBrief_ConnectionTypeVariants, v.ConnectionTypeVariants)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.ConnectionTypeBrief_Description, *v.Description)
 	}
@@ -6888,7 +7089,9 @@ func (v *ConnectorAuthenticationConfiguration) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ConnectorAuthenticationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationTypes(s, schemas.ConnectorAuthenticationConfiguration_AuthenticationTypes, v.AuthenticationTypes)
+	if v.AuthenticationTypes != nil {
+		serializeAuthenticationTypes(s, schemas.ConnectorAuthenticationConfiguration_AuthenticationTypes, v.AuthenticationTypes)
+	}
 	if v.BasicAuthenticationProperties != nil {
 		s.WriteStruct(schemas.ConnectorAuthenticationConfiguration_BasicAuthenticationProperties)
 		v.BasicAuthenticationProperties.SerializeMembers(s)
@@ -7024,7 +7227,9 @@ func (v *ConnectorAuthorizationCodeProperties) SerializeMembers(s smithy.ShapeSe
 		v.TokenUrl.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectorPropertyList(s, schemas.ConnectorAuthorizationCodeProperties_TokenUrlParameters, v.TokenUrlParameters)
+	if v.TokenUrlParameters != nil {
+		serializeConnectorPropertyList(s, schemas.ConnectorAuthorizationCodeProperties_TokenUrlParameters, v.TokenUrlParameters)
+	}
 }
 func (v *ConnectorAuthorizationCodeProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectorAuthorizationCodeProperties, func(s *smithy.Schema) error {
@@ -7127,11 +7332,15 @@ func (v *ConnectorDataSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionType != nil {
 		s.WriteString(schemas.ConnectorDataSource_ConnectionType, *v.ConnectionType)
 	}
-	serializeConnectorOptions(s, schemas.ConnectorDataSource_Data, v.Data)
+	if v.Data != nil {
+		serializeConnectorOptions(s, schemas.ConnectorDataSource_Data, v.Data)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ConnectorDataSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.ConnectorDataSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.ConnectorDataSource_OutputSchemas, v.OutputSchemas)
+	}
 }
 func (v *ConnectorDataSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectorDataSource, func(s *smithy.Schema) error {
@@ -7204,8 +7413,12 @@ func (v *ConnectorDataTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionType != nil {
 		s.WriteString(schemas.ConnectorDataTarget_ConnectionType, *v.ConnectionType)
 	}
-	serializeConnectorOptions(s, schemas.ConnectorDataTarget_Data, v.Data)
-	serializeOneInput(s, schemas.ConnectorDataTarget_Inputs, v.Inputs)
+	if v.Data != nil {
+		serializeConnectorOptions(s, schemas.ConnectorDataTarget_Data, v.Data)
+	}
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.ConnectorDataTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ConnectorDataTarget_Name, *v.Name)
 	}
@@ -7350,7 +7563,9 @@ func (v *ConnectorProperty) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectorProperty) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfString(s, schemas.ConnectorProperty_AllowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializeListOfString(s, schemas.ConnectorProperty_AllowedValues, v.AllowedValues)
+	}
 	if v.DefaultValue != nil {
 		s.WriteString(schemas.ConnectorProperty_DefaultValue, *v.DefaultValue)
 	}
@@ -7582,7 +7797,9 @@ func (v *Crawler) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.Crawler_CatalogId, *v.CatalogId)
 	}
-	serializeClassifierNameList(s, schemas.Crawler_Classifiers, v.Classifiers)
+	if v.Classifiers != nil {
+		serializeClassifierNameList(s, schemas.Crawler_Classifiers, v.Classifiers)
+	}
 	if v.Configuration != nil {
 		s.WriteString(schemas.Crawler_Configuration, *v.Configuration)
 	}
@@ -7947,7 +8164,9 @@ func (v *CrawlerNodeDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CrawlerNodeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlList(s, schemas.CrawlerNodeDetails_Crawls, v.Crawls)
+	if v.Crawls != nil {
+		serializeCrawlList(s, schemas.CrawlerNodeDetails_Crawls, v.Crawls)
+	}
 }
 func (v *CrawlerNodeDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CrawlerNodeDetails, func(s *smithy.Schema) error {
@@ -7996,14 +8215,30 @@ func (v *CrawlerTargets) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CrawlerTargets) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCatalogTargetList(s, schemas.CrawlerTargets_CatalogTargets, v.CatalogTargets)
-	serializeDeltaTargetList(s, schemas.CrawlerTargets_DeltaTargets, v.DeltaTargets)
-	serializeDynamoDBTargetList(s, schemas.CrawlerTargets_DynamoDBTargets, v.DynamoDBTargets)
-	serializeHudiTargetList(s, schemas.CrawlerTargets_HudiTargets, v.HudiTargets)
-	serializeIcebergTargetList(s, schemas.CrawlerTargets_IcebergTargets, v.IcebergTargets)
-	serializeJdbcTargetList(s, schemas.CrawlerTargets_JdbcTargets, v.JdbcTargets)
-	serializeMongoDBTargetList(s, schemas.CrawlerTargets_MongoDBTargets, v.MongoDBTargets)
-	serializeS3TargetList(s, schemas.CrawlerTargets_S3Targets, v.S3Targets)
+	if v.CatalogTargets != nil {
+		serializeCatalogTargetList(s, schemas.CrawlerTargets_CatalogTargets, v.CatalogTargets)
+	}
+	if v.DeltaTargets != nil {
+		serializeDeltaTargetList(s, schemas.CrawlerTargets_DeltaTargets, v.DeltaTargets)
+	}
+	if v.DynamoDBTargets != nil {
+		serializeDynamoDBTargetList(s, schemas.CrawlerTargets_DynamoDBTargets, v.DynamoDBTargets)
+	}
+	if v.HudiTargets != nil {
+		serializeHudiTargetList(s, schemas.CrawlerTargets_HudiTargets, v.HudiTargets)
+	}
+	if v.IcebergTargets != nil {
+		serializeIcebergTargetList(s, schemas.CrawlerTargets_IcebergTargets, v.IcebergTargets)
+	}
+	if v.JdbcTargets != nil {
+		serializeJdbcTargetList(s, schemas.CrawlerTargets_JdbcTargets, v.JdbcTargets)
+	}
+	if v.MongoDBTargets != nil {
+		serializeMongoDBTargetList(s, schemas.CrawlerTargets_MongoDBTargets, v.MongoDBTargets)
+	}
+	if v.S3Targets != nil {
+		serializeS3TargetList(s, schemas.CrawlerTargets_S3Targets, v.S3Targets)
+	}
 }
 func (v *CrawlerTargets) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CrawlerTargets, func(s *smithy.Schema) error {
@@ -8166,14 +8401,18 @@ func (v *CreateCsvClassifierRequest) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CustomDatatypeConfigured != nil {
 		s.WriteBool(schemas.CreateCsvClassifierRequest_CustomDatatypeConfigured, *v.CustomDatatypeConfigured)
 	}
-	serializeCustomDatatypes(s, schemas.CreateCsvClassifierRequest_CustomDatatypes, v.CustomDatatypes)
+	if v.CustomDatatypes != nil {
+		serializeCustomDatatypes(s, schemas.CreateCsvClassifierRequest_CustomDatatypes, v.CustomDatatypes)
+	}
 	if v.Delimiter != nil {
 		s.WriteString(schemas.CreateCsvClassifierRequest_Delimiter, *v.Delimiter)
 	}
 	if v.DisableValueTrimming != nil {
 		s.WriteBool(schemas.CreateCsvClassifierRequest_DisableValueTrimming, *v.DisableValueTrimming)
 	}
-	serializeCsvHeader(s, schemas.CreateCsvClassifierRequest_Header, v.Header)
+	if v.Header != nil {
+		serializeCsvHeader(s, schemas.CreateCsvClassifierRequest_Header, v.Header)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCsvClassifierRequest_Name, *v.Name)
 	}
@@ -8338,7 +8577,9 @@ func (v *CreateIcebergTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PartitionSpec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringToStringMap(s, schemas.CreateIcebergTableInput_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeStringToStringMap(s, schemas.CreateIcebergTableInput_Properties, v.Properties)
+	}
 	if v.Schema != nil {
 		s.WriteStruct(schemas.CreateIcebergTableInput_Schema)
 		v.Schema.SerializeMembers(s)
@@ -8546,14 +8787,18 @@ func (v *CsvClassifier) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomDatatypeConfigured != nil {
 		s.WriteBool(schemas.CsvClassifier_CustomDatatypeConfigured, *v.CustomDatatypeConfigured)
 	}
-	serializeCustomDatatypes(s, schemas.CsvClassifier_CustomDatatypes, v.CustomDatatypes)
+	if v.CustomDatatypes != nil {
+		serializeCustomDatatypes(s, schemas.CsvClassifier_CustomDatatypes, v.CustomDatatypes)
+	}
 	if v.Delimiter != nil {
 		s.WriteString(schemas.CsvClassifier_Delimiter, *v.Delimiter)
 	}
 	if v.DisableValueTrimming != nil {
 		s.WriteBool(schemas.CsvClassifier_DisableValueTrimming, *v.DisableValueTrimming)
 	}
-	serializeCsvHeader(s, schemas.CsvClassifier_Header, v.Header)
+	if v.Header != nil {
+		serializeCsvHeader(s, schemas.CsvClassifier_Header, v.Header)
+	}
 	if v.LastUpdated != nil {
 		s.WriteTime(schemas.CsvClassifier_LastUpdated, *v.LastUpdated)
 	}
@@ -8691,7 +8936,9 @@ func (v *CustomAuthenticationProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomAuthenticationProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorPropertyList(s, schemas.CustomAuthenticationProperties_AuthenticationParameters, v.AuthenticationParameters)
+	if v.AuthenticationParameters != nil {
+		serializeConnectorPropertyList(s, schemas.CustomAuthenticationProperties_AuthenticationParameters, v.AuthenticationParameters)
+	}
 }
 func (v *CustomAuthenticationProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomAuthenticationProperties, func(s *smithy.Schema) error {
@@ -8746,11 +8993,15 @@ func (v *CustomCode) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != nil {
 		s.WriteString(schemas.CustomCode_Code, *v.Code)
 	}
-	serializeManyInputs(s, schemas.CustomCode_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeManyInputs(s, schemas.CustomCode_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CustomCode_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.CustomCode_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.CustomCode_OutputSchemas, v.OutputSchemas)
+	}
 }
 func (v *CustomCode) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomCode, func(s *smithy.Schema) error {
@@ -8806,7 +9057,9 @@ func (v *CustomEntityType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomEntityType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContextWords(s, schemas.CustomEntityType_ContextWords, v.ContextWords)
+	if v.ContextWords != nil {
+		serializeContextWords(s, schemas.CustomEntityType_ContextWords, v.ContextWords)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CustomEntityType_Name, *v.Name)
 	}
@@ -8880,7 +9133,9 @@ func (v *Database) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.Database_CatalogId, *v.CatalogId)
 	}
-	serializePrincipalPermissionsList(s, schemas.Database_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	if v.CreateTableDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.Database_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.Database_CreateTime, *v.CreateTime)
 	}
@@ -8898,7 +9153,9 @@ func (v *Database) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Database_Name, *v.Name)
 	}
-	serializeParametersMap(s, schemas.Database_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.Database_Parameters, v.Parameters)
+	}
 	if v.TargetDatabase != nil {
 		s.WriteStruct(schemas.Database_TargetDatabase)
 		v.TargetDatabase.SerializeMembers(s)
@@ -9029,7 +9286,9 @@ func (v *DatabaseInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrincipalPermissionsList(s, schemas.DatabaseInput_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	if v.CreateTableDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.DatabaseInput_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DatabaseInput_Description, *v.Description)
 	}
@@ -9044,7 +9303,9 @@ func (v *DatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DatabaseInput_Name, *v.Name)
 	}
-	serializeParametersMap(s, schemas.DatabaseInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.DatabaseInput_Parameters, v.Parameters)
+	}
 	if v.TargetDatabase != nil {
 		s.WriteStruct(schemas.DatabaseInput_TargetDatabase)
 		v.TargetDatabase.SerializeMembers(s)
@@ -9480,8 +9741,12 @@ func (v *DataQualityAnalyzerResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DataQualityAnalyzerResult_Description, *v.Description)
 	}
-	serializeEvaluatedDistributionsMap(s, schemas.DataQualityAnalyzerResult_EvaluatedDistributions, v.EvaluatedDistributions)
-	serializeEvaluatedMetricsMap(s, schemas.DataQualityAnalyzerResult_EvaluatedMetrics, v.EvaluatedMetrics)
+	if v.EvaluatedDistributions != nil {
+		serializeEvaluatedDistributionsMap(s, schemas.DataQualityAnalyzerResult_EvaluatedDistributions, v.EvaluatedDistributions)
+	}
+	if v.EvaluatedMetrics != nil {
+		serializeEvaluatedMetricsMap(s, schemas.DataQualityAnalyzerResult_EvaluatedMetrics, v.EvaluatedMetrics)
+	}
 	if v.EvaluationMessage != nil {
 		s.WriteString(schemas.DataQualityAnalyzerResult_EvaluationMessage, *v.EvaluationMessage)
 	}
@@ -9610,6 +9875,472 @@ func (v *DataQualityEncryption) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DataQualityEncryption_KmsKeyArn:
 			v.KmsKeyArn = new(string)
 			return d.ReadString(schemas.DataQualityEncryption_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
+// Additional run options for each evaluation of a data quality evaluation
+// configuration.
+type DataQualityEvaluationConfigAdditionalRunOptions struct {
+
+	// Specifies whether to enable CloudWatch metrics.
+	CloudWatchMetricsEnabled *bool
+
+	// Set the evaluation method for composite rules in the ruleset to ROW/COLUMN
+	CompositeRuleEvaluationMethod DQCompositeRuleEvaluationMethod
+
+	// A custom prefix for the CloudWatch log group names. When specified, evaluation
+	// run logs are written to /error and /output instead of the default
+	// /aws-glue/data-quality/error and /aws-glue/data-quality/output log groups.
+	CustomLogGroupPrefix *string
+
+	// The configuration for writing rule results to a Glue Data Catalog table.
+	DataQualityRuleResults *DataQualityRuleResultsOptions
+
+	// The observation mode for the evaluation run. Specifies how anomaly detection
+	// bounds are calculated.
+	ObservationMode ObservationMode
+
+	// The configuration for writing observation results to a Glue Data Catalog table.
+	ObservationResults *ObservationResultsOptions
+
+	// The scope of the observation for the evaluation run. Specifies whether anomaly
+	// detection is enabled or disabled.
+	ObservationScope ObservationConfiguration
+
+	// The configuration for writing profiling results to a Glue Data Catalog table.
+	ProfilingResults *ProfilingResultsOptions
+
+	// Prefix for Amazon S3 to store results.
+	ResultsS3Prefix *string
+
+	// The configuration for writing row-level evaluation results to a Glue Data
+	// Catalog table.
+	RowLevelResults *RowLevelResultsOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigAdditionalRunOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigAdditionalRunOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchMetricsEnabled != nil {
+		s.WriteBool(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled, *v.CloudWatchMetricsEnabled)
+	}
+	if v.CompositeRuleEvaluationMethod != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod, string(v.CompositeRuleEvaluationMethod))
+	}
+	if v.CustomLogGroupPrefix != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix, *v.CustomLogGroupPrefix)
+	}
+	if v.DataQualityRuleResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_DataQualityRuleResults)
+		v.DataQualityRuleResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObservationMode != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode, string(v.ObservationMode))
+	}
+	if v.ObservationResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationResults)
+		v.ObservationResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObservationScope != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope, string(v.ObservationScope))
+	}
+	if v.ProfilingResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ProfilingResults)
+		v.ProfilingResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResultsS3Prefix != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix, *v.ResultsS3Prefix)
+	}
+	if v.RowLevelResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_RowLevelResults)
+		v.RowLevelResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataQualityEvaluationConfigAdditionalRunOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigAdditionalRunOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled:
+			v.CloudWatchMetricsEnabled = new(bool)
+			return d.ReadBool(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled, v.CloudWatchMetricsEnabled)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod, &ev); err != nil {
+				return err
+			}
+			v.CompositeRuleEvaluationMethod = DQCompositeRuleEvaluationMethod(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix:
+			v.CustomLogGroupPrefix = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix, v.CustomLogGroupPrefix)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_DataQualityRuleResults:
+			v.DataQualityRuleResults = &DataQualityRuleResultsOptions{}
+			return v.DataQualityRuleResults.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode, &ev); err != nil {
+				return err
+			}
+			v.ObservationMode = ObservationMode(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationResults:
+			v.ObservationResults = &ObservationResultsOptions{}
+			return v.ObservationResults.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope, &ev); err != nil {
+				return err
+			}
+			v.ObservationScope = ObservationConfiguration(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ProfilingResults:
+			v.ProfilingResults = &ProfilingResultsOptions{}
+			return v.ProfilingResults.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix:
+			v.ResultsS3Prefix = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix, v.ResultsS3Prefix)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_RowLevelResults:
+			v.RowLevelResults = &RowLevelResultsOptions{}
+			return v.RowLevelResults.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The data source that a data quality evaluation configuration applies to.
+type DataQualityEvaluationConfigDataSource struct {
+
+	// The Glue Data Catalog tables that the configuration applies to.
+	GlueTables *DataQualityEvaluationConfigGlueTables
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueTables != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigDataSource_GlueTables)
+		v.GlueTables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataQualityEvaluationConfigDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigDataSource_GlueTables:
+			v.GlueTables = &DataQualityEvaluationConfigGlueTables{}
+			return v.GlueTables.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Identifies the Glue Data Catalog tables that a data quality evaluation
+// configuration applies to.
+type DataQualityEvaluationConfigGlueTables struct {
+
+	// A unique identifier for the Glue Data Catalog.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// Options for reading the table. The following keys are supported:
+	//
+	//   - pushDownPredicate : to filter on partitions without having to list and read
+	//   all the files in your dataset.
+	//
+	//   - catalogPartitionPredicate : to use server-side partition pruning using
+	//   partition indexes in the Glue Data Catalog.
+	AdditionalOptions map[string]string
+
+	// The name of the connection to the Glue Data Catalog.
+	ConnectionName *string
+
+	// A database name in the Glue Data Catalog.
+	DatabaseName *string
+
+	// SQL Query of SparkSQL format that can be used to pre-process the data for the
+	// table in Glue Data Catalog, before running the Data Quality Operation.
+	//
+	// For the CATALOG and DATABASE levels, use the {{DATABASE_NAME}} and
+	// {{TABLE_NAME}} placeholders, which are filled in for each table.
+	PreProcessingQuery *string
+
+	// For the CATALOG and DATABASE levels, a glob pattern, such as orders_* , that
+	// selects tables. If you don't specify a pattern, every table at the level is in
+	// scope. For the TABLE level, the name of the table.
+	TableNamePattern *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigGlueTables) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigGlueTables)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigGlueTables) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalOptions != nil {
+		serializeGlueTableAdditionalOptions(s, schemas.DataQualityEvaluationConfigGlueTables_AdditionalOptions, v.AdditionalOptions)
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_CatalogId, *v.CatalogId)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_ConnectionName, *v.ConnectionName)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_DatabaseName, *v.DatabaseName)
+	}
+	if v.PreProcessingQuery != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_PreProcessingQuery, *v.PreProcessingQuery)
+	}
+	if v.TableNamePattern != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_TableNamePattern, *v.TableNamePattern)
+	}
+}
+func (v *DataQualityEvaluationConfigGlueTables) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigGlueTables, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigGlueTables_AdditionalOptions:
+			return deserializeGlueTableAdditionalOptions(d, schemas.DataQualityEvaluationConfigGlueTables_AdditionalOptions, &v.AdditionalOptions)
+		case schemas.DataQualityEvaluationConfigGlueTables_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_CatalogId, v.CatalogId)
+		case schemas.DataQualityEvaluationConfigGlueTables_ConnectionName:
+			v.ConnectionName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_ConnectionName, v.ConnectionName)
+		case schemas.DataQualityEvaluationConfigGlueTables_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_DatabaseName, v.DatabaseName)
+		case schemas.DataQualityEvaluationConfigGlueTables_PreProcessingQuery:
+			v.PreProcessingQuery = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_PreProcessingQuery, v.PreProcessingQuery)
+		case schemas.DataQualityEvaluationConfigGlueTables_TableNamePattern:
+			v.TableNamePattern = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_TableNamePattern, v.TableNamePattern)
+		}
+		return nil
+	})
+}
+
+// The data source that a data quality evaluation configuration applies to.
+type DataQualityEvaluationConfigListDataSource struct {
+
+	// The Glue Data Catalog tables that the configuration applies to.
+	GlueTables *DataQualityEvaluationConfigListGlueTables
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigListDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigListDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigListDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueTables != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigListDataSource_GlueTables)
+		v.GlueTables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataQualityEvaluationConfigListDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigListDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigListDataSource_GlueTables:
+			v.GlueTables = &DataQualityEvaluationConfigListGlueTables{}
+			return v.GlueTables.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes a data quality evaluation configuration.
+type DataQualityEvaluationConfigListDetails struct {
+
+	// The time when the configuration was created.
+	CreatedOn *time.Time
+
+	// The catalog, database, or table that the configuration applies to.
+	DataSource *DataQualityEvaluationConfigListDataSource
+
+	// The evaluation run mode of the configuration's results, which is
+	// EVALUATION_CONFIG .
+	EvaluationRunMode DataQualityEvaluationRunMode
+
+	// The time when the configuration was last modified.
+	LastModifiedOn *time.Time
+
+	// The Glue Data Catalog hierarchical level that the configuration applies to.
+	Level DataQualityEvaluationConfigLevel
+
+	// The built-in ruleset that tables are evaluated with.
+	ManagedRulesetName DataQualityEvaluationConfigManagedRuleset
+
+	// The name of the data quality evaluation configuration.
+	Name *string
+
+	// Specifies whether evaluations are paused.
+	PauseRuns *bool
+
+	// The name of the data quality ruleset that tables are evaluated with.
+	RulesetName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigListDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigListDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigListDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.DataQualityEvaluationConfigListDetails_CreatedOn, *v.CreatedOn)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigListDetails_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_EvaluationRunMode, string(v.EvaluationRunMode))
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.DataQualityEvaluationConfigListDetails_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_Level, string(v.Level))
+	}
+	if v.ManagedRulesetName != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_ManagedRulesetName, string(v.ManagedRulesetName))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_Name, *v.Name)
+	}
+	if v.PauseRuns != nil {
+		s.WriteBool(schemas.DataQualityEvaluationConfigListDetails_PauseRuns, *v.PauseRuns)
+	}
+	if v.RulesetName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_RulesetName, *v.RulesetName)
+	}
+}
+func (v *DataQualityEvaluationConfigListDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigListDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigListDetails_CreatedOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityEvaluationConfigListDetails_CreatedOn, v.CreatedOn)
+		case schemas.DataQualityEvaluationConfigListDetails_DataSource:
+			v.DataSource = &DataQualityEvaluationConfigListDataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigListDetails_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigListDetails_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigListDetails_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityEvaluationConfigListDetails_LastModifiedOn, v.LastModifiedOn)
+		case schemas.DataQualityEvaluationConfigListDetails_Level:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigListDetails_Level, &ev); err != nil {
+				return err
+			}
+			v.Level = DataQualityEvaluationConfigLevel(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigListDetails_ManagedRulesetName:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigListDetails_ManagedRulesetName, &ev); err != nil {
+				return err
+			}
+			v.ManagedRulesetName = DataQualityEvaluationConfigManagedRuleset(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigListDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListDetails_Name, v.Name)
+		case schemas.DataQualityEvaluationConfigListDetails_PauseRuns:
+			v.PauseRuns = new(bool)
+			return d.ReadBool(schemas.DataQualityEvaluationConfigListDetails_PauseRuns, v.PauseRuns)
+		case schemas.DataQualityEvaluationConfigListDetails_RulesetName:
+			v.RulesetName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListDetails_RulesetName, v.RulesetName)
+		}
+		return nil
+	})
+}
+
+// Identifies the Glue Data Catalog tables that a data quality evaluation
+// configuration applies to.
+type DataQualityEvaluationConfigListGlueTables struct {
+
+	// A unique identifier for the Glue Data Catalog.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// A database name in the Glue Data Catalog.
+	DatabaseName *string
+
+	// For the CATALOG and DATABASE levels, a glob pattern, such as orders_* , that
+	// selects tables. If you don't specify a pattern, every table at the level is in
+	// scope. For the TABLE level, the name of the table.
+	TableNamePattern *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigListGlueTables) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigListGlueTables)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigListGlueTables) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListGlueTables_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListGlueTables_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableNamePattern != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListGlueTables_TableNamePattern, *v.TableNamePattern)
+	}
+}
+func (v *DataQualityEvaluationConfigListGlueTables) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigListGlueTables, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigListGlueTables_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListGlueTables_CatalogId, v.CatalogId)
+		case schemas.DataQualityEvaluationConfigListGlueTables_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListGlueTables_DatabaseName, v.DatabaseName)
+		case schemas.DataQualityEvaluationConfigListGlueTables_TableNamePattern:
+			v.TableNamePattern = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListGlueTables_TableNamePattern, v.TableNamePattern)
 		}
 		return nil
 	})
@@ -9795,7 +10526,9 @@ func (v *DataQualityGlueTable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityGlueTable) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlueTableAdditionalOptions(s, schemas.DataQualityGlueTable_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeGlueTableAdditionalOptions(s, schemas.DataQualityGlueTable_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.CatalogId != nil {
 		s.WriteString(schemas.DataQualityGlueTable_CatalogId, *v.CatalogId)
 	}
@@ -9957,6 +10690,10 @@ type DataQualityResult struct {
 	// The date and time when this data quality run completed.
 	CompletedOn *time.Time
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *DataSource
 
@@ -9964,6 +10701,12 @@ type DataQualityResult struct {
 	// assigned some sort of name and data quality nodes will have names. In the case
 	// of multiple nodes, the evaluationContext can differentiate the nodes.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The job name associated with the data quality result, if any.
 	JobName *string
@@ -10012,9 +10755,14 @@ func (v *DataQualityResult) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AggregatedMetrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataQualityAnalyzerResults(s, schemas.DataQualityResult_AnalyzerResults, v.AnalyzerResults)
+	if v.AnalyzerResults != nil {
+		serializeDataQualityAnalyzerResults(s, schemas.DataQualityResult_AnalyzerResults, v.AnalyzerResults)
+	}
 	if v.CompletedOn != nil {
 		s.WriteTime(schemas.DataQualityResult_CompletedOn, *v.CompletedOn)
+	}
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResult_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
 	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResult_DataSource)
@@ -10024,20 +10772,27 @@ func (v *DataQualityResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResult_EvaluationContext, *v.EvaluationContext)
 	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResult_EvaluationRunMode, string(v.EvaluationRunMode))
+	}
 	if v.JobName != nil {
 		s.WriteString(schemas.DataQualityResult_JobName, *v.JobName)
 	}
 	if v.JobRunId != nil {
 		s.WriteString(schemas.DataQualityResult_JobRunId, *v.JobRunId)
 	}
-	serializeDataQualityObservations(s, schemas.DataQualityResult_Observations, v.Observations)
+	if v.Observations != nil {
+		serializeDataQualityObservations(s, schemas.DataQualityResult_Observations, v.Observations)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.DataQualityResult_ProfileId, *v.ProfileId)
 	}
 	if v.ResultId != nil {
 		s.WriteString(schemas.DataQualityResult_ResultId, *v.ResultId)
 	}
-	serializeDataQualityRuleResults(s, schemas.DataQualityResult_RuleResults, v.RuleResults)
+	if v.RuleResults != nil {
+		serializeDataQualityRuleResults(s, schemas.DataQualityResult_RuleResults, v.RuleResults)
+	}
 	if v.RulesetEvaluationRunId != nil {
 		s.WriteString(schemas.DataQualityResult_RulesetEvaluationRunId, *v.RulesetEvaluationRunId)
 	}
@@ -10062,12 +10817,22 @@ func (v *DataQualityResult) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DataQualityResult_CompletedOn:
 			v.CompletedOn = new(time.Time)
 			return d.ReadTime(schemas.DataQualityResult_CompletedOn, v.CompletedOn)
+		case schemas.DataQualityResult_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResult_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResult_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
 		case schemas.DataQualityResult_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResult_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResult_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResult_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResult_JobName:
 			v.JobName = new(string)
 			return d.ReadString(schemas.DataQualityResult_JobName, v.JobName)
@@ -10104,8 +10869,18 @@ func (v *DataQualityResult) Deserialize(d smithy.ShapeDeserializer) error {
 // Describes a data quality result.
 type DataQualityResultDescription struct {
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table name associated with the data quality result.
 	DataSource *DataSource
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The job name associated with the data quality result.
 	JobName *string
@@ -10129,10 +10904,16 @@ func (v *DataQualityResultDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityResultDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultDescription_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultDescription_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultDescription_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.DataQualityResultDescription_JobName, *v.JobName)
@@ -10150,9 +10931,19 @@ func (v *DataQualityResultDescription) SerializeMembers(s smithy.ShapeSerializer
 func (v *DataQualityResultDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultDescription, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultDescription_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultDescription_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultDescription_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityResultDescription_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultDescription_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultDescription_JobName:
 			v.JobName = new(string)
 			return d.ReadString(schemas.DataQualityResultDescription_JobName, v.JobName)
@@ -10173,9 +10964,17 @@ func (v *DataQualityResultDescription) Deserialize(d smithy.ShapeDeserializer) e
 // Criteria used to return data quality results.
 type DataQualityResultFilterCriteria struct {
 
+	// Filter results by the evaluation configuration name which started the
+	// evaluation run.
+	DataQualityEvaluationConfig *string
+
 	// Filter results by the specified data source. For example, retrieving all
 	// results for an Glue table.
 	DataSource *DataSource
+
+	// Filter results by how their evaluation run started: ON_DEMAND or
+	// EVALUATION_CONFIG . Results that no evaluation run produced match neither value.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// Filter results by the specified job name.
 	JobName *string
@@ -10199,10 +10998,16 @@ func (v *DataQualityResultFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityResultFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultFilterCriteria_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultFilterCriteria_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultFilterCriteria_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.DataQualityResultFilterCriteria_JobName, *v.JobName)
@@ -10220,9 +11025,19 @@ func (v *DataQualityResultFilterCriteria) SerializeMembers(s smithy.ShapeSeriali
 func (v *DataQualityResultFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultFilterCriteria, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultFilterCriteria_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultFilterCriteria_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultFilterCriteria_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityResultFilterCriteria_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultFilterCriteria_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultFilterCriteria_JobName:
 			v.JobName = new(string)
 			return d.ReadString(schemas.DataQualityResultFilterCriteria_JobName, v.JobName)
@@ -10243,6 +11058,10 @@ func (v *DataQualityResultFilterCriteria) Deserialize(d smithy.ShapeDeserializer
 // Describes a data quality result returned by ListDataQualityResultsV2 .
 type DataQualityResultsV2Description struct {
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *DataSource
 
@@ -10258,6 +11077,12 @@ type DataQualityResultsV2Description struct {
 	// The evaluation context for the data quality result. This value identifies a
 	// specific data quality result, or a series of related results, within a run.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The unique result ID for this data quality result.
 	ResultId *string
@@ -10275,15 +11100,25 @@ func (v *DataQualityResultsV2Description) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityResultsV2Description) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultsV2Description_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultsV2Description_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePublishDataQualityResultDescriptors(s, schemas.DataQualityResultsV2Description_Descriptors, v.Descriptors)
-	serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultsV2Description_Dimensions, v.Dimensions)
+	if v.Descriptors != nil {
+		serializePublishDataQualityResultDescriptors(s, schemas.DataQualityResultsV2Description_Descriptors, v.Descriptors)
+	}
+	if v.Dimensions != nil {
+		serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultsV2Description_Dimensions, v.Dimensions)
+	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResultsV2Description_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultsV2Description_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.ResultId != nil {
 		s.WriteString(schemas.DataQualityResultsV2Description_ResultId, *v.ResultId)
@@ -10295,6 +11130,9 @@ func (v *DataQualityResultsV2Description) SerializeMembers(s smithy.ShapeSeriali
 func (v *DataQualityResultsV2Description) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultsV2Description, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultsV2Description_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultsV2Description_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultsV2Description_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -10305,6 +11143,13 @@ func (v *DataQualityResultsV2Description) Deserialize(d smithy.ShapeDeserializer
 		case schemas.DataQualityResultsV2Description_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResultsV2Description_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultsV2Description_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultsV2Description_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultsV2Description_ResultId:
 			v.ResultId = new(string)
 			return d.ReadString(schemas.DataQualityResultsV2Description_ResultId, v.ResultId)
@@ -10320,6 +11165,10 @@ func (v *DataQualityResultsV2Description) Deserialize(d smithy.ShapeDeserializer
 // ListDataQualityResultsV2 .
 type DataQualityResultsV2FilterCriteria struct {
 
+	// Filter results by the evaluation configuration name which started the
+	// evaluation run.
+	DataQualityEvaluationConfig *string
+
 	// The data source used to filter the results. For example, you can retrieve all
 	// results for an Glue table. DatabaseName and TableName are required. If you omit
 	// CatalogId , the catalog of the calling account is used.
@@ -10333,6 +11182,10 @@ type DataQualityResultsV2FilterCriteria struct {
 
 	// The evaluation context to filter results by.
 	EvaluationContext *string
+
+	// Filter results by how their evaluation run started: ON_DEMAND or
+	// EVALUATION_CONFIG . Results that no evaluation run produced match neither value.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The time after which to include published results.
 	PublishedAfter *time.Time
@@ -10350,14 +11203,22 @@ func (v *DataQualityResultsV2FilterCriteria) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DataQualityResultsV2FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultsV2FilterCriteria_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultsV2FilterCriteria_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultsV2FilterCriteria_Dimensions, v.Dimensions)
+	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResultsV2FilterCriteria_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultsV2FilterCriteria_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.PublishedAfter != nil {
 		s.WriteTime(schemas.DataQualityResultsV2FilterCriteria_PublishedAfter, *v.PublishedAfter)
@@ -10369,6 +11230,9 @@ func (v *DataQualityResultsV2FilterCriteria) SerializeMembers(s smithy.ShapeSeri
 func (v *DataQualityResultsV2FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultsV2FilterCriteria, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultsV2FilterCriteria_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -10377,6 +11241,13 @@ func (v *DataQualityResultsV2FilterCriteria) Deserialize(d smithy.ShapeDeseriali
 		case schemas.DataQualityResultsV2FilterCriteria_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResultsV2FilterCriteria_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultsV2FilterCriteria_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultsV2FilterCriteria_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultsV2FilterCriteria_PublishedAfter:
 			v.PublishedAfter = new(time.Time)
 			return d.ReadTime(schemas.DataQualityResultsV2FilterCriteria_PublishedAfter, v.PublishedAfter)
@@ -10405,6 +11276,10 @@ type DataQualityResultV2Item struct {
 	// analyzer.
 	AnalyzerResults []DataQualityAnalyzerResult
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *DataSource
 
@@ -10420,6 +11295,12 @@ type DataQualityResultV2Item struct {
 	// The evaluation context for the data quality result. This value identifies a
 	// specific data quality result, or a series of related results, within a run.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The date and time when this data quality run completed.
 	ExecutionCompletedOn *time.Time
@@ -10462,16 +11343,28 @@ func (v *DataQualityResultV2Item) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AggregatedMetrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataQualityAnalyzerResults(s, schemas.DataQualityResultV2Item_AnalyzerResults, v.AnalyzerResults)
+	if v.AnalyzerResults != nil {
+		serializeDataQualityAnalyzerResults(s, schemas.DataQualityResultV2Item_AnalyzerResults, v.AnalyzerResults)
+	}
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultV2Item_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultV2Item_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePublishDataQualityResultDescriptors(s, schemas.DataQualityResultV2Item_Descriptors, v.Descriptors)
-	serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultV2Item_Dimensions, v.Dimensions)
+	if v.Descriptors != nil {
+		serializePublishDataQualityResultDescriptors(s, schemas.DataQualityResultV2Item_Descriptors, v.Descriptors)
+	}
+	if v.Dimensions != nil {
+		serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultV2Item_Dimensions, v.Dimensions)
+	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResultV2Item_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultV2Item_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.ExecutionCompletedOn != nil {
 		s.WriteTime(schemas.DataQualityResultV2Item_ExecutionCompletedOn, *v.ExecutionCompletedOn)
@@ -10479,21 +11372,27 @@ func (v *DataQualityResultV2Item) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionStartedOn != nil {
 		s.WriteTime(schemas.DataQualityResultV2Item_ExecutionStartedOn, *v.ExecutionStartedOn)
 	}
-	serializeDataQualityObservations(s, schemas.DataQualityResultV2Item_Observations, v.Observations)
+	if v.Observations != nil {
+		serializeDataQualityObservations(s, schemas.DataQualityResultV2Item_Observations, v.Observations)
+	}
 	if v.ResultId != nil {
 		s.WriteString(schemas.DataQualityResultV2Item_ResultId, *v.ResultId)
 	}
 	if v.ResultPublishedOn != nil {
 		s.WriteTime(schemas.DataQualityResultV2Item_ResultPublishedOn, *v.ResultPublishedOn)
 	}
-	serializeDataQualityRuleResults(s, schemas.DataQualityResultV2Item_RuleResults, v.RuleResults)
+	if v.RuleResults != nil {
+		serializeDataQualityRuleResults(s, schemas.DataQualityResultV2Item_RuleResults, v.RuleResults)
+	}
 	if v.RulesetName != nil {
 		s.WriteString(schemas.DataQualityResultV2Item_RulesetName, *v.RulesetName)
 	}
 	if v.Score != nil {
 		s.WriteFloat64(schemas.DataQualityResultV2Item_Score, *v.Score)
 	}
-	serializePublishDataQualityResultTags(s, schemas.DataQualityResultV2Item_Tags, v.Tags)
+	if v.Tags != nil {
+		serializePublishDataQualityResultTags(s, schemas.DataQualityResultV2Item_Tags, v.Tags)
+	}
 }
 func (v *DataQualityResultV2Item) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultV2Item, func(s *smithy.Schema) error {
@@ -10503,6 +11402,9 @@ func (v *DataQualityResultV2Item) Deserialize(d smithy.ShapeDeserializer) error 
 			return v.AggregatedMetrics.Deserialize(d)
 		case schemas.DataQualityResultV2Item_AnalyzerResults:
 			return deserializeDataQualityAnalyzerResults(d, schemas.DataQualityResultV2Item_AnalyzerResults, &v.AnalyzerResults)
+		case schemas.DataQualityResultV2Item_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultV2Item_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultV2Item_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -10513,6 +11415,13 @@ func (v *DataQualityResultV2Item) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.DataQualityResultV2Item_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResultV2Item_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultV2Item_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultV2Item_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultV2Item_ExecutionCompletedOn:
 			v.ExecutionCompletedOn = new(time.Time)
 			return d.ReadTime(schemas.DataQualityResultV2Item_ExecutionCompletedOn, v.ExecutionCompletedOn)
@@ -10758,21 +11667,27 @@ func (v *DataQualityRuleResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DataQualityRuleResult_Description, *v.Description)
 	}
-	serializeEvaluatedMetricsMap(s, schemas.DataQualityRuleResult_EvaluatedMetrics, v.EvaluatedMetrics)
+	if v.EvaluatedMetrics != nil {
+		serializeEvaluatedMetricsMap(s, schemas.DataQualityRuleResult_EvaluatedMetrics, v.EvaluatedMetrics)
+	}
 	if v.EvaluatedRule != nil {
 		s.WriteString(schemas.DataQualityRuleResult_EvaluatedRule, *v.EvaluatedRule)
 	}
 	if v.EvaluationMessage != nil {
 		s.WriteString(schemas.DataQualityRuleResult_EvaluationMessage, *v.EvaluationMessage)
 	}
-	serializeLabels(s, schemas.DataQualityRuleResult_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeLabels(s, schemas.DataQualityRuleResult_Labels, v.Labels)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DataQualityRuleResult_Name, *v.Name)
 	}
 	if v.Result != "" {
 		s.WriteString(schemas.DataQualityRuleResult_Result, string(v.Result))
 	}
-	serializeRuleMetricsMap(s, schemas.DataQualityRuleResult_RuleMetrics, v.RuleMetrics)
+	if v.RuleMetrics != nil {
+		serializeRuleMetricsMap(s, schemas.DataQualityRuleResult_RuleMetrics, v.RuleMetrics)
+	}
 }
 func (v *DataQualityRuleResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityRuleResult, func(s *smithy.Schema) error {
@@ -10910,7 +11825,9 @@ func (v *DataQualityRulesetEvaluationRun) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityRulesetEvaluationRun) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceMap(s, schemas.DataQualityRulesetEvaluationRun_AdditionalDataSources, v.AdditionalDataSources)
+	if v.AdditionalDataSources != nil {
+		serializeDataSourceMap(s, schemas.DataQualityRulesetEvaluationRun_AdditionalDataSources, v.AdditionalDataSources)
+	}
 	if v.AdditionalRunOptions != nil {
 		s.WriteStruct(schemas.DataQualityRulesetEvaluationRun_AdditionalRunOptions)
 		v.AdditionalRunOptions.SerializeMembers(s)
@@ -10936,11 +11853,15 @@ func (v *DataQualityRulesetEvaluationRun) SerializeMembers(s smithy.ShapeSeriali
 	if v.NumberOfWorkers != nil {
 		s.WriteInt32(schemas.DataQualityRulesetEvaluationRun_NumberOfWorkers, *v.NumberOfWorkers)
 	}
-	serializeDataQualityResultIdList(s, schemas.DataQualityRulesetEvaluationRun_ResultIds, v.ResultIds)
+	if v.ResultIds != nil {
+		serializeDataQualityResultIdList(s, schemas.DataQualityRulesetEvaluationRun_ResultIds, v.ResultIds)
+	}
 	if v.Role != nil {
 		s.WriteString(schemas.DataQualityRulesetEvaluationRun_Role, *v.Role)
 	}
-	serializeRulesetNames(s, schemas.DataQualityRulesetEvaluationRun_RulesetNames, v.RulesetNames)
+	if v.RulesetNames != nil {
+		serializeRulesetNames(s, schemas.DataQualityRulesetEvaluationRun_RulesetNames, v.RulesetNames)
+	}
 	if v.RunId != nil {
 		s.WriteString(schemas.DataQualityRulesetEvaluationRun_RunId, *v.RunId)
 	}
@@ -11362,16 +12283,23 @@ func (v *DataQualityTargetTable) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type DataQualityTelemetry struct {
+
+	//
 	Engine DataQualityEngine
 
+	//
 	FlagsEnabled map[string]string
 
+	//
 	HostRuntimeVersion *string
 
+	//
 	LibraryVersion *string
 
+	//
 	SparkVersion *string
 
+	//
 	VcpuHours *float64
 
 	noSmithyDocumentSerde
@@ -11387,7 +12315,9 @@ func (v *DataQualityTelemetry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Engine != "" {
 		s.WriteString(schemas.DataQualityTelemetry_Engine, string(v.Engine))
 	}
-	serializeDataQualityFlagsEnabled(s, schemas.DataQualityTelemetry_FlagsEnabled, v.FlagsEnabled)
+	if v.FlagsEnabled != nil {
+		serializeDataQualityFlagsEnabled(s, schemas.DataQualityTelemetry_FlagsEnabled, v.FlagsEnabled)
+	}
 	if v.HostRuntimeVersion != nil {
 		s.WriteString(schemas.DataQualityTelemetry_HostRuntimeVersion, *v.HostRuntimeVersion)
 	}
@@ -11853,7 +12783,9 @@ func (v *DeltaTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateNativeDeltaTable != nil {
 		s.WriteBool(schemas.DeltaTarget_CreateNativeDeltaTable, *v.CreateNativeDeltaTable)
 	}
-	serializePathList(s, schemas.DeltaTarget_DeltaTables, v.DeltaTables)
+	if v.DeltaTables != nil {
+		serializePathList(s, schemas.DeltaTarget_DeltaTables, v.DeltaTables)
+	}
 	if v.WriteManifest != nil {
 		s.WriteBool(schemas.DeltaTarget_WriteManifest, *v.WriteManifest)
 	}
@@ -12032,7 +12964,9 @@ func (v *DevEndpoint) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DevEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapValue(s, schemas.DevEndpoint_Arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeMapValue(s, schemas.DevEndpoint_Arguments, v.Arguments)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.DevEndpoint_AvailabilityZone, *v.AvailabilityZone)
 	}
@@ -12075,14 +13009,18 @@ func (v *DevEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PublicKey != nil {
 		s.WriteString(schemas.DevEndpoint_PublicKey, *v.PublicKey)
 	}
-	serializePublicKeysList(s, schemas.DevEndpoint_PublicKeys, v.PublicKeys)
+	if v.PublicKeys != nil {
+		serializePublicKeysList(s, schemas.DevEndpoint_PublicKeys, v.PublicKeys)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DevEndpoint_RoleArn, *v.RoleArn)
 	}
 	if v.SecurityConfiguration != nil {
 		s.WriteString(schemas.DevEndpoint_SecurityConfiguration, *v.SecurityConfiguration)
 	}
-	serializeStringList(s, schemas.DevEndpoint_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.DevEndpoint_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.DevEndpoint_Status, *v.Status)
 	}
@@ -12291,7 +13229,9 @@ func (v *DirectJDBCSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DirectJDBCSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.DirectJDBCSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.DirectJDBCSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.RedshiftTmpDir != nil {
 		s.WriteString(schemas.DirectJDBCSource_RedshiftTmpDir, *v.RedshiftTmpDir)
 	}
@@ -12562,8 +13502,12 @@ func (v *DistributionData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DistributionData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBinEdges(s, schemas.DistributionData_BinEdges, v.BinEdges)
-	serializeCount(s, schemas.DistributionData_Count, v.Count)
+	if v.BinEdges != nil {
+		serializeBinEdges(s, schemas.DistributionData_BinEdges, v.BinEdges)
+	}
+	if v.Count != nil {
+		serializeCount(s, schemas.DistributionData_Count, v.Count)
+	}
 	if v.DataType != nil {
 		s.WriteString(schemas.DistributionData_DataType, *v.DataType)
 	}
@@ -12800,8 +13744,12 @@ func (v *DropDuplicates) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DropDuplicates) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLimitedPathList(s, schemas.DropDuplicates_Columns, v.Columns)
-	serializeOneInput(s, schemas.DropDuplicates_Inputs, v.Inputs)
+	if v.Columns != nil {
+		serializeLimitedPathList(s, schemas.DropDuplicates_Columns, v.Columns)
+	}
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.DropDuplicates_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DropDuplicates_Name, *v.Name)
 	}
@@ -12849,11 +13797,15 @@ func (v *DropFields) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DropFields) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.DropFields_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.DropFields_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DropFields_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.DropFields_Paths, v.Paths)
+	if v.Paths != nil {
+		serializeGlueStudioPathList(s, schemas.DropFields_Paths, v.Paths)
+	}
 }
 func (v *DropFields) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DropFields, func(s *smithy.Schema) error {
@@ -12908,7 +13860,9 @@ func (v *DropNullFields) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DropNullFields) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.DropNullFields_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.DropNullFields_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DropNullFields_Name, *v.Name)
 	}
@@ -12917,7 +13871,9 @@ func (v *DropNullFields) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NullCheckBoxList.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNullValueFields(s, schemas.DropNullFields_NullTextList, v.NullTextList)
+	if v.NullTextList != nil {
+		serializeNullValueFields(s, schemas.DropNullFields_NullTextList, v.NullTextList)
+	}
 }
 func (v *DropNullFields) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DropNullFields, func(s *smithy.Schema) error {
@@ -12988,12 +13944,18 @@ func (v *DynamicTransform) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionName != nil {
 		s.WriteString(schemas.DynamicTransform_FunctionName, *v.FunctionName)
 	}
-	serializeOneInput(s, schemas.DynamicTransform_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.DynamicTransform_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DynamicTransform_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.DynamicTransform_OutputSchemas, v.OutputSchemas)
-	serializeTransformConfigParameterList(s, schemas.DynamicTransform_Parameters, v.Parameters)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.DynamicTransform_OutputSchemas, v.OutputSchemas)
+	}
+	if v.Parameters != nil {
+		serializeTransformConfigParameterList(s, schemas.DynamicTransform_Parameters, v.Parameters)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.DynamicTransform_Path, *v.Path)
 	}
@@ -13143,7 +14105,9 @@ func (v *DynamoDBELTConnectorSource) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.DynamoDBELTConnectorSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.DynamoDBELTConnectorSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.DynamoDBELTConnectorSource_OutputSchemas, v.OutputSchemas)
+	}
 }
 func (v *DynamoDBELTConnectorSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DynamoDBELTConnectorSource, func(s *smithy.Schema) error {
@@ -13360,7 +14324,9 @@ func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.JobBookmarksEncryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeS3EncryptionList(s, schemas.EncryptionConfiguration_S3Encryption, v.S3Encryption)
+	if v.S3Encryption != nil {
+		serializeS3EncryptionList(s, schemas.EncryptionConfiguration_S3Encryption, v.S3Encryption)
+	}
 }
 func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
@@ -13418,7 +14384,9 @@ func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Category != nil {
 		s.WriteString(schemas.Entity_Category, *v.Category)
 	}
-	serializeCustomProperties(s, schemas.Entity_CustomProperties, v.CustomProperties)
+	if v.CustomProperties != nil {
+		serializeCustomProperties(s, schemas.Entity_CustomProperties, v.CustomProperties)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Entity_Description, *v.Description)
 	}
@@ -13479,7 +14447,9 @@ func (v *EntityConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EntityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldDefinitionMap(s, schemas.EntityConfiguration_Schema, v.Schema)
+	if v.Schema != nil {
+		serializeFieldDefinitionMap(s, schemas.EntityConfiguration_Schema, v.Schema)
+	}
 	if v.SourceConfiguration != nil {
 		s.WriteStruct(schemas.EntityConfiguration_SourceConfiguration)
 		v.SourceConfiguration.SerializeMembers(s)
@@ -13617,7 +14587,9 @@ func (v *EvaluateDataQuality) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluateDataQuality) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.EvaluateDataQuality_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.EvaluateDataQuality_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.EvaluateDataQuality_Name, *v.Name)
 	}
@@ -13709,9 +14681,15 @@ func (v *EvaluateDataQualityMultiFrame) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluateDataQualityMultiFrame) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDQDLAliases(s, schemas.EvaluateDataQualityMultiFrame_AdditionalDataSources, v.AdditionalDataSources)
-	serializeDQAdditionalOptions(s, schemas.EvaluateDataQualityMultiFrame_AdditionalOptions, v.AdditionalOptions)
-	serializeManyInputs(s, schemas.EvaluateDataQualityMultiFrame_Inputs, v.Inputs)
+	if v.AdditionalDataSources != nil {
+		serializeDQDLAliases(s, schemas.EvaluateDataQualityMultiFrame_AdditionalDataSources, v.AdditionalDataSources)
+	}
+	if v.AdditionalOptions != nil {
+		serializeDQAdditionalOptions(s, schemas.EvaluateDataQualityMultiFrame_AdditionalOptions, v.AdditionalOptions)
+	}
+	if v.Inputs != nil {
+		serializeManyInputs(s, schemas.EvaluateDataQualityMultiFrame_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.EvaluateDataQualityMultiFrame_Name, *v.Name)
 	}
@@ -14316,7 +15294,9 @@ func (v *Field) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Field) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomProperties(s, schemas.Field_CustomProperties, v.CustomProperties)
+	if v.CustomProperties != nil {
+		serializeCustomProperties(s, schemas.Field_CustomProperties, v.CustomProperties)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Field_Description, *v.Description)
 	}
@@ -14362,8 +15342,12 @@ func (v *Field) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentField != nil {
 		s.WriteString(schemas.Field_ParentField, *v.ParentField)
 	}
-	serializeFieldFilterOperatorsList(s, schemas.Field_SupportedFilterOperators, v.SupportedFilterOperators)
-	serializeListOfString(s, schemas.Field_SupportedValues, v.SupportedValues)
+	if v.SupportedFilterOperators != nil {
+		serializeFieldFilterOperatorsList(s, schemas.Field_SupportedFilterOperators, v.SupportedFilterOperators)
+	}
+	if v.SupportedValues != nil {
+		serializeListOfString(s, schemas.Field_SupportedValues, v.SupportedValues)
+	}
 }
 func (v *Field) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Field, func(s *smithy.Schema) error {
@@ -14579,7 +15563,9 @@ func (v *FillMissingValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImputedPath != nil {
 		s.WriteString(schemas.FillMissingValues_ImputedPath, *v.ImputedPath)
 	}
-	serializeOneInput(s, schemas.FillMissingValues_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.FillMissingValues_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.FillMissingValues_Name, *v.Name)
 	}
@@ -14638,8 +15624,12 @@ func (v *Filter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterExpressions(s, schemas.Filter_Filters, v.Filters)
-	serializeOneInput(s, schemas.Filter_Inputs, v.Inputs)
+	if v.Filters != nil {
+		serializeFilterExpressions(s, schemas.Filter_Filters, v.Filters)
+	}
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.Filter_Inputs, v.Inputs)
+	}
 	if v.LogicalOperator != "" {
 		s.WriteString(schemas.Filter_LogicalOperator, string(v.LogicalOperator))
 	}
@@ -14729,7 +15719,9 @@ func (v *FilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FilterStringConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectionStringToStringMap(s, schemas.FilterConfiguration_OperatorMappings, v.OperatorMappings)
+	if v.OperatorMappings != nil {
+		serializeConnectionStringToStringMap(s, schemas.FilterConfiguration_OperatorMappings, v.OperatorMappings)
+	}
 	if v.StripQuotes != nil {
 		s.WriteBool(schemas.FilterConfiguration_StripQuotes, *v.StripQuotes)
 	}
@@ -14795,7 +15787,9 @@ func (v *FilterExpression) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operation != "" {
 		s.WriteString(schemas.FilterExpression_Operation, string(v.Operation))
 	}
-	serializeFilterValues(s, schemas.FilterExpression_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.FilterExpression_Values, v.Values)
+	}
 }
 func (v *FilterExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterExpression, func(s *smithy.Schema) error {
@@ -14861,7 +15855,9 @@ func (v *FilterOverrides) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FieldName != nil {
 		s.WriteString(schemas.FilterOverrides_FieldName, *v.FieldName)
 	}
-	serializeConnectionStringToStringMap(s, schemas.FilterOverrides_OperatorMappings, v.OperatorMappings)
+	if v.OperatorMappings != nil {
+		serializeConnectionStringToStringMap(s, schemas.FilterOverrides_OperatorMappings, v.OperatorMappings)
+	}
 }
 func (v *FilterOverrides) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterOverrides, func(s *smithy.Schema) error {
@@ -14963,7 +15959,9 @@ func (v *FilterValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.FilterValue_Type, string(v.Type))
 	}
-	serializeEnclosedInStringProperties(s, schemas.FilterValue_Value, v.Value)
+	if v.Value != nil {
+		serializeEnclosedInStringProperties(s, schemas.FilterValue_Value, v.Value)
+	}
 }
 func (v *FilterValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterValue, func(s *smithy.Schema) error {
@@ -15049,7 +16047,9 @@ func (v *FindMatchesMetrics) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AreaUnderPRCurve != nil {
 		s.WriteFloat64(schemas.FindMatchesMetrics_AreaUnderPRCurve, *v.AreaUnderPRCurve)
 	}
-	serializeColumnImportanceList(s, schemas.FindMatchesMetrics_ColumnImportances, v.ColumnImportances)
+	if v.ColumnImportances != nil {
+		serializeColumnImportanceList(s, schemas.FindMatchesMetrics_ColumnImportances, v.ColumnImportances)
+	}
 	if v.ConfusionMatrix != nil {
 		s.WriteStruct(schemas.FindMatchesMetrics_ConfusionMatrix)
 		v.ConfusionMatrix.SerializeMembers(s)
@@ -15296,7 +16296,9 @@ func (v *GetConnectionsFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionType != "" {
 		s.WriteString(schemas.GetConnectionsFilter_ConnectionType, string(v.ConnectionType))
 	}
-	serializeMatchCriteria(s, schemas.GetConnectionsFilter_MatchCriteria, v.MatchCriteria)
+	if v.MatchCriteria != nil {
+		serializeMatchCriteria(s, schemas.GetConnectionsFilter_MatchCriteria, v.MatchCriteria)
+	}
 }
 func (v *GetConnectionsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetConnectionsFilter, func(s *smithy.Schema) error {
@@ -15490,7 +16492,9 @@ func (v *GlueSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GlueSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlueStudioSchemaColumnList(s, schemas.GlueSchema_Columns, v.Columns)
+	if v.Columns != nil {
+		serializeGlueStudioSchemaColumnList(s, schemas.GlueSchema_Columns, v.Columns)
+	}
 }
 func (v *GlueSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GlueSchema, func(s *smithy.Schema) error {
@@ -15592,7 +16596,9 @@ func (v *GlueTable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GlueTable) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlueTableAdditionalOptions(s, schemas.GlueTable_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeGlueTableAdditionalOptions(s, schemas.GlueTable_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.CatalogId != nil {
 		s.WriteString(schemas.GlueTable_CatalogId, *v.CatalogId)
 	}
@@ -15746,11 +16752,15 @@ func (v *GovernedCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.GovernedCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.GovernedCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.GovernedCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GovernedCatalogTarget_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.GovernedCatalogTarget_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.GovernedCatalogTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.SchemaChangePolicy != nil {
 		s.WriteStruct(schemas.GovernedCatalogTarget_SchemaChangePolicy)
 		v.SchemaChangePolicy.SerializeMembers(s)
@@ -15911,7 +16921,9 @@ func (v *GroupFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GroupFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterExpressions(s, schemas.GroupFilters_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterExpressions(s, schemas.GroupFilters_Filters, v.Filters)
+	}
 	if v.GroupName != nil {
 		s.WriteString(schemas.GroupFilters_GroupName, *v.GroupName)
 	}
@@ -15978,11 +16990,15 @@ func (v *HudiTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionName != nil {
 		s.WriteString(schemas.HudiTarget_ConnectionName, *v.ConnectionName)
 	}
-	serializePathList(s, schemas.HudiTarget_Exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializePathList(s, schemas.HudiTarget_Exclusions, v.Exclusions)
+	}
 	if v.MaximumTraversalDepth != nil {
 		s.WriteInt32(schemas.HudiTarget_MaximumTraversalDepth, *v.MaximumTraversalDepth)
 	}
-	serializePathList(s, schemas.HudiTarget_Paths, v.Paths)
+	if v.Paths != nil {
+		serializePathList(s, schemas.HudiTarget_Paths, v.Paths)
+	}
 }
 func (v *HudiTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HudiTarget, func(s *smithy.Schema) error {
@@ -16193,7 +17209,9 @@ func (v *IcebergEncryptedKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyId != nil {
 		s.WriteString(schemas.IcebergEncryptedKey_KeyId, *v.KeyId)
 	}
-	serializeStringToStringMap(s, schemas.IcebergEncryptedKey_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeStringToStringMap(s, schemas.IcebergEncryptedKey_Properties, v.Properties)
+	}
 }
 func (v *IcebergEncryptedKey) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IcebergEncryptedKey, func(s *smithy.Schema) error {
@@ -16307,9 +17325,15 @@ func (v *IcebergOptimizationProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergOptimizationProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParametersMap(s, schemas.IcebergOptimizationProperties_Compaction, v.Compaction)
-	serializeParametersMap(s, schemas.IcebergOptimizationProperties_OrphanFileDeletion, v.OrphanFileDeletion)
-	serializeParametersMap(s, schemas.IcebergOptimizationProperties_Retention, v.Retention)
+	if v.Compaction != nil {
+		serializeParametersMap(s, schemas.IcebergOptimizationProperties_Compaction, v.Compaction)
+	}
+	if v.OrphanFileDeletion != nil {
+		serializeParametersMap(s, schemas.IcebergOptimizationProperties_OrphanFileDeletion, v.OrphanFileDeletion)
+	}
+	if v.Retention != nil {
+		serializeParametersMap(s, schemas.IcebergOptimizationProperties_Retention, v.Retention)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.IcebergOptimizationProperties_RoleArn, *v.RoleArn)
 	}
@@ -16367,12 +17391,18 @@ func (v *IcebergOptimizationPropertiesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *IcebergOptimizationPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParametersMap(s, schemas.IcebergOptimizationPropertiesOutput_Compaction, v.Compaction)
+	if v.Compaction != nil {
+		serializeParametersMap(s, schemas.IcebergOptimizationPropertiesOutput_Compaction, v.Compaction)
+	}
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.IcebergOptimizationPropertiesOutput_LastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeParametersMap(s, schemas.IcebergOptimizationPropertiesOutput_OrphanFileDeletion, v.OrphanFileDeletion)
-	serializeParametersMap(s, schemas.IcebergOptimizationPropertiesOutput_Retention, v.Retention)
+	if v.OrphanFileDeletion != nil {
+		serializeParametersMap(s, schemas.IcebergOptimizationPropertiesOutput_OrphanFileDeletion, v.OrphanFileDeletion)
+	}
+	if v.Retention != nil {
+		serializeParametersMap(s, schemas.IcebergOptimizationPropertiesOutput_Retention, v.Retention)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.IcebergOptimizationPropertiesOutput_RoleArn, *v.RoleArn)
 	}
@@ -16596,7 +17626,9 @@ func (v *IcebergPartitionSpec) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergPartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergPartitionSpecFieldList(s, schemas.IcebergPartitionSpec_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeIcebergPartitionSpecFieldList(s, schemas.IcebergPartitionSpec_Fields, v.Fields)
+	}
 	if v.SpecId != 0 {
 		s.WriteInt32(schemas.IcebergPartitionSpec_SpecId, v.SpecId)
 	}
@@ -16781,8 +17813,12 @@ func (v *IcebergSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergStructFieldList(s, schemas.IcebergSchema_Fields, v.Fields)
-	serializeIntegerList(s, schemas.IcebergSchema_IdentifierFieldIds, v.IdentifierFieldIds)
+	if v.Fields != nil {
+		serializeIcebergStructFieldList(s, schemas.IcebergSchema_Fields, v.Fields)
+	}
+	if v.IdentifierFieldIds != nil {
+		serializeIntegerList(s, schemas.IcebergSchema_IdentifierFieldIds, v.IdentifierFieldIds)
+	}
 	if v.SchemaId != 0 {
 		s.WriteInt32(schemas.IcebergSchema_SchemaId, v.SchemaId)
 	}
@@ -16912,7 +17948,9 @@ func (v *IcebergSortOrder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSortOrder) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergSortOrderFieldList(s, schemas.IcebergSortOrder_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeIcebergSortOrderFieldList(s, schemas.IcebergSortOrder_Fields, v.Fields)
+	}
 	s.WriteInt32(schemas.IcebergSortOrder_OrderId, v.OrderId)
 }
 func (v *IcebergSortOrder) Deserialize(d smithy.ShapeDeserializer) error {
@@ -17126,10 +18164,18 @@ func (v *IcebergTableMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Location != nil {
 		s.WriteString(schemas.IcebergTableMetadata_Location, *v.Location)
 	}
-	serializeIcebergPartitionSpecList(s, schemas.IcebergTableMetadata_PartitionSpecs, v.PartitionSpecs)
-	serializeStringToStringMap(s, schemas.IcebergTableMetadata_Properties, v.Properties)
-	serializeIcebergSchemaList(s, schemas.IcebergTableMetadata_Schemas, v.Schemas)
-	serializeIcebergSortOrderList(s, schemas.IcebergTableMetadata_SortOrders, v.SortOrders)
+	if v.PartitionSpecs != nil {
+		serializeIcebergPartitionSpecList(s, schemas.IcebergTableMetadata_PartitionSpecs, v.PartitionSpecs)
+	}
+	if v.Properties != nil {
+		serializeStringToStringMap(s, schemas.IcebergTableMetadata_Properties, v.Properties)
+	}
+	if v.Schemas != nil {
+		serializeIcebergSchemaList(s, schemas.IcebergTableMetadata_Schemas, v.Schemas)
+	}
+	if v.SortOrders != nil {
+		serializeIcebergSortOrderList(s, schemas.IcebergTableMetadata_SortOrders, v.SortOrders)
+	}
 	if v.TableUuid != nil {
 		s.WriteString(schemas.IcebergTableMetadata_TableUuid, *v.TableUuid)
 	}
@@ -17241,7 +18287,9 @@ func (v *IcebergTableUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PartitionSpec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringToStringMap(s, schemas.IcebergTableUpdate_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeStringToStringMap(s, schemas.IcebergTableUpdate_Properties, v.Properties)
+	}
 	if v.Schema != nil {
 		s.WriteStruct(schemas.IcebergTableUpdate_Schema)
 		v.Schema.SerializeMembers(s)
@@ -17323,11 +18371,15 @@ func (v *IcebergTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionName != nil {
 		s.WriteString(schemas.IcebergTarget_ConnectionName, *v.ConnectionName)
 	}
-	serializePathList(s, schemas.IcebergTarget_Exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializePathList(s, schemas.IcebergTarget_Exclusions, v.Exclusions)
+	}
 	if v.MaximumTraversalDepth != nil {
 		s.WriteInt32(schemas.IcebergTarget_MaximumTraversalDepth, *v.MaximumTraversalDepth)
 	}
-	serializePathList(s, schemas.IcebergTarget_Paths, v.Paths)
+	if v.Paths != nil {
+		serializePathList(s, schemas.IcebergTarget_Paths, v.Paths)
+	}
 }
 func (v *IcebergTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IcebergTarget, func(s *smithy.Schema) error {
@@ -17448,7 +18500,9 @@ func (v *InboundIntegration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.InboundIntegration_CreateTime, *v.CreateTime)
 	}
-	serializeIntegrationErrorList(s, schemas.InboundIntegration_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeIntegrationErrorList(s, schemas.InboundIntegration_Errors, v.Errors)
+	}
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.InboundIntegration_IntegrationArn, *v.IntegrationArn)
 	}
@@ -17579,7 +18633,9 @@ func (v *Integration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Integration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationAdditionalEncryptionContextMap(s, schemas.Integration_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeIntegrationAdditionalEncryptionContextMap(s, schemas.Integration_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.Integration_CreateTime, *v.CreateTime)
 	}
@@ -17589,7 +18645,9 @@ func (v *Integration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.Integration_Description, *v.Description)
 	}
-	serializeIntegrationErrorList(s, schemas.Integration_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeIntegrationErrorList(s, schemas.Integration_Errors, v.Errors)
+	}
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.Integration_IntegrationArn, *v.IntegrationArn)
 	}
@@ -17610,7 +18668,9 @@ func (v *Integration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Integration_Status, string(v.Status))
 	}
-	serializeIntegrationTagsList(s, schemas.Integration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeIntegrationTagsList(s, schemas.Integration_Tags, v.Tags)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.Integration_TargetArn, *v.TargetArn)
 	}
@@ -17713,7 +18773,9 @@ func (v *IntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RefreshInterval != nil {
 		s.WriteString(schemas.IntegrationConfig_RefreshInterval, *v.RefreshInterval)
 	}
-	serializeIntegrationSourcePropertiesMap(s, schemas.IntegrationConfig_SourceProperties, v.SourceProperties)
+	if v.SourceProperties != nil {
+		serializeIntegrationSourcePropertiesMap(s, schemas.IntegrationConfig_SourceProperties, v.SourceProperties)
+	}
 	if v.TargetNamespace != nil {
 		s.WriteString(schemas.IntegrationConfig_TargetNamespace, *v.TargetNamespace)
 	}
@@ -17799,7 +18861,9 @@ func (v *IntegrationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.IntegrationFilter_Name, *v.Name)
 	}
-	serializeIntegrationFilterValues(s, schemas.IntegrationFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeIntegrationFilterValues(s, schemas.IntegrationFilter_Values, v.Values)
+	}
 }
 func (v *IntegrationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntegrationFilter, func(s *smithy.Schema) error {
@@ -17987,7 +19051,9 @@ func (v *IntegrationResourcePropertyFilter) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.IntegrationResourcePropertyFilter_Name, *v.Name)
 	}
-	serializeIntegrationResourcePropertyFilterValues(s, schemas.IntegrationResourcePropertyFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeIntegrationResourcePropertyFilterValues(s, schemas.IntegrationResourcePropertyFilter_Values, v.Values)
+	}
 }
 func (v *IntegrationResourcePropertyFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntegrationResourcePropertyFilter, func(s *smithy.Schema) error {
@@ -18094,7 +19160,9 @@ func (v *IntegrationTablePropertiesFilter) SerializeMembers(s smithy.ShapeSerial
 	if v.Name != nil {
 		s.WriteString(schemas.IntegrationTablePropertiesFilter_Name, *v.Name)
 	}
-	serializeIntegrationTablePropertiesFilterValues(s, schemas.IntegrationTablePropertiesFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeIntegrationTablePropertiesFilterValues(s, schemas.IntegrationTablePropertiesFilter_Values, v.Values)
+	}
 }
 func (v *IntegrationTablePropertiesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntegrationTablePropertiesFilter, func(s *smithy.Schema) error {
@@ -18218,9 +19286,15 @@ func (v *IterableFormItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IterableFormItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetFormMap(s, schemas.IterableFormItem_Attachments, v.Attachments)
-	serializeAssetFormMap(s, schemas.IterableFormItem_Forms, v.Forms)
-	serializeGlossaryTermIdList(s, schemas.IterableFormItem_GlossaryTerms, v.GlossaryTerms)
+	if v.Attachments != nil {
+		serializeAssetFormMap(s, schemas.IterableFormItem_Attachments, v.Attachments)
+	}
+	if v.Forms != nil {
+		serializeAssetFormMap(s, schemas.IterableFormItem_Forms, v.Forms)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTermIdList(s, schemas.IterableFormItem_GlossaryTerms, v.GlossaryTerms)
+	}
 	if v.ItemId != nil {
 		s.WriteString(schemas.IterableFormItem_ItemId, *v.ItemId)
 	}
@@ -18276,7 +19350,9 @@ func (v *IterableFormListItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.IterableFormListItem_Description, *v.Description)
 	}
-	serializeGlossaryTermIdList(s, schemas.IterableFormListItem_GlossaryTerms, v.GlossaryTerms)
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTermIdList(s, schemas.IterableFormListItem_GlossaryTerms, v.GlossaryTerms)
+	}
 	if v.ItemId != nil {
 		s.WriteString(schemas.IterableFormListItem_ItemId, *v.ItemId)
 	}
@@ -18355,11 +19431,15 @@ func (v *JDBCConnectorOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JDBCConnectorOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJDBCDataTypeMapping(s, schemas.JDBCConnectorOptions_DataTypeMapping, v.DataTypeMapping)
+	if v.DataTypeMapping != nil {
+		serializeJDBCDataTypeMapping(s, schemas.JDBCConnectorOptions_DataTypeMapping, v.DataTypeMapping)
+	}
 	if v.FilterPredicate != nil {
 		s.WriteString(schemas.JDBCConnectorOptions_FilterPredicate, *v.FilterPredicate)
 	}
-	serializeEnclosedInStringProperties(s, schemas.JDBCConnectorOptions_JobBookmarkKeys, v.JobBookmarkKeys)
+	if v.JobBookmarkKeys != nil {
+		serializeEnclosedInStringProperties(s, schemas.JDBCConnectorOptions_JobBookmarkKeys, v.JobBookmarkKeys)
+	}
 	if v.JobBookmarkKeysSortOrder != nil {
 		s.WriteString(schemas.JDBCConnectorOptions_JobBookmarkKeysSortOrder, *v.JobBookmarkKeysSortOrder)
 	}
@@ -18474,7 +19554,9 @@ func (v *JDBCConnectorSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.JDBCConnectorSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.JDBCConnectorSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.JDBCConnectorSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.Query != nil {
 		s.WriteString(schemas.JDBCConnectorSource_Query, *v.Query)
 	}
@@ -18561,7 +19643,9 @@ func (v *JDBCConnectorTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JDBCConnectorTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.JDBCConnectorTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.JDBCConnectorTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.ConnectionName != nil {
 		s.WriteString(schemas.JDBCConnectorTarget_ConnectionName, *v.ConnectionName)
 	}
@@ -18574,11 +19658,15 @@ func (v *JDBCConnectorTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorName != nil {
 		s.WriteString(schemas.JDBCConnectorTarget_ConnectorName, *v.ConnectorName)
 	}
-	serializeOneInput(s, schemas.JDBCConnectorTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.JDBCConnectorTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.JDBCConnectorTarget_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.JDBCConnectorTarget_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.JDBCConnectorTarget_OutputSchemas, v.OutputSchemas)
+	}
 }
 func (v *JDBCConnectorTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JDBCConnectorTarget, func(s *smithy.Schema) error {
@@ -18644,8 +19732,12 @@ func (v *JdbcTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionName != nil {
 		s.WriteString(schemas.JdbcTarget_ConnectionName, *v.ConnectionName)
 	}
-	serializeEnableAdditionalMetadata(s, schemas.JdbcTarget_EnableAdditionalMetadata, v.EnableAdditionalMetadata)
-	serializePathList(s, schemas.JdbcTarget_Exclusions, v.Exclusions)
+	if v.EnableAdditionalMetadata != nil {
+		serializeEnableAdditionalMetadata(s, schemas.JdbcTarget_EnableAdditionalMetadata, v.EnableAdditionalMetadata)
+	}
+	if v.Exclusions != nil {
+		serializePathList(s, schemas.JdbcTarget_Exclusions, v.Exclusions)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.JdbcTarget_Path, *v.Path)
 	}
@@ -18682,6 +19774,10 @@ type Job struct {
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
+
+	// The auto-upgrade assessment information for a job configured with
+	// glueVersion=auto. This field is null when the job is not configured to auto.
+	AutoUpgradeMetadata *AutoUpgradeMetadata
 
 	// The representation of a directed acyclic graph on which both the Glue Studio
 	// visual component and Glue Studio code generation is based.
@@ -18883,13 +19979,19 @@ type Job struct {
 	//
 	// R Worker Types (Memory-optimized workers):
 	//
-	//   - R.1X: 1 M-DPU (4 vCPUs, 32 GB memory)
+	//   - R.1X: 1 M-DPU (4 vCPUs, 32 GB memory, 94GB disk)
 	//
-	//   - R.2X: 2 M-DPU (8 vCPUs, 64 GB memory)
+	//   - R.2X: 2 M-DPU (8 vCPUs, 64 GB memory, 138GB disk)
 	//
-	//   - R.4X: 4 M-DPU (16 vCPUs, 128 GB memory)
+	//   - R.4X: 4 M-DPU (16 vCPUs, 128 GB memory, 256GB disk)
 	//
-	//   - R.8X: 8 M-DPU (32 vCPUs, 256 GB memory)
+	//   - R.8X: 8 M-DPU (32 vCPUs, 256 GB memory, 512GB disk)
+	//
+	// The G.12X , G.16X , and R.1X through R.8X worker types are available only for
+	// Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services Regions.
+	// For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	// [Configuring job properties for Spark jobs]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	WorkerType WorkerType
 
 	noSmithyDocumentSerde
@@ -18905,7 +20007,14 @@ func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedCapacity != 0 {
 		s.WriteInt32(schemas.Job_AllocatedCapacity, v.AllocatedCapacity)
 	}
-	serializeCodeGenConfigurationNodes(s, schemas.Job_CodeGenConfigurationNodes, v.CodeGenConfigurationNodes)
+	if v.AutoUpgradeMetadata != nil {
+		s.WriteStruct(schemas.Job_AutoUpgradeMetadata)
+		v.AutoUpgradeMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeGenConfigurationNodes != nil {
+		serializeCodeGenConfigurationNodes(s, schemas.Job_CodeGenConfigurationNodes, v.CodeGenConfigurationNodes)
+	}
 	if v.Command != nil {
 		s.WriteStruct(schemas.Job_Command)
 		v.Command.SerializeMembers(s)
@@ -18919,7 +20028,9 @@ func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedOn != nil {
 		s.WriteTime(schemas.Job_CreatedOn, *v.CreatedOn)
 	}
-	serializeGenericMap(s, schemas.Job_DefaultArguments, v.DefaultArguments)
+	if v.DefaultArguments != nil {
+		serializeGenericMap(s, schemas.Job_DefaultArguments, v.DefaultArguments)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Job_Description, *v.Description)
 	}
@@ -18958,7 +20069,9 @@ func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Job_Name, *v.Name)
 	}
-	serializeGenericMap(s, schemas.Job_NonOverridableArguments, v.NonOverridableArguments)
+	if v.NonOverridableArguments != nil {
+		serializeGenericMap(s, schemas.Job_NonOverridableArguments, v.NonOverridableArguments)
+	}
 	if v.NotificationProperty != nil {
 		s.WriteStruct(schemas.Job_NotificationProperty)
 		v.NotificationProperty.SerializeMembers(s)
@@ -18993,6 +20106,9 @@ func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.Job_AllocatedCapacity:
 			return d.ReadInt32(schemas.Job_AllocatedCapacity, &v.AllocatedCapacity)
+		case schemas.Job_AutoUpgradeMetadata:
+			v.AutoUpgradeMetadata = &AutoUpgradeMetadata{}
+			return v.AutoUpgradeMetadata.Deserialize(d)
 		case schemas.Job_CodeGenConfigurationNodes:
 			return deserializeCodeGenConfigurationNodes(d, schemas.Job_CodeGenConfigurationNodes, &v.CodeGenConfigurationNodes)
 		case schemas.Job_Command:
@@ -19293,7 +20409,9 @@ func (v *JobNodeDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JobNodeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobRunList(s, schemas.JobNodeDetails_JobRuns, v.JobRuns)
+	if v.JobRuns != nil {
+		serializeJobRunList(s, schemas.JobNodeDetails_JobRuns, v.JobRuns)
+	}
 }
 func (v *JobNodeDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobNodeDetails, func(s *smithy.Schema) error {
@@ -19526,8 +20644,13 @@ type JobRun struct {
 	TriggerName *string
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a
-	// value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X
-	// for Ray jobs.
+	// value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, or R.8X
+	// for Spark jobs. Accepts the value Z.2X for Ray jobs.
+	//
+	//   - For the G.025X worker type, each worker maps to 0.25 DPU (2 vCPUs, 4 GB of
+	//   memory) with 84GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for low volume streaming jobs. This worker type is only available
+	//   for Glue version 3.0 or later streaming jobs.
 	//
 	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of
 	//   memory) with 94GB disk, and provides 1 executor per worker. We recommend this
@@ -19543,26 +20666,57 @@ type JobRun struct {
 	//   memory) with 256GB disk, and provides 1 executor per worker. We recommend this
 	//   worker type for jobs whose workloads contain your most demanding transforms,
 	//   aggregations, joins, and queries. This worker type is available only for Glue
-	//   version 3.0 or later Spark ETL jobs in the following Amazon Web Services
-	//   Regions: US East (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific
-	//   (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada (Central),
-	//   Europe (Frankfurt), Europe (Ireland), and Europe (Stockholm).
+	//   version 3.0 or later Spark ETL jobs in select Amazon Web Services Regions. For
+	//   the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
 	//
 	//   - For the G.8X worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of
 	//   memory) with 512GB disk, and provides 1 executor per worker. We recommend this
 	//   worker type for jobs whose workloads contain your most demanding transforms,
 	//   aggregations, joins, and queries. This worker type is available only for Glue
-	//   version 3.0 or later Spark ETL jobs, in the same Amazon Web Services Regions as
-	//   supported for the G.4X worker type.
+	//   version 3.0 or later Spark ETL jobs in select Amazon Web Services Regions. For
+	//   the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
 	//
-	//   - For the G.025X worker type, each worker maps to 0.25 DPU (2 vCPUs, 4 GB of
-	//   memory) with 84GB disk, and provides 1 executor per worker. We recommend this
-	//   worker type for low volume streaming jobs. This worker type is only available
-	//   for Glue version 3.0 or later streaming jobs.
+	//   - For the G.12X worker type, each worker maps to 12 DPU (48 vCPUs, 192 GB of
+	//   memory) with 768GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for jobs with very large workloads. This worker type is available
+	//   only for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the G.16X worker type, each worker maps to 16 DPU (64 vCPUs, 256 GB of
+	//   memory) with 1024GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for jobs with very large workloads. This worker type is available
+	//   only for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.1X worker type, each worker maps to 1 M-DPU (4 vCPUs, 32 GB of
+	//   memory) with 94GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.2X worker type, each worker maps to 2 M-DPU (8 vCPUs, 64 GB of
+	//   memory) with 138GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.4X worker type, each worker maps to 4 M-DPU (16 vCPUs, 128 GB of
+	//   memory) with 256GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	//   - For the R.8X worker type, each worker maps to 8 M-DPU (32 vCPUs, 256 GB of
+	//   memory) with 512GB disk, and provides 1 executor per worker. We recommend this
+	//   worker type for memory-intensive workloads. This worker type is available only
+	//   for Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services
+	//   Regions. For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
 	//
 	//   - For the Z.2X worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of
 	//   memory) with 128 GB disk, and provides up to 8 Ray workers based on the
 	//   autoscaler.
+	//
+	// [Configuring job properties for Spark jobs]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	WorkerType WorkerType
 
 	noSmithyDocumentSerde
@@ -19578,7 +20732,9 @@ func (v *JobRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedCapacity != 0 {
 		s.WriteInt32(schemas.JobRun_AllocatedCapacity, v.AllocatedCapacity)
 	}
-	serializeGenericMap(s, schemas.JobRun_Arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeGenericMap(s, schemas.JobRun_Arguments, v.Arguments)
+	}
 	if v.Attempt != 0 {
 		s.WriteInt32(schemas.JobRun_Attempt, v.Attempt)
 	}
@@ -19638,7 +20794,9 @@ func (v *JobRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberOfWorkers != nil {
 		s.WriteInt32(schemas.JobRun_NumberOfWorkers, *v.NumberOfWorkers)
 	}
-	serializePredecessorList(s, schemas.JobRun_PredecessorRuns, v.PredecessorRuns)
+	if v.PredecessorRuns != nil {
+		serializePredecessorList(s, schemas.JobRun_PredecessorRuns, v.PredecessorRuns)
+	}
 	if v.PreviousRunId != nil {
 		s.WriteString(schemas.JobRun_PreviousRunId, *v.PreviousRunId)
 	}
@@ -19959,9 +21117,14 @@ type JobUpdate struct {
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a
-	// value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X
-	// for Ray jobs. For more information, see [Defining job properties for Spark jobs]
+	// value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, or R.8X
+	// for Spark jobs. Accepts the value Z.2X for Ray jobs. For more information, see [Defining job properties for Spark jobs]
 	//
+	// The G.12X , G.16X , and R.1X through R.8X worker types are available only for
+	// Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services Regions.
+	// For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	// [Configuring job properties for Spark jobs]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	// [Defining job properties for Spark jobs]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html#create-job
 	WorkerType WorkerType
 
@@ -19978,7 +21141,9 @@ func (v *JobUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedCapacity != 0 {
 		s.WriteInt32(schemas.JobUpdate_AllocatedCapacity, v.AllocatedCapacity)
 	}
-	serializeCodeGenConfigurationNodes(s, schemas.JobUpdate_CodeGenConfigurationNodes, v.CodeGenConfigurationNodes)
+	if v.CodeGenConfigurationNodes != nil {
+		serializeCodeGenConfigurationNodes(s, schemas.JobUpdate_CodeGenConfigurationNodes, v.CodeGenConfigurationNodes)
+	}
 	if v.Command != nil {
 		s.WriteStruct(schemas.JobUpdate_Command)
 		v.Command.SerializeMembers(s)
@@ -19989,7 +21154,9 @@ func (v *JobUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Connections.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGenericMap(s, schemas.JobUpdate_DefaultArguments, v.DefaultArguments)
+	if v.DefaultArguments != nil {
+		serializeGenericMap(s, schemas.JobUpdate_DefaultArguments, v.DefaultArguments)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.JobUpdate_Description, *v.Description)
 	}
@@ -20022,7 +21189,9 @@ func (v *JobUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxRetries != 0 {
 		s.WriteInt32(schemas.JobUpdate_MaxRetries, v.MaxRetries)
 	}
-	serializeGenericMap(s, schemas.JobUpdate_NonOverridableArguments, v.NonOverridableArguments)
+	if v.NonOverridableArguments != nil {
+		serializeGenericMap(s, schemas.JobUpdate_NonOverridableArguments, v.NonOverridableArguments)
+	}
 	if v.NotificationProperty != nil {
 		s.WriteStruct(schemas.JobUpdate_NotificationProperty)
 		v.NotificationProperty.SerializeMembers(s)
@@ -20168,8 +21337,12 @@ func (v *Join) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Join) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJoinColumns(s, schemas.Join_Columns, v.Columns)
-	serializeTwoInputs(s, schemas.Join_Inputs, v.Inputs)
+	if v.Columns != nil {
+		serializeJoinColumns(s, schemas.Join_Columns, v.Columns)
+	}
+	if v.Inputs != nil {
+		serializeTwoInputs(s, schemas.Join_Inputs, v.Inputs)
+	}
 	if v.JoinType != "" {
 		s.WriteString(schemas.Join_JoinType, string(v.JoinType))
 	}
@@ -20225,7 +21398,9 @@ func (v *JoinColumn) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.From != nil {
 		s.WriteString(schemas.JoinColumn_From, *v.From)
 	}
-	serializeGlueStudioPathList(s, schemas.JoinColumn_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeGlueStudioPathList(s, schemas.JoinColumn_Keys, v.Keys)
+	}
 }
 func (v *JoinColumn) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JoinColumn, func(s *smithy.Schema) error {
@@ -20360,7 +21535,9 @@ func (v *JWTBearerProperties) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TokenUrl.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectorPropertyList(s, schemas.JWTBearerProperties_TokenUrlParameters, v.TokenUrlParameters)
+	if v.TokenUrlParameters != nil {
+		serializeConnectorPropertyList(s, schemas.JWTBearerProperties_TokenUrlParameters, v.TokenUrlParameters)
+	}
 }
 func (v *JWTBearerProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JWTBearerProperties, func(s *smithy.Schema) error {
@@ -21213,9 +22390,15 @@ func (v *Location) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeGenNodeArgs(s, schemas.Location_DynamoDB, v.DynamoDB)
-	serializeCodeGenNodeArgs(s, schemas.Location_Jdbc, v.Jdbc)
-	serializeCodeGenNodeArgs(s, schemas.Location_S3, v.S3)
+	if v.DynamoDB != nil {
+		serializeCodeGenNodeArgs(s, schemas.Location_DynamoDB, v.DynamoDB)
+	}
+	if v.Jdbc != nil {
+		serializeCodeGenNodeArgs(s, schemas.Location_Jdbc, v.Jdbc)
+	}
+	if v.S3 != nil {
+		serializeCodeGenNodeArgs(s, schemas.Location_S3, v.S3)
+	}
 }
 func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Location, func(s *smithy.Schema) error {
@@ -21332,11 +22515,15 @@ func (v *Mapping) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Mapping) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMappings(s, schemas.Mapping_Children, v.Children)
+	if v.Children != nil {
+		serializeMappings(s, schemas.Mapping_Children, v.Children)
+	}
 	if v.Dropped != nil {
 		s.WriteBool(schemas.Mapping_Dropped, *v.Dropped)
 	}
-	serializeEnclosedInStringProperties(s, schemas.Mapping_FromPath, v.FromPath)
+	if v.FromPath != nil {
+		serializeEnclosedInStringProperties(s, schemas.Mapping_FromPath, v.FromPath)
+	}
 	if v.FromType != nil {
 		s.WriteString(schemas.Mapping_FromType, *v.FromType)
 	}
@@ -21649,11 +22836,15 @@ func (v *Merge) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Merge) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTwoInputs(s, schemas.Merge_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeTwoInputs(s, schemas.Merge_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Merge_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.Merge_PrimaryKeys, v.PrimaryKeys)
+	if v.PrimaryKeys != nil {
+		serializeGlueStudioPathList(s, schemas.Merge_PrimaryKeys, v.PrimaryKeys)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.Merge_Source, *v.Source)
 	}
@@ -21704,7 +22895,9 @@ func (v *MetadataInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MetadataValue != nil {
 		s.WriteString(schemas.MetadataInfo_MetadataValue, *v.MetadataValue)
 	}
-	serializeOtherMetadataValueList(s, schemas.MetadataInfo_OtherMetadataValueList, v.OtherMetadataValueList)
+	if v.OtherMetadataValueList != nil {
+		serializeOtherMetadataValueList(s, schemas.MetadataInfo_OtherMetadataValueList, v.OtherMetadataValueList)
+	}
 }
 func (v *MetadataInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetadataInfo, func(s *smithy.Schema) error {
@@ -21798,7 +22991,9 @@ func (v *MetricBasedObservation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MetricValues.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNewRules(s, schemas.MetricBasedObservation_NewRules, v.NewRules)
+	if v.NewRules != nil {
+		serializeNewRules(s, schemas.MetricBasedObservation_NewRules, v.NewRules)
+	}
 	if v.StatisticId != nil {
 		s.WriteString(schemas.MetricBasedObservation_StatisticId, *v.StatisticId)
 	}
@@ -21913,7 +23108,9 @@ func (v *MicrosoftSQLServerCatalogTarget) SerializeMembers(s smithy.ShapeSeriali
 	if v.Database != nil {
 		s.WriteString(schemas.MicrosoftSQLServerCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.MicrosoftSQLServerCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.MicrosoftSQLServerCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.MicrosoftSQLServerCatalogTarget_Name, *v.Name)
 	}
@@ -22097,7 +23294,9 @@ func (v *MLTransform) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GlueVersion != nil {
 		s.WriteString(schemas.MLTransform_GlueVersion, *v.GlueVersion)
 	}
-	serializeGlueTables(s, schemas.MLTransform_InputRecordTables, v.InputRecordTables)
+	if v.InputRecordTables != nil {
+		serializeGlueTables(s, schemas.MLTransform_InputRecordTables, v.InputRecordTables)
+	}
 	if v.LabelCount != 0 {
 		s.WriteInt32(schemas.MLTransform_LabelCount, v.LabelCount)
 	}
@@ -22124,7 +23323,9 @@ func (v *MLTransform) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != nil {
 		s.WriteString(schemas.MLTransform_Role, *v.Role)
 	}
-	serializeTransformSchema(s, schemas.MLTransform_Schema, v.Schema)
+	if v.Schema != nil {
+		serializeTransformSchema(s, schemas.MLTransform_Schema, v.Schema)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.MLTransform_Status, string(v.Status))
 	}
@@ -22411,7 +23612,9 @@ func (v *MySQLCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.MySQLCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.MySQLCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.MySQLCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.MySQLCatalogTarget_Name, *v.Name)
 	}
@@ -22790,7 +23993,9 @@ func (v *OAuth2Properties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TokenUrl != nil {
 		s.WriteString(schemas.OAuth2Properties_TokenUrl, *v.TokenUrl)
 	}
-	serializeTokenUrlParametersMap(s, schemas.OAuth2Properties_TokenUrlParametersMap, v.TokenUrlParametersMap)
+	if v.TokenUrlParametersMap != nil {
+		serializeTokenUrlParametersMap(s, schemas.OAuth2Properties_TokenUrlParametersMap, v.TokenUrlParametersMap)
+	}
 }
 func (v *OAuth2Properties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OAuth2Properties, func(s *smithy.Schema) error {
@@ -22870,7 +24075,9 @@ func (v *OAuth2PropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TokenUrl != nil {
 		s.WriteString(schemas.OAuth2PropertiesInput_TokenUrl, *v.TokenUrl)
 	}
-	serializeTokenUrlParametersMap(s, schemas.OAuth2PropertiesInput_TokenUrlParametersMap, v.TokenUrlParametersMap)
+	if v.TokenUrlParametersMap != nil {
+		serializeTokenUrlParametersMap(s, schemas.OAuth2PropertiesInput_TokenUrlParametersMap, v.TokenUrlParametersMap)
+	}
 }
 func (v *OAuth2PropertiesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OAuth2PropertiesInput, func(s *smithy.Schema) error {
@@ -23168,7 +24375,9 @@ func (v *OracleSQLCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.OracleSQLCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.OracleSQLCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.OracleSQLCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.OracleSQLCatalogTarget_Name, *v.Name)
 	}
@@ -23448,7 +24657,9 @@ func (v *Partition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastAnalyzedTime != nil {
 		s.WriteTime(schemas.Partition_LastAnalyzedTime, *v.LastAnalyzedTime)
 	}
-	serializeParametersMap(s, schemas.Partition_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.Partition_Parameters, v.Parameters)
+	}
 	if v.StorageDescriptor != nil {
 		s.WriteStruct(schemas.Partition_StorageDescriptor)
 		v.StorageDescriptor.SerializeMembers(s)
@@ -23457,7 +24668,9 @@ func (v *Partition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.Partition_TableName, *v.TableName)
 	}
-	serializeValueStringList(s, schemas.Partition_Values, v.Values)
+	if v.Values != nil {
+		serializeValueStringList(s, schemas.Partition_Values, v.Values)
+	}
 }
 func (v *Partition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Partition, func(s *smithy.Schema) error {
@@ -23516,7 +24729,9 @@ func (v *PartitionError) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ErrorDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeValueStringList(s, schemas.PartitionError_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializeValueStringList(s, schemas.PartitionError_PartitionValues, v.PartitionValues)
+	}
 }
 func (v *PartitionError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionError, func(s *smithy.Schema) error {
@@ -23557,7 +24772,9 @@ func (v *PartitionIndex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.PartitionIndex_IndexName, *v.IndexName)
 	}
-	serializeKeyList(s, schemas.PartitionIndex_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeKeyList(s, schemas.PartitionIndex_Keys, v.Keys)
+	}
 }
 func (v *PartitionIndex) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionIndex, func(s *smithy.Schema) error {
@@ -23616,14 +24833,18 @@ func (v *PartitionIndexDescriptor) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PartitionIndexDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackfillErrors(s, schemas.PartitionIndexDescriptor_BackfillErrors, v.BackfillErrors)
+	if v.BackfillErrors != nil {
+		serializeBackfillErrors(s, schemas.PartitionIndexDescriptor_BackfillErrors, v.BackfillErrors)
+	}
 	if v.IndexName != nil {
 		s.WriteString(schemas.PartitionIndexDescriptor_IndexName, *v.IndexName)
 	}
 	if v.IndexStatus != "" {
 		s.WriteString(schemas.PartitionIndexDescriptor_IndexStatus, string(v.IndexStatus))
 	}
-	serializeKeySchemaElementList(s, schemas.PartitionIndexDescriptor_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeKeySchemaElementList(s, schemas.PartitionIndexDescriptor_Keys, v.Keys)
+	}
 }
 func (v *PartitionIndexDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionIndexDescriptor, func(s *smithy.Schema) error {
@@ -23687,13 +24908,17 @@ func (v *PartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastAnalyzedTime != nil {
 		s.WriteTime(schemas.PartitionInput_LastAnalyzedTime, *v.LastAnalyzedTime)
 	}
-	serializeParametersMap(s, schemas.PartitionInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.PartitionInput_Parameters, v.Parameters)
+	}
 	if v.StorageDescriptor != nil {
 		s.WriteStruct(schemas.PartitionInput_StorageDescriptor)
 		v.StorageDescriptor.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeValueStringList(s, schemas.PartitionInput_Values, v.Values)
+	if v.Values != nil {
+		serializeValueStringList(s, schemas.PartitionInput_Values, v.Values)
+	}
 }
 func (v *PartitionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionInput, func(s *smithy.Schema) error {
@@ -23734,7 +24959,9 @@ func (v *PartitionValueList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PartitionValueList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValueStringList(s, schemas.PartitionValueList_Values, v.Values)
+	if v.Values != nil {
+		serializeValueStringList(s, schemas.PartitionValueList_Values, v.Values)
+	}
 }
 func (v *PartitionValueList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionValueList, func(s *smithy.Schema) error {
@@ -23771,7 +24998,9 @@ func (v *PhysicalConnectionRequirements) SerializeMembers(s smithy.ShapeSerializ
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.PhysicalConnectionRequirements_AvailabilityZone, *v.AvailabilityZone)
 	}
-	serializeSecurityGroupIdList(s, schemas.PhysicalConnectionRequirements_SecurityGroupIdList, v.SecurityGroupIdList)
+	if v.SecurityGroupIdList != nil {
+		serializeSecurityGroupIdList(s, schemas.PhysicalConnectionRequirements_SecurityGroupIdList, v.SecurityGroupIdList)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.PhysicalConnectionRequirements_SubnetId, *v.SubnetId)
 	}
@@ -23880,8 +25109,12 @@ func (v *PIIDetection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectionSensitivity != nil {
 		s.WriteString(schemas.PIIDetection_DetectionSensitivity, *v.DetectionSensitivity)
 	}
-	serializeEnclosedInStringProperties(s, schemas.PIIDetection_EntityTypesToDetect, v.EntityTypesToDetect)
-	serializeOneInput(s, schemas.PIIDetection_Inputs, v.Inputs)
+	if v.EntityTypesToDetect != nil {
+		serializeEnclosedInStringProperties(s, schemas.PIIDetection_EntityTypesToDetect, v.EntityTypesToDetect)
+	}
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.PIIDetection_Inputs, v.Inputs)
+	}
 	if v.MaskValue != nil {
 		s.WriteString(schemas.PIIDetection_MaskValue, *v.MaskValue)
 	}
@@ -24062,7 +25295,9 @@ func (v *PostgreSQLCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.PostgreSQLCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.PostgreSQLCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.PostgreSQLCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.PostgreSQLCatalogTarget_Name, *v.Name)
 	}
@@ -24150,7 +25385,9 @@ func (v *Predicate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Predicate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConditionList(s, schemas.Predicate_Conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditionList(s, schemas.Predicate_Conditions, v.Conditions)
+	}
 	if v.Logical != "" {
 		s.WriteString(schemas.Predicate_Logical, string(v.Logical))
 	}
@@ -24191,7 +25428,9 @@ func (v *PrincipalPermissions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrincipalPermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePermissionList(s, schemas.PrincipalPermissions_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.PrincipalPermissions_Permissions, v.Permissions)
+	}
 	if v.Principal != nil {
 		s.WriteStruct(schemas.PrincipalPermissions_Principal)
 		v.Principal.SerializeMembers(s)
@@ -24231,8 +25470,12 @@ func (v *ProfileConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProfileConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationMap(s, schemas.ProfileConfiguration_JobConfiguration, v.JobConfiguration)
-	serializeConfigurationMap(s, schemas.ProfileConfiguration_SessionConfiguration, v.SessionConfiguration)
+	if v.JobConfiguration != nil {
+		serializeConfigurationMap(s, schemas.ProfileConfiguration_JobConfiguration, v.JobConfiguration)
+	}
+	if v.SessionConfiguration != nil {
+		serializeConfigurationMap(s, schemas.ProfileConfiguration_SessionConfiguration, v.SessionConfiguration)
+	}
 }
 func (v *ProfileConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProfileConfiguration, func(s *smithy.Schema) error {
@@ -24349,8 +25592,12 @@ func (v *Property) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Property) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedValues(s, schemas.Property_AllowedValues, v.AllowedValues)
-	serializeDataOperations(s, schemas.Property_DataOperationScopes, v.DataOperationScopes)
+	if v.AllowedValues != nil {
+		serializeAllowedValues(s, schemas.Property_AllowedValues, v.AllowedValues)
+	}
+	if v.DataOperationScopes != nil {
+		serializeDataOperations(s, schemas.Property_DataOperationScopes, v.DataOperationScopes)
+	}
 	if v.DefaultValue != nil {
 		s.WriteString(schemas.Property_DefaultValue, *v.DefaultValue)
 	}
@@ -24366,7 +25613,9 @@ func (v *Property) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PropertyLocation != "" {
 		s.WriteString(schemas.Property_PropertyLocation, string(v.PropertyLocation))
 	}
-	serializePropertyTypes(s, schemas.Property_PropertyTypes, v.PropertyTypes)
+	if v.PropertyTypes != nil {
+		serializePropertyTypes(s, schemas.Property_PropertyTypes, v.PropertyTypes)
+	}
 	if v.Required != nil {
 		s.WriteBool(schemas.Property_Required, *v.Required)
 	}
@@ -24496,7 +25745,9 @@ func (v *QuerySessionContext) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuerySessionContext) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalContextMap(s, schemas.QuerySessionContext_AdditionalContext, v.AdditionalContext)
+	if v.AdditionalContext != nil {
+		serializeAdditionalContextMap(s, schemas.QuerySessionContext_AdditionalContext, v.AdditionalContext)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.QuerySessionContext_ClusterId, *v.ClusterId)
 	}
@@ -24561,7 +25812,9 @@ func (v *Recipe) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Recipe) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.Recipe_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.Recipe_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Recipe_Name, *v.Name)
 	}
@@ -24570,7 +25823,9 @@ func (v *Recipe) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RecipeReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecipeSteps(s, schemas.Recipe_RecipeSteps, v.RecipeSteps)
+	if v.RecipeSteps != nil {
+		serializeRecipeSteps(s, schemas.Recipe_RecipeSteps, v.RecipeSteps)
+	}
 }
 func (v *Recipe) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Recipe, func(s *smithy.Schema) error {
@@ -24614,7 +25869,9 @@ func (v *RecipeAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operation != nil {
 		s.WriteString(schemas.RecipeAction_Operation, *v.Operation)
 	}
-	serializeParameterMap(s, schemas.RecipeAction_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterMap(s, schemas.RecipeAction_Parameters, v.Parameters)
+	}
 }
 func (v *RecipeAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecipeAction, func(s *smithy.Schema) error {
@@ -24699,7 +25956,9 @@ func (v *RecipeStep) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Action.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConditionExpressionList(s, schemas.RecipeStep_ConditionExpressions, v.ConditionExpressions)
+	if v.ConditionExpressions != nil {
+		serializeConditionExpressionList(s, schemas.RecipeStep_ConditionExpressions, v.ConditionExpressions)
+	}
 }
 func (v *RecipeStep) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecipeStep, func(s *smithy.Schema) error {
@@ -24884,7 +26143,9 @@ func (v *RedshiftTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.RedshiftTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.RedshiftTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.RedshiftTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RedshiftTarget_Name, *v.Name)
 	}
@@ -25142,12 +26403,18 @@ func (v *RenameField) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RenameField) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.RenameField_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.RenameField_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RenameField_Name, *v.Name)
 	}
-	serializeEnclosedInStringProperties(s, schemas.RenameField_SourcePath, v.SourcePath)
-	serializeEnclosedInStringProperties(s, schemas.RenameField_TargetPath, v.TargetPath)
+	if v.SourcePath != nil {
+		serializeEnclosedInStringProperties(s, schemas.RenameField_SourcePath, v.SourcePath)
+	}
+	if v.TargetPath != nil {
+		serializeEnclosedInStringProperties(s, schemas.RenameField_TargetPath, v.TargetPath)
+	}
 }
 func (v *RenameField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RenameField, func(s *smithy.Schema) error {
@@ -25169,6 +26436,12 @@ func (v *RenameField) Deserialize(d smithy.ShapeDeserializer) error {
 // The URIs for function resources.
 type ResourceUri struct {
 
+	// The time at which the resource was last modified in Amazon S3. Glue records
+	// this value when you create or update a function whose GovernanceMode is
+	// LAKE_FORMATION . Analytics engines use it to verify that the resource hasn't
+	// changed. This is an output-only field.
+	LastModified *time.Time
+
 	// The type of the resource.
 	ResourceType ResourceType
 
@@ -25185,6 +26458,9 @@ func (v *ResourceUri) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceUri) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ResourceUri_LastModified, *v.LastModified)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ResourceUri_ResourceType, string(v.ResourceType))
 	}
@@ -25195,6 +26471,9 @@ func (v *ResourceUri) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ResourceUri) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceUri, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceUri_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ResourceUri_LastModified, v.LastModified)
 		case schemas.ResourceUri_ResourceType:
 			var ev string
 			if err := d.ReadString(schemas.ResourceUri_ResourceType, &ev); err != nil {
@@ -25324,7 +26603,9 @@ func (v *RestConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityConfigurationMap(s, schemas.RestConfiguration_EntityConfigurations, v.EntityConfigurations)
+	if v.EntityConfigurations != nil {
+		serializeEntityConfigurationMap(s, schemas.RestConfiguration_EntityConfigurations, v.EntityConfigurations)
+	}
 	if v.GlobalSourceConfiguration != nil {
 		s.WriteStruct(schemas.RestConfiguration_GlobalSourceConfiguration)
 		v.GlobalSourceConfiguration.SerializeMembers(s)
@@ -25479,8 +26760,12 @@ func (v *Route) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupFiltersList(s, schemas.Route_GroupFiltersList, v.GroupFiltersList)
-	serializeOneInput(s, schemas.Route_Inputs, v.Inputs)
+	if v.GroupFiltersList != nil {
+		serializeGroupFiltersList(s, schemas.Route_GroupFiltersList, v.GroupFiltersList)
+	}
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.Route_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Route_Name, *v.Name)
 	}
@@ -25691,14 +26976,18 @@ func (v *S3CatalogDeltaSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3CatalogDeltaSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3CatalogDeltaSource_AdditionalDeltaOptions, v.AdditionalDeltaOptions)
+	if v.AdditionalDeltaOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3CatalogDeltaSource_AdditionalDeltaOptions, v.AdditionalDeltaOptions)
+	}
 	if v.Database != nil {
 		s.WriteString(schemas.S3CatalogDeltaSource_Database, *v.Database)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3CatalogDeltaSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3CatalogDeltaSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3CatalogDeltaSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.Table != nil {
 		s.WriteString(schemas.S3CatalogDeltaSource_Table, *v.Table)
 	}
@@ -25759,14 +27048,18 @@ func (v *S3CatalogHudiSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3CatalogHudiSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3CatalogHudiSource_AdditionalHudiOptions, v.AdditionalHudiOptions)
+	if v.AdditionalHudiOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3CatalogHudiSource_AdditionalHudiOptions, v.AdditionalHudiOptions)
+	}
 	if v.Database != nil {
 		s.WriteString(schemas.S3CatalogHudiSource_Database, *v.Database)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3CatalogHudiSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3CatalogHudiSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3CatalogHudiSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.Table != nil {
 		s.WriteString(schemas.S3CatalogHudiSource_Table, *v.Table)
 	}
@@ -25827,14 +27120,18 @@ func (v *S3CatalogIcebergSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3CatalogIcebergSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3CatalogIcebergSource_AdditionalIcebergOptions, v.AdditionalIcebergOptions)
+	if v.AdditionalIcebergOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3CatalogIcebergSource_AdditionalIcebergOptions, v.AdditionalIcebergOptions)
+	}
 	if v.Database != nil {
 		s.WriteString(schemas.S3CatalogIcebergSource_Database, *v.Database)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3CatalogIcebergSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3CatalogIcebergSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3CatalogIcebergSource_OutputSchemas, v.OutputSchemas)
+	}
 	if v.Table != nil {
 		s.WriteString(schemas.S3CatalogIcebergSource_Table, *v.Table)
 	}
@@ -25988,11 +27285,15 @@ func (v *S3CatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.S3CatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.S3CatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3CatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3CatalogTarget_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.S3CatalogTarget_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3CatalogTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.SchemaChangePolicy != nil {
 		s.WriteStruct(schemas.S3CatalogTarget_SchemaChangePolicy)
 		v.SchemaChangePolicy.SerializeMembers(s)
@@ -26145,7 +27446,9 @@ func (v *S3CsvSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Escaper != nil {
 		s.WriteString(schemas.S3CsvSource_Escaper, *v.Escaper)
 	}
-	serializeEnclosedInStringProperties(s, schemas.S3CsvSource_Exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3CsvSource_Exclusions, v.Exclusions)
+	}
 	if v.GroupFiles != nil {
 		s.WriteString(schemas.S3CsvSource_GroupFiles, *v.GroupFiles)
 	}
@@ -26167,8 +27470,12 @@ func (v *S3CsvSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptimizePerformance != false {
 		s.WriteBool(schemas.S3CsvSource_OptimizePerformance, v.OptimizePerformance)
 	}
-	serializeGlueSchemas(s, schemas.S3CsvSource_OutputSchemas, v.OutputSchemas)
-	serializeEnclosedInStringProperties(s, schemas.S3CsvSource_Paths, v.Paths)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3CsvSource_OutputSchemas, v.OutputSchemas)
+	}
+	if v.Paths != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3CsvSource_Paths, v.Paths)
+	}
 	if v.QuoteChar != "" {
 		s.WriteString(schemas.S3CsvSource_QuoteChar, string(v.QuoteChar))
 	}
@@ -26312,7 +27619,9 @@ func (v *S3DeltaCatalogTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3DeltaCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3DeltaCatalogTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3DeltaCatalogTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.AutoDataQuality != nil {
 		s.WriteStruct(schemas.S3DeltaCatalogTarget_AutoDataQuality)
 		v.AutoDataQuality.SerializeMembers(s)
@@ -26321,12 +27630,18 @@ func (v *S3DeltaCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.S3DeltaCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.S3DeltaCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3DeltaCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3DeltaCatalogTarget_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3DeltaCatalogTarget_OutputSchemas, v.OutputSchemas)
-	serializeGlueStudioPathList(s, schemas.S3DeltaCatalogTarget_PartitionKeys, v.PartitionKeys)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3DeltaCatalogTarget_OutputSchemas, v.OutputSchemas)
+	}
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3DeltaCatalogTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.SchemaChangePolicy != nil {
 		s.WriteStruct(schemas.S3DeltaCatalogTarget_SchemaChangePolicy)
 		v.SchemaChangePolicy.SerializeMembers(s)
@@ -26424,7 +27739,9 @@ func (v *S3DeltaDirectTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3DeltaDirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3DeltaDirectTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3DeltaDirectTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.AutoDataQuality != nil {
 		s.WriteStruct(schemas.S3DeltaDirectTarget_AutoDataQuality)
 		v.AutoDataQuality.SerializeMembers(s)
@@ -26436,14 +27753,18 @@ func (v *S3DeltaDirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.S3DeltaDirectTarget_Format, string(v.Format))
 	}
-	serializeOneInput(s, schemas.S3DeltaDirectTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3DeltaDirectTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3DeltaDirectTarget_Name, *v.Name)
 	}
 	if v.NumberTargetPartitions != nil {
 		s.WriteString(schemas.S3DeltaDirectTarget_NumberTargetPartitions, *v.NumberTargetPartitions)
 	}
-	serializeGlueStudioPathList(s, schemas.S3DeltaDirectTarget_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3DeltaDirectTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.S3DeltaDirectTarget_Path, *v.Path)
 	}
@@ -26528,7 +27849,9 @@ func (v *S3DeltaSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3DeltaSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3DeltaSource_AdditionalDeltaOptions, v.AdditionalDeltaOptions)
+	if v.AdditionalDeltaOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3DeltaSource_AdditionalDeltaOptions, v.AdditionalDeltaOptions)
+	}
 	if v.AdditionalOptions != nil {
 		s.WriteStruct(schemas.S3DeltaSource_AdditionalOptions)
 		v.AdditionalOptions.SerializeMembers(s)
@@ -26537,8 +27860,12 @@ func (v *S3DeltaSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.S3DeltaSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3DeltaSource_OutputSchemas, v.OutputSchemas)
-	serializeEnclosedInStringProperties(s, schemas.S3DeltaSource_Paths, v.Paths)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3DeltaSource_OutputSchemas, v.OutputSchemas)
+	}
+	if v.Paths != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3DeltaSource_Paths, v.Paths)
+	}
 }
 func (v *S3DeltaSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3DeltaSource, func(s *smithy.Schema) error {
@@ -26685,15 +28012,21 @@ func (v *S3DirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.S3DirectTarget_Format, string(v.Format))
 	}
-	serializeOneInput(s, schemas.S3DirectTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3DirectTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3DirectTarget_Name, *v.Name)
 	}
 	if v.NumberTargetPartitions != nil {
 		s.WriteString(schemas.S3DirectTarget_NumberTargetPartitions, *v.NumberTargetPartitions)
 	}
-	serializeGlueSchemas(s, schemas.S3DirectTarget_OutputSchemas, v.OutputSchemas)
-	serializeGlueStudioPathList(s, schemas.S3DirectTarget_PartitionKeys, v.PartitionKeys)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3DirectTarget_OutputSchemas, v.OutputSchemas)
+	}
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3DirectTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.S3DirectTarget_Path, *v.Path)
 	}
@@ -26851,7 +28184,9 @@ func (v *S3ExcelSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CompressionType != "" {
 		s.WriteString(schemas.S3ExcelSource_CompressionType, string(v.CompressionType))
 	}
-	serializeEnclosedInStringProperties(s, schemas.S3ExcelSource_Exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3ExcelSource_Exclusions, v.Exclusions)
+	}
 	if v.GroupFiles != nil {
 		s.WriteString(schemas.S3ExcelSource_GroupFiles, *v.GroupFiles)
 	}
@@ -26870,8 +28205,12 @@ func (v *S3ExcelSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberRows != nil {
 		s.WriteInt64(schemas.S3ExcelSource_NumberRows, *v.NumberRows)
 	}
-	serializeGlueSchemas(s, schemas.S3ExcelSource_OutputSchemas, v.OutputSchemas)
-	serializeEnclosedInStringProperties(s, schemas.S3ExcelSource_Paths, v.Paths)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3ExcelSource_OutputSchemas, v.OutputSchemas)
+	}
+	if v.Paths != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3ExcelSource_Paths, v.Paths)
+	}
 	if v.Recurse != nil {
 		s.WriteBool(schemas.S3ExcelSource_Recurse, *v.Recurse)
 	}
@@ -26983,14 +28322,18 @@ func (v *S3GlueParquetTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Compression != "" {
 		s.WriteString(schemas.S3GlueParquetTarget_Compression, string(v.Compression))
 	}
-	serializeOneInput(s, schemas.S3GlueParquetTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3GlueParquetTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3GlueParquetTarget_Name, *v.Name)
 	}
 	if v.NumberTargetPartitions != nil {
 		s.WriteString(schemas.S3GlueParquetTarget_NumberTargetPartitions, *v.NumberTargetPartitions)
 	}
-	serializeGlueStudioPathList(s, schemas.S3GlueParquetTarget_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3GlueParquetTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.S3GlueParquetTarget_Path, *v.Path)
 	}
@@ -27086,7 +28429,9 @@ func (v *S3HudiCatalogTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3HudiCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3HudiCatalogTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3HudiCatalogTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.AutoDataQuality != nil {
 		s.WriteStruct(schemas.S3HudiCatalogTarget_AutoDataQuality)
 		v.AutoDataQuality.SerializeMembers(s)
@@ -27095,12 +28440,18 @@ func (v *S3HudiCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.S3HudiCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.S3HudiCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3HudiCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3HudiCatalogTarget_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3HudiCatalogTarget_OutputSchemas, v.OutputSchemas)
-	serializeGlueStudioPathList(s, schemas.S3HudiCatalogTarget_PartitionKeys, v.PartitionKeys)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3HudiCatalogTarget_OutputSchemas, v.OutputSchemas)
+	}
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3HudiCatalogTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.SchemaChangePolicy != nil {
 		s.WriteStruct(schemas.S3HudiCatalogTarget_SchemaChangePolicy)
 		v.SchemaChangePolicy.SerializeMembers(s)
@@ -27200,7 +28551,9 @@ func (v *S3HudiDirectTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3HudiDirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3HudiDirectTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3HudiDirectTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.AutoDataQuality != nil {
 		s.WriteStruct(schemas.S3HudiDirectTarget_AutoDataQuality)
 		v.AutoDataQuality.SerializeMembers(s)
@@ -27212,14 +28565,18 @@ func (v *S3HudiDirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.S3HudiDirectTarget_Format, string(v.Format))
 	}
-	serializeOneInput(s, schemas.S3HudiDirectTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3HudiDirectTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3HudiDirectTarget_Name, *v.Name)
 	}
 	if v.NumberTargetPartitions != nil {
 		s.WriteString(schemas.S3HudiDirectTarget_NumberTargetPartitions, *v.NumberTargetPartitions)
 	}
-	serializeGlueStudioPathList(s, schemas.S3HudiDirectTarget_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3HudiDirectTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.S3HudiDirectTarget_Path, *v.Path)
 	}
@@ -27304,7 +28661,9 @@ func (v *S3HudiSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3HudiSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3HudiSource_AdditionalHudiOptions, v.AdditionalHudiOptions)
+	if v.AdditionalHudiOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3HudiSource_AdditionalHudiOptions, v.AdditionalHudiOptions)
+	}
 	if v.AdditionalOptions != nil {
 		s.WriteStruct(schemas.S3HudiSource_AdditionalOptions)
 		v.AdditionalOptions.SerializeMembers(s)
@@ -27313,8 +28672,12 @@ func (v *S3HudiSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.S3HudiSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3HudiSource_OutputSchemas, v.OutputSchemas)
-	serializeEnclosedInStringProperties(s, schemas.S3HudiSource_Paths, v.Paths)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3HudiSource_OutputSchemas, v.OutputSchemas)
+	}
+	if v.Paths != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3HudiSource_Paths, v.Paths)
+	}
 }
 func (v *S3HudiSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3HudiSource, func(s *smithy.Schema) error {
@@ -27395,12 +28758,18 @@ func (v *S3HyperDirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.S3HyperDirectTarget_Format, string(v.Format))
 	}
-	serializeOneInput(s, schemas.S3HyperDirectTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3HyperDirectTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3HyperDirectTarget_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3HyperDirectTarget_OutputSchemas, v.OutputSchemas)
-	serializeGlueStudioPathList(s, schemas.S3HyperDirectTarget_PartitionKeys, v.PartitionKeys)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3HyperDirectTarget_OutputSchemas, v.OutputSchemas)
+	}
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3HyperDirectTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.S3HyperDirectTarget_Path, *v.Path)
 	}
@@ -27498,7 +28867,9 @@ func (v *S3IcebergCatalogTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3IcebergCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3IcebergCatalogTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3IcebergCatalogTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.AutoDataQuality != nil {
 		s.WriteStruct(schemas.S3IcebergCatalogTarget_AutoDataQuality)
 		v.AutoDataQuality.SerializeMembers(s)
@@ -27507,11 +28878,15 @@ func (v *S3IcebergCatalogTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.S3IcebergCatalogTarget_Database, *v.Database)
 	}
-	serializeOneInput(s, schemas.S3IcebergCatalogTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3IcebergCatalogTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3IcebergCatalogTarget_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.S3IcebergCatalogTarget_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3IcebergCatalogTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.SchemaChangePolicy != nil {
 		s.WriteStruct(schemas.S3IcebergCatalogTarget_SchemaChangePolicy)
 		v.SchemaChangePolicy.SerializeMembers(s)
@@ -27613,7 +28988,9 @@ func (v *S3IcebergDirectTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3IcebergDirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.S3IcebergDirectTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.S3IcebergDirectTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.AutoDataQuality != nil {
 		s.WriteStruct(schemas.S3IcebergDirectTarget_AutoDataQuality)
 		v.AutoDataQuality.SerializeMembers(s)
@@ -27625,15 +29002,21 @@ func (v *S3IcebergDirectTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.S3IcebergDirectTarget_Format, string(v.Format))
 	}
-	serializeOneInput(s, schemas.S3IcebergDirectTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.S3IcebergDirectTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.S3IcebergDirectTarget_Name, *v.Name)
 	}
 	if v.NumberTargetPartitions != nil {
 		s.WriteString(schemas.S3IcebergDirectTarget_NumberTargetPartitions, *v.NumberTargetPartitions)
 	}
-	serializeGlueSchemas(s, schemas.S3IcebergDirectTarget_OutputSchemas, v.OutputSchemas)
-	serializeGlueStudioPathList(s, schemas.S3IcebergDirectTarget_PartitionKeys, v.PartitionKeys)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3IcebergDirectTarget_OutputSchemas, v.OutputSchemas)
+	}
+	if v.PartitionKeys != nil {
+		serializeGlueStudioPathList(s, schemas.S3IcebergDirectTarget_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.S3IcebergDirectTarget_Path, *v.Path)
 	}
@@ -27769,7 +29152,9 @@ func (v *S3JsonSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CompressionType != "" {
 		s.WriteString(schemas.S3JsonSource_CompressionType, string(v.CompressionType))
 	}
-	serializeEnclosedInStringProperties(s, schemas.S3JsonSource_Exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3JsonSource_Exclusions, v.Exclusions)
+	}
 	if v.GroupFiles != nil {
 		s.WriteString(schemas.S3JsonSource_GroupFiles, *v.GroupFiles)
 	}
@@ -27791,8 +29176,12 @@ func (v *S3JsonSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.S3JsonSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3JsonSource_OutputSchemas, v.OutputSchemas)
-	serializeEnclosedInStringProperties(s, schemas.S3JsonSource_Paths, v.Paths)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3JsonSource_OutputSchemas, v.OutputSchemas)
+	}
+	if v.Paths != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3JsonSource_Paths, v.Paths)
+	}
 	if v.Recurse != nil {
 		s.WriteBool(schemas.S3JsonSource_Recurse, *v.Recurse)
 	}
@@ -27917,7 +29306,9 @@ func (v *S3ParquetSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CompressionType != "" {
 		s.WriteString(schemas.S3ParquetSource_CompressionType, string(v.CompressionType))
 	}
-	serializeEnclosedInStringProperties(s, schemas.S3ParquetSource_Exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3ParquetSource_Exclusions, v.Exclusions)
+	}
 	if v.GroupFiles != nil {
 		s.WriteString(schemas.S3ParquetSource_GroupFiles, *v.GroupFiles)
 	}
@@ -27933,8 +29324,12 @@ func (v *S3ParquetSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.S3ParquetSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.S3ParquetSource_OutputSchemas, v.OutputSchemas)
-	serializeEnclosedInStringProperties(s, schemas.S3ParquetSource_Paths, v.Paths)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.S3ParquetSource_OutputSchemas, v.OutputSchemas)
+	}
+	if v.Paths != nil {
+		serializeEnclosedInStringProperties(s, schemas.S3ParquetSource_Paths, v.Paths)
+	}
 	if v.Recurse != nil {
 		s.WriteBool(schemas.S3ParquetSource_Recurse, *v.Recurse)
 	}
@@ -28069,7 +29464,9 @@ func (v *S3Target) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventQueueArn != nil {
 		s.WriteString(schemas.S3Target_EventQueueArn, *v.EventQueueArn)
 	}
-	serializePathList(s, schemas.S3Target_Exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializePathList(s, schemas.S3Target_Exclusions, v.Exclusions)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.S3Target_Path, *v.Path)
 	}
@@ -28616,7 +30013,9 @@ func (v *SearchAttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.SearchAttributeFilter_Operator, string(v.Operator))
 	}
-	serializeSearchFilterValue(s, schemas.SearchAttributeFilter_Value, v.Value)
+	if v.Value != nil {
+		serializeSearchFilterValue(s, schemas.SearchAttributeFilter_Value, v.Value)
+	}
 }
 func (v *SearchAttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchAttributeFilter, func(s *smithy.Schema) error {
@@ -28789,7 +30188,9 @@ func (v *SearchMapFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.SearchMapFilter_Key, *v.Key)
 	}
-	serializeSearchMapFilterValue(s, schemas.SearchMapFilter_Value, v.Value)
+	if v.Value != nil {
+		serializeSearchMapFilterValue(s, schemas.SearchMapFilter_Value, v.Value)
+	}
 }
 func (v *SearchMapFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchMapFilter, func(s *smithy.Schema) error {
@@ -29066,11 +30467,15 @@ func (v *SelectFields) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SelectFields) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.SelectFields_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.SelectFields_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SelectFields_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.SelectFields_Paths, v.Paths)
+	if v.Paths != nil {
+		serializeGlueStudioPathList(s, schemas.SelectFields_Paths, v.Paths)
+	}
 }
 func (v *SelectFields) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SelectFields, func(s *smithy.Schema) error {
@@ -29117,7 +30522,9 @@ func (v *SelectFromCollection) Serialize(s smithy.ShapeSerializer) {
 
 func (v *SelectFromCollection) SerializeMembers(s smithy.ShapeSerializer) {
 	s.WriteInt32(schemas.SelectFromCollection_Index, v.Index)
-	serializeOneInput(s, schemas.SelectFromCollection_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.SelectFromCollection_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SelectFromCollection_Name, *v.Name)
 	}
@@ -29164,7 +30571,9 @@ func (v *SerDeInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SerDeInfo_Name, *v.Name)
 	}
-	serializeParametersMap(s, schemas.SerDeInfo_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.SerDeInfo_Parameters, v.Parameters)
+	}
 	if v.SerializationLibrary != nil {
 		s.WriteString(schemas.SerDeInfo_SerializationLibrary, *v.SerializationLibrary)
 	}
@@ -29253,8 +30662,14 @@ type Session struct {
 	Status SessionStatus
 
 	// The type of predefined worker that is allocated when a session runs. Accepts a
-	// value of G.1X , G.2X , G.4X , or G.8X for Spark sessions. Accepts the value Z.2X
-	// for Ray sessions.
+	// value of G.1X , G.2X , G.4X , G.8X , G.12X , G.16X , R.1X , R.2X , R.4X , or
+	// R.8X for Spark sessions. Accepts the value Z.2X for Ray sessions.
+	//
+	// The G.12X , G.16X , and R.1X through R.8X worker types are available only for
+	// Glue version 4.0 or later Spark ETL jobs in select Amazon Web Services Regions.
+	// For the supported Regions, see [Configuring job properties for Spark jobs]in the developer guide.
+	//
+	// [Configuring job properties for Spark jobs]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	WorkerType WorkerType
 
 	noSmithyDocumentSerde
@@ -29286,7 +30701,9 @@ func (v *Session) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DPUSeconds != nil {
 		s.WriteFloat64(schemas.Session_DPUSeconds, *v.DPUSeconds)
 	}
-	serializeOrchestrationArgumentsMap(s, schemas.Session_DefaultArguments, v.DefaultArguments)
+	if v.DefaultArguments != nil {
+		serializeOrchestrationArgumentsMap(s, schemas.Session_DefaultArguments, v.DefaultArguments)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Session_Description, *v.Description)
 	}
@@ -29534,9 +30951,15 @@ func (v *SkewedInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SkewedInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNameStringList(s, schemas.SkewedInfo_SkewedColumnNames, v.SkewedColumnNames)
-	serializeLocationMap(s, schemas.SkewedInfo_SkewedColumnValueLocationMaps, v.SkewedColumnValueLocationMaps)
-	serializeColumnValueStringList(s, schemas.SkewedInfo_SkewedColumnValues, v.SkewedColumnValues)
+	if v.SkewedColumnNames != nil {
+		serializeNameStringList(s, schemas.SkewedInfo_SkewedColumnNames, v.SkewedColumnNames)
+	}
+	if v.SkewedColumnValueLocationMaps != nil {
+		serializeLocationMap(s, schemas.SkewedInfo_SkewedColumnValueLocationMaps, v.SkewedColumnValueLocationMaps)
+	}
+	if v.SkewedColumnValues != nil {
+		serializeColumnValueStringList(s, schemas.SkewedInfo_SkewedColumnValues, v.SkewedColumnValues)
+	}
 }
 func (v *SkewedInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SkewedInfo, func(s *smithy.Schema) error {
@@ -29647,7 +31070,9 @@ func (v *SnowflakeNodeData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != nil {
 		s.WriteString(schemas.SnowflakeNodeData_Action, *v.Action)
 	}
-	serializeAdditionalOptions(s, schemas.SnowflakeNodeData_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.SnowflakeNodeData_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.AutoPushdown != false {
 		s.WriteBool(schemas.SnowflakeNodeData_AutoPushdown, v.AutoPushdown)
 	}
@@ -29688,7 +31113,9 @@ func (v *SnowflakeNodeData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Schema != nil {
 		s.WriteString(schemas.SnowflakeNodeData_Schema, *v.Schema)
 	}
-	serializeOptionList(s, schemas.SnowflakeNodeData_SelectedColumns, v.SelectedColumns)
+	if v.SelectedColumns != nil {
+		serializeOptionList(s, schemas.SnowflakeNodeData_SelectedColumns, v.SelectedColumns)
+	}
 	if v.SourceType != nil {
 		s.WriteString(schemas.SnowflakeNodeData_SourceType, *v.SourceType)
 	}
@@ -29698,7 +31125,9 @@ func (v *SnowflakeNodeData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Table != nil {
 		s.WriteString(schemas.SnowflakeNodeData_Table, *v.Table)
 	}
-	serializeOptionList(s, schemas.SnowflakeNodeData_TableSchema, v.TableSchema)
+	if v.TableSchema != nil {
+		serializeOptionList(s, schemas.SnowflakeNodeData_TableSchema, v.TableSchema)
+	}
 	if v.TempDir != nil {
 		s.WriteString(schemas.SnowflakeNodeData_TempDir, *v.TempDir)
 	}
@@ -29806,7 +31235,9 @@ func (v *SnowflakeSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SnowflakeSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.SnowflakeSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.SnowflakeSource_OutputSchemas, v.OutputSchemas)
+	}
 }
 func (v *SnowflakeSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SnowflakeSource, func(s *smithy.Schema) error {
@@ -29855,7 +31286,9 @@ func (v *SnowflakeTarget) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Data.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOneInput(s, schemas.SnowflakeTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.SnowflakeTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SnowflakeTarget_Name, *v.Name)
 	}
@@ -29970,7 +31403,9 @@ func (v *SourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestMethod != "" {
 		s.WriteString(schemas.SourceConfiguration_RequestMethod, string(v.RequestMethod))
 	}
-	serializeConnectorPropertyList(s, schemas.SourceConfiguration_RequestParameters, v.RequestParameters)
+	if v.RequestParameters != nil {
+		serializeConnectorPropertyList(s, schemas.SourceConfiguration_RequestParameters, v.RequestParameters)
+	}
 	if v.RequestPath != nil {
 		s.WriteString(schemas.SourceConfiguration_RequestPath, *v.RequestPath)
 	}
@@ -30171,11 +31606,15 @@ func (v *SourceTableConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceTableConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceTableFieldsList(s, schemas.SourceTableConfig_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeSourceTableFieldsList(s, schemas.SourceTableConfig_Fields, v.Fields)
+	}
 	if v.FilterPredicate != nil {
 		s.WriteString(schemas.SourceTableConfig_FilterPredicate, *v.FilterPredicate)
 	}
-	serializePrimaryKeyList(s, schemas.SourceTableConfig_PrimaryKey, v.PrimaryKey)
+	if v.PrimaryKey != nil {
+		serializePrimaryKeyList(s, schemas.SourceTableConfig_PrimaryKey, v.PrimaryKey)
+	}
 	if v.RecordUpdateField != nil {
 		s.WriteString(schemas.SourceTableConfig_RecordUpdateField, *v.RecordUpdateField)
 	}
@@ -30239,7 +31678,9 @@ func (v *SparkConnectorSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparkConnectorSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.SparkConnectorSource_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.SparkConnectorSource_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.ConnectionName != nil {
 		s.WriteString(schemas.SparkConnectorSource_ConnectionName, *v.ConnectionName)
 	}
@@ -30252,7 +31693,9 @@ func (v *SparkConnectorSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SparkConnectorSource_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.SparkConnectorSource_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.SparkConnectorSource_OutputSchemas, v.OutputSchemas)
+	}
 }
 func (v *SparkConnectorSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparkConnectorSource, func(s *smithy.Schema) error {
@@ -30323,7 +31766,9 @@ func (v *SparkConnectorTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparkConnectorTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalOptions(s, schemas.SparkConnectorTarget_AdditionalOptions, v.AdditionalOptions)
+	if v.AdditionalOptions != nil {
+		serializeAdditionalOptions(s, schemas.SparkConnectorTarget_AdditionalOptions, v.AdditionalOptions)
+	}
 	if v.ConnectionName != nil {
 		s.WriteString(schemas.SparkConnectorTarget_ConnectionName, *v.ConnectionName)
 	}
@@ -30333,11 +31778,15 @@ func (v *SparkConnectorTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorName != nil {
 		s.WriteString(schemas.SparkConnectorTarget_ConnectorName, *v.ConnectorName)
 	}
-	serializeOneInput(s, schemas.SparkConnectorTarget_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.SparkConnectorTarget_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SparkConnectorTarget_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.SparkConnectorTarget_OutputSchemas, v.OutputSchemas)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.SparkConnectorTarget_OutputSchemas, v.OutputSchemas)
+	}
 }
 func (v *SparkConnectorTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparkConnectorTarget, func(s *smithy.Schema) error {
@@ -30411,12 +31860,18 @@ func (v *SparkSQL) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparkSQL) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManyInputs(s, schemas.SparkSQL_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeManyInputs(s, schemas.SparkSQL_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SparkSQL_Name, *v.Name)
 	}
-	serializeGlueSchemas(s, schemas.SparkSQL_OutputSchemas, v.OutputSchemas)
-	serializeSqlAliases(s, schemas.SparkSQL_SqlAliases, v.SqlAliases)
+	if v.OutputSchemas != nil {
+		serializeGlueSchemas(s, schemas.SparkSQL_OutputSchemas, v.OutputSchemas)
+	}
+	if v.SqlAliases != nil {
+		serializeSqlAliases(s, schemas.SparkSQL_SqlAliases, v.SqlAliases)
+	}
 	if v.SqlQuery != nil {
 		s.WriteString(schemas.SparkSQL_SqlQuery, *v.SqlQuery)
 	}
@@ -30479,7 +31934,9 @@ func (v *Spigot) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Spigot) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.Spigot_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.Spigot_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Spigot_Name, *v.Name)
 	}
@@ -30545,11 +32002,15 @@ func (v *SplitFields) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SplitFields) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneInput(s, schemas.SplitFields_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeOneInput(s, schemas.SplitFields_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SplitFields_Name, *v.Name)
 	}
-	serializeGlueStudioPathList(s, schemas.SplitFields_Paths, v.Paths)
+	if v.Paths != nil {
+		serializeGlueStudioPathList(s, schemas.SplitFields_Paths, v.Paths)
+	}
 }
 func (v *SplitFields) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SplitFields, func(s *smithy.Schema) error {
@@ -30787,7 +32248,9 @@ func (v *StatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.StatementOutput_Status, string(v.Status))
 	}
-	serializeOrchestrationStringList(s, schemas.StatementOutput_Traceback, v.Traceback)
+	if v.Traceback != nil {
+		serializeOrchestrationStringList(s, schemas.StatementOutput_Traceback, v.Traceback)
+	}
 }
 func (v *StatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StatementOutput, func(s *smithy.Schema) error {
@@ -31038,7 +32501,9 @@ func (v *StatisticSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StatisticSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnNameList(s, schemas.StatisticSummary_ColumnsReferenced, v.ColumnsReferenced)
+	if v.ColumnsReferenced != nil {
+		serializeColumnNameList(s, schemas.StatisticSummary_ColumnsReferenced, v.ColumnsReferenced)
+	}
 	if v.DistributionValue != nil {
 		s.WriteStruct(schemas.StatisticSummary_DistributionValue)
 		v.DistributionValue.SerializeMembers(s)
@@ -31061,7 +32526,9 @@ func (v *StatisticSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordedOn != nil {
 		s.WriteTime(schemas.StatisticSummary_RecordedOn, *v.RecordedOn)
 	}
-	serializeReferenceDatasetsList(s, schemas.StatisticSummary_ReferencedDatasets, v.ReferencedDatasets)
+	if v.ReferencedDatasets != nil {
+		serializeReferenceDatasetsList(s, schemas.StatisticSummary_ReferencedDatasets, v.ReferencedDatasets)
+	}
 	if v.RunIdentifier != nil {
 		s.WriteStruct(schemas.StatisticSummary_RunIdentifier)
 		v.RunIdentifier.SerializeMembers(s)
@@ -31073,7 +32540,9 @@ func (v *StatisticSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatisticName != nil {
 		s.WriteString(schemas.StatisticSummary_StatisticName, *v.StatisticName)
 	}
-	serializeStatisticPropertiesMap(s, schemas.StatisticSummary_StatisticProperties, v.StatisticProperties)
+	if v.StatisticProperties != nil {
+		serializeStatisticPropertiesMap(s, schemas.StatisticSummary_StatisticProperties, v.StatisticProperties)
+	}
 }
 func (v *StatisticSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StatisticSummary, func(s *smithy.Schema) error {
@@ -31144,7 +32613,9 @@ func (v *StatusDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RequestedChange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeViewValidationList(s, schemas.StatusDetails_ViewValidations, v.ViewValidations)
+	if v.ViewValidations != nil {
+		serializeViewValidationList(s, schemas.StatusDetails_ViewValidations, v.ViewValidations)
+	}
 }
 func (v *StatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StatusDetails, func(s *smithy.Schema) error {
@@ -31222,9 +32693,15 @@ func (v *StorageDescriptor) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StorageDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationStringList(s, schemas.StorageDescriptor_AdditionalLocations, v.AdditionalLocations)
-	serializeNameStringList(s, schemas.StorageDescriptor_BucketColumns, v.BucketColumns)
-	serializeColumnList(s, schemas.StorageDescriptor_Columns, v.Columns)
+	if v.AdditionalLocations != nil {
+		serializeLocationStringList(s, schemas.StorageDescriptor_AdditionalLocations, v.AdditionalLocations)
+	}
+	if v.BucketColumns != nil {
+		serializeNameStringList(s, schemas.StorageDescriptor_BucketColumns, v.BucketColumns)
+	}
+	if v.Columns != nil {
+		serializeColumnList(s, schemas.StorageDescriptor_Columns, v.Columns)
+	}
 	if v.Compressed != false {
 		s.WriteBool(schemas.StorageDescriptor_Compressed, v.Compressed)
 	}
@@ -31240,7 +32717,9 @@ func (v *StorageDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputFormat != nil {
 		s.WriteString(schemas.StorageDescriptor_OutputFormat, *v.OutputFormat)
 	}
-	serializeParametersMap(s, schemas.StorageDescriptor_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.StorageDescriptor_Parameters, v.Parameters)
+	}
 	if v.SchemaReference != nil {
 		s.WriteStruct(schemas.StorageDescriptor_SchemaReference)
 		v.SchemaReference.SerializeMembers(s)
@@ -31256,7 +32735,9 @@ func (v *StorageDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SkewedInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOrderList(s, schemas.StorageDescriptor_SortColumns, v.SortColumns)
+	if v.SortColumns != nil {
+		serializeOrderList(s, schemas.StorageDescriptor_SortColumns, v.SortColumns)
+	}
 	if v.StoredAsSubDirectories != false {
 		s.WriteBool(schemas.StorageDescriptor_StoredAsSubDirectories, v.StoredAsSubDirectories)
 	}
@@ -31687,8 +33168,12 @@ func (v *Table) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != nil {
 		s.WriteString(schemas.Table_Owner, *v.Owner)
 	}
-	serializeParametersMap(s, schemas.Table_Parameters, v.Parameters)
-	serializeColumnList(s, schemas.Table_PartitionKeys, v.PartitionKeys)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.Table_Parameters, v.Parameters)
+	}
+	if v.PartitionKeys != nil {
+		serializeColumnList(s, schemas.Table_PartitionKeys, v.PartitionKeys)
+	}
 	if v.RLSProperties != nil {
 		s.WriteStruct(schemas.Table_RLSProperties)
 		v.RLSProperties.SerializeMembers(s)
@@ -32022,8 +33507,12 @@ func (v *TableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != nil {
 		s.WriteString(schemas.TableInput_Owner, *v.Owner)
 	}
-	serializeParametersMap(s, schemas.TableInput_Parameters, v.Parameters)
-	serializeColumnList(s, schemas.TableInput_PartitionKeys, v.PartitionKeys)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.TableInput_Parameters, v.Parameters)
+	}
+	if v.PartitionKeys != nil {
+		serializeColumnList(s, schemas.TableInput_PartitionKeys, v.PartitionKeys)
+	}
 	if v.Retention != 0 {
 		s.WriteInt32(schemas.TableInput_Retention, v.Retention)
 	}
@@ -32242,7 +33731,9 @@ func (v *TableOptimizerConfiguration) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RoleArn != nil {
 		s.WriteString(schemas.TableOptimizerConfiguration_roleArn, *v.RoleArn)
 	}
-	serializeTableOptimizerVpcConfiguration(s, schemas.TableOptimizerConfiguration_vpcConfiguration, v.VpcConfiguration)
+	if v.VpcConfiguration != nil {
+		serializeTableOptimizerVpcConfiguration(s, schemas.TableOptimizerConfiguration_vpcConfiguration, v.VpcConfiguration)
+	}
 }
 func (v *TableOptimizerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableOptimizerConfiguration, func(s *smithy.Schema) error {
@@ -32820,7 +34311,9 @@ func (v *TargetTableConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.TargetTableConfig_IntegrationArn, *v.IntegrationArn)
 	}
-	serializeIntegrationPartitionSpecList(s, schemas.TargetTableConfig_PartitionSpec, v.PartitionSpec)
+	if v.PartitionSpec != nil {
+		serializeIntegrationPartitionSpecList(s, schemas.TargetTableConfig_PartitionSpec, v.PartitionSpec)
+	}
 	if v.TargetTableName != nil {
 		s.WriteString(schemas.TargetTableConfig_TargetTableName, *v.TargetTableName)
 	}
@@ -33215,7 +34708,9 @@ func (v *TestConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AuthenticationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectionProperties(s, schemas.TestConnectionInput_ConnectionProperties, v.ConnectionProperties)
+	if v.ConnectionProperties != nil {
+		serializeConnectionProperties(s, schemas.TestConnectionInput_ConnectionProperties, v.ConnectionProperties)
+	}
 	if v.ConnectionType != "" {
 		s.WriteString(schemas.TestConnectionInput_ConnectionType, string(v.ConnectionType))
 	}
@@ -33383,7 +34878,9 @@ func (v *TransformConfigParameter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ValidationRule != nil {
 		s.WriteString(schemas.TransformConfigParameter_ValidationRule, *v.ValidationRule)
 	}
-	serializeEnclosedInStringProperties(s, schemas.TransformConfigParameter_Value, v.Value)
+	if v.Value != nil {
+		serializeEnclosedInStringProperties(s, schemas.TransformConfigParameter_Value, v.Value)
+	}
 }
 func (v *TransformConfigParameter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TransformConfigParameter, func(s *smithy.Schema) error {
@@ -33538,7 +35035,9 @@ func (v *TransformFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TransformFilterCriteria_Name, *v.Name)
 	}
-	serializeTransformSchema(s, schemas.TransformFilterCriteria_Schema, v.Schema)
+	if v.Schema != nil {
+		serializeTransformSchema(s, schemas.TransformFilterCriteria_Schema, v.Schema)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.TransformFilterCriteria_Status, string(v.Status))
 	}
@@ -33742,7 +35241,9 @@ func (v *Trigger) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Trigger) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.Trigger_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.Trigger_Actions, v.Actions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Trigger_Description, *v.Description)
 	}
@@ -33889,7 +35390,9 @@ func (v *TriggerUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TriggerUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.TriggerUpdate_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.TriggerUpdate_Actions, v.Actions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.TriggerUpdate_Description, *v.Description)
 	}
@@ -33958,7 +35461,9 @@ func (v *UnfilteredPartition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UnfilteredPartition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNameStringList(s, schemas.UnfilteredPartition_AuthorizedColumns, v.AuthorizedColumns)
+	if v.AuthorizedColumns != nil {
+		serializeNameStringList(s, schemas.UnfilteredPartition_AuthorizedColumns, v.AuthorizedColumns)
+	}
 	if v.IsRegisteredWithLakeFormation != false {
 		s.WriteBool(schemas.UnfilteredPartition_IsRegisteredWithLakeFormation, v.IsRegisteredWithLakeFormation)
 	}
@@ -34017,7 +35522,9 @@ func (v *Union) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Union) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTwoInputs(s, schemas.Union_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeTwoInputs(s, schemas.Union_Inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Union_Name, *v.Name)
 	}
@@ -34103,14 +35610,18 @@ func (v *UpdateCsvClassifierRequest) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CustomDatatypeConfigured != nil {
 		s.WriteBool(schemas.UpdateCsvClassifierRequest_CustomDatatypeConfigured, *v.CustomDatatypeConfigured)
 	}
-	serializeCustomDatatypes(s, schemas.UpdateCsvClassifierRequest_CustomDatatypes, v.CustomDatatypes)
+	if v.CustomDatatypes != nil {
+		serializeCustomDatatypes(s, schemas.UpdateCsvClassifierRequest_CustomDatatypes, v.CustomDatatypes)
+	}
 	if v.Delimiter != nil {
 		s.WriteString(schemas.UpdateCsvClassifierRequest_Delimiter, *v.Delimiter)
 	}
 	if v.DisableValueTrimming != nil {
 		s.WriteBool(schemas.UpdateCsvClassifierRequest_DisableValueTrimming, *v.DisableValueTrimming)
 	}
-	serializeCsvHeader(s, schemas.UpdateCsvClassifierRequest_Header, v.Header)
+	if v.Header != nil {
+		serializeCsvHeader(s, schemas.UpdateCsvClassifierRequest_Header, v.Header)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateCsvClassifierRequest_Name, *v.Name)
 	}
@@ -34286,7 +35797,9 @@ func (v *UpdateIcebergTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateIcebergTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergTableUpdateList(s, schemas.UpdateIcebergTableInput_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeIcebergTableUpdateList(s, schemas.UpdateIcebergTableInput_Updates, v.Updates)
+	}
 }
 func (v *UpdateIcebergTableInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateIcebergTableInput, func(s *smithy.Schema) error {
@@ -34462,7 +35975,9 @@ func (v *UpsertRedshiftTargetOptions) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TableLocation != nil {
 		s.WriteString(schemas.UpsertRedshiftTargetOptions_TableLocation, *v.TableLocation)
 	}
-	serializeEnclosedInStringPropertiesMinOne(s, schemas.UpsertRedshiftTargetOptions_UpsertKeys, v.UpsertKeys)
+	if v.UpsertKeys != nil {
+		serializeEnclosedInStringPropertiesMinOne(s, schemas.UpsertRedshiftTargetOptions_UpsertKeys, v.UpsertKeys)
+	}
 }
 func (v *UpsertRedshiftTargetOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpsertRedshiftTargetOptions, func(s *smithy.Schema) error {
@@ -34541,6 +36056,11 @@ func (v *UsageProfileDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 // Represents the equivalent of a Hive user-defined function ( UDF ) definition.
 type UserDefinedFunction struct {
 
+	// The Amazon S3 location that contains the function's artifacts. This location
+	// must be registered with Lake Formation. Glue returns this field only for
+	// functions whose GovernanceMode is LAKE_FORMATION .
+	ArtifactLocation *string
+
 	// The ID of the Data Catalog in which the function resides.
 	CatalogId *string
 
@@ -34558,6 +36078,12 @@ type UserDefinedFunction struct {
 
 	// The type of the function.
 	FunctionType FunctionType
+
+	// How access to the function is governed. IAM_ONLY means access is controlled by
+	// IAM permissions only. LAKE_FORMATION means Lake Formation permissions ( EXECUTE
+	// , DESCRIBE , ALTER , and DROP ) also control who can run, describe, update, and
+	// delete the function.
+	GovernanceMode GovernanceMode
 
 	// The owner of the function.
 	OwnerName *string
@@ -34578,6 +36104,9 @@ func (v *UserDefinedFunction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserDefinedFunction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactLocation != nil {
+		s.WriteString(schemas.UserDefinedFunction_ArtifactLocation, *v.ArtifactLocation)
+	}
 	if v.CatalogId != nil {
 		s.WriteString(schemas.UserDefinedFunction_CatalogId, *v.CatalogId)
 	}
@@ -34596,17 +36125,25 @@ func (v *UserDefinedFunction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.UserDefinedFunction_FunctionType, string(v.FunctionType))
 	}
+	if v.GovernanceMode != "" {
+		s.WriteString(schemas.UserDefinedFunction_GovernanceMode, string(v.GovernanceMode))
+	}
 	if v.OwnerName != nil {
 		s.WriteString(schemas.UserDefinedFunction_OwnerName, *v.OwnerName)
 	}
 	if v.OwnerType != "" {
 		s.WriteString(schemas.UserDefinedFunction_OwnerType, string(v.OwnerType))
 	}
-	serializeResourceUriList(s, schemas.UserDefinedFunction_ResourceUris, v.ResourceUris)
+	if v.ResourceUris != nil {
+		serializeResourceUriList(s, schemas.UserDefinedFunction_ResourceUris, v.ResourceUris)
+	}
 }
 func (v *UserDefinedFunction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserDefinedFunction, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UserDefinedFunction_ArtifactLocation:
+			v.ArtifactLocation = new(string)
+			return d.ReadString(schemas.UserDefinedFunction_ArtifactLocation, v.ArtifactLocation)
 		case schemas.UserDefinedFunction_CatalogId:
 			v.CatalogId = new(string)
 			return d.ReadString(schemas.UserDefinedFunction_CatalogId, v.CatalogId)
@@ -34629,6 +36166,13 @@ func (v *UserDefinedFunction) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FunctionType = FunctionType(ev)
 			return nil
+		case schemas.UserDefinedFunction_GovernanceMode:
+			var ev string
+			if err := d.ReadString(schemas.UserDefinedFunction_GovernanceMode, &ev); err != nil {
+				return err
+			}
+			v.GovernanceMode = GovernanceMode(ev)
+			return nil
 		case schemas.UserDefinedFunction_OwnerName:
 			v.OwnerName = new(string)
 			return d.ReadString(schemas.UserDefinedFunction_OwnerName, v.OwnerName)
@@ -34649,6 +36193,11 @@ func (v *UserDefinedFunction) Deserialize(d smithy.ShapeDeserializer) error {
 // A structure used to create or update a user-defined function.
 type UserDefinedFunctionInput struct {
 
+	// The Amazon S3 location that contains the function's artifacts. Required when
+	// GovernanceMode is LAKE_FORMATION . You must register the location with Lake
+	// Formation, and every resource URI must be under this location.
+	ArtifactLocation *string
+
 	// The Java class that contains the function code.
 	ClassName *string
 
@@ -34657,6 +36206,25 @@ type UserDefinedFunctionInput struct {
 
 	// The type of the function.
 	FunctionType FunctionType
+
+	// How access to the function is governed. Specify LAKE_FORMATION to manage access
+	// to the function with Lake Formation permissions. If you don't specify a value,
+	// the default is IAM_ONLY . You can't change the governance mode after the
+	// function is created.
+	//
+	// When GovernanceMode is LAKE_FORMATION :
+	//
+	//   - You must be a data lake administrator or have all permissions on the Data
+	//   Catalog with the grant option.
+	//
+	//   - You must have the DATA_LOCATION_ACCESS permission on the ArtifactLocation ,
+	//   unless you're a data lake administrator.
+	//
+	//   - You must specify from 1 to 10 resource URIs, each under the ArtifactLocation
+	//   .
+	//
+	//   - You can't rename the function.
+	GovernanceMode GovernanceMode
 
 	// The owner of the function.
 	OwnerName *string
@@ -34677,6 +36245,9 @@ func (v *UserDefinedFunctionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactLocation != nil {
+		s.WriteString(schemas.UserDefinedFunctionInput_ArtifactLocation, *v.ArtifactLocation)
+	}
 	if v.ClassName != nil {
 		s.WriteString(schemas.UserDefinedFunctionInput_ClassName, *v.ClassName)
 	}
@@ -34686,17 +36257,25 @@ func (v *UserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.UserDefinedFunctionInput_FunctionType, string(v.FunctionType))
 	}
+	if v.GovernanceMode != "" {
+		s.WriteString(schemas.UserDefinedFunctionInput_GovernanceMode, string(v.GovernanceMode))
+	}
 	if v.OwnerName != nil {
 		s.WriteString(schemas.UserDefinedFunctionInput_OwnerName, *v.OwnerName)
 	}
 	if v.OwnerType != "" {
 		s.WriteString(schemas.UserDefinedFunctionInput_OwnerType, string(v.OwnerType))
 	}
-	serializeResourceUriList(s, schemas.UserDefinedFunctionInput_ResourceUris, v.ResourceUris)
+	if v.ResourceUris != nil {
+		serializeResourceUriList(s, schemas.UserDefinedFunctionInput_ResourceUris, v.ResourceUris)
+	}
 }
 func (v *UserDefinedFunctionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserDefinedFunctionInput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UserDefinedFunctionInput_ArtifactLocation:
+			v.ArtifactLocation = new(string)
+			return d.ReadString(schemas.UserDefinedFunctionInput_ArtifactLocation, v.ArtifactLocation)
 		case schemas.UserDefinedFunctionInput_ClassName:
 			v.ClassName = new(string)
 			return d.ReadString(schemas.UserDefinedFunctionInput_ClassName, v.ClassName)
@@ -34709,6 +36288,13 @@ func (v *UserDefinedFunctionInput) Deserialize(d smithy.ShapeDeserializer) error
 				return err
 			}
 			v.FunctionType = FunctionType(ev)
+			return nil
+		case schemas.UserDefinedFunctionInput_GovernanceMode:
+			var ev string
+			if err := d.ReadString(schemas.UserDefinedFunctionInput_GovernanceMode, &ev); err != nil {
+				return err
+			}
+			v.GovernanceMode = GovernanceMode(ev)
 			return nil
 		case schemas.UserDefinedFunctionInput_OwnerName:
 			v.OwnerName = new(string)
@@ -34800,11 +36386,21 @@ func (v *ViewDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RefreshSeconds != nil {
 		s.WriteInt64(schemas.ViewDefinition_RefreshSeconds, *v.RefreshSeconds)
 	}
-	serializeViewRepresentationList(s, schemas.ViewDefinition_Representations, v.Representations)
-	serializeSparkPipelineInfoMap(s, schemas.ViewDefinition_SparkPipelineInfo, v.SparkPipelineInfo)
-	serializeViewSubObjectVersionIdsList(s, schemas.ViewDefinition_SubObjectVersionIds, v.SubObjectVersionIds)
-	serializeViewSubObjectsList(s, schemas.ViewDefinition_SubObjects, v.SubObjects)
-	serializeSubObjectsStatisticsList(s, schemas.ViewDefinition_SubObjectsStatistics, v.SubObjectsStatistics)
+	if v.Representations != nil {
+		serializeViewRepresentationList(s, schemas.ViewDefinition_Representations, v.Representations)
+	}
+	if v.SparkPipelineInfo != nil {
+		serializeSparkPipelineInfoMap(s, schemas.ViewDefinition_SparkPipelineInfo, v.SparkPipelineInfo)
+	}
+	if v.SubObjectVersionIds != nil {
+		serializeViewSubObjectVersionIdsList(s, schemas.ViewDefinition_SubObjectVersionIds, v.SubObjectVersionIds)
+	}
+	if v.SubObjects != nil {
+		serializeViewSubObjectsList(s, schemas.ViewDefinition_SubObjects, v.SubObjects)
+	}
+	if v.SubObjectsStatistics != nil {
+		serializeSubObjectsStatisticsList(s, schemas.ViewDefinition_SubObjectsStatistics, v.SubObjectsStatistics)
+	}
 	if v.ViewVersionId != 0 {
 		s.WriteInt64(schemas.ViewDefinition_ViewVersionId, v.ViewVersionId)
 	}
@@ -34928,11 +36524,21 @@ func (v *ViewDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RefreshSeconds != nil {
 		s.WriteInt64(schemas.ViewDefinitionInput_RefreshSeconds, *v.RefreshSeconds)
 	}
-	serializeViewRepresentationInputList(s, schemas.ViewDefinitionInput_Representations, v.Representations)
-	serializeSparkPipelineInfoMap(s, schemas.ViewDefinitionInput_SparkPipelineInfo, v.SparkPipelineInfo)
-	serializeViewSubObjectVersionIdsList(s, schemas.ViewDefinitionInput_SubObjectVersionIds, v.SubObjectVersionIds)
-	serializeViewSubObjectsList(s, schemas.ViewDefinitionInput_SubObjects, v.SubObjects)
-	serializeSubObjectsStatisticsList(s, schemas.ViewDefinitionInput_SubObjectsStatistics, v.SubObjectsStatistics)
+	if v.Representations != nil {
+		serializeViewRepresentationInputList(s, schemas.ViewDefinitionInput_Representations, v.Representations)
+	}
+	if v.SparkPipelineInfo != nil {
+		serializeSparkPipelineInfoMap(s, schemas.ViewDefinitionInput_SparkPipelineInfo, v.SparkPipelineInfo)
+	}
+	if v.SubObjectVersionIds != nil {
+		serializeViewSubObjectVersionIdsList(s, schemas.ViewDefinitionInput_SubObjectVersionIds, v.SubObjectVersionIds)
+	}
+	if v.SubObjects != nil {
+		serializeViewSubObjectsList(s, schemas.ViewDefinitionInput_SubObjects, v.SubObjects)
+	}
+	if v.SubObjectsStatistics != nil {
+		serializeSubObjectsStatisticsList(s, schemas.ViewDefinitionInput_SubObjectsStatistics, v.SubObjectsStatistics)
+	}
 	if v.ViewVersionId != 0 {
 		s.WriteInt64(schemas.ViewDefinitionInput_ViewVersionId, v.ViewVersionId)
 	}
@@ -35293,7 +36899,9 @@ func (v *Workflow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedOn != nil {
 		s.WriteTime(schemas.Workflow_CreatedOn, *v.CreatedOn)
 	}
-	serializeWorkflowRunProperties(s, schemas.Workflow_DefaultRunProperties, v.DefaultRunProperties)
+	if v.DefaultRunProperties != nil {
+		serializeWorkflowRunProperties(s, schemas.Workflow_DefaultRunProperties, v.DefaultRunProperties)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Workflow_Description, *v.Description)
 	}
@@ -35373,8 +36981,12 @@ func (v *WorkflowGraph) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkflowGraph) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeList(s, schemas.WorkflowGraph_Edges, v.Edges)
-	serializeNodeList(s, schemas.WorkflowGraph_Nodes, v.Nodes)
+	if v.Edges != nil {
+		serializeEdgeList(s, schemas.WorkflowGraph_Edges, v.Edges)
+	}
+	if v.Nodes != nil {
+		serializeNodeList(s, schemas.WorkflowGraph_Nodes, v.Nodes)
+	}
 }
 func (v *WorkflowGraph) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkflowGraph, func(s *smithy.Schema) error {
@@ -35474,7 +37086,9 @@ func (v *WorkflowRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WorkflowRunId != nil {
 		s.WriteString(schemas.WorkflowRun_WorkflowRunId, *v.WorkflowRunId)
 	}
-	serializeWorkflowRunProperties(s, schemas.WorkflowRun_WorkflowRunProperties, v.WorkflowRunProperties)
+	if v.WorkflowRunProperties != nil {
+		serializeWorkflowRunProperties(s, schemas.WorkflowRun_WorkflowRunProperties, v.WorkflowRunProperties)
+	}
 }
 func (v *WorkflowRun) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkflowRun, func(s *smithy.Schema) error {

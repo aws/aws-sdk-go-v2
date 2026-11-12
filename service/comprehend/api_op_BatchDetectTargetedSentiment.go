@@ -59,7 +59,9 @@ func (v *BatchDetectTargetedSentimentInput) SerializeMembers(s smithy.ShapeSeria
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.BatchDetectTargetedSentimentRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeCustomerInputStringList(s, schemas.BatchDetectTargetedSentimentRequest_TextList, v.TextList)
+	if v.TextList != nil {
+		serializeCustomerInputStringList(s, schemas.BatchDetectTargetedSentimentRequest_TextList, v.TextList)
+	}
 }
 
 type BatchDetectTargetedSentimentOutput struct {
@@ -90,8 +92,12 @@ func (v *BatchDetectTargetedSentimentOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchDetectTargetedSentimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchItemErrorList(s, schemas.BatchDetectTargetedSentimentResponse_ErrorList, v.ErrorList)
-	serializeListOfDetectTargetedSentimentResult(s, schemas.BatchDetectTargetedSentimentResponse_ResultList, v.ResultList)
+	if v.ErrorList != nil {
+		serializeBatchItemErrorList(s, schemas.BatchDetectTargetedSentimentResponse_ErrorList, v.ErrorList)
+	}
+	if v.ResultList != nil {
+		serializeListOfDetectTargetedSentimentResult(s, schemas.BatchDetectTargetedSentimentResponse_ResultList, v.ResultList)
+	}
 }
 func (v *BatchDetectTargetedSentimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDetectTargetedSentimentResponse, func(s *smithy.Schema) error {
@@ -119,6 +125,9 @@ func (c *Client) addOperationBatchDetectTargetedSentimentMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

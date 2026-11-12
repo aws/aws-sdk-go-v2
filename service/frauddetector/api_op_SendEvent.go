@@ -77,7 +77,9 @@ func (v *SendEventInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssignedLabel != nil {
 		s.WriteString(schemas.SendEventRequest_assignedLabel, *v.AssignedLabel)
 	}
-	serializelistOfEntities(s, schemas.SendEventRequest_entities, v.Entities)
+	if v.Entities != nil {
+		serializelistOfEntities(s, schemas.SendEventRequest_entities, v.Entities)
+	}
 	if v.EventId != nil {
 		s.WriteString(schemas.SendEventRequest_eventId, *v.EventId)
 	}
@@ -87,7 +89,9 @@ func (v *SendEventInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventTypeName != nil {
 		s.WriteString(schemas.SendEventRequest_eventTypeName, *v.EventTypeName)
 	}
-	serializeEventVariableMap(s, schemas.SendEventRequest_eventVariables, v.EventVariables)
+	if v.EventVariables != nil {
+		serializeEventVariableMap(s, schemas.SendEventRequest_eventVariables, v.EventVariables)
+	}
 	if v.LabelTimestamp != nil {
 		s.WriteString(schemas.SendEventRequest_labelTimestamp, *v.LabelTimestamp)
 	}

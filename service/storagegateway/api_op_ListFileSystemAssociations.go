@@ -91,7 +91,9 @@ func (v *ListFileSystemAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFileSystemAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileSystemAssociationSummaryList(s, schemas.ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList, v.FileSystemAssociationSummaryList)
+	if v.FileSystemAssociationSummaryList != nil {
+		serializeFileSystemAssociationSummaryList(s, schemas.ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList, v.FileSystemAssociationSummaryList)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListFileSystemAssociationsOutput_Marker, *v.Marker)
 	}

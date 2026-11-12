@@ -87,7 +87,9 @@ func (v *RegisterClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RegisterClusterRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.RegisterClusterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RegisterClusterRequest_tags, v.Tags)
+	}
 }
 
 type RegisterClusterOutput struct {

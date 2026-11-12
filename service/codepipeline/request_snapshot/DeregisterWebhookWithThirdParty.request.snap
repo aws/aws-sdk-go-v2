@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/DeregisterWebhookWithThirdParty
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.DeregisterWebhookWithThirdParty
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"webhookName":"__WebhookName__"}
+¿kwebhookNameo__WebhookName__ÿ

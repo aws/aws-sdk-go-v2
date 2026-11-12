@@ -95,7 +95,9 @@ func (v *ListContactEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContactEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationSummaryList(s, schemas.ListContactEvaluationsResponse_EvaluationSummaryList, v.EvaluationSummaryList)
+	if v.EvaluationSummaryList != nil {
+		serializeEvaluationSummaryList(s, schemas.ListContactEvaluationsResponse_EvaluationSummaryList, v.EvaluationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactEvaluationsResponse_NextToken, *v.NextToken)
 	}

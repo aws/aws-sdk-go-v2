@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","subscriptions":[{"activatedAt":946684800,"arn":"__Arn__","createdAt":946684800,"deactivatedAt":946684800,"domainId":"__DomainId__","lastUpdatedAt":946684800,"status":"ACTIVE","subscriptionId":"__SubscriptionId__"},{"activatedAt":946684800,"arn":"__Arn__","createdAt":946684800,"deactivatedAt":946684800,"domainId":"__DomainId__","lastUpdatedAt":946684800,"status":"ACTIVE","subscriptionId":"__SubscriptionId__"}]}

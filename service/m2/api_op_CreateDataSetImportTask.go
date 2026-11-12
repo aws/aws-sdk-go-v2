@@ -62,7 +62,9 @@ func (v *CreateDataSetImportTaskInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateDataSetImportTaskRequest_clientToken, *v.ClientToken)
 	}
-	serializeDataSetImportConfig(s, schemas.CreateDataSetImportTaskRequest_importConfig, v.ImportConfig)
+	if v.ImportConfig != nil {
+		serializeDataSetImportConfig(s, schemas.CreateDataSetImportTaskRequest_importConfig, v.ImportConfig)
+	}
 }
 func (v *CreateDataSetImportTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDataSetImportTaskRequest, func(s *smithy.Schema) error {

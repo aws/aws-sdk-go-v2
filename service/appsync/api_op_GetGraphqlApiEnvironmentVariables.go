@@ -67,7 +67,9 @@ func (v *GetGraphqlApiEnvironmentVariablesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *GetGraphqlApiEnvironmentVariablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariableMap(s, schemas.GetGraphqlApiEnvironmentVariablesResponse_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariableMap(s, schemas.GetGraphqlApiEnvironmentVariablesResponse_environmentVariables, v.EnvironmentVariables)
+	}
 }
 func (v *GetGraphqlApiEnvironmentVariablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetGraphqlApiEnvironmentVariablesResponse, func(s *smithy.Schema) error {

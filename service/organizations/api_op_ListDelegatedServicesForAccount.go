@@ -94,7 +94,9 @@ func (v *ListDelegatedServicesForAccountOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListDelegatedServicesForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDelegatedServices(s, schemas.ListDelegatedServicesForAccountResponse_DelegatedServices, v.DelegatedServices)
+	if v.DelegatedServices != nil {
+		serializeDelegatedServices(s, schemas.ListDelegatedServicesForAccountResponse_DelegatedServices, v.DelegatedServices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDelegatedServicesForAccountResponse_NextToken, *v.NextToken)
 	}

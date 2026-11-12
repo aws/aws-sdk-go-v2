@@ -127,7 +127,9 @@ func (v *ListEfficiencyMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEfficiencyMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEfficiencyMetricsByGroupList(s, schemas.ListEfficiencyMetricsResponse_efficiencyMetricsByGroup, v.EfficiencyMetricsByGroup)
+	if v.EfficiencyMetricsByGroup != nil {
+		serializeEfficiencyMetricsByGroupList(s, schemas.ListEfficiencyMetricsResponse_efficiencyMetricsByGroup, v.EfficiencyMetricsByGroup)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEfficiencyMetricsResponse_nextToken, *v.NextToken)
 	}

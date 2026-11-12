@@ -80,7 +80,9 @@ func (v *StartAppAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartAppAssessmentRequest_clientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.StartAppAssessmentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartAppAssessmentRequest_tags, v.Tags)
+	}
 }
 func (v *StartAppAssessmentInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartAppAssessmentRequest, func(s *smithy.Schema) error {

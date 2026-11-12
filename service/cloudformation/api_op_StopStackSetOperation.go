@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,24 @@ type StopStackSetOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopStackSetOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopStackSetOperationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopStackSetOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.StopStackSetOperationInput_CallAs, string(v.CallAs))
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.StopStackSetOperationInput_OperationId, *v.OperationId)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.StopStackSetOperationInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type StopStackSetOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +87,26 @@ type StopStackSetOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopStackSetOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopStackSetOperationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopStackSetOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopStackSetOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopStackSetOperationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopStackSetOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopStackSetOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopStackSetOperation, schemas.StopStackSetOperationInput, schemas.StopStackSetOperationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStopStackSetOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopStackSetOperation, schemas.StopStackSetOperationInput, schemas.StopStackSetOperationOutput), output: &StopStackSetOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -148,11 +148,15 @@ func (v *CreateReplicationConfigurationTemplateInput) SerializeMembers(s smithy.
 	if v.ReplicationServerInstanceType != nil {
 		s.WriteString(schemas.CreateReplicationConfigurationTemplateRequest_replicationServerInstanceType, *v.ReplicationServerInstanceType)
 	}
-	serializeReplicationServersSecurityGroupsIDs(s, schemas.CreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	if v.ReplicationServersSecurityGroupsIDs != nil {
+		serializeReplicationServersSecurityGroupsIDs(s, schemas.CreateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	}
 	if v.StagingAreaSubnetId != nil {
 		s.WriteString(schemas.CreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId, *v.StagingAreaSubnetId)
 	}
-	serializeTagsMap(s, schemas.CreateReplicationConfigurationTemplateRequest_stagingAreaTags, v.StagingAreaTags)
+	if v.StagingAreaTags != nil {
+		serializeTagsMap(s, schemas.CreateReplicationConfigurationTemplateRequest_stagingAreaTags, v.StagingAreaTags)
+	}
 	if v.StorageConfiguration != nil {
 		s.WriteStruct(schemas.CreateReplicationConfigurationTemplateRequest_storageConfiguration)
 		v.StorageConfiguration.SerializeMembers(s)
@@ -161,7 +165,9 @@ func (v *CreateReplicationConfigurationTemplateInput) SerializeMembers(s smithy.
 	if v.StoreSnapshotOnLocalZone != nil {
 		s.WriteBool(schemas.CreateReplicationConfigurationTemplateRequest_storeSnapshotOnLocalZone, *v.StoreSnapshotOnLocalZone)
 	}
-	serializeTagsMap(s, schemas.CreateReplicationConfigurationTemplateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateReplicationConfigurationTemplateRequest_tags, v.Tags)
+	}
 	if v.UseDedicatedReplicationServer != nil {
 		s.WriteBool(schemas.CreateReplicationConfigurationTemplateRequest_useDedicatedReplicationServer, *v.UseDedicatedReplicationServer)
 	}
@@ -348,11 +354,15 @@ func (v *CreateReplicationConfigurationTemplateOutput) SerializeMembers(s smithy
 	if v.ReplicationServerInstanceType != nil {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_replicationServerInstanceType, *v.ReplicationServerInstanceType)
 	}
-	serializeReplicationServersSecurityGroupsIDs(s, schemas.ReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	if v.ReplicationServersSecurityGroupsIDs != nil {
+		serializeReplicationServersSecurityGroupsIDs(s, schemas.ReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	}
 	if v.StagingAreaSubnetId != nil {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_stagingAreaSubnetId, *v.StagingAreaSubnetId)
 	}
-	serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_stagingAreaTags, v.StagingAreaTags)
+	if v.StagingAreaTags != nil {
+		serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_stagingAreaTags, v.StagingAreaTags)
+	}
 	if v.StorageConfiguration != nil {
 		s.WriteStruct(schemas.ReplicationConfigurationTemplate_storageConfiguration)
 		v.StorageConfiguration.SerializeMembers(s)
@@ -361,7 +371,9 @@ func (v *CreateReplicationConfigurationTemplateOutput) SerializeMembers(s smithy
 	if v.StoreSnapshotOnLocalZone != nil {
 		s.WriteBool(schemas.ReplicationConfigurationTemplate_storeSnapshotOnLocalZone, *v.StoreSnapshotOnLocalZone)
 	}
-	serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_tags, v.Tags)
+	}
 	if v.UseDedicatedReplicationServer != nil {
 		s.WriteBool(schemas.ReplicationConfigurationTemplate_useDedicatedReplicationServer, *v.UseDedicatedReplicationServer)
 	}

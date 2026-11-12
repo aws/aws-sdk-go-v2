@@ -98,7 +98,9 @@ func (v *ListCustomRoutingPortMappingsByDestinationOutput) Serialize(s smithy.Sh
 }
 
 func (v *ListCustomRoutingPortMappingsByDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationPortMappings(s, schemas.ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings, v.DestinationPortMappings)
+	if v.DestinationPortMappings != nil {
+		serializeDestinationPortMappings(s, schemas.ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings, v.DestinationPortMappings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomRoutingPortMappingsByDestinationResponse_NextToken, *v.NextToken)
 	}

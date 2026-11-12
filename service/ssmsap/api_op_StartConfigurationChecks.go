@@ -49,7 +49,9 @@ func (v *StartConfigurationChecksInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.StartConfigurationChecksInput_ApplicationId, *v.ApplicationId)
 	}
-	serializeConfigurationCheckTypeList(s, schemas.StartConfigurationChecksInput_ConfigurationCheckIds, v.ConfigurationCheckIds)
+	if v.ConfigurationCheckIds != nil {
+		serializeConfigurationCheckTypeList(s, schemas.StartConfigurationChecksInput_ConfigurationCheckIds, v.ConfigurationCheckIds)
+	}
 }
 
 type StartConfigurationChecksOutput struct {
@@ -70,7 +72,9 @@ func (v *StartConfigurationChecksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartConfigurationChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationCheckOperationList(s, schemas.StartConfigurationChecksOutput_ConfigurationCheckOperations, v.ConfigurationCheckOperations)
+	if v.ConfigurationCheckOperations != nil {
+		serializeConfigurationCheckOperationList(s, schemas.StartConfigurationChecksOutput_ConfigurationCheckOperations, v.ConfigurationCheckOperations)
+	}
 }
 func (v *StartConfigurationChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartConfigurationChecksOutput, func(s *smithy.Schema) error {

@@ -65,8 +65,12 @@ func (v *UpdateOdbPeeringConnectionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.OdbPeeringConnectionId != nil {
 		s.WriteString(schemas.UpdateOdbPeeringConnectionInput_odbPeeringConnectionId, *v.OdbPeeringConnectionId)
 	}
-	serializePeeredCidrList(s, schemas.UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded, v.PeerNetworkCidrsToBeAdded)
-	serializePeeredCidrList(s, schemas.UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeRemoved, v.PeerNetworkCidrsToBeRemoved)
+	if v.PeerNetworkCidrsToBeAdded != nil {
+		serializePeeredCidrList(s, schemas.UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded, v.PeerNetworkCidrsToBeAdded)
+	}
+	if v.PeerNetworkCidrsToBeRemoved != nil {
+		serializePeeredCidrList(s, schemas.UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeRemoved, v.PeerNetworkCidrsToBeRemoved)
+	}
 }
 
 type UpdateOdbPeeringConnectionOutput struct {

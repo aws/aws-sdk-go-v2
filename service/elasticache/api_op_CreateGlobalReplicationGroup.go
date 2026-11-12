@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,27 @@ type CreateGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlobalReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlobalReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlobalReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroupDescription != nil {
+		s.WriteString(schemas.CreateGlobalReplicationGroupMessage_GlobalReplicationGroupDescription, *v.GlobalReplicationGroupDescription)
+	}
+	if v.GlobalReplicationGroupIdSuffix != nil {
+		s.WriteString(schemas.CreateGlobalReplicationGroupMessage_GlobalReplicationGroupIdSuffix, *v.GlobalReplicationGroupIdSuffix)
+	}
+	if v.PrimaryReplicationGroupId != nil {
+		s.WriteString(schemas.CreateGlobalReplicationGroupMessage_PrimaryReplicationGroupId, *v.PrimaryReplicationGroupId)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGlobalReplicationGroupMessage_Tags, v.Tags)
+	}
+}
+
 type CreateGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
@@ -84,13 +107,34 @@ type CreateGlobalReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlobalReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlobalReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlobalReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroup != nil {
+		s.WriteStruct(schemas.CreateGlobalReplicationGroupResult_GlobalReplicationGroup)
+		v.GlobalReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGlobalReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGlobalReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGlobalReplicationGroupResult_GlobalReplicationGroup:
+			v.GlobalReplicationGroup = &types.GlobalReplicationGroup{}
+			return v.GlobalReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalReplicationGroup, schemas.CreateGlobalReplicationGroupMessage, schemas.CreateGlobalReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalReplicationGroup, schemas.CreateGlobalReplicationGroupMessage, schemas.CreateGlobalReplicationGroupResult), output: &CreateGlobalReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

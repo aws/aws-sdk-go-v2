@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,27 @@ type CopyClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyClusterSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManualSnapshotRetentionPeriod != nil {
+		s.WriteInt32(schemas.CopyClusterSnapshotMessage_ManualSnapshotRetentionPeriod, *v.ManualSnapshotRetentionPeriod)
+	}
+	if v.SourceSnapshotClusterIdentifier != nil {
+		s.WriteString(schemas.CopyClusterSnapshotMessage_SourceSnapshotClusterIdentifier, *v.SourceSnapshotClusterIdentifier)
+	}
+	if v.SourceSnapshotIdentifier != nil {
+		s.WriteString(schemas.CopyClusterSnapshotMessage_SourceSnapshotIdentifier, *v.SourceSnapshotIdentifier)
+	}
+	if v.TargetSnapshotIdentifier != nil {
+		s.WriteString(schemas.CopyClusterSnapshotMessage_TargetSnapshotIdentifier, *v.TargetSnapshotIdentifier)
+	}
+}
+
 type CopyClusterSnapshotOutput struct {
 
 	// Describes a snapshot.
@@ -98,13 +121,34 @@ type CopyClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyClusterSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.CopyClusterSnapshotResult_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyClusterSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyClusterSnapshotResult_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyClusterSnapshot, schemas.CopyClusterSnapshotMessage, schemas.CopyClusterSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyClusterSnapshot, schemas.CopyClusterSnapshotMessage, schemas.CopyClusterSnapshotResult), output: &CopyClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/CreateProvisioningArtifact
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.CreateProvisioningArtifact
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","Parameters":{"Description":"__Description__","DisableTemplateValidation":true,"Info":{"key0":"__Value__"},"Name":"__Name__","Type":"CLOUD_FORMATION_TEMPLATE"},"ProductId":"__ProductId__"}
+¿nAcceptLanguager__AcceptLanguage__pIdempotencyTokent__IdempotencyToken__jParameters¿kDescriptiono__Description__xDisableTemplateValidationõdInfo¿dkey0i__Value__ÿdNameh__Name__dTypexCLOUD_FORMATION_TEMPLATEÿiProductIdm__ProductId__ÿ

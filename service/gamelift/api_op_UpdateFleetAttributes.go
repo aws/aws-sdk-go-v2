@@ -108,7 +108,9 @@ func (v *UpdateFleetAttributesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FleetId != nil {
 		s.WriteString(schemas.UpdateFleetAttributesInput_FleetId, *v.FleetId)
 	}
-	serializeMetricGroupList(s, schemas.UpdateFleetAttributesInput_MetricGroups, v.MetricGroups)
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.UpdateFleetAttributesInput_MetricGroups, v.MetricGroups)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateFleetAttributesInput_Name, *v.Name)
 	}

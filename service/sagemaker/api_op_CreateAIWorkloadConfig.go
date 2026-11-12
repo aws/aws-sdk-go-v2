@@ -70,8 +70,12 @@ func (v *CreateAIWorkloadConfigInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.AIWorkloadConfigs.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAIDatasetConfig(s, schemas.CreateAIWorkloadConfigRequest_DatasetConfig, v.DatasetConfig)
-	serializeTagList(s, schemas.CreateAIWorkloadConfigRequest_Tags, v.Tags)
+	if v.DatasetConfig != nil {
+		serializeAIDatasetConfig(s, schemas.CreateAIWorkloadConfigRequest_DatasetConfig, v.DatasetConfig)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAIWorkloadConfigRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAIWorkloadConfigOutput struct {

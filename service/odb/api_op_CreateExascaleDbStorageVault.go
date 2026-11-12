@@ -12,6 +12,9 @@ import (
 )
 
 // Creates an Exascale storage vault.
+//
+// To create the Exascale storage vault on dedicated Exadata infrastructure,
+// specify cloudExadataInfrastructureId .
 func (c *Client) CreateExascaleDbStorageVault(ctx context.Context, params *CreateExascaleDbStorageVaultInput, optFns ...func(*Options)) (*CreateExascaleDbStorageVaultOutput, error) {
 	if params == nil {
 		params = &CreateExascaleDbStorageVaultInput{}
@@ -60,6 +63,15 @@ type CreateExascaleDbStorageVaultInput struct {
 	// it's first used.
 	ClientToken *string
 
+	// The unique identifier or Amazon Resource Name (ARN) of the Exadata
+	// infrastructure on which to create the Exascale storage vault. Specify this value
+	// to create the Exascale storage vault on dedicated Exadata infrastructure that
+	// has Exascale storage configured. If you specify availabilityZone or
+	// availabilityZoneId , the value must match the Availability Zone of the Exadata
+	// infrastructure. If you specify neither, the service uses the Availability Zone
+	// of the Exadata infrastructure.
+	CloudExadataInfrastructureId *string
+
 	// A description of the Exascale storage vault.
 	Description *string
 
@@ -97,6 +109,9 @@ func (v *CreateExascaleDbStorageVaultInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_clientToken, *v.ClientToken)
 	}
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_description, *v.Description)
 	}
@@ -109,7 +124,9 @@ func (v *CreateExascaleDbStorageVaultInput) SerializeMembers(s smithy.ShapeSeria
 	if v.IsAutoscaleEnabled != nil {
 		s.WriteBool(schemas.CreateExascaleDbStorageVaultInput_isAutoscaleEnabled, *v.IsAutoscaleEnabled)
 	}
-	serializeRequestTagMap(s, schemas.CreateExascaleDbStorageVaultInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateExascaleDbStorageVaultInput_tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_timeZone, *v.TimeZone)
 	}

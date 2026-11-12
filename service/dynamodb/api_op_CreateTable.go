@@ -299,22 +299,30 @@ func (v *CreateTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeDefinitions(s, schemas.CreateTableInput_AttributeDefinitions, v.AttributeDefinitions)
+	if v.AttributeDefinitions != nil {
+		serializeAttributeDefinitions(s, schemas.CreateTableInput_AttributeDefinitions, v.AttributeDefinitions)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.CreateTableInput_BillingMode, string(v.BillingMode))
 	}
 	if v.DeletionProtectionEnabled != nil {
 		s.WriteBool(schemas.CreateTableInput_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
 	}
-	serializeGlobalSecondaryIndexList(s, schemas.CreateTableInput_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeGlobalSecondaryIndexList(s, schemas.CreateTableInput_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
 	if v.GlobalTableSettingsReplicationMode != "" {
 		s.WriteString(schemas.CreateTableInput_GlobalTableSettingsReplicationMode, string(v.GlobalTableSettingsReplicationMode))
 	}
 	if v.GlobalTableSourceArn != nil {
 		s.WriteString(schemas.CreateTableInput_GlobalTableSourceArn, *v.GlobalTableSourceArn)
 	}
-	serializeKeySchema(s, schemas.CreateTableInput_KeySchema, v.KeySchema)
-	serializeLocalSecondaryIndexList(s, schemas.CreateTableInput_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.CreateTableInput_KeySchema, v.KeySchema)
+	}
+	if v.LocalSecondaryIndexes != nil {
+		serializeLocalSecondaryIndexList(s, schemas.CreateTableInput_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	}
 	if v.OnDemandThroughput != nil {
 		s.WriteStruct(schemas.CreateTableInput_OnDemandThroughput)
 		v.OnDemandThroughput.SerializeMembers(s)
@@ -344,8 +352,12 @@ func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.CreateTableInput_TableName, *v.TableName)
 	}
-	serializeTagList(s, schemas.CreateTableInput_Tags, v.Tags)
-	serializeVectorIndexList(s, schemas.CreateTableInput_VectorIndexes, v.VectorIndexes)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTableInput_Tags, v.Tags)
+	}
+	if v.VectorIndexes != nil {
+		serializeVectorIndexList(s, schemas.CreateTableInput_VectorIndexes, v.VectorIndexes)
+	}
 	if v.WarmThroughput != nil {
 		s.WriteStruct(schemas.CreateTableInput_WarmThroughput)
 		v.WarmThroughput.SerializeMembers(s)

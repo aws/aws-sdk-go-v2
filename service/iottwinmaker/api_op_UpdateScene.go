@@ -62,7 +62,9 @@ func (v *UpdateSceneInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSceneInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSceneCapabilities(s, schemas.UpdateSceneRequest_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeSceneCapabilities(s, schemas.UpdateSceneRequest_capabilities, v.Capabilities)
+	}
 	if v.ContentLocation != nil {
 		s.WriteString(schemas.UpdateSceneRequest_contentLocation, *v.ContentLocation)
 	}
@@ -72,7 +74,9 @@ func (v *UpdateSceneInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SceneId != nil {
 		s.WriteString(schemas.UpdateSceneRequest_sceneId, *v.SceneId)
 	}
-	serializeSceneMetadataMap(s, schemas.UpdateSceneRequest_sceneMetadata, v.SceneMetadata)
+	if v.SceneMetadata != nil {
+		serializeSceneMetadataMap(s, schemas.UpdateSceneRequest_sceneMetadata, v.SceneMetadata)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.UpdateSceneRequest_workspaceId, *v.WorkspaceId)
 	}

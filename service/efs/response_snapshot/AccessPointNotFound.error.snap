@@ -1,0 +1,4 @@
+404
+Content-Type: application/json
+
+{"__type":"AccessPointNotFound","ErrorCode":"__ErrorCode___","Message":"__Message__"}

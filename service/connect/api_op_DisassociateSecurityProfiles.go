@@ -70,7 +70,9 @@ func (v *DisassociateSecurityProfilesInput) SerializeMembers(s smithy.ShapeSeria
 	if v.InstanceId != nil {
 		s.WriteString(schemas.DisassociateSecurityProfilesRequest_InstanceId, *v.InstanceId)
 	}
-	serializeSecurityProfiles(s, schemas.DisassociateSecurityProfilesRequest_SecurityProfiles, v.SecurityProfiles)
+	if v.SecurityProfiles != nil {
+		serializeSecurityProfiles(s, schemas.DisassociateSecurityProfilesRequest_SecurityProfiles, v.SecurityProfiles)
+	}
 }
 
 type DisassociateSecurityProfilesOutput struct {

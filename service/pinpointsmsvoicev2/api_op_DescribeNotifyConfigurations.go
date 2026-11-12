@@ -61,14 +61,18 @@ func (v *DescribeNotifyConfigurationsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeNotifyConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotifyConfigurationFilterList(s, schemas.DescribeNotifyConfigurationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeNotifyConfigurationFilterList(s, schemas.DescribeNotifyConfigurationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeNotifyConfigurationsRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeNotifyConfigurationsRequest_NextToken, *v.NextToken)
 	}
-	serializeNotifyConfigurationIdList(s, schemas.DescribeNotifyConfigurationsRequest_NotifyConfigurationIds, v.NotifyConfigurationIds)
+	if v.NotifyConfigurationIds != nil {
+		serializeNotifyConfigurationIdList(s, schemas.DescribeNotifyConfigurationsRequest_NotifyConfigurationIds, v.NotifyConfigurationIds)
+	}
 }
 
 type DescribeNotifyConfigurationsOutput struct {
@@ -96,7 +100,9 @@ func (v *DescribeNotifyConfigurationsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeNotifyConfigurationsResult_NextToken, *v.NextToken)
 	}
-	serializeNotifyConfigurationInformationList(s, schemas.DescribeNotifyConfigurationsResult_NotifyConfigurations, v.NotifyConfigurations)
+	if v.NotifyConfigurations != nil {
+		serializeNotifyConfigurationInformationList(s, schemas.DescribeNotifyConfigurationsResult_NotifyConfigurations, v.NotifyConfigurations)
+	}
 }
 func (v *DescribeNotifyConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeNotifyConfigurationsResult, func(s *smithy.Schema) error {

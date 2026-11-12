@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -359,6 +361,105 @@ type CreateCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCacheClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCacheClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCacheClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AZMode != "" {
+		s.WriteString(schemas.CreateCacheClusterMessage_AZMode, string(v.AZMode))
+	}
+	if v.AuthToken != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_AuthToken, *v.AuthToken)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateCacheClusterMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.CacheNodeType != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_CacheNodeType, *v.CacheNodeType)
+	}
+	if v.CacheParameterGroupName != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_CacheParameterGroupName, *v.CacheParameterGroupName)
+	}
+	if v.CacheSecurityGroupNames != nil {
+		serializeCacheSecurityGroupNameList(s, schemas.CreateCacheClusterMessage_CacheSecurityGroupNames, v.CacheSecurityGroupNames)
+	}
+	if v.CacheSubnetGroupName != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_CacheSubnetGroupName, *v.CacheSubnetGroupName)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.IpDiscovery != "" {
+		s.WriteString(schemas.CreateCacheClusterMessage_IpDiscovery, string(v.IpDiscovery))
+	}
+	if v.LogDeliveryConfigurations != nil {
+		serializeLogDeliveryConfigurationRequestList(s, schemas.CreateCacheClusterMessage_LogDeliveryConfigurations, v.LogDeliveryConfigurations)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateCacheClusterMessage_NetworkType, string(v.NetworkType))
+	}
+	if v.NotificationTopicArn != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_NotificationTopicArn, *v.NotificationTopicArn)
+	}
+	if v.NumCacheNodes != nil {
+		s.WriteInt32(schemas.CreateCacheClusterMessage_NumCacheNodes, *v.NumCacheNodes)
+	}
+	if v.OutpostMode != "" {
+		s.WriteString(schemas.CreateCacheClusterMessage_OutpostMode, string(v.OutpostMode))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.CreateCacheClusterMessage_Port, *v.Port)
+	}
+	if v.PreferredAvailabilityZone != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_PreferredAvailabilityZone, *v.PreferredAvailabilityZone)
+	}
+	if v.PreferredAvailabilityZones != nil {
+		serializePreferredAvailabilityZoneList(s, schemas.CreateCacheClusterMessage_PreferredAvailabilityZones, v.PreferredAvailabilityZones)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PreferredOutpostArn != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_PreferredOutpostArn, *v.PreferredOutpostArn)
+	}
+	if v.PreferredOutpostArns != nil {
+		serializePreferredOutpostArnList(s, schemas.CreateCacheClusterMessage_PreferredOutpostArns, v.PreferredOutpostArns)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.CreateCacheClusterMessage_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SnapshotArns != nil {
+		serializeSnapshotArnsList(s, schemas.CreateCacheClusterMessage_SnapshotArns, v.SnapshotArns)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_SnapshotName, *v.SnapshotName)
+	}
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.CreateCacheClusterMessage_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SnapshotWindow != nil {
+		s.WriteString(schemas.CreateCacheClusterMessage_SnapshotWindow, *v.SnapshotWindow)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCacheClusterMessage_Tags, v.Tags)
+	}
+	if v.TransitEncryptionEnabled != nil {
+		s.WriteBool(schemas.CreateCacheClusterMessage_TransitEncryptionEnabled, *v.TransitEncryptionEnabled)
+	}
+}
+
 type CreateCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.
@@ -370,13 +471,34 @@ type CreateCacheClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCacheClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCacheClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCacheClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheCluster != nil {
+		s.WriteStruct(schemas.CreateCacheClusterResult_CacheCluster)
+		v.CacheCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCacheClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCacheClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCacheClusterResult_CacheCluster:
+			v.CacheCluster = &types.CacheCluster{}
+			return v.CacheCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCacheCluster, schemas.CreateCacheClusterMessage, schemas.CreateCacheClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCacheCluster, schemas.CreateCacheClusterMessage, schemas.CreateCacheClusterResult), output: &CreateCacheClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -41,6 +41,12 @@ type ListRealtimeContactAnalysisSegmentsInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// A filter that limits the category segments returned by the operation. When
+	// provided, use CategoriesAttributeFilter to return only the category segments
+	// whose rules have tags that match the filter. This enforces tag-based access
+	// control on the categories that the caller can view.
+	ListFilter *types.RealTimeContactAnalysisSegmentsFilter
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
@@ -63,6 +69,11 @@ func (v *ListRealtimeContactAnalysisSegmentsInput) SerializeMembers(s smithy.Sha
 	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ListFilter != nil {
+		s.WriteStruct(schemas.ListRealtimeContactAnalysisSegmentsRequest_ListFilter)
+		v.ListFilter.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRealtimeContactAnalysisSegmentsRequest_MaxResults, *v.MaxResults)
@@ -108,7 +119,9 @@ func (v *ListRealtimeContactAnalysisSegmentsOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsResponse_NextToken, *v.NextToken)
 	}
-	serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsResponse_Segments, v.Segments)
+	if v.Segments != nil {
+		serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsResponse_Segments, v.Segments)
+	}
 }
 func (v *ListRealtimeContactAnalysisSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRealtimeContactAnalysisSegmentsResponse, func(s *smithy.Schema) error {

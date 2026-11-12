@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failureMessage":"__FailureMessage__","lastRunTimestamp":"2000-01-01T00:00:00Z","metrics":{"deletedDataFiles":1,"deletedRecords":1,"removedFilesSize":1},"status":"NotYetRun"}

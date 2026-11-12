@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.UpdateSnapshotCopyConfiguration
+
+{"snapshotCopyConfiguration":{"destinationKmsKeyId":"__DestinationKmsKeyId__","destinationRegion":"__DestinationRegion__","namespaceName":"__NamespaceName__","snapshotCopyConfigurationArn":"__SnapshotCopyConfigurationArn__","snapshotCopyConfigurationId":"__SnapshotCopyConfigurationId__","snapshotRetentionPeriod":1}}

@@ -77,7 +77,9 @@ func (v *ListSourceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceAssociationsRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceShareArnList(s, schemas.ListSourceAssociationsRequest_resourceShareArns, v.ResourceShareArns)
+	if v.ResourceShareArns != nil {
+		serializeResourceShareArnList(s, schemas.ListSourceAssociationsRequest_resourceShareArns, v.ResourceShareArns)
+	}
 	if v.SourceId != nil {
 		s.WriteString(schemas.ListSourceAssociationsRequest_sourceId, *v.SourceId)
 	}
@@ -111,7 +113,9 @@ func (v *ListSourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceAssociationsResponse_nextToken, *v.NextToken)
 	}
-	serializeAssociatedSourceList(s, schemas.ListSourceAssociationsResponse_sourceAssociations, v.SourceAssociations)
+	if v.SourceAssociations != nil {
+		serializeAssociatedSourceList(s, schemas.ListSourceAssociationsResponse_sourceAssociations, v.SourceAssociations)
+	}
 }
 func (v *ListSourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSourceAssociationsResponse, func(s *smithy.Schema) error {

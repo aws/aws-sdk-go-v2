@@ -49,7 +49,9 @@ func (v *BatchDeleteInstrumentationConfigurationsInput) Serialize(s smithy.Shape
 }
 
 func (v *BatchDeleteInstrumentationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteDeletionTarget(s, schemas.BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget, v.DeletionTarget)
+	if v.DeletionTarget != nil {
+		serializeBatchDeleteDeletionTarget(s, schemas.BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget, v.DeletionTarget)
+	}
 }
 
 type BatchDeleteInstrumentationConfigurationsOutput struct {
@@ -89,8 +91,12 @@ func (v *BatchDeleteInstrumentationConfigurationsOutput) SerializeMembers(s smit
 	if v.DeletedCount != nil {
 		s.WriteInt32(schemas.BatchDeleteInstrumentationConfigurationsResponse_DeletedCount, *v.DeletedCount)
 	}
-	serializeBatchDeleteErrorList(s, schemas.BatchDeleteInstrumentationConfigurationsResponse_Errors, v.Errors)
-	serializeBatchDeleteSuccessfulDeletionList(s, schemas.BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions, v.SuccessfulDeletions)
+	if v.Errors != nil {
+		serializeBatchDeleteErrorList(s, schemas.BatchDeleteInstrumentationConfigurationsResponse_Errors, v.Errors)
+	}
+	if v.SuccessfulDeletions != nil {
+		serializeBatchDeleteSuccessfulDeletionList(s, schemas.BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions, v.SuccessfulDeletions)
+	}
 }
 func (v *BatchDeleteInstrumentationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteInstrumentationConfigurationsResponse, func(s *smithy.Schema) error {

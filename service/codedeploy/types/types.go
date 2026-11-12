@@ -72,7 +72,9 @@ func (v *AlarmConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AlarmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmList(s, schemas.AlarmConfiguration_alarms, v.Alarms)
+	if v.Alarms != nil {
+		serializeAlarmList(s, schemas.AlarmConfiguration_alarms, v.Alarms)
+	}
 	if v.Enabled != false {
 		s.WriteBool(schemas.AlarmConfiguration_enabled, v.Enabled)
 	}
@@ -255,7 +257,9 @@ func (v *AutoRollbackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != false {
 		s.WriteBool(schemas.AutoRollbackConfiguration_enabled, v.Enabled)
 	}
-	serializeAutoRollbackEventsList(s, schemas.AutoRollbackConfiguration_events, v.Events)
+	if v.Events != nil {
+		serializeAutoRollbackEventsList(s, schemas.AutoRollbackConfiguration_events, v.Events)
+	}
 }
 func (v *AutoRollbackConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoRollbackConfiguration, func(s *smithy.Schema) error {
@@ -492,7 +496,9 @@ func (v *CloudFormationTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.CloudFormationTarget_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeLifecycleEventList(s, schemas.CloudFormationTarget_lifecycleEvents, v.LifecycleEvents)
+	if v.LifecycleEvents != nil {
+		serializeLifecycleEventList(s, schemas.CloudFormationTarget_lifecycleEvents, v.LifecycleEvents)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.CloudFormationTarget_resourceType, *v.ResourceType)
 	}
@@ -668,6 +674,10 @@ type DeploymentGroupInfo struct {
 	// want to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *DeploymentStyle
 
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *EC2DeploymentOptions
+
 	// The Amazon EC2 tags on which to filter. The deployment group includes EC2
 	// instances with any of the specified tags.
 	Ec2TagFilters []EC2TagFilter
@@ -759,7 +769,9 @@ func (v *DeploymentGroupInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoRollbackConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoScalingGroupList(s, schemas.DeploymentGroupInfo_autoScalingGroups, v.AutoScalingGroups)
+	if v.AutoScalingGroups != nil {
+		serializeAutoScalingGroupList(s, schemas.DeploymentGroupInfo_autoScalingGroups, v.AutoScalingGroups)
+	}
 	if v.BlueGreenDeploymentConfiguration != nil {
 		s.WriteStruct(schemas.DeploymentGroupInfo_blueGreenDeploymentConfiguration)
 		v.BlueGreenDeploymentConfiguration.SerializeMembers(s)
@@ -782,13 +794,22 @@ func (v *DeploymentGroupInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeploymentStyle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEC2TagFilterList(s, schemas.DeploymentGroupInfo_ec2TagFilters, v.Ec2TagFilters)
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.DeploymentGroupInfo_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ec2TagFilters != nil {
+		serializeEC2TagFilterList(s, schemas.DeploymentGroupInfo_ec2TagFilters, v.Ec2TagFilters)
+	}
 	if v.Ec2TagSet != nil {
 		s.WriteStruct(schemas.DeploymentGroupInfo_ec2TagSet)
 		v.Ec2TagSet.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeECSServiceList(s, schemas.DeploymentGroupInfo_ecsServices, v.EcsServices)
+	if v.EcsServices != nil {
+		serializeECSServiceList(s, schemas.DeploymentGroupInfo_ecsServices, v.EcsServices)
+	}
 	if v.LastAttemptedDeployment != nil {
 		s.WriteStruct(schemas.DeploymentGroupInfo_lastAttemptedDeployment)
 		v.LastAttemptedDeployment.SerializeMembers(s)
@@ -804,7 +825,9 @@ func (v *DeploymentGroupInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LoadBalancerInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagFilterList(s, schemas.DeploymentGroupInfo_onPremisesInstanceTagFilters, v.OnPremisesInstanceTagFilters)
+	if v.OnPremisesInstanceTagFilters != nil {
+		serializeTagFilterList(s, schemas.DeploymentGroupInfo_onPremisesInstanceTagFilters, v.OnPremisesInstanceTagFilters)
+	}
 	if v.OnPremisesTagSet != nil {
 		s.WriteStruct(schemas.DeploymentGroupInfo_onPremisesTagSet)
 		v.OnPremisesTagSet.SerializeMembers(s)
@@ -824,7 +847,9 @@ func (v *DeploymentGroupInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TerminationHookEnabled != false {
 		s.WriteBool(schemas.DeploymentGroupInfo_terminationHookEnabled, v.TerminationHookEnabled)
 	}
-	serializeTriggerConfigList(s, schemas.DeploymentGroupInfo_triggerConfigurations, v.TriggerConfigurations)
+	if v.TriggerConfigurations != nil {
+		serializeTriggerConfigList(s, schemas.DeploymentGroupInfo_triggerConfigurations, v.TriggerConfigurations)
+	}
 }
 func (v *DeploymentGroupInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeploymentGroupInfo, func(s *smithy.Schema) error {
@@ -862,6 +887,9 @@ func (v *DeploymentGroupInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeploymentGroupInfo_deploymentStyle:
 			v.DeploymentStyle = &DeploymentStyle{}
 			return v.DeploymentStyle.Deserialize(d)
+		case schemas.DeploymentGroupInfo_ec2DeploymentOptions:
+			v.Ec2DeploymentOptions = &EC2DeploymentOptions{}
+			return v.Ec2DeploymentOptions.Deserialize(d)
 		case schemas.DeploymentGroupInfo_ec2TagFilters:
 			return deserializeEC2TagFilterList(d, schemas.DeploymentGroupInfo_ec2TagFilters, &v.Ec2TagFilters)
 		case schemas.DeploymentGroupInfo_ec2TagSet:
@@ -981,6 +1009,10 @@ type DeploymentInfo struct {
 
 	// A comment about the deployment.
 	Description *string
+
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *EC2DeploymentOptions
 
 	// Information about any error associated with this deployment.
 	ErrorInformation *ErrorInformation
@@ -1127,7 +1159,9 @@ func (v *DeploymentInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeploymentOverview.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDeploymentStatusMessageList(s, schemas.DeploymentInfo_deploymentStatusMessages, v.DeploymentStatusMessages)
+	if v.DeploymentStatusMessages != nil {
+		serializeDeploymentStatusMessageList(s, schemas.DeploymentInfo_deploymentStatusMessages, v.DeploymentStatusMessages)
+	}
 	if v.DeploymentStyle != nil {
 		s.WriteStruct(schemas.DeploymentInfo_deploymentStyle)
 		v.DeploymentStyle.SerializeMembers(s)
@@ -1135,6 +1169,11 @@ func (v *DeploymentInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.DeploymentInfo_description, *v.Description)
+	}
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.DeploymentInfo_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.ErrorInformation != nil {
 		s.WriteStruct(schemas.DeploymentInfo_errorInformation)
@@ -1260,6 +1299,9 @@ func (v *DeploymentInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeploymentInfo_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.DeploymentInfo_description, v.Description)
+		case schemas.DeploymentInfo_ec2DeploymentOptions:
+			v.Ec2DeploymentOptions = &EC2DeploymentOptions{}
+			return v.Ec2DeploymentOptions.Deserialize(d)
 		case schemas.DeploymentInfo_errorInformation:
 			v.ErrorInformation = &ErrorInformation{}
 			return v.ErrorInformation.Deserialize(d)
@@ -1655,6 +1697,59 @@ func (v *Diagnostics) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+// during a deployment.
+type EC2DeploymentOptions struct {
+
+	// The Amazon EC2 Auto Scaling processes to suspend during the deployment.
+	// CodeDeploy suspends these processes before it deploys to instances in an Auto
+	// Scaling group, and resumes them when the deployment succeeds, fails, or is
+	// stopped. Valid values are Terminate , AZRebalance , InstanceRefresh , and
+	// ScheduledActions .
+	//
+	// This parameter applies only to in-place deployments on the EC2/On-premises
+	// compute platform. If the list is empty, or if the deployment does not target
+	// instances in an Auto Scaling group, no processes are suspended.
+	//
+	// The service role for the deployment group must have permission to call
+	// autoscaling:SuspendProcesses and autoscaling:ResumeProcesses on the target Auto
+	// Scaling groups. If the processes cannot be suspended, the deployment fails
+	// before any instance is updated.
+	//
+	// If you suspend ScheduledActions , scheduled actions with a start time during the
+	// deployment are skipped and do not run after the process resumes.
+	//
+	// If CodeDeploy cannot resume the processes, the deployment fails and the
+	// processes stay suspended until you resume them with the Auto Scaling
+	// ResumeProcesses action. While Terminate is suspended, Auto Scaling does not
+	// replace unhealthy instances. If you suspend Terminate , configure a trigger that
+	// notifies you when a deployment fails.
+	AutoScalingGroupProcessesToSuspend []AutoScalingGroupProcess
+
+	noSmithyDocumentSerde
+}
+
+func (v *EC2DeploymentOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2DeploymentOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2DeploymentOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupProcessesToSuspend != nil {
+		serializeAutoScalingGroupProcessesToSuspendList(s, schemas.EC2DeploymentOptions_autoScalingGroupProcessesToSuspend, v.AutoScalingGroupProcessesToSuspend)
+	}
+}
+func (v *EC2DeploymentOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2DeploymentOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2DeploymentOptions_autoScalingGroupProcessesToSuspend:
+			return deserializeAutoScalingGroupProcessesToSuspendList(d, schemas.EC2DeploymentOptions_autoScalingGroupProcessesToSuspend, &v.AutoScalingGroupProcessesToSuspend)
+		}
+		return nil
+	})
+}
+
 // Information about an EC2 tag filter.
 type EC2TagFilter struct {
 
@@ -1732,7 +1827,9 @@ func (v *EC2TagSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EC2TagSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEC2TagSetList(s, schemas.EC2TagSet_ec2TagSetList, v.Ec2TagSetList)
+	if v.Ec2TagSetList != nil {
+		serializeEC2TagSetList(s, schemas.EC2TagSet_ec2TagSetList, v.Ec2TagSetList)
+	}
 }
 func (v *EC2TagSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EC2TagSet, func(s *smithy.Schema) error {
@@ -1827,7 +1924,9 @@ func (v *ECSTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.ECSTarget_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeLifecycleEventList(s, schemas.ECSTarget_lifecycleEvents, v.LifecycleEvents)
+	if v.LifecycleEvents != nil {
+		serializeLifecycleEventList(s, schemas.ECSTarget_lifecycleEvents, v.LifecycleEvents)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ECSTarget_status, string(v.Status))
 	}
@@ -1837,7 +1936,9 @@ func (v *ECSTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetId != nil {
 		s.WriteString(schemas.ECSTarget_targetId, *v.TargetId)
 	}
-	serializeECSTaskSetList(s, schemas.ECSTarget_taskSetsInfo, v.TaskSetsInfo)
+	if v.TaskSetsInfo != nil {
+		serializeECSTaskSetList(s, schemas.ECSTarget_taskSetsInfo, v.TaskSetsInfo)
+	}
 }
 func (v *ECSTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ECSTarget, func(s *smithy.Schema) error {
@@ -2139,7 +2240,9 @@ func (v *GenericRevisionInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenericRevisionInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentGroupsList(s, schemas.GenericRevisionInfo_deploymentGroups, v.DeploymentGroups)
+	if v.DeploymentGroups != nil {
+		serializeDeploymentGroupsList(s, schemas.GenericRevisionInfo_deploymentGroups, v.DeploymentGroups)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GenericRevisionInfo_description, *v.Description)
 	}
@@ -2314,7 +2417,9 @@ func (v *InstanceInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegisterTime != nil {
 		s.WriteTime(schemas.InstanceInfo_registerTime, *v.RegisterTime)
 	}
-	serializeTagList(s, schemas.InstanceInfo_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.InstanceInfo_tags, v.Tags)
+	}
 }
 func (v *InstanceInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceInfo, func(s *smithy.Schema) error {
@@ -2406,7 +2511,9 @@ func (v *InstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.InstanceSummary_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeLifecycleEventList(s, schemas.InstanceSummary_lifecycleEvents, v.LifecycleEvents)
+	if v.LifecycleEvents != nil {
+		serializeLifecycleEventList(s, schemas.InstanceSummary_lifecycleEvents, v.LifecycleEvents)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.InstanceSummary_status, string(v.Status))
 	}
@@ -2490,7 +2597,9 @@ func (v *InstanceTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.InstanceTarget_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeLifecycleEventList(s, schemas.InstanceTarget_lifecycleEvents, v.LifecycleEvents)
+	if v.LifecycleEvents != nil {
+		serializeLifecycleEventList(s, schemas.InstanceTarget_lifecycleEvents, v.LifecycleEvents)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.InstanceTarget_status, string(v.Status))
 	}
@@ -2653,7 +2762,9 @@ func (v *LambdaTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.LambdaTarget_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeLifecycleEventList(s, schemas.LambdaTarget_lifecycleEvents, v.LifecycleEvents)
+	if v.LifecycleEvents != nil {
+		serializeLifecycleEventList(s, schemas.LambdaTarget_lifecycleEvents, v.LifecycleEvents)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.LambdaTarget_status, string(v.Status))
 	}
@@ -2890,9 +3001,15 @@ func (v *LoadBalancerInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LoadBalancerInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeELBInfoList(s, schemas.LoadBalancerInfo_elbInfoList, v.ElbInfoList)
-	serializeTargetGroupInfoList(s, schemas.LoadBalancerInfo_targetGroupInfoList, v.TargetGroupInfoList)
-	serializeTargetGroupPairInfoList(s, schemas.LoadBalancerInfo_targetGroupPairInfoList, v.TargetGroupPairInfoList)
+	if v.ElbInfoList != nil {
+		serializeELBInfoList(s, schemas.LoadBalancerInfo_elbInfoList, v.ElbInfoList)
+	}
+	if v.TargetGroupInfoList != nil {
+		serializeTargetGroupInfoList(s, schemas.LoadBalancerInfo_targetGroupInfoList, v.TargetGroupInfoList)
+	}
+	if v.TargetGroupPairInfoList != nil {
+		serializeTargetGroupPairInfoList(s, schemas.LoadBalancerInfo_targetGroupPairInfoList, v.TargetGroupPairInfoList)
+	}
 }
 func (v *LoadBalancerInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoadBalancerInfo, func(s *smithy.Schema) error {
@@ -3038,7 +3155,9 @@ func (v *OnPremisesTagSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OnPremisesTagSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOnPremisesTagSetList(s, schemas.OnPremisesTagSet_onPremisesTagSetList, v.OnPremisesTagSetList)
+	if v.OnPremisesTagSetList != nil {
+		serializeOnPremisesTagSetList(s, schemas.OnPremisesTagSet_onPremisesTagSetList, v.OnPremisesTagSetList)
+	}
 }
 func (v *OnPremisesTagSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OnPremisesTagSet, func(s *smithy.Schema) error {
@@ -3113,7 +3232,9 @@ func (v *RelatedDeployments) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RelatedDeployments) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentsList(s, schemas.RelatedDeployments_autoUpdateOutdatedInstancesDeploymentIds, v.AutoUpdateOutdatedInstancesDeploymentIds)
+	if v.AutoUpdateOutdatedInstancesDeploymentIds != nil {
+		serializeDeploymentsList(s, schemas.RelatedDeployments_autoUpdateOutdatedInstancesDeploymentIds, v.AutoUpdateOutdatedInstancesDeploymentIds)
+	}
 	if v.AutoUpdateOutdatedInstancesRootDeploymentId != nil {
 		s.WriteString(schemas.RelatedDeployments_autoUpdateOutdatedInstancesRootDeploymentId, *v.AutoUpdateOutdatedInstancesRootDeploymentId)
 	}
@@ -3584,7 +3705,9 @@ func (v *TargetGroupPairInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProdTrafficRoute.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTargetGroupInfoList(s, schemas.TargetGroupPairInfo_targetGroups, v.TargetGroups)
+	if v.TargetGroups != nil {
+		serializeTargetGroupInfoList(s, schemas.TargetGroupPairInfo_targetGroups, v.TargetGroups)
+	}
 	if v.TestTrafficRoute != nil {
 		s.WriteStruct(schemas.TargetGroupPairInfo_testTrafficRoute)
 		v.TestTrafficRoute.SerializeMembers(s)
@@ -3635,13 +3758,17 @@ func (v *TargetInstances) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TargetInstances) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoScalingGroupNameList(s, schemas.TargetInstances_autoScalingGroups, v.AutoScalingGroups)
+	if v.AutoScalingGroups != nil {
+		serializeAutoScalingGroupNameList(s, schemas.TargetInstances_autoScalingGroups, v.AutoScalingGroups)
+	}
 	if v.Ec2TagSet != nil {
 		s.WriteStruct(schemas.TargetInstances_ec2TagSet)
 		v.Ec2TagSet.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEC2TagFilterList(s, schemas.TargetInstances_tagFilters, v.TagFilters)
+	if v.TagFilters != nil {
+		serializeEC2TagFilterList(s, schemas.TargetInstances_tagFilters, v.TagFilters)
+	}
 }
 func (v *TargetInstances) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TargetInstances, func(s *smithy.Schema) error {
@@ -3808,7 +3935,9 @@ func (v *TrafficRoute) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrafficRoute) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListenerArnList(s, schemas.TrafficRoute_listenerArns, v.ListenerArns)
+	if v.ListenerArns != nil {
+		serializeListenerArnList(s, schemas.TrafficRoute_listenerArns, v.ListenerArns)
+	}
 }
 func (v *TrafficRoute) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrafficRoute, func(s *smithy.Schema) error {
@@ -3909,7 +4038,9 @@ func (v *TriggerConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TriggerConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTriggerEventTypeList(s, schemas.TriggerConfig_triggerEvents, v.TriggerEvents)
+	if v.TriggerEvents != nil {
+		serializeTriggerEventTypeList(s, schemas.TriggerConfig_triggerEvents, v.TriggerEvents)
+	}
 	if v.TriggerName != nil {
 		s.WriteString(schemas.TriggerConfig_triggerName, *v.TriggerName)
 	}

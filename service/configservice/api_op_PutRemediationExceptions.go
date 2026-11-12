@@ -114,7 +114,9 @@ func (v *PutRemediationExceptionsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Message != nil {
 		s.WriteString(schemas.PutRemediationExceptionsRequest_Message, *v.Message)
 	}
-	serializeRemediationExceptionResourceKeys(s, schemas.PutRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+	if v.ResourceKeys != nil {
+		serializeRemediationExceptionResourceKeys(s, schemas.PutRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+	}
 }
 
 type PutRemediationExceptionsOutput struct {
@@ -136,7 +138,9 @@ func (v *PutRemediationExceptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutRemediationExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRemediationExceptionBatches(s, schemas.PutRemediationExceptionsResponse_FailedBatches, v.FailedBatches)
+	if v.FailedBatches != nil {
+		serializeFailedRemediationExceptionBatches(s, schemas.PutRemediationExceptionsResponse_FailedBatches, v.FailedBatches)
+	}
 }
 func (v *PutRemediationExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutRemediationExceptionsResponse, func(s *smithy.Schema) error {

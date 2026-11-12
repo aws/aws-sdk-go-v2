@@ -111,7 +111,9 @@ func (v *RegisterConnectionTypeInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.RestConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.RegisterConnectionTypeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.RegisterConnectionTypeRequest_Tags, v.Tags)
+	}
 }
 
 // Contains the Amazon Resource Name (ARN) of the newly registered connection type.

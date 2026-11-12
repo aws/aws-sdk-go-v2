@@ -81,7 +81,9 @@ func (v *PollForThirdPartyJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PollForThirdPartyJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThirdPartyJobList(s, schemas.PollForThirdPartyJobsOutput_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeThirdPartyJobList(s, schemas.PollForThirdPartyJobsOutput_jobs, v.Jobs)
+	}
 }
 func (v *PollForThirdPartyJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PollForThirdPartyJobsOutput, func(s *smithy.Schema) error {
@@ -107,6 +109,9 @@ func (c *Client) addOperationPollForThirdPartyJobsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

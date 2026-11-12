@@ -102,7 +102,9 @@ func (v *GetConformancePackComplianceDetailsOutput) SerializeMembers(s smithy.Sh
 	if v.ConformancePackName != nil {
 		s.WriteString(schemas.GetConformancePackComplianceDetailsResponse_ConformancePackName, *v.ConformancePackName)
 	}
-	serializeConformancePackRuleEvaluationResultsList(s, schemas.GetConformancePackComplianceDetailsResponse_ConformancePackRuleEvaluationResults, v.ConformancePackRuleEvaluationResults)
+	if v.ConformancePackRuleEvaluationResults != nil {
+		serializeConformancePackRuleEvaluationResultsList(s, schemas.GetConformancePackComplianceDetailsResponse_ConformancePackRuleEvaluationResults, v.ConformancePackRuleEvaluationResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetConformancePackComplianceDetailsResponse_NextToken, *v.NextToken)
 	}

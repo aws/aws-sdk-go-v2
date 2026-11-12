@@ -97,7 +97,9 @@ func (v *ListEventBusesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventBusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventBusList(s, schemas.ListEventBusesResponse_EventBuses, v.EventBuses)
+	if v.EventBuses != nil {
+		serializeEventBusList(s, schemas.ListEventBusesResponse_EventBuses, v.EventBuses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventBusesResponse_NextToken, *v.NextToken)
 	}

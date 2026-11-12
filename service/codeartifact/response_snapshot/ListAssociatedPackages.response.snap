@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","packages":[{"associationType":"STRONG","format":"npm","namespace":"__Namespace__","package":"__Package__"},{"associationType":"STRONG","format":"npm","namespace":"__Namespace__","package":"__Package__"}]}

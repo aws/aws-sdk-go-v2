@@ -1,0 +1,5 @@
+POST /RevokeConnectionToken
+
+Content-Type: application/json
+
+{"tokenId":"__TokenId__"}

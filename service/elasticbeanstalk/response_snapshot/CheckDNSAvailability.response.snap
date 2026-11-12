@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CheckDNSAvailabilityResponse><CheckDNSAvailabilityResult><Available>true</Available><FullyQualifiedCNAME>__FullyQualifiedCNAME__</FullyQualifiedCNAME></CheckDNSAvailabilityResult></CheckDNSAvailabilityResponse>

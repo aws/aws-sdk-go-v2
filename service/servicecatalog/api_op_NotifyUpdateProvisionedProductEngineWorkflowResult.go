@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,33 @@ type NotifyUpdateProvisionedProductEngineWorkflowResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyUpdateProvisionedProductEngineWorkflowResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyUpdateProvisionedProductEngineWorkflowResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_FailureReason, *v.FailureReason)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Outputs != nil {
+		serializeRecordOutputs(s, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	}
+	if v.RecordId != nil {
+		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_RecordId, *v.RecordId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_Status, string(v.Status))
+	}
+	if v.WorkflowToken != nil {
+		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_WorkflowToken, *v.WorkflowToken)
+	}
+}
+
 type NotifyUpdateProvisionedProductEngineWorkflowResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +93,26 @@ type NotifyUpdateProvisionedProductEngineWorkflowResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyUpdateProvisionedProductEngineWorkflowResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyUpdateProvisionedProductEngineWorkflowResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NotifyUpdateProvisionedProductEngineWorkflowResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyUpdateProvisionedProductEngineWorkflowResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyUpdateProvisionedProductEngineWorkflowResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyUpdateProvisionedProductEngineWorkflowResult, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNotifyUpdateProvisionedProductEngineWorkflowResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyUpdateProvisionedProductEngineWorkflowResult, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultOutput), output: &NotifyUpdateProvisionedProductEngineWorkflowResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -81,6 +123,9 @@ func (c *Client) addOperationNotifyUpdateProvisionedProductEngineWorkflowResultM
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -97,7 +97,9 @@ func (v *StartExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.StartExportTaskInput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.StartExportTaskInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartExportTaskInput_tags, v.Tags)
+	}
 }
 func (in *StartExportTaskInput) bindEndpointParams(p *EndpointParameters) {
 

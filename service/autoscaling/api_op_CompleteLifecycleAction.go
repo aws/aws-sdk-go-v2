@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,52 @@ type CompleteLifecycleActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteLifecycleActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteLifecycleActionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteLifecycleActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.CompleteLifecycleActionType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CompleteLifecycleActionType_InstanceId, *v.InstanceId)
+	}
+	if v.LifecycleActionResult != nil {
+		s.WriteString(schemas.CompleteLifecycleActionType_LifecycleActionResult, *v.LifecycleActionResult)
+	}
+	if v.LifecycleActionToken != nil {
+		s.WriteString(schemas.CompleteLifecycleActionType_LifecycleActionToken, *v.LifecycleActionToken)
+	}
+	if v.LifecycleHookName != nil {
+		s.WriteString(schemas.CompleteLifecycleActionType_LifecycleHookName, *v.LifecycleHookName)
+	}
+}
+func (v *CompleteLifecycleActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteLifecycleActionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteLifecycleActionType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.CompleteLifecycleActionType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.CompleteLifecycleActionType_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.CompleteLifecycleActionType_InstanceId, v.InstanceId)
+		case schemas.CompleteLifecycleActionType_LifecycleActionResult:
+			v.LifecycleActionResult = new(string)
+			return d.ReadString(schemas.CompleteLifecycleActionType_LifecycleActionResult, v.LifecycleActionResult)
+		case schemas.CompleteLifecycleActionType_LifecycleActionToken:
+			v.LifecycleActionToken = new(string)
+			return d.ReadString(schemas.CompleteLifecycleActionType_LifecycleActionToken, v.LifecycleActionToken)
+		case schemas.CompleteLifecycleActionType_LifecycleHookName:
+			v.LifecycleHookName = new(string)
+			return d.ReadString(schemas.CompleteLifecycleActionType_LifecycleHookName, v.LifecycleHookName)
+		}
+		return nil
+	})
+}
+
 type CompleteLifecycleActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -88,13 +136,26 @@ type CompleteLifecycleActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteLifecycleActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteLifecycleActionAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteLifecycleActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CompleteLifecycleActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteLifecycleActionAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteLifecycleActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCompleteLifecycleAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteLifecycleAction, schemas.CompleteLifecycleActionType, schemas.CompleteLifecycleActionAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCompleteLifecycleAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteLifecycleAction, schemas.CompleteLifecycleActionType, schemas.CompleteLifecycleActionAnswer), output: &CompleteLifecycleActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

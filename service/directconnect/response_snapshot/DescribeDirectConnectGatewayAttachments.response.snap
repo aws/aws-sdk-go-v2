@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeDirectConnectGatewayAttachments
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"directConnectGatewayAttachments":[{"attachmentState":"attaching","attachmentType":"TransitVirtualInterface","directConnectGatewayId":"__DirectConnectGatewayId__","stateChangeError":"__StateChangeError__","virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceOwnerAccount":"__VirtualInterfaceOwnerAccount__","virtualInterfaceRegion":"__VirtualInterfaceRegion__"},{"attachmentState":"attaching","attachmentType":"TransitVirtualInterface","directConnectGatewayId":"__DirectConnectGatewayId__","stateChangeError":"__StateChangeError__","virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceOwnerAccount":"__VirtualInterfaceOwnerAccount__","virtualInterfaceRegion":"__VirtualInterfaceRegion__"}],"nextToken":"__NextToken__"}
+¿xdirectConnectGatewayAttachmentsŸ¿oattachmentStateiattachingnattachmentTypewTransitVirtualInterfacevdirectConnectGatewayIdx__DirectConnectGatewayId__pstateChangeErrort__StateChangeError__rvirtualInterfaceIdv__VirtualInterfaceId__xvirtualInterfaceOwnerAccountx __VirtualInterfaceOwnerAccount__vvirtualInterfaceRegionx__VirtualInterfaceRegion__ÿ¿oattachmentStateiattachingnattachmentTypewTransitVirtualInterfacevdirectConnectGatewayIdx__DirectConnectGatewayId__pstateChangeErrort__StateChangeError__rvirtualInterfaceIdv__VirtualInterfaceId__xvirtualInterfaceOwnerAccountx __VirtualInterfaceOwnerAccount__vvirtualInterfaceRegionx__VirtualInterfaceRegion__ÿÿinextTokenm__NextToken__ÿ

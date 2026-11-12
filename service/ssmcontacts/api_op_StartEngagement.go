@@ -5,6 +5,8 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,39 @@ type StartEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEngagementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEngagementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartEngagementRequest_ContactId, *v.ContactId)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.StartEngagementRequest_Content, *v.Content)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartEngagementRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.IncidentId != nil {
+		s.WriteString(schemas.StartEngagementRequest_IncidentId, *v.IncidentId)
+	}
+	if v.PublicContent != nil {
+		s.WriteString(schemas.StartEngagementRequest_PublicContent, *v.PublicContent)
+	}
+	if v.PublicSubject != nil {
+		s.WriteString(schemas.StartEngagementRequest_PublicSubject, *v.PublicSubject)
+	}
+	if v.Sender != nil {
+		s.WriteString(schemas.StartEngagementRequest_Sender, *v.Sender)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.StartEngagementRequest_Subject, *v.Subject)
+	}
+}
+
 type StartEngagementOutput struct {
 
 	// The ARN of the engagement.
@@ -80,13 +115,32 @@ type StartEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEngagementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEngagementResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEngagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementArn != nil {
+		s.WriteString(schemas.StartEngagementResult_EngagementArn, *v.EngagementArn)
+	}
+}
+func (v *StartEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEngagementResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEngagementResult_EngagementArn:
+			v.EngagementArn = new(string)
+			return d.ReadString(schemas.StartEngagementResult_EngagementArn, v.EngagementArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagement, schemas.StartEngagementRequest, schemas.StartEngagementResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagement, schemas.StartEngagementRequest, schemas.StartEngagementResult), output: &StartEngagementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

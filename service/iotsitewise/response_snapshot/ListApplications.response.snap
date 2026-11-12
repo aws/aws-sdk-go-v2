@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applications":[{"arn":"__Arn__","createdAt":946684800,"id":"__Id__","name":"__Name__","status":"CREATING","workspaceName":"__WorkspaceName__"},{"arn":"__Arn__","createdAt":946684800,"id":"__Id__","name":"__Name__","status":"CREATING","workspaceName":"__WorkspaceName__"}],"nextToken":"__NextToken__"}

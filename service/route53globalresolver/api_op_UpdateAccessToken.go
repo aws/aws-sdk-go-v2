@@ -4,6 +4,8 @@ package route53globalresolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type UpdateAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessTokenInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessTokenId != nil {
+		s.WriteString(schemas.UpdateAccessTokenInput_accessTokenId, *v.AccessTokenId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAccessTokenInput_name, *v.Name)
+	}
+}
+
 type UpdateAccessTokenOutput struct {
 
 	// The ID of the token.
@@ -62,13 +79,38 @@ type UpdateAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessTokenOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAccessTokenOutput_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAccessTokenOutput_name, *v.Name)
+	}
+}
+func (v *UpdateAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessTokenOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessTokenOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAccessTokenOutput_id, v.Id)
+		case schemas.UpdateAccessTokenOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAccessTokenOutput_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessToken, schemas.UpdateAccessTokenInput, schemas.UpdateAccessTokenOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessToken, schemas.UpdateAccessTokenInput, schemas.UpdateAccessTokenOutput), output: &UpdateAccessTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

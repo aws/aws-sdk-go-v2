@@ -118,7 +118,9 @@ func (v *StartKeyPhrasesDetectionJobInput) SerializeMembers(s smithy.ShapeSerial
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartKeyPhrasesDetectionJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartKeyPhrasesDetectionJobRequest_Tags, v.Tags)
+	}
 	if v.VolumeKmsKeyId != nil {
 		s.WriteString(schemas.StartKeyPhrasesDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
 	}
@@ -216,6 +218,9 @@ func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,21 @@ type DetachUserPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachUserPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachUserPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachUserPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.DetachUserPolicyRequest_PolicyArn, *v.PolicyArn)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DetachUserPolicyRequest_UserName, *v.UserName)
+	}
+}
+
 type DetachUserPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +79,26 @@ type DetachUserPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachUserPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachUserPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DetachUserPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachUserPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachUserPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachUserPolicy, schemas.DetachUserPolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetachUserPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachUserPolicy, schemas.DetachUserPolicyRequest, nil), output: &DetachUserPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

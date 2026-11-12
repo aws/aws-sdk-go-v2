@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Blueprint":{"BlueprintName":"__BlueprintName__","DisplayDescription":"__DisplayDescription__","DisplayName":"__DisplayName__","PipelineConfigurationBody":"__PipelineConfigurationBody__","Service":"__Service__","UseCase":"__UseCase__"},"Format":"__Format__"}

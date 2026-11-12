@@ -51,7 +51,9 @@ func (v *UpdateSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.UpdateSettingsRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeSettings(s, schemas.UpdateSettingsRequest_Settings, v.Settings)
+	if v.Settings != nil {
+		serializeSettings(s, schemas.UpdateSettingsRequest_Settings, v.Settings)
+	}
 }
 
 type UpdateSettingsOutput struct {
@@ -101,6 +103,9 @@ func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

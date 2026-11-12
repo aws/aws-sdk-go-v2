@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttachmentId":"__AttachmentId__","NatGatewayRules":[{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1,"State":"CREATING"},{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1,"State":"CREATING"}],"NatGatewaySupport":"ENABLED","NatSystemRouteSupport":true}

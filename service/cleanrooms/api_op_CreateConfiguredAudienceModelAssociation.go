@@ -95,7 +95,9 @@ func (v *CreateConfiguredAudienceModelAssociationInput) SerializeMembers(s smith
 	if v.MembershipIdentifier != nil {
 		s.WriteString(schemas.CreateConfiguredAudienceModelAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateConfiguredAudienceModelAssociationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfiguredAudienceModelAssociationInput_tags, v.Tags)
+	}
 }
 
 type CreateConfiguredAudienceModelAssociationOutput struct {

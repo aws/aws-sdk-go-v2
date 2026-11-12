@@ -123,7 +123,9 @@ func (v *ListModelQualityJobDefinitionsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListModelQualityJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelQualityJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	if v.JobDefinitionSummaries != nil {
+		serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelQualityJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelQualityJobDefinitionsResponse_NextToken, *v.NextToken)
 	}

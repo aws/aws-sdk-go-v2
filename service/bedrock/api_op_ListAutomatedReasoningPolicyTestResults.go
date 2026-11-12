@@ -101,7 +101,9 @@ func (v *ListAutomatedReasoningPolicyTestResultsOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsResponse_nextToken, *v.NextToken)
 	}
-	serializeAutomatedReasoningPolicyTestList(s, schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults, v.TestResults)
+	if v.TestResults != nil {
+		serializeAutomatedReasoningPolicyTestList(s, schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults, v.TestResults)
+	}
 }
 func (v *ListAutomatedReasoningPolicyTestResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAutomatedReasoningPolicyTestResultsResponse, func(s *smithy.Schema) error {

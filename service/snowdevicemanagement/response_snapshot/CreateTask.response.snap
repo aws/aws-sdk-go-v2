@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"taskArn":"__TaskArn__","taskId":"__TaskId__"}

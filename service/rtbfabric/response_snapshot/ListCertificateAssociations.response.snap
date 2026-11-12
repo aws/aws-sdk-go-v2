@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"certificateAssociations":[{"acmCertificateArn":"__AcmCertificateArn__","associatedAt":946684800,"status":"PENDING_ASSOCIATION","updatedAt":946684800},{"acmCertificateArn":"__AcmCertificateArn__","associatedAt":946684800,"status":"PENDING_ASSOCIATION","updatedAt":946684800}],"nextToken":"__NextToken__"}

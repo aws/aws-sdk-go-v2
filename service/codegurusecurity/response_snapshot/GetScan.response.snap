@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"analysisType":"Security","createdAt":946684800,"errorMessage":"__ErrorMessage__","numberOfRevisions":1,"runId":"__RunId__","scanName":"__ScanName__","scanNameArn":"__ScanNameArn__","scanState":"InProgress","updatedAt":946684800}

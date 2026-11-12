@@ -43,7 +43,9 @@ func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBadRequestDetails(s, schemas.BadRequestException_Details, v.Details)
+	if v.Details != nil {
+		serializeBadRequestDetails(s, schemas.BadRequestException_Details, v.Details)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BadRequestException_Message, *v.Message)
 	}
@@ -156,7 +158,9 @@ func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
 	}
-	serializeStringMap(s, schemas.ResourceNotFoundException_ReferencedBy, v.ReferencedBy)
+	if v.ReferencedBy != nil {
+		serializeStringMap(s, schemas.ResourceNotFoundException_ReferencedBy, v.ReferencedBy)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ResourceNotFoundException_ResourceType, string(v.ResourceType))
 	}

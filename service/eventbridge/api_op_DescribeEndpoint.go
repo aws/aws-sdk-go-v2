@@ -130,7 +130,9 @@ func (v *DescribeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointUrl != nil {
 		s.WriteString(schemas.DescribeEndpointResponse_EndpointUrl, *v.EndpointUrl)
 	}
-	serializeEndpointEventBusList(s, schemas.DescribeEndpointResponse_EventBuses, v.EventBuses)
+	if v.EventBuses != nil {
+		serializeEndpointEventBusList(s, schemas.DescribeEndpointResponse_EventBuses, v.EventBuses)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeEndpointResponse_LastModifiedTime, *v.LastModifiedTime)
 	}

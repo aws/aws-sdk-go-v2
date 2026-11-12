@@ -52,7 +52,9 @@ func (v *DescribeConfigurationAggregatorsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DescribeConfigurationAggregatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationAggregatorNameList(s, schemas.DescribeConfigurationAggregatorsRequest_ConfigurationAggregatorNames, v.ConfigurationAggregatorNames)
+	if v.ConfigurationAggregatorNames != nil {
+		serializeConfigurationAggregatorNameList(s, schemas.DescribeConfigurationAggregatorsRequest_ConfigurationAggregatorNames, v.ConfigurationAggregatorNames)
+	}
 	if v.Limit != 0 {
 		s.WriteInt32(schemas.DescribeConfigurationAggregatorsRequest_Limit, v.Limit)
 	}
@@ -83,7 +85,9 @@ func (v *DescribeConfigurationAggregatorsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeConfigurationAggregatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationAggregatorList(s, schemas.DescribeConfigurationAggregatorsResponse_ConfigurationAggregators, v.ConfigurationAggregators)
+	if v.ConfigurationAggregators != nil {
+		serializeConfigurationAggregatorList(s, schemas.DescribeConfigurationAggregatorsResponse_ConfigurationAggregators, v.ConfigurationAggregators)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConfigurationAggregatorsResponse_NextToken, *v.NextToken)
 	}

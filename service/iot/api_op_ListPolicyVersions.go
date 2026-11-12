@@ -72,7 +72,9 @@ func (v *ListPolicyVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPolicyVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyVersions(s, schemas.ListPolicyVersionsResponse_policyVersions, v.PolicyVersions)
+	if v.PolicyVersions != nil {
+		serializePolicyVersions(s, schemas.ListPolicyVersionsResponse_policyVersions, v.PolicyVersions)
+	}
 }
 func (v *ListPolicyVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPolicyVersionsResponse, func(s *smithy.Schema) error {

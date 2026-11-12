@@ -114,7 +114,9 @@ func (v *Backup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceRegion != nil {
 		s.WriteString(schemas.Backup_SourceRegion, *v.SourceRegion)
 	}
-	serializeTagList(s, schemas.Backup_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.Backup_TagList, v.TagList)
+	}
 }
 func (v *Backup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Backup, func(s *smithy.Schema) error {
@@ -390,7 +392,9 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HsmTypeRollbackExpiration != nil {
 		s.WriteTime(schemas.Cluster_HsmTypeRollbackExpiration, *v.HsmTypeRollbackExpiration)
 	}
-	serializeHsms(s, schemas.Cluster_Hsms, v.Hsms)
+	if v.Hsms != nil {
+		serializeHsms(s, schemas.Cluster_Hsms, v.Hsms)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.Cluster_Mode, string(v.Mode))
 	}
@@ -412,8 +416,12 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StateMessage != nil {
 		s.WriteString(schemas.Cluster_StateMessage, *v.StateMessage)
 	}
-	serializeExternalSubnetMapping(s, schemas.Cluster_SubnetMapping, v.SubnetMapping)
-	serializeTagList(s, schemas.Cluster_TagList, v.TagList)
+	if v.SubnetMapping != nil {
+		serializeExternalSubnetMapping(s, schemas.Cluster_SubnetMapping, v.SubnetMapping)
+	}
+	if v.TagList != nil {
+		serializeTagList(s, schemas.Cluster_TagList, v.TagList)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.Cluster_VpcId, *v.VpcId)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChallengeMetadata":{"Arn":"__Arn__","ConnectorArn":"__ConnectorArn__","CreatedAt":946684800,"UpdatedAt":946684800}}

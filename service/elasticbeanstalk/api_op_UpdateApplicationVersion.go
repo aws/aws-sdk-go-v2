@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type UpdateApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationVersionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.UpdateApplicationVersionMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApplicationVersionMessage_Description, *v.Description)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.UpdateApplicationVersionMessage_VersionLabel, *v.VersionLabel)
+	}
+}
+
 // Result message wrapping a single description of an application version.
 type UpdateApplicationVersionOutput struct {
 
@@ -63,13 +83,34 @@ type UpdateApplicationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationVersionDescriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationVersion != nil {
+		s.WriteStruct(schemas.ApplicationVersionDescriptionMessage_ApplicationVersion)
+		v.ApplicationVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApplicationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationVersionDescriptionMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationVersionDescriptionMessage_ApplicationVersion:
+			v.ApplicationVersion = &types.ApplicationVersionDescription{}
+			return v.ApplicationVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationVersion, schemas.UpdateApplicationVersionMessage, schemas.ApplicationVersionDescriptionMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationVersion, schemas.UpdateApplicationVersionMessage, schemas.ApplicationVersionDescriptionMessage), output: &UpdateApplicationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

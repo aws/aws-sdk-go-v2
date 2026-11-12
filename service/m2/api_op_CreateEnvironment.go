@@ -135,10 +135,18 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != false {
 		s.WriteBool(schemas.CreateEnvironmentRequest_publiclyAccessible, v.PubliclyAccessible)
 	}
-	serializeString50List(s, schemas.CreateEnvironmentRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeStorageConfigurationList(s, schemas.CreateEnvironmentRequest_storageConfigurations, v.StorageConfigurations)
-	serializeString50List(s, schemas.CreateEnvironmentRequest_subnetIds, v.SubnetIds)
-	serializeTagMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeString50List(s, schemas.CreateEnvironmentRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.StorageConfigurations != nil {
+		serializeStorageConfigurationList(s, schemas.CreateEnvironmentRequest_storageConfigurations, v.StorageConfigurations)
+	}
+	if v.SubnetIds != nil {
+		serializeString50List(s, schemas.CreateEnvironmentRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
+	}
 }
 func (v *CreateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEnvironmentRequest, func(s *smithy.Schema) error {

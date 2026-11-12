@@ -78,7 +78,9 @@ func (v *ListGroupMembershipsForMemberInput) SerializeMembers(s smithy.ShapeSeri
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListGroupMembershipsForMemberRequest_MaxResults, *v.MaxResults)
 	}
-	serializeMemberId(s, schemas.ListGroupMembershipsForMemberRequest_MemberId, v.MemberId)
+	if v.MemberId != nil {
+		serializeMemberId(s, schemas.ListGroupMembershipsForMemberRequest_MemberId, v.MemberId)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupMembershipsForMemberRequest_NextToken, *v.NextToken)
 	}
@@ -111,7 +113,9 @@ func (v *ListGroupMembershipsForMemberOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListGroupMembershipsForMemberOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupMemberships(s, schemas.ListGroupMembershipsForMemberResponse_GroupMemberships, v.GroupMemberships)
+	if v.GroupMemberships != nil {
+		serializeGroupMemberships(s, schemas.ListGroupMembershipsForMemberResponse_GroupMemberships, v.GroupMemberships)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupMembershipsForMemberResponse_NextToken, *v.NextToken)
 	}

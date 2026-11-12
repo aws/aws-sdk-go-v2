@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeMaintenanceWindowExecutionTaskInvocations
+
+{"NextToken":"__NextToken__","WindowExecutionTaskInvocationIdentities":[{"EndTime":946684800,"ExecutionId":"__ExecutionId__","InvocationId":"__InvocationId__","OwnerInformation":"__OwnerInformation__","Parameters":"__Parameters__","StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","TaskExecutionId":"__TaskExecutionId__","TaskType":"RUN_COMMAND","WindowExecutionId":"__WindowExecutionId__","WindowTargetId":"__WindowTargetId__"},{"EndTime":946684800,"ExecutionId":"__ExecutionId__","InvocationId":"__InvocationId__","OwnerInformation":"__OwnerInformation__","Parameters":"__Parameters__","StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","TaskExecutionId":"__TaskExecutionId__","TaskType":"RUN_COMMAND","WindowExecutionId":"__WindowExecutionId__","WindowTargetId":"__WindowTargetId__"}]}

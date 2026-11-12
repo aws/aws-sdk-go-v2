@@ -106,7 +106,9 @@ func (v *GetCustomVerificationEmailTemplateOutput) SerializeMembers(s smithy.Sha
 	if v.SuccessRedirectionURL != nil {
 		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_SuccessRedirectionURL, *v.SuccessRedirectionURL)
 	}
-	serializeTagList(s, schemas.GetCustomVerificationEmailTemplateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetCustomVerificationEmailTemplateResponse_Tags, v.Tags)
+	}
 	if v.TemplateContent != nil {
 		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_TemplateContent, *v.TemplateContent)
 	}

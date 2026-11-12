@@ -68,7 +68,9 @@ func (v *UpdateExperimentTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateExperimentTemplateActionInputMap(s, schemas.UpdateExperimentTemplateRequest_actions, v.Actions)
+	if v.Actions != nil {
+		serializeUpdateExperimentTemplateActionInputMap(s, schemas.UpdateExperimentTemplateRequest_actions, v.Actions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateExperimentTemplateRequest_description, *v.Description)
 	}
@@ -93,8 +95,12 @@ func (v *UpdateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateExperimentTemplateRequest_roleArn, *v.RoleArn)
 	}
-	serializeUpdateExperimentTemplateStopConditionInputList(s, schemas.UpdateExperimentTemplateRequest_stopConditions, v.StopConditions)
-	serializeUpdateExperimentTemplateTargetInputMap(s, schemas.UpdateExperimentTemplateRequest_targets, v.Targets)
+	if v.StopConditions != nil {
+		serializeUpdateExperimentTemplateStopConditionInputList(s, schemas.UpdateExperimentTemplateRequest_stopConditions, v.StopConditions)
+	}
+	if v.Targets != nil {
+		serializeUpdateExperimentTemplateTargetInputMap(s, schemas.UpdateExperimentTemplateRequest_targets, v.Targets)
+	}
 }
 
 type UpdateExperimentTemplateOutput struct {

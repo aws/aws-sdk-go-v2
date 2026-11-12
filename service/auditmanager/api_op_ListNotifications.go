@@ -77,7 +77,9 @@ func (v *ListNotificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotificationsResponse_nextToken, *v.NextToken)
 	}
-	serializeNotifications(s, schemas.ListNotificationsResponse_notifications, v.Notifications)
+	if v.Notifications != nil {
+		serializeNotifications(s, schemas.ListNotificationsResponse_notifications, v.Notifications)
+	}
 }
 func (v *ListNotificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotificationsResponse, func(s *smithy.Schema) error {

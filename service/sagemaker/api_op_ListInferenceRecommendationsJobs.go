@@ -144,7 +144,9 @@ func (v *ListInferenceRecommendationsJobsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListInferenceRecommendationsJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceRecommendationsJobs(s, schemas.ListInferenceRecommendationsJobsResponse_InferenceRecommendationsJobs, v.InferenceRecommendationsJobs)
+	if v.InferenceRecommendationsJobs != nil {
+		serializeInferenceRecommendationsJobs(s, schemas.ListInferenceRecommendationsJobsResponse_InferenceRecommendationsJobs, v.InferenceRecommendationsJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceRecommendationsJobsResponse_NextToken, *v.NextToken)
 	}

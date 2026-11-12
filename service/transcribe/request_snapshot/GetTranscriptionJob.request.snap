@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/GetTranscriptionJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.GetTranscriptionJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"TranscriptionJobName":"__TranscriptionJobName__"}
+¿tTranscriptionJobNamex__TranscriptionJobName__ÿ

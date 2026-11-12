@@ -80,7 +80,9 @@ func (v *ListVolumeRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.ListVolumeRecoveryPointsOutput_GatewayARN, *v.GatewayARN)
 	}
-	serializeVolumeRecoveryPointInfos(s, schemas.ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos, v.VolumeRecoveryPointInfos)
+	if v.VolumeRecoveryPointInfos != nil {
+		serializeVolumeRecoveryPointInfos(s, schemas.ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos, v.VolumeRecoveryPointInfos)
+	}
 }
 func (v *ListVolumeRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVolumeRecoveryPointsOutput, func(s *smithy.Schema) error {

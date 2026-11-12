@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DeleteSubnetGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DeleteSubnetGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"SubnetGroupName":"__SubnetGroupName__"}
+¿oSubnetGroupNames__SubnetGroupName__ÿ

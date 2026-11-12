@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assetModelId":"__AssetModelId__","hierarchyMappings":[{"assetModelHierarchyId":"__AssetModelHierarchyId__","interfaceAssetModelHierarchyId":"__InterfaceAssetModelHierarchyId__"},{"assetModelHierarchyId":"__AssetModelHierarchyId__","interfaceAssetModelHierarchyId":"__InterfaceAssetModelHierarchyId__"}],"interfaceAssetModelId":"__InterfaceAssetModelId__","propertyMappings":[{"assetModelPropertyId":"__AssetModelPropertyId__","interfaceAssetModelPropertyId":"__InterfaceAssetModelPropertyId__"},{"assetModelPropertyId":"__AssetModelPropertyId__","interfaceAssetModelPropertyId":"__InterfaceAssetModelPropertyId__"}]}

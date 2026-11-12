@@ -1615,6 +1615,51 @@ func TestCheckRequestSnapshot_InvokeBrowser(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_InvokeWebSearch(t *testing.T) {
+	input := &InvokeWebSearchInput{
+		WebSearchId: ptr.String("__WebSearchId__"),
+		SearchQuery: ptr.String("__SearchQuery__"),
+		MaxResults:  ptr.Int32(1),
+		Filters: &types.WebSearchFilters{
+			DomainFilter: &types.DomainFilter{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PublishedDateFilter: &types.PublishedDateFilter{
+				PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.InvokeWebSearch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InvokeWebSearch"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListABTests(t *testing.T) {
 	input := &ListABTestsInput{
 		MaxResults: ptr.Int32(1),
@@ -4322,6 +4367,51 @@ func TestUpdateRequestSnapshot_InvokeBrowser(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InvokeBrowser"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_InvokeWebSearch(t *testing.T) {
+	input := &InvokeWebSearchInput{
+		WebSearchId: ptr.String("__WebSearchId__"),
+		SearchQuery: ptr.String("__SearchQuery__"),
+		MaxResults:  ptr.Int32(1),
+		Filters: &types.WebSearchFilters{
+			DomainFilter: &types.DomainFilter{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PublishedDateFilter: &types.PublishedDateFilter{
+				PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.InvokeWebSearch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InvokeWebSearch"); err != nil {
 		t.Fatal(err)
 	}
 }

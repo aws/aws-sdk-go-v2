@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/DisableStageTransition
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.DisableStageTransition
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"pipelineName":"__PipelineName__","reason":"__Reason__","stageName":"__StageName__","transitionType":"Inbound"}
+¿lpipelineNamep__PipelineName__freasonj__Reason__istageNamem__StageName__ntransitionTypegInboundÿ

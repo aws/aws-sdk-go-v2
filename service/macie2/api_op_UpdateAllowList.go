@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,29 @@ type UpdateAllowListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAllowListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAllowListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAllowListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criteria != nil {
+		s.WriteStruct(schemas.UpdateAllowListRequest_criteria)
+		v.Criteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAllowListRequest_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAllowListRequest_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAllowListRequest_name, *v.Name)
+	}
+}
+
 type UpdateAllowListOutput struct {
 
 	// The Amazon Resource Name (ARN) of the allow list.
@@ -70,13 +95,38 @@ type UpdateAllowListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAllowListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAllowListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAllowListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAllowListResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAllowListResponse_id, *v.Id)
+	}
+}
+func (v *UpdateAllowListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAllowListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAllowListResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAllowListResponse_arn, v.Arn)
+		case schemas.UpdateAllowListResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAllowListResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAllowListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAllowList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAllowList, schemas.UpdateAllowListRequest, schemas.UpdateAllowListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAllowList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAllowList, schemas.UpdateAllowListRequest, schemas.UpdateAllowListResponse), output: &UpdateAllowListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

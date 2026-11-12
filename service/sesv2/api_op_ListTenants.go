@@ -59,7 +59,9 @@ func (v *ListTenantsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTenantsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListTenantsFilter(s, schemas.ListTenantsRequest_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeListTenantsFilter(s, schemas.ListTenantsRequest_Filter, v.Filter)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTenantsRequest_NextToken, *v.NextToken)
 	}
@@ -95,7 +97,9 @@ func (v *ListTenantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTenantsResponse_NextToken, *v.NextToken)
 	}
-	serializeTenantInfoList(s, schemas.ListTenantsResponse_Tenants, v.Tenants)
+	if v.Tenants != nil {
+		serializeTenantInfoList(s, schemas.ListTenantsResponse_Tenants, v.Tenants)
+	}
 }
 func (v *ListTenantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTenantsResponse, func(s *smithy.Schema) error {

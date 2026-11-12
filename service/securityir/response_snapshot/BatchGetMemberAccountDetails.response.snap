@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"accountId":"__AccountId__","error":"__Error__","message":"__Message__"},{"accountId":"__AccountId__","error":"__Error__","message":"__Message__"}],"items":[{"accountId":"__AccountId__","relationshipStatus":"Associated","relationshipType":"Organization"},{"accountId":"__AccountId__","relationshipStatus":"Associated","relationshipType":"Organization"}]}

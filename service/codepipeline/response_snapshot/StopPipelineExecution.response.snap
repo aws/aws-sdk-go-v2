@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.StopPipelineExecution
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"pipelineExecutionId":"__PipelineExecutionId__"}
+¿spipelineExecutionIdw__PipelineExecutionId__ÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/RevokeIpRules
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.RevokeIpRules
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"GroupId":"__GroupId__","UserRules":["__Member__","__Member__"]}
+¿gGroupIdk__GroupId__iUserRulesŸj__Member__j__Member__ÿÿ

@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,18 @@ type CancelAnnotationImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAnnotationImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAnnotationImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAnnotationImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelAnnotationImportRequest_jobId, *v.JobId)
+	}
+}
+
 type CancelAnnotationImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type CancelAnnotationImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAnnotationImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAnnotationImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAnnotationImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelAnnotationImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelAnnotationImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelAnnotationImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelAnnotationImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAnnotationImportJob, schemas.CancelAnnotationImportRequest, schemas.CancelAnnotationImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelAnnotationImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAnnotationImportJob, schemas.CancelAnnotationImportRequest, schemas.CancelAnnotationImportResponse), output: &CancelAnnotationImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

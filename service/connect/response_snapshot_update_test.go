@@ -3850,6 +3850,16 @@ func TestUpdateResponseSnapshot_DescribeContact(t *testing.T) {
 				Arn:  ptr.String("__Arn__"),
 				Name: ptr.String("__Name__"),
 			},
+			Cases: []types.CaseEntry{
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+			},
 			ContactDetails: &types.ContactDetails{
 				Name:        ptr.String("__Name__"),
 				Description: ptr.String("__Description__"),
@@ -3903,6 +3913,46 @@ func TestUpdateResponseSnapshot_DescribeContact(t *testing.T) {
 				ActiveRegion:               ptr.String("__ActiveRegion__"),
 				OriginRegion:               ptr.String("__OriginRegion__"),
 				TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+			},
+			ContactLens: &types.ContactLens{
+				ConversationalAnalytics: &types.ConversationalAnalytics{
+					Configuration: &types.ConversationalAnalyticsConfiguration{
+						Enabled:        ptr.Bool(true),
+						LanguageLocale: ptr.String("__LanguageLocale__"),
+						LanguageLocales: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ChannelConfiguration: &types.ContactLensChannelConfiguration{
+							AnalyticsModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RedactionConfiguration: &types.ContactLensRedactionConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+							Policy:   ptr.String("__Policy__"),
+							Entities: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MaskMode: ptr.String("__MaskMode__"),
+						},
+						SummaryConfiguration: &types.ContactLensSummaryConfiguration{
+							SummaryModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						SentimentConfiguration: &types.ContactLensSentimentConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+						},
+					},
+					ContactAnalysisReferenceState: &types.ContactAnalysisReferenceState{
+						Status:       ptr.String("__Status__"),
+						StatusReason: ptr.String("__StatusReason__"),
+					},
+				},
 			},
 		},
 	}
@@ -6558,7 +6608,8 @@ func TestUpdateResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -6709,7 +6760,8 @@ func TestUpdateResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -6845,6 +6897,7 @@ func TestUpdateResponseSnapshot_DescribeSecurityProfile(t *testing.T) {
 					},
 				},
 			},
+			Type: types.SecurityProfileType("AWS_MANAGED"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)
@@ -8911,6 +8964,9 @@ func TestUpdateResponseSnapshot_GetTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -9087,6 +9143,7 @@ func TestUpdateResponseSnapshot_GetTrafficDistribution(t *testing.T) {
 				},
 			},
 		},
+		LastFailoverTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)
 	opSchema := smithy.NewOperationSchema(schemas.GetTrafficDistribution, schemas.GetTrafficDistributionResponse, schemas.GetTrafficDistributionResponse)
@@ -11427,6 +11484,74 @@ func TestUpdateResponseSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing
 	}
 }
 
+func TestUpdateResponseSnapshot_ListReplicationFindings(t *testing.T) {
+	want := &ListReplicationFindingsOutput{
+		ReplicationFindingsList: []types.ReplicationFinding{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+		},
+		ApproximateDriftedResourceCounts: []types.ApproximateDriftedResourceCount{
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		ResourceReplicationStatuses: []types.ResourceReplicationStatus{
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.ListReplicationFindings, schemas.ListReplicationFindingsResponse, schemas.ListReplicationFindingsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListReplicationFindings.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
 	want := &ListRoutingProfileManualAssignmentQueuesOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -11810,6 +11935,7 @@ func TestUpdateResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                 ptr.String("__Id__"),
@@ -11817,6 +11943,7 @@ func TestUpdateResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -14820,6 +14947,7 @@ func TestUpdateResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                     ptr.String("__Id__"),
@@ -14830,6 +14958,7 @@ func TestUpdateResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken:             ptr.String("__NextToken__"),
@@ -16983,6 +17112,30 @@ func TestUpdateResponseSnapshot_UpdateNotificationContent(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	want := &UpdateOutboundEmailContactMessageOutput{
+		ContactId: ptr.String("__ContactId__"),
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateOutboundEmailContactMessage, schemas.UpdateOutboundEmailContactMessageResponse, schemas.UpdateOutboundEmailContactMessageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateOutboundEmailContactMessage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	want := &UpdateParticipantAuthenticationOutput{}
 	proto := restjson1.New(schemas.AmazonConnectService)
@@ -17460,6 +17613,9 @@ func TestUpdateResponseSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{

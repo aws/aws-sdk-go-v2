@@ -54,7 +54,9 @@ func (v *GetInsightsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.GetInsightsRequest_InsightArns, v.InsightArns)
+	if v.InsightArns != nil {
+		serializeArnList(s, schemas.GetInsightsRequest_InsightArns, v.InsightArns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetInsightsRequest_MaxResults, *v.MaxResults)
 	}
@@ -86,7 +88,9 @@ func (v *GetInsightsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInsightList(s, schemas.GetInsightsResponse_Insights, v.Insights)
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.GetInsightsResponse_Insights, v.Insights)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInsightsResponse_NextToken, *v.NextToken)
 	}

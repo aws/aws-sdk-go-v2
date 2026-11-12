@@ -539,6 +539,31 @@ func TestUpdateResponseSnapshot_BatchWriteItem(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CancelBulkOperation(t *testing.T) {
+	want := &CancelBulkOperationOutput{
+		BulkOperationArn:    ptr.String("__BulkOperationArn__"),
+		BulkOperationStatus: types.BulkOperationStatus("IN_PROGRESS"),
+	}
+	proto := awsjson.New10(schemas.DynamoDB_20120810)
+	opSchema := smithy.NewOperationSchema(schemas.CancelBulkOperation, schemas.CancelBulkOperationOutput, schemas.CancelBulkOperationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelBulkOperation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateBackup(t *testing.T) {
 	want := &CreateBackupOutput{
 		BackupDetails: &types.BackupDetails{
@@ -1036,7 +1061,8 @@ func TestUpdateResponseSnapshot_CreateTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -1778,7 +1804,8 @@ func TestUpdateResponseSnapshot_DeleteTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -2098,6 +2125,118 @@ func TestUpdateResponseSnapshot_DescribeBackup(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeBackup.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeBulkOperation(t *testing.T) {
+	want := &DescribeBulkOperationOutput{
+		BulkOperationDescription: &types.BulkOperationDescription{
+			BulkOperationArn:    ptr.String("__BulkOperationArn__"),
+			BulkOperationStatus: types.BulkOperationStatus("IN_PROGRESS"),
+			TableDetails: []types.BulkOperationTableDetail{
+				{
+					TableName: ptr.String("__TableName__"),
+					TableId:   ptr.String("__TableId__"),
+				},
+				{
+					TableName: ptr.String("__TableName__"),
+					TableId:   ptr.String("__TableId__"),
+				},
+			},
+			ClientToken: ptr.String("__ClientToken__"),
+			InputS3Configuration: &types.InputS3Configuration{
+				S3BucketOwner:        ptr.String("__S3BucketOwner__"),
+				S3Bucket:             ptr.String("__S3Bucket__"),
+				S3KeyPrefix:          ptr.String("__S3KeyPrefix__"),
+				InputFormat:          types.BulkOperationInputFormat("DYNAMODB_JSON"),
+				InputCompressionType: types.InputCompressionType("GZIP"),
+			},
+			OutputS3Configuration: &types.OutputS3Configuration{
+				S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+				S3Bucket:       ptr.String("__S3Bucket__"),
+				S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+				S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+				S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+				OutputType: []types.OutputTypeEnum{
+					types.OutputTypeEnum("ERROR"),
+					types.OutputTypeEnum("ERROR"),
+				},
+			},
+			StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ProcessedItemCount:  1,
+			ProcessedInputBytes: ptr.Int64(1),
+			TotalInputBytes:     ptr.Int64(1),
+			BulkOperationUsage: []types.BulkOperationUsage{
+				{
+					TableName:    ptr.String("__TableName__"),
+					BulkPutBytes: ptr.Int64(1),
+					Table: &types.BulkOperationBytes{
+						BulkPutBytes: ptr.Int64(1),
+					},
+					LocalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					GlobalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					VectorIndexes: map[string]types.BulkOperationVectorBytes{
+						"key0": {
+							BulkPutVectorBytes: ptr.Int64(1),
+						},
+					},
+				},
+				{
+					TableName:    ptr.String("__TableName__"),
+					BulkPutBytes: ptr.Int64(1),
+					Table: &types.BulkOperationBytes{
+						BulkPutBytes: ptr.Int64(1),
+					},
+					LocalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					GlobalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					VectorIndexes: map[string]types.BulkOperationVectorBytes{
+						"key0": {
+							BulkPutVectorBytes: ptr.Int64(1),
+						},
+					},
+				},
+			},
+			FailedItemCount:      1,
+			FailureCode:          ptr.String("__FailureCode__"),
+			FailureMessage:       ptr.String("__FailureMessage__"),
+			MaxWriteRequestUnits: ptr.Int64(1),
+			PerformanceTier:      types.BulkOperationPerformanceTier("STANDARD"),
+		},
+	}
+	proto := awsjson.New10(schemas.DynamoDB_20120810)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeBulkOperation, schemas.DescribeBulkOperationOutput, schemas.DescribeBulkOperationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeBulkOperation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3400,7 +3539,8 @@ func TestUpdateResponseSnapshot_DescribeTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -4531,6 +4671,44 @@ func TestUpdateResponseSnapshot_ListBackups(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListBulkOperations(t *testing.T) {
+	want := &ListBulkOperationsOutput{
+		BulkOperationsSummaryList: []types.BulkOperationSummary{
+			{
+				BulkOperationArn:    ptr.String("__BulkOperationArn__"),
+				BulkOperationStatus: types.BulkOperationStatus("IN_PROGRESS"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				BulkOperationArn:    ptr.String("__BulkOperationArn__"),
+				BulkOperationStatus: types.BulkOperationStatus("IN_PROGRESS"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.DynamoDB_20120810)
+	opSchema := smithy.NewOperationSchema(schemas.ListBulkOperations, schemas.ListBulkOperationsOutput, schemas.ListBulkOperationsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListBulkOperations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListContributorInsights(t *testing.T) {
 	want := &ListContributorInsightsOutput{
 		ContributorInsightsSummaries: []types.ContributorInsightsSummary{
@@ -5260,7 +5438,8 @@ func TestUpdateResponseSnapshot_RestoreTableFromBackup(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -5679,7 +5858,8 @@ func TestUpdateResponseSnapshot_RestoreTableToPointInTime(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -5888,6 +6068,118 @@ func TestUpdateResponseSnapshot_SearchVectors(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("SearchVectors.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartBulkPutItems(t *testing.T) {
+	want := &StartBulkPutItemsOutput{
+		BulkOperationDescription: &types.BulkOperationDescription{
+			BulkOperationArn:    ptr.String("__BulkOperationArn__"),
+			BulkOperationStatus: types.BulkOperationStatus("IN_PROGRESS"),
+			TableDetails: []types.BulkOperationTableDetail{
+				{
+					TableName: ptr.String("__TableName__"),
+					TableId:   ptr.String("__TableId__"),
+				},
+				{
+					TableName: ptr.String("__TableName__"),
+					TableId:   ptr.String("__TableId__"),
+				},
+			},
+			ClientToken: ptr.String("__ClientToken__"),
+			InputS3Configuration: &types.InputS3Configuration{
+				S3BucketOwner:        ptr.String("__S3BucketOwner__"),
+				S3Bucket:             ptr.String("__S3Bucket__"),
+				S3KeyPrefix:          ptr.String("__S3KeyPrefix__"),
+				InputFormat:          types.BulkOperationInputFormat("DYNAMODB_JSON"),
+				InputCompressionType: types.InputCompressionType("GZIP"),
+			},
+			OutputS3Configuration: &types.OutputS3Configuration{
+				S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+				S3Bucket:       ptr.String("__S3Bucket__"),
+				S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+				S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+				S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+				OutputType: []types.OutputTypeEnum{
+					types.OutputTypeEnum("ERROR"),
+					types.OutputTypeEnum("ERROR"),
+				},
+			},
+			StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ProcessedItemCount:  1,
+			ProcessedInputBytes: ptr.Int64(1),
+			TotalInputBytes:     ptr.Int64(1),
+			BulkOperationUsage: []types.BulkOperationUsage{
+				{
+					TableName:    ptr.String("__TableName__"),
+					BulkPutBytes: ptr.Int64(1),
+					Table: &types.BulkOperationBytes{
+						BulkPutBytes: ptr.Int64(1),
+					},
+					LocalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					GlobalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					VectorIndexes: map[string]types.BulkOperationVectorBytes{
+						"key0": {
+							BulkPutVectorBytes: ptr.Int64(1),
+						},
+					},
+				},
+				{
+					TableName:    ptr.String("__TableName__"),
+					BulkPutBytes: ptr.Int64(1),
+					Table: &types.BulkOperationBytes{
+						BulkPutBytes: ptr.Int64(1),
+					},
+					LocalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					GlobalSecondaryIndexes: map[string]types.BulkOperationBytes{
+						"key0": {
+							BulkPutBytes: ptr.Int64(1),
+						},
+					},
+					VectorIndexes: map[string]types.BulkOperationVectorBytes{
+						"key0": {
+							BulkPutVectorBytes: ptr.Int64(1),
+						},
+					},
+				},
+			},
+			FailedItemCount:      1,
+			FailureCode:          ptr.String("__FailureCode__"),
+			FailureMessage:       ptr.String("__FailureMessage__"),
+			MaxWriteRequestUnits: ptr.Int64(1),
+			PerformanceTier:      types.BulkOperationPerformanceTier("STANDARD"),
+		},
+	}
+	proto := awsjson.New10(schemas.DynamoDB_20120810)
+	opSchema := smithy.NewOperationSchema(schemas.StartBulkPutItems, schemas.StartBulkPutItemsOutput, schemas.StartBulkPutItemsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartBulkPutItems.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7169,7 +7461,8 @@ func TestUpdateResponseSnapshot_UpdateTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),

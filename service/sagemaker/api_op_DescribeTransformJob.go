@@ -202,7 +202,9 @@ func (v *DescribeTransformJobOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.DataProcessing.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTransformEnvironmentMap(s, schemas.DescribeTransformJobResponse_Environment, v.Environment)
+	if v.Environment != nil {
+		serializeTransformEnvironmentMap(s, schemas.DescribeTransformJobResponse_Environment, v.Environment)
+	}
 	if v.ExperimentConfig != nil {
 		s.WriteStruct(schemas.DescribeTransformJobResponse_ExperimentConfig)
 		v.ExperimentConfig.SerializeMembers(s)

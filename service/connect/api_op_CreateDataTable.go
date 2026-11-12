@@ -97,7 +97,9 @@ func (v *CreateDataTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateDataTableRequest_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateDataTableRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDataTableRequest_Tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateDataTableRequest_TimeZone, *v.TimeZone)
 	}

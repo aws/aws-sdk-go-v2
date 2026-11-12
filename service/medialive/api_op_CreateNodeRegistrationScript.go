@@ -80,7 +80,9 @@ func (v *CreateNodeRegistrationScriptInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_Name, *v.Name)
 	}
-	serialize__listOfNodeInterfaceMapping(s, schemas.CreateNodeRegistrationScriptRequest_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.NodeInterfaceMappings != nil {
+		serialize__listOfNodeInterfaceMapping(s, schemas.CreateNodeRegistrationScriptRequest_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_RequestId, *v.RequestId)
 	}

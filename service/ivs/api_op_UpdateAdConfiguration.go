@@ -59,7 +59,9 @@ func (v *UpdateAdConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateAdConfigurationRequest_arn, *v.Arn)
 	}
-	serializeMediaTailorPlaybackConfigurationsList(s, schemas.UpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	if v.MediaTailorPlaybackConfigurations != nil {
+		serializeMediaTailorPlaybackConfigurationsList(s, schemas.UpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAdConfigurationRequest_name, *v.Name)
 	}

@@ -28,7 +28,6 @@ func (c *Client) ListLicenseEndpoints(ctx context.Context, params *ListLicenseEn
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListLicenseEndpointsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -56,7 +55,6 @@ func (v *ListLicenseEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListLicenseEndpointsOutput struct {
 
 	// The license endpoints.
@@ -85,7 +83,9 @@ func (v *ListLicenseEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLicenseEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseEndpointSummaries(s, schemas.ListLicenseEndpointsResponse_licenseEndpoints, v.LicenseEndpoints)
+	if v.LicenseEndpoints != nil {
+		serializeLicenseEndpointSummaries(s, schemas.ListLicenseEndpointsResponse_licenseEndpoints, v.LicenseEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicenseEndpointsResponse_nextToken, *v.NextToken)
 	}

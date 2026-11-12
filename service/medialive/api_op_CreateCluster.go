@@ -85,7 +85,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateClusterRequest_RequestId, *v.RequestId)
 	}
-	serializeTags(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateClusterResponse
@@ -136,7 +138,9 @@ func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateClusterResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.CreateClusterResponse_ChannelIds, v.ChannelIds)
+	if v.ChannelIds != nil {
+		serialize__listOf__string(s, schemas.CreateClusterResponse_ChannelIds, v.ChannelIds)
+	}
 	if v.ClusterType != "" {
 		s.WriteString(schemas.CreateClusterResponse_ClusterType, string(v.ClusterType))
 	}

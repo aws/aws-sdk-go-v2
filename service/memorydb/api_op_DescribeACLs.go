@@ -89,7 +89,9 @@ func (v *DescribeACLsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeACLsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeACLList(s, schemas.DescribeACLsResponse_ACLs, v.ACLs)
+	if v.ACLs != nil {
+		serializeACLList(s, schemas.DescribeACLsResponse_ACLs, v.ACLs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeACLsResponse_NextToken, *v.NextToken)
 	}
@@ -121,6 +123,9 @@ func (c *Client) addOperationDescribeACLsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

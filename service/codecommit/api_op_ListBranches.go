@@ -77,7 +77,9 @@ func (v *ListBranchesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBranchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBranchNameList(s, schemas.ListBranchesOutput_branches, v.Branches)
+	if v.Branches != nil {
+		serializeBranchNameList(s, schemas.ListBranchesOutput_branches, v.Branches)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBranchesOutput_nextToken, *v.NextToken)
 	}

@@ -128,7 +128,9 @@ func (v *DescribeContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LineageGroupArn != nil {
 		s.WriteString(schemas.DescribeContextResponse_LineageGroupArn, *v.LineageGroupArn)
 	}
-	serializeLineageEntityParameters(s, schemas.DescribeContextResponse_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeLineageEntityParameters(s, schemas.DescribeContextResponse_Properties, v.Properties)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.DescribeContextResponse_Source)
 		v.Source.SerializeMembers(s)

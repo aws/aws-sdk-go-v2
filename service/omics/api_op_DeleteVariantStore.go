@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type DeleteVariantStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVariantStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVariantStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVariantStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != false {
+		s.WriteBool(schemas.DeleteVariantStoreRequest_force, v.Force)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteVariantStoreRequest_name, *v.Name)
+	}
+}
+
 type DeleteVariantStoreOutput struct {
 
 	// The store's status.
@@ -58,13 +75,36 @@ type DeleteVariantStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVariantStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVariantStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVariantStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteVariantStoreResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteVariantStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVariantStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVariantStoreResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteVariantStoreResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StoreStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVariantStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVariantStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVariantStore, schemas.DeleteVariantStoreRequest, schemas.DeleteVariantStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVariantStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVariantStore, schemas.DeleteVariantStoreRequest, schemas.DeleteVariantStoreResponse), output: &DeleteVariantStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

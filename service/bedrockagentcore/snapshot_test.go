@@ -542,6 +542,18 @@ func TestCheckSnapshot_InvokeHarness(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeWebSearch(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeWebSearch(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeWebSearch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListABTests(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListABTests(context.Background(), nil, func(o *Options) {
@@ -1338,6 +1350,18 @@ func TestUpdateSnapshot_InvokeHarness(t *testing.T) {
 	_, err := svc.InvokeHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeWebSearch(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeWebSearch(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeWebSearch")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -602,12 +602,16 @@ var InitialVlans_hcxNetworkAclId *smithy.Schema
 var InstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "InstanceType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 5)
 var InstanceType_I4I_METAL *smithy.Schema
 
 var InstanceType_I7I_METAL_24XL *smithy.Schema
 
 var InstanceType_I7I_METAL_48XL *smithy.Schema
+
+var InstanceType_R7I_METAL_24XL *smithy.Schema
+
+var InstanceType_R7I_METAL_48XL *smithy.Schema
 
 var InstanceTypeEsxVersionsInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
@@ -1708,6 +1712,10 @@ func init() {
 	InstanceType_I7I_METAL_24XL = InstanceType.AddMember("I7I_METAL_24XL", smithyprelude.Unit)
 
 	InstanceType_I7I_METAL_48XL = InstanceType.AddMember("I7I_METAL_48XL", smithyprelude.Unit)
+
+	InstanceType_R7I_METAL_24XL = InstanceType.AddMember("R7I_METAL_24XL", smithyprelude.Unit)
+
+	InstanceType_R7I_METAL_48XL = InstanceType.AddMember("R7I_METAL_48XL", smithyprelude.Unit)
 
 	HostState_CREATING = HostState.AddMember("CREATING", smithyprelude.Unit)
 

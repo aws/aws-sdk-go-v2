@@ -100,7 +100,9 @@ func (v *ListVocabularyFiltersOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVocabularyFiltersResponse_NextToken, *v.NextToken)
 	}
-	serializeVocabularyFilters(s, schemas.ListVocabularyFiltersResponse_VocabularyFilters, v.VocabularyFilters)
+	if v.VocabularyFilters != nil {
+		serializeVocabularyFilters(s, schemas.ListVocabularyFiltersResponse_VocabularyFilters, v.VocabularyFilters)
+	}
 }
 func (v *ListVocabularyFiltersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVocabularyFiltersResponse, func(s *smithy.Schema) error {
@@ -129,6 +131,9 @@ func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

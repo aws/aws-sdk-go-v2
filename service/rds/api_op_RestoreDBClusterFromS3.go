@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -435,6 +437,134 @@ type RestoreDBClusterFromS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterFromS3Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBClusterFromS3Message)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBClusterFromS3Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedRoles != nil {
+		serializeDBClusterAssociatedRoles(s, schemas.RestoreDBClusterFromS3Message_AssociatedRoles, v.AssociatedRoles)
+	}
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.RestoreDBClusterFromS3Message_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.BacktrackWindow != nil {
+		s.WriteInt64(schemas.RestoreDBClusterFromS3Message_BacktrackWindow, *v.BacktrackWindow)
+	}
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.RestoreDBClusterFromS3Message_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.CharacterSetName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_CharacterSetName, *v.CharacterSetName)
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromS3Message_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBClusterParameterGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_DatabaseName, *v.DatabaseName)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromS3Message_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_Domain, *v.Domain)
+	}
+	if v.DomainIAMRoleName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_DomainIAMRoleName, *v.DomainIAMRoleName)
+	}
+	if v.EnableCloudwatchLogsExports != nil {
+		serializeLogTypeList(s, schemas.RestoreDBClusterFromS3Message_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromS3Message_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_Engine, *v.Engine)
+	}
+	if v.EngineLifecycleSupport != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_EngineLifecycleSupport, *v.EngineLifecycleSupport)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_EngineVersion, *v.EngineVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ManageMasterUserPassword != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromS3Message_ManageMasterUserPassword, *v.ManageMasterUserPassword)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_MasterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUserSecretKmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
+	}
+	if v.MasterUsername != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_MasterUsername, *v.MasterUsername)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_NetworkType, *v.NetworkType)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RestoreDBClusterFromS3Message_Port, *v.Port)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_PreferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3IngestionRoleArn != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_S3IngestionRoleArn, *v.S3IngestionRoleArn)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_S3Prefix, *v.S3Prefix)
+	}
+	if v.ServerlessV2ScalingConfiguration != nil {
+		s.WriteStruct(schemas.RestoreDBClusterFromS3Message_ServerlessV2ScalingConfiguration)
+		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceEngine != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_SourceEngine, *v.SourceEngine)
+	}
+	if v.SourceEngineVersion != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_SourceEngineVersion, *v.SourceEngineVersion)
+	}
+	if v.StorageEncrypted != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromS3Message_StorageEncrypted, *v.StorageEncrypted)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.RestoreDBClusterFromS3Message_StorageType, *v.StorageType)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.RestoreDBClusterFromS3Message_TagSpecifications, v.TagSpecifications)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RestoreDBClusterFromS3Message_Tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.RestoreDBClusterFromS3Message_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type RestoreDBClusterFromS3Output struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
@@ -466,13 +596,34 @@ type RestoreDBClusterFromS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterFromS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBClusterFromS3Result)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBClusterFromS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCluster != nil {
+		s.WriteStruct(schemas.RestoreDBClusterFromS3Result_DBCluster)
+		v.DBCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreDBClusterFromS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDBClusterFromS3Result, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDBClusterFromS3Result_DBCluster:
+			v.DBCluster = &types.DBCluster{}
+			return v.DBCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterFromS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterFromS3, schemas.RestoreDBClusterFromS3Message, schemas.RestoreDBClusterFromS3Result)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreDBClusterFromS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterFromS3, schemas.RestoreDBClusterFromS3Message, schemas.RestoreDBClusterFromS3Result), output: &RestoreDBClusterFromS3Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -82,10 +82,18 @@ func (v *CreateQuoteInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutpostIdentifier != nil {
 		s.WriteString(schemas.CreateQuoteInput_OutpostIdentifier, *v.OutpostIdentifier)
 	}
-	serializeQuoteCapacityList(s, schemas.CreateQuoteInput_RequestedCapacities, v.RequestedCapacities)
-	serializeQuoteConstraintList(s, schemas.CreateQuoteInput_RequestedConstraints, v.RequestedConstraints)
-	serializePaymentOptionList(s, schemas.CreateQuoteInput_RequestedPaymentOptions, v.RequestedPaymentOptions)
-	serializePaymentTermList(s, schemas.CreateQuoteInput_RequestedPaymentTerms, v.RequestedPaymentTerms)
+	if v.RequestedCapacities != nil {
+		serializeQuoteCapacityList(s, schemas.CreateQuoteInput_RequestedCapacities, v.RequestedCapacities)
+	}
+	if v.RequestedConstraints != nil {
+		serializeQuoteConstraintList(s, schemas.CreateQuoteInput_RequestedConstraints, v.RequestedConstraints)
+	}
+	if v.RequestedPaymentOptions != nil {
+		serializePaymentOptionList(s, schemas.CreateQuoteInput_RequestedPaymentOptions, v.RequestedPaymentOptions)
+	}
+	if v.RequestedPaymentTerms != nil {
+		serializePaymentTermList(s, schemas.CreateQuoteInput_RequestedPaymentTerms, v.RequestedPaymentTerms)
+	}
 }
 
 type CreateQuoteOutput struct {

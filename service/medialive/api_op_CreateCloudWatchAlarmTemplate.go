@@ -142,7 +142,9 @@ func (v *CreateCloudWatchAlarmTemplateInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Statistic != "" {
 		s.WriteString(schemas.CreateCloudWatchAlarmTemplateRequest_Statistic, string(v.Statistic))
 	}
-	serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateRequest_Tags, v.Tags)
+	}
 	if v.TargetResourceType != "" {
 		s.WriteString(schemas.CreateCloudWatchAlarmTemplateRequest_TargetResourceType, string(v.TargetResourceType))
 	}
@@ -268,7 +270,9 @@ func (v *CreateCloudWatchAlarmTemplateOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Statistic != "" {
 		s.WriteString(schemas.CreateCloudWatchAlarmTemplateResponse_Statistic, string(v.Statistic))
 	}
-	serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateResponse_Tags, v.Tags)
+	}
 	if v.TargetResourceType != "" {
 		s.WriteString(schemas.CreateCloudWatchAlarmTemplateResponse_TargetResourceType, string(v.TargetResourceType))
 	}

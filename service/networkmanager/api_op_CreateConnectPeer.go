@@ -85,14 +85,18 @@ func (v *CreateConnectPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CoreNetworkAddress != nil {
 		s.WriteString(schemas.CreateConnectPeerRequest_CoreNetworkAddress, *v.CoreNetworkAddress)
 	}
-	serializeConstrainedStringList(s, schemas.CreateConnectPeerRequest_InsideCidrBlocks, v.InsideCidrBlocks)
+	if v.InsideCidrBlocks != nil {
+		serializeConstrainedStringList(s, schemas.CreateConnectPeerRequest_InsideCidrBlocks, v.InsideCidrBlocks)
+	}
 	if v.PeerAddress != nil {
 		s.WriteString(schemas.CreateConnectPeerRequest_PeerAddress, *v.PeerAddress)
 	}
 	if v.SubnetArn != nil {
 		s.WriteString(schemas.CreateConnectPeerRequest_SubnetArn, *v.SubnetArn)
 	}
-	serializeTagList(s, schemas.CreateConnectPeerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConnectPeerRequest_Tags, v.Tags)
+	}
 }
 
 type CreateConnectPeerOutput struct {

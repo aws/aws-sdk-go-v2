@@ -88,7 +88,9 @@ func (v *GetEntityRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionName != nil {
 		s.WriteString(schemas.GetEntityRecordsRequest_ConnectionName, *v.ConnectionName)
 	}
-	serializeConnectionOptions(s, schemas.GetEntityRecordsRequest_ConnectionOptions, v.ConnectionOptions)
+	if v.ConnectionOptions != nil {
+		serializeConnectionOptions(s, schemas.GetEntityRecordsRequest_ConnectionOptions, v.ConnectionOptions)
+	}
 	if v.DataStoreApiVersion != nil {
 		s.WriteString(schemas.GetEntityRecordsRequest_DataStoreApiVersion, *v.DataStoreApiVersion)
 	}
@@ -107,7 +109,9 @@ func (v *GetEntityRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OrderBy != nil {
 		s.WriteString(schemas.GetEntityRecordsRequest_OrderBy, *v.OrderBy)
 	}
-	serializeSelectedFields(s, schemas.GetEntityRecordsRequest_SelectedFields, v.SelectedFields)
+	if v.SelectedFields != nil {
+		serializeSelectedFields(s, schemas.GetEntityRecordsRequest_SelectedFields, v.SelectedFields)
+	}
 }
 
 type GetEntityRecordsOutput struct {
@@ -134,7 +138,9 @@ func (v *GetEntityRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEntityRecordsResponse_NextToken, *v.NextToken)
 	}
-	serializeRecords(s, schemas.GetEntityRecordsResponse_Records, v.Records)
+	if v.Records != nil {
+		serializeRecords(s, schemas.GetEntityRecordsResponse_Records, v.Records)
+	}
 }
 func (v *GetEntityRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEntityRecordsResponse, func(s *smithy.Schema) error {

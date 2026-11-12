@@ -57,7 +57,9 @@ func (v *UpdateSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubnetGroupName != nil {
 		s.WriteString(schemas.UpdateSubnetGroupRequest_SubnetGroupName, *v.SubnetGroupName)
 	}
-	serializeSubnetIdentifierList(s, schemas.UpdateSubnetGroupRequest_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdentifierList(s, schemas.UpdateSubnetGroupRequest_SubnetIds, v.SubnetIds)
+	}
 }
 
 type UpdateSubnetGroupOutput struct {
@@ -109,6 +111,9 @@ func (c *Client) addOperationUpdateSubnetGroupMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

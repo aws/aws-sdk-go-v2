@@ -121,19 +121,27 @@ func (v *ListIntentMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIntentMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyticsBinByList(s, schemas.ListIntentMetricsRequest_binBy, v.BinBy)
+	if v.BinBy != nil {
+		serializeAnalyticsBinByList(s, schemas.ListIntentMetricsRequest_binBy, v.BinBy)
+	}
 	if v.BotId != nil {
 		s.WriteString(schemas.ListIntentMetricsRequest_botId, *v.BotId)
 	}
 	if v.EndDateTime != nil {
 		s.WriteTime(schemas.ListIntentMetricsRequest_endDateTime, *v.EndDateTime)
 	}
-	serializeAnalyticsIntentFilters(s, schemas.ListIntentMetricsRequest_filters, v.Filters)
-	serializeAnalyticsIntentGroupByList(s, schemas.ListIntentMetricsRequest_groupBy, v.GroupBy)
+	if v.Filters != nil {
+		serializeAnalyticsIntentFilters(s, schemas.ListIntentMetricsRequest_filters, v.Filters)
+	}
+	if v.GroupBy != nil {
+		serializeAnalyticsIntentGroupByList(s, schemas.ListIntentMetricsRequest_groupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListIntentMetricsRequest_maxResults, *v.MaxResults)
 	}
-	serializeAnalyticsIntentMetrics(s, schemas.ListIntentMetricsRequest_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeAnalyticsIntentMetrics(s, schemas.ListIntentMetricsRequest_metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntentMetricsRequest_nextToken, *v.NextToken)
 	}
@@ -178,7 +186,9 @@ func (v *ListIntentMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntentMetricsResponse_nextToken, *v.NextToken)
 	}
-	serializeAnalyticsIntentResults(s, schemas.ListIntentMetricsResponse_results, v.Results)
+	if v.Results != nil {
+		serializeAnalyticsIntentResults(s, schemas.ListIntentMetricsResponse_results, v.Results)
+	}
 }
 func (v *ListIntentMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListIntentMetricsResponse, func(s *smithy.Schema) error {

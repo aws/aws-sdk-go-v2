@@ -442,13 +442,17 @@ func (v *SearchOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFacets(s, schemas.SearchResponse_facets, v.Facets)
+	if v.Facets != nil {
+		serializeFacets(s, schemas.SearchResponse_facets, v.Facets)
+	}
 	if v.Hits != nil {
 		s.WriteStruct(schemas.SearchResponse_hits)
 		v.Hits.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStats(s, schemas.SearchResponse_stats, v.Stats)
+	if v.Stats != nil {
+		serializeStats(s, schemas.SearchResponse_stats, v.Stats)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.SearchResponse_status)
 		v.Status.SerializeMembers(s)

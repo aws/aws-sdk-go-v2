@@ -78,7 +78,9 @@ func (v *UpdatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdatePlanRequest_arn, *v.Arn)
 	}
-	serializeAssociatedAlarmMap(s, schemas.UpdatePlanRequest_associatedAlarms, v.AssociatedAlarms)
+	if v.AssociatedAlarms != nil {
+		serializeAssociatedAlarmMap(s, schemas.UpdatePlanRequest_associatedAlarms, v.AssociatedAlarms)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdatePlanRequest_description, *v.Description)
 	}
@@ -96,8 +98,12 @@ func (v *UpdatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceQuotaChecksEnabled != nil {
 		s.WriteBool(schemas.UpdatePlanRequest_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
 	}
-	serializeTriggerList(s, schemas.UpdatePlanRequest_triggers, v.Triggers)
-	serializeWorkflowList(s, schemas.UpdatePlanRequest_workflows, v.Workflows)
+	if v.Triggers != nil {
+		serializeTriggerList(s, schemas.UpdatePlanRequest_triggers, v.Triggers)
+	}
+	if v.Workflows != nil {
+		serializeWorkflowList(s, schemas.UpdatePlanRequest_workflows, v.Workflows)
+	}
 }
 func (in *UpdatePlanInput) bindEndpointParams(p *EndpointParameters) {
 

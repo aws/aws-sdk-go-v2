@@ -83,7 +83,9 @@ func (v *GetDomainNamesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDomainNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDomainName(s, schemas.DomainNames_items, v.Items)
+	if v.Items != nil {
+		serializeListOfDomainName(s, schemas.DomainNames_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.DomainNames_position, *v.Position)
 	}

@@ -87,7 +87,9 @@ func (v *ListArchiveExportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListArchiveExportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportSummaryList(s, schemas.ListArchiveExportsResponse_Exports, v.Exports)
+	if v.Exports != nil {
+		serializeExportSummaryList(s, schemas.ListArchiveExportsResponse_Exports, v.Exports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListArchiveExportsResponse_NextToken, *v.NextToken)
 	}

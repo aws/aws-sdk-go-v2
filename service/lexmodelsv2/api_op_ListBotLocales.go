@@ -74,7 +74,9 @@ func (v *ListBotLocalesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListBotLocalesRequest_botVersion, *v.BotVersion)
 	}
-	serializeBotLocaleFilters(s, schemas.ListBotLocalesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeBotLocaleFilters(s, schemas.ListBotLocalesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBotLocalesRequest_maxResults, *v.MaxResults)
 	}
@@ -124,7 +126,9 @@ func (v *ListBotLocalesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.ListBotLocalesResponse_botId, *v.BotId)
 	}
-	serializeBotLocaleSummaryList(s, schemas.ListBotLocalesResponse_botLocaleSummaries, v.BotLocaleSummaries)
+	if v.BotLocaleSummaries != nil {
+		serializeBotLocaleSummaryList(s, schemas.ListBotLocalesResponse_botLocaleSummaries, v.BotLocaleSummaries)
+	}
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListBotLocalesResponse_botVersion, *v.BotVersion)
 	}

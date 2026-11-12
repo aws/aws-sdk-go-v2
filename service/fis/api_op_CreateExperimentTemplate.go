@@ -99,7 +99,9 @@ func (v *CreateExperimentTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateExperimentTemplateActionInputMap(s, schemas.CreateExperimentTemplateRequest_actions, v.Actions)
+	if v.Actions != nil {
+		serializeCreateExperimentTemplateActionInputMap(s, schemas.CreateExperimentTemplateRequest_actions, v.Actions)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateExperimentTemplateRequest_clientToken, *v.ClientToken)
 	}
@@ -124,9 +126,15 @@ func (v *CreateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateExperimentTemplateRequest_roleArn, *v.RoleArn)
 	}
-	serializeCreateExperimentTemplateStopConditionInputList(s, schemas.CreateExperimentTemplateRequest_stopConditions, v.StopConditions)
-	serializeTagMap(s, schemas.CreateExperimentTemplateRequest_tags, v.Tags)
-	serializeCreateExperimentTemplateTargetInputMap(s, schemas.CreateExperimentTemplateRequest_targets, v.Targets)
+	if v.StopConditions != nil {
+		serializeCreateExperimentTemplateStopConditionInputList(s, schemas.CreateExperimentTemplateRequest_stopConditions, v.StopConditions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateExperimentTemplateRequest_tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeCreateExperimentTemplateTargetInputMap(s, schemas.CreateExperimentTemplateRequest_targets, v.Targets)
+	}
 }
 
 type CreateExperimentTemplateOutput struct {

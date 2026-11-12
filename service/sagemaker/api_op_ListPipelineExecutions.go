@@ -51,6 +51,11 @@ type ListPipelineExecutionsInput struct {
 	// use the token in the next request.
 	NextToken *string
 
+	// The alias of a pipeline version. The response includes only the executions of
+	// the version that has this alias when you make the request. If no version of the
+	// pipeline has this alias, the request fails with a ResourceNotFound error.
+	PipelineVersionAlias *string
+
 	// The field by which to sort results. The default is CreatedTime .
 	SortBy types.SortPipelineExecutionsBy
 
@@ -81,6 +86,9 @@ func (v *ListPipelineExecutionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	}
 	if v.PipelineName != nil {
 		s.WriteString(schemas.ListPipelineExecutionsRequest_PipelineName, *v.PipelineName)
+	}
+	if v.PipelineVersionAlias != nil {
+		s.WriteString(schemas.ListPipelineExecutionsRequest_PipelineVersionAlias, *v.PipelineVersionAlias)
 	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.ListPipelineExecutionsRequest_SortBy, string(v.SortBy))
@@ -118,7 +126,9 @@ func (v *ListPipelineExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPipelineExecutionsResponse_NextToken, *v.NextToken)
 	}
-	serializePipelineExecutionSummaryList(s, schemas.ListPipelineExecutionsResponse_PipelineExecutionSummaries, v.PipelineExecutionSummaries)
+	if v.PipelineExecutionSummaries != nil {
+		serializePipelineExecutionSummaryList(s, schemas.ListPipelineExecutionsResponse_PipelineExecutionSummaries, v.PipelineExecutionSummaries)
+	}
 }
 func (v *ListPipelineExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPipelineExecutionsResponse, func(s *smithy.Schema) error {

@@ -108,8 +108,12 @@ func (v *GetVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.VpcLink_statusMessage, *v.StatusMessage)
 	}
-	serializeMapOfStringToString(s, schemas.VpcLink_tags, v.Tags)
-	serializeListOfString(s, schemas.VpcLink_targetArns, v.TargetArns)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.VpcLink_tags, v.Tags)
+	}
+	if v.TargetArns != nil {
+		serializeListOfString(s, schemas.VpcLink_targetArns, v.TargetArns)
+	}
 }
 func (v *GetVpcLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcLink, func(s *smithy.Schema) error {

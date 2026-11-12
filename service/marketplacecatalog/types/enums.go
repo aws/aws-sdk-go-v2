@@ -212,6 +212,50 @@ func (DataProductVisibilityString) Values() []DataProductVisibilityString {
 	}
 }
 
+type ExpressPrivateOfferConfigurationSortBy string
+
+// Enum values for ExpressPrivateOfferConfigurationSortBy
+const (
+	ExpressPrivateOfferConfigurationSortByEntityId         ExpressPrivateOfferConfigurationSortBy = "EntityId"
+	ExpressPrivateOfferConfigurationSortByLastModifiedDate ExpressPrivateOfferConfigurationSortBy = "LastModifiedDate"
+	ExpressPrivateOfferConfigurationSortByProductId        ExpressPrivateOfferConfigurationSortBy = "ProductId"
+	ExpressPrivateOfferConfigurationSortByState            ExpressPrivateOfferConfigurationSortBy = "State"
+)
+
+// Values returns all known values for ExpressPrivateOfferConfigurationSortBy.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExpressPrivateOfferConfigurationSortBy) Values() []ExpressPrivateOfferConfigurationSortBy {
+	return []ExpressPrivateOfferConfigurationSortBy{
+		"EntityId",
+		"LastModifiedDate",
+		"ProductId",
+		"State",
+	}
+}
+
+type ExpressPrivateOfferConfigurationStateString string
+
+// Enum values for ExpressPrivateOfferConfigurationStateString
+const (
+	ExpressPrivateOfferConfigurationStateStringActive   ExpressPrivateOfferConfigurationStateString = "ACTIVE"
+	ExpressPrivateOfferConfigurationStateStringInactive ExpressPrivateOfferConfigurationStateString = "INACTIVE"
+)
+
+// Values returns all known values for
+// ExpressPrivateOfferConfigurationStateString. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExpressPrivateOfferConfigurationStateString) Values() []ExpressPrivateOfferConfigurationStateString {
+	return []ExpressPrivateOfferConfigurationStateString{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type FailureCode string
 
 // Enum values for FailureCode
@@ -638,6 +682,56 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type SubsidiaryAuthorizationSortBy string
+
+// Enum values for SubsidiaryAuthorizationSortBy
+const (
+	SubsidiaryAuthorizationSortByEntityId            SubsidiaryAuthorizationSortBy = "EntityId"
+	SubsidiaryAuthorizationSortByStatus              SubsidiaryAuthorizationSortBy = "Status"
+	SubsidiaryAuthorizationSortByResourceId          SubsidiaryAuthorizationSortBy = "ResourceId"
+	SubsidiaryAuthorizationSortBySubsidiaryAccountId SubsidiaryAuthorizationSortBy = "SubsidiaryAccountId"
+	SubsidiaryAuthorizationSortByCreatedDate         SubsidiaryAuthorizationSortBy = "CreatedDate"
+	SubsidiaryAuthorizationSortByLastModifiedDate    SubsidiaryAuthorizationSortBy = "LastModifiedDate"
+)
+
+// Values returns all known values for SubsidiaryAuthorizationSortBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubsidiaryAuthorizationSortBy) Values() []SubsidiaryAuthorizationSortBy {
+	return []SubsidiaryAuthorizationSortBy{
+		"EntityId",
+		"Status",
+		"ResourceId",
+		"SubsidiaryAccountId",
+		"CreatedDate",
+		"LastModifiedDate",
+	}
+}
+
+type SubsidiaryAuthorizationStatusString string
+
+// Enum values for SubsidiaryAuthorizationStatusString
+const (
+	SubsidiaryAuthorizationStatusStringDraft      SubsidiaryAuthorizationStatusString = "Draft"
+	SubsidiaryAuthorizationStatusStringActive     SubsidiaryAuthorizationStatusString = "Active"
+	SubsidiaryAuthorizationStatusStringRestricted SubsidiaryAuthorizationStatusString = "Restricted"
+)
+
+// Values returns all known values for SubsidiaryAuthorizationStatusString. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubsidiaryAuthorizationStatusString) Values() []SubsidiaryAuthorizationStatusString {
+	return []SubsidiaryAuthorizationStatusString{
+		"Draft",
+		"Active",
+		"Restricted",
 	}
 }
 

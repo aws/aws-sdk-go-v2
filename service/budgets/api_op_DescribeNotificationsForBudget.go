@@ -99,7 +99,9 @@ func (v *DescribeNotificationsForBudgetOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeNotificationsForBudgetResponse_NextToken, *v.NextToken)
 	}
-	serializeNotifications(s, schemas.DescribeNotificationsForBudgetResponse_Notifications, v.Notifications)
+	if v.Notifications != nil {
+		serializeNotifications(s, schemas.DescribeNotificationsForBudgetResponse_Notifications, v.Notifications)
+	}
 }
 func (v *DescribeNotificationsForBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeNotificationsForBudgetResponse, func(s *smithy.Schema) error {

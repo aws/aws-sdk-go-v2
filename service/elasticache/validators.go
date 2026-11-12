@@ -90,26 +90,6 @@ func (m *validateOpBatchStopUpdateAction) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCompleteMigration struct {
-}
-
-func (*validateOpCompleteMigration) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCompleteMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CompleteMigrationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCompleteMigrationInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCopyServerlessCacheSnapshot struct {
 }
 
@@ -990,6 +970,26 @@ func (m *validateOpModifyUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPrepareMigration struct {
+}
+
+func (*validateOpPrepareMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPrepareMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PrepareMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPrepareMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPurchaseReservedCacheNodesOffering struct {
 }
 
@@ -1110,21 +1110,21 @@ func (m *validateOpRevokeCacheSecurityGroupIngress) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpStartMigration struct {
+type validateOpStopMigration struct {
 }
 
-func (*validateOpStartMigration) ID() string {
+func (*validateOpStopMigration) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpStartMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpStopMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*StartMigrationInput)
+	input, ok := in.Parameters.(*StopMigrationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpStartMigrationInput(input); err != nil {
+	if err := validateOpStopMigrationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1184,10 +1184,6 @@ func addOpBatchApplyUpdateActionValidationMiddleware(stack *middleware.Stack) er
 
 func addOpBatchStopUpdateActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchStopUpdateAction{}, middleware.After)
-}
-
-func addOpCompleteMigrationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCompleteMigration{}, middleware.After)
 }
 
 func addOpCopyServerlessCacheSnapshotValidationMiddleware(stack *middleware.Stack) error {
@@ -1366,6 +1362,10 @@ func addOpModifyUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyUser{}, middleware.After)
 }
 
+func addOpPrepareMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPrepareMigration{}, middleware.After)
+}
+
 func addOpPurchaseReservedCacheNodesOfferingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPurchaseReservedCacheNodesOffering{}, middleware.After)
 }
@@ -1390,8 +1390,8 @@ func addOpRevokeCacheSecurityGroupIngressValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpRevokeCacheSecurityGroupIngress{}, middleware.After)
 }
 
-func addOpStartMigrationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpStartMigration{}, middleware.After)
+func addOpStopMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopMigration{}, middleware.After)
 }
 
 func addOpTestFailoverValidationMiddleware(stack *middleware.Stack) error {
@@ -1603,21 +1603,6 @@ func validateOpBatchStopUpdateActionInput(v *BatchStopUpdateActionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchStopUpdateActionInput"}
 	if v.ServiceUpdateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceUpdateName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCompleteMigrationInput(v *CompleteMigrationInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CompleteMigrationInput"}
-	if v.ReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2406,6 +2391,24 @@ func validateOpModifyUserInput(v *ModifyUserInput) error {
 	}
 }
 
+func validateOpPrepareMigrationInput(v *PrepareMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrepareMigrationInput"}
+	if v.ServerlessCacheName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheName"))
+	}
+	if v.CustomerNodeEndpointList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerNodeEndpointList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPurchaseReservedCacheNodesOfferingInput(v *PurchaseReservedCacheNodesOfferingInput) error {
 	if v == nil {
 		return nil
@@ -2511,16 +2514,13 @@ func validateOpRevokeCacheSecurityGroupIngressInput(v *RevokeCacheSecurityGroupI
 	}
 }
 
-func validateOpStartMigrationInput(v *StartMigrationInput) error {
+func validateOpStopMigrationInput(v *StopMigrationInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "StartMigrationInput"}
-	if v.ReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
-	}
-	if v.CustomerNodeEndpointList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerNodeEndpointList"))
+	invalidParams := smithy.InvalidParamsError{Context: "StopMigrationInput"}
+	if v.ServerlessCacheName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

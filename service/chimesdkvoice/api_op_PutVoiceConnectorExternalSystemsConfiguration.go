@@ -50,8 +50,12 @@ func (v *PutVoiceConnectorExternalSystemsConfigurationInput) Serialize(s smithy.
 }
 
 func (v *PutVoiceConnectorExternalSystemsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactCenterSystemTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes, v.ContactCenterSystemTypes)
-	serializeSessionBorderControllerTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes, v.SessionBorderControllerTypes)
+	if v.ContactCenterSystemTypes != nil {
+		serializeContactCenterSystemTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes, v.ContactCenterSystemTypes)
+	}
+	if v.SessionBorderControllerTypes != nil {
+		serializeSessionBorderControllerTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes, v.SessionBorderControllerTypes)
+	}
 	if v.VoiceConnectorId != nil {
 		s.WriteString(schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
 	}

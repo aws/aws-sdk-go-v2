@@ -73,8 +73,12 @@ func (v *UpdateFleetPortSettingsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.FleetId != nil {
 		s.WriteString(schemas.UpdateFleetPortSettingsInput_FleetId, *v.FleetId)
 	}
-	serializeIpPermissionsList(s, schemas.UpdateFleetPortSettingsInput_InboundPermissionAuthorizations, v.InboundPermissionAuthorizations)
-	serializeIpPermissionsList(s, schemas.UpdateFleetPortSettingsInput_InboundPermissionRevocations, v.InboundPermissionRevocations)
+	if v.InboundPermissionAuthorizations != nil {
+		serializeIpPermissionsList(s, schemas.UpdateFleetPortSettingsInput_InboundPermissionAuthorizations, v.InboundPermissionAuthorizations)
+	}
+	if v.InboundPermissionRevocations != nil {
+		serializeIpPermissionsList(s, schemas.UpdateFleetPortSettingsInput_InboundPermissionRevocations, v.InboundPermissionRevocations)
+	}
 }
 
 type UpdateFleetPortSettingsOutput struct {

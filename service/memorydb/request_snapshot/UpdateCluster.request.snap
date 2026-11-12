@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/UpdateCluster
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.UpdateCluster
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ACLName":"__ACLName__","ClusterName":"__ClusterName__","Description":"__Description__","Engine":"__Engine__","EngineVersion":"__EngineVersion__","IpDiscovery":"ipv4","MaintenanceWindow":"__MaintenanceWindow__","NodeType":"__NodeType__","ParameterGroupName":"__ParameterGroupName__","ReplicaConfiguration":{"ReplicaCount":1},"SecurityGroupIds":["__Member__","__Member__"],"ShardConfiguration":{"ShardCount":1},"SnapshotRetentionLimit":1,"SnapshotWindow":"__SnapshotWindow__","SnsTopicArn":"__SnsTopicArn__","SnsTopicStatus":"__SnsTopicStatus__"}
+¿gACLNamek__ACLName__kClusterNameo__ClusterName__kDescriptiono__Description__fEnginej__Engine__mEngineVersionq__EngineVersion__kIpDiscoverydipv4qMaintenanceWindowu__MaintenanceWindow__hNodeTypel__NodeType__rParameterGroupNamev__ParameterGroupName__tReplicaConfiguration¿lReplicaCountÿpSecurityGroupIdsŸj__Member__j__Member__ÿrShardConfiguration¿jShardCountÿvSnapshotRetentionLimitnSnapshotWindowr__SnapshotWindow__kSnsTopicArno__SnsTopicArn__nSnsTopicStatusr__SnsTopicStatus__ÿ

@@ -99,7 +99,9 @@ func (v *ListHoursOfOperationOverridesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListHoursOfOperationOverridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHoursOfOperationOverrideList(s, schemas.ListHoursOfOperationOverridesResponse_HoursOfOperationOverrideList, v.HoursOfOperationOverrideList)
+	if v.HoursOfOperationOverrideList != nil {
+		serializeHoursOfOperationOverrideList(s, schemas.ListHoursOfOperationOverridesResponse_HoursOfOperationOverrideList, v.HoursOfOperationOverrideList)
+	}
 	if v.LastModifiedRegion != nil {
 		s.WriteString(schemas.ListHoursOfOperationOverridesResponse_LastModifiedRegion, *v.LastModifiedRegion)
 	}

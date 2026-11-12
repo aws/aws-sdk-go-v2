@@ -3039,6 +3039,71 @@ func validateConfiguredTableAnalysisRulePolicyV1(v types.ConfiguredTableAnalysis
 	}
 }
 
+func validateDatabricksConnectionType(v types.DatabricksConnectionType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatabricksConnectionType"}
+	switch uv := v.(type) {
+	case *types.DatabricksConnectionTypeMemberDeltaSharing:
+		if err := validateDatabricksDeltaSharingConnection(&uv.Value); err != nil {
+			invalidParams.AddNested("[deltaSharing]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDatabricksDeltaSharingConnection(v *types.DatabricksDeltaSharingConnection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatabricksDeltaSharingConnection"}
+	if v.DeltaShareEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeltaShareEndpoint"))
+	}
+	if v.ShareName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDatabricksTableReference(v *types.DatabricksTableReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatabricksTableReference"}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.WorkspaceUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceUrl"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	} else if v.ConnectionType != nil {
+		if err := validateDatabricksConnectionType(v.ConnectionType); err != nil {
+			invalidParams.AddNested("ConnectionType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataEncryptionMetadata(v *types.DataEncryptionMetadata) error {
 	if v == nil {
 		return nil
@@ -4362,6 +4427,11 @@ func validateTableReference(v types.TableReference) error {
 	case *types.TableReferenceMemberAthena:
 		if err := validateAthenaTableReference(&uv.Value); err != nil {
 			invalidParams.AddNested("[athena]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.TableReferenceMemberDatabricks:
+		if err := validateDatabricksTableReference(&uv.Value); err != nil {
+			invalidParams.AddNested("[databricks]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.TableReferenceMemberGlue:

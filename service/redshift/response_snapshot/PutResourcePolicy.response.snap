@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<PutResourcePolicyResponse><PutResourcePolicyResult><ResourcePolicy><Policy>__Policy__</Policy><ResourceArn>__ResourceArn__</ResourceArn></ResourcePolicy></PutResourcePolicyResult></PutResourcePolicyResponse>

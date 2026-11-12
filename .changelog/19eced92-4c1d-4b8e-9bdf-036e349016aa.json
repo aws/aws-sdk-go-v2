@@ -1,8 +1,0 @@
-{
-    "id": "19eced92-4c1d-4b8e-9bdf-036e349016aa",
-    "type": "bugfix",
-    "description": "Fix deserialization failure when `Observations.Text` lists contains a null value.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

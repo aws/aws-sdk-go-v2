@@ -73,8 +73,12 @@ func (v *CreateDataflowEndpointGroupV2Input) SerializeMembers(s smithy.ShapeSeri
 	if v.ContactPrePassDurationSeconds != nil {
 		s.WriteInt32(schemas.CreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
 	}
-	serializeCreateEndpointDetailsList(s, schemas.CreateDataflowEndpointGroupV2Request_endpoints, v.Endpoints)
-	serializeTagsMap(s, schemas.CreateDataflowEndpointGroupV2Request_tags, v.Tags)
+	if v.Endpoints != nil {
+		serializeCreateEndpointDetailsList(s, schemas.CreateDataflowEndpointGroupV2Request_endpoints, v.Endpoints)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateDataflowEndpointGroupV2Request_tags, v.Tags)
+	}
 }
 
 type CreateDataflowEndpointGroupV2Output struct {

@@ -107,7 +107,9 @@ func (v *CreateWorkspacesPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RunningMode != "" {
 		s.WriteString(schemas.CreateWorkspacesPoolRequest_RunningMode, string(v.RunningMode))
 	}
-	serializeTagList(s, schemas.CreateWorkspacesPoolRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWorkspacesPoolRequest_Tags, v.Tags)
+	}
 	if v.TimeoutSettings != nil {
 		s.WriteStruct(schemas.CreateWorkspacesPoolRequest_TimeoutSettings)
 		v.TimeoutSettings.SerializeMembers(s)
@@ -164,6 +166,9 @@ func (c *Client) addOperationCreateWorkspacesPoolMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

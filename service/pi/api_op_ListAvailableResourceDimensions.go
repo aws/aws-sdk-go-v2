@@ -78,14 +78,18 @@ func (v *ListAvailableResourceDimensionsInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListAvailableResourceDimensionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizedActionsList(s, schemas.ListAvailableResourceDimensionsRequest_AuthorizedActions, v.AuthorizedActions)
+	if v.AuthorizedActions != nil {
+		serializeAuthorizedActionsList(s, schemas.ListAvailableResourceDimensionsRequest_AuthorizedActions, v.AuthorizedActions)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_Identifier, *v.Identifier)
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAvailableResourceDimensionsRequest_MaxResults, *v.MaxResults)
 	}
-	serializeDimensionsMetricList(s, schemas.ListAvailableResourceDimensionsRequest_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeDimensionsMetricList(s, schemas.ListAvailableResourceDimensionsRequest_Metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_NextToken, *v.NextToken)
 	}
@@ -117,7 +121,9 @@ func (v *ListAvailableResourceDimensionsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListAvailableResourceDimensionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensionsList(s, schemas.ListAvailableResourceDimensionsResponse_MetricDimensions, v.MetricDimensions)
+	if v.MetricDimensions != nil {
+		serializeMetricDimensionsList(s, schemas.ListAvailableResourceDimensionsResponse_MetricDimensions, v.MetricDimensions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailableResourceDimensionsResponse_NextToken, *v.NextToken)
 	}

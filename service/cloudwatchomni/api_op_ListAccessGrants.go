@@ -112,7 +112,9 @@ func (v *ListAccessGrantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessGrantSummaryList(s, schemas.ListAccessGrantsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeAccessGrantSummaryList(s, schemas.ListAccessGrantsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessGrantsOutput_nextToken, *v.NextToken)
 	}

@@ -119,18 +119,24 @@ func (v *PutOrganizationConformancePackInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *PutOrganizationConformancePackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConformancePackInputParameters(s, schemas.PutOrganizationConformancePackRequest_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	if v.ConformancePackInputParameters != nil {
+		serializeConformancePackInputParameters(s, schemas.PutOrganizationConformancePackRequest_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	}
 	if v.DeliveryS3Bucket != nil {
 		s.WriteString(schemas.PutOrganizationConformancePackRequest_DeliveryS3Bucket, *v.DeliveryS3Bucket)
 	}
 	if v.DeliveryS3KeyPrefix != nil {
 		s.WriteString(schemas.PutOrganizationConformancePackRequest_DeliveryS3KeyPrefix, *v.DeliveryS3KeyPrefix)
 	}
-	serializeExcludedAccounts(s, schemas.PutOrganizationConformancePackRequest_ExcludedAccounts, v.ExcludedAccounts)
+	if v.ExcludedAccounts != nil {
+		serializeExcludedAccounts(s, schemas.PutOrganizationConformancePackRequest_ExcludedAccounts, v.ExcludedAccounts)
+	}
 	if v.OrganizationConformancePackName != nil {
 		s.WriteString(schemas.PutOrganizationConformancePackRequest_OrganizationConformancePackName, *v.OrganizationConformancePackName)
 	}
-	serializeTagsList(s, schemas.PutOrganizationConformancePackRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutOrganizationConformancePackRequest_Tags, v.Tags)
+	}
 	if v.TemplateBody != nil {
 		s.WriteString(schemas.PutOrganizationConformancePackRequest_TemplateBody, *v.TemplateBody)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"portalArn":"__PortalArn__","sessionLoggerArn":"__SessionLoggerArn__"}

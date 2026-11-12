@@ -71,7 +71,9 @@ func (v *ValidateFlowDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidateFlowDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowValidations(s, schemas.ValidateFlowDefinitionResponse_validations, v.Validations)
+	if v.Validations != nil {
+		serializeFlowValidations(s, schemas.ValidateFlowDefinitionResponse_validations, v.Validations)
+	}
 }
 func (v *ValidateFlowDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidateFlowDefinitionResponse, func(s *smithy.Schema) error {

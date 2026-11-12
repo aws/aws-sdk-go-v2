@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/AssociateIpGroups
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.AssociateIpGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DirectoryId":"__DirectoryId__","GroupIds":["__Member__","__Member__"]}
+¿kDirectoryIdo__DirectoryId__hGroupIdsŸj__Member__j__Member__ÿÿ

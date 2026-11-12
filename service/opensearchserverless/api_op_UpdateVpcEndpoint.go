@@ -64,16 +64,24 @@ func (v *UpdateVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointRequest_addSecurityGroupIds, v.AddSecurityGroupIds)
-	serializeSubnetIds(s, schemas.UpdateVpcEndpointRequest_addSubnetIds, v.AddSubnetIds)
+	if v.AddSecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointRequest_addSecurityGroupIds, v.AddSecurityGroupIds)
+	}
+	if v.AddSubnetIds != nil {
+		serializeSubnetIds(s, schemas.UpdateVpcEndpointRequest_addSubnetIds, v.AddSubnetIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateVpcEndpointRequest_clientToken, *v.ClientToken)
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateVpcEndpointRequest_id, *v.Id)
 	}
-	serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointRequest_removeSecurityGroupIds, v.RemoveSecurityGroupIds)
-	serializeSubnetIds(s, schemas.UpdateVpcEndpointRequest_removeSubnetIds, v.RemoveSubnetIds)
+	if v.RemoveSecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointRequest_removeSecurityGroupIds, v.RemoveSecurityGroupIds)
+	}
+	if v.RemoveSubnetIds != nil {
+		serializeSubnetIds(s, schemas.UpdateVpcEndpointRequest_removeSubnetIds, v.RemoveSubnetIds)
+	}
 }
 func (v *UpdateVpcEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateVpcEndpointRequest, func(s *smithy.Schema) error {

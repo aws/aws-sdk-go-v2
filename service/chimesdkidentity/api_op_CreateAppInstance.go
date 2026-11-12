@@ -69,7 +69,9 @@ func (v *CreateAppInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAppInstanceRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateAppInstanceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAppInstanceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAppInstanceOutput struct {

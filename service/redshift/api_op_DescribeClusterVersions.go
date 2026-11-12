@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,27 @@ type DescribeClusterVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterVersionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeClusterVersionsMessage_ClusterParameterGroupFamily, *v.ClusterParameterGroupFamily)
+	}
+	if v.ClusterVersion != nil {
+		s.WriteString(schemas.DescribeClusterVersionsMessage_ClusterVersion, *v.ClusterVersion)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeClusterVersionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeClusterVersionsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Contains the output from the DescribeClusterVersions action.
 type DescribeClusterVersionsOutput struct {
 
@@ -89,13 +112,37 @@ type DescribeClusterVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterVersionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterVersions != nil {
+		serializeClusterVersionList(s, schemas.ClusterVersionsMessage_ClusterVersions, v.ClusterVersions)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ClusterVersionsMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeClusterVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterVersionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterVersionsMessage_ClusterVersions:
+			return deserializeClusterVersionList(d, schemas.ClusterVersionsMessage_ClusterVersions, &v.ClusterVersions)
+		case schemas.ClusterVersionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ClusterVersionsMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterVersions, schemas.DescribeClusterVersionsMessage, schemas.ClusterVersionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeClusterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterVersions, schemas.DescribeClusterVersionsMessage, schemas.ClusterVersionsMessage), output: &DescribeClusterVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

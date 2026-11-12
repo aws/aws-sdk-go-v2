@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/RemoveTagsFromResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.RemoveTagsFromResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__","TagKeys":["__Member__","__Member__"]}
+¿jResourceIdn__ResourceId__gTagKeysŸj__Member__j__Member__ÿÿ

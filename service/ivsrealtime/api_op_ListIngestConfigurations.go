@@ -93,7 +93,9 @@ func (v *ListIngestConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIngestConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngestConfigurationList(s, schemas.ListIngestConfigurationsResponse_ingestConfigurations, v.IngestConfigurations)
+	if v.IngestConfigurations != nil {
+		serializeIngestConfigurationList(s, schemas.ListIngestConfigurationsResponse_ingestConfigurations, v.IngestConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIngestConfigurationsResponse_nextToken, *v.NextToken)
 	}

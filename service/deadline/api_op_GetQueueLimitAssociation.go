@@ -69,8 +69,6 @@ func (v *GetQueueLimitAssociationInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 }
 
-// Domain fields for QueueLimitAssociation summary/response shapes, ordered before
-// timestamps.
 type GetQueueLimitAssociationOutput struct {
 
 	// The Unix timestamp of the date and time that the association was created.

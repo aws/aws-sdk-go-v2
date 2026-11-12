@@ -1712,6 +1712,12 @@ var _ControlPlaneScalingTierList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ControlPlaneScalingTierList_member *smithy.Schema
 
+var CrdManagementConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "CrdManagementConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var CrdManagementConfiguration_managed *smithy.Schema
+
 var CreateAccessConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "CreateAccessConfigRequest",
@@ -1852,8 +1858,10 @@ var EksAnywhereSubscriptionTermUnit_MONTHS *smithy.Schema
 var ElasticLoadBalancing = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ElasticLoadBalancing",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ElasticLoadBalancing_enabled *smithy.Schema
+
+var ElasticLoadBalancing_gatewayApi *smithy.Schema
 
 var EncryptionConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
@@ -2033,6 +2041,12 @@ var FargateProfileStatus_DELETING *smithy.Schema
 var FargateProfileStatus_CREATE_FAILED *smithy.Schema
 
 var FargateProfileStatus_DELETE_FAILED *smithy.Schema
+
+var GatewayApiConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "GatewayApiConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var GatewayApiConfiguration_crds *smithy.Schema
 
 var HorizontalPodAutoscalerControllerConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
@@ -5682,7 +5696,13 @@ func init() {
 
 	IpFamily_IPV6 = IpFamily.AddMember("IPV6", smithyprelude.Unit)
 
+	CrdManagementConfiguration_managed = CrdManagementConfiguration.AddMember("managed", _BoxedBoolean)
+
+	GatewayApiConfiguration_crds = GatewayApiConfiguration.AddMember("crds", CrdManagementConfiguration)
+
 	ElasticLoadBalancing_enabled = ElasticLoadBalancing.AddMember("enabled", _BoxedBoolean)
+
+	ElasticLoadBalancing_gatewayApi = ElasticLoadBalancing.AddMember("gatewayApi", GatewayApiConfiguration)
 
 	KubernetesNetworkConfigResponse_serviceIpv4Cidr = KubernetesNetworkConfigResponse.AddMember("serviceIpv4Cidr", _String)
 

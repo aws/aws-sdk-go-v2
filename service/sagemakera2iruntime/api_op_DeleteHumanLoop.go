@@ -4,6 +4,8 @@ package sagemakera2iruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteHumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHumanLoopInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHumanLoopRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHumanLoopInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanLoopName != nil {
+		s.WriteString(schemas.DeleteHumanLoopRequest_HumanLoopName, *v.HumanLoopName)
+	}
+}
+
 type DeleteHumanLoopOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteHumanLoopOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHumanLoopOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHumanLoopResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHumanLoopOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteHumanLoopOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteHumanLoopResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHumanLoop, schemas.DeleteHumanLoopRequest, schemas.DeleteHumanLoopResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHumanLoop, schemas.DeleteHumanLoopRequest, schemas.DeleteHumanLoopResponse), output: &DeleteHumanLoopOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

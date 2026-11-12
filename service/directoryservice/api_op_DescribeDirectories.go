@@ -67,7 +67,9 @@ func (v *DescribeDirectoriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDirectoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryIds(s, schemas.DescribeDirectoriesRequest_DirectoryIds, v.DirectoryIds)
+	if v.DirectoryIds != nil {
+		serializeDirectoryIds(s, schemas.DescribeDirectoriesRequest_DirectoryIds, v.DirectoryIds)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeDirectoriesRequest_Limit, *v.Limit)
 	}
@@ -104,7 +106,9 @@ func (v *DescribeDirectoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDirectoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryDescriptions(s, schemas.DescribeDirectoriesResult_DirectoryDescriptions, v.DirectoryDescriptions)
+	if v.DirectoryDescriptions != nil {
+		serializeDirectoryDescriptions(s, schemas.DescribeDirectoriesResult_DirectoryDescriptions, v.DirectoryDescriptions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDirectoriesResult_NextToken, *v.NextToken)
 	}
@@ -136,6 +140,9 @@ func (c *Client) addOperationDescribeDirectoriesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

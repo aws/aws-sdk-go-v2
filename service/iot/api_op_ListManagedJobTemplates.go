@@ -81,7 +81,9 @@ func (v *ListManagedJobTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedJobTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedJobTemplatesSummaryList(s, schemas.ListManagedJobTemplatesResponse_managedJobTemplates, v.ManagedJobTemplates)
+	if v.ManagedJobTemplates != nil {
+		serializeManagedJobTemplatesSummaryList(s, schemas.ListManagedJobTemplatesResponse_managedJobTemplates, v.ManagedJobTemplates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedJobTemplatesResponse_nextToken, *v.NextToken)
 	}

@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,45 @@ type TerminateInstanceInAutoScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateInstanceInAutoScalingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateInstanceInAutoScalingGroupType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateInstanceInAutoScalingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.TerminateInstanceInAutoScalingGroupType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.TerminateInstanceInAutoScalingGroupType_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceIds != nil {
+		serializeTerminationInstanceIds(s, schemas.TerminateInstanceInAutoScalingGroupType_InstanceIds, v.InstanceIds)
+	}
+	if v.ShouldDecrementDesiredCapacity != nil {
+		s.WriteBool(schemas.TerminateInstanceInAutoScalingGroupType_ShouldDecrementDesiredCapacity, *v.ShouldDecrementDesiredCapacity)
+	}
+}
+func (v *TerminateInstanceInAutoScalingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateInstanceInAutoScalingGroupType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateInstanceInAutoScalingGroupType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.TerminateInstanceInAutoScalingGroupType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.TerminateInstanceInAutoScalingGroupType_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.TerminateInstanceInAutoScalingGroupType_InstanceId, v.InstanceId)
+		case schemas.TerminateInstanceInAutoScalingGroupType_InstanceIds:
+			return deserializeTerminationInstanceIds(d, schemas.TerminateInstanceInAutoScalingGroupType_InstanceIds, &v.InstanceIds)
+		case schemas.TerminateInstanceInAutoScalingGroupType_ShouldDecrementDesiredCapacity:
+			v.ShouldDecrementDesiredCapacity = new(bool)
+			return d.ReadBool(schemas.TerminateInstanceInAutoScalingGroupType_ShouldDecrementDesiredCapacity, v.ShouldDecrementDesiredCapacity)
+		}
+		return nil
+	})
+}
+
 type TerminateInstanceInAutoScalingGroupOutput struct {
 
 	// The scaling activities related to terminating the instances from the Auto
@@ -82,13 +123,39 @@ type TerminateInstanceInAutoScalingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateInstanceInAutoScalingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateInstanceInAutoScalingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activities != nil {
+		serializeActivities(s, schemas.ActivityType_Activities, v.Activities)
+	}
+	if v.Activity != nil {
+		s.WriteStruct(schemas.ActivityType_Activity)
+		v.Activity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TerminateInstanceInAutoScalingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityType_Activities:
+			return deserializeActivities(d, schemas.ActivityType_Activities, &v.Activities)
+		case schemas.ActivityType_Activity:
+			v.Activity = &types.Activity{}
+			return v.Activity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateInstanceInAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTerminateInstanceInAutoScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateInstanceInAutoScalingGroup, schemas.TerminateInstanceInAutoScalingGroupType, schemas.ActivityType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTerminateInstanceInAutoScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateInstanceInAutoScalingGroup, schemas.TerminateInstanceInAutoScalingGroupType, schemas.ActivityType), output: &TerminateInstanceInAutoScalingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

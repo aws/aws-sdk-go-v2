@@ -149,7 +149,9 @@ func (v *PutFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SequentialExecutorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.PutFunctionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.PutFunctionRequest_Tags, v.Tags)
+	}
 	if v.VastRequestConfiguration != nil {
 		s.WriteStruct(schemas.PutFunctionRequest_VastRequestConfiguration)
 		v.VastRequestConfiguration.SerializeMembers(s)
@@ -252,7 +254,9 @@ func (v *PutFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SequentialExecutorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.PutFunctionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.PutFunctionResponse_Tags, v.Tags)
+	}
 	if v.VastRequestConfiguration != nil {
 		s.WriteStruct(schemas.PutFunctionResponse_VastRequestConfiguration)
 		v.VastRequestConfiguration.SerializeMembers(s)

@@ -61,7 +61,9 @@ func (v *InvokeDataAutomationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvokeDataAutomationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintList(s, schemas.InvokeDataAutomationRequest_blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializeBlueprintList(s, schemas.InvokeDataAutomationRequest_blueprints, v.Blueprints)
+	}
 	if v.DataAutomationConfiguration != nil {
 		s.WriteStruct(schemas.InvokeDataAutomationRequest_dataAutomationConfiguration)
 		v.DataAutomationConfiguration.SerializeMembers(s)
@@ -119,7 +121,9 @@ func (v *InvokeDataAutomationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.OutputConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOutputSegmentList(s, schemas.InvokeDataAutomationResponse_outputSegments, v.OutputSegments)
+	if v.OutputSegments != nil {
+		serializeOutputSegmentList(s, schemas.InvokeDataAutomationResponse_outputSegments, v.OutputSegments)
+	}
 	if v.SemanticModality != "" {
 		s.WriteString(schemas.InvokeDataAutomationResponse_semanticModality, string(v.SemanticModality))
 	}

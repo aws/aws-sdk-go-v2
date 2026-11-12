@@ -63,10 +63,18 @@ func (v *ListAssetInstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.ListAssetInstancesInput_AccountIdFilter, v.AccountIdFilter)
-	serializeAssetIdList(s, schemas.ListAssetInstancesInput_AssetIdFilter, v.AssetIdFilter)
-	serializeAWSServiceNameList(s, schemas.ListAssetInstancesInput_AwsServiceFilter, v.AwsServiceFilter)
-	serializeOutpostInstanceTypeList(s, schemas.ListAssetInstancesInput_InstanceTypeFilter, v.InstanceTypeFilter)
+	if v.AccountIdFilter != nil {
+		serializeAccountIdList(s, schemas.ListAssetInstancesInput_AccountIdFilter, v.AccountIdFilter)
+	}
+	if v.AssetIdFilter != nil {
+		serializeAssetIdList(s, schemas.ListAssetInstancesInput_AssetIdFilter, v.AssetIdFilter)
+	}
+	if v.AwsServiceFilter != nil {
+		serializeAWSServiceNameList(s, schemas.ListAssetInstancesInput_AwsServiceFilter, v.AwsServiceFilter)
+	}
+	if v.InstanceTypeFilter != nil {
+		serializeOutpostInstanceTypeList(s, schemas.ListAssetInstancesInput_InstanceTypeFilter, v.InstanceTypeFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAssetInstancesInput_MaxResults, *v.MaxResults)
 	}
@@ -100,7 +108,9 @@ func (v *ListAssetInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetInstanceList(s, schemas.ListAssetInstancesOutput_AssetInstances, v.AssetInstances)
+	if v.AssetInstances != nil {
+		serializeAssetInstanceList(s, schemas.ListAssetInstancesOutput_AssetInstances, v.AssetInstances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetInstancesOutput_NextToken, *v.NextToken)
 	}

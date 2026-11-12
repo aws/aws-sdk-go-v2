@@ -1,3 +1,46 @@
+# v1.175.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.175.0 (2026-11-09)
+
+* **Feature**: We are releasing five new APIs to allow customers to enable Catalog-level data quality monitoring in AWS Glue Data Catalog, a new feature to perform data quality evaluation on collections of GDC tables selected by the customer, on a schedule or event-driven basis, using a custom or managed ruleset.
+
+# v1.174.0 (2026-11-06)
+
+* **Feature**: Adds support for user-defined functions governed by AWS Lake Formation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.173.0 (2026-11-05)
+
+* **Feature**: AWS Glue Spark ETL jobs can now auto-upgrade to the latest version. Set GlueVersion to Auto, then track progress with the AutoVersionStatus field in GetJob. Use StartJobUpgradeAnalysis to approve or decline an upgrade, GetJobUpgradeAnalysis to view details, and StopJobUpgradeAnalysis to stop it.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.172.3 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.172.2 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
+# v1.172.1 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.172.0 (2026-10-22)
+
+* **Feature**: Add support for large worker types in AWS Glue
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.171.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.171.0 (2026-10-13)
 
 * **Feature**: Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration

@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,35 @@ type GetTemplateSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.GetTemplateSummaryInput_CallAs, string(v.CallAs))
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.GetTemplateSummaryInput_StackName, *v.StackName)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.GetTemplateSummaryInput_StackSetName, *v.StackSetName)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.GetTemplateSummaryInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateSummaryConfig != nil {
+		s.WriteStruct(schemas.GetTemplateSummaryInput_TemplateSummaryConfig)
+		v.TemplateSummaryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.GetTemplateSummaryInput_TemplateURL, *v.TemplateURL)
+	}
+}
+
 // The output for the GetTemplateSummary action.
 type GetTemplateSummaryOutput struct {
 
@@ -143,13 +174,83 @@ type GetTemplateSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.GetTemplateSummaryOutput_Capabilities, v.Capabilities)
+	}
+	if v.CapabilitiesReason != nil {
+		s.WriteString(schemas.GetTemplateSummaryOutput_CapabilitiesReason, *v.CapabilitiesReason)
+	}
+	if v.DeclaredTransforms != nil {
+		serializeTransformsList(s, schemas.GetTemplateSummaryOutput_DeclaredTransforms, v.DeclaredTransforms)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetTemplateSummaryOutput_Description, *v.Description)
+	}
+	if v.Metadata != nil {
+		s.WriteString(schemas.GetTemplateSummaryOutput_Metadata, *v.Metadata)
+	}
+	if v.Parameters != nil {
+		serializeParameterDeclarations(s, schemas.GetTemplateSummaryOutput_Parameters, v.Parameters)
+	}
+	if v.ResourceIdentifierSummaries != nil {
+		serializeResourceIdentifierSummaries(s, schemas.GetTemplateSummaryOutput_ResourceIdentifierSummaries, v.ResourceIdentifierSummaries)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.GetTemplateSummaryOutput_ResourceTypes, v.ResourceTypes)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetTemplateSummaryOutput_Version, *v.Version)
+	}
+	if v.Warnings != nil {
+		s.WriteStruct(schemas.GetTemplateSummaryOutput_Warnings)
+		v.Warnings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTemplateSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateSummaryOutput_Capabilities:
+			return deserializeCapabilities(d, schemas.GetTemplateSummaryOutput_Capabilities, &v.Capabilities)
+		case schemas.GetTemplateSummaryOutput_CapabilitiesReason:
+			v.CapabilitiesReason = new(string)
+			return d.ReadString(schemas.GetTemplateSummaryOutput_CapabilitiesReason, v.CapabilitiesReason)
+		case schemas.GetTemplateSummaryOutput_DeclaredTransforms:
+			return deserializeTransformsList(d, schemas.GetTemplateSummaryOutput_DeclaredTransforms, &v.DeclaredTransforms)
+		case schemas.GetTemplateSummaryOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetTemplateSummaryOutput_Description, v.Description)
+		case schemas.GetTemplateSummaryOutput_Metadata:
+			v.Metadata = new(string)
+			return d.ReadString(schemas.GetTemplateSummaryOutput_Metadata, v.Metadata)
+		case schemas.GetTemplateSummaryOutput_Parameters:
+			return deserializeParameterDeclarations(d, schemas.GetTemplateSummaryOutput_Parameters, &v.Parameters)
+		case schemas.GetTemplateSummaryOutput_ResourceIdentifierSummaries:
+			return deserializeResourceIdentifierSummaries(d, schemas.GetTemplateSummaryOutput_ResourceIdentifierSummaries, &v.ResourceIdentifierSummaries)
+		case schemas.GetTemplateSummaryOutput_ResourceTypes:
+			return deserializeResourceTypes(d, schemas.GetTemplateSummaryOutput_ResourceTypes, &v.ResourceTypes)
+		case schemas.GetTemplateSummaryOutput_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetTemplateSummaryOutput_Version, v.Version)
+		case schemas.GetTemplateSummaryOutput_Warnings:
+			v.Warnings = &types.Warnings{}
+			return v.Warnings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemplateSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetTemplateSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateSummary, schemas.GetTemplateSummaryInput, schemas.GetTemplateSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetTemplateSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateSummary, schemas.GetTemplateSummaryInput, schemas.GetTemplateSummaryOutput), output: &GetTemplateSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

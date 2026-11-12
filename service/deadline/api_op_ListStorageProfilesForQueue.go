@@ -28,7 +28,6 @@ func (c *Client) ListStorageProfilesForQueue(ctx context.Context, params *ListSt
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListStorageProfilesForQueueInput struct {
 
 	// The farm ID of the queue's storage profile.
@@ -72,7 +71,6 @@ func (v *ListStorageProfilesForQueueInput) SerializeMembers(s smithy.ShapeSerial
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListStorageProfilesForQueueOutput struct {
 
 	// The storage profiles in the queue.
@@ -104,7 +102,9 @@ func (v *ListStorageProfilesForQueueOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStorageProfilesForQueueResponse_nextToken, *v.NextToken)
 	}
-	serializeStorageProfileSummaries(s, schemas.ListStorageProfilesForQueueResponse_storageProfiles, v.StorageProfiles)
+	if v.StorageProfiles != nil {
+		serializeStorageProfileSummaries(s, schemas.ListStorageProfilesForQueueResponse_storageProfiles, v.StorageProfiles)
+	}
 }
 func (v *ListStorageProfilesForQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStorageProfilesForQueueResponse, func(s *smithy.Schema) error {

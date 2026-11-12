@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -198,7 +198,7 @@ func TestUpdateResponseSnapshot_CreateCallAnalyticsCategory(t *testing.T) {
 			InputType: types.InputType("REAL_TIME"),
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCallAnalyticsCategory, schemas.CreateCallAnalyticsCategoryResponse, schemas.CreateCallAnalyticsCategoryResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -230,7 +230,7 @@ func TestUpdateResponseSnapshot_CreateLanguageModel(t *testing.T) {
 		},
 		ModelStatus: types.ModelStatus("IN_PROGRESS"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLanguageModel, schemas.CreateLanguageModelResponse, schemas.CreateLanguageModelResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -258,7 +258,7 @@ func TestUpdateResponseSnapshot_CreateMedicalVocabulary(t *testing.T) {
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		FailureReason:    ptr.String("__FailureReason__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateMedicalVocabulary, schemas.CreateMedicalVocabularyResponse, schemas.CreateMedicalVocabularyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -286,7 +286,7 @@ func TestUpdateResponseSnapshot_CreateVocabulary(t *testing.T) {
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		FailureReason:    ptr.String("__FailureReason__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateVocabulary, schemas.CreateVocabularyResponse, schemas.CreateVocabularyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -312,7 +312,7 @@ func TestUpdateResponseSnapshot_CreateVocabularyFilter(t *testing.T) {
 		LanguageCode:         types.LanguageCode("af-ZA"),
 		LastModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateVocabularyFilter, schemas.CreateVocabularyFilterResponse, schemas.CreateVocabularyFilterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -334,7 +334,7 @@ func TestUpdateResponseSnapshot_CreateVocabularyFilter(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteCallAnalyticsCategory(t *testing.T) {
 	want := &DeleteCallAnalyticsCategoryOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteCallAnalyticsCategory, schemas.DeleteCallAnalyticsCategoryResponse, schemas.DeleteCallAnalyticsCategoryResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -356,7 +356,7 @@ func TestUpdateResponseSnapshot_DeleteCallAnalyticsCategory(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteCallAnalyticsJob(t *testing.T) {
 	want := &DeleteCallAnalyticsJobOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteCallAnalyticsJob, schemas.DeleteCallAnalyticsJobResponse, schemas.DeleteCallAnalyticsJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -378,7 +378,7 @@ func TestUpdateResponseSnapshot_DeleteCallAnalyticsJob(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteLanguageModel(t *testing.T) {
 	want := &DeleteLanguageModelOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteLanguageModel, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -400,7 +400,7 @@ func TestUpdateResponseSnapshot_DeleteLanguageModel(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteMedicalScribeJob(t *testing.T) {
 	want := &DeleteMedicalScribeJobOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteMedicalScribeJob, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -422,7 +422,7 @@ func TestUpdateResponseSnapshot_DeleteMedicalScribeJob(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteMedicalTranscriptionJob(t *testing.T) {
 	want := &DeleteMedicalTranscriptionJobOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteMedicalTranscriptionJob, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -444,7 +444,7 @@ func TestUpdateResponseSnapshot_DeleteMedicalTranscriptionJob(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteMedicalVocabulary(t *testing.T) {
 	want := &DeleteMedicalVocabularyOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteMedicalVocabulary, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -466,7 +466,7 @@ func TestUpdateResponseSnapshot_DeleteMedicalVocabulary(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteTranscriptionJob(t *testing.T) {
 	want := &DeleteTranscriptionJobOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTranscriptionJob, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -488,7 +488,7 @@ func TestUpdateResponseSnapshot_DeleteTranscriptionJob(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteVocabulary(t *testing.T) {
 	want := &DeleteVocabularyOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteVocabulary, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -510,7 +510,7 @@ func TestUpdateResponseSnapshot_DeleteVocabulary(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteVocabularyFilter(t *testing.T) {
 	want := &DeleteVocabularyFilterOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteVocabularyFilter, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -554,7 +554,7 @@ func TestUpdateResponseSnapshot_DescribeLanguageModel(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLanguageModel, schemas.DescribeLanguageModelResponse, schemas.DescribeLanguageModelResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -631,7 +631,7 @@ func TestUpdateResponseSnapshot_GetCallAnalyticsCategory(t *testing.T) {
 			InputType: types.InputType("REAL_TIME"),
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetCallAnalyticsCategory, schemas.GetCallAnalyticsCategoryResponse, schemas.GetCallAnalyticsCategoryResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -737,7 +737,7 @@ func TestUpdateResponseSnapshot_GetCallAnalyticsJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetCallAnalyticsJob, schemas.GetCallAnalyticsJobResponse, schemas.GetCallAnalyticsJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -810,7 +810,7 @@ func TestUpdateResponseSnapshot_GetMedicalScribeJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetMedicalScribeJob, schemas.GetMedicalScribeJobResponse, schemas.GetMedicalScribeJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -872,7 +872,7 @@ func TestUpdateResponseSnapshot_GetMedicalTranscriptionJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetMedicalTranscriptionJob, schemas.GetMedicalTranscriptionJobResponse, schemas.GetMedicalTranscriptionJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -901,7 +901,7 @@ func TestUpdateResponseSnapshot_GetMedicalVocabulary(t *testing.T) {
 		FailureReason:    ptr.String("__FailureReason__"),
 		DownloadUri:      ptr.String("__DownloadUri__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetMedicalVocabulary, schemas.GetMedicalVocabularyResponse, schemas.GetMedicalVocabularyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1027,7 +1027,7 @@ func TestUpdateResponseSnapshot_GetTranscriptionJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetTranscriptionJob, schemas.GetTranscriptionJobResponse, schemas.GetTranscriptionJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1063,7 +1063,7 @@ func TestUpdateResponseSnapshot_GetVocabulary(t *testing.T) {
 			KMSKey: ptr.String("__KMSKey__"),
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetVocabulary, schemas.GetVocabularyResponse, schemas.GetVocabularyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1097,7 +1097,7 @@ func TestUpdateResponseSnapshot_GetVocabularyFilter(t *testing.T) {
 			KMSKey: ptr.String("__KMSKey__"),
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetVocabularyFilter, schemas.GetVocabularyFilterResponse, schemas.GetVocabularyFilterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1231,7 +1231,7 @@ func TestUpdateResponseSnapshot_ListCallAnalyticsCategories(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListCallAnalyticsCategories, schemas.ListCallAnalyticsCategoriesResponse, schemas.ListCallAnalyticsCategoriesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1304,7 +1304,7 @@ func TestUpdateResponseSnapshot_ListCallAnalyticsJobs(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListCallAnalyticsJobs, schemas.ListCallAnalyticsJobsResponse, schemas.ListCallAnalyticsJobsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1372,7 +1372,7 @@ func TestUpdateResponseSnapshot_ListLanguageModels(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListLanguageModels, schemas.ListLanguageModelsResponse, schemas.ListLanguageModelsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1417,7 +1417,7 @@ func TestUpdateResponseSnapshot_ListMedicalScribeJobs(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListMedicalScribeJobs, schemas.ListMedicalScribeJobsResponse, schemas.ListMedicalScribeJobsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1470,7 +1470,7 @@ func TestUpdateResponseSnapshot_ListMedicalTranscriptionJobs(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListMedicalTranscriptionJobs, schemas.ListMedicalTranscriptionJobsResponse, schemas.ListMedicalTranscriptionJobsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1509,7 +1509,7 @@ func TestUpdateResponseSnapshot_ListMedicalVocabularies(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListMedicalVocabularies, schemas.ListMedicalVocabulariesResponse, schemas.ListMedicalVocabulariesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1543,7 +1543,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1666,7 +1666,7 @@ func TestUpdateResponseSnapshot_ListTranscriptionJobs(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListTranscriptionJobs, schemas.ListTranscriptionJobsResponse, schemas.ListTranscriptionJobsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1705,7 +1705,7 @@ func TestUpdateResponseSnapshot_ListVocabularies(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListVocabularies, schemas.ListVocabulariesResponse, schemas.ListVocabulariesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1741,7 +1741,7 @@ func TestUpdateResponseSnapshot_ListVocabularyFilters(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.ListVocabularyFilters, schemas.ListVocabularyFiltersResponse, schemas.ListVocabularyFiltersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1847,7 +1847,7 @@ func TestUpdateResponseSnapshot_StartCallAnalyticsJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.StartCallAnalyticsJob, schemas.StartCallAnalyticsJobResponse, schemas.StartCallAnalyticsJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1920,7 +1920,7 @@ func TestUpdateResponseSnapshot_StartMedicalScribeJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.StartMedicalScribeJob, schemas.StartMedicalScribeJobResponse, schemas.StartMedicalScribeJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1982,7 +1982,7 @@ func TestUpdateResponseSnapshot_StartMedicalTranscriptionJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.StartMedicalTranscriptionJob, schemas.StartMedicalTranscriptionJobResponse, schemas.StartMedicalTranscriptionJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2108,7 +2108,7 @@ func TestUpdateResponseSnapshot_StartTranscriptionJob(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.StartTranscriptionJob, schemas.StartTranscriptionJobResponse, schemas.StartTranscriptionJobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2130,7 +2130,7 @@ func TestUpdateResponseSnapshot_StartTranscriptionJob(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2152,7 +2152,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2229,7 +2229,7 @@ func TestUpdateResponseSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 			InputType: types.InputType("REAL_TIME"),
 		},
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateCallAnalyticsCategory, schemas.UpdateCallAnalyticsCategoryResponse, schemas.UpdateCallAnalyticsCategoryResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2255,7 +2255,7 @@ func TestUpdateResponseSnapshot_UpdateLanguageModel(t *testing.T) {
 		ModelStatus:      types.ModelStatus("IN_PROGRESS"),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLanguageModel, schemas.UpdateLanguageModelResponse, schemas.UpdateLanguageModelResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2282,7 +2282,7 @@ func TestUpdateResponseSnapshot_UpdateMedicalVocabulary(t *testing.T) {
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		VocabularyState:  types.VocabularyState("PENDING"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateMedicalVocabulary, schemas.UpdateMedicalVocabularyResponse, schemas.UpdateMedicalVocabularyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2309,7 +2309,7 @@ func TestUpdateResponseSnapshot_UpdateVocabulary(t *testing.T) {
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		VocabularyState:  types.VocabularyState("PENDING"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateVocabulary, schemas.UpdateVocabularyResponse, schemas.UpdateVocabularyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2335,7 +2335,7 @@ func TestUpdateResponseSnapshot_UpdateVocabularyFilter(t *testing.T) {
 		LanguageCode:         types.LanguageCode("af-ZA"),
 		LastModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateVocabularyFilter, schemas.UpdateVocabularyFilterResponse, schemas.UpdateVocabularyFilterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2359,7 +2359,7 @@ func TestUpdateResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCallAnalyticsCategory, schemas.BadRequestException, schemas.BadRequestException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2374,7 +2374,7 @@ func TestUpdateResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("BadRequestException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2384,7 +2384,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCallAnalyticsCategory, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2399,7 +2399,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2409,7 +2409,7 @@ func TestUpdateResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 	want := &types.InternalFailureException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCallAnalyticsCategory, schemas.InternalFailureException, schemas.InternalFailureException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2424,7 +2424,7 @@ func TestUpdateResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalFailureException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2434,7 +2434,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCallAnalyticsCategory, schemas.LimitExceededException, schemas.LimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2449,7 +2449,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededException.error", 429, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2459,7 +2459,7 @@ func TestUpdateResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.Transcribe)
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteCallAnalyticsCategory, schemas.NotFoundException, schemas.NotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2474,7 +2474,7 @@ func TestUpdateResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

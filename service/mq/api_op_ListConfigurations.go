@@ -80,7 +80,9 @@ func (v *ListConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfConfiguration(s, schemas.ListConfigurationsResponse_Configurations, v.Configurations)
+	if v.Configurations != nil {
+		serialize__listOfConfiguration(s, schemas.ListConfigurationsResponse_Configurations, v.Configurations)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListConfigurationsResponse_MaxResults, *v.MaxResults)
 	}

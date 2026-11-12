@@ -95,13 +95,17 @@ func (v *CreateAdvancedPromptOptimizationJobInput) SerializeMembers(s smithy.Sha
 	if v.JobName != nil {
 		s.WriteString(schemas.CreateAdvancedPromptOptimizationJobRequest_jobName, *v.JobName)
 	}
-	serializeModelConfigurations(s, schemas.CreateAdvancedPromptOptimizationJobRequest_modelConfigurations, v.ModelConfigurations)
+	if v.ModelConfigurations != nil {
+		serializeModelConfigurations(s, schemas.CreateAdvancedPromptOptimizationJobRequest_modelConfigurations, v.ModelConfigurations)
+	}
 	if v.OutputConfig != nil {
 		s.WriteStruct(schemas.CreateAdvancedPromptOptimizationJobRequest_outputConfig)
 		v.OutputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAdvancedPromptOptimizationJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAdvancedPromptOptimizationJobRequest_tags, v.Tags)
+	}
 }
 
 // Create Advanced Prompt Optimization Job Response

@@ -81,8 +81,12 @@ func (v *PublishLayerVersionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PublishLayerVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleArchitectures(s, schemas.PublishLayerVersionRequest_CompatibleArchitectures, v.CompatibleArchitectures)
-	serializeCompatibleRuntimes(s, schemas.PublishLayerVersionRequest_CompatibleRuntimes, v.CompatibleRuntimes)
+	if v.CompatibleArchitectures != nil {
+		serializeCompatibleArchitectures(s, schemas.PublishLayerVersionRequest_CompatibleArchitectures, v.CompatibleArchitectures)
+	}
+	if v.CompatibleRuntimes != nil {
+		serializeCompatibleRuntimes(s, schemas.PublishLayerVersionRequest_CompatibleRuntimes, v.CompatibleRuntimes)
+	}
 	if v.Content != nil {
 		s.WriteStruct(schemas.PublishLayerVersionRequest_Content)
 		v.Content.SerializeMembers(s)
@@ -152,8 +156,12 @@ func (v *PublishLayerVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PublishLayerVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleArchitectures(s, schemas.PublishLayerVersionResponse_CompatibleArchitectures, v.CompatibleArchitectures)
-	serializeCompatibleRuntimes(s, schemas.PublishLayerVersionResponse_CompatibleRuntimes, v.CompatibleRuntimes)
+	if v.CompatibleArchitectures != nil {
+		serializeCompatibleArchitectures(s, schemas.PublishLayerVersionResponse_CompatibleArchitectures, v.CompatibleArchitectures)
+	}
+	if v.CompatibleRuntimes != nil {
+		serializeCompatibleRuntimes(s, schemas.PublishLayerVersionResponse_CompatibleRuntimes, v.CompatibleRuntimes)
+	}
 	if v.Content != nil {
 		s.WriteStruct(schemas.PublishLayerVersionResponse_Content)
 		v.Content.SerializeMembers(s)

@@ -89,7 +89,9 @@ func (v *ListMilestonesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMilestonesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMilestoneSummaries(s, schemas.ListMilestonesOutput_MilestoneSummaries, v.MilestoneSummaries)
+	if v.MilestoneSummaries != nil {
+		serializeMilestoneSummaries(s, schemas.ListMilestonesOutput_MilestoneSummaries, v.MilestoneSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMilestonesOutput_NextToken, *v.NextToken)
 	}

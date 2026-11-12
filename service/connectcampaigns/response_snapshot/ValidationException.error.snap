@@ -1,0 +1,5 @@
+400
+Content-Type: application/json
+X-Amzn-Errortype: ValidationException
+
+{"__type":"ValidationException","message":"__Message__"}

@@ -4,7 +4,9 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetTelemetryPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTelemetryPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTelemetryPipelineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineIdentifier != nil {
+		s.WriteString(schemas.GetTelemetryPipelineInput_PipelineIdentifier, *v.PipelineIdentifier)
+	}
+}
+
 type GetTelemetryPipelineOutput struct {
 
 	// The complete telemetry pipeline resource information, including configuration,
@@ -47,13 +61,34 @@ type GetTelemetryPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTelemetryPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTelemetryPipelineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.GetTelemetryPipelineOutput_Pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTelemetryPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTelemetryPipelineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTelemetryPipelineOutput_Pipeline:
+			v.Pipeline = &types.TelemetryPipeline{}
+			return v.Pipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTelemetryPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTelemetryPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryPipeline, schemas.GetTelemetryPipelineInput, schemas.GetTelemetryPipelineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTelemetryPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryPipeline, schemas.GetTelemetryPipelineInput, schemas.GetTelemetryPipelineOutput), output: &GetTelemetryPipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

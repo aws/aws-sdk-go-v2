@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -31,6 +32,27 @@ func (e *WAFBadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFBadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFBadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFBadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFBadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFBadRequestException_message, *v.Message)
+	}
+}
+func (v *WAFBadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFBadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFBadRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFBadRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The name specified is invalid.
 type WAFDisallowedNameException struct {
@@ -57,6 +79,27 @@ func (e *WAFDisallowedNameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFDisallowedNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFDisallowedNameException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFDisallowedNameException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFDisallowedNameException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFDisallowedNameException_message, *v.Message)
+	}
+}
+func (v *WAFDisallowedNameException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFDisallowedNameException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFDisallowedNameException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFDisallowedNameException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed due to a problem with the migration. The failure cause is
 // provided in the exception, in the MigrationErrorType :
@@ -106,6 +149,43 @@ func (e *WAFEntityMigrationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFEntityMigrationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFEntityMigrationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFEntityMigrationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFEntityMigrationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationErrorReason != nil {
+		s.WriteString(schemas.WAFEntityMigrationException_MigrationErrorReason, *v.MigrationErrorReason)
+	}
+	if v.MigrationErrorType != "" {
+		s.WriteString(schemas.WAFEntityMigrationException_MigrationErrorType, string(v.MigrationErrorType))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.WAFEntityMigrationException_message, *v.Message)
+	}
+}
+func (v *WAFEntityMigrationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFEntityMigrationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFEntityMigrationException_MigrationErrorReason:
+			v.MigrationErrorReason = new(string)
+			return d.ReadString(schemas.WAFEntityMigrationException_MigrationErrorReason, v.MigrationErrorReason)
+		case schemas.WAFEntityMigrationException_MigrationErrorType:
+			var ev string
+			if err := d.ReadString(schemas.WAFEntityMigrationException_MigrationErrorType, &ev); err != nil {
+				return err
+			}
+			v.MigrationErrorType = MigrationErrorType(ev)
+			return nil
+		case schemas.WAFEntityMigrationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFEntityMigrationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because of a system problem, even though the request was
 // valid. Retry your request.
@@ -133,6 +213,27 @@ func (e *WAFInternalErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *WAFInternalErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInternalErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInternalErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInternalErrorException_message, *v.Message)
+	}
+}
+func (v *WAFInternalErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInternalErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInternalErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInternalErrorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because you tried to create, update, or delete an object
 // by using an invalid account identifier.
@@ -160,6 +261,21 @@ func (e *WAFInvalidAccountException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFInvalidAccountException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidAccountException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidAccountException) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *WAFInvalidAccountException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidAccountException, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 
 // The operation failed because there was nothing to do. For example:
 //
@@ -201,6 +317,27 @@ func (e *WAFInvalidOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFInvalidOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInvalidOperationException_message, *v.Message)
+	}
+}
+func (v *WAFInvalidOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidOperationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInvalidOperationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because AWS WAF didn't recognize a parameter in the
 // request. For example:
@@ -256,6 +393,47 @@ func (e *WAFInvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFInvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != "" {
+		s.WriteString(schemas.WAFInvalidParameterException_field, string(v.Field))
+	}
+	if v.Parameter != nil {
+		s.WriteString(schemas.WAFInvalidParameterException_parameter, *v.Parameter)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.WAFInvalidParameterException_reason, string(v.Reason))
+	}
+}
+func (v *WAFInvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidParameterException_field:
+			var ev string
+			if err := d.ReadString(schemas.WAFInvalidParameterException_field, &ev); err != nil {
+				return err
+			}
+			v.Field = ParameterExceptionField(ev)
+			return nil
+		case schemas.WAFInvalidParameterException_parameter:
+			v.Parameter = new(string)
+			return d.ReadString(schemas.WAFInvalidParameterException_parameter, v.Parameter)
+		case schemas.WAFInvalidParameterException_reason:
+			var ev string
+			if err := d.ReadString(schemas.WAFInvalidParameterException_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ParameterExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // The operation failed because the specified policy is not in the proper format.
 //
@@ -305,6 +483,27 @@ func (e *WAFInvalidPermissionPolicyException) ErrorCode() string {
 func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *WAFInvalidPermissionPolicyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidPermissionPolicyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidPermissionPolicyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInvalidPermissionPolicyException_message, *v.Message)
+	}
+}
+func (v *WAFInvalidPermissionPolicyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidPermissionPolicyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidPermissionPolicyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInvalidPermissionPolicyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The regular expression (regex) you specified in RegexPatternString is invalid.
 type WAFInvalidRegexPatternException struct {
@@ -331,6 +530,27 @@ func (e *WAFInvalidRegexPatternException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidRegexPatternException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFInvalidRegexPatternException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidRegexPatternException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidRegexPatternException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInvalidRegexPatternException_message, *v.Message)
+	}
+}
+func (v *WAFInvalidRegexPatternException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidRegexPatternException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidRegexPatternException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInvalidRegexPatternException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation exceeds a resource limit, for example, the maximum number of
 // WebACL objects that you can create for an AWS account. For more information, see [Limits]
@@ -361,6 +581,27 @@ func (e *WAFLimitsExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFLimitsExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFLimitsExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFLimitsExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFLimitsExceededException_message, *v.Message)
+	}
+}
+func (v *WAFLimitsExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFLimitsExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFLimitsExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFLimitsExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because you tried to delete an object that isn't empty.
 // For example:
@@ -398,6 +639,27 @@ func (e *WAFNonEmptyEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFNonEmptyEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFNonEmptyEntityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFNonEmptyEntityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFNonEmptyEntityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFNonEmptyEntityException_message, *v.Message)
+	}
+}
+func (v *WAFNonEmptyEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFNonEmptyEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFNonEmptyEntityException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFNonEmptyEntityException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because you tried to add an object to or delete an object
 // from another object that doesn't exist. For example:
@@ -436,6 +698,27 @@ func (e *WAFNonexistentContainerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFNonexistentContainerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFNonexistentContainerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFNonexistentContainerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFNonexistentContainerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFNonexistentContainerException_message, *v.Message)
+	}
+}
+func (v *WAFNonexistentContainerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFNonexistentContainerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFNonexistentContainerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFNonexistentContainerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because the referenced object doesn't exist.
 type WAFNonexistentItemException struct {
@@ -462,6 +745,27 @@ func (e *WAFNonexistentItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFNonexistentItemException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFNonexistentItemException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFNonexistentItemException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFNonexistentItemException_message, *v.Message)
+	}
+}
+func (v *WAFNonexistentItemException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFNonexistentItemException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFNonexistentItemException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFNonexistentItemException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because you tried to delete an object that is still in
 // use. For example:
@@ -493,6 +797,27 @@ func (e *WAFReferencedItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFReferencedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFReferencedItemException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFReferencedItemException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFReferencedItemException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFReferencedItemException_message, *v.Message)
+	}
+}
+func (v *WAFReferencedItemException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFReferencedItemException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFReferencedItemException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFReferencedItemException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // AWS WAF is not able to access the service linked role. This can be caused by a
 // previous PutLoggingConfiguration request, which can lock the service linked
@@ -528,6 +853,27 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorCode() string {
 func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *WAFServiceLinkedRoleErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFServiceLinkedRoleErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFServiceLinkedRoleErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFServiceLinkedRoleErrorException_message, *v.Message)
+	}
+}
+func (v *WAFServiceLinkedRoleErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFServiceLinkedRoleErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFServiceLinkedRoleErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFServiceLinkedRoleErrorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because you tried to create, update, or delete an object
 // by using a change token that has already been used.
@@ -555,6 +901,27 @@ func (e *WAFStaleDataException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFStaleDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFStaleDataException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFStaleDataException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFStaleDataException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFStaleDataException_message, *v.Message)
+	}
+}
+func (v *WAFStaleDataException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFStaleDataException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFStaleDataException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFStaleDataException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified subscription does not exist.
 type WAFSubscriptionNotFoundException struct {
@@ -581,6 +948,27 @@ func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFSubscriptionNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFSubscriptionNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFSubscriptionNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFSubscriptionNotFoundException_message, *v.Message)
+	}
+}
+func (v *WAFSubscriptionNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFSubscriptionNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFSubscriptionNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFSubscriptionNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 type WAFTagOperationException struct {
 	Message *string
@@ -606,6 +994,27 @@ func (e *WAFTagOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFTagOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFTagOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFTagOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFTagOperationException_message, *v.Message)
+	}
+}
+func (v *WAFTagOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFTagOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFTagOperationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFTagOperationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 type WAFTagOperationInternalErrorException struct {
 	Message *string
@@ -632,6 +1041,27 @@ func (e *WAFTagOperationInternalErrorException) ErrorCode() string {
 }
 func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *WAFTagOperationInternalErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFTagOperationInternalErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFTagOperationInternalErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFTagOperationInternalErrorException_message, *v.Message)
+	}
+}
+func (v *WAFTagOperationInternalErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFTagOperationInternalErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFTagOperationInternalErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFTagOperationInternalErrorException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The operation failed because the entity referenced is temporarily unavailable.
@@ -660,3 +1090,24 @@ func (e *WAFUnavailableEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFUnavailableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFUnavailableEntityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFUnavailableEntityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFUnavailableEntityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFUnavailableEntityException_message, *v.Message)
+	}
+}
+func (v *WAFUnavailableEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFUnavailableEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFUnavailableEntityException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFUnavailableEntityException_message, v.Message)
+		}
+		return nil
+	})
+}

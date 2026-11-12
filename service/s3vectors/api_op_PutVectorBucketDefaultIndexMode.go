@@ -4,7 +4,9 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type PutVectorBucketDefaultIndexModeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVectorBucketDefaultIndexModeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVectorBucketDefaultIndexModeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVectorBucketDefaultIndexModeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultIndexMode != "" {
+		s.WriteString(schemas.PutVectorBucketDefaultIndexModeInput_defaultIndexMode, string(v.DefaultIndexMode))
+	}
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.PutVectorBucketDefaultIndexModeInput_vectorBucketArn, *v.VectorBucketArn)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.PutVectorBucketDefaultIndexModeInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type PutVectorBucketDefaultIndexModeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +75,26 @@ type PutVectorBucketDefaultIndexModeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVectorBucketDefaultIndexModeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVectorBucketDefaultIndexModeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVectorBucketDefaultIndexModeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutVectorBucketDefaultIndexModeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVectorBucketDefaultIndexModeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVectorBucketDefaultIndexModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVectorBucketDefaultIndexMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVectorBucketDefaultIndexMode, schemas.PutVectorBucketDefaultIndexModeInput, schemas.PutVectorBucketDefaultIndexModeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVectorBucketDefaultIndexMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVectorBucketDefaultIndexMode, schemas.PutVectorBucketDefaultIndexModeInput, schemas.PutVectorBucketDefaultIndexModeOutput), output: &PutVectorBucketDefaultIndexModeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

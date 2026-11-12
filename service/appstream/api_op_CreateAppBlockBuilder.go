@@ -121,7 +121,9 @@ func (v *CreateAppBlockBuilderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAppBlockBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.CreateAppBlockBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.CreateAppBlockBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAppBlockBuilderRequest_Description, *v.Description)
 	}
@@ -146,7 +148,9 @@ func (v *CreateAppBlockBuilderInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Platform != "" {
 		s.WriteString(schemas.CreateAppBlockBuilderRequest_Platform, string(v.Platform))
 	}
-	serializeTags(s, schemas.CreateAppBlockBuilderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAppBlockBuilderRequest_Tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateAppBlockBuilderRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

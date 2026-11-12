@@ -286,6 +286,26 @@ func TestUpdateResponseSnapshot_CreatePermission(t *testing.T) {
 			IsResourceTypeDefault: ptr.Bool(true),
 			PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 			FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+			PermissionTemplateParameters: []types.PermissionTemplateParameter{
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -296,6 +316,7 @@ func TestUpdateResponseSnapshot_CreatePermission(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			ResourceOwner: types.ResourceOwner("SELF"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -322,12 +343,24 @@ func TestUpdateResponseSnapshot_CreatePermission(t *testing.T) {
 func TestUpdateResponseSnapshot_CreatePermissionVersion(t *testing.T) {
 	want := &CreatePermissionVersionOutput{
 		Permission: &types.ResourceSharePermissionDetail{
-			Arn:                   ptr.String("__Arn__"),
-			Version:               ptr.String("__Version__"),
-			DefaultVersion:        ptr.Bool(true),
-			Name:                  ptr.String("__Name__"),
-			ResourceType:          ptr.String("__ResourceType__"),
-			Permission:            ptr.String("__Permission__"),
+			Arn:            ptr.String("__Arn__"),
+			Version:        ptr.String("__Version__"),
+			DefaultVersion: ptr.Bool(true),
+			Name:           ptr.String("__Name__"),
+			ResourceType:   ptr.String("__ResourceType__"),
+			Permission:     ptr.String("__Permission__"),
+			PermissionTemplateParameters: []types.PermissionTemplateParameterDeclaration{
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+				},
+			},
 			CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			LastUpdatedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			IsResourceTypeDefault: ptr.Bool(true),
@@ -344,6 +377,7 @@ func TestUpdateResponseSnapshot_CreatePermissionVersion(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			ResourceOwner: types.ResourceOwner("SELF"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -592,12 +626,24 @@ func TestUpdateResponseSnapshot_EnableSharingWithAwsOrganization(t *testing.T) {
 func TestUpdateResponseSnapshot_GetPermission(t *testing.T) {
 	want := &GetPermissionOutput{
 		Permission: &types.ResourceSharePermissionDetail{
-			Arn:                   ptr.String("__Arn__"),
-			Version:               ptr.String("__Version__"),
-			DefaultVersion:        ptr.Bool(true),
-			Name:                  ptr.String("__Name__"),
-			ResourceType:          ptr.String("__ResourceType__"),
-			Permission:            ptr.String("__Permission__"),
+			Arn:            ptr.String("__Arn__"),
+			Version:        ptr.String("__Version__"),
+			DefaultVersion: ptr.Bool(true),
+			Name:           ptr.String("__Name__"),
+			ResourceType:   ptr.String("__ResourceType__"),
+			Permission:     ptr.String("__Permission__"),
+			PermissionTemplateParameters: []types.PermissionTemplateParameterDeclaration{
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+				},
+			},
 			CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			LastUpdatedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			IsResourceTypeDefault: ptr.Bool(true),
@@ -614,6 +660,7 @@ func TestUpdateResponseSnapshot_GetPermission(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			ResourceOwner: types.ResourceOwner("SELF"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonResourceSharing)
@@ -940,6 +987,26 @@ func TestUpdateResponseSnapshot_ListPermissionAssociations(t *testing.T) {
 				FeatureSet:        types.PermissionFeatureSet("CREATED_FROM_POLICY"),
 				LastUpdatedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ResourceShareArn:  ptr.String("__ResourceShareArn__"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				Arn:               ptr.String("__Arn__"),
@@ -950,6 +1017,26 @@ func TestUpdateResponseSnapshot_ListPermissionAssociations(t *testing.T) {
 				FeatureSet:        types.PermissionFeatureSet("CREATED_FROM_POLICY"),
 				LastUpdatedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ResourceShareArn:  ptr.String("__ResourceShareArn__"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -989,6 +1076,26 @@ func TestUpdateResponseSnapshot_ListPermissionVersions(t *testing.T) {
 				IsResourceTypeDefault: ptr.Bool(true),
 				PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 				FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -999,6 +1106,7 @@ func TestUpdateResponseSnapshot_ListPermissionVersions(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				ResourceOwner: types.ResourceOwner("SELF"),
 			},
 			{
 				Arn:                   ptr.String("__Arn__"),
@@ -1012,6 +1120,26 @@ func TestUpdateResponseSnapshot_ListPermissionVersions(t *testing.T) {
 				IsResourceTypeDefault: ptr.Bool(true),
 				PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 				FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1022,6 +1150,7 @@ func TestUpdateResponseSnapshot_ListPermissionVersions(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				ResourceOwner: types.ResourceOwner("SELF"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1061,6 +1190,26 @@ func TestUpdateResponseSnapshot_ListPermissions(t *testing.T) {
 				IsResourceTypeDefault: ptr.Bool(true),
 				PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 				FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1071,6 +1220,7 @@ func TestUpdateResponseSnapshot_ListPermissions(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				ResourceOwner: types.ResourceOwner("SELF"),
 			},
 			{
 				Arn:                   ptr.String("__Arn__"),
@@ -1084,6 +1234,26 @@ func TestUpdateResponseSnapshot_ListPermissions(t *testing.T) {
 				IsResourceTypeDefault: ptr.Bool(true),
 				PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 				FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1094,6 +1264,7 @@ func TestUpdateResponseSnapshot_ListPermissions(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				ResourceOwner: types.ResourceOwner("SELF"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1167,10 +1338,30 @@ func TestUpdateResponseSnapshot_ListReplacePermissionAssociationsWork(t *testing
 				FromPermissionVersion: ptr.String("__FromPermissionVersion__"),
 				ToPermissionArn:       ptr.String("__ToPermissionArn__"),
 				ToPermissionVersion:   ptr.String("__ToPermissionVersion__"),
-				Status:                types.ReplacePermissionAssociationsWorkStatus("IN_PROGRESS"),
-				StatusMessage:         ptr.String("__StatusMessage__"),
-				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastUpdatedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Status:          types.ReplacePermissionAssociationsWorkStatus("IN_PROGRESS"),
+				StatusMessage:   ptr.String("__StatusMessage__"),
+				CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				Id:                    ptr.String("__Id__"),
@@ -1178,10 +1369,30 @@ func TestUpdateResponseSnapshot_ListReplacePermissionAssociationsWork(t *testing
 				FromPermissionVersion: ptr.String("__FromPermissionVersion__"),
 				ToPermissionArn:       ptr.String("__ToPermissionArn__"),
 				ToPermissionVersion:   ptr.String("__ToPermissionVersion__"),
-				Status:                types.ReplacePermissionAssociationsWorkStatus("IN_PROGRESS"),
-				StatusMessage:         ptr.String("__StatusMessage__"),
-				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastUpdatedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Status:          types.ReplacePermissionAssociationsWorkStatus("IN_PROGRESS"),
+				StatusMessage:   ptr.String("__StatusMessage__"),
+				CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1221,6 +1432,26 @@ func TestUpdateResponseSnapshot_ListResourceSharePermissions(t *testing.T) {
 				IsResourceTypeDefault: ptr.Bool(true),
 				PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 				FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1231,6 +1462,7 @@ func TestUpdateResponseSnapshot_ListResourceSharePermissions(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				ResourceOwner: types.ResourceOwner("SELF"),
 			},
 			{
 				Arn:                   ptr.String("__Arn__"),
@@ -1244,6 +1476,26 @@ func TestUpdateResponseSnapshot_ListResourceSharePermissions(t *testing.T) {
 				IsResourceTypeDefault: ptr.Bool(true),
 				PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 				FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+				PermissionTemplateParameters: []types.PermissionTemplateParameter{
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Type:        types.PermissionTemplateParameterType("STRING"),
+						Description: ptr.String("__Description__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1254,6 +1506,7 @@ func TestUpdateResponseSnapshot_ListResourceSharePermissions(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				ResourceOwner: types.ResourceOwner("SELF"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1420,6 +1673,26 @@ func TestUpdateResponseSnapshot_PromotePermissionCreatedFromPolicy(t *testing.T)
 			IsResourceTypeDefault: ptr.Bool(true),
 			PermissionType:        types.PermissionType("CUSTOMER_MANAGED"),
 			FeatureSet:            types.PermissionFeatureSet("CREATED_FROM_POLICY"),
+			PermissionTemplateParameters: []types.PermissionTemplateParameter{
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -1430,6 +1703,7 @@ func TestUpdateResponseSnapshot_PromotePermissionCreatedFromPolicy(t *testing.T)
 					Value: ptr.String("__Value__"),
 				},
 			},
+			ResourceOwner: types.ResourceOwner("SELF"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -1543,10 +1817,30 @@ func TestUpdateResponseSnapshot_ReplacePermissionAssociations(t *testing.T) {
 			FromPermissionVersion: ptr.String("__FromPermissionVersion__"),
 			ToPermissionArn:       ptr.String("__ToPermissionArn__"),
 			ToPermissionVersion:   ptr.String("__ToPermissionVersion__"),
-			Status:                types.ReplacePermissionAssociationsWorkStatus("IN_PROGRESS"),
-			StatusMessage:         ptr.String("__StatusMessage__"),
-			CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			LastUpdatedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			PermissionTemplateParameters: []types.PermissionTemplateParameter{
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Type:        types.PermissionTemplateParameterType("STRING"),
+					Description: ptr.String("__Description__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Status:          types.ReplacePermissionAssociationsWorkStatus("IN_PROGRESS"),
+			StatusMessage:   ptr.String("__StatusMessage__"),
+			CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -1635,6 +1929,31 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UntagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdatePermission(t *testing.T) {
+	want := &UpdatePermissionOutput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		PermissionStatus: types.UpdatePermissionStatus("ATTACHABLE"),
+	}
+	proto := restjson1.New(schemas.AmazonResourceSharing)
+	opSchema := smithy.NewOperationSchema(schemas.UpdatePermission, schemas.UpdatePermissionResponse, schemas.UpdatePermissionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdatePermission.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

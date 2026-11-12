@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,33 @@ type CreateSegmentSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSegmentSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSegmentSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSegmentSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFormat != "" {
+		s.WriteString(schemas.CreateSegmentSnapshotRequest_DataFormat, string(v.DataFormat))
+	}
+	if v.DestinationUri != nil {
+		s.WriteString(schemas.CreateSegmentSnapshotRequest_DestinationUri, *v.DestinationUri)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateSegmentSnapshotRequest_DomainName, *v.DomainName)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.CreateSegmentSnapshotRequest_EncryptionKey, *v.EncryptionKey)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateSegmentSnapshotRequest_RoleArn, *v.RoleArn)
+	}
+	if v.SegmentDefinitionName != nil {
+		s.WriteString(schemas.CreateSegmentSnapshotRequest_SegmentDefinitionName, *v.SegmentDefinitionName)
+	}
+}
+
 type CreateSegmentSnapshotOutput struct {
 
 	// The unique identifier of the segment snapshot.
@@ -70,13 +99,32 @@ type CreateSegmentSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSegmentSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSegmentSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSegmentSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CreateSegmentSnapshotResponse_SnapshotId, *v.SnapshotId)
+	}
+}
+func (v *CreateSegmentSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSegmentSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSegmentSnapshotResponse_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.CreateSegmentSnapshotResponse_SnapshotId, v.SnapshotId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSegmentSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSegmentSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSegmentSnapshot, schemas.CreateSegmentSnapshotRequest, schemas.CreateSegmentSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSegmentSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSegmentSnapshot, schemas.CreateSegmentSnapshotRequest, schemas.CreateSegmentSnapshotResponse), output: &CreateSegmentSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

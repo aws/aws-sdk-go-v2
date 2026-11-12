@@ -113,7 +113,9 @@ func (v *ListEnabledControlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnabledControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnabledControls(s, schemas.ListEnabledControlsOutput_enabledControls, v.EnabledControls)
+	if v.EnabledControls != nil {
+		serializeEnabledControls(s, schemas.ListEnabledControlsOutput_enabledControls, v.EnabledControls)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnabledControlsOutput_nextToken, *v.NextToken)
 	}

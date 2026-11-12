@@ -105,7 +105,9 @@ func (v *DescribeTestCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeTestCasesOutput_nextToken, *v.NextToken)
 	}
-	serializeTestCases(s, schemas.DescribeTestCasesOutput_testCases, v.TestCases)
+	if v.TestCases != nil {
+		serializeTestCases(s, schemas.DescribeTestCasesOutput_testCases, v.TestCases)
+	}
 }
 func (v *DescribeTestCasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTestCasesOutput, func(s *smithy.Schema) error {
@@ -134,6 +136,9 @@ func (c *Client) addOperationDescribeTestCasesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -83,7 +83,9 @@ func (v *GetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDeployment(s, schemas.GetDeploymentsResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfDeployment(s, schemas.GetDeploymentsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDeploymentsResponse_NextToken, *v.NextToken)
 	}

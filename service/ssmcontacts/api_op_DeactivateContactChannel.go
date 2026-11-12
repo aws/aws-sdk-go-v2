@@ -4,6 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeactivateContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateContactChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateContactChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateContactChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactChannelId != nil {
+		s.WriteString(schemas.DeactivateContactChannelRequest_ContactChannelId, *v.ContactChannelId)
+	}
+}
+
 type DeactivateContactChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeactivateContactChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateContactChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateContactChannelResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateContactChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeactivateContactChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeactivateContactChannelResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeactivateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeactivateContactChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateContactChannel, schemas.DeactivateContactChannelRequest, schemas.DeactivateContactChannelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeactivateContactChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateContactChannel, schemas.DeactivateContactChannelRequest, schemas.DeactivateContactChannelResult), output: &DeactivateContactChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

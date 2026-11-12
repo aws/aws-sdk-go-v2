@@ -94,7 +94,9 @@ func (v *ListDeploymentSnapshotsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentSnapshotsOutput_nextToken, *v.NextToken)
 	}
-	serializeDeploymentSummaryList(s, schemas.ListDeploymentSnapshotsOutput_snapshots, v.Snapshots)
+	if v.Snapshots != nil {
+		serializeDeploymentSummaryList(s, schemas.ListDeploymentSnapshotsOutput_snapshots, v.Snapshots)
+	}
 }
 func (v *ListDeploymentSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDeploymentSnapshotsOutput, func(s *smithy.Schema) error {

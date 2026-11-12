@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetRDFGraphSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDFGraphSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDFGraphSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDFGraphSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.GetRDFGraphSummaryInput_mode, string(v.Mode))
+	}
+}
+
 type GetRDFGraphSummaryOutput struct {
 
 	// Payload for an RDF graph summary response
@@ -52,13 +66,40 @@ type GetRDFGraphSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDFGraphSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDFGraphSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDFGraphSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteStruct(schemas.GetRDFGraphSummaryOutput_payload)
+		v.Payload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.GetRDFGraphSummaryOutput_statusCode, *v.StatusCode)
+	}
+}
+func (v *GetRDFGraphSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRDFGraphSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRDFGraphSummaryOutput_payload:
+			v.Payload = &types.RDFGraphSummaryValueMap{}
+			return v.Payload.Deserialize(d)
+		case schemas.GetRDFGraphSummaryOutput_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.GetRDFGraphSummaryOutput_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRDFGraphSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRDFGraphSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDFGraphSummary, schemas.GetRDFGraphSummaryInput, schemas.GetRDFGraphSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRDFGraphSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDFGraphSummary, schemas.GetRDFGraphSummaryInput, schemas.GetRDFGraphSummaryOutput), output: &GetRDFGraphSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

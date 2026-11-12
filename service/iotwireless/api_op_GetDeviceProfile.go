@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetDeviceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetDeviceProfileRequest_Id, *v.Id)
+	}
+}
+
 type GetDeviceProfileOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -57,13 +71,60 @@ type GetDeviceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDeviceProfileResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetDeviceProfileResponse_Id, *v.Id)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.GetDeviceProfileResponse_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDeviceProfileResponse_Name, *v.Name)
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.GetDeviceProfileResponse_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDeviceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeviceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeviceProfileResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDeviceProfileResponse_Arn, v.Arn)
+		case schemas.GetDeviceProfileResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDeviceProfileResponse_Id, v.Id)
+		case schemas.GetDeviceProfileResponse_LoRaWAN:
+			v.LoRaWAN = &types.LoRaWANDeviceProfile{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.GetDeviceProfileResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDeviceProfileResponse_Name, v.Name)
+		case schemas.GetDeviceProfileResponse_Sidewalk:
+			v.Sidewalk = &types.SidewalkGetDeviceProfile{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceProfile, schemas.GetDeviceProfileRequest, schemas.GetDeviceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeviceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceProfile, schemas.GetDeviceProfileRequest, schemas.GetDeviceProfileResponse), output: &GetDeviceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

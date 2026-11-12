@@ -67,15 +67,21 @@ func (v *SubmitContactEvaluationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubmitContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationAnswersInputMap(s, schemas.SubmitContactEvaluationRequest_Answers, v.Answers)
+	if v.Answers != nil {
+		serializeEvaluationAnswersInputMap(s, schemas.SubmitContactEvaluationRequest_Answers, v.Answers)
+	}
 	if v.EvaluationId != nil {
 		s.WriteString(schemas.SubmitContactEvaluationRequest_EvaluationId, *v.EvaluationId)
 	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.SubmitContactEvaluationRequest_InstanceId, *v.InstanceId)
 	}
-	serializeEvaluationNotesMap(s, schemas.SubmitContactEvaluationRequest_Notes, v.Notes)
-	serializeEvaluatorUserUnion(s, schemas.SubmitContactEvaluationRequest_SubmittedBy, v.SubmittedBy)
+	if v.Notes != nil {
+		serializeEvaluationNotesMap(s, schemas.SubmitContactEvaluationRequest_Notes, v.Notes)
+	}
+	if v.SubmittedBy != nil {
+		serializeEvaluatorUserUnion(s, schemas.SubmitContactEvaluationRequest_SubmittedBy, v.SubmittedBy)
+	}
 }
 
 type SubmitContactEvaluationOutput struct {

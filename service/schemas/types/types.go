@@ -55,7 +55,9 @@ func (v *DiscovererSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DiscovererSummary_State, string(v.State))
 	}
-	serializeTags(s, schemas.DiscovererSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DiscovererSummary_Tags, v.Tags)
+	}
 }
 func (v *DiscovererSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DiscovererSummary, func(s *smithy.Schema) error {
@@ -113,7 +115,9 @@ func (v *RegistrySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistryName != nil {
 		s.WriteString(schemas.RegistrySummary_RegistryName, *v.RegistryName)
 	}
-	serializeTags(s, schemas.RegistrySummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegistrySummary_Tags, v.Tags)
+	}
 }
 func (v *RegistrySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegistrySummary, func(s *smithy.Schema) error {
@@ -168,7 +172,9 @@ func (v *SchemaSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaName != nil {
 		s.WriteString(schemas.SchemaSummary_SchemaName, *v.SchemaName)
 	}
-	serializeTags(s, schemas.SchemaSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.SchemaSummary_Tags, v.Tags)
+	}
 	if v.VersionCount != nil {
 		s.WriteInt64(schemas.SchemaSummary_VersionCount, *v.VersionCount)
 	}
@@ -289,7 +295,9 @@ func (v *SearchSchemaSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaName != nil {
 		s.WriteString(schemas.SearchSchemaSummary_SchemaName, *v.SchemaName)
 	}
-	serialize__listOfSearchSchemaVersionSummary(s, schemas.SearchSchemaSummary_SchemaVersions, v.SchemaVersions)
+	if v.SchemaVersions != nil {
+		serialize__listOfSearchSchemaVersionSummary(s, schemas.SearchSchemaSummary_SchemaVersions, v.SchemaVersions)
+	}
 }
 func (v *SearchSchemaSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchSchemaSummary, func(s *smithy.Schema) error {

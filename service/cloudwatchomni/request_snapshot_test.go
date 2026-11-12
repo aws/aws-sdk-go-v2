@@ -1613,6 +1613,51 @@ func TestCheckRequestSnapshot_GetSpaceCredentialsForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetSpaceDataAccess(t *testing.T) {
+	input := &GetSpaceDataAccessInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		TargetScopes: []types.DataAccessTarget{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSpaceDataAccess(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSpaceDataAccess"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetTelemetryQueryResults(t *testing.T) {
 	input := &GetTelemetryQueryResultsInput{
 		QueryId:    ptr.String("__QueryId__"),
@@ -3949,6 +3994,51 @@ func TestUpdateRequestSnapshot_GetSpaceCredentialsForOrganization(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSpaceCredentialsForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetSpaceDataAccess(t *testing.T) {
+	input := &GetSpaceDataAccessInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		TargetScopes: []types.DataAccessTarget{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSpaceDataAccess(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSpaceDataAccess"); err != nil {
 		t.Fatal(err)
 	}
 }

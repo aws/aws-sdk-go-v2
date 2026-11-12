@@ -255,6 +255,16 @@ const (
 	ConnectionTypeVpc           ConnectionType = "VPC"
 	// A Git connection type.
 	ConnectionTypeGit ConnectionType = "GIT"
+	// A generic Iceberg REST catalog connection type.
+	ConnectionTypeIcebergrestcatalog ConnectionType = "ICEBERGRESTCATALOG"
+	// A Snowflake Horizon (Iceberg REST) catalog connection type.
+	ConnectionTypeSnowflakeicebergrestcatalog ConnectionType = "SNOWFLAKEICEBERGRESTCATALOG"
+	// A Databricks Unity Catalog (Iceberg REST) connection type.
+	ConnectionTypeDatabricksicebergrestcatalog ConnectionType = "DATABRICKSICEBERGRESTCATALOG"
+	// A Workday Data Connect (Iceberg REST) catalog connection type.
+	ConnectionTypeWorkdayicebergrestcatalog ConnectionType = "WORKDAYICEBERGRESTCATALOG"
+	// A Workday Live Data Query connection type.
+	ConnectionTypeWorkdayldq ConnectionType = "WORKDAYLDQ"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -287,6 +297,11 @@ func (ConnectionType) Values() []ConnectionType {
 		"MLFLOW",
 		"VPC",
 		"GIT",
+		"ICEBERGRESTCATALOG",
+		"SNOWFLAKEICEBERGRESTCATALOG",
+		"DATABRICKSICEBERGRESTCATALOG",
+		"WORKDAYICEBERGRESTCATALOG",
+		"WORKDAYLDQ",
 	}
 }
 
@@ -540,6 +555,27 @@ func (DeploymentType) Values() []DeploymentType {
 		"CREATE",
 		"UPDATE",
 		"DELETE",
+	}
+}
+
+type DesignationType string
+
+// Enum values for DesignationType
+const (
+	// System-defined designation that cannot be modified or deleted.
+	DesignationTypeManaged DesignationType = "MANAGED"
+	// Created by a user via the CreateDesignation API.
+	DesignationTypeUserCreated DesignationType = "USER_CREATED"
+)
+
+// Values returns all known values for DesignationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DesignationType) Values() []DesignationType {
+	return []DesignationType{
+		"MANAGED",
+		"USER_CREATED",
 	}
 }
 
@@ -881,6 +917,16 @@ const (
 	GlueConnectionTypeSqlserver  GlueConnectionType = "SQLSERVER"
 	GlueConnectionTypeTeradata   GlueConnectionType = "TERADATA"
 	GlueConnectionTypeVertica    GlueConnectionType = "VERTICA"
+	// A generic Iceberg REST catalog connection type.
+	GlueConnectionTypeIcebergrestcatalog GlueConnectionType = "ICEBERGRESTCATALOG"
+	// A Snowflake Horizon (Iceberg REST) catalog connection type.
+	GlueConnectionTypeSnowflakeicebergrestcatalog GlueConnectionType = "SNOWFLAKEICEBERGRESTCATALOG"
+	// A Databricks Unity Catalog (Iceberg REST) connection type.
+	GlueConnectionTypeDatabricksicebergrestcatalog GlueConnectionType = "DATABRICKSICEBERGRESTCATALOG"
+	// A Workday Data Connect (Iceberg REST) catalog connection type.
+	GlueConnectionTypeWorkdayicebergrestcatalog GlueConnectionType = "WORKDAYICEBERGRESTCATALOG"
+	// A Workday Live Data Query connection type.
+	GlueConnectionTypeWorkdayldq GlueConnectionType = "WORKDAYLDQ"
 )
 
 // Values returns all known values for GlueConnectionType. Note that this can be
@@ -902,6 +948,11 @@ func (GlueConnectionType) Values() []GlueConnectionType {
 		"SQLSERVER",
 		"TERADATA",
 		"VERTICA",
+		"ICEBERGRESTCATALOG",
+		"SNOWFLAKEICEBERGRESTCATALOG",
+		"DATABRICKSICEBERGRESTCATALOG",
+		"WORKDAYICEBERGRESTCATALOG",
+		"WORKDAYLDQ",
 	}
 }
 
@@ -1605,9 +1656,10 @@ type ProjectDesignation string
 
 // Enum values for ProjectDesignation
 const (
-	ProjectDesignationOwner                 ProjectDesignation = "OWNER"
-	ProjectDesignationContributor           ProjectDesignation = "CONTRIBUTOR"
-	ProjectDesignationProjectCatalogSteward ProjectDesignation = "PROJECT_CATALOG_STEWARD"
+	ProjectDesignationOwner                  ProjectDesignation = "OWNER"
+	ProjectDesignationContributor            ProjectDesignation = "CONTRIBUTOR"
+	ProjectDesignationProjectCatalogSteward  ProjectDesignation = "PROJECT_CATALOG_STEWARD"
+	ProjectDesignationUserCreatedDesignation ProjectDesignation = "USER_CREATED_DESIGNATION"
 )
 
 // Values returns all known values for ProjectDesignation. Note that this can be
@@ -1619,6 +1671,7 @@ func (ProjectDesignation) Values() []ProjectDesignation {
 		"OWNER",
 		"CONTRIBUTOR",
 		"PROJECT_CATALOG_STEWARD",
+		"USER_CREATED_DESIGNATION",
 	}
 }
 
@@ -2421,6 +2474,7 @@ const (
 	UserDesignationProjectCatalogViewer   UserDesignation = "PROJECT_CATALOG_VIEWER"
 	UserDesignationProjectCatalogConsumer UserDesignation = "PROJECT_CATALOG_CONSUMER"
 	UserDesignationProjectCatalogSteward  UserDesignation = "PROJECT_CATALOG_STEWARD"
+	UserDesignationUserCreatedDesignation UserDesignation = "USER_CREATED_DESIGNATION"
 )
 
 // Values returns all known values for UserDesignation. Note that this can be
@@ -2434,6 +2488,7 @@ func (UserDesignation) Values() []UserDesignation {
 		"PROJECT_CATALOG_VIEWER",
 		"PROJECT_CATALOG_CONSUMER",
 		"PROJECT_CATALOG_STEWARD",
+		"USER_CREATED_DESIGNATION",
 	}
 }
 

@@ -153,7 +153,9 @@ func (v *ImportComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SemanticVersion != nil {
 		s.WriteString(schemas.ImportComponentRequest_semanticVersion, *v.SemanticVersion)
 	}
-	serializeTagMap(s, schemas.ImportComponentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ImportComponentRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ImportComponentRequest_type, string(v.Type))
 	}

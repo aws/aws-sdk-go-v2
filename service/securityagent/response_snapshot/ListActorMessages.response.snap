@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"messages":[{"body":"__Body__","receivedAt":"2000-01-01T00:00:00Z","sender":"__Sender__","subject":"__Subject__"},{"body":"__Body__","receivedAt":"2000-01-01T00:00:00Z","sender":"__Sender__","subject":"__Subject__"}],"nextToken":"__NextToken__"}

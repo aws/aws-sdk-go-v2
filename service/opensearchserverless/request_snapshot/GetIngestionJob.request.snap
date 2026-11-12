@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.GetIngestionJob
+
+{"collectionId":"__CollectionId__","ingestionJobId":"__IngestionJobId__"}

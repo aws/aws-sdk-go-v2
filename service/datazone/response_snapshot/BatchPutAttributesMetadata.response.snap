@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributes":[{"attributeIdentifier":"__AttributeIdentifier__"},{"attributeIdentifier":"__AttributeIdentifier__"}],"errors":[{"attributeIdentifier":"__AttributeIdentifier__","code":"__Code__","message":"__Message__"},{"attributeIdentifier":"__AttributeIdentifier__","code":"__Code__","message":"__Message__"}]}

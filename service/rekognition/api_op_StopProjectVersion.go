@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type StopProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopProjectVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopProjectVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopProjectVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectVersionArn != nil {
+		s.WriteString(schemas.StopProjectVersionRequest_ProjectVersionArn, *v.ProjectVersionArn)
+	}
+}
+
 type StopProjectVersionOutput struct {
 
 	// The current status of the stop operation.
@@ -54,13 +68,36 @@ type StopProjectVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopProjectVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopProjectVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopProjectVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.StopProjectVersionResponse_Status, string(v.Status))
+	}
+}
+func (v *StopProjectVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopProjectVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopProjectVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StopProjectVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProjectVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopProjectVersion, schemas.StopProjectVersionRequest, schemas.StopProjectVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopProjectVersion, schemas.StopProjectVersionRequest, schemas.StopProjectVersionResponse), output: &StopProjectVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

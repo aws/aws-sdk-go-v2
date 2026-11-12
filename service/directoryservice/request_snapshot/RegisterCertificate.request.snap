@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/RegisterCertificate
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.RegisterCertificate
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CertificateData":"__CertificateData__","ClientCertAuthSettings":{"OCSPUrl":"__OCSPUrl__"},"DirectoryId":"__DirectoryId__","Type":"ClientCertAuth"}
+¿oCertificateDatas__CertificateData__vClientCertAuthSettings¿gOCSPUrlk__OCSPUrl__ÿkDirectoryIdo__DirectoryId__dTypenClientCertAuthÿ

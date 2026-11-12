@@ -95,7 +95,9 @@ func (v *ListBotAliasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBotAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotAliasSummaryList(s, schemas.ListBotAliasesResponse_botAliasSummaries, v.BotAliasSummaries)
+	if v.BotAliasSummaries != nil {
+		serializeBotAliasSummaryList(s, schemas.ListBotAliasesResponse_botAliasSummaries, v.BotAliasSummaries)
+	}
 	if v.BotId != nil {
 		s.WriteString(schemas.ListBotAliasesResponse_botId, *v.BotId)
 	}

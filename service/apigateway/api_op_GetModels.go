@@ -85,7 +85,9 @@ func (v *GetModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfModel(s, schemas.Models_items, v.Items)
+	if v.Items != nil {
+		serializeListOfModel(s, schemas.Models_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.Models_position, *v.Position)
 	}

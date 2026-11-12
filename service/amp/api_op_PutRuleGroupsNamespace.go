@@ -152,7 +152,9 @@ func (v *PutRuleGroupsNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.PutRuleGroupsNamespaceResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutRuleGroupsNamespaceResponse_tags, v.Tags)
+	}
 }
 func (v *PutRuleGroupsNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutRuleGroupsNamespaceResponse, func(s *smithy.Schema) error {

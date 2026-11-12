@@ -86,7 +86,9 @@ func (v *UpdateFlowAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateFlowAliasRequest_name, *v.Name)
 	}
-	serializeFlowAliasRoutingConfiguration(s, schemas.UpdateFlowAliasRequest_routingConfiguration, v.RoutingConfiguration)
+	if v.RoutingConfiguration != nil {
+		serializeFlowAliasRoutingConfiguration(s, schemas.UpdateFlowAliasRequest_routingConfiguration, v.RoutingConfiguration)
+	}
 }
 
 type UpdateFlowAliasOutput struct {
@@ -168,7 +170,9 @@ func (v *UpdateFlowAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateFlowAliasResponse_name, *v.Name)
 	}
-	serializeFlowAliasRoutingConfiguration(s, schemas.UpdateFlowAliasResponse_routingConfiguration, v.RoutingConfiguration)
+	if v.RoutingConfiguration != nil {
+		serializeFlowAliasRoutingConfiguration(s, schemas.UpdateFlowAliasResponse_routingConfiguration, v.RoutingConfiguration)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.UpdateFlowAliasResponse_updatedAt, *v.UpdatedAt)
 	}

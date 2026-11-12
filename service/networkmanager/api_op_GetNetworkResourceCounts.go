@@ -129,7 +129,9 @@ func (v *GetNetworkResourceCountsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetNetworkResourceCountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkResourceCountList(s, schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts, v.NetworkResourceCounts)
+	if v.NetworkResourceCounts != nil {
+		serializeNetworkResourceCountList(s, schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts, v.NetworkResourceCounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetNetworkResourceCountsResponse_NextToken, *v.NextToken)
 	}

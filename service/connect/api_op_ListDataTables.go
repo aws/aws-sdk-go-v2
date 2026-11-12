@@ -90,7 +90,9 @@ func (v *ListDataTablesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataTableSummaryList(s, schemas.ListDataTablesResponse_DataTableSummaryList, v.DataTableSummaryList)
+	if v.DataTableSummaryList != nil {
+		serializeDataTableSummaryList(s, schemas.ListDataTablesResponse_DataTableSummaryList, v.DataTableSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataTablesResponse_NextToken, *v.NextToken)
 	}

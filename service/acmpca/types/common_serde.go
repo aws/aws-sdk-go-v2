@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAccessDescriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AccessDescription) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeAccessDescriptionList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ActionType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -31,9 +25,6 @@ func serializeActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Ac
 }
 
 func serializeCertificateAuthorities(s smithy.ShapeSerializer, schema *smithy.Schema, v []CertificateAuthority) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -44,9 +35,6 @@ func serializeCertificateAuthorities(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeCertificatePolicyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PolicyInformation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeCertificatePolicyList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeCustomAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CustomAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serializeCustomAttributeList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeCustomExtensionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CustomExtension) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -83,9 +65,6 @@ func serializeCustomExtensionList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeExtendedKeyUsageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExtendedKeyUsage) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -96,9 +75,6 @@ func serializeExtendedKeyUsageList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeGeneralNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GeneralName) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -109,9 +85,6 @@ func serializeGeneralNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializePermissionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Permission) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -122,9 +95,6 @@ func serializePermissionList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializePolicyQualifierInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PolicyQualifierInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -135,9 +105,6 @@ func serializePolicyQualifierInfoList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

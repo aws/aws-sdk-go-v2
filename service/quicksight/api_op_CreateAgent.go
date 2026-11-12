@@ -80,7 +80,9 @@ func (v *CreateAgentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateAgentRequestActionConnectorsList(s, schemas.CreateAgentRequest_ActionConnectors, v.ActionConnectors)
+	if v.ActionConnectors != nil {
+		serializeCreateAgentRequestActionConnectorsList(s, schemas.CreateAgentRequest_ActionConnectors, v.ActionConnectors)
+	}
 	if v.AgentId != nil {
 		s.WriteString(schemas.CreateAgentRequest_AgentId, *v.AgentId)
 	}
@@ -90,7 +92,9 @@ func (v *CreateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.CreateAgentRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeCustomPromptInput(s, schemas.CreateAgentRequest_CustomPromptInput, v.CustomPromptInput)
+	if v.CustomPromptInput != nil {
+		serializeCustomPromptInput(s, schemas.CreateAgentRequest_CustomPromptInput, v.CustomPromptInput)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAgentRequest_Description, *v.Description)
 	}
@@ -100,8 +104,12 @@ func (v *CreateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAgentRequest_Name, *v.Name)
 	}
-	serializeCreateAgentRequestSpacesList(s, schemas.CreateAgentRequest_Spaces, v.Spaces)
-	serializeStarterPromptList(s, schemas.CreateAgentRequest_StarterPrompts, v.StarterPrompts)
+	if v.Spaces != nil {
+		serializeCreateAgentRequestSpacesList(s, schemas.CreateAgentRequest_Spaces, v.Spaces)
+	}
+	if v.StarterPrompts != nil {
+		serializeStarterPromptList(s, schemas.CreateAgentRequest_StarterPrompts, v.StarterPrompts)
+	}
 	if v.WelcomeMessage != nil {
 		s.WriteString(schemas.CreateAgentRequest_WelcomeMessage, *v.WelcomeMessage)
 	}

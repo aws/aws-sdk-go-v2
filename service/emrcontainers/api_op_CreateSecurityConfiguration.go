@@ -80,7 +80,9 @@ func (v *CreateSecurityConfigurationInput) SerializeMembers(s smithy.ShapeSerial
 		v.SecurityConfigurationData.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateSecurityConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSecurityConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateSecurityConfigurationOutput struct {

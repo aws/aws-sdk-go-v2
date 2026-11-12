@@ -1767,6 +1767,14 @@ var ImageType_OWNED *smithy.Schema
 
 var ImageType_SHARED *smithy.Schema
 
+var ImageValidationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.workspaces",
+	Name:      "ImageValidationMode",
+}, smithy.ShapeTypeEnum, 2)
+var ImageValidationMode_CUSTOMER_MANAGED *smithy.Schema
+
+var ImageValidationMode_SERVICE_MANAGED *smithy.Schema
+
 var IncompatibleApplicationsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "IncompatibleApplicationsException",
@@ -2060,7 +2068,7 @@ var OperatingSystem_Type *smithy.Schema
 var OperatingSystemName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "OperatingSystemName",
-}, smithy.ShapeTypeEnum, 14)
+}, smithy.ShapeTypeEnum, 20)
 var OperatingSystemName_AMAZON_LINUX_2 *smithy.Schema
 
 var OperatingSystemName_UBUNTU_18_04 *smithy.Schema
@@ -2088,6 +2096,18 @@ var OperatingSystemName_WINDOWS_SERVER_2025 *smithy.Schema
 var OperatingSystemName_RHEL_8 *smithy.Schema
 
 var OperatingSystemName_ROCKY_8 *smithy.Schema
+
+var OperatingSystemName_UBUNTU_24_04 *smithy.Schema
+
+var OperatingSystemName_RHEL_9 *smithy.Schema
+
+var OperatingSystemName_ROCKY_9 *smithy.Schema
+
+var OperatingSystemName_UBUNTU_26_04 *smithy.Schema
+
+var OperatingSystemName_RHEL_10 *smithy.Schema
+
+var OperatingSystemName_ROCKY_10 *smithy.Schema
 
 var _OperatingSystemNameList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -4579,7 +4599,7 @@ var ImportClientBrandingResult_DeviceTypeWeb *smithy.Schema
 var ImportCustomWorkspaceImageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ImportCustomWorkspaceImageRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ImportCustomWorkspaceImageRequest_ImageName *smithy.Schema
 
 var ImportCustomWorkspaceImageRequest_ImageDescription *smithy.Schema
@@ -4597,6 +4617,8 @@ var ImportCustomWorkspaceImageRequest_Platform *smithy.Schema
 var ImportCustomWorkspaceImageRequest_OsVersion *smithy.Schema
 
 var ImportCustomWorkspaceImageRequest_Tags *smithy.Schema
+
+var ImportCustomWorkspaceImageRequest_ImageValidationMode *smithy.Schema
 
 var ImportCustomWorkspaceImageResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -6018,6 +6040,18 @@ func init() {
 
 	OperatingSystemName_ROCKY_8 = OperatingSystemName.AddMember("ROCKY_8", smithyprelude.Unit)
 
+	OperatingSystemName_UBUNTU_24_04 = OperatingSystemName.AddMember("UBUNTU_24_04", smithyprelude.Unit)
+
+	OperatingSystemName_RHEL_9 = OperatingSystemName.AddMember("RHEL_9", smithyprelude.Unit)
+
+	OperatingSystemName_ROCKY_9 = OperatingSystemName.AddMember("ROCKY_9", smithyprelude.Unit)
+
+	OperatingSystemName_UBUNTU_26_04 = OperatingSystemName.AddMember("UBUNTU_26_04", smithyprelude.Unit)
+
+	OperatingSystemName_RHEL_10 = OperatingSystemName.AddMember("RHEL_10", smithyprelude.Unit)
+
+	OperatingSystemName_ROCKY_10 = OperatingSystemName.AddMember("ROCKY_10", smithyprelude.Unit)
+
 	GlobalAcceleratorForWorkSpace_Mode = GlobalAcceleratorForWorkSpace.AddMember("Mode", AGAModeForWorkSpaceEnum)
 
 	GlobalAcceleratorForWorkSpace_PreferredProtocol = GlobalAcceleratorForWorkSpace.AddMember("PreferredProtocol", AGAPreferredProtocolForWorkSpace)
@@ -6125,6 +6159,10 @@ func init() {
 	ImageType_OWNED = ImageType.AddMember("OWNED", smithyprelude.Unit)
 
 	ImageType_SHARED = ImageType.AddMember("SHARED", smithyprelude.Unit)
+
+	ImageValidationMode_CUSTOMER_MANAGED = ImageValidationMode.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
+
+	ImageValidationMode_SERVICE_MANAGED = ImageValidationMode.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
 
 	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
 
@@ -7209,6 +7247,8 @@ func init() {
 	ImportCustomWorkspaceImageRequest_OsVersion = ImportCustomWorkspaceImageRequest.AddMember("OsVersion", OSVersion)
 
 	ImportCustomWorkspaceImageRequest_Tags = ImportCustomWorkspaceImageRequest.AddMember("Tags", _TagList)
+
+	ImportCustomWorkspaceImageRequest_ImageValidationMode = ImportCustomWorkspaceImageRequest.AddMember("ImageValidationMode", ImageValidationMode)
 
 	ImportCustomWorkspaceImageResult_ImageId = ImportCustomWorkspaceImageResult.AddMember("ImageId", _WorkspaceImageId)
 

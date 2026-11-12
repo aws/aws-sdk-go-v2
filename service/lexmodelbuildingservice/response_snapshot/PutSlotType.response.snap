@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"checksum":"__Checksum__","createVersion":true,"createdDate":946684800,"description":"__Description__","enumerationValues":[{"synonyms":["__Member__","__Member__"],"value":"__Value__"},{"synonyms":["__Member__","__Member__"],"value":"__Value__"}],"lastUpdatedDate":946684800,"name":"__Name__","parentSlotTypeSignature":"__ParentSlotTypeSignature__","slotTypeConfigurations":[{"regexConfiguration":{"pattern":"__Pattern__"}},{"regexConfiguration":{"pattern":"__Pattern__"}}],"valueSelectionStrategy":"ORIGINAL_VALUE","version":"__Version__"}

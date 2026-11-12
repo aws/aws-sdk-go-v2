@@ -622,8 +622,9 @@ type AssistedNluMode string
 
 // Enum values for AssistedNluMode
 const (
-	AssistedNluModePrimary  AssistedNluMode = "Primary"
-	AssistedNluModeFallback AssistedNluMode = "Fallback"
+	AssistedNluModePrimary       AssistedNluMode = "Primary"
+	AssistedNluModeFallback      AssistedNluMode = "Fallback"
+	AssistedNluModeDialogManager AssistedNluMode = "DialogManager"
 )
 
 // Values returns all known values for AssistedNluMode. Note that this can be
@@ -634,6 +635,7 @@ func (AssistedNluMode) Values() []AssistedNluMode {
 	return []AssistedNluMode{
 		"Primary",
 		"Fallback",
+		"DialogManager",
 	}
 }
 

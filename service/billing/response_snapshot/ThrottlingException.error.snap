@@ -1,5 +1,5 @@
 429
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBilling.AssociateSourceViews
+X-Amz-Target: AWSBilling.AssociateContract
 
 {"__type":"ThrottlingException","message":"__Message__"}

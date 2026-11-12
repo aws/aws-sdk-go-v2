@@ -337,7 +337,7 @@ public class AddAwsConfigFields implements GoIntegration {
             writeAwsDefaultResolvers(serviceShape, w);
         });
         goDelegator.useShapeTestWriter(serviceShape, w -> {
-            writerAwsDefaultResolversTests(w);
+            writerAwsDefaultResolversTests(serviceShape, w);
         });
     }
 
@@ -364,8 +364,13 @@ public class AddAwsConfigFields implements GoIntegration {
                 """);
     }
 
-    private void writerAwsDefaultResolversTests(GoWriter writer) {
-        writeRetryResolverTests(writer);
+    private void writerAwsDefaultResolversTests(ServiceShape serviceShape, GoWriter writer) {
+        writeRetryResolverTests(serviceShape, writer);
+    }
+
+    private static boolean isDynamoDB(ServiceShape serviceShape) {
+        String sdkId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+        return sdkId.equals("DynamoDB") || sdkId.equals("DynamoDB Streams");
     }
 
     private void writeRetryerResolvers(ServiceShape serviceShape, GoWriter writer) {
@@ -398,25 +403,19 @@ public class AddAwsConfigFields implements GoIntegration {
                 AwsGoDependency.AWS_RETRY).build());
 
         // Determine service-specific retry configuration.
-        String sdkId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
-        boolean isDynamoDB = sdkId.equals("DynamoDB") || sdkId.equals("DynamoDB Streams");
-
         String serviceSpecificRetryOptions;
-        if (isDynamoDB) {
+        if (isDynamoDB(serviceShape)) {
             writer.addUseImports(SmithyGoDependency.TIME);
-            writer.addUseImports(SmithyGoDependency.OS);
 
             serviceSpecificRetryOptions = """
-                    if os.Getenv("AWS_NEW_RETRIES_2026") == "true" {
-                        // DynamoDB uses a shorter base backoff (25ms) and one additional
-                        // retry attempt (4 total) by default.
-                        standardOptions = append(standardOptions, func(so *$standardOptions:T) {
-                            if o.$retryMaxAttemptsOption:L == 0 {
-                                so.MaxAttempts = 4
-                            }
-                            so.BaseDelay = 25 * time.Millisecond
-                        })
-                    }
+                    // DynamoDB uses a shorter base backoff (25ms) and one additional
+                    // retry attempt (4 total) by default.
+                    standardOptions = append(standardOptions, func(so *$standardOptions:T) {
+                        if o.$retryMaxAttemptsOption:L == 0 {
+                            so.MaxAttempts = 4
+                        }
+                        so.BaseDelay = 25 * time.Millisecond
+                    })
                     """;
         } else {
             serviceSpecificRetryOptions = "";
@@ -514,8 +513,11 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.popState();
     }
 
-    private void writeRetryResolverTests(GoWriter writer) {
+    private void writeRetryResolverTests(ServiceShape serviceShape, GoWriter writer) {
         writer.pushState();
+
+        // DynamoDB defaults to one additional retry attempt (4 total).
+        writer.putContext("defaultMaxAttempts", isDynamoDB(serviceShape) ? 4 : 3);
 
         writer.putContext("retryModeOptions", "Client_resolveRetryOptions");
         writer.putContext("retryerType", getAwsCoreSymbol("Retryer"));
@@ -569,8 +571,8 @@ public class AddAwsConfigFields implements GoIntegration {
                         "defaults": {
                             defaultsMode: $defaultsModeStandard:T,
                             expectClientRetryMode: $retryModeStandard:T,
-                            expectClientMaxAttempts: 3,
-                            expectOpMaxAttempts: 3,
+                            expectClientMaxAttempts: $defaultMaxAttempts:L,
+                            expectOpMaxAttempts: $defaultMaxAttempts:L,
                         },
                         "custom default retry": {
                             retryMode: $retryModeAdaptive:T,

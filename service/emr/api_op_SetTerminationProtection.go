@@ -68,7 +68,9 @@ func (v *SetTerminationProtectionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetTerminationProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeXmlStringList(s, schemas.SetTerminationProtectionInput_JobFlowIds, v.JobFlowIds)
+	if v.JobFlowIds != nil {
+		serializeXmlStringList(s, schemas.SetTerminationProtectionInput_JobFlowIds, v.JobFlowIds)
+	}
 	if v.TerminationProtected != nil {
 		s.WriteBool(schemas.SetTerminationProtectionInput_TerminationProtected, *v.TerminationProtected)
 	}

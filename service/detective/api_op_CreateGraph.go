@@ -55,7 +55,9 @@ func (v *CreateGraphInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.CreateGraphRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateGraphRequest_Tags, v.Tags)
+	}
 }
 
 type CreateGraphOutput struct {

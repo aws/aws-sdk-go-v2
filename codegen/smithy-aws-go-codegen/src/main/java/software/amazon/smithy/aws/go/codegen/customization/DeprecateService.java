@@ -46,7 +46,12 @@ public class DeprecateService implements GoIntegration {
         "com.amazonaws.iotevents#IotColumboService",
         "com.amazonaws.ioteventsdata#IotColumboDataService",
         "com.amazonaws.panorama#OmniCloudServiceLambda",
-        "com.amazonaws.simspaceweaver#SimSpaceWeaver"
+        "com.amazonaws.simspaceweaver#SimSpaceWeaver",
+
+        // 10/19/2026
+        "com.amazonaws.finspace#AWSHabaneroManagementService",
+        "com.amazonaws.finspacedata#AWSHabaneroPublicAPI",
+        "com.amazonaws.tnb#TNB"
     );
 
     @Override

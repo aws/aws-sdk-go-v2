@@ -48,7 +48,9 @@ func (v *UpdateProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateIds(s, schemas.UpdateProfileRequest_CertificateIds, v.CertificateIds)
+	if v.CertificateIds != nil {
+		serializeCertificateIds(s, schemas.UpdateProfileRequest_CertificateIds, v.CertificateIds)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.UpdateProfileRequest_ProfileId, *v.ProfileId)
 	}

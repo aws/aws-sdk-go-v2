@@ -97,7 +97,9 @@ func (v *UpdateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateFlowRequest_description, *v.Description)
 	}
-	serializeDestinationFlowConfigList(s, schemas.UpdateFlowRequest_destinationFlowConfigList, v.DestinationFlowConfigList)
+	if v.DestinationFlowConfigList != nil {
+		serializeDestinationFlowConfigList(s, schemas.UpdateFlowRequest_destinationFlowConfigList, v.DestinationFlowConfigList)
+	}
 	if v.FlowName != nil {
 		s.WriteString(schemas.UpdateFlowRequest_flowName, *v.FlowName)
 	}
@@ -111,7 +113,9 @@ func (v *UpdateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceFlowConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTasks(s, schemas.UpdateFlowRequest_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeTasks(s, schemas.UpdateFlowRequest_tasks, v.Tasks)
+	}
 	if v.TriggerConfig != nil {
 		s.WriteStruct(schemas.UpdateFlowRequest_triggerConfig)
 		v.TriggerConfig.SerializeMembers(s)

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"payload":{"token":"__Token__"},"status":"__Status__"}

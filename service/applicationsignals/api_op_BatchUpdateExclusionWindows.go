@@ -52,9 +52,15 @@ func (v *BatchUpdateExclusionWindowsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateExclusionWindowsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionWindows(s, schemas.BatchUpdateExclusionWindowsInput_AddExclusionWindows, v.AddExclusionWindows)
-	serializeExclusionWindows(s, schemas.BatchUpdateExclusionWindowsInput_RemoveExclusionWindows, v.RemoveExclusionWindows)
-	serializeServiceLevelObjectiveIds(s, schemas.BatchUpdateExclusionWindowsInput_SloIds, v.SloIds)
+	if v.AddExclusionWindows != nil {
+		serializeExclusionWindows(s, schemas.BatchUpdateExclusionWindowsInput_AddExclusionWindows, v.AddExclusionWindows)
+	}
+	if v.RemoveExclusionWindows != nil {
+		serializeExclusionWindows(s, schemas.BatchUpdateExclusionWindowsInput_RemoveExclusionWindows, v.RemoveExclusionWindows)
+	}
+	if v.SloIds != nil {
+		serializeServiceLevelObjectiveIds(s, schemas.BatchUpdateExclusionWindowsInput_SloIds, v.SloIds)
+	}
 }
 
 type BatchUpdateExclusionWindowsOutput struct {
@@ -82,8 +88,12 @@ func (v *BatchUpdateExclusionWindowsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchUpdateExclusionWindowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateExclusionWindowsErrors(s, schemas.BatchUpdateExclusionWindowsOutput_Errors, v.Errors)
-	serializeServiceLevelObjectiveIds(s, schemas.BatchUpdateExclusionWindowsOutput_SloIds, v.SloIds)
+	if v.Errors != nil {
+		serializeBatchUpdateExclusionWindowsErrors(s, schemas.BatchUpdateExclusionWindowsOutput_Errors, v.Errors)
+	}
+	if v.SloIds != nil {
+		serializeServiceLevelObjectiveIds(s, schemas.BatchUpdateExclusionWindowsOutput_SloIds, v.SloIds)
+	}
 }
 func (v *BatchUpdateExclusionWindowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateExclusionWindowsOutput, func(s *smithy.Schema) error {

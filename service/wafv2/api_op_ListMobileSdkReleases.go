@@ -101,7 +101,9 @@ func (v *ListMobileSdkReleasesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListMobileSdkReleasesResponse_NextMarker, *v.NextMarker)
 	}
-	serializeReleaseSummaries(s, schemas.ListMobileSdkReleasesResponse_ReleaseSummaries, v.ReleaseSummaries)
+	if v.ReleaseSummaries != nil {
+		serializeReleaseSummaries(s, schemas.ListMobileSdkReleasesResponse_ReleaseSummaries, v.ReleaseSummaries)
+	}
 }
 func (v *ListMobileSdkReleasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMobileSdkReleasesResponse, func(s *smithy.Schema) error {

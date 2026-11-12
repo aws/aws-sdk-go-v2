@@ -114,7 +114,9 @@ func (v *GetDataQualityRulesetEvaluationRunOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceMap(s, schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalDataSources, v.AdditionalDataSources)
+	if v.AdditionalDataSources != nil {
+		serializeDataSourceMap(s, schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalDataSources, v.AdditionalDataSources)
+	}
 	if v.AdditionalRunOptions != nil {
 		s.WriteStruct(schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalRunOptions)
 		v.AdditionalRunOptions.SerializeMembers(s)
@@ -140,11 +142,15 @@ func (v *GetDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.Sha
 	if v.NumberOfWorkers != nil {
 		s.WriteInt32(schemas.GetDataQualityRulesetEvaluationRunResponse_NumberOfWorkers, *v.NumberOfWorkers)
 	}
-	serializeDataQualityResultIdList(s, schemas.GetDataQualityRulesetEvaluationRunResponse_ResultIds, v.ResultIds)
+	if v.ResultIds != nil {
+		serializeDataQualityResultIdList(s, schemas.GetDataQualityRulesetEvaluationRunResponse_ResultIds, v.ResultIds)
+	}
 	if v.Role != nil {
 		s.WriteString(schemas.GetDataQualityRulesetEvaluationRunResponse_Role, *v.Role)
 	}
-	serializeRulesetNames(s, schemas.GetDataQualityRulesetEvaluationRunResponse_RulesetNames, v.RulesetNames)
+	if v.RulesetNames != nil {
+		serializeRulesetNames(s, schemas.GetDataQualityRulesetEvaluationRunResponse_RulesetNames, v.RulesetNames)
+	}
 	if v.RunId != nil {
 		s.WriteString(schemas.GetDataQualityRulesetEvaluationRunResponse_RunId, *v.RunId)
 	}

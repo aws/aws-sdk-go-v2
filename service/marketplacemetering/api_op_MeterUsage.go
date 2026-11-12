@@ -58,6 +58,8 @@ import (
 // If you submit records more than six hours after events occur, the records won't
 // be accepted. The timestamp in your request determines when an event is recorded.
 //
+// To report fractional usage, use UsageQuantityAsDecimal instead of UsageQuantity .
+//
 // You can optionally include multiple usage allocations, to provide customers
 // with usage data split into buckets by tags that you define or allow the customer
 // to define.
@@ -131,13 +133,34 @@ type MeterUsageInput struct {
 
 	// The set of UsageAllocations to submit.
 	//
-	// The sum of all UsageAllocation quantities must equal the UsageQuantity of the
-	// MeterUsage request, and each UsageAllocation must have a unique set of tags
-	// (include no tags).
+	// The sum of all UsageAllocation quantities must equal the usage quantity of the
+	// MeterUsage request ( UsageQuantity or UsageQuantityAsDecimal ), and each
+	// UsageAllocation must have a unique set of tags (include no tags). Allocations
+	// must use the same type of quantity as the request: AllocatedUsageQuantity with
+	// UsageQuantity , or AllocatedUsageQuantityAsDecimal with UsageQuantityAsDecimal .
 	UsageAllocations []types.UsageAllocation
 
-	// Consumption value for the hour. Defaults to 0 if not specified.
+	// The consumption value for the hour, as a whole number. Defaults to 0 if neither
+	// UsageQuantity nor UsageQuantityAsDecimal is specified.
+	//
+	// Use UsageQuantityAsDecimal instead. You can't specify both UsageQuantity and
+	// UsageQuantityAsDecimal .
+	//
+	// Deprecated: Use UsageQuantityAsDecimal instead.
 	UsageQuantity *int32
+
+	// The consumption value for the hour, as a decimal string. Use this instead of
+	// UsageQuantity to report fractional usage.
+	//
+	// A non-negative decimal number, for example 17.42 .
+	//
+	// You can't specify both UsageQuantity and UsageQuantityAsDecimal . If you provide
+	// UsageAllocations , each allocation must use AllocatedUsageQuantityAsDecimal .
+	//
+	// Quantities are compared by value when checking for duplicate or retried
+	// requests, so 17 , 17.0 , and 17.00 are the same quantity, whether you send it
+	// in UsageQuantity or UsageQuantityAsDecimal .
+	UsageQuantityAsDecimal *string
 
 	noSmithyDocumentSerde
 }
@@ -161,12 +184,17 @@ func (v *MeterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.MeterUsageRequest_Timestamp, *v.Timestamp)
 	}
-	serializeUsageAllocations(s, schemas.MeterUsageRequest_UsageAllocations, v.UsageAllocations)
+	if v.UsageAllocations != nil {
+		serializeUsageAllocations(s, schemas.MeterUsageRequest_UsageAllocations, v.UsageAllocations)
+	}
 	if v.UsageDimension != nil {
 		s.WriteString(schemas.MeterUsageRequest_UsageDimension, *v.UsageDimension)
 	}
 	if v.UsageQuantity != nil {
 		s.WriteInt32(schemas.MeterUsageRequest_UsageQuantity, *v.UsageQuantity)
+	}
+	if v.UsageQuantityAsDecimal != nil {
+		s.WriteString(schemas.MeterUsageRequest_UsageQuantityAsDecimal, *v.UsageQuantityAsDecimal)
 	}
 }
 

@@ -116,7 +116,9 @@ func (v *UpdateDiscovererOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.UpdateDiscovererResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.UpdateDiscovererResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateDiscovererResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateDiscovererOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateDiscovererResponse, func(s *smithy.Schema) error {

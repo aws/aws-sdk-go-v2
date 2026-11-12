@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -235,6 +237,41 @@ type SendRawEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendRawEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendRawEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendRawEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendRawEmailRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Destinations != nil {
+		serializeAddressList(s, schemas.SendRawEmailRequest_Destinations, v.Destinations)
+	}
+	if v.FromArn != nil {
+		s.WriteString(schemas.SendRawEmailRequest_FromArn, *v.FromArn)
+	}
+	if v.RawMessage != nil {
+		s.WriteStruct(schemas.SendRawEmailRequest_RawMessage)
+		v.RawMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReturnPathArn != nil {
+		s.WriteString(schemas.SendRawEmailRequest_ReturnPathArn, *v.ReturnPathArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.SendRawEmailRequest_Source, *v.Source)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.SendRawEmailRequest_SourceArn, *v.SourceArn)
+	}
+	if v.Tags != nil {
+		serializeMessageTagList(s, schemas.SendRawEmailRequest_Tags, v.Tags)
+	}
+}
+
 // Represents a unique message ID.
 type SendRawEmailOutput struct {
 
@@ -249,13 +286,32 @@ type SendRawEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendRawEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendRawEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendRawEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendRawEmailResponse_MessageId, *v.MessageId)
+	}
+}
+func (v *SendRawEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendRawEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendRawEmailResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendRawEmailResponse_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendRawEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendRawEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendRawEmail, schemas.SendRawEmailRequest, schemas.SendRawEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSendRawEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendRawEmail, schemas.SendRawEmailRequest, schemas.SendRawEmailResponse), output: &SendRawEmailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

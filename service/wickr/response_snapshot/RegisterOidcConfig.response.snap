@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationId":1,"applicationName":"__ApplicationName__","caCertificate":"__CaCertificate__","clientId":"__ClientId__","clientSecret":"__ClientSecret__","companyId":"__CompanyId__","customUsername":"__CustomUsername__","extraAuthParams":"__ExtraAuthParams__","issuer":"__Issuer__","redirectUrl":"__RedirectUrl__","scopes":"__Scopes__","secret":"__Secret__","ssoTokenBufferMinutes":1,"userId":"__UserId__"}

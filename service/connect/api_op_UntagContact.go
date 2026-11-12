@@ -65,7 +65,9 @@ func (v *UntagContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UntagContactRequest_InstanceId, *v.InstanceId)
 	}
-	serializeContactTagKeys(s, schemas.UntagContactRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeContactTagKeys(s, schemas.UntagContactRequest_TagKeys, v.TagKeys)
+	}
 }
 
 type UntagContactOutput struct {

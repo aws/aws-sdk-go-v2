@@ -173,7 +173,9 @@ func (v *DescribeDashboardDefinitionOutput) SerializeMembers(s smithy.ShapeSeria
 		v.Definition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDashboardErrorList(s, schemas.DescribeDashboardDefinitionResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeDashboardErrorList(s, schemas.DescribeDashboardDefinitionResponse_Errors, v.Errors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeDashboardDefinitionResponse_Name, *v.Name)
 	}

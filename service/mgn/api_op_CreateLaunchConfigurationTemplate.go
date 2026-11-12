@@ -136,7 +136,9 @@ func (v *CreateLaunchConfigurationTemplateInput) SerializeMembers(s smithy.Shape
 	if v.SmallVolumeMaxSize != 0 {
 		s.WriteInt64(schemas.CreateLaunchConfigurationTemplateRequest_smallVolumeMaxSize, v.SmallVolumeMaxSize)
 	}
-	serializeTagsMap(s, schemas.CreateLaunchConfigurationTemplateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateLaunchConfigurationTemplateRequest_tags, v.Tags)
+	}
 	if v.TargetInstanceTypeRightSizingMethod != "" {
 		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
 	}
@@ -340,7 +342,9 @@ func (v *CreateLaunchConfigurationTemplateOutput) SerializeMembers(s smithy.Shap
 	if v.SmallVolumeMaxSize != 0 {
 		s.WriteInt64(schemas.LaunchConfigurationTemplate_smallVolumeMaxSize, v.SmallVolumeMaxSize)
 	}
-	serializeTagsMap(s, schemas.LaunchConfigurationTemplate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.LaunchConfigurationTemplate_tags, v.Tags)
+	}
 	if v.TargetInstanceTypeRightSizingMethod != "" {
 		s.WriteString(schemas.LaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
 	}

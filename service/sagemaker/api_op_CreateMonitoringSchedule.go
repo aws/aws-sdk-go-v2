@@ -65,7 +65,9 @@ func (v *CreateMonitoringScheduleInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.MonitoringScheduleName != nil {
 		s.WriteString(schemas.CreateMonitoringScheduleRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
 	}
-	serializeTagList(s, schemas.CreateMonitoringScheduleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMonitoringScheduleRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMonitoringScheduleOutput struct {

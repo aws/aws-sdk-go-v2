@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type BatchDeleteClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteClusterSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteClusterSnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteClusterSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifiers != nil {
+		serializeDeleteClusterSnapshotMessageList(s, schemas.BatchDeleteClusterSnapshotsRequest_Identifiers, v.Identifiers)
+	}
+}
+
 type BatchDeleteClusterSnapshotsOutput struct {
 
 	// A list of any errors returned.
@@ -48,13 +62,36 @@ type BatchDeleteClusterSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteClusterSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteClusterSnapshotsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteClusterSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Errors != nil {
+		serializeBatchSnapshotOperationErrorList(s, schemas.BatchDeleteClusterSnapshotsResult_Errors, v.Errors)
+	}
+	if v.Resources != nil {
+		serializeSnapshotIdentifierList(s, schemas.BatchDeleteClusterSnapshotsResult_Resources, v.Resources)
+	}
+}
+func (v *BatchDeleteClusterSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteClusterSnapshotsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteClusterSnapshotsResult_Errors:
+			return deserializeBatchSnapshotOperationErrorList(d, schemas.BatchDeleteClusterSnapshotsResult_Errors, &v.Errors)
+		case schemas.BatchDeleteClusterSnapshotsResult_Resources:
+			return deserializeSnapshotIdentifierList(d, schemas.BatchDeleteClusterSnapshotsResult_Resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchDeleteClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteClusterSnapshots, schemas.BatchDeleteClusterSnapshotsRequest, schemas.BatchDeleteClusterSnapshotsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBatchDeleteClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteClusterSnapshots, schemas.BatchDeleteClusterSnapshotsRequest, schemas.BatchDeleteClusterSnapshotsResult), output: &BatchDeleteClusterSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

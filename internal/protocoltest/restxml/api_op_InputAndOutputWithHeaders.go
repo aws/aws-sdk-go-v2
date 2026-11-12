@@ -71,7 +71,9 @@ func (v *InputAndOutputWithHeadersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputAndOutputWithHeadersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanList(s, schemas.InputAndOutputWithHeadersIO_headerBooleanList, v.HeaderBooleanList)
+	if v.HeaderBooleanList != nil {
+		serializeBooleanList(s, schemas.InputAndOutputWithHeadersIO_headerBooleanList, v.HeaderBooleanList)
+	}
 	if v.HeaderByte != nil {
 		s.WriteInt8(schemas.InputAndOutputWithHeadersIO_headerByte, *v.HeaderByte)
 	}
@@ -81,7 +83,9 @@ func (v *InputAndOutputWithHeadersInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.HeaderEnum != "" {
 		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerEnum, string(v.HeaderEnum))
 	}
-	serializeFooEnumList(s, schemas.InputAndOutputWithHeadersIO_headerEnumList, v.HeaderEnumList)
+	if v.HeaderEnumList != nil {
+		serializeFooEnumList(s, schemas.InputAndOutputWithHeadersIO_headerEnumList, v.HeaderEnumList)
+	}
 	if v.HeaderFalseBool != nil {
 		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerFalseBool, *v.HeaderFalseBool)
 	}
@@ -91,7 +95,9 @@ func (v *InputAndOutputWithHeadersInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.HeaderInteger != nil {
 		s.WriteInt32(schemas.InputAndOutputWithHeadersIO_headerInteger, *v.HeaderInteger)
 	}
-	serializeIntegerList(s, schemas.InputAndOutputWithHeadersIO_headerIntegerList, v.HeaderIntegerList)
+	if v.HeaderIntegerList != nil {
+		serializeIntegerList(s, schemas.InputAndOutputWithHeadersIO_headerIntegerList, v.HeaderIntegerList)
+	}
 	if v.HeaderLong != nil {
 		s.WriteInt64(schemas.InputAndOutputWithHeadersIO_headerLong, *v.HeaderLong)
 	}
@@ -101,9 +107,15 @@ func (v *InputAndOutputWithHeadersInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.HeaderString != nil {
 		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerString, *v.HeaderString)
 	}
-	serializeStringList(s, schemas.InputAndOutputWithHeadersIO_headerStringList, v.HeaderStringList)
-	serializeStringSet(s, schemas.InputAndOutputWithHeadersIO_headerStringSet, v.HeaderStringSet)
-	serializeTimestampList(s, schemas.InputAndOutputWithHeadersIO_headerTimestampList, v.HeaderTimestampList)
+	if v.HeaderStringList != nil {
+		serializeStringList(s, schemas.InputAndOutputWithHeadersIO_headerStringList, v.HeaderStringList)
+	}
+	if v.HeaderStringSet != nil {
+		serializeStringSet(s, schemas.InputAndOutputWithHeadersIO_headerStringSet, v.HeaderStringSet)
+	}
+	if v.HeaderTimestampList != nil {
+		serializeTimestampList(s, schemas.InputAndOutputWithHeadersIO_headerTimestampList, v.HeaderTimestampList)
+	}
 	if v.HeaderTrueBool != nil {
 		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerTrueBool, *v.HeaderTrueBool)
 	}
@@ -208,7 +220,9 @@ func (v *InputAndOutputWithHeadersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputAndOutputWithHeadersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanList(s, schemas.InputAndOutputWithHeadersIO_headerBooleanList, v.HeaderBooleanList)
+	if v.HeaderBooleanList != nil {
+		serializeBooleanList(s, schemas.InputAndOutputWithHeadersIO_headerBooleanList, v.HeaderBooleanList)
+	}
 	if v.HeaderByte != nil {
 		s.WriteInt8(schemas.InputAndOutputWithHeadersIO_headerByte, *v.HeaderByte)
 	}
@@ -218,7 +232,9 @@ func (v *InputAndOutputWithHeadersOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.HeaderEnum != "" {
 		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerEnum, string(v.HeaderEnum))
 	}
-	serializeFooEnumList(s, schemas.InputAndOutputWithHeadersIO_headerEnumList, v.HeaderEnumList)
+	if v.HeaderEnumList != nil {
+		serializeFooEnumList(s, schemas.InputAndOutputWithHeadersIO_headerEnumList, v.HeaderEnumList)
+	}
 	if v.HeaderFalseBool != nil {
 		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerFalseBool, *v.HeaderFalseBool)
 	}
@@ -228,7 +244,9 @@ func (v *InputAndOutputWithHeadersOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.HeaderInteger != nil {
 		s.WriteInt32(schemas.InputAndOutputWithHeadersIO_headerInteger, *v.HeaderInteger)
 	}
-	serializeIntegerList(s, schemas.InputAndOutputWithHeadersIO_headerIntegerList, v.HeaderIntegerList)
+	if v.HeaderIntegerList != nil {
+		serializeIntegerList(s, schemas.InputAndOutputWithHeadersIO_headerIntegerList, v.HeaderIntegerList)
+	}
 	if v.HeaderLong != nil {
 		s.WriteInt64(schemas.InputAndOutputWithHeadersIO_headerLong, *v.HeaderLong)
 	}
@@ -238,9 +256,15 @@ func (v *InputAndOutputWithHeadersOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.HeaderString != nil {
 		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerString, *v.HeaderString)
 	}
-	serializeStringList(s, schemas.InputAndOutputWithHeadersIO_headerStringList, v.HeaderStringList)
-	serializeStringSet(s, schemas.InputAndOutputWithHeadersIO_headerStringSet, v.HeaderStringSet)
-	serializeTimestampList(s, schemas.InputAndOutputWithHeadersIO_headerTimestampList, v.HeaderTimestampList)
+	if v.HeaderStringList != nil {
+		serializeStringList(s, schemas.InputAndOutputWithHeadersIO_headerStringList, v.HeaderStringList)
+	}
+	if v.HeaderStringSet != nil {
+		serializeStringSet(s, schemas.InputAndOutputWithHeadersIO_headerStringSet, v.HeaderStringSet)
+	}
+	if v.HeaderTimestampList != nil {
+		serializeTimestampList(s, schemas.InputAndOutputWithHeadersIO_headerTimestampList, v.HeaderTimestampList)
+	}
 	if v.HeaderTrueBool != nil {
 		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerTrueBool, *v.HeaderTrueBool)
 	}

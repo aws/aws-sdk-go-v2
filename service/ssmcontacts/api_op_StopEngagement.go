@@ -4,6 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type StopEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEngagementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEngagementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementId != nil {
+		s.WriteString(schemas.StopEngagementRequest_EngagementId, *v.EngagementId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.StopEngagementRequest_Reason, *v.Reason)
+	}
+}
+
 type StopEngagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +61,26 @@ type StopEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEngagementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEngagementResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEngagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEngagementResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEngagement, schemas.StopEngagementRequest, schemas.StopEngagementResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEngagement, schemas.StopEngagementRequest, schemas.StopEngagementResult), output: &StopEngagementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

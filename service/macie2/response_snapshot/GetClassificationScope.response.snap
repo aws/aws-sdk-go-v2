@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"id":"__Id__","name":"__Name__","s3":{"excludes":{"bucketNames":["__Member__","__Member__"]}}}

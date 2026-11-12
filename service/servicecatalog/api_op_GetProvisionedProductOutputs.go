@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type GetProvisionedProductOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedProductOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedProductOutputsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedProductOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.GetProvisionedProductOutputsInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.OutputKeys != nil {
+		serializeOutputKeys(s, schemas.GetProvisionedProductOutputsInput_OutputKeys, v.OutputKeys)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.GetProvisionedProductOutputsInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetProvisionedProductOutputsInput_PageToken, *v.PageToken)
+	}
+	if v.ProvisionedProductId != nil {
+		s.WriteString(schemas.GetProvisionedProductOutputsInput_ProvisionedProductId, *v.ProvisionedProductId)
+	}
+	if v.ProvisionedProductName != nil {
+		s.WriteString(schemas.GetProvisionedProductOutputsInput_ProvisionedProductName, *v.ProvisionedProductName)
+	}
+}
+
 type GetProvisionedProductOutputsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -73,13 +102,37 @@ type GetProvisionedProductOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedProductOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedProductOutputsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedProductOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetProvisionedProductOutputsOutput_NextPageToken, *v.NextPageToken)
+	}
+	if v.Outputs != nil {
+		serializeRecordOutputs(s, schemas.GetProvisionedProductOutputsOutput_Outputs, v.Outputs)
+	}
+}
+func (v *GetProvisionedProductOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProvisionedProductOutputsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProvisionedProductOutputsOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetProvisionedProductOutputsOutput_NextPageToken, v.NextPageToken)
+		case schemas.GetProvisionedProductOutputsOutput_Outputs:
+			return deserializeRecordOutputs(d, schemas.GetProvisionedProductOutputsOutput_Outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProvisionedProductOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedProductOutputs, schemas.GetProvisionedProductOutputsInput, schemas.GetProvisionedProductOutputsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetProvisionedProductOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedProductOutputs, schemas.GetProvisionedProductOutputsInput, schemas.GetProvisionedProductOutputsOutput), output: &GetProvisionedProductOutputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -90,6 +143,9 @@ func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

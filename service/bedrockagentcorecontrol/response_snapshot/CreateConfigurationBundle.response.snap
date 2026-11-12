@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"bundleArn":"__BundleArn__","bundleId":"__BundleId__","createdAt":946684800,"versionId":"__VersionId__"}

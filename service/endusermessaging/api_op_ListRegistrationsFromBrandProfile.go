@@ -93,7 +93,9 @@ func (v *ListRegistrationsFromBrandProfileOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegistrationsFromBrandProfileOutput_nextToken, *v.NextToken)
 	}
-	serializeRegistrationAssociationSummaryList(s, schemas.ListRegistrationsFromBrandProfileOutput_registrationAssociations, v.RegistrationAssociations)
+	if v.RegistrationAssociations != nil {
+		serializeRegistrationAssociationSummaryList(s, schemas.ListRegistrationsFromBrandProfileOutput_registrationAssociations, v.RegistrationAssociations)
+	}
 }
 func (v *ListRegistrationsFromBrandProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegistrationsFromBrandProfileOutput, func(s *smithy.Schema) error {

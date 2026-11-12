@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type CreateUserGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateUserGroupMessage_Engine, *v.Engine)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUserGroupMessage_Tags, v.Tags)
+	}
+	if v.UserGroupId != nil {
+		s.WriteString(schemas.CreateUserGroupMessage_UserGroupId, *v.UserGroupId)
+	}
+	if v.UserIds != nil {
+		serializeUserIdListInput(s, schemas.CreateUserGroupMessage_UserIds, v.UserIds)
+	}
+}
+
 type CreateUserGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user group.
@@ -87,13 +110,79 @@ type CreateUserGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.UserGroup_ARN, *v.ARN)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.UserGroup_Engine, *v.Engine)
+	}
+	if v.MinimumEngineVersion != nil {
+		s.WriteString(schemas.UserGroup_MinimumEngineVersion, *v.MinimumEngineVersion)
+	}
+	if v.PendingChanges != nil {
+		s.WriteStruct(schemas.UserGroup_PendingChanges)
+		v.PendingChanges.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationGroups != nil {
+		serializeUGReplicationGroupIdList(s, schemas.UserGroup_ReplicationGroups, v.ReplicationGroups)
+	}
+	if v.ServerlessCaches != nil {
+		serializeUGServerlessCacheIdList(s, schemas.UserGroup_ServerlessCaches, v.ServerlessCaches)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UserGroup_Status, *v.Status)
+	}
+	if v.UserGroupId != nil {
+		s.WriteString(schemas.UserGroup_UserGroupId, *v.UserGroupId)
+	}
+	if v.UserIds != nil {
+		serializeUserIdList(s, schemas.UserGroup_UserIds, v.UserIds)
+	}
+}
+func (v *CreateUserGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserGroup_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.UserGroup_ARN, v.ARN)
+		case schemas.UserGroup_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.UserGroup_Engine, v.Engine)
+		case schemas.UserGroup_MinimumEngineVersion:
+			v.MinimumEngineVersion = new(string)
+			return d.ReadString(schemas.UserGroup_MinimumEngineVersion, v.MinimumEngineVersion)
+		case schemas.UserGroup_PendingChanges:
+			v.PendingChanges = &types.UserGroupPendingChanges{}
+			return v.PendingChanges.Deserialize(d)
+		case schemas.UserGroup_ReplicationGroups:
+			return deserializeUGReplicationGroupIdList(d, schemas.UserGroup_ReplicationGroups, &v.ReplicationGroups)
+		case schemas.UserGroup_ServerlessCaches:
+			return deserializeUGServerlessCacheIdList(d, schemas.UserGroup_ServerlessCaches, &v.ServerlessCaches)
+		case schemas.UserGroup_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UserGroup_Status, v.Status)
+		case schemas.UserGroup_UserGroupId:
+			v.UserGroupId = new(string)
+			return d.ReadString(schemas.UserGroup_UserGroupId, v.UserGroupId)
+		case schemas.UserGroup_UserIds:
+			return deserializeUserIdList(d, schemas.UserGroup_UserIds, &v.UserIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateUserGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserGroup, schemas.CreateUserGroupMessage, schemas.UserGroup)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateUserGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserGroup, schemas.CreateUserGroupMessage, schemas.UserGroup), output: &CreateUserGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteWirelessGatewayTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWirelessGatewayTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWirelessGatewayTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWirelessGatewayTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteWirelessGatewayTaskDefinitionRequest_Id, *v.Id)
+	}
+}
+
 type DeleteWirelessGatewayTaskDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteWirelessGatewayTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWirelessGatewayTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWirelessGatewayTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWirelessGatewayTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWirelessGatewayTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWirelessGatewayTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWirelessGatewayTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWirelessGatewayTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWirelessGatewayTaskDefinition, schemas.DeleteWirelessGatewayTaskDefinitionRequest, schemas.DeleteWirelessGatewayTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWirelessGatewayTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWirelessGatewayTaskDefinition, schemas.DeleteWirelessGatewayTaskDefinitionRequest, schemas.DeleteWirelessGatewayTaskDefinitionResponse), output: &DeleteWirelessGatewayTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

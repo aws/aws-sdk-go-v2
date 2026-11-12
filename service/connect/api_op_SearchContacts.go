@@ -115,7 +115,9 @@ func (v *SearchContactsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContacts(s, schemas.SearchContactsResponse_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeContacts(s, schemas.SearchContactsResponse_Contacts, v.Contacts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchContactsResponse_NextToken, *v.NextToken)
 	}

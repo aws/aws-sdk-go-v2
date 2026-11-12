@@ -97,7 +97,9 @@ func (v *UpdateTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enforcement != "" {
 		s.WriteString(schemas.UpdateTermsRequest_Enforcement, string(v.Enforcement))
 	}
-	serializeLinksType(s, schemas.UpdateTermsRequest_Links, v.Links)
+	if v.Links != nil {
+		serializeLinksType(s, schemas.UpdateTermsRequest_Links, v.Links)
+	}
 	if v.TermsId != nil {
 		s.WriteString(schemas.UpdateTermsRequest_TermsId, *v.TermsId)
 	}

@@ -94,7 +94,9 @@ func (v *ListGuardrailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGuardrailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailSummaries(s, schemas.ListGuardrailsResponse_guardrails, v.Guardrails)
+	if v.Guardrails != nil {
+		serializeGuardrailSummaries(s, schemas.ListGuardrailsResponse_guardrails, v.Guardrails)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGuardrailsResponse_nextToken, *v.NextToken)
 	}

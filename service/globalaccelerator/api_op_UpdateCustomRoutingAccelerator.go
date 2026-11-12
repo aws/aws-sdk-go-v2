@@ -71,7 +71,9 @@ func (v *UpdateCustomRoutingAcceleratorInput) SerializeMembers(s smithy.ShapeSer
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.UpdateCustomRoutingAcceleratorRequest_IpAddressType, string(v.IpAddressType))
 	}
-	serializeIpAddresses(s, schemas.UpdateCustomRoutingAcceleratorRequest_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddresses(s, schemas.UpdateCustomRoutingAcceleratorRequest_IpAddresses, v.IpAddresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateCustomRoutingAcceleratorRequest_Name, *v.Name)
 	}

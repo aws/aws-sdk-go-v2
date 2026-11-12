@@ -612,7 +612,9 @@ func (v *SlotNotAvailableException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SlotNotAvailableException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSlotList(s, schemas.SlotNotAvailableException_SlotSuggestions, v.SlotSuggestions)
+	if v.SlotSuggestions != nil {
+		serializeSlotList(s, schemas.SlotNotAvailableException_SlotSuggestions, v.SlotSuggestions)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.SlotNotAvailableException_message, *v.Message)
 	}

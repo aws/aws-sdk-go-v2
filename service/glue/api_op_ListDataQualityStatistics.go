@@ -96,7 +96,9 @@ func (v *ListDataQualityStatisticsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityStatisticsResponse_NextToken, *v.NextToken)
 	}
-	serializeStatisticSummaryList(s, schemas.ListDataQualityStatisticsResponse_Statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeStatisticSummaryList(s, schemas.ListDataQualityStatisticsResponse_Statistics, v.Statistics)
+	}
 }
 func (v *ListDataQualityStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataQualityStatisticsResponse, func(s *smithy.Schema) error {

@@ -156,7 +156,9 @@ func (v *StartOutboundChatContactInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartOutboundChatContactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.StartOutboundChatContactRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.StartOutboundChatContactRequest_Attributes, v.Attributes)
+	}
 	if v.ChatDurationInMinutes != nil {
 		s.WriteInt32(schemas.StartOutboundChatContactRequest_ChatDurationInMinutes, *v.ChatDurationInMinutes)
 	}
@@ -192,13 +194,17 @@ func (v *StartOutboundChatContactInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RelatedContactId != nil {
 		s.WriteString(schemas.StartOutboundChatContactRequest_RelatedContactId, *v.RelatedContactId)
 	}
-	serializeSegmentAttributes(s, schemas.StartOutboundChatContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.SegmentAttributes != nil {
+		serializeSegmentAttributes(s, schemas.StartOutboundChatContactRequest_SegmentAttributes, v.SegmentAttributes)
+	}
 	if v.SourceEndpoint != nil {
 		s.WriteStruct(schemas.StartOutboundChatContactRequest_SourceEndpoint)
 		v.SourceEndpoint.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSupportedMessagingContentTypes(s, schemas.StartOutboundChatContactRequest_SupportedMessagingContentTypes, v.SupportedMessagingContentTypes)
+	if v.SupportedMessagingContentTypes != nil {
+		serializeSupportedMessagingContentTypes(s, schemas.StartOutboundChatContactRequest_SupportedMessagingContentTypes, v.SupportedMessagingContentTypes)
+	}
 }
 
 type StartOutboundChatContactOutput struct {

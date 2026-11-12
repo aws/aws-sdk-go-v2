@@ -114,7 +114,9 @@ func (v *ListAIWorkloadConfigsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAIWorkloadConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIWorkloadConfigSummaryList(s, schemas.ListAIWorkloadConfigsResponse_AIWorkloadConfigs, v.AIWorkloadConfigs)
+	if v.AIWorkloadConfigs != nil {
+		serializeAIWorkloadConfigSummaryList(s, schemas.ListAIWorkloadConfigsResponse_AIWorkloadConfigs, v.AIWorkloadConfigs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAIWorkloadConfigsResponse_NextToken, *v.NextToken)
 	}

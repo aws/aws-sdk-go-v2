@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type IncreaseReplicaCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IncreaseReplicaCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncreaseReplicaCountMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncreaseReplicaCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.IncreaseReplicaCountMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.NewReplicaCount != nil {
+		s.WriteInt32(schemas.IncreaseReplicaCountMessage_NewReplicaCount, *v.NewReplicaCount)
+	}
+	if v.ReplicaConfiguration != nil {
+		serializeReplicaConfigurationList(s, schemas.IncreaseReplicaCountMessage_ReplicaConfiguration, v.ReplicaConfiguration)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.IncreaseReplicaCountMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+}
+
 type IncreaseReplicaCountOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -68,13 +91,34 @@ type IncreaseReplicaCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IncreaseReplicaCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncreaseReplicaCountResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncreaseReplicaCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.IncreaseReplicaCountResult_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IncreaseReplicaCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncreaseReplicaCountResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncreaseReplicaCountResult_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIncreaseReplicaCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpIncreaseReplicaCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IncreaseReplicaCount, schemas.IncreaseReplicaCountMessage, schemas.IncreaseReplicaCountResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpIncreaseReplicaCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IncreaseReplicaCount, schemas.IncreaseReplicaCountMessage, schemas.IncreaseReplicaCountResult), output: &IncreaseReplicaCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

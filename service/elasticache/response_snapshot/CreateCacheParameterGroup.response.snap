@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateCacheParameterGroupResponse><CreateCacheParameterGroupResult><CacheParameterGroup><ARN>__ARN__</ARN><CacheParameterGroupFamily>__CacheParameterGroupFamily__</CacheParameterGroupFamily><CacheParameterGroupName>__CacheParameterGroupName__</CacheParameterGroupName><Description>__Description__</Description><IsGlobal>true</IsGlobal></CacheParameterGroup></CreateCacheParameterGroupResult></CreateCacheParameterGroupResponse>

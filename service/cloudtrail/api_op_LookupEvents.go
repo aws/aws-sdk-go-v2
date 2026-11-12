@@ -119,7 +119,9 @@ func (v *LookupEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventCategory != "" {
 		s.WriteString(schemas.LookupEventsRequest_EventCategory, string(v.EventCategory))
 	}
-	serializeLookupAttributesList(s, schemas.LookupEventsRequest_LookupAttributes, v.LookupAttributes)
+	if v.LookupAttributes != nil {
+		serializeLookupAttributesList(s, schemas.LookupEventsRequest_LookupAttributes, v.LookupAttributes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.LookupEventsRequest_MaxResults, *v.MaxResults)
 	}
@@ -159,7 +161,9 @@ func (v *LookupEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LookupEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventsList(s, schemas.LookupEventsResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeEventsList(s, schemas.LookupEventsResponse_Events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.LookupEventsResponse_NextToken, *v.NextToken)
 	}

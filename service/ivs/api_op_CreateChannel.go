@@ -41,6 +41,11 @@ type CreateChannelInput struct {
 	// containerFormat may be set to TS or FRAGMENTED_MP4 . Default: TS .
 	ContainerFormat types.ContainerFormat
 
+	// Failover-slate-configuration ARN. A valid ARN value here both specifies the ARN
+	// and enables failover slate. Default: "" (empty string, no failover slate
+	// configuration is applied).
+	FailoverSlateConfigurationArn *string
+
 	// Whether the channel allows insecure RTMP and SRT ingest. Default: false .
 	InsecureIngest bool
 
@@ -104,6 +109,9 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerFormat != "" {
 		s.WriteString(schemas.CreateChannelRequest_containerFormat, string(v.ContainerFormat))
 	}
+	if v.FailoverSlateConfigurationArn != nil {
+		s.WriteString(schemas.CreateChannelRequest_failoverSlateConfigurationArn, *v.FailoverSlateConfigurationArn)
+	}
 	if v.InsecureIngest != false {
 		s.WriteBool(schemas.CreateChannelRequest_insecureIngest, v.InsecureIngest)
 	}
@@ -127,7 +135,9 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordingConfigurationArn != nil {
 		s.WriteString(schemas.CreateChannelRequest_recordingConfigurationArn, *v.RecordingConfigurationArn)
 	}
-	serializeTags(s, schemas.CreateChannelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChannelRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateChannelRequest_type, string(v.Type))
 	}
@@ -147,6 +157,9 @@ func (v *CreateChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ContainerFormat = types.ContainerFormat(ev)
 			return nil
+		case schemas.CreateChannelRequest_failoverSlateConfigurationArn:
+			v.FailoverSlateConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateChannelRequest_failoverSlateConfigurationArn, v.FailoverSlateConfigurationArn)
 		case schemas.CreateChannelRequest_insecureIngest:
 			return d.ReadBool(schemas.CreateChannelRequest_insecureIngest, &v.InsecureIngest)
 		case schemas.CreateChannelRequest_latencyMode:

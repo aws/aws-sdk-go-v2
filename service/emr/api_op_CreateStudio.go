@@ -164,8 +164,12 @@ func (v *CreateStudioInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.CreateStudioInput_ServiceRole, *v.ServiceRole)
 	}
-	serializeSubnetIdList(s, schemas.CreateStudioInput_SubnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateStudioInput_Tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateStudioInput_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateStudioInput_Tags, v.Tags)
+	}
 	if v.TrustedIdentityPropagationEnabled != nil {
 		s.WriteBool(schemas.CreateStudioInput_TrustedIdentityPropagationEnabled, *v.TrustedIdentityPropagationEnabled)
 	}

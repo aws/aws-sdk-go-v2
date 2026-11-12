@@ -5,7 +5,9 @@ package sns
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type ListEndpointsByPlatformApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsByPlatformApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsByPlatformApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsByPlatformApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsByPlatformApplicationInput_NextToken, *v.NextToken)
+	}
+	if v.PlatformApplicationArn != nil {
+		s.WriteString(schemas.ListEndpointsByPlatformApplicationInput_PlatformApplicationArn, *v.PlatformApplicationArn)
+	}
+}
+
 // Response for ListEndpointsByPlatformApplication action.
 type ListEndpointsByPlatformApplicationOutput struct {
 
@@ -67,13 +84,37 @@ type ListEndpointsByPlatformApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsByPlatformApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsByPlatformApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsByPlatformApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoints != nil {
+		serializeListOfEndpoints(s, schemas.ListEndpointsByPlatformApplicationResponse_Endpoints, v.Endpoints)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsByPlatformApplicationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEndpointsByPlatformApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEndpointsByPlatformApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEndpointsByPlatformApplicationResponse_Endpoints:
+			return deserializeListOfEndpoints(d, schemas.ListEndpointsByPlatformApplicationResponse_Endpoints, &v.Endpoints)
+		case schemas.ListEndpointsByPlatformApplicationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEndpointsByPlatformApplicationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEndpointsByPlatformApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListEndpointsByPlatformApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpointsByPlatformApplication, schemas.ListEndpointsByPlatformApplicationInput, schemas.ListEndpointsByPlatformApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListEndpointsByPlatformApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpointsByPlatformApplication, schemas.ListEndpointsByPlatformApplicationInput, schemas.ListEndpointsByPlatformApplicationResponse), output: &ListEndpointsByPlatformApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

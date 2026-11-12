@@ -108,7 +108,9 @@ func (v *ListUserProficienciesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserProficienciesResponse_NextToken, *v.NextToken)
 	}
-	serializeUserProficiencyList(s, schemas.ListUserProficienciesResponse_UserProficiencyList, v.UserProficiencyList)
+	if v.UserProficiencyList != nil {
+		serializeUserProficiencyList(s, schemas.ListUserProficienciesResponse_UserProficiencyList, v.UserProficiencyList)
+	}
 }
 func (v *ListUserProficienciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUserProficienciesResponse, func(s *smithy.Schema) error {

@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetWirelessGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWirelessGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWirelessGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWirelessGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetWirelessGatewayRequest_Identifier, *v.Identifier)
+	}
+	if v.IdentifierType != "" {
+		s.WriteString(schemas.GetWirelessGatewayRequest_IdentifierType, string(v.IdentifierType))
+	}
+}
+
 type GetWirelessGatewayOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -69,13 +86,70 @@ type GetWirelessGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWirelessGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWirelessGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWirelessGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetWirelessGatewayResponse_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetWirelessGatewayResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetWirelessGatewayResponse_Id, *v.Id)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.GetWirelessGatewayResponse_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetWirelessGatewayResponse_Name, *v.Name)
+	}
+	if v.ThingArn != nil {
+		s.WriteString(schemas.GetWirelessGatewayResponse_ThingArn, *v.ThingArn)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.GetWirelessGatewayResponse_ThingName, *v.ThingName)
+	}
+}
+func (v *GetWirelessGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWirelessGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWirelessGatewayResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayResponse_Arn, v.Arn)
+		case schemas.GetWirelessGatewayResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayResponse_Description, v.Description)
+		case schemas.GetWirelessGatewayResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayResponse_Id, v.Id)
+		case schemas.GetWirelessGatewayResponse_LoRaWAN:
+			v.LoRaWAN = &types.LoRaWANGateway{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.GetWirelessGatewayResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayResponse_Name, v.Name)
+		case schemas.GetWirelessGatewayResponse_ThingArn:
+			v.ThingArn = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayResponse_ThingArn, v.ThingArn)
+		case schemas.GetWirelessGatewayResponse_ThingName:
+			v.ThingName = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayResponse_ThingName, v.ThingName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWirelessGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGateway, schemas.GetWirelessGatewayRequest, schemas.GetWirelessGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGateway, schemas.GetWirelessGatewayRequest, schemas.GetWirelessGatewayResponse), output: &GetWirelessGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

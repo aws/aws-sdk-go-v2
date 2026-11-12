@@ -4,7 +4,9 @@ package securityir
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type SendFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.SendFeedbackRequest_caseId, *v.CaseId)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.SendFeedbackRequest_comment, *v.Comment)
+	}
+	if v.ResultId != nil {
+		s.WriteString(schemas.SendFeedbackRequest_resultId, *v.ResultId)
+	}
+	if v.Usefulness != "" {
+		s.WriteString(schemas.SendFeedbackRequest_usefulness, string(v.Usefulness))
+	}
+}
+
 type SendFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +77,26 @@ type SendFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendFeedback, schemas.SendFeedbackRequest, schemas.SendFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendFeedback, schemas.SendFeedbackRequest, schemas.SendFeedbackResponse), output: &SendFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

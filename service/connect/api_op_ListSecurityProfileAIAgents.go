@@ -101,7 +101,9 @@ func (v *ListSecurityProfileAIAgentsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListSecurityProfileAIAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedAIAgents(s, schemas.ListSecurityProfileAIAgentsResponse_AllowedAIAgents, v.AllowedAIAgents)
+	if v.AllowedAIAgents != nil {
+		serializeAllowedAIAgents(s, schemas.ListSecurityProfileAIAgentsResponse_AllowedAIAgents, v.AllowedAIAgents)
+	}
 	if v.LastModifiedRegion != nil {
 		s.WriteString(schemas.ListSecurityProfileAIAgentsResponse_LastModifiedRegion, *v.LastModifiedRegion)
 	}

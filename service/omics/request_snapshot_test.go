@@ -3332,6 +3332,7 @@ func TestCheckRequestSnapshot_StartRun(t *testing.T) {
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
 		SessionPolicy:       ptr.String("__SessionPolicy__"),
 		EngineSettings:      document.NewLazyDocument("__Document__"),
+		OutputUriPrefixMode: types.RunOutputUriPrefixMode("SERVICE_DEFINED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6947,6 +6948,7 @@ func TestUpdateRequestSnapshot_StartRun(t *testing.T) {
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
 		SessionPolicy:       ptr.String("__SessionPolicy__"),
 		EngineSettings:      document.NewLazyDocument("__Document__"),
+		OutputUriPrefixMode: types.RunOutputUriPrefixMode("SERVICE_DEFINED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

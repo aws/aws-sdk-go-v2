@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type RetryWorkflowStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryWorkflowStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryWorkflowStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryWorkflowStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RetryWorkflowStepRequest_id, *v.Id)
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.RetryWorkflowStepRequest_stepGroupId, *v.StepGroupId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.RetryWorkflowStepRequest_workflowId, *v.WorkflowId)
+	}
+}
+func (v *RetryWorkflowStepInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryWorkflowStepRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryWorkflowStepRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RetryWorkflowStepRequest_id, v.Id)
+		case schemas.RetryWorkflowStepRequest_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.RetryWorkflowStepRequest_stepGroupId, v.StepGroupId)
+		case schemas.RetryWorkflowStepRequest_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.RetryWorkflowStepRequest_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
+
 type RetryWorkflowStepOutput struct {
 
 	// The ID of the step.
@@ -64,13 +100,54 @@ type RetryWorkflowStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryWorkflowStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryWorkflowStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryWorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RetryWorkflowStepResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RetryWorkflowStepResponse_status, string(v.Status))
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.RetryWorkflowStepResponse_stepGroupId, *v.StepGroupId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.RetryWorkflowStepResponse_workflowId, *v.WorkflowId)
+	}
+}
+func (v *RetryWorkflowStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryWorkflowStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryWorkflowStepResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RetryWorkflowStepResponse_id, v.Id)
+		case schemas.RetryWorkflowStepResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.RetryWorkflowStepResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StepStatus(ev)
+			return nil
+		case schemas.RetryWorkflowStepResponse_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.RetryWorkflowStepResponse_stepGroupId, v.StepGroupId)
+		case schemas.RetryWorkflowStepResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.RetryWorkflowStepResponse_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetryWorkflowStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetryWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryWorkflowStep, schemas.RetryWorkflowStepRequest, schemas.RetryWorkflowStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetryWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryWorkflowStep, schemas.RetryWorkflowStepRequest, schemas.RetryWorkflowStepResponse), output: &RetryWorkflowStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

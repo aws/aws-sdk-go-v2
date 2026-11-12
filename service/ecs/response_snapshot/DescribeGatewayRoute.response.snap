@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.DescribeGatewayRoute
+
+{"gatewayRoute":{"gatewayRouteArn":"__GatewayRouteArn__","resources":{"hostSharedAlb":[{"acmCertificateArn":"__AcmCertificateArn__","listenerArn":"__ListenerArn__","listenerRuleArn":"__ListenerRuleArn__","loadBalancerArn":"__LoadBalancerArn__","loadBalancerSecurityGroups":[{"arn":"__Arn__","ruleArns":["__Member__","__Member__"]},{"arn":"__Arn__","ruleArns":["__Member__","__Member__"]}],"serviceSecurityGroupArn":"__ServiceSecurityGroupArn__","testListenerRuleArns":["__Member__","__Member__"]},{"acmCertificateArn":"__AcmCertificateArn__","listenerArn":"__ListenerArn__","listenerRuleArn":"__ListenerRuleArn__","loadBalancerArn":"__LoadBalancerArn__","loadBalancerSecurityGroups":[{"arn":"__Arn__","ruleArns":["__Member__","__Member__"]},{"arn":"__Arn__","ruleArns":["__Member__","__Member__"]}],"serviceSecurityGroupArn":"__ServiceSecurityGroupArn__","testListenerRuleArns":["__Member__","__Member__"]}]},"serviceArn":"__ServiceArn__","serviceContainerPortName":"__ServiceContainerPortName__","serviceUrl":"__ServiceUrl__","status":"ACTIVE"}}

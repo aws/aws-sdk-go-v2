@@ -51,7 +51,9 @@ func (v *ConfigureLogsForChannelInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ChannelName != nil {
 		s.WriteString(schemas.ConfigureLogsForChannelRequest_ChannelName, *v.ChannelName)
 	}
-	serializeLogTypes(s, schemas.ConfigureLogsForChannelRequest_LogTypes, v.LogTypes)
+	if v.LogTypes != nil {
+		serializeLogTypes(s, schemas.ConfigureLogsForChannelRequest_LogTypes, v.LogTypes)
+	}
 }
 func (v *ConfigureLogsForChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigureLogsForChannelRequest, func(s *smithy.Schema) error {
@@ -90,7 +92,9 @@ func (v *ConfigureLogsForChannelOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ChannelName != nil {
 		s.WriteString(schemas.ConfigureLogsForChannelResponse_ChannelName, *v.ChannelName)
 	}
-	serializeLogTypes(s, schemas.ConfigureLogsForChannelResponse_LogTypes, v.LogTypes)
+	if v.LogTypes != nil {
+		serializeLogTypes(s, schemas.ConfigureLogsForChannelResponse_LogTypes, v.LogTypes)
+	}
 }
 func (v *ConfigureLogsForChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigureLogsForChannelResponse, func(s *smithy.Schema) error {

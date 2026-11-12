@@ -99,7 +99,9 @@ func (v *ListServiceNetworkResourceAssociationsOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListServiceNetworkResourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceNetworkResourceAssociationList(s, schemas.ListServiceNetworkResourceAssociationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeServiceNetworkResourceAssociationList(s, schemas.ListServiceNetworkResourceAssociationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceNetworkResourceAssociationsResponse_nextToken, *v.NextToken)
 	}

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type DeleteWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteWorkspaceRequest_clientToken, *v.ClientToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DeleteWorkspaceRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type DeleteWorkspaceOutput struct {
 
 	// The status of the workspace after the deletion request, which is DELETING when
@@ -57,13 +74,34 @@ type DeleteWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceStatus != nil {
+		s.WriteStruct(schemas.DeleteWorkspaceResponse_workspaceStatus)
+		v.WorkspaceStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkspaceResponse_workspaceStatus:
+			v.WorkspaceStatus = &types.WorkspaceStatus{}
+			return v.WorkspaceStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspace, schemas.DeleteWorkspaceRequest, schemas.DeleteWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspace, schemas.DeleteWorkspaceRequest, schemas.DeleteWorkspaceResponse), output: &DeleteWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

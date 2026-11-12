@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"channelDescription":"__ChannelDescription__","channelId":"__ChannelId__","channelName":"__ChannelName__","channelRoles":{"key0":["ASKER","ASKER"]},"channelStatus":"CREATED","createDateTime":"2000-01-01T00:00:00Z","deleteDateTime":"2000-01-01T00:00:00Z","spaceId":"__SpaceId__"}

@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,33 @@ type DescribeExportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExportTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExportTasksMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExportTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportTaskIdentifier != nil {
+		s.WriteString(schemas.DescribeExportTasksMessage_ExportTaskIdentifier, *v.ExportTaskIdentifier)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeExportTasksMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeExportTasksMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeExportTasksMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.DescribeExportTasksMessage_SourceArn, *v.SourceArn)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.DescribeExportTasksMessage_SourceType, string(v.SourceType))
+	}
+}
+
 type DescribeExportTasksOutput struct {
 
 	// Information about an export of a snapshot or cluster to Amazon S3.
@@ -101,13 +130,37 @@ type DescribeExportTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExportTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTasksMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExportTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportTasks != nil {
+		serializeExportTasksList(s, schemas.ExportTasksMessage_ExportTasks, v.ExportTasks)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ExportTasksMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeExportTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportTasksMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportTasksMessage_ExportTasks:
+			return deserializeExportTasksList(d, schemas.ExportTasksMessage_ExportTasks, &v.ExportTasks)
+		case schemas.ExportTasksMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ExportTasksMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeExportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExportTasks, schemas.DescribeExportTasksMessage, schemas.ExportTasksMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeExportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExportTasks, schemas.DescribeExportTasksMessage, schemas.ExportTasksMessage), output: &DescribeExportTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

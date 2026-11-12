@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetBotsCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotsCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotsCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotsCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetBotsCountRequest_networkId, *v.NetworkId)
+	}
+}
+
 type GetBotsCountOutput struct {
 
 	// The number of bots with active status.
@@ -57,13 +71,44 @@ type GetBotsCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotsCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotsCountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotsCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Active != nil {
+		s.WriteInt32(schemas.GetBotsCountResponse_active, *v.Active)
+	}
+	if v.Pending != nil {
+		s.WriteInt32(schemas.GetBotsCountResponse_pending, *v.Pending)
+	}
+	if v.Total != nil {
+		s.WriteInt32(schemas.GetBotsCountResponse_total, *v.Total)
+	}
+}
+func (v *GetBotsCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotsCountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotsCountResponse_active:
+			v.Active = new(int32)
+			return d.ReadInt32(schemas.GetBotsCountResponse_active, v.Active)
+		case schemas.GetBotsCountResponse_pending:
+			v.Pending = new(int32)
+			return d.ReadInt32(schemas.GetBotsCountResponse_pending, v.Pending)
+		case schemas.GetBotsCountResponse_total:
+			v.Total = new(int32)
+			return d.ReadInt32(schemas.GetBotsCountResponse_total, v.Total)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotsCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotsCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotsCount, schemas.GetBotsCountRequest, schemas.GetBotsCountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotsCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotsCount, schemas.GetBotsCountRequest, schemas.GetBotsCountResponse), output: &GetBotsCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

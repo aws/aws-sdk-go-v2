@@ -71,6 +71,23 @@ func (ContextGraphStatus) Values() []ContextGraphStatus {
 	}
 }
 
+type DeletionProtection string
+
+// Enum values for DeletionProtection
+const (
+	DeletionProtectionEnabled DeletionProtection = "ENABLED"
+)
+
+// Values returns all known values for DeletionProtection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionProtection) Values() []DeletionProtection {
+	return []DeletionProtection{
+		"ENABLED",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType
@@ -634,9 +651,10 @@ type TelemetryType string
 
 // Enum values for TelemetryType
 const (
-	TelemetryTypeLogs    TelemetryType = "Logs"
-	TelemetryTypeMetrics TelemetryType = "Metrics"
-	TelemetryTypeTraces  TelemetryType = "Traces"
+	TelemetryTypeLogs     TelemetryType = "Logs"
+	TelemetryTypeMetrics  TelemetryType = "Metrics"
+	TelemetryTypeTraces   TelemetryType = "Traces"
+	TelemetryTypeInsights TelemetryType = "Insights"
 )
 
 // Values returns all known values for TelemetryType. Note that this can be
@@ -648,6 +666,7 @@ func (TelemetryType) Values() []TelemetryType {
 		"Logs",
 		"Metrics",
 		"Traces",
+		"Insights",
 	}
 }
 

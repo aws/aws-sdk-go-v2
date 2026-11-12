@@ -63,7 +63,9 @@ func (v *CreateBotVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.CreateBotVersionRequest_botId, *v.BotId)
 	}
-	serializeBotVersionLocaleSpecification(s, schemas.CreateBotVersionRequest_botVersionLocaleSpecification, v.BotVersionLocaleSpecification)
+	if v.BotVersionLocaleSpecification != nil {
+		serializeBotVersionLocaleSpecification(s, schemas.CreateBotVersionRequest_botVersionLocaleSpecification, v.BotVersionLocaleSpecification)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateBotVersionRequest_description, *v.Description)
 	}
@@ -113,7 +115,9 @@ func (v *CreateBotVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.CreateBotVersionResponse_botVersion, *v.BotVersion)
 	}
-	serializeBotVersionLocaleSpecification(s, schemas.CreateBotVersionResponse_botVersionLocaleSpecification, v.BotVersionLocaleSpecification)
+	if v.BotVersionLocaleSpecification != nil {
+		serializeBotVersionLocaleSpecification(s, schemas.CreateBotVersionResponse_botVersionLocaleSpecification, v.BotVersionLocaleSpecification)
+	}
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.CreateBotVersionResponse_creationDateTime, *v.CreationDateTime)
 	}

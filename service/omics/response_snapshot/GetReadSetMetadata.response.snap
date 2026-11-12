@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationJobId":"__CreationJobId__","creationTime":"2000-01-01T00:00:00Z","creationType":"IMPORT","description":"__Description__","etag":{"algorithm":"FASTQ_MD5up","source1":"__Source1__","source2":"__Source2__"},"fileType":"FASTQ","files":{"index":{"contentLength":1,"partSize":1,"s3Access":{"s3Uri":"__S3Uri__"},"totalParts":1},"source1":{"contentLength":1,"partSize":1,"s3Access":{"s3Uri":"__S3Uri__"},"totalParts":1},"source2":{"contentLength":1,"partSize":1,"s3Access":{"s3Uri":"__S3Uri__"},"totalParts":1}},"id":"__Id__","name":"__Name__","referenceArn":"__ReferenceArn__","sampleId":"__SampleId__","sequenceInformation":{"alignment":"__Alignment__","generatedFrom":"__GeneratedFrom__","totalBaseCount":1,"totalReadCount":1},"sequenceStoreId":"__SequenceStoreId__","status":"ARCHIVED","statusMessage":"__StatusMessage__","subjectId":"__SubjectId__"}

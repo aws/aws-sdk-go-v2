@@ -82,7 +82,9 @@ func (v *CreateServiceNetworkServiceAssociationInput) SerializeMembers(s smithy.
 	if v.ServiceNetworkIdentifier != nil {
 		s.WriteString(schemas.CreateServiceNetworkServiceAssociationRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateServiceNetworkServiceAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceNetworkServiceAssociationRequest_tags, v.Tags)
+	}
 }
 func (v *CreateServiceNetworkServiceAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateServiceNetworkServiceAssociationRequest, func(s *smithy.Schema) error {

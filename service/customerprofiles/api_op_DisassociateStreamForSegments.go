@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DisassociateStreamForSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateStreamForSegmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateStreamForSegmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateStreamForSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DisassociateStreamForSegmentsRequest_DomainName, *v.DomainName)
+	}
+}
+
 type DisassociateStreamForSegmentsOutput struct {
 
 	// A confirmation message indicating the stream was disassociated successfully.
@@ -46,13 +60,32 @@ type DisassociateStreamForSegmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateStreamForSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateStreamForSegmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateStreamForSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DisassociateStreamForSegmentsResponse_Message, *v.Message)
+	}
+}
+func (v *DisassociateStreamForSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateStreamForSegmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateStreamForSegmentsResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DisassociateStreamForSegmentsResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateStreamForSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateStreamForSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateStreamForSegments, schemas.DisassociateStreamForSegmentsRequest, schemas.DisassociateStreamForSegmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateStreamForSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateStreamForSegments, schemas.DisassociateStreamForSegmentsRequest, schemas.DisassociateStreamForSegmentsResponse), output: &DisassociateStreamForSegmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

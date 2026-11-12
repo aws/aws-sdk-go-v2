@@ -165,7 +165,9 @@ func (v *GetCloudWatchAlarmTemplateOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Statistic != "" {
 		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_Statistic, string(v.Statistic))
 	}
-	serializeTagMap(s, schemas.GetCloudWatchAlarmTemplateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetCloudWatchAlarmTemplateResponse_Tags, v.Tags)
+	}
 	if v.TargetResourceType != "" {
 		s.WriteString(schemas.GetCloudWatchAlarmTemplateResponse_TargetResourceType, string(v.TargetResourceType))
 	}

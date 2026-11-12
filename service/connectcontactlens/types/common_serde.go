@@ -6,10 +6,17 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-func serializeExtractedInformationValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExtractedInformationValue) {
-	if v == nil {
-		return
+func serializeCategoriesAttributeOrConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CategoriesAttributeAndCondition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
+	s.CloseList()
+}
+
+func serializeExtractedInformationValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExtractedInformationValue) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +27,6 @@ func serializeExtractedInformationValues(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeIssuesDetected(s smithy.ShapeSerializer, schema *smithy.Schema, v []IssueDetected) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +37,6 @@ func serializeIssuesDetected(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeMatchedCategories(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -44,9 +45,6 @@ func serializeMatchedCategories(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializePointsOfInterest(s smithy.ShapeSerializer, schema *smithy.Schema, v []PointOfInterest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +55,6 @@ func serializePointsOfInterest(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeRealtimeContactAnalysisSegments(s smithy.ShapeSerializer, schema *smithy.Schema, v []RealtimeContactAnalysisSegment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -67,6 +62,38 @@ func serializeRealtimeContactAnalysisSegments(s smithy.ShapeSerializer, schema *
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func serializeTagAndConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TagCondition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func deserializeCategoriesAttributeOrConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CategoriesAttributeAndCondition) error {
+	*v = make([]CategoriesAttributeAndCondition, 0)
+	var vv CategoriesAttributeAndCondition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CategoriesAttributeAndCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = CategoriesAttributeAndCondition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeExtractedInformationValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExtractedInformationValue) error {
@@ -178,10 +205,29 @@ func deserializeRealtimeContactAnalysisSegments(d smithy.ShapeDeserializer, s *s
 	})
 }
 
+func deserializeTagAndConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TagCondition) error {
+	*v = make([]TagCondition, 0)
+	var vv TagCondition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TagCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = TagCondition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func serializeMatchedDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]CategoryDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

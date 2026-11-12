@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -17,6 +18,7 @@ import (
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	"github.com/aws/aws-sdk-go-v2/internal/timeouts"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -25,9 +27,11 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/aws/smithy-go/transport/http/protocol/restjson1"
 	"io"
 	"net"
 	"net/http"
+	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -216,6 +220,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveAuthSchemeResolver(&options)
 
+	options.Protocol = restjson1.New(schemas.AmazonBedrockAgentCore)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -261,8 +267,6 @@ func (c *Client) invokeOperation(
 	for _, fn := range optFns {
 		fn(&options)
 	}
-
-	setSafeEventStreamClientLogMode(&options, opID)
 
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
@@ -356,8 +360,6 @@ func (c *Client) invokeEventStreamOperation(
 	for _, fn := range optFns {
 		fn(&options)
 	}
-
-	setSafeEventStreamClientLogMode(&options, opID)
 
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
@@ -489,6 +491,98 @@ type PartialResult struct {
 	Error    error
 }
 
+// initialRequestWriter writes the already serialized initial-request message
+// ahead of everything else written to w.
+//
+// The message is written eagerly, since a server may not respond until it has
+// it, but any write that arrives first waits for it so that it always precedes
+// the first event. It is serialized by the caller because the protocol is not
+// safe to use from more than one goroutine at a time.
+type initialRequestWriter struct {
+	w       io.WriteCloser
+	initial []byte
+
+	once sync.Once
+	err  error
+}
+
+func newInitialRequestWriter(w io.WriteCloser, initial []byte) *initialRequestWriter {
+	irw := &initialRequestWriter{w: w, initial: initial}
+	go irw.writeInitial()
+	return irw
+}
+
+func (irw *initialRequestWriter) writeInitial() error {
+	irw.once.Do(func() {
+		_, irw.err = irw.w.Write(irw.initial)
+	})
+	return irw.err
+}
+
+func (irw *initialRequestWriter) Write(p []byte) (int, error) {
+	if err := irw.writeInitial(); err != nil {
+		return 0, err
+	}
+	return irw.w.Write(p)
+}
+
+func (irw *initialRequestWriter) Close() error {
+	err := irw.writeInitial()
+	if cerr := irw.w.Close(); err == nil {
+		err = cerr
+	}
+	return err
+}
+
+// initialResponseReader consumes the initial-response message from the front of
+// r, so that it is never seen as an event by whatever reads the rest.
+type initialResponseReader struct {
+	r    io.ReadCloser
+	out  smithy.Deserializable
+	read func(io.Reader, smithy.Deserializable) error
+
+	once sync.Once
+	done chan struct{}
+	err  error
+}
+
+func newInitialResponseReader(r io.ReadCloser, out smithy.Deserializable, read func(io.Reader, smithy.Deserializable) error) *initialResponseReader {
+	return &initialResponseReader{r: r, out: out, read: read, done: make(chan struct{})}
+}
+
+func (r *initialResponseReader) readInitial() error {
+	r.once.Do(func() {
+		r.err = r.read(r.r, r.out)
+		close(r.done)
+	})
+	return r.err
+}
+
+func (r *initialResponseReader) Read(p []byte) (int, error) {
+	if err := r.readInitial(); err != nil {
+		return 0, err
+	}
+	return r.r.Read(p)
+}
+
+func (r *initialResponseReader) Close() error {
+	return r.r.Close()
+}
+
+// wait blocks until the initial-response message has been read and returns the
+// value it was deserialized into.
+func (r *initialResponseReader) wait(ctx context.Context) (smithy.Deserializable, error) {
+	select {
+	case <-r.done:
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+	if r.err != nil {
+		return nil, r.err
+	}
+	return r.out, nil
+}
+
 type operationInputKey struct{}
 
 func setOperationInput(ctx context.Context, input interface{}) context.Context {
@@ -581,6 +675,102 @@ func resolveAuthSchemes(options *Options) {
 			}),
 		}
 	}
+}
+
+type serializeRequestMiddleware struct {
+	options         *Options
+	operationSchema *smithy.OperationSchema
+}
+
+func (*serializeRequestMiddleware) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *serializeRequestMiddleware) HandleSerialize(
+	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
+) (
+	middleware.SerializeOutput, middleware.Metadata, error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(smithy.Serializable)
+	if !ok {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, fmt.Errorf("input %T is not Serializable", in.Request)
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+
+	err := m.options.Protocol.SerializeRequest(ctx, m.operationSchema, input, req)
+
+	endTimer()
+	span.End()
+
+	if err != nil {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, err
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type deserializeResponseMiddleware struct {
+	options         *Options
+	operationSchema *smithy.OperationSchema
+	output          smithy.Deserializable
+}
+
+func (*deserializeResponseMiddleware) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *deserializeResponseMiddleware) HandleDeserialize(
+	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
+) (
+	middleware.DeserializeOutput, middleware.Metadata, error,
+) {
+	out, md, err := next.HandleDeserialize(ctx, in)
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, md, err
+		}
+		return out, md, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	// Close the response body on return. CloseResponseBody keeps the body
+	// open only for a successful caller-owned stream (a streaming payload
+	// with a nil error); on any error -- including one surfaced by an
+	// interceptor that runs after OperationDeserializer (after transmit or
+	// before deserialization) -- it closes the received body. Registering
+	// this before the error check below is what covers those interceptor
+	// aborts. Event streams close their own body in the event stream
+	// deserializer.
+	if !m.operationSchema.IsInputEventStream() && !m.operationSchema.IsOutputEventStream() {
+		_, isStreamingPayload := m.output.(smithy.StreamingOutput)
+		defer func() {
+			smithyhttp.CloseResponseBody(ctx, resp, isStreamingPayload, err)
+		}()
+	}
+
+	if err != nil {
+		return out, md, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+
+	err = m.options.Protocol.DeserializeResponse(ctx, m.operationSchema, TypeRegistry, resp, m.output)
+	out.Result = m.output
+
+	endTimer()
+	span.End()
+
+	return out, md, err
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
@@ -953,6 +1143,18 @@ func addCredentialSource(stack *middleware.Stack, options Options) error {
 		ua.AddCredentialsSource(source)
 	}
 	return nil
+}
+
+// UnknownEventMessageError provides an error when a message is received from the stream,
+// but the reader is unable to determine what kind of message it is.
+type UnknownEventMessageError struct {
+	Type    string
+	Message eventstream.Message
+}
+
+// Error retruns the error message string.
+func (e *UnknownEventMessageError) Error() string {
+	return "unknown event stream message type, " + e.Type
 }
 
 func resolveTracerProvider(options *Options) {

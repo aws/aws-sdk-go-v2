@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,26 @@ type CreateFaceLivenessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFaceLivenessSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFaceLivenessSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFaceLivenessSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateFaceLivenessSessionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateFaceLivenessSessionRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.CreateFaceLivenessSessionRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateFaceLivenessSessionOutput struct {
 
 	// A unique 128-bit UUID identifying a Face Liveness session. A new sessionID must
@@ -80,13 +102,32 @@ type CreateFaceLivenessSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFaceLivenessSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFaceLivenessSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFaceLivenessSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreateFaceLivenessSessionResponse_SessionId, *v.SessionId)
+	}
+}
+func (v *CreateFaceLivenessSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFaceLivenessSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFaceLivenessSessionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.CreateFaceLivenessSessionResponse_SessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFaceLivenessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFaceLivenessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFaceLivenessSession, schemas.CreateFaceLivenessSessionRequest, schemas.CreateFaceLivenessSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFaceLivenessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFaceLivenessSession, schemas.CreateFaceLivenessSessionRequest, schemas.CreateFaceLivenessSessionResponse), output: &CreateFaceLivenessSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

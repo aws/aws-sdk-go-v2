@@ -82,7 +82,9 @@ func (v *GetTagKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.GetTagKeysOutput_PaginationToken, *v.PaginationToken)
 	}
-	serializeTagKeyList(s, schemas.GetTagKeysOutput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.GetTagKeysOutput_TagKeys, v.TagKeys)
+	}
 }
 func (v *GetTagKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTagKeysOutput, func(s *smithy.Schema) error {
@@ -111,6 +113,9 @@ func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteCapacityProviderSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCapacityProviderSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCapacityProviderSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCapacityProviderSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderId != nil {
+		s.WriteString(schemas.DeleteCapacityProviderSessionRequest_capacityProviderId, *v.CapacityProviderId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.DeleteCapacityProviderSessionRequest_sessionId, *v.SessionId)
+	}
+}
+
 type DeleteCapacityProviderSessionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the capacity provider associated with the
@@ -68,13 +85,48 @@ type DeleteCapacityProviderSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCapacityProviderSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCapacityProviderSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCapacityProviderSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderArn != nil {
+		s.WriteString(schemas.DeleteCapacityProviderSessionResponse_capacityProviderArn, *v.CapacityProviderArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.DeleteCapacityProviderSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteCapacityProviderSessionResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteCapacityProviderSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCapacityProviderSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCapacityProviderSessionResponse_capacityProviderArn:
+			v.CapacityProviderArn = new(string)
+			return d.ReadString(schemas.DeleteCapacityProviderSessionResponse_capacityProviderArn, v.CapacityProviderArn)
+		case schemas.DeleteCapacityProviderSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.DeleteCapacityProviderSessionResponse_sessionId, v.SessionId)
+		case schemas.DeleteCapacityProviderSessionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteCapacityProviderSessionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CapacityProviderSessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCapacityProviderSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCapacityProviderSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCapacityProviderSession, schemas.DeleteCapacityProviderSessionRequest, schemas.DeleteCapacityProviderSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCapacityProviderSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCapacityProviderSession, schemas.DeleteCapacityProviderSessionRequest, schemas.DeleteCapacityProviderSessionResponse), output: &DeleteCapacityProviderSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

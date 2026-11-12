@@ -62,7 +62,9 @@ func (v *CreateFieldInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateFieldInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldAttributes(s, schemas.CreateFieldRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeFieldAttributes(s, schemas.CreateFieldRequest_attributes, v.Attributes)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateFieldRequest_description, *v.Description)
 	}

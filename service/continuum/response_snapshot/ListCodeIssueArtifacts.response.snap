@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"artifactId":"__ArtifactId__","artifactType":"EVIDENCE","contentSizeBytes":1,"createdAt":"2000-01-01T00:00:00Z","mediaType":"__MediaType__","producer":{"agent":"__Agent__"}},{"artifactId":"__ArtifactId__","artifactType":"EVIDENCE","contentSizeBytes":1,"createdAt":"2000-01-01T00:00:00Z","mediaType":"__MediaType__","producer":{"agent":"__Agent__"}}],"nextToken":"__NextToken__"}

@@ -127,7 +127,9 @@ func (v *GetArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.GetArchiveResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeArchiveRetention(s, schemas.GetArchiveResponse_Retention, v.Retention)
+	if v.Retention != nil {
+		serializeArchiveRetention(s, schemas.GetArchiveResponse_Retention, v.Retention)
+	}
 }
 func (v *GetArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetArchiveResponse, func(s *smithy.Schema) error {

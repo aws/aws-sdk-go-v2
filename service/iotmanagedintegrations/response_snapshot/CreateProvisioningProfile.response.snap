@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","ClaimCertificate":"__ClaimCertificate__","ClaimCertificatePrivateKey":"__ClaimCertificatePrivateKey__","Id":"__Id__","Name":"__Name__","ProvisioningType":"FLEET_PROVISIONING","Status":"CREATE_IN_PROGRESS"}

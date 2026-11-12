@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"ResourceNotReadyException","Message":"__Message__"}

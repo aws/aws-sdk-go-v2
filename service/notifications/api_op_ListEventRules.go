@@ -88,7 +88,9 @@ func (v *ListEventRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventRules(s, schemas.ListEventRulesResponse_eventRules, v.EventRules)
+	if v.EventRules != nil {
+		serializeEventRules(s, schemas.ListEventRulesResponse_eventRules, v.EventRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventRulesResponse_nextToken, *v.NextToken)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetSMSAttributesResponse><GetSMSAttributesResult><attributes><entry><key>key0</key><value>__Value__</value></entry></attributes></GetSMSAttributesResult></GetSMSAttributesResponse>

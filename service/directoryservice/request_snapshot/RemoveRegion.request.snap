@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/RemoveRegion
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.RemoveRegion
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DirectoryId":"__DirectoryId__"}
+¿kDirectoryIdo__DirectoryId__ÿ

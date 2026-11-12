@@ -67,7 +67,9 @@ func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProviderType != "" {
 		s.WriteString(schemas.CreateConnectionRequest_ProviderType, string(v.ProviderType))
 	}
-	serializeTagList(s, schemas.CreateConnectionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConnectionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateConnectionOutput struct {

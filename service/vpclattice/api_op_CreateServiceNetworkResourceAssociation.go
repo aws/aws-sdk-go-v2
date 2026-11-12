@@ -76,7 +76,9 @@ func (v *CreateServiceNetworkResourceAssociationInput) SerializeMembers(s smithy
 	if v.ServiceNetworkIdentifier != nil {
 		s.WriteString(schemas.CreateServiceNetworkResourceAssociationRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateServiceNetworkResourceAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceNetworkResourceAssociationRequest_tags, v.Tags)
+	}
 }
 
 type CreateServiceNetworkResourceAssociationOutput struct {

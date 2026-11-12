@@ -40,7 +40,9 @@ func (v *HttpEmptyPrefixHeadersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpEmptyPrefixHeadersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.HttpEmptyPrefixHeadersInput_prefixHeaders, v.PrefixHeaders)
+	if v.PrefixHeaders != nil {
+		serializeStringMap(s, schemas.HttpEmptyPrefixHeadersInput_prefixHeaders, v.PrefixHeaders)
+	}
 	if v.SpecificHeader != nil {
 		s.WriteString(schemas.HttpEmptyPrefixHeadersInput_specificHeader, *v.SpecificHeader)
 	}
@@ -66,7 +68,9 @@ func (v *HttpEmptyPrefixHeadersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpEmptyPrefixHeadersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.HttpEmptyPrefixHeadersOutput_prefixHeaders, v.PrefixHeaders)
+	if v.PrefixHeaders != nil {
+		serializeStringMap(s, schemas.HttpEmptyPrefixHeadersOutput_prefixHeaders, v.PrefixHeaders)
+	}
 	if v.SpecificHeader != nil {
 		s.WriteString(schemas.HttpEmptyPrefixHeadersOutput_specificHeader, *v.SpecificHeader)
 	}

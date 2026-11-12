@@ -84,7 +84,9 @@ func (v *ListEntitiesDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEntitiesDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntitiesDetectionJobPropertiesList(s, schemas.ListEntitiesDetectionJobsResponse_EntitiesDetectionJobPropertiesList, v.EntitiesDetectionJobPropertiesList)
+	if v.EntitiesDetectionJobPropertiesList != nil {
+		serializeEntitiesDetectionJobPropertiesList(s, schemas.ListEntitiesDetectionJobsResponse_EntitiesDetectionJobPropertiesList, v.EntitiesDetectionJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEntitiesDetectionJobsResponse_NextToken, *v.NextToken)
 	}
@@ -116,6 +118,9 @@ func (c *Client) addOperationListEntitiesDetectionJobsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

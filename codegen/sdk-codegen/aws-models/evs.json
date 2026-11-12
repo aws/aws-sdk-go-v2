@@ -2914,7 +2914,7 @@
                 "instanceType": {
                     "target": "com.amazonaws.evs#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance type that represents the host.</p>",
+                        "smithy.api#documentation": "<p>The EC2 instance type that represents the host.</p> <note> <p>With VCF 5.2.x, you can use only the <code>i4i.metal</code>, <code>i7i.metal-24xl</code>, and <code>i7i.metal-48xl</code> instance types. All of these instance types are supported with <code>vcfVersion</code> set to <code>SELF_DEPLOYED</code>.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3131,6 +3131,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "i7i.metal-48xl"
+                    }
+                },
+                "R7I_METAL_24XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7i.metal-24xl"
+                    }
+                },
+                "R7I_METAL_48XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7i.metal-48xl"
                     }
                 }
             }

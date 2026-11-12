@@ -4,7 +4,9 @@ package docdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type SwitchoverGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverGlobalClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.SwitchoverGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	if v.TargetDbClusterIdentifier != nil {
+		s.WriteString(schemas.SwitchoverGlobalClusterMessage_TargetDbClusterIdentifier, *v.TargetDbClusterIdentifier)
+	}
+}
+
 type SwitchoverGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.
@@ -74,13 +91,34 @@ type SwitchoverGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverGlobalClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverGlobalClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverGlobalClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalCluster != nil {
+		s.WriteStruct(schemas.SwitchoverGlobalClusterResult_GlobalCluster)
+		v.GlobalCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SwitchoverGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SwitchoverGlobalClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SwitchoverGlobalClusterResult_GlobalCluster:
+			v.GlobalCluster = &types.GlobalCluster{}
+			return v.GlobalCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSwitchoverGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSwitchoverGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverGlobalCluster, schemas.SwitchoverGlobalClusterMessage, schemas.SwitchoverGlobalClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSwitchoverGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverGlobalCluster, schemas.SwitchoverGlobalClusterMessage, schemas.SwitchoverGlobalClusterResult), output: &SwitchoverGlobalClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

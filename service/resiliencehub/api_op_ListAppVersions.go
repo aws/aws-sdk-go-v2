@@ -126,7 +126,9 @@ func (v *ListAppVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppVersionList(s, schemas.ListAppVersionsResponse_appVersions, v.AppVersions)
+	if v.AppVersions != nil {
+		serializeAppVersionList(s, schemas.ListAppVersionsResponse_appVersions, v.AppVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppVersionsResponse_nextToken, *v.NextToken)
 	}

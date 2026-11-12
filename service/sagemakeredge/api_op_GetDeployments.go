@@ -75,7 +75,9 @@ func (v *GetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeDeployments(s, schemas.GetDeploymentsResult_Deployments, v.Deployments)
+	if v.Deployments != nil {
+		serializeEdgeDeployments(s, schemas.GetDeploymentsResult_Deployments, v.Deployments)
+	}
 }
 func (v *GetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDeploymentsResult, func(s *smithy.Schema) error {

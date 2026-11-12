@@ -4,6 +4,8 @@ package supportauthz
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supportauthz/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.GetActionInput_action, *v.Action)
+	}
+}
+
 type GetActionOutput struct {
 
 	// The name of the support action.
@@ -56,13 +70,44 @@ type GetActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.GetActionOutput_action, *v.Action)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetActionOutput_description, *v.Description)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.GetActionOutput_service, *v.Service)
+	}
+}
+func (v *GetActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetActionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetActionOutput_action:
+			v.Action = new(string)
+			return d.ReadString(schemas.GetActionOutput_action, v.Action)
+		case schemas.GetActionOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetActionOutput_description, v.Description)
+		case schemas.GetActionOutput_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.GetActionOutput_service, v.Service)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAction, schemas.GetActionInput, schemas.GetActionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAction, schemas.GetActionInput, schemas.GetActionOutput), output: &GetActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -768,6 +768,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The trust anchors used to validate target endpoint TLS certificates. Provide these for endpoints served by a private or internal certificate authority (CA), an intermediate CA, or a self-signed certificate.</p>"
                     }
+                },
+                "clientCertificates": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client certificates for mutual TLS (mTLS) authentication to target hosts. Each certificate is stored in Secrets Manager and scoped to specific target origins.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3067,6 +3073,71 @@
                 "smithy.api#documentation": "<p>Strategy for handling resources created during a pentest.</p>"
             }
         },
+        "com.amazonaws.securityagent#ClientCertificate": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen name for this client certificate, used in error messages and console display.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret containing the certificate and private key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "origins": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateOriginList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origins (scheme://host[:port]) this certificate applies to. Paths are not supported. Each hostname can have at most one client certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A client certificate for mutual TLS (mTLS) authentication to target hosts.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#ClientCertificateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#ClientCertificate"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of client certificates for mTLS authentication.</p>",
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.securityagent#ClientCertificateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A customer-chosen name for a client certificate, used in error messages and console display.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]*$"
+            }
+        },
+        "com.amazonaws.securityagent#ClientCertificateOriginList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of origins that a client certificate applies to.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.securityagent#ClientId": {
             "type": "string",
             "traits": {
@@ -4548,7 +4619,7 @@
                 "target": "com.amazonaws.securityagent#CreateMembershipResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new membership, granting a user access to an agent space within an application.</p>",
+                "smithy.api#documentation": "<p>Creates a new membership, granting a user or group access to an agent space within an application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateMembership"
@@ -4582,7 +4653,7 @@
                 "memberType": {
                     "target": "com.amazonaws.securityagent#MembershipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of member. Currently, only USER is supported.</p>",
+                        "smithy.api#documentation": "<p>The type of member. Use USER for an individual user or GROUP for an IAM Identity Center group. All members of a group have access to the agent space.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5927,7 +5998,7 @@
                 "target": "com.amazonaws.securityagent#DeleteMembershipResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a membership, revoking a user's access to an agent space.</p>",
+                "smithy.api#documentation": "<p>Deletes a membership, revoking a user's or group's access to an agent space.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteMembership"
@@ -7702,6 +7773,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of GitLab access token.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#GroupMetadata": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about an IAM Identity Center group member, including the group display name and description.</p>"
             }
         },
         "com.amazonaws.securityagent#HostAddress": {
@@ -10718,6 +10809,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user metadata for the member.</p>"
                     }
+                },
+                "group": {
+                    "target": "com.amazonaws.securityagent#GroupMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group metadata for the member.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10840,6 +10937,13 @@
                         "smithy.api#documentation": "<p>Human user member.</p>",
                         "smithy.api#enumValue": "USER"
                     }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IAM Identity Center group member. All members of the group have access to the agent space.</p>",
+                        "smithy.api#enumValue": "GROUP"
+                    }
                 }
             },
             "traits": {
@@ -10854,6 +10958,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Show only user members.</p>",
                         "smithy.api#enumValue": "USER"
+                    }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Show only group members.</p>",
+                        "smithy.api#enumValue": "GROUP"
                     }
                 },
                 "ALL": {
@@ -11224,6 +11335,12 @@
                     "target": "com.amazonaws.securityagent#TrustedCaCertificateList",
                     "traits": {
                         "smithy.api#documentation": "<p>The trust anchors used to validate target endpoint TLS certificates during the pentest job.</p>"
+                    }
+                },
+                "clientCertificates": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client certificates for mutual TLS (mTLS) authentication to target hosts during the pentest job.</p>"
                     }
                 },
                 "codeRemediationStrategy": {

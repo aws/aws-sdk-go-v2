@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","templates":[{"correctCategory":"__CorrectCategory__","metaTemplateId":"__MetaTemplateId__","templateCategory":"__TemplateCategory__","templateLanguage":"__TemplateLanguage__","templateName":"__TemplateName__","templateQualityScore":"__TemplateQualityScore__","templateSource":"__TemplateSource__","templateStatus":"__TemplateStatus__"},{"correctCategory":"__CorrectCategory__","metaTemplateId":"__MetaTemplateId__","templateCategory":"__TemplateCategory__","templateLanguage":"__TemplateLanguage__","templateName":"__TemplateName__","templateQualityScore":"__TemplateQualityScore__","templateSource":"__TemplateSource__","templateStatus":"__TemplateStatus__"}]}

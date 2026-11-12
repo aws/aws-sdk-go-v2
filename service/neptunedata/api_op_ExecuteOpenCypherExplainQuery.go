@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type ExecuteOpenCypherExplainQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteOpenCypherExplainQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteOpenCypherExplainQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteOpenCypherExplainQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainMode != "" {
+		s.WriteString(schemas.ExecuteOpenCypherExplainQueryInput_explainMode, string(v.ExplainMode))
+	}
+	if v.OpenCypherQuery != nil {
+		s.WriteString(schemas.ExecuteOpenCypherExplainQueryInput_openCypherQuery, *v.OpenCypherQuery)
+	}
+	if v.Parameters != nil {
+		s.WriteString(schemas.ExecuteOpenCypherExplainQueryInput_parameters, *v.Parameters)
+	}
+}
+
 type ExecuteOpenCypherExplainQueryOutput struct {
 
 	// A text blob containing the openCypher explain results.
@@ -67,13 +87,31 @@ type ExecuteOpenCypherExplainQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteOpenCypherExplainQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteOpenCypherExplainQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteOpenCypherExplainQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Results != nil {
+		s.WriteBlob(schemas.ExecuteOpenCypherExplainQueryOutput_results, v.Results)
+	}
+}
+func (v *ExecuteOpenCypherExplainQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteOpenCypherExplainQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteOpenCypherExplainQueryOutput_results:
+			return d.ReadBlob(schemas.ExecuteOpenCypherExplainQueryOutput_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteOpenCypherExplainQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteOpenCypherExplainQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteOpenCypherExplainQuery, schemas.ExecuteOpenCypherExplainQueryInput, schemas.ExecuteOpenCypherExplainQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteOpenCypherExplainQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteOpenCypherExplainQuery, schemas.ExecuteOpenCypherExplainQueryInput, schemas.ExecuteOpenCypherExplainQueryOutput), output: &ExecuteOpenCypherExplainQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

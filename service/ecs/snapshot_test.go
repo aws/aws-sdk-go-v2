@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateGatewayWithCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateGatewayWithCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateGatewayWithCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ContinueServiceDeployment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ContinueServiceDeployment(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_CreateExpressGatewayService(t *testing.T) {
 	_, err := svc.CreateExpressGatewayService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateExpressGatewayService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_DeleteExpressGatewayService(t *testing.T) {
 	_, err := svc.DeleteExpressGatewayService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteExpressGatewayService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -386,6 +422,42 @@ func TestCheckSnapshot_DescribeExpressGatewayService(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeGatewayResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGatewayResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeGatewayResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeGatewayRoute(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGatewayRoute(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeGatewayRoute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeServiceDeployments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeServiceDeployments(context.Background(), nil, func(o *Options) {
@@ -451,6 +523,18 @@ func TestCheckSnapshot_DescribeTaskSets(t *testing.T) {
 	_, err := svc.DescribeTaskSets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeTaskSets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateGatewayFromCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateGatewayFromCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateGatewayFromCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -571,6 +655,42 @@ func TestCheckSnapshot_ListDaemonTaskDefinitions(t *testing.T) {
 	_, err := svc.ListDaemonTaskDefinitions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDaemonTaskDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGatewayClusterAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayClusterAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGatewayClusterAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGatewayRoutes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRoutes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGatewayRoutes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGateways")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -938,6 +1058,18 @@ func TestCheckSnapshot_UpdateExpressGatewayService(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateService(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateService(context.Background(), nil, func(o *Options) {
@@ -985,6 +1117,18 @@ func TestCheckSnapshot_UpdateTaskSet(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateGatewayWithCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateGatewayWithCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateGatewayWithCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ContinueServiceDeployment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ContinueServiceDeployment(context.Background(), nil, func(o *Options) {
@@ -1038,6 +1182,18 @@ func TestUpdateSnapshot_CreateExpressGatewayService(t *testing.T) {
 	_, err := svc.CreateExpressGatewayService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateExpressGatewayService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1146,6 +1302,18 @@ func TestUpdateSnapshot_DeleteExpressGatewayService(t *testing.T) {
 	_, err := svc.DeleteExpressGatewayService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteExpressGatewayService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1309,6 +1477,42 @@ func TestUpdateSnapshot_DescribeExpressGatewayService(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeGatewayResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGatewayResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeGatewayResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeGatewayRoute(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGatewayRoute(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeGatewayRoute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeServiceDeployments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeServiceDeployments(context.Background(), nil, func(o *Options) {
@@ -1374,6 +1578,18 @@ func TestUpdateSnapshot_DescribeTaskSets(t *testing.T) {
 	_, err := svc.DescribeTaskSets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTaskSets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateGatewayFromCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateGatewayFromCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateGatewayFromCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1494,6 +1710,42 @@ func TestUpdateSnapshot_ListDaemonTaskDefinitions(t *testing.T) {
 	_, err := svc.ListDaemonTaskDefinitions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDaemonTaskDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGatewayClusterAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayClusterAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGatewayClusterAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGatewayRoutes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRoutes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGatewayRoutes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGateways")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1854,6 +2106,18 @@ func TestUpdateSnapshot_UpdateExpressGatewayService(t *testing.T) {
 	_, err := svc.UpdateExpressGatewayService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateExpressGatewayService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

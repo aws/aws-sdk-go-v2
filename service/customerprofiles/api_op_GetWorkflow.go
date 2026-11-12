@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetWorkflowRequest_DomainName, *v.DomainName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetWorkflowRequest_WorkflowId, *v.WorkflowId)
+	}
+}
+
 type GetWorkflowOutput struct {
 
 	// Attributes provided for workflow execution.
@@ -72,13 +89,86 @@ type GetWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_Attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorDescription != nil {
+		s.WriteString(schemas.GetWorkflowResponse_ErrorDescription, *v.ErrorDescription)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetWorkflowResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_Metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.GetWorkflowResponse_StartDate, *v.StartDate)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWorkflowResponse_Status, string(v.Status))
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetWorkflowResponse_WorkflowId, *v.WorkflowId)
+	}
+	if v.WorkflowType != "" {
+		s.WriteString(schemas.GetWorkflowResponse_WorkflowType, string(v.WorkflowType))
+	}
+}
+func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowResponse_Attributes:
+			v.Attributes = &types.WorkflowAttributes{}
+			return v.Attributes.Deserialize(d)
+		case schemas.GetWorkflowResponse_ErrorDescription:
+			v.ErrorDescription = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_ErrorDescription, v.ErrorDescription)
+		case schemas.GetWorkflowResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetWorkflowResponse_Metrics:
+			v.Metrics = &types.WorkflowMetrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.GetWorkflowResponse_StartDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowResponse_StartDate, v.StartDate)
+		case schemas.GetWorkflowResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.GetWorkflowResponse_WorkflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_WorkflowId, v.WorkflowId)
+		case schemas.GetWorkflowResponse_WorkflowType:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowResponse_WorkflowType, &ev); err != nil {
+				return err
+			}
+			v.WorkflowType = types.WorkflowType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse), output: &GetWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

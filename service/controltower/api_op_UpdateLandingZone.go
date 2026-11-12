@@ -70,7 +70,9 @@ func (v *UpdateLandingZoneInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Manifest != nil {
 		s.WriteDocument(schemas.UpdateLandingZoneInput_manifest, &smithydocument.Opaque{Value: v.Manifest})
 	}
-	serializeRemediationTypes(s, schemas.UpdateLandingZoneInput_remediationTypes, v.RemediationTypes)
+	if v.RemediationTypes != nil {
+		serializeRemediationTypes(s, schemas.UpdateLandingZoneInput_remediationTypes, v.RemediationTypes)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.UpdateLandingZoneInput_version, *v.Version)
 	}

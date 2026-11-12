@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UpdatePartnerStatusResponse><UpdatePartnerStatusResult><DatabaseName>__DatabaseName__</DatabaseName><PartnerName>__PartnerName__</PartnerName></UpdatePartnerStatusResult></UpdatePartnerStatusResponse>

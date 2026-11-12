@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -157,6 +159,21 @@ type GenerateOrganizationsAccessReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateOrganizationsAccessReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateOrganizationsAccessReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateOrganizationsAccessReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityPath != nil {
+		s.WriteString(schemas.GenerateOrganizationsAccessReportRequest_EntityPath, *v.EntityPath)
+	}
+	if v.OrganizationsPolicyId != nil {
+		s.WriteString(schemas.GenerateOrganizationsAccessReportRequest_OrganizationsPolicyId, *v.OrganizationsPolicyId)
+	}
+}
+
 type GenerateOrganizationsAccessReportOutput struct {
 
 	// The job identifier that you can use in the [GetOrganizationsAccessReport] operation.
@@ -170,13 +187,32 @@ type GenerateOrganizationsAccessReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateOrganizationsAccessReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateOrganizationsAccessReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateOrganizationsAccessReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GenerateOrganizationsAccessReportResponse_JobId, *v.JobId)
+	}
+}
+func (v *GenerateOrganizationsAccessReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateOrganizationsAccessReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateOrganizationsAccessReportResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GenerateOrganizationsAccessReportResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateOrganizationsAccessReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGenerateOrganizationsAccessReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateOrganizationsAccessReport, schemas.GenerateOrganizationsAccessReportRequest, schemas.GenerateOrganizationsAccessReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGenerateOrganizationsAccessReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateOrganizationsAccessReport, schemas.GenerateOrganizationsAccessReportRequest, schemas.GenerateOrganizationsAccessReportResponse), output: &GenerateOrganizationsAccessReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

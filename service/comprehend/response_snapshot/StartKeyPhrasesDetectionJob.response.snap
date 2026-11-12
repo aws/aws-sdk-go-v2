@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.StartKeyPhrasesDetectionJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"JobArn":"__JobArn__","JobId":"__JobId__","JobStatus":"SUBMITTED"}
+¿fJobArnj__JobArn__eJobIdi__JobId__iJobStatusiSUBMITTEDÿ

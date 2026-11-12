@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/compareDomainConfiguration
+
+Content-Type: application/json
+
+{"Categories":["__Member__","__Member__"],"SourceDomainArn":"__SourceDomainArn__","TargetDomainArn":"__TargetDomainArn__"}

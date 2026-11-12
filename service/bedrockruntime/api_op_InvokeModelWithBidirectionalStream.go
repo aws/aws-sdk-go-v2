@@ -104,6 +104,13 @@ func (o *InvokeModelWithBidirectionalStreamOutput) GetInitialReply() <-chan Invo
 	return o.initialReply
 }
 
+func (v *InvokeModelWithBidirectionalStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeModelWithBidirectionalStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeModelWithBidirectionalStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeModelWithBidirectionalStream, schemas.InvokeModelWithBidirectionalStreamRequest, schemas.InvokeModelWithBidirectionalStreamResponse)}, middleware.After); err != nil {
 		return err

@@ -222,8 +222,12 @@ func (v *DescribeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PendingDeploymentSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProductionVariantSummaryList(s, schemas.DescribeEndpointOutput_ProductionVariants, v.ProductionVariants)
-	serializeProductionVariantSummaryList(s, schemas.DescribeEndpointOutput_ShadowProductionVariants, v.ShadowProductionVariants)
+	if v.ProductionVariants != nil {
+		serializeProductionVariantSummaryList(s, schemas.DescribeEndpointOutput_ProductionVariants, v.ProductionVariants)
+	}
+	if v.ShadowProductionVariants != nil {
+		serializeProductionVariantSummaryList(s, schemas.DescribeEndpointOutput_ShadowProductionVariants, v.ShadowProductionVariants)
+	}
 }
 func (v *DescribeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEndpointOutput, func(s *smithy.Schema) error {

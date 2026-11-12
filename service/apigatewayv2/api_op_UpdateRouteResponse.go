@@ -73,8 +73,12 @@ func (v *UpdateRouteResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelSelectionExpression != nil {
 		s.WriteString(schemas.UpdateRouteResponseRequest_ModelSelectionExpression, *v.ModelSelectionExpression)
 	}
-	serializeRouteModels(s, schemas.UpdateRouteResponseRequest_ResponseModels, v.ResponseModels)
-	serializeRouteParameters(s, schemas.UpdateRouteResponseRequest_ResponseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeRouteModels(s, schemas.UpdateRouteResponseRequest_ResponseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeRouteParameters(s, schemas.UpdateRouteResponseRequest_ResponseParameters, v.ResponseParameters)
+	}
 	if v.RouteId != nil {
 		s.WriteString(schemas.UpdateRouteResponseRequest_RouteId, *v.RouteId)
 	}
@@ -120,8 +124,12 @@ func (v *UpdateRouteResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelSelectionExpression != nil {
 		s.WriteString(schemas.UpdateRouteResponseResponse_ModelSelectionExpression, *v.ModelSelectionExpression)
 	}
-	serializeRouteModels(s, schemas.UpdateRouteResponseResponse_ResponseModels, v.ResponseModels)
-	serializeRouteParameters(s, schemas.UpdateRouteResponseResponse_ResponseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeRouteModels(s, schemas.UpdateRouteResponseResponse_ResponseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeRouteParameters(s, schemas.UpdateRouteResponseResponse_ResponseParameters, v.ResponseParameters)
+	}
 	if v.RouteResponseId != nil {
 		s.WriteString(schemas.UpdateRouteResponseResponse_RouteResponseId, *v.RouteResponseId)
 	}

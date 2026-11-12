@@ -7,9 +7,6 @@ import (
 )
 
 func serializeConnectionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Connection) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeConnectionList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeHostList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Host) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeHostList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Host
 }
 
 func serializeLatestSyncBlockerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SyncBlocker) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeLatestSyncBlockerList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeRepositoryLinkList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RepositoryLinkInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeRepositoryLinkList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeRepositorySyncDefinitionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RepositorySyncDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeRepositorySyncDefinitionList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeRepositorySyncEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RepositorySyncEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -85,9 +67,6 @@ func serializeRepositorySyncEventList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeResourceSyncEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceSyncEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -98,9 +77,6 @@ func serializeResourceSyncEventList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -109,9 +85,6 @@ func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSubnetIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -120,9 +93,6 @@ func serializeSubnetIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeSyncBlockerContextList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SyncBlockerContext) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -133,9 +103,6 @@ func serializeSyncBlockerContextList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeSyncConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SyncConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -146,9 +113,6 @@ func serializeSyncConfigurationList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -157,9 +121,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

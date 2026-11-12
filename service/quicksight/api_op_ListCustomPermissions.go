@@ -89,7 +89,9 @@ func (v *ListCustomPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomPermissionsList(s, schemas.ListCustomPermissionsResponse_CustomPermissionsList, v.CustomPermissionsList)
+	if v.CustomPermissionsList != nil {
+		serializeCustomPermissionsList(s, schemas.ListCustomPermissionsResponse_CustomPermissionsList, v.CustomPermissionsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomPermissionsResponse_NextToken, *v.NextToken)
 	}

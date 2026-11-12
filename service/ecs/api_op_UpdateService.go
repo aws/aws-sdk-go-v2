@@ -255,6 +255,10 @@ type UpdateServiceInput struct {
 	// my_image:latest ) or to roll Fargate tasks onto a newer platform version.
 	ForceNewDeployment bool
 
+	// The updated set of gateway connectors that connect the service to a gateway
+	// ingress path. A service supports no more than one gateway connector.
+	GatewayConnectors []types.GatewayConnector
+
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
 	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
 	// a task has first started. If you don't specify a health check grace period
@@ -434,7 +438,9 @@ func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZoneRebalancing != "" {
 		s.WriteString(schemas.UpdateServiceRequest_availabilityZoneRebalancing, string(v.AvailabilityZoneRebalancing))
 	}
-	serializeCapacityProviderStrategy(s, schemas.UpdateServiceRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.CapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.UpdateServiceRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.UpdateServiceRequest_cluster, *v.Cluster)
 	}
@@ -460,10 +466,15 @@ func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ForceNewDeployment != false {
 		s.WriteBool(schemas.UpdateServiceRequest_forceNewDeployment, v.ForceNewDeployment)
 	}
+	if v.GatewayConnectors != nil {
+		serializeGatewayConnectorList(s, schemas.UpdateServiceRequest_gatewayConnectors, v.GatewayConnectors)
+	}
 	if v.HealthCheckGracePeriodSeconds != nil {
 		s.WriteInt32(schemas.UpdateServiceRequest_healthCheckGracePeriodSeconds, *v.HealthCheckGracePeriodSeconds)
 	}
-	serializeLoadBalancers(s, schemas.UpdateServiceRequest_loadBalancers, v.LoadBalancers)
+	if v.LoadBalancers != nil {
+		serializeLoadBalancers(s, schemas.UpdateServiceRequest_loadBalancers, v.LoadBalancers)
+	}
 	if v.Monitoring != nil {
 		s.WriteStruct(schemas.UpdateServiceRequest_monitoring)
 		v.Monitoring.SerializeMembers(s)
@@ -474,8 +485,12 @@ func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlacementConstraints(s, schemas.UpdateServiceRequest_placementConstraints, v.PlacementConstraints)
-	serializePlacementStrategies(s, schemas.UpdateServiceRequest_placementStrategy, v.PlacementStrategy)
+	if v.PlacementConstraints != nil {
+		serializePlacementConstraints(s, schemas.UpdateServiceRequest_placementConstraints, v.PlacementConstraints)
+	}
+	if v.PlacementStrategy != nil {
+		serializePlacementStrategies(s, schemas.UpdateServiceRequest_placementStrategy, v.PlacementStrategy)
+	}
 	if v.PlatformVersion != nil {
 		s.WriteString(schemas.UpdateServiceRequest_platformVersion, *v.PlatformVersion)
 	}
@@ -490,12 +505,18 @@ func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServiceConnectConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeServiceRegistries(s, schemas.UpdateServiceRequest_serviceRegistries, v.ServiceRegistries)
+	if v.ServiceRegistries != nil {
+		serializeServiceRegistries(s, schemas.UpdateServiceRequest_serviceRegistries, v.ServiceRegistries)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteString(schemas.UpdateServiceRequest_taskDefinition, *v.TaskDefinition)
 	}
-	serializeServiceVolumeConfigurations(s, schemas.UpdateServiceRequest_volumeConfigurations, v.VolumeConfigurations)
-	serializeVpcLatticeConfigurations(s, schemas.UpdateServiceRequest_vpcLatticeConfigurations, v.VpcLatticeConfigurations)
+	if v.VolumeConfigurations != nil {
+		serializeServiceVolumeConfigurations(s, schemas.UpdateServiceRequest_volumeConfigurations, v.VolumeConfigurations)
+	}
+	if v.VpcLatticeConfigurations != nil {
+		serializeVpcLatticeConfigurations(s, schemas.UpdateServiceRequest_vpcLatticeConfigurations, v.VpcLatticeConfigurations)
+	}
 }
 
 type UpdateServiceOutput struct {

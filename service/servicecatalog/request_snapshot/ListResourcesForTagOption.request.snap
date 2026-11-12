@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/ListResourcesForTagOption
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListResourcesForTagOption
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PageSize":1,"PageToken":"__PageToken__","ResourceType":"__ResourceType__","TagOptionId":"__TagOptionId__"}
+¿hPageSizeiPageTokenm__PageToken__lResourceTypep__ResourceType__kTagOptionIdo__TagOptionId__ÿ

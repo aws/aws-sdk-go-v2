@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/DeleteCallAnalyticsCategory
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.DeleteCallAnalyticsCategory
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CategoryName":"__CategoryName__"}
+¿lCategoryNamep__CategoryName__ÿ

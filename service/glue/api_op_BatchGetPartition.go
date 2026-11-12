@@ -81,7 +81,9 @@ func (v *BatchGetPartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.BatchGetPartitionRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeBatchGetPartitionValueList(s, schemas.BatchGetPartitionRequest_PartitionsToGet, v.PartitionsToGet)
+	if v.PartitionsToGet != nil {
+		serializeBatchGetPartitionValueList(s, schemas.BatchGetPartitionRequest_PartitionsToGet, v.PartitionsToGet)
+	}
 	if v.QuerySessionContext != nil {
 		s.WriteStruct(schemas.BatchGetPartitionRequest_QuerySessionContext)
 		v.QuerySessionContext.SerializeMembers(s)
@@ -114,8 +116,12 @@ func (v *BatchGetPartitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetPartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartitionList(s, schemas.BatchGetPartitionResponse_Partitions, v.Partitions)
-	serializeBatchGetPartitionValueList(s, schemas.BatchGetPartitionResponse_UnprocessedKeys, v.UnprocessedKeys)
+	if v.Partitions != nil {
+		serializePartitionList(s, schemas.BatchGetPartitionResponse_Partitions, v.Partitions)
+	}
+	if v.UnprocessedKeys != nil {
+		serializeBatchGetPartitionValueList(s, schemas.BatchGetPartitionResponse_UnprocessedKeys, v.UnprocessedKeys)
+	}
 }
 func (v *BatchGetPartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetPartitionResponse, func(s *smithy.Schema) error {

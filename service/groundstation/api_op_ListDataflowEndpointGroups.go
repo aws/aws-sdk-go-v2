@@ -78,7 +78,9 @@ func (v *ListDataflowEndpointGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataflowEndpointGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataflowEndpointGroupList(s, schemas.ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList, v.DataflowEndpointGroupList)
+	if v.DataflowEndpointGroupList != nil {
+		serializeDataflowEndpointGroupList(s, schemas.ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList, v.DataflowEndpointGroupList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataflowEndpointGroupsResponse_nextToken, *v.NextToken)
 	}

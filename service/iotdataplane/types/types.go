@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -25,6 +27,43 @@ type RetainedMessageSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetainedMessageSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetainedMessageSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetainedMessageSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.RetainedMessageSummary_lastModifiedTime, v.LastModifiedTime)
+	}
+	if v.PayloadSize != 0 {
+		s.WriteInt64(schemas.RetainedMessageSummary_payloadSize, v.PayloadSize)
+	}
+	if v.Qos != 0 {
+		s.WriteInt32(schemas.RetainedMessageSummary_qos, v.Qos)
+	}
+	if v.Topic != nil {
+		s.WriteString(schemas.RetainedMessageSummary_topic, *v.Topic)
+	}
+}
+func (v *RetainedMessageSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetainedMessageSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetainedMessageSummary_lastModifiedTime:
+			return d.ReadInt64(schemas.RetainedMessageSummary_lastModifiedTime, &v.LastModifiedTime)
+		case schemas.RetainedMessageSummary_payloadSize:
+			return d.ReadInt64(schemas.RetainedMessageSummary_payloadSize, &v.PayloadSize)
+		case schemas.RetainedMessageSummary_qos:
+			return d.ReadInt32(schemas.RetainedMessageSummary_qos, &v.Qos)
+		case schemas.RetainedMessageSummary_topic:
+			v.Topic = new(string)
+			return d.ReadString(schemas.RetainedMessageSummary_topic, v.Topic)
+		}
+		return nil
+	})
+}
+
 // Contains information about a subscription for an MQTT client, including the
 // topic filter and Quality of Service (QoS) level.
 type SubscriptionSummary struct {
@@ -42,6 +81,31 @@ type SubscriptionSummary struct {
 	TopicFilter *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubscriptionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscriptionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscriptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.SubscriptionSummary_qos, v.Qos)
+	if v.TopicFilter != nil {
+		s.WriteString(schemas.SubscriptionSummary_topicFilter, *v.TopicFilter)
+	}
+}
+func (v *SubscriptionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscriptionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscriptionSummary_qos:
+			return d.ReadInt32(schemas.SubscriptionSummary_qos, &v.Qos)
+		case schemas.SubscriptionSummary_topicFilter:
+			v.TopicFilter = new(string)
+			return d.ReadString(schemas.SubscriptionSummary_topicFilter, v.TopicFilter)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

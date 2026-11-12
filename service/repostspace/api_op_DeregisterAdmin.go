@@ -4,6 +4,8 @@ package repostspace
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeregisterAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterAdminInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterAdminInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterAdminInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminId != nil {
+		s.WriteString(schemas.DeregisterAdminInput_adminId, *v.AdminId)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.DeregisterAdminInput_spaceId, *v.SpaceId)
+	}
+}
+
 type DeregisterAdminOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeregisterAdminOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterAdminOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterAdminOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterAdmin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterAdmin, schemas.DeregisterAdminInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterAdmin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterAdmin, schemas.DeregisterAdminInput, nil), output: &DeregisterAdminOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

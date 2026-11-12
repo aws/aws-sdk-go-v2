@@ -125,9 +125,15 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_Name, *v.Name)
 	}
-	serializePermissionList(s, schemas.UpdateApplicationRequest_Permissions, v.Permissions)
-	serializePublicationList(s, schemas.UpdateApplicationRequest_Publications, v.Publications)
-	serializeSubscriptionList(s, schemas.UpdateApplicationRequest_Subscriptions, v.Subscriptions)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.UpdateApplicationRequest_Permissions, v.Permissions)
+	}
+	if v.Publications != nil {
+		serializePublicationList(s, schemas.UpdateApplicationRequest_Publications, v.Publications)
+	}
+	if v.Subscriptions != nil {
+		serializeSubscriptionList(s, schemas.UpdateApplicationRequest_Subscriptions, v.Subscriptions)
+	}
 }
 
 type UpdateApplicationOutput struct {

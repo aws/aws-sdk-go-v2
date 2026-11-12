@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type DeleteReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinalSnapshotIdentifier != nil {
+		s.WriteString(schemas.DeleteReplicationGroupMessage_FinalSnapshotIdentifier, *v.FinalSnapshotIdentifier)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.DeleteReplicationGroupMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.RetainPrimaryCluster != nil {
+		s.WriteBool(schemas.DeleteReplicationGroupMessage_RetainPrimaryCluster, *v.RetainPrimaryCluster)
+	}
+}
+
 type DeleteReplicationGroupOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -71,13 +91,34 @@ type DeleteReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.DeleteReplicationGroupResult_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteReplicationGroupResult_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationGroup, schemas.DeleteReplicationGroupMessage, schemas.DeleteReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationGroup, schemas.DeleteReplicationGroupMessage, schemas.DeleteReplicationGroupResult), output: &DeleteReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1383,6 +1383,221 @@ func TestCheckResponseSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_BatchGetDestinationEndpoint(t *testing.T) {
+	want := &BatchGetDestinationEndpointOutput{
+		DestinationEndpoints: []types.DestinationEndpoint{
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.DestinationEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				DestinationType: types.DestinationEndpointType("STANDARD"),
+				Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+					Value: types.StandardDestinationEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicDestinationEndpointNetworkingConfiguration{
+								DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardDestinationEndpointConfiguration{
+								DestinationAddress:    ptr.String("__DestinationAddress__"),
+								DestinationIngestPort: ptr.Int32(1),
+							},
+						},
+						DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+						Protocol:                  types.DestinationEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointConnectionDetails{
+						SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+						SourceListenerPort:   ptr.Int32(1),
+						SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						SourceEndpointType: types.SourceEndpointType("STANDARD"),
+					},
+				},
+				ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+				ConnectedSource: ptr.String("__ConnectedSource__"),
+				DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+				DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.DestinationEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				DestinationType: types.DestinationEndpointType("STANDARD"),
+				Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+					Value: types.StandardDestinationEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicDestinationEndpointNetworkingConfiguration{
+								DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardDestinationEndpointConfiguration{
+								DestinationAddress:    ptr.String("__DestinationAddress__"),
+								DestinationIngestPort: ptr.Int32(1),
+							},
+						},
+						DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+						Protocol:                  types.DestinationEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointConnectionDetails{
+						SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+						SourceListenerPort:   ptr.Int32(1),
+						SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						SourceEndpointType: types.SourceEndpointType("STANDARD"),
+					},
+				},
+				ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+				ConnectedSource: ptr.String("__ConnectedSource__"),
+				DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+				DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Errors: []types.BatchGetDestinationEndpointError{
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchGetDestinationEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchGetDestinationEndpoint(context.Background(), &BatchGetDestinationEndpointInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchGetDestinationEndpoint.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 	want := &BatchGetRouterInputOutput{
 		RouterInputs: []types.RouterInput{
@@ -1392,16 +1607,18 @@ func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Id:        ptr.String("__Id__"),
 				State:     types.RouterInputState("CREATING"),
 				InputType: types.RouterInputType("STANDARD"),
-				Configuration: &types.RouterInputConfigurationMemberStandard{
-					Value: types.StandardRouterInputConfiguration{
-						NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-						ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-							Value: types.RistRouterInputConfiguration{
-								Port:                        ptr.Int32(1),
-								RecoveryLatencyMilliseconds: ptr.Int64(1),
+				Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputConfiguration{
+						EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+						SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
 							},
 						},
-						Protocol: types.RouterInputProtocol("RTP"),
 					},
 				},
 				RoutedOutputs:        ptr.Int32(1),
@@ -1435,10 +1652,8 @@ func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-					Value: types.StandardRouterInputStreamDetails{
-						SourceIpAddress: ptr.String("__SourceIpAddress__"),
-					},
+				StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputStreamDetails{},
 				},
 				IpAddress:       ptr.String("__IpAddress__"),
 				MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -1472,6 +1687,10 @@ func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 							ThresholdSeconds: ptr.Int32(1),
 						},
 					},
+				},
+				AssociatedDestinationEndpointArns: []string{
+					"__Member__",
+					"__Member__",
 				},
 			},
 			{
@@ -1480,16 +1699,18 @@ func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Id:        ptr.String("__Id__"),
 				State:     types.RouterInputState("CREATING"),
 				InputType: types.RouterInputType("STANDARD"),
-				Configuration: &types.RouterInputConfigurationMemberStandard{
-					Value: types.StandardRouterInputConfiguration{
-						NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-						ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-							Value: types.RistRouterInputConfiguration{
-								Port:                        ptr.Int32(1),
-								RecoveryLatencyMilliseconds: ptr.Int64(1),
+				Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputConfiguration{
+						EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+						SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
 							},
 						},
-						Protocol: types.RouterInputProtocol("RTP"),
 					},
 				},
 				RoutedOutputs:        ptr.Int32(1),
@@ -1523,10 +1744,8 @@ func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-					Value: types.StandardRouterInputStreamDetails{
-						SourceIpAddress: ptr.String("__SourceIpAddress__"),
-					},
+				StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+					Value: types.DestinationEndpointRouterInputStreamDetails{},
 				},
 				IpAddress:       ptr.String("__IpAddress__"),
 				MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -1560,6 +1779,10 @@ func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 							ThresholdSeconds: ptr.Int32(1),
 						},
 					},
+				},
+				AssociatedDestinationEndpointArns: []string{
+					"__Member__",
+					"__Member__",
 				},
 			},
 		},
@@ -1758,6 +1981,10 @@ func TestCheckResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 				FabricConfiguration: &types.FabricConfiguration{
 					RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 				},
+				AssociatedSourceEndpointArns: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				Name:       ptr.String("__Name__"),
@@ -1823,6 +2050,10 @@ func TestCheckResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 				FabricConfiguration: &types.FabricConfiguration{
 					RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 				},
+				AssociatedSourceEndpointArns: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		Errors: []types.BatchGetRouterOutputError{
@@ -1857,6 +2088,254 @@ func TestCheckResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "BatchGetRouterOutput.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchGetSourceEndpoint(t *testing.T) {
+	want := &BatchGetSourceEndpointOutput{
+		SourceEndpoints: []types.SourceEndpoint{
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.SourceEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				SourceType: types.SourceEndpointType("STANDARD"),
+				Configuration: &types.SourceEndpointConfigurationMemberStandard{
+					Value: types.StandardSourceEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicSourceEndpointNetworkingConfiguration{
+								SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardSourceEndpointConfiguration{
+								DestinationIngestPort:       ptr.Int32(1),
+								RecoveryLatencyMilliseconds: ptr.Int64(1),
+							},
+						},
+						SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+						Protocol:             types.SourceEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+				ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardSourceEndpointConnectionDetails{
+						DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+						DestinationIngestPort:     ptr.Int32(1),
+						DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+					},
+				},
+				ConnectedDestinations: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                ptr.String("__Name__"),
+				Arn:                 ptr.String("__Arn__"),
+				Id:                  ptr.String("__Id__"),
+				Description:         ptr.String("__Description__"),
+				RegionName:          ptr.String("__RegionName__"),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				Messages: []types.SourceEndpointMessage{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				SourceType: types.SourceEndpointType("STANDARD"),
+				Configuration: &types.SourceEndpointConfigurationMemberStandard{
+					Value: types.StandardSourceEndpointConfiguration{
+						Name: ptr.String("__Name__"),
+						SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+							Value: types.PublicSourceEndpointNetworkingConfiguration{
+								SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+									{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+						},
+						ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+							Value: types.RistStandardSourceEndpointConfiguration{
+								DestinationIngestPort:       ptr.Int32(1),
+								RecoveryLatencyMilliseconds: ptr.Int64(1),
+							},
+						},
+						SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+						Protocol:             types.SourceEndpointProtocol("RTP"),
+					},
+				},
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+					Value: types.OwnedResourceShareDetails{
+						ShareState: types.ResourceShareState("SHARED"),
+					},
+				},
+				RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+				ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+					Value: types.StandardSourceEndpointConnectionDetails{
+						DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+						DestinationIngestPort:     ptr.Int32(1),
+						DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+						DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+							Value: types.SecretsManagerEndpointEncryptionConfiguration{
+								EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+								EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+									SecretArn: ptr.String("__SecretArn__"),
+								},
+							},
+						},
+						DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+					},
+				},
+				ConnectedDestinations: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
+					},
+				},
+				AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+					Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Errors: []types.BatchGetSourceEndpointError{
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Arn:     ptr.String("__Arn__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchGetSourceEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchGetSourceEndpoint(context.Background(), &BatchGetSourceEndpointInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchGetSourceEndpoint.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ConnectEndpoints(t *testing.T) {
+	want := &ConnectEndpointsOutput{
+		DestinationEndpointArn:  ptr.String("__DestinationEndpointArn__"),
+		DestinationEndpointName: ptr.String("__DestinationEndpointName__"),
+		SourceEndpointArn:       ptr.String("__SourceEndpointArn__"),
+		SourceEndpointName:      ptr.String("__SourceEndpointName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConnectEndpoints.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ConnectEndpoints(context.Background(), &ConnectEndpointsInput{
+		DestinationEndpointArn: ptr.String("__DestinationEndpointArn__"),
+		SourceEndpointArn:      ptr.String("__SourceEndpointArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ConnectEndpoints.response", err)
 	}
 }
 
@@ -3624,16 +4103,18 @@ func TestCheckResponseSnapshot_CreateRouterInput(t *testing.T) {
 			Id:        ptr.String("__Id__"),
 			State:     types.RouterInputState("CREATING"),
 			InputType: types.RouterInputType("STANDARD"),
-			Configuration: &types.RouterInputConfigurationMemberStandard{
-				Value: types.StandardRouterInputConfiguration{
-					NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-					ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-						Value: types.RistRouterInputConfiguration{
-							Port:                        ptr.Int32(1),
-							RecoveryLatencyMilliseconds: ptr.Int64(1),
+			Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputConfiguration{
+					EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+					SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
 						},
 					},
-					Protocol: types.RouterInputProtocol("RTP"),
 				},
 			},
 			RoutedOutputs:        ptr.Int32(1),
@@ -3667,10 +4148,8 @@ func TestCheckResponseSnapshot_CreateRouterInput(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-				Value: types.StandardRouterInputStreamDetails{
-					SourceIpAddress: ptr.String("__SourceIpAddress__"),
-				},
+			StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputStreamDetails{},
 			},
 			IpAddress:       ptr.String("__IpAddress__"),
 			MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -3705,6 +4184,10 @@ func TestCheckResponseSnapshot_CreateRouterInput(t *testing.T) {
 					},
 				},
 			},
+			AssociatedDestinationEndpointArns: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateRouterInput.response")
@@ -3717,16 +4200,18 @@ func TestCheckResponseSnapshot_CreateRouterInput(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CreateRouterInput(context.Background(), &CreateRouterInputInput{
 		Name: ptr.String("__Name__"),
-		Configuration: &types.RouterInputConfigurationMemberStandard{
-			Value: types.StandardRouterInputConfiguration{
-				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-					Value: types.RistRouterInputConfiguration{
-						Port:                        ptr.Int32(1),
-						RecoveryLatencyMilliseconds: ptr.Int64(1),
+		Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+			Value: types.DestinationEndpointRouterInputConfiguration{
+				EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
 					},
 				},
-				Protocol: types.RouterInputProtocol("RTP"),
 			},
 		},
 		MaximumBitrate:   ptr.Int64(1),
@@ -3909,6 +4394,10 @@ func TestCheckResponseSnapshot_CreateRouterOutput(t *testing.T) {
 			},
 			FabricConfiguration: &types.FabricConfiguration{
 				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			},
+			AssociatedSourceEndpointArns: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}
@@ -4106,6 +4595,30 @@ func TestCheckResponseSnapshot_DeleteRouterOutput(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeregisterDestinationEndpoint(t *testing.T) {
+	want := &DeregisterDestinationEndpointOutput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeregisterDestinationEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeregisterDestinationEndpoint(context.Background(), &DeregisterDestinationEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeregisterDestinationEndpoint.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeregisterGatewayInstance(t *testing.T) {
 	want := &DeregisterGatewayInstanceOutput{
 		GatewayInstanceArn: ptr.String("__GatewayInstanceArn__"),
@@ -4128,6 +4641,30 @@ func TestCheckResponseSnapshot_DeregisterGatewayInstance(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeregisterGatewayInstance.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeregisterSourceEndpoint(t *testing.T) {
+	want := &DeregisterSourceEndpointOutput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeregisterSourceEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeregisterSourceEndpoint(context.Background(), &DeregisterSourceEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeregisterSourceEndpoint.response", err)
 	}
 }
 
@@ -5478,6 +6015,143 @@ func TestCheckResponseSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisconnectEndpoints(t *testing.T) {
+	want := &DisconnectEndpointsOutput{
+		DestinationEndpointArn:  ptr.String("__DestinationEndpointArn__"),
+		DestinationEndpointName: ptr.String("__DestinationEndpointName__"),
+		SourceEndpointArn:       ptr.String("__SourceEndpointArn__"),
+		SourceEndpointName:      ptr.String("__SourceEndpointName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisconnectEndpoints.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisconnectEndpoints(context.Background(), &DisconnectEndpointsInput{
+		DestinationEndpointArn: ptr.String("__DestinationEndpointArn__"),
+		SourceEndpointArn:      ptr.String("__SourceEndpointArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisconnectEndpoints.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetDestinationEndpoint(t *testing.T) {
+	want := &GetDestinationEndpointOutput{
+		DestinationEndpoint: &types.DestinationEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.DestinationEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			DestinationType: types.DestinationEndpointType("STANDARD"),
+			Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+				Value: types.StandardDestinationEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicDestinationEndpointNetworkingConfiguration{
+							DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardDestinationEndpointConfiguration{
+							DestinationAddress:    ptr.String("__DestinationAddress__"),
+							DestinationIngestPort: ptr.Int32(1),
+						},
+					},
+					DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+					Protocol:                  types.DestinationEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+			ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointConnectionDetails{
+					SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+					SourceListenerPort:   ptr.Int32(1),
+					SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					SourceEndpointType: types.SourceEndpointType("STANDARD"),
+				},
+			},
+			ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+			ConnectedSource: ptr.String("__ConnectedSource__"),
+			DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+			DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDestinationEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDestinationEndpoint(context.Background(), &GetDestinationEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDestinationEndpoint.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetRouterInput(t *testing.T) {
 	want := &GetRouterInputOutput{
 		RouterInput: &types.RouterInput{
@@ -5486,16 +6160,18 @@ func TestCheckResponseSnapshot_GetRouterInput(t *testing.T) {
 			Id:        ptr.String("__Id__"),
 			State:     types.RouterInputState("CREATING"),
 			InputType: types.RouterInputType("STANDARD"),
-			Configuration: &types.RouterInputConfigurationMemberStandard{
-				Value: types.StandardRouterInputConfiguration{
-					NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-					ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-						Value: types.RistRouterInputConfiguration{
-							Port:                        ptr.Int32(1),
-							RecoveryLatencyMilliseconds: ptr.Int64(1),
+			Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputConfiguration{
+					EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+					SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
 						},
 					},
-					Protocol: types.RouterInputProtocol("RTP"),
 				},
 			},
 			RoutedOutputs:        ptr.Int32(1),
@@ -5529,10 +6205,8 @@ func TestCheckResponseSnapshot_GetRouterInput(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-				Value: types.StandardRouterInputStreamDetails{
-					SourceIpAddress: ptr.String("__SourceIpAddress__"),
-				},
+			StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputStreamDetails{},
 			},
 			IpAddress:       ptr.String("__IpAddress__"),
 			MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -5566,6 +6240,10 @@ func TestCheckResponseSnapshot_GetRouterInput(t *testing.T) {
 						ThresholdSeconds: ptr.Int32(1),
 					},
 				},
+			},
+			AssociatedDestinationEndpointArns: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}
@@ -5874,6 +6552,10 @@ func TestCheckResponseSnapshot_GetRouterOutput(t *testing.T) {
 			FabricConfiguration: &types.FabricConfiguration{
 				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 			},
+			AssociatedSourceEndpointArns: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRouterOutput.response")
@@ -5892,6 +6574,119 @@ func TestCheckResponseSnapshot_GetRouterOutput(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetRouterOutput.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetSourceEndpoint(t *testing.T) {
+	want := &GetSourceEndpointOutput{
+		SourceEndpoint: &types.SourceEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.SourceEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			SourceType: types.SourceEndpointType("STANDARD"),
+			Configuration: &types.SourceEndpointConfigurationMemberStandard{
+				Value: types.StandardSourceEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicSourceEndpointNetworkingConfiguration{
+							SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardSourceEndpointConfiguration{
+							DestinationIngestPort:       ptr.Int32(1),
+							RecoveryLatencyMilliseconds: ptr.Int64(1),
+						},
+					},
+					SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+					Protocol:             types.SourceEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+			ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+			ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardSourceEndpointConnectionDetails{
+					DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+					DestinationIngestPort:     ptr.Int32(1),
+					DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+				},
+			},
+			ConnectedDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+			EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSourceEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSourceEndpoint(context.Background(), &GetSourceEndpointInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSourceEndpoint.response", err)
 	}
 }
 
@@ -6052,6 +6847,86 @@ func TestCheckResponseSnapshot_ListBridges(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListBridges.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListDestinationEndpoints(t *testing.T) {
+	want := &ListDestinationEndpointsOutput{
+		DestinationEndpoints: []types.ListedDestinationEndpoint{
+			{
+				Name:                   ptr.String("__Name__"),
+				Arn:                    ptr.String("__Arn__"),
+				Id:                     ptr.String("__Id__"),
+				DestinationType:        types.DestinationEndpointType("STANDARD"),
+				RegionName:             ptr.String("__RegionName__"),
+				AvailabilityZone:       ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:    types.EndpointLifecycle("MANAGED"),
+				MessageCount:           ptr.Int32(1),
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:     types.ResourceShareState("SHARED"),
+				RegistrationState:      types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionState:        types.DestinationEndpointConnectionState("CONNECTED"),
+				DecryptionType:         types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedSource:        ptr.String("__ConnectedSource__"),
+				AssociatedResourceArn:  ptr.String("__AssociatedResourceArn__"),
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				Arn:                    ptr.String("__Arn__"),
+				Id:                     ptr.String("__Id__"),
+				DestinationType:        types.DestinationEndpointType("STANDARD"),
+				RegionName:             ptr.String("__RegionName__"),
+				AvailabilityZone:       ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:    types.EndpointLifecycle("MANAGED"),
+				MessageCount:           ptr.Int32(1),
+				ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:     types.ResourceShareState("SHARED"),
+				RegistrationState:      types.DestinationEndpointRegistrationState("REGISTERED"),
+				ConnectionState:        types.DestinationEndpointConnectionState("CONNECTED"),
+				DecryptionType:         types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedSource:        ptr.String("__ConnectedSource__"),
+				AssociatedResourceArn:  ptr.String("__AssociatedResourceArn__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDestinationEndpoints.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDestinationEndpoints(context.Background(), &ListDestinationEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.DestinationEndpointFilter{
+			&types.DestinationEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.DestinationEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDestinationEndpoints.response", err)
 	}
 }
 
@@ -6576,6 +7451,86 @@ func TestCheckResponseSnapshot_ListRouterOutputs(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListSourceEndpoints(t *testing.T) {
+	want := &ListSourceEndpointsOutput{
+		SourceEndpoints: []types.ListedSourceEndpoint{
+			{
+				Name:                      ptr.String("__Name__"),
+				Arn:                       ptr.String("__Arn__"),
+				Id:                        ptr.String("__Id__"),
+				SourceType:                types.SourceEndpointType("STANDARD"),
+				RegionName:                ptr.String("__RegionName__"),
+				AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:       types.EndpointLifecycle("MANAGED"),
+				MessageCount:              ptr.Int32(1),
+				ResourceShareOwnership:    types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:        types.ResourceShareState("SHARED"),
+				RegistrationState:         types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:           types.SourceEndpointConnectionState("CONNECTED"),
+				EncryptionType:            types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedDestinationCount: ptr.Int32(1),
+				AssociatedResourceArn:     ptr.String("__AssociatedResourceArn__"),
+			},
+			{
+				Name:                      ptr.String("__Name__"),
+				Arn:                       ptr.String("__Arn__"),
+				Id:                        ptr.String("__Id__"),
+				SourceType:                types.SourceEndpointType("STANDARD"),
+				RegionName:                ptr.String("__RegionName__"),
+				AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LifecycleManagement:       types.EndpointLifecycle("MANAGED"),
+				MessageCount:              ptr.Int32(1),
+				ResourceShareOwnership:    types.ResourceShareOwnership("OWNED"),
+				ResourceShareState:        types.ResourceShareState("SHARED"),
+				RegistrationState:         types.SourceEndpointRegistrationState("REGISTERED"),
+				ConnectionState:           types.SourceEndpointConnectionState("CONNECTED"),
+				EncryptionType:            types.EndpointEncryptionType("SECRETS_MANAGER"),
+				ConnectedDestinationCount: ptr.Int32(1),
+				AssociatedResourceArn:     ptr.String("__AssociatedResourceArn__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSourceEndpoints.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSourceEndpoints(context.Background(), &ListSourceEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.SourceEndpointFilter{
+			&types.SourceEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.SourceEndpointFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSourceEndpoints.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForGlobalResource(t *testing.T) {
 	want := &ListTagsForGlobalResourceOutput{
 		Tags: map[string]string{
@@ -6665,6 +7620,289 @@ func TestCheckResponseSnapshot_PurchaseOffering(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PurchaseOffering.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RegisterDestinationEndpoint(t *testing.T) {
+	want := &RegisterDestinationEndpointOutput{
+		DestinationEndpoint: &types.DestinationEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.DestinationEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			DestinationType: types.DestinationEndpointType("STANDARD"),
+			Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+				Value: types.StandardDestinationEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicDestinationEndpointNetworkingConfiguration{
+							DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardDestinationEndpointConfiguration{
+							DestinationAddress:    ptr.String("__DestinationAddress__"),
+							DestinationIngestPort: ptr.Int32(1),
+						},
+					},
+					DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+					Protocol:                  types.DestinationEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+			ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointConnectionDetails{
+					SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+					SourceListenerPort:   ptr.Int32(1),
+					SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					SourceEndpointType: types.SourceEndpointType("STANDARD"),
+				},
+			},
+			ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+			ConnectedSource: ptr.String("__ConnectedSource__"),
+			DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+			DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("RegisterDestinationEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RegisterDestinationEndpoint(context.Background(), &RegisterDestinationEndpointInput{
+		Description: ptr.String("__Description__"),
+		Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+			Value: types.StandardDestinationEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicDestinationEndpointNetworkingConfiguration{
+						DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardDestinationEndpointConfiguration{
+						DestinationAddress:    ptr.String("__DestinationAddress__"),
+						DestinationIngestPort: ptr.Int32(1),
+					},
+				},
+				DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+				Protocol:                  types.DestinationEndpointProtocol("RTP"),
+			},
+		},
+		RegionName: ptr.String("__RegionName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RegisterDestinationEndpoint.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RegisterSourceEndpoint(t *testing.T) {
+	want := &RegisterSourceEndpointOutput{
+		SourceEndpoint: &types.SourceEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.SourceEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			SourceType: types.SourceEndpointType("STANDARD"),
+			Configuration: &types.SourceEndpointConfigurationMemberStandard{
+				Value: types.StandardSourceEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicSourceEndpointNetworkingConfiguration{
+							SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardSourceEndpointConfiguration{
+							DestinationIngestPort:       ptr.Int32(1),
+							RecoveryLatencyMilliseconds: ptr.Int64(1),
+						},
+					},
+					SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+					Protocol:             types.SourceEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+			ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+			ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardSourceEndpointConnectionDetails{
+					DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+					DestinationIngestPort:     ptr.Int32(1),
+					DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+				},
+			},
+			ConnectedDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+			EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("RegisterSourceEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RegisterSourceEndpoint(context.Background(), &RegisterSourceEndpointInput{
+		RegionName:  ptr.String("__RegionName__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.SourceEndpointConfigurationMemberStandard{
+			Value: types.StandardSourceEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicSourceEndpointNetworkingConfiguration{
+						SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardSourceEndpointConfiguration{
+						DestinationIngestPort:       ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+				Protocol:             types.SourceEndpointProtocol("RTP"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RegisterSourceEndpoint.response", err)
 	}
 }
 
@@ -7460,6 +8698,142 @@ func TestCheckResponseSnapshot_UpdateBridgeState(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateBridgeState.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateDestinationEndpoint(t *testing.T) {
+	want := &UpdateDestinationEndpointOutput{
+		DestinationEndpoint: &types.DestinationEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.DestinationEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			DestinationType: types.DestinationEndpointType("STANDARD"),
+			Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+				Value: types.StandardDestinationEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicDestinationEndpointNetworkingConfiguration{
+							DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardDestinationEndpointConfiguration{
+							DestinationAddress:    ptr.String("__DestinationAddress__"),
+							DestinationIngestPort: ptr.Int32(1),
+						},
+					},
+					DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+					Protocol:                  types.DestinationEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.DestinationEndpointRegistrationState("REGISTERED"),
+			ConnectionDetails: &types.DestinationEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointConnectionDetails{
+					SourceIpAddress:      ptr.String("__SourceIpAddress__"),
+					SourceListenerPort:   ptr.Int32(1),
+					SourceEncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceEncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					SourceEndpointType: types.SourceEndpointType("STANDARD"),
+				},
+			},
+			ConnectionState: types.DestinationEndpointConnectionState("CONNECTED"),
+			ConnectedSource: ptr.String("__ConnectedSource__"),
+			DecryptionType:  types.EndpointEncryptionType("SECRETS_MANAGER"),
+			DecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.DestinationEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardDestinationEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateDestinationEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateDestinationEndpoint(context.Background(), &UpdateDestinationEndpointInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+			Value: types.StandardDestinationEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicDestinationEndpointNetworkingConfiguration{
+						DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardDestinationEndpointConfiguration{
+						DestinationAddress:    ptr.String("__DestinationAddress__"),
+						DestinationIngestPort: ptr.Int32(1),
+					},
+				},
+				DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+				Protocol:                  types.DestinationEndpointProtocol("RTP"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateDestinationEndpoint.response", err)
 	}
 }
 
@@ -8958,16 +10332,18 @@ func TestCheckResponseSnapshot_UpdateRouterInput(t *testing.T) {
 			Id:        ptr.String("__Id__"),
 			State:     types.RouterInputState("CREATING"),
 			InputType: types.RouterInputType("STANDARD"),
-			Configuration: &types.RouterInputConfigurationMemberStandard{
-				Value: types.StandardRouterInputConfiguration{
-					NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-					ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-						Value: types.RistRouterInputConfiguration{
-							Port:                        ptr.Int32(1),
-							RecoveryLatencyMilliseconds: ptr.Int64(1),
+			Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputConfiguration{
+					EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+					SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
 						},
 					},
-					Protocol: types.RouterInputProtocol("RTP"),
 				},
 			},
 			RoutedOutputs:        ptr.Int32(1),
@@ -9001,10 +10377,8 @@ func TestCheckResponseSnapshot_UpdateRouterInput(t *testing.T) {
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
-			StreamDetails: &types.RouterInputStreamDetailsMemberStandard{
-				Value: types.StandardRouterInputStreamDetails{
-					SourceIpAddress: ptr.String("__SourceIpAddress__"),
-				},
+			StreamDetails: &types.RouterInputStreamDetailsMemberDestinationEndpoint{
+				Value: types.DestinationEndpointRouterInputStreamDetails{},
 			},
 			IpAddress:       ptr.String("__IpAddress__"),
 			MaintenanceType: types.MaintenanceType("PREFERRED_DAY_TIME"),
@@ -9039,6 +10413,10 @@ func TestCheckResponseSnapshot_UpdateRouterInput(t *testing.T) {
 					},
 				},
 			},
+			AssociatedDestinationEndpointArns: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateRouterInput.response")
@@ -9052,16 +10430,18 @@ func TestCheckResponseSnapshot_UpdateRouterInput(t *testing.T) {
 	got, err := svc.UpdateRouterInput(context.Background(), &UpdateRouterInputInput{
 		Arn:  ptr.String("__Arn__"),
 		Name: ptr.String("__Name__"),
-		Configuration: &types.RouterInputConfigurationMemberStandard{
-			Value: types.StandardRouterInputConfiguration{
-				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-					Value: types.RistRouterInputConfiguration{
-						Port:                        ptr.Int32(1),
-						RecoveryLatencyMilliseconds: ptr.Int64(1),
+		Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+			Value: types.DestinationEndpointRouterInputConfiguration{
+				EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
 					},
 				},
-				Protocol: types.RouterInputProtocol("RTP"),
 			},
 		},
 		MaximumBitrate: ptr.Int64(1),
@@ -9235,6 +10615,10 @@ func TestCheckResponseSnapshot_UpdateRouterOutput(t *testing.T) {
 			FabricConfiguration: &types.FabricConfiguration{
 				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 			},
+			AssociatedSourceEndpointArns: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateRouterOutput.response")
@@ -9278,6 +10662,145 @@ func TestCheckResponseSnapshot_UpdateRouterOutput(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRouterOutput.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateSourceEndpoint(t *testing.T) {
+	want := &UpdateSourceEndpointOutput{
+		SourceEndpoint: &types.SourceEndpoint{
+			Name:                ptr.String("__Name__"),
+			Arn:                 ptr.String("__Arn__"),
+			Id:                  ptr.String("__Id__"),
+			Description:         ptr.String("__Description__"),
+			RegionName:          ptr.String("__RegionName__"),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LifecycleManagement: types.EndpointLifecycle("MANAGED"),
+			Messages: []types.SourceEndpointMessage{
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			SourceType: types.SourceEndpointType("STANDARD"),
+			Configuration: &types.SourceEndpointConfigurationMemberStandard{
+				Value: types.StandardSourceEndpointConfiguration{
+					Name: ptr.String("__Name__"),
+					SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+						Value: types.PublicSourceEndpointNetworkingConfiguration{
+							SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+								{
+									Cidr: ptr.String("__Cidr__"),
+								},
+							},
+						},
+					},
+					ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+						Value: types.RistStandardSourceEndpointConfiguration{
+							DestinationIngestPort:       ptr.Int32(1),
+							RecoveryLatencyMilliseconds: ptr.Int64(1),
+						},
+					},
+					SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+					Protocol:             types.SourceEndpointProtocol("RTP"),
+				},
+			},
+			ResourceShareOwnership: types.ResourceShareOwnership("OWNED"),
+			ResourceShareDetails: &types.ResourceShareDetailsMemberOwned{
+				Value: types.OwnedResourceShareDetails{
+					ShareState: types.ResourceShareState("SHARED"),
+				},
+			},
+			RegistrationState: types.SourceEndpointRegistrationState("REGISTERED"),
+			ConnectionState:   types.SourceEndpointConnectionState("CONNECTED"),
+			ConnectionDetails: &types.SourceEndpointConnectionDetailsMemberStandard{
+				Value: types.StandardSourceEndpointConnectionDetails{
+					DestinationIpAddress:      ptr.String("__DestinationIpAddress__"),
+					DestinationIngestPort:     ptr.Int32(1),
+					DestinationDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+					DestinationDecryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEndpointEncryptionConfiguration{
+							EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+							EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+					DestinationEndpointType: types.DestinationEndpointType("STANDARD"),
+				},
+			},
+			ConnectedDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EncryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+			EncryptionConfiguration: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEndpointEncryptionConfiguration{
+					EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+					EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			AssociatedResourceDetails: &types.SourceEndpointAssociatedResourceDetailsMemberStandard{
+				Value: types.StandardSourceEndpointAssociatedResourceDetails{},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateSourceEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateSourceEndpoint(context.Background(), &UpdateSourceEndpointInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.SourceEndpointConfigurationMemberStandard{
+			Value: types.StandardSourceEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicSourceEndpointNetworkingConfiguration{
+						SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardSourceEndpointConfiguration{
+						DestinationIngestPort:       ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+				Protocol:             types.SourceEndpointProtocol("RTP"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSourceEndpoint.response", err)
 	}
 }
 
@@ -10454,6 +11977,63 @@ func TestCheckResponseSnapshot_Error_CreateGateway420Exception(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_DestinationEndpointServiceQuotaExceededException(t *testing.T) {
+	want := &types.DestinationEndpointServiceQuotaExceededException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DestinationEndpointServiceQuotaExceededException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.RegisterDestinationEndpoint(context.Background(), &RegisterDestinationEndpointInput{
+		Description: ptr.String("__Description__"),
+		Configuration: &types.DestinationEndpointConfigurationMemberStandard{
+			Value: types.StandardDestinationEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				DestinationNetworkingConfiguration: &types.StandardDestinationEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicDestinationEndpointNetworkingConfiguration{
+						DestinationAllowRules: []types.PublicDestinationEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardDestinationEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardDestinationEndpointConfiguration{
+						DestinationAddress:    ptr.String("__DestinationAddress__"),
+						DestinationIngestPort: ptr.Int32(1),
+					},
+				},
+				DestinationNetworkingType: types.DestinationEndpointNetworkingType("PUBLIC"),
+				Protocol:                  types.DestinationEndpointProtocol("RTP"),
+			},
+		},
+		RegionName: ptr.String("__RegionName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.DestinationEndpointServiceQuotaExceededException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.DestinationEndpointServiceQuotaExceededException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "DestinationEndpointServiceQuotaExceededException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
 		Message: ptr.String("__Message__"),
@@ -10692,16 +12272,18 @@ func TestCheckResponseSnapshot_Error_RouterInputServiceQuotaExceededException(t 
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.CreateRouterInput(context.Background(), &CreateRouterInputInput{
 		Name: ptr.String("__Name__"),
-		Configuration: &types.RouterInputConfigurationMemberStandard{
-			Value: types.StandardRouterInputConfiguration{
-				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
-				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
-					Value: types.RistRouterInputConfiguration{
-						Port:                        ptr.Int32(1),
-						RecoveryLatencyMilliseconds: ptr.Int64(1),
+		Configuration: &types.RouterInputConfigurationMemberDestinationEndpoint{
+			Value: types.DestinationEndpointRouterInputConfiguration{
+				EndpointLifecycleManagement: types.EndpointLifecycle("MANAGED"),
+				SourceTransitDecryptionType: types.EndpointEncryptionType("SECRETS_MANAGER"),
+				SourceTransitDecryption: &types.EndpointEncryptionConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEndpointEncryptionConfiguration{
+						EncryptionSecretType: types.EndpointEncryptionSecretType("AES_128_KEY"),
+						EncryptionSecret: &types.EndpointEncryptionSecretConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+						},
 					},
 				},
-				Protocol: types.RouterInputProtocol("RTP"),
 			},
 		},
 		MaximumBitrate:   ptr.Int64(1),
@@ -10904,6 +12486,63 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceUnavailableException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_SourceEndpointServiceQuotaExceededException(t *testing.T) {
+	want := &types.SourceEndpointServiceQuotaExceededException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SourceEndpointServiceQuotaExceededException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.RegisterSourceEndpoint(context.Background(), &RegisterSourceEndpointInput{
+		RegionName:  ptr.String("__RegionName__"),
+		Description: ptr.String("__Description__"),
+		Configuration: &types.SourceEndpointConfigurationMemberStandard{
+			Value: types.StandardSourceEndpointConfiguration{
+				Name: ptr.String("__Name__"),
+				SourceNetworkingConfiguration: &types.StandardSourceEndpointNetworkingConfigurationMemberPublic{
+					Value: types.PublicSourceEndpointNetworkingConfiguration{
+						SourceAllowRules: []types.PublicSourceEndpointNetworkingConfigurationAllowRule{
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+							{
+								Cidr: ptr.String("__Cidr__"),
+							},
+						},
+					},
+				},
+				ProtocolConfiguration: &types.StandardSourceEndpointProtocolConfigurationMemberRist{
+					Value: types.RistStandardSourceEndpointConfiguration{
+						DestinationIngestPort:       ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				SourceNetworkingType: types.SourceEndpointNetworkingType("PUBLIC"),
+				Protocol:             types.SourceEndpointProtocol("RTP"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.SourceEndpointServiceQuotaExceededException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.SourceEndpointServiceQuotaExceededException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "SourceEndpointServiceQuotaExceededException.error", err)
 	}
 }
 

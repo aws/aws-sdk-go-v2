@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"columnInfo":[{"name":"__Name__","type":"__Type__"},{"name":"__Name__","type":"__Type__"}],"nextToken":"__NextToken__","rows":[["__Member__","__Member__"],["__Member__","__Member__"]]}

@@ -79,17 +79,27 @@ func (v *UpdateUserConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUserConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAfterContactWorkConfigs(s, schemas.UpdateUserConfigRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
-	serializeAutoAcceptConfigs(s, schemas.UpdateUserConfigRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	if v.AfterContactWorkConfigs != nil {
+		serializeAfterContactWorkConfigs(s, schemas.UpdateUserConfigRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
+	}
+	if v.AutoAcceptConfigs != nil {
+		serializeAutoAcceptConfigs(s, schemas.UpdateUserConfigRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateUserConfigRequest_InstanceId, *v.InstanceId)
 	}
-	serializePersistentConnectionConfigs(s, schemas.UpdateUserConfigRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
-	serializePhoneNumberConfigs(s, schemas.UpdateUserConfigRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	if v.PersistentConnectionConfigs != nil {
+		serializePersistentConnectionConfigs(s, schemas.UpdateUserConfigRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
+	}
+	if v.PhoneNumberConfigs != nil {
+		serializePhoneNumberConfigs(s, schemas.UpdateUserConfigRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UpdateUserConfigRequest_UserId, *v.UserId)
 	}
-	serializeVoiceEnhancementConfigs(s, schemas.UpdateUserConfigRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+	if v.VoiceEnhancementConfigs != nil {
+		serializeVoiceEnhancementConfigs(s, schemas.UpdateUserConfigRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+	}
 }
 
 type UpdateUserConfigOutput struct {

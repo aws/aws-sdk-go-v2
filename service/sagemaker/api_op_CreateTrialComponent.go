@@ -105,14 +105,20 @@ func (v *CreateTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.CreateTrialComponentRequest_EndTime, *v.EndTime)
 	}
-	serializeTrialComponentArtifacts(s, schemas.CreateTrialComponentRequest_InputArtifacts, v.InputArtifacts)
+	if v.InputArtifacts != nil {
+		serializeTrialComponentArtifacts(s, schemas.CreateTrialComponentRequest_InputArtifacts, v.InputArtifacts)
+	}
 	if v.MetadataProperties != nil {
 		s.WriteStruct(schemas.CreateTrialComponentRequest_MetadataProperties)
 		v.MetadataProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTrialComponentArtifacts(s, schemas.CreateTrialComponentRequest_OutputArtifacts, v.OutputArtifacts)
-	serializeTrialComponentParameters(s, schemas.CreateTrialComponentRequest_Parameters, v.Parameters)
+	if v.OutputArtifacts != nil {
+		serializeTrialComponentArtifacts(s, schemas.CreateTrialComponentRequest_OutputArtifacts, v.OutputArtifacts)
+	}
+	if v.Parameters != nil {
+		serializeTrialComponentParameters(s, schemas.CreateTrialComponentRequest_Parameters, v.Parameters)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CreateTrialComponentRequest_StartTime, *v.StartTime)
 	}
@@ -121,7 +127,9 @@ func (v *CreateTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTrialComponentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrialComponentRequest_Tags, v.Tags)
+	}
 	if v.TrialComponentName != nil {
 		s.WriteString(schemas.CreateTrialComponentRequest_TrialComponentName, *v.TrialComponentName)
 	}

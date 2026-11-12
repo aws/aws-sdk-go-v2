@@ -79,7 +79,9 @@ func (v *ListCodeSecurityScanConfigurationsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListCodeSecurityScanConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityScanConfigurationSummaries(s, schemas.ListCodeSecurityScanConfigurationsResponse_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeCodeSecurityScanConfigurationSummaries(s, schemas.ListCodeSecurityScanConfigurationsResponse_configurations, v.Configurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeSecurityScanConfigurationsResponse_nextToken, *v.NextToken)
 	}

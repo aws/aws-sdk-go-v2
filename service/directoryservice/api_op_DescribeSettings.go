@@ -99,7 +99,9 @@ func (v *DescribeSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSettingsResult_NextToken, *v.NextToken)
 	}
-	serializeSettingEntries(s, schemas.DescribeSettingsResult_SettingEntries, v.SettingEntries)
+	if v.SettingEntries != nil {
+		serializeSettingEntries(s, schemas.DescribeSettingsResult_SettingEntries, v.SettingEntries)
+	}
 }
 func (v *DescribeSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSettingsResult, func(s *smithy.Schema) error {
@@ -131,6 +133,9 @@ func (c *Client) addOperationDescribeSettingsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

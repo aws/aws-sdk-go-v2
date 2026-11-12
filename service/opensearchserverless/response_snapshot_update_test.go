@@ -25,6 +25,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 func serdeRespCreatePath(path string) (*os.File, error) {
@@ -524,6 +525,33 @@ func TestUpdateResponseSnapshot_BatchGetVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CancelIngestionJob(t *testing.T) {
+	want := &CancelIngestionJobOutput{
+		IngestionJobId:   ptr.String("__IngestionJobId__"),
+		CollectionId:     ptr.String("__CollectionId__"),
+		IngestionJobName: ptr.String("__IngestionJobName__"),
+		Status:           types.IngestionJobStatus("CREATING"),
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIngestionJob, schemas.CancelIngestionJobResponse, schemas.CancelIngestionJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelIngestionJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateAccessPolicy(t *testing.T) {
 	want := &CreateAccessPolicyOutput{
 		AccessPolicyDetail: &types.AccessPolicyDetail{
@@ -662,6 +690,157 @@ func TestUpdateResponseSnapshot_CreateIndex(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateIndex.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateIngestionJob(t *testing.T) {
+	want := &CreateIngestionJobOutput{
+		IngestionJobDetail: &types.IngestionJobDetail{
+			IngestionJobId:   ptr.String("__IngestionJobId__"),
+			Arn:              ptr.String("__Arn__"),
+			CollectionId:     ptr.String("__CollectionId__"),
+			IngestionJobName: ptr.String("__IngestionJobName__"),
+			IndexName:        ptr.String("__IndexName__"),
+			FailureIndexName: ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionJobSource{
+				S3: &types.IngestionJobS3Source{
+					Bucket:               ptr.String("__Bucket__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+					KeyPrefix:            ptr.String("__KeyPrefix__"),
+				},
+			},
+			Status: types.IngestionJobStatus("CREATING"),
+			State:  types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.CreateIngestionJob, schemas.CreateIngestionJobResponse, schemas.CreateIngestionJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateIngestionJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateIngestionStream(t *testing.T) {
+	want := &CreateIngestionStreamOutput{
+		IngestionStreamDetail: &types.IngestionStreamDetail{
+			IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+			Arn:                 ptr.String("__Arn__"),
+			CollectionId:        ptr.String("__CollectionId__"),
+			IngestionStreamName: ptr.String("__IngestionStreamName__"),
+			IndexName:           ptr.String("__IndexName__"),
+			FailureIndexName:    ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionStreamSource{
+				S3: &types.IngestionStreamS3Source{
+					SqsArn: ptr.String("__SqsArn__"),
+					Buckets: []types.StreamBucketConfig{
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+					},
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			Status:  types.IngestionStreamStatus("CREATING"),
+			State:   types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.CreateIngestionStream, schemas.CreateIngestionStreamResponse, schemas.CreateIngestionStreamResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateIngestionStream.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -903,6 +1082,33 @@ func TestUpdateResponseSnapshot_DeleteIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteIngestionStream(t *testing.T) {
+	want := &DeleteIngestionStreamOutput{
+		IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+		CollectionId:        ptr.String("__CollectionId__"),
+		IngestionStreamName: ptr.String("__IngestionStreamName__"),
+		Status:              types.IngestionStreamStatus("CREATING"),
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteIngestionStream, schemas.DeleteIngestionStreamResponse, schemas.DeleteIngestionStreamResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteIngestionStream.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	want := &DeleteLifecyclePolicyOutput{}
 	proto := awsjson.New10(schemas.OpenSearchServerless)
@@ -1078,6 +1284,157 @@ func TestUpdateResponseSnapshot_GetIndex(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetIndex.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetIngestionJob(t *testing.T) {
+	want := &GetIngestionJobOutput{
+		IngestionJobDetail: &types.IngestionJobDetail{
+			IngestionJobId:   ptr.String("__IngestionJobId__"),
+			Arn:              ptr.String("__Arn__"),
+			CollectionId:     ptr.String("__CollectionId__"),
+			IngestionJobName: ptr.String("__IngestionJobName__"),
+			IndexName:        ptr.String("__IndexName__"),
+			FailureIndexName: ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionJobSource{
+				S3: &types.IngestionJobS3Source{
+					Bucket:               ptr.String("__Bucket__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+					KeyPrefix:            ptr.String("__KeyPrefix__"),
+				},
+			},
+			Status: types.IngestionJobStatus("CREATING"),
+			State:  types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.GetIngestionJob, schemas.GetIngestionJobResponse, schemas.GetIngestionJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetIngestionJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetIngestionStream(t *testing.T) {
+	want := &GetIngestionStreamOutput{
+		IngestionStreamDetail: &types.IngestionStreamDetail{
+			IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+			Arn:                 ptr.String("__Arn__"),
+			CollectionId:        ptr.String("__CollectionId__"),
+			IngestionStreamName: ptr.String("__IngestionStreamName__"),
+			IndexName:           ptr.String("__IndexName__"),
+			FailureIndexName:    ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionStreamSource{
+				S3: &types.IngestionStreamS3Source{
+					SqsArn: ptr.String("__SqsArn__"),
+					Buckets: []types.StreamBucketConfig{
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+					},
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			Status:  types.IngestionStreamStatus("CREATING"),
+			State:   types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.GetIngestionStream, schemas.GetIngestionStreamResponse, schemas.GetIngestionStreamResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetIngestionStream.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1335,6 +1692,94 @@ func TestUpdateResponseSnapshot_ListCollections(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListCollections.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListIngestionJobs(t *testing.T) {
+	want := &ListIngestionJobsOutput{
+		IngestionJobSummaries: []types.IngestionJobSummary{
+			{
+				IngestionJobId:   ptr.String("__IngestionJobId__"),
+				Arn:              ptr.String("__Arn__"),
+				IngestionJobName: ptr.String("__IngestionJobName__"),
+				IndexName:        ptr.String("__IndexName__"),
+				Status:           types.IngestionJobStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				IngestionJobId:   ptr.String("__IngestionJobId__"),
+				Arn:              ptr.String("__Arn__"),
+				IngestionJobName: ptr.String("__IngestionJobName__"),
+				IndexName:        ptr.String("__IndexName__"),
+				Status:           types.IngestionJobStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.ListIngestionJobs, schemas.ListIngestionJobsResponse, schemas.ListIngestionJobsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListIngestionJobs.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListIngestionStreams(t *testing.T) {
+	want := &ListIngestionStreamsOutput{
+		IngestionStreamSummaries: []types.IngestionStreamSummary{
+			{
+				IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+				Arn:                 ptr.String("__Arn__"),
+				IngestionStreamName: ptr.String("__IngestionStreamName__"),
+				IndexName:           ptr.String("__IndexName__"),
+				Status:              types.IngestionStreamStatus("CREATING"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+				Arn:                 ptr.String("__Arn__"),
+				IngestionStreamName: ptr.String("__IngestionStreamName__"),
+				IndexName:           ptr.String("__IndexName__"),
+				Status:              types.IngestionStreamStatus("CREATING"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.OpenSearchServerless)
+	opSchema := smithy.NewOperationSchema(schemas.ListIngestionStreams, schemas.ListIngestionStreamsResponse, schemas.ListIngestionStreamsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListIngestionStreams.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1650,6 +2095,7 @@ func TestUpdateResponseSnapshot_UpdateCollection(t *testing.T) {
 			VectorOptions: &types.VectorOptions{
 				ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
 			},
+			KmsKeyArn:          ptr.String("__KmsKeyArn__"),
 			Arn:                ptr.String("__Arn__"),
 			CreatedDate:        ptr.Int64(1),
 			LastModifiedDate:   ptr.Int64(1),
@@ -1892,7 +2338,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.OpenSearchServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateAccessPolicy, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIngestionJob, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1967,7 +2413,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.OpenSearchServerless)
-	opSchema := smithy.NewOperationSchema(schemas.CreateIndex, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIngestionJob, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

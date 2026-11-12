@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type DeleteTenantDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTenantDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTenantDatabaseMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTenantDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DeleteTenantDatabaseMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.FinalDBSnapshotIdentifier != nil {
+		s.WriteString(schemas.DeleteTenantDatabaseMessage_FinalDBSnapshotIdentifier, *v.FinalDBSnapshotIdentifier)
+	}
+	if v.SkipFinalSnapshot != nil {
+		s.WriteBool(schemas.DeleteTenantDatabaseMessage_SkipFinalSnapshot, *v.SkipFinalSnapshot)
+	}
+	if v.TenantDBName != nil {
+		s.WriteString(schemas.DeleteTenantDatabaseMessage_TenantDBName, *v.TenantDBName)
+	}
+}
+
 type DeleteTenantDatabaseOutput struct {
 
 	// A tenant database in the DB instance. This data type is an element in the
@@ -73,13 +96,34 @@ type DeleteTenantDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTenantDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTenantDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTenantDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TenantDatabase != nil {
+		s.WriteStruct(schemas.DeleteTenantDatabaseResult_TenantDatabase)
+		v.TenantDatabase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteTenantDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTenantDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTenantDatabaseResult_TenantDatabase:
+			v.TenantDatabase = &types.TenantDatabase{}
+			return v.TenantDatabase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTenantDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteTenantDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTenantDatabase, schemas.DeleteTenantDatabaseMessage, schemas.DeleteTenantDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteTenantDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTenantDatabase, schemas.DeleteTenantDatabaseMessage, schemas.DeleteTenantDatabaseResult), output: &DeleteTenantDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

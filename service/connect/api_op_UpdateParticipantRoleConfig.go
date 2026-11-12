@@ -70,7 +70,9 @@ func (v *UpdateParticipantRoleConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateParticipantRoleConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateParticipantRoleConfigChannelInfo(s, schemas.UpdateParticipantRoleConfigRequest_ChannelConfiguration, v.ChannelConfiguration)
+	if v.ChannelConfiguration != nil {
+		serializeUpdateParticipantRoleConfigChannelInfo(s, schemas.UpdateParticipantRoleConfigRequest_ChannelConfiguration, v.ChannelConfiguration)
+	}
 	if v.ContactId != nil {
 		s.WriteString(schemas.UpdateParticipantRoleConfigRequest_ContactId, *v.ContactId)
 	}

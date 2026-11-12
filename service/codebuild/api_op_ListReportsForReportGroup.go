@@ -112,7 +112,9 @@ func (v *ListReportsForReportGroupOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReportsForReportGroupOutput_nextToken, *v.NextToken)
 	}
-	serializeReportArns(s, schemas.ListReportsForReportGroupOutput_reports, v.Reports)
+	if v.Reports != nil {
+		serializeReportArns(s, schemas.ListReportsForReportGroupOutput_reports, v.Reports)
+	}
 }
 func (v *ListReportsForReportGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReportsForReportGroupOutput, func(s *smithy.Schema) error {
@@ -141,6 +143,9 @@ func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middlew
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

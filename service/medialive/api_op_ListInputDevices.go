@@ -76,7 +76,9 @@ func (v *ListInputDevicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInputDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfInputDeviceSummary(s, schemas.ListInputDevicesResponse_InputDevices, v.InputDevices)
+	if v.InputDevices != nil {
+		serialize__listOfInputDeviceSummary(s, schemas.ListInputDevicesResponse_InputDevices, v.InputDevices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInputDevicesResponse_NextToken, *v.NextToken)
 	}

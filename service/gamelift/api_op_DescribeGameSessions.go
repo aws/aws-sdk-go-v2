@@ -160,7 +160,9 @@ func (v *DescribeGameSessionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeGameSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGameSessionList(s, schemas.DescribeGameSessionsOutput_GameSessions, v.GameSessions)
+	if v.GameSessions != nil {
+		serializeGameSessionList(s, schemas.DescribeGameSessionsOutput_GameSessions, v.GameSessions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeGameSessionsOutput_NextToken, *v.NextToken)
 	}

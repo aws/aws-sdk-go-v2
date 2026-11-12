@@ -3338,6 +3338,7 @@ func TestCheckResponseSnapshot_ImportCustomWorkspaceImage(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ImageValidationMode: types.ImageValidationMode("CUSTOMER_MANAGED"),
 	})
 	if err != nil {
 		t.Fatal(err)

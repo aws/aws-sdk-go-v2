@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<VerifyDomainIdentityResponse><VerifyDomainIdentityResult><VerificationToken>__VerificationToken__</VerificationToken></VerifyDomainIdentityResult></VerifyDomainIdentityResponse>

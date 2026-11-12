@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type CreateDBSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.CreateDBSnapshotMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBSnapshotIdentifier != nil {
+		s.WriteString(schemas.CreateDBSnapshotMessage_DBSnapshotIdentifier, *v.DBSnapshotIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDBSnapshotMessage_Tags, v.Tags)
+	}
+}
+
 type CreateDBSnapshotOutput struct {
 
 	// Contains the details of an Amazon RDS DB snapshot.
@@ -78,13 +98,34 @@ type CreateDBSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSnapshot != nil {
+		s.WriteStruct(schemas.CreateDBSnapshotResult_DBSnapshot)
+		v.DBSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDBSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDBSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDBSnapshotResult_DBSnapshot:
+			v.DBSnapshot = &types.DBSnapshot{}
+			return v.DBSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBSnapshot, schemas.CreateDBSnapshotMessage, schemas.CreateDBSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBSnapshot, schemas.CreateDBSnapshotMessage, schemas.CreateDBSnapshotResult), output: &CreateDBSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

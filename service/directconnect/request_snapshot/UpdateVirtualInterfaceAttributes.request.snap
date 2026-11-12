@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/UpdateVirtualInterfaceAttributes
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.UpdateVirtualInterfaceAttributes
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"enableSiteLink":true,"mtu":1,"prefixPoolAllocatedCountIpv4":1,"prefixPoolAllocatedCountIpv6":1,"rateLimit":"__RateLimit__","virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceName":"__VirtualInterfaceName__"}
+¿nenableSiteLinkõcmtuxprefixPoolAllocatedCountIpv4xprefixPoolAllocatedCountIpv6irateLimitm__RateLimit__rvirtualInterfaceIdv__VirtualInterfaceId__tvirtualInterfaceNamex__VirtualInterfaceName__ÿ

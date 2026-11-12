@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/DeleteProxyRules
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DeleteProxyRules
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ProxyRuleGroupArn":"__ProxyRuleGroupArn__","ProxyRuleGroupName":"__ProxyRuleGroupName__","Rules":["__Member__","__Member__"]}
+¿qProxyRuleGroupArnu__ProxyRuleGroupArn__rProxyRuleGroupNamev__ProxyRuleGroupName__eRulesŸj__Member__j__Member__ÿÿ

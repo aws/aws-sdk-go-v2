@@ -52,9 +52,15 @@ func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Action_id, *v.Id)
 	}
-	serializeActionParameterMap(s, schemas.Action_parameters, v.Parameters)
-	serializeTagMap(s, schemas.Action_tags, v.Tags)
-	serializeActionTargetMap(s, schemas.Action_targets, v.Targets)
+	if v.Parameters != nil {
+		serializeActionParameterMap(s, schemas.Action_parameters, v.Parameters)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Action_tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeActionTargetMap(s, schemas.Action_targets, v.Targets)
+	}
 }
 func (v *Action) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Action, func(s *smithy.Schema) error {
@@ -156,8 +162,12 @@ func (v *ActionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.ActionSummary_id, *v.Id)
 	}
-	serializeTagMap(s, schemas.ActionSummary_tags, v.Tags)
-	serializeActionTargetMap(s, schemas.ActionSummary_targets, v.Targets)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ActionSummary_tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeActionTargetMap(s, schemas.ActionSummary_targets, v.Targets)
+	}
 }
 func (v *ActionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ActionSummary, func(s *smithy.Schema) error {
@@ -253,9 +263,15 @@ func (v *CreateExperimentTemplateActionInput) SerializeMembers(s smithy.ShapeSer
 	if v.Description != nil {
 		s.WriteString(schemas.CreateExperimentTemplateActionInput_description, *v.Description)
 	}
-	serializeExperimentTemplateActionParameterMap(s, schemas.CreateExperimentTemplateActionInput_parameters, v.Parameters)
-	serializeExperimentTemplateActionStartAfterList(s, schemas.CreateExperimentTemplateActionInput_startAfter, v.StartAfter)
-	serializeExperimentTemplateActionTargetMap(s, schemas.CreateExperimentTemplateActionInput_targets, v.Targets)
+	if v.Parameters != nil {
+		serializeExperimentTemplateActionParameterMap(s, schemas.CreateExperimentTemplateActionInput_parameters, v.Parameters)
+	}
+	if v.StartAfter != nil {
+		serializeExperimentTemplateActionStartAfterList(s, schemas.CreateExperimentTemplateActionInput_startAfter, v.StartAfter)
+	}
+	if v.Targets != nil {
+		serializeExperimentTemplateActionTargetMap(s, schemas.CreateExperimentTemplateActionInput_targets, v.Targets)
+	}
 }
 func (v *CreateExperimentTemplateActionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateActionInput, func(s *smithy.Schema) error {
@@ -542,10 +558,18 @@ func (v *CreateExperimentTemplateTargetInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *CreateExperimentTemplateTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentTemplateTargetFilterInputList(s, schemas.CreateExperimentTemplateTargetInput_filters, v.Filters)
-	serializeExperimentTemplateTargetParameterMap(s, schemas.CreateExperimentTemplateTargetInput_parameters, v.Parameters)
-	serializeResourceArnList(s, schemas.CreateExperimentTemplateTargetInput_resourceArns, v.ResourceArns)
-	serializeTagMap(s, schemas.CreateExperimentTemplateTargetInput_resourceTags, v.ResourceTags)
+	if v.Filters != nil {
+		serializeExperimentTemplateTargetFilterInputList(s, schemas.CreateExperimentTemplateTargetInput_filters, v.Filters)
+	}
+	if v.Parameters != nil {
+		serializeExperimentTemplateTargetParameterMap(s, schemas.CreateExperimentTemplateTargetInput_parameters, v.Parameters)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.CreateExperimentTemplateTargetInput_resourceArns, v.ResourceArns)
+	}
+	if v.ResourceTags != nil {
+		serializeTagMap(s, schemas.CreateExperimentTemplateTargetInput_resourceTags, v.ResourceTags)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.CreateExperimentTemplateTargetInput_resourceType, *v.ResourceType)
 	}
@@ -640,7 +664,9 @@ func (v *Experiment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Experiment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentActionMap(s, schemas.Experiment_actions, v.Actions)
+	if v.Actions != nil {
+		serializeExperimentActionMap(s, schemas.Experiment_actions, v.Actions)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.Experiment_arn, *v.Arn)
 	}
@@ -687,12 +713,18 @@ func (v *Experiment) SerializeMembers(s smithy.ShapeSerializer) {
 		v.State.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExperimentStopConditionList(s, schemas.Experiment_stopConditions, v.StopConditions)
-	serializeTagMap(s, schemas.Experiment_tags, v.Tags)
+	if v.StopConditions != nil {
+		serializeExperimentStopConditionList(s, schemas.Experiment_stopConditions, v.StopConditions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Experiment_tags, v.Tags)
+	}
 	if v.TargetAccountConfigurationsCount != nil {
 		s.WriteInt64(schemas.Experiment_targetAccountConfigurationsCount, *v.TargetAccountConfigurationsCount)
 	}
-	serializeExperimentTargetMap(s, schemas.Experiment_targets, v.Targets)
+	if v.Targets != nil {
+		serializeExperimentTargetMap(s, schemas.Experiment_targets, v.Targets)
+	}
 }
 func (v *Experiment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Experiment, func(s *smithy.Schema) error {
@@ -795,8 +827,12 @@ func (v *ExperimentAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ExperimentAction_endTime, *v.EndTime)
 	}
-	serializeExperimentActionParameterMap(s, schemas.ExperimentAction_parameters, v.Parameters)
-	serializeExperimentActionStartAfterList(s, schemas.ExperimentAction_startAfter, v.StartAfter)
+	if v.Parameters != nil {
+		serializeExperimentActionParameterMap(s, schemas.ExperimentAction_parameters, v.Parameters)
+	}
+	if v.StartAfter != nil {
+		serializeExperimentActionStartAfterList(s, schemas.ExperimentAction_startAfter, v.StartAfter)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ExperimentAction_startTime, *v.StartTime)
 	}
@@ -805,7 +841,9 @@ func (v *ExperimentAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.State.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExperimentActionTargetMap(s, schemas.ExperimentAction_targets, v.Targets)
+	if v.Targets != nil {
+		serializeExperimentActionTargetMap(s, schemas.ExperimentAction_targets, v.Targets)
+	}
 }
 func (v *ExperimentAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentAction, func(s *smithy.Schema) error {
@@ -1095,7 +1133,9 @@ func (v *ExperimentReport) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExperimentReport) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentReportS3ReportList(s, schemas.ExperimentReport_s3Reports, v.S3Reports)
+	if v.S3Reports != nil {
+		serializeExperimentReportS3ReportList(s, schemas.ExperimentReport_s3Reports, v.S3Reports)
+	}
 	if v.State != nil {
 		s.WriteStruct(schemas.ExperimentReport_state)
 		v.State.SerializeMembers(s)
@@ -1231,7 +1271,9 @@ func (v *ExperimentReportConfigurationDataSources) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ExperimentReportConfigurationDataSources) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentReportConfigurationCloudWatchDashboardList(s, schemas.ExperimentReportConfigurationDataSources_cloudWatchDashboards, v.CloudWatchDashboards)
+	if v.CloudWatchDashboards != nil {
+		serializeExperimentReportConfigurationCloudWatchDashboardList(s, schemas.ExperimentReportConfigurationDataSources_cloudWatchDashboards, v.CloudWatchDashboards)
+	}
 }
 func (v *ExperimentReportConfigurationDataSources) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentReportConfigurationDataSources, func(s *smithy.Schema) error {
@@ -1634,7 +1676,9 @@ func (v *ExperimentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.State.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.ExperimentSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ExperimentSummary_tags, v.Tags)
+	}
 }
 func (v *ExperimentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentSummary, func(s *smithy.Schema) error {
@@ -1695,10 +1739,18 @@ func (v *ExperimentTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExperimentTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentTargetFilterList(s, schemas.ExperimentTarget_filters, v.Filters)
-	serializeExperimentTargetParameterMap(s, schemas.ExperimentTarget_parameters, v.Parameters)
-	serializeResourceArnList(s, schemas.ExperimentTarget_resourceArns, v.ResourceArns)
-	serializeTagMap(s, schemas.ExperimentTarget_resourceTags, v.ResourceTags)
+	if v.Filters != nil {
+		serializeExperimentTargetFilterList(s, schemas.ExperimentTarget_filters, v.Filters)
+	}
+	if v.Parameters != nil {
+		serializeExperimentTargetParameterMap(s, schemas.ExperimentTarget_parameters, v.Parameters)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.ExperimentTarget_resourceArns, v.ResourceArns)
+	}
+	if v.ResourceTags != nil {
+		serializeTagMap(s, schemas.ExperimentTarget_resourceTags, v.ResourceTags)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ExperimentTarget_resourceType, *v.ResourceType)
 	}
@@ -1848,7 +1900,9 @@ func (v *ExperimentTargetFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Path != nil {
 		s.WriteString(schemas.ExperimentTargetFilter_path, *v.Path)
 	}
-	serializeExperimentTargetFilterValues(s, schemas.ExperimentTargetFilter_values, v.Values)
+	if v.Values != nil {
+		serializeExperimentTargetFilterValues(s, schemas.ExperimentTargetFilter_values, v.Values)
+	}
 }
 func (v *ExperimentTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTargetFilter, func(s *smithy.Schema) error {
@@ -1918,7 +1972,9 @@ func (v *ExperimentTemplate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExperimentTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentTemplateActionMap(s, schemas.ExperimentTemplate_actions, v.Actions)
+	if v.Actions != nil {
+		serializeExperimentTemplateActionMap(s, schemas.ExperimentTemplate_actions, v.Actions)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ExperimentTemplate_arn, *v.Arn)
 	}
@@ -1952,12 +2008,18 @@ func (v *ExperimentTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.ExperimentTemplate_roleArn, *v.RoleArn)
 	}
-	serializeExperimentTemplateStopConditionList(s, schemas.ExperimentTemplate_stopConditions, v.StopConditions)
-	serializeTagMap(s, schemas.ExperimentTemplate_tags, v.Tags)
+	if v.StopConditions != nil {
+		serializeExperimentTemplateStopConditionList(s, schemas.ExperimentTemplate_stopConditions, v.StopConditions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ExperimentTemplate_tags, v.Tags)
+	}
 	if v.TargetAccountConfigurationsCount != nil {
 		s.WriteInt64(schemas.ExperimentTemplate_targetAccountConfigurationsCount, *v.TargetAccountConfigurationsCount)
 	}
-	serializeExperimentTemplateTargetMap(s, schemas.ExperimentTemplate_targets, v.Targets)
+	if v.Targets != nil {
+		serializeExperimentTemplateTargetMap(s, schemas.ExperimentTemplate_targets, v.Targets)
+	}
 }
 func (v *ExperimentTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTemplate, func(s *smithy.Schema) error {
@@ -2039,9 +2101,15 @@ func (v *ExperimentTemplateAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ExperimentTemplateAction_description, *v.Description)
 	}
-	serializeExperimentTemplateActionParameterMap(s, schemas.ExperimentTemplateAction_parameters, v.Parameters)
-	serializeExperimentTemplateActionStartAfterList(s, schemas.ExperimentTemplateAction_startAfter, v.StartAfter)
-	serializeExperimentTemplateActionTargetMap(s, schemas.ExperimentTemplateAction_targets, v.Targets)
+	if v.Parameters != nil {
+		serializeExperimentTemplateActionParameterMap(s, schemas.ExperimentTemplateAction_parameters, v.Parameters)
+	}
+	if v.StartAfter != nil {
+		serializeExperimentTemplateActionStartAfterList(s, schemas.ExperimentTemplateAction_startAfter, v.StartAfter)
+	}
+	if v.Targets != nil {
+		serializeExperimentTemplateActionTargetMap(s, schemas.ExperimentTemplateAction_targets, v.Targets)
+	}
 }
 func (v *ExperimentTemplateAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTemplateAction, func(s *smithy.Schema) error {
@@ -2344,7 +2412,9 @@ func (v *ExperimentTemplateReportConfigurationDataSources) Serialize(s smithy.Sh
 }
 
 func (v *ExperimentTemplateReportConfigurationDataSources) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentTemplateReportConfigurationCloudWatchDashboardList(s, schemas.ExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards, v.CloudWatchDashboards)
+	if v.CloudWatchDashboards != nil {
+		serializeExperimentTemplateReportConfigurationCloudWatchDashboardList(s, schemas.ExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards, v.CloudWatchDashboards)
+	}
 }
 func (v *ExperimentTemplateReportConfigurationDataSources) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfigurationDataSources, func(s *smithy.Schema) error {
@@ -2372,7 +2442,9 @@ func (v *ExperimentTemplateReportConfigurationDataSourcesInput) Serialize(s smit
 }
 
 func (v *ExperimentTemplateReportConfigurationDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReportConfigurationCloudWatchDashboardInputList(s, schemas.ExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards, v.CloudWatchDashboards)
+	if v.CloudWatchDashboards != nil {
+		serializeReportConfigurationCloudWatchDashboardInputList(s, schemas.ExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards, v.CloudWatchDashboards)
+	}
 }
 func (v *ExperimentTemplateReportConfigurationDataSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfigurationDataSourcesInput, func(s *smithy.Schema) error {
@@ -2618,7 +2690,9 @@ func (v *ExperimentTemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdateTime != nil {
 		s.WriteTime(schemas.ExperimentTemplateSummary_lastUpdateTime, *v.LastUpdateTime)
 	}
-	serializeTagMap(s, schemas.ExperimentTemplateSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ExperimentTemplateSummary_tags, v.Tags)
+	}
 }
 func (v *ExperimentTemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTemplateSummary, func(s *smithy.Schema) error {
@@ -2676,10 +2750,18 @@ func (v *ExperimentTemplateTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExperimentTemplateTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentTemplateTargetFilterList(s, schemas.ExperimentTemplateTarget_filters, v.Filters)
-	serializeExperimentTemplateTargetParameterMap(s, schemas.ExperimentTemplateTarget_parameters, v.Parameters)
-	serializeResourceArnList(s, schemas.ExperimentTemplateTarget_resourceArns, v.ResourceArns)
-	serializeTagMap(s, schemas.ExperimentTemplateTarget_resourceTags, v.ResourceTags)
+	if v.Filters != nil {
+		serializeExperimentTemplateTargetFilterList(s, schemas.ExperimentTemplateTarget_filters, v.Filters)
+	}
+	if v.Parameters != nil {
+		serializeExperimentTemplateTargetParameterMap(s, schemas.ExperimentTemplateTarget_parameters, v.Parameters)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.ExperimentTemplateTarget_resourceArns, v.ResourceArns)
+	}
+	if v.ResourceTags != nil {
+		serializeTagMap(s, schemas.ExperimentTemplateTarget_resourceTags, v.ResourceTags)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ExperimentTemplateTarget_resourceType, *v.ResourceType)
 	}
@@ -2731,7 +2813,9 @@ func (v *ExperimentTemplateTargetFilter) SerializeMembers(s smithy.ShapeSerializ
 	if v.Path != nil {
 		s.WriteString(schemas.ExperimentTemplateTargetFilter_path, *v.Path)
 	}
-	serializeExperimentTemplateTargetFilterValues(s, schemas.ExperimentTemplateTargetFilter_values, v.Values)
+	if v.Values != nil {
+		serializeExperimentTemplateTargetFilterValues(s, schemas.ExperimentTemplateTargetFilter_values, v.Values)
+	}
 }
 func (v *ExperimentTemplateTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTemplateTargetFilter, func(s *smithy.Schema) error {
@@ -2776,7 +2860,9 @@ func (v *ExperimentTemplateTargetInputFilter) SerializeMembers(s smithy.ShapeSer
 	if v.Path != nil {
 		s.WriteString(schemas.ExperimentTemplateTargetInputFilter_path, *v.Path)
 	}
-	serializeExperimentTemplateTargetFilterValues(s, schemas.ExperimentTemplateTargetInputFilter_values, v.Values)
+	if v.Values != nil {
+		serializeExperimentTemplateTargetFilterValues(s, schemas.ExperimentTemplateTargetInputFilter_values, v.Values)
+	}
 }
 func (v *ExperimentTemplateTargetInputFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentTemplateTargetInputFilter, func(s *smithy.Schema) error {
@@ -2928,7 +3014,9 @@ func (v *ResolvedTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ResolvedTarget_resourceType, *v.ResourceType)
 	}
-	serializeTargetInformationMap(s, schemas.ResolvedTarget_targetInformation, v.TargetInformation)
+	if v.TargetInformation != nil {
+		serializeTargetInformationMap(s, schemas.ResolvedTarget_targetInformation, v.TargetInformation)
+	}
 	if v.TargetName != nil {
 		s.WriteString(schemas.ResolvedTarget_targetName, *v.TargetName)
 	}
@@ -3202,7 +3290,9 @@ func (v *TargetResourceType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.TargetResourceType_description, *v.Description)
 	}
-	serializeTargetResourceTypeParameterMap(s, schemas.TargetResourceType_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeTargetResourceTypeParameterMap(s, schemas.TargetResourceType_parameters, v.Parameters)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.TargetResourceType_resourceType, *v.ResourceType)
 	}
@@ -3339,9 +3429,15 @@ func (v *UpdateExperimentTemplateActionInputItem) SerializeMembers(s smithy.Shap
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateExperimentTemplateActionInputItem_description, *v.Description)
 	}
-	serializeExperimentTemplateActionParameterMap(s, schemas.UpdateExperimentTemplateActionInputItem_parameters, v.Parameters)
-	serializeExperimentTemplateActionStartAfterList(s, schemas.UpdateExperimentTemplateActionInputItem_startAfter, v.StartAfter)
-	serializeExperimentTemplateActionTargetMap(s, schemas.UpdateExperimentTemplateActionInputItem_targets, v.Targets)
+	if v.Parameters != nil {
+		serializeExperimentTemplateActionParameterMap(s, schemas.UpdateExperimentTemplateActionInputItem_parameters, v.Parameters)
+	}
+	if v.StartAfter != nil {
+		serializeExperimentTemplateActionStartAfterList(s, schemas.UpdateExperimentTemplateActionInputItem_startAfter, v.StartAfter)
+	}
+	if v.Targets != nil {
+		serializeExperimentTemplateActionTargetMap(s, schemas.UpdateExperimentTemplateActionInputItem_targets, v.Targets)
+	}
 }
 func (v *UpdateExperimentTemplateActionInputItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateActionInputItem, func(s *smithy.Schema) error {
@@ -3596,10 +3692,18 @@ func (v *UpdateExperimentTemplateTargetInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateExperimentTemplateTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentTemplateTargetFilterInputList(s, schemas.UpdateExperimentTemplateTargetInput_filters, v.Filters)
-	serializeExperimentTemplateTargetParameterMap(s, schemas.UpdateExperimentTemplateTargetInput_parameters, v.Parameters)
-	serializeResourceArnList(s, schemas.UpdateExperimentTemplateTargetInput_resourceArns, v.ResourceArns)
-	serializeTagMap(s, schemas.UpdateExperimentTemplateTargetInput_resourceTags, v.ResourceTags)
+	if v.Filters != nil {
+		serializeExperimentTemplateTargetFilterInputList(s, schemas.UpdateExperimentTemplateTargetInput_filters, v.Filters)
+	}
+	if v.Parameters != nil {
+		serializeExperimentTemplateTargetParameterMap(s, schemas.UpdateExperimentTemplateTargetInput_parameters, v.Parameters)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.UpdateExperimentTemplateTargetInput_resourceArns, v.ResourceArns)
+	}
+	if v.ResourceTags != nil {
+		serializeTagMap(s, schemas.UpdateExperimentTemplateTargetInput_resourceTags, v.ResourceTags)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.UpdateExperimentTemplateTargetInput_resourceType, *v.ResourceType)
 	}

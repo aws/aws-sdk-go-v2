@@ -80,16 +80,24 @@ func (v *UpdateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttributeUpdateMode != "" {
 		s.WriteString(schemas.UpdateVehicleRequest_attributeUpdateMode, string(v.AttributeUpdateMode))
 	}
-	serializeattributesMap(s, schemas.UpdateVehicleRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeattributesMap(s, schemas.UpdateVehicleRequest_attributes, v.Attributes)
+	}
 	if v.DecoderManifestArn != nil {
 		s.WriteString(schemas.UpdateVehicleRequest_decoderManifestArn, *v.DecoderManifestArn)
 	}
 	if v.ModelManifestArn != nil {
 		s.WriteString(schemas.UpdateVehicleRequest_modelManifestArn, *v.ModelManifestArn)
 	}
-	serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequest_stateTemplatesToAdd, v.StateTemplatesToAdd)
-	serializeStateTemplateAssociationIdentifiers(s, schemas.UpdateVehicleRequest_stateTemplatesToRemove, v.StateTemplatesToRemove)
-	serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequest_stateTemplatesToUpdate, v.StateTemplatesToUpdate)
+	if v.StateTemplatesToAdd != nil {
+		serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequest_stateTemplatesToAdd, v.StateTemplatesToAdd)
+	}
+	if v.StateTemplatesToRemove != nil {
+		serializeStateTemplateAssociationIdentifiers(s, schemas.UpdateVehicleRequest_stateTemplatesToRemove, v.StateTemplatesToRemove)
+	}
+	if v.StateTemplatesToUpdate != nil {
+		serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequest_stateTemplatesToUpdate, v.StateTemplatesToUpdate)
+	}
 	if v.VehicleName != nil {
 		s.WriteString(schemas.UpdateVehicleRequest_vehicleName, *v.VehicleName)
 	}

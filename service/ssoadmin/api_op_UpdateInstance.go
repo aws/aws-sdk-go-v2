@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -19,9 +21,9 @@ import (
 //
 //   - Enable permission sets for the instance by specifying PermissionSetsEnabled .
 //
-// A request that specifies both EncryptionConfiguration and PermissionSetsEnabled
-// returns a ValidationException . To perform both operations, call UpdateInstance
-// separately for each. The two calls can be made in parallel.
+// If you specify both EncryptionConfiguration and PermissionSetsEnabled in a
+// request, the request returns a ValidationException . To perform both operations,
+// call UpdateInstance separately for each. You can make the two calls in parallel.
 func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput, optFns ...func(*Options)) (*UpdateInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceInput{}
@@ -58,11 +60,34 @@ type UpdateInstanceInput struct {
 	// value is true . After permission sets are enabled, they cannot be disabled.
 	//
 	// You can't set EncryptionConfiguration and PermissionSetsEnabled in the same
-	// request. To configure both, make two separate UpdateInstance calls. These calls
-	// can be made in parallel.
+	// request. To configure both, make two separate UpdateInstance calls. You can
+	// make these calls in parallel.
 	PermissionSetsEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateInstanceRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.UpdateInstanceRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateInstanceRequest_Name, *v.Name)
+	}
+	if v.PermissionSetsEnabled != nil {
+		s.WriteBool(schemas.UpdateInstanceRequest_PermissionSetsEnabled, *v.PermissionSetsEnabled)
+	}
 }
 
 type UpdateInstanceOutput struct {
@@ -72,13 +97,26 @@ type UpdateInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstance, schemas.UpdateInstanceRequest, schemas.UpdateInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstance, schemas.UpdateInstanceRequest, schemas.UpdateInstanceResponse), output: &UpdateInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

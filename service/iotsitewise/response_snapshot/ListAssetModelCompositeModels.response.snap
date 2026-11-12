@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assetModelCompositeModelSummaries":[{"description":"__Description__","externalId":"__ExternalId__","id":"__Id__","name":"__Name__","path":[{"id":"__Id__","name":"__Name__"},{"id":"__Id__","name":"__Name__"}],"type":"__Type__"},{"description":"__Description__","externalId":"__ExternalId__","id":"__Id__","name":"__Name__","path":[{"id":"__Id__","name":"__Name__"},{"id":"__Id__","name":"__Name__"}],"type":"__Type__"}],"nextToken":"__NextToken__"}

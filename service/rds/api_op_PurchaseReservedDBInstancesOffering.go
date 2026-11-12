@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type PurchaseReservedDBInstancesOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedDBInstancesOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedDBInstancesOfferingMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedDBInstancesOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceCount != nil {
+		s.WriteInt32(schemas.PurchaseReservedDBInstancesOfferingMessage_DBInstanceCount, *v.DBInstanceCount)
+	}
+	if v.ReservedDBInstanceId != nil {
+		s.WriteString(schemas.PurchaseReservedDBInstancesOfferingMessage_ReservedDBInstanceId, *v.ReservedDBInstanceId)
+	}
+	if v.ReservedDBInstancesOfferingId != nil {
+		s.WriteString(schemas.PurchaseReservedDBInstancesOfferingMessage_ReservedDBInstancesOfferingId, *v.ReservedDBInstancesOfferingId)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PurchaseReservedDBInstancesOfferingMessage_Tags, v.Tags)
+	}
+}
+
 type PurchaseReservedDBInstancesOfferingOutput struct {
 
 	// This data type is used as a response element in the DescribeReservedDBInstances
@@ -67,13 +90,34 @@ type PurchaseReservedDBInstancesOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedDBInstancesOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedDBInstancesOfferingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedDBInstancesOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservedDBInstance != nil {
+		s.WriteStruct(schemas.PurchaseReservedDBInstancesOfferingResult_ReservedDBInstance)
+		v.ReservedDBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseReservedDBInstancesOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseReservedDBInstancesOfferingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseReservedDBInstancesOfferingResult_ReservedDBInstance:
+			v.ReservedDBInstance = &types.ReservedDBInstance{}
+			return v.ReservedDBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseReservedDBInstancesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurchaseReservedDBInstancesOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedDBInstancesOffering, schemas.PurchaseReservedDBInstancesOfferingMessage, schemas.PurchaseReservedDBInstancesOfferingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPurchaseReservedDBInstancesOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedDBInstancesOffering, schemas.PurchaseReservedDBInstancesOfferingMessage, schemas.PurchaseReservedDBInstancesOfferingResult), output: &PurchaseReservedDBInstancesOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

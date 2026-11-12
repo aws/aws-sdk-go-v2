@@ -133,6 +133,25 @@ func (ExecutionPolicy) Values() []ExecutionPolicy {
 	}
 }
 
+type LaunchTemplateMode string
+
+// Enum values for LaunchTemplateMode
+const (
+	LaunchTemplateModeCustom  LaunchTemplateMode = "CUSTOM"
+	LaunchTemplateModeManaged LaunchTemplateMode = "MANAGED"
+)
+
+// Values returns all known values for LaunchTemplateMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LaunchTemplateMode) Values() []LaunchTemplateMode {
+	return []LaunchTemplateMode{
+		"CUSTOM",
+		"MANAGED",
+	}
+}
+
 type NetworkType string
 
 // Enum values for NetworkType

@@ -52,7 +52,9 @@ func (v *AssociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.AssociateAccountsInput_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.AssociateAccountsInput_AccountIds, v.AccountIds)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.AssociateAccountsInput_Arn, *v.Arn)
 	}

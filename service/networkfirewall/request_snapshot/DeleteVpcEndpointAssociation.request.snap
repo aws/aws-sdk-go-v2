@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/DeleteVpcEndpointAssociation
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DeleteVpcEndpointAssociation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"VpcEndpointAssociationArn":"__VpcEndpointAssociationArn__"}
+¿xVpcEndpointAssociationArnx__VpcEndpointAssociationArn__ÿ

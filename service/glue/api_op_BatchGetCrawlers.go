@@ -47,7 +47,9 @@ func (v *BatchGetCrawlersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCrawlersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlerNameList(s, schemas.BatchGetCrawlersRequest_CrawlerNames, v.CrawlerNames)
+	if v.CrawlerNames != nil {
+		serializeCrawlerNameList(s, schemas.BatchGetCrawlersRequest_CrawlerNames, v.CrawlerNames)
+	}
 }
 
 type BatchGetCrawlersOutput struct {
@@ -71,8 +73,12 @@ func (v *BatchGetCrawlersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCrawlersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlerList(s, schemas.BatchGetCrawlersResponse_Crawlers, v.Crawlers)
-	serializeCrawlerNameList(s, schemas.BatchGetCrawlersResponse_CrawlersNotFound, v.CrawlersNotFound)
+	if v.Crawlers != nil {
+		serializeCrawlerList(s, schemas.BatchGetCrawlersResponse_Crawlers, v.Crawlers)
+	}
+	if v.CrawlersNotFound != nil {
+		serializeCrawlerNameList(s, schemas.BatchGetCrawlersResponse_CrawlersNotFound, v.CrawlersNotFound)
+	}
 }
 func (v *BatchGetCrawlersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCrawlersResponse, func(s *smithy.Schema) error {

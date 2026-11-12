@@ -90,7 +90,9 @@ func (v *CreateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSnapshotRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateSnapshotRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSnapshotRequest_Tags, v.Tags)
+	}
 	if v.VolumeId != nil {
 		s.WriteString(schemas.CreateSnapshotRequest_VolumeId, *v.VolumeId)
 	}

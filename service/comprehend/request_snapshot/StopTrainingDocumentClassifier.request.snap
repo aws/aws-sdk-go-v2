@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/StopTrainingDocumentClassifier
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.StopTrainingDocumentClassifier
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DocumentClassifierArn":"__DocumentClassifierArn__"}
+¿uDocumentClassifierArnx__DocumentClassifierArn__ÿ

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assetPropertyValueHistory":[{"quality":"GOOD","timestamp":{"offsetInNanos":1,"timeInSeconds":1},"value":{"booleanValue":true,"doubleValue":1,"integerValue":1,"nullValue":{"valueType":"D"},"stringValue":"__StringValue__"}},{"quality":"GOOD","timestamp":{"offsetInNanos":1,"timeInSeconds":1},"value":{"booleanValue":true,"doubleValue":1,"integerValue":1,"nullValue":{"valueType":"D"},"stringValue":"__StringValue__"}}],"nextToken":"__NextToken__"}

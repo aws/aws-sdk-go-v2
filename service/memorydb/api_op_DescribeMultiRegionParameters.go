@@ -95,7 +95,9 @@ func (v *DescribeMultiRegionParametersOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeMultiRegionParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiRegionParametersList(s, schemas.DescribeMultiRegionParametersResponse_MultiRegionParameters, v.MultiRegionParameters)
+	if v.MultiRegionParameters != nil {
+		serializeMultiRegionParametersList(s, schemas.DescribeMultiRegionParametersResponse_MultiRegionParameters, v.MultiRegionParameters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMultiRegionParametersResponse_NextToken, *v.NextToken)
 	}
@@ -127,6 +129,9 @@ func (c *Client) addOperationDescribeMultiRegionParametersMiddlewares(stack *mid
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

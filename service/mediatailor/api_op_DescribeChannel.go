@@ -126,7 +126,9 @@ func (v *DescribeChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeChannelResponse_Arn, *v.Arn)
 	}
-	serializeAudiences(s, schemas.DescribeChannelResponse_Audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.DescribeChannelResponse_Audiences, v.Audiences)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.DescribeChannelResponse_ChannelName, *v.ChannelName)
 	}
@@ -149,11 +151,15 @@ func (v *DescribeChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResponseOutputs(s, schemas.DescribeChannelResponse_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeResponseOutputs(s, schemas.DescribeChannelResponse_Outputs, v.Outputs)
+	}
 	if v.PlaybackMode != nil {
 		s.WriteString(schemas.DescribeChannelResponse_PlaybackMode, *v.PlaybackMode)
 	}
-	serialize__mapOf__string(s, schemas.DescribeChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeChannelResponse_Tags, v.Tags)
+	}
 	if v.Tier != nil {
 		s.WriteString(schemas.DescribeChannelResponse_Tier, *v.Tier)
 	}

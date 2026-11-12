@@ -85,7 +85,9 @@ func (v *GetLabelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializelabelList(s, schemas.GetLabelsResult_labels, v.Labels)
+	if v.Labels != nil {
+		serializelabelList(s, schemas.GetLabelsResult_labels, v.Labels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLabelsResult_nextToken, *v.NextToken)
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Timestream_20181101.ListBatchLoadTasks
+
+{"BatchLoadTasks":[{"CreationTime":946684800,"DatabaseName":"__DatabaseName__","LastUpdatedTime":946684800,"ResumableUntil":946684800,"TableName":"__TableName__","TaskId":"__TaskId__","TaskStatus":"CREATED"},{"CreationTime":946684800,"DatabaseName":"__DatabaseName__","LastUpdatedTime":946684800,"ResumableUntil":946684800,"TableName":"__TableName__","TaskId":"__TaskId__","TaskStatus":"CREATED"}],"NextToken":"__NextToken__"}

@@ -73,7 +73,9 @@ func (v *ListRecommendationSummariesInput) SerializeMembers(s smithy.ShapeSerial
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRecommendationSummariesRequest_maxResults, *v.MaxResults)
 	}
-	serializeSummaryMetricsList(s, schemas.ListRecommendationSummariesRequest_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeSummaryMetricsList(s, schemas.ListRecommendationSummariesRequest_metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendationSummariesRequest_nextToken, *v.NextToken)
 	}
@@ -122,7 +124,9 @@ func (v *ListRecommendationSummariesOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.GroupBy != nil {
 		s.WriteString(schemas.ListRecommendationSummariesResponse_groupBy, *v.GroupBy)
 	}
-	serializeRecommendationSummariesList(s, schemas.ListRecommendationSummariesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeRecommendationSummariesList(s, schemas.ListRecommendationSummariesResponse_items, v.Items)
+	}
 	if v.Metrics != nil {
 		s.WriteStruct(schemas.ListRecommendationSummariesResponse_metrics)
 		v.Metrics.SerializeMembers(s)

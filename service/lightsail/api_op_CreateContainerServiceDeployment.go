@@ -63,7 +63,9 @@ func (v *CreateContainerServiceDeploymentInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateContainerServiceDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerMap(s, schemas.CreateContainerServiceDeploymentRequest_containers, v.Containers)
+	if v.Containers != nil {
+		serializeContainerMap(s, schemas.CreateContainerServiceDeploymentRequest_containers, v.Containers)
+	}
 	if v.PublicEndpoint != nil {
 		s.WriteStruct(schemas.CreateContainerServiceDeploymentRequest_publicEndpoint)
 		v.PublicEndpoint.SerializeMembers(s)

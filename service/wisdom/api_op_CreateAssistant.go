@@ -89,7 +89,9 @@ func (v *CreateAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateAssistantRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAssistantRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateAssistantRequest_type, string(v.Type))
 	}

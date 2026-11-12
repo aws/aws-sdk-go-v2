@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","subjects":[{"createdAt":"2000-01-01T00:00:00Z","enabled":true,"lastSeenAt":"2000-01-01T00:00:00Z","subjectArn":"__SubjectArn__","subjectId":"__SubjectId__","updatedAt":"2000-01-01T00:00:00Z","x509Subject":"__X509Subject__"},{"createdAt":"2000-01-01T00:00:00Z","enabled":true,"lastSeenAt":"2000-01-01T00:00:00Z","subjectArn":"__SubjectArn__","subjectId":"__SubjectId__","updatedAt":"2000-01-01T00:00:00Z","x509Subject":"__X509Subject__"}]}

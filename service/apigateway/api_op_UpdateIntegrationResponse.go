@@ -67,7 +67,9 @@ func (v *UpdateIntegrationResponseInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.HttpMethod != nil {
 		s.WriteString(schemas.UpdateIntegrationResponseRequest_httpMethod, *v.HttpMethod)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateIntegrationResponseRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateIntegrationResponseRequest_patchOperations, v.PatchOperations)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.UpdateIntegrationResponseRequest_resourceId, *v.ResourceId)
 	}
@@ -139,8 +141,12 @@ func (v *UpdateIntegrationResponseOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ContentHandling != "" {
 		s.WriteString(schemas.IntegrationResponse_contentHandling, string(v.ContentHandling))
 	}
-	serializeMapOfStringToString(s, schemas.IntegrationResponse_responseParameters, v.ResponseParameters)
-	serializeMapOfStringToString(s, schemas.IntegrationResponse_responseTemplates, v.ResponseTemplates)
+	if v.ResponseParameters != nil {
+		serializeMapOfStringToString(s, schemas.IntegrationResponse_responseParameters, v.ResponseParameters)
+	}
+	if v.ResponseTemplates != nil {
+		serializeMapOfStringToString(s, schemas.IntegrationResponse_responseTemplates, v.ResponseTemplates)
+	}
 	if v.SelectionPattern != nil {
 		s.WriteString(schemas.IntegrationResponse_selectionPattern, *v.SelectionPattern)
 	}

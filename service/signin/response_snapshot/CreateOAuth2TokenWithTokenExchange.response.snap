@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"access_token":"__AccessToken__","expires_in":1,"issued_token_type":"__IssuedTokenType__","token_type":"__TokenType__"}

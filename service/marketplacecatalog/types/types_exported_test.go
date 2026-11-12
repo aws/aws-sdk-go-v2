@@ -20,6 +20,9 @@ func ExampleEntityTypeFilters_outputUsage() {
 	case *types.EntityTypeFiltersMemberDataProductFilters:
 		_ = v.Value // Value is types.DataProductFilters
 
+	case *types.EntityTypeFiltersMemberExpressPrivateOfferConfigurationFilters:
+		_ = v.Value // Value is types.ExpressPrivateOfferConfigurationFilters
+
 	case *types.EntityTypeFiltersMemberMachineLearningProductFilters:
 		_ = v.Value // Value is types.MachineLearningProductFilters
 
@@ -35,6 +38,9 @@ func ExampleEntityTypeFilters_outputUsage() {
 	case *types.EntityTypeFiltersMemberSaaSProductFilters:
 		_ = v.Value // Value is types.SaaSProductFilters
 
+	case *types.EntityTypeFiltersMemberSubsidiaryAuthorizationFilters:
+		_ = v.Value // Value is types.SubsidiaryAuthorizationFilters
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -49,9 +55,11 @@ var _ *types.ContainerProductFilters
 var _ *types.SaaSProductFilters
 var _ *types.OfferFilters
 var _ *types.MachineLearningProductFilters
+var _ *types.ExpressPrivateOfferConfigurationFilters
 var _ *types.ResaleAuthorizationFilters
 var _ *types.DataProductFilters
 var _ *types.OfferSetFilters
+var _ *types.SubsidiaryAuthorizationFilters
 
 func ExampleEntityTypeSort_outputUsage() {
 	var union types.EntityTypeSort
@@ -65,6 +73,9 @@ func ExampleEntityTypeSort_outputUsage() {
 
 	case *types.EntityTypeSortMemberDataProductSort:
 		_ = v.Value // Value is types.DataProductSort
+
+	case *types.EntityTypeSortMemberExpressPrivateOfferConfigurationSort:
+		_ = v.Value // Value is types.ExpressPrivateOfferConfigurationSort
 
 	case *types.EntityTypeSortMemberMachineLearningProductSort:
 		_ = v.Value // Value is types.MachineLearningProductSort
@@ -81,6 +92,9 @@ func ExampleEntityTypeSort_outputUsage() {
 	case *types.EntityTypeSortMemberSaaSProductSort:
 		_ = v.Value // Value is types.SaaSProductSort
 
+	case *types.EntityTypeSortMemberSubsidiaryAuthorizationSort:
+		_ = v.Value // Value is types.SubsidiaryAuthorizationSort
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -91,12 +105,14 @@ func ExampleEntityTypeSort_outputUsage() {
 }
 
 var _ *types.MachineLearningProductSort
+var _ *types.ExpressPrivateOfferConfigurationSort
 var _ *types.SaaSProductSort
 var _ *types.AmiProductSort
 var _ *types.OfferSetSort
 var _ *types.OfferSort
 var _ *types.DataProductSort
 var _ *types.ResaleAuthorizationSort
+var _ *types.SubsidiaryAuthorizationSort
 var _ *types.ContainerProductSort
 
 func ExampleFrameworkFilters_outputUsage() {

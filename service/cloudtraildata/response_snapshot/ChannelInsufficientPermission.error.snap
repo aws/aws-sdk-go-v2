@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"ChannelInsufficientPermission","message":"__Message__"}

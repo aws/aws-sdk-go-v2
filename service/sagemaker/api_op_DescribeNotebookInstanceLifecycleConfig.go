@@ -99,8 +99,12 @@ func (v *DescribeNotebookInstanceLifecycleConfigOutput) SerializeMembers(s smith
 	if v.NotebookInstanceLifecycleConfigName != nil {
 		s.WriteString(schemas.DescribeNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
 	}
-	serializeNotebookInstanceLifecycleConfigList(s, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnCreate, v.OnCreate)
-	serializeNotebookInstanceLifecycleConfigList(s, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnStart, v.OnStart)
+	if v.OnCreate != nil {
+		serializeNotebookInstanceLifecycleConfigList(s, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnCreate, v.OnCreate)
+	}
+	if v.OnStart != nil {
+		serializeNotebookInstanceLifecycleConfigList(s, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnStart, v.OnStart)
+	}
 }
 func (v *DescribeNotebookInstanceLifecycleConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeNotebookInstanceLifecycleConfigOutput, func(s *smithy.Schema) error {

@@ -228,7 +228,9 @@ func (v *DescribeSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeSecretResponse_Description, *v.Description)
 	}
-	serializeExternalSecretRotationMetadataType(s, schemas.DescribeSecretResponse_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	if v.ExternalSecretRotationMetadata != nil {
+		serializeExternalSecretRotationMetadataType(s, schemas.DescribeSecretResponse_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	}
 	if v.ExternalSecretRotationRoleArn != nil {
 		s.WriteString(schemas.DescribeSecretResponse_ExternalSecretRotationRoleArn, *v.ExternalSecretRotationRoleArn)
 	}
@@ -256,7 +258,9 @@ func (v *DescribeSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryRegion != nil {
 		s.WriteString(schemas.DescribeSecretResponse_PrimaryRegion, *v.PrimaryRegion)
 	}
-	serializeReplicationStatusListType(s, schemas.DescribeSecretResponse_ReplicationStatus, v.ReplicationStatus)
+	if v.ReplicationStatus != nil {
+		serializeReplicationStatusListType(s, schemas.DescribeSecretResponse_ReplicationStatus, v.ReplicationStatus)
+	}
 	if v.RotationEnabled != nil {
 		s.WriteBool(schemas.DescribeSecretResponse_RotationEnabled, *v.RotationEnabled)
 	}
@@ -268,11 +272,15 @@ func (v *DescribeSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RotationRules.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagListType(s, schemas.DescribeSecretResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagListType(s, schemas.DescribeSecretResponse_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.DescribeSecretResponse_Type, *v.Type)
 	}
-	serializeSecretVersionsToStagesMapType(s, schemas.DescribeSecretResponse_VersionIdsToStages, v.VersionIdsToStages)
+	if v.VersionIdsToStages != nil {
+		serializeSecretVersionsToStagesMapType(s, schemas.DescribeSecretResponse_VersionIdsToStages, v.VersionIdsToStages)
+	}
 }
 func (v *DescribeSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSecretResponse, func(s *smithy.Schema) error {

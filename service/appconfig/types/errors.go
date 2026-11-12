@@ -44,7 +44,9 @@ func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBadRequestDetails(s, schemas.BadRequestException_Details, v.Details)
+	if v.Details != nil {
+		serializeBadRequestDetails(s, schemas.BadRequestException_Details, v.Details)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BadRequestException_Message, *v.Message)
 	}

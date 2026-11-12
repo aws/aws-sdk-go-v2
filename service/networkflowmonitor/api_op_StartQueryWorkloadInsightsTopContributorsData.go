@@ -4,7 +4,9 @@ package networkflowmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,30 @@ type StartQueryWorkloadInsightsTopContributorsDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryWorkloadInsightsTopContributorsDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryWorkloadInsightsTopContributorsDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryWorkloadInsightsTopContributorsDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCategory != "" {
+		s.WriteString(schemas.StartQueryWorkloadInsightsTopContributorsDataInput_destinationCategory, string(v.DestinationCategory))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.StartQueryWorkloadInsightsTopContributorsDataInput_endTime, *v.EndTime)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.StartQueryWorkloadInsightsTopContributorsDataInput_metricName, string(v.MetricName))
+	}
+	if v.ScopeId != nil {
+		s.WriteString(schemas.StartQueryWorkloadInsightsTopContributorsDataInput_scopeId, *v.ScopeId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartQueryWorkloadInsightsTopContributorsDataInput_startTime, *v.StartTime)
+	}
+}
+
 type StartQueryWorkloadInsightsTopContributorsDataOutput struct {
 
 	// The identifier for the query. A query ID is an internally-generated identifier
@@ -104,13 +130,32 @@ type StartQueryWorkloadInsightsTopContributorsDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryWorkloadInsightsTopContributorsDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryWorkloadInsightsTopContributorsDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryWorkloadInsightsTopContributorsDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.StartQueryWorkloadInsightsTopContributorsDataOutput_queryId, *v.QueryId)
+	}
+}
+func (v *StartQueryWorkloadInsightsTopContributorsDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQueryWorkloadInsightsTopContributorsDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQueryWorkloadInsightsTopContributorsDataOutput_queryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.StartQueryWorkloadInsightsTopContributorsDataOutput_queryId, v.QueryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQueryWorkloadInsightsTopContributorsDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartQueryWorkloadInsightsTopContributorsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryWorkloadInsightsTopContributorsData, schemas.StartQueryWorkloadInsightsTopContributorsDataInput, schemas.StartQueryWorkloadInsightsTopContributorsDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartQueryWorkloadInsightsTopContributorsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryWorkloadInsightsTopContributorsData, schemas.StartQueryWorkloadInsightsTopContributorsDataInput, schemas.StartQueryWorkloadInsightsTopContributorsDataOutput), output: &StartQueryWorkloadInsightsTopContributorsDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

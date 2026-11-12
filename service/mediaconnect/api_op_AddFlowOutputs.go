@@ -51,7 +51,9 @@ func (v *AddFlowOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowArn != nil {
 		s.WriteString(schemas.AddFlowOutputsRequest_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfAddOutputRequest(s, schemas.AddFlowOutputsRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfAddOutputRequest(s, schemas.AddFlowOutputsRequest_Outputs, v.Outputs)
+	}
 }
 
 type AddFlowOutputsOutput struct {
@@ -78,7 +80,9 @@ func (v *AddFlowOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowArn != nil {
 		s.WriteString(schemas.AddFlowOutputsResponse_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfOutput(s, schemas.AddFlowOutputsResponse_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfOutput(s, schemas.AddFlowOutputsResponse_Outputs, v.Outputs)
+	}
 }
 func (v *AddFlowOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddFlowOutputsResponse, func(s *smithy.Schema) error {

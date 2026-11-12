@@ -74,7 +74,9 @@ func (v *CreateCodeRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GitConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateCodeRepositoryInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCodeRepositoryInput_Tags, v.Tags)
+	}
 }
 
 type CreateCodeRepositoryOutput struct {

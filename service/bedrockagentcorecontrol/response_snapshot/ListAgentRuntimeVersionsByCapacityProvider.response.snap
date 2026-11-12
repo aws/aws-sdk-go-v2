@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentRuntimes":[{"agentRuntimeArn":"__AgentRuntimeArn__","agentRuntimeVersion":"__AgentRuntimeVersion__","status":"CREATING"},{"agentRuntimeArn":"__AgentRuntimeArn__","agentRuntimeVersion":"__AgentRuntimeVersion__","status":"CREATING"}],"nextToken":"__NextToken__"}

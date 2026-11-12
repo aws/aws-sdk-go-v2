@@ -23,6 +23,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.InternalServerException,
 			New:    func() any { return &types.InternalServerException{} },
 		},
+		"com.amazonaws.cloudwatchomni#PolicyTooLargeException": {
+			Schema: schemas.PolicyTooLargeException,
+			New:    func() any { return &types.PolicyTooLargeException{} },
+		},
 		"com.amazonaws.cloudwatchomni#ResourceNotFoundException": {
 			Schema: schemas.ResourceNotFoundException,
 			New:    func() any { return &types.ResourceNotFoundException{} },

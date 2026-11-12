@@ -78,7 +78,7 @@
                     }
                 },
                 "secretAccessKey": {
-                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "target": "com.amazonaws.lightsail#SensitiveNonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The secret access key used to sign requests.</p>\n         <p>You should store the secret access key in a safe location. We recommend that you delete\n      the access key if the secret access key is compromised.</p>"
                     }
@@ -3146,7 +3146,7 @@
                     }
                 },
                 "password": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The container service registry password to use to push container images to the container\n      image registry of a Lightsail account</p>"
                     }
@@ -4543,6 +4543,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the custom error responses for the distribution. With a\n      custom error response, you can specify the page to return when the origin responds with a\n      given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>"
                     }
+                },
+                "enableWaf": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable Web Application Firewall (WAF) for the distribution. WAF\n      inspects viewer requests and blocks requests that match the WAF rule groups that you\n      enable.</p>\n         <p>When you enable WAF without specifying the <code>wafRules</code> parameter, the\n      distribution has no WAF rule groups enabled and doesn't block any requests.</p>\n         <note>\n            <p>WAF is available only for distributions that use the <code>medium_1_0</code> or\n          <code>large_1_0</code> bundle.</p>\n         </note>"
+                    }
+                },
+                "wafRules": {
+                    "target": "com.amazonaws.lightsail#WafRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the WAF rule groups to enable for the\n      distribution.</p>\n         <p>The WAF rule groups that you can specify depend on the bundle of the\n      distribution:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>medium_1_0</code> – Supports the <code>AWSManagedRulesCommonRuleSet</code>,\n            <code>AWSManagedRulesKnownBadInputsRuleSet</code>, and\n            <code>AWSManagedRulesAnonymousIpList</code> rule groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>large_1_0</code> – Supports the rule groups for <code>medium_1_0</code>, plus\n            <code>AWSManagedRulesAdminProtectionRuleSet</code>,\n            <code>AWSManagedRulesSQLiRuleSet</code>, <code>AWSManagedRulesLinuxRuleSet</code>,\n            <code>AWSManagedRulesUnixRuleSet</code>, <code>AWSManagedRulesWindowsRuleSet</code>,\n            <code>AWSManagedRulesPHPRuleSet</code>, <code>AWSManagedRulesWordPressRuleSet</code>,\n            <code>AWSManagedRulesAmazonIpReputationList</code>,\n            <code>AWSManagedRulesATPRuleSet</code>, <code>AWSManagedRulesACFPRuleSet</code>, and\n            <code>AWSManagedRulesBotControlRuleSet</code> rule groups.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -5257,7 +5269,7 @@
                     }
                 },
                 "privateKeyBase64": {
-                    "target": "com.amazonaws.lightsail#Base64",
+                    "target": "com.amazonaws.lightsail#SensitiveBase64",
                     "traits": {
                         "smithy.api#documentation": "<p>A base64-encoded RSA private key.</p>"
                     }
@@ -8259,6 +8271,18 @@
                     "traits": {
                         "smithy.api#enumValue": "Http5xxErrorRate"
                     }
+                },
+                "WafAllowedRequests": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WafAllowedRequests"
+                    }
+                },
+                "WafBlockedRequests": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WafBlockedRequests"
+                    }
                 }
             }
         },
@@ -8546,7 +8570,7 @@
                     }
                 },
                 "privateKeyBase64": {
-                    "target": "com.amazonaws.lightsail#Base64",
+                    "target": "com.amazonaws.lightsail#SensitiveBase64",
                     "traits": {
                         "smithy.api#documentation": "<p>A base64-encoded RSA private key.</p>"
                     }
@@ -11049,7 +11073,7 @@
                 "metricName": {
                     "target": "com.amazonaws.lightsail#DistributionMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric for which you want to return information.</p>\n         <p>Valid distribution metric names are listed below, along with the most useful\n        <code>statistics</code> to include in your request, and the published <code>unit</code>\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Requests</code>\n                  </b> - The total number of viewer\n          requests received by your Lightsail distribution, for all HTTP methods, and for both\n          HTTP and HTTPS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesDownloaded</code>\n                  </b> - The number of bytes\n          downloaded by viewers for GET, HEAD, and OPTIONS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesUploaded </code>\n                  </b> - The number of bytes\n          uploaded to your origin by your Lightsail distribution, using POST and PUT\n          requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>TotalErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 4xx or 5xx.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>4xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status cod was 4xx. In these cases, the\n          client or client viewer may have made an error. For example, a status code of 404 (Not\n          Found) means that the client requested an object that could not be found.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>5xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 5xx. In these cases, the\n          origin server did not satisfy the requests. For example, a status code of 503 (Service\n          Unavailable) means that the origin server is currently unavailable.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The metric for which you want to return information.</p>\n         <p>Valid distribution metric names are listed below, along with the most useful\n        <code>statistics</code> to include in your request, and the published <code>unit</code>\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Requests</code>\n                  </b> - The total number of viewer\n          requests received by your Lightsail distribution, for all HTTP methods, and for both\n          HTTP and HTTPS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesDownloaded</code>\n                  </b> - The number of bytes\n          downloaded by viewers for GET, HEAD, and OPTIONS requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BytesUploaded </code>\n                  </b> - The number of bytes\n          uploaded to your origin by your Lightsail distribution, using POST and PUT\n          requests.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>TotalErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 4xx or 5xx.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>4xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status cod was 4xx. In these cases, the\n          client or client viewer may have made an error. For example, a status code of 404 (Not\n          Found) means that the client requested an object that could not be found.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>5xxErrorRate</code>\n                  </b> - The percentage of all\n          viewer requests for which the response's HTTP status code was 5xx. In these cases, the\n          origin server did not satisfy the requests. For example, a status code of 503 (Service\n          Unavailable) means that the origin server is currently unavailable.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>WafAllowedRequests</code>\n                  </b> - The number of\n          viewer requests that Web Application Firewall (WAF) allowed. This metric is available only\n          when WAF is enabled for the distribution.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>WafBlockedRequests</code>\n                  </b> - The number of\n          viewer requests that WAF blocked. This metric is available only when WAF is enabled for\n          the distribution.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>None</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11593,7 +11617,7 @@
                 "metricName": {
                     "target": "com.amazonaws.lightsail#InstanceMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric for which you want to return information.</p>\n         <p>Valid instance metric names are listed below, along with the most useful\n        <code>statistics</code> to include in your request, and the published <code>unit</code>\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>BurstCapacityPercentage</code>\n                  </b> - The percentage\n          of CPU performance available for your instance to burst above its baseline. Your instance\n          continuously accrues and consumes burst capacity. Burst capacity stops accruing when your\n          instance's <code>BurstCapacityPercentage</code> reaches 100%. For more information, see\n            <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity\">Viewing instance burst capacity in Amazon Lightsail</a>.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and\n            <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BurstCapacityTime</code>\n                  </b> - The available amount\n          of time for your instance to burst at 100% CPU utilization. Your instance continuously\n          accrues and consumes burst capacity. Burst capacity time stops accruing when your\n          instance's <code>BurstCapacityPercentage</code> metric reaches 100%.</p>\n               <p>Burst capacity time is consumed at the full rate only when your instance operates at\n          100% CPU utilization. For example, if your instance operates at 50% CPU utilization in the\n          burstable zone for a 5-minute period, then it consumes CPU burst capacity minutes at a 50%\n          rate in that period. Your instance consumed 2 minutes and 30 seconds of CPU burst capacity\n          minutes in the 5-minute period. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity\">Viewing instance burst capacity in Amazon Lightsail</a>.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and\n            <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Seconds</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUtilization</code>\n                  </b> - The percentage of\n          allocated compute units that are currently in use on the instance. This metric identifies\n          the processing power to run the applications on the instance. Tools in your operating\n          system can show a lower percentage than Lightsail when the instance is not allocated a\n          full processor core.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and\n            <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkIn</code>\n                  </b> - The number of bytes received\n          on all network interfaces by the instance. This metric identifies the volume of incoming\n          network traffic to the instance. The number reported is the number of bytes received\n          during the period. Because this metric is reported in 5-minute intervals, divide the\n          reported number by 300 to find Bytes/second.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Bytes</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkOut</code>\n                  </b> - The number of bytes sent\n          out on all network interfaces by the instance. This metric identifies the volume of\n          outgoing network traffic from the instance. The number reported is the number of bytes\n          sent during the period. Because this metric is reported in 5-minute intervals, divide the\n          reported number by 300 to find Bytes/second.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Bytes</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StatusCheckFailed</code>\n                  </b> - Reports whether the\n          instance passed or failed both the instance status check and the system status check. This\n          metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute\n          (60 seconds) granularity.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StatusCheckFailed_Instance</code>\n                  </b> - Reports\n          whether the instance passed or failed the instance status check. This metric can be either\n          0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds)\n          granularity.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StatusCheckFailed_System</code>\n                  </b> - Reports\n          whether the instance passed or failed the system status check. This metric can be either 0\n          (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds)\n          granularity.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MetadataNoToken</code>\n                  </b> - Reports the number of\n          times that the instance metadata service was successfully accessed without a token. This\n          metric determines if there are any processes accessing instance metadata by using Instance\n          Metadata Service Version 1, which doesn't use a token. If all requests use token-backed\n          sessions, such as Instance Metadata Service Version 2, then the value is 0.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The metric for which you want to return information.</p>\n         <p>Valid instance metric names are listed below, along with the most useful\n        <code>statistics</code> to include in your request, and the published <code>unit</code>\n      value.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>BurstCapacityPercentage</code>\n                  </b> - The percentage\n          of CPU performance available for your instance to burst above its baseline. Your instance\n          continuously accrues and consumes burst capacity. Burst capacity stops accruing when your\n          instance's <code>BurstCapacityPercentage</code> reaches 100%. For more information, see\n            <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity\">Viewing instance burst capacity in Amazon Lightsail</a>.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and\n            <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BurstCapacityTime</code>\n                  </b> - The available amount\n          of time for your instance to burst at 100% CPU utilization. Your instance continuously\n          accrues and consumes burst capacity. Burst capacity time stops accruing when your\n          instance's <code>BurstCapacityPercentage</code> metric reaches 100%.</p>\n               <p>Burst capacity time is consumed at the full rate only when your instance operates at\n          100% CPU utilization. For example, if your instance operates at 50% CPU utilization in the\n          burstable zone for a 5-minute period, then it consumes CPU burst capacity minutes at a 50%\n          rate in that period. Your instance consumed 2 minutes and 30 seconds of CPU burst capacity\n          minutes in the 5-minute period. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity\">Viewing instance burst capacity in Amazon Lightsail</a>.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and\n            <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Seconds</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CPUUtilization</code>\n                  </b> - The percentage of\n          allocated compute units that are currently in use on the instance. This metric identifies\n          the processing power to run the applications on the instance. Tools in your operating\n          system can show a lower percentage than Lightsail when the instance is not allocated a\n          full processor core.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and\n            <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Percent</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkIn</code>\n                  </b> - The number of bytes received\n          on all network interfaces by the instance. This metric identifies the volume of incoming\n          network traffic to the instance. The number reported is the number of bytes received\n          during the period. Because this metric is reported in 5-minute intervals, divide the\n          reported number by 300 to find Bytes/second.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Bytes</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NetworkOut</code>\n                  </b> - The number of bytes sent\n          out on all network interfaces by the instance. This metric identifies the volume of\n          outgoing network traffic from the instance. The number reported is the number of bytes\n          sent during the period. Because this metric is reported in 5-minute intervals, divide the\n          reported number by 300 to find Bytes/second.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Bytes</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StatusCheckFailed</code>\n                  </b> - Reports whether the\n          instance passed or failed both the instance status check and the system status check. This\n          metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute\n          (60 seconds) granularity.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StatusCheckFailed_Instance</code>\n                  </b> - Reports\n          whether the instance passed or failed the instance status check. This metric can be either\n          0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds)\n          granularity.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StatusCheckFailed_System</code>\n                  </b> - Reports\n          whether the instance passed or failed the system status check. This metric can be either 0\n          (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds)\n          granularity.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MetadataNoToken</code>\n                  </b> - Reports the number of\n          times that the instance metadata service was successfully accessed without a token. This\n          metric determines if there are any processes accessing instance metadata by using Instance\n          Metadata Service Version 1, which doesn't use a token. If all requests use token-backed\n          sessions, such as Instance Metadata Service Version 2, then the value is 0.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskReadOps</code>\n                  </b> - The number of read\n          operations completed on the system disk of the instance during the period. This metric\n          doesn't include activity on additional disks that you attach to the instance.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskWriteOps</code>\n                  </b> - The number of write\n          operations completed on the system disk of the instance during the period. This metric\n          doesn't include activity on additional disks that you attach to the instance.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskReadBytes</code>\n                  </b> - The number of bytes read\n          from the system disk of the instance during the period. This metric doesn't include\n          activity on additional disks that you attach to the instance.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Bytes</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskWriteBytes</code>\n                  </b> - The number of bytes\n          written to the system disk of the instance during the period. This metric doesn't include\n          activity on additional disks that you attach to the instance.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Bytes</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskTotalReadTime</code>\n                  </b> - The total number of\n          seconds spent by all read operations that completed on the system disk of the instance\n          during the period. This metric doesn't include activity on additional disks that you\n          attach to the instance.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Seconds</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskTotalWriteTime</code>\n                  </b> - The total number of\n          seconds spent by all write operations that completed on the system disk of the instance\n          during the period. This metric doesn't include activity on additional disks that you\n          attach to the instance.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Seconds</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskQueueLength</code>\n                  </b> - The number of read and\n          write requests that are waiting to access the system disk of the instance. This metric\n          doesn't include activity on additional disks that you attach to the instance.</p>\n               <p>\n                  <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p>\n               <p>\n                  <code>Unit</code>: The published unit is <code>Count</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about system disk performance metrics, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-disk-performance-metrics\">View system disk performance metrics for your Lightsail instance</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11737,6 +11761,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "includeHealthStatus": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include the instance health status checks in the response of your\n      request.</p>\n         <p>When set to <code>true</code>, the response includes the <code>instanceStatus</code> and\n        <code>systemStatus</code> of the instance. When omitted or set to <code>false</code>, the\n      response doesn't include them.</p>"
                     }
                 }
             },
@@ -12029,6 +12059,12 @@
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetInstances</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
+                    }
+                },
+                "includeHealthStatus": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include the instance health status checks of each instance in the\n      response of your request.</p>\n         <p>When set to <code>true</code>, the response includes the <code>instanceStatus</code> and\n        <code>systemStatus</code> of each instance. When omitted or set to <code>false</code>, the\n      response doesn't include them.</p>"
                     }
                 }
             },
@@ -14754,6 +14790,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata options for the Amazon Lightsail instance.</p>"
                     }
+                },
+                "instanceStatus": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reports impaired functionality that stems from issues internal to the instance, such as\n      impaired reachability.</p>\n         <p>This value is returned only when you set <code>includeHealthStatus</code> to\n        <code>true</code> in your request.</p>"
+                    }
+                },
+                "systemStatus": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reports impaired functionality that stems from issues related to the systems that\n      support an instance, such as hardware failures and network connectivity problems.</p>\n         <p>This value is returned only when you set <code>includeHealthStatus</code> to\n        <code>true</code> in your request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14788,7 +14836,7 @@
                     }
                 },
                 "password": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>For RDP access, the password for your Amazon Lightsail instance. Password will be an empty\n      string if the password for your new instance is not ready yet. When you create an instance, it\n      can take up to 15 minutes for the instance to be ready.</p>\n         <note>\n            <p>If you create an instance using any key pair other than the default\n          (<code>LightsailDefaultKeyPair</code>), <code>password</code> will always be an empty\n        string.</p>\n            <p>If you change the Administrator password on the instance, Lightsail will continue to\n        return the original password value. When accessing the instance using RDP, you need to\n        manually enter the Administrator password after changing it from the default.</p>\n         </note>"
                     }
@@ -14800,7 +14848,7 @@
                     }
                 },
                 "privateKey": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>For SSH access, the temporary private key. For OpenSSH clients (command line SSH), you\n      should save this value to <code>tempkey</code>).</p>"
                     }
@@ -14849,6 +14897,20 @@
                         "smithy.api#enumValue": "rdp"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#InstanceAttributeUpdates": {
+            "type": "structure",
+            "members": {
+                "bundleId": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the bundle to update the instance to.</p>\n         <p>Specify one of the following values for the bundle ID:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>auto</code>\n                  </b> – Updates an instance that\n          runs on a previous-generation bundle to the newer-generation equivalent of that\n          bundle. For example, specify <code>auto</code> to update an instance that runs on\n            <code>small_2_0</code> to <code>small_3_0</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Newer-generation bundle ID</b> – Updates an\n          instance that runs on a previous-generation bundle to the specified bundle. For example,\n          specify <code>small_3_0</code> to update an instance that runs on <code>small_2_0</code>\n          to <code>small_3_0</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Original bundle ID</b> – Updates an instance to\n          the previous-generation bundle that it ran on before an earlier update. For example,\n          specify <code>small_2_0</code> to return an instance that runs on <code>small_3_0</code>\n          to <code>small_2_0</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The instance must be in the <code>stopped</code> state to update its bundle.</p>\n            <p>There is no additional cost to update an instance to a newer-generation bundle.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the attributes to update on a Lightsail instance when it starts.</p>"
             }
         },
         "com.amazonaws.lightsail#InstanceEntry": {
@@ -15037,6 +15099,133 @@
                 }
             }
         },
+        "com.amazonaws.lightsail#InstanceHealthStatus": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>\n         <p>The following values are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ok</code> - All checks are passing. The instance is reachable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>impaired</code> - One or more checks have failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>initializing</code> - The instance was recently started, and the checks are in\n          progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>insufficient-data</code> - There isn't enough data yet to determine the\n          result.</p>\n            </li>\n            <li>\n               <p>\n                  <code>not-applicable</code> - The check doesn't apply because the instance isn't\n          running.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system instance health or instance health.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the status of an Amazon Lightsail instance.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetail": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusDetailName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instance status. The only possible value is\n      <code>reachability</code>.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusDetailValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>\n         <p>The following values are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>passed</code> - The check passed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed</code> - The check failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>initializing</code> - The check is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>insufficient-data</code> - There isn't enough data yet to determine the\n          result.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "impairedSince": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a status check failed. For an instance that was launched and impaired,\n      this is the time when the instance was launched.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the instance status.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#InstanceHealthStatusDetail"
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetailName": {
+            "type": "enum",
+            "members": {
+                "REACHABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reachability"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetailValue": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "passed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-data"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "initializing"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusValue": {
+            "type": "enum",
+            "members": {
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ok"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "impaired"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "initializing"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-data"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "not-applicable"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lightsail#InstanceHealthSummary": {
             "type": "structure",
             "members": {
@@ -15185,6 +15374,48 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MetadataNoToken"
+                    }
+                },
+                "DiskReadOps": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskReadOps"
+                    }
+                },
+                "DiskWriteOps": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskWriteOps"
+                    }
+                },
+                "DiskReadBytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskReadBytes"
+                    }
+                },
+                "DiskWriteBytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskWriteBytes"
+                    }
+                },
+                "DiskTotalReadTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskTotalReadTime"
+                    }
+                },
+                "DiskTotalWriteTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskTotalWriteTime"
+                    }
+                },
+                "DiskQueueLength": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskQueueLength"
                     }
                 }
             }
@@ -15882,6 +16113,12 @@
                     "target": "com.amazonaws.lightsail#DistributionCustomErrorResponseList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the custom error responses configured for the\n      distribution.</p>"
+                    }
+                },
+                "waf": {
+                    "target": "com.amazonaws.lightsail#WafConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the Web Application Firewall (WAF) configuration of the\n      distribution.</p>"
                     }
                 }
             },
@@ -18462,6 +18699,48 @@
                     "traits": {
                         "smithy.api#enumValue": "BurstCapacityPercentage"
                     }
+                },
+                "DiskReadOps": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskReadOps"
+                    }
+                },
+                "DiskWriteOps": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskWriteOps"
+                    }
+                },
+                "DiskReadBytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskReadBytes"
+                    }
+                },
+                "DiskWriteBytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskWriteBytes"
+                    }
+                },
+                "DiskTotalReadTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskTotalReadTime"
+                    }
+                },
+                "DiskTotalWriteTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskTotalWriteTime"
+                    }
+                },
+                "DiskQueueLength": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiskQueueLength"
+                    }
                 }
             }
         },
@@ -19722,7 +20001,7 @@
             "type": "structure",
             "members": {
                 "ciphertext": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The encrypted password. Ciphertext will be an empty string if access to your new instance\n      is not ready yet. When you create an instance, it can take up to 15 minutes for the instance\n      to be ready.</p>\n         <note>\n            <p>If you use the default key pair (<code>LightsailDefaultKeyPair</code>), the decrypted\n        password will be available in the password field.</p>\n            <p>If you are using a custom key pair, you need to use your own means of decryption.</p>\n            <p>If you change the Administrator password on the instance, Lightsail will continue to\n        return the original ciphertext value. When accessing the instance using RDP, you need to\n        manually enter the Administrator password after changing it from the default.</p>\n         </note>"
                     }
@@ -19838,7 +20117,7 @@
             "type": "structure",
             "members": {
                 "masterUserPassword": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The password for the master user of the database.</p>"
                     }
@@ -20133,7 +20412,7 @@
                 "metricName": {
                     "target": "com.amazonaws.lightsail#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the metric to associate with the alarm.</p>\n         <p>You can configure up to two alarms per metric.</p>\n         <p>The following metrics are available for each resource type:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Instances</b>: <code>BurstCapacityPercentage</code>,\n            <code>BurstCapacityTime</code>, <code>CPUUtilization</code>, <code>NetworkIn</code>,\n            <code>NetworkOut</code>, <code>StatusCheckFailed</code>,\n            <code>StatusCheckFailed_Instance</code>, and\n          <code>StatusCheckFailed_System</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Load balancers</b>:\n            <code>ClientTLSNegotiationErrorCount</code>, <code>HealthyHostCount</code>,\n            <code>UnhealthyHostCount</code>, <code>HTTPCode_LB_4XX_Count</code>,\n            <code>HTTPCode_LB_5XX_Count</code>, <code>HTTPCode_Instance_2XX_Count</code>,\n            <code>HTTPCode_Instance_3XX_Count</code>, <code>HTTPCode_Instance_4XX_Count</code>,\n            <code>HTTPCode_Instance_5XX_Count</code>, <code>InstanceResponseTime</code>,\n            <code>RejectedConnectionCount</code>, and <code>RequestCount</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Relational databases</b>: <code>CPUUtilization</code>,\n            <code>DatabaseConnections</code>, <code>DiskQueueDepth</code>,\n            <code>FreeStorageSpace</code>, <code>NetworkReceiveThroughput</code>, and\n            <code>NetworkTransmitThroughput</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about these metrics, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-resource-health-metrics#available-metrics\">Metrics available in Lightsail</a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the metric to associate with the alarm.</p>\n         <p>You can configure up to two alarms per metric.</p>\n         <p>The following metrics are available for each resource type:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Instances</b>: <code>BurstCapacityPercentage</code>,\n            <code>BurstCapacityTime</code>, <code>CPUUtilization</code>, <code>NetworkIn</code>,\n            <code>NetworkOut</code>, <code>StatusCheckFailed</code>,\n            <code>StatusCheckFailed_Instance</code>, <code>StatusCheckFailed_System</code>,\n            <code>DiskReadOps</code>, <code>DiskWriteOps</code>, <code>DiskReadBytes</code>,\n            <code>DiskWriteBytes</code>, <code>DiskTotalReadTime</code>,\n            <code>DiskTotalWriteTime</code>, and <code>DiskQueueLength</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Load balancers</b>:\n            <code>ClientTLSNegotiationErrorCount</code>, <code>HealthyHostCount</code>,\n            <code>UnhealthyHostCount</code>, <code>HTTPCode_LB_4XX_Count</code>,\n            <code>HTTPCode_LB_5XX_Count</code>, <code>HTTPCode_Instance_2XX_Count</code>,\n            <code>HTTPCode_Instance_3XX_Count</code>, <code>HTTPCode_Instance_4XX_Count</code>,\n            <code>HTTPCode_Instance_5XX_Count</code>, <code>InstanceResponseTime</code>,\n            <code>RejectedConnectionCount</code>, and <code>RequestCount</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Relational databases</b>: <code>CPUUtilization</code>,\n            <code>DatabaseConnections</code>, <code>DiskQueueDepth</code>,\n            <code>FreeStorageSpace</code>, <code>NetworkReceiveThroughput</code>, and\n            <code>NetworkTransmitThroughput</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about these metrics, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-resource-health-metrics#available-metrics\">Metrics available in Lightsail</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22022,6 +22301,12 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lightsail#SensitiveBase64": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.lightsail#SensitiveNonEmptyString": {
             "type": "string",
             "traits": {
@@ -22678,6 +22963,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the instance (a virtual private server) to start.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "attributeUpdates": {
+                    "target": "com.amazonaws.lightsail#InstanceAttributeUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the attributes to update on the instance before it starts.</p>"
                     }
                 }
             },
@@ -24095,6 +24386,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe the custom error responses for the distribution. With a\n      custom error response, you can specify the page to return when the origin responds with a\n      given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>"
                     }
+                },
+                "enableWaf": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable Web Application Firewall (WAF) for the distribution. WAF\n      inspects viewer requests and blocks requests that match the WAF rule groups that you\n      enable.</p>\n         <p>When you enable WAF without specifying the <code>wafRules</code> parameter, the\n      distribution has no WAF rule groups enabled and doesn't block any requests.</p>\n         <note>\n            <p>WAF is available only for distributions that use the <code>medium_1_0</code> or\n          <code>large_1_0</code> bundle.</p>\n            <p>Setting this parameter to <code>false</code> disables WAF for the distribution and\n        removes its WAF rule groups. You must enable the WAF rule groups again if you enable WAF\n        again.</p>\n         </note>"
+                    }
+                },
+                "wafRules": {
+                    "target": "com.amazonaws.lightsail#WafRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the WAF rule groups to enable for the\n      distribution.</p>\n         <p>The array that you specify replaces the existing WAF rule groups of the distribution.\n      To keep a WAF rule group enabled, include it in the array. To disable all WAF rule groups,\n      specify an empty array.</p>\n         <p>You can specify this parameter only when WAF is enabled for the distribution.</p>\n         <p>The WAF rule groups that you can specify depend on the bundle of the\n      distribution:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>medium_1_0</code> – Supports the <code>AWSManagedRulesCommonRuleSet</code>,\n            <code>AWSManagedRulesKnownBadInputsRuleSet</code>, and\n            <code>AWSManagedRulesAnonymousIpList</code> rule groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>large_1_0</code> – Supports the rule groups for <code>medium_1_0</code>, plus\n            <code>AWSManagedRulesAdminProtectionRuleSet</code>,\n            <code>AWSManagedRulesSQLiRuleSet</code>, <code>AWSManagedRulesLinuxRuleSet</code>,\n            <code>AWSManagedRulesUnixRuleSet</code>, <code>AWSManagedRulesWindowsRuleSet</code>,\n            <code>AWSManagedRulesPHPRuleSet</code>, <code>AWSManagedRulesWordPressRuleSet</code>,\n            <code>AWSManagedRulesAmazonIpReputationList</code>,\n            <code>AWSManagedRulesATPRuleSet</code>, <code>AWSManagedRulesACFPRuleSet</code>, and\n            <code>AWSManagedRulesBotControlRuleSet</code> rule groups.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -24614,6 +24917,209 @@
                         "smithy.api#enumValue": "TLSv1.2_2021"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#WafAcfpConfig": {
+            "type": "structure",
+            "members": {
+                "payloadType": {
+                    "target": "com.amazonaws.lightsail#WafPayloadTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type of the request body of account creation requests.</p>\n         <p>The following content types are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JSON</code> – The request body is in JSON format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORM_ENCODED</code> – The request body is form encoded.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "creationPath": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the endpoint that accepts completed account creation forms (for example,\n        <code>/signup/submit</code>). This endpoint must accept <code>POST</code> requests.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must start with a forward slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 256 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "registrationPagePath": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the page that displays the account creation form (for example,\n        <code>/signup</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must start with a forward slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 256 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "responseInspection": {
+                    "target": "com.amazonaws.lightsail#WafResponseInspection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the HTTP status codes that your application returns for\n      successful and failed account creation attempts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the account creation fraud prevention Web Application\n      Firewall (WAF) rule group. The rule group inspects account creation requests to your\n      application.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafAtpConfig": {
+            "type": "structure",
+            "members": {
+                "loginPath": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the login endpoint of your application (for example,\n      <code>/login</code>). Login paths that start with the path that you specify are a\n      match.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must start with a forward slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 256 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "payloadType": {
+                    "target": "com.amazonaws.lightsail#WafPayloadTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type of the request body of login requests.</p>\n         <p>The following content types are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JSON</code> – The request body is in JSON format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORM_ENCODED</code> – The request body is form encoded.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "usernameField": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the request body that contains the username (for example,\n        <code>/username</code> for <code>JSON</code> or <code>username</code> for\n        <code>FORM_ENCODED</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>For a <code>JSON</code> payload, must be a JSON pointer that starts with a forward\n          slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 512 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "passwordField": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the request body that contains the password (for example,\n        <code>/password</code> for <code>JSON</code> or <code>password</code> for\n        <code>FORM_ENCODED</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>For a <code>JSON</code> payload, must be a JSON pointer that starts with a forward\n          slash (<code>/</code>).</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 512 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "responseInspection": {
+                    "target": "com.amazonaws.lightsail#WafResponseInspection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the HTTP status codes that your application returns for\n      successful and failed login attempts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the account takeover prevention Web Application Firewall\n      (WAF) rule group. The rule group inspects login requests to the login path of your\n      application.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafBotControlConfig": {
+            "type": "structure",
+            "members": {
+                "inspectionLevel": {
+                    "target": "com.amazonaws.lightsail#WafInspectionLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inspection level of the bot control rule group.</p>\n         <p>The following inspection levels are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMMON</code> – Detects a variety of bots that identify themselves, such as\n          web scraping frameworks, search engines, and automated browsers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TARGETED</code> – Includes the <code>COMMON</code> protections, and adds\n          detection for sophisticated bots that don't identify themselves. This level uses rate\n          limiting, CAPTCHA, and background browser challenges.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the bot control Web Application Firewall (WAF) rule\n      group.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafConfig": {
+            "type": "structure",
+            "members": {
+                "isWafEnabled": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether WAF is enabled for the distribution.</p>"
+                    }
+                },
+                "wafRules": {
+                    "target": "com.amazonaws.lightsail#WafRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the WAF rule groups enabled for the\n      distribution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Web Application Firewall (WAF) configuration of a Lightsail\n      distribution.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafInspectionLevelEnum": {
+            "type": "enum",
+            "members": {
+                "COMMON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMON"
+                    }
+                },
+                "TARGETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#WafPayloadTypeEnum": {
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "FORM_ENCODED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM_ENCODED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#WafResponseInspection": {
+            "type": "structure",
+            "members": {
+                "successCodes": {
+                    "target": "com.amazonaws.lightsail#WafStatusCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status codes that indicate a successful attempt (for example,\n      <code>200</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 10 status codes.</p>\n            </li>\n            <li>\n               <p>Each status code must be from <code>0</code> to <code>999</code>.</p>\n            </li>\n            <li>\n               <p>Can't contain a status code that is also in\n          <code>failureCodes</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "failureCodes": {
+                    "target": "com.amazonaws.lightsail#WafStatusCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status codes that indicate a failed attempt (for example,\n      <code>401</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 10 status codes.</p>\n            </li>\n            <li>\n               <p>Each status code must be from <code>0</code> to <code>999</code>.</p>\n            </li>\n            <li>\n               <p>Can't contain a status code that is also in\n          <code>successCodes</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the HTTP status codes that your application returns to indicate successful and\n      failed attempts. The Web Application Firewall (WAF) rule group uses these status codes to\n      track successful and failed attempts.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafRule": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the WAF rule group (for example,\n      <code>AWSManagedRulesCommonRuleSet</code>).</p>\n         <p>For the WAF rule groups that you can specify for each bundle, see the\n        <code>wafRules</code> parameter of the <code>CreateDistribution</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "atpConfig": {
+                    "target": "com.amazonaws.lightsail#WafAtpConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the configuration of the account takeover prevention rule\n      group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Define this parameter only when the <code>name</code> is\n            <code>AWSManagedRulesATPRuleSet</code>.</p>\n            </li>\n            <li>\n               <p>This parameter is required when the <code>name</code> is\n            <code>AWSManagedRulesATPRuleSet</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "acfpConfig": {
+                    "target": "com.amazonaws.lightsail#WafAcfpConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the configuration of the account creation fraud prevention\n      rule group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Define this parameter only when the <code>name</code> is\n            <code>AWSManagedRulesACFPRuleSet</code>.</p>\n            </li>\n            <li>\n               <p>This parameter is required when the <code>name</code> is\n            <code>AWSManagedRulesACFPRuleSet</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "botControlConfig": {
+                    "target": "com.amazonaws.lightsail#WafBotControlConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the configuration of the bot control rule group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Define this parameter only when the <code>name</code> is\n            <code>AWSManagedRulesBotControlRuleSet</code>.</p>\n            </li>\n            <li>\n               <p>This parameter is required when the <code>name</code> is\n            <code>AWSManagedRulesBotControlRuleSet</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Web Application Firewall (WAF) rule group for a Lightsail distribution. A\n      WAF rule group is a set of rules managed by AWS. The rules inspect viewer requests and block\n      requests that match them.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#WafRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#WafRule"
+            }
+        },
+        "com.amazonaws.lightsail#WafStatusCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#integer"
             }
         },
         "com.amazonaws.lightsail#boolean": {

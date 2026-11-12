@@ -28,7 +28,6 @@ func (c *Client) ListSessionActions(ctx context.Context, params *ListSessionActi
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListSessionActionsInput struct {
 
 	// The farm ID for the session actions list.
@@ -92,7 +91,6 @@ func (v *ListSessionActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListSessionActionsOutput struct {
 
 	// The session actions.
@@ -124,7 +122,9 @@ func (v *ListSessionActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionActionsResponse_nextToken, *v.NextToken)
 	}
-	serializeSessionActionSummaries(s, schemas.ListSessionActionsResponse_sessionActions, v.SessionActions)
+	if v.SessionActions != nil {
+		serializeSessionActionSummaries(s, schemas.ListSessionActionsResponse_sessionActions, v.SessionActions)
+	}
 }
 func (v *ListSessionActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionActionsResponse, func(s *smithy.Schema) error {

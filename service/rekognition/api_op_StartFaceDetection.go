@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,34 @@ type StartFaceDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFaceDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFaceDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFaceDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartFaceDetectionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FaceAttributes != "" {
+		s.WriteString(schemas.StartFaceDetectionRequest_FaceAttributes, string(v.FaceAttributes))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartFaceDetectionRequest_JobTag, *v.JobTag)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartFaceDetectionRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.StartFaceDetectionRequest_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartFaceDetectionOutput struct {
 
 	// The identifier for the face detection job. Use JobId to identify the job in a
@@ -86,13 +116,32 @@ type StartFaceDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFaceDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFaceDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFaceDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartFaceDetectionResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartFaceDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFaceDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFaceDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartFaceDetectionResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFaceDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFaceDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFaceDetection, schemas.StartFaceDetectionRequest, schemas.StartFaceDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartFaceDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFaceDetection, schemas.StartFaceDetectionRequest, schemas.StartFaceDetectionResponse), output: &StartFaceDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

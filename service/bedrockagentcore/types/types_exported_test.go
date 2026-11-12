@@ -609,6 +609,28 @@ func ExampleHarnessReasoningContentBlockDelta_outputUsage() {
 var _ *string
 var _ []byte
 
+func ExampleHarnessRemoteMcpOutboundAuth_outputUsage() {
+	var union types.HarnessRemoteMcpOutboundAuth
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessRemoteMcpOutboundAuthMemberAwsIam:
+		_ = v.Value // Value is types.IamCredentialProvider
+
+	case *types.HarnessRemoteMcpOutboundAuthMemberNone:
+		_ = v.Value // Value is types.Unit
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.Unit
+var _ *types.IamCredentialProvider
+
 func ExampleHarnessSkill_outputUsage() {
 	var union types.HarnessSkill
 	// type switches can be used to check the union value

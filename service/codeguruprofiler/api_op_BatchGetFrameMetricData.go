@@ -85,7 +85,9 @@ func (v *BatchGetFrameMetricDataInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EndTime != nil {
 		s.WriteTime(schemas.BatchGetFrameMetricDataRequest_endTime, *v.EndTime)
 	}
-	serializeFrameMetrics(s, schemas.BatchGetFrameMetricDataRequest_frameMetrics, v.FrameMetrics)
+	if v.FrameMetrics != nil {
+		serializeFrameMetrics(s, schemas.BatchGetFrameMetricDataRequest_frameMetrics, v.FrameMetrics)
+	}
 	if v.Period != nil {
 		s.WriteString(schemas.BatchGetFrameMetricDataRequest_period, *v.Period)
 	}
@@ -195,15 +197,21 @@ func (v *BatchGetFrameMetricDataOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EndTime != nil {
 		s.WriteTime(schemas.BatchGetFrameMetricDataResponse_endTime, *v.EndTime)
 	}
-	serializeListOfTimestamps(s, schemas.BatchGetFrameMetricDataResponse_endTimes, v.EndTimes)
-	serializeFrameMetricData(s, schemas.BatchGetFrameMetricDataResponse_frameMetricData, v.FrameMetricData)
+	if v.EndTimes != nil {
+		serializeListOfTimestamps(s, schemas.BatchGetFrameMetricDataResponse_endTimes, v.EndTimes)
+	}
+	if v.FrameMetricData != nil {
+		serializeFrameMetricData(s, schemas.BatchGetFrameMetricDataResponse_frameMetricData, v.FrameMetricData)
+	}
 	if v.Resolution != "" {
 		s.WriteString(schemas.BatchGetFrameMetricDataResponse_resolution, string(v.Resolution))
 	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.BatchGetFrameMetricDataResponse_startTime, *v.StartTime)
 	}
-	serializeUnprocessedEndTimeMap(s, schemas.BatchGetFrameMetricDataResponse_unprocessedEndTimes, v.UnprocessedEndTimes)
+	if v.UnprocessedEndTimes != nil {
+		serializeUnprocessedEndTimeMap(s, schemas.BatchGetFrameMetricDataResponse_unprocessedEndTimes, v.UnprocessedEndTimes)
+	}
 }
 func (v *BatchGetFrameMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFrameMetricDataResponse, func(s *smithy.Schema) error {

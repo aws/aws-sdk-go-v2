@@ -115,7 +115,9 @@ func (v *ListViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListViewsOutput_NextToken, *v.NextToken)
 	}
-	serializeViewArnList(s, schemas.ListViewsOutput_Views, v.Views)
+	if v.Views != nil {
+		serializeViewArnList(s, schemas.ListViewsOutput_Views, v.Views)
+	}
 }
 func (v *ListViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListViewsOutput, func(s *smithy.Schema) error {

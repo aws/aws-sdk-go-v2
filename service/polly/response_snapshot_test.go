@@ -385,6 +385,31 @@ func TestCheckResponseSnapshot_ListSpeechSynthesisTasks(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
+	want := &ListTagsForResourceOutput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTagsForResource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTagsForResource.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutLexicon(t *testing.T) {
 	want := &PutLexiconOutput{}
 	status, header, body, err := serdeRespReadSnapshot("PutLexicon.response")
@@ -398,6 +423,9 @@ func TestCheckResponseSnapshot_PutLexicon(t *testing.T) {
 	got, err := svc.PutLexicon(context.Background(), &PutLexiconInput{
 		Name:    ptr.String("__Name__"),
 		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -512,6 +540,55 @@ func TestCheckResponseSnapshot_SynthesizeSpeech(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_TagResource(t *testing.T) {
+	want := &TagResourceOutput{}
+	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "TagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
+	want := &UntagResourceOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UntagResource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_EngineNotSupportedException(t *testing.T) {
 	want := &types.EngineNotSupportedException{
 		Message: ptr.String("__Message__"),
@@ -571,6 +648,9 @@ func TestCheckResponseSnapshot_Error_InvalidLexiconException(t *testing.T) {
 	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
 		Name:    ptr.String("__Name__"),
 		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -834,6 +914,33 @@ func TestCheckResponseSnapshot_Error_InvalidSsmlException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_InvalidTagParameterException(t *testing.T) {
+	want := &types.InvalidTagParameterException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidTagParameterException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidTagParameterException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidTagParameterException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidTagParameterException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_InvalidTaskIdException(t *testing.T) {
 	want := &types.InvalidTaskIdException{
 		Message: ptr.String("__Message__"),
@@ -947,6 +1054,9 @@ func TestCheckResponseSnapshot_Error_LexiconSizeExceededException(t *testing.T) 
 	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
 		Name:    ptr.String("__Name__"),
 		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1019,6 +1129,9 @@ func TestCheckResponseSnapshot_Error_MaxLexemeLengthExceededException(t *testing
 	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
 		Name:    ptr.String("__Name__"),
 		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1047,6 +1160,9 @@ func TestCheckResponseSnapshot_Error_MaxLexiconsNumberExceededException(t *testi
 	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
 		Name:    ptr.String("__Name__"),
 		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1057,6 +1173,35 @@ func TestCheckResponseSnapshot_Error_MaxLexiconsNumberExceededException(t *testi
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "MaxLexiconsNumberExceededException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
+	want := &types.ResourceNotFoundException{
+		Message:      ptr.String("__Message__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.ResourceType("lexicon"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ResourceNotFoundException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ResourceNotFoundException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
 	}
 }
 
@@ -1202,6 +1347,74 @@ func TestCheckResponseSnapshot_Error_TextLengthExceededException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
+	want := &types.ThrottlingException{
+		Message: ptr.String("__Message__"),
+		ThrottlingReasons: []types.ThrottlingReason{
+			{
+				Reason:   ptr.String("__Reason__"),
+				Resource: ptr.String("__Resource__"),
+			},
+			{
+				Reason:   ptr.String("__Reason__"),
+				Resource: ptr.String("__Resource__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ThrottlingException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ThrottlingException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ThrottlingException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
+	want := &types.TooManyTagsException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("TooManyTagsException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.TooManyTagsException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.TooManyTagsException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "TooManyTagsException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_UnsupportedPlsAlphabetException(t *testing.T) {
 	want := &types.UnsupportedPlsAlphabetException{
 		Message: ptr.String("__Message__"),
@@ -1217,6 +1430,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedPlsAlphabetException(t *testing.
 	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
 		Name:    ptr.String("__Name__"),
 		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1245,6 +1461,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedPlsLanguageException(t *testing.
 	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
 		Name:    ptr.String("__Name__"),
 		Content: ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1255,5 +1474,43 @@ func TestCheckResponseSnapshot_Error_UnsupportedPlsLanguageException(t *testing.
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "UnsupportedPlsLanguageException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message: ptr.String("__Message__"),
+		Reason:  types.ValidationExceptionReason("unsupportedOperation"),
+		Fields: []types.ValidationExceptionField{
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ValidationException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ValidationException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ValidationException.error", err)
 	}
 }

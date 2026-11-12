@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Lexicons":[{"Attributes":{"Alphabet":"__Alphabet__","LanguageCode":"arb","LastModified":946684800,"LexemesCount":1,"LexiconArn":"__LexiconArn__","Size":1},"Name":"__Name__"},{"Attributes":{"Alphabet":"__Alphabet__","LanguageCode":"arb","LastModified":946684800,"LexemesCount":1,"LexiconArn":"__LexiconArn__","Size":1},"Name":"__Name__"}],"NextToken":"__NextToken__"}

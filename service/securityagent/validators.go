@@ -2166,6 +2166,11 @@ func validateAssets(v *types.Assets) error {
 			invalidParams.AddNested("TrustedCaCertificates", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ClientCertificates != nil {
+		if err := validateClientCertificateList(v.ClientCertificates); err != nil {
+			invalidParams.AddNested("ClientCertificates", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2300,6 +2305,44 @@ func validateBitbucketResourceCapabilities(v *types.BitbucketResourceCapabilitie
 	if v.TriggerFilterGroups != nil {
 		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
 			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientCertificate(v *types.ClientCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCertificate"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.Origins == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Origins"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientCertificateList(v []types.ClientCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCertificateList"}
+	for i := range v {
+		if err := validateClientCertificate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

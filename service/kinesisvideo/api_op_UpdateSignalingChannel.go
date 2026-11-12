@@ -4,7 +4,9 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,26 @@ type UpdateSignalingChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSignalingChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSignalingChannelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSignalingChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.UpdateSignalingChannelInput_ChannelARN, *v.ChannelARN)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateSignalingChannelInput_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.SingleMasterConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSignalingChannelInput_SingleMasterConfiguration)
+		v.SingleMasterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSignalingChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +79,26 @@ type UpdateSignalingChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSignalingChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSignalingChannelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSignalingChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateSignalingChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSignalingChannelOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSignalingChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSignalingChannel, schemas.UpdateSignalingChannelInput, schemas.UpdateSignalingChannelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSignalingChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSignalingChannel, schemas.UpdateSignalingChannelInput, schemas.UpdateSignalingChannelOutput), output: &UpdateSignalingChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

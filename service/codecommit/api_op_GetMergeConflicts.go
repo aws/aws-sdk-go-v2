@@ -156,7 +156,9 @@ func (v *GetMergeConflictsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseCommitId != nil {
 		s.WriteString(schemas.GetMergeConflictsOutput_baseCommitId, *v.BaseCommitId)
 	}
-	serializeConflictMetadataList(s, schemas.GetMergeConflictsOutput_conflictMetadataList, v.ConflictMetadataList)
+	if v.ConflictMetadataList != nil {
+		serializeConflictMetadataList(s, schemas.GetMergeConflictsOutput_conflictMetadataList, v.ConflictMetadataList)
+	}
 	if v.DestinationCommitId != nil {
 		s.WriteString(schemas.GetMergeConflictsOutput_destinationCommitId, *v.DestinationCommitId)
 	}

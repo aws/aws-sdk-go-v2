@@ -75,7 +75,9 @@ func (v *ListSubscriptionDefinitionsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListSubscriptionDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDefinitionInformation(s, schemas.ListSubscriptionDefinitionsResponse_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serialize__listOfDefinitionInformation(s, schemas.ListSubscriptionDefinitionsResponse_Definitions, v.Definitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSubscriptionDefinitionsResponse_NextToken, *v.NextToken)
 	}

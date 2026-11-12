@@ -94,14 +94,18 @@ func (v *StartFHIRImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DriftDetectionEnabled != false {
 		s.WriteBool(schemas.StartFHIRImportJobRequest_DriftDetectionEnabled, v.DriftDetectionEnabled)
 	}
-	serializeInputDataConfig(s, schemas.StartFHIRImportJobRequest_InputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeInputDataConfig(s, schemas.StartFHIRImportJobRequest_InputDataConfig, v.InputDataConfig)
+	}
 	if v.InputFormat != nil {
 		s.WriteString(schemas.StartFHIRImportJobRequest_InputFormat, *v.InputFormat)
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.StartFHIRImportJobRequest_JobName, *v.JobName)
 	}
-	serializeOutputDataConfig(s, schemas.StartFHIRImportJobRequest_JobOutputDataConfig, v.JobOutputDataConfig)
+	if v.JobOutputDataConfig != nil {
+		serializeOutputDataConfig(s, schemas.StartFHIRImportJobRequest_JobOutputDataConfig, v.JobOutputDataConfig)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.StartFHIRImportJobRequest_ProfileId, *v.ProfileId)
 	}

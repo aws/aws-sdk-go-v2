@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UploadSigningCertificateResponse><UploadSigningCertificateResult><Certificate><CertificateBody>__CertificateBody__</CertificateBody><CertificateId>__CertificateId__</CertificateId><Status>Active</Status><UploadDate>2000-01-01T00:00:00Z</UploadDate><UserName>__UserName__</UserName></Certificate></UploadSigningCertificateResult></UploadSigningCertificateResponse>

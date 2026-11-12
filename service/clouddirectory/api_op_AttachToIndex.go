@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,28 @@ type AttachToIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachToIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachToIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachToIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.AttachToIndexRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.IndexReference != nil {
+		s.WriteStruct(schemas.AttachToIndexRequest_IndexReference)
+		v.IndexReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetReference != nil {
+		s.WriteStruct(schemas.AttachToIndexRequest_TargetReference)
+		v.TargetReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AttachToIndexOutput struct {
 
 	// The ObjectIdentifier of the object that was attached to the index.
@@ -56,13 +80,32 @@ type AttachToIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachToIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachToIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachToIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachedObjectIdentifier != nil {
+		s.WriteString(schemas.AttachToIndexResponse_AttachedObjectIdentifier, *v.AttachedObjectIdentifier)
+	}
+}
+func (v *AttachToIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachToIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachToIndexResponse_AttachedObjectIdentifier:
+			v.AttachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.AttachToIndexResponse_AttachedObjectIdentifier, v.AttachedObjectIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachToIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachToIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachToIndex, schemas.AttachToIndexRequest, schemas.AttachToIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAttachToIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachToIndex, schemas.AttachToIndexRequest, schemas.AttachToIndexResponse), output: &AttachToIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

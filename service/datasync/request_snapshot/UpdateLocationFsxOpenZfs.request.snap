@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/UpdateLocationFsxOpenZfs
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.UpdateLocationFsxOpenZfs
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"LocationArn":"__LocationArn__","Protocol":{"NFS":{"MountOptions":{"Version":"AUTOMATIC"}},"SMB":{"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"Domain":"__Domain__","ManagedSecretConfig":{"SecretArn":"__SecretArn__"},"MountOptions":{"Version":"AUTOMATIC"},"Password":"__Password__","User":"__User__"}},"Subdirectory":"__Subdirectory__"}
+¿kLocationArno__LocationArn__hProtocol¿cNFS¿lMountOptions¿gVersioniAUTOMATICÿÿcSMB¿oCmkSecretConfig¿iKmsKeyArnm__KmsKeyArn__iSecretArnm__SecretArn__ÿrCustomSecretConfig¿sSecretAccessRoleArnw__SecretAccessRoleArn__iSecretArnm__SecretArn__ÿfDomainj__Domain__sManagedSecretConfig¿iSecretArnm__SecretArn__ÿlMountOptions¿gVersioniAUTOMATICÿhPasswordl__Password__dUserh__User__ÿÿlSubdirectoryp__Subdirectory__ÿ

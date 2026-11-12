@@ -107,7 +107,9 @@ func (v *ListManagedRuleSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedRuleSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedRuleSetSummaries(s, schemas.ListManagedRuleSetsResponse_ManagedRuleSets, v.ManagedRuleSets)
+	if v.ManagedRuleSets != nil {
+		serializeManagedRuleSetSummaries(s, schemas.ListManagedRuleSetsResponse_ManagedRuleSets, v.ManagedRuleSets)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListManagedRuleSetsResponse_NextMarker, *v.NextMarker)
 	}

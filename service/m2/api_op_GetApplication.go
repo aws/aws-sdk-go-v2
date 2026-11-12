@@ -192,12 +192,18 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LatestVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeArnList(s, schemas.GetApplicationResponse_listenerArns, v.ListenerArns)
-	serializePortList(s, schemas.GetApplicationResponse_listenerPorts, v.ListenerPorts)
+	if v.ListenerArns != nil {
+		serializeArnList(s, schemas.GetApplicationResponse_listenerArns, v.ListenerArns)
+	}
+	if v.ListenerPorts != nil {
+		serializePortList(s, schemas.GetApplicationResponse_listenerPorts, v.ListenerPorts)
+	}
 	if v.LoadBalancerDnsName != nil {
 		s.WriteString(schemas.GetApplicationResponse_loadBalancerDnsName, *v.LoadBalancerDnsName)
 	}
-	serializeLogGroupSummaries(s, schemas.GetApplicationResponse_logGroups, v.LogGroups)
+	if v.LogGroups != nil {
+		serializeLogGroupSummaries(s, schemas.GetApplicationResponse_logGroups, v.LogGroups)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetApplicationResponse_name, *v.Name)
 	}
@@ -210,8 +216,12 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.GetApplicationResponse_statusReason, *v.StatusReason)
 	}
-	serializeTagMap(s, schemas.GetApplicationResponse_tags, v.Tags)
-	serializeArnList(s, schemas.GetApplicationResponse_targetGroupArns, v.TargetGroupArns)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetApplicationResponse_tags, v.Tags)
+	}
+	if v.TargetGroupArns != nil {
+		serializeArnList(s, schemas.GetApplicationResponse_targetGroupArns, v.TargetGroupArns)
+	}
 }
 func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {

@@ -70,6 +70,15 @@ type UpdateKnowledgeBaseInput struct {
 	// Specifies a new description for the knowledge base.
 	Description *string
 
+	// Specifies up to 30 custom metadata field configurations for a managed knowledge
+	// base.
+	//
+	// The list that you specify replaces the existing configurations. The update
+	// removes any configuration that you leave out, and its field is no longer
+	// searchable. An empty list removes all configurations. If you don't specify a
+	// list, the existing configurations don't change.
+	MetadataConfigurations []types.MetadataConfiguration
+
 	// Specifies the configuration for the vector store used for the knowledge base.
 	// You must use the same configuration as when the knowledge base was created.
 	StorageConfiguration *types.StorageConfiguration
@@ -94,6 +103,9 @@ func (v *UpdateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.UpdateKnowledgeBaseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MetadataConfigurations != nil {
+		serializeMetadataConfigurations(s, schemas.UpdateKnowledgeBaseRequest_metadataConfigurations, v.MetadataConfigurations)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateKnowledgeBaseRequest_name, *v.Name)

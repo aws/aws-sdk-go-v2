@@ -100,7 +100,9 @@ func (v *ListExperimentRunEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExperimentRunEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentRunEventList(s, schemas.ExperimentRunEvents_Items, v.Items)
+	if v.Items != nil {
+		serializeExperimentRunEventList(s, schemas.ExperimentRunEvents_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExperimentRunEvents_NextToken, *v.NextToken)
 	}

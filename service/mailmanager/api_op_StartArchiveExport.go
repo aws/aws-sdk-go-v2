@@ -72,7 +72,9 @@ func (v *StartArchiveExportInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArchiveId != nil {
 		s.WriteString(schemas.StartArchiveExportRequest_ArchiveId, *v.ArchiveId)
 	}
-	serializeExportDestinationConfiguration(s, schemas.StartArchiveExportRequest_ExportDestinationConfiguration, v.ExportDestinationConfiguration)
+	if v.ExportDestinationConfiguration != nil {
+		serializeExportDestinationConfiguration(s, schemas.StartArchiveExportRequest_ExportDestinationConfiguration, v.ExportDestinationConfiguration)
+	}
 	if v.Filters != nil {
 		s.WriteStruct(schemas.StartArchiveExportRequest_Filters)
 		v.Filters.SerializeMembers(s)

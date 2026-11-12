@@ -111,7 +111,9 @@ func (v *GetDocumentationPartsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDocumentationPartsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDocumentationPart(s, schemas.DocumentationParts_items, v.Items)
+	if v.Items != nil {
+		serializeListOfDocumentationPart(s, schemas.DocumentationParts_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.DocumentationParts_position, *v.Position)
 	}

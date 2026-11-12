@@ -49,7 +49,9 @@ func (v *BatchDeleteTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.BatchDeleteTaxRegistrationRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.BatchDeleteTaxRegistrationRequest_accountIds, v.AccountIds)
+	}
 }
 
 type BatchDeleteTaxRegistrationOutput struct {
@@ -73,7 +75,9 @@ func (v *BatchDeleteTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteTaxRegistrationErrors(s, schemas.BatchDeleteTaxRegistrationResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDeleteTaxRegistrationErrors(s, schemas.BatchDeleteTaxRegistrationResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteTaxRegistrationResponse, func(s *smithy.Schema) error {

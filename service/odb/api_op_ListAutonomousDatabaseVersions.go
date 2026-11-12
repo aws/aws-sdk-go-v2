@@ -86,7 +86,9 @@ func (v *ListAutonomousDatabaseVersionsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListAutonomousDatabaseVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutonomousDatabaseVersionList(s, schemas.ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions, v.AutonomousDatabaseVersions)
+	if v.AutonomousDatabaseVersions != nil {
+		serializeAutonomousDatabaseVersionList(s, schemas.ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions, v.AutonomousDatabaseVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutonomousDatabaseVersionsOutput_nextToken, *v.NextToken)
 	}

@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -130,6 +132,44 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	// [Configure IAM and your VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
 	CustomIamInstanceProfile *string
+
+	// The identifier or the name of the DB capacity reservation to associate with
+	// this read replica. You can specify the identifier, which has the prefix dbcr- ,
+	// or the reservation name. When you specify this parameter, the read replica uses
+	// reserved capacity from the specified reservation. A read replica uses one unit
+	// of reserved capacity, in the same way as any other DB instance.
+	//
+	// If you specify AvailabilityZone , Amazon RDS places the DB instance in that
+	// Availability Zone, and the reservation must cover it.
+	//
+	// Constraints:
+	//
+	//   - The reservation must reserve capacity for the DB instance class and the
+	//   database engine of the DB instance.
+	//
+	//   - If the reservation reserves capacity for a specific license model, the
+	//   license model of the source DB instance must match it. A read replica inherits
+	//   its license model from the source DB instance.
+	//
+	//   - The reservation must be in the active state, and it must not be past its end
+	//   date.
+	//
+	//   - If you specify AvailabilityZone , it must be one of the Availability Zones
+	//   of the reservation.
+	//
+	//   - For a Multi-AZ DB instance, the reservation must cover two or more
+	//   Availability Zones. A Multi-AZ DB instance uses one unit of reserved capacity in
+	//   each of two Availability Zones. If the reservation covers more than two
+	//   Availability Zones, Amazon RDS chooses the two that the DB instance uses.
+	//
+	//   - The reservation must have available capacity in each Availability Zone that
+	//   the DB instance uses.
+	//
+	//   - The DB subnet group must be in a VPC with default tenancy.
+	//
+	//   - The DB subnet group must cover each Availability Zone that the DB instance
+	//   uses.
+	DBCapacityReservationIdentifier *string
 
 	// The compute and memory capacity of the read replica, for example db.m4.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
@@ -327,10 +367,13 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
 	// or alias name for the KMS key.
 	//
-	// If you create an encrypted read replica in the same Amazon Web Services Region
-	// as the source DB instance or Multi-AZ DB cluster, don't specify a value for this
-	// parameter. A read replica in the same Amazon Web Services Region is always
-	// encrypted with the same KMS key as the source DB instance or cluster.
+	// For a read replica in the same Amazon Web Services Region as the source DB
+	// instance or Multi-AZ DB cluster, specifying this parameter is optional. If you
+	// specify a KMS key identifier, the read replica is encrypted with that KMS key,
+	// which can be different from the KMS key of the source.
+	//
+	// If you don't specify a value for this parameter, the read replica is encrypted
+	// with the same KMS key as the source DB instance or Multi-AZ DB cluster.
 	//
 	// If you create an encrypted read replica in a different Amazon Web Services
 	// Region, then you must specify a KMS key identifier for the destination Amazon
@@ -689,6 +732,168 @@ type CreateDBInstanceReadReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBInstanceReadReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBInstanceReadReplicaMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBInstanceReadReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalStorageVolumes != nil {
+		serializeAdditionalStorageVolumesList(s, schemas.CreateDBInstanceReadReplicaMessage_AdditionalStorageVolumes, v.AdditionalStorageVolumes)
+	}
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.CreateDBInstanceReadReplicaMessage_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.BackupTarget != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_BackupTarget, *v.BackupTarget)
+	}
+	if v.CACertificateIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.CustomIamInstanceProfile != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_CustomIamInstanceProfile, *v.CustomIamInstanceProfile)
+	}
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DatabaseInsightsMode != "" {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DatabaseInsightsMode, string(v.DatabaseInsightsMode))
+	}
+	if v.DedicatedLogVolume != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_DedicatedLogVolume, *v.DedicatedLogVolume)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.destinationRegion != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DestinationRegion, *v.destinationRegion)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_Domain, *v.Domain)
+	}
+	if v.DomainAuthSecretArn != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DomainAuthSecretArn, *v.DomainAuthSecretArn)
+	}
+	if v.DomainDnsIps != nil {
+		serializeStringList(s, schemas.CreateDBInstanceReadReplicaMessage_DomainDnsIps, v.DomainDnsIps)
+	}
+	if v.DomainFqdn != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DomainFqdn, *v.DomainFqdn)
+	}
+	if v.DomainIAMRoleName != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DomainIAMRoleName, *v.DomainIAMRoleName)
+	}
+	if v.DomainOu != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_DomainOu, *v.DomainOu)
+	}
+	if v.EnableCloudwatchLogsExports != nil {
+		serializeLogTypeList(s, schemas.CreateDBInstanceReadReplicaMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	}
+	if v.EnableCustomerOwnedIp != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_EnableCustomerOwnedIp, *v.EnableCustomerOwnedIp)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.EnablePerformanceInsights != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.CreateDBInstanceReadReplicaMessage_Iops, *v.Iops)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MaxAllocatedStorage != nil {
+		s.WriteInt32(schemas.CreateDBInstanceReadReplicaMessage_MaxAllocatedStorage, *v.MaxAllocatedStorage)
+	}
+	if v.MonitoringInterval != nil {
+		s.WriteInt32(schemas.CreateDBInstanceReadReplicaMessage_MonitoringInterval, *v.MonitoringInterval)
+	}
+	if v.MonitoringRoleArn != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_MonitoringRoleArn, *v.MonitoringRoleArn)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_NetworkType, *v.NetworkType)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.PerformanceInsightsKMSKeyId != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
+	}
+	if v.PerformanceInsightsRetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateDBInstanceReadReplicaMessage_PerformanceInsightsRetentionPeriod, *v.PerformanceInsightsRetentionPeriod)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.CreateDBInstanceReadReplicaMessage_Port, *v.Port)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.ProcessorFeatures != nil {
+		serializeProcessorFeatureList(s, schemas.CreateDBInstanceReadReplicaMessage_ProcessorFeatures, v.ProcessorFeatures)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.ReplicaMode != "" {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_ReplicaMode, string(v.ReplicaMode))
+	}
+	if v.SourceDBClusterIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_SourceDBClusterIdentifier, *v.SourceDBClusterIdentifier)
+	}
+	if v.SourceDBInstanceIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_SourceDBInstanceIdentifier, *v.SourceDBInstanceIdentifier)
+	}
+	if v.StorageThroughput != nil {
+		s.WriteInt32(schemas.CreateDBInstanceReadReplicaMessage_StorageThroughput, *v.StorageThroughput)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.CreateDBInstanceReadReplicaMessage_StorageType, *v.StorageType)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.CreateDBInstanceReadReplicaMessage_TagSpecifications, v.TagSpecifications)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDBInstanceReadReplicaMessage_Tags, v.Tags)
+	}
+	if v.UpgradeStorageConfig != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_UpgradeStorageConfig, *v.UpgradeStorageConfig)
+	}
+	if v.UseDefaultProcessorFeatures != nil {
+		s.WriteBool(schemas.CreateDBInstanceReadReplicaMessage_UseDefaultProcessorFeatures, *v.UseDefaultProcessorFeatures)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDBInstanceReadReplicaMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type CreateDBInstanceReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -706,13 +911,34 @@ type CreateDBInstanceReadReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBInstanceReadReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBInstanceReadReplicaResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBInstanceReadReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.CreateDBInstanceReadReplicaResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDBInstanceReadReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDBInstanceReadReplicaResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDBInstanceReadReplicaResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBInstanceReadReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBInstanceReadReplica, schemas.CreateDBInstanceReadReplicaMessage, schemas.CreateDBInstanceReadReplicaResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBInstanceReadReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBInstanceReadReplica, schemas.CreateDBInstanceReadReplicaMessage, schemas.CreateDBInstanceReadReplicaResult), output: &CreateDBInstanceReadReplicaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

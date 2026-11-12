@@ -1393,8 +1393,12 @@ func (v *DatabaseColumnList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatabaseColumnList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseColumnList_Exclude, v.Exclude)
-	serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseColumnList_Include, v.Include)
+	if v.Exclude != nil {
+		serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseColumnList_Exclude, v.Exclude)
+	}
+	if v.Include != nil {
+		serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseColumnList_Include, v.Include)
+	}
 }
 func (v *DatabaseColumnList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatabaseColumnList, func(s *smithy.Schema) error {
@@ -1436,8 +1440,12 @@ func (v *DatabaseList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatabaseList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseIncludeOrExcludeList(s, schemas.DatabaseList_Exclude, v.Exclude)
-	serializeDatabaseIncludeOrExcludeList(s, schemas.DatabaseList_Include, v.Include)
+	if v.Exclude != nil {
+		serializeDatabaseIncludeOrExcludeList(s, schemas.DatabaseList_Exclude, v.Exclude)
+	}
+	if v.Include != nil {
+		serializeDatabaseIncludeOrExcludeList(s, schemas.DatabaseList_Include, v.Include)
+	}
 }
 func (v *DatabaseList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatabaseList, func(s *smithy.Schema) error {
@@ -1737,7 +1745,9 @@ func (v *DatabaseSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer)
 	if v.SnapshotWatermarkTable != nil {
 		s.WriteString(schemas.DatabaseSourceConfiguration_SnapshotWatermarkTable, *v.SnapshotWatermarkTable)
 	}
-	serializeDatabaseSurrogateKeyList(s, schemas.DatabaseSourceConfiguration_SurrogateKeys, v.SurrogateKeys)
+	if v.SurrogateKeys != nil {
+		serializeDatabaseSurrogateKeyList(s, schemas.DatabaseSourceConfiguration_SurrogateKeys, v.SurrogateKeys)
+	}
 	if v.Tables != nil {
 		s.WriteStruct(schemas.DatabaseSourceConfiguration_Tables)
 		v.Tables.SerializeMembers(s)
@@ -1916,11 +1926,15 @@ func (v *DatabaseSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SSLMode != "" {
 		s.WriteString(schemas.DatabaseSourceDescription_SSLMode, string(v.SSLMode))
 	}
-	serializeDatabaseSnapshotInfoList(s, schemas.DatabaseSourceDescription_SnapshotInfo, v.SnapshotInfo)
+	if v.SnapshotInfo != nil {
+		serializeDatabaseSnapshotInfoList(s, schemas.DatabaseSourceDescription_SnapshotInfo, v.SnapshotInfo)
+	}
 	if v.SnapshotWatermarkTable != nil {
 		s.WriteString(schemas.DatabaseSourceDescription_SnapshotWatermarkTable, *v.SnapshotWatermarkTable)
 	}
-	serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseSourceDescription_SurrogateKeys, v.SurrogateKeys)
+	if v.SurrogateKeys != nil {
+		serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseSourceDescription_SurrogateKeys, v.SurrogateKeys)
+	}
 	if v.Tables != nil {
 		s.WriteStruct(schemas.DatabaseSourceDescription_Tables)
 		v.Tables.SerializeMembers(s)
@@ -2050,8 +2064,12 @@ func (v *DatabaseTableList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatabaseTableList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseTableIncludeOrExcludeList(s, schemas.DatabaseTableList_Exclude, v.Exclude)
-	serializeDatabaseTableIncludeOrExcludeList(s, schemas.DatabaseTableList_Include, v.Include)
+	if v.Exclude != nil {
+		serializeDatabaseTableIncludeOrExcludeList(s, schemas.DatabaseTableList_Exclude, v.Exclude)
+	}
+	if v.Include != nil {
+		serializeDatabaseTableIncludeOrExcludeList(s, schemas.DatabaseTableList_Include, v.Include)
+	}
 }
 func (v *DatabaseTableList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatabaseTableList, func(s *smithy.Schema) error {
@@ -2240,7 +2258,9 @@ func (v *DeliveryStreamDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeliveryStreamType != "" {
 		s.WriteString(schemas.DeliveryStreamDescription_DeliveryStreamType, string(v.DeliveryStreamType))
 	}
-	serializeDestinationDescriptionList(s, schemas.DeliveryStreamDescription_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinationDescriptionList(s, schemas.DeliveryStreamDescription_Destinations, v.Destinations)
+	}
 	if v.FailureDescription != nil {
 		s.WriteStruct(schemas.DeliveryStreamDescription_FailureDescription)
 		v.FailureDescription.SerializeMembers(s)
@@ -2715,7 +2735,9 @@ func (v *DestinationTableConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.S3ErrorOutputPrefix != nil {
 		s.WriteString(schemas.DestinationTableConfiguration_S3ErrorOutputPrefix, *v.S3ErrorOutputPrefix)
 	}
-	serializeListOfNonEmptyStringsWithoutWhitespace(s, schemas.DestinationTableConfiguration_UniqueKeys, v.UniqueKeys)
+	if v.UniqueKeys != nil {
+		serializeListOfNonEmptyStringsWithoutWhitespace(s, schemas.DestinationTableConfiguration_UniqueKeys, v.UniqueKeys)
+	}
 }
 func (v *DestinationTableConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DestinationTableConfiguration, func(s *smithy.Schema) error {
@@ -4281,7 +4303,9 @@ func (v *HiveJsonSerDe) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HiveJsonSerDe) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfNonEmptyStrings(s, schemas.HiveJsonSerDe_TimestampFormats, v.TimestampFormats)
+	if v.TimestampFormats != nil {
+		serializeListOfNonEmptyStrings(s, schemas.HiveJsonSerDe_TimestampFormats, v.TimestampFormats)
+	}
 }
 func (v *HiveJsonSerDe) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HiveJsonSerDe, func(s *smithy.Schema) error {
@@ -4945,7 +4969,9 @@ func (v *HttpEndpointRequestConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpEndpointRequestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHttpEndpointCommonAttributesList(s, schemas.HttpEndpointRequestConfiguration_CommonAttributes, v.CommonAttributes)
+	if v.CommonAttributes != nil {
+		serializeHttpEndpointCommonAttributesList(s, schemas.HttpEndpointRequestConfiguration_CommonAttributes, v.CommonAttributes)
+	}
 	if v.ContentEncoding != "" {
 		s.WriteString(schemas.HttpEndpointRequestConfiguration_ContentEncoding, string(v.ContentEncoding))
 	}
@@ -5096,7 +5122,9 @@ func (v *IcebergDestinationConfiguration) SerializeMembers(s smithy.ShapeSeriali
 		v.CloudWatchLoggingOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationConfiguration_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	if v.DestinationTableConfigurationList != nil {
+		serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationConfiguration_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	}
 	if v.ProcessingConfiguration != nil {
 		s.WriteStruct(schemas.IcebergDestinationConfiguration_ProcessingConfiguration)
 		v.ProcessingConfiguration.SerializeMembers(s)
@@ -5262,7 +5290,9 @@ func (v *IcebergDestinationDescription) SerializeMembers(s smithy.ShapeSerialize
 		v.CloudWatchLoggingOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationDescription_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	if v.DestinationTableConfigurationList != nil {
+		serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationDescription_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	}
 	if v.ProcessingConfiguration != nil {
 		s.WriteStruct(schemas.IcebergDestinationDescription_ProcessingConfiguration)
 		v.ProcessingConfiguration.SerializeMembers(s)
@@ -5428,7 +5458,9 @@ func (v *IcebergDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CloudWatchLoggingOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationUpdate_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	if v.DestinationTableConfigurationList != nil {
+		serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationUpdate_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	}
 	if v.ProcessingConfiguration != nil {
 		s.WriteStruct(schemas.IcebergDestinationUpdate_ProcessingConfiguration)
 		v.ProcessingConfiguration.SerializeMembers(s)
@@ -5875,7 +5907,9 @@ func (v *OpenXJsonSerDe) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CaseInsensitive != nil {
 		s.WriteBool(schemas.OpenXJsonSerDe_CaseInsensitive, *v.CaseInsensitive)
 	}
-	serializeColumnToJsonKeyMappings(s, schemas.OpenXJsonSerDe_ColumnToJsonKeyMappings, v.ColumnToJsonKeyMappings)
+	if v.ColumnToJsonKeyMappings != nil {
+		serializeColumnToJsonKeyMappings(s, schemas.OpenXJsonSerDe_ColumnToJsonKeyMappings, v.ColumnToJsonKeyMappings)
+	}
 	if v.ConvertDotsInJsonKeysToUnderscores != nil {
 		s.WriteBool(schemas.OpenXJsonSerDe_ConvertDotsInJsonKeysToUnderscores, *v.ConvertDotsInJsonKeysToUnderscores)
 	}
@@ -5970,7 +6004,9 @@ func (v *OrcSerDe) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BlockSizeBytes != nil {
 		s.WriteInt32(schemas.OrcSerDe_BlockSizeBytes, *v.BlockSizeBytes)
 	}
-	serializeListOfNonEmptyStringsWithoutWhitespace(s, schemas.OrcSerDe_BloomFilterColumns, v.BloomFilterColumns)
+	if v.BloomFilterColumns != nil {
+		serializeListOfNonEmptyStringsWithoutWhitespace(s, schemas.OrcSerDe_BloomFilterColumns, v.BloomFilterColumns)
+	}
 	if v.BloomFilterFalsePositiveProbability != nil {
 		s.WriteFloat64(schemas.OrcSerDe_BloomFilterFalsePositiveProbability, *v.BloomFilterFalsePositiveProbability)
 	}
@@ -6241,7 +6277,9 @@ func (v *PartitionSpec) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartitionFields(s, schemas.PartitionSpec_Identity, v.Identity)
+	if v.Identity != nil {
+		serializePartitionFields(s, schemas.PartitionSpec_Identity, v.Identity)
+	}
 }
 func (v *PartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionSpec, func(s *smithy.Schema) error {
@@ -6275,7 +6313,9 @@ func (v *ProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.ProcessingConfiguration_Enabled, *v.Enabled)
 	}
-	serializeProcessorList(s, schemas.ProcessingConfiguration_Processors, v.Processors)
+	if v.Processors != nil {
+		serializeProcessorList(s, schemas.ProcessingConfiguration_Processors, v.Processors)
+	}
 }
 func (v *ProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProcessingConfiguration, func(s *smithy.Schema) error {
@@ -6316,7 +6356,9 @@ func (v *Processor) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Processor) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProcessorParameterList(s, schemas.Processor_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeProcessorParameterList(s, schemas.Processor_Parameters, v.Parameters)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Processor_Type, string(v.Type))
 	}
@@ -9326,8 +9368,12 @@ func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleARN != nil {
 		s.WriteString(schemas.VpcConfiguration_RoleARN, *v.RoleARN)
 	}
-	serializeSecurityGroupIdList(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
@@ -9428,8 +9474,12 @@ func (v *VpcConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RoleARN != nil {
 		s.WriteString(schemas.VpcConfigurationDescription_RoleARN, *v.RoleARN)
 	}
-	serializeSecurityGroupIdList(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcConfigurationDescription_VpcId, *v.VpcId)
 	}

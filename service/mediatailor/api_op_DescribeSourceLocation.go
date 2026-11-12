@@ -132,11 +132,15 @@ func (v *DescribeSourceLocationOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeSourceLocationResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serialize__listOfSegmentDeliveryConfiguration(s, schemas.DescribeSourceLocationResponse_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SegmentDeliveryConfigurations != nil {
+		serialize__listOfSegmentDeliveryConfiguration(s, schemas.DescribeSourceLocationResponse_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.DescribeSourceLocationResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.DescribeSourceLocationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeSourceLocationResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeSourceLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSourceLocationResponse, func(s *smithy.Schema) error {

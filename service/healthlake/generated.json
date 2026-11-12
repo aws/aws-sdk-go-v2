@@ -40,6 +40,7 @@
         "endpoints.go",
         "endpoints_config_test.go",
         "endpoints_test.go",
+        "eventstream.go",
         "generated.json",
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",

@@ -92,7 +92,9 @@ func (v *ListPersonalAccessTokensOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPersonalAccessTokensResponse_NextToken, *v.NextToken)
 	}
-	serializePersonalAccessTokenSummaryList(s, schemas.ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries, v.PersonalAccessTokenSummaries)
+	if v.PersonalAccessTokenSummaries != nil {
+		serializePersonalAccessTokenSummaryList(s, schemas.ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries, v.PersonalAccessTokenSummaries)
+	}
 }
 func (v *ListPersonalAccessTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPersonalAccessTokensResponse, func(s *smithy.Schema) error {

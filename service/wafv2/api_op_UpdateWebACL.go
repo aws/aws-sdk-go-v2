@@ -148,6 +148,10 @@ type UpdateWebACLInput struct {
 	// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
 	// bytes).
 	//
+	// You can also use this to have your CloudFront distributions insert the WAF
+	// challenge JavaScript SDK into the HTML responses that they return. For more
+	// information, see the ChallengeJavascriptSdkInjection setting.
+	//
 	// [WAF Pricing]: http://aws.amazon.com/waf/pricing/
 	AssociationConfig *types.AssociationConfig
 
@@ -249,7 +253,9 @@ func (v *UpdateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChallengeConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomResponseBodies(s, schemas.UpdateWebACLRequest_CustomResponseBodies, v.CustomResponseBodies)
+	if v.CustomResponseBodies != nil {
+		serializeCustomResponseBodies(s, schemas.UpdateWebACLRequest_CustomResponseBodies, v.CustomResponseBodies)
+	}
 	if v.DataProtectionConfig != nil {
 		s.WriteStruct(schemas.UpdateWebACLRequest_DataProtectionConfig)
 		v.DataProtectionConfig.SerializeMembers(s)
@@ -282,11 +288,15 @@ func (v *UpdateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OnSourceDDoSProtectionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRules(s, schemas.UpdateWebACLRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.UpdateWebACLRequest_Rules, v.Rules)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.UpdateWebACLRequest_Scope, string(v.Scope))
 	}
-	serializeTokenDomains(s, schemas.UpdateWebACLRequest_TokenDomains, v.TokenDomains)
+	if v.TokenDomains != nil {
+		serializeTokenDomains(s, schemas.UpdateWebACLRequest_TokenDomains, v.TokenDomains)
+	}
 	if v.VisibilityConfig != nil {
 		s.WriteStruct(schemas.UpdateWebACLRequest_VisibilityConfig)
 		v.VisibilityConfig.SerializeMembers(s)

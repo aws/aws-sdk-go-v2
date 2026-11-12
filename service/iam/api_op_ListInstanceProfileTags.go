@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListInstanceProfileTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceProfileTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceProfileTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceProfileTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.ListInstanceProfileTagsRequest_InstanceProfileName, *v.InstanceProfileName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceProfileTagsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListInstanceProfileTagsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListInstanceProfileTagsOutput struct {
 
 	// The list of tags that are currently attached to the IAM instance profile. Each
@@ -89,13 +109,42 @@ type ListInstanceProfileTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceProfileTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceProfileTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceProfileTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListInstanceProfileTagsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceProfileTagsResponse_Marker, *v.Marker)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.ListInstanceProfileTagsResponse_Tags, v.Tags)
+	}
+}
+func (v *ListInstanceProfileTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceProfileTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceProfileTagsResponse_IsTruncated:
+			return d.ReadBool(schemas.ListInstanceProfileTagsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListInstanceProfileTagsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListInstanceProfileTagsResponse_Marker, v.Marker)
+		case schemas.ListInstanceProfileTagsResponse_Tags:
+			return deserializetagListType(d, schemas.ListInstanceProfileTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceProfileTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListInstanceProfileTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceProfileTags, schemas.ListInstanceProfileTagsRequest, schemas.ListInstanceProfileTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListInstanceProfileTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceProfileTags, schemas.ListInstanceProfileTagsRequest, schemas.ListInstanceProfileTagsResponse), output: &ListInstanceProfileTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

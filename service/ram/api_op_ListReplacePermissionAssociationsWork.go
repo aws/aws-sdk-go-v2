@@ -79,7 +79,9 @@ func (v *ListReplacePermissionAssociationsWorkInput) SerializeMembers(s smithy.S
 	if v.Status != "" {
 		s.WriteString(schemas.ListReplacePermissionAssociationsWorkRequest_status, string(v.Status))
 	}
-	serializeReplacePermissionAssociationsWorkIdList(s, schemas.ListReplacePermissionAssociationsWorkRequest_workIds, v.WorkIds)
+	if v.WorkIds != nil {
+		serializeReplacePermissionAssociationsWorkIdList(s, schemas.ListReplacePermissionAssociationsWorkRequest_workIds, v.WorkIds)
+	}
 }
 
 type ListReplacePermissionAssociationsWorkOutput struct {
@@ -110,7 +112,9 @@ func (v *ListReplacePermissionAssociationsWorkOutput) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReplacePermissionAssociationsWorkResponse_nextToken, *v.NextToken)
 	}
-	serializeReplacePermissionAssociationsWorkList(s, schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks, v.ReplacePermissionAssociationsWorks)
+	if v.ReplacePermissionAssociationsWorks != nil {
+		serializeReplacePermissionAssociationsWorkList(s, schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks, v.ReplacePermissionAssociationsWorks)
+	}
 }
 func (v *ListReplacePermissionAssociationsWorkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReplacePermissionAssociationsWorkResponse, func(s *smithy.Schema) error {

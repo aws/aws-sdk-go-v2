@@ -4,11 +4,20 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
 // Delete a parameter from the system. After deleting a parameter, wait for at
 // least 30 seconds to create a parameter with the same name.
+//
+// This operation is authorized against the ssm:DeleteParameter action. Denying
+// that action alone doesn't restrict DeleteParameters, which is authorized against its own
+// action. For more information, see [Restricting access to specific parameters and paths]in the Amazon Web Services Systems Manager
+// User Guide.
+//
+// [Restricting access to specific parameters and paths]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html
 func (c *Client) DeleteParameter(ctx context.Context, params *DeleteParameterInput, optFns ...func(*Options)) (*DeleteParameterOutput, error) {
 	if params == nil {
 		params = &DeleteParameterInput{}
@@ -37,6 +46,18 @@ type DeleteParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParameterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParameterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteParameterRequest_Name, *v.Name)
+	}
+}
+
 type DeleteParameterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +65,26 @@ type DeleteParameterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParameterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParameterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParameterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteParameterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteParameterResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParameter, schemas.DeleteParameterRequest, schemas.DeleteParameterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParameter, schemas.DeleteParameterRequest, schemas.DeleteParameterResult), output: &DeleteParameterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

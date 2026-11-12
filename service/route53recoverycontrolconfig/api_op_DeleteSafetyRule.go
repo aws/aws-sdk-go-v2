@@ -4,6 +4,8 @@ package route53recoverycontrolconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSafetyRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSafetyRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSafetyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SafetyRuleArn != nil {
+		s.WriteString(schemas.DeleteSafetyRuleRequest_SafetyRuleArn, *v.SafetyRuleArn)
+	}
+}
+
 type DeleteSafetyRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteSafetyRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSafetyRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSafetyRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSafetyRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSafetyRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSafetyRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSafetyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSafetyRule, schemas.DeleteSafetyRuleRequest, schemas.DeleteSafetyRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSafetyRule, schemas.DeleteSafetyRuleRequest, schemas.DeleteSafetyRuleResponse), output: &DeleteSafetyRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

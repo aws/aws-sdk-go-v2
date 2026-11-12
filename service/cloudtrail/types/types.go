@@ -45,7 +45,9 @@ func (v *AdvancedEventSelector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdvancedEventSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedFieldSelectors(s, schemas.AdvancedEventSelector_FieldSelectors, v.FieldSelectors)
+	if v.FieldSelectors != nil {
+		serializeAdvancedFieldSelectors(s, schemas.AdvancedEventSelector_FieldSelectors, v.FieldSelectors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AdvancedEventSelector_Name, *v.Name)
 	}
@@ -117,15 +119,27 @@ func (v *AdvancedFieldSelector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdvancedFieldSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperator(s, schemas.AdvancedFieldSelector_EndsWith, v.EndsWith)
-	serializeOperator(s, schemas.AdvancedFieldSelector_Equals, v.Equals)
+	if v.EndsWith != nil {
+		serializeOperator(s, schemas.AdvancedFieldSelector_EndsWith, v.EndsWith)
+	}
+	if v.Equals != nil {
+		serializeOperator(s, schemas.AdvancedFieldSelector_Equals, v.Equals)
+	}
 	if v.Field != nil {
 		s.WriteString(schemas.AdvancedFieldSelector_Field, *v.Field)
 	}
-	serializeOperator(s, schemas.AdvancedFieldSelector_NotEndsWith, v.NotEndsWith)
-	serializeOperator(s, schemas.AdvancedFieldSelector_NotEquals, v.NotEquals)
-	serializeOperator(s, schemas.AdvancedFieldSelector_NotStartsWith, v.NotStartsWith)
-	serializeOperator(s, schemas.AdvancedFieldSelector_StartsWith, v.StartsWith)
+	if v.NotEndsWith != nil {
+		serializeOperator(s, schemas.AdvancedFieldSelector_NotEndsWith, v.NotEndsWith)
+	}
+	if v.NotEquals != nil {
+		serializeOperator(s, schemas.AdvancedFieldSelector_NotEquals, v.NotEquals)
+	}
+	if v.NotStartsWith != nil {
+		serializeOperator(s, schemas.AdvancedFieldSelector_NotStartsWith, v.NotStartsWith)
+	}
+	if v.StartsWith != nil {
+		serializeOperator(s, schemas.AdvancedFieldSelector_StartsWith, v.StartsWith)
+	}
 }
 func (v *AdvancedFieldSelector) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdvancedFieldSelector, func(s *smithy.Schema) error {
@@ -176,7 +190,9 @@ func (v *AggregationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventCategory != "" {
 		s.WriteString(schemas.AggregationConfiguration_EventCategory, string(v.EventCategory))
 	}
-	serializeTemplates(s, schemas.AggregationConfiguration_Templates, v.Templates)
+	if v.Templates != nil {
+		serializeTemplates(s, schemas.AggregationConfiguration_Templates, v.Templates)
+	}
 }
 func (v *AggregationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AggregationConfiguration, func(s *smithy.Schema) error {
@@ -263,7 +279,9 @@ func (v *ContextKeySelector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContextKeySelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperatorTargetList(s, schemas.ContextKeySelector_Equals, v.Equals)
+	if v.Equals != nil {
+		serializeOperatorTargetList(s, schemas.ContextKeySelector_Equals, v.Equals)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ContextKeySelector_Type, string(v.Type))
 	}
@@ -453,7 +471,9 @@ func (v *DataResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != nil {
 		s.WriteString(schemas.DataResource_Type, *v.Type)
 	}
-	serializeDataResourceValues(s, schemas.DataResource_Values, v.Values)
+	if v.Values != nil {
+		serializeDataResourceValues(s, schemas.DataResource_Values, v.Values)
+	}
 }
 func (v *DataResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataResource, func(s *smithy.Schema) error {
@@ -585,7 +605,9 @@ func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReadOnly != nil {
 		s.WriteString(schemas.Event_ReadOnly, *v.ReadOnly)
 	}
-	serializeResourceList(s, schemas.Event_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.Event_Resources, v.Resources)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.Event_Username, *v.Username)
 	}
@@ -692,7 +714,9 @@ func (v *EventDataStore) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventDataStore) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.EventDataStore_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.EventDataStore_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.EventDataStore_CreatedTimestamp, *v.CreatedTimestamp)
 	}
@@ -835,8 +859,12 @@ func (v *EventSelector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataResources(s, schemas.EventSelector_DataResources, v.DataResources)
-	serializeExcludeManagementEventSources(s, schemas.EventSelector_ExcludeManagementEventSources, v.ExcludeManagementEventSources)
+	if v.DataResources != nil {
+		serializeDataResources(s, schemas.EventSelector_DataResources, v.DataResources)
+	}
+	if v.ExcludeManagementEventSources != nil {
+		serializeExcludeManagementEventSources(s, schemas.EventSelector_ExcludeManagementEventSources, v.ExcludeManagementEventSources)
+	}
 	if v.IncludeManagementEvents != nil {
 		s.WriteBool(schemas.EventSelector_IncludeManagementEvents, *v.IncludeManagementEvents)
 	}
@@ -968,7 +996,9 @@ func (v *ImportsListItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.ImportsListItem_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeImportDestinations(s, schemas.ImportsListItem_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeImportDestinations(s, schemas.ImportsListItem_Destinations, v.Destinations)
+	}
 	if v.ImportId != nil {
 		s.WriteString(schemas.ImportsListItem_ImportId, *v.ImportId)
 	}
@@ -1217,7 +1247,9 @@ func (v *InsightSelector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InsightSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceEventCategories(s, schemas.InsightSelector_EventCategories, v.EventCategories)
+	if v.EventCategories != nil {
+		serializeSourceEventCategories(s, schemas.InsightSelector_EventCategories, v.EventCategories)
+	}
 	if v.InsightType != "" {
 		s.WriteString(schemas.InsightSelector_InsightType, string(v.InsightType))
 	}
@@ -1719,11 +1751,15 @@ func (v *RequestWidget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequestWidget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryParameters(s, schemas.RequestWidget_QueryParameters, v.QueryParameters)
+	if v.QueryParameters != nil {
+		serializeQueryParameters(s, schemas.RequestWidget_QueryParameters, v.QueryParameters)
+	}
 	if v.QueryStatement != nil {
 		s.WriteString(schemas.RequestWidget_QueryStatement, *v.QueryStatement)
 	}
-	serializeViewPropertiesMap(s, schemas.RequestWidget_ViewProperties, v.ViewProperties)
+	if v.ViewProperties != nil {
+		serializeViewPropertiesMap(s, schemas.RequestWidget_ViewProperties, v.ViewProperties)
+	}
 }
 func (v *RequestWidget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestWidget, func(s *smithy.Schema) error {
@@ -1811,7 +1847,9 @@ func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.ResourceTag_ResourceId, *v.ResourceId)
 	}
-	serializeTagsList(s, schemas.ResourceTag_TagsList, v.TagsList)
+	if v.TagsList != nil {
+		serializeTagsList(s, schemas.ResourceTag_TagsList, v.TagsList)
+	}
 }
 func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
@@ -1958,7 +1996,9 @@ func (v *SourceConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.SourceConfig_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.SourceConfig_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 	if v.ApplyToAllRegions != nil {
 		s.WriteBool(schemas.SourceConfig_ApplyToAllRegions, *v.ApplyToAllRegions)
 	}
@@ -2305,11 +2345,15 @@ func (v *Widget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryAlias != nil {
 		s.WriteString(schemas.Widget_QueryAlias, *v.QueryAlias)
 	}
-	serializeQueryParameters(s, schemas.Widget_QueryParameters, v.QueryParameters)
+	if v.QueryParameters != nil {
+		serializeQueryParameters(s, schemas.Widget_QueryParameters, v.QueryParameters)
+	}
 	if v.QueryStatement != nil {
 		s.WriteString(schemas.Widget_QueryStatement, *v.QueryStatement)
 	}
-	serializeViewPropertiesMap(s, schemas.Widget_ViewProperties, v.ViewProperties)
+	if v.ViewProperties != nil {
+		serializeViewPropertiesMap(s, schemas.Widget_ViewProperties, v.ViewProperties)
+	}
 }
 func (v *Widget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Widget, func(s *smithy.Schema) error {

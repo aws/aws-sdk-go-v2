@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,21 @@ type CancelEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelEnrichmentJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelEnrichmentJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelEnrichmentJobRequest_jobId, *v.JobId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CancelEnrichmentJobRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type CancelEnrichmentJobOutput struct {
 
 	// The unique identifier of the cancelled enrichment job.
@@ -90,13 +107,42 @@ type CancelEnrichmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelEnrichmentJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelEnrichmentJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelEnrichmentJobResponse_jobId, *v.JobId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelEnrichmentJobResponse_status, string(v.Status))
+	}
+}
+func (v *CancelEnrichmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelEnrichmentJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelEnrichmentJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CancelEnrichmentJobResponse_jobId, v.JobId)
+		case schemas.CancelEnrichmentJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelEnrichmentJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnrichmentJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelEnrichmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelEnrichmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelEnrichmentJob, schemas.CancelEnrichmentJobRequest, schemas.CancelEnrichmentJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelEnrichmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelEnrichmentJob, schemas.CancelEnrichmentJobRequest, schemas.CancelEnrichmentJobResponse), output: &CancelEnrichmentJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

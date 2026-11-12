@@ -105,7 +105,9 @@ func (v *CreateMicrosoftADInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShortName != nil {
 		s.WriteString(schemas.CreateMicrosoftADRequest_ShortName, *v.ShortName)
 	}
-	serializeTags(s, schemas.CreateMicrosoftADRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateMicrosoftADRequest_Tags, v.Tags)
+	}
 	if v.VpcSettings != nil {
 		s.WriteStruct(schemas.CreateMicrosoftADRequest_VpcSettings)
 		v.VpcSettings.SerializeMembers(s)
@@ -161,6 +163,9 @@ func (c *Client) addOperationCreateMicrosoftADMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

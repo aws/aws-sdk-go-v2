@@ -100,18 +100,24 @@ func (v *CreateEventSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Enabled != nil {
 		s.WriteBool(schemas.CreateEventSubscriptionMessage_Enabled, *v.Enabled)
 	}
-	serializeEventCategoriesList(s, schemas.CreateEventSubscriptionMessage_EventCategories, v.EventCategories)
+	if v.EventCategories != nil {
+		serializeEventCategoriesList(s, schemas.CreateEventSubscriptionMessage_EventCategories, v.EventCategories)
+	}
 	if v.SnsTopicArn != nil {
 		s.WriteString(schemas.CreateEventSubscriptionMessage_SnsTopicArn, *v.SnsTopicArn)
 	}
-	serializeSourceIdsList(s, schemas.CreateEventSubscriptionMessage_SourceIds, v.SourceIds)
+	if v.SourceIds != nil {
+		serializeSourceIdsList(s, schemas.CreateEventSubscriptionMessage_SourceIds, v.SourceIds)
+	}
 	if v.SourceType != nil {
 		s.WriteString(schemas.CreateEventSubscriptionMessage_SourceType, *v.SourceType)
 	}
 	if v.SubscriptionName != nil {
 		s.WriteString(schemas.CreateEventSubscriptionMessage_SubscriptionName, *v.SubscriptionName)
 	}
-	serializeTagList(s, schemas.CreateEventSubscriptionMessage_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEventSubscriptionMessage_Tags, v.Tags)
+	}
 }
 
 type CreateEventSubscriptionOutput struct {

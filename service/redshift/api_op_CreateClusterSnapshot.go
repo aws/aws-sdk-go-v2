@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,27 @@ type CreateClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.CreateClusterSnapshotMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ManualSnapshotRetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateClusterSnapshotMessage_ManualSnapshotRetentionPeriod, *v.ManualSnapshotRetentionPeriod)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.CreateClusterSnapshotMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterSnapshotMessage_Tags, v.Tags)
+	}
+}
+
 type CreateClusterSnapshotOutput struct {
 
 	// Describes a snapshot.
@@ -80,13 +103,34 @@ type CreateClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.CreateClusterSnapshotResult_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterSnapshotResult_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSnapshot, schemas.CreateClusterSnapshotMessage, schemas.CreateClusterSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSnapshot, schemas.CreateClusterSnapshotMessage, schemas.CreateClusterSnapshotResult), output: &CreateClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

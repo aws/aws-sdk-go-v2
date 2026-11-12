@@ -74,7 +74,9 @@ func (v *DescribeAttackStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAttackStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttackStatisticsDataList(s, schemas.DescribeAttackStatisticsResponse_DataItems, v.DataItems)
+	if v.DataItems != nil {
+		serializeAttackStatisticsDataList(s, schemas.DescribeAttackStatisticsResponse_DataItems, v.DataItems)
+	}
 	if v.TimeRange != nil {
 		s.WriteStruct(schemas.DescribeAttackStatisticsResponse_TimeRange)
 		v.TimeRange.SerializeMembers(s)
@@ -108,6 +110,9 @@ func (c *Client) addOperationDescribeAttackStatisticsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

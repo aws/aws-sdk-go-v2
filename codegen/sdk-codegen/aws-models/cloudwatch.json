@@ -42,6 +42,20 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#ActionConfiguration": {
+            "type": "structure",
+            "members": {
+                "AlarmTagsPropagation": {
+                    "target": "com.amazonaws.cloudwatch#AlarmTagsPropagation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for including the alarm's tags in its action notifications and\n            state-change events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that change the content of the notifications and events that an alarm sends\n            when its state changes. These settings apply to the alarm's actions, whichever state\n            triggers them.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#ActionLogLineCount": {
             "type": "integer"
         },
@@ -365,6 +379,58 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#AlarmTagsPropagation": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.cloudwatch#AlarmTagsPropagationEnabled",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to include the alarm's tags. Set to <code>false</code> to\n            stop including them.</p>\n         <p>When this is <code>true</code>, you must have the\n                <code>cloudwatch:ListTagsForResource</code> permission on the alarm to create or\n            update it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludedTagKeys": {
+                    "target": "com.amazonaws.cloudwatch#AlarmTagsPropagationTagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys to include. Only the alarm's tags with these keys are included.</p>\n         <p>You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.</p>\n         <p>You can't specify both <code>IncludedTagKeys</code> and\n            <code>ExcludedTagKeys</code>.</p>"
+                    }
+                },
+                "ExcludedTagKeys": {
+                    "target": "com.amazonaws.cloudwatch#AlarmTagsPropagationTagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys to exclude. All of the alarm's tags except those with these keys are\n            included.</p>\n         <p>You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.</p>\n         <p>You can't specify both <code>IncludedTagKeys</code> and\n            <code>ExcludedTagKeys</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Includes the alarm's tags in the notifications that the alarm sends to Amazon SNS\n            topics and Lambda functions. The tags are also included in the alarm's\n            state-change events in Amazon EventBridge. Other types of alarm actions don't receive\n            the tags.</p>\n         <p>By default, the alarm's tags aren't included.</p>\n         <p>Use this to route or filter notifications and events by tag, such as by team or\n            environment. You can also use it to read the alarm's tags without looking them up\n            separately.</p>\n         <p>To limit which tags are included, specify either <code>IncludedTagKeys</code> or\n                <code>ExcludedTagKeys</code>. You can't specify both. If you specify neither, all of\n            the alarm's tags are included. This includes tags that you add to the alarm later.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#AlarmTagsPropagationEnabled": {
+            "type": "boolean"
+        },
+        "com.amazonaws.cloudwatch#AlarmTagsPropagationTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#AlarmTagsPropagationTagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#AlarmTagsPropagationTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#AlarmType": {
             "type": "enum",
             "members": {
@@ -483,6 +549,29 @@
                 "smithy.api#documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric, statistic,\n            or metric math expression. You can use the model to display a band of expected, normal\n            values when the metric is graphed.</p>\n         <p>If you have enabled unified cross-account observability, and this account is a\n            monitoring account, the metric can be in the same account or a source account.</p>"
             }
         },
+        "com.amazonaws.cloudwatch#AnomalyDetectorAdaptationSpeed": {
+            "type": "enum",
+            "members": {
+                "FAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAST"
+                    }
+                },
+                "NORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMAL"
+                    }
+                },
+                "SLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SLOW"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#AnomalyDetectorConfiguration": {
             "type": "structure",
             "members": {
@@ -496,6 +585,18 @@
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorMetricTimezone",
                     "traits": {
                         "smithy.api#documentation": "<p>The time zone to use for the metric. This is useful to enable the model to\n            automatically account for daylight savings time changes if the metric is sensitive to\n            such time changes.</p>\n         <p>To specify a time zone, use the name of the time zone as specified in the standard\n            tz database. For more information, see <a href=\"https://en.wikipedia.org/wiki/Tz_database\">tz database</a>.</p>"
+                    }
+                },
+                "AdaptationSpeed": {
+                    "target": "com.amazonaws.cloudwatch#AnomalyDetectorAdaptationSpeed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speed at which the anomaly detection model adapts to sustained changes in the\n            metric's baseline. Faster adaptation lets the model track shifting workloads sooner, but\n            increases the chance that the model treats a real, lasting change as normal.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAST</code> - The model adapts quickly to sustained changes in the baseline.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NORMAL</code> - The model adapts at a moderate pace. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLOW</code> - The model adapts slowly, reducing the risk of treating a real change as normal.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "OutlierFilteringStrength": {
+                    "target": "com.amazonaws.cloudwatch#AnomalyDetectorOutlierFilteringStrength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggressiveness with which CloudWatch filters outliers from the metric data\n            that the anomaly detection model uses. Stronger filtering excludes more extreme values,\n            which can produce a tighter band of expected values but may also suppress legitimate\n            spikes.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MINIMAL</code> - Excludes only the most extreme outliers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODERATE</code> - Excludes a moderate range of outliers. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRICT</code> - Excludes a wider range of outliers, which can suppress legitimate spikes.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -549,6 +650,29 @@
                     "max": 50
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.cloudwatch#AnomalyDetectorOutlierFilteringStrength": {
+            "type": "enum",
+            "members": {
+                "MINIMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINIMAL"
+                    }
+                },
+                "MODERATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODERATE"
+                    }
+                },
+                "STRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRICT"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorStateValue": {
@@ -867,6 +991,12 @@
                     "target": "com.amazonaws.cloudwatch#SuppressorPeriod",
                     "traits": {
                         "smithy.api#documentation": "<p> The maximum time in seconds that the composite alarm waits after suppressor alarm\n            goes out of the <code>ALARM</code> state. After this time, the composite alarm performs\n            its actions. </p>\n         <important>\n            <p>\n               <code>ExtensionPeriod</code> is required only when <code>ActionsSuppressor</code> is\n                specified. </p>\n         </important>"
+                    }
+                },
+                "ActionConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ActionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that change the content of the notifications and events that the alarm\n            sends when its state changes. These settings apply to the alarm's actions, whichever\n            state triggers them.</p>"
                     }
                 }
             },
@@ -3453,7 +3583,7 @@
                 "target": "com.amazonaws.cloudwatch#GetMetricWidgetImageOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>You can use the <code>GetMetricWidgetImage</code> API to retrieve a snapshot graph\n            of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this\n            image into your services and products, such as wiki pages, reports, and documents. You\n            could also retrieve images regularly, such as every minute, and create your own custom\n            live dashboard.</p>\n         <p>The graph you retrieve can include all CloudWatch metric graph features, including\n            metric math and horizontal and vertical annotations.</p>\n         <p>There is a limit of 20 transactions per second for this API. Each\n                <code>GetMetricWidgetImage</code> action has the following limits:</p>\n         <ul>\n            <li>\n               <p>As many as 100 metrics in the graph.</p>\n            </li>\n            <li>\n               <p>Up to 100 KB uncompressed payload.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>You can use the <code>GetMetricWidgetImage</code> API to retrieve a snapshot graph\n            of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this\n            image into your services and products, such as wiki pages, reports, and documents. You\n            could also retrieve images regularly, such as every minute, and create your own custom\n            live dashboard.</p>\n         <note>\n            <p>\n               <code>GetMetricWidgetImage</code> is not available in the Amazon Web Services\n                GovCloud (US) Regions. In those Regions, calls to this operation fail. For the list\n                of Amazon CloudWatch features that are not available in Amazon Web Services\n                GovCloud (US), see <a href=\"https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-cw.html\">Amazon CloudWatch in\n                    Amazon Web Services GovCloud (US)</a>.</p>\n         </note>\n         <p>The graph you retrieve can include all CloudWatch metric graph features, including\n            metric math and horizontal and vertical annotations.</p>\n         <p>There is a limit of 20 transactions per second for this API. Each\n                <code>GetMetricWidgetImage</code> action has the following limits:</p>\n         <ul>\n            <li>\n               <p>As many as 100 metrics in the graph.</p>\n            </li>\n            <li>\n               <p>Up to 100 KB uncompressed payload.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudwatch#GetMetricWidgetImageInput": {
@@ -5936,6 +6066,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation\n            after you create or update the alarm. During the warm-up period, the alarm stays in\n                <code>INSUFFICIENT_DATA</code> and does not perform alarm actions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html\">Alarm warm-up\n                periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
                     }
+                },
+                "ActionConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ActionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that change the content of the notifications and events that the alarm\n            sends when its state changes. These settings apply to the alarm's actions, whichever\n            state triggers them.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6323,6 +6459,12 @@
                     "target": "com.amazonaws.cloudwatch#EvaluationInterval",
                     "traits": {
                         "smithy.api#documentation": "<p>The frequency, in seconds, at which the alarm is evaluated.</p>"
+                    }
+                },
+                "ActionConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ActionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that change the content of the notifications and events that the alarm\n            sends when its state changes. These settings apply to the alarm's actions, whichever\n            state triggers them.</p>"
                     }
                 }
             },
@@ -7318,6 +7460,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The maximum time in seconds that the composite alarm waits after suppressor alarm\n            goes out of the <code>ALARM</code> state. After this time, the composite alarm performs\n            its actions. </p>\n         <important>\n            <p>\n               <code>ExtensionPeriod</code> is required only when <code>ActionsSuppressor</code> is\n                specified. </p>\n         </important>"
                     }
+                },
+                "ActionConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ActionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that change the content of the notifications and events that the alarm\n            sends when its state changes. These settings apply to the alarm's actions, whichever\n            state triggers them.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7593,6 +7741,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation\n            after you create or update the alarm. The warm-up period reduces alarm noise from\n            missing data while a new resource or service starts publishing data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html\">Alarm warm-up\n                periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
                     }
+                },
+                "ActionConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ActionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that change the content of the notifications and events that the alarm\n            sends when its state changes. These settings apply to the alarm's actions, whichever\n            state triggers them.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7825,6 +7979,12 @@
                     "target": "com.amazonaws.cloudwatch#EvaluationInterval",
                     "traits": {
                         "smithy.api#documentation": "<p>The frequency, in seconds, at which the alarm is evaluated. Valid values are 10,\n            20, 30, and any multiple of 60.</p>\n         <p>This parameter is required for alarms that use <code>EvaluationCriteria</code>, and\n            cannot be specified for alarms configured with <code>MetricName</code> or\n                <code>Metrics</code>.</p>"
+                    }
+                },
+                "ActionConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ActionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that change the content of the notifications and events that the alarm\n            sends when its state changes. These settings apply to the alarm's actions, whichever\n            state triggers them.</p>"
                     }
                 }
             },

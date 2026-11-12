@@ -106,7 +106,9 @@ func (v *ListAuditSuppressionsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAuditSuppressionsResponse_nextToken, *v.NextToken)
 	}
-	serializeAuditSuppressionList(s, schemas.ListAuditSuppressionsResponse_suppressions, v.Suppressions)
+	if v.Suppressions != nil {
+		serializeAuditSuppressionList(s, schemas.ListAuditSuppressionsResponse_suppressions, v.Suppressions)
+	}
 }
 func (v *ListAuditSuppressionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAuditSuppressionsResponse, func(s *smithy.Schema) error {

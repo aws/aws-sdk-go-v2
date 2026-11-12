@@ -5,6 +5,7 @@ package connectparticipant
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -51,6 +52,14 @@ type GetAttachmentInput struct {
 	// This member is required.
 	ConnectionToken *string
 
+	// Specifies how a browser handles the file at the pre-signed URL. The following
+	// values are valid:
+	//
+	// INLINE Displays the file in the browser.
+	//
+	// ATTACHMENT Downloads the file. This is the default behavior.
+	UrlContentDisposition types.ContentDisposition
+
 	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
 	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	UrlExpiryInSeconds *int32
@@ -70,6 +79,9 @@ func (v *GetAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ConnectionToken != nil {
 		s.WriteString(schemas.GetAttachmentRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.UrlContentDisposition != "" {
+		s.WriteString(schemas.GetAttachmentRequest_UrlContentDisposition, string(v.UrlContentDisposition))
 	}
 	if v.UrlExpiryInSeconds != nil {
 		s.WriteInt32(schemas.GetAttachmentRequest_UrlExpiryInSeconds, *v.UrlExpiryInSeconds)

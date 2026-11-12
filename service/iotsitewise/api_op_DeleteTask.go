@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type DeleteTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskName != nil {
+		s.WriteString(schemas.DeleteTaskRequest_taskName, *v.TaskName)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DeleteTaskRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for DeleteTask operation.
 type DeleteTaskOutput struct {
 
@@ -58,13 +75,34 @@ type DeleteTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.DeleteTaskResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTaskResponse_status:
+			v.Status = &types.ResourceStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTask, schemas.DeleteTaskRequest, schemas.DeleteTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTask, schemas.DeleteTaskRequest, schemas.DeleteTaskResponse), output: &DeleteTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

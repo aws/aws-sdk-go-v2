@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetDocument
+
+{"AttachmentsContent":[{"Hash":"__Hash__","HashType":"Sha256","Name":"__Name__","Size":1,"Url":"__Url__"},{"Hash":"__Hash__","HashType":"Sha256","Name":"__Name__","Size":1,"Url":"__Url__"}],"Content":"__Content__","CreatedDate":946684800,"DisplayName":"__DisplayName__","DocumentFormat":"YAML","DocumentType":"Command","DocumentVersion":"__DocumentVersion__","Name":"__Name__","Requires":[{"Name":"__Name__","RequireType":"__RequireType__","Version":"__Version__","VersionName":"__VersionName__"},{"Name":"__Name__","RequireType":"__RequireType__","Version":"__Version__","VersionName":"__VersionName__"}],"ReviewStatus":"APPROVED","Status":"Creating","StatusInformation":"__StatusInformation__","VersionName":"__VersionName__"}

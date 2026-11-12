@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agreementId":"__AgreementId__","deploymentParameterId":"__DeploymentParameterId__","resourceArn":"__ResourceArn__","tags":{"key0":"__Value__"}}

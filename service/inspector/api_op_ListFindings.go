@@ -62,7 +62,9 @@ func (v *ListFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListParentArnList(s, schemas.ListFindingsRequest_assessmentRunArns, v.AssessmentRunArns)
+	if v.AssessmentRunArns != nil {
+		serializeListParentArnList(s, schemas.ListFindingsRequest_assessmentRunArns, v.AssessmentRunArns)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.ListFindingsRequest_filter)
 		v.Filter.SerializeMembers(s)
@@ -102,7 +104,9 @@ func (v *ListFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListReturnedArnList(s, schemas.ListFindingsResponse_findingArns, v.FindingArns)
+	if v.FindingArns != nil {
+		serializeListReturnedArnList(s, schemas.ListFindingsResponse_findingArns, v.FindingArns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingsResponse_nextToken, *v.NextToken)
 	}

@@ -89,7 +89,9 @@ func (v *ListCommandExecutionsForSandboxOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListCommandExecutionsForSandboxOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandExecutions(s, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, v.CommandExecutions)
+	if v.CommandExecutions != nil {
+		serializeCommandExecutions(s, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, v.CommandExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCommandExecutionsForSandboxOutput_nextToken, *v.NextToken)
 	}
@@ -121,6 +123,9 @@ func (c *Client) addOperationListCommandExecutionsForSandboxMiddlewares(stack *m
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

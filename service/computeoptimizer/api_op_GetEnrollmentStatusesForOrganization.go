@@ -56,7 +56,9 @@ func (v *GetEnrollmentStatusesForOrganizationInput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GetEnrollmentStatusesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnrollmentFilters(s, schemas.GetEnrollmentStatusesForOrganizationRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeEnrollmentFilters(s, schemas.GetEnrollmentStatusesForOrganizationRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetEnrollmentStatusesForOrganizationRequest_maxResults, *v.MaxResults)
 	}
@@ -90,7 +92,9 @@ func (v *GetEnrollmentStatusesForOrganizationOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *GetEnrollmentStatusesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountEnrollmentStatuses(s, schemas.GetEnrollmentStatusesForOrganizationResponse_accountEnrollmentStatuses, v.AccountEnrollmentStatuses)
+	if v.AccountEnrollmentStatuses != nil {
+		serializeAccountEnrollmentStatuses(s, schemas.GetEnrollmentStatusesForOrganizationResponse_accountEnrollmentStatuses, v.AccountEnrollmentStatuses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEnrollmentStatusesForOrganizationResponse_nextToken, *v.NextToken)
 	}

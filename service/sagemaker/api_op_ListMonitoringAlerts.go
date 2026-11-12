@@ -85,7 +85,9 @@ func (v *ListMonitoringAlertsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitoringAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoringAlertSummaryList(s, schemas.ListMonitoringAlertsResponse_MonitoringAlertSummaries, v.MonitoringAlertSummaries)
+	if v.MonitoringAlertSummaries != nil {
+		serializeMonitoringAlertSummaryList(s, schemas.ListMonitoringAlertsResponse_MonitoringAlertSummaries, v.MonitoringAlertSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitoringAlertsResponse_NextToken, *v.NextToken)
 	}

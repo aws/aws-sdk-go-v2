@@ -125,8 +125,12 @@ func (v *DescribeFeaturedResultsSetOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeFeaturedResultsSetResponse_Description, *v.Description)
 	}
-	serializeFeaturedDocumentMissingList(s, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsMissing, v.FeaturedDocumentsMissing)
-	serializeFeaturedDocumentWithMetadataList(s, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsWithMetadata, v.FeaturedDocumentsWithMetadata)
+	if v.FeaturedDocumentsMissing != nil {
+		serializeFeaturedDocumentMissingList(s, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsMissing, v.FeaturedDocumentsMissing)
+	}
+	if v.FeaturedDocumentsWithMetadata != nil {
+		serializeFeaturedDocumentWithMetadataList(s, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsWithMetadata, v.FeaturedDocumentsWithMetadata)
+	}
 	if v.FeaturedResultsSetId != nil {
 		s.WriteString(schemas.DescribeFeaturedResultsSetResponse_FeaturedResultsSetId, *v.FeaturedResultsSetId)
 	}
@@ -136,7 +140,9 @@ func (v *DescribeFeaturedResultsSetOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteInt64(schemas.DescribeFeaturedResultsSetResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeQueryTextList(s, schemas.DescribeFeaturedResultsSetResponse_QueryTexts, v.QueryTexts)
+	if v.QueryTexts != nil {
+		serializeQueryTextList(s, schemas.DescribeFeaturedResultsSetResponse_QueryTexts, v.QueryTexts)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeFeaturedResultsSetResponse_Status, string(v.Status))
 	}

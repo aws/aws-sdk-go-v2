@@ -69,7 +69,9 @@ func (v *UpdateFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateFindingsRequest_clientToken, *v.ClientToken)
 	}
-	serializeFindingIdList(s, schemas.UpdateFindingsRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeFindingIdList(s, schemas.UpdateFindingsRequest_ids, v.Ids)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UpdateFindingsRequest_resourceArn, *v.ResourceArn)
 	}

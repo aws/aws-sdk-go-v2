@@ -92,7 +92,9 @@ func (v *DescribeDomainAutoTunesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDomainAutoTunesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoTuneList(s, schemas.DescribeDomainAutoTunesResponse_AutoTunes, v.AutoTunes)
+	if v.AutoTunes != nil {
+		serializeAutoTuneList(s, schemas.DescribeDomainAutoTunesResponse_AutoTunes, v.AutoTunes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDomainAutoTunesResponse_NextToken, *v.NextToken)
 	}

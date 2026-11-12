@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"harnessVersions":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","failureReason":"__FailureReason__","harnessId":"__HarnessId__","harnessName":"__HarnessName__","harnessVersion":"__HarnessVersion__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","failureReason":"__FailureReason__","harnessId":"__HarnessId__","harnessName":"__HarnessName__","harnessVersion":"__HarnessVersion__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

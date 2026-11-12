@@ -84,7 +84,9 @@ func (v *DescribeEventDetailsForOrganizationInput) SerializeMembers(s smithy.Sha
 	if v.Locale != nil {
 		s.WriteString(schemas.DescribeEventDetailsForOrganizationRequest_locale, *v.Locale)
 	}
-	serializeOrganizationEventDetailFiltersList(s, schemas.DescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters, v.OrganizationEventDetailFilters)
+	if v.OrganizationEventDetailFilters != nil {
+		serializeOrganizationEventDetailFiltersList(s, schemas.DescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters, v.OrganizationEventDetailFilters)
+	}
 }
 
 type DescribeEventDetailsForOrganizationOutput struct {
@@ -108,8 +110,12 @@ func (v *DescribeEventDetailsForOrganizationOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeEventDetailsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDescribeEventDetailsForOrganizationFailedSet(s, schemas.DescribeEventDetailsForOrganizationResponse_failedSet, v.FailedSet)
-	serializeDescribeEventDetailsForOrganizationSuccessfulSet(s, schemas.DescribeEventDetailsForOrganizationResponse_successfulSet, v.SuccessfulSet)
+	if v.FailedSet != nil {
+		serializeDescribeEventDetailsForOrganizationFailedSet(s, schemas.DescribeEventDetailsForOrganizationResponse_failedSet, v.FailedSet)
+	}
+	if v.SuccessfulSet != nil {
+		serializeDescribeEventDetailsForOrganizationSuccessfulSet(s, schemas.DescribeEventDetailsForOrganizationResponse_successfulSet, v.SuccessfulSet)
+	}
 }
 func (v *DescribeEventDetailsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEventDetailsForOrganizationResponse, func(s *smithy.Schema) error {

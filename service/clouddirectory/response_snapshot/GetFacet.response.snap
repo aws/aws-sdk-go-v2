@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Facet":{"FacetStyle":"STATIC","Name":"__Name__","ObjectType":"NODE"}}

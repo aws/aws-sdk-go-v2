@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -158,6 +160,42 @@ type RestoreDBInstanceFromS3Input struct {
 	// Specifies whether to copy all tags from the DB instance to snapshots of the DB
 	// instance. By default, tags are not copied.
 	CopyTagsToSnapshot *bool
+
+	// The identifier or the name of the DB capacity reservation to associate with
+	// this DB instance. You can specify the identifier, which has the prefix dbcr- ,
+	// or the reservation name. When you specify this parameter, the DB instance uses
+	// reserved capacity from the specified reservation.
+	//
+	// If you specify AvailabilityZone , Amazon RDS places the DB instance in that
+	// Availability Zone, and the reservation must cover it.
+	//
+	// Constraints:
+	//
+	//   - The reservation must reserve capacity for the DB instance class and the
+	//   database engine of the DB instance.
+	//
+	//   - If the reservation reserves capacity for a specific license model, the
+	//   license model of the DB instance must match it.
+	//
+	//   - The reservation must be in the active state, and it must not be past its end
+	//   date.
+	//
+	//   - If you specify AvailabilityZone , it must be one of the Availability Zones
+	//   of the reservation.
+	//
+	//   - For a Multi-AZ DB instance, the reservation must cover two or more
+	//   Availability Zones. A Multi-AZ DB instance uses one unit of reserved capacity in
+	//   each of two Availability Zones. If the reservation covers more than two
+	//   Availability Zones, Amazon RDS chooses the two that the DB instance uses.
+	//
+	//   - The reservation must have available capacity in each Availability Zone that
+	//   the DB instance uses.
+	//
+	//   - The DB subnet group must be in a VPC with default tenancy.
+	//
+	//   - The DB subnet group must cover each Availability Zone that the DB instance
+	//   uses.
+	DBCapacityReservationIdentifier *string
 
 	// The name of the database to create when the DB instance is created. Follow the
 	// naming rules specified in CreateDBInstance .
@@ -542,6 +580,180 @@ type RestoreDBInstanceFromS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBInstanceFromS3Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBInstanceFromS3Message)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBInstanceFromS3Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalStorageVolumes != nil {
+		serializeAdditionalStorageVolumesList(s, schemas.RestoreDBInstanceFromS3Message_AdditionalStorageVolumes, v.AdditionalStorageVolumes)
+	}
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.CACertificateIdentifier != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_CACertificateIdentifier, *v.CACertificateIdentifier)
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBName != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_DBName, *v.DBName)
+	}
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+	if v.DBSecurityGroups != nil {
+		serializeDBSecurityGroupNameList(s, schemas.RestoreDBInstanceFromS3Message_DBSecurityGroups, v.DBSecurityGroups)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DatabaseInsightsMode != "" {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_DatabaseInsightsMode, string(v.DatabaseInsightsMode))
+	}
+	if v.DedicatedLogVolume != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_DedicatedLogVolume, *v.DedicatedLogVolume)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.EnableCloudwatchLogsExports != nil {
+		serializeLogTypeList(s, schemas.RestoreDBInstanceFromS3Message_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.EnablePerformanceInsights != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_Engine, *v.Engine)
+	}
+	if v.EngineLifecycleSupport != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_EngineLifecycleSupport, *v.EngineLifecycleSupport)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_EngineVersion, *v.EngineVersion)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_Iops, *v.Iops)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LicenseModel != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_LicenseModel, *v.LicenseModel)
+	}
+	if v.ManageMasterUserPassword != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_ManageMasterUserPassword, *v.ManageMasterUserPassword)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_MasterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUserSecretKmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
+	}
+	if v.MasterUsername != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_MasterUsername, *v.MasterUsername)
+	}
+	if v.MaxAllocatedStorage != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_MaxAllocatedStorage, *v.MaxAllocatedStorage)
+	}
+	if v.MonitoringInterval != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_MonitoringInterval, *v.MonitoringInterval)
+	}
+	if v.MonitoringRoleArn != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_MonitoringRoleArn, *v.MonitoringRoleArn)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_MultiAZ, *v.MultiAZ)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_NetworkType, *v.NetworkType)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.PerformanceInsightsKMSKeyId != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
+	}
+	if v.PerformanceInsightsRetentionPeriod != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_PerformanceInsightsRetentionPeriod, *v.PerformanceInsightsRetentionPeriod)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_Port, *v.Port)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_PreferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.ProcessorFeatures != nil {
+		serializeProcessorFeatureList(s, schemas.RestoreDBInstanceFromS3Message_ProcessorFeatures, v.ProcessorFeatures)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3IngestionRoleArn != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_S3IngestionRoleArn, *v.S3IngestionRoleArn)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_S3Prefix, *v.S3Prefix)
+	}
+	if v.SourceEngine != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_SourceEngine, *v.SourceEngine)
+	}
+	if v.SourceEngineVersion != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_SourceEngineVersion, *v.SourceEngineVersion)
+	}
+	if v.StorageEncrypted != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_StorageEncrypted, *v.StorageEncrypted)
+	}
+	if v.StorageThroughput != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceFromS3Message_StorageThroughput, *v.StorageThroughput)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.RestoreDBInstanceFromS3Message_StorageType, *v.StorageType)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.RestoreDBInstanceFromS3Message_TagSpecifications, v.TagSpecifications)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RestoreDBInstanceFromS3Message_Tags, v.Tags)
+	}
+	if v.UseDefaultProcessorFeatures != nil {
+		s.WriteBool(schemas.RestoreDBInstanceFromS3Message_UseDefaultProcessorFeatures, *v.UseDefaultProcessorFeatures)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.RestoreDBInstanceFromS3Message_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type RestoreDBInstanceFromS3Output struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -559,13 +771,34 @@ type RestoreDBInstanceFromS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBInstanceFromS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBInstanceFromS3Result)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBInstanceFromS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.RestoreDBInstanceFromS3Result_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreDBInstanceFromS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDBInstanceFromS3Result, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDBInstanceFromS3Result_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreDBInstanceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBInstanceFromS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBInstanceFromS3, schemas.RestoreDBInstanceFromS3Message, schemas.RestoreDBInstanceFromS3Result)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreDBInstanceFromS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBInstanceFromS3, schemas.RestoreDBInstanceFromS3Message, schemas.RestoreDBInstanceFromS3Result), output: &RestoreDBInstanceFromS3Output{}}, middleware.After); err != nil {
 		return err
 	}
 

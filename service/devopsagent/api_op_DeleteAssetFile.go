@@ -5,6 +5,8 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type DeleteAssetFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.DeleteAssetFileRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.DeleteAssetFileRequest_assetId, *v.AssetId)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.DeleteAssetFileRequest_path, *v.Path)
+	}
+}
+
 // Response structure for deleting an asset file
 type DeleteAssetFileOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -54,13 +74,26 @@ type DeleteAssetFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAssetFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssetFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssetFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssetFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetFile, schemas.DeleteAssetFileRequest, schemas.DeleteAssetFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssetFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetFile, schemas.DeleteAssetFileRequest, schemas.DeleteAssetFileResponse), output: &DeleteAssetFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type AssociateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmCertificateArn != nil {
+		s.WriteString(schemas.AssociateCertificateRequest_acmCertificateArn, *v.AcmCertificateArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateCertificateRequest_clientToken, *v.ClientToken)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.AssociateCertificateRequest_gatewayId, *v.GatewayId)
+	}
+}
+
 type AssociateCertificateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the ACM certificate.
@@ -80,13 +100,48 @@ type AssociateCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmCertificateArn != nil {
+		s.WriteString(schemas.AssociateCertificateResponse_acmCertificateArn, *v.AcmCertificateArn)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.AssociateCertificateResponse_gatewayId, *v.GatewayId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssociateCertificateResponse_status, string(v.Status))
+	}
+}
+func (v *AssociateCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateCertificateResponse_acmCertificateArn:
+			v.AcmCertificateArn = new(string)
+			return d.ReadString(schemas.AssociateCertificateResponse_acmCertificateArn, v.AcmCertificateArn)
+		case schemas.AssociateCertificateResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.AssociateCertificateResponse_gatewayId, v.GatewayId)
+		case schemas.AssociateCertificateResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.AssociateCertificateResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CertificateAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCertificate, schemas.AssociateCertificateRequest, schemas.AssociateCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCertificate, schemas.AssociateCertificateRequest, schemas.AssociateCertificateResponse), output: &AssociateCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

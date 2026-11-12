@@ -78,7 +78,9 @@ func (v *DeleteKnownHostKeysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteKnownHostKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteKnownHostKeysResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteKnownHostKeysResult_operations, v.Operations)
+	}
 }
 func (v *DeleteKnownHostKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteKnownHostKeysResult, func(s *smithy.Schema) error {

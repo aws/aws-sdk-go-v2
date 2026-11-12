@@ -1138,6 +1138,23 @@ func addOpUpdateResourceMetricsConfigurationValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpUpdateResourceMetricsConfiguration{}, middleware.After)
 }
 
+func validateActionConfiguration(v *types.ActionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionConfiguration"}
+	if v.AlarmTagsPropagation != nil {
+		if err := validateAlarmTagsPropagation(v.AlarmTagsPropagation); err != nil {
+			invalidParams.AddNested("AlarmTagsPropagation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAlarmPromQLCriteria(v *types.AlarmPromQLCriteria) error {
 	if v == nil {
 		return nil
@@ -1145,6 +1162,21 @@ func validateAlarmPromQLCriteria(v *types.AlarmPromQLCriteria) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AlarmPromQLCriteria"}
 	if v.Query == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Query"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmTagsPropagation(v *types.AlarmTagsPropagation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmTagsPropagation"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2418,6 +2450,11 @@ func validateOpPutCompositeAlarmInput(v *PutCompositeAlarmInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ActionConfiguration != nil {
+		if err := validateActionConfiguration(v.ActionConfiguration); err != nil {
+			invalidParams.AddNested("ActionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2508,6 +2545,11 @@ func validateOpPutLogAlarmInput(v *PutLogAlarmInput) error {
 			invalidParams.AddNested("WarmUpConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ActionConfiguration != nil {
+		if err := validateActionConfiguration(v.ActionConfiguration); err != nil {
+			invalidParams.AddNested("ActionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2565,6 +2607,11 @@ func validateOpPutMetricAlarmInput(v *PutMetricAlarmInput) error {
 	if v.EvaluationCriteria != nil {
 		if err := validateEvaluationCriteria(v.EvaluationCriteria); err != nil {
 			invalidParams.AddNested("EvaluationCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ActionConfiguration != nil {
+		if err := validateActionConfiguration(v.ActionConfiguration); err != nil {
+			invalidParams.AddNested("ActionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

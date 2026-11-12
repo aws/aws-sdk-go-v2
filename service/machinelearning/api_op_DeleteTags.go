@@ -62,7 +62,9 @@ func (v *DeleteTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.DeleteTagsInput_ResourceType, string(v.ResourceType))
 	}
-	serializeTagKeyList(s, schemas.DeleteTagsInput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DeleteTagsInput_TagKeys, v.TagKeys)
+	}
 }
 
 // Amazon ML returns the following elements.

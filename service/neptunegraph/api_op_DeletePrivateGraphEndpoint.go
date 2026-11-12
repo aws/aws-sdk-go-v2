@@ -97,7 +97,9 @@ func (v *DeletePrivateGraphEndpointOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Status != "" {
 		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_status, string(v.Status))
 	}
-	serializeSubnetIds(s, schemas.DeletePrivateGraphEndpointOutput_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.DeletePrivateGraphEndpointOutput_subnetIds, v.SubnetIds)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_vpcEndpointId, *v.VpcEndpointId)
 	}

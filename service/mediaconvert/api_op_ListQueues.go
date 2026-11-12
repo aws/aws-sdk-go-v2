@@ -104,7 +104,9 @@ func (v *ListQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueuesResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfQueue(s, schemas.ListQueuesResponse_Queues, v.Queues)
+	if v.Queues != nil {
+		serialize__listOfQueue(s, schemas.ListQueuesResponse_Queues, v.Queues)
+	}
 	if v.TotalConcurrentJobs != nil {
 		s.WriteInt32(schemas.ListQueuesResponse_TotalConcurrentJobs, *v.TotalConcurrentJobs)
 	}

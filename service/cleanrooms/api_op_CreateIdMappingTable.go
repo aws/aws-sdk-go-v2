@@ -83,7 +83,9 @@ func (v *CreateIdMappingTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateIdMappingTableInput_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateIdMappingTableInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIdMappingTableInput_tags, v.Tags)
+	}
 }
 
 type CreateIdMappingTableOutput struct {

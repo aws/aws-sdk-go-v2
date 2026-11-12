@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","SlackWorkspaces":[{"SlackTeamId":"__SlackTeamId__","SlackTeamName":"__SlackTeamName__","State":"__State__","StateReason":"__StateReason__"},{"SlackTeamId":"__SlackTeamId__","SlackTeamName":"__SlackTeamName__","State":"__State__","StateReason":"__StateReason__"}]}

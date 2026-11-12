@@ -67,7 +67,9 @@ func (v *DeleteAlarmsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteAlarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmNames(s, schemas.DeleteAlarmsInput_AlarmNames, v.AlarmNames)
+	if v.AlarmNames != nil {
+		serializeAlarmNames(s, schemas.DeleteAlarmsInput_AlarmNames, v.AlarmNames)
+	}
 }
 
 type DeleteAlarmsOutput struct {

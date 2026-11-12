@@ -53,7 +53,9 @@ func (v *CreateTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.CreateTagsRequest_ResourceId, *v.ResourceId)
 	}
-	serializeTagList(s, schemas.CreateTagsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTagsRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTagsOutput struct {
@@ -93,6 +95,9 @@ func (c *Client) addOperationCreateTagsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

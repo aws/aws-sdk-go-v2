@@ -142,6 +142,32 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_AssociateGatewayWithCluster(t *testing.T) {
+	want := &AssociateGatewayWithClusterOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.AssociateGatewayWithClusterResponse, schemas.AssociateGatewayWithClusterResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AssociateGatewayWithCluster.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ContinueServiceDeployment(t *testing.T) {
 	want := &ContinueServiceDeploymentOutput{
 		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
@@ -290,6 +316,7 @@ func TestUpdateResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -680,6 +707,32 @@ func TestUpdateResponseSnapshot_CreateExpressGatewayService(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateExpressGatewayService.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateGateway(t *testing.T) {
+	want := &CreateGatewayOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.GatewayStatus("ACTIVE"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayResponse, schemas.CreateGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateGateway.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1172,6 +1225,14 @@ func TestUpdateResponseSnapshot_CreateService(t *testing.T) {
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
 						{
@@ -1449,6 +1510,14 @@ func TestUpdateResponseSnapshot_CreateService(t *testing.T) {
 						AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
 						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -2000,6 +2069,7 @@ func TestUpdateResponseSnapshot_DeleteCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -2415,6 +2485,32 @@ func TestUpdateResponseSnapshot_DeleteExpressGatewayService(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteExpressGatewayService.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteGateway(t *testing.T) {
+	want := &DeleteGatewayOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.GatewayStatus("ACTIVE"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteGateway, schemas.DeleteGatewayResponse, schemas.DeleteGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteGateway.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2907,6 +3003,14 @@ func TestUpdateResponseSnapshot_DeleteService(t *testing.T) {
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
 						{
@@ -3184,6 +3288,14 @@ func TestUpdateResponseSnapshot_DeleteService(t *testing.T) {
 						AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
 						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -3676,10 +3788,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -3943,10 +4067,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -4125,6 +4261,10 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 					SizeInGiB: 1,
 				},
 				EnableFaultInjection: ptr.Bool(true),
+				TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+					IsolationMode:     types.IsolationMode("SHARED"),
+					AttestationPolicy: ptr.String("__AttestationPolicy__"),
+				},
 			},
 			{
 				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
@@ -4379,10 +4519,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -4646,10 +4798,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -4828,6 +4992,10 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 					SizeInGiB: 1,
 				},
 				EnableFaultInjection: ptr.Bool(true),
+				TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+					IsolationMode:     types.IsolationMode("SHARED"),
+					AttestationPolicy: ptr.String("__AttestationPolicy__"),
+				},
 			},
 		},
 		Failures: []types.Failure{
@@ -5130,6 +5298,22 @@ func TestUpdateResponseSnapshot_DeregisterContainerInstance(t *testing.T) {
 					},
 				},
 			},
+			GpuDevices: []types.GpuDevice{
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -5407,10 +5591,22 @@ func TestUpdateResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -5674,10 +5870,22 @@ func TestUpdateResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -5856,6 +6064,10 @@ func TestUpdateResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -6003,6 +6215,7 @@ func TestUpdateResponseSnapshot_DescribeCapacityProviders(t *testing.T) {
 							ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 							ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 						},
+						NitroEnclavesEnabled: ptr.Bool(true),
 					},
 					PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 					InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -6148,6 +6361,7 @@ func TestUpdateResponseSnapshot_DescribeCapacityProviders(t *testing.T) {
 							ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 							ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 						},
+						NitroEnclavesEnabled: ptr.Bool(true),
 					},
 					PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 					InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -6602,6 +6816,22 @@ func TestUpdateResponseSnapshot_DescribeContainerInstances(t *testing.T) {
 						},
 					},
 				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+				},
 			},
 			{
 				ContainerInstanceArn: ptr.String("__ContainerInstanceArn__"),
@@ -6741,6 +6971,22 @@ func TestUpdateResponseSnapshot_DescribeContainerInstances(t *testing.T) {
 							LastUpdated:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							LastStatusChange: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
+					},
+				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
 					},
 				},
 			},
@@ -7577,11 +7823,17 @@ func TestUpdateResponseSnapshot_DescribeDaemonTaskDefinition(t *testing.T) {
 					Host: &types.HostVolumeProperties{
 						SourcePath: ptr.String("__SourcePath__"),
 					},
+					LogDriverVolumeConfiguration: &types.LogDriverVolumeConfiguration{
+						Driver: types.LogDriver("json-file"),
+					},
 				},
 				{
 					Name: ptr.String("__Name__"),
 					Host: &types.HostVolumeProperties{
 						SourcePath: ptr.String("__SourcePath__"),
+					},
+					LogDriverVolumeConfiguration: &types.LogDriverVolumeConfiguration{
+						Driver: types.LogDriver("json-file"),
 					},
 				},
 			},
@@ -7803,6 +8055,256 @@ func TestUpdateResponseSnapshot_DescribeExpressGatewayService(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeExpressGatewayService.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeGateway(t *testing.T) {
+	want := &DescribeGatewayOutput{
+		Gateway: &types.Gateway{
+			GatewayArn:   ptr.String("__GatewayArn__"),
+			Name:         ptr.String("__Name__"),
+			Status:       types.GatewayStatus("ACTIVE"),
+			StatusReason: ptr.String("__StatusReason__"),
+			Failures: []types.GatewayResourceFailure{
+				{
+					Arn: ptr.String("__Arn__"),
+					Errors: []types.GatewayOperationError{
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+					},
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+					Errors: []types.GatewayOperationError{
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+					},
+				},
+			},
+			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+			DeletionProtection:    ptr.Bool(true),
+			Configuration: &types.DescribeGatewayConfigurationMemberHostSharedAlb{
+				Value: types.DescribeGatewayAlbConfiguration{
+					NetworkConfiguration: &types.GatewayElbNetworkConfiguration{
+						InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						IpAddressType: types.GatewayElbIpAddressType("ipv4"),
+					},
+					Scheme: types.GatewayElbScheme("internet-facing"),
+					AccessLogs: &types.GatewayElbAccessLogConfiguration{
+						Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+							Value: types.GatewayElbAccessLogS3Destination{
+								Bucket: ptr.String("__Bucket__"),
+								Prefix: ptr.String("__Prefix__"),
+							},
+						},
+					},
+					WebACLArn:       ptr.String("__WebACLArn__"),
+					Port:            ptr.Int32(1),
+					Protocol:        types.GatewayAlbProtocol("HTTP"),
+					MaxAlbCount:     ptr.Int32(1),
+					CurrentAlbCount: ptr.Int32(1),
+					HttpDesync:      types.GatewayAlbDesyncMitigationMode("monitor"),
+					TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+						Header: &types.GatewayTestTrafficHeader{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			AccessType:    types.AccessType("PUBLIC"),
+			PropagateTags: types.PropagateGatewayTags("NONE"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeGateway, schemas.DescribeGatewayResponse, schemas.DescribeGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeGateway.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeGatewayResources(t *testing.T) {
+	want := &DescribeGatewayResourcesOutput{
+		GatewayResources: &types.GatewayResources{
+			GatewayArn: ptr.String("__GatewayArn__"),
+			Resources: &types.GatewayInfrastructureResourcesMemberHostSharedAlb{
+				Value: []types.ElbGatewayResources{
+					{
+						LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+						ListenerArn:     ptr.String("__ListenerArn__"),
+						SecurityGroup:   ptr.String("__SecurityGroup__"),
+						GatewayRouteArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+						ListenerArn:     ptr.String("__ListenerArn__"),
+						SecurityGroup:   ptr.String("__SecurityGroup__"),
+						GatewayRouteArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeGatewayResources, schemas.DescribeGatewayResourcesResponse, schemas.DescribeGatewayResourcesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeGatewayResources.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeGatewayRoute(t *testing.T) {
+	want := &DescribeGatewayRouteOutput{
+		GatewayRoute: &types.GatewayRoute{
+			GatewayRouteArn:          ptr.String("__GatewayRouteArn__"),
+			ServiceArn:               ptr.String("__ServiceArn__"),
+			ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+			Status:                   types.GatewayRouteStatus("ACTIVE"),
+			ServiceUrl:               ptr.String("__ServiceUrl__"),
+			Resources: &types.GatewayRouteResourcesMemberHostSharedAlb{
+				Value: []types.GatewayRouteAlbResources{
+					{
+						AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+						LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+						ListenerArn:       ptr.String("__ListenerArn__"),
+						ListenerRuleArn:   ptr.String("__ListenerRuleArn__"),
+						TestListenerRuleArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LoadBalancerSecurityGroups: []types.GatewayRouteLoadBalancerSecurityGroup{
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ServiceSecurityGroupArn: ptr.String("__ServiceSecurityGroupArn__"),
+					},
+					{
+						AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+						LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+						ListenerArn:       ptr.String("__ListenerArn__"),
+						ListenerRuleArn:   ptr.String("__ListenerRuleArn__"),
+						TestListenerRuleArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LoadBalancerSecurityGroups: []types.GatewayRouteLoadBalancerSecurityGroup{
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ServiceSecurityGroupArn: ptr.String("__ServiceSecurityGroupArn__"),
+					},
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeGatewayRoute, schemas.DescribeGatewayRouteResponse, schemas.DescribeGatewayRouteResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeGatewayRoute.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8330,6 +8832,14 @@ func TestUpdateResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 						Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 						IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 					},
+					ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
+					},
 				},
 				VolumeConfigurations: []types.ServiceVolumeConfiguration{
 					{
@@ -8692,10 +9202,134 @@ func TestUpdateResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 							LogGroupName: ptr.String("__LogGroupName__"),
 						},
 					},
+					GatewayConnections: []types.GatewayConnection{
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+					},
 				},
 				Overrides: &types.ServiceRevisionOverrides{
 					RuntimePlatform: &types.RuntimePlatformOverride{
 						CpuArchitecture: ptr.String("__CpuArchitecture__"),
+					},
+				},
+				GatewayConnectors: []types.GatewayConnector{
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
+					},
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
 					},
 				},
 				Monitoring: &types.MonitoringConfiguration{
@@ -8912,6 +9546,14 @@ func TestUpdateResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 						Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 						IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 					},
+					ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
+					},
 				},
 				VolumeConfigurations: []types.ServiceVolumeConfiguration{
 					{
@@ -9274,10 +9916,134 @@ func TestUpdateResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 							LogGroupName: ptr.String("__LogGroupName__"),
 						},
 					},
+					GatewayConnections: []types.GatewayConnection{
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+					},
 				},
 				Overrides: &types.ServiceRevisionOverrides{
 					RuntimePlatform: &types.RuntimePlatformOverride{
 						CpuArchitecture: ptr.String("__CpuArchitecture__"),
+					},
+				},
+				GatewayConnectors: []types.GatewayConnector{
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
+					},
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
 					},
 				},
 				Monitoring: &types.MonitoringConfiguration{
@@ -9822,6 +10588,14 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
 							{
@@ -10099,6 +10873,14 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 							AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
 							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -10800,6 +11582,14 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
 							{
@@ -11077,6 +11867,14 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 							AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
 							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -11581,10 +12379,22 @@ func TestUpdateResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -11848,10 +12658,22 @@ func TestUpdateResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -12030,6 +12852,10 @@ func TestUpdateResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -12426,6 +13252,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -12493,6 +13325,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -12550,10 +13388,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -12590,10 +13440,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -12645,6 +13507,10 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 			{
@@ -12767,6 +13633,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -12834,6 +13706,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -12891,10 +13769,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -12931,10 +13821,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -12987,6 +13889,10 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
 				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+				},
 			},
 		},
 		Failures: []types.Failure{
@@ -13018,6 +13924,32 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeTasks.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DisassociateGatewayFromCluster(t *testing.T) {
+	want := &DisassociateGatewayFromClusterOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.DisassociateGatewayFromCluster, schemas.DisassociateGatewayFromClusterResponse, schemas.DisassociateGatewayFromClusterResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisassociateGatewayFromCluster.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -13384,6 +14316,122 @@ func TestUpdateResponseSnapshot_ListDaemons(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListDaemons.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListGatewayClusterAssociations(t *testing.T) {
+	want := &ListGatewayClusterAssociationsOutput{
+		GatewayClusterAssociations: []types.GatewayClusterAssociationSummary{
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+				Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+			},
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+				Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.ListGatewayClusterAssociations, schemas.ListGatewayClusterAssociationsResponse, schemas.ListGatewayClusterAssociationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListGatewayClusterAssociations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListGatewayRoutes(t *testing.T) {
+	want := &ListGatewayRoutesOutput{
+		GatewayRoutes: []types.GatewayRouteSummary{
+			{
+				GatewayRouteArn:          ptr.String("__GatewayRouteArn__"),
+				GatewayArn:               ptr.String("__GatewayArn__"),
+				ClusterArn:               ptr.String("__ClusterArn__"),
+				ServiceArn:               ptr.String("__ServiceArn__"),
+				ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+				Status:                   types.GatewayRouteStatus("ACTIVE"),
+			},
+			{
+				GatewayRouteArn:          ptr.String("__GatewayRouteArn__"),
+				GatewayArn:               ptr.String("__GatewayArn__"),
+				ClusterArn:               ptr.String("__ClusterArn__"),
+				ServiceArn:               ptr.String("__ServiceArn__"),
+				ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+				Status:                   types.GatewayRouteStatus("ACTIVE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.ListGatewayRoutes, schemas.ListGatewayRoutesResponse, schemas.ListGatewayRoutesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListGatewayRoutes.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListGateways(t *testing.T) {
+	want := &ListGatewaysOutput{
+		Gateways: []types.GatewaySummary{
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.GatewayStatus("ACTIVE"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.GatewayStatus("ACTIVE"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.ListGateways, schemas.ListGatewaysResponse, schemas.ListGatewaysResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListGateways.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -13977,6 +15025,22 @@ func TestUpdateResponseSnapshot_RegisterContainerInstance(t *testing.T) {
 					},
 				},
 			},
+			GpuDevices: []types.GpuDevice{
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -14278,10 +15342,22 @@ func TestUpdateResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -14545,10 +15621,22 @@ func TestUpdateResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -14727,6 +15815,10 @@ func TestUpdateResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -14882,6 +15974,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -14949,6 +16047,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -15006,10 +16110,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -15046,10 +16162,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -15101,6 +16229,10 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 			{
@@ -15223,6 +16355,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -15290,6 +16428,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -15347,10 +16491,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -15387,10 +16543,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -15442,6 +16610,10 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -15601,6 +16773,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -15668,6 +16846,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -15725,10 +16909,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -15765,10 +16961,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -15820,6 +17028,10 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 			{
@@ -15942,6 +17154,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -16009,6 +17227,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -16066,10 +17290,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16106,10 +17342,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16161,6 +17409,10 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -16343,6 +17595,12 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+						Value: types.NvidiaMpsAllocation{
+							Memory:            ptr.Int32(1),
+							MaxComputePercent: ptr.Int32(1),
+						},
+					},
 				},
 				{
 					ContainerArn: ptr.String("__ContainerArn__"),
@@ -16410,6 +17668,12 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+						Value: types.NvidiaMpsAllocation{
+							Memory:            ptr.Int32(1),
+							MaxComputePercent: ptr.Int32(1),
+						},
+					},
 				},
 			},
 			Cpu:                  ptr.String("__Cpu__"),
@@ -16467,10 +17731,22 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 					},
@@ -16507,10 +17783,22 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 					},
@@ -16562,6 +17850,10 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 			FargateEphemeralStorage: &types.TaskEphemeralStorage{
 				SizeInGiB: 1,
 				KmsKeyId:  ptr.String("__KmsKeyId__"),
+			},
+			TrustedExecutionSummary: &types.TrustedExecutionSummary{
+				IsolationMode:           types.IsolationMode("SHARED"),
+				AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 			},
 		},
 	}
@@ -16825,6 +18117,7 @@ func TestUpdateResponseSnapshot_UpdateCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -17273,6 +18566,22 @@ func TestUpdateResponseSnapshot_UpdateContainerAgent(t *testing.T) {
 					},
 				},
 			},
+			GpuDevices: []types.GpuDevice{
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -17438,6 +18747,22 @@ func TestUpdateResponseSnapshot_UpdateContainerInstancesState(t *testing.T) {
 						},
 					},
 				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+				},
 			},
 			{
 				ContainerInstanceArn: ptr.String("__ContainerInstanceArn__"),
@@ -17577,6 +18902,22 @@ func TestUpdateResponseSnapshot_UpdateContainerInstancesState(t *testing.T) {
 							LastUpdated:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							LastStatusChange: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
+					},
+				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
 					},
 				},
 			},
@@ -17744,6 +19085,32 @@ func TestUpdateResponseSnapshot_UpdateExpressGatewayService(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateExpressGatewayService.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateGateway(t *testing.T) {
+	want := &UpdateGatewayOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.GatewayStatus("ACTIVE"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateGateway, schemas.UpdateGatewayResponse, schemas.UpdateGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateGateway.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18236,6 +19603,14 @@ func TestUpdateResponseSnapshot_UpdateService(t *testing.T) {
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
 						{
@@ -18513,6 +19888,14 @@ func TestUpdateResponseSnapshot_UpdateService(t *testing.T) {
 						AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
 						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -19051,7 +20434,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
-	opSchema := smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -19126,7 +20509,7 @@ func TestUpdateResponseSnapshot_Error_ClientException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
-	opSchema := smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.ClientException, schemas.ClientException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.ClientException, schemas.ClientException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -19251,7 +20634,7 @@ func TestUpdateResponseSnapshot_Error_ClusterNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
-	opSchema := smithy.NewOperationSchema(schemas.CreateCapacityProvider, schemas.ClusterNotFoundException, schemas.ClusterNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.ClusterNotFoundException, schemas.ClusterNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -19350,12 +20733,37 @@ func TestUpdateResponseSnapshot_Error_DaemonNotFoundException(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_GatewayNotFoundException(t *testing.T) {
+	want := &types.GatewayNotFoundException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.GatewayNotFoundException, schemas.GatewayNotFoundException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("GatewayNotFoundException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
-	opSchema := smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.InvalidParameterException, schemas.InvalidParameterException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.InvalidParameterException, schemas.InvalidParameterException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -19580,7 +20988,7 @@ func TestUpdateResponseSnapshot_Error_ServerException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
-	opSchema := smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.ServerException, schemas.ServerException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.ServerException, schemas.ServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -19755,7 +21163,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedFeatureException(t *testing.T) 
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
-	opSchema := smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.UnsupportedFeatureException, schemas.UnsupportedFeatureException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateGatewayWithCluster, schemas.UnsupportedFeatureException, schemas.UnsupportedFeatureException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

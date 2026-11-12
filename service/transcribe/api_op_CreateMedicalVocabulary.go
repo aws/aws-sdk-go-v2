@@ -91,7 +91,9 @@ func (v *CreateMedicalVocabularyInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.CreateMedicalVocabularyRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeTagList(s, schemas.CreateMedicalVocabularyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMedicalVocabularyRequest_Tags, v.Tags)
+	}
 	if v.VocabularyFileUri != nil {
 		s.WriteString(schemas.CreateMedicalVocabularyRequest_VocabularyFileUri, *v.VocabularyFileUri)
 	}
@@ -199,6 +201,9 @@ func (c *Client) addOperationCreateMedicalVocabularyMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

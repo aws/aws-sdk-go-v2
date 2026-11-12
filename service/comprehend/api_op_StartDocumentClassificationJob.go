@@ -121,7 +121,9 @@ func (v *StartDocumentClassificationJobInput) SerializeMembers(s smithy.ShapeSer
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartDocumentClassificationJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartDocumentClassificationJobRequest_Tags, v.Tags)
+	}
 	if v.VolumeKmsKeyId != nil {
 		s.WriteString(schemas.StartDocumentClassificationJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
 	}
@@ -234,6 +236,9 @@ func (c *Client) addOperationStartDocumentClassificationJobMiddlewares(stack *mi
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

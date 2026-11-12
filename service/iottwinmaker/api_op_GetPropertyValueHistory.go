@@ -145,8 +145,12 @@ func (v *GetPropertyValueHistoryInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.OrderByTime != "" {
 		s.WriteString(schemas.GetPropertyValueHistoryRequest_orderByTime, string(v.OrderByTime))
 	}
-	serializePropertyFilters(s, schemas.GetPropertyValueHistoryRequest_propertyFilters, v.PropertyFilters)
-	serializeSelectedPropertyList(s, schemas.GetPropertyValueHistoryRequest_selectedProperties, v.SelectedProperties)
+	if v.PropertyFilters != nil {
+		serializePropertyFilters(s, schemas.GetPropertyValueHistoryRequest_propertyFilters, v.PropertyFilters)
+	}
+	if v.SelectedProperties != nil {
+		serializeSelectedPropertyList(s, schemas.GetPropertyValueHistoryRequest_selectedProperties, v.SelectedProperties)
+	}
 	if v.StartDateTime != nil {
 		s.WriteTime(schemas.GetPropertyValueHistoryRequest_startDateTime, *v.StartDateTime)
 	}
@@ -239,7 +243,9 @@ func (v *GetPropertyValueHistoryOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetPropertyValueHistoryResponse_nextToken, *v.NextToken)
 	}
-	serializePropertyValueList(s, schemas.GetPropertyValueHistoryResponse_propertyValues, v.PropertyValues)
+	if v.PropertyValues != nil {
+		serializePropertyValueList(s, schemas.GetPropertyValueHistoryResponse_propertyValues, v.PropertyValues)
+	}
 }
 func (v *GetPropertyValueHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPropertyValueHistoryResponse, func(s *smithy.Schema) error {

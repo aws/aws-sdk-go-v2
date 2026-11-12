@@ -4,6 +4,8 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type CancelOpenCypherQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelOpenCypherQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelOpenCypherQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelOpenCypherQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.CancelOpenCypherQueryInput_queryId, *v.QueryId)
+	}
+	if v.Silent != nil {
+		s.WriteBool(schemas.CancelOpenCypherQueryInput_silent, *v.Silent)
+	}
+}
+
 type CancelOpenCypherQueryOutput struct {
 
 	// The cancelation payload for the openCypher query.
@@ -58,13 +75,38 @@ type CancelOpenCypherQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelOpenCypherQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelOpenCypherQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelOpenCypherQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteBool(schemas.CancelOpenCypherQueryOutput_payload, *v.Payload)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.CancelOpenCypherQueryOutput_status, *v.Status)
+	}
+}
+func (v *CancelOpenCypherQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelOpenCypherQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelOpenCypherQueryOutput_payload:
+			v.Payload = new(bool)
+			return d.ReadBool(schemas.CancelOpenCypherQueryOutput_payload, v.Payload)
+		case schemas.CancelOpenCypherQueryOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CancelOpenCypherQueryOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelOpenCypherQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelOpenCypherQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelOpenCypherQuery, schemas.CancelOpenCypherQueryInput, schemas.CancelOpenCypherQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelOpenCypherQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelOpenCypherQuery, schemas.CancelOpenCypherQueryInput, schemas.CancelOpenCypherQueryOutput), output: &CancelOpenCypherQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

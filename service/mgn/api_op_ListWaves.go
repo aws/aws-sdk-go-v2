@@ -107,7 +107,9 @@ func (v *ListWavesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWavesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWavesList(s, schemas.ListWavesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeWavesList(s, schemas.ListWavesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWavesResponse_nextToken, *v.NextToken)
 	}

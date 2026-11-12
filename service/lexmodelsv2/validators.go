@@ -4894,9 +4894,7 @@ func validateIntentConfirmationSetting(v *types.IntentConfirmationSetting) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntentConfirmationSetting"}
-	if v.PromptSpecification == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PromptSpecification"))
-	} else if v.PromptSpecification != nil {
+	if v.PromptSpecification != nil {
 		if err := validatePromptSpecification(v.PromptSpecification); err != nil {
 			invalidParams.AddNested("PromptSpecification", err.(smithy.InvalidParamsError))
 		}
@@ -6796,16 +6794,12 @@ func validateWaitAndContinueSpecification(v *types.WaitAndContinueSpecification)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WaitAndContinueSpecification"}
-	if v.WaitingResponse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WaitingResponse"))
-	} else if v.WaitingResponse != nil {
+	if v.WaitingResponse != nil {
 		if err := validateResponseSpecification(v.WaitingResponse); err != nil {
 			invalidParams.AddNested("WaitingResponse", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ContinueResponse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContinueResponse"))
-	} else if v.ContinueResponse != nil {
+	if v.ContinueResponse != nil {
 		if err := validateResponseSpecification(v.ContinueResponse); err != nil {
 			invalidParams.AddNested("ContinueResponse", err.(smithy.InvalidParamsError))
 		}

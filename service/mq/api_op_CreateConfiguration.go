@@ -82,7 +82,9 @@ func (v *CreateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConfigurationRequest_Name, *v.Name)
 	}
-	serialize__mapOf__string(s, schemas.CreateConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateConfigurationOutput struct {

@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type UpdateDocumentDefaultVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDocumentDefaultVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDocumentDefaultVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDocumentDefaultVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.UpdateDocumentDefaultVersionRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDocumentDefaultVersionRequest_Name, *v.Name)
+	}
+}
+
 type UpdateDocumentDefaultVersionOutput struct {
 
 	// The description of a custom document that you want to set as the default
@@ -55,13 +72,34 @@ type UpdateDocumentDefaultVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDocumentDefaultVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDocumentDefaultVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDocumentDefaultVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteStruct(schemas.UpdateDocumentDefaultVersionResult_Description)
+		v.Description.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDocumentDefaultVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDocumentDefaultVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDocumentDefaultVersionResult_Description:
+			v.Description = &types.DocumentDefaultVersionDescription{}
+			return v.Description.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDocumentDefaultVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDocumentDefaultVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDocumentDefaultVersion, schemas.UpdateDocumentDefaultVersionRequest, schemas.UpdateDocumentDefaultVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDocumentDefaultVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDocumentDefaultVersion, schemas.UpdateDocumentDefaultVersionRequest, schemas.UpdateDocumentDefaultVersionResult), output: &UpdateDocumentDefaultVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

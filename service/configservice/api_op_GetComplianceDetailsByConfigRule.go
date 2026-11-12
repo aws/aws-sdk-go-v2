@@ -63,7 +63,9 @@ func (v *GetComplianceDetailsByConfigRuleInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetComplianceDetailsByConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceTypes(s, schemas.GetComplianceDetailsByConfigRuleRequest_ComplianceTypes, v.ComplianceTypes)
+	if v.ComplianceTypes != nil {
+		serializeComplianceTypes(s, schemas.GetComplianceDetailsByConfigRuleRequest_ComplianceTypes, v.ComplianceTypes)
+	}
 	if v.ConfigRuleName != nil {
 		s.WriteString(schemas.GetComplianceDetailsByConfigRuleRequest_ConfigRuleName, *v.ConfigRuleName)
 	}
@@ -98,7 +100,9 @@ func (v *GetComplianceDetailsByConfigRuleOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *GetComplianceDetailsByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationResults(s, schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults, v.EvaluationResults)
+	if v.EvaluationResults != nil {
+		serializeEvaluationResults(s, schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults, v.EvaluationResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetComplianceDetailsByConfigRuleResponse_NextToken, *v.NextToken)
 	}

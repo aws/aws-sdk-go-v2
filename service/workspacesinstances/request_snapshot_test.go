@@ -855,6 +855,38 @@ func TestCheckRequestSnapshot_ListWorkspaceInstances(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyVolume(t *testing.T) {
+	input := &ModifyVolumeInput{
+		VolumeId:    ptr.String("__VolumeId__"),
+		SizeInGB:    ptr.Int32(1),
+		VolumeType:  types.VolumeTypeEnum("standard"),
+		Iops:        ptr.Int32(1),
+		Throughput:  ptr.Int32(1),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyVolume(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyVolume"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
@@ -1580,6 +1612,38 @@ func TestUpdateRequestSnapshot_ListWorkspaceInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListWorkspaceInstances"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyVolume(t *testing.T) {
+	input := &ModifyVolumeInput{
+		VolumeId:    ptr.String("__VolumeId__"),
+		SizeInGB:    ptr.Int32(1),
+		VolumeType:  types.VolumeTypeEnum("standard"),
+		Iops:        ptr.Int32(1),
+		Throughput:  ptr.Int32(1),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyVolume(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyVolume"); err != nil {
 		t.Fatal(err)
 	}
 }

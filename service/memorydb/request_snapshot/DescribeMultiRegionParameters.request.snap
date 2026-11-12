@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeMultiRegionParameters
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeMultiRegionParameters
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"MultiRegionParameterGroupName":"__MultiRegionParameterGroupName__","NextToken":"__NextToken__","Source":"__Source__"}
+¿jMaxResultsxMultiRegionParameterGroupNamex!__MultiRegionParameterGroupName__iNextTokenm__NextToken__fSourcej__Source__ÿ

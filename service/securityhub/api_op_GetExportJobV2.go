@@ -139,7 +139,9 @@ func (v *GetExportJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataType != "" {
 		s.WriteString(schemas.GetExportJobV2Response_DataType, string(v.DataType))
 	}
-	serializeExportDestination(s, schemas.GetExportJobV2Response_Destination, v.Destination)
+	if v.Destination != nil {
+		serializeExportDestination(s, schemas.GetExportJobV2Response_Destination, v.Destination)
+	}
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.GetExportJobV2Response_EndedAt, *v.EndedAt)
 	}
@@ -155,7 +157,9 @@ func (v *GetExportJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetExportJobV2Response_Name, *v.Name)
 	}
-	serializeExportOutput(s, schemas.GetExportJobV2Response_OutputConfiguration, v.OutputConfiguration)
+	if v.OutputConfiguration != nil {
+		serializeExportOutput(s, schemas.GetExportJobV2Response_OutputConfiguration, v.OutputConfiguration)
+	}
 	if v.Scopes != nil {
 		s.WriteStruct(schemas.GetExportJobV2Response_Scopes)
 		v.Scopes.SerializeMembers(s)

@@ -101,6 +101,17 @@ type CreateDistributionInput struct {
 	// Lightsail bucket. If the origin is another resource type, the request fails.
 	EnablePrivateOriginAccess *bool
 
+	// Specifies whether to enable Web Application Firewall (WAF) for the
+	// distribution. WAF inspects viewer requests and blocks requests that match the
+	// WAF rule groups that you enable.
+	//
+	// When you enable WAF without specifying the wafRules parameter, the distribution
+	// has no WAF rule groups enabled and doesn't block any requests.
+	//
+	// WAF is available only for distributions that use the medium_1_0 or large_1_0
+	// bundle.
+	EnableWaf *bool
+
 	// The IP address type for the distribution.
 	//
 	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
@@ -115,6 +126,25 @@ type CreateDistributionInput struct {
 
 	// The minimum TLS protocol version for the SSL/TLS certificate.
 	ViewerMinimumTlsProtocolVersion types.ViewerMinimumTlsProtocolVersionEnum
+
+	// An array of objects that describe the WAF rule groups to enable for the
+	// distribution.
+	//
+	// The WAF rule groups that you can specify depend on the bundle of the
+	// distribution:
+	//
+	//   - medium_1_0 – Supports the AWSManagedRulesCommonRuleSet ,
+	//   AWSManagedRulesKnownBadInputsRuleSet , and AWSManagedRulesAnonymousIpList rule
+	//   groups.
+	//
+	//   - large_1_0 – Supports the rule groups for medium_1_0 , plus
+	//   AWSManagedRulesAdminProtectionRuleSet , AWSManagedRulesSQLiRuleSet ,
+	//   AWSManagedRulesLinuxRuleSet , AWSManagedRulesUnixRuleSet ,
+	//   AWSManagedRulesWindowsRuleSet , AWSManagedRulesPHPRuleSet ,
+	//   AWSManagedRulesWordPressRuleSet , AWSManagedRulesAmazonIpReputationList ,
+	//   AWSManagedRulesATPRuleSet , AWSManagedRulesACFPRuleSet , and
+	//   AWSManagedRulesBotControlRuleSet rule groups.
+	WafRules []types.WafRule
 
 	noSmithyDocumentSerde
 }
@@ -134,11 +164,15 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CacheBehaviorSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	if v.CacheBehaviors != nil {
+		serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	}
 	if v.CertificateName != nil {
 		s.WriteString(schemas.CreateDistributionRequest_certificateName, *v.CertificateName)
 	}
-	serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	if v.CustomErrorResponses != nil {
+		serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	}
 	if v.DefaultCacheBehavior != nil {
 		s.WriteStruct(schemas.CreateDistributionRequest_defaultCacheBehavior)
 		v.DefaultCacheBehavior.SerializeMembers(s)
@@ -153,6 +187,9 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnablePrivateOriginAccess != nil {
 		s.WriteBool(schemas.CreateDistributionRequest_enablePrivateOriginAccess, *v.EnablePrivateOriginAccess)
 	}
+	if v.EnableWaf != nil {
+		s.WriteBool(schemas.CreateDistributionRequest_enableWaf, *v.EnableWaf)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CreateDistributionRequest_ipAddressType, string(v.IpAddressType))
 	}
@@ -161,9 +198,14 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Origin.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	}
 	if v.ViewerMinimumTlsProtocolVersion != "" {
 		s.WriteString(schemas.CreateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
+	}
+	if v.WafRules != nil {
+		serializeWafRuleList(s, schemas.CreateDistributionRequest_wafRules, v.WafRules)
 	}
 }
 

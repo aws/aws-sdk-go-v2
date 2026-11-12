@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListSSHPublicKeysResponse><ListSSHPublicKeysResult><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker><SSHPublicKeys><member><SSHPublicKeyId>__SSHPublicKeyId__</SSHPublicKeyId><Status>Active</Status><UploadDate>2000-01-01T00:00:00Z</UploadDate><UserName>__UserName__</UserName></member><member><SSHPublicKeyId>__SSHPublicKeyId__</SSHPublicKeyId><Status>Active</Status><UploadDate>2000-01-01T00:00:00Z</UploadDate><UserName>__UserName__</UserName></member></SSHPublicKeys></ListSSHPublicKeysResult></ListSSHPublicKeysResponse>

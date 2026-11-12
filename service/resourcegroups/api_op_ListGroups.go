@@ -89,7 +89,9 @@ func (v *ListGroupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupFilterList(s, schemas.ListGroupsInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeGroupFilterList(s, schemas.ListGroupsInput_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListGroupsInput_MaxResults, *v.MaxResults)
 	}
@@ -129,8 +131,12 @@ func (v *ListGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupIdentifierList(s, schemas.ListGroupsOutput_GroupIdentifiers, v.GroupIdentifiers)
-	serializeGroupList(s, schemas.ListGroupsOutput_Groups, v.Groups)
+	if v.GroupIdentifiers != nil {
+		serializeGroupIdentifierList(s, schemas.ListGroupsOutput_GroupIdentifiers, v.GroupIdentifiers)
+	}
+	if v.Groups != nil {
+		serializeGroupList(s, schemas.ListGroupsOutput_Groups, v.Groups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupsOutput_NextToken, *v.NextToken)
 	}

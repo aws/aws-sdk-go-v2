@@ -90,7 +90,9 @@ func (v *ListAuthenticationProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAuthenticationProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationProfileSummaryList(s, schemas.ListAuthenticationProfilesResponse_AuthenticationProfileSummaryList, v.AuthenticationProfileSummaryList)
+	if v.AuthenticationProfileSummaryList != nil {
+		serializeAuthenticationProfileSummaryList(s, schemas.ListAuthenticationProfilesResponse_AuthenticationProfileSummaryList, v.AuthenticationProfileSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAuthenticationProfilesResponse_NextToken, *v.NextToken)
 	}

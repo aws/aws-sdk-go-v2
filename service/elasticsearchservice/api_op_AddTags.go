@@ -57,7 +57,9 @@ func (v *AddTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.AddTagsRequest_ARN, *v.ARN)
 	}
-	serializeTagList(s, schemas.AddTagsRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.AddTagsRequest_TagList, v.TagList)
+	}
 }
 
 type AddTagsOutput struct {

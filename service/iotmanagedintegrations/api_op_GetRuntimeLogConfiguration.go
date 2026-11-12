@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetRuntimeLogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuntimeLogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuntimeLogConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuntimeLogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.GetRuntimeLogConfigurationRequest_ManagedThingId, *v.ManagedThingId)
+	}
+}
+
 type GetRuntimeLogConfigurationOutput struct {
 
 	// The id for a managed thing.
@@ -48,13 +62,40 @@ type GetRuntimeLogConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuntimeLogConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuntimeLogConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuntimeLogConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.GetRuntimeLogConfigurationResponse_ManagedThingId, *v.ManagedThingId)
+	}
+	if v.RuntimeLogConfigurations != nil {
+		s.WriteStruct(schemas.GetRuntimeLogConfigurationResponse_RuntimeLogConfigurations)
+		v.RuntimeLogConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRuntimeLogConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRuntimeLogConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRuntimeLogConfigurationResponse_ManagedThingId:
+			v.ManagedThingId = new(string)
+			return d.ReadString(schemas.GetRuntimeLogConfigurationResponse_ManagedThingId, v.ManagedThingId)
+		case schemas.GetRuntimeLogConfigurationResponse_RuntimeLogConfigurations:
+			v.RuntimeLogConfigurations = &types.RuntimeLogConfigurations{}
+			return v.RuntimeLogConfigurations.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRuntimeLogConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRuntimeLogConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRuntimeLogConfiguration, schemas.GetRuntimeLogConfigurationRequest, schemas.GetRuntimeLogConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRuntimeLogConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRuntimeLogConfiguration, schemas.GetRuntimeLogConfigurationRequest, schemas.GetRuntimeLogConfigurationResponse), output: &GetRuntimeLogConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

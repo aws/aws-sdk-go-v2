@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Software":[{"PackageName":"__PackageName__","PackageType":"__PackageType__","PackageVersion":"__PackageVersion__","ResourceCount":1},{"PackageName":"__PackageName__","PackageType":"__PackageType__","PackageVersion":"__PackageVersion__","ResourceCount":1}]}

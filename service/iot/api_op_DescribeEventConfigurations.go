@@ -71,7 +71,9 @@ func (v *DescribeEventConfigurationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.DescribeEventConfigurationsResponse_creationDate, *v.CreationDate)
 	}
-	serializeEventConfigurations(s, schemas.DescribeEventConfigurationsResponse_eventConfigurations, v.EventConfigurations)
+	if v.EventConfigurations != nil {
+		serializeEventConfigurations(s, schemas.DescribeEventConfigurationsResponse_eventConfigurations, v.EventConfigurations)
+	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.DescribeEventConfigurationsResponse_lastModifiedDate, *v.LastModifiedDate)
 	}

@@ -74,7 +74,9 @@ func (v *DescribeVTLDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeVTLDevicesInput_Marker, *v.Marker)
 	}
-	serializeVTLDeviceARNs(s, schemas.DescribeVTLDevicesInput_VTLDeviceARNs, v.VTLDeviceARNs)
+	if v.VTLDeviceARNs != nil {
+		serializeVTLDeviceARNs(s, schemas.DescribeVTLDevicesInput_VTLDeviceARNs, v.VTLDeviceARNs)
+	}
 }
 
 // DescribeVTLDevicesOutput
@@ -113,7 +115,9 @@ func (v *DescribeVTLDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeVTLDevicesOutput_Marker, *v.Marker)
 	}
-	serializeVTLDevices(s, schemas.DescribeVTLDevicesOutput_VTLDevices, v.VTLDevices)
+	if v.VTLDevices != nil {
+		serializeVTLDevices(s, schemas.DescribeVTLDevicesOutput_VTLDevices, v.VTLDevices)
+	}
 }
 func (v *DescribeVTLDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeVTLDevicesOutput, func(s *smithy.Schema) error {

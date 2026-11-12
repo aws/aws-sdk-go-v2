@@ -187,6 +187,54 @@ func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The requested actions produce a credential that exceeds the maximum size.
+// Request fewer actions.
+type PolicyTooLargeException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PolicyTooLargeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PolicyTooLargeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PolicyTooLargeException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PolicyTooLargeException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PolicyTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyTooLargeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyTooLargeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyTooLargeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyTooLargeException_message, *v.Message)
+	}
+}
+func (v *PolicyTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyTooLargeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyTooLargeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyTooLargeException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string

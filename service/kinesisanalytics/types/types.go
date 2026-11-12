@@ -102,16 +102,24 @@ func (v *ApplicationDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationVersionId != nil {
 		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionId, *v.ApplicationVersionId)
 	}
-	serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.CloudWatchLoggingOptionDescriptions != nil {
+		serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	}
 	if v.CreateTimestamp != nil {
 		s.WriteTime(schemas.ApplicationDetail_CreateTimestamp, *v.CreateTimestamp)
 	}
-	serializeInputDescriptions(s, schemas.ApplicationDetail_InputDescriptions, v.InputDescriptions)
+	if v.InputDescriptions != nil {
+		serializeInputDescriptions(s, schemas.ApplicationDetail_InputDescriptions, v.InputDescriptions)
+	}
 	if v.LastUpdateTimestamp != nil {
 		s.WriteTime(schemas.ApplicationDetail_LastUpdateTimestamp, *v.LastUpdateTimestamp)
 	}
-	serializeOutputDescriptions(s, schemas.ApplicationDetail_OutputDescriptions, v.OutputDescriptions)
-	serializeReferenceDataSourceDescriptions(s, schemas.ApplicationDetail_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	if v.OutputDescriptions != nil {
+		serializeOutputDescriptions(s, schemas.ApplicationDetail_OutputDescriptions, v.OutputDescriptions)
+	}
+	if v.ReferenceDataSourceDescriptions != nil {
+		serializeReferenceDataSourceDescriptions(s, schemas.ApplicationDetail_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	}
 }
 func (v *ApplicationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationDetail, func(s *smithy.Schema) error {
@@ -252,10 +260,18 @@ func (v *ApplicationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationCodeUpdate != nil {
 		s.WriteString(schemas.ApplicationUpdate_ApplicationCodeUpdate, *v.ApplicationCodeUpdate)
 	}
-	serializeCloudWatchLoggingOptionUpdates(s, schemas.ApplicationUpdate_CloudWatchLoggingOptionUpdates, v.CloudWatchLoggingOptionUpdates)
-	serializeInputUpdates(s, schemas.ApplicationUpdate_InputUpdates, v.InputUpdates)
-	serializeOutputUpdates(s, schemas.ApplicationUpdate_OutputUpdates, v.OutputUpdates)
-	serializeReferenceDataSourceUpdates(s, schemas.ApplicationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+	if v.CloudWatchLoggingOptionUpdates != nil {
+		serializeCloudWatchLoggingOptionUpdates(s, schemas.ApplicationUpdate_CloudWatchLoggingOptionUpdates, v.CloudWatchLoggingOptionUpdates)
+	}
+	if v.InputUpdates != nil {
+		serializeInputUpdates(s, schemas.ApplicationUpdate_InputUpdates, v.InputUpdates)
+	}
+	if v.OutputUpdates != nil {
+		serializeOutputUpdates(s, schemas.ApplicationUpdate_OutputUpdates, v.OutputUpdates)
+	}
+	if v.ReferenceDataSourceUpdates != nil {
+		serializeReferenceDataSourceUpdates(s, schemas.ApplicationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+	}
 }
 func (v *ApplicationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationUpdate, func(s *smithy.Schema) error {
@@ -747,7 +763,9 @@ func (v *InputDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	if v.InAppStreamNames != nil {
+		serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	}
 	if v.InputId != nil {
 		s.WriteString(schemas.InputDescription_InputId, *v.InputId)
 	}
@@ -1180,7 +1198,9 @@ func (v *InputSchemaUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputSchemaUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	if v.RecordColumnUpdates != nil {
+		serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	}
 	if v.RecordEncodingUpdate != nil {
 		s.WriteString(schemas.InputSchemaUpdate_RecordEncodingUpdate, *v.RecordEncodingUpdate)
 	}
@@ -2988,7 +3008,9 @@ func (v *SourceSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	if v.RecordColumns != nil {
+		serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	}
 	if v.RecordEncoding != nil {
 		s.WriteString(schemas.SourceSchema_RecordEncoding, *v.RecordEncoding)
 	}

@@ -104,7 +104,9 @@ func (v *ListHostedConfigurationVersionsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListHostedConfigurationVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHostedConfigurationVersionSummaryList(s, schemas.HostedConfigurationVersions_Items, v.Items)
+	if v.Items != nil {
+		serializeHostedConfigurationVersionSummaryList(s, schemas.HostedConfigurationVersions_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.HostedConfigurationVersions_NextToken, *v.NextToken)
 	}

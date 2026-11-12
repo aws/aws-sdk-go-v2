@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type DescribeServiceUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServiceUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServiceUpdatesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServiceUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeServiceUpdatesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeServiceUpdatesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ServiceUpdateName != nil {
+		s.WriteString(schemas.DescribeServiceUpdatesMessage_ServiceUpdateName, *v.ServiceUpdateName)
+	}
+	if v.ServiceUpdateStatus != nil {
+		serializeServiceUpdateStatusList(s, schemas.DescribeServiceUpdatesMessage_ServiceUpdateStatus, v.ServiceUpdateStatus)
+	}
+}
+
 type DescribeServiceUpdatesOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -62,13 +85,37 @@ type DescribeServiceUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServiceUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUpdatesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServiceUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ServiceUpdatesMessage_Marker, *v.Marker)
+	}
+	if v.ServiceUpdates != nil {
+		serializeServiceUpdateList(s, schemas.ServiceUpdatesMessage_ServiceUpdates, v.ServiceUpdates)
+	}
+}
+func (v *DescribeServiceUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUpdatesMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUpdatesMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ServiceUpdatesMessage_Marker, v.Marker)
+		case schemas.ServiceUpdatesMessage_ServiceUpdates:
+			return deserializeServiceUpdateList(d, schemas.ServiceUpdatesMessage_ServiceUpdates, &v.ServiceUpdates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServiceUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeServiceUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceUpdates, schemas.DescribeServiceUpdatesMessage, schemas.ServiceUpdatesMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeServiceUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceUpdates, schemas.DescribeServiceUpdatesMessage, schemas.ServiceUpdatesMessage), output: &DescribeServiceUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package devopsguru
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,20 @@ type UpdateServiceIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceIntegration != nil {
+		s.WriteStruct(schemas.UpdateServiceIntegrationRequest_ServiceIntegration)
+		v.ServiceIntegration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateServiceIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +62,26 @@ type UpdateServiceIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateServiceIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceIntegration, schemas.UpdateServiceIntegrationRequest, schemas.UpdateServiceIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceIntegration, schemas.UpdateServiceIntegrationRequest, schemas.UpdateServiceIntegrationResponse), output: &UpdateServiceIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

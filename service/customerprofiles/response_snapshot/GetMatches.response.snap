@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MatchGenerationDate":946684800,"Matches":[{"ConfidenceScore":1,"MatchId":"__MatchId__","ProfileIds":["__Member__","__Member__"]},{"ConfidenceScore":1,"MatchId":"__MatchId__","ProfileIds":["__Member__","__Member__"]}],"NextToken":"__NextToken__","PotentialMatches":1}

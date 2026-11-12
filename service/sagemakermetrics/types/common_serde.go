@@ -7,9 +7,6 @@ import (
 )
 
 func serializeBatchPutMetricsErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchPutMetricsError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeBatchPutMetricsErrorList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeMetricQueryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetricQuery) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeMetricQueryList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeMetricQueryResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetricQueryResult) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeMetricQueryResultList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeMetricValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -57,9 +45,6 @@ func serializeMetricValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeRawMetricDataList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RawMetricData) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serializeRawMetricDataList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeXAxisValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []int64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteInt64(schema.ListMember(), vv)

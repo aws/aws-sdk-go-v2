@@ -163,7 +163,9 @@ func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.EncryptionConfiguration_kmsEncryptionContext, v.KmsEncryptionContext)
+	if v.KmsEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.EncryptionConfiguration_kmsEncryptionContext, v.KmsEncryptionContext)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.EncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
 	}
@@ -522,7 +524,9 @@ func (v *VideoAssetProcessingConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *VideoAssetProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVideoSegmentConfiguration(s, schemas.VideoAssetProcessingConfiguration_segmentConfiguration, v.SegmentConfiguration)
+	if v.SegmentConfiguration != nil {
+		serializeVideoSegmentConfiguration(s, schemas.VideoAssetProcessingConfiguration_segmentConfiguration, v.SegmentConfiguration)
+	}
 }
 func (v *VideoAssetProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VideoAssetProcessingConfiguration, func(s *smithy.Schema) error {

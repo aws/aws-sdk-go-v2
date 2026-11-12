@@ -130,7 +130,9 @@ func (v *SearchEvaluationFormsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchEvaluationFormsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeEvaluationFormSearchSummaryList(s, schemas.SearchEvaluationFormsResponse_EvaluationFormSearchSummaryList, v.EvaluationFormSearchSummaryList)
+	if v.EvaluationFormSearchSummaryList != nil {
+		serializeEvaluationFormSearchSummaryList(s, schemas.SearchEvaluationFormsResponse_EvaluationFormSearchSummaryList, v.EvaluationFormSearchSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchEvaluationFormsResponse_NextToken, *v.NextToken)
 	}

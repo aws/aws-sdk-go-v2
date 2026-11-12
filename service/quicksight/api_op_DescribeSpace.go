@@ -96,7 +96,9 @@ func (v *DescribeSpaceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSpaceContributorList(s, schemas.DescribeSpaceResponse_Contributors, v.Contributors)
+	if v.Contributors != nil {
+		serializeSpaceContributorList(s, schemas.DescribeSpaceResponse_Contributors, v.Contributors)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeSpaceResponse_RequestId, *v.RequestId)
 	}

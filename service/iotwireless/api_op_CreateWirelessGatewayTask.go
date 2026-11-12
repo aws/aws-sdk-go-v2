@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type CreateWirelessGatewayTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessGatewayTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWirelessGatewayTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWirelessGatewayTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWirelessGatewayTaskRequest_Id, *v.Id)
+	}
+	if v.WirelessGatewayTaskDefinitionId != nil {
+		s.WriteString(schemas.CreateWirelessGatewayTaskRequest_WirelessGatewayTaskDefinitionId, *v.WirelessGatewayTaskDefinitionId)
+	}
+}
+
 type CreateWirelessGatewayTaskOutput struct {
 
 	// The status of the request.
@@ -53,13 +70,42 @@ type CreateWirelessGatewayTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessGatewayTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWirelessGatewayTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWirelessGatewayTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CreateWirelessGatewayTaskResponse_Status, string(v.Status))
+	}
+	if v.WirelessGatewayTaskDefinitionId != nil {
+		s.WriteString(schemas.CreateWirelessGatewayTaskResponse_WirelessGatewayTaskDefinitionId, *v.WirelessGatewayTaskDefinitionId)
+	}
+}
+func (v *CreateWirelessGatewayTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWirelessGatewayTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWirelessGatewayTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateWirelessGatewayTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WirelessGatewayTaskStatus(ev)
+			return nil
+		case schemas.CreateWirelessGatewayTaskResponse_WirelessGatewayTaskDefinitionId:
+			v.WirelessGatewayTaskDefinitionId = new(string)
+			return d.ReadString(schemas.CreateWirelessGatewayTaskResponse_WirelessGatewayTaskDefinitionId, v.WirelessGatewayTaskDefinitionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWirelessGatewayTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWirelessGatewayTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGatewayTask, schemas.CreateWirelessGatewayTaskRequest, schemas.CreateWirelessGatewayTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWirelessGatewayTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGatewayTask, schemas.CreateWirelessGatewayTaskRequest, schemas.CreateWirelessGatewayTaskResponse), output: &CreateWirelessGatewayTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

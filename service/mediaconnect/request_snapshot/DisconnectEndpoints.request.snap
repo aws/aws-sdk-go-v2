@@ -1,0 +1,5 @@
+PUT /v1/disconnectEndpoints/__DestinationEndpointArn__
+
+Content-Type: application/json
+
+{"sourceEndpointArn":"__SourceEndpointArn__"}

@@ -89,7 +89,9 @@ func (v *ListManagedInsightRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedInsightRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedRuleDescriptions(s, schemas.ListManagedInsightRulesOutput_ManagedRules, v.ManagedRules)
+	if v.ManagedRules != nil {
+		serializeManagedRuleDescriptions(s, schemas.ListManagedInsightRulesOutput_ManagedRules, v.ManagedRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedInsightRulesOutput_NextToken, *v.NextToken)
 	}

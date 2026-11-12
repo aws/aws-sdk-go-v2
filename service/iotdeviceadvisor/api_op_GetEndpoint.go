@@ -4,7 +4,9 @@ package iotdeviceadvisor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,27 @@ type GetEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationMethod != "" {
+		s.WriteString(schemas.GetEndpointRequest_authenticationMethod, string(v.AuthenticationMethod))
+	}
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.GetEndpointRequest_certificateArn, *v.CertificateArn)
+	}
+	if v.DeviceRoleArn != nil {
+		s.WriteString(schemas.GetEndpointRequest_deviceRoleArn, *v.DeviceRoleArn)
+	}
+	if v.ThingArn != nil {
+		s.WriteString(schemas.GetEndpointRequest_thingArn, *v.ThingArn)
+	}
+}
+
 type GetEndpointOutput struct {
 
 	// The response of an Device Advisor endpoint.
@@ -52,13 +75,32 @@ type GetEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.GetEndpointResponse_endpoint, *v.Endpoint)
+	}
+}
+func (v *GetEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEndpointResponse_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.GetEndpointResponse_endpoint, v.Endpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEndpoint, schemas.GetEndpointRequest, schemas.GetEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEndpoint, schemas.GetEndpointRequest, schemas.GetEndpointResponse), output: &GetEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

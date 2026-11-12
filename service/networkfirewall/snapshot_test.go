@@ -158,6 +158,18 @@ func TestCheckSnapshot_CreateFirewallPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateFirewallPolicyV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateProxy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProxy(context.Background(), nil, func(o *Options) {
@@ -271,6 +283,18 @@ func TestCheckSnapshot_DeleteFirewallPolicy(t *testing.T) {
 	_, err := svc.DeleteFirewallPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteFirewallPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFirewallPolicyV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -427,6 +451,18 @@ func TestCheckSnapshot_DescribeFirewallPolicy(t *testing.T) {
 	_, err := svc.DescribeFirewallPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeFirewallPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeFirewallPolicyV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -655,6 +691,18 @@ func TestCheckSnapshot_ListFirewallPolicies(t *testing.T) {
 	_, err := svc.ListFirewallPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFirewallPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFirewallPoliciesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFirewallPoliciesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFirewallPoliciesV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -962,6 +1010,18 @@ func TestCheckSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFirewallPolicyV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLoggingConfiguration(context.Background(), nil, func(o *Options) {
@@ -1177,6 +1237,18 @@ func TestUpdateSnapshot_CreateFirewallPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateFirewallPolicyV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateProxy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProxy(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1362,18 @@ func TestUpdateSnapshot_DeleteFirewallPolicy(t *testing.T) {
 	_, err := svc.DeleteFirewallPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteFirewallPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFirewallPolicyV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1446,6 +1530,18 @@ func TestUpdateSnapshot_DescribeFirewallPolicy(t *testing.T) {
 	_, err := svc.DescribeFirewallPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeFirewallPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeFirewallPolicyV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1674,6 +1770,18 @@ func TestUpdateSnapshot_ListFirewallPolicies(t *testing.T) {
 	_, err := svc.ListFirewallPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFirewallPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFirewallPoliciesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFirewallPoliciesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFirewallPoliciesV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1974,6 +2082,18 @@ func TestUpdateSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.T) {
 	_, err := svc.UpdateFirewallPolicyChangeProtection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateFirewallPolicyChangeProtection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFirewallPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFirewallPolicyV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

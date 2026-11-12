@@ -71,7 +71,9 @@ func (v *DescribeOptOutListsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOptOutListsRequest_NextToken, *v.NextToken)
 	}
-	serializeOptOutListNameList(s, schemas.DescribeOptOutListsRequest_OptOutListNames, v.OptOutListNames)
+	if v.OptOutListNames != nil {
+		serializeOptOutListNameList(s, schemas.DescribeOptOutListsRequest_OptOutListNames, v.OptOutListNames)
+	}
 	if v.Owner != "" {
 		s.WriteString(schemas.DescribeOptOutListsRequest_Owner, string(v.Owner))
 	}
@@ -103,7 +105,9 @@ func (v *DescribeOptOutListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOptOutListsResult_NextToken, *v.NextToken)
 	}
-	serializeOptOutListInformationList(s, schemas.DescribeOptOutListsResult_OptOutLists, v.OptOutLists)
+	if v.OptOutLists != nil {
+		serializeOptOutListInformationList(s, schemas.DescribeOptOutListsResult_OptOutLists, v.OptOutLists)
+	}
 }
 func (v *DescribeOptOutListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOptOutListsResult, func(s *smithy.Schema) error {

@@ -43,7 +43,9 @@ func (v *BatchGetStreamKeyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStreamKeyArnList(s, schemas.BatchGetStreamKeyRequest_arns, v.Arns)
+	if v.Arns != nil {
+		serializeStreamKeyArnList(s, schemas.BatchGetStreamKeyRequest_arns, v.Arns)
+	}
 }
 func (v *BatchGetStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetStreamKeyRequest, func(s *smithy.Schema) error {
@@ -123,8 +125,12 @@ func (v *BatchGetStreamKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentSecurityPolicy != nil {
 		s.WriteString(schemas.BatchGetStreamKeyResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
 	}
-	serializeBatchErrors(s, schemas.BatchGetStreamKeyResponse_errors, v.Errors)
-	serializeStreamKeys(s, schemas.BatchGetStreamKeyResponse_streamKeys, v.StreamKeys)
+	if v.Errors != nil {
+		serializeBatchErrors(s, schemas.BatchGetStreamKeyResponse_errors, v.Errors)
+	}
+	if v.StreamKeys != nil {
+		serializeStreamKeys(s, schemas.BatchGetStreamKeyResponse_streamKeys, v.StreamKeys)
+	}
 	if v.StrictTransportSecurity != nil {
 		s.WriteString(schemas.BatchGetStreamKeyResponse_strictTransportSecurity, *v.StrictTransportSecurity)
 	}

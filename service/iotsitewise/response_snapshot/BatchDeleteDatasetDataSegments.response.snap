@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"datasetId":"__DatasetId__","datasetVersion":"__DatasetVersion__","errors":[{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"errorCode":"INTERNAL_FAILURE","errorMessage":"__ErrorMessage__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"},{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"errorCode":"INTERNAL_FAILURE","errorMessage":"__ErrorMessage__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"}]}

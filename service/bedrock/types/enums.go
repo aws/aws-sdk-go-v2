@@ -759,6 +759,26 @@ func (GuardrailContextualGroundingFilterType) Values() []GuardrailContextualGrou
 	}
 }
 
+type GuardrailContextualGroundingTierName string
+
+// Enum values for GuardrailContextualGroundingTierName
+const (
+	GuardrailContextualGroundingTierNameClassic  GuardrailContextualGroundingTierName = "CLASSIC"
+	GuardrailContextualGroundingTierNameStandard GuardrailContextualGroundingTierName = "STANDARD"
+)
+
+// Values returns all known values for GuardrailContextualGroundingTierName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContextualGroundingTierName) Values() []GuardrailContextualGroundingTierName {
+	return []GuardrailContextualGroundingTierName{
+		"CLASSIC",
+		"STANDARD",
+	}
+}
+
 type GuardrailFilterStrength string
 
 // Enum values for GuardrailFilterStrength

@@ -16,6 +16,10 @@ import (
 // actually looks like. For example, it contains the location of the data source,
 // the data schema, and other information. A dataset also contains any tags
 // associated with the ingested data.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -79,7 +83,9 @@ func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServerSideKmsKeyId != nil {
 		s.WriteString(schemas.CreateDatasetRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
 	}
-	serializeTagList(s, schemas.CreateDatasetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDatasetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDatasetOutput struct {

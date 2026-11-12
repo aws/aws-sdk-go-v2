@@ -83,6 +83,25 @@ func (ConnectionType) Values() []ConnectionType {
 	}
 }
 
+type ContentDisposition string
+
+// Enum values for ContentDisposition
+const (
+	ContentDispositionInline     ContentDisposition = "INLINE"
+	ContentDispositionAttachment ContentDisposition = "ATTACHMENT"
+)
+
+// Values returns all known values for ContentDisposition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentDisposition) Values() []ContentDisposition {
+	return []ContentDisposition{
+		"INLINE",
+		"ATTACHMENT",
+	}
+}
+
 type MeetingFeatureStatus string
 
 // Enum values for MeetingFeatureStatus

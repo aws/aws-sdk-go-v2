@@ -63,7 +63,9 @@ func (v *UpdateSipRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SipRuleId != nil {
 		s.WriteString(schemas.UpdateSipRuleRequest_SipRuleId, *v.SipRuleId)
 	}
-	serializeSipRuleTargetApplicationList(s, schemas.UpdateSipRuleRequest_TargetApplications, v.TargetApplications)
+	if v.TargetApplications != nil {
+		serializeSipRuleTargetApplicationList(s, schemas.UpdateSipRuleRequest_TargetApplications, v.TargetApplications)
+	}
 }
 
 type UpdateSipRuleOutput struct {

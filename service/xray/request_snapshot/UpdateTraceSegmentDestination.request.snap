@@ -2,4 +2,4 @@ POST /UpdateTraceSegmentDestination
 
 Content-Type: application/json
 
-{"Destination":"XRay"}
+{"CloudWatchLogsConfiguration":{"SpansLogGroupKmsKeyId":"__SpansLogGroupKmsKeyId__"},"Destination":"XRay"}

@@ -1360,9 +1360,6 @@ func validateOpUpdateProfileWithAgentInput(v *UpdateProfileWithAgentInput) error
 	if v.ProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
-	if len(v.SourceFormat) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceFormat"))
-	}
 	if v.InputMessage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputMessage"))
 	} else if v.InputMessage != nil {

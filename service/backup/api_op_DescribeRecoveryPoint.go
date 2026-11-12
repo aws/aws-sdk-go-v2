@@ -344,7 +344,9 @@ func (v *DescribeRecoveryPointOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ResourceType != nil {
 		s.WriteString(schemas.DescribeRecoveryPointOutput_ResourceType, *v.ResourceType)
 	}
-	serializeScanResults(s, schemas.DescribeRecoveryPointOutput_ScanResults, v.ScanResults)
+	if v.ScanResults != nil {
+		serializeScanResults(s, schemas.DescribeRecoveryPointOutput_ScanResults, v.ScanResults)
+	}
 	if v.SourceBackupVaultArn != nil {
 		s.WriteString(schemas.DescribeRecoveryPointOutput_SourceBackupVaultArn, *v.SourceBackupVaultArn)
 	}

@@ -125,7 +125,9 @@ func (v *ListModelManifestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelManifestsResponse_nextToken, *v.NextToken)
 	}
-	serializemodelManifestSummaries(s, schemas.ListModelManifestsResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializemodelManifestSummaries(s, schemas.ListModelManifestsResponse_summaries, v.Summaries)
+	}
 }
 func (v *ListModelManifestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListModelManifestsResponse, func(s *smithy.Schema) error {

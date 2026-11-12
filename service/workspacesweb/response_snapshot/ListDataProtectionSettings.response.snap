@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataProtectionSettings":[{"creationDate":946684800,"dataProtectionSettingsArn":"__DataProtectionSettingsArn__","description":"__Description__","displayName":"__DisplayName__"},{"creationDate":946684800,"dataProtectionSettingsArn":"__DataProtectionSettingsArn__","description":"__Description__","displayName":"__DisplayName__"}],"nextToken":"__NextToken__"}

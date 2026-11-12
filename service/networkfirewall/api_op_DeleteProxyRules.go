@@ -60,7 +60,9 @@ func (v *DeleteProxyRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProxyRuleGroupName != nil {
 		s.WriteString(schemas.DeleteProxyRulesRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
 	}
-	serializeResourceNameList(s, schemas.DeleteProxyRulesRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeResourceNameList(s, schemas.DeleteProxyRulesRequest_Rules, v.Rules)
+	}
 }
 
 type DeleteProxyRulesOutput struct {
@@ -113,6 +115,9 @@ func (c *Client) addOperationDeleteProxyRulesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

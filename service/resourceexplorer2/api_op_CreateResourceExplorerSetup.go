@@ -57,8 +57,12 @@ func (v *CreateResourceExplorerSetupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateResourceExplorerSetupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_AggregatorRegions, v.AggregatorRegions)
-	serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_RegionList, v.RegionList)
+	if v.AggregatorRegions != nil {
+		serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_AggregatorRegions, v.AggregatorRegions)
+	}
+	if v.RegionList != nil {
+		serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_RegionList, v.RegionList)
+	}
 	if v.ViewName != nil {
 		s.WriteString(schemas.CreateResourceExplorerSetupInput_ViewName, *v.ViewName)
 	}

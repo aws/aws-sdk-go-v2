@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"portalArn":"__PortalArn__","portalId":"__PortalId__","portalStartUrl":"__PortalStartUrl__","portalStatus":{"error":{"code":"INTERNAL_FAILURE","message":"__Message__"},"state":"CREATING"},"ssoApplicationId":"__SsoApplicationId__"}

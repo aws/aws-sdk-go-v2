@@ -180,7 +180,9 @@ func (v *CreateAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateAgreementRequest_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.CreateAgreementRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAgreementRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAgreementOutput struct {

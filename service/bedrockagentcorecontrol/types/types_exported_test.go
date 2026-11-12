@@ -51,6 +51,28 @@ func ExampleAgentRuntimeArtifact_outputUsage() {
 var _ *types.ContainerConfiguration
 var _ *types.CodeConfiguration
 
+func ExampleAllowedPort_outputUsage() {
+	var union types.AllowedPort
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AllowedPortMemberPort:
+		_ = v.Value // Value is int32
+
+	case *types.AllowedPortMemberPortRange:
+		_ = v.Value // Value is types.PortRange
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PortRange
+var _ *int32
+
 func ExampleApiSchemaConfiguration_outputUsage() {
 	var union types.ApiSchemaConfiguration
 	// type switches can be used to check the union value
@@ -229,6 +251,9 @@ func ExampleCondition_outputUsage() {
 	var union types.Condition
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ConditionMemberMatchModels:
+		_ = v.Value // Value is types.MatchModels
+
 	case *types.ConditionMemberMatchPaths:
 		_ = v.Value // Value is types.MatchPaths
 
@@ -244,6 +269,7 @@ func ExampleCondition_outputUsage() {
 	}
 }
 
+var _ *types.MatchModels
 var _ *types.MatchPaths
 var _ *types.MatchPrincipals
 
@@ -591,6 +617,28 @@ func ExampleDataSourceType_outputUsage() {
 
 var _ *types.InlineExamplesSource
 var _ *types.S3Source
+
+func ExampleDimensionRatingScale_outputUsage() {
+	var union types.DimensionRatingScale
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DimensionRatingScaleMemberCategorical:
+		_ = v.Value // Value is []types.CategoricalScaleDefinition
+
+	case *types.DimensionRatingScaleMemberNumerical:
+		_ = v.Value // Value is []types.NumericalScaleDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.CategoricalScaleDefinition
+var _ []types.NumericalScaleDefinition
 
 func ExampleEvaluatorConfig_outputUsage() {
 	var union types.EvaluatorConfig
@@ -959,6 +1007,28 @@ var _ *types.HarnessGeminiModelConfig
 var _ *types.HarnessOpenAiModelConfig
 var _ *types.HarnessBedrockModelConfig
 
+func ExampleHarnessRemoteMcpOutboundAuth_outputUsage() {
+	var union types.HarnessRemoteMcpOutboundAuth
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessRemoteMcpOutboundAuthMemberAwsIam:
+		_ = v.Value // Value is types.IamCredentialProvider
+
+	case *types.HarnessRemoteMcpOutboundAuthMemberNone:
+		_ = v.Value // Value is types.Unit
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.IamCredentialProvider
+var _ *types.Unit
+
 func ExampleHarnessSkill_outputUsage() {
 	var union types.HarnessSkill
 	// type switches can be used to check the union value
@@ -1164,6 +1234,24 @@ func ExampleLaunchTemplateSource_outputUsage() {
 }
 
 var _ *types.LaunchParameters
+
+func ExampleLifecycleHookAction_outputUsage() {
+	var union types.LifecycleHookAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LifecycleHookActionMemberHttpPost:
+		_ = v.Value // Value is types.HttpPostLifecycleHookAction
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HttpPostLifecycleHookAction
 
 func ExampleMatchPrincipalEntry_outputUsage() {
 	var union types.MatchPrincipalEntry
@@ -1573,6 +1661,9 @@ func ExampleRatingScale_outputUsage() {
 	case *types.RatingScaleMemberCategorical:
 		_ = v.Value // Value is []types.CategoricalScaleDefinition
 
+	case *types.RatingScaleMemberMultiDimensional:
+		_ = v.Value // Value is []types.EvaluationDimension
+
 	case *types.RatingScaleMemberNumerical:
 		_ = v.Value // Value is []types.NumericalScaleDefinition
 
@@ -1587,6 +1678,7 @@ func ExampleRatingScale_outputUsage() {
 
 var _ []types.CategoricalScaleDefinition
 var _ []types.NumericalScaleDefinition
+var _ []types.EvaluationDimension
 
 func ExampleRecordExpirySpecification_outputUsage() {
 	var union types.RecordExpirySpecification

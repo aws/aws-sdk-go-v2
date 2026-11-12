@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *ActiveSessionsExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ActiveSessionsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ActiveSessionsExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveSessionsExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveSessionsExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ActiveSessionsExceededException_Message, *v.Message)
+	}
+}
+func (v *ActiveSessionsExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveSessionsExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveSessionsExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActiveSessionsExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of active statements exceeds the limit.
 type ActiveStatementsExceededException struct {
@@ -59,6 +81,27 @@ func (e *ActiveStatementsExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ActiveStatementsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ActiveStatementsExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveStatementsExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveStatementsExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ActiveStatementsExceededException_Message, *v.Message)
+	}
+}
+func (v *ActiveStatementsExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveStatementsExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveStatementsExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActiveStatementsExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of active requests with WaitTimeSeconds for the same SQL statement
 // exceeds the limit.
@@ -88,6 +131,27 @@ func (e *ActiveWaitingRequestsExceededException) ErrorCode() string {
 func (e *ActiveWaitingRequestsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ActiveWaitingRequestsExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveWaitingRequestsExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveWaitingRequestsExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ActiveWaitingRequestsExceededException_Message, *v.Message)
+	}
+}
+func (v *ActiveWaitingRequestsExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveWaitingRequestsExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveWaitingRequestsExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActiveWaitingRequestsExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An SQL statement encountered an environmental error while running.
 type BatchExecuteStatementException struct {
@@ -116,6 +180,33 @@ func (e *BatchExecuteStatementException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BatchExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *BatchExecuteStatementException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExecuteStatementException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExecuteStatementException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BatchExecuteStatementException_Message, *v.Message)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.BatchExecuteStatementException_StatementId, *v.StatementId)
+	}
+}
+func (v *BatchExecuteStatementException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchExecuteStatementException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchExecuteStatementException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementException_Message, v.Message)
+		case schemas.BatchExecuteStatementException_StatementId:
+			v.StatementId = new(string)
+			return d.ReadString(schemas.BatchExecuteStatementException_StatementId, v.StatementId)
+		}
+		return nil
+	})
+}
 
 // Connection to a database failed.
 type DatabaseConnectionException struct {
@@ -142,6 +233,27 @@ func (e *DatabaseConnectionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DatabaseConnectionException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DatabaseConnectionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseConnectionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseConnectionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DatabaseConnectionException_Message, *v.Message)
+	}
+}
+func (v *DatabaseConnectionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseConnectionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseConnectionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DatabaseConnectionException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The SQL statement encountered an environmental error while running.
 type ExecuteStatementException struct {
@@ -170,6 +282,33 @@ func (e *ExecuteStatementException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ExecuteStatementException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteStatementException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteStatementException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ExecuteStatementException_Message, *v.Message)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.ExecuteStatementException_StatementId, *v.StatementId)
+	}
+}
+func (v *ExecuteStatementException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteStatementException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteStatementException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExecuteStatementException_Message, v.Message)
+		case schemas.ExecuteStatementException_StatementId:
+			v.StatementId = new(string)
+			return d.ReadString(schemas.ExecuteStatementException_StatementId, v.StatementId)
+		}
+		return nil
+	})
+}
 
 // The Amazon Redshift Data API operation failed due to invalid input.
 type InternalServerException struct {
@@ -196,6 +335,27 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_Message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Amazon Redshift Data API operation failed due to timeout.
 type QueryTimeoutException struct {
@@ -222,6 +382,27 @@ func (e *QueryTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *QueryTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *QueryTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.QueryTimeoutException_Message, *v.Message)
+	}
+}
+func (v *QueryTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryTimeoutException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.QueryTimeoutException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Amazon Redshift Data API operation failed due to a missing resource.
 type ResourceNotFoundException struct {
@@ -250,6 +431,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ResourceNotFoundException_ResourceId, *v.ResourceId)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
+}
 
 // The Amazon Redshift Data API operation failed due to invalid input.
 type ValidationException struct {
@@ -276,3 +484,24 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}

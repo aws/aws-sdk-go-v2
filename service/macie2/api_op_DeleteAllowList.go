@@ -4,6 +4,8 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DeleteAllowListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAllowListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAllowListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAllowListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteAllowListRequest_id, *v.Id)
+	}
+	if v.IgnoreJobChecks != nil {
+		s.WriteString(schemas.DeleteAllowListRequest_ignoreJobChecks, *v.IgnoreJobChecks)
+	}
+}
+
 type DeleteAllowListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type DeleteAllowListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAllowListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAllowListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAllowListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAllowListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAllowListResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAllowListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAllowList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAllowList, schemas.DeleteAllowListRequest, schemas.DeleteAllowListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAllowList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAllowList, schemas.DeleteAllowListRequest, schemas.DeleteAllowListResponse), output: &DeleteAllowListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -2317,7 +2317,7 @@
                 "supportMode": {
                     "target": "com.amazonaws.artifact#InquirySupportMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Support mode for this inquiry. AI_ONLY provides AI-generated responses. FULL_SUPPORT includes human expert review.</p>"
+                        "smithy.api#documentation": "<p>Support mode for this inquiry. AI_ONLY provides AI-generated responses.</p>"
                     }
                 }
             },
@@ -2496,12 +2496,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AI_ONLY"
-                    }
-                },
-                "FULL_SUPPORT": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "FULL_SUPPORT"
                     }
                 }
             }

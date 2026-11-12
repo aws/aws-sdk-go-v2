@@ -142,7 +142,9 @@ func (v *GetComputeAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComputeName != nil {
 		s.WriteString(schemas.GetComputeAccessOutput_ComputeName, *v.ComputeName)
 	}
-	serializeContainerIdentifierList(s, schemas.GetComputeAccessOutput_ContainerIdentifiers, v.ContainerIdentifiers)
+	if v.ContainerIdentifiers != nil {
+		serializeContainerIdentifierList(s, schemas.GetComputeAccessOutput_ContainerIdentifiers, v.ContainerIdentifiers)
+	}
 	if v.Credentials != nil {
 		s.WriteStruct(schemas.GetComputeAccessOutput_Credentials)
 		v.Credentials.SerializeMembers(s)

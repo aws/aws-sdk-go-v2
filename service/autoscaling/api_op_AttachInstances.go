@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,33 @@ type AttachInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachInstancesQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.AttachInstancesQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.AttachInstancesQuery_InstanceIds, v.InstanceIds)
+	}
+}
+func (v *AttachInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachInstancesQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachInstancesQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.AttachInstancesQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.AttachInstancesQuery_InstanceIds:
+			return deserializeInstanceIds(d, schemas.AttachInstancesQuery_InstanceIds, &v.InstanceIds)
+		}
+		return nil
+	})
+}
+
 type AttachInstancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +86,26 @@ type AttachInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AttachInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachInstances, schemas.AttachInstancesQuery, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAttachInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachInstances, schemas.AttachInstancesQuery, nil), output: &AttachInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

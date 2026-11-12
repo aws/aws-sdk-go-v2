@@ -1,6 +1,5 @@
 StartMigration
 	Initialize stack step
-		OperationInputValidation
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint

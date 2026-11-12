@@ -49,7 +49,9 @@ func (v *RebootWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RebootWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRebootWorkspaceRequests(s, schemas.RebootWorkspacesRequest_RebootWorkspaceRequests, v.RebootWorkspaceRequests)
+	if v.RebootWorkspaceRequests != nil {
+		serializeRebootWorkspaceRequests(s, schemas.RebootWorkspacesRequest_RebootWorkspaceRequests, v.RebootWorkspaceRequests)
+	}
 }
 
 type RebootWorkspacesOutput struct {
@@ -70,7 +72,9 @@ func (v *RebootWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RebootWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRebootWorkspaceRequests(s, schemas.RebootWorkspacesResult_FailedRequests, v.FailedRequests)
+	if v.FailedRequests != nil {
+		serializeFailedRebootWorkspaceRequests(s, schemas.RebootWorkspacesResult_FailedRequests, v.FailedRequests)
+	}
 }
 func (v *RebootWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RebootWorkspacesResult, func(s *smithy.Schema) error {
@@ -96,6 +100,9 @@ func (c *Client) addOperationRebootWorkspacesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

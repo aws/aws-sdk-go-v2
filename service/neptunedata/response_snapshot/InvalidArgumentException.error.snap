@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidArgumentException","code":"InvalidArgumentException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

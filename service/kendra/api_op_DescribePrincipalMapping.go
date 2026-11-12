@@ -121,7 +121,9 @@ func (v *DescribePrincipalMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.GroupId != nil {
 		s.WriteString(schemas.DescribePrincipalMappingResponse_GroupId, *v.GroupId)
 	}
-	serializeGroupOrderingIdSummaries(s, schemas.DescribePrincipalMappingResponse_GroupOrderingIdSummaries, v.GroupOrderingIdSummaries)
+	if v.GroupOrderingIdSummaries != nil {
+		serializeGroupOrderingIdSummaries(s, schemas.DescribePrincipalMappingResponse_GroupOrderingIdSummaries, v.GroupOrderingIdSummaries)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.DescribePrincipalMappingResponse_IndexId, *v.IndexId)
 	}

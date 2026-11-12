@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.ListRotationOverrides
+
+{"NextToken":"__NextToken__","RotationOverrides":[{"CreateTime":946684800,"EndTime":946684800,"NewContactIds":["__Member__","__Member__"],"RotationOverrideId":"__RotationOverrideId__","StartTime":946684800},{"CreateTime":946684800,"EndTime":946684800,"NewContactIds":["__Member__","__Member__"],"RotationOverrideId":"__RotationOverrideId__","StartTime":946684800}]}

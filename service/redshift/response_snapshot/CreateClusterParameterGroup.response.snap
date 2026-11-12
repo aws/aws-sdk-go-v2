@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateClusterParameterGroupResponse><CreateClusterParameterGroupResult><ClusterParameterGroup><Description>__Description__</Description><ParameterGroupFamily>__ParameterGroupFamily__</ParameterGroupFamily><ParameterGroupName>__ParameterGroupName__</ParameterGroupName><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></ClusterParameterGroup></CreateClusterParameterGroupResult></CreateClusterParameterGroupResponse>

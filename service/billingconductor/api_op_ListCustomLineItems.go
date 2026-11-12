@@ -113,7 +113,9 @@ func (v *ListCustomLineItemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomLineItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomLineItemList(s, schemas.ListCustomLineItemsOutput_CustomLineItems, v.CustomLineItems)
+	if v.CustomLineItems != nil {
+		serializeCustomLineItemList(s, schemas.ListCustomLineItemsOutput_CustomLineItems, v.CustomLineItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomLineItemsOutput_NextToken, *v.NextToken)
 	}

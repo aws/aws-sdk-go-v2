@@ -463,6 +463,13 @@ var GetVpcAttachment = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/vpc-attachments/{AttachmentId}",
 	Code: 200})
 
+var ListAttachmentNatConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListAttachmentNatConfigurations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/nat-configurations",
+	Code: 200})
+
 var ListAttachmentRoutingPolicyAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "ListAttachmentRoutingPolicyAssociations",
@@ -610,6 +617,13 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tags/{ResourceArn}",
 	Code: 200})
 
+var UpdateAttachmentNatConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "UpdateAttachmentNatConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/attachments/{AttachmentId}/nat-configuration",
+	Code: 200})
+
 var UpdateConnection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "UpdateConnection",
@@ -714,7 +728,7 @@ var _Action = smithy.NewSchema(smithy.ShapeID{
 var Attachment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "Attachment",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 20)
 var Attachment_CoreNetworkId *smithy.Schema
 
 var Attachment_CoreNetworkArn *smithy.Schema
@@ -738,6 +752,10 @@ var Attachment_AttachmentPolicyRuleNumber *smithy.Schema
 var Attachment_SegmentName *smithy.Schema
 
 var Attachment_NetworkFunctionGroupName *smithy.Schema
+
+var Attachment_NatGatewaySupport *smithy.Schema
+
+var Attachment_NatSystemRouteSupport *smithy.Schema
 
 var Attachment_Tags *smithy.Schema
 
@@ -766,7 +784,7 @@ var AttachmentError_RequestId *smithy.Schema
 var AttachmentErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "AttachmentErrorCode",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 19)
 var AttachmentErrorCode_VPC_NOT_FOUND *smithy.Schema
 
 var AttachmentErrorCode_SUBNET_NOT_FOUND *smithy.Schema
@@ -778,6 +796,8 @@ var AttachmentErrorCode_SUBNET_NO_FREE_ADDRESSES *smithy.Schema
 var AttachmentErrorCode_SUBNET_UNSUPPORTED_AVAILABILITY_ZONE *smithy.Schema
 
 var AttachmentErrorCode_SUBNET_NO_IPV6_CIDRS *smithy.Schema
+
+var AttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE *smithy.Schema
 
 var AttachmentErrorCode_VPN_CONNECTION_NOT_FOUND *smithy.Schema
 
@@ -791,7 +811,17 @@ var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF *smithy.Schema
 
 var AttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS *smithy.Schema
 
+var AttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED *smithy.Schema
+
 var AttachmentErrorCode_VPC_UNSUPPORTED_FEATURES *smithy.Schema
+
+var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS *smithy.Schema
+
+var AttachmentErrorCode_CREATION_FAILED *smithy.Schema
+
+var AttachmentErrorCode_UPDATE_FAILED *smithy.Schema
+
+var AttachmentErrorCode_DELETION_FAILED *smithy.Schema
 
 var _AttachmentErrorList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -809,6 +839,24 @@ var _AttachmentList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AttachmentList",
 }, smithy.ShapeTypeList, 1)
 var _AttachmentList_member *smithy.Schema
+
+var AttachmentNatConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "AttachmentNatConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var AttachmentNatConfiguration_AttachmentId *smithy.Schema
+
+var AttachmentNatConfiguration_NatGatewaySupport *smithy.Schema
+
+var AttachmentNatConfiguration_NatSystemRouteSupport *smithy.Schema
+
+var AttachmentNatConfiguration_NatGatewayRules *smithy.Schema
+
+var _AttachmentNatConfigurationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "AttachmentNatConfigurationList",
+}, smithy.ShapeTypeList, 1)
+var _AttachmentNatConfigurationList_member *smithy.Schema
 
 var _AttachmentRoutingPolicyAssociationsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -894,6 +942,11 @@ var BgpOptions_PeerAsn *smithy.Schema
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "Boolean",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _BoxedBoolean = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "BoxedBoolean",
 }, smithy.ShapeTypeBoolean, 0)
 
 var ChangeAction = smithy.NewSchema(smithy.ShapeID{
@@ -1187,7 +1240,7 @@ var ConnectPeerError_RequestId *smithy.Schema
 var ConnectPeerErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "ConnectPeerErrorCode",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 8)
 var ConnectPeerErrorCode_EDGE_LOCATION_NO_FREE_IPS *smithy.Schema
 
 var ConnectPeerErrorCode_EDGE_LOCATION_PEER_DUPLICATE *smithy.Schema
@@ -1199,6 +1252,10 @@ var ConnectPeerErrorCode_IP_OUTSIDE_SUBNET_CIDR_RANGE *smithy.Schema
 var ConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK *smithy.Schema
 
 var ConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK *smithy.Schema
+
+var ConnectPeerErrorCode_CREATION_FAILED *smithy.Schema
+
+var ConnectPeerErrorCode_DELETION_FAILED *smithy.Schema
 
 var _ConnectPeerErrorList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -1987,6 +2044,89 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
 
+var NatGatewaySupportState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatGatewaySupportState",
+}, smithy.ShapeTypeEnum, 5)
+var NatGatewaySupportState_ENABLED *smithy.Schema
+
+var NatGatewaySupportState_ENABLING *smithy.Schema
+
+var NatGatewaySupportState_DISABLED *smithy.Schema
+
+var NatGatewaySupportState_DISABLING *smithy.Schema
+
+var NatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE *smithy.Schema
+
+var NatGatewaySupportValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatGatewaySupportValue",
+}, smithy.ShapeTypeEnum, 2)
+var NatGatewaySupportValue_ENABLE *smithy.Schema
+
+var NatGatewaySupportValue_DISABLE *smithy.Schema
+
+var NatRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatRule",
+}, smithy.ShapeTypeStructure, 4)
+var NatRule_RuleNumber *smithy.Schema
+
+var NatRule_MatchSourceCidr *smithy.Schema
+
+var NatRule_NatCidr *smithy.Schema
+
+var NatRule_State *smithy.Schema
+
+var _NatRuleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatRuleList",
+}, smithy.ShapeTypeList, 1)
+var _NatRuleList_member *smithy.Schema
+
+var _NatRuleNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatRuleNumber",
+}, smithy.ShapeTypeInteger, 0)
+
+var NatRuleRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatRuleRequest",
+}, smithy.ShapeTypeStructure, 3)
+var NatRuleRequest_RuleNumber *smithy.Schema
+
+var NatRuleRequest_MatchSourceCidr *smithy.Schema
+
+var NatRuleRequest_NatCidr *smithy.Schema
+
+var _NatRuleRequestList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatRuleRequestList",
+}, smithy.ShapeTypeList, 1)
+var _NatRuleRequestList_member *smithy.Schema
+
+var NatRuleState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "NatRuleState",
+}, smithy.ShapeTypeEnum, 9)
+var NatRuleState_CREATING *smithy.Schema
+
+var NatRuleState_MODIFYING *smithy.Schema
+
+var NatRuleState_DELETING *smithy.Schema
+
+var NatRuleState_ACTIVATED *smithy.Schema
+
+var NatRuleState_ACTIVATING *smithy.Schema
+
+var NatRuleState_DEACTIVATED *smithy.Schema
+
+var NatRuleState_DEACTIVATING *smithy.Schema
+
+var NatRuleState_FAILED *smithy.Schema
+
+var NatRuleState_PENDING_ATTACHMENT_ACCEPTANCE *smithy.Schema
+
 var NetworkFunctionGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "NetworkFunctionGroup",
@@ -2232,7 +2372,7 @@ var PeeringError_MissingPermissionsContext *smithy.Schema
 var PeeringErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "PeeringErrorCode",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 9)
 var PeeringErrorCode_TRANSIT_GATEWAY_NOT_FOUND *smithy.Schema
 
 var PeeringErrorCode_TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED *smithy.Schema
@@ -2244,6 +2384,12 @@ var PeeringErrorCode_INTERNAL_ERROR *smithy.Schema
 var PeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE *smithy.Schema
 
 var PeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE *smithy.Schema
+
+var PeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED *smithy.Schema
+
+var PeeringErrorCode_CREATION_FAILED *smithy.Schema
+
+var PeeringErrorCode_DELETION_FAILED *smithy.Schema
 
 var _PeeringErrorList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -2525,10 +2671,12 @@ var RouteTableType_NETWORK_FUNCTION_GROUP *smithy.Schema
 var RouteType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "RouteType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var RouteType_PROPAGATED *smithy.Schema
 
 var RouteType_STATIC *smithy.Schema
+
+var RouteType_SYSTEM *smithy.Schema
 
 var _RouteTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -3083,7 +3231,7 @@ var AssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociat
 var CreateConnectAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "CreateConnectAttachmentRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var CreateConnectAttachmentRequest_CoreNetworkId *smithy.Schema
 
 var CreateConnectAttachmentRequest_EdgeLocation *smithy.Schema
@@ -3091,6 +3239,10 @@ var CreateConnectAttachmentRequest_EdgeLocation *smithy.Schema
 var CreateConnectAttachmentRequest_TransportAttachmentId *smithy.Schema
 
 var CreateConnectAttachmentRequest_RoutingPolicyLabel *smithy.Schema
+
+var CreateConnectAttachmentRequest_NatGatewaySupport *smithy.Schema
+
+var CreateConnectAttachmentRequest_NatGatewayRules *smithy.Schema
 
 var CreateConnectAttachmentRequest_Options *smithy.Schema
 
@@ -3229,7 +3381,7 @@ var CreateDeviceResponse_Device *smithy.Schema
 var CreateDirectConnectGatewayAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "CreateDirectConnectGatewayAttachmentRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 9)
 var CreateDirectConnectGatewayAttachmentRequest_CoreNetworkId *smithy.Schema
 
 var CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn *smithy.Schema
@@ -3237,6 +3389,12 @@ var CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn *smithy.
 var CreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel *smithy.Schema
 
 var CreateDirectConnectGatewayAttachmentRequest_EdgeLocations *smithy.Schema
+
+var CreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport *smithy.Schema
+
+var CreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport *smithy.Schema
+
+var CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules *smithy.Schema
 
 var CreateDirectConnectGatewayAttachmentRequest_Tags *smithy.Schema
 
@@ -3307,12 +3465,18 @@ var CreateSiteResponse_Site *smithy.Schema
 var CreateSiteToSiteVpnAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "CreateSiteToSiteVpnAttachmentRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 8)
 var CreateSiteToSiteVpnAttachmentRequest_CoreNetworkId *smithy.Schema
 
 var CreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn *smithy.Schema
 
 var CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel *smithy.Schema
+
+var CreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport *smithy.Schema
+
+var CreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport *smithy.Schema
+
+var CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules *smithy.Schema
 
 var CreateSiteToSiteVpnAttachmentRequest_Tags *smithy.Schema
 
@@ -3365,7 +3529,7 @@ var CreateTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAtt
 var CreateVpcAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "CreateVpcAttachmentRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var CreateVpcAttachmentRequest_CoreNetworkId *smithy.Schema
 
 var CreateVpcAttachmentRequest_VpcArn *smithy.Schema
@@ -3375,6 +3539,10 @@ var CreateVpcAttachmentRequest_SubnetArns *smithy.Schema
 var CreateVpcAttachmentRequest_Options *smithy.Schema
 
 var CreateVpcAttachmentRequest_RoutingPolicyLabel *smithy.Schema
+
+var CreateVpcAttachmentRequest_NatGatewaySupport *smithy.Schema
+
+var CreateVpcAttachmentRequest_NatGatewayRules *smithy.Schema
 
 var CreateVpcAttachmentRequest_Tags *smithy.Schema
 
@@ -3965,7 +4133,7 @@ var GetNetworkResourcesResponse_NextToken *smithy.Schema
 var GetNetworkRoutesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "GetNetworkRoutesRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var GetNetworkRoutesRequest_GlobalNetworkId *smithy.Schema
 
 var GetNetworkRoutesRequest_RouteTableIdentifier *smithy.Schema
@@ -3986,19 +4154,27 @@ var GetNetworkRoutesRequest_Types *smithy.Schema
 
 var GetNetworkRoutesRequest_DestinationFilters *smithy.Schema
 
+var GetNetworkRoutesRequest_MaxResults *smithy.Schema
+
+var GetNetworkRoutesRequest_NextToken *smithy.Schema
+
 var GetNetworkRoutesResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "GetNetworkRoutesResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var GetNetworkRoutesResponse_RouteTableArn *smithy.Schema
 
 var GetNetworkRoutesResponse_CoreNetworkSegmentEdge *smithy.Schema
+
+var GetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup *smithy.Schema
 
 var GetNetworkRoutesResponse_RouteTableType *smithy.Schema
 
 var GetNetworkRoutesResponse_RouteTableTimestamp *smithy.Schema
 
 var GetNetworkRoutesResponse_NetworkRoutes *smithy.Schema
+
+var GetNetworkRoutesResponse_NextToken *smithy.Schema
 
 var GetNetworkTelemetryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -4164,6 +4340,28 @@ var GetVpcAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetVpcAttachmentResponse_VpcAttachment *smithy.Schema
 
+var ListAttachmentNatConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListAttachmentNatConfigurationsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListAttachmentNatConfigurationsRequest_CoreNetworkId *smithy.Schema
+
+var ListAttachmentNatConfigurationsRequest_AttachmentId *smithy.Schema
+
+var ListAttachmentNatConfigurationsRequest_Filters *smithy.Schema
+
+var ListAttachmentNatConfigurationsRequest_MaxResults *smithy.Schema
+
+var ListAttachmentNatConfigurationsRequest_NextToken *smithy.Schema
+
+var ListAttachmentNatConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListAttachmentNatConfigurationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations *smithy.Schema
+
+var ListAttachmentNatConfigurationsResponse_NextToken *smithy.Schema
+
 var ListAttachmentRoutingPolicyAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "ListAttachmentRoutingPolicyAssociationsRequest",
@@ -4269,7 +4467,7 @@ var ListCoreNetworkPrefixListAssociationsResponse_NextToken *smithy.Schema
 var ListCoreNetworkRoutingInformationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "ListCoreNetworkRoutingInformationRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 14)
 var ListCoreNetworkRoutingInformationRequest_CoreNetworkId *smithy.Schema
 
 var ListCoreNetworkRoutingInformationRequest_SegmentName *smithy.Schema
@@ -4277,6 +4475,14 @@ var ListCoreNetworkRoutingInformationRequest_SegmentName *smithy.Schema
 var ListCoreNetworkRoutingInformationRequest_EdgeLocation *smithy.Schema
 
 var ListCoreNetworkRoutingInformationRequest_NextHopFilters *smithy.Schema
+
+var ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches *smithy.Schema
+
+var ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches *smithy.Schema
+
+var ListCoreNetworkRoutingInformationRequest_SubnetOfMatches *smithy.Schema
+
+var ListCoreNetworkRoutingInformationRequest_SupernetOfMatches *smithy.Schema
 
 var ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches *smithy.Schema
 
@@ -4537,6 +4743,32 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateAttachmentNatConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "UpdateAttachmentNatConfigurationRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateAttachmentNatConfigurationRequest_AttachmentId *smithy.Schema
+
+var UpdateAttachmentNatConfigurationRequest_NatGatewaySupport *smithy.Schema
+
+var UpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport *smithy.Schema
+
+var UpdateAttachmentNatConfigurationRequest_NatGatewayRules *smithy.Schema
+
+var UpdateAttachmentNatConfigurationRequest_ClientToken *smithy.Schema
+
+var UpdateAttachmentNatConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "UpdateAttachmentNatConfigurationResponse",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateAttachmentNatConfigurationResponse_AttachmentId *smithy.Schema
+
+var UpdateAttachmentNatConfigurationResponse_NatGatewaySupport *smithy.Schema
+
+var UpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport *smithy.Schema
+
+var UpdateAttachmentNatConfigurationResponse_NatGatewayRules *smithy.Schema
+
 var UpdateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "UpdateConnectionRequest",
@@ -4746,6 +4978,16 @@ func init() {
 
 	_ExternalRegionCodeList_member = _ExternalRegionCodeList.AddMember("member", _ExternalRegionCode)
 
+	NatGatewaySupportState_ENABLED = NatGatewaySupportState.AddMember("ENABLED", smithyprelude.Unit)
+
+	NatGatewaySupportState_ENABLING = NatGatewaySupportState.AddMember("ENABLING", smithyprelude.Unit)
+
+	NatGatewaySupportState_DISABLED = NatGatewaySupportState.AddMember("DISABLED", smithyprelude.Unit)
+
+	NatGatewaySupportState_DISABLING = NatGatewaySupportState.AddMember("DISABLING", smithyprelude.Unit)
+
+	NatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE = NatGatewaySupportState.AddMember("PENDING_ATTACHMENT_ACCEPTANCE", smithyprelude.Unit)
+
 	Tag_Key = Tag.AddMember("Key", _TagKey)
 
 	Tag_Value = Tag.AddMember("Value", _TagValue)
@@ -4776,6 +5018,8 @@ func init() {
 
 	AttachmentErrorCode_SUBNET_NO_IPV6_CIDRS = AttachmentErrorCode.AddMember("SUBNET_NO_IPV6_CIDRS", smithyprelude.Unit)
 
+	AttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE = AttachmentErrorCode.AddMember("SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", smithyprelude.Unit)
+
 	AttachmentErrorCode_VPN_CONNECTION_NOT_FOUND = AttachmentErrorCode.AddMember("VPN_CONNECTION_NOT_FOUND", smithyprelude.Unit)
 
 	AttachmentErrorCode_MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED = AttachmentErrorCode.AddMember("MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", smithyprelude.Unit)
@@ -4788,7 +5032,17 @@ func init() {
 
 	AttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS = AttachmentErrorCode.AddMember("VPN_EXISTING_ASSOCIATIONS", smithyprelude.Unit)
 
+	AttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED = AttachmentErrorCode.AddMember("VPN_STATIC_ROUTES_NAT_UNSUPPORTED", smithyprelude.Unit)
+
 	AttachmentErrorCode_VPC_UNSUPPORTED_FEATURES = AttachmentErrorCode.AddMember("VPC_UNSUPPORTED_FEATURES", smithyprelude.Unit)
+
+	AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS = AttachmentErrorCode.AddMember("DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", smithyprelude.Unit)
+
+	AttachmentErrorCode_CREATION_FAILED = AttachmentErrorCode.AddMember("CREATION_FAILED", smithyprelude.Unit)
+
+	AttachmentErrorCode_UPDATE_FAILED = AttachmentErrorCode.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
+	AttachmentErrorCode_DELETION_FAILED = AttachmentErrorCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
 
 	AttachmentError_Code = AttachmentError.AddMember("Code", AttachmentErrorCode)
 
@@ -4824,6 +5078,10 @@ func init() {
 
 	Attachment_NetworkFunctionGroupName = Attachment.AddMember("NetworkFunctionGroupName", _NetworkFunctionGroupName)
 
+	Attachment_NatGatewaySupport = Attachment.AddMember("NatGatewaySupport", NatGatewaySupportState)
+
+	Attachment_NatSystemRouteSupport = Attachment.AddMember("NatSystemRouteSupport", _BoxedBoolean)
+
 	Attachment_Tags = Attachment.AddMember("Tags", _TagList)
 
 	Attachment_ProposedSegmentChange = Attachment.AddMember("ProposedSegmentChange", ProposedSegmentChange)
@@ -4837,6 +5095,44 @@ func init() {
 	Attachment_LastModificationErrors = Attachment.AddMember("LastModificationErrors", _AttachmentErrorList)
 
 	_AttachmentList_member = _AttachmentList.AddMember("member", Attachment)
+
+	NatRuleState_CREATING = NatRuleState.AddMember("CREATING", smithyprelude.Unit)
+
+	NatRuleState_MODIFYING = NatRuleState.AddMember("MODIFYING", smithyprelude.Unit)
+
+	NatRuleState_DELETING = NatRuleState.AddMember("DELETING", smithyprelude.Unit)
+
+	NatRuleState_ACTIVATED = NatRuleState.AddMember("ACTIVATED", smithyprelude.Unit)
+
+	NatRuleState_ACTIVATING = NatRuleState.AddMember("ACTIVATING", smithyprelude.Unit)
+
+	NatRuleState_DEACTIVATED = NatRuleState.AddMember("DEACTIVATED", smithyprelude.Unit)
+
+	NatRuleState_DEACTIVATING = NatRuleState.AddMember("DEACTIVATING", smithyprelude.Unit)
+
+	NatRuleState_FAILED = NatRuleState.AddMember("FAILED", smithyprelude.Unit)
+
+	NatRuleState_PENDING_ATTACHMENT_ACCEPTANCE = NatRuleState.AddMember("PENDING_ATTACHMENT_ACCEPTANCE", smithyprelude.Unit)
+
+	NatRule_RuleNumber = NatRule.AddMember("RuleNumber", _NatRuleNumber)
+
+	NatRule_MatchSourceCidr = NatRule.AddMember("MatchSourceCidr", _IPAddress)
+
+	NatRule_NatCidr = NatRule.AddMember("NatCidr", _IPAddress)
+
+	NatRule_State = NatRule.AddMember("State", NatRuleState)
+
+	_NatRuleList_member = _NatRuleList.AddMember("member", NatRule)
+
+	AttachmentNatConfiguration_AttachmentId = AttachmentNatConfiguration.AddMember("AttachmentId", _AttachmentId)
+
+	AttachmentNatConfiguration_NatGatewaySupport = AttachmentNatConfiguration.AddMember("NatGatewaySupport", NatGatewaySupportState)
+
+	AttachmentNatConfiguration_NatSystemRouteSupport = AttachmentNatConfiguration.AddMember("NatSystemRouteSupport", _BoxedBoolean)
+
+	AttachmentNatConfiguration_NatGatewayRules = AttachmentNatConfiguration.AddMember("NatGatewayRules", _NatRuleList)
+
+	_AttachmentNatConfigurationList_member = _AttachmentNatConfigurationList.AddMember("member", AttachmentNatConfiguration)
 
 	_ConstrainedStringList_member = _ConstrainedStringList.AddMember("member", _ConstrainedString)
 
@@ -5019,6 +5315,10 @@ func init() {
 	ConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK = ConnectPeerErrorCode.AddMember("INVALID_INSIDE_CIDR_BLOCK", smithyprelude.Unit)
 
 	ConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK = ConnectPeerErrorCode.AddMember("NO_ASSOCIATED_CIDR_BLOCK", smithyprelude.Unit)
+
+	ConnectPeerErrorCode_CREATION_FAILED = ConnectPeerErrorCode.AddMember("CREATION_FAILED", smithyprelude.Unit)
+
+	ConnectPeerErrorCode_DELETION_FAILED = ConnectPeerErrorCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
 
 	ConnectPeerError_Code = ConnectPeerError.AddMember("Code", ConnectPeerErrorCode)
 
@@ -5536,6 +5836,18 @@ func init() {
 
 	_LinkList_member = _LinkList.AddMember("member", Link)
 
+	NatGatewaySupportValue_ENABLE = NatGatewaySupportValue.AddMember("ENABLE", smithyprelude.Unit)
+
+	NatGatewaySupportValue_DISABLE = NatGatewaySupportValue.AddMember("DISABLE", smithyprelude.Unit)
+
+	NatRuleRequest_RuleNumber = NatRuleRequest.AddMember("RuleNumber", _NatRuleNumber)
+
+	NatRuleRequest_MatchSourceCidr = NatRuleRequest.AddMember("MatchSourceCidr", _IPAddress)
+
+	NatRuleRequest_NatCidr = NatRuleRequest.AddMember("NatCidr", _IPAddress)
+
+	_NatRuleRequestList_member = _NatRuleRequestList.AddMember("member", NatRuleRequest)
+
 	_NetworkResourceMetadataMap_key = _NetworkResourceMetadataMap.AddMember("key", _ConstrainedString)
 
 	_NetworkResourceMetadataMap_value = _NetworkResourceMetadataMap.AddMember("value", _ConstrainedString)
@@ -5606,6 +5918,8 @@ func init() {
 
 	RouteType_STATIC = RouteType.AddMember("STATIC", smithyprelude.Unit)
 
+	RouteType_SYSTEM = RouteType.AddMember("SYSTEM", smithyprelude.Unit)
+
 	NetworkRoute_DestinationCidrBlock = NetworkRoute.AddMember("DestinationCidrBlock", _ConstrainedString)
 
 	NetworkRoute_Destinations = NetworkRoute.AddMember("Destinations", _NetworkRouteDestinationList)
@@ -5675,6 +5989,12 @@ func init() {
 	PeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE = PeeringErrorCode.AddMember("EDGE_LOCATION_PEER_DUPLICATE", smithyprelude.Unit)
 
 	PeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE = PeeringErrorCode.AddMember("INVALID_TRANSIT_GATEWAY_STATE", smithyprelude.Unit)
+
+	PeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED = PeeringErrorCode.AddMember("TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED", smithyprelude.Unit)
+
+	PeeringErrorCode_CREATION_FAILED = PeeringErrorCode.AddMember("CREATION_FAILED", smithyprelude.Unit)
+
+	PeeringErrorCode_DELETION_FAILED = PeeringErrorCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
 
 	PermissionsErrorContext_MissingPermission = PermissionsErrorContext.AddMember("MissingPermission", _ServerSideString)
 
@@ -6022,6 +6342,10 @@ func init() {
 
 	CreateConnectAttachmentRequest_RoutingPolicyLabel = CreateConnectAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
 
+	CreateConnectAttachmentRequest_NatGatewaySupport = CreateConnectAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
+
+	CreateConnectAttachmentRequest_NatGatewayRules = CreateConnectAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
+
 	CreateConnectAttachmentRequest_Options = CreateConnectAttachmentRequest.AddMember("Options", ConnectAttachmentOptions)
 
 	CreateConnectAttachmentRequest_Tags = CreateConnectAttachmentRequest.AddMember("Tags", _TagList)
@@ -6120,6 +6444,12 @@ func init() {
 
 	CreateDirectConnectGatewayAttachmentRequest_EdgeLocations = CreateDirectConnectGatewayAttachmentRequest.AddMember("EdgeLocations", _ExternalRegionCodeList)
 
+	CreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport = CreateDirectConnectGatewayAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
+
+	CreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport = CreateDirectConnectGatewayAttachmentRequest.AddMember("NatSystemRouteSupport", _BoxedBoolean)
+
+	CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules = CreateDirectConnectGatewayAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
+
 	CreateDirectConnectGatewayAttachmentRequest_Tags = CreateDirectConnectGatewayAttachmentRequest.AddMember("Tags", _TagList)
 
 	CreateDirectConnectGatewayAttachmentRequest_ClientToken = CreateDirectConnectGatewayAttachmentRequest.AddMember("ClientToken", _ClientToken)
@@ -6164,6 +6494,12 @@ func init() {
 
 	CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel = CreateSiteToSiteVpnAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
 
+	CreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport = CreateSiteToSiteVpnAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
+
+	CreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport = CreateSiteToSiteVpnAttachmentRequest.AddMember("NatSystemRouteSupport", _BoxedBoolean)
+
+	CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules = CreateSiteToSiteVpnAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
+
 	CreateSiteToSiteVpnAttachmentRequest_Tags = CreateSiteToSiteVpnAttachmentRequest.AddMember("Tags", _TagList)
 
 	CreateSiteToSiteVpnAttachmentRequest_ClientToken = CreateSiteToSiteVpnAttachmentRequest.AddMember("ClientToken", _ClientToken)
@@ -6201,6 +6537,10 @@ func init() {
 	CreateVpcAttachmentRequest_Options = CreateVpcAttachmentRequest.AddMember("Options", VpcOptions)
 
 	CreateVpcAttachmentRequest_RoutingPolicyLabel = CreateVpcAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
+
+	CreateVpcAttachmentRequest_NatGatewaySupport = CreateVpcAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
+
+	CreateVpcAttachmentRequest_NatGatewayRules = CreateVpcAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
 
 	CreateVpcAttachmentRequest_Tags = CreateVpcAttachmentRequest.AddMember("Tags", _TagList)
 
@@ -6522,15 +6862,23 @@ func init() {
 
 	GetNetworkRoutesRequest_DestinationFilters = GetNetworkRoutesRequest.AddMember("DestinationFilters", _FilterMap)
 
+	GetNetworkRoutesRequest_MaxResults = GetNetworkRoutesRequest.AddMember("MaxResults", _MaxResults)
+
+	GetNetworkRoutesRequest_NextToken = GetNetworkRoutesRequest.AddMember("NextToken", _NextToken)
+
 	GetNetworkRoutesResponse_RouteTableArn = GetNetworkRoutesResponse.AddMember("RouteTableArn", _ResourceArn)
 
 	GetNetworkRoutesResponse_CoreNetworkSegmentEdge = GetNetworkRoutesResponse.AddMember("CoreNetworkSegmentEdge", CoreNetworkSegmentEdgeIdentifier)
+
+	GetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup = GetNetworkRoutesResponse.AddMember("CoreNetworkNetworkFunctionGroup", CoreNetworkNetworkFunctionGroupIdentifier)
 
 	GetNetworkRoutesResponse_RouteTableType = GetNetworkRoutesResponse.AddMember("RouteTableType", RouteTableType)
 
 	GetNetworkRoutesResponse_RouteTableTimestamp = GetNetworkRoutesResponse.AddMember("RouteTableTimestamp", _DateTime)
 
 	GetNetworkRoutesResponse_NetworkRoutes = GetNetworkRoutesResponse.AddMember("NetworkRoutes", _NetworkRouteList)
+
+	GetNetworkRoutesResponse_NextToken = GetNetworkRoutesResponse.AddMember("NextToken", _NextToken)
 
 	GetNetworkTelemetryRequest_GlobalNetworkId = GetNetworkTelemetryRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
 
@@ -6616,6 +6964,20 @@ func init() {
 
 	GetVpcAttachmentResponse_VpcAttachment = GetVpcAttachmentResponse.AddMember("VpcAttachment", VpcAttachment)
 
+	ListAttachmentNatConfigurationsRequest_CoreNetworkId = ListAttachmentNatConfigurationsRequest.AddMember("CoreNetworkId", _CoreNetworkId)
+
+	ListAttachmentNatConfigurationsRequest_AttachmentId = ListAttachmentNatConfigurationsRequest.AddMember("AttachmentId", _AttachmentId)
+
+	ListAttachmentNatConfigurationsRequest_Filters = ListAttachmentNatConfigurationsRequest.AddMember("Filters", _FilterMap)
+
+	ListAttachmentNatConfigurationsRequest_MaxResults = ListAttachmentNatConfigurationsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListAttachmentNatConfigurationsRequest_NextToken = ListAttachmentNatConfigurationsRequest.AddMember("NextToken", _NextToken)
+
+	ListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations = ListAttachmentNatConfigurationsResponse.AddMember("AttachmentNatConfigurations", _AttachmentNatConfigurationList)
+
+	ListAttachmentNatConfigurationsResponse_NextToken = ListAttachmentNatConfigurationsResponse.AddMember("NextToken", _NextToken)
+
 	ListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId = ListAttachmentRoutingPolicyAssociationsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
 
 	ListAttachmentRoutingPolicyAssociationsRequest_AttachmentId = ListAttachmentRoutingPolicyAssociationsRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPQuery{Name: "attachmentId"})
@@ -6685,6 +7047,14 @@ func init() {
 	ListCoreNetworkRoutingInformationRequest_EdgeLocation = ListCoreNetworkRoutingInformationRequest.AddMember("EdgeLocation", _ExternalRegionCode)
 
 	ListCoreNetworkRoutingInformationRequest_NextHopFilters = ListCoreNetworkRoutingInformationRequest.AddMember("NextHopFilters", _FilterMap)
+
+	ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches = ListCoreNetworkRoutingInformationRequest.AddMember("ExactPrefixMatches", _ConstrainedStringList)
+
+	ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches = ListCoreNetworkRoutingInformationRequest.AddMember("LongestPrefixMatches", _ConstrainedStringList)
+
+	ListCoreNetworkRoutingInformationRequest_SubnetOfMatches = ListCoreNetworkRoutingInformationRequest.AddMember("SubnetOfMatches", _ConstrainedStringList)
+
+	ListCoreNetworkRoutingInformationRequest_SupernetOfMatches = ListCoreNetworkRoutingInformationRequest.AddMember("SupernetOfMatches", _ConstrainedStringList)
 
 	ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches = ListCoreNetworkRoutingInformationRequest.AddMember("LocalPreferenceMatches", _ConstrainedStringList)
 
@@ -6817,6 +7187,24 @@ func init() {
 	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
 
 	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
+
+	UpdateAttachmentNatConfigurationRequest_AttachmentId = UpdateAttachmentNatConfigurationRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
+
+	UpdateAttachmentNatConfigurationRequest_NatGatewaySupport = UpdateAttachmentNatConfigurationRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
+
+	UpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport = UpdateAttachmentNatConfigurationRequest.AddMember("NatSystemRouteSupport", _BoxedBoolean)
+
+	UpdateAttachmentNatConfigurationRequest_NatGatewayRules = UpdateAttachmentNatConfigurationRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
+
+	UpdateAttachmentNatConfigurationRequest_ClientToken = UpdateAttachmentNatConfigurationRequest.AddMember("ClientToken", _ClientToken)
+
+	UpdateAttachmentNatConfigurationResponse_AttachmentId = UpdateAttachmentNatConfigurationResponse.AddMember("AttachmentId", _AttachmentId)
+
+	UpdateAttachmentNatConfigurationResponse_NatGatewaySupport = UpdateAttachmentNatConfigurationResponse.AddMember("NatGatewaySupport", NatGatewaySupportState)
+
+	UpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport = UpdateAttachmentNatConfigurationResponse.AddMember("NatSystemRouteSupport", _BoxedBoolean)
+
+	UpdateAttachmentNatConfigurationResponse_NatGatewayRules = UpdateAttachmentNatConfigurationResponse.AddMember("NatGatewayRules", _NatRuleList)
 
 	UpdateConnectionRequest_GlobalNetworkId = UpdateConnectionRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
 

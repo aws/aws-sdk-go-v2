@@ -4,6 +4,8 @@ package repostspace
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelDescription != nil {
+		s.WriteString(schemas.CreateChannelInput_channelDescription, *v.ChannelDescription)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CreateChannelInput_channelName, *v.ChannelName)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.CreateChannelInput_spaceId, *v.SpaceId)
+	}
+}
+
 type CreateChannelOutput struct {
 
 	// The unique ID of the private re:Post channel.
@@ -55,13 +75,32 @@ type CreateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.CreateChannelOutput_channelId, *v.ChannelId)
+	}
+}
+func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelOutput_channelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.CreateChannelOutput_channelId, v.ChannelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelInput, schemas.CreateChannelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelInput, schemas.CreateChannelOutput), output: &CreateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

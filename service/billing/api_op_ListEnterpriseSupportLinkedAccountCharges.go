@@ -93,7 +93,9 @@ func (v *ListEnterpriseSupportLinkedAccountChargesOutput) Serialize(s smithy.Sha
 }
 
 func (v *ListEnterpriseSupportLinkedAccountChargesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkedAccountChargeList(s, schemas.ListEnterpriseSupportLinkedAccountChargesResponse_linkedAccount, v.LinkedAccount)
+	if v.LinkedAccount != nil {
+		serializeLinkedAccountChargeList(s, schemas.ListEnterpriseSupportLinkedAccountChargesResponse_linkedAccount, v.LinkedAccount)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnterpriseSupportLinkedAccountChargesResponse_nextToken, *v.NextToken)
 	}

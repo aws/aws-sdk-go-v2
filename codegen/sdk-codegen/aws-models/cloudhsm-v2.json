@@ -304,6 +304,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>For more information about CloudHSM, see <a href=\"http://aws.amazon.com/cloudhsm/\">CloudHSM</a> and the <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/userguide/\">\n      CloudHSM User Guide</a>.</p>",
                 "smithy.api#title": "AWS CloudHSM V2",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

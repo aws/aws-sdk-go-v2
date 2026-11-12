@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetTemplateRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 type GetTemplateOutput struct {
 
 	// The content of the email, composed of a subject line and either an HTML part or
@@ -49,13 +63,34 @@ type GetTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Template != nil {
+		s.WriteStruct(schemas.GetTemplateResponse_Template)
+		v.Template.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateResponse_Template:
+			v.Template = &types.Template{}
+			return v.Template.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplate, schemas.GetTemplateRequest, schemas.GetTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplate, schemas.GetTemplateRequest, schemas.GetTemplateResponse), output: &GetTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

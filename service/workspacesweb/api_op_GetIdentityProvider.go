@@ -4,7 +4,9 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.GetIdentityProviderRequest_identityProviderArn, *v.IdentityProviderArn)
+	}
+}
+
 type GetIdentityProviderOutput struct {
 
 	// The identity provider.
@@ -45,13 +59,34 @@ type GetIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProvider != nil {
+		s.WriteStruct(schemas.GetIdentityProviderResponse_identityProvider)
+		v.IdentityProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityProviderResponse_identityProvider:
+			v.IdentityProvider = &types.IdentityProvider{}
+			return v.IdentityProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityProvider, schemas.GetIdentityProviderRequest, schemas.GetIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityProvider, schemas.GetIdentityProviderRequest, schemas.GetIdentityProviderResponse), output: &GetIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ebs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ebs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,30 @@ type CompleteSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangedBlocksCount != nil {
+		s.WriteInt32(schemas.CompleteSnapshotRequest_ChangedBlocksCount, *v.ChangedBlocksCount)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.CompleteSnapshotRequest_Checksum, *v.Checksum)
+	}
+	if v.ChecksumAggregationMethod != "" {
+		s.WriteString(schemas.CompleteSnapshotRequest_ChecksumAggregationMethod, string(v.ChecksumAggregationMethod))
+	}
+	if v.ChecksumAlgorithm != "" {
+		s.WriteString(schemas.CompleteSnapshotRequest_ChecksumAlgorithm, string(v.ChecksumAlgorithm))
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CompleteSnapshotRequest_SnapshotId, *v.SnapshotId)
+	}
+}
+
 type CompleteSnapshotOutput struct {
 
 	// The status of the snapshot.
@@ -75,13 +101,36 @@ type CompleteSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CompleteSnapshotResponse_Status, string(v.Status))
+	}
+}
+func (v *CompleteSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteSnapshotResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CompleteSnapshotResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteSnapshot, schemas.CompleteSnapshotRequest, schemas.CompleteSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteSnapshot, schemas.CompleteSnapshotRequest, schemas.CompleteSnapshotResponse), output: &CompleteSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

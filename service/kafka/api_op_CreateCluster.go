@@ -138,7 +138,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageMode != "" {
 		s.WriteString(schemas.CreateClusterRequest_StorageMode, string(v.StorageMode))
 	}
-	serialize__mapOf__string(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {

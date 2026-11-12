@@ -87,7 +87,9 @@ func (v *GetResourceMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeatureMetadataMap(s, schemas.GetResourceMetadataResponse_Features, v.Features)
+	if v.Features != nil {
+		serializeFeatureMetadataMap(s, schemas.GetResourceMetadataResponse_Features, v.Features)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.GetResourceMetadataResponse_Identifier, *v.Identifier)
 	}

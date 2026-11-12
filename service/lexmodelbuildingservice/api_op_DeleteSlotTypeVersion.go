@@ -4,6 +4,8 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeleteSlotTypeVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSlotTypeVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSlotTypeVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlotTypeVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteSlotTypeVersionRequest_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DeleteSlotTypeVersionRequest_version, *v.Version)
+	}
+}
+
 type DeleteSlotTypeVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type DeleteSlotTypeVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSlotTypeVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlotTypeVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSlotTypeVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSlotTypeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSlotTypeVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlotTypeVersion, schemas.DeleteSlotTypeVersionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSlotTypeVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlotTypeVersion, schemas.DeleteSlotTypeVersionRequest, nil), output: &DeleteSlotTypeVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

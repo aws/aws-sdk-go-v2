@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"inProgressJobs":[{"executionNumber":1,"jobId":"__JobId__","lastUpdatedAt":1,"queuedAt":1,"startedAt":1,"versionNumber":1},{"executionNumber":1,"jobId":"__JobId__","lastUpdatedAt":1,"queuedAt":1,"startedAt":1,"versionNumber":1}],"queuedJobs":[{"executionNumber":1,"jobId":"__JobId__","lastUpdatedAt":1,"queuedAt":1,"startedAt":1,"versionNumber":1},{"executionNumber":1,"jobId":"__JobId__","lastUpdatedAt":1,"queuedAt":1,"startedAt":1,"versionNumber":1}]}

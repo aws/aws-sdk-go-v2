@@ -63,8 +63,12 @@ func (v *UpdateActionConnectorPermissionsInput) SerializeMembers(s smithy.ShapeS
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateActionConnectorPermissionsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateActionConnectorPermissionsOutput struct {
@@ -103,7 +107,9 @@ func (v *UpdateActionConnectorPermissionsOutput) SerializeMembers(s smithy.Shape
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateActionConnectorPermissionsResponse_Arn, *v.Arn)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateActionConnectorPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateActionConnectorPermissionsResponse_RequestId, *v.RequestId)
 	}

@@ -68,7 +68,9 @@ func (v *CreateSyncJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SyncSource != nil {
 		s.WriteString(schemas.CreateSyncJobRequest_syncSource, *v.SyncSource)
 	}
-	serializeTagMap(s, schemas.CreateSyncJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSyncJobRequest_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.CreateSyncJobRequest_workspaceId, *v.WorkspaceId)
 	}

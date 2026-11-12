@@ -123,7 +123,9 @@ func (v *UpdateSenderIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsoCountryCode != nil {
 		s.WriteString(schemas.UpdateSenderIdResult_IsoCountryCode, *v.IsoCountryCode)
 	}
-	serializeMessageTypeList(s, schemas.UpdateSenderIdResult_MessageTypes, v.MessageTypes)
+	if v.MessageTypes != nil {
+		serializeMessageTypeList(s, schemas.UpdateSenderIdResult_MessageTypes, v.MessageTypes)
+	}
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.UpdateSenderIdResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
 	}

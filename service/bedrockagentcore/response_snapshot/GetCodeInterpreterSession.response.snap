@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"certificates":[{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}},{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}}],"codeInterpreterIdentifier":"__CodeInterpreterIdentifier__","createdAt":"2000-01-01T00:00:00Z","filesystemConfigurations":[{"s3FilesConfiguration":{"accessPointArn":"__AccessPointArn__","fileSystemArn":"__FileSystemArn__","mountPath":"__MountPath__"}},{"s3FilesConfiguration":{"accessPointArn":"__AccessPointArn__","fileSystemArn":"__FileSystemArn__","mountPath":"__MountPath__"}}],"name":"__Name__","sessionId":"__SessionId__","sessionTimeoutSeconds":1,"status":"READY"}

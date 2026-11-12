@@ -94,7 +94,9 @@ func (v *CreateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Provider != "" {
 		s.WriteString(schemas.CreateRepositoryInput_provider, string(v.Provider))
 	}
-	serializeTagList(s, schemas.CreateRepositoryInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRepositoryInput_tags, v.Tags)
+	}
 }
 func (v *CreateRepositoryInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRepositoryInput, func(s *smithy.Schema) error {

@@ -110,7 +110,9 @@ func (v *GetPartnershipOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPartnershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartnershipCapabilities(s, schemas.GetPartnershipResponse_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializePartnershipCapabilities(s, schemas.GetPartnershipResponse_capabilities, v.Capabilities)
+	}
 	if v.CapabilityOptions != nil {
 		s.WriteStruct(schemas.GetPartnershipResponse_capabilityOptions)
 		v.CapabilityOptions.SerializeMembers(s)

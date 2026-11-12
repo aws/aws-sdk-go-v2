@@ -152,8 +152,12 @@ func (v *PutEventSelectorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEventSelectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
-	serializeEventSelectors(s, schemas.PutEventSelectorsRequest_EventSelectors, v.EventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
+	if v.EventSelectors != nil {
+		serializeEventSelectors(s, schemas.PutEventSelectorsRequest_EventSelectors, v.EventSelectors)
+	}
 	if v.TrailName != nil {
 		s.WriteString(schemas.PutEventSelectorsRequest_TrailName, *v.TrailName)
 	}
@@ -186,8 +190,12 @@ func (v *PutEventSelectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEventSelectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
-	serializeEventSelectors(s, schemas.PutEventSelectorsResponse_EventSelectors, v.EventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
+	if v.EventSelectors != nil {
+		serializeEventSelectors(s, schemas.PutEventSelectorsResponse_EventSelectors, v.EventSelectors)
+	}
 	if v.TrailARN != nil {
 		s.WriteString(schemas.PutEventSelectorsResponse_TrailARN, *v.TrailARN)
 	}

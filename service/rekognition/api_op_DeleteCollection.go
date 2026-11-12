@@ -4,6 +4,8 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.DeleteCollectionRequest_CollectionId, *v.CollectionId)
+	}
+}
+
 type DeleteCollectionOutput struct {
 
 	// HTTP status code that indicates the result of the operation.
@@ -50,13 +64,32 @@ type DeleteCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.DeleteCollectionResponse_StatusCode, *v.StatusCode)
+	}
+}
+func (v *DeleteCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCollectionResponse_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.DeleteCollectionResponse_StatusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCollection, schemas.DeleteCollectionRequest, schemas.DeleteCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCollection, schemas.DeleteCollectionRequest, schemas.DeleteCollectionResponse), output: &DeleteCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

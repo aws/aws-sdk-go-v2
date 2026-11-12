@@ -222,7 +222,9 @@ func (v *CreateSolutionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SolutionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateSolutionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSolutionRequest_tags, v.Tags)
+	}
 }
 
 type CreateSolutionOutput struct {

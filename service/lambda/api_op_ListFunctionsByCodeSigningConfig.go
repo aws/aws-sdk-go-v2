@@ -84,7 +84,9 @@ func (v *ListFunctionsByCodeSigningConfigOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListFunctionsByCodeSigningConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionArnList(s, schemas.ListFunctionsByCodeSigningConfigResponse_FunctionArns, v.FunctionArns)
+	if v.FunctionArns != nil {
+		serializeFunctionArnList(s, schemas.ListFunctionsByCodeSigningConfigResponse_FunctionArns, v.FunctionArns)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListFunctionsByCodeSigningConfigResponse_NextMarker, *v.NextMarker)
 	}

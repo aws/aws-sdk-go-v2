@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type TestMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestMigrationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerNodeEndpointList != nil {
+		serializeCustomerNodeEndpointList(s, schemas.TestMigrationMessage_CustomerNodeEndpointList, v.CustomerNodeEndpointList)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.TestMigrationMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+}
+
 type TestMigrationOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -52,13 +69,34 @@ type TestMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.TestMigrationResponse_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TestMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestMigrationResponse_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTestMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestMigration, schemas.TestMigrationMessage, schemas.TestMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTestMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestMigration, schemas.TestMigrationMessage, schemas.TestMigrationResponse), output: &TestMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

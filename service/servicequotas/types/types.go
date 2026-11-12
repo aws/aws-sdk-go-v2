@@ -90,7 +90,9 @@ func (v *MetricInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensionsMapDefinition(s, schemas.MetricInfo_MetricDimensions, v.MetricDimensions)
+	if v.MetricDimensions != nil {
+		serializeMetricDimensionsMapDefinition(s, schemas.MetricInfo_MetricDimensions, v.MetricDimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.MetricInfo_MetricName, *v.MetricName)
 	}

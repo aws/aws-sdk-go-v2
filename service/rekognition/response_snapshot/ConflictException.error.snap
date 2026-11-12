@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.AssociateFaces
+
+{"__type":"ConflictException","Code":"ConflictException","Logref":"__Logref__","Message":"__Message__"}

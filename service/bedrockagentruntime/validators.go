@@ -913,6 +913,21 @@ func validateAgenticRetrieveConfiguration(v *types.AgenticRetrieveConfiguration)
 	}
 }
 
+func validateAgenticRetrieveInstructionConfiguration(v *types.AgenticRetrieveInstructionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgenticRetrieveInstructionConfiguration"}
+	if v.RetrievalInstructionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalInstructionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAgenticRetrieveMemoryConfiguration(v *types.AgenticRetrieveMemoryConfiguration) error {
 	if v == nil {
 		return nil
@@ -3143,6 +3158,11 @@ func validateOpAgenticRetrieveStreamInput(v *AgenticRetrieveStreamInput) error {
 	if v.MemoryConfiguration != nil {
 		if err := validateAgenticRetrieveMemoryConfiguration(v.MemoryConfiguration); err != nil {
 			invalidParams.AddNested("MemoryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetrievalInstructionConfiguration != nil {
+		if err := validateAgenticRetrieveInstructionConfiguration(v.RetrievalInstructionConfiguration); err != nil {
+			invalidParams.AddNested("RetrievalInstructionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

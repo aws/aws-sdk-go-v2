@@ -4,7 +4,9 @@ package sagemakera2iruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,31 @@ type StartHumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartHumanLoopInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartHumanLoopRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartHumanLoopInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAttributes != nil {
+		s.WriteStruct(schemas.StartHumanLoopRequest_DataAttributes)
+		v.DataAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowDefinitionArn != nil {
+		s.WriteString(schemas.StartHumanLoopRequest_FlowDefinitionArn, *v.FlowDefinitionArn)
+	}
+	if v.HumanLoopInput != nil {
+		s.WriteStruct(schemas.StartHumanLoopRequest_HumanLoopInput)
+		v.HumanLoopInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HumanLoopName != nil {
+		s.WriteString(schemas.StartHumanLoopRequest_HumanLoopName, *v.HumanLoopName)
+	}
+}
+
 type StartHumanLoopOutput struct {
 
 	// The Amazon Resource Name (ARN) of the human loop.
@@ -60,13 +87,32 @@ type StartHumanLoopOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartHumanLoopOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartHumanLoopResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartHumanLoopOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanLoopArn != nil {
+		s.WriteString(schemas.StartHumanLoopResponse_HumanLoopArn, *v.HumanLoopArn)
+	}
+}
+func (v *StartHumanLoopOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartHumanLoopResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartHumanLoopResponse_HumanLoopArn:
+			v.HumanLoopArn = new(string)
+			return d.ReadString(schemas.StartHumanLoopResponse_HumanLoopArn, v.HumanLoopArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartHumanLoop, schemas.StartHumanLoopRequest, schemas.StartHumanLoopResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartHumanLoop, schemas.StartHumanLoopRequest, schemas.StartHumanLoopResponse), output: &StartHumanLoopOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

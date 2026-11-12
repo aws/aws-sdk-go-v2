@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type GetPositionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPositionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPositionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPositionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.GetPositionConfigurationRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetPositionConfigurationRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type GetPositionConfigurationOutput struct {
 
 	// The position data destination that describes the AWS IoT rule that processes
@@ -61,13 +78,40 @@ type GetPositionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPositionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPositionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPositionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.GetPositionConfigurationResponse_Destination, *v.Destination)
+	}
+	if v.Solvers != nil {
+		s.WriteStruct(schemas.GetPositionConfigurationResponse_Solvers)
+		v.Solvers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPositionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPositionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPositionConfigurationResponse_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.GetPositionConfigurationResponse_Destination, v.Destination)
+		case schemas.GetPositionConfigurationResponse_Solvers:
+			v.Solvers = &types.PositionSolverDetails{}
+			return v.Solvers.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPositionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPositionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPositionConfiguration, schemas.GetPositionConfigurationRequest, schemas.GetPositionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPositionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPositionConfiguration, schemas.GetPositionConfigurationRequest, schemas.GetPositionConfigurationResponse), output: &GetPositionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

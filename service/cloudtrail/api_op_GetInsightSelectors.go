@@ -122,7 +122,9 @@ func (v *GetInsightSelectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventDataStoreArn != nil {
 		s.WriteString(schemas.GetInsightSelectorsResponse_EventDataStoreArn, *v.EventDataStoreArn)
 	}
-	serializeInsightSelectors(s, schemas.GetInsightSelectorsResponse_InsightSelectors, v.InsightSelectors)
+	if v.InsightSelectors != nil {
+		serializeInsightSelectors(s, schemas.GetInsightSelectorsResponse_InsightSelectors, v.InsightSelectors)
+	}
 	if v.InsightsDestination != nil {
 		s.WriteString(schemas.GetInsightSelectorsResponse_InsightsDestination, *v.InsightsDestination)
 	}

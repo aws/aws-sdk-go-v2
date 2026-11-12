@@ -1077,7 +1077,9 @@ func (v *IngestedFilesSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngestedFilesSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDiscardedFiles(s, schemas.IngestedFilesSummary_DiscardedFiles, v.DiscardedFiles)
+	if v.DiscardedFiles != nil {
+		serializeListOfDiscardedFiles(s, schemas.IngestedFilesSummary_DiscardedFiles, v.DiscardedFiles)
+	}
 	if v.IngestedNumberOfFiles != nil {
 		s.WriteInt32(schemas.IngestedFilesSummary_IngestedNumberOfFiles, *v.IngestedNumberOfFiles)
 	}

@@ -48,7 +48,9 @@ func (v *ReorderRecoveryPlanStepsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReorderRecoveryPlanStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryPlanStepArnList(s, schemas.ReorderRecoveryPlanStepsRequest_orderedStepArns, v.OrderedStepArns)
+	if v.OrderedStepArns != nil {
+		serializeRecoveryPlanStepArnList(s, schemas.ReorderRecoveryPlanStepsRequest_orderedStepArns, v.OrderedStepArns)
+	}
 	if v.RecoveryPlanArn != nil {
 		s.WriteString(schemas.ReorderRecoveryPlanStepsRequest_recoveryPlanArn, *v.RecoveryPlanArn)
 	}
@@ -74,7 +76,9 @@ func (v *ReorderRecoveryPlanStepsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReorderRecoveryPlanStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryPlanStepList(s, schemas.ReorderRecoveryPlanStepsResponse_recoveryPlanSteps, v.RecoveryPlanSteps)
+	if v.RecoveryPlanSteps != nil {
+		serializeRecoveryPlanStepList(s, schemas.ReorderRecoveryPlanStepsResponse_recoveryPlanSteps, v.RecoveryPlanSteps)
+	}
 }
 func (v *ReorderRecoveryPlanStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReorderRecoveryPlanStepsResponse, func(s *smithy.Schema) error {

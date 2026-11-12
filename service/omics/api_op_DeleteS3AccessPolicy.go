@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +37,18 @@ type DeleteS3AccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteS3AccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteS3AccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteS3AccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3AccessPointArn != nil {
+		s.WriteString(schemas.DeleteS3AccessPolicyRequest_s3AccessPointArn, *v.S3AccessPointArn)
+	}
+}
+
 type DeleteS3AccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteS3AccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteS3AccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteS3AccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteS3AccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteS3AccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteS3AccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteS3AccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteS3AccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteS3AccessPolicy, schemas.DeleteS3AccessPolicyRequest, schemas.DeleteS3AccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteS3AccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteS3AccessPolicy, schemas.DeleteS3AccessPolicyRequest, schemas.DeleteS3AccessPolicyResponse), output: &DeleteS3AccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

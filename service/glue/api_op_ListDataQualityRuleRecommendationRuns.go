@@ -62,7 +62,9 @@ func (v *ListDataQualityRuleRecommendationRunsInput) SerializeMembers(s smithy.S
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityRuleRecommendationRunsRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListDataQualityRuleRecommendationRunsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListDataQualityRuleRecommendationRunsRequest_Tags, v.Tags)
+	}
 }
 
 type ListDataQualityRuleRecommendationRunsOutput struct {
@@ -89,7 +91,9 @@ func (v *ListDataQualityRuleRecommendationRunsOutput) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityRuleRecommendationRunsResponse_NextToken, *v.NextToken)
 	}
-	serializeDataQualityRuleRecommendationRunList(s, schemas.ListDataQualityRuleRecommendationRunsResponse_Runs, v.Runs)
+	if v.Runs != nil {
+		serializeDataQualityRuleRecommendationRunList(s, schemas.ListDataQualityRuleRecommendationRunsResponse_Runs, v.Runs)
+	}
 }
 func (v *ListDataQualityRuleRecommendationRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataQualityRuleRecommendationRunsResponse, func(s *smithy.Schema) error {

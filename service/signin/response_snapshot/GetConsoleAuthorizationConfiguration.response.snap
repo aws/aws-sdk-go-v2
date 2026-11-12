@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"consoleAuthorizationEnabled":true,"scope":"__Scope__","targetId":"__TargetId__"}

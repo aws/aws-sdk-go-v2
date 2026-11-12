@@ -5,8 +5,9 @@ package connecthealth
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -65,6 +66,33 @@ type StartMedicalScribeListeningSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMedicalScribeListeningSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalScribeListeningSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalScribeListeningSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.StartMedicalScribeListeningSessionInput_domainId, *v.DomainId)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartMedicalScribeListeningSessionInput_languageCode, string(v.LanguageCode))
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.StartMedicalScribeListeningSessionInput_mediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartMedicalScribeListeningSessionInput_mediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartMedicalScribeListeningSessionInput_sessionId, *v.SessionId)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.StartMedicalScribeListeningSessionInput_subscriptionId, *v.SubscriptionId)
+	}
+}
+
 type StartMedicalScribeListeningSessionOutput struct {
 	eventStream *StartMedicalScribeListeningSessionEventStream
 
@@ -73,6 +101,22 @@ type StartMedicalScribeListeningSessionOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartMedicalScribeListeningSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalScribeListeningSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalScribeListeningSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartMedicalScribeListeningSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMedicalScribeListeningSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -112,22 +156,56 @@ func (o *StartMedicalScribeListeningSessionOutput) GetInitialReply() <-chan Star
 	return o.initialReply
 }
 
+func (v *StartMedicalScribeListeningSessionInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMedicalScribeListeningSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMedicalScribeListeningSessionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_domainId, v.DomainId)
+		case schemas.StartMedicalScribeListeningSessionOutput_languageCode:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_languageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.MedicalScribeLanguageCode(ev)
+			return nil
+		case schemas.StartMedicalScribeListeningSessionOutput_mediaEncoding:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_mediaEncoding, &ev); err != nil {
+				return err
+			}
+			v.MediaEncoding = types.MedicalScribeMediaEncoding(ev)
+			return nil
+		case schemas.StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.StartMedicalScribeListeningSessionOutput_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_requestId, v.RequestId)
+		case schemas.StartMedicalScribeListeningSessionOutput_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_sessionId, v.SessionId)
+		case schemas.StartMedicalScribeListeningSessionOutput_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMedicalScribeListeningSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMedicalScribeListeningSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalScribeListeningSession, schemas.StartMedicalScribeListeningSessionInput, schemas.StartMedicalScribeListeningSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMedicalScribeListeningSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalScribeListeningSession, schemas.StartMedicalScribeListeningSessionInput, schemas.StartMedicalScribeListeningSessionOutput), output: &StartMedicalScribeListeningSessionOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamStartMedicalScribeListeningSession{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamStartMedicalScribeListeningSessionMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
-		return err
-	}
 	if err = addEventStreamBuild_opStartMedicalScribeListeningSessionMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,9 +219,6 @@ func (c *Client) addOperationStartMedicalScribeListeningSessionMiddlewares(stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

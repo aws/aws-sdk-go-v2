@@ -55,7 +55,9 @@ func (v *UpdateStageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateStageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateStageRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateStageRequest_patchOperations, v.PatchOperations)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.UpdateStageRequest_restApiId, *v.RestApiId)
 	}
@@ -181,15 +183,21 @@ func (v *UpdateStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.Stage_lastUpdatedDate, *v.LastUpdatedDate)
 	}
-	serializeMapOfMethodSettings(s, schemas.Stage_methodSettings, v.MethodSettings)
+	if v.MethodSettings != nil {
+		serializeMapOfMethodSettings(s, schemas.Stage_methodSettings, v.MethodSettings)
+	}
 	if v.StageName != nil {
 		s.WriteString(schemas.Stage_stageName, *v.StageName)
 	}
-	serializeMapOfStringToString(s, schemas.Stage_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.Stage_tags, v.Tags)
+	}
 	if v.TracingEnabled != false {
 		s.WriteBool(schemas.Stage_tracingEnabled, v.TracingEnabled)
 	}
-	serializeMapOfStringToString(s, schemas.Stage_variables, v.Variables)
+	if v.Variables != nil {
+		serializeMapOfStringToString(s, schemas.Stage_variables, v.Variables)
+	}
 	if v.WebAclArn != nil {
 		s.WriteString(schemas.Stage_webAclArn, *v.WebAclArn)
 	}

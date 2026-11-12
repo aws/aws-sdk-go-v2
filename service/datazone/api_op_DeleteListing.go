@@ -4,6 +4,8 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteListingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteListingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteListingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteListingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.DeleteListingInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteListingInput_identifier, *v.Identifier)
+	}
+}
+
 type DeleteListingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteListingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteListingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteListingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteListingOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteListing, schemas.DeleteListingInput, schemas.DeleteListingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteListing, schemas.DeleteListingInput, schemas.DeleteListingOutput), output: &DeleteListingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

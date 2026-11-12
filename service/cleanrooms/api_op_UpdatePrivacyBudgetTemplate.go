@@ -61,7 +61,9 @@ func (v *UpdatePrivacyBudgetTemplateInput) SerializeMembers(s smithy.ShapeSerial
 	if v.MembershipIdentifier != nil {
 		s.WriteString(schemas.UpdatePrivacyBudgetTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
 	}
-	serializePrivacyBudgetTemplateUpdateParameters(s, schemas.UpdatePrivacyBudgetTemplateInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePrivacyBudgetTemplateUpdateParameters(s, schemas.UpdatePrivacyBudgetTemplateInput_parameters, v.Parameters)
+	}
 	if v.PrivacyBudgetTemplateIdentifier != nil {
 		s.WriteString(schemas.UpdatePrivacyBudgetTemplateInput_privacyBudgetTemplateIdentifier, *v.PrivacyBudgetTemplateIdentifier)
 	}

@@ -113,7 +113,9 @@ func (v *UpdateCloudWatchAlarmTemplateGroupOutput) SerializeMembers(s smithy.Sha
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateCloudWatchAlarmTemplateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCloudWatchAlarmTemplateGroupResponse, func(s *smithy.Schema) error {

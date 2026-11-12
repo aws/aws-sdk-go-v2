@@ -96,7 +96,9 @@ func (v *SendMediaMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.SendMediaMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeContextMap(s, schemas.SendMediaMessageRequest_Context, v.Context)
+	if v.Context != nil {
+		serializeContextMap(s, schemas.SendMediaMessageRequest_Context, v.Context)
+	}
 	if v.DestinationPhoneNumber != nil {
 		s.WriteString(schemas.SendMediaMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
 	}
@@ -106,7 +108,9 @@ func (v *SendMediaMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxPrice != nil {
 		s.WriteString(schemas.SendMediaMessageRequest_MaxPrice, *v.MaxPrice)
 	}
-	serializeMediaUrlList(s, schemas.SendMediaMessageRequest_MediaUrls, v.MediaUrls)
+	if v.MediaUrls != nil {
+		serializeMediaUrlList(s, schemas.SendMediaMessageRequest_MediaUrls, v.MediaUrls)
+	}
 	if v.MessageBody != nil {
 		s.WriteString(schemas.SendMediaMessageRequest_MessageBody, *v.MessageBody)
 	}

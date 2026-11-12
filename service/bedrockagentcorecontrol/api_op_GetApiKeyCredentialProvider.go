@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetApiKeyCredentialProviderInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetApiKeyCredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiKeyCredentialProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiKeyCredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetApiKeyCredentialProviderRequest_name, *v.Name)
+	}
 }
 
 type GetApiKeyCredentialProviderOutput struct {
@@ -78,13 +92,74 @@ type GetApiKeyCredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiKeyCredentialProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiKeyCredentialProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiKeyCredentialProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeySecretArn != nil {
+		s.WriteStruct(schemas.GetApiKeyCredentialProviderResponse_apiKeySecretArn)
+		v.ApiKeySecretArn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApiKeySecretJsonKey != nil {
+		s.WriteString(schemas.GetApiKeyCredentialProviderResponse_apiKeySecretJsonKey, *v.ApiKeySecretJsonKey)
+	}
+	if v.ApiKeySecretSource != "" {
+		s.WriteString(schemas.GetApiKeyCredentialProviderResponse_apiKeySecretSource, string(v.ApiKeySecretSource))
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.GetApiKeyCredentialProviderResponse_createdTime, *v.CreatedTime)
+	}
+	if v.CredentialProviderArn != nil {
+		s.WriteString(schemas.GetApiKeyCredentialProviderResponse_credentialProviderArn, *v.CredentialProviderArn)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.GetApiKeyCredentialProviderResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetApiKeyCredentialProviderResponse_name, *v.Name)
+	}
+}
+func (v *GetApiKeyCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApiKeyCredentialProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApiKeyCredentialProviderResponse_apiKeySecretArn:
+			v.ApiKeySecretArn = &types.Secret{}
+			return v.ApiKeySecretArn.Deserialize(d)
+		case schemas.GetApiKeyCredentialProviderResponse_apiKeySecretJsonKey:
+			v.ApiKeySecretJsonKey = new(string)
+			return d.ReadString(schemas.GetApiKeyCredentialProviderResponse_apiKeySecretJsonKey, v.ApiKeySecretJsonKey)
+		case schemas.GetApiKeyCredentialProviderResponse_apiKeySecretSource:
+			var ev string
+			if err := d.ReadString(schemas.GetApiKeyCredentialProviderResponse_apiKeySecretSource, &ev); err != nil {
+				return err
+			}
+			v.ApiKeySecretSource = types.SecretSourceType(ev)
+			return nil
+		case schemas.GetApiKeyCredentialProviderResponse_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetApiKeyCredentialProviderResponse_createdTime, v.CreatedTime)
+		case schemas.GetApiKeyCredentialProviderResponse_credentialProviderArn:
+			v.CredentialProviderArn = new(string)
+			return d.ReadString(schemas.GetApiKeyCredentialProviderResponse_credentialProviderArn, v.CredentialProviderArn)
+		case schemas.GetApiKeyCredentialProviderResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetApiKeyCredentialProviderResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetApiKeyCredentialProviderResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetApiKeyCredentialProviderResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApiKeyCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApiKeyCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiKeyCredentialProvider, schemas.GetApiKeyCredentialProviderRequest, schemas.GetApiKeyCredentialProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApiKeyCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiKeyCredentialProvider, schemas.GetApiKeyCredentialProviderRequest, schemas.GetApiKeyCredentialProviderResponse), output: &GetApiKeyCredentialProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

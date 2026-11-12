@@ -4,7 +4,9 @@ package bedrockdataautomation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetDataAutomationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataAutomationProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataAutomationProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataAutomationProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.GetDataAutomationProjectRequest_projectArn, *v.ProjectArn)
+	}
+	if v.ProjectStage != "" {
+		s.WriteString(schemas.GetDataAutomationProjectRequest_projectStage, string(v.ProjectStage))
+	}
+}
+
 // Get DataAutomationProject Response
 type GetDataAutomationProjectOutput struct {
 
@@ -52,13 +69,34 @@ type GetDataAutomationProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataAutomationProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataAutomationProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataAutomationProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Project != nil {
+		s.WriteStruct(schemas.GetDataAutomationProjectResponse_project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDataAutomationProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataAutomationProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataAutomationProjectResponse_project:
+			v.Project = &types.DataAutomationProject{}
+			return v.Project.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataAutomationProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataAutomationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationProject, schemas.GetDataAutomationProjectRequest, schemas.GetDataAutomationProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataAutomationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationProject, schemas.GetDataAutomationProjectRequest, schemas.GetDataAutomationProjectResponse), output: &GetDataAutomationProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

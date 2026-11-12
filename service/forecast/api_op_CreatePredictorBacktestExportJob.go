@@ -114,7 +114,9 @@ func (v *CreatePredictorBacktestExportJobInput) SerializeMembers(s smithy.ShapeS
 	if v.PredictorBacktestExportJobName != nil {
 		s.WriteString(schemas.CreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName, *v.PredictorBacktestExportJobName)
 	}
-	serializeTags(s, schemas.CreatePredictorBacktestExportJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePredictorBacktestExportJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePredictorBacktestExportJobOutput struct {

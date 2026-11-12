@@ -73,7 +73,9 @@ func (v *CreateDirectoryConfigInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DirectoryName != nil {
 		s.WriteString(schemas.CreateDirectoryConfigRequest_DirectoryName, *v.DirectoryName)
 	}
-	serializeOrganizationalUnitDistinguishedNamesList(s, schemas.CreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames, v.OrganizationalUnitDistinguishedNames)
+	if v.OrganizationalUnitDistinguishedNames != nil {
+		serializeOrganizationalUnitDistinguishedNamesList(s, schemas.CreateDirectoryConfigRequest_OrganizationalUnitDistinguishedNames, v.OrganizationalUnitDistinguishedNames)
+	}
 	if v.ServiceAccountCredentials != nil {
 		s.WriteStruct(schemas.CreateDirectoryConfigRequest_ServiceAccountCredentials)
 		v.ServiceAccountCredentials.SerializeMembers(s)

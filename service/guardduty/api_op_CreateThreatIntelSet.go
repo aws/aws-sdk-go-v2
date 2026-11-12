@@ -106,7 +106,9 @@ func (v *CreateThreatIntelSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateThreatIntelSetRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateThreatIntelSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateThreatIntelSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateThreatIntelSetOutput struct {

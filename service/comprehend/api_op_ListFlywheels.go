@@ -85,7 +85,9 @@ func (v *ListFlywheelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlywheelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlywheelSummaryList(s, schemas.ListFlywheelsResponse_FlywheelSummaryList, v.FlywheelSummaryList)
+	if v.FlywheelSummaryList != nil {
+		serializeFlywheelSummaryList(s, schemas.ListFlywheelsResponse_FlywheelSummaryList, v.FlywheelSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlywheelsResponse_NextToken, *v.NextToken)
 	}
@@ -117,6 +119,9 @@ func (c *Client) addOperationListFlywheelsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -87,7 +87,9 @@ func (v *GetInsightSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetInsightSummariesRequest_StartTime, *v.StartTime)
 	}
-	serializeInsightStateList(s, schemas.GetInsightSummariesRequest_States, v.States)
+	if v.States != nil {
+		serializeInsightStateList(s, schemas.GetInsightSummariesRequest_States, v.States)
+	}
 }
 
 type GetInsightSummariesOutput struct {
@@ -114,7 +116,9 @@ func (v *GetInsightSummariesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInsightSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInsightSummaryList(s, schemas.GetInsightSummariesResult_InsightSummaries, v.InsightSummaries)
+	if v.InsightSummaries != nil {
+		serializeInsightSummaryList(s, schemas.GetInsightSummariesResult_InsightSummaries, v.InsightSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInsightSummariesResult_NextToken, *v.NextToken)
 	}

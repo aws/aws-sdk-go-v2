@@ -49,7 +49,9 @@ func (v *ListLicenseManagerReportGeneratorsInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListLicenseManagerReportGeneratorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListLicenseManagerReportGeneratorsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListLicenseManagerReportGeneratorsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLicenseManagerReportGeneratorsRequest_MaxResults, *v.MaxResults)
 	}
@@ -83,7 +85,9 @@ func (v *ListLicenseManagerReportGeneratorsOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicenseManagerReportGeneratorsResponse_NextToken, *v.NextToken)
 	}
-	serializeReportGeneratorList(s, schemas.ListLicenseManagerReportGeneratorsResponse_ReportGenerators, v.ReportGenerators)
+	if v.ReportGenerators != nil {
+		serializeReportGeneratorList(s, schemas.ListLicenseManagerReportGeneratorsResponse_ReportGenerators, v.ReportGenerators)
+	}
 }
 func (v *ListLicenseManagerReportGeneratorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLicenseManagerReportGeneratorsResponse, func(s *smithy.Schema) error {

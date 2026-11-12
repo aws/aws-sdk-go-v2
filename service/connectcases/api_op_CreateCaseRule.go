@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new case rule. In the Amazon Connect admin website, case rules are
+// Creates a new case rule. In the Connect Customer admin website, case rules are
 // known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
@@ -69,7 +69,9 @@ func (v *CreateCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCaseRuleRequest_name, *v.Name)
 	}
-	serializeCaseRuleDetails(s, schemas.CreateCaseRuleRequest_rule, v.Rule)
+	if v.Rule != nil {
+		serializeCaseRuleDetails(s, schemas.CreateCaseRuleRequest_rule, v.Rule)
+	}
 }
 
 type CreateCaseRuleOutput struct {

@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,58 @@ type PutWarmPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutWarmPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutWarmPoolType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutWarmPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.PutWarmPoolType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceReusePolicy != nil {
+		s.WriteStruct(schemas.PutWarmPoolType_InstanceReusePolicy)
+		v.InstanceReusePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxGroupPreparedCapacity != nil {
+		s.WriteInt32(schemas.PutWarmPoolType_MaxGroupPreparedCapacity, *v.MaxGroupPreparedCapacity)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.PutWarmPoolType_MinSize, *v.MinSize)
+	}
+	if v.PoolState != "" {
+		s.WriteString(schemas.PutWarmPoolType_PoolState, string(v.PoolState))
+	}
+}
+func (v *PutWarmPoolInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutWarmPoolType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutWarmPoolType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.PutWarmPoolType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.PutWarmPoolType_InstanceReusePolicy:
+			v.InstanceReusePolicy = &types.InstanceReusePolicy{}
+			return v.InstanceReusePolicy.Deserialize(d)
+		case schemas.PutWarmPoolType_MaxGroupPreparedCapacity:
+			v.MaxGroupPreparedCapacity = new(int32)
+			return d.ReadInt32(schemas.PutWarmPoolType_MaxGroupPreparedCapacity, v.MaxGroupPreparedCapacity)
+		case schemas.PutWarmPoolType_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.PutWarmPoolType_MinSize, v.MinSize)
+		case schemas.PutWarmPoolType_PoolState:
+			var ev string
+			if err := d.ReadString(schemas.PutWarmPoolType_PoolState, &ev); err != nil {
+				return err
+			}
+			v.PoolState = types.WarmPoolState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type PutWarmPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,13 +145,26 @@ type PutWarmPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutWarmPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutWarmPoolAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutWarmPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutWarmPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutWarmPoolAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutWarmPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutWarmPool, schemas.PutWarmPoolType, schemas.PutWarmPoolAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutWarmPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutWarmPool, schemas.PutWarmPoolType, schemas.PutWarmPoolAnswer), output: &PutWarmPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

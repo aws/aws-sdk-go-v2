@@ -117,7 +117,9 @@ func (v *CreateTLSInspectionConfigurationInput) SerializeMembers(s smithy.ShapeS
 	if v.TLSInspectionConfigurationName != nil {
 		s.WriteString(schemas.CreateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName, *v.TLSInspectionConfigurationName)
 	}
-	serializeTagList(s, schemas.CreateTLSInspectionConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTLSInspectionConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTLSInspectionConfigurationOutput struct {
@@ -194,6 +196,9 @@ func (c *Client) addOperationCreateTLSInspectionConfigurationMiddlewares(stack *
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

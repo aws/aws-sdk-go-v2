@@ -182,7 +182,9 @@ func (v *PutRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.PutRuleRequest_State, string(v.State))
 	}
-	serializeTagList(s, schemas.PutRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutRuleRequest_Tags, v.Tags)
+	}
 }
 
 type PutRuleOutput struct {

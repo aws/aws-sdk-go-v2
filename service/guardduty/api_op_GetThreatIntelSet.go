@@ -121,7 +121,9 @@ func (v *GetThreatIntelSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetThreatIntelSetResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetThreatIntelSetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetThreatIntelSetResponse_Tags, v.Tags)
+	}
 }
 func (v *GetThreatIntelSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetThreatIntelSetResponse, func(s *smithy.Schema) error {

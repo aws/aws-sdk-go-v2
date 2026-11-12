@@ -105,7 +105,9 @@ func (v *DescribeUserStackAssociationsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeUserStackAssociationsResult_NextToken, *v.NextToken)
 	}
-	serializeUserStackAssociationList(s, schemas.DescribeUserStackAssociationsResult_UserStackAssociations, v.UserStackAssociations)
+	if v.UserStackAssociations != nil {
+		serializeUserStackAssociationList(s, schemas.DescribeUserStackAssociationsResult_UserStackAssociations, v.UserStackAssociations)
+	}
 }
 func (v *DescribeUserStackAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeUserStackAssociationsResult, func(s *smithy.Schema) error {

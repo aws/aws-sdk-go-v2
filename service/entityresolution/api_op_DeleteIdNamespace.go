@@ -4,6 +4,8 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteIdNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdNamespaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdNamespaceName != nil {
+		s.WriteString(schemas.DeleteIdNamespaceInput_idNamespaceName, *v.IdNamespaceName)
+	}
+}
+
 type DeleteIdNamespaceOutput struct {
 
 	// A successful operation message.
@@ -47,13 +61,32 @@ type DeleteIdNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdNamespaceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteIdNamespaceOutput_message, *v.Message)
+	}
+}
+func (v *DeleteIdNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdNamespaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIdNamespaceOutput_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteIdNamespaceOutput_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIdNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdNamespace, schemas.DeleteIdNamespaceInput, schemas.DeleteIdNamespaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIdNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdNamespace, schemas.DeleteIdNamespaceInput, schemas.DeleteIdNamespaceOutput), output: &DeleteIdNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -266,6 +266,11 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 		},
 		BillingTagsSource:  types.BillingTagsSource("QUEUE"),
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -1512,9 +1517,13 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -1623,8 +1632,12 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -2271,6 +2284,10 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -2375,8 +2392,13 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -2481,6 +2503,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -2665,6 +2688,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -2681,8 +2705,11 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -2766,6 +2793,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -2825,6 +2854,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -2870,6 +2901,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -3519,6 +3552,10 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -3623,8 +3660,13 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -3729,6 +3771,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -3913,6 +3956,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -3929,8 +3973,11 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -4014,6 +4061,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -4073,6 +4122,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -4118,6 +4169,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -4493,9 +4546,13 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -4604,8 +4661,12 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -5252,6 +5313,10 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -5356,8 +5421,13 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -5462,6 +5532,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -5646,6 +5717,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -5662,8 +5734,11 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -5747,6 +5822,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -5806,6 +5883,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -5851,6 +5930,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -6500,6 +6581,10 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -6604,8 +6689,13 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -6710,6 +6800,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -6894,6 +6985,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -6910,8 +7002,11 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -6995,6 +7090,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -7054,6 +7151,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -7099,6 +7198,8 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -7436,6 +7537,11 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 		},
 		Category:    ptr.String("__Category__"),
 		Description: ptr.String("__Description__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -8626,9 +8732,13 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -8737,8 +8847,12 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -9385,6 +9499,10 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -9489,8 +9607,13 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -9595,6 +9718,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -9779,6 +9903,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -9795,8 +9920,11 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -9880,6 +10008,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -9939,6 +10069,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -9984,6 +10116,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -10633,6 +10767,10 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -10737,8 +10875,13 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -10843,6 +10986,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -11027,6 +11171,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -11043,8 +11188,11 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -11128,6 +11276,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -11187,6 +11337,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -11232,6 +11384,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -11607,9 +11761,13 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -11718,8 +11876,12 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -12366,6 +12528,10 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -12470,8 +12636,13 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -12576,6 +12747,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -12760,6 +12932,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -12776,8 +12949,11 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -12861,6 +13037,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -12920,6 +13098,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -12965,6 +13145,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -13614,6 +13796,10 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -13718,8 +13904,13 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -13824,6 +14015,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -14008,6 +14200,7 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -14024,8 +14217,11 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -14109,6 +14305,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -14168,6 +14366,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -14213,6 +14413,8 @@ func TestCheckRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -15295,6 +15497,7 @@ func TestCheckRequestSnapshot_CreatePreset(t *testing.T) {
 					Av1Settings: &types.Av1Settings{
 						AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 						BitDepth:                            types.Av1BitDepth("BIT_8"),
+						Bitrate:                             ptr.Int32(1),
 						FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 						FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 						FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -15311,8 +15514,11 @@ func TestCheckRequestSnapshot_CreatePreset(t *testing.T) {
 							QvbrQualityLevel:         ptr.Int32(1),
 							QvbrQualityLevelFineTune: ptr.Float64(1.0),
 						},
-						RateControlMode:             types.Av1RateControlMode("QVBR"),
+						RateControlMode:             types.Av1RateControlMode("CBR"),
+						SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 						Slices:                      ptr.Int32(1),
+						SlidingWindowMs:             ptr.Int32(1),
+						SlidingWindowPeakBitrate:    ptr.Int32(1),
 						SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 					},
 					AvcIntraSettings: &types.AvcIntraSettings{
@@ -15396,6 +15602,8 @@ func TestCheckRequestSnapshot_CreatePreset(t *testing.T) {
 						ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 						Slices:                       ptr.Int32(1),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.H264SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -15455,6 +15663,8 @@ func TestCheckRequestSnapshot_CreatePreset(t *testing.T) {
 						ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 						Slices:                         ptr.Int32(1),
+						SlidingWindowMs:                ptr.Int32(1),
+						SlidingWindowPeakBitrate:       ptr.Int32(1),
 						SlowPal:                        types.H265SlowPal("DISABLED"),
 						SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 						Telecine:                       types.H265Telecine("NONE"),
@@ -15500,6 +15710,8 @@ func TestCheckRequestSnapshot_CreatePreset(t *testing.T) {
 						RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 						ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -16581,6 +16793,11 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 		},
 		Category:    ptr.String("__Category__"),
 		Description: ptr.String("__Description__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -17771,9 +17988,13 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -17882,8 +18103,12 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -18530,6 +18755,10 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -18634,8 +18863,13 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -18740,6 +18974,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -18924,6 +19159,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -18940,8 +19176,11 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -19025,6 +19264,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -19084,6 +19325,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -19129,6 +19372,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -19778,6 +20023,10 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -19882,8 +20131,13 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -19988,6 +20242,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -20172,6 +20427,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -20188,8 +20444,11 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -20273,6 +20532,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -20332,6 +20593,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -20377,6 +20640,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -20752,9 +21017,13 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -20863,8 +21132,12 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -21511,6 +21784,10 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -21615,8 +21892,13 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -21721,6 +22003,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -21905,6 +22188,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -21921,8 +22205,11 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -22006,6 +22293,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -22065,6 +22354,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -22110,6 +22401,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -22759,6 +23052,10 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -22863,8 +23160,13 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -22969,6 +23271,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -23153,6 +23456,7 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -23169,8 +23473,11 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -23254,6 +23561,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -23313,6 +23622,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -23358,6 +23669,8 @@ func TestCheckRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -24437,6 +24750,7 @@ func TestCheckRequestSnapshot_UpdatePreset(t *testing.T) {
 					Av1Settings: &types.Av1Settings{
 						AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 						BitDepth:                            types.Av1BitDepth("BIT_8"),
+						Bitrate:                             ptr.Int32(1),
 						FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 						FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 						FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -24453,8 +24767,11 @@ func TestCheckRequestSnapshot_UpdatePreset(t *testing.T) {
 							QvbrQualityLevel:         ptr.Int32(1),
 							QvbrQualityLevelFineTune: ptr.Float64(1.0),
 						},
-						RateControlMode:             types.Av1RateControlMode("QVBR"),
+						RateControlMode:             types.Av1RateControlMode("CBR"),
+						SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 						Slices:                      ptr.Int32(1),
+						SlidingWindowMs:             ptr.Int32(1),
+						SlidingWindowPeakBitrate:    ptr.Int32(1),
 						SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 					},
 					AvcIntraSettings: &types.AvcIntraSettings{
@@ -24538,6 +24855,8 @@ func TestCheckRequestSnapshot_UpdatePreset(t *testing.T) {
 						ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 						Slices:                       ptr.Int32(1),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.H264SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -24597,6 +24916,8 @@ func TestCheckRequestSnapshot_UpdatePreset(t *testing.T) {
 						ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 						Slices:                         ptr.Int32(1),
+						SlidingWindowMs:                ptr.Int32(1),
+						SlidingWindowPeakBitrate:       ptr.Int32(1),
 						SlowPal:                        types.H265SlowPal("DISABLED"),
 						SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 						Telecine:                       types.H265Telecine("NONE"),
@@ -24642,6 +24963,8 @@ func TestCheckRequestSnapshot_UpdatePreset(t *testing.T) {
 						RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 						ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -25038,6 +25361,11 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 		},
 		BillingTagsSource:  types.BillingTagsSource("QUEUE"),
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -26284,9 +26612,13 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -26395,8 +26727,12 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -27043,6 +27379,10 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -27147,8 +27487,13 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -27253,6 +27598,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -27437,6 +27783,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -27453,8 +27800,11 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -27538,6 +27888,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -27597,6 +27949,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -27642,6 +27996,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -28291,6 +28647,10 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -28395,8 +28755,13 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -28501,6 +28866,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -28685,6 +29051,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -28701,8 +29068,11 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -28786,6 +29156,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -28845,6 +29217,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -28890,6 +29264,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -29265,9 +29641,13 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -29376,8 +29756,12 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -30024,6 +30408,10 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -30128,8 +30516,13 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -30234,6 +30627,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -30418,6 +30812,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -30434,8 +30829,11 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -30519,6 +30917,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -30578,6 +30978,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -30623,6 +31025,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -31272,6 +31676,10 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -31376,8 +31784,13 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -31482,6 +31895,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -31666,6 +32080,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -31682,8 +32097,11 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -31767,6 +32185,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -31826,6 +32246,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -31871,6 +32293,8 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -32208,6 +32632,11 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 		},
 		Category:    ptr.String("__Category__"),
 		Description: ptr.String("__Description__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -33398,9 +33827,13 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -33509,8 +33942,12 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -34157,6 +34594,10 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -34261,8 +34702,13 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -34367,6 +34813,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -34551,6 +34998,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -34567,8 +35015,11 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -34652,6 +35103,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -34711,6 +35164,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -34756,6 +35211,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -35405,6 +35862,10 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -35509,8 +35970,13 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -35615,6 +36081,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -35799,6 +36266,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -35815,8 +36283,11 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -35900,6 +36371,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -35959,6 +36432,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -36004,6 +36479,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -36379,9 +36856,13 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -36490,8 +36971,12 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -37138,6 +37623,10 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -37242,8 +37731,13 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -37348,6 +37842,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -37532,6 +38027,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -37548,8 +38044,11 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -37633,6 +38132,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -37692,6 +38193,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -37737,6 +38240,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -38386,6 +38891,10 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -38490,8 +38999,13 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -38596,6 +39110,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -38780,6 +39295,7 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -38796,8 +39312,11 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -38881,6 +39400,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -38940,6 +39461,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -38985,6 +39508,8 @@ func TestUpdateRequestSnapshot_CreateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -40067,6 +40592,7 @@ func TestUpdateRequestSnapshot_CreatePreset(t *testing.T) {
 					Av1Settings: &types.Av1Settings{
 						AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 						BitDepth:                            types.Av1BitDepth("BIT_8"),
+						Bitrate:                             ptr.Int32(1),
 						FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 						FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 						FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -40083,8 +40609,11 @@ func TestUpdateRequestSnapshot_CreatePreset(t *testing.T) {
 							QvbrQualityLevel:         ptr.Int32(1),
 							QvbrQualityLevelFineTune: ptr.Float64(1.0),
 						},
-						RateControlMode:             types.Av1RateControlMode("QVBR"),
+						RateControlMode:             types.Av1RateControlMode("CBR"),
+						SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 						Slices:                      ptr.Int32(1),
+						SlidingWindowMs:             ptr.Int32(1),
+						SlidingWindowPeakBitrate:    ptr.Int32(1),
 						SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 					},
 					AvcIntraSettings: &types.AvcIntraSettings{
@@ -40168,6 +40697,8 @@ func TestUpdateRequestSnapshot_CreatePreset(t *testing.T) {
 						ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 						Slices:                       ptr.Int32(1),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.H264SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -40227,6 +40758,8 @@ func TestUpdateRequestSnapshot_CreatePreset(t *testing.T) {
 						ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 						Slices:                         ptr.Int32(1),
+						SlidingWindowMs:                ptr.Int32(1),
+						SlidingWindowPeakBitrate:       ptr.Int32(1),
 						SlowPal:                        types.H265SlowPal("DISABLED"),
 						SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 						Telecine:                       types.H265Telecine("NONE"),
@@ -40272,6 +40805,8 @@ func TestUpdateRequestSnapshot_CreatePreset(t *testing.T) {
 						RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 						ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -41353,6 +41888,11 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 		},
 		Category:    ptr.String("__Category__"),
 		Description: ptr.String("__Description__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -42543,9 +43083,13 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -42654,8 +43198,12 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -43302,6 +43850,10 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -43406,8 +43958,13 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -43512,6 +44069,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -43696,6 +44254,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -43712,8 +44271,11 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -43797,6 +44359,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -43856,6 +44420,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -43901,6 +44467,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -44550,6 +45118,10 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -44654,8 +45226,13 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -44760,6 +45337,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -44944,6 +45522,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -44960,8 +45539,11 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -45045,6 +45627,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -45104,6 +45688,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -45149,6 +45735,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -45524,9 +46112,13 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							BaseUrl:                         ptr.String("__BaseUrl__"),
-							ClientCache:                     types.CmafClientCache("DISABLED"),
-							CodecSpecification:              types.CmafCodecSpecification("RFC_6381"),
+							BaseUrl:            ptr.String("__BaseUrl__"),
+							ClientCache:        types.CmafClientCache("DISABLED"),
+							CodecSpecification: types.CmafCodecSpecification("RFC_6381"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -45635,8 +46227,12 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 								},
 							},
-							AudioChannelConfigSchemeIdUri:   types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
-							BaseUrl:                         ptr.String("__BaseUrl__"),
+							AudioChannelConfigSchemeIdUri: types.DashIsoGroupAudioChannelConfigSchemeIdUri("MPEG_CHANNEL_CONFIGURATION"),
+							BaseUrl:                       ptr.String("__BaseUrl__"),
+							DashAdaptationSetGrouping: []types.DashAdaptationSetGrouping{
+								types.DashAdaptationSetGrouping("CODEC"),
+								types.DashAdaptationSetGrouping("CODEC"),
+							},
 							DashIFrameTrickPlayNameModifier: ptr.String("__DashIFrameTrickPlayNameModifier__"),
 							DashManifestStyle:               types.DashManifestStyle("BASIC"),
 							Destination:                     ptr.String("__Destination__"),
@@ -46283,6 +46879,10 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -46387,8 +46987,13 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -46493,6 +47098,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -46677,6 +47283,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -46693,8 +47300,11 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -46778,6 +47388,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -46837,6 +47449,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -46882,6 +47496,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -47531,6 +48147,10 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -47635,8 +48255,13 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -47741,6 +48366,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -47925,6 +48551,7 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 									Av1Settings: &types.Av1Settings{
 										AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 										BitDepth:                            types.Av1BitDepth("BIT_8"),
+										Bitrate:                             ptr.Int32(1),
 										FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 										FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 										FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -47941,8 +48568,11 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 											QvbrQualityLevel:         ptr.Int32(1),
 											QvbrQualityLevelFineTune: ptr.Float64(1.0),
 										},
-										RateControlMode:             types.Av1RateControlMode("QVBR"),
+										RateControlMode:             types.Av1RateControlMode("CBR"),
+										SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 										Slices:                      ptr.Int32(1),
+										SlidingWindowMs:             ptr.Int32(1),
+										SlidingWindowPeakBitrate:    ptr.Int32(1),
 										SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 									},
 									AvcIntraSettings: &types.AvcIntraSettings{
@@ -48026,6 +48656,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 										Slices:                       ptr.Int32(1),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.H264SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -48085,6 +48717,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 										Slices:                         ptr.Int32(1),
+										SlidingWindowMs:                ptr.Int32(1),
+										SlidingWindowPeakBitrate:       ptr.Int32(1),
 										SlowPal:                        types.H265SlowPal("DISABLED"),
 										SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 										Telecine:                       types.H265Telecine("NONE"),
@@ -48130,6 +48764,8 @@ func TestUpdateRequestSnapshot_UpdateJobTemplate(t *testing.T) {
 										RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 										ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 										SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+										SlidingWindowMs:              ptr.Int32(1),
+										SlidingWindowPeakBitrate:     ptr.Int32(1),
 										SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 										Softness:                     ptr.Int32(1),
 										SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),
@@ -49209,6 +49845,7 @@ func TestUpdateRequestSnapshot_UpdatePreset(t *testing.T) {
 					Av1Settings: &types.Av1Settings{
 						AdaptiveQuantization:                types.Av1AdaptiveQuantization("OFF"),
 						BitDepth:                            types.Av1BitDepth("BIT_8"),
+						Bitrate:                             ptr.Int32(1),
 						FilmGrainSynthesis:                  types.Av1FilmGrainSynthesis("DISABLED"),
 						FramerateControl:                    types.Av1FramerateControl("INITIALIZE_FROM_SOURCE"),
 						FramerateConversionAlgorithm:        types.Av1FramerateConversionAlgorithm("DUPLICATE_DROP"),
@@ -49225,8 +49862,11 @@ func TestUpdateRequestSnapshot_UpdatePreset(t *testing.T) {
 							QvbrQualityLevel:         ptr.Int32(1),
 							QvbrQualityLevelFineTune: ptr.Float64(1.0),
 						},
-						RateControlMode:             types.Av1RateControlMode("QVBR"),
+						RateControlMode:             types.Av1RateControlMode("CBR"),
+						SceneChangeDetect:           types.Av1SceneChangeDetect("DISABLED"),
 						Slices:                      ptr.Int32(1),
+						SlidingWindowMs:             ptr.Int32(1),
+						SlidingWindowPeakBitrate:    ptr.Int32(1),
 						SpatialAdaptiveQuantization: types.Av1SpatialAdaptiveQuantization("DISABLED"),
 					},
 					AvcIntraSettings: &types.AvcIntraSettings{
@@ -49310,6 +49950,8 @@ func TestUpdateRequestSnapshot_UpdatePreset(t *testing.T) {
 						ScanTypeConversionMode:       types.H264ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.H264SceneChangeDetect("DISABLED"),
 						Slices:                       ptr.Int32(1),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.H264SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.H264SpatialAdaptiveQuantization("DISABLED"),
@@ -49369,6 +50011,8 @@ func TestUpdateRequestSnapshot_UpdatePreset(t *testing.T) {
 						ScanTypeConversionMode:         types.H265ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:              types.H265SceneChangeDetect("DISABLED"),
 						Slices:                         ptr.Int32(1),
+						SlidingWindowMs:                ptr.Int32(1),
+						SlidingWindowPeakBitrate:       ptr.Int32(1),
 						SlowPal:                        types.H265SlowPal("DISABLED"),
 						SpatialAdaptiveQuantization:    types.H265SpatialAdaptiveQuantization("DISABLED"),
 						Telecine:                       types.H265Telecine("NONE"),
@@ -49414,6 +50058,8 @@ func TestUpdateRequestSnapshot_UpdatePreset(t *testing.T) {
 						RateControlMode:              types.Mpeg2RateControlMode("VBR"),
 						ScanTypeConversionMode:       types.Mpeg2ScanTypeConversionMode("INTERLACED"),
 						SceneChangeDetect:            types.Mpeg2SceneChangeDetect("DISABLED"),
+						SlidingWindowMs:              ptr.Int32(1),
+						SlidingWindowPeakBitrate:     ptr.Int32(1),
 						SlowPal:                      types.Mpeg2SlowPal("DISABLED"),
 						Softness:                     ptr.Int32(1),
 						SpatialAdaptiveQuantization:  types.Mpeg2SpatialAdaptiveQuantization("DISABLED"),

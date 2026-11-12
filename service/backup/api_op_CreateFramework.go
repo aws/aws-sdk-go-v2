@@ -67,14 +67,18 @@ func (v *CreateFrameworkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFrameworkControls(s, schemas.CreateFrameworkInput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkControls != nil {
+		serializeFrameworkControls(s, schemas.CreateFrameworkInput_FrameworkControls, v.FrameworkControls)
+	}
 	if v.FrameworkDescription != nil {
 		s.WriteString(schemas.CreateFrameworkInput_FrameworkDescription, *v.FrameworkDescription)
 	}
 	if v.FrameworkName != nil {
 		s.WriteString(schemas.CreateFrameworkInput_FrameworkName, *v.FrameworkName)
 	}
-	serializestringMap(s, schemas.CreateFrameworkInput_FrameworkTags, v.FrameworkTags)
+	if v.FrameworkTags != nil {
+		serializestringMap(s, schemas.CreateFrameworkInput_FrameworkTags, v.FrameworkTags)
+	}
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateFrameworkInput_IdempotencyToken, *v.IdempotencyToken)
 	}

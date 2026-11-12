@@ -1223,6 +1223,35 @@ func TestCheckRequestSnapshot_DescribeAccountLimits(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeAccountSettings(t *testing.T) {
+	input := &DescribeAccountSettingsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAccountSettings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeAdjustmentTypes(t *testing.T) {
 	input := &DescribeAdjustmentTypesInput{}
 	body := &bytes.Buffer{}
@@ -1254,9 +1283,10 @@ func TestCheckRequestSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IncludeInstances: ptr.Bool(true),
-		NextToken:        ptr.String("__NextToken__"),
-		MaxRecords:       ptr.Int32(1),
+		IncludeInstances:        ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -1303,8 +1333,9 @@ func TestCheckRequestSnapshot_DescribeAutoScalingInstances(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxRecords: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1564,8 +1595,9 @@ func TestCheckRequestSnapshot_DescribeNotificationConfigurations(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1601,8 +1633,9 @@ func TestCheckRequestSnapshot_DescribePolicies(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1633,10 +1666,11 @@ func TestCheckRequestSnapshot_DescribeScalingActivities(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
-		IncludeDeletedGroups: ptr.Bool(true),
-		MaxRecords:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
+		AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
+		IncludeDeletedGroups:    ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -1709,10 +1743,11 @@ func TestCheckRequestSnapshot_DescribeScheduledActions(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1755,8 +1790,9 @@ func TestCheckRequestSnapshot_DescribeTags(t *testing.T) {
 				},
 			},
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2221,6 +2257,34 @@ func TestCheckRequestSnapshot_LaunchInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "LaunchInstances"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutAccountSetting(t *testing.T) {
+	input := &PutAccountSettingInput{
+		Name:  ptr.String("__Name__"),
+		Value: ptr.String("__Value__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAccountSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountSetting"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4728,6 +4792,35 @@ func TestUpdateRequestSnapshot_DescribeAccountLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeAccountSettings(t *testing.T) {
+	input := &DescribeAccountSettingsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAccountSettings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeAdjustmentTypes(t *testing.T) {
 	input := &DescribeAdjustmentTypesInput{}
 	body := &bytes.Buffer{}
@@ -4759,9 +4852,10 @@ func TestUpdateRequestSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IncludeInstances: ptr.Bool(true),
-		NextToken:        ptr.String("__NextToken__"),
-		MaxRecords:       ptr.Int32(1),
+		IncludeInstances:        ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -4808,8 +4902,9 @@ func TestUpdateRequestSnapshot_DescribeAutoScalingInstances(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxRecords: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5069,8 +5164,9 @@ func TestUpdateRequestSnapshot_DescribeNotificationConfigurations(t *testing.T) 
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5106,8 +5202,9 @@ func TestUpdateRequestSnapshot_DescribePolicies(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5138,10 +5235,11 @@ func TestUpdateRequestSnapshot_DescribeScalingActivities(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
-		IncludeDeletedGroups: ptr.Bool(true),
-		MaxRecords:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
+		AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
+		IncludeDeletedGroups:    ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -5214,10 +5312,11 @@ func TestUpdateRequestSnapshot_DescribeScheduledActions(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5260,8 +5359,9 @@ func TestUpdateRequestSnapshot_DescribeTags(t *testing.T) {
 				},
 			},
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5726,6 +5826,34 @@ func TestUpdateRequestSnapshot_LaunchInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "LaunchInstances"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutAccountSetting(t *testing.T) {
+	input := &PutAccountSettingInput{
+		Name:  ptr.String("__Name__"),
+		Value: ptr.String("__Value__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAccountSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountSetting"); err != nil {
 		t.Fatal(err)
 	}
 }

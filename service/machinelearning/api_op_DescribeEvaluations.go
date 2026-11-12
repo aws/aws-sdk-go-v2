@@ -181,7 +181,9 @@ func (v *DescribeEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEvaluationsOutput_NextToken, *v.NextToken)
 	}
-	serializeEvaluations(s, schemas.DescribeEvaluationsOutput_Results, v.Results)
+	if v.Results != nil {
+		serializeEvaluations(s, schemas.DescribeEvaluationsOutput_Results, v.Results)
+	}
 }
 func (v *DescribeEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEvaluationsOutput, func(s *smithy.Schema) error {

@@ -72,7 +72,9 @@ func (v *CreateExportInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Export.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTagList(s, schemas.CreateExportRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateExportRequest_ResourceTags, v.ResourceTags)
+	}
 }
 
 type CreateExportOutput struct {

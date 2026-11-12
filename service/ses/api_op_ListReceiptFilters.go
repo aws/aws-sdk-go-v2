@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,15 @@ type ListReceiptFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceiptFiltersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceiptFiltersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceiptFiltersInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // A list of IP address filters that exist under your Amazon Web Services account.
 type ListReceiptFiltersOutput struct {
 
@@ -53,13 +64,31 @@ type ListReceiptFiltersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceiptFiltersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceiptFiltersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceiptFiltersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeReceiptFilterList(s, schemas.ListReceiptFiltersResponse_Filters, v.Filters)
+	}
+}
+func (v *ListReceiptFiltersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReceiptFiltersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReceiptFiltersResponse_Filters:
+			return deserializeReceiptFilterList(d, schemas.ListReceiptFiltersResponse_Filters, &v.Filters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReceiptFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListReceiptFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceiptFilters, schemas.ListReceiptFiltersRequest, schemas.ListReceiptFiltersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListReceiptFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceiptFilters, schemas.ListReceiptFiltersRequest, schemas.ListReceiptFiltersResponse), output: &ListReceiptFiltersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

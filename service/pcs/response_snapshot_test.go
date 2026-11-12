@@ -292,6 +292,12 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 	want := &CreateComputeNodeGroupOutput{
 		ComputeNodeGroup: &types.ComputeNodeGroup{
+			AmiId: ptr.String("__AmiId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SshKeyName: ptr.String("__SshKeyName__"),
 			Name:       ptr.String("__Name__"),
 			Id:         ptr.String("__Id__"),
 			Arn:        ptr.String("__Arn__"),
@@ -299,12 +305,12 @@ func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:     types.ComputeNodeGroupStatus("CREATING"),
-			AmiId:      ptr.String("__AmiId__"),
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
 			},
-			PurchaseOption: types.PurchaseOption("ONDEMAND"),
+			PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+			LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 			CustomLaunchTemplate: &types.CustomLaunchTemplate{
 				Id:      ptr.String("__Id__"),
 				Version: ptr.String("__Version__"),
@@ -432,14 +438,20 @@ func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CreateComputeNodeGroup(context.Background(), &CreateComputeNodeGroupInput{
+		AmiId: ptr.String("__AmiId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SshKeyName:           ptr.String("__SshKeyName__"),
 		ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
 		ComputeNodeGroupName: ptr.String("__ComputeNodeGroupName__"),
-		AmiId:                ptr.String("__AmiId__"),
 		SubnetIds: []string{
 			"__Member__",
 			"__Member__",
 		},
-		PurchaseOption: types.PurchaseOption("ONDEMAND"),
+		PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+		LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 		CustomLaunchTemplate: &types.CustomLaunchTemplate{
 			Id:      ptr.String("__Id__"),
 			Version: ptr.String("__Version__"),
@@ -838,6 +850,12 @@ func TestCheckResponseSnapshot_GetCluster(t *testing.T) {
 func TestCheckResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 	want := &GetComputeNodeGroupOutput{
 		ComputeNodeGroup: &types.ComputeNodeGroup{
+			AmiId: ptr.String("__AmiId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SshKeyName: ptr.String("__SshKeyName__"),
 			Name:       ptr.String("__Name__"),
 			Id:         ptr.String("__Id__"),
 			Arn:        ptr.String("__Arn__"),
@@ -845,12 +863,12 @@ func TestCheckResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:     types.ComputeNodeGroupStatus("CREATING"),
-			AmiId:      ptr.String("__AmiId__"),
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
 			},
-			PurchaseOption: types.PurchaseOption("ONDEMAND"),
+			PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+			LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 			CustomLaunchTemplate: &types.CustomLaunchTemplate{
 				Id:      ptr.String("__Id__"),
 				Version: ptr.String("__Version__"),
@@ -1536,6 +1554,12 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 	want := &UpdateComputeNodeGroupOutput{
 		ComputeNodeGroup: &types.ComputeNodeGroup{
+			AmiId: ptr.String("__AmiId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SshKeyName: ptr.String("__SshKeyName__"),
 			Name:       ptr.String("__Name__"),
 			Id:         ptr.String("__Id__"),
 			Arn:        ptr.String("__Arn__"),
@@ -1543,12 +1567,12 @@ func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:     types.ComputeNodeGroupStatus("CREATING"),
-			AmiId:      ptr.String("__AmiId__"),
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
 			},
-			PurchaseOption: types.PurchaseOption("ONDEMAND"),
+			PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+			LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 			CustomLaunchTemplate: &types.CustomLaunchTemplate{
 				Id:      ptr.String("__Id__"),
 				Version: ptr.String("__Version__"),
@@ -1676,13 +1700,19 @@ func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.UpdateComputeNodeGroup(context.Background(), &UpdateComputeNodeGroupInput{
+		AmiId: ptr.String("__AmiId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SshKeyName:                 ptr.String("__SshKeyName__"),
 		ClusterIdentifier:          ptr.String("__ClusterIdentifier__"),
 		ComputeNodeGroupIdentifier: ptr.String("__ComputeNodeGroupIdentifier__"),
-		AmiId:                      ptr.String("__AmiId__"),
 		SubnetIds: []string{
 			"__Member__",
 			"__Member__",
 		},
+		LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 		CustomLaunchTemplate: &types.CustomLaunchTemplate{
 			Id:      ptr.String("__Id__"),
 			Version: ptr.String("__Version__"),
@@ -2153,14 +2183,20 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.CreateComputeNodeGroup(context.Background(), &CreateComputeNodeGroupInput{
+		AmiId: ptr.String("__AmiId__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SshKeyName:           ptr.String("__SshKeyName__"),
 		ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
 		ComputeNodeGroupName: ptr.String("__ComputeNodeGroupName__"),
-		AmiId:                ptr.String("__AmiId__"),
 		SubnetIds: []string{
 			"__Member__",
 			"__Member__",
 		},
-		PurchaseOption: types.PurchaseOption("ONDEMAND"),
+		PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+		LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 		CustomLaunchTemplate: &types.CustomLaunchTemplate{
 			Id:      ptr.String("__Id__"),
 			Version: ptr.String("__Version__"),

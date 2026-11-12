@@ -89,7 +89,9 @@ func (v *ListInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvitationList(s, schemas.ListInvitationsResponse_Invitations, v.Invitations)
+	if v.Invitations != nil {
+		serializeInvitationList(s, schemas.ListInvitationsResponse_Invitations, v.Invitations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInvitationsResponse_NextToken, *v.NextToken)
 	}

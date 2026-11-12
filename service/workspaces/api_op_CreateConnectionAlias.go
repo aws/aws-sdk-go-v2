@@ -58,7 +58,9 @@ func (v *CreateConnectionAliasInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ConnectionString != nil {
 		s.WriteString(schemas.CreateConnectionAliasRequest_ConnectionString, *v.ConnectionString)
 	}
-	serializeTagList(s, schemas.CreateConnectionAliasRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConnectionAliasRequest_Tags, v.Tags)
+	}
 }
 
 type CreateConnectionAliasOutput struct {
@@ -108,6 +110,9 @@ func (c *Client) addOperationCreateConnectionAliasMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

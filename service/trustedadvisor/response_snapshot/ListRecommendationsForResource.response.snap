@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","recommendationForResourceSummaries":[{"awsResourceArn":"__AwsResourceArn__","checkArn":"__CheckArn__","exclusionStatus":"excluded","lastUpdatedAt":"2000-01-01T00:00:00Z","metadata":{"key0":"__Value__"},"pillars":["cost_optimizing","cost_optimizing"],"recommendationArn":"__RecommendationArn__","status":"ok"},{"awsResourceArn":"__AwsResourceArn__","checkArn":"__CheckArn__","exclusionStatus":"excluded","lastUpdatedAt":"2000-01-01T00:00:00Z","metadata":{"key0":"__Value__"},"pillars":["cost_optimizing","cost_optimizing"],"recommendationArn":"__RecommendationArn__","status":"ok"}]}

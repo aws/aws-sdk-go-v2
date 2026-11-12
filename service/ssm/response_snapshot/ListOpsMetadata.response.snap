@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.ListOpsMetadata
+
+{"NextToken":"__NextToken__","OpsMetadataList":[{"CreationDate":946684800,"LastModifiedDate":946684800,"LastModifiedUser":"__LastModifiedUser__","OpsMetadataArn":"__OpsMetadataArn__","ResourceId":"__ResourceId__"},{"CreationDate":946684800,"LastModifiedDate":946684800,"LastModifiedUser":"__LastModifiedUser__","OpsMetadataArn":"__OpsMetadataArn__","ResourceId":"__ResourceId__"}]}

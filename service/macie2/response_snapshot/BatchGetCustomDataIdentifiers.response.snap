@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"customDataIdentifiers":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","deleted":true,"description":"__Description__","id":"__Id__","name":"__Name__"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","deleted":true,"description":"__Description__","id":"__Id__","name":"__Name__"}],"notFoundIdentifierIds":["__Member__","__Member__"]}

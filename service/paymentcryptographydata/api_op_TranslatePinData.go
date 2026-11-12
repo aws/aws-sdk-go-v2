@@ -166,7 +166,9 @@ func (v *TranslatePinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncomingKeyIdentifier != nil {
 		s.WriteString(schemas.TranslatePinDataInput_IncomingKeyIdentifier, *v.IncomingKeyIdentifier)
 	}
-	serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_IncomingTranslationAttributes, v.IncomingTranslationAttributes)
+	if v.IncomingTranslationAttributes != nil {
+		serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_IncomingTranslationAttributes, v.IncomingTranslationAttributes)
+	}
 	if v.IncomingWrappedKey != nil {
 		s.WriteStruct(schemas.TranslatePinDataInput_IncomingWrappedKey)
 		v.IncomingWrappedKey.SerializeMembers(s)
@@ -180,7 +182,9 @@ func (v *TranslatePinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutgoingKeyIdentifier != nil {
 		s.WriteString(schemas.TranslatePinDataInput_OutgoingKeyIdentifier, *v.OutgoingKeyIdentifier)
 	}
-	serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_OutgoingTranslationAttributes, v.OutgoingTranslationAttributes)
+	if v.OutgoingTranslationAttributes != nil {
+		serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_OutgoingTranslationAttributes, v.OutgoingTranslationAttributes)
+	}
 	if v.OutgoingWrappedKey != nil {
 		s.WriteStruct(schemas.TranslatePinDataInput_OutgoingWrappedKey)
 		v.OutgoingWrappedKey.SerializeMembers(s)

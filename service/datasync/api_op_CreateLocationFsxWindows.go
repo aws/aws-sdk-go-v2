@@ -154,11 +154,15 @@ func (v *CreateLocationFsxWindowsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Password != nil {
 		s.WriteString(schemas.CreateLocationFsxWindowsRequest_Password, *v.Password)
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxWindowsRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxWindowsRequest_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationFsxWindowsRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationFsxWindowsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationFsxWindowsRequest_Tags, v.Tags)
+	}
 	if v.User != nil {
 		s.WriteString(schemas.CreateLocationFsxWindowsRequest_User, *v.User)
 	}
@@ -211,6 +215,9 @@ func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

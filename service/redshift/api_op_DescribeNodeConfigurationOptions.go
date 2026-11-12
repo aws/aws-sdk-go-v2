@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,39 @@ type DescribeNodeConfigurationOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNodeConfigurationOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNodeConfigurationOptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNodeConfigurationOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.DescribeNodeConfigurationOptionsMessage_ActionType, string(v.ActionType))
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeNodeConfigurationOptionsMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Filters != nil {
+		serializeNodeConfigurationOptionsFilterList(s, schemas.DescribeNodeConfigurationOptionsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeNodeConfigurationOptionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeNodeConfigurationOptionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DescribeNodeConfigurationOptionsMessage_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.DescribeNodeConfigurationOptionsMessage_SnapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.DescribeNodeConfigurationOptionsMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+}
+
 type DescribeNodeConfigurationOptionsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -93,13 +128,37 @@ type DescribeNodeConfigurationOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNodeConfigurationOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeConfigurationOptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNodeConfigurationOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.NodeConfigurationOptionsMessage_Marker, *v.Marker)
+	}
+	if v.NodeConfigurationOptionList != nil {
+		serializeNodeConfigurationOptionList(s, schemas.NodeConfigurationOptionsMessage_NodeConfigurationOptionList, v.NodeConfigurationOptionList)
+	}
+}
+func (v *DescribeNodeConfigurationOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeConfigurationOptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeConfigurationOptionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.NodeConfigurationOptionsMessage_Marker, v.Marker)
+		case schemas.NodeConfigurationOptionsMessage_NodeConfigurationOptionList:
+			return deserializeNodeConfigurationOptionList(d, schemas.NodeConfigurationOptionsMessage_NodeConfigurationOptionList, &v.NodeConfigurationOptionList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNodeConfigurationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeNodeConfigurationOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNodeConfigurationOptions, schemas.DescribeNodeConfigurationOptionsMessage, schemas.NodeConfigurationOptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeNodeConfigurationOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNodeConfigurationOptions, schemas.DescribeNodeConfigurationOptionsMessage, schemas.NodeConfigurationOptionsMessage), output: &DescribeNodeConfigurationOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

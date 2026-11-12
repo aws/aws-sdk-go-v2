@@ -112,7 +112,9 @@ func (v *DisassociateCustomDomainOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.DisassociateCustomDomainResponse_ServiceArn, *v.ServiceArn)
 	}
-	serializeVpcDNSTargetList(s, schemas.DisassociateCustomDomainResponse_VpcDNSTargets, v.VpcDNSTargets)
+	if v.VpcDNSTargets != nil {
+		serializeVpcDNSTargetList(s, schemas.DisassociateCustomDomainResponse_VpcDNSTargets, v.VpcDNSTargets)
+	}
 }
 func (v *DisassociateCustomDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisassociateCustomDomainResponse, func(s *smithy.Schema) error {

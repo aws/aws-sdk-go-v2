@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -28,6 +30,15 @@ func (c *Client) GetAutomatedDiscoveryConfiguration(ctx context.Context, params 
 
 type GetAutomatedDiscoveryConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetAutomatedDiscoveryConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedDiscoveryConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedDiscoveryConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetAutomatedDiscoveryConfigurationOutput struct {
@@ -76,13 +87,76 @@ type GetAutomatedDiscoveryConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomatedDiscoveryConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedDiscoveryConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedDiscoveryConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnableOrganizationMembers != "" {
+		s.WriteString(schemas.GetAutomatedDiscoveryConfigurationResponse_autoEnableOrganizationMembers, string(v.AutoEnableOrganizationMembers))
+	}
+	if v.ClassificationScopeId != nil {
+		s.WriteString(schemas.GetAutomatedDiscoveryConfigurationResponse_classificationScopeId, *v.ClassificationScopeId)
+	}
+	if v.DisabledAt != nil {
+		s.WriteTime(schemas.GetAutomatedDiscoveryConfigurationResponse_disabledAt, *v.DisabledAt)
+	}
+	if v.FirstEnabledAt != nil {
+		s.WriteTime(schemas.GetAutomatedDiscoveryConfigurationResponse_firstEnabledAt, *v.FirstEnabledAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetAutomatedDiscoveryConfigurationResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.SensitivityInspectionTemplateId != nil {
+		s.WriteString(schemas.GetAutomatedDiscoveryConfigurationResponse_sensitivityInspectionTemplateId, *v.SensitivityInspectionTemplateId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAutomatedDiscoveryConfigurationResponse_status, string(v.Status))
+	}
+}
+func (v *GetAutomatedDiscoveryConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutomatedDiscoveryConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutomatedDiscoveryConfigurationResponse_autoEnableOrganizationMembers:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomatedDiscoveryConfigurationResponse_autoEnableOrganizationMembers, &ev); err != nil {
+				return err
+			}
+			v.AutoEnableOrganizationMembers = types.AutoEnableMode(ev)
+			return nil
+		case schemas.GetAutomatedDiscoveryConfigurationResponse_classificationScopeId:
+			v.ClassificationScopeId = new(string)
+			return d.ReadString(schemas.GetAutomatedDiscoveryConfigurationResponse_classificationScopeId, v.ClassificationScopeId)
+		case schemas.GetAutomatedDiscoveryConfigurationResponse_disabledAt:
+			v.DisabledAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomatedDiscoveryConfigurationResponse_disabledAt, v.DisabledAt)
+		case schemas.GetAutomatedDiscoveryConfigurationResponse_firstEnabledAt:
+			v.FirstEnabledAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomatedDiscoveryConfigurationResponse_firstEnabledAt, v.FirstEnabledAt)
+		case schemas.GetAutomatedDiscoveryConfigurationResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomatedDiscoveryConfigurationResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetAutomatedDiscoveryConfigurationResponse_sensitivityInspectionTemplateId:
+			v.SensitivityInspectionTemplateId = new(string)
+			return d.ReadString(schemas.GetAutomatedDiscoveryConfigurationResponse_sensitivityInspectionTemplateId, v.SensitivityInspectionTemplateId)
+		case schemas.GetAutomatedDiscoveryConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomatedDiscoveryConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutomatedDiscoveryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutomatedDiscoveryConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAutomatedDiscoveryConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedDiscoveryConfiguration, schemas.GetAutomatedDiscoveryConfigurationRequest, schemas.GetAutomatedDiscoveryConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAutomatedDiscoveryConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedDiscoveryConfiguration, schemas.GetAutomatedDiscoveryConfigurationRequest, schemas.GetAutomatedDiscoveryConfigurationResponse), output: &GetAutomatedDiscoveryConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

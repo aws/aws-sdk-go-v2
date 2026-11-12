@@ -69,7 +69,9 @@ func (v *GetMessagingStreamingConfigurationsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GetMessagingStreamingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStreamingConfigurationList(s, schemas.GetMessagingStreamingConfigurationsResponse_StreamingConfigurations, v.StreamingConfigurations)
+	if v.StreamingConfigurations != nil {
+		serializeStreamingConfigurationList(s, schemas.GetMessagingStreamingConfigurationsResponse_StreamingConfigurations, v.StreamingConfigurations)
+	}
 }
 func (v *GetMessagingStreamingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMessagingStreamingConfigurationsResponse, func(s *smithy.Schema) error {

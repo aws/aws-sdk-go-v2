@@ -82,7 +82,9 @@ func (v *CreateAccessLogSubscriptionInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ServiceNetworkLogType != "" {
 		s.WriteString(schemas.CreateAccessLogSubscriptionRequest_serviceNetworkLogType, string(v.ServiceNetworkLogType))
 	}
-	serializeTagMap(s, schemas.CreateAccessLogSubscriptionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAccessLogSubscriptionRequest_tags, v.Tags)
+	}
 }
 func (v *CreateAccessLogSubscriptionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAccessLogSubscriptionRequest, func(s *smithy.Schema) error {

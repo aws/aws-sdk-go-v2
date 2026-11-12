@@ -108,7 +108,9 @@ func (v *CheckNoNewAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.CheckNoNewAccessResponse_message, *v.Message)
 	}
-	serializeReasonSummaryList(s, schemas.CheckNoNewAccessResponse_reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeReasonSummaryList(s, schemas.CheckNoNewAccessResponse_reasons, v.Reasons)
+	}
 	if v.Result != "" {
 		s.WriteString(schemas.CheckNoNewAccessResponse_result, string(v.Result))
 	}

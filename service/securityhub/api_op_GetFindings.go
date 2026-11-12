@@ -77,7 +77,9 @@ func (v *GetFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFindingsRequest_NextToken, *v.NextToken)
 	}
-	serializeSortCriteria(s, schemas.GetFindingsRequest_SortCriteria, v.SortCriteria)
+	if v.SortCriteria != nil {
+		serializeSortCriteria(s, schemas.GetFindingsRequest_SortCriteria, v.SortCriteria)
+	}
 }
 
 type GetFindingsOutput struct {
@@ -103,7 +105,9 @@ func (v *GetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsSecurityFindingList(s, schemas.GetFindingsResponse_Findings, v.Findings)
+	if v.Findings != nil {
+		serializeAwsSecurityFindingList(s, schemas.GetFindingsResponse_Findings, v.Findings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFindingsResponse_NextToken, *v.NextToken)
 	}

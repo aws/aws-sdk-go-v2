@@ -111,7 +111,9 @@ func (v *ListInsightsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInsightList(s, schemas.ListInsightsResponse_Insights, v.Insights)
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.ListInsightsResponse_Insights, v.Insights)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInsightsResponse_NextToken, *v.NextToken)
 	}

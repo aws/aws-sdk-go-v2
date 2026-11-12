@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<StartActivityStreamResponse><StartActivityStreamResult><ApplyImmediately>true</ApplyImmediately><EngineNativeAuditFieldsIncluded>true</EngineNativeAuditFieldsIncluded><KinesisStreamName>__KinesisStreamName__</KinesisStreamName><KmsKeyId>__KmsKeyId__</KmsKeyId><Mode>sync</Mode><Status>stopped</Status></StartActivityStreamResult></StartActivityStreamResponse>

@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DeleteACL
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DeleteACL
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ACLName":"__ACLName__"}
+¿gACLNamek__ACLName__ÿ

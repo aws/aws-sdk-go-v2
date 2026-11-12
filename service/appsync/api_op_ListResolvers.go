@@ -95,7 +95,9 @@ func (v *ListResolversOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResolversResponse_nextToken, *v.NextToken)
 	}
-	serializeResolvers(s, schemas.ListResolversResponse_resolvers, v.Resolvers)
+	if v.Resolvers != nil {
+		serializeResolvers(s, schemas.ListResolversResponse_resolvers, v.Resolvers)
+	}
 }
 func (v *ListResolversOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResolversResponse, func(s *smithy.Schema) error {

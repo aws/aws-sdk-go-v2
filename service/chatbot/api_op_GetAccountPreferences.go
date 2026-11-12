@@ -4,7 +4,9 @@ package chatbot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetAccountPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAccountPreferencesOutput struct {
 
 	// The preferences related to AWS Chatbot usage in the calling AWS account.
@@ -39,13 +50,34 @@ type GetAccountPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPreferencesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountPreferences != nil {
+		s.WriteStruct(schemas.GetAccountPreferencesResult_AccountPreferences)
+		v.AccountPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccountPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountPreferencesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountPreferencesResult_AccountPreferences:
+			v.AccountPreferences = &types.AccountPreferences{}
+			return v.AccountPreferences.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPreferences, schemas.GetAccountPreferencesRequest, schemas.GetAccountPreferencesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPreferences, schemas.GetAccountPreferencesRequest, schemas.GetAccountPreferencesResult), output: &GetAccountPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

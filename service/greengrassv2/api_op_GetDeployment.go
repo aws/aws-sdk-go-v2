@@ -121,7 +121,9 @@ func (v *GetDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentDeploymentSpecifications(s, schemas.GetDeploymentResponse_components, v.Components)
+	if v.Components != nil {
+		serializeComponentDeploymentSpecifications(s, schemas.GetDeploymentResponse_components, v.Components)
+	}
 	if v.CreationTimestamp != nil {
 		s.WriteTime(schemas.GetDeploymentResponse_creationTimestamp, *v.CreationTimestamp)
 	}
@@ -159,7 +161,9 @@ func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RevisionId != nil {
 		s.WriteString(schemas.GetDeploymentResponse_revisionId, *v.RevisionId)
 	}
-	serializeTagMap(s, schemas.GetDeploymentResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDeploymentResponse_tags, v.Tags)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.GetDeploymentResponse_targetArn, *v.TargetArn)
 	}

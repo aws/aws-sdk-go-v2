@@ -4,6 +4,8 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetApplicationAssignmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationAssignmentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationAssignmentConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationAssignmentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.GetApplicationAssignmentConfigurationRequest_ApplicationArn, *v.ApplicationArn)
+	}
+}
+
 type GetApplicationAssignmentConfigurationOutput struct {
 
 	// If AssignmentsRequired is true (default value), users don’t have access to the
@@ -51,13 +65,32 @@ type GetApplicationAssignmentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationAssignmentConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationAssignmentConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationAssignmentConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentRequired != nil {
+		s.WriteBool(schemas.GetApplicationAssignmentConfigurationResponse_AssignmentRequired, *v.AssignmentRequired)
+	}
+}
+func (v *GetApplicationAssignmentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationAssignmentConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationAssignmentConfigurationResponse_AssignmentRequired:
+			v.AssignmentRequired = new(bool)
+			return d.ReadBool(schemas.GetApplicationAssignmentConfigurationResponse_AssignmentRequired, v.AssignmentRequired)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationAssignmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApplicationAssignmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationAssignmentConfiguration, schemas.GetApplicationAssignmentConfigurationRequest, schemas.GetApplicationAssignmentConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetApplicationAssignmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationAssignmentConfiguration, schemas.GetApplicationAssignmentConfigurationRequest, schemas.GetApplicationAssignmentConfigurationResponse), output: &GetApplicationAssignmentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -58,7 +58,9 @@ func (v *SearchAssetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchFilterClause(s, schemas.SearchAssetsInput_FilterClause, v.FilterClause)
+	if v.FilterClause != nil {
+		serializeSearchFilterClause(s, schemas.SearchAssetsInput_FilterClause, v.FilterClause)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchAssetsInput_MaxResults, *v.MaxResults)
 	}
@@ -97,7 +99,9 @@ func (v *SearchAssetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchResultItemList(s, schemas.SearchAssetsOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeSearchResultItemList(s, schemas.SearchAssetsOutput_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchAssetsOutput_NextToken, *v.NextToken)
 	}

@@ -4,6 +4,8 @@ package supportauthz
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supportauthz/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type RejectSupportPermitRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectSupportPermitRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectSupportPermitRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectSupportPermitRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestArn != nil {
+		s.WriteString(schemas.RejectSupportPermitRequestInput_requestArn, *v.RequestArn)
+	}
+}
+
 type RejectSupportPermitRequestOutput struct {
 
 	// The ARN of the rejected permit request.
@@ -47,13 +61,32 @@ type RejectSupportPermitRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectSupportPermitRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectSupportPermitRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectSupportPermitRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestArn != nil {
+		s.WriteString(schemas.RejectSupportPermitRequestOutput_requestArn, *v.RequestArn)
+	}
+}
+func (v *RejectSupportPermitRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectSupportPermitRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectSupportPermitRequestOutput_requestArn:
+			v.RequestArn = new(string)
+			return d.ReadString(schemas.RejectSupportPermitRequestOutput_requestArn, v.RequestArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectSupportPermitRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectSupportPermitRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectSupportPermitRequest, schemas.RejectSupportPermitRequestInput, schemas.RejectSupportPermitRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectSupportPermitRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectSupportPermitRequest, schemas.RejectSupportPermitRequestInput, schemas.RejectSupportPermitRequestOutput), output: &RejectSupportPermitRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

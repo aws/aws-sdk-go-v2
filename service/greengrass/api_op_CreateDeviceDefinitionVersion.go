@@ -55,7 +55,9 @@ func (v *CreateDeviceDefinitionVersionInput) SerializeMembers(s smithy.ShapeSeri
 	if v.DeviceDefinitionId != nil {
 		s.WriteString(schemas.CreateDeviceDefinitionVersionRequest_DeviceDefinitionId, *v.DeviceDefinitionId)
 	}
-	serialize__listOfDevice(s, schemas.CreateDeviceDefinitionVersionRequest_Devices, v.Devices)
+	if v.Devices != nil {
+		serialize__listOfDevice(s, schemas.CreateDeviceDefinitionVersionRequest_Devices, v.Devices)
+	}
 }
 
 type CreateDeviceDefinitionVersionOutput struct {

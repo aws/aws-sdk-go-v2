@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,15 @@ type DescribeAccountAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAttributesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Data returned by the DescribeAccountAttributes action.
 type DescribeAccountAttributesOutput struct {
 
@@ -46,13 +57,31 @@ type DescribeAccountAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountAttributesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountQuotas != nil {
+		serializeAccountQuotaList(s, schemas.AccountAttributesMessage_AccountQuotas, v.AccountQuotas)
+	}
+}
+func (v *DescribeAccountAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountAttributesMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountAttributesMessage_AccountQuotas:
+			return deserializeAccountQuotaList(d, schemas.AccountAttributesMessage_AccountQuotas, &v.AccountQuotas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAccountAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAttributes, schemas.DescribeAccountAttributesMessage, schemas.AccountAttributesMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAccountAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAttributes, schemas.DescribeAccountAttributesMessage, schemas.AccountAttributesMessage), output: &DescribeAccountAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

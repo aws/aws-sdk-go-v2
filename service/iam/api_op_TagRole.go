@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,21 @@ type TagRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleName != nil {
+		s.WriteString(schemas.TagRoleRequest_RoleName, *v.RoleName)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.TagRoleRequest_Tags, v.Tags)
+	}
+}
+
 type TagRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,13 +103,26 @@ type TagRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TagRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagRole, schemas.TagRoleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTagRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagRole, schemas.TagRoleRequest, nil), output: &TagRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

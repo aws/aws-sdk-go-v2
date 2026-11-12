@@ -52,7 +52,9 @@ func (v *BatchGetSessionActionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSessionActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetSessionActionIdentifiers(s, schemas.BatchGetSessionActionRequest_identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeBatchGetSessionActionIdentifiers(s, schemas.BatchGetSessionActionRequest_identifiers, v.Identifiers)
+	}
 }
 
 type BatchGetSessionActionOutput struct {
@@ -80,8 +82,12 @@ func (v *BatchGetSessionActionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSessionActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetSessionActionErrors(s, schemas.BatchGetSessionActionResponse_errors, v.Errors)
-	serializeBatchGetSessionActionItems(s, schemas.BatchGetSessionActionResponse_sessionActions, v.SessionActions)
+	if v.Errors != nil {
+		serializeBatchGetSessionActionErrors(s, schemas.BatchGetSessionActionResponse_errors, v.Errors)
+	}
+	if v.SessionActions != nil {
+		serializeBatchGetSessionActionItems(s, schemas.BatchGetSessionActionResponse_sessionActions, v.SessionActions)
+	}
 }
 func (v *BatchGetSessionActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSessionActionResponse, func(s *smithy.Schema) error {

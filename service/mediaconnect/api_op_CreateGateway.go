@@ -59,11 +59,15 @@ func (v *CreateGatewayInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.CreateGatewayRequest_EgressCidrBlocks, v.EgressCidrBlocks)
+	if v.EgressCidrBlocks != nil {
+		serialize__listOfString(s, schemas.CreateGatewayRequest_EgressCidrBlocks, v.EgressCidrBlocks)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateGatewayRequest_Name, *v.Name)
 	}
-	serialize__listOfGatewayNetwork(s, schemas.CreateGatewayRequest_Networks, v.Networks)
+	if v.Networks != nil {
+		serialize__listOfGatewayNetwork(s, schemas.CreateGatewayRequest_Networks, v.Networks)
+	}
 }
 
 type CreateGatewayOutput struct {

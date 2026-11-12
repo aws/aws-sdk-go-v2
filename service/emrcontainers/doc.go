@@ -3,7 +3,8 @@
 // Package emrcontainers provides the API client, operations, and parameter types
 // for Amazon EMR Containers.
 //
-// Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you
+//	Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you
+//
 // to run open-source big data frameworks on Amazon Elastic Kubernetes Service
 // (Amazon EKS). With this deployment option, you can focus on running analytics
 // workloads while Amazon EMR on EKS builds, configures, and manages containers for

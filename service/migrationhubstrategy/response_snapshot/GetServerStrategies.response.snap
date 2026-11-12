@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"serverStrategies":[{"isPreferred":true,"numberOfApplicationComponents":1,"recommendation":{"strategy":"Rehost","targetDestination":"None specified","transformationTool":{"description":"__Description__","name":"App2Container","tranformationToolInstallationLink":"__TranformationToolInstallationLink__"}},"status":"recommended"},{"isPreferred":true,"numberOfApplicationComponents":1,"recommendation":{"strategy":"Rehost","targetDestination":"None specified","transformationTool":{"description":"__Description__","name":"App2Container","tranformationToolInstallationLink":"__TranformationToolInstallationLink__"}},"status":"recommended"}]}

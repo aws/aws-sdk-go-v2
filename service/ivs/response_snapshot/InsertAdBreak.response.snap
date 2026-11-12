@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"adBreakId":"__AdBreakId__"}
+{"adBreakId":"__AdBreakId__","targetStartAt":"2000-01-01T00:00:00Z"}

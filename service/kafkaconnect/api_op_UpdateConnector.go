@@ -4,12 +4,17 @@ package kafkaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the specified connector. For request body, specify only one parameter:
-// either capacity or connectorConfiguration .
+// Updates the specified connector. In the request body, you can update either the
+// connector's worker setting or its connector configuration, but not both in the
+// same request. To update the worker setting, specify one or more of capacity ,
+// plugins , workerConfiguration , or useDefaultWorkerConfiguration . To update the
+// connector configuration, specify only connectorConfiguration .
 func (c *Client) UpdateConnector(ctx context.Context, params *UpdateConnectorInput, optFns ...func(*Options)) (*UpdateConnectorOutput, error) {
 	if params == nil {
 		params = &UpdateConnectorInput{}
@@ -43,7 +48,77 @@ type UpdateConnectorInput struct {
 	// A map of keys to values that represent the configuration for the connector.
 	ConnectorConfiguration map[string]string
 
+	// Amazon MSK Connect does not currently support specifying multiple plugins as a
+	// list. To use more than one plugin for your connector, you can create a single
+	// custom plugin using a ZIP file that bundles multiple plugins together.
+	//
+	// Specifies which plugin to use for the connector. You must specify a
+	// single-element list containing one customPlugin object. If you don't specify
+	// this parameter, the connector keeps its current plugin.
+	Plugins []types.PluginUpdate
+
+	// Specifies whether the update bypasses connector-level and task-level health
+	// checks. If true , the update skips the health checks. The update stays in effect
+	// even if the connector or its tasks are unhealthy, and Amazon MSK Connect doesn't
+	// roll it back. If false or not specified, the health checks run. If they fail,
+	// MSK Connect automatically rolls the connector back to its previous
+	// configuration, and the update doesn't take effect. To update a connector that is
+	// in the PAUSED state, you must set this parameter to true .
+	SkipHealthValidation bool
+
+	// Specifies whether to switch the connector to the default worker configuration
+	// that Amazon MSK Connect provides. If true , the connector stops using its custom
+	// worker configuration and uses the default worker configuration instead. If false
+	// or not specified, the connector keeps its current worker configuration. You
+	// can't specify both useDefaultWorkerConfiguration and workerConfiguration in the
+	// same request.
+	UseDefaultWorkerConfiguration bool
+
+	// The worker configuration to use with the connector. Specify the Amazon Resource
+	// Name (ARN) and the revision of the worker configuration. You can't specify both
+	// workerConfiguration and useDefaultWorkerConfiguration in the same request. If
+	// you specify neither parameter, the connector keeps its current worker
+	// configuration.
+	WorkerConfiguration *types.WorkerConfigurationUpdate
+
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capacity != nil {
+		s.WriteStruct(schemas.UpdateConnectorRequest_capacity)
+		v.Capacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_connectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorConfiguration != nil {
+		serializeConnectorConfigurationUpdate(s, schemas.UpdateConnectorRequest_connectorConfiguration, v.ConnectorConfiguration)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_currentVersion, *v.CurrentVersion)
+	}
+	if v.Plugins != nil {
+		serialize__listOfPluginUpdate(s, schemas.UpdateConnectorRequest_plugins, v.Plugins)
+	}
+	if v.SkipHealthValidation != false {
+		s.WriteBool(schemas.UpdateConnectorRequest_skipHealthValidation, v.SkipHealthValidation)
+	}
+	if v.UseDefaultWorkerConfiguration != false {
+		s.WriteBool(schemas.UpdateConnectorRequest_useDefaultWorkerConfiguration, v.UseDefaultWorkerConfiguration)
+	}
+	if v.WorkerConfiguration != nil {
+		s.WriteStruct(schemas.UpdateConnectorRequest_workerConfiguration)
+		v.WorkerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type UpdateConnectorOutput struct {
@@ -63,13 +138,48 @@ type UpdateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.UpdateConnectorResponse_connectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorOperationArn != nil {
+		s.WriteString(schemas.UpdateConnectorResponse_connectorOperationArn, *v.ConnectorOperationArn)
+	}
+	if v.ConnectorState != "" {
+		s.WriteString(schemas.UpdateConnectorResponse_connectorState, string(v.ConnectorState))
+	}
+}
+func (v *UpdateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectorResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.UpdateConnectorResponse_connectorArn, v.ConnectorArn)
+		case schemas.UpdateConnectorResponse_connectorOperationArn:
+			v.ConnectorOperationArn = new(string)
+			return d.ReadString(schemas.UpdateConnectorResponse_connectorOperationArn, v.ConnectorOperationArn)
+		case schemas.UpdateConnectorResponse_connectorState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectorResponse_connectorState, &ev); err != nil {
+				return err
+			}
+			v.ConnectorState = types.ConnectorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnector, schemas.UpdateConnectorRequest, schemas.UpdateConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnector, schemas.UpdateConnectorRequest, schemas.UpdateConnectorResponse), output: &UpdateConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

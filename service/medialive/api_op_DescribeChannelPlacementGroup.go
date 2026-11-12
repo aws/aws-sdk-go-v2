@@ -105,7 +105,9 @@ func (v *DescribeChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeChannelPlacementGroupResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupResponse_Channels, v.Channels)
+	if v.Channels != nil {
+		serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupResponse_Channels, v.Channels)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.DescribeChannelPlacementGroupResponse_ClusterId, *v.ClusterId)
 	}
@@ -115,7 +117,9 @@ func (v *DescribeChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeChannelPlacementGroupResponse_Name, *v.Name)
 	}
-	serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupResponse_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupResponse_Nodes, v.Nodes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DescribeChannelPlacementGroupResponse_State, string(v.State))
 	}

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,21 @@ type DescribeQueryInput struct {
 	WorkspaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.DescribeQueryRequest_queryId, *v.QueryId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeQueryRequest_workspaceName, *v.WorkspaceName)
+	}
 }
 
 // Contains the response for the DescribeQuery operation.
@@ -78,13 +95,68 @@ type DescribeQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.DescribeQueryResponse_completedAt, *v.CompletedAt)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeQueryResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.DescribeQueryResponse_queryId, *v.QueryId)
+	}
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.DescribeQueryResponse_statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeQueryResponse_status, string(v.Status))
+	}
+	if v.SubmittedAt != nil {
+		s.WriteTime(schemas.DescribeQueryResponse_submittedAt, *v.SubmittedAt)
+	}
+}
+func (v *DescribeQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQueryResponse_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeQueryResponse_completedAt, v.CompletedAt)
+		case schemas.DescribeQueryResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_errorMessage, v.ErrorMessage)
+		case schemas.DescribeQueryResponse_queryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_queryId, v.QueryId)
+		case schemas.DescribeQueryResponse_statistics:
+			v.Statistics = &types.QueryStatistics{}
+			return v.Statistics.Deserialize(d)
+		case schemas.DescribeQueryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQueryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QueryStatus(ev)
+			return nil
+		case schemas.DescribeQueryResponse_submittedAt:
+			v.SubmittedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeQueryResponse_submittedAt, v.SubmittedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuery, schemas.DescribeQueryRequest, schemas.DescribeQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuery, schemas.DescribeQueryRequest, schemas.DescribeQueryResponse), output: &DescribeQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

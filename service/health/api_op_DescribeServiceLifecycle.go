@@ -94,7 +94,9 @@ func (v *DescribeServiceLifecycleOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeServiceLifecycleResponse_nextToken, *v.NextToken)
 	}
-	serializeServiceLifecycleList(s, schemas.DescribeServiceLifecycleResponse_serviceLifecycles, v.ServiceLifecycles)
+	if v.ServiceLifecycles != nil {
+		serializeServiceLifecycleList(s, schemas.DescribeServiceLifecycleResponse_serviceLifecycles, v.ServiceLifecycles)
+	}
 }
 func (v *DescribeServiceLifecycleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeServiceLifecycleResponse, func(s *smithy.Schema) error {

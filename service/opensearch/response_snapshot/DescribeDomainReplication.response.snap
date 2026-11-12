@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DomainArn":"__DomainArn__","Peers":[{"PeerDomainArn":"__PeerDomainArn__","PeerRole":"PRIMARY","Status":"PENDING_SETUP","StatusMessage":"__StatusMessage__"},{"PeerDomainArn":"__PeerDomainArn__","PeerRole":"PRIMARY","Status":"PENDING_SETUP","StatusMessage":"__StatusMessage__"}],"Role":"PRIMARY"}

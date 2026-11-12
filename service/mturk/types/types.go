@@ -375,7 +375,9 @@ func (v *HIT) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberOfAssignmentsPending != nil {
 		s.WriteInt32(schemas.HIT_NumberOfAssignmentsPending, *v.NumberOfAssignmentsPending)
 	}
-	serializeQualificationRequirementList(s, schemas.HIT_QualificationRequirements, v.QualificationRequirements)
+	if v.QualificationRequirements != nil {
+		serializeQualificationRequirementList(s, schemas.HIT_QualificationRequirements, v.QualificationRequirements)
+	}
 	if v.Question != nil {
 		s.WriteString(schemas.HIT_Question, *v.Question)
 	}
@@ -607,7 +609,9 @@ func (v *NotificationSpecification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Destination != nil {
 		s.WriteString(schemas.NotificationSpecification_Destination, *v.Destination)
 	}
-	serializeEventTypeList(s, schemas.NotificationSpecification_EventTypes, v.EventTypes)
+	if v.EventTypes != nil {
+		serializeEventTypeList(s, schemas.NotificationSpecification_EventTypes, v.EventTypes)
+	}
 	if v.Transport != "" {
 		s.WriteString(schemas.NotificationSpecification_Transport, string(v.Transport))
 	}
@@ -720,7 +724,9 @@ func (v *ParameterMapEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.ParameterMapEntry_Key, *v.Key)
 	}
-	serializeStringList(s, schemas.ParameterMapEntry_Values, v.Values)
+	if v.Values != nil {
+		serializeStringList(s, schemas.ParameterMapEntry_Values, v.Values)
+	}
 }
 func (v *ParameterMapEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ParameterMapEntry, func(s *smithy.Schema) error {
@@ -760,8 +766,12 @@ func (v *PolicyParameter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.PolicyParameter_Key, *v.Key)
 	}
-	serializeParameterMapEntryList(s, schemas.PolicyParameter_MapEntries, v.MapEntries)
-	serializeStringList(s, schemas.PolicyParameter_Values, v.Values)
+	if v.MapEntries != nil {
+		serializeParameterMapEntryList(s, schemas.PolicyParameter_MapEntries, v.MapEntries)
+	}
+	if v.Values != nil {
+		serializeStringList(s, schemas.PolicyParameter_Values, v.Values)
+	}
 }
 func (v *PolicyParameter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolicyParameter, func(s *smithy.Schema) error {
@@ -1045,8 +1055,12 @@ func (v *QualificationRequirement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Comparator != "" {
 		s.WriteString(schemas.QualificationRequirement_Comparator, string(v.Comparator))
 	}
-	serializeIntegerList(s, schemas.QualificationRequirement_IntegerValues, v.IntegerValues)
-	serializeLocaleList(s, schemas.QualificationRequirement_LocaleValues, v.LocaleValues)
+	if v.IntegerValues != nil {
+		serializeIntegerList(s, schemas.QualificationRequirement_IntegerValues, v.IntegerValues)
+	}
+	if v.LocaleValues != nil {
+		serializeLocaleList(s, schemas.QualificationRequirement_LocaleValues, v.LocaleValues)
+	}
 	if v.QualificationTypeId != nil {
 		s.WriteString(schemas.QualificationRequirement_QualificationTypeId, *v.QualificationTypeId)
 	}
@@ -1384,7 +1398,9 @@ func (v *ReviewPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReviewPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyParameterList(s, schemas.ReviewPolicy_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePolicyParameterList(s, schemas.ReviewPolicy_Parameters, v.Parameters)
+	}
 	if v.PolicyName != nil {
 		s.WriteString(schemas.ReviewPolicy_PolicyName, *v.PolicyName)
 	}
@@ -1422,8 +1438,12 @@ func (v *ReviewReport) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReviewReport) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReviewActionDetailList(s, schemas.ReviewReport_ReviewActions, v.ReviewActions)
-	serializeReviewResultDetailList(s, schemas.ReviewReport_ReviewResults, v.ReviewResults)
+	if v.ReviewActions != nil {
+		serializeReviewActionDetailList(s, schemas.ReviewReport_ReviewActions, v.ReviewActions)
+	}
+	if v.ReviewResults != nil {
+		serializeReviewResultDetailList(s, schemas.ReviewReport_ReviewResults, v.ReviewResults)
+	}
 }
 func (v *ReviewReport) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReviewReport, func(s *smithy.Schema) error {

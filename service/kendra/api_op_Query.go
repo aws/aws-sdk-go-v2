@@ -183,8 +183,12 @@ func (v *QueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CollapseConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentRelevanceOverrideConfigurationList(s, schemas.QueryRequest_DocumentRelevanceOverrideConfigurations, v.DocumentRelevanceOverrideConfigurations)
-	serializeFacetList(s, schemas.QueryRequest_Facets, v.Facets)
+	if v.DocumentRelevanceOverrideConfigurations != nil {
+		serializeDocumentRelevanceOverrideConfigurationList(s, schemas.QueryRequest_DocumentRelevanceOverrideConfigurations, v.DocumentRelevanceOverrideConfigurations)
+	}
+	if v.Facets != nil {
+		serializeFacetList(s, schemas.QueryRequest_Facets, v.Facets)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.QueryRequest_IndexId, *v.IndexId)
 	}
@@ -200,13 +204,17 @@ func (v *QueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryText != nil {
 		s.WriteString(schemas.QueryRequest_QueryText, *v.QueryText)
 	}
-	serializeDocumentAttributeKeyList(s, schemas.QueryRequest_RequestedDocumentAttributes, v.RequestedDocumentAttributes)
+	if v.RequestedDocumentAttributes != nil {
+		serializeDocumentAttributeKeyList(s, schemas.QueryRequest_RequestedDocumentAttributes, v.RequestedDocumentAttributes)
+	}
 	if v.SortingConfiguration != nil {
 		s.WriteStruct(schemas.QueryRequest_SortingConfiguration)
 		v.SortingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSortingConfigurationList(s, schemas.QueryRequest_SortingConfigurations, v.SortingConfigurations)
+	if v.SortingConfigurations != nil {
+		serializeSortingConfigurationList(s, schemas.QueryRequest_SortingConfigurations, v.SortingConfigurations)
+	}
 	if v.SpellCorrectionConfiguration != nil {
 		s.WriteStruct(schemas.QueryRequest_SpellCorrectionConfiguration)
 		v.SpellCorrectionConfiguration.SerializeMembers(s)
@@ -272,17 +280,27 @@ func (v *QueryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFacetResultList(s, schemas.QueryResult_FacetResults, v.FacetResults)
-	serializeFeaturedResultsItemList(s, schemas.QueryResult_FeaturedResultsItems, v.FeaturedResultsItems)
+	if v.FacetResults != nil {
+		serializeFacetResultList(s, schemas.QueryResult_FacetResults, v.FacetResults)
+	}
+	if v.FeaturedResultsItems != nil {
+		serializeFeaturedResultsItemList(s, schemas.QueryResult_FeaturedResultsItems, v.FeaturedResultsItems)
+	}
 	if v.QueryId != nil {
 		s.WriteString(schemas.QueryResult_QueryId, *v.QueryId)
 	}
-	serializeQueryResultItemList(s, schemas.QueryResult_ResultItems, v.ResultItems)
-	serializeSpellCorrectedQueryList(s, schemas.QueryResult_SpellCorrectedQueries, v.SpellCorrectedQueries)
+	if v.ResultItems != nil {
+		serializeQueryResultItemList(s, schemas.QueryResult_ResultItems, v.ResultItems)
+	}
+	if v.SpellCorrectedQueries != nil {
+		serializeSpellCorrectedQueryList(s, schemas.QueryResult_SpellCorrectedQueries, v.SpellCorrectedQueries)
+	}
 	if v.TotalNumberOfResults != nil {
 		s.WriteInt32(schemas.QueryResult_TotalNumberOfResults, *v.TotalNumberOfResults)
 	}
-	serializeWarningList(s, schemas.QueryResult_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarningList(s, schemas.QueryResult_Warnings, v.Warnings)
+	}
 }
 func (v *QueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryResult, func(s *smithy.Schema) error {

@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/RebuildWorkspaces
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.RebuildWorkspaces
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"RebuildWorkspaceRequests":[{"WorkspaceId":"__WorkspaceId__"},{"WorkspaceId":"__WorkspaceId__"}]}
+¿xRebuildWorkspaceRequestsŸ¿kWorkspaceIdo__WorkspaceId__ÿ¿kWorkspaceIdo__WorkspaceId__ÿÿÿ

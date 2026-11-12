@@ -61,7 +61,9 @@ func (v *ListTestTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTestTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTestTemplateSummaryList(s, schemas.ListTestTemplatesResponse_testTemplates, v.TestTemplates)
+	if v.TestTemplates != nil {
+		serializeTestTemplateSummaryList(s, schemas.ListTestTemplatesResponse_testTemplates, v.TestTemplates)
+	}
 }
 func (v *ListTestTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTestTemplatesResponse, func(s *smithy.Schema) error {

@@ -63,7 +63,9 @@ func (v *UpdateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceGroupName != nil {
 		s.WriteString(schemas.UpdateComponentRequest_ResourceGroupName, *v.ResourceGroupName)
 	}
-	serializeResourceList(s, schemas.UpdateComponentRequest_ResourceList, v.ResourceList)
+	if v.ResourceList != nil {
+		serializeResourceList(s, schemas.UpdateComponentRequest_ResourceList, v.ResourceList)
+	}
 }
 
 type UpdateComponentOutput struct {

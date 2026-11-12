@@ -89,7 +89,9 @@ func (v *CreateContentAssociationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateContentAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentAssociationContents(s, schemas.CreateContentAssociationRequest_association, v.Association)
+	if v.Association != nil {
+		serializeContentAssociationContents(s, schemas.CreateContentAssociationRequest_association, v.Association)
+	}
 	if v.AssociationType != "" {
 		s.WriteString(schemas.CreateContentAssociationRequest_associationType, string(v.AssociationType))
 	}
@@ -102,7 +104,9 @@ func (v *CreateContentAssociationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.CreateContentAssociationRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeTags(s, schemas.CreateContentAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateContentAssociationRequest_tags, v.Tags)
+	}
 }
 
 type CreateContentAssociationOutput struct {

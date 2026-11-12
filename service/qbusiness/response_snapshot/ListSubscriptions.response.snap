@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","subscriptions":[{"currentSubscription":{"type":"Q_LITE"},"nextSubscription":{"type":"Q_LITE"},"principal":{"user":"__SubscriptionPrincipalMemberUser__"},"subscriptionArn":"__SubscriptionArn__","subscriptionId":"__SubscriptionId__"},{"currentSubscription":{"type":"Q_LITE"},"nextSubscription":{"type":"Q_LITE"},"principal":{"user":"__SubscriptionPrincipalMemberUser__"},"subscriptionArn":"__SubscriptionArn__","subscriptionId":"__SubscriptionId__"}]}

@@ -1176,6 +1176,17 @@ func TestCheckResponseSnapshot_DescribeDomainChangeProgress(t *testing.T) {
 			ConfigChangeStatus: types.ConfigChangeStatus("Pending"),
 			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			InitiatedBy:        types.InitiatedBy("CUSTOMER"),
+			ClonedBlueGreenUpgradeDetails: &types.ClonedBlueGreenUpgradeDetails{
+				TrafficSplit: &types.TrafficPercents{
+					PrimaryReadTrafficPercent: 1,
+					CloneReadTrafficPercent:   1,
+				},
+				ScheduledAction: &types.ClonedBlueGreenScheduledAction{
+					Action:        types.ClonedBlueGreenScheduledActionType("AutomaticCutoverToPrimaryCluster"),
+					ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				RetentionInHours: ptr.Int32(1),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeDomainChangeProgress.response")
@@ -3267,6 +3278,58 @@ func TestCheckResponseSnapshot_StartElasticsearchServiceSoftwareUpdate(t *testin
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateClone(t *testing.T) {
+	want := &UpdateCloneOutput{
+		DomainName: ptr.String("__DomainName__"),
+		ChangeId:   ptr.String("__ChangeId__"),
+		CutoverOptions: &types.CutoverOptions{
+			Target: types.CutoverTarget("ClonedCluster"),
+			Status: types.CutoverStatus("InProgress"),
+		},
+		TrafficSplitOptions: &types.TrafficSplitOptions{
+			Current: &types.TrafficPercents{
+				PrimaryReadTrafficPercent: 1,
+				CloneReadTrafficPercent:   1,
+			},
+			Target: &types.TrafficPercents{
+				PrimaryReadTrafficPercent: 1,
+				CloneReadTrafficPercent:   1,
+			},
+			Status: types.TrafficSplitStatus("InProgress"),
+		},
+		RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+			Value: 1,
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateClone.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateClone(context.Background(), &UpdateCloneInput{
+		DomainName: ptr.String("__DomainName__"),
+		TrafficSplitOptions: &types.TrafficSplitRequestOptions{
+			Strategy:                types.TrafficStrategy("ShiftReadTrafficPercent"),
+			CloneReadTrafficPercent: 1,
+		},
+		CutoverOptions: &types.CutoverRequestOptions{
+			Target: types.CutoverTarget("ClonedCluster"),
+		},
+		RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+			Value: 1,
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateClone.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateElasticsearchDomainConfig(t *testing.T) {
 	want := &UpdateElasticsearchDomainConfigOutput{
 		DomainConfig: &types.ElasticsearchDomainConfig{
@@ -3825,6 +3888,14 @@ func TestCheckResponseSnapshot_UpgradeElasticsearchDomain(t *testing.T) {
 		DomainName:       ptr.String("__DomainName__"),
 		TargetVersion:    ptr.String("__TargetVersion__"),
 		PerformCheckOnly: ptr.Bool(true),
+		DeploymentStrategyOptions: &types.DeploymentStrategyOverrideOptions{
+			DeploymentStrategy: types.DeploymentStrategyOverride("ClonedBlueGreen"),
+			ClonedBlueGreenOptions: &types.ClonedBlueGreenOptions{
+				RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+					Value: 1,
+				},
+			},
+		},
 		ChangeProgressDetails: &types.ChangeProgressDetails{
 			ChangeId:           ptr.String("__ChangeId__"),
 			Message:            ptr.String("__Message__"),
@@ -3846,6 +3917,14 @@ func TestCheckResponseSnapshot_UpgradeElasticsearchDomain(t *testing.T) {
 		DomainName:       ptr.String("__DomainName__"),
 		TargetVersion:    ptr.String("__TargetVersion__"),
 		PerformCheckOnly: ptr.Bool(true),
+		DeploymentStrategyOptions: &types.DeploymentStrategyOverrideOptions{
+			DeploymentStrategy: types.DeploymentStrategyOverride("ClonedBlueGreen"),
+			ClonedBlueGreenOptions: &types.ClonedBlueGreenOptions{
+				RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+					Value: 1,
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

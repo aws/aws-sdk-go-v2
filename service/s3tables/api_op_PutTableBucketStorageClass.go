@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type PutTableBucketStorageClassInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableBucketStorageClassInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTableBucketStorageClassRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableBucketStorageClassInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageClassConfiguration != nil {
+		s.WriteStruct(schemas.PutTableBucketStorageClassRequest_storageClassConfiguration)
+		v.StorageClassConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.PutTableBucketStorageClassRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type PutTableBucketStorageClassOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +71,26 @@ type PutTableBucketStorageClassOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableBucketStorageClassOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableBucketStorageClassOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTableBucketStorageClassOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTableBucketStorageClassMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTableBucketStorageClass{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableBucketStorageClass, schemas.PutTableBucketStorageClassRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTableBucketStorageClass{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableBucketStorageClass, schemas.PutTableBucketStorageClassRequest, nil), output: &PutTableBucketStorageClassOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

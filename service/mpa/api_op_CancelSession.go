@@ -4,6 +4,8 @@ package mpa
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type CancelSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionArn != nil {
+		s.WriteString(schemas.CancelSessionRequest_SessionArn, *v.SessionArn)
+	}
+}
+
 type CancelSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type CancelSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSession, schemas.CancelSessionRequest, schemas.CancelSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSession, schemas.CancelSessionRequest, schemas.CancelSessionResponse), output: &CancelSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

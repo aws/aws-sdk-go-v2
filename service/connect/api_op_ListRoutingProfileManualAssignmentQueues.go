@@ -136,7 +136,9 @@ func (v *ListRoutingProfileManualAssignmentQueuesOutput) SerializeMembers(s smit
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoutingProfileManualAssignmentQueuesResponse_NextToken, *v.NextToken)
 	}
-	serializeRoutingProfileManualAssignmentQueueConfigSummaryList(s, schemas.ListRoutingProfileManualAssignmentQueuesResponse_RoutingProfileManualAssignmentQueueConfigSummaryList, v.RoutingProfileManualAssignmentQueueConfigSummaryList)
+	if v.RoutingProfileManualAssignmentQueueConfigSummaryList != nil {
+		serializeRoutingProfileManualAssignmentQueueConfigSummaryList(s, schemas.ListRoutingProfileManualAssignmentQueuesResponse_RoutingProfileManualAssignmentQueueConfigSummaryList, v.RoutingProfileManualAssignmentQueueConfigSummaryList)
+	}
 }
 func (v *ListRoutingProfileManualAssignmentQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoutingProfileManualAssignmentQueuesResponse, func(s *smithy.Schema) error {

@@ -67,7 +67,9 @@ func (v *CreateResiliencyGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResiliencyGroupName != nil {
 		s.WriteString(schemas.CreateResiliencyGroupRequest_resiliencyGroupName, *v.ResiliencyGroupName)
 	}
-	serializeTagList(s, schemas.CreateResiliencyGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResiliencyGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateResiliencyGroupOutput struct {
@@ -119,6 +121,9 @@ func (c *Client) addOperationCreateResiliencyGroupMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

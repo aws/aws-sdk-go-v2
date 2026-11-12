@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type CreateDataRetentionBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataRetentionBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataRetentionBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataRetentionBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateDataRetentionBotRequest_networkId, *v.NetworkId)
+	}
+}
+
 type CreateDataRetentionBotOutput struct {
 
 	// A message indicating that the data retention bot was successfully provisioned.
@@ -46,13 +60,32 @@ type CreateDataRetentionBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataRetentionBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataRetentionBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataRetentionBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateDataRetentionBotResponse_message, *v.Message)
+	}
+}
+func (v *CreateDataRetentionBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataRetentionBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataRetentionBotResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateDataRetentionBotResponse_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataRetentionBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataRetentionBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataRetentionBot, schemas.CreateDataRetentionBotRequest, schemas.CreateDataRetentionBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataRetentionBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataRetentionBot, schemas.CreateDataRetentionBotRequest, schemas.CreateDataRetentionBotResponse), output: &CreateDataRetentionBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

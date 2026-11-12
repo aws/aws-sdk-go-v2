@@ -122,6 +122,18 @@ func TestCheckSnapshot_BatchGetVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAccessPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAccessPolicy(context.Background(), nil, func(o *Options) {
@@ -163,6 +175,30 @@ func TestCheckSnapshot_CreateIndex(t *testing.T) {
 	_, err := svc.CreateIndex(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateIngestionStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIngestionStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIngestionStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -266,6 +302,18 @@ func TestCheckSnapshot_DeleteIndex(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIngestionStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIngestionStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIngestionStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -350,6 +398,30 @@ func TestCheckSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIngestionStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestionStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIngestionStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPoliciesStats(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPoliciesStats(context.Background(), nil, func(o *Options) {
@@ -415,6 +487,30 @@ func TestCheckSnapshot_ListCollections(t *testing.T) {
 	_, err := svc.ListCollections(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCollections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIngestionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIngestionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIngestionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIngestionStreams(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIngestionStreams(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIngestionStreams")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -673,6 +769,18 @@ func TestUpdateSnapshot_BatchGetVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAccessPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAccessPolicy(context.Background(), nil, func(o *Options) {
@@ -714,6 +822,30 @@ func TestUpdateSnapshot_CreateIndex(t *testing.T) {
 	_, err := svc.CreateIndex(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateIngestionStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIngestionStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIngestionStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -817,6 +949,18 @@ func TestUpdateSnapshot_DeleteIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIngestionStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIngestionStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIngestionStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -901,6 +1045,30 @@ func TestUpdateSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIngestionStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestionStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIngestionStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPoliciesStats(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPoliciesStats(context.Background(), nil, func(o *Options) {
@@ -966,6 +1134,30 @@ func TestUpdateSnapshot_ListCollections(t *testing.T) {
 	_, err := svc.ListCollections(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCollections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIngestionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIngestionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIngestionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIngestionStreams(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIngestionStreams(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIngestionStreams")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

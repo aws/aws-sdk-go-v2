@@ -58,6 +58,9 @@ type UpdateTaskTemplateInput struct {
 	// a ContactFlowId or a field of type QUICK_CONNECT .
 	ContactFlowId *string
 
+	// The event hooks that are set on tasks created by using this template.
+	ContactHooks *types.TaskTemplateContactHooks
+
 	// The default values for fields when a task is created by referencing this
 	// template.
 	Defaults *types.TaskTemplateDefaults
@@ -104,6 +107,11 @@ func (v *UpdateTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactFlowId != nil {
 		s.WriteString(schemas.UpdateTaskTemplateRequest_ContactFlowId, *v.ContactFlowId)
 	}
+	if v.ContactHooks != nil {
+		s.WriteStruct(schemas.UpdateTaskTemplateRequest_ContactHooks)
+		v.ContactHooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Defaults != nil {
 		s.WriteStruct(schemas.UpdateTaskTemplateRequest_Defaults)
 		v.Defaults.SerializeMembers(s)
@@ -112,7 +120,9 @@ func (v *UpdateTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateTaskTemplateRequest_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateRequest_Fields, v.Fields)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateTaskTemplateRequest_InstanceId, *v.InstanceId)
 	}
@@ -145,6 +155,9 @@ type UpdateTaskTemplateOutput struct {
 	// The identifier of the flow that runs by default when a task is created by
 	// referencing this template.
 	ContactFlowId *string
+
+	// The event hooks that are set on tasks created by using this template.
+	ContactHooks *types.TaskTemplateContactHooks
 
 	// The timestamp when the task template was created.
 	CreatedTime *time.Time
@@ -207,6 +220,11 @@ func (v *UpdateTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactFlowId != nil {
 		s.WriteString(schemas.UpdateTaskTemplateResponse_ContactFlowId, *v.ContactFlowId)
 	}
+	if v.ContactHooks != nil {
+		s.WriteStruct(schemas.UpdateTaskTemplateResponse_ContactHooks)
+		v.ContactHooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.UpdateTaskTemplateResponse_CreatedTime, *v.CreatedTime)
 	}
@@ -218,7 +236,9 @@ func (v *UpdateTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateTaskTemplateResponse_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateResponse_Fields, v.Fields)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateTaskTemplateResponse_Id, *v.Id)
 	}
@@ -250,6 +270,9 @@ func (v *UpdateTaskTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.UpdateTaskTemplateResponse_ContactFlowId:
 			v.ContactFlowId = new(string)
 			return d.ReadString(schemas.UpdateTaskTemplateResponse_ContactFlowId, v.ContactFlowId)
+		case schemas.UpdateTaskTemplateResponse_ContactHooks:
+			v.ContactHooks = &types.TaskTemplateContactHooks{}
+			return v.ContactHooks.Deserialize(d)
 		case schemas.UpdateTaskTemplateResponse_CreatedTime:
 			v.CreatedTime = new(time.Time)
 			return d.ReadTime(schemas.UpdateTaskTemplateResponse_CreatedTime, v.CreatedTime)

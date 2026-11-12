@@ -60,7 +60,9 @@ func (v *RemoveTagsFromVaultInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RemoveTagsFromVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagKeyList(s, schemas.RemoveTagsFromVaultInput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.RemoveTagsFromVaultInput_TagKeys, v.TagKeys)
+	}
 	if v.AccountId != nil {
 		s.WriteString(schemas.RemoveTagsFromVaultInput_accountId, *v.AccountId)
 	}

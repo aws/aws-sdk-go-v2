@@ -7,10 +7,10 @@ package route53domains
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -186,25 +186,12 @@ func serdeBodyEqual(got, expected []byte) bool {
 	if len(got) == 0 || len(expected) == 0 {
 		return bytes.Equal(got, expected)
 	}
-	gv, gok := serdeDecodeJSON(got)
-	ev, eok := serdeDecodeJSON(expected)
-	if !gok || !eok {
+	gv, gerr := smithycbor.Decode(got)
+	ev, eerr := smithycbor.Decode(expected)
+	if gerr != nil || eerr != nil {
 		return bytes.Equal(got, expected)
 	}
 	return reflect.DeepEqual(gv, ev)
-}
-
-// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
-// json.Number rather than float64 so a large int64 doesn't lose precision (which would
-// mask a real difference) and so numeric formatting differences still show up.
-func serdeDecodeJSON(b []byte) (any, bool) {
-	d := json.NewDecoder(bytes.NewReader(b))
-	d.UseNumber()
-	var v any
-	if err := d.Decode(&v); err != nil {
-		return nil, false
-	}
-	return v, true
 }
 func TestCheckRequestSnapshot_AcceptDomainTransferFromAnotherAwsAccount(t *testing.T) {
 	input := &AcceptDomainTransferFromAnotherAwsAccountInput{
@@ -1102,6 +1089,37 @@ func TestCheckRequestSnapshot_ResendOperationAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResendOperationAuthorization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RestoreDomain(t *testing.T) {
+	input := &RestoreDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreDomain(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreDomain"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2484,6 +2502,37 @@ func TestUpdateRequestSnapshot_ResendOperationAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResendOperationAuthorization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RestoreDomain(t *testing.T) {
+	input := &RestoreDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreDomain(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreDomain"); err != nil {
 		t.Fatal(err)
 	}
 }

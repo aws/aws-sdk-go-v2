@@ -91,7 +91,9 @@ func (v *PutConfigurationRecorderInput) SerializeMembers(s smithy.ShapeSerialize
 		v.ConfigurationRecorder.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.PutConfigurationRecorderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutConfigurationRecorderRequest_Tags, v.Tags)
+	}
 }
 
 type PutConfigurationRecorderOutput struct {

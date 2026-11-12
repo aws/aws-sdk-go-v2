@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type StopUploadJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopUploadJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopUploadJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopUploadJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.StopUploadJobRequest_DomainName, *v.DomainName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StopUploadJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopUploadJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type StopUploadJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopUploadJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopUploadJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopUploadJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopUploadJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopUploadJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopUploadJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopUploadJob, schemas.StopUploadJobRequest, schemas.StopUploadJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopUploadJob, schemas.StopUploadJobRequest, schemas.StopUploadJobResponse), output: &StopUploadJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

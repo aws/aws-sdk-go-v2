@@ -1,0 +1,20 @@
+200
+Content-Type: __ContentType__
+X-Amz-Lex-Active-Contexts: X19BY3RpdmVDb250ZXh0c19f
+X-Amz-Lex-Alternative-Intents: X19BbHRlcm5hdGl2ZUludGVudHNfXw==
+X-Amz-Lex-Bot-Version: __BotVersion__
+X-Amz-Lex-Dialog-State: ElicitIntent
+X-Amz-Lex-Encoded-Input-Transcript: __EncodedInputTranscript__
+X-Amz-Lex-Encoded-Message: __EncodedMessage__
+X-Amz-Lex-Input-Transcript: __InputTranscript__
+X-Amz-Lex-Intent-Name: __IntentName__
+X-Amz-Lex-Message: __Message__
+X-Amz-Lex-Message-Format: PlainText
+X-Amz-Lex-Nlu-Intent-Confidence: X19ObHVJbnRlbnRDb25maWRlbmNlX18=
+X-Amz-Lex-Sentiment: __SentimentResponse__
+X-Amz-Lex-Session-Attributes: X19TZXNzaW9uQXR0cmlidXRlc19f
+X-Amz-Lex-Session-Id: __SessionId__
+X-Amz-Lex-Slot-To-Elicit: __SlotToElicit__
+X-Amz-Lex-Slots: X19TbG90c19f
+
+__AudioStream__

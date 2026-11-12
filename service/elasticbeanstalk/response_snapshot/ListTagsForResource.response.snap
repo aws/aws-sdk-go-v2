@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListTagsForResourceResponse><ListTagsForResourceResult><ResourceArn>__ResourceArn__</ResourceArn><ResourceTags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></ResourceTags></ListTagsForResourceResult></ListTagsForResourceResponse>

@@ -64,7 +64,9 @@ func (v *ListDataTableAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataTableAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeIds(s, schemas.ListDataTableAttributesRequest_AttributeIds, v.AttributeIds)
+	if v.AttributeIds != nil {
+		serializeAttributeIds(s, schemas.ListDataTableAttributesRequest_AttributeIds, v.AttributeIds)
+	}
 	if v.DataTableId != nil {
 		s.WriteString(schemas.ListDataTableAttributesRequest_DataTableId, *v.DataTableId)
 	}
@@ -103,7 +105,9 @@ func (v *ListDataTableAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataTableAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeList(s, schemas.ListDataTableAttributesResponse_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeList(s, schemas.ListDataTableAttributesResponse_Attributes, v.Attributes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataTableAttributesResponse_NextToken, *v.NextToken)
 	}

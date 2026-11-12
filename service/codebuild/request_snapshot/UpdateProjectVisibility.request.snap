@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/UpdateProjectVisibility
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.UpdateProjectVisibility
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"projectArn":"__ProjectArn__","projectVisibility":"PUBLIC_READ","resourceAccessRole":"__ResourceAccessRole__"}
+¿jprojectArnn__ProjectArn__qprojectVisibilitykPUBLIC_READrresourceAccessRolev__ResourceAccessRole__ÿ

@@ -74,7 +74,9 @@ func (v *CreateEphemerisInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.CreateEphemerisRequest_enabled, *v.Enabled)
 	}
-	serializeEphemerisData(s, schemas.CreateEphemerisRequest_ephemeris, v.Ephemeris)
+	if v.Ephemeris != nil {
+		serializeEphemerisData(s, schemas.CreateEphemerisRequest_ephemeris, v.Ephemeris)
+	}
 	if v.ExpirationTime != nil {
 		s.WriteTime(schemas.CreateEphemerisRequest_expirationTime, *v.ExpirationTime)
 	}
@@ -90,7 +92,9 @@ func (v *CreateEphemerisInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SatelliteId != nil {
 		s.WriteString(schemas.CreateEphemerisRequest_satelliteId, *v.SatelliteId)
 	}
-	serializeTagsMap(s, schemas.CreateEphemerisRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateEphemerisRequest_tags, v.Tags)
+	}
 }
 
 type CreateEphemerisOutput struct {

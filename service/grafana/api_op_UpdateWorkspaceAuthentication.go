@@ -63,7 +63,9 @@ func (v *UpdateWorkspaceAuthenticationInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateWorkspaceAuthenticationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationProviders(s, schemas.UpdateWorkspaceAuthenticationRequest_authenticationProviders, v.AuthenticationProviders)
+	if v.AuthenticationProviders != nil {
+		serializeAuthenticationProviders(s, schemas.UpdateWorkspaceAuthenticationRequest_authenticationProviders, v.AuthenticationProviders)
+	}
 	if v.SamlConfiguration != nil {
 		s.WriteStruct(schemas.UpdateWorkspaceAuthenticationRequest_samlConfiguration)
 		v.SamlConfiguration.SerializeMembers(s)

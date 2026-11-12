@@ -77,7 +77,9 @@ func (v *CreateHoursOfOperationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateHoursOfOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHoursOfOperationConfigList(s, schemas.CreateHoursOfOperationRequest_Config, v.Config)
+	if v.Config != nil {
+		serializeHoursOfOperationConfigList(s, schemas.CreateHoursOfOperationRequest_Config, v.Config)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateHoursOfOperationRequest_Description, *v.Description)
 	}
@@ -87,8 +89,12 @@ func (v *CreateHoursOfOperationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateHoursOfOperationRequest_Name, *v.Name)
 	}
-	serializeParentHoursOfOperationConfigList(s, schemas.CreateHoursOfOperationRequest_ParentHoursOfOperationConfigs, v.ParentHoursOfOperationConfigs)
-	serializeTagMap(s, schemas.CreateHoursOfOperationRequest_Tags, v.Tags)
+	if v.ParentHoursOfOperationConfigs != nil {
+		serializeParentHoursOfOperationConfigList(s, schemas.CreateHoursOfOperationRequest_ParentHoursOfOperationConfigs, v.ParentHoursOfOperationConfigs)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateHoursOfOperationRequest_Tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateHoursOfOperationRequest_TimeZone, *v.TimeZone)
 	}

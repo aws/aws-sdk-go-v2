@@ -558,13 +558,8 @@ func (w *ImageDeletedWaiter) WaitForOutput(ctx context.Context, params *Describe
 func imageDeletedStateRetryable(ctx context.Context, input *DescribeImageInput, output *DescribeImageOutput, err error) (bool, error) {
 
 	if err != nil {
-		var apiErr smithy.APIError
-		ok := errors.As(err, &apiErr)
-		if !ok {
-			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
-		}
-
-		if "ResourceNotFoundException" == apiErr.ErrorCode() {
+		var errorType *types.ResourceNotFound
+		if errors.As(err, &errorType) {
 			return false, nil
 		}
 	}

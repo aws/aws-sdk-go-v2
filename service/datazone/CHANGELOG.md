@@ -1,3 +1,54 @@
+# v1.84.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.84.0 (2026-11-09)
+
+* **Feature**: Adds support for Workday Data Connect and Workday Live Data Query connection types in Amazon DataZone connection APIs.
+
+# v1.83.0 (2026-11-06)
+
+* **Feature**: Adds support for updating OAuth 2.0 connection settings with UpdateConnection.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.82.4 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.82.3 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.82.2 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
+# v1.82.1 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.82.0 (2026-10-22)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.81.0 (2026-10-21)
+
+* **Feature**: Added custom designations support with new CRUD APIs. The designation field in project membership and policy grant APIs supports a new enum for custom designations. These APIs also support a new field for custom designation id.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.80.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.79.0 (2026-10-19)
+
+* **Feature**: Adds SDK and CLI support for the Iceberg REST catalog connection types already available in Amazon SageMaker Unified Studio - ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, and DATABRICKSICEBERGRESTCATALOG.
+
 # v1.78.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

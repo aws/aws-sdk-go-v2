@@ -83,7 +83,9 @@ func (v *GetUsagePlansOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUsagePlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfUsagePlan(s, schemas.UsagePlans_items, v.Items)
+	if v.Items != nil {
+		serializeListOfUsagePlan(s, schemas.UsagePlans_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.UsagePlans_position, *v.Position)
 	}

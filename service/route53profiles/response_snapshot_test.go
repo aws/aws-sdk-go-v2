@@ -119,6 +119,7 @@ func TestCheckResponseSnapshot_AssociateProfile(t *testing.T) {
 			StatusMessage:    ptr.String("__StatusMessage__"),
 			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssociateProfile.response")
@@ -143,6 +144,7 @@ func TestCheckResponseSnapshot_AssociateProfile(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -281,6 +283,7 @@ func TestCheckResponseSnapshot_DisassociateProfile(t *testing.T) {
 			StatusMessage:    ptr.String("__StatusMessage__"),
 			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisassociateProfile.response")
@@ -385,6 +388,7 @@ func TestCheckResponseSnapshot_GetProfileAssociation(t *testing.T) {
 			StatusMessage:    ptr.String("__StatusMessage__"),
 			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetProfileAssociation.response")
@@ -454,6 +458,7 @@ func TestCheckResponseSnapshot_ListProfileAssociations(t *testing.T) {
 				StatusMessage:    ptr.String("__StatusMessage__"),
 				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Priority:         ptr.Int32(1),
 			},
 			{
 				Id:               ptr.String("__Id__"),
@@ -465,6 +470,7 @@ func TestCheckResponseSnapshot_ListProfileAssociations(t *testing.T) {
 				StatusMessage:    ptr.String("__StatusMessage__"),
 				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Priority:         ptr.Int32(1),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -534,6 +540,7 @@ func TestCheckResponseSnapshot_ListProfileResourceAssociations(t *testing.T) {
 	got, err := svc.ListProfileResourceAssociations(context.Background(), &ListProfileResourceAssociationsInput{
 		ProfileId:    ptr.String("__ProfileId__"),
 		ResourceType: ptr.String("__ResourceType__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
 		MaxResults:   ptr.Int32(1),
 		NextToken:    ptr.String("__NextToken__"),
 	})
@@ -657,6 +664,42 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateProfileAssociation(t *testing.T) {
+	want := &UpdateProfileAssociationOutput{
+		ProfileAssociation: &types.ProfileAssociation{
+			Id:               ptr.String("__Id__"),
+			Name:             ptr.String("__Name__"),
+			OwnerId:          ptr.String("__OwnerId__"),
+			ProfileId:        ptr.String("__ProfileId__"),
+			ResourceId:       ptr.String("__ResourceId__"),
+			Status:           types.ProfileStatus("COMPLETE"),
+			StatusMessage:    ptr.String("__StatusMessage__"),
+			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateProfileAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateProfileAssociation(context.Background(), &UpdateProfileAssociationInput{
+		ProfileAssociationId: ptr.String("__ProfileAssociationId__"),
+		Name:                 ptr.String("__Name__"),
+		Priority:             ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProfileAssociation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateProfileResourceAssociation(t *testing.T) {
 	want := &UpdateProfileResourceAssociationOutput{
 		ProfileResourceAssociation: &types.ProfileResourceAssociation{
@@ -720,6 +763,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -759,6 +803,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -859,6 +904,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -899,6 +945,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -939,6 +986,7 @@ func TestCheckResponseSnapshot_Error_ResourceExistsException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -979,6 +1027,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1018,6 +1067,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1057,6 +1107,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

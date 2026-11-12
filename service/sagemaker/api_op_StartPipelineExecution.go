@@ -56,8 +56,20 @@ type StartPipelineExecutionInput struct {
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []types.Parameter
 
-	// The ID of the pipeline version to start execution from.
+	// The alias of the pipeline version to start the execution from. You can't
+	// specify this with PipelineVersionId . If no version of the pipeline has this
+	// alias, the request fails with a ResourceNotFound error.
+	PipelineVersionAlias *string
+
+	// The ID of the pipeline version to start execution from. You can't specify this
+	// with PipelineVersionAlias .
 	PipelineVersionId *int64
+
+	// The Amazon Resource Name (ARN) of the IAM role that the execution uses. You
+	// must specify this parameter when you start an execution of a pipeline that AWS
+	// manages. You can't specify it for a pipeline that you create, because its
+	// executions use the pipeline's role.
+	RoleArn *string
 
 	// The selective execution configuration applied to the pipeline run.
 	SelectiveExecutionConfig *types.SelectiveExecutionConfig
@@ -92,9 +104,17 @@ func (v *StartPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PipelineName != nil {
 		s.WriteString(schemas.StartPipelineExecutionRequest_PipelineName, *v.PipelineName)
 	}
-	serializeParameterList(s, schemas.StartPipelineExecutionRequest_PipelineParameters, v.PipelineParameters)
+	if v.PipelineParameters != nil {
+		serializeParameterList(s, schemas.StartPipelineExecutionRequest_PipelineParameters, v.PipelineParameters)
+	}
+	if v.PipelineVersionAlias != nil {
+		s.WriteString(schemas.StartPipelineExecutionRequest_PipelineVersionAlias, *v.PipelineVersionAlias)
+	}
 	if v.PipelineVersionId != nil {
 		s.WriteInt64(schemas.StartPipelineExecutionRequest_PipelineVersionId, *v.PipelineVersionId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartPipelineExecutionRequest_RoleArn, *v.RoleArn)
 	}
 	if v.SelectiveExecutionConfig != nil {
 		s.WriteStruct(schemas.StartPipelineExecutionRequest_SelectiveExecutionConfig)

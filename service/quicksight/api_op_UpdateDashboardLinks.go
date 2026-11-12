@@ -59,7 +59,9 @@ func (v *UpdateDashboardLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DashboardId != nil {
 		s.WriteString(schemas.UpdateDashboardLinksRequest_DashboardId, *v.DashboardId)
 	}
-	serializeLinkEntityArnList(s, schemas.UpdateDashboardLinksRequest_LinkEntities, v.LinkEntities)
+	if v.LinkEntities != nil {
+		serializeLinkEntityArnList(s, schemas.UpdateDashboardLinksRequest_LinkEntities, v.LinkEntities)
+	}
 }
 
 type UpdateDashboardLinksOutput struct {
@@ -92,7 +94,9 @@ func (v *UpdateDashboardLinksOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DashboardArn != nil {
 		s.WriteString(schemas.UpdateDashboardLinksResponse_DashboardArn, *v.DashboardArn)
 	}
-	serializeLinkEntityArnList(s, schemas.UpdateDashboardLinksResponse_LinkEntities, v.LinkEntities)
+	if v.LinkEntities != nil {
+		serializeLinkEntityArnList(s, schemas.UpdateDashboardLinksResponse_LinkEntities, v.LinkEntities)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateDashboardLinksResponse_RequestId, *v.RequestId)
 	}

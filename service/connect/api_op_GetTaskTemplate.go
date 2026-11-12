@@ -96,6 +96,9 @@ type GetTaskTemplateOutput struct {
 	// referencing this template.
 	ContactFlowId *string
 
+	// The event hooks that are set on tasks created by using this template.
+	ContactHooks *types.TaskTemplateContactHooks
+
 	// The timestamp when the task template was created.
 	CreatedTime *time.Time
 
@@ -155,6 +158,11 @@ func (v *GetTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactFlowId != nil {
 		s.WriteString(schemas.GetTaskTemplateResponse_ContactFlowId, *v.ContactFlowId)
 	}
+	if v.ContactHooks != nil {
+		s.WriteStruct(schemas.GetTaskTemplateResponse_ContactHooks)
+		v.ContactHooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.GetTaskTemplateResponse_CreatedTime, *v.CreatedTime)
 	}
@@ -166,7 +174,9 @@ func (v *GetTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetTaskTemplateResponse_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.GetTaskTemplateResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.GetTaskTemplateResponse_Fields, v.Fields)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetTaskTemplateResponse_Id, *v.Id)
 	}
@@ -185,7 +195,9 @@ func (v *GetTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetTaskTemplateResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetTaskTemplateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetTaskTemplateResponse_Tags, v.Tags)
+	}
 }
 func (v *GetTaskTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTaskTemplateResponse, func(s *smithy.Schema) error {
@@ -199,6 +211,9 @@ func (v *GetTaskTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetTaskTemplateResponse_ContactFlowId:
 			v.ContactFlowId = new(string)
 			return d.ReadString(schemas.GetTaskTemplateResponse_ContactFlowId, v.ContactFlowId)
+		case schemas.GetTaskTemplateResponse_ContactHooks:
+			v.ContactHooks = &types.TaskTemplateContactHooks{}
+			return v.ContactHooks.Deserialize(d)
 		case schemas.GetTaskTemplateResponse_CreatedTime:
 			v.CreatedTime = new(time.Time)
 			return d.ReadTime(schemas.GetTaskTemplateResponse_CreatedTime, v.CreatedTime)

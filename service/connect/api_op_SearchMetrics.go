@@ -110,7 +110,9 @@ func (v *SearchMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchMetricsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeMetricSearchSummaryList(s, schemas.SearchMetricsResponse_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricSearchSummaryList(s, schemas.SearchMetricsResponse_Metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchMetricsResponse_NextToken, *v.NextToken)
 	}

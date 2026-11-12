@@ -99,8 +99,12 @@ func (v *CreateThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateThemeRequest_Name, *v.Name)
 	}
-	serializeResourcePermissionList(s, schemas.CreateThemeRequest_Permissions, v.Permissions)
-	serializeTagList(s, schemas.CreateThemeRequest_Tags, v.Tags)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateThemeRequest_Permissions, v.Permissions)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateThemeRequest_Tags, v.Tags)
+	}
 	if v.ThemeId != nil {
 		s.WriteString(schemas.CreateThemeRequest_ThemeId, *v.ThemeId)
 	}

@@ -59,9 +59,15 @@ func (v *CreateMediaConcatenationPipelineInput) SerializeMembers(s smithy.ShapeS
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateMediaConcatenationPipelineRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
-	serializeConcatenationSinkList(s, schemas.CreateMediaConcatenationPipelineRequest_Sinks, v.Sinks)
-	serializeConcatenationSourceList(s, schemas.CreateMediaConcatenationPipelineRequest_Sources, v.Sources)
-	serializeTagList(s, schemas.CreateMediaConcatenationPipelineRequest_Tags, v.Tags)
+	if v.Sinks != nil {
+		serializeConcatenationSinkList(s, schemas.CreateMediaConcatenationPipelineRequest_Sinks, v.Sinks)
+	}
+	if v.Sources != nil {
+		serializeConcatenationSourceList(s, schemas.CreateMediaConcatenationPipelineRequest_Sources, v.Sources)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMediaConcatenationPipelineRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMediaConcatenationPipelineOutput struct {

@@ -57,7 +57,9 @@ func (v *UpdateQueryLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateQueryLoggingConfigurationRequest_clientToken, *v.ClientToken)
 	}
-	serializeLoggingDestinations(s, schemas.UpdateQueryLoggingConfigurationRequest_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeLoggingDestinations(s, schemas.UpdateQueryLoggingConfigurationRequest_destinations, v.Destinations)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.UpdateQueryLoggingConfigurationRequest_workspaceId, *v.WorkspaceId)
 	}

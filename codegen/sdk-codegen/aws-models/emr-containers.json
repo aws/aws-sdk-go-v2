@@ -82,7 +82,7 @@
                 "lakeFormationConfiguration": {
                     "target": "com.amazonaws.emrcontainers#LakeFormationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lake Formation related configuration inputs for the security\n         configuration.</p>"
+                        "smithy.api#documentation": "<p>\n            Lake Formation related configuration inputs for the security\n         configuration.</p>"
                     }
                 },
                 "encryptionConfiguration": {
@@ -188,7 +188,7 @@
                     "name": "emr-containers"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            Amazon EMR on EKS</a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following\n         scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n            Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            Amazon EMR on EKS\n            </a>.</p>\n         <p>\n            <i>\n               Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following\n         scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS\n                  </a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">\n                     Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon EMR Containers",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -3561,7 +3561,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lake Formation related configuration inputs for the security\n         configuration.</p>"
+                "smithy.api#documentation": "<p>\n            Lake Formation related configuration inputs for the security\n         configuration.</p>"
             }
         },
         "com.amazonaws.emrcontainers#ListJobRuns": {
@@ -4964,13 +4964,13 @@
                 "publicCertificateSecretArn": {
                     "target": "com.amazonaws.emrcontainers#SecretsManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Secrets Manager ARN that contains the public TLS certificate contents, used for\n         communication between the user job and the system job.</p>"
+                        "smithy.api#documentation": "<p>\n            Secrets Manager ARN that contains the public TLS certificate contents, used for\n         communication between the user job and the system job.</p>"
                     }
                 },
                 "privateCertificateSecretArn": {
                     "target": "com.amazonaws.emrcontainers#SecretsManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Secrets Manager ARN that contains the private TLS certificate contents, used for\n         communication between the user job and the system job.</p>"
+                        "smithy.api#documentation": "<p>\n            Secrets Manager ARN that contains the private TLS certificate contents, used for\n         communication between the user job and the system job.</p>"
                     }
                 }
             },

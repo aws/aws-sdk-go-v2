@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetReservedNodeExchangeOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservedNodeExchangeOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservedNodeExchangeOfferingsInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservedNodeExchangeOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.GetReservedNodeExchangeOfferingsInputMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.GetReservedNodeExchangeOfferingsInputMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReservedNodeId != nil {
+		s.WriteString(schemas.GetReservedNodeExchangeOfferingsInputMessage_ReservedNodeId, *v.ReservedNodeId)
+	}
+}
+
 type GetReservedNodeExchangeOfferingsOutput struct {
 
 	// An optional parameter that specifies the starting point for returning a set of
@@ -63,13 +83,37 @@ type GetReservedNodeExchangeOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservedNodeExchangeOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservedNodeExchangeOfferingsOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservedNodeExchangeOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.GetReservedNodeExchangeOfferingsOutputMessage_Marker, *v.Marker)
+	}
+	if v.ReservedNodeOfferings != nil {
+		serializeReservedNodeOfferingList(s, schemas.GetReservedNodeExchangeOfferingsOutputMessage_ReservedNodeOfferings, v.ReservedNodeOfferings)
+	}
+}
+func (v *GetReservedNodeExchangeOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReservedNodeExchangeOfferingsOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReservedNodeExchangeOfferingsOutputMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.GetReservedNodeExchangeOfferingsOutputMessage_Marker, v.Marker)
+		case schemas.GetReservedNodeExchangeOfferingsOutputMessage_ReservedNodeOfferings:
+			return deserializeReservedNodeOfferingList(d, schemas.GetReservedNodeExchangeOfferingsOutputMessage_ReservedNodeOfferings, &v.ReservedNodeOfferings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReservedNodeExchangeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetReservedNodeExchangeOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservedNodeExchangeOfferings, schemas.GetReservedNodeExchangeOfferingsInputMessage, schemas.GetReservedNodeExchangeOfferingsOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetReservedNodeExchangeOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservedNodeExchangeOfferings, schemas.GetReservedNodeExchangeOfferingsInputMessage, schemas.GetReservedNodeExchangeOfferingsOutputMessage), output: &GetReservedNodeExchangeOfferingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

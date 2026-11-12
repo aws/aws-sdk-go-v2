@@ -83,7 +83,9 @@ func (v *ListStorageConfigurationsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStorageConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serializeStorageConfigurationSummaryList(s, schemas.ListStorageConfigurationsResponse_storageConfigurations, v.StorageConfigurations)
+	if v.StorageConfigurations != nil {
+		serializeStorageConfigurationSummaryList(s, schemas.ListStorageConfigurationsResponse_storageConfigurations, v.StorageConfigurations)
+	}
 }
 func (v *ListStorageConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStorageConfigurationsResponse, func(s *smithy.Schema) error {

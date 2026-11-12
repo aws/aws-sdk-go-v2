@@ -61,7 +61,9 @@ func (v *CreateCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCatalogRequest_Name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateCatalogRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateCatalogRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCatalogOutput struct {

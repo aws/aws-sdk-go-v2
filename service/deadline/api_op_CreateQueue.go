@@ -30,9 +30,6 @@ func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optF
 	return out, nil
 }
 
-// Shared displayName + description for Create operations where both are present.
-// displayName is @required here - this mixin is Create-only by design (Update has
-// optional displayName).
 type CreateQueueInput struct {
 
 	// The display name of the queue.
@@ -99,7 +96,9 @@ func (v *CreateQueueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedStorageProfileIds(s, schemas.CreateQueueRequest_allowedStorageProfileIds, v.AllowedStorageProfileIds)
+	if v.AllowedStorageProfileIds != nil {
+		serializeAllowedStorageProfileIds(s, schemas.CreateQueueRequest_allowedStorageProfileIds, v.AllowedStorageProfileIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateQueueRequest_clientToken, *v.ClientToken)
 	}
@@ -125,16 +124,20 @@ func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.JobRunAsUser.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequiredFileSystemLocationNames(s, schemas.CreateQueueRequest_requiredFileSystemLocationNames, v.RequiredFileSystemLocationNames)
+	if v.RequiredFileSystemLocationNames != nil {
+		serializeRequiredFileSystemLocationNames(s, schemas.CreateQueueRequest_requiredFileSystemLocationNames, v.RequiredFileSystemLocationNames)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateQueueRequest_roleArn, *v.RoleArn)
 	}
-	serializeSchedulingConfiguration(s, schemas.CreateQueueRequest_schedulingConfiguration, v.SchedulingConfiguration)
-	serializeTags(s, schemas.CreateQueueRequest_tags, v.Tags)
+	if v.SchedulingConfiguration != nil {
+		serializeSchedulingConfiguration(s, schemas.CreateQueueRequest_schedulingConfiguration, v.SchedulingConfiguration)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateQueueRequest_tags, v.Tags)
+	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateQueueOutput struct {
 
 	// The queue ID.

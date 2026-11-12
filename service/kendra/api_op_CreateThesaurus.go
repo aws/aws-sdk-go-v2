@@ -101,7 +101,9 @@ func (v *CreateThesaurusInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceS3Path.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateThesaurusRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateThesaurusRequest_Tags, v.Tags)
+	}
 }
 
 type CreateThesaurusOutput struct {

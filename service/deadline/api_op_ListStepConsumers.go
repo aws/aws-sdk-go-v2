@@ -87,7 +87,6 @@ func (v *ListStepConsumersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListStepConsumersOutput struct {
 
 	// The consumers on the list.
@@ -116,7 +115,9 @@ func (v *ListStepConsumersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStepConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStepConsumers(s, schemas.ListStepConsumersResponse_consumers, v.Consumers)
+	if v.Consumers != nil {
+		serializeStepConsumers(s, schemas.ListStepConsumersResponse_consumers, v.Consumers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStepConsumersResponse_nextToken, *v.NextToken)
 	}

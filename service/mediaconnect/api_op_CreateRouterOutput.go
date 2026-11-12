@@ -108,13 +108,17 @@ func (v *CreateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRouterOutputRequest_ClientToken, *v.ClientToken)
 	}
-	serializeRouterOutputConfiguration(s, schemas.CreateRouterOutputRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterOutputConfiguration(s, schemas.CreateRouterOutputRequest_Configuration, v.Configuration)
+	}
 	if v.FabricConfiguration != nil {
 		s.WriteStruct(schemas.CreateRouterOutputRequest_FabricConfiguration)
 		v.FabricConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMaintenanceConfiguration(s, schemas.CreateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.CreateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.CreateRouterOutputRequest_MaximumBitrate, *v.MaximumBitrate)
 	}
@@ -127,7 +131,9 @@ func (v *CreateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingScope != "" {
 		s.WriteString(schemas.CreateRouterOutputRequest_RoutingScope, string(v.RoutingScope))
 	}
-	serialize__mapOfString(s, schemas.CreateRouterOutputRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.CreateRouterOutputRequest_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.CreateRouterOutputRequest_Tier, string(v.Tier))
 	}

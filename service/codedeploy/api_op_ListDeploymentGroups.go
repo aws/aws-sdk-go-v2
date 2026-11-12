@@ -88,7 +88,9 @@ func (v *ListDeploymentGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ApplicationName != nil {
 		s.WriteString(schemas.ListDeploymentGroupsOutput_applicationName, *v.ApplicationName)
 	}
-	serializeDeploymentGroupsList(s, schemas.ListDeploymentGroupsOutput_deploymentGroups, v.DeploymentGroups)
+	if v.DeploymentGroups != nil {
+		serializeDeploymentGroupsList(s, schemas.ListDeploymentGroupsOutput_deploymentGroups, v.DeploymentGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentGroupsOutput_nextToken, *v.NextToken)
 	}
@@ -123,6 +125,9 @@ func (c *Client) addOperationListDeploymentGroupsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -4,6 +4,8 @@ package qapps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DisassociateQAppFromUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateQAppFromUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateQAppFromUserInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateQAppFromUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DisassociateQAppFromUserInput_appId, *v.AppId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateQAppFromUserInput_instanceId, *v.InstanceId)
+	}
+}
+
 type DisassociateQAppFromUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DisassociateQAppFromUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateQAppFromUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateQAppFromUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateQAppFromUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateQAppFromUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateQAppFromUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateQAppFromUser, schemas.DisassociateQAppFromUserInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateQAppFromUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateQAppFromUser, schemas.DisassociateQAppFromUserInput, nil), output: &DisassociateQAppFromUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

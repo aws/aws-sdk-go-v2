@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,28 @@ type AttachPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.AttachPolicyRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.AttachPolicyRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyReference != nil {
+		s.WriteStruct(schemas.AttachPolicyRequest_PolicyReference)
+		v.PolicyReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AttachPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +77,26 @@ type AttachPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AttachPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachPolicy, schemas.AttachPolicyRequest, schemas.AttachPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAttachPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachPolicy, schemas.AttachPolicyRequest, schemas.AttachPolicyResponse), output: &AttachPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

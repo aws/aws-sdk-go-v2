@@ -104,7 +104,9 @@ func (v *ListAgentRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentRecommendationSummaries(s, schemas.ListAgentRecommendationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAgentRecommendationSummaries(s, schemas.ListAgentRecommendationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentRecommendationsResponse_nextToken, *v.NextToken)
 	}

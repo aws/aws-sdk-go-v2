@@ -4,6 +4,8 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,36 @@ type RegisterResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedResourceOwnerAccount != nil {
+		s.WriteString(schemas.RegisterResourceRequest_ExpectedResourceOwnerAccount, *v.ExpectedResourceOwnerAccount)
+	}
+	if v.HybridAccessEnabled != nil {
+		s.WriteBool(schemas.RegisterResourceRequest_HybridAccessEnabled, *v.HybridAccessEnabled)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.RegisterResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.RegisterResourceRequest_RoleArn, *v.RoleArn)
+	}
+	if v.UseServiceLinkedRole != nil {
+		s.WriteBool(schemas.RegisterResourceRequest_UseServiceLinkedRole, *v.UseServiceLinkedRole)
+	}
+	if v.WithFederation != nil {
+		s.WriteBool(schemas.RegisterResourceRequest_WithFederation, *v.WithFederation)
+	}
+	if v.WithPrivilegedAccess != false {
+		s.WriteBool(schemas.RegisterResourceRequest_WithPrivilegedAccess, v.WithPrivilegedAccess)
+	}
+}
+
 type RegisterResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,13 +116,26 @@ type RegisterResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterResource, schemas.RegisterResourceRequest, schemas.RegisterResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterResource, schemas.RegisterResourceRequest, schemas.RegisterResourceResponse), output: &RegisterResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -61,7 +61,9 @@ func (v *DescribeEmergencyContactSettingsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeEmergencyContactSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEmergencyContactList(s, schemas.DescribeEmergencyContactSettingsResponse_EmergencyContactList, v.EmergencyContactList)
+	if v.EmergencyContactList != nil {
+		serializeEmergencyContactList(s, schemas.DescribeEmergencyContactSettingsResponse_EmergencyContactList, v.EmergencyContactList)
+	}
 }
 func (v *DescribeEmergencyContactSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEmergencyContactSettingsResponse, func(s *smithy.Schema) error {
@@ -87,6 +89,9 @@ func (c *Client) addOperationDescribeEmergencyContactSettingsMiddlewares(stack *
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

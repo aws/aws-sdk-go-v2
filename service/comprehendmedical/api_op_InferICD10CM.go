@@ -82,7 +82,9 @@ func (v *InferICD10CMOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InferICD10CMOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeICD10CMEntityList(s, schemas.InferICD10CMResponse_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeICD10CMEntityList(s, schemas.InferICD10CMResponse_Entities, v.Entities)
+	}
 	if v.ModelVersion != nil {
 		s.WriteString(schemas.InferICD10CMResponse_ModelVersion, *v.ModelVersion)
 	}

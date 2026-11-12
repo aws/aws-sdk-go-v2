@@ -80,7 +80,9 @@ func (v *ListFleetMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFleetMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetMetricNameAndArnList(s, schemas.ListFleetMetricsResponse_fleetMetrics, v.FleetMetrics)
+	if v.FleetMetrics != nil {
+		serializeFleetMetricNameAndArnList(s, schemas.ListFleetMetricsResponse_fleetMetrics, v.FleetMetrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFleetMetricsResponse_nextToken, *v.NextToken)
 	}

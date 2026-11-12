@@ -36,6 +36,10 @@ type ListChannelsInput struct {
 	// Filters the channel list to match the specified ad configuration ARN.
 	FilterByAdConfigurationArn *string
 
+	// Filters the channel list to match the specified failover-slate-configuration
+	// ARN.
+	FilterByFailoverSlateConfigurationArn *string
+
 	// Filters the channel list to match the specified name.
 	FilterByName *string
 
@@ -65,6 +69,9 @@ func (v *ListChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilterByAdConfigurationArn != nil {
 		s.WriteString(schemas.ListChannelsRequest_filterByAdConfigurationArn, *v.FilterByAdConfigurationArn)
 	}
+	if v.FilterByFailoverSlateConfigurationArn != nil {
+		s.WriteString(schemas.ListChannelsRequest_filterByFailoverSlateConfigurationArn, *v.FilterByFailoverSlateConfigurationArn)
+	}
 	if v.FilterByName != nil {
 		s.WriteString(schemas.ListChannelsRequest_filterByName, *v.FilterByName)
 	}
@@ -87,6 +94,9 @@ func (v *ListChannelsInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ListChannelsRequest_filterByAdConfigurationArn:
 			v.FilterByAdConfigurationArn = new(string)
 			return d.ReadString(schemas.ListChannelsRequest_filterByAdConfigurationArn, v.FilterByAdConfigurationArn)
+		case schemas.ListChannelsRequest_filterByFailoverSlateConfigurationArn:
+			v.FilterByFailoverSlateConfigurationArn = new(string)
+			return d.ReadString(schemas.ListChannelsRequest_filterByFailoverSlateConfigurationArn, v.FilterByFailoverSlateConfigurationArn)
 		case schemas.ListChannelsRequest_filterByName:
 			v.FilterByName = new(string)
 			return d.ReadString(schemas.ListChannelsRequest_filterByName, v.FilterByName)
@@ -131,7 +141,9 @@ func (v *ListChannelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelList(s, schemas.ListChannelsResponse_channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannelList(s, schemas.ListChannelsResponse_channels, v.Channels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelsResponse_nextToken, *v.NextToken)
 	}

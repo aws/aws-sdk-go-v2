@@ -147,7 +147,9 @@ func (v *ListStreamConsumersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStreamConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsumerList(s, schemas.ListStreamConsumersOutput_Consumers, v.Consumers)
+	if v.Consumers != nil {
+		serializeConsumerList(s, schemas.ListStreamConsumersOutput_Consumers, v.Consumers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStreamConsumersOutput_NextToken, *v.NextToken)
 	}

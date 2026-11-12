@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeAccountSettings&MaxRecords=1&Name=__Name__&NextToken=__NextToken__&Version=2011-01-01

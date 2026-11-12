@@ -72,7 +72,9 @@ func (v *CreateBillScenarioInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateBillScenarioRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateBillScenarioRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateBillScenarioRequest_tags, v.Tags)
+	}
 }
 
 type CreateBillScenarioOutput struct {

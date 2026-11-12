@@ -88,7 +88,9 @@ func (v *DescribeAlarmHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlarmName != nil {
 		s.WriteString(schemas.DescribeAlarmHistoryInput_AlarmName, *v.AlarmName)
 	}
-	serializeAlarmTypes(s, schemas.DescribeAlarmHistoryInput_AlarmTypes, v.AlarmTypes)
+	if v.AlarmTypes != nil {
+		serializeAlarmTypes(s, schemas.DescribeAlarmHistoryInput_AlarmTypes, v.AlarmTypes)
+	}
 	if v.EndDate != nil {
 		s.WriteTime(schemas.DescribeAlarmHistoryInput_EndDate, *v.EndDate)
 	}
@@ -130,7 +132,9 @@ func (v *DescribeAlarmHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAlarmHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmHistoryItems(s, schemas.DescribeAlarmHistoryOutput_AlarmHistoryItems, v.AlarmHistoryItems)
+	if v.AlarmHistoryItems != nil {
+		serializeAlarmHistoryItems(s, schemas.DescribeAlarmHistoryOutput_AlarmHistoryItems, v.AlarmHistoryItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAlarmHistoryOutput_NextToken, *v.NextToken)
 	}

@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeParameterGroups
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeParameterGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NextToken":"__NextToken__","ParameterGroupName":"__ParameterGroupName__"}
+¿jMaxResultsiNextTokenm__NextToken__rParameterGroupNamev__ParameterGroupName__ÿ

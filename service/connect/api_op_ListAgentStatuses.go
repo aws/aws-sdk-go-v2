@@ -57,7 +57,9 @@ func (v *ListAgentStatusesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentStatusTypes(s, schemas.ListAgentStatusRequest_AgentStatusTypes, v.AgentStatusTypes)
+	if v.AgentStatusTypes != nil {
+		serializeAgentStatusTypes(s, schemas.ListAgentStatusRequest_AgentStatusTypes, v.AgentStatusTypes)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListAgentStatusRequest_InstanceId, *v.InstanceId)
 	}
@@ -90,7 +92,9 @@ func (v *ListAgentStatusesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentStatusSummaryList(s, schemas.ListAgentStatusResponse_AgentStatusSummaryList, v.AgentStatusSummaryList)
+	if v.AgentStatusSummaryList != nil {
+		serializeAgentStatusSummaryList(s, schemas.ListAgentStatusResponse_AgentStatusSummaryList, v.AgentStatusSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentStatusResponse_NextToken, *v.NextToken)
 	}

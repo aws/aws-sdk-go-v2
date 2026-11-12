@@ -76,7 +76,9 @@ func (v *CreateTypeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldList(s, schemas.CreateTypeRequest_fieldDefinitions, v.FieldDefinitions)
+	if v.FieldDefinitions != nil {
+		serializeFieldList(s, schemas.CreateTypeRequest_fieldDefinitions, v.FieldDefinitions)
+	}
 	if v.KeyspaceName != nil {
 		s.WriteString(schemas.CreateTypeRequest_keyspaceName, *v.KeyspaceName)
 	}

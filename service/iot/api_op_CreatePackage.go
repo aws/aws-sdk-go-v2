@@ -69,7 +69,9 @@ func (v *CreatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackageName != nil {
 		s.WriteString(schemas.CreatePackageRequest_packageName, *v.PackageName)
 	}
-	serializeTagMap(s, schemas.CreatePackageRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePackageRequest_tags, v.Tags)
+	}
 }
 
 type CreatePackageOutput struct {

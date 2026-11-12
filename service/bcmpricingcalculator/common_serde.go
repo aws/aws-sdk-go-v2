@@ -62,9 +62,6 @@ func deserializeBillScenarioCommitmentModificationAction(d smithy.ShapeDeseriali
 }
 
 func serializeBatchCreateBillScenarioCommitmentModificationEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateBillScenarioCommitmentModificationEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -75,9 +72,6 @@ func serializeBatchCreateBillScenarioCommitmentModificationEntries(s smithy.Shap
 }
 
 func serializeBatchCreateBillScenarioCommitmentModificationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateBillScenarioCommitmentModificationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -88,9 +82,6 @@ func serializeBatchCreateBillScenarioCommitmentModificationErrors(s smithy.Shape
 }
 
 func serializeBatchCreateBillScenarioCommitmentModificationItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateBillScenarioCommitmentModificationItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -101,9 +92,6 @@ func serializeBatchCreateBillScenarioCommitmentModificationItems(s smithy.ShapeS
 }
 
 func serializeBatchCreateBillScenarioUsageModificationEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateBillScenarioUsageModificationEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -114,9 +102,6 @@ func serializeBatchCreateBillScenarioUsageModificationEntries(s smithy.ShapeSeri
 }
 
 func serializeBatchCreateBillScenarioUsageModificationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateBillScenarioUsageModificationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -127,9 +112,6 @@ func serializeBatchCreateBillScenarioUsageModificationErrors(s smithy.ShapeSeria
 }
 
 func serializeBatchCreateBillScenarioUsageModificationItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateBillScenarioUsageModificationItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -140,9 +122,6 @@ func serializeBatchCreateBillScenarioUsageModificationItems(s smithy.ShapeSerial
 }
 
 func serializeBatchCreateWorkloadEstimateUsageEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateWorkloadEstimateUsageEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -153,9 +132,6 @@ func serializeBatchCreateWorkloadEstimateUsageEntries(s smithy.ShapeSerializer, 
 }
 
 func serializeBatchCreateWorkloadEstimateUsageErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateWorkloadEstimateUsageError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -166,9 +142,6 @@ func serializeBatchCreateWorkloadEstimateUsageErrors(s smithy.ShapeSerializer, s
 }
 
 func serializeBatchCreateWorkloadEstimateUsageItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateWorkloadEstimateUsageItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -179,9 +152,6 @@ func serializeBatchCreateWorkloadEstimateUsageItems(s smithy.ShapeSerializer, sc
 }
 
 func serializeBatchDeleteBillScenarioCommitmentModificationEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -190,9 +160,6 @@ func serializeBatchDeleteBillScenarioCommitmentModificationEntries(s smithy.Shap
 }
 
 func serializeBatchDeleteBillScenarioCommitmentModificationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeleteBillScenarioCommitmentModificationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -203,9 +170,6 @@ func serializeBatchDeleteBillScenarioCommitmentModificationErrors(s smithy.Shape
 }
 
 func serializeBatchDeleteBillScenarioUsageModificationEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -214,9 +178,6 @@ func serializeBatchDeleteBillScenarioUsageModificationEntries(s smithy.ShapeSeri
 }
 
 func serializeBatchDeleteBillScenarioUsageModificationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeleteBillScenarioUsageModificationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -227,9 +188,6 @@ func serializeBatchDeleteBillScenarioUsageModificationErrors(s smithy.ShapeSeria
 }
 
 func serializeBatchDeleteWorkloadEstimateUsageEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -238,9 +196,6 @@ func serializeBatchDeleteWorkloadEstimateUsageEntries(s smithy.ShapeSerializer, 
 }
 
 func serializeBatchDeleteWorkloadEstimateUsageErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeleteWorkloadEstimateUsageError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -251,9 +206,6 @@ func serializeBatchDeleteWorkloadEstimateUsageErrors(s smithy.ShapeSerializer, s
 }
 
 func serializeBatchUpdateBillScenarioCommitmentModificationEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateBillScenarioCommitmentModificationEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -264,9 +216,6 @@ func serializeBatchUpdateBillScenarioCommitmentModificationEntries(s smithy.Shap
 }
 
 func serializeBatchUpdateBillScenarioCommitmentModificationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateBillScenarioCommitmentModificationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -277,9 +226,6 @@ func serializeBatchUpdateBillScenarioCommitmentModificationErrors(s smithy.Shape
 }
 
 func serializeBatchUpdateBillScenarioUsageModificationEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateBillScenarioUsageModificationEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -290,9 +236,6 @@ func serializeBatchUpdateBillScenarioUsageModificationEntries(s smithy.ShapeSeri
 }
 
 func serializeBatchUpdateBillScenarioUsageModificationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateBillScenarioUsageModificationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -303,9 +246,6 @@ func serializeBatchUpdateBillScenarioUsageModificationErrors(s smithy.ShapeSeria
 }
 
 func serializeBatchUpdateWorkloadEstimateUsageEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateWorkloadEstimateUsageEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -316,9 +256,6 @@ func serializeBatchUpdateWorkloadEstimateUsageEntries(s smithy.ShapeSerializer, 
 }
 
 func serializeBatchUpdateWorkloadEstimateUsageErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateWorkloadEstimateUsageError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -329,9 +266,6 @@ func serializeBatchUpdateWorkloadEstimateUsageErrors(s smithy.ShapeSerializer, s
 }
 
 func serializeBillEstimateCommitmentSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillEstimateCommitmentSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -342,9 +276,6 @@ func serializeBillEstimateCommitmentSummaries(s smithy.ShapeSerializer, schema *
 }
 
 func serializeBillEstimateInputCommitmentModificationSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillEstimateInputCommitmentModificationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -355,9 +286,6 @@ func serializeBillEstimateInputCommitmentModificationSummaries(s smithy.ShapeSer
 }
 
 func serializeBillEstimateInputUsageModificationSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillEstimateInputUsageModificationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -368,9 +296,6 @@ func serializeBillEstimateInputUsageModificationSummaries(s smithy.ShapeSerializ
 }
 
 func serializeBillEstimateLineItemSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillEstimateLineItemSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -381,9 +306,6 @@ func serializeBillEstimateLineItemSummaries(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeBillEstimateSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillEstimateSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -394,9 +316,6 @@ func serializeBillEstimateSummaries(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeBillScenarioCommitmentModificationItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillScenarioCommitmentModificationItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -407,9 +326,6 @@ func serializeBillScenarioCommitmentModificationItems(s smithy.ShapeSerializer, 
 }
 
 func serializeBillScenarioSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillScenarioSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -420,9 +336,6 @@ func serializeBillScenarioSummaries(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeBillScenarioUsageModificationItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillScenarioUsageModificationItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -433,9 +346,6 @@ func serializeBillScenarioUsageModificationItems(s smithy.ShapeSerializer, schem
 }
 
 func serializeExpressionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Expression) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -446,9 +356,6 @@ func serializeExpressionList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeListBillEstimateLineItemsFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListBillEstimateLineItemsFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -459,9 +366,6 @@ func serializeListBillEstimateLineItemsFilters(s smithy.ShapeSerializer, schema 
 }
 
 func serializeListBillEstimateLineItemsFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -470,9 +374,6 @@ func serializeListBillEstimateLineItemsFilterValues(s smithy.ShapeSerializer, sc
 }
 
 func serializeListBillEstimatesFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListBillEstimatesFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -483,9 +384,6 @@ func serializeListBillEstimatesFilters(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeListBillEstimatesFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -494,9 +392,6 @@ func serializeListBillEstimatesFilterValues(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeListBillScenariosFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListBillScenariosFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -507,9 +402,6 @@ func serializeListBillScenariosFilters(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeListBillScenariosFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -518,9 +410,6 @@ func serializeListBillScenariosFilterValues(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeListUsageFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListUsageFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -531,9 +420,6 @@ func serializeListUsageFilters(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeListUsageFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -542,9 +428,6 @@ func serializeListUsageFilterValues(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeListWorkloadEstimatesFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListWorkloadEstimatesFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -555,9 +438,6 @@ func serializeListWorkloadEstimatesFilters(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeListWorkloadEstimatesFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -566,9 +446,6 @@ func serializeListWorkloadEstimatesFilterValues(s smithy.ShapeSerializer, schema
 }
 
 func serializeRateTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RateType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -577,9 +454,6 @@ func serializeRateTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeResourceTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -588,9 +462,6 @@ func serializeResourceTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSavingsPlanArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -599,9 +470,6 @@ func serializeSavingsPlanArns(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -610,9 +478,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeUsageAmounts(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UsageAmount) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -623,9 +488,6 @@ func serializeUsageAmounts(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeUsageQuantities(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UsageQuantity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -636,9 +498,6 @@ func serializeUsageQuantities(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -649,9 +508,6 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeWorkloadEstimateSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WorkloadEstimateSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -662,9 +518,6 @@ func serializeWorkloadEstimateSummaries(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeWorkloadEstimateUsageItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WorkloadEstimateUsageItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1741,9 +1594,6 @@ func deserializeWorkloadEstimateUsageItems(d smithy.ShapeDeserializer, s *smithy
 }
 
 func serializeServiceCostDifferenceMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.CostDifference) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1755,9 +1605,6 @@ func serializeServiceCostDifferenceMap(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

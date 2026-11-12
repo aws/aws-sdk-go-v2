@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,22 @@ type DescribeTerminationPolicyTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTerminationPolicyTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTerminationPolicyTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeTerminationPolicyTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeTerminationPolicyTypesOutput struct {
 
 	// The termination policies supported by Amazon EC2 Auto Scaling: OldestInstance ,
@@ -44,13 +62,31 @@ type DescribeTerminationPolicyTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTerminationPolicyTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTerminationPolicyTypesAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTerminationPolicyTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TerminationPolicyTypes != nil {
+		serializeTerminationPolicies(s, schemas.DescribeTerminationPolicyTypesAnswer_TerminationPolicyTypes, v.TerminationPolicyTypes)
+	}
+}
+func (v *DescribeTerminationPolicyTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTerminationPolicyTypesAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTerminationPolicyTypesAnswer_TerminationPolicyTypes:
+			return deserializeTerminationPolicies(d, schemas.DescribeTerminationPolicyTypesAnswer_TerminationPolicyTypes, &v.TerminationPolicyTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTerminationPolicyTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTerminationPolicyTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTerminationPolicyTypes, nil, schemas.DescribeTerminationPolicyTypesAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTerminationPolicyTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTerminationPolicyTypes, nil, schemas.DescribeTerminationPolicyTypesAnswer), output: &DescribeTerminationPolicyTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

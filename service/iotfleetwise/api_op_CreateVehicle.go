@@ -88,15 +88,21 @@ func (v *CreateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociationBehavior != "" {
 		s.WriteString(schemas.CreateVehicleRequest_associationBehavior, string(v.AssociationBehavior))
 	}
-	serializeattributesMap(s, schemas.CreateVehicleRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeattributesMap(s, schemas.CreateVehicleRequest_attributes, v.Attributes)
+	}
 	if v.DecoderManifestArn != nil {
 		s.WriteString(schemas.CreateVehicleRequest_decoderManifestArn, *v.DecoderManifestArn)
 	}
 	if v.ModelManifestArn != nil {
 		s.WriteString(schemas.CreateVehicleRequest_modelManifestArn, *v.ModelManifestArn)
 	}
-	serializeStateTemplateAssociations(s, schemas.CreateVehicleRequest_stateTemplates, v.StateTemplates)
-	serializeTagList(s, schemas.CreateVehicleRequest_tags, v.Tags)
+	if v.StateTemplates != nil {
+		serializeStateTemplateAssociations(s, schemas.CreateVehicleRequest_stateTemplates, v.StateTemplates)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVehicleRequest_tags, v.Tags)
+	}
 	if v.VehicleName != nil {
 		s.WriteString(schemas.CreateVehicleRequest_vehicleName, *v.VehicleName)
 	}

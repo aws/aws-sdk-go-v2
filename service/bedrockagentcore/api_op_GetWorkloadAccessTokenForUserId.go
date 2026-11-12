@@ -4,6 +4,8 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetWorkloadAccessTokenForUserIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadAccessTokenForUserIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadAccessTokenForUserIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadAccessTokenForUserIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserId != nil {
+		s.WriteString(schemas.GetWorkloadAccessTokenForUserIdRequest_userId, *v.UserId)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.GetWorkloadAccessTokenForUserIdRequest_workloadName, *v.WorkloadName)
+	}
+}
+
 type GetWorkloadAccessTokenForUserIdOutput struct {
 
 	// The access token for the specified workload.
@@ -52,13 +69,32 @@ type GetWorkloadAccessTokenForUserIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadAccessTokenForUserIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadAccessTokenForUserIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadAccessTokenForUserIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadAccessToken != nil {
+		s.WriteString(schemas.GetWorkloadAccessTokenForUserIdResponse_workloadAccessToken, *v.WorkloadAccessToken)
+	}
+}
+func (v *GetWorkloadAccessTokenForUserIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkloadAccessTokenForUserIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkloadAccessTokenForUserIdResponse_workloadAccessToken:
+			v.WorkloadAccessToken = new(string)
+			return d.ReadString(schemas.GetWorkloadAccessTokenForUserIdResponse_workloadAccessToken, v.WorkloadAccessToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkloadAccessTokenForUserIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkloadAccessTokenForUserId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadAccessTokenForUserId, schemas.GetWorkloadAccessTokenForUserIdRequest, schemas.GetWorkloadAccessTokenForUserIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkloadAccessTokenForUserId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadAccessTokenForUserId, schemas.GetWorkloadAccessTokenForUserIdRequest, schemas.GetWorkloadAccessTokenForUserIdResponse), output: &GetWorkloadAccessTokenForUserIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

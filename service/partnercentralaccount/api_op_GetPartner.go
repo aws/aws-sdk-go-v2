@@ -110,7 +110,9 @@ func (v *GetPartnerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetPartnerResponse_Arn, *v.Arn)
 	}
-	serializePartnerDomainList(s, schemas.GetPartnerResponse_AwsTrainingCertificationEmailDomains, v.AwsTrainingCertificationEmailDomains)
+	if v.AwsTrainingCertificationEmailDomains != nil {
+		serializePartnerDomainList(s, schemas.GetPartnerResponse_AwsTrainingCertificationEmailDomains, v.AwsTrainingCertificationEmailDomains)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.GetPartnerResponse_Catalog, *v.Catalog)
 	}

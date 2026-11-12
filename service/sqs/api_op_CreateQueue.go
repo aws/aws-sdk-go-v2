@@ -296,11 +296,15 @@ func (v *CreateQueueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueueAttributeMap(s, schemas.CreateQueueRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeQueueAttributeMap(s, schemas.CreateQueueRequest_Attributes, v.Attributes)
+	}
 	if v.QueueName != nil {
 		s.WriteString(schemas.CreateQueueRequest_QueueName, *v.QueueName)
 	}
-	serializeTagMap(s, schemas.CreateQueueRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateQueueRequest_tags, v.Tags)
+	}
 }
 
 // Returns the QueueUrl attribute of the created queue.

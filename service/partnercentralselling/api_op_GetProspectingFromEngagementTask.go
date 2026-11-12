@@ -119,7 +119,9 @@ func (v *GetProspectingFromEngagementTaskOutput) SerializeMembers(s smithy.Shape
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GetProspectingFromEngagementTaskResponse_EndTime, *v.EndTime)
 	}
-	serializeEngagementProspectingResultList(s, schemas.GetProspectingFromEngagementTaskResponse_Engagements, v.Engagements)
+	if v.Engagements != nil {
+		serializeEngagementProspectingResultList(s, schemas.GetProspectingFromEngagementTaskResponse_Engagements, v.Engagements)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetProspectingFromEngagementTaskResponse_StartTime, *v.StartTime)
 	}

@@ -4,6 +4,8 @@ package iotdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type UpdateThingShadowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingShadowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingShadowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingShadowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteBlob(schemas.UpdateThingShadowRequest_payload, v.Payload)
+	}
+	if v.ShadowName != nil {
+		s.WriteString(schemas.UpdateThingShadowRequest_shadowName, *v.ShadowName)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.UpdateThingShadowRequest_thingName, *v.ThingName)
+	}
+}
+
 // The output from the UpdateThingShadow operation.
 type UpdateThingShadowOutput struct {
 
@@ -60,13 +80,31 @@ type UpdateThingShadowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingShadowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingShadowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingShadowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteBlob(schemas.UpdateThingShadowResponse_payload, v.Payload)
+	}
+}
+func (v *UpdateThingShadowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThingShadowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateThingShadowResponse_payload:
+			return d.ReadBlob(schemas.UpdateThingShadowResponse_payload, &v.Payload)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThingShadow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThingShadow, schemas.UpdateThingShadowRequest, schemas.UpdateThingShadowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateThingShadow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThingShadow, schemas.UpdateThingShadowRequest, schemas.UpdateThingShadowResponse), output: &UpdateThingShadowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

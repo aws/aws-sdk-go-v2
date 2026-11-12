@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobs":[{"actorId":"__ActorId__","failureReason":"__FailureReason__","jobID":"__JobID__","messages":{"messagesList":[{"eventId":"__EventId__","messageIndex":1},{"eventId":"__EventId__","messageIndex":1}]},"sessionId":"__SessionId__","status":"FAILED","strategyId":"__StrategyId__"},{"actorId":"__ActorId__","failureReason":"__FailureReason__","jobID":"__JobID__","messages":{"messagesList":[{"eventId":"__EventId__","messageIndex":1},{"eventId":"__EventId__","messageIndex":1}]},"sessionId":"__SessionId__","status":"FAILED","strategyId":"__StrategyId__"}],"nextToken":"__NextToken__"}

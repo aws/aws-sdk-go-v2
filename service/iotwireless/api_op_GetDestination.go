@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetDestinationRequest_Name, *v.Name)
+	}
+}
+
 type GetDestinationOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -60,13 +74,66 @@ type GetDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDestinationResponse_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetDestinationResponse_Description, *v.Description)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.GetDestinationResponse_Expression, *v.Expression)
+	}
+	if v.ExpressionType != "" {
+		s.WriteString(schemas.GetDestinationResponse_ExpressionType, string(v.ExpressionType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDestinationResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetDestinationResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *GetDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDestinationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_Arn, v.Arn)
+		case schemas.GetDestinationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_Description, v.Description)
+		case schemas.GetDestinationResponse_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_Expression, v.Expression)
+		case schemas.GetDestinationResponse_ExpressionType:
+			var ev string
+			if err := d.ReadString(schemas.GetDestinationResponse_ExpressionType, &ev); err != nil {
+				return err
+			}
+			v.ExpressionType = types.ExpressionType(ev)
+			return nil
+		case schemas.GetDestinationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_Name, v.Name)
+		case schemas.GetDestinationResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDestination, schemas.GetDestinationRequest, schemas.GetDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDestination, schemas.GetDestinationRequest, schemas.GetDestinationResponse), output: &GetDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

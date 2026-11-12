@@ -101,7 +101,9 @@ func (v *GetEvidenceFoldersByAssessmentControlOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *GetEvidenceFoldersByAssessmentControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentEvidenceFolders(s, schemas.GetEvidenceFoldersByAssessmentControlResponse_evidenceFolders, v.EvidenceFolders)
+	if v.EvidenceFolders != nil {
+		serializeAssessmentEvidenceFolders(s, schemas.GetEvidenceFoldersByAssessmentControlResponse_evidenceFolders, v.EvidenceFolders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEvidenceFoldersByAssessmentControlResponse_nextToken, *v.NextToken)
 	}

@@ -28,7 +28,6 @@ func (c *Client) ListSteps(ctx context.Context, params *ListStepsInput, optFns .
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListStepsInput struct {
 
 	// The farm ID to include on the list of steps.
@@ -80,7 +79,6 @@ func (v *ListStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListStepsOutput struct {
 
 	// The steps on the list.
@@ -112,7 +110,9 @@ func (v *ListStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStepsResponse_nextToken, *v.NextToken)
 	}
-	serializeStepSummaries(s, schemas.ListStepsResponse_steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepSummaries(s, schemas.ListStepsResponse_steps, v.Steps)
+	}
 }
 func (v *ListStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStepsResponse, func(s *smithy.Schema) error {

@@ -4,7 +4,9 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type DescribeDBClusterSnapshotAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterSnapshotAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBClusterSnapshotAttributesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterSnapshotAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier, *v.DBClusterSnapshotIdentifier)
+	}
+}
+
 type DescribeDBClusterSnapshotAttributesOutput struct {
 
 	// Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes API action.
@@ -61,13 +75,34 @@ type DescribeDBClusterSnapshotAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterSnapshotAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBClusterSnapshotAttributesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterSnapshotAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterSnapshotAttributesResult != nil {
+		s.WriteStruct(schemas.DescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult)
+		v.DBClusterSnapshotAttributesResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDBClusterSnapshotAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDBClusterSnapshotAttributesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult:
+			v.DBClusterSnapshotAttributesResult = &types.DBClusterSnapshotAttributesResult{}
+			return v.DBClusterSnapshotAttributesResult.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterSnapshotAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterSnapshotAttributes, schemas.DescribeDBClusterSnapshotAttributesMessage, schemas.DescribeDBClusterSnapshotAttributesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusterSnapshotAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterSnapshotAttributes, schemas.DescribeDBClusterSnapshotAttributesMessage, schemas.DescribeDBClusterSnapshotAttributesResult), output: &DescribeDBClusterSnapshotAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

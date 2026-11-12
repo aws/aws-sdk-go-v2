@@ -85,7 +85,9 @@ func (v *ListRemoteAccessSessionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRemoteAccessSessionsResult_nextToken, *v.NextToken)
 	}
-	serializeRemoteAccessSessions(s, schemas.ListRemoteAccessSessionsResult_remoteAccessSessions, v.RemoteAccessSessions)
+	if v.RemoteAccessSessions != nil {
+		serializeRemoteAccessSessions(s, schemas.ListRemoteAccessSessionsResult_remoteAccessSessions, v.RemoteAccessSessions)
+	}
 }
 func (v *ListRemoteAccessSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRemoteAccessSessionsResult, func(s *smithy.Schema) error {

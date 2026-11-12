@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type RegisterPublisherInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterPublisherInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterPublisherInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterPublisherInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptTermsAndConditions != nil {
+		s.WriteBool(schemas.RegisterPublisherInput_AcceptTermsAndConditions, *v.AcceptTermsAndConditions)
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.RegisterPublisherInput_ConnectionArn, *v.ConnectionArn)
+	}
+}
+
 type RegisterPublisherOutput struct {
 
 	// The ID assigned this account by CloudFormation for publishing extensions.
@@ -65,13 +82,32 @@ type RegisterPublisherOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterPublisherOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterPublisherOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterPublisherOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublisherId != nil {
+		s.WriteString(schemas.RegisterPublisherOutput_PublisherId, *v.PublisherId)
+	}
+}
+func (v *RegisterPublisherOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterPublisherOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterPublisherOutput_PublisherId:
+			v.PublisherId = new(string)
+			return d.ReadString(schemas.RegisterPublisherOutput_PublisherId, v.PublisherId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterPublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterPublisher{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterPublisher, schemas.RegisterPublisherInput, schemas.RegisterPublisherOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRegisterPublisher{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterPublisher, schemas.RegisterPublisherInput, schemas.RegisterPublisherOutput), output: &RegisterPublisherOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

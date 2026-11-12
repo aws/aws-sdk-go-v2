@@ -100,7 +100,9 @@ func (v *DeleteChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Arn != nil {
 		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Channels, v.Channels)
+	if v.Channels != nil {
+		serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Channels, v.Channels)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_ClusterId, *v.ClusterId)
 	}
@@ -110,7 +112,9 @@ func (v *DeleteChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Name, *v.Name)
 	}
-	serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Nodes, v.Nodes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_State, string(v.State))
 	}

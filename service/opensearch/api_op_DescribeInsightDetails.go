@@ -90,7 +90,9 @@ func (v *DescribeInsightDetailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInsightDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInsightFieldList(s, schemas.DescribeInsightDetailsResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeInsightFieldList(s, schemas.DescribeInsightDetailsResponse_Fields, v.Fields)
+	}
 }
 func (v *DescribeInsightDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeInsightDetailsResponse, func(s *smithy.Schema) error {

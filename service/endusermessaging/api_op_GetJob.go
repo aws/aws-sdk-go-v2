@@ -131,7 +131,9 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationType != nil {
 		s.WriteString(schemas.Job_operationType, *v.OperationType)
 	}
-	serializeJobResourceList(s, schemas.Job_resources, v.Resources)
+	if v.Resources != nil {
+		serializeJobResourceList(s, schemas.Job_resources, v.Resources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Job_status, string(v.Status))
 	}

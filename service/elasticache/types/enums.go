@@ -628,6 +628,25 @@ func (StorageEncryptionType) Values() []StorageEncryptionType {
 	}
 }
 
+type TlsMode string
+
+// Enum values for TlsMode
+const (
+	TlsModeNone     TlsMode = "none"
+	TlsModeVerifyCa TlsMode = "verify-ca"
+)
+
+// Values returns all known values for TlsMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TlsMode) Values() []TlsMode {
+	return []TlsMode{
+		"none",
+		"verify-ca",
+	}
+}
+
 type TransitEncryptionMode string
 
 // Enum values for TransitEncryptionMode

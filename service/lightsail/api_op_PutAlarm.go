@@ -83,8 +83,9 @@ type PutAlarmInput struct {
 	// The following metrics are available for each resource type:
 	//
 	//   - Instances: BurstCapacityPercentage , BurstCapacityTime , CPUUtilization ,
-	//   NetworkIn , NetworkOut , StatusCheckFailed , StatusCheckFailed_Instance , and
-	//   StatusCheckFailed_System .
+	//   NetworkIn , NetworkOut , StatusCheckFailed , StatusCheckFailed_Instance ,
+	//   StatusCheckFailed_System , DiskReadOps , DiskWriteOps , DiskReadBytes ,
+	//   DiskWriteBytes , DiskTotalReadTime , DiskTotalWriteTime , and DiskQueueLength .
 	//
 	//   - Load balancers: ClientTLSNegotiationErrorCount , HealthyHostCount ,
 	//   UnhealthyHostCount , HTTPCode_LB_4XX_Count , HTTPCode_LB_5XX_Count ,
@@ -204,7 +205,9 @@ func (v *PutAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComparisonOperator != "" {
 		s.WriteString(schemas.PutAlarmRequest_comparisonOperator, string(v.ComparisonOperator))
 	}
-	serializeContactProtocolsList(s, schemas.PutAlarmRequest_contactProtocols, v.ContactProtocols)
+	if v.ContactProtocols != nil {
+		serializeContactProtocolsList(s, schemas.PutAlarmRequest_contactProtocols, v.ContactProtocols)
+	}
 	if v.DatapointsToAlarm != nil {
 		s.WriteInt32(schemas.PutAlarmRequest_datapointsToAlarm, *v.DatapointsToAlarm)
 	}
@@ -220,8 +223,12 @@ func (v *PutAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotificationEnabled != nil {
 		s.WriteBool(schemas.PutAlarmRequest_notificationEnabled, *v.NotificationEnabled)
 	}
-	serializeNotificationTriggerList(s, schemas.PutAlarmRequest_notificationTriggers, v.NotificationTriggers)
-	serializeTagList(s, schemas.PutAlarmRequest_tags, v.Tags)
+	if v.NotificationTriggers != nil {
+		serializeNotificationTriggerList(s, schemas.PutAlarmRequest_notificationTriggers, v.NotificationTriggers)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutAlarmRequest_tags, v.Tags)
+	}
 	if v.Threshold != nil {
 		s.WriteFloat64(schemas.PutAlarmRequest_threshold, *v.Threshold)
 	}
@@ -250,7 +257,9 @@ func (v *PutAlarmOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.PutAlarmResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.PutAlarmResult_operations, v.Operations)
+	}
 }
 func (v *PutAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAlarmResult, func(s *smithy.Schema) error {

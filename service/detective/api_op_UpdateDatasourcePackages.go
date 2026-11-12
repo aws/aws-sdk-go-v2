@@ -48,7 +48,9 @@ func (v *UpdateDatasourcePackagesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDatasourcePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasourcePackageList(s, schemas.UpdateDatasourcePackagesRequest_DatasourcePackages, v.DatasourcePackages)
+	if v.DatasourcePackages != nil {
+		serializeDatasourcePackageList(s, schemas.UpdateDatasourcePackagesRequest_DatasourcePackages, v.DatasourcePackages)
+	}
 	if v.GraphArn != nil {
 		s.WriteString(schemas.UpdateDatasourcePackagesRequest_GraphArn, *v.GraphArn)
 	}

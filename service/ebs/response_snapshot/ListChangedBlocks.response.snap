@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BlockSize":1,"ChangedBlocks":[{"BlockIndex":1,"FirstBlockToken":"__FirstBlockToken__","SecondBlockToken":"__SecondBlockToken__"},{"BlockIndex":1,"FirstBlockToken":"__FirstBlockToken__","SecondBlockToken":"__SecondBlockToken__"}],"ExpiryTime":946684800,"NextToken":"__NextToken__","VolumeSize":1}

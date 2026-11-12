@@ -168,6 +168,25 @@ func (DashAudioTimelinePattern) Values() []DashAudioTimelinePattern {
 	}
 }
 
+type DashBandwidthReportingMode string
+
+// Enum values for DashBandwidthReportingMode
+const (
+	DashBandwidthReportingModeAverage DashBandwidthReportingMode = "AVERAGE"
+	DashBandwidthReportingModeMax     DashBandwidthReportingMode = "MAX"
+)
+
+// Values returns all known values for DashBandwidthReportingMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashBandwidthReportingMode) Values() []DashBandwidthReportingMode {
+	return []DashBandwidthReportingMode{
+		"AVERAGE",
+		"MAX",
+	}
+}
+
 type DashCompactness string
 
 // Enum values for DashCompactness

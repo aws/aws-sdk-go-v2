@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.CheckDomainAvailability
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"TLDInMaintenance","message":"__Message__","tld":"__Tld__"}
+¿f__typepTLDInMaintenancegmessagek__Message__ctldg__Tld__ÿ

@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSGlue.GetUserDefinedFunction
 
-{"UserDefinedFunction":{"CatalogId":"__CatalogId__","ClassName":"__ClassName__","CreateTime":946684800,"DatabaseName":"__DatabaseName__","FunctionName":"__FunctionName__","FunctionType":"REGULAR_FUNCTION","OwnerName":"__OwnerName__","OwnerType":"USER","ResourceUris":[{"ResourceType":"JAR","Uri":"__Uri__"},{"ResourceType":"JAR","Uri":"__Uri__"}]}}
+{"UserDefinedFunction":{"ArtifactLocation":"__ArtifactLocation__","CatalogId":"__CatalogId__","ClassName":"__ClassName__","CreateTime":946684800,"DatabaseName":"__DatabaseName__","FunctionName":"__FunctionName__","FunctionType":"REGULAR_FUNCTION","GovernanceMode":"IAM_ONLY","OwnerName":"__OwnerName__","OwnerType":"USER","ResourceUris":[{"LastModified":946684800,"ResourceType":"JAR","Uri":"__Uri__"},{"LastModified":946684800,"ResourceType":"JAR","Uri":"__Uri__"}]}}

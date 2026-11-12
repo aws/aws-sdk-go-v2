@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListContractualInvestments
+
+{"items":[{"milestoneBasedInvestment":{"investmentDisbursedAt":946684800,"investmentId":"__InvestmentId__","investmentValue":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"}}},{"milestoneBasedInvestment":{"investmentDisbursedAt":946684800,"investmentId":"__InvestmentId__","investmentValue":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"}}}],"nextToken":"__NextToken__"}

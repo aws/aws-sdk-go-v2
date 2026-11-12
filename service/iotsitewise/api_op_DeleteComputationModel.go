@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type DeleteComputationModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComputationModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComputationModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComputationModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteComputationModelRequest_clientToken, *v.ClientToken)
+	}
+	if v.ComputationModelId != nil {
+		s.WriteString(schemas.DeleteComputationModelRequest_computationModelId, *v.ComputationModelId)
+	}
+}
+
 type DeleteComputationModelOutput struct {
 
 	// The status of the computation model. It contains a state (DELETING after
@@ -55,13 +72,34 @@ type DeleteComputationModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComputationModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComputationModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComputationModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputationModelStatus != nil {
+		s.WriteStruct(schemas.DeleteComputationModelResponse_computationModelStatus)
+		v.ComputationModelStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteComputationModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteComputationModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteComputationModelResponse_computationModelStatus:
+			v.ComputationModelStatus = &types.ComputationModelStatus{}
+			return v.ComputationModelStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteComputationModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteComputationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComputationModel, schemas.DeleteComputationModelRequest, schemas.DeleteComputationModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteComputationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComputationModel, schemas.DeleteComputationModelRequest, schemas.DeleteComputationModelResponse), output: &DeleteComputationModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

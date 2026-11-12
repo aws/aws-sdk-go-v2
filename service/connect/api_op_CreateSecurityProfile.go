@@ -104,13 +104,21 @@ func (v *CreateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedAIAgents(s, schemas.CreateSecurityProfileRequest_AllowedAIAgents, v.AllowedAIAgents)
+	if v.AllowedAIAgents != nil {
+		serializeAllowedAIAgents(s, schemas.CreateSecurityProfileRequest_AllowedAIAgents, v.AllowedAIAgents)
+	}
 	if v.AllowedAccessControlHierarchyGroupId != nil {
 		s.WriteString(schemas.CreateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId, *v.AllowedAccessControlHierarchyGroupId)
 	}
-	serializeAllowedAccessControlTags(s, schemas.CreateSecurityProfileRequest_AllowedAccessControlTags, v.AllowedAccessControlTags)
-	serializeAllowedFlowModules(s, schemas.CreateSecurityProfileRequest_AllowedFlowModules, v.AllowedFlowModules)
-	serializeApplications(s, schemas.CreateSecurityProfileRequest_Applications, v.Applications)
+	if v.AllowedAccessControlTags != nil {
+		serializeAllowedAccessControlTags(s, schemas.CreateSecurityProfileRequest_AllowedAccessControlTags, v.AllowedAccessControlTags)
+	}
+	if v.AllowedFlowModules != nil {
+		serializeAllowedFlowModules(s, schemas.CreateSecurityProfileRequest_AllowedFlowModules, v.AllowedFlowModules)
+	}
+	if v.Applications != nil {
+		serializeApplications(s, schemas.CreateSecurityProfileRequest_Applications, v.Applications)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateSecurityProfileRequest_Description, *v.Description)
 	}
@@ -119,16 +127,24 @@ func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.GranularAccessControlConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHierarchyRestrictedResourceList(s, schemas.CreateSecurityProfileRequest_HierarchyRestrictedResources, v.HierarchyRestrictedResources)
+	if v.HierarchyRestrictedResources != nil {
+		serializeHierarchyRestrictedResourceList(s, schemas.CreateSecurityProfileRequest_HierarchyRestrictedResources, v.HierarchyRestrictedResources)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateSecurityProfileRequest_InstanceId, *v.InstanceId)
 	}
-	serializePermissionsList(s, schemas.CreateSecurityProfileRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsList(s, schemas.CreateSecurityProfileRequest_Permissions, v.Permissions)
+	}
 	if v.SecurityProfileName != nil {
 		s.WriteString(schemas.CreateSecurityProfileRequest_SecurityProfileName, *v.SecurityProfileName)
 	}
-	serializeTagRestrictedResourceList(s, schemas.CreateSecurityProfileRequest_TagRestrictedResources, v.TagRestrictedResources)
-	serializeTagMap(s, schemas.CreateSecurityProfileRequest_Tags, v.Tags)
+	if v.TagRestrictedResources != nil {
+		serializeTagRestrictedResourceList(s, schemas.CreateSecurityProfileRequest_TagRestrictedResources, v.TagRestrictedResources)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSecurityProfileRequest_Tags, v.Tags)
+	}
 }
 
 type CreateSecurityProfileOutput struct {

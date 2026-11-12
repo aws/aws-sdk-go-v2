@@ -165,12 +165,18 @@ func (v *UpdateWorkloadInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkloadAccountIds(s, schemas.UpdateWorkloadInput_AccountIds, v.AccountIds)
-	serializeWorkloadApplications(s, schemas.UpdateWorkloadInput_Applications, v.Applications)
+	if v.AccountIds != nil {
+		serializeWorkloadAccountIds(s, schemas.UpdateWorkloadInput_AccountIds, v.AccountIds)
+	}
+	if v.Applications != nil {
+		serializeWorkloadApplications(s, schemas.UpdateWorkloadInput_Applications, v.Applications)
+	}
 	if v.ArchitecturalDesign != nil {
 		s.WriteString(schemas.UpdateWorkloadInput_ArchitecturalDesign, *v.ArchitecturalDesign)
 	}
-	serializeWorkloadAwsRegions(s, schemas.UpdateWorkloadInput_AwsRegions, v.AwsRegions)
+	if v.AwsRegions != nil {
+		serializeWorkloadAwsRegions(s, schemas.UpdateWorkloadInput_AwsRegions, v.AwsRegions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateWorkloadInput_Description, *v.Description)
 	}
@@ -199,11 +205,15 @@ func (v *UpdateWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.JiraConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWorkloadNonAwsRegions(s, schemas.UpdateWorkloadInput_NonAwsRegions, v.NonAwsRegions)
+	if v.NonAwsRegions != nil {
+		serializeWorkloadNonAwsRegions(s, schemas.UpdateWorkloadInput_NonAwsRegions, v.NonAwsRegions)
+	}
 	if v.Notes != nil {
 		s.WriteString(schemas.UpdateWorkloadInput_Notes, *v.Notes)
 	}
-	serializeWorkloadPillarPriorities(s, schemas.UpdateWorkloadInput_PillarPriorities, v.PillarPriorities)
+	if v.PillarPriorities != nil {
+		serializeWorkloadPillarPriorities(s, schemas.UpdateWorkloadInput_PillarPriorities, v.PillarPriorities)
+	}
 	if v.ReviewOwner != nil {
 		s.WriteString(schemas.UpdateWorkloadInput_ReviewOwner, *v.ReviewOwner)
 	}

@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,15 @@ type EnableOrganizationsRootCredentialsManagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOrganizationsRootCredentialsManagementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableOrganizationsRootCredentialsManagementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableOrganizationsRootCredentialsManagementInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type EnableOrganizationsRootCredentialsManagementOutput struct {
 
 	// The features you have enabled for centralized root access.
@@ -57,13 +68,37 @@ type EnableOrganizationsRootCredentialsManagementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOrganizationsRootCredentialsManagementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableOrganizationsRootCredentialsManagementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableOrganizationsRootCredentialsManagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledFeatures != nil {
+		serializeFeaturesListType(s, schemas.EnableOrganizationsRootCredentialsManagementResponse_EnabledFeatures, v.EnabledFeatures)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.EnableOrganizationsRootCredentialsManagementResponse_OrganizationId, *v.OrganizationId)
+	}
+}
+func (v *EnableOrganizationsRootCredentialsManagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableOrganizationsRootCredentialsManagementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableOrganizationsRootCredentialsManagementResponse_EnabledFeatures:
+			return deserializeFeaturesListType(d, schemas.EnableOrganizationsRootCredentialsManagementResponse_EnabledFeatures, &v.EnabledFeatures)
+		case schemas.EnableOrganizationsRootCredentialsManagementResponse_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.EnableOrganizationsRootCredentialsManagementResponse_OrganizationId, v.OrganizationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableOrganizationsRootCredentialsManagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnableOrganizationsRootCredentialsManagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableOrganizationsRootCredentialsManagement, schemas.EnableOrganizationsRootCredentialsManagementRequest, schemas.EnableOrganizationsRootCredentialsManagementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpEnableOrganizationsRootCredentialsManagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableOrganizationsRootCredentialsManagement, schemas.EnableOrganizationsRootCredentialsManagementRequest, schemas.EnableOrganizationsRootCredentialsManagementResponse), output: &EnableOrganizationsRootCredentialsManagementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

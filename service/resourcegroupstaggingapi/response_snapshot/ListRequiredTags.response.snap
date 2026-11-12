@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.ListRequiredTags
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","RequiredTags":[{"CloudFormationResourceTypes":["__Member__","__Member__"],"ReportingTagKeys":["__Member__","__Member__"],"ResourceType":"__ResourceType__"},{"CloudFormationResourceTypes":["__Member__","__Member__"],"ReportingTagKeys":["__Member__","__Member__"],"ResourceType":"__ResourceType__"}]}
+¿iNextTokenm__NextToken__lRequiredTagsŸ¿xCloudFormationResourceTypesŸj__Member__j__Member__ÿpReportingTagKeysŸj__Member__j__Member__ÿlResourceTypep__ResourceType__ÿ¿xCloudFormationResourceTypesŸj__Member__j__Member__ÿpReportingTagKeysŸj__Member__j__Member__ÿlResourceTypep__ResourceType__ÿÿÿ

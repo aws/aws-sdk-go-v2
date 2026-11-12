@@ -527,8 +527,12 @@ func (v *UnableToDetectSchemaException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UnableToDetectSchemaException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProcessedInputRecords(s, schemas.UnableToDetectSchemaException_ProcessedInputRecords, v.ProcessedInputRecords)
-	serializeRawInputRecords(s, schemas.UnableToDetectSchemaException_RawInputRecords, v.RawInputRecords)
+	if v.ProcessedInputRecords != nil {
+		serializeProcessedInputRecords(s, schemas.UnableToDetectSchemaException_ProcessedInputRecords, v.ProcessedInputRecords)
+	}
+	if v.RawInputRecords != nil {
+		serializeRawInputRecords(s, schemas.UnableToDetectSchemaException_RawInputRecords, v.RawInputRecords)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.UnableToDetectSchemaException_message, *v.Message)
 	}

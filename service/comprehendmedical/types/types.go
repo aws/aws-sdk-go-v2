@@ -87,7 +87,9 @@ func (v *Attribute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Text != nil {
 		s.WriteString(schemas.Attribute_Text, *v.Text)
 	}
-	serializeTraitList(s, schemas.Attribute_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeTraitList(s, schemas.Attribute_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Attribute_Type, string(v.Type))
 	}
@@ -453,7 +455,9 @@ func (v *Entity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeList(s, schemas.Entity_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeList(s, schemas.Entity_Attributes, v.Attributes)
+	}
 	if v.BeginOffset != nil {
 		s.WriteInt32(schemas.Entity_BeginOffset, *v.BeginOffset)
 	}
@@ -472,7 +476,9 @@ func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Text != nil {
 		s.WriteString(schemas.Entity_Text, *v.Text)
 	}
-	serializeTraitList(s, schemas.Entity_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeTraitList(s, schemas.Entity_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Entity_Type, string(v.Type))
 	}
@@ -595,7 +601,9 @@ func (v *ICD10CMAttribute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Text != nil {
 		s.WriteString(schemas.ICD10CMAttribute_Text, *v.Text)
 	}
-	serializeICD10CMTraitList(s, schemas.ICD10CMAttribute_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeICD10CMTraitList(s, schemas.ICD10CMAttribute_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ICD10CMAttribute_Type, string(v.Type))
 	}
@@ -759,7 +767,9 @@ func (v *ICD10CMEntity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ICD10CMEntity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeICD10CMAttributeList(s, schemas.ICD10CMEntity_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeICD10CMAttributeList(s, schemas.ICD10CMEntity_Attributes, v.Attributes)
+	}
 	if v.BeginOffset != nil {
 		s.WriteInt32(schemas.ICD10CMEntity_BeginOffset, *v.BeginOffset)
 	}
@@ -769,7 +779,9 @@ func (v *ICD10CMEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndOffset != nil {
 		s.WriteInt32(schemas.ICD10CMEntity_EndOffset, *v.EndOffset)
 	}
-	serializeICD10CMConceptList(s, schemas.ICD10CMEntity_ICD10CMConcepts, v.ICD10CMConcepts)
+	if v.ICD10CMConcepts != nil {
+		serializeICD10CMConceptList(s, schemas.ICD10CMEntity_ICD10CMConcepts, v.ICD10CMConcepts)
+	}
 	if v.Id != nil {
 		s.WriteInt32(schemas.ICD10CMEntity_Id, *v.Id)
 	}
@@ -779,7 +791,9 @@ func (v *ICD10CMEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Text != nil {
 		s.WriteString(schemas.ICD10CMEntity_Text, *v.Text)
 	}
-	serializeICD10CMTraitList(s, schemas.ICD10CMEntity_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeICD10CMTraitList(s, schemas.ICD10CMEntity_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ICD10CMEntity_Type, string(v.Type))
 	}
@@ -1028,7 +1042,9 @@ func (v *RxNormAttribute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Text != nil {
 		s.WriteString(schemas.RxNormAttribute_Text, *v.Text)
 	}
-	serializeRxNormTraitList(s, schemas.RxNormAttribute_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeRxNormTraitList(s, schemas.RxNormAttribute_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.RxNormAttribute_Type, string(v.Type))
 	}
@@ -1174,7 +1190,9 @@ func (v *RxNormEntity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RxNormEntity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRxNormAttributeList(s, schemas.RxNormEntity_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeRxNormAttributeList(s, schemas.RxNormEntity_Attributes, v.Attributes)
+	}
 	if v.BeginOffset != nil {
 		s.WriteInt32(schemas.RxNormEntity_BeginOffset, *v.BeginOffset)
 	}
@@ -1187,14 +1205,18 @@ func (v *RxNormEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteInt32(schemas.RxNormEntity_Id, *v.Id)
 	}
-	serializeRxNormConceptList(s, schemas.RxNormEntity_RxNormConcepts, v.RxNormConcepts)
+	if v.RxNormConcepts != nil {
+		serializeRxNormConceptList(s, schemas.RxNormEntity_RxNormConcepts, v.RxNormConcepts)
+	}
 	if v.Score != nil {
 		s.WriteFloat32(schemas.RxNormEntity_Score, *v.Score)
 	}
 	if v.Text != nil {
 		s.WriteString(schemas.RxNormEntity_Text, *v.Text)
 	}
-	serializeRxNormTraitList(s, schemas.RxNormEntity_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeRxNormTraitList(s, schemas.RxNormEntity_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.RxNormEntity_Type, string(v.Type))
 	}
@@ -1366,14 +1388,18 @@ func (v *SNOMEDCTAttribute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RelationshipType != "" {
 		s.WriteString(schemas.SNOMEDCTAttribute_RelationshipType, string(v.RelationshipType))
 	}
-	serializeSNOMEDCTConceptList(s, schemas.SNOMEDCTAttribute_SNOMEDCTConcepts, v.SNOMEDCTConcepts)
+	if v.SNOMEDCTConcepts != nil {
+		serializeSNOMEDCTConceptList(s, schemas.SNOMEDCTAttribute_SNOMEDCTConcepts, v.SNOMEDCTConcepts)
+	}
 	if v.Score != nil {
 		s.WriteFloat32(schemas.SNOMEDCTAttribute_Score, *v.Score)
 	}
 	if v.Text != nil {
 		s.WriteString(schemas.SNOMEDCTAttribute_Text, *v.Text)
 	}
-	serializeSNOMEDCTTraitList(s, schemas.SNOMEDCTAttribute_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeSNOMEDCTTraitList(s, schemas.SNOMEDCTAttribute_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.SNOMEDCTAttribute_Type, string(v.Type))
 	}
@@ -1592,7 +1618,9 @@ func (v *SNOMEDCTEntity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SNOMEDCTEntity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSNOMEDCTAttributeList(s, schemas.SNOMEDCTEntity_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeSNOMEDCTAttributeList(s, schemas.SNOMEDCTEntity_Attributes, v.Attributes)
+	}
 	if v.BeginOffset != nil {
 		s.WriteInt32(schemas.SNOMEDCTEntity_BeginOffset, *v.BeginOffset)
 	}
@@ -1605,14 +1633,18 @@ func (v *SNOMEDCTEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteInt32(schemas.SNOMEDCTEntity_Id, *v.Id)
 	}
-	serializeSNOMEDCTConceptList(s, schemas.SNOMEDCTEntity_SNOMEDCTConcepts, v.SNOMEDCTConcepts)
+	if v.SNOMEDCTConcepts != nil {
+		serializeSNOMEDCTConceptList(s, schemas.SNOMEDCTEntity_SNOMEDCTConcepts, v.SNOMEDCTConcepts)
+	}
 	if v.Score != nil {
 		s.WriteFloat32(schemas.SNOMEDCTEntity_Score, *v.Score)
 	}
 	if v.Text != nil {
 		s.WriteString(schemas.SNOMEDCTEntity_Text, *v.Text)
 	}
-	serializeSNOMEDCTTraitList(s, schemas.SNOMEDCTEntity_Traits, v.Traits)
+	if v.Traits != nil {
+		serializeSNOMEDCTTraitList(s, schemas.SNOMEDCTEntity_Traits, v.Traits)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.SNOMEDCTEntity_Type, string(v.Type))
 	}

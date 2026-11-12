@@ -69,7 +69,9 @@ func (v *CheckCapacityInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CheckCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRules(s, schemas.CheckCapacityRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.CheckCapacityRequest_Rules, v.Rules)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.CheckCapacityRequest_Scope, string(v.Scope))
 	}

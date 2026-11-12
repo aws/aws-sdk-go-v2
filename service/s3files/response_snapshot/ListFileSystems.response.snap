@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"fileSystems":[{"bucket":"__Bucket__","creationTime":946684800,"fileSystemArn":"__FileSystemArn__","fileSystemId":"__FileSystemId__","name":"__Name__","ownerId":"__OwnerId__","roleArn":"__RoleArn__","status":"available","statusMessage":"__StatusMessage__"},{"bucket":"__Bucket__","creationTime":946684800,"fileSystemArn":"__FileSystemArn__","fileSystemId":"__FileSystemId__","name":"__Name__","ownerId":"__OwnerId__","roleArn":"__RoleArn__","status":"available","statusMessage":"__StatusMessage__"}],"nextToken":"__NextToken__"}

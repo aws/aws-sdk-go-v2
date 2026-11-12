@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"alias":"__Alias__","assetId":"__AssetId__","dataType":"STRING","dataTypeSpec":"__DataTypeSpec__","propertyId":"__PropertyId__","timeSeriesArn":"__TimeSeriesArn__","timeSeriesCreationDate":946684800,"timeSeriesId":"__TimeSeriesId__","timeSeriesLastUpdateDate":946684800,"workspaceName":"__WorkspaceName__"}

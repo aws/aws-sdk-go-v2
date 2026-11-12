@@ -659,6 +659,13 @@ type AgreementViewSummary struct {
 	// A list of entitlements associated with the agreement.
 	Entitlements []Entitlement
 
+	// The date and time when the free trial of the agreement ends. This field is
+	// present only when the agreement includes a free trial.
+	//
+	// For an agreement that includes both a free trial and usage-based pricing, the
+	// agreement converts to paid usage at this time.
+	FreeTrialEndTime *time.Time
+
 	// The unique identifier of the very first agreement in a chain of related
 	// agreements, such as renewals or replacements. It stays the same across all
 	// agreements in that chain, which lets you trace an agreement back to the
@@ -721,7 +728,12 @@ func (v *AgreementViewSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTimeBehaviorType != "" {
 		s.WriteString(schemas.AgreementViewSummary_endTimeBehaviorType, string(v.EndTimeBehaviorType))
 	}
-	serializeEntitlementList(s, schemas.AgreementViewSummary_entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeEntitlementList(s, schemas.AgreementViewSummary_entitlements, v.Entitlements)
+	}
+	if v.FreeTrialEndTime != nil {
+		s.WriteTime(schemas.AgreementViewSummary_freeTrialEndTime, *v.FreeTrialEndTime)
+	}
 	if v.InitialAgreementId != nil {
 		s.WriteString(schemas.AgreementViewSummary_initialAgreementId, *v.InitialAgreementId)
 	}
@@ -779,6 +791,9 @@ func (v *AgreementViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.AgreementViewSummary_entitlements:
 			return deserializeEntitlementList(d, schemas.AgreementViewSummary_entitlements, &v.Entitlements)
+		case schemas.AgreementViewSummary_freeTrialEndTime:
+			v.FreeTrialEndTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementViewSummary_freeTrialEndTime, v.FreeTrialEndTime)
 		case schemas.AgreementViewSummary_initialAgreementId:
 			v.InitialAgreementId = new(string)
 			return d.ReadString(schemas.AgreementViewSummary_initialAgreementId, v.InitialAgreementId)
@@ -1346,13 +1361,17 @@ func (v *ChargeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EstimatedTaxes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpectedChargeList(s, schemas.ChargeSummary_expectedCharges, v.ExpectedCharges)
+	if v.ExpectedCharges != nil {
+		serializeExpectedChargeList(s, schemas.ChargeSummary_expectedCharges, v.ExpectedCharges)
+	}
 	if v.InvoicingEntity != nil {
 		s.WriteStruct(schemas.ChargeSummary_invoicingEntity)
 		v.InvoicingEntity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeItemizedChargeList(s, schemas.ChargeSummary_itemizedCharges, v.ItemizedCharges)
+	if v.ItemizedCharges != nil {
+		serializeItemizedChargeList(s, schemas.ChargeSummary_itemizedCharges, v.ItemizedCharges)
+	}
 	if v.NewAgreementValue != nil {
 		s.WriteString(schemas.ChargeSummary_newAgreementValue, *v.NewAgreementValue)
 	}
@@ -1427,7 +1446,9 @@ func (v *ConfigurableUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializ
 	if v.Id != nil {
 		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_id, *v.Id)
 	}
-	serializeConfigurableUpfrontRateCardList(s, schemas.ConfigurableUpfrontPricingTerm_rateCards, v.RateCards)
+	if v.RateCards != nil {
+		serializeConfigurableUpfrontRateCardList(s, schemas.ConfigurableUpfrontPricingTerm_rateCards, v.RateCards)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_type, *v.Type)
 	}
@@ -1480,7 +1501,9 @@ func (v *ConfigurableUpfrontPricingTermConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *ConfigurableUpfrontPricingTermConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionList(s, schemas.ConfigurableUpfrontPricingTermConfiguration_dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionList(s, schemas.ConfigurableUpfrontPricingTermConfiguration_dimensions, v.Dimensions)
+	}
 	if v.SelectorValue != nil {
 		s.WriteString(schemas.ConfigurableUpfrontPricingTermConfiguration_selectorValue, *v.SelectorValue)
 	}
@@ -1528,7 +1551,9 @@ func (v *ConfigurableUpfrontRateCardItem) SerializeMembers(s smithy.ShapeSeriali
 		v.Constraints.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRateCardList(s, schemas.ConfigurableUpfrontRateCardItem_rateCard, v.RateCard)
+	if v.RateCard != nil {
+		serializeRateCardList(s, schemas.ConfigurableUpfrontRateCardItem_rateCard, v.RateCard)
+	}
 	if v.Selector != nil {
 		s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem_selector)
 		v.Selector.SerializeMembers(s)
@@ -1917,7 +1942,9 @@ func (v *EstimatedTaxes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EstimatedTaxes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTaxBreakdown(s, schemas.EstimatedTaxes_breakdown, v.Breakdown)
+	if v.Breakdown != nil {
+		serializeTaxBreakdown(s, schemas.EstimatedTaxes_breakdown, v.Breakdown)
+	}
 	if v.TotalAmount != nil {
 		s.WriteString(schemas.EstimatedTaxes_totalAmount, *v.TotalAmount)
 	}
@@ -2048,7 +2075,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_name, *v.Name)
 	}
-	serializeFilterValueList(s, schemas.Filter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValueList(s, schemas.Filter_values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -2135,7 +2164,9 @@ func (v *FixedUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Duration != nil {
 		s.WriteString(schemas.FixedUpfrontPricingTerm_duration, *v.Duration)
 	}
-	serializeGrantList(s, schemas.FixedUpfrontPricingTerm_grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrantList(s, schemas.FixedUpfrontPricingTerm_grants, v.Grants)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.FixedUpfrontPricingTerm_id, *v.Id)
 	}
@@ -2175,7 +2206,8 @@ func (v *FixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error 
 // anything within a specified limit.
 type FreeTrialPricingTerm struct {
 
-	// Duration of the free trial period (5–31 days).
+	// Duration of the free trial period. The allowed duration depends on the product
+	// type. For SaaS products, the free trial lasts 7 to 90 days.
 	Duration *string
 
 	// Entitlements granted to the acceptor of a free trial as part of an agreement
@@ -2201,7 +2233,9 @@ func (v *FreeTrialPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Duration != nil {
 		s.WriteString(schemas.FreeTrialPricingTerm_duration, *v.Duration)
 	}
-	serializeGrantList(s, schemas.FreeTrialPricingTerm_grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrantList(s, schemas.FreeTrialPricingTerm_grants, v.Grants)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.FreeTrialPricingTerm_id, *v.Id)
 	}
@@ -2223,6 +2257,40 @@ func (v *FreeTrialPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FreeTrialPricingTerm_type:
 			v.Type = new(string)
 			return d.ReadString(schemas.FreeTrialPricingTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Contains details about the free trial of an agreement, including when the free
+// trial ends.
+type FreeTrialSummary struct {
+
+	// The date and time when the free trial ends. For an agreement that includes both
+	// a free trial and usage-based pricing, the agreement converts to paid usage at
+	// this time.
+	TrialEndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *FreeTrialSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FreeTrialSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FreeTrialSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialEndTime != nil {
+		s.WriteTime(schemas.FreeTrialSummary_trialEndTime, *v.TrialEndTime)
+	}
+}
+func (v *FreeTrialSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FreeTrialSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FreeTrialSummary_trialEndTime:
+			v.TrialEndTime = new(time.Time)
+			return d.ReadTime(schemas.FreeTrialSummary_trialEndTime, v.TrialEndTime)
 		}
 		return nil
 	})
@@ -2450,7 +2518,9 @@ func (v *LegalTerm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LegalTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentList(s, schemas.LegalTerm_documents, v.Documents)
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.LegalTerm_documents, v.Documents)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.LegalTerm_id, *v.Id)
 	}
@@ -2729,7 +2799,9 @@ func (v *PaymentScheduleTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.PaymentScheduleTerm_id, *v.Id)
 	}
-	serializeScheduleList(s, schemas.PaymentScheduleTerm_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeScheduleList(s, schemas.PaymentScheduleTerm_schedule, v.Schedule)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.PaymentScheduleTerm_type, *v.Type)
 	}
@@ -2770,7 +2842,9 @@ func (v *PaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PaymentScheduleTermTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePaymentScheduleEntryList(s, schemas.PaymentScheduleTermTemplate_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializePaymentScheduleEntryList(s, schemas.PaymentScheduleTermTemplate_schedule, v.Schedule)
+	}
 }
 func (v *PaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PaymentScheduleTermTemplate, func(s *smithy.Schema) error {
@@ -2964,7 +3038,9 @@ func (v *ProposalSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OfferSetId != nil {
 		s.WriteString(schemas.ProposalSummary_offerSetId, *v.OfferSetId)
 	}
-	serializeResources(s, schemas.ProposalSummary_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResources(s, schemas.ProposalSummary_resources, v.Resources)
+	}
 }
 func (v *ProposalSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProposalSummary, func(s *smithy.Schema) error {
@@ -3305,8 +3381,12 @@ func (v *RenewalTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxRenewals != nil {
 		s.WriteInt32(schemas.RenewalTerm_maxRenewals, *v.MaxRenewals)
 	}
-	serializePriceIncrease(s, schemas.RenewalTerm_priceIncrease, v.PriceIncrease)
-	serializeTermTemplateList(s, schemas.RenewalTerm_termTemplates, v.TermTemplates)
+	if v.PriceIncrease != nil {
+		serializePriceIncrease(s, schemas.RenewalTerm_priceIncrease, v.PriceIncrease)
+	}
+	if v.TermTemplates != nil {
+		serializeTermTemplateList(s, schemas.RenewalTerm_termTemplates, v.TermTemplates)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.RenewalTerm_type, *v.Type)
 	}
@@ -3400,7 +3480,9 @@ func (v *RequestedTerm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequestedTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRequestedTermConfiguration(s, schemas.RequestedTerm_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRequestedTermConfiguration(s, schemas.RequestedTerm_configuration, v.Configuration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.RequestedTerm_id, *v.Id)
 	}
@@ -3854,7 +3936,9 @@ func (v *UsageBasedPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.UsageBasedPricingTerm_id, *v.Id)
 	}
-	serializeUsageBasedRateCardList(s, schemas.UsageBasedPricingTerm_rateCards, v.RateCards)
+	if v.RateCards != nil {
+		serializeUsageBasedRateCardList(s, schemas.UsageBasedPricingTerm_rateCards, v.RateCards)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.UsageBasedPricingTerm_type, *v.Type)
 	}
@@ -3895,7 +3979,9 @@ func (v *UsageBasedRateCardItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UsageBasedRateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRateCardList(s, schemas.UsageBasedRateCardItem_rateCard, v.RateCard)
+	if v.RateCard != nil {
+		serializeRateCardList(s, schemas.UsageBasedRateCardItem_rateCard, v.RateCard)
+	}
 }
 func (v *UsageBasedRateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageBasedRateCardItem, func(s *smithy.Schema) error {

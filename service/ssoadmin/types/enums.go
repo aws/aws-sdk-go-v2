@@ -275,6 +275,25 @@ func (ProvisionTargetType) Values() []ProvisionTargetType {
 	}
 }
 
+type RegionScope string
+
+// Enum values for RegionScope
+const (
+	RegionScopeCurrentRegion RegionScope = "CURRENT_REGION"
+	RegionScopeAllRegions    RegionScope = "ALL_REGIONS"
+)
+
+// Values returns all known values for RegionScope. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegionScope) Values() []RegionScope {
+	return []RegionScope{
+		"CURRENT_REGION",
+		"ALL_REGIONS",
+	}
+}
+
 type RegionStatus string
 
 // Enum values for RegionStatus

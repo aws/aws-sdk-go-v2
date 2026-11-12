@@ -81,7 +81,9 @@ func (v *ListPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPackagesResponse_nextToken, *v.NextToken)
 	}
-	serializePackageSummaryList(s, schemas.ListPackagesResponse_packageSummaries, v.PackageSummaries)
+	if v.PackageSummaries != nil {
+		serializePackageSummaryList(s, schemas.ListPackagesResponse_packageSummaries, v.PackageSummaries)
+	}
 }
 func (v *ListPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPackagesResponse, func(s *smithy.Schema) error {

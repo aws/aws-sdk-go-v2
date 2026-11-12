@@ -5,7 +5,9 @@ package s3files
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,36 @@ type CreateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptBucketWarning != nil {
+		s.WriteBool(schemas.CreateFileSystemRequest_acceptBucketWarning, *v.AcceptBucketWarning)
+	}
+	if v.Bucket != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_bucket, *v.Bucket)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_clientToken, *v.ClientToken)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_prefix, *v.Prefix)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_roleArn, *v.RoleArn)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFileSystemRequest_tags, v.Tags)
+	}
+}
+
 type CreateFileSystemOutput struct {
 
 	// The Amazon Resource Name (ARN) of the S3 bucket associated with the file system.
@@ -113,8 +145,8 @@ type CreateFileSystemOutput struct {
 	// The lifecycle state of the file system. Valid values are: AVAILABLE (the file
 	// system is available for use), CREATING (the file system is being created),
 	// DELETING (the file system is being deleted), DELETED (the file system has been
-	// deleted), ERROR (the file system is in an error state), or UPDATING (the file
-	// system is being updated).
+	// deleted), ERROR (the file system is in an error state), MISCONFIGURED (the file
+	// system has a misconfiguration), or UPDATING (the file system is being updated).
 	Status types.LifeCycleState
 
 	// Additional information about the file system status. This field provides more
@@ -130,13 +162,107 @@ type CreateFileSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_bucket, *v.Bucket)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_clientToken, *v.ClientToken)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateFileSystemResponse_creationTime, *v.CreationTime)
+	}
+	if v.FileSystemArn != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_fileSystemArn, *v.FileSystemArn)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_fileSystemId, *v.FileSystemId)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_ownerId, *v.OwnerId)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_prefix, *v.Prefix)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateFileSystemResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.CreateFileSystemResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFileSystemResponse_tags, v.Tags)
+	}
+}
+func (v *CreateFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemResponse_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_bucket, v.Bucket)
+		case schemas.CreateFileSystemResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_clientToken, v.ClientToken)
+		case schemas.CreateFileSystemResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateFileSystemResponse_creationTime, v.CreationTime)
+		case schemas.CreateFileSystemResponse_fileSystemArn:
+			v.FileSystemArn = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_fileSystemArn, v.FileSystemArn)
+		case schemas.CreateFileSystemResponse_fileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_fileSystemId, v.FileSystemId)
+		case schemas.CreateFileSystemResponse_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_kmsKeyId, v.KmsKeyId)
+		case schemas.CreateFileSystemResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_name, v.Name)
+		case schemas.CreateFileSystemResponse_ownerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_ownerId, v.OwnerId)
+		case schemas.CreateFileSystemResponse_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_prefix, v.Prefix)
+		case schemas.CreateFileSystemResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_roleArn, v.RoleArn)
+		case schemas.CreateFileSystemResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LifeCycleState(ev)
+			return nil
+		case schemas.CreateFileSystemResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.CreateFileSystemResponse_statusMessage, v.StatusMessage)
+		case schemas.CreateFileSystemResponse_tags:
+			return deserializeTagList(d, schemas.CreateFileSystemResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystem, schemas.CreateFileSystemRequest, schemas.CreateFileSystemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystem, schemas.CreateFileSystemRequest, schemas.CreateFileSystemResponse), output: &CreateFileSystemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

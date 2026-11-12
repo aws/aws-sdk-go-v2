@@ -139,7 +139,9 @@ func (v *GetBatchJobExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.GetBatchJobExecutionResponse_applicationId, *v.ApplicationId)
 	}
-	serializeBatchJobIdentifier(s, schemas.GetBatchJobExecutionResponse_batchJobIdentifier, v.BatchJobIdentifier)
+	if v.BatchJobIdentifier != nil {
+		serializeBatchJobIdentifier(s, schemas.GetBatchJobExecutionResponse_batchJobIdentifier, v.BatchJobIdentifier)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GetBatchJobExecutionResponse_endTime, *v.EndTime)
 	}

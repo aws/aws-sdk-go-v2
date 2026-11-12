@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type CreateListingChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateListingChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateListingChangeSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateListingChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CreateListingChangeSetInput_action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateListingChangeSetInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateListingChangeSetInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EntityIdentifier != nil {
+		s.WriteString(schemas.CreateListingChangeSetInput_entityIdentifier, *v.EntityIdentifier)
+	}
+	if v.EntityRevision != nil {
+		s.WriteString(schemas.CreateListingChangeSetInput_entityRevision, *v.EntityRevision)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.CreateListingChangeSetInput_entityType, string(v.EntityType))
+	}
+}
+
 type CreateListingChangeSetOutput struct {
 
 	// The ID of the listing (a record of an asset at a given time).
@@ -81,13 +110,48 @@ type CreateListingChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateListingChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateListingChangeSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateListingChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListingId != nil {
+		s.WriteString(schemas.CreateListingChangeSetOutput_listingId, *v.ListingId)
+	}
+	if v.ListingRevision != nil {
+		s.WriteString(schemas.CreateListingChangeSetOutput_listingRevision, *v.ListingRevision)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateListingChangeSetOutput_status, string(v.Status))
+	}
+}
+func (v *CreateListingChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateListingChangeSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateListingChangeSetOutput_listingId:
+			v.ListingId = new(string)
+			return d.ReadString(schemas.CreateListingChangeSetOutput_listingId, v.ListingId)
+		case schemas.CreateListingChangeSetOutput_listingRevision:
+			v.ListingRevision = new(string)
+			return d.ReadString(schemas.CreateListingChangeSetOutput_listingRevision, v.ListingRevision)
+		case schemas.CreateListingChangeSetOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateListingChangeSetOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ListingStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateListingChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateListingChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateListingChangeSet, schemas.CreateListingChangeSetInput, schemas.CreateListingChangeSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateListingChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateListingChangeSet, schemas.CreateListingChangeSetInput, schemas.CreateListingChangeSetOutput), output: &CreateListingChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

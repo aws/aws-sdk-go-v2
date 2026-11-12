@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,18 @@ type GetIdentityNotificationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityNotificationAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityNotificationAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityNotificationAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identities != nil {
+		serializeIdentityList(s, schemas.GetIdentityNotificationAttributesRequest_Identities, v.Identities)
+	}
+}
+
 // Represents the notification attributes for a list of identities.
 type GetIdentityNotificationAttributesOutput struct {
 
@@ -63,13 +77,31 @@ type GetIdentityNotificationAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityNotificationAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityNotificationAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityNotificationAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationAttributes != nil {
+		serializeNotificationAttributes(s, schemas.GetIdentityNotificationAttributesResponse_NotificationAttributes, v.NotificationAttributes)
+	}
+}
+func (v *GetIdentityNotificationAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityNotificationAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityNotificationAttributesResponse_NotificationAttributes:
+			return deserializeNotificationAttributes(d, schemas.GetIdentityNotificationAttributesResponse_NotificationAttributes, &v.NotificationAttributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityNotificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityNotificationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityNotificationAttributes, schemas.GetIdentityNotificationAttributesRequest, schemas.GetIdentityNotificationAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityNotificationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityNotificationAttributes, schemas.GetIdentityNotificationAttributesRequest, schemas.GetIdentityNotificationAttributesResponse), output: &GetIdentityNotificationAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

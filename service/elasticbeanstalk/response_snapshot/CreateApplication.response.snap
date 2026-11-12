@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateApplicationResponse><CreateApplicationResult><Application><ApplicationArn>__ApplicationArn__</ApplicationArn><ApplicationName>__ApplicationName__</ApplicationName><ConfigurationTemplates><member>__Member__</member><member>__Member__</member></ConfigurationTemplates><DateCreated>2000-01-01T00:00:00Z</DateCreated><DateUpdated>2000-01-01T00:00:00Z</DateUpdated><Description>__Description__</Description><ResourceLifecycleConfig><ServiceRole>__ServiceRole__</ServiceRole><VersionLifecycleConfig><MaxAgeRule><DeleteSourceFromS3>true</DeleteSourceFromS3><Enabled>true</Enabled><MaxAgeInDays>1</MaxAgeInDays></MaxAgeRule><MaxCountRule><DeleteSourceFromS3>true</DeleteSourceFromS3><Enabled>true</Enabled><MaxCount>1</MaxCount></MaxCountRule></VersionLifecycleConfig></ResourceLifecycleConfig><Versions><member>__Member__</member><member>__Member__</member></Versions></Application></CreateApplicationResult></CreateApplicationResponse>

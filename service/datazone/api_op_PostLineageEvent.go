@@ -5,6 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type PostLineageEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostLineageEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostLineageEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostLineageEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PostLineageEventInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.PostLineageEventInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Event != nil {
+		s.WriteBlob(schemas.PostLineageEventInput_event, v.Event)
+	}
+}
+
 type PostLineageEventOutput struct {
 
 	// The ID of the domain.
@@ -58,13 +78,38 @@ type PostLineageEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostLineageEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostLineageEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostLineageEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.PostLineageEventOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.PostLineageEventOutput_id, *v.Id)
+	}
+}
+func (v *PostLineageEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostLineageEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostLineageEventOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.PostLineageEventOutput_domainId, v.DomainId)
+		case schemas.PostLineageEventOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PostLineageEventOutput_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPostLineageEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostLineageEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostLineageEvent, schemas.PostLineageEventInput, schemas.PostLineageEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostLineageEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostLineageEvent, schemas.PostLineageEventInput, schemas.PostLineageEventOutput), output: &PostLineageEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

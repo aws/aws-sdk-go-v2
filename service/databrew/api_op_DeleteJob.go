@@ -4,6 +4,8 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteJobRequest_Name, *v.Name)
+	}
+}
+
 type DeleteJobOutput struct {
 
 	// The name of the job that you deleted.
@@ -46,13 +60,32 @@ type DeleteJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteJobResponse_Name, *v.Name)
+	}
+}
+func (v *DeleteJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteJobResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteJobResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJob, schemas.DeleteJobRequest, schemas.DeleteJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJob, schemas.DeleteJobRequest, schemas.DeleteJobResponse), output: &DeleteJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

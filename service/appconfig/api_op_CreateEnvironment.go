@@ -71,11 +71,15 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateEnvironmentRequest_Description, *v.Description)
 	}
-	serializeMonitorList(s, schemas.CreateEnvironmentRequest_Monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorList(s, schemas.CreateEnvironmentRequest_Monitors, v.Monitors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEnvironmentRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateEnvironmentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEnvironmentRequest_Tags, v.Tags)
+	}
 }
 
 type CreateEnvironmentOutput struct {
@@ -121,7 +125,9 @@ func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Environment_Id, *v.Id)
 	}
-	serializeMonitorList(s, schemas.Environment_Monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorList(s, schemas.Environment_Monitors, v.Monitors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Environment_Name, *v.Name)
 	}

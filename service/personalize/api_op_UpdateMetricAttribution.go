@@ -50,7 +50,9 @@ func (v *UpdateMetricAttributionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMetricAttributionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricAttributes(s, schemas.UpdateMetricAttributionRequest_addMetrics, v.AddMetrics)
+	if v.AddMetrics != nil {
+		serializeMetricAttributes(s, schemas.UpdateMetricAttributionRequest_addMetrics, v.AddMetrics)
+	}
 	if v.MetricAttributionArn != nil {
 		s.WriteString(schemas.UpdateMetricAttributionRequest_metricAttributionArn, *v.MetricAttributionArn)
 	}
@@ -59,7 +61,9 @@ func (v *UpdateMetricAttributionInput) SerializeMembers(s smithy.ShapeSerializer
 		v.MetricsOutputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricAttributesNamesList(s, schemas.UpdateMetricAttributionRequest_removeMetrics, v.RemoveMetrics)
+	if v.RemoveMetrics != nil {
+		serializeMetricAttributesNamesList(s, schemas.UpdateMetricAttributionRequest_removeMetrics, v.RemoveMetrics)
+	}
 }
 
 type UpdateMetricAttributionOutput struct {

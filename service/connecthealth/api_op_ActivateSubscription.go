@@ -4,7 +4,9 @@ package connecthealth
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ActivateSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ActivateSubscriptionInput_domainId, *v.DomainId)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.ActivateSubscriptionInput_subscriptionId, *v.SubscriptionId)
+	}
+}
+
 type ActivateSubscriptionOutput struct {
 
 	//
@@ -50,13 +67,34 @@ type ActivateSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateSubscriptionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscription != nil {
+		s.WriteStruct(schemas.ActivateSubscriptionOutput_subscription)
+		v.Subscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ActivateSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivateSubscriptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivateSubscriptionOutput_subscription:
+			v.Subscription = &types.SubscriptionDescription{}
+			return v.Subscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationActivateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpActivateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateSubscription, schemas.ActivateSubscriptionInput, schemas.ActivateSubscriptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpActivateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateSubscription, schemas.ActivateSubscriptionInput, schemas.ActivateSubscriptionOutput), output: &ActivateSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

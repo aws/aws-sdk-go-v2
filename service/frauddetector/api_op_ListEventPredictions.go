@@ -129,7 +129,9 @@ func (v *ListEventPredictionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventPredictionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfEventPredictionSummaries(s, schemas.ListEventPredictionsResult_eventPredictionSummaries, v.EventPredictionSummaries)
+	if v.EventPredictionSummaries != nil {
+		serializeListOfEventPredictionSummaries(s, schemas.ListEventPredictionsResult_eventPredictionSummaries, v.EventPredictionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventPredictionsResult_nextToken, *v.NextToken)
 	}

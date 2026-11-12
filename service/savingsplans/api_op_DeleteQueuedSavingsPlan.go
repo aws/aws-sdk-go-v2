@@ -4,6 +4,8 @@ package savingsplans
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/savingsplans/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteQueuedSavingsPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQueuedSavingsPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQueuedSavingsPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQueuedSavingsPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SavingsPlanId != nil {
+		s.WriteString(schemas.DeleteQueuedSavingsPlanRequest_savingsPlanId, *v.SavingsPlanId)
+	}
+}
+
 type DeleteQueuedSavingsPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteQueuedSavingsPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQueuedSavingsPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQueuedSavingsPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQueuedSavingsPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQueuedSavingsPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteQueuedSavingsPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQueuedSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQueuedSavingsPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQueuedSavingsPlan, schemas.DeleteQueuedSavingsPlanRequest, schemas.DeleteQueuedSavingsPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteQueuedSavingsPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQueuedSavingsPlan, schemas.DeleteQueuedSavingsPlanRequest, schemas.DeleteQueuedSavingsPlanResponse), output: &DeleteQueuedSavingsPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

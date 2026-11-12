@@ -77,7 +77,9 @@ func (v *ListSipMediaApplicationsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSipMediaApplicationsResponse_NextToken, *v.NextToken)
 	}
-	serializeSipMediaApplicationList(s, schemas.ListSipMediaApplicationsResponse_SipMediaApplications, v.SipMediaApplications)
+	if v.SipMediaApplications != nil {
+		serializeSipMediaApplicationList(s, schemas.ListSipMediaApplicationsResponse_SipMediaApplications, v.SipMediaApplications)
+	}
 }
 func (v *ListSipMediaApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSipMediaApplicationsResponse, func(s *smithy.Schema) error {

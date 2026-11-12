@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/CreateDirectory
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.CreateDirectory
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Description":"__Description__","Name":"__Name__","NetworkType":"Dual-stack","Password":"__Password__","ShortName":"__ShortName__","Size":"Small","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcSettings":{"SubnetIds":["__Member__","__Member__"],"VpcId":"__VpcId__"}}
+¿kDescriptiono__Description__dNameh__Name__kNetworkTypejDual-stackhPasswordl__Password__iShortNamem__ShortName__dSizeeSmalldTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿkVpcSettings¿iSubnetIdsŸj__Member__j__Member__ÿeVpcIdi__VpcId__ÿÿ

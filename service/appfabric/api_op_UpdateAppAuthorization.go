@@ -72,7 +72,9 @@ func (v *UpdateAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AppBundleIdentifier != nil {
 		s.WriteString(schemas.UpdateAppAuthorizationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
 	}
-	serializeCredential(s, schemas.UpdateAppAuthorizationRequest_credential, v.Credential)
+	if v.Credential != nil {
+		serializeCredential(s, schemas.UpdateAppAuthorizationRequest_credential, v.Credential)
+	}
 	if v.Tenant != nil {
 		s.WriteStruct(schemas.UpdateAppAuthorizationRequest_tenant)
 		v.Tenant.SerializeMembers(s)

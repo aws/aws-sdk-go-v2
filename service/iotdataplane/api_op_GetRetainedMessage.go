@@ -4,6 +4,8 @@ package iotdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type GetRetainedMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRetainedMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRetainedMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRetainedMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Topic != nil {
+		s.WriteString(schemas.GetRetainedMessageRequest_topic, *v.Topic)
+	}
+}
+
 // The output from the GetRetainedMessage operation.
 type GetRetainedMessageOutput struct {
 
@@ -77,13 +91,52 @@ type GetRetainedMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRetainedMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRetainedMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRetainedMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.GetRetainedMessageResponse_lastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Payload != nil {
+		s.WriteBlob(schemas.GetRetainedMessageResponse_payload, v.Payload)
+	}
+	if v.Qos != 0 {
+		s.WriteInt32(schemas.GetRetainedMessageResponse_qos, v.Qos)
+	}
+	if v.Topic != nil {
+		s.WriteString(schemas.GetRetainedMessageResponse_topic, *v.Topic)
+	}
+	if v.UserProperties != nil {
+		s.WriteBlob(schemas.GetRetainedMessageResponse_userProperties, v.UserProperties)
+	}
+}
+func (v *GetRetainedMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRetainedMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRetainedMessageResponse_lastModifiedTime:
+			return d.ReadInt64(schemas.GetRetainedMessageResponse_lastModifiedTime, &v.LastModifiedTime)
+		case schemas.GetRetainedMessageResponse_payload:
+			return d.ReadBlob(schemas.GetRetainedMessageResponse_payload, &v.Payload)
+		case schemas.GetRetainedMessageResponse_qos:
+			return d.ReadInt32(schemas.GetRetainedMessageResponse_qos, &v.Qos)
+		case schemas.GetRetainedMessageResponse_topic:
+			v.Topic = new(string)
+			return d.ReadString(schemas.GetRetainedMessageResponse_topic, v.Topic)
+		case schemas.GetRetainedMessageResponse_userProperties:
+			return d.ReadBlob(schemas.GetRetainedMessageResponse_userProperties, &v.UserProperties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRetainedMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRetainedMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRetainedMessage, schemas.GetRetainedMessageRequest, schemas.GetRetainedMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRetainedMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRetainedMessage, schemas.GetRetainedMessageRequest, schemas.GetRetainedMessageResponse), output: &GetRetainedMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

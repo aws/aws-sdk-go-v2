@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"migrations":[{"createdAt":"2000-01-01T00:00:00Z","hasValidPlan":true,"migrationId":"__MigrationId__","name":"__Name__","namespace":"__Namespace__","state":"new","stateUpdatedAt":"2000-01-01T00:00:00Z","tableARN":"__TableARN__","tableBucketARN":"__TableBucketARN__","type":"start"},{"createdAt":"2000-01-01T00:00:00Z","hasValidPlan":true,"migrationId":"__MigrationId__","name":"__Name__","namespace":"__Namespace__","state":"new","stateUpdatedAt":"2000-01-01T00:00:00Z","tableARN":"__TableARN__","tableBucketARN":"__TableBucketARN__","type":"start"}],"nextToken":"__NextToken__"}

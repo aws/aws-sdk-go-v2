@@ -84,7 +84,9 @@ func (v *ListBatchSegmentJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchSegmentJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchSegmentJobs(s, schemas.ListBatchSegmentJobsResponse_batchSegmentJobs, v.BatchSegmentJobs)
+	if v.BatchSegmentJobs != nil {
+		serializeBatchSegmentJobs(s, schemas.ListBatchSegmentJobsResponse_batchSegmentJobs, v.BatchSegmentJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBatchSegmentJobsResponse_nextToken, *v.NextToken)
 	}

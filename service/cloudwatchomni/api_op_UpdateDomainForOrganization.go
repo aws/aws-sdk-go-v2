@@ -66,7 +66,9 @@ func (v *UpdateDomainForOrganizationInput) SerializeMembers(s smithy.ShapeSerial
 		v.IdentityProviderConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentityProviderList(s, schemas.UpdateDomainForOrganizationInput_identityProviders, v.IdentityProviders)
+	if v.IdentityProviders != nil {
+		serializeIdentityProviderList(s, schemas.UpdateDomainForOrganizationInput_identityProviders, v.IdentityProviders)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDomainForOrganizationInput_name, *v.Name)
 	}

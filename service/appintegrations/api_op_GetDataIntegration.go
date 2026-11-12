@@ -120,7 +120,9 @@ func (v *GetDataIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetDataIntegrationResponse_Name, *v.Name)
 	}
-	serializeObjectConfiguration(s, schemas.GetDataIntegrationResponse_ObjectConfiguration, v.ObjectConfiguration)
+	if v.ObjectConfiguration != nil {
+		serializeObjectConfiguration(s, schemas.GetDataIntegrationResponse_ObjectConfiguration, v.ObjectConfiguration)
+	}
 	if v.ScheduleConfiguration != nil {
 		s.WriteStruct(schemas.GetDataIntegrationResponse_ScheduleConfiguration)
 		v.ScheduleConfiguration.SerializeMembers(s)
@@ -129,7 +131,9 @@ func (v *GetDataIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceURI != nil {
 		s.WriteString(schemas.GetDataIntegrationResponse_SourceURI, *v.SourceURI)
 	}
-	serializeTagMap(s, schemas.GetDataIntegrationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDataIntegrationResponse_Tags, v.Tags)
+	}
 }
 func (v *GetDataIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataIntegrationResponse, func(s *smithy.Schema) error {

@@ -4,6 +4,8 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type ResetAllResourceLogLevelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetAllResourceLogLevelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetAllResourceLogLevelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetAllResourceLogLevelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type ResetAllResourceLogLevelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -35,13 +46,26 @@ type ResetAllResourceLogLevelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetAllResourceLogLevelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetAllResourceLogLevelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetAllResourceLogLevelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResetAllResourceLogLevelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetAllResourceLogLevelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetAllResourceLogLevelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetAllResourceLogLevels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetAllResourceLogLevels, schemas.ResetAllResourceLogLevelsRequest, schemas.ResetAllResourceLogLevelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetAllResourceLogLevels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetAllResourceLogLevels, schemas.ResetAllResourceLogLevelsRequest, schemas.ResetAllResourceLogLevelsResponse), output: &ResetAllResourceLogLevelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

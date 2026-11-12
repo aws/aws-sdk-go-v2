@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -108,6 +110,21 @@ type SetPlatformApplicationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetPlatformApplicationAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetPlatformApplicationAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetPlatformApplicationAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.SetPlatformApplicationAttributesInput_Attributes, v.Attributes)
+	}
+	if v.PlatformApplicationArn != nil {
+		s.WriteString(schemas.SetPlatformApplicationAttributesInput_PlatformApplicationArn, *v.PlatformApplicationArn)
+	}
+}
+
 type SetPlatformApplicationAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -115,13 +132,26 @@ type SetPlatformApplicationAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetPlatformApplicationAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetPlatformApplicationAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetPlatformApplicationAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetPlatformApplicationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetPlatformApplicationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetPlatformApplicationAttributes, schemas.SetPlatformApplicationAttributesInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetPlatformApplicationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetPlatformApplicationAttributes, schemas.SetPlatformApplicationAttributesInput, nil), output: &SetPlatformApplicationAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

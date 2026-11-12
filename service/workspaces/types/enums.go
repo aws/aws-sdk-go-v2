@@ -842,6 +842,25 @@ func (ImageType) Values() []ImageType {
 	}
 }
 
+type ImageValidationMode string
+
+// Enum values for ImageValidationMode
+const (
+	ImageValidationModeCustomerManaged ImageValidationMode = "CUSTOMER_MANAGED"
+	ImageValidationModeServiceManaged  ImageValidationMode = "SERVICE_MANAGED"
+)
+
+// Values returns all known values for ImageValidationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageValidationMode) Values() []ImageValidationMode {
+	return []ImageValidationMode{
+		"CUSTOMER_MANAGED",
+		"SERVICE_MANAGED",
+	}
+}
+
 type InternetFallbackProtocol string
 
 // Enum values for InternetFallbackProtocol
@@ -942,6 +961,12 @@ const (
 	OperatingSystemNameWindowsServer2025 OperatingSystemName = "WINDOWS_SERVER_2025"
 	OperatingSystemNameRhel8             OperatingSystemName = "RHEL_8"
 	OperatingSystemNameRocky8            OperatingSystemName = "ROCKY_8"
+	OperatingSystemNameUbuntu2404        OperatingSystemName = "UBUNTU_24_04"
+	OperatingSystemNameRhel9             OperatingSystemName = "RHEL_9"
+	OperatingSystemNameRocky9            OperatingSystemName = "ROCKY_9"
+	OperatingSystemNameUbuntu2604        OperatingSystemName = "UBUNTU_26_04"
+	OperatingSystemNameRhel10            OperatingSystemName = "RHEL_10"
+	OperatingSystemNameRocky10           OperatingSystemName = "ROCKY_10"
 )
 
 // Values returns all known values for OperatingSystemName. Note that this can be
@@ -964,6 +989,12 @@ func (OperatingSystemName) Values() []OperatingSystemName {
 		"WINDOWS_SERVER_2025",
 		"RHEL_8",
 		"ROCKY_8",
+		"UBUNTU_24_04",
+		"RHEL_9",
+		"ROCKY_9",
+		"UBUNTU_26_04",
+		"RHEL_10",
+		"ROCKY_10",
 	}
 }
 

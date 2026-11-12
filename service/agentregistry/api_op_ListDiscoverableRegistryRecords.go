@@ -58,7 +58,9 @@ func (v *ListDiscoverableRegistryRecordsInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListDiscoverableRegistryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryRecordFilterList(s, schemas.ListDiscoverableRegistryRecordsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeRegistryRecordFilterList(s, schemas.ListDiscoverableRegistryRecordsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDiscoverableRegistryRecordsRequest_maxResults, *v.MaxResults)
 	}
@@ -97,7 +99,9 @@ func (v *ListDiscoverableRegistryRecordsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDiscoverableRegistryRecordsResponse_nextToken, *v.NextToken)
 	}
-	serializeDiscoverableRegistryRecordSummaryList(s, schemas.ListDiscoverableRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+	if v.RegistryRecords != nil {
+		serializeDiscoverableRegistryRecordSummaryList(s, schemas.ListDiscoverableRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+	}
 }
 func (v *ListDiscoverableRegistryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDiscoverableRegistryRecordsResponse, func(s *smithy.Schema) error {

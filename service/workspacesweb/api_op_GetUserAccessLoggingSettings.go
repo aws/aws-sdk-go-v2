@@ -4,7 +4,9 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserAccessLoggingSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserAccessLoggingSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserAccessLoggingSettingsArn != nil {
+		s.WriteString(schemas.GetUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn, *v.UserAccessLoggingSettingsArn)
+	}
+}
+
 type GetUserAccessLoggingSettingsOutput struct {
 
 	// The user access logging settings.
@@ -45,13 +59,34 @@ type GetUserAccessLoggingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserAccessLoggingSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserAccessLoggingSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserAccessLoggingSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserAccessLoggingSettings != nil {
+		s.WriteStruct(schemas.GetUserAccessLoggingSettingsResponse_userAccessLoggingSettings)
+		v.UserAccessLoggingSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserAccessLoggingSettingsResponse_userAccessLoggingSettings:
+			v.UserAccessLoggingSettings = &types.UserAccessLoggingSettings{}
+			return v.UserAccessLoggingSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserAccessLoggingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserAccessLoggingSettings, schemas.GetUserAccessLoggingSettingsRequest, schemas.GetUserAccessLoggingSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserAccessLoggingSettings, schemas.GetUserAccessLoggingSettingsRequest, schemas.GetUserAccessLoggingSettingsResponse), output: &GetUserAccessLoggingSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

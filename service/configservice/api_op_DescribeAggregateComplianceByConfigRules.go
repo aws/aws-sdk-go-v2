@@ -98,7 +98,9 @@ func (v *DescribeAggregateComplianceByConfigRulesOutput) Serialize(s smithy.Shap
 }
 
 func (v *DescribeAggregateComplianceByConfigRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateComplianceByConfigRuleList(s, schemas.DescribeAggregateComplianceByConfigRulesResponse_AggregateComplianceByConfigRules, v.AggregateComplianceByConfigRules)
+	if v.AggregateComplianceByConfigRules != nil {
+		serializeAggregateComplianceByConfigRuleList(s, schemas.DescribeAggregateComplianceByConfigRulesResponse_AggregateComplianceByConfigRules, v.AggregateComplianceByConfigRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAggregateComplianceByConfigRulesResponse_NextToken, *v.NextToken)
 	}

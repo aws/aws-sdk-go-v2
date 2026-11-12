@@ -114,7 +114,9 @@ func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_description, *v.Description)
 	}
-	serializeDestinationPackageVersions(s, schemas.CreateJobTemplateRequest_destinationPackageVersions, v.DestinationPackageVersions)
+	if v.DestinationPackageVersions != nil {
+		serializeDestinationPackageVersions(s, schemas.CreateJobTemplateRequest_destinationPackageVersions, v.DestinationPackageVersions)
+	}
 	if v.Document != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_document, *v.Document)
 	}
@@ -137,13 +139,17 @@ func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobTemplateId != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_jobTemplateId, *v.JobTemplateId)
 	}
-	serializeMaintenanceWindows(s, schemas.CreateJobTemplateRequest_maintenanceWindows, v.MaintenanceWindows)
+	if v.MaintenanceWindows != nil {
+		serializeMaintenanceWindows(s, schemas.CreateJobTemplateRequest_maintenanceWindows, v.MaintenanceWindows)
+	}
 	if v.PresignedUrlConfig != nil {
 		s.WriteStruct(schemas.CreateJobTemplateRequest_presignedUrlConfig)
 		v.PresignedUrlConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateJobTemplateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateJobTemplateRequest_tags, v.Tags)
+	}
 	if v.TimeoutConfig != nil {
 		s.WriteStruct(schemas.CreateJobTemplateRequest_timeoutConfig)
 		v.TimeoutConfig.SerializeMembers(s)

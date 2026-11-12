@@ -4,6 +4,8 @@ package backupsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backupsearch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type StopSearchJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSearchJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSearchJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSearchJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchJobIdentifier != nil {
+		s.WriteString(schemas.StopSearchJobInput_SearchJobIdentifier, *v.SearchJobIdentifier)
+	}
+}
+
 type StopSearchJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type StopSearchJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSearchJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSearchJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSearchJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopSearchJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSearchJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSearchJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopSearchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSearchJob, schemas.StopSearchJobInput, schemas.StopSearchJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopSearchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSearchJob, schemas.StopSearchJobInput, schemas.StopSearchJobOutput), output: &StopSearchJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

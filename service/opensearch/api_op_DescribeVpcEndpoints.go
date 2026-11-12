@@ -43,7 +43,9 @@ func (v *DescribeVpcEndpointsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeVpcEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcEndpointIdList(s, schemas.DescribeVpcEndpointsRequest_VpcEndpointIds, v.VpcEndpointIds)
+	if v.VpcEndpointIds != nil {
+		serializeVpcEndpointIdList(s, schemas.DescribeVpcEndpointsRequest_VpcEndpointIds, v.VpcEndpointIds)
+	}
 }
 
 type DescribeVpcEndpointsOutput struct {
@@ -71,8 +73,12 @@ func (v *DescribeVpcEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeVpcEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcEndpointErrorList(s, schemas.DescribeVpcEndpointsResponse_VpcEndpointErrors, v.VpcEndpointErrors)
-	serializeVpcEndpoints(s, schemas.DescribeVpcEndpointsResponse_VpcEndpoints, v.VpcEndpoints)
+	if v.VpcEndpointErrors != nil {
+		serializeVpcEndpointErrorList(s, schemas.DescribeVpcEndpointsResponse_VpcEndpointErrors, v.VpcEndpointErrors)
+	}
+	if v.VpcEndpoints != nil {
+		serializeVpcEndpoints(s, schemas.DescribeVpcEndpointsResponse_VpcEndpoints, v.VpcEndpoints)
+	}
 }
 func (v *DescribeVpcEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeVpcEndpointsResponse, func(s *smithy.Schema) error {

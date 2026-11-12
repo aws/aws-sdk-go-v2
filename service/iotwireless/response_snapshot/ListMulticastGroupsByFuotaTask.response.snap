@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MulticastGroupList":[{"Id":"__Id__"},{"Id":"__Id__"}],"NextToken":"__NextToken__"}

@@ -152,7 +152,9 @@ func (v *ListInstrumentationConfigurationsOutput) SerializeMembers(s smithy.Shap
 	if v.Environment != nil {
 		s.WriteString(schemas.InstrumentationConfigurationsPage_Environment, *v.Environment)
 	}
-	serializeInstrumentationConfigurationsWithoutServiceEnv(s, schemas.InstrumentationConfigurationsPage_LatestConfigurations, v.LatestConfigurations)
+	if v.LatestConfigurations != nil {
+		serializeInstrumentationConfigurationsWithoutServiceEnv(s, schemas.InstrumentationConfigurationsPage_LatestConfigurations, v.LatestConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.InstrumentationConfigurationsPage_NextToken, *v.NextToken)
 	}

@@ -43,7 +43,9 @@ func (v *BatchDescribeModelPackageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDescribeModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelPackageArnList(s, schemas.BatchDescribeModelPackageInput_ModelPackageArnList, v.ModelPackageArnList)
+	if v.ModelPackageArnList != nil {
+		serializeModelPackageArnList(s, schemas.BatchDescribeModelPackageInput_ModelPackageArnList, v.ModelPackageArnList)
+	}
 }
 
 type BatchDescribeModelPackageOutput struct {
@@ -68,8 +70,12 @@ func (v *BatchDescribeModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDescribeModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDescribeModelPackageErrorMap(s, schemas.BatchDescribeModelPackageOutput_BatchDescribeModelPackageErrorMap, v.BatchDescribeModelPackageErrorMap)
-	serializeModelPackageSummaries(s, schemas.BatchDescribeModelPackageOutput_ModelPackageSummaries, v.ModelPackageSummaries)
+	if v.BatchDescribeModelPackageErrorMap != nil {
+		serializeBatchDescribeModelPackageErrorMap(s, schemas.BatchDescribeModelPackageOutput_BatchDescribeModelPackageErrorMap, v.BatchDescribeModelPackageErrorMap)
+	}
+	if v.ModelPackageSummaries != nil {
+		serializeModelPackageSummaries(s, schemas.BatchDescribeModelPackageOutput_ModelPackageSummaries, v.ModelPackageSummaries)
+	}
 }
 func (v *BatchDescribeModelPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDescribeModelPackageOutput, func(s *smithy.Schema) error {

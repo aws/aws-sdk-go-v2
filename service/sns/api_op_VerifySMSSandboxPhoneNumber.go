@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type VerifySMSSandboxPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySMSSandboxPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifySMSSandboxPhoneNumberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySMSSandboxPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OneTimePassword != nil {
+		s.WriteString(schemas.VerifySMSSandboxPhoneNumberInput_OneTimePassword, *v.OneTimePassword)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.VerifySMSSandboxPhoneNumberInput_PhoneNumber, *v.PhoneNumber)
+	}
+}
+
 // The destination phone number's verification status.
 type VerifySMSSandboxPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -59,13 +76,26 @@ type VerifySMSSandboxPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySMSSandboxPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifySMSSandboxPhoneNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySMSSandboxPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *VerifySMSSandboxPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifySMSSandboxPhoneNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifySMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifySMSSandboxPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySMSSandboxPhoneNumber, schemas.VerifySMSSandboxPhoneNumberInput, schemas.VerifySMSSandboxPhoneNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpVerifySMSSandboxPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySMSSandboxPhoneNumber, schemas.VerifySMSSandboxPhoneNumberInput, schemas.VerifySMSSandboxPhoneNumberResult), output: &VerifySMSSandboxPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

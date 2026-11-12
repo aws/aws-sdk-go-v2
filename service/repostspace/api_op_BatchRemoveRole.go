@@ -4,7 +4,9 @@ package repostspace
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type BatchRemoveRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRemoveRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRemoveRoleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRemoveRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorIds != nil {
+		serializeAccessorIdList(s, schemas.BatchRemoveRoleInput_accessorIds, v.AccessorIds)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.BatchRemoveRoleInput_role, string(v.Role))
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.BatchRemoveRoleInput_spaceId, *v.SpaceId)
+	}
+}
+
 type BatchRemoveRoleOutput struct {
 
 	// An array of errors that occurred when roles were removed.
@@ -62,13 +82,36 @@ type BatchRemoveRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRemoveRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRemoveRoleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRemoveRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Errors != nil {
+		serializeBatchErrorList(s, schemas.BatchRemoveRoleOutput_errors, v.Errors)
+	}
+	if v.RemovedAccessorIds != nil {
+		serializeAccessorIdList(s, schemas.BatchRemoveRoleOutput_removedAccessorIds, v.RemovedAccessorIds)
+	}
+}
+func (v *BatchRemoveRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRemoveRoleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchRemoveRoleOutput_errors:
+			return deserializeBatchErrorList(d, schemas.BatchRemoveRoleOutput_errors, &v.Errors)
+		case schemas.BatchRemoveRoleOutput_removedAccessorIds:
+			return deserializeAccessorIdList(d, schemas.BatchRemoveRoleOutput_removedAccessorIds, &v.RemovedAccessorIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchRemoveRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchRemoveRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRemoveRole, schemas.BatchRemoveRoleInput, schemas.BatchRemoveRoleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchRemoveRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRemoveRole, schemas.BatchRemoveRoleInput, schemas.BatchRemoveRoleOutput), output: &BatchRemoveRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

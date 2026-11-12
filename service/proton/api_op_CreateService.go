@@ -119,7 +119,9 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Spec != nil {
 		s.WriteString(schemas.CreateServiceInput_spec, *v.Spec)
 	}
-	serializeTagList(s, schemas.CreateServiceInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServiceInput_tags, v.Tags)
+	}
 	if v.TemplateMajorVersion != nil {
 		s.WriteString(schemas.CreateServiceInput_templateMajorVersion, *v.TemplateMajorVersion)
 	}

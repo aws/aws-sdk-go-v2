@@ -2276,6 +2276,7 @@ func TestCheckRequestSnapshot_CreateDatasetExportJob(t *testing.T) {
 				},
 			},
 		},
+		JobName: ptr.String("__JobName__"),
 		ErrorReportLocation: &types.ExportErrorReportLocation{
 			S3Uri: ptr.String("__S3Uri__"),
 		},
@@ -9521,6 +9522,7 @@ func TestUpdateRequestSnapshot_CreateDatasetExportJob(t *testing.T) {
 				},
 			},
 		},
+		JobName: ptr.String("__JobName__"),
 		ErrorReportLocation: &types.ExportErrorReportLocation{
 			S3Uri: ptr.String("__S3Uri__"),
 		},

@@ -125,6 +125,8 @@ func TestCheckResponseSnapshot_AcceptAttachment(t *testing.T) {
 			AttachmentPolicyRuleNumber: ptr.Int32(1),
 			SegmentName:                ptr.String("__SegmentName__"),
 			NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+			NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+			NatSystemRouteSupport:      ptr.Bool(true),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -345,6 +347,8 @@ func TestCheckResponseSnapshot_CreateConnectAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -419,6 +423,19 @@ func TestCheckResponseSnapshot_CreateConnectAttachment(t *testing.T) {
 		EdgeLocation:          ptr.String("__EdgeLocation__"),
 		TransportAttachmentId: ptr.String("__TransportAttachmentId__"),
 		RoutingPolicyLabel:    ptr.String("__RoutingPolicyLabel__"),
+		NatGatewaySupport:     types.NatGatewaySupportValue("ENABLE"),
+		NatGatewayRules: []types.NatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
 		Options: &types.ConnectAttachmentOptions{
 			Protocol: types.TunnelProtocol("GRE"),
 		},
@@ -857,6 +874,8 @@ func TestCheckResponseSnapshot_CreateDirectConnectGatewayAttachment(t *testing.T
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -930,6 +949,20 @@ func TestCheckResponseSnapshot_CreateDirectConnectGatewayAttachment(t *testing.T
 		EdgeLocations: []string{
 			"__Member__",
 			"__Member__",
+		},
+		NatGatewaySupport:     types.NatGatewaySupportValue("ENABLE"),
+		NatSystemRouteSupport: ptr.Bool(true),
+		NatGatewayRules: []types.NatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -1145,6 +1178,8 @@ func TestCheckResponseSnapshot_CreateSiteToSiteVpnAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1212,9 +1247,23 @@ func TestCheckResponseSnapshot_CreateSiteToSiteVpnAttachment(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CreateSiteToSiteVpnAttachment(context.Background(), &CreateSiteToSiteVpnAttachmentInput{
-		CoreNetworkId:      ptr.String("__CoreNetworkId__"),
-		VpnConnectionArn:   ptr.String("__VpnConnectionArn__"),
-		RoutingPolicyLabel: ptr.String("__RoutingPolicyLabel__"),
+		CoreNetworkId:         ptr.String("__CoreNetworkId__"),
+		VpnConnectionArn:      ptr.String("__VpnConnectionArn__"),
+		RoutingPolicyLabel:    ptr.String("__RoutingPolicyLabel__"),
+		NatGatewaySupport:     types.NatGatewaySupportValue("ENABLE"),
+		NatSystemRouteSupport: ptr.Bool(true),
+		NatGatewayRules: []types.NatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -1333,6 +1382,8 @@ func TestCheckResponseSnapshot_CreateTransitGatewayRouteTableAttachment(t *testi
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1443,6 +1494,8 @@ func TestCheckResponseSnapshot_CreateVpcAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -1532,6 +1585,19 @@ func TestCheckResponseSnapshot_CreateVpcAttachment(t *testing.T) {
 			SecurityGroupReferencingSupport: ptr.Bool(true),
 		},
 		RoutingPolicyLabel: ptr.String("__RoutingPolicyLabel__"),
+		NatGatewaySupport:  types.NatGatewaySupportValue("ENABLE"),
+		NatGatewayRules: []types.NatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -1570,6 +1636,8 @@ func TestCheckResponseSnapshot_DeleteAttachment(t *testing.T) {
 			AttachmentPolicyRuleNumber: ptr.Int32(1),
 			SegmentName:                ptr.String("__SegmentName__"),
 			NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+			NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+			NatSystemRouteSupport:      ptr.Bool(true),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -2483,6 +2551,8 @@ func TestCheckResponseSnapshot_GetConnectAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -3825,6 +3895,8 @@ func TestCheckResponseSnapshot_GetDirectConnectGatewayAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -4193,6 +4265,11 @@ func TestCheckResponseSnapshot_GetNetworkRoutes(t *testing.T) {
 			SegmentName:   ptr.String("__SegmentName__"),
 			EdgeLocation:  ptr.String("__EdgeLocation__"),
 		},
+		CoreNetworkNetworkFunctionGroup: &types.CoreNetworkNetworkFunctionGroupIdentifier{
+			CoreNetworkId:            ptr.String("__CoreNetworkId__"),
+			NetworkFunctionGroupName: ptr.String("__NetworkFunctionGroupName__"),
+			EdgeLocation:             ptr.String("__EdgeLocation__"),
+		},
 		RouteTableType:      types.RouteTableType("TRANSIT_GATEWAY_ROUTE_TABLE"),
 		RouteTableTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		NetworkRoutes: []types.NetworkRoute{
@@ -4249,6 +4326,7 @@ func TestCheckResponseSnapshot_GetNetworkRoutes(t *testing.T) {
 				Type:         types.RouteType("PROPAGATED"),
 			},
 		},
+		NextToken: ptr.String("__NextToken__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetNetworkRoutes.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4307,6 +4385,8 @@ func TestCheckResponseSnapshot_GetNetworkRoutes(t *testing.T) {
 				"__Member__",
 			},
 		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4533,6 +4613,8 @@ func TestCheckResponseSnapshot_GetSiteToSiteVpnAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -4865,6 +4947,8 @@ func TestCheckResponseSnapshot_GetTransitGatewayRouteTableAttachment(t *testing.
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -4962,6 +5046,8 @@ func TestCheckResponseSnapshot_GetVpcAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -5048,6 +5134,78 @@ func TestCheckResponseSnapshot_GetVpcAttachment(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListAttachmentNatConfigurations(t *testing.T) {
+	want := &ListAttachmentNatConfigurationsOutput{
+		AttachmentNatConfigurations: []types.AttachmentNatConfiguration{
+			{
+				AttachmentId:          ptr.String("__AttachmentId__"),
+				NatGatewaySupport:     types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport: ptr.Bool(true),
+				NatGatewayRules: []types.NatRule{
+					{
+						RuleNumber:      ptr.Int32(1),
+						MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+						NatCidr:         ptr.String("__NatCidr__"),
+						State:           types.NatRuleState("CREATING"),
+					},
+					{
+						RuleNumber:      ptr.Int32(1),
+						MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+						NatCidr:         ptr.String("__NatCidr__"),
+						State:           types.NatRuleState("CREATING"),
+					},
+				},
+			},
+			{
+				AttachmentId:          ptr.String("__AttachmentId__"),
+				NatGatewaySupport:     types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport: ptr.Bool(true),
+				NatGatewayRules: []types.NatRule{
+					{
+						RuleNumber:      ptr.Int32(1),
+						MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+						NatCidr:         ptr.String("__NatCidr__"),
+						State:           types.NatRuleState("CREATING"),
+					},
+					{
+						RuleNumber:      ptr.Int32(1),
+						MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+						NatCidr:         ptr.String("__NatCidr__"),
+						State:           types.NatRuleState("CREATING"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAttachmentNatConfigurations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAttachmentNatConfigurations(context.Background(), &ListAttachmentNatConfigurationsInput{
+		CoreNetworkId: ptr.String("__CoreNetworkId__"),
+		AttachmentId:  ptr.String("__AttachmentId__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAttachmentNatConfigurations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAttachmentRoutingPolicyAssociations(t *testing.T) {
 	want := &ListAttachmentRoutingPolicyAssociationsOutput{
 		AttachmentRoutingPolicyAssociations: []types.AttachmentRoutingPolicyAssociationSummary{
@@ -5119,6 +5277,8 @@ func TestCheckResponseSnapshot_ListAttachments(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -5190,6 +5350,8 @@ func TestCheckResponseSnapshot_ListAttachments(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -5484,6 +5646,22 @@ func TestCheckResponseSnapshot_ListCoreNetworkRoutingInformation(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		ExactPrefixMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LongestPrefixMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetOfMatches: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SupernetOfMatches: []string{
+			"__Member__",
+			"__Member__",
 		},
 		LocalPreferenceMatches: []string{
 			"__Member__",
@@ -5903,6 +6081,8 @@ func TestCheckResponseSnapshot_RejectAttachment(t *testing.T) {
 			AttachmentPolicyRuleNumber: ptr.Int32(1),
 			SegmentName:                ptr.String("__SegmentName__"),
 			NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+			NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+			NatSystemRouteSupport:      ptr.Bool(true),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -6262,6 +6442,60 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateAttachmentNatConfiguration(t *testing.T) {
+	want := &UpdateAttachmentNatConfigurationOutput{
+		AttachmentId:          ptr.String("__AttachmentId__"),
+		NatGatewaySupport:     types.NatGatewaySupportState("ENABLED"),
+		NatSystemRouteSupport: ptr.Bool(true),
+		NatGatewayRules: []types.NatRule{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.NatRuleState("CREATING"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.NatRuleState("CREATING"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateAttachmentNatConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateAttachmentNatConfiguration(context.Background(), &UpdateAttachmentNatConfigurationInput{
+		AttachmentId:          ptr.String("__AttachmentId__"),
+		NatGatewaySupport:     types.NatGatewaySupportValue("ENABLE"),
+		NatSystemRouteSupport: ptr.Bool(true),
+		NatGatewayRules: []types.NatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAttachmentNatConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 	want := &UpdateConnectionOutput{
 		Connection: &types.Connection{
@@ -6518,6 +6752,8 @@ func TestCheckResponseSnapshot_UpdateDirectConnectGatewayAttachment(t *testing.T
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -6795,6 +7031,8 @@ func TestCheckResponseSnapshot_UpdateVpcAttachment(t *testing.T) {
 				AttachmentPolicyRuleNumber: ptr.Int32(1),
 				SegmentName:                ptr.String("__SegmentName__"),
 				NetworkFunctionGroupName:   ptr.String("__NetworkFunctionGroupName__"),
+				NatGatewaySupport:          types.NatGatewaySupportState("ENABLED"),
+				NatSystemRouteSupport:      ptr.Bool(true),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),

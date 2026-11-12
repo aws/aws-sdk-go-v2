@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/StopTargetedSentimentDetectionJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.StopTargetedSentimentDetectionJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"JobId":"__JobId__"}
+¿eJobIdi__JobId__ÿ

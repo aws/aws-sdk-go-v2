@@ -105,7 +105,9 @@ func (v *ListSourceLocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSourceLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSourceLocation(s, schemas.ListSourceLocationsResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfSourceLocation(s, schemas.ListSourceLocationsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceLocationsResponse_NextToken, *v.NextToken)
 	}

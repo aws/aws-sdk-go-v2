@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"repositoryEndpoint":"__RepositoryEndpoint__"}

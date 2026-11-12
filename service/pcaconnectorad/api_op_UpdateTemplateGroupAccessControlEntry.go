@@ -4,7 +4,9 @@ package pcaconnectorad
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,29 @@ type UpdateTemplateGroupAccessControlEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateGroupAccessControlEntryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateGroupAccessControlEntryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateGroupAccessControlEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRights != nil {
+		s.WriteStruct(schemas.UpdateTemplateGroupAccessControlEntryRequest_AccessRights)
+		v.AccessRights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupDisplayName != nil {
+		s.WriteString(schemas.UpdateTemplateGroupAccessControlEntryRequest_GroupDisplayName, *v.GroupDisplayName)
+	}
+	if v.GroupSecurityIdentifier != nil {
+		s.WriteString(schemas.UpdateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier, *v.GroupSecurityIdentifier)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.UpdateTemplateGroupAccessControlEntryRequest_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type UpdateTemplateGroupAccessControlEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +84,26 @@ type UpdateTemplateGroupAccessControlEntryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateGroupAccessControlEntryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateGroupAccessControlEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTemplateGroupAccessControlEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplateGroupAccessControlEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplateGroupAccessControlEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplateGroupAccessControlEntry, schemas.UpdateTemplateGroupAccessControlEntryRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTemplateGroupAccessControlEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplateGroupAccessControlEntry, schemas.UpdateTemplateGroupAccessControlEntryRequest, nil), output: &UpdateTemplateGroupAccessControlEntryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

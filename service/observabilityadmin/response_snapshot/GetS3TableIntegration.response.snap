@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreatedTimeStamp":1,"DestinationTableBucketArn":"__DestinationTableBucketArn__","Encryption":{"KmsKeyArn":"__KmsKeyArn__","SseAlgorithm":"aws:kms"},"RoleArn":"__RoleArn__","Status":"ACTIVE"}

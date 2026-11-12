@@ -180,7 +180,9 @@ func (v *DeleteReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DeleteReservationResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.DeleteReservationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DeleteReservationResponse_Tags, v.Tags)
+	}
 	if v.UsagePrice != nil {
 		s.WriteFloat64(schemas.DeleteReservationResponse_UsagePrice, *v.UsagePrice)
 	}

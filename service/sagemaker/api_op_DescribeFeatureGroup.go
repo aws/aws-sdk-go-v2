@@ -191,7 +191,9 @@ func (v *DescribeFeatureGroupOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FailureReason != nil {
 		s.WriteString(schemas.DescribeFeatureGroupResponse_FailureReason, *v.FailureReason)
 	}
-	serializeFeatureDefinitions(s, schemas.DescribeFeatureGroupResponse_FeatureDefinitions, v.FeatureDefinitions)
+	if v.FeatureDefinitions != nil {
+		serializeFeatureDefinitions(s, schemas.DescribeFeatureGroupResponse_FeatureDefinitions, v.FeatureDefinitions)
+	}
 	if v.FeatureGroupArn != nil {
 		s.WriteString(schemas.DescribeFeatureGroupResponse_FeatureGroupArn, *v.FeatureGroupArn)
 	}

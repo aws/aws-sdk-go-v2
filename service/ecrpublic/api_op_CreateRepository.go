@@ -67,7 +67,9 @@ func (v *CreateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.CreateRepositoryRequest_repositoryName, *v.RepositoryName)
 	}
-	serializeTagList(s, schemas.CreateRepositoryRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRepositoryRequest_tags, v.Tags)
+	}
 }
 
 type CreateRepositoryOutput struct {

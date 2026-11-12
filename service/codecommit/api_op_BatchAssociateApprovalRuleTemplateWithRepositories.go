@@ -55,7 +55,9 @@ func (v *BatchAssociateApprovalRuleTemplateWithRepositoriesInput) SerializeMembe
 	if v.ApprovalRuleTemplateName != nil {
 		s.WriteString(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesInput_approvalRuleTemplateName, *v.ApprovalRuleTemplateName)
 	}
-	serializeRepositoryNameList(s, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesInput_repositoryNames, v.RepositoryNames)
+	if v.RepositoryNames != nil {
+		serializeRepositoryNameList(s, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesInput_repositoryNames, v.RepositoryNames)
+	}
 }
 
 type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
@@ -84,8 +86,12 @@ func (v *BatchAssociateApprovalRuleTemplateWithRepositoriesOutput) Serialize(s s
 }
 
 func (v *BatchAssociateApprovalRuleTemplateWithRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositoryNameList(s, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput_associatedRepositoryNames, v.AssociatedRepositoryNames)
-	serializeBatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList(s, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput_errors, v.Errors)
+	if v.AssociatedRepositoryNames != nil {
+		serializeRepositoryNameList(s, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput_associatedRepositoryNames, v.AssociatedRepositoryNames)
+	}
+	if v.Errors != nil {
+		serializeBatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList(s, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput_errors, v.Errors)
+	}
 }
 func (v *BatchAssociateApprovalRuleTemplateWithRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput, func(s *smithy.Schema) error {

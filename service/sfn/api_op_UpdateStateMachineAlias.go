@@ -81,7 +81,9 @@ func (v *UpdateStateMachineAliasInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateStateMachineAliasInput_description, *v.Description)
 	}
-	serializeRoutingConfigurationList(s, schemas.UpdateStateMachineAliasInput_routingConfiguration, v.RoutingConfiguration)
+	if v.RoutingConfiguration != nil {
+		serializeRoutingConfigurationList(s, schemas.UpdateStateMachineAliasInput_routingConfiguration, v.RoutingConfiguration)
+	}
 	if v.StateMachineAliasArn != nil {
 		s.WriteString(schemas.UpdateStateMachineAliasInput_stateMachineAliasArn, *v.StateMachineAliasArn)
 	}

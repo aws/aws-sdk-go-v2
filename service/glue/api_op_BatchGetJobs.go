@@ -47,7 +47,9 @@ func (v *BatchGetJobsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobNameList(s, schemas.BatchGetJobsRequest_JobNames, v.JobNames)
+	if v.JobNames != nil {
+		serializeJobNameList(s, schemas.BatchGetJobsRequest_JobNames, v.JobNames)
+	}
 }
 
 type BatchGetJobsOutput struct {
@@ -71,8 +73,12 @@ func (v *BatchGetJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobList(s, schemas.BatchGetJobsResponse_Jobs, v.Jobs)
-	serializeJobNameList(s, schemas.BatchGetJobsResponse_JobsNotFound, v.JobsNotFound)
+	if v.Jobs != nil {
+		serializeJobList(s, schemas.BatchGetJobsResponse_Jobs, v.Jobs)
+	}
+	if v.JobsNotFound != nil {
+		serializeJobNameList(s, schemas.BatchGetJobsResponse_JobsNotFound, v.JobsNotFound)
+	}
 }
 func (v *BatchGetJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetJobsResponse, func(s *smithy.Schema) error {

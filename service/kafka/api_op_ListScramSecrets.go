@@ -84,7 +84,9 @@ func (v *ListScramSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListScramSecretsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOf__string(s, schemas.ListScramSecretsResponse_SecretArnList, v.SecretArnList)
+	if v.SecretArnList != nil {
+		serialize__listOf__string(s, schemas.ListScramSecretsResponse_SecretArnList, v.SecretArnList)
+	}
 }
 func (v *ListScramSecretsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListScramSecretsResponse, func(s *smithy.Schema) error {

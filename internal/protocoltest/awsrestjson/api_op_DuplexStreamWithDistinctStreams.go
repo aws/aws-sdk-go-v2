@@ -60,7 +60,9 @@ func (v *DuplexStreamWithDistinctStreamsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DuplexStreamWithDistinctStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSingletonEventStream(s, schemas.DuplexStreamWithDistinctStreamsOutput_stream, v.Stream)
+	if v.Stream != nil {
+		serializeSingletonEventStream(s, schemas.DuplexStreamWithDistinctStreamsOutput_stream, v.Stream)
+	}
 }
 func (v *DuplexStreamWithDistinctStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DuplexStreamWithDistinctStreamsOutput, func(s *smithy.Schema) error {

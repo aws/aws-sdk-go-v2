@@ -164,6 +164,11 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -285,6 +290,11 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		TriggerMode:        ptr.String("__TriggerMode__"),
@@ -739,6 +749,11 @@ func TestCheckResponseSnapshot_UpdateWorkflow(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		TriggerMode: ptr.String("__TriggerMode__"),
 	})
 	if err != nil {
@@ -794,6 +809,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{
@@ -862,6 +882,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -927,6 +952,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -989,6 +1019,11 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{
@@ -1089,6 +1124,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1154,6 +1194,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{
@@ -1229,6 +1274,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{

@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetTrackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackName != nil {
+		s.WriteString(schemas.GetTrackRequest_trackName, *v.TrackName)
+	}
+}
+
 type GetTrackOutput struct {
 
 	// The version of the specified track.
@@ -45,13 +59,34 @@ type GetTrackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Track != nil {
+		s.WriteStruct(schemas.GetTrackResponse_track)
+		v.Track.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTrackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrackResponse_track:
+			v.Track = &types.ServerlessTrack{}
+			return v.Track.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTrack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrack, schemas.GetTrackRequest, schemas.GetTrackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTrack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrack, schemas.GetTrackRequest, schemas.GetTrackResponse), output: &GetTrackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

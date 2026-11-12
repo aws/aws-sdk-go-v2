@@ -79,7 +79,9 @@ func (v *ListTaxRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTaxRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountDetailsList(s, schemas.ListTaxRegistrationsResponse_accountDetails, v.AccountDetails)
+	if v.AccountDetails != nil {
+		serializeAccountDetailsList(s, schemas.ListTaxRegistrationsResponse_accountDetails, v.AccountDetails)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTaxRegistrationsResponse_nextToken, *v.NextToken)
 	}

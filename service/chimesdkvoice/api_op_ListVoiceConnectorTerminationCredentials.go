@@ -65,7 +65,9 @@ func (v *ListVoiceConnectorTerminationCredentialsOutput) Serialize(s smithy.Shap
 }
 
 func (v *ListVoiceConnectorTerminationCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSensitiveStringList(s, schemas.ListVoiceConnectorTerminationCredentialsResponse_Usernames, v.Usernames)
+	if v.Usernames != nil {
+		serializeSensitiveStringList(s, schemas.ListVoiceConnectorTerminationCredentialsResponse_Usernames, v.Usernames)
+	}
 }
 func (v *ListVoiceConnectorTerminationCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVoiceConnectorTerminationCredentialsResponse, func(s *smithy.Schema) error {

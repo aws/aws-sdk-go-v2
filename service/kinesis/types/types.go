@@ -129,7 +129,9 @@ func (v *ChannelDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceExecutionRoleARN != nil {
 		s.WriteString(schemas.ChannelDescription_ServiceExecutionRoleARN, *v.ServiceExecutionRoleARN)
 	}
-	serializeChannelStreamDescriptionList(s, schemas.ChannelDescription_StreamConfigurationList, v.StreamConfigurationList)
+	if v.StreamConfigurationList != nil {
+		serializeChannelStreamDescriptionList(s, schemas.ChannelDescription_StreamConfigurationList, v.StreamConfigurationList)
+	}
 }
 func (v *ChannelDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChannelDescription, func(s *smithy.Schema) error {
@@ -532,7 +534,9 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelStatusReason != nil {
 		s.WriteString(schemas.ChannelSummary_ChannelStatusReason, *v.ChannelStatusReason)
 	}
-	serializeChannelStreamIdentifierList(s, schemas.ChannelSummary_Streams, v.Streams)
+	if v.Streams != nil {
+		serializeChannelStreamIdentifierList(s, schemas.ChannelSummary_Streams, v.Streams)
+	}
 }
 func (v *ChannelSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChannelSummary, func(s *smithy.Schema) error {
@@ -608,7 +612,9 @@ func (v *ChildShard) SerializeMembers(s smithy.ShapeSerializer) {
 		v.HashKeyRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeShardIdList(s, schemas.ChildShard_ParentShards, v.ParentShards)
+	if v.ParentShards != nil {
+		serializeShardIdList(s, schemas.ChildShard_ParentShards, v.ParentShards)
+	}
 	if v.ShardId != nil {
 		s.WriteString(schemas.ChildShard_ShardId, *v.ShardId)
 	}
@@ -992,7 +998,9 @@ func (v *EnhancedMetrics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnhancedMetrics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricsNameList(s, schemas.EnhancedMetrics_ShardLevelMetrics, v.ShardLevelMetrics)
+	if v.ShardLevelMetrics != nil {
+		serializeMetricsNameList(s, schemas.EnhancedMetrics_ShardLevelMetrics, v.ShardLevelMetrics)
+	}
 }
 func (v *EnhancedMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnhancedMetrics, func(s *smithy.Schema) error {
@@ -1232,7 +1240,9 @@ func (v *PartitionSpec) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartitionFieldList(s, schemas.PartitionSpec_PartitionFields, v.PartitionFields)
+	if v.PartitionFields != nil {
+		serializePartitionFieldList(s, schemas.PartitionSpec_PartitionFields, v.PartitionFields)
+	}
 }
 func (v *PartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionSpec, func(s *smithy.Schema) error {
@@ -1902,7 +1912,9 @@ func (v *S3TablesDestinationConfiguration) SerializeMembers(s smithy.ShapeSerial
 		v.DeadLetterQueueS3Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeS3TablesConfigurationList(s, schemas.S3TablesDestinationConfiguration_S3TablesConfigurationList, v.S3TablesConfigurationList)
+	if v.S3TablesConfigurationList != nil {
+		serializeS3TablesConfigurationList(s, schemas.S3TablesDestinationConfiguration_S3TablesConfigurationList, v.S3TablesConfigurationList)
+	}
 }
 func (v *S3TablesDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3TablesDestinationConfiguration, func(s *smithy.Schema) error {
@@ -1957,7 +1969,9 @@ func (v *S3TablesDestinationDescription) SerializeMembers(s smithy.ShapeSerializ
 		v.DeadLetterQueueS3Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeS3TablesConfigurationList(s, schemas.S3TablesDestinationDescription_S3TablesConfigurationList, v.S3TablesConfigurationList)
+	if v.S3TablesConfigurationList != nil {
+		serializeS3TablesConfigurationList(s, schemas.S3TablesDestinationDescription_S3TablesConfigurationList, v.S3TablesConfigurationList)
+	}
 }
 func (v *S3TablesDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3TablesDestinationDescription, func(s *smithy.Schema) error {
@@ -2395,7 +2409,9 @@ func (v *StreamDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.StreamDescription_EncryptionType, string(v.EncryptionType))
 	}
-	serializeEnhancedMonitoringList(s, schemas.StreamDescription_EnhancedMonitoring, v.EnhancedMonitoring)
+	if v.EnhancedMonitoring != nil {
+		serializeEnhancedMonitoringList(s, schemas.StreamDescription_EnhancedMonitoring, v.EnhancedMonitoring)
+	}
 	if v.HasMoreShards != nil {
 		s.WriteBool(schemas.StreamDescription_HasMoreShards, *v.HasMoreShards)
 	}
@@ -2405,7 +2421,9 @@ func (v *StreamDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RetentionPeriodHours != nil {
 		s.WriteInt32(schemas.StreamDescription_RetentionPeriodHours, *v.RetentionPeriodHours)
 	}
-	serializeShardList(s, schemas.StreamDescription_Shards, v.Shards)
+	if v.Shards != nil {
+		serializeShardList(s, schemas.StreamDescription_Shards, v.Shards)
+	}
 	if v.StreamARN != nil {
 		s.WriteString(schemas.StreamDescription_StreamARN, *v.StreamARN)
 	}
@@ -2596,7 +2614,9 @@ func (v *StreamDescriptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.StreamDescriptionSummary_EncryptionType, string(v.EncryptionType))
 	}
-	serializeEnhancedMonitoringList(s, schemas.StreamDescriptionSummary_EnhancedMonitoring, v.EnhancedMonitoring)
+	if v.EnhancedMonitoring != nil {
+		serializeEnhancedMonitoringList(s, schemas.StreamDescriptionSummary_EnhancedMonitoring, v.EnhancedMonitoring)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.StreamDescriptionSummary_KeyId, *v.KeyId)
 	}
@@ -2909,14 +2929,18 @@ func (v *SubscribeToShardEvent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubscribeToShardEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChildShardList(s, schemas.SubscribeToShardEvent_ChildShards, v.ChildShards)
+	if v.ChildShards != nil {
+		serializeChildShardList(s, schemas.SubscribeToShardEvent_ChildShards, v.ChildShards)
+	}
 	if v.ContinuationSequenceNumber != nil {
 		s.WriteString(schemas.SubscribeToShardEvent_ContinuationSequenceNumber, *v.ContinuationSequenceNumber)
 	}
 	if v.MillisBehindLatest != nil {
 		s.WriteInt64(schemas.SubscribeToShardEvent_MillisBehindLatest, *v.MillisBehindLatest)
 	}
-	serializeRecordList(s, schemas.SubscribeToShardEvent_Records, v.Records)
+	if v.Records != nil {
+		serializeRecordList(s, schemas.SubscribeToShardEvent_Records, v.Records)
+	}
 }
 func (v *SubscribeToShardEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SubscribeToShardEvent, func(s *smithy.Schema) error {

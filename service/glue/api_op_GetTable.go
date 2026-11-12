@@ -86,7 +86,9 @@ func (v *GetTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableAttributesList(s, schemas.GetTableRequest_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeTableAttributesList(s, schemas.GetTableRequest_AttributesToGet, v.AttributesToGet)
+	}
 	if v.AuditContext != nil {
 		s.WriteStruct(schemas.GetTableRequest_AuditContext)
 		v.AuditContext.SerializeMembers(s)

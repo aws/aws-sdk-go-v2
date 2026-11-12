@@ -4,7 +4,9 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type DescribeAttachmentUploadStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAttachmentUploadStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAttachmentUploadStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAttachmentUploadStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.DescribeAttachmentUploadStatusRequest_dryRun, *v.DryRun)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.DescribeAttachmentUploadStatusRequest_uploadId, *v.UploadId)
+	}
+}
+
 type DescribeAttachmentUploadStatusOutput struct {
 
 	// The name of the file being uploaded, including the file extension.
@@ -86,13 +103,50 @@ type DescribeAttachmentUploadStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAttachmentUploadStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAttachmentUploadStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAttachmentUploadStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileName != nil {
+		s.WriteString(schemas.DescribeAttachmentUploadStatusResponse_fileName, *v.FileName)
+	}
+	if v.UploadProgress != nil {
+		s.WriteStruct(schemas.DescribeAttachmentUploadStatusResponse_uploadProgress)
+		v.UploadProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UploadStatus != "" {
+		s.WriteString(schemas.DescribeAttachmentUploadStatusResponse_uploadStatus, string(v.UploadStatus))
+	}
+}
+func (v *DescribeAttachmentUploadStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAttachmentUploadStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAttachmentUploadStatusResponse_fileName:
+			v.FileName = new(string)
+			return d.ReadString(schemas.DescribeAttachmentUploadStatusResponse_fileName, v.FileName)
+		case schemas.DescribeAttachmentUploadStatusResponse_uploadProgress:
+			v.UploadProgress = &types.UploadProgress{}
+			return v.UploadProgress.Deserialize(d)
+		case schemas.DescribeAttachmentUploadStatusResponse_uploadStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAttachmentUploadStatusResponse_uploadStatus, &ev); err != nil {
+				return err
+			}
+			v.UploadStatus = types.UploadStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAttachmentUploadStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAttachmentUploadStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAttachmentUploadStatus, schemas.DescribeAttachmentUploadStatusRequest, schemas.DescribeAttachmentUploadStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAttachmentUploadStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAttachmentUploadStatus, schemas.DescribeAttachmentUploadStatusRequest, schemas.DescribeAttachmentUploadStatusResponse), output: &DescribeAttachmentUploadStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

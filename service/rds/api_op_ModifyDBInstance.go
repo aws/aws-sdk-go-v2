@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -220,6 +222,125 @@ type ModifyDBInstanceInput struct {
 	// instance has no effect on the DB cluster setting. For more information, see
 	// ModifyDBCluster .
 	CopyTagsToSnapshot *bool
+
+	// The identifier or the name of the DB capacity reservation for the DB instance
+	// to use. You can specify the identifier, which has the prefix dbcr- , or the
+	// reservation name. After the modification completes, the DB instance uses
+	// reserved capacity from this reservation.
+	//
+	// You can't change the DB capacity reservation of a DB instance on its own. A
+	// request that changes the reservation must also change the DB instance class, the
+	// Multi-AZ setting, the license model, or the engine. Therefore, this request
+	// always changes the configuration of the DB instance.
+	//
+	// If the DB instance already uses the reservation that you specify, this
+	// requirement doesn't apply. You can then change another setting, such as the
+	// Multi-AZ setting, and keep the reservation.
+	//
+	// For a DB instance that uses no reservation, change DBInstanceClass to the DB
+	// instance class that the reservation reserves. A reservation reserves capacity
+	// for one DB instance class, so that change moves the DB instance onto the
+	// reserved capacity. That change also resizes the DB instance, which interrupts
+	// it.
+	//
+	// If the DB instance already runs the DB instance class that the reservation
+	// reserves, change MultiAZ or LicenseModel instead. Only RDS for Oracle and RDS
+	// for Microsoft SQL Server accept a change of license model, so MultiAZ is the
+	// remaining choice for every other engine.
+	//
+	// If you don't specify this parameter, Amazon RDS moves the DB instance to
+	// unreserved capacity, and it releases the reserved capacity that the DB instance
+	// holds. A request that changes the DB instance class, the Multi-AZ setting, the
+	// license model, or the engine moves the DB instance to different hardware, and
+	// Amazon RDS places the DB instance on unreserved capacity. Therefore, to keep the
+	// DB instance on reserved capacity, specify this parameter in every request that
+	// changes any of those settings.
+	//
+	// The DB instance keeps its current reservation until Amazon RDS applies the
+	// modification. Until then, the DBCapacityReservationIdentifier field of the DB
+	// instance still reports that reservation, and PendingModifiedValues reports no
+	// reservation. Amazon RDS releases the reserved capacity when it moves the DB
+	// instance.
+	//
+	// Constraints:
+	//
+	//   - If the request changes which DB capacity reservation the DB instance uses,
+	//   it must also set a new value for DBInstanceClass , MultiAZ , LicenseModel , or
+	//   Engine . The new value must differ from the current value. The only engine
+	//   change that ModifyDBInstance supports is a conversion to the CDB architecture.
+	//   Repeating the current value doesn't satisfy this requirement. This requirement
+	//   applies both when the DB instance uses no reservation, and when it moves to a
+	//   different reservation.
+	//
+	//   - The reservation must reserve capacity for the DB instance class that the DB
+	//   instance uses after the modification, and for the database engine of the DB
+	//   instance. Therefore, when the request changes DBInstanceClass , the
+	//   reservation reserves capacity for a DB instance class that the DB instance
+	//   doesn't use today.
+	//
+	//   - The reservation must be in the active state, and it must not be past its end
+	//   date.
+	//
+	//   - The reservation must have available capacity in each Availability Zone that
+	//   the DB instance uses after the modification.
+	//
+	//   - The reservation must cover the Availability Zone of the DB instance, except
+	//   when the request changes the DB instance from Multi-AZ to Single-AZ.
+	//
+	//   - For a Multi-AZ DB instance, the reservation must cover two or more
+	//   Availability Zones. A Multi-AZ DB instance uses one unit of reserved capacity in
+	//   each of two Availability Zones.
+	//
+	//   - If the DB instance is already Multi-AZ, the reservation must cover both of
+	//   its Availability Zones. If the request converts the DB instance to Multi-AZ, the
+	//   reservation must cover the current Availability Zone of the DB instance, and
+	//   Amazon RDS chooses the second Availability Zone from the reservation.
+	//
+	//   - If the reservation reserves capacity for a specific license model, the
+	//   license model of the DB instance must match it. Amazon RDS checks the license
+	//   model only when the request specifies LicenseModel .
+	//
+	//   - You can't specify this parameter together with a change to DBSubnetGroupName
+	//   .
+	//
+	//   - You can't specify this parameter together with a change to both
+	//   DBInstanceClass and LicenseModel . Submit those changes as two separate
+	//   requests.
+	//
+	//   - Can't be specified together with a change to DBInstanceClass when the
+	//   request also changes the DB instance from Multi-AZ to Single-AZ.
+	//
+	//   - When the request changes the DB instance from Multi-AZ to Single-AZ, the
+	//   reservation must cover either the primary or the secondary Availability Zone of
+	//   the DB instance. Amazon RDS keeps the DB instance in its primary Availability
+	//   Zone, and it removes the standby replica. Therefore, the primary Availability
+	//   Zone keeps its unit of reserved capacity, and the secondary Availability Zone
+	//   releases its unit.
+	//
+	//   - Can't be specified together with LicenseModel while a modification of the DB
+	//   instance class or the Multi-AZ setting is pending.
+	//
+	//   - Can't be specified together with DBInstanceClass or MultiAZ while a
+	//   modification of the license model is pending.
+	//
+	//   - When a modification is already pending, the reservation must reserve
+	//   capacity for the DB instance as it will be after both the pending modification
+	//   and the requested modification complete.
+	//
+	//   - The DB subnet group must be in a VPC with default tenancy.
+	//
+	//   - The DB subnet group must cover each Availability Zone that the DB instance
+	//   uses.
+	//
+	//   - Isn't supported for an RDS on Outposts DB instance.
+	//
+	//   - If the reservation expires within one week, you must also enable
+	//   ApplyImmediately . Otherwise, choose a reservation with a later end date.
+	//
+	//   - Amazon RDS holds a unit of reserved capacity for the DB instance when it
+	//   accepts the request, even when the modification waits for the maintenance
+	//   window.
+	DBCapacityReservationIdentifier *string
 
 	// The new compute and memory capacity of the DB instance, for example db.m4.large
 	// . Not all DB instance classes are available in all Amazon Web Services Regions,
@@ -1067,6 +1188,215 @@ type ModifyDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalStorageVolumes != nil {
+		serializeModifyAdditionalStorageVolumesList(s, schemas.ModifyDBInstanceMessage_AdditionalStorageVolumes, v.AdditionalStorageVolumes)
+	}
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AllowMajorVersionUpgrade != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_AllowMajorVersionUpgrade, *v.AllowMajorVersionUpgrade)
+	}
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AutomationMode != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_AutomationMode, string(v.AutomationMode))
+	}
+	if v.AwsBackupRecoveryPointArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_AwsBackupRecoveryPointArn, *v.AwsBackupRecoveryPointArn)
+	}
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.CACertificateIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
+	}
+	if v.CertificateRotationRestart != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_CertificateRotationRestart, *v.CertificateRotationRestart)
+	}
+	if v.CloudwatchLogsExportConfiguration != nil {
+		s.WriteStruct(schemas.ModifyDBInstanceMessage_CloudwatchLogsExportConfiguration)
+		v.CloudwatchLogsExportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+	if v.DBPortNumber != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_DBPortNumber, *v.DBPortNumber)
+	}
+	if v.DBSecurityGroups != nil {
+		serializeDBSecurityGroupNameList(s, schemas.ModifyDBInstanceMessage_DBSecurityGroups, v.DBSecurityGroups)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DatabaseInsightsMode != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DatabaseInsightsMode, string(v.DatabaseInsightsMode))
+	}
+	if v.DedicatedLogVolume != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_DedicatedLogVolume, *v.DedicatedLogVolume)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.DisableDomain != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_DisableDomain, *v.DisableDomain)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_Domain, *v.Domain)
+	}
+	if v.DomainAuthSecretArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainAuthSecretArn, *v.DomainAuthSecretArn)
+	}
+	if v.DomainDnsIps != nil {
+		serializeStringList(s, schemas.ModifyDBInstanceMessage_DomainDnsIps, v.DomainDnsIps)
+	}
+	if v.DomainFqdn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainFqdn, *v.DomainFqdn)
+	}
+	if v.DomainIAMRoleName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainIAMRoleName, *v.DomainIAMRoleName)
+	}
+	if v.DomainOu != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_DomainOu, *v.DomainOu)
+	}
+	if v.EnableCustomerOwnedIp != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_EnableCustomerOwnedIp, *v.EnableCustomerOwnedIp)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.EnablePerformanceInsights != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_Engine, *v.Engine)
+	}
+	if v.EngineLifecycleSupport != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_EngineLifecycleSupport, *v.EngineLifecycleSupport)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_Iops, *v.Iops)
+	}
+	if v.LicenseModel != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_LicenseModel, *v.LicenseModel)
+	}
+	if v.ManageMasterUserPassword != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
+	}
+	if v.MasterUserAuthenticationType != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MasterUserAuthenticationType, string(v.MasterUserAuthenticationType))
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MasterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUserSecretKmsKeyId != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
+	}
+	if v.MaxAllocatedStorage != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_MaxAllocatedStorage, *v.MaxAllocatedStorage)
+	}
+	if v.MonitoringInterval != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_MonitoringInterval, *v.MonitoringInterval)
+	}
+	if v.MonitoringRoleArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_MonitoringRoleArn, *v.MonitoringRoleArn)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.MultiTenant != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_MultiTenant, *v.MultiTenant)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_NetworkType, *v.NetworkType)
+	}
+	if v.NewDBInstanceIdentifier != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_NewDBInstanceIdentifier, *v.NewDBInstanceIdentifier)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.PerformanceInsightsKMSKeyId != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
+	}
+	if v.PerformanceInsightsRetentionPeriod != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_PerformanceInsightsRetentionPeriod, *v.PerformanceInsightsRetentionPeriod)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.ProcessorFeatures != nil {
+		serializeProcessorFeatureList(s, schemas.ModifyDBInstanceMessage_ProcessorFeatures, v.ProcessorFeatures)
+	}
+	if v.PromotionTier != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_PromotionTier, *v.PromotionTier)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.ReplicaMode != "" {
+		s.WriteString(schemas.ModifyDBInstanceMessage_ReplicaMode, string(v.ReplicaMode))
+	}
+	if v.ResumeFullAutomationModeMinutes != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_ResumeFullAutomationModeMinutes, *v.ResumeFullAutomationModeMinutes)
+	}
+	if v.RotateMasterUserPassword != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_RotateMasterUserPassword, *v.RotateMasterUserPassword)
+	}
+	if v.StorageThroughput != nil {
+		s.WriteInt32(schemas.ModifyDBInstanceMessage_StorageThroughput, *v.StorageThroughput)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_StorageType, *v.StorageType)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.ModifyDBInstanceMessage_TagSpecifications, v.TagSpecifications)
+	}
+	if v.TdeCredentialArn != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_TdeCredentialArn, *v.TdeCredentialArn)
+	}
+	if v.TdeCredentialPassword != nil {
+		s.WriteString(schemas.ModifyDBInstanceMessage_TdeCredentialPassword, *v.TdeCredentialPassword)
+	}
+	if v.UseDefaultProcessorFeatures != nil {
+		s.WriteBool(schemas.ModifyDBInstanceMessage_UseDefaultProcessorFeatures, *v.UseDefaultProcessorFeatures)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.ModifyDBInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type ModifyDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -1084,13 +1414,34 @@ type ModifyDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.ModifyDBInstanceResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBInstanceResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult), output: &ModifyDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

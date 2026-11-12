@@ -79,12 +79,15 @@ type CreateLogGroupInput struct {
 	KmsKeyId *string
 
 	// Use this parameter to specify the log group class for this log group. There are
-	// three classes:
+	// four classes:
 	//
 	//   - The Standard log class supports all CloudWatch Logs features.
 	//
 	//   - The Infrequent Access log class supports a subset of CloudWatch Logs
 	//   features and incurs lower costs.
+	//
+	//   - The Essentials log class supports a subset of CloudWatch Logs features and
+	//   incurs lower costs.
 	//
 	//   - Use the Delivery log class only for delivering Lambda logs to store in
 	//   Amazon S3 or Amazon Data Firehose. Log events in log groups in the Delivery
@@ -135,7 +138,9 @@ func (v *CreateLogGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogGroupName != nil {
 		s.WriteString(schemas.CreateLogGroupRequest_logGroupName, *v.LogGroupName)
 	}
-	serializeTags(s, schemas.CreateLogGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateLogGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateLogGroupOutput struct {

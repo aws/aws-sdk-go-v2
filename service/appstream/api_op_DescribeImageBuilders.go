@@ -53,7 +53,9 @@ func (v *DescribeImageBuildersInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeImageBuildersRequest_MaxResults, *v.MaxResults)
 	}
-	serializeStringList(s, schemas.DescribeImageBuildersRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeStringList(s, schemas.DescribeImageBuildersRequest_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeImageBuildersRequest_NextToken, *v.NextToken)
 	}
@@ -81,7 +83,9 @@ func (v *DescribeImageBuildersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeImageBuildersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageBuilderList(s, schemas.DescribeImageBuildersResult_ImageBuilders, v.ImageBuilders)
+	if v.ImageBuilders != nil {
+		serializeImageBuilderList(s, schemas.DescribeImageBuildersResult_ImageBuilders, v.ImageBuilders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeImageBuildersResult_NextToken, *v.NextToken)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"computationModelSummaries":[{"arn":"__Arn__","creationDate":946684800,"description":"__Description__","id":"__Id__","lastUpdateDate":946684800,"name":"__Name__","status":{"error":{"code":"VALIDATION_ERROR","details":[{"code":"INCOMPATIBLE_COMPUTE_LOCATION","message":"__Message__"},{"code":"INCOMPATIBLE_COMPUTE_LOCATION","message":"__Message__"}],"message":"__Message__"},"state":"CREATING"},"type":"ANOMALY_DETECTION","version":"__Version__"},{"arn":"__Arn__","creationDate":946684800,"description":"__Description__","id":"__Id__","lastUpdateDate":946684800,"name":"__Name__","status":{"error":{"code":"VALIDATION_ERROR","details":[{"code":"INCOMPATIBLE_COMPUTE_LOCATION","message":"__Message__"},{"code":"INCOMPATIBLE_COMPUTE_LOCATION","message":"__Message__"}],"message":"__Message__"},"state":"CREATING"},"type":"ANOMALY_DETECTION","version":"__Version__"}],"nextToken":"__NextToken__"}

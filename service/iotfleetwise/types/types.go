@@ -68,7 +68,9 @@ func (v *Actuator) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Actuator) SerializeMembers(s smithy.ShapeSerializer) {
-	serializelistOfStrings(s, schemas.Actuator_allowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializelistOfStrings(s, schemas.Actuator_allowedValues, v.AllowedValues)
+	}
 	if v.AssignedValue != nil {
 		s.WriteString(schemas.Actuator_assignedValue, *v.AssignedValue)
 	}
@@ -198,7 +200,9 @@ func (v *Attribute) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Attribute) SerializeMembers(s smithy.ShapeSerializer) {
-	serializelistOfStrings(s, schemas.Attribute_allowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializelistOfStrings(s, schemas.Attribute_allowedValues, v.AllowedValues)
+	}
 	if v.AssignedValue != nil {
 		s.WriteString(schemas.Attribute_assignedValue, *v.AssignedValue)
 	}
@@ -481,11 +485,15 @@ func (v *CanDbcDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CanDbcDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkFilesList(s, schemas.CanDbcDefinition_canDbcFiles, v.CanDbcFiles)
+	if v.CanDbcFiles != nil {
+		serializeNetworkFilesList(s, schemas.CanDbcDefinition_canDbcFiles, v.CanDbcFiles)
+	}
 	if v.NetworkInterface != nil {
 		s.WriteString(schemas.CanDbcDefinition_networkInterface, *v.NetworkInterface)
 	}
-	serializeModelSignalsMap(s, schemas.CanDbcDefinition_signalsMap, v.SignalsMap)
+	if v.SignalsMap != nil {
+		serializeModelSignalsMap(s, schemas.CanDbcDefinition_signalsMap, v.SignalsMap)
+	}
 }
 func (v *CanDbcDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CanDbcDefinition, func(s *smithy.Schema) error {
@@ -979,15 +987,21 @@ func (v *CreateVehicleRequestItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociationBehavior != "" {
 		s.WriteString(schemas.CreateVehicleRequestItem_associationBehavior, string(v.AssociationBehavior))
 	}
-	serializeattributesMap(s, schemas.CreateVehicleRequestItem_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeattributesMap(s, schemas.CreateVehicleRequestItem_attributes, v.Attributes)
+	}
 	if v.DecoderManifestArn != nil {
 		s.WriteString(schemas.CreateVehicleRequestItem_decoderManifestArn, *v.DecoderManifestArn)
 	}
 	if v.ModelManifestArn != nil {
 		s.WriteString(schemas.CreateVehicleRequestItem_modelManifestArn, *v.ModelManifestArn)
 	}
-	serializeStateTemplateAssociations(s, schemas.CreateVehicleRequestItem_stateTemplates, v.StateTemplates)
-	serializeTagList(s, schemas.CreateVehicleRequestItem_tags, v.Tags)
+	if v.StateTemplates != nil {
+		serializeStateTemplateAssociations(s, schemas.CreateVehicleRequestItem_stateTemplates, v.StateTemplates)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVehicleRequestItem_tags, v.Tags)
+	}
 	if v.VehicleName != nil {
 		s.WriteString(schemas.CreateVehicleRequestItem_vehicleName, *v.VehicleName)
 	}
@@ -2060,7 +2074,9 @@ func (v *MessageSignal) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MessageSignal) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStructuredMessage(s, schemas.MessageSignal_structuredMessage, v.StructuredMessage)
+	if v.StructuredMessage != nil {
+		serializeStructuredMessage(s, schemas.MessageSignal_structuredMessage, v.StructuredMessage)
+	}
 	if v.TopicName != nil {
 		s.WriteString(schemas.MessageSignal_topicName, *v.TopicName)
 	}
@@ -3080,7 +3096,9 @@ func (v *Sensor) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Sensor) SerializeMembers(s smithy.ShapeSerializer) {
-	serializelistOfStrings(s, schemas.Sensor_allowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializelistOfStrings(s, schemas.Sensor_allowedValues, v.AllowedValues)
+	}
 	if v.Comment != nil {
 		s.WriteString(schemas.Sensor_comment, *v.Comment)
 	}
@@ -3415,14 +3433,18 @@ func (v *SignalFetchInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SignalFetchInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventExpressionList(s, schemas.SignalFetchInformation_actions, v.Actions)
+	if v.Actions != nil {
+		serializeEventExpressionList(s, schemas.SignalFetchInformation_actions, v.Actions)
+	}
 	if v.ConditionLanguageVersion != nil {
 		s.WriteInt32(schemas.SignalFetchInformation_conditionLanguageVersion, *v.ConditionLanguageVersion)
 	}
 	if v.FullyQualifiedName != nil {
 		s.WriteString(schemas.SignalFetchInformation_fullyQualifiedName, *v.FullyQualifiedName)
 	}
-	serializeSignalFetchConfig(s, schemas.SignalFetchInformation_signalFetchConfig, v.SignalFetchConfig)
+	if v.SignalFetchConfig != nil {
+		serializeSignalFetchConfig(s, schemas.SignalFetchInformation_signalFetchConfig, v.SignalFetchConfig)
+	}
 }
 func (v *SignalFetchInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SignalFetchInformation, func(s *smithy.Schema) error {
@@ -3562,7 +3584,9 @@ func (v *StateTemplateAssociation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.StateTemplateAssociation_identifier, *v.Identifier)
 	}
-	serializeStateTemplateUpdateStrategy(s, schemas.StateTemplateAssociation_stateTemplateUpdateStrategy, v.StateTemplateUpdateStrategy)
+	if v.StateTemplateUpdateStrategy != nil {
+		serializeStateTemplateUpdateStrategy(s, schemas.StateTemplateAssociation_stateTemplateUpdateStrategy, v.StateTemplateUpdateStrategy)
+	}
 }
 func (v *StateTemplateAssociation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StateTemplateAssociation, func(s *smithy.Schema) error {
@@ -3917,7 +3941,9 @@ func (v *StructuredMessageFieldNameAndDataTypePair) Serialize(s smithy.ShapeSeri
 }
 
 func (v *StructuredMessageFieldNameAndDataTypePair) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStructuredMessage(s, schemas.StructuredMessageFieldNameAndDataTypePair_dataType, v.DataType)
+	if v.DataType != nil {
+		serializeStructuredMessage(s, schemas.StructuredMessageFieldNameAndDataTypePair_dataType, v.DataType)
+	}
 	if v.FieldName != nil {
 		s.WriteString(schemas.StructuredMessageFieldNameAndDataTypePair_fieldName, *v.FieldName)
 	}
@@ -3973,7 +3999,9 @@ func (v *StructuredMessageListDefinition) SerializeMembers(s smithy.ShapeSeriali
 	if v.ListType != "" {
 		s.WriteString(schemas.StructuredMessageListDefinition_listType, string(v.ListType))
 	}
-	serializeStructuredMessage(s, schemas.StructuredMessageListDefinition_memberType, v.MemberType)
+	if v.MemberType != nil {
+		serializeStructuredMessage(s, schemas.StructuredMessageListDefinition_memberType, v.MemberType)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StructuredMessageListDefinition_name, *v.Name)
 	}
@@ -4449,16 +4477,24 @@ func (v *UpdateVehicleRequestItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttributeUpdateMode != "" {
 		s.WriteString(schemas.UpdateVehicleRequestItem_attributeUpdateMode, string(v.AttributeUpdateMode))
 	}
-	serializeattributesMap(s, schemas.UpdateVehicleRequestItem_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeattributesMap(s, schemas.UpdateVehicleRequestItem_attributes, v.Attributes)
+	}
 	if v.DecoderManifestArn != nil {
 		s.WriteString(schemas.UpdateVehicleRequestItem_decoderManifestArn, *v.DecoderManifestArn)
 	}
 	if v.ModelManifestArn != nil {
 		s.WriteString(schemas.UpdateVehicleRequestItem_modelManifestArn, *v.ModelManifestArn)
 	}
-	serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequestItem_stateTemplatesToAdd, v.StateTemplatesToAdd)
-	serializeStateTemplateAssociationIdentifiers(s, schemas.UpdateVehicleRequestItem_stateTemplatesToRemove, v.StateTemplatesToRemove)
-	serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequestItem_stateTemplatesToUpdate, v.StateTemplatesToUpdate)
+	if v.StateTemplatesToAdd != nil {
+		serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequestItem_stateTemplatesToAdd, v.StateTemplatesToAdd)
+	}
+	if v.StateTemplatesToRemove != nil {
+		serializeStateTemplateAssociationIdentifiers(s, schemas.UpdateVehicleRequestItem_stateTemplatesToRemove, v.StateTemplatesToRemove)
+	}
+	if v.StateTemplatesToUpdate != nil {
+		serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequestItem_stateTemplatesToUpdate, v.StateTemplatesToUpdate)
+	}
 	if v.VehicleName != nil {
 		s.WriteString(schemas.UpdateVehicleRequestItem_vehicleName, *v.VehicleName)
 	}
@@ -4752,7 +4788,9 @@ func (v *VehicleSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.VehicleSummary_arn, *v.Arn)
 	}
-	serializeattributesMap(s, schemas.VehicleSummary_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeattributesMap(s, schemas.VehicleSummary_attributes, v.Attributes)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.VehicleSummary_creationTime, *v.CreationTime)
 	}

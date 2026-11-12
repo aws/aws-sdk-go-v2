@@ -4,7 +4,9 @@ package geoplaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,36 @@ type GetPlaceInput struct {
 	PoliticalView *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPlaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalFeatures != nil {
+		serializeGetPlaceAdditionalFeatureList(s, schemas.GetPlaceRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
+	if v.AddressNamesMode != "" {
+		s.WriteString(schemas.GetPlaceRequest_AddressNamesMode, string(v.AddressNamesMode))
+	}
+	if v.IntendedUse != "" {
+		s.WriteString(schemas.GetPlaceRequest_IntendedUse, string(v.IntendedUse))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.GetPlaceRequest_Key, *v.Key)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.GetPlaceRequest_Language, *v.Language)
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.GetPlaceRequest_PlaceId, *v.PlaceId)
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.GetPlaceRequest_PoliticalView, *v.PoliticalView)
+	}
 }
 
 type GetPlaceOutput struct {
@@ -230,13 +262,172 @@ type GetPlaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.GetPlaceResponse_AccessPoints, v.AccessPoints)
+	}
+	if v.AccessRestrictions != nil {
+		serializeAccessRestrictionList(s, schemas.GetPlaceResponse_AccessRestrictions, v.AccessRestrictions)
+	}
+	if v.Address != nil {
+		s.WriteStruct(schemas.GetPlaceResponse_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressNumberCorrected != nil {
+		s.WriteBool(schemas.GetPlaceResponse_AddressNumberCorrected, *v.AddressNumberCorrected)
+	}
+	if v.BusinessChains != nil {
+		serializeBusinessChainList(s, schemas.GetPlaceResponse_BusinessChains, v.BusinessChains)
+	}
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.GetPlaceResponse_Categories, v.Categories)
+	}
+	if v.Contacts != nil {
+		s.WriteStruct(schemas.GetPlaceResponse_Contacts)
+		v.Contacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CrossReferences != nil {
+		serializeCrossReferenceList(s, schemas.GetPlaceResponse_CrossReferences, v.CrossReferences)
+	}
+	if v.EstimatedPointAddress != nil {
+		s.WriteBool(schemas.GetPlaceResponse_EstimatedPointAddress, *v.EstimatedPointAddress)
+	}
+	if v.FoodTypes != nil {
+		serializeFoodTypeList(s, schemas.GetPlaceResponse_FoodTypes, v.FoodTypes)
+	}
+	if v.MainAddress != nil {
+		s.WriteStruct(schemas.GetPlaceResponse_MainAddress)
+		v.MainAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.GetPlaceResponse_MapView, v.MapView)
+	}
+	if v.OpeningHours != nil {
+		serializeOpeningHoursList(s, schemas.GetPlaceResponse_OpeningHours, v.OpeningHours)
+	}
+	if v.Phonemes != nil {
+		s.WriteStruct(schemas.GetPlaceResponse_Phonemes)
+		v.Phonemes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceAttributes != nil {
+		serializePlaceAttributeList(s, schemas.GetPlaceResponse_PlaceAttributes, v.PlaceAttributes)
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.GetPlaceResponse_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.GetPlaceResponse_PlaceType, string(v.PlaceType))
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.GetPlaceResponse_PoliticalView, *v.PoliticalView)
+	}
+	if v.Position != nil {
+		serializePosition(s, schemas.GetPlaceResponse_Position, v.Position)
+	}
+	if v.PostalCodeDetails != nil {
+		serializePostalCodeDetailsList(s, schemas.GetPlaceResponse_PostalCodeDetails, v.PostalCodeDetails)
+	}
+	if v.PricingBucket != nil {
+		s.WriteString(schemas.GetPlaceResponse_PricingBucket, *v.PricingBucket)
+	}
+	if v.SecondaryAddresses != nil {
+		serializeRelatedPlaceList(s, schemas.GetPlaceResponse_SecondaryAddresses, v.SecondaryAddresses)
+	}
+	if v.TimeZone != nil {
+		s.WriteStruct(schemas.GetPlaceResponse_TimeZone)
+		v.TimeZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.GetPlaceResponse_Title, *v.Title)
+	}
+}
+func (v *GetPlaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlaceResponse_AccessPoints:
+			return deserializeAccessPointList(d, schemas.GetPlaceResponse_AccessPoints, &v.AccessPoints)
+		case schemas.GetPlaceResponse_AccessRestrictions:
+			return deserializeAccessRestrictionList(d, schemas.GetPlaceResponse_AccessRestrictions, &v.AccessRestrictions)
+		case schemas.GetPlaceResponse_Address:
+			v.Address = &types.Address{}
+			return v.Address.Deserialize(d)
+		case schemas.GetPlaceResponse_AddressNumberCorrected:
+			v.AddressNumberCorrected = new(bool)
+			return d.ReadBool(schemas.GetPlaceResponse_AddressNumberCorrected, v.AddressNumberCorrected)
+		case schemas.GetPlaceResponse_BusinessChains:
+			return deserializeBusinessChainList(d, schemas.GetPlaceResponse_BusinessChains, &v.BusinessChains)
+		case schemas.GetPlaceResponse_Categories:
+			return deserializeCategoryList(d, schemas.GetPlaceResponse_Categories, &v.Categories)
+		case schemas.GetPlaceResponse_Contacts:
+			v.Contacts = &types.Contacts{}
+			return v.Contacts.Deserialize(d)
+		case schemas.GetPlaceResponse_CrossReferences:
+			return deserializeCrossReferenceList(d, schemas.GetPlaceResponse_CrossReferences, &v.CrossReferences)
+		case schemas.GetPlaceResponse_EstimatedPointAddress:
+			v.EstimatedPointAddress = new(bool)
+			return d.ReadBool(schemas.GetPlaceResponse_EstimatedPointAddress, v.EstimatedPointAddress)
+		case schemas.GetPlaceResponse_FoodTypes:
+			return deserializeFoodTypeList(d, schemas.GetPlaceResponse_FoodTypes, &v.FoodTypes)
+		case schemas.GetPlaceResponse_MainAddress:
+			v.MainAddress = &types.RelatedPlace{}
+			return v.MainAddress.Deserialize(d)
+		case schemas.GetPlaceResponse_MapView:
+			return deserializeBoundingBox(d, schemas.GetPlaceResponse_MapView, &v.MapView)
+		case schemas.GetPlaceResponse_OpeningHours:
+			return deserializeOpeningHoursList(d, schemas.GetPlaceResponse_OpeningHours, &v.OpeningHours)
+		case schemas.GetPlaceResponse_Phonemes:
+			v.Phonemes = &types.PhonemeDetails{}
+			return v.Phonemes.Deserialize(d)
+		case schemas.GetPlaceResponse_PlaceAttributes:
+			return deserializePlaceAttributeList(d, schemas.GetPlaceResponse_PlaceAttributes, &v.PlaceAttributes)
+		case schemas.GetPlaceResponse_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_PlaceId, v.PlaceId)
+		case schemas.GetPlaceResponse_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.GetPlaceResponse_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = types.PlaceType(ev)
+			return nil
+		case schemas.GetPlaceResponse_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_PoliticalView, v.PoliticalView)
+		case schemas.GetPlaceResponse_Position:
+			return deserializePosition(d, schemas.GetPlaceResponse_Position, &v.Position)
+		case schemas.GetPlaceResponse_PostalCodeDetails:
+			return deserializePostalCodeDetailsList(d, schemas.GetPlaceResponse_PostalCodeDetails, &v.PostalCodeDetails)
+		case schemas.GetPlaceResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_PricingBucket, v.PricingBucket)
+		case schemas.GetPlaceResponse_SecondaryAddresses:
+			return deserializeRelatedPlaceList(d, schemas.GetPlaceResponse_SecondaryAddresses, &v.SecondaryAddresses)
+		case schemas.GetPlaceResponse_TimeZone:
+			v.TimeZone = &types.TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		case schemas.GetPlaceResponse_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_Title, v.Title)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse), output: &GetPlaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

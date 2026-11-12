@@ -61,6 +61,10 @@ type GetDataQualityResultV2Output struct {
 	// analyzer.
 	AnalyzerResults []types.DataQualityAnalyzerResult
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *types.DataSource
 
@@ -76,6 +80,12 @@ type GetDataQualityResultV2Output struct {
 	// The evaluation context for the data quality result. This value identifies a
 	// specific data quality result, or a series of related results, within a run.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode types.DataQualityEvaluationRunMode
 
 	// The date and time when this data quality run completed.
 	ExecutionCompletedOn *time.Time
@@ -127,16 +137,28 @@ func (v *GetDataQualityResultV2Output) SerializeMembers(s smithy.ShapeSerializer
 		v.AggregatedMetrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataQualityAnalyzerResults(s, schemas.GetDataQualityResultV2Response_AnalyzerResults, v.AnalyzerResults)
+	if v.AnalyzerResults != nil {
+		serializeDataQualityAnalyzerResults(s, schemas.GetDataQualityResultV2Response_AnalyzerResults, v.AnalyzerResults)
+	}
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.GetDataQualityResultV2Response_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.GetDataQualityResultV2Response_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePublishDataQualityResultDescriptors(s, schemas.GetDataQualityResultV2Response_Descriptors, v.Descriptors)
-	serializePublishDataQualityResultDimensions(s, schemas.GetDataQualityResultV2Response_Dimensions, v.Dimensions)
+	if v.Descriptors != nil {
+		serializePublishDataQualityResultDescriptors(s, schemas.GetDataQualityResultV2Response_Descriptors, v.Descriptors)
+	}
+	if v.Dimensions != nil {
+		serializePublishDataQualityResultDimensions(s, schemas.GetDataQualityResultV2Response_Dimensions, v.Dimensions)
+	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.GetDataQualityResultV2Response_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.GetDataQualityResultV2Response_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.ExecutionCompletedOn != nil {
 		s.WriteTime(schemas.GetDataQualityResultV2Response_ExecutionCompletedOn, *v.ExecutionCompletedOn)
@@ -144,7 +166,9 @@ func (v *GetDataQualityResultV2Output) SerializeMembers(s smithy.ShapeSerializer
 	if v.ExecutionStartedOn != nil {
 		s.WriteTime(schemas.GetDataQualityResultV2Response_ExecutionStartedOn, *v.ExecutionStartedOn)
 	}
-	serializeDataQualityObservations(s, schemas.GetDataQualityResultV2Response_Observations, v.Observations)
+	if v.Observations != nil {
+		serializeDataQualityObservations(s, schemas.GetDataQualityResultV2Response_Observations, v.Observations)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.GetDataQualityResultV2Response_ProfileId, *v.ProfileId)
 	}
@@ -154,14 +178,18 @@ func (v *GetDataQualityResultV2Output) SerializeMembers(s smithy.ShapeSerializer
 	if v.ResultPublishedOn != nil {
 		s.WriteTime(schemas.GetDataQualityResultV2Response_ResultPublishedOn, *v.ResultPublishedOn)
 	}
-	serializeDataQualityRuleResults(s, schemas.GetDataQualityResultV2Response_RuleResults, v.RuleResults)
+	if v.RuleResults != nil {
+		serializeDataQualityRuleResults(s, schemas.GetDataQualityResultV2Response_RuleResults, v.RuleResults)
+	}
 	if v.RulesetName != nil {
 		s.WriteString(schemas.GetDataQualityResultV2Response_RulesetName, *v.RulesetName)
 	}
 	if v.Score != nil {
 		s.WriteFloat64(schemas.GetDataQualityResultV2Response_Score, *v.Score)
 	}
-	serializePublishDataQualityResultTags(s, schemas.GetDataQualityResultV2Response_Tags, v.Tags)
+	if v.Tags != nil {
+		serializePublishDataQualityResultTags(s, schemas.GetDataQualityResultV2Response_Tags, v.Tags)
+	}
 }
 func (v *GetDataQualityResultV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataQualityResultV2Response, func(s *smithy.Schema) error {
@@ -171,6 +199,9 @@ func (v *GetDataQualityResultV2Output) Deserialize(d smithy.ShapeDeserializer) e
 			return v.AggregatedMetrics.Deserialize(d)
 		case schemas.GetDataQualityResultV2Response_AnalyzerResults:
 			return deserializeDataQualityAnalyzerResults(d, schemas.GetDataQualityResultV2Response_AnalyzerResults, &v.AnalyzerResults)
+		case schemas.GetDataQualityResultV2Response_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.GetDataQualityResultV2Response_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.GetDataQualityResultV2Response_DataSource:
 			v.DataSource = &types.DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -181,6 +212,13 @@ func (v *GetDataQualityResultV2Output) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.GetDataQualityResultV2Response_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.GetDataQualityResultV2Response_EvaluationContext, v.EvaluationContext)
+		case schemas.GetDataQualityResultV2Response_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.GetDataQualityResultV2Response_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = types.DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.GetDataQualityResultV2Response_ExecutionCompletedOn:
 			v.ExecutionCompletedOn = new(time.Time)
 			return d.ReadTime(schemas.GetDataQualityResultV2Response_ExecutionCompletedOn, v.ExecutionCompletedOn)

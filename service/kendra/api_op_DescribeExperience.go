@@ -128,7 +128,9 @@ func (v *DescribeExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeExperienceResponse_Description, *v.Description)
 	}
-	serializeExperienceEndpoints(s, schemas.DescribeExperienceResponse_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeExperienceEndpoints(s, schemas.DescribeExperienceResponse_Endpoints, v.Endpoints)
+	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.DescribeExperienceResponse_ErrorMessage, *v.ErrorMessage)
 	}

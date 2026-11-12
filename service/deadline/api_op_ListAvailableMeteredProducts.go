@@ -28,7 +28,6 @@ func (c *Client) ListAvailableMeteredProducts(ctx context.Context, params *ListA
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListAvailableMeteredProductsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -56,7 +55,6 @@ func (v *ListAvailableMeteredProductsInput) SerializeMembers(s smithy.ShapeSeria
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListAvailableMeteredProductsOutput struct {
 
 	// The metered products.
@@ -85,7 +83,9 @@ func (v *ListAvailableMeteredProductsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListAvailableMeteredProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMeteredProductSummaryList(s, schemas.ListAvailableMeteredProductsResponse_meteredProducts, v.MeteredProducts)
+	if v.MeteredProducts != nil {
+		serializeMeteredProductSummaryList(s, schemas.ListAvailableMeteredProductsResponse_meteredProducts, v.MeteredProducts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailableMeteredProductsResponse_nextToken, *v.NextToken)
 	}

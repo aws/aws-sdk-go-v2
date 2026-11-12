@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetManagedThingConnectivityDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingConnectivityDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingConnectivityDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingConnectivityDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetManagedThingConnectivityDataRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetManagedThingConnectivityDataOutput struct {
 
 	// The connectivity status for a managed thing.
@@ -56,13 +70,54 @@ type GetManagedThingConnectivityDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingConnectivityDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingConnectivityDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingConnectivityDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connected != nil {
+		s.WriteBool(schemas.GetManagedThingConnectivityDataResponse_Connected, *v.Connected)
+	}
+	if v.DisconnectReason != "" {
+		s.WriteString(schemas.GetManagedThingConnectivityDataResponse_DisconnectReason, string(v.DisconnectReason))
+	}
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.GetManagedThingConnectivityDataResponse_ManagedThingId, *v.ManagedThingId)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.GetManagedThingConnectivityDataResponse_Timestamp, *v.Timestamp)
+	}
+}
+func (v *GetManagedThingConnectivityDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedThingConnectivityDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedThingConnectivityDataResponse_Connected:
+			v.Connected = new(bool)
+			return d.ReadBool(schemas.GetManagedThingConnectivityDataResponse_Connected, v.Connected)
+		case schemas.GetManagedThingConnectivityDataResponse_DisconnectReason:
+			var ev string
+			if err := d.ReadString(schemas.GetManagedThingConnectivityDataResponse_DisconnectReason, &ev); err != nil {
+				return err
+			}
+			v.DisconnectReason = types.DisconnectReasonValue(ev)
+			return nil
+		case schemas.GetManagedThingConnectivityDataResponse_ManagedThingId:
+			v.ManagedThingId = new(string)
+			return d.ReadString(schemas.GetManagedThingConnectivityDataResponse_ManagedThingId, v.ManagedThingId)
+		case schemas.GetManagedThingConnectivityDataResponse_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.GetManagedThingConnectivityDataResponse_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedThingConnectivityDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThingConnectivityData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingConnectivityData, schemas.GetManagedThingConnectivityDataRequest, schemas.GetManagedThingConnectivityDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThingConnectivityData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingConnectivityData, schemas.GetManagedThingConnectivityDataRequest, schemas.GetManagedThingConnectivityDataResponse), output: &GetManagedThingConnectivityDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

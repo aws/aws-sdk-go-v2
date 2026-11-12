@@ -62,7 +62,9 @@ func (v *BatchAssociateClientDeviceWithCoreDeviceInput) SerializeMembers(s smith
 	if v.CoreDeviceThingName != nil {
 		s.WriteString(schemas.BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName, *v.CoreDeviceThingName)
 	}
-	serializeAssociateClientDeviceWithCoreDeviceEntryList(s, schemas.BatchAssociateClientDeviceWithCoreDeviceRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeAssociateClientDeviceWithCoreDeviceEntryList(s, schemas.BatchAssociateClientDeviceWithCoreDeviceRequest_entries, v.Entries)
+	}
 }
 
 type BatchAssociateClientDeviceWithCoreDeviceOutput struct {
@@ -84,7 +86,9 @@ func (v *BatchAssociateClientDeviceWithCoreDeviceOutput) Serialize(s smithy.Shap
 }
 
 func (v *BatchAssociateClientDeviceWithCoreDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociateClientDeviceWithCoreDeviceErrorList(s, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries, v.ErrorEntries)
+	if v.ErrorEntries != nil {
+		serializeAssociateClientDeviceWithCoreDeviceErrorList(s, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries, v.ErrorEntries)
+	}
 }
 func (v *BatchAssociateClientDeviceWithCoreDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse, func(s *smithy.Schema) error {

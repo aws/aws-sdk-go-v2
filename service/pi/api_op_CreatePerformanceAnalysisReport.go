@@ -78,7 +78,9 @@ func (v *CreatePerformanceAnalysisReportInput) SerializeMembers(s smithy.ShapeSe
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CreatePerformanceAnalysisReportRequest_StartTime, *v.StartTime)
 	}
-	serializeTagList(s, schemas.CreatePerformanceAnalysisReportRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePerformanceAnalysisReportRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePerformanceAnalysisReportOutput struct {

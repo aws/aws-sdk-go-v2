@@ -638,12 +638,14 @@ type DistributionMetricName string
 
 // Enum values for DistributionMetricName
 const (
-	DistributionMetricNameRequests         DistributionMetricName = "Requests"
-	DistributionMetricNameBytesDownloaded  DistributionMetricName = "BytesDownloaded"
-	DistributionMetricNameBytesUploaded    DistributionMetricName = "BytesUploaded"
-	DistributionMetricNameTotalErrorRate   DistributionMetricName = "TotalErrorRate"
-	DistributionMetricNameHttp4xxErrorRate DistributionMetricName = "Http4xxErrorRate"
-	DistributionMetricNameHttp5xxErrorRate DistributionMetricName = "Http5xxErrorRate"
+	DistributionMetricNameRequests           DistributionMetricName = "Requests"
+	DistributionMetricNameBytesDownloaded    DistributionMetricName = "BytesDownloaded"
+	DistributionMetricNameBytesUploaded      DistributionMetricName = "BytesUploaded"
+	DistributionMetricNameTotalErrorRate     DistributionMetricName = "TotalErrorRate"
+	DistributionMetricNameHttp4xxErrorRate   DistributionMetricName = "Http4xxErrorRate"
+	DistributionMetricNameHttp5xxErrorRate   DistributionMetricName = "Http5xxErrorRate"
+	DistributionMetricNameWafAllowedRequests DistributionMetricName = "WafAllowedRequests"
+	DistributionMetricNameWafBlockedRequests DistributionMetricName = "WafBlockedRequests"
 )
 
 // Values returns all known values for DistributionMetricName. Note that this can
@@ -658,6 +660,8 @@ func (DistributionMetricName) Values() []DistributionMetricName {
 		"TotalErrorRate",
 		"Http4xxErrorRate",
 		"Http5xxErrorRate",
+		"WafAllowedRequests",
+		"WafBlockedRequests",
 	}
 }
 
@@ -908,6 +912,73 @@ func (InstanceHealthState) Values() []InstanceHealthState {
 	}
 }
 
+type InstanceHealthStatusDetailName string
+
+// Enum values for InstanceHealthStatusDetailName
+const (
+	InstanceHealthStatusDetailNameReachability InstanceHealthStatusDetailName = "reachability"
+)
+
+// Values returns all known values for InstanceHealthStatusDetailName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthStatusDetailName) Values() []InstanceHealthStatusDetailName {
+	return []InstanceHealthStatusDetailName{
+		"reachability",
+	}
+}
+
+type InstanceHealthStatusDetailValue string
+
+// Enum values for InstanceHealthStatusDetailValue
+const (
+	InstanceHealthStatusDetailValuePassed           InstanceHealthStatusDetailValue = "passed"
+	InstanceHealthStatusDetailValueFailed           InstanceHealthStatusDetailValue = "failed"
+	InstanceHealthStatusDetailValueInsufficientData InstanceHealthStatusDetailValue = "insufficient-data"
+	InstanceHealthStatusDetailValueInitializing     InstanceHealthStatusDetailValue = "initializing"
+)
+
+// Values returns all known values for InstanceHealthStatusDetailValue. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthStatusDetailValue) Values() []InstanceHealthStatusDetailValue {
+	return []InstanceHealthStatusDetailValue{
+		"passed",
+		"failed",
+		"insufficient-data",
+		"initializing",
+	}
+}
+
+type InstanceHealthStatusValue string
+
+// Enum values for InstanceHealthStatusValue
+const (
+	InstanceHealthStatusValueOk               InstanceHealthStatusValue = "ok"
+	InstanceHealthStatusValueImpaired         InstanceHealthStatusValue = "impaired"
+	InstanceHealthStatusValueInitializing     InstanceHealthStatusValue = "initializing"
+	InstanceHealthStatusValueInsufficientData InstanceHealthStatusValue = "insufficient-data"
+	InstanceHealthStatusValueNotApplicable    InstanceHealthStatusValue = "not-applicable"
+)
+
+// Values returns all known values for InstanceHealthStatusValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthStatusValue) Values() []InstanceHealthStatusValue {
+	return []InstanceHealthStatusValue{
+		"ok",
+		"impaired",
+		"initializing",
+		"insufficient-data",
+		"not-applicable",
+	}
+}
+
 type InstanceMetadataState string
 
 // Enum values for InstanceMetadataState
@@ -940,6 +1011,13 @@ const (
 	InstanceMetricNameBurstCapacityTime         InstanceMetricName = "BurstCapacityTime"
 	InstanceMetricNameBurstCapacityPercentage   InstanceMetricName = "BurstCapacityPercentage"
 	InstanceMetricNameMetadataNoToken           InstanceMetricName = "MetadataNoToken"
+	InstanceMetricNameDiskReadOps               InstanceMetricName = "DiskReadOps"
+	InstanceMetricNameDiskWriteOps              InstanceMetricName = "DiskWriteOps"
+	InstanceMetricNameDiskReadBytes             InstanceMetricName = "DiskReadBytes"
+	InstanceMetricNameDiskWriteBytes            InstanceMetricName = "DiskWriteBytes"
+	InstanceMetricNameDiskTotalReadTime         InstanceMetricName = "DiskTotalReadTime"
+	InstanceMetricNameDiskTotalWriteTime        InstanceMetricName = "DiskTotalWriteTime"
+	InstanceMetricNameDiskQueueLength           InstanceMetricName = "DiskQueueLength"
 )
 
 // Values returns all known values for InstanceMetricName. Note that this can be
@@ -957,6 +1035,13 @@ func (InstanceMetricName) Values() []InstanceMetricName {
 		"BurstCapacityTime",
 		"BurstCapacityPercentage",
 		"MetadataNoToken",
+		"DiskReadOps",
+		"DiskWriteOps",
+		"DiskReadBytes",
+		"DiskWriteBytes",
+		"DiskTotalReadTime",
+		"DiskTotalWriteTime",
+		"DiskQueueLength",
 	}
 }
 
@@ -1322,6 +1407,13 @@ const (
 	MetricNameSwapUsage                      MetricName = "SwapUsage"
 	MetricNameBurstCapacityTime              MetricName = "BurstCapacityTime"
 	MetricNameBurstCapacityPercentage        MetricName = "BurstCapacityPercentage"
+	MetricNameDiskReadOps                    MetricName = "DiskReadOps"
+	MetricNameDiskWriteOps                   MetricName = "DiskWriteOps"
+	MetricNameDiskReadBytes                  MetricName = "DiskReadBytes"
+	MetricNameDiskWriteBytes                 MetricName = "DiskWriteBytes"
+	MetricNameDiskTotalReadTime              MetricName = "DiskTotalReadTime"
+	MetricNameDiskTotalWriteTime             MetricName = "DiskTotalWriteTime"
+	MetricNameDiskQueueLength                MetricName = "DiskQueueLength"
 )
 
 // Values returns all known values for MetricName. Note that this can be expanded
@@ -1357,6 +1449,13 @@ func (MetricName) Values() []MetricName {
 		"SwapUsage",
 		"BurstCapacityTime",
 		"BurstCapacityPercentage",
+		"DiskReadOps",
+		"DiskWriteOps",
+		"DiskReadBytes",
+		"DiskWriteBytes",
+		"DiskTotalReadTime",
+		"DiskTotalWriteTime",
+		"DiskQueueLength",
 	}
 }
 
@@ -2284,5 +2383,43 @@ func (ViewerMinimumTlsProtocolVersionEnum) Values() []ViewerMinimumTlsProtocolVe
 		"TLSv1.2_2018",
 		"TLSv1.2_2019",
 		"TLSv1.2_2021",
+	}
+}
+
+type WafInspectionLevelEnum string
+
+// Enum values for WafInspectionLevelEnum
+const (
+	WafInspectionLevelEnumCommon   WafInspectionLevelEnum = "COMMON"
+	WafInspectionLevelEnumTargeted WafInspectionLevelEnum = "TARGETED"
+)
+
+// Values returns all known values for WafInspectionLevelEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WafInspectionLevelEnum) Values() []WafInspectionLevelEnum {
+	return []WafInspectionLevelEnum{
+		"COMMON",
+		"TARGETED",
+	}
+}
+
+type WafPayloadTypeEnum string
+
+// Enum values for WafPayloadTypeEnum
+const (
+	WafPayloadTypeEnumJson        WafPayloadTypeEnum = "JSON"
+	WafPayloadTypeEnumFormEncoded WafPayloadTypeEnum = "FORM_ENCODED"
+)
+
+// Values returns all known values for WafPayloadTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WafPayloadTypeEnum) Values() []WafPayloadTypeEnum {
+	return []WafPayloadTypeEnum{
+		"JSON",
+		"FORM_ENCODED",
 	}
 }

@@ -4,7 +4,9 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetInstanceCommunicationLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceCommunicationLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceCommunicationLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceCommunicationLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.GetInstanceCommunicationLimitsRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+}
+
 // The response for GetInstanceCommunicationLimits API.
 type GetInstanceCommunicationLimitsOutput struct {
 
@@ -47,13 +61,34 @@ type GetInstanceCommunicationLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceCommunicationLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceCommunicationLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceCommunicationLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommunicationLimitsConfig != nil {
+		s.WriteStruct(schemas.GetInstanceCommunicationLimitsResponse_communicationLimitsConfig)
+		v.CommunicationLimitsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInstanceCommunicationLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstanceCommunicationLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstanceCommunicationLimitsResponse_communicationLimitsConfig:
+			v.CommunicationLimitsConfig = &types.InstanceCommunicationLimitsConfig{}
+			return v.CommunicationLimitsConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstanceCommunicationLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInstanceCommunicationLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceCommunicationLimits, schemas.GetInstanceCommunicationLimitsRequest, schemas.GetInstanceCommunicationLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInstanceCommunicationLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceCommunicationLimits, schemas.GetInstanceCommunicationLimitsRequest, schemas.GetInstanceCommunicationLimitsResponse), output: &GetInstanceCommunicationLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

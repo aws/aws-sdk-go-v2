@@ -95,7 +95,9 @@ func (v *DescribeBackupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBackupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.DescribeBackupsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.DescribeBackupsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeBackupsRequest_MaxResults, *v.MaxResults)
 	}
@@ -133,7 +135,9 @@ func (v *DescribeBackupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackups(s, schemas.DescribeBackupsResponse_Backups, v.Backups)
+	if v.Backups != nil {
+		serializeBackups(s, schemas.DescribeBackupsResponse_Backups, v.Backups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeBackupsResponse_NextToken, *v.NextToken)
 	}
@@ -165,6 +169,9 @@ func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

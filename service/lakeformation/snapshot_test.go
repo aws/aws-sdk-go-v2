@@ -422,6 +422,18 @@ func TestCheckSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetGlueFunctionSessionContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlueFunctionSessionContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGlueFunctionSessionContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLFTag(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLFTag(context.Background(), nil, func(o *Options) {
@@ -511,6 +523,18 @@ func TestCheckSnapshot_GetTemporaryDataLocationCredentials(t *testing.T) {
 	_, err := svc.GetTemporaryDataLocationCredentials(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTemporaryDataLocationCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTemporaryGlueFunctionCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTemporaryGlueFunctionCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTemporaryGlueFunctionCredentials")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,6 +1273,18 @@ func TestUpdateSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetGlueFunctionSessionContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlueFunctionSessionContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGlueFunctionSessionContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLFTag(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLFTag(context.Background(), nil, func(o *Options) {
@@ -1338,6 +1374,18 @@ func TestUpdateSnapshot_GetTemporaryDataLocationCredentials(t *testing.T) {
 	_, err := svc.GetTemporaryDataLocationCredentials(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTemporaryDataLocationCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTemporaryGlueFunctionCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTemporaryGlueFunctionCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTemporaryGlueFunctionCredentials")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -4,6 +4,8 @@ package iotdeviceadvisor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type StopSuiteRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSuiteRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSuiteRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSuiteRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SuiteDefinitionId != nil {
+		s.WriteString(schemas.StopSuiteRunRequest_suiteDefinitionId, *v.SuiteDefinitionId)
+	}
+	if v.SuiteRunId != nil {
+		s.WriteString(schemas.StopSuiteRunRequest_suiteRunId, *v.SuiteRunId)
+	}
+}
+
 type StopSuiteRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type StopSuiteRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSuiteRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSuiteRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSuiteRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopSuiteRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSuiteRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopSuiteRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSuiteRun, schemas.StopSuiteRunRequest, schemas.StopSuiteRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopSuiteRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSuiteRun, schemas.StopSuiteRunRequest, schemas.StopSuiteRunResponse), output: &StopSuiteRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

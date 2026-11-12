@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetLinkedWhatsAppBusinessAccountPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id, *v.Id)
+	}
+}
+
 type GetLinkedWhatsAppBusinessAccountPhoneNumberOutput struct {
 
 	// The calling settings configured for the phone number. This value is absent when
@@ -58,13 +72,48 @@ type GetLinkedWhatsAppBusinessAccountPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallSettings != nil {
+		s.WriteStruct(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings)
+		v.CallSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LinkedWhatsAppBusinessAccountId != nil {
+		s.WriteString(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId, *v.LinkedWhatsAppBusinessAccountId)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteStruct(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber)
+		v.PhoneNumber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings:
+			v.CallSettings = &types.WhatsAppCallSettings{}
+			return v.CallSettings.Deserialize(d)
+		case schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId:
+			v.LinkedWhatsAppBusinessAccountId = new(string)
+			return d.ReadString(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId, v.LinkedWhatsAppBusinessAccountId)
+		case schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber:
+			v.PhoneNumber = &types.WhatsAppPhoneNumberDetail{}
+			return v.PhoneNumber.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLinkedWhatsAppBusinessAccountPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumber, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumber, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput), output: &GetLinkedWhatsAppBusinessAccountPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

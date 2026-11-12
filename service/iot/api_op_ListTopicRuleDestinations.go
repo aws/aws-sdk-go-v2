@@ -80,7 +80,9 @@ func (v *ListTopicRuleDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTopicRuleDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTopicRuleDestinationSummaries(s, schemas.ListTopicRuleDestinationsResponse_destinationSummaries, v.DestinationSummaries)
+	if v.DestinationSummaries != nil {
+		serializeTopicRuleDestinationSummaries(s, schemas.ListTopicRuleDestinationsResponse_destinationSummaries, v.DestinationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTopicRuleDestinationsResponse_nextToken, *v.NextToken)
 	}

@@ -2,4 +2,4 @@ POST /ListChannels
 
 Content-Type: application/json
 
-{"filterByAdConfigurationArn":"__FilterByAdConfigurationArn__","filterByName":"__FilterByName__","filterByPlaybackRestrictionPolicyArn":"__FilterByPlaybackRestrictionPolicyArn__","filterByRecordingConfigurationArn":"__FilterByRecordingConfigurationArn__","maxResults":1,"nextToken":"__NextToken__"}
+{"filterByAdConfigurationArn":"__FilterByAdConfigurationArn__","filterByFailoverSlateConfigurationArn":"__FilterByFailoverSlateConfigurationArn__","filterByName":"__FilterByName__","filterByPlaybackRestrictionPolicyArn":"__FilterByPlaybackRestrictionPolicyArn__","filterByRecordingConfigurationArn":"__FilterByRecordingConfigurationArn__","maxResults":1,"nextToken":"__NextToken__"}

@@ -53,7 +53,9 @@ func (v *StartJobsQueryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartJobsQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfJobsQueryFilter(s, schemas.StartJobsQueryRequest_FilterList, v.FilterList)
+	if v.FilterList != nil {
+		serialize__listOfJobsQueryFilter(s, schemas.StartJobsQueryRequest_FilterList, v.FilterList)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.StartJobsQueryRequest_MaxResults, *v.MaxResults)
 	}

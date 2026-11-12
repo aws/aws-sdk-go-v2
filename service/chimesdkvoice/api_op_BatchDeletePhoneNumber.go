@@ -49,7 +49,9 @@ func (v *BatchDeletePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeletePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNonEmptyStringList(s, schemas.BatchDeletePhoneNumberRequest_PhoneNumberIds, v.PhoneNumberIds)
+	if v.PhoneNumberIds != nil {
+		serializeNonEmptyStringList(s, schemas.BatchDeletePhoneNumberRequest_PhoneNumberIds, v.PhoneNumberIds)
+	}
 }
 
 type BatchDeletePhoneNumberOutput struct {
@@ -71,7 +73,9 @@ func (v *BatchDeletePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeletePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhoneNumberErrorList(s, schemas.BatchDeletePhoneNumberResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+	if v.PhoneNumberErrors != nil {
+		serializePhoneNumberErrorList(s, schemas.BatchDeletePhoneNumberResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+	}
 }
 func (v *BatchDeletePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeletePhoneNumberResponse, func(s *smithy.Schema) error {

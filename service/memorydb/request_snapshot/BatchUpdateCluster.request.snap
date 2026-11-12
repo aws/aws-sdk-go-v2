@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/BatchUpdateCluster
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.BatchUpdateCluster
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterNames":["__Member__","__Member__"],"ServiceUpdate":{"ServiceUpdateNameToApply":"__ServiceUpdateNameToApply__"}}
+¿lClusterNamesŸj__Member__j__Member__ÿmServiceUpdate¿xServiceUpdateNameToApplyx__ServiceUpdateNameToApply__ÿÿ

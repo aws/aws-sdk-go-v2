@@ -88,7 +88,9 @@ func (v *ListEvaluationFormsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEvaluationFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationFormSummaryList(s, schemas.ListEvaluationFormsResponse_EvaluationFormSummaryList, v.EvaluationFormSummaryList)
+	if v.EvaluationFormSummaryList != nil {
+		serializeEvaluationFormSummaryList(s, schemas.ListEvaluationFormsResponse_EvaluationFormSummaryList, v.EvaluationFormSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEvaluationFormsResponse_NextToken, *v.NextToken)
 	}

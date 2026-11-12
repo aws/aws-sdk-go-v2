@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","suiteRunsList":[{"createdAt":946684800,"endAt":946684800,"failed":1,"passed":1,"startedAt":946684800,"status":"PASS","suiteDefinitionId":"__SuiteDefinitionId__","suiteDefinitionName":"__SuiteDefinitionName__","suiteDefinitionVersion":"__SuiteDefinitionVersion__","suiteRunId":"__SuiteRunId__"},{"createdAt":946684800,"endAt":946684800,"failed":1,"passed":1,"startedAt":946684800,"status":"PASS","suiteDefinitionId":"__SuiteDefinitionId__","suiteDefinitionName":"__SuiteDefinitionName__","suiteDefinitionVersion":"__SuiteDefinitionVersion__","suiteRunId":"__SuiteRunId__"}]}

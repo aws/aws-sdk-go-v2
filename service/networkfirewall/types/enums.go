@@ -2,6 +2,29 @@
 
 package types
 
+type ActionScope string
+
+// Enum values for ActionScope
+const (
+	ActionScopeFlow   ActionScope = "FLOW"
+	ActionScopeTx     ActionScope = "TX"
+	ActionScopeHook   ActionScope = "HOOK"
+	ActionScopePacket ActionScope = "PACKET"
+)
+
+// Values returns all known values for ActionScope. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionScope) Values() []ActionScope {
+	return []ActionScope{
+		"FLOW",
+		"TX",
+		"HOOK",
+		"PACKET",
+	}
+}
+
 type AttachmentStatus string
 
 // Enum values for AttachmentStatus
@@ -92,6 +115,27 @@ func (ContainerMonitoringType) Values() []ContainerMonitoringType {
 	}
 }
 
+type DNSExpiryExceptionPolicy string
+
+// Enum values for DNSExpiryExceptionPolicy
+const (
+	DNSExpiryExceptionPolicyReject   DNSExpiryExceptionPolicy = "REJECT"
+	DNSExpiryExceptionPolicyDrop     DNSExpiryExceptionPolicy = "DROP"
+	DNSExpiryExceptionPolicyContinue DNSExpiryExceptionPolicy = "CONTINUE"
+)
+
+// Values returns all known values for DNSExpiryExceptionPolicy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DNSExpiryExceptionPolicy) Values() []DNSExpiryExceptionPolicy {
+	return []DNSExpiryExceptionPolicy{
+		"REJECT",
+		"DROP",
+		"CONTINUE",
+	}
+}
+
 type EnabledAnalysisType string
 
 // Enum values for EnabledAnalysisType
@@ -127,6 +171,145 @@ func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"CUSTOMER_KMS",
 		"AWS_OWNED_KMS_KEY",
+	}
+}
+
+type FirewallPolicyErrorCode string
+
+// Enum values for FirewallPolicyErrorCode
+const (
+	FirewallPolicyErrorCodeDnsFirewallRuleGroupUnavailable    FirewallPolicyErrorCode = "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"
+	FirewallPolicyErrorCodeRoute53ResolvedIpValidationMissing FirewallPolicyErrorCode = "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+)
+
+// Values returns all known values for FirewallPolicyErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallPolicyErrorCode) Values() []FirewallPolicyErrorCode {
+	return []FirewallPolicyErrorCode{
+		"DNS_FIREWALL_RULE_GROUP_UNAVAILABLE",
+		"ROUTE53_RESOLVED_IP_VALIDATION_MISSING",
+	}
+}
+
+type FirewallRuleAction string
+
+// Enum values for FirewallRuleAction
+const (
+	FirewallRuleActionAccept     FirewallRuleAction = "ACCEPT"
+	FirewallRuleActionDrop       FirewallRuleAction = "DROP"
+	FirewallRuleActionReject     FirewallRuleAction = "REJECT"
+	FirewallRuleActionRejectDst  FirewallRuleAction = "REJECT_DST"
+	FirewallRuleActionRejectBoth FirewallRuleAction = "REJECT_BOTH"
+)
+
+// Values returns all known values for FirewallRuleAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallRuleAction) Values() []FirewallRuleAction {
+	return []FirewallRuleAction{
+		"ACCEPT",
+		"DROP",
+		"REJECT",
+		"REJECT_DST",
+		"REJECT_BOTH",
+	}
+}
+
+type FirewallRuleProtocol string
+
+// Enum values for FirewallRuleProtocol
+const (
+	FirewallRuleProtocolAny           FirewallRuleProtocol = "IP"
+	FirewallRuleProtocolTcp           FirewallRuleProtocol = "TCP"
+	FirewallRuleProtocolUdp           FirewallRuleProtocol = "UDP"
+	FirewallRuleProtocolIcmp          FirewallRuleProtocol = "ICMP"
+	FirewallRuleProtocolHttp          FirewallRuleProtocol = "HTTP"
+	FirewallRuleProtocolFtp           FirewallRuleProtocol = "FTP"
+	FirewallRuleProtocolTls           FirewallRuleProtocol = "TLS"
+	FirewallRuleProtocolSmb           FirewallRuleProtocol = "SMB"
+	FirewallRuleProtocolDns           FirewallRuleProtocol = "DNS"
+	FirewallRuleProtocolDcerpc        FirewallRuleProtocol = "DCERPC"
+	FirewallRuleProtocolSsh           FirewallRuleProtocol = "SSH"
+	FirewallRuleProtocolSmtp          FirewallRuleProtocol = "SMTP"
+	FirewallRuleProtocolMsn           FirewallRuleProtocol = "MSN"
+	FirewallRuleProtocolKrb5          FirewallRuleProtocol = "KRB5"
+	FirewallRuleProtocolIkev2         FirewallRuleProtocol = "IKEV2"
+	FirewallRuleProtocolTftp          FirewallRuleProtocol = "TFTP"
+	FirewallRuleProtocolNtp           FirewallRuleProtocol = "NTP"
+	FirewallRuleProtocolDhcp          FirewallRuleProtocol = "DHCP"
+	FirewallRuleProtocolHttp2         FirewallRuleProtocol = "HTTP2"
+	FirewallRuleProtocolQuic          FirewallRuleProtocol = "QUIC"
+	FirewallRuleProtocolIcmpv4        FirewallRuleProtocol = "ICMPV4"
+	FirewallRuleProtocolIcmpv6        FirewallRuleProtocol = "ICMPV6"
+	FirewallRuleProtocolSctp          FirewallRuleProtocol = "SCTP"
+	FirewallRuleProtocolIpv4          FirewallRuleProtocol = "IPV4"
+	FirewallRuleProtocolIpv6          FirewallRuleProtocol = "IPV6"
+	FirewallRuleProtocolDoh2          FirewallRuleProtocol = "DOH2"
+	FirewallRuleProtocolFtpData       FirewallRuleProtocol = "FTP_DATA"
+	FirewallRuleProtocolNfs           FirewallRuleProtocol = "NFS"
+	FirewallRuleProtocolRdp           FirewallRuleProtocol = "RDP"
+	FirewallRuleProtocolRfb           FirewallRuleProtocol = "RFB"
+	FirewallRuleProtocolMqtt          FirewallRuleProtocol = "MQTT"
+	FirewallRuleProtocolPgsql         FirewallRuleProtocol = "PGSQL"
+	FirewallRuleProtocolSnmp          FirewallRuleProtocol = "SNMP"
+	FirewallRuleProtocolTelnet        FirewallRuleProtocol = "TELNET"
+	FirewallRuleProtocolWebsocket     FirewallRuleProtocol = "WEBSOCKET"
+	FirewallRuleProtocolLdap          FirewallRuleProtocol = "LDAP"
+	FirewallRuleProtocolPop3          FirewallRuleProtocol = "POP3"
+	FirewallRuleProtocolMdns          FirewallRuleProtocol = "MDNS"
+	FirewallRuleProtocolBittorrentDht FirewallRuleProtocol = "BITTORRENT_DHT"
+	FirewallRuleProtocolDnp3          FirewallRuleProtocol = "DNP3"
+)
+
+// Values returns all known values for FirewallRuleProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallRuleProtocol) Values() []FirewallRuleProtocol {
+	return []FirewallRuleProtocol{
+		"IP",
+		"TCP",
+		"UDP",
+		"ICMP",
+		"HTTP",
+		"FTP",
+		"TLS",
+		"SMB",
+		"DNS",
+		"DCERPC",
+		"SSH",
+		"SMTP",
+		"MSN",
+		"KRB5",
+		"IKEV2",
+		"TFTP",
+		"NTP",
+		"DHCP",
+		"HTTP2",
+		"QUIC",
+		"ICMPV4",
+		"ICMPV6",
+		"SCTP",
+		"IPV4",
+		"IPV6",
+		"DOH2",
+		"FTP_DATA",
+		"NFS",
+		"RDP",
+		"RFB",
+		"MQTT",
+		"PGSQL",
+		"SNMP",
+		"TELNET",
+		"WEBSOCKET",
+		"LDAP",
+		"POP3",
+		"MDNS",
+		"BITTORRENT_DHT",
+		"DNP3",
 	}
 }
 
@@ -215,6 +398,413 @@ func (GeneratedRulesType) Values() []GeneratedRulesType {
 		"DENYLIST",
 		"REJECTLIST",
 		"ALERTLIST",
+	}
+}
+
+type HookKey string
+
+// Enum values for HookKey
+const (
+	HookKeyTcpAll                        HookKey = "TCP_ALL"
+	HookKeyTcpFlowStart                  HookKey = "TCP_FLOW_START"
+	HookKeyTcpPreFlow                    HookKey = "TCP_PRE_FLOW"
+	HookKeyTcpPreStream                  HookKey = "TCP_PRE_STREAM"
+	HookKeySctpAll                       HookKey = "SCTP_ALL"
+	HookKeySctpFlowStart                 HookKey = "SCTP_FLOW_START"
+	HookKeySctpPreFlow                   HookKey = "SCTP_PRE_FLOW"
+	HookKeySctpPreStream                 HookKey = "SCTP_PRE_STREAM"
+	HookKeyIpv6All                       HookKey = "IPV6_ALL"
+	HookKeyIpv6FlowStart                 HookKey = "IPV6_FLOW_START"
+	HookKeyIpv6PreFlow                   HookKey = "IPV6_PRE_FLOW"
+	HookKeyIpv6PreStream                 HookKey = "IPV6_PRE_STREAM"
+	HookKeyIcmpv6All                     HookKey = "ICMPV6_ALL"
+	HookKeyIcmpv6FlowStart               HookKey = "ICMPV6_FLOW_START"
+	HookKeyIcmpv6PreFlow                 HookKey = "ICMPV6_PRE_FLOW"
+	HookKeyIcmpv6PreStream               HookKey = "ICMPV6_PRE_STREAM"
+	HookKeyUdpAll                        HookKey = "UDP_ALL"
+	HookKeyUdpFlowStart                  HookKey = "UDP_FLOW_START"
+	HookKeyUdpPreFlow                    HookKey = "UDP_PRE_FLOW"
+	HookKeyUdpPreStream                  HookKey = "UDP_PRE_STREAM"
+	HookKeyIcmpAll                       HookKey = "ICMP_ALL"
+	HookKeyIcmpFlowStart                 HookKey = "ICMP_FLOW_START"
+	HookKeyIcmpPreFlow                   HookKey = "ICMP_PRE_FLOW"
+	HookKeyIcmpPreStream                 HookKey = "ICMP_PRE_STREAM"
+	HookKeyIcmpv4All                     HookKey = "ICMPV4_ALL"
+	HookKeyIcmpv4FlowStart               HookKey = "ICMPV4_FLOW_START"
+	HookKeyIcmpv4PreFlow                 HookKey = "ICMPV4_PRE_FLOW"
+	HookKeyIcmpv4PreStream               HookKey = "ICMPV4_PRE_STREAM"
+	HookKeyIpAll                         HookKey = "IP_ALL"
+	HookKeyIpFlowStart                   HookKey = "IP_FLOW_START"
+	HookKeyIpPreFlow                     HookKey = "IP_PRE_FLOW"
+	HookKeyIpPreStream                   HookKey = "IP_PRE_STREAM"
+	HookKeyIpv4All                       HookKey = "IPV4_ALL"
+	HookKeyIpv4FlowStart                 HookKey = "IPV4_FLOW_START"
+	HookKeyIpv4PreFlow                   HookKey = "IPV4_PRE_FLOW"
+	HookKeyIpv4PreStream                 HookKey = "IPV4_PRE_STREAM"
+	HookKeyTlsClientStarted              HookKey = "TLS_CLIENT_STARTED"
+	HookKeyTlsClientHello                HookKey = "TLS_CLIENT_HELLO"
+	HookKeyTlsClientCert                 HookKey = "TLS_CLIENT_CERT"
+	HookKeyTlsClientData                 HookKey = "TLS_CLIENT_DATA"
+	HookKeyTlsClientFinished             HookKey = "TLS_CLIENT_FINISHED"
+	HookKeyTlsServerStarted              HookKey = "TLS_SERVER_STARTED"
+	HookKeyTlsServerHello                HookKey = "TLS_SERVER_HELLO"
+	HookKeyTlsServerCert                 HookKey = "TLS_SERVER_CERT"
+	HookKeyTlsServerData                 HookKey = "TLS_SERVER_DATA"
+	HookKeyTlsServerFinished             HookKey = "TLS_SERVER_FINISHED"
+	HookKeyHttp1RequestStarted           HookKey = "HTTP1_REQUEST_STARTED"
+	HookKeyHttp1RequestLine              HookKey = "HTTP1_REQUEST_LINE"
+	HookKeyHttp1RequestHeaders           HookKey = "HTTP1_REQUEST_HEADERS"
+	HookKeyHttp1RequestBody              HookKey = "HTTP1_REQUEST_BODY"
+	HookKeyHttp1RequestTrailer           HookKey = "HTTP1_REQUEST_TRAILER"
+	HookKeyHttp1RequestComplete          HookKey = "HTTP1_REQUEST_COMPLETE"
+	HookKeyHttp1ResponseStarted          HookKey = "HTTP1_RESPONSE_STARTED"
+	HookKeyHttp1ResponseLine             HookKey = "HTTP1_RESPONSE_LINE"
+	HookKeyHttp1ResponseHeaders          HookKey = "HTTP1_RESPONSE_HEADERS"
+	HookKeyHttp1ResponseBody             HookKey = "HTTP1_RESPONSE_BODY"
+	HookKeyHttp1ResponseTrailer          HookKey = "HTTP1_RESPONSE_TRAILER"
+	HookKeyHttp1ResponseComplete         HookKey = "HTTP1_RESPONSE_COMPLETE"
+	HookKeyHttp2StreamRequestStarted     HookKey = "HTTP2_STREAM_REQUEST_STARTED"
+	HookKeyHttp2StreamRequestHeaders     HookKey = "HTTP2_STREAM_REQUEST_HEADERS"
+	HookKeyHttp2StreamRequestData        HookKey = "HTTP2_STREAM_REQUEST_DATA"
+	HookKeyHttp2StreamRequestClosed      HookKey = "HTTP2_STREAM_REQUEST_CLOSED"
+	HookKeyHttp2StreamRequestComplete    HookKey = "HTTP2_STREAM_REQUEST_COMPLETE"
+	HookKeyHttp2StreamResponseStarted    HookKey = "HTTP2_STREAM_RESPONSE_STARTED"
+	HookKeyHttp2StreamResponseHeaders    HookKey = "HTTP2_STREAM_RESPONSE_HEADERS"
+	HookKeyHttp2StreamResponseData       HookKey = "HTTP2_STREAM_RESPONSE_DATA"
+	HookKeyHttp2StreamResponseClosed     HookKey = "HTTP2_STREAM_RESPONSE_CLOSED"
+	HookKeyHttp2StreamResponseComplete   HookKey = "HTTP2_STREAM_RESPONSE_COMPLETE"
+	HookKeyHttp2GlobalRequestStarted     HookKey = "HTTP2_GLOBAL_REQUEST_STARTED"
+	HookKeyHttp2GlobalRequestComplete    HookKey = "HTTP2_GLOBAL_REQUEST_COMPLETE"
+	HookKeyHttp2GlobalResponseStarted    HookKey = "HTTP2_GLOBAL_RESPONSE_STARTED"
+	HookKeyHttp2GlobalResponseComplete   HookKey = "HTTP2_GLOBAL_RESPONSE_COMPLETE"
+	HookKeyDoh2StreamRequestStarted      HookKey = "DOH2_STREAM_REQUEST_STARTED"
+	HookKeyDoh2StreamRequestHeaders      HookKey = "DOH2_STREAM_REQUEST_HEADERS"
+	HookKeyDoh2StreamRequestData         HookKey = "DOH2_STREAM_REQUEST_DATA"
+	HookKeyDoh2StreamRequestClosed       HookKey = "DOH2_STREAM_REQUEST_CLOSED"
+	HookKeyDoh2StreamRequestComplete     HookKey = "DOH2_STREAM_REQUEST_COMPLETE"
+	HookKeyDoh2StreamResponseStarted     HookKey = "DOH2_STREAM_RESPONSE_STARTED"
+	HookKeyDoh2StreamResponseHeaders     HookKey = "DOH2_STREAM_RESPONSE_HEADERS"
+	HookKeyDoh2StreamResponseData        HookKey = "DOH2_STREAM_RESPONSE_DATA"
+	HookKeyDoh2StreamResponseClosed      HookKey = "DOH2_STREAM_RESPONSE_CLOSED"
+	HookKeyDoh2StreamResponseComplete    HookKey = "DOH2_STREAM_RESPONSE_COMPLETE"
+	HookKeyDoh2GlobalRequestStarted      HookKey = "DOH2_GLOBAL_REQUEST_STARTED"
+	HookKeyDoh2GlobalRequestComplete     HookKey = "DOH2_GLOBAL_REQUEST_COMPLETE"
+	HookKeyDoh2GlobalResponseStarted     HookKey = "DOH2_GLOBAL_RESPONSE_STARTED"
+	HookKeyDoh2GlobalResponseComplete    HookKey = "DOH2_GLOBAL_RESPONSE_COMPLETE"
+	HookKeyDnsRequestStarted             HookKey = "DNS_REQUEST_STARTED"
+	HookKeyDnsRequestComplete            HookKey = "DNS_REQUEST_COMPLETE"
+	HookKeyDnsResponseStarted            HookKey = "DNS_RESPONSE_STARTED"
+	HookKeyDnsResponseComplete           HookKey = "DNS_RESPONSE_COMPLETE"
+	HookKeySmtpRequestStarted            HookKey = "SMTP_REQUEST_STARTED"
+	HookKeySmtpRequestData               HookKey = "SMTP_REQUEST_DATA"
+	HookKeySmtpRequestComplete           HookKey = "SMTP_REQUEST_COMPLETE"
+	HookKeySmtpResponseStarted           HookKey = "SMTP_RESPONSE_STARTED"
+	HookKeySmtpResponseData              HookKey = "SMTP_RESPONSE_DATA"
+	HookKeySmtpResponseComplete          HookKey = "SMTP_RESPONSE_COMPLETE"
+	HookKeyFtpRequestStarted             HookKey = "FTP_REQUEST_STARTED"
+	HookKeyFtpRequestComplete            HookKey = "FTP_REQUEST_COMPLETE"
+	HookKeyFtpResponseStarted            HookKey = "FTP_RESPONSE_STARTED"
+	HookKeyFtpResponseComplete           HookKey = "FTP_RESPONSE_COMPLETE"
+	HookKeyFtpDataRequestStarted         HookKey = "FTP_DATA_REQUEST_STARTED"
+	HookKeyFtpDataRequestComplete        HookKey = "FTP_DATA_REQUEST_COMPLETE"
+	HookKeyFtpDataResponseStarted        HookKey = "FTP_DATA_RESPONSE_STARTED"
+	HookKeyFtpDataResponseComplete       HookKey = "FTP_DATA_RESPONSE_COMPLETE"
+	HookKeySmbRequestStarted             HookKey = "SMB_REQUEST_STARTED"
+	HookKeySmbRequestComplete            HookKey = "SMB_REQUEST_COMPLETE"
+	HookKeySmbResponseStarted            HookKey = "SMB_RESPONSE_STARTED"
+	HookKeySmbResponseComplete           HookKey = "SMB_RESPONSE_COMPLETE"
+	HookKeyDcerpcRequestStarted          HookKey = "DCERPC_REQUEST_STARTED"
+	HookKeyDcerpcRequestComplete         HookKey = "DCERPC_REQUEST_COMPLETE"
+	HookKeyDcerpcResponseStarted         HookKey = "DCERPC_RESPONSE_STARTED"
+	HookKeyDcerpcResponseComplete        HookKey = "DCERPC_RESPONSE_COMPLETE"
+	HookKeyNfsRequestStarted             HookKey = "NFS_REQUEST_STARTED"
+	HookKeyNfsRequestComplete            HookKey = "NFS_REQUEST_COMPLETE"
+	HookKeyNfsResponseStarted            HookKey = "NFS_RESPONSE_STARTED"
+	HookKeyNfsResponseComplete           HookKey = "NFS_RESPONSE_COMPLETE"
+	HookKeyKrb5RequestStarted            HookKey = "KRB5_REQUEST_STARTED"
+	HookKeyKrb5RequestComplete           HookKey = "KRB5_REQUEST_COMPLETE"
+	HookKeyKrb5ResponseStarted           HookKey = "KRB5_RESPONSE_STARTED"
+	HookKeyKrb5ResponseComplete          HookKey = "KRB5_RESPONSE_COMPLETE"
+	HookKeyIkeRequestStarted             HookKey = "IKE_REQUEST_STARTED"
+	HookKeyIkeRequestComplete            HookKey = "IKE_REQUEST_COMPLETE"
+	HookKeyIkeResponseStarted            HookKey = "IKE_RESPONSE_STARTED"
+	HookKeyIkeResponseComplete           HookKey = "IKE_RESPONSE_COMPLETE"
+	HookKeyTftpRequestStarted            HookKey = "TFTP_REQUEST_STARTED"
+	HookKeyTftpRequestComplete           HookKey = "TFTP_REQUEST_COMPLETE"
+	HookKeyTftpResponseStarted           HookKey = "TFTP_RESPONSE_STARTED"
+	HookKeyTftpResponseComplete          HookKey = "TFTP_RESPONSE_COMPLETE"
+	HookKeyDhcpRequestStarted            HookKey = "DHCP_REQUEST_STARTED"
+	HookKeyDhcpRequestComplete           HookKey = "DHCP_REQUEST_COMPLETE"
+	HookKeyDhcpResponseStarted           HookKey = "DHCP_RESPONSE_STARTED"
+	HookKeyDhcpResponseComplete          HookKey = "DHCP_RESPONSE_COMPLETE"
+	HookKeyQuicRequestStarted            HookKey = "QUIC_REQUEST_STARTED"
+	HookKeyQuicRequestComplete           HookKey = "QUIC_REQUEST_COMPLETE"
+	HookKeyQuicResponseStarted           HookKey = "QUIC_RESPONSE_STARTED"
+	HookKeyQuicResponseComplete          HookKey = "QUIC_RESPONSE_COMPLETE"
+	HookKeyRdpRequestStarted             HookKey = "RDP_REQUEST_STARTED"
+	HookKeyRdpRequestComplete            HookKey = "RDP_REQUEST_COMPLETE"
+	HookKeyRdpResponseStarted            HookKey = "RDP_RESPONSE_STARTED"
+	HookKeyRdpResponseComplete           HookKey = "RDP_RESPONSE_COMPLETE"
+	HookKeyRfbRequestStarted             HookKey = "RFB_REQUEST_STARTED"
+	HookKeyRfbRequestComplete            HookKey = "RFB_REQUEST_COMPLETE"
+	HookKeyRfbResponseStarted            HookKey = "RFB_RESPONSE_STARTED"
+	HookKeyRfbResponseComplete           HookKey = "RFB_RESPONSE_COMPLETE"
+	HookKeyMqttRequestStarted            HookKey = "MQTT_REQUEST_STARTED"
+	HookKeyMqttRequestComplete           HookKey = "MQTT_REQUEST_COMPLETE"
+	HookKeyMqttResponseStarted           HookKey = "MQTT_RESPONSE_STARTED"
+	HookKeyMqttResponseComplete          HookKey = "MQTT_RESPONSE_COMPLETE"
+	HookKeyPgsqlRequestStarted           HookKey = "PGSQL_REQUEST_STARTED"
+	HookKeyPgsqlRequestComplete          HookKey = "PGSQL_REQUEST_COMPLETE"
+	HookKeyPgsqlResponseStarted          HookKey = "PGSQL_RESPONSE_STARTED"
+	HookKeyPgsqlResponseComplete         HookKey = "PGSQL_RESPONSE_COMPLETE"
+	HookKeySnmpRequestStarted            HookKey = "SNMP_REQUEST_STARTED"
+	HookKeySnmpRequestComplete           HookKey = "SNMP_REQUEST_COMPLETE"
+	HookKeySnmpResponseStarted           HookKey = "SNMP_RESPONSE_STARTED"
+	HookKeySnmpResponseComplete          HookKey = "SNMP_RESPONSE_COMPLETE"
+	HookKeyNtpRequestStarted             HookKey = "NTP_REQUEST_STARTED"
+	HookKeyNtpRequestComplete            HookKey = "NTP_REQUEST_COMPLETE"
+	HookKeyNtpResponseStarted            HookKey = "NTP_RESPONSE_STARTED"
+	HookKeyNtpResponseComplete           HookKey = "NTP_RESPONSE_COMPLETE"
+	HookKeyTelnetRequestStarted          HookKey = "TELNET_REQUEST_STARTED"
+	HookKeyTelnetRequestComplete         HookKey = "TELNET_REQUEST_COMPLETE"
+	HookKeyTelnetResponseStarted         HookKey = "TELNET_RESPONSE_STARTED"
+	HookKeyTelnetResponseComplete        HookKey = "TELNET_RESPONSE_COMPLETE"
+	HookKeyWebsocketRequestStarted       HookKey = "WEBSOCKET_REQUEST_STARTED"
+	HookKeyWebsocketRequestComplete      HookKey = "WEBSOCKET_REQUEST_COMPLETE"
+	HookKeyWebsocketResponseStarted      HookKey = "WEBSOCKET_RESPONSE_STARTED"
+	HookKeyWebsocketResponseComplete     HookKey = "WEBSOCKET_RESPONSE_COMPLETE"
+	HookKeyLdapRequestStarted            HookKey = "LDAP_REQUEST_STARTED"
+	HookKeyLdapRequestComplete           HookKey = "LDAP_REQUEST_COMPLETE"
+	HookKeyLdapResponseStarted           HookKey = "LDAP_RESPONSE_STARTED"
+	HookKeyLdapResponseComplete          HookKey = "LDAP_RESPONSE_COMPLETE"
+	HookKeyPop3RequestStarted            HookKey = "POP3_REQUEST_STARTED"
+	HookKeyPop3RequestComplete           HookKey = "POP3_REQUEST_COMPLETE"
+	HookKeyPop3ResponseStarted           HookKey = "POP3_RESPONSE_STARTED"
+	HookKeyPop3ResponseComplete          HookKey = "POP3_RESPONSE_COMPLETE"
+	HookKeyMdnsRequestStarted            HookKey = "MDNS_REQUEST_STARTED"
+	HookKeyMdnsRequestComplete           HookKey = "MDNS_REQUEST_COMPLETE"
+	HookKeyMdnsResponseStarted           HookKey = "MDNS_RESPONSE_STARTED"
+	HookKeyMdnsResponseComplete          HookKey = "MDNS_RESPONSE_COMPLETE"
+	HookKeyBittorrentDhtRequestStarted   HookKey = "BITTORRENT_DHT_REQUEST_STARTED"
+	HookKeyBittorrentDhtRequestComplete  HookKey = "BITTORRENT_DHT_REQUEST_COMPLETE"
+	HookKeyBittorrentDhtResponseStarted  HookKey = "BITTORRENT_DHT_RESPONSE_STARTED"
+	HookKeyBittorrentDhtResponseComplete HookKey = "BITTORRENT_DHT_RESPONSE_COMPLETE"
+	HookKeyDnp3RequestStarted            HookKey = "DNP3_REQUEST_STARTED"
+	HookKeyDnp3RequestComplete           HookKey = "DNP3_REQUEST_COMPLETE"
+	HookKeyDnp3ResponseStarted           HookKey = "DNP3_RESPONSE_STARTED"
+	HookKeyDnp3ResponseComplete          HookKey = "DNP3_RESPONSE_COMPLETE"
+	HookKeySshRequestInProgress          HookKey = "SSH_REQUEST_IN_PROGRESS"
+	HookKeySshRequestBannerWaitEol       HookKey = "SSH_REQUEST_BANNER_WAIT_EOL"
+	HookKeySshRequestBannerDone          HookKey = "SSH_REQUEST_BANNER_DONE"
+	HookKeySshRequestFinished            HookKey = "SSH_REQUEST_FINISHED"
+	HookKeySshResponseInProgress         HookKey = "SSH_RESPONSE_IN_PROGRESS"
+	HookKeySshResponseBannerWaitEol      HookKey = "SSH_RESPONSE_BANNER_WAIT_EOL"
+	HookKeySshResponseBannerDone         HookKey = "SSH_RESPONSE_BANNER_DONE"
+	HookKeySshResponseFinished           HookKey = "SSH_RESPONSE_FINISHED"
+)
+
+// Values returns all known values for HookKey. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HookKey) Values() []HookKey {
+	return []HookKey{
+		"TCP_ALL",
+		"TCP_FLOW_START",
+		"TCP_PRE_FLOW",
+		"TCP_PRE_STREAM",
+		"SCTP_ALL",
+		"SCTP_FLOW_START",
+		"SCTP_PRE_FLOW",
+		"SCTP_PRE_STREAM",
+		"IPV6_ALL",
+		"IPV6_FLOW_START",
+		"IPV6_PRE_FLOW",
+		"IPV6_PRE_STREAM",
+		"ICMPV6_ALL",
+		"ICMPV6_FLOW_START",
+		"ICMPV6_PRE_FLOW",
+		"ICMPV6_PRE_STREAM",
+		"UDP_ALL",
+		"UDP_FLOW_START",
+		"UDP_PRE_FLOW",
+		"UDP_PRE_STREAM",
+		"ICMP_ALL",
+		"ICMP_FLOW_START",
+		"ICMP_PRE_FLOW",
+		"ICMP_PRE_STREAM",
+		"ICMPV4_ALL",
+		"ICMPV4_FLOW_START",
+		"ICMPV4_PRE_FLOW",
+		"ICMPV4_PRE_STREAM",
+		"IP_ALL",
+		"IP_FLOW_START",
+		"IP_PRE_FLOW",
+		"IP_PRE_STREAM",
+		"IPV4_ALL",
+		"IPV4_FLOW_START",
+		"IPV4_PRE_FLOW",
+		"IPV4_PRE_STREAM",
+		"TLS_CLIENT_STARTED",
+		"TLS_CLIENT_HELLO",
+		"TLS_CLIENT_CERT",
+		"TLS_CLIENT_DATA",
+		"TLS_CLIENT_FINISHED",
+		"TLS_SERVER_STARTED",
+		"TLS_SERVER_HELLO",
+		"TLS_SERVER_CERT",
+		"TLS_SERVER_DATA",
+		"TLS_SERVER_FINISHED",
+		"HTTP1_REQUEST_STARTED",
+		"HTTP1_REQUEST_LINE",
+		"HTTP1_REQUEST_HEADERS",
+		"HTTP1_REQUEST_BODY",
+		"HTTP1_REQUEST_TRAILER",
+		"HTTP1_REQUEST_COMPLETE",
+		"HTTP1_RESPONSE_STARTED",
+		"HTTP1_RESPONSE_LINE",
+		"HTTP1_RESPONSE_HEADERS",
+		"HTTP1_RESPONSE_BODY",
+		"HTTP1_RESPONSE_TRAILER",
+		"HTTP1_RESPONSE_COMPLETE",
+		"HTTP2_STREAM_REQUEST_STARTED",
+		"HTTP2_STREAM_REQUEST_HEADERS",
+		"HTTP2_STREAM_REQUEST_DATA",
+		"HTTP2_STREAM_REQUEST_CLOSED",
+		"HTTP2_STREAM_REQUEST_COMPLETE",
+		"HTTP2_STREAM_RESPONSE_STARTED",
+		"HTTP2_STREAM_RESPONSE_HEADERS",
+		"HTTP2_STREAM_RESPONSE_DATA",
+		"HTTP2_STREAM_RESPONSE_CLOSED",
+		"HTTP2_STREAM_RESPONSE_COMPLETE",
+		"HTTP2_GLOBAL_REQUEST_STARTED",
+		"HTTP2_GLOBAL_REQUEST_COMPLETE",
+		"HTTP2_GLOBAL_RESPONSE_STARTED",
+		"HTTP2_GLOBAL_RESPONSE_COMPLETE",
+		"DOH2_STREAM_REQUEST_STARTED",
+		"DOH2_STREAM_REQUEST_HEADERS",
+		"DOH2_STREAM_REQUEST_DATA",
+		"DOH2_STREAM_REQUEST_CLOSED",
+		"DOH2_STREAM_REQUEST_COMPLETE",
+		"DOH2_STREAM_RESPONSE_STARTED",
+		"DOH2_STREAM_RESPONSE_HEADERS",
+		"DOH2_STREAM_RESPONSE_DATA",
+		"DOH2_STREAM_RESPONSE_CLOSED",
+		"DOH2_STREAM_RESPONSE_COMPLETE",
+		"DOH2_GLOBAL_REQUEST_STARTED",
+		"DOH2_GLOBAL_REQUEST_COMPLETE",
+		"DOH2_GLOBAL_RESPONSE_STARTED",
+		"DOH2_GLOBAL_RESPONSE_COMPLETE",
+		"DNS_REQUEST_STARTED",
+		"DNS_REQUEST_COMPLETE",
+		"DNS_RESPONSE_STARTED",
+		"DNS_RESPONSE_COMPLETE",
+		"SMTP_REQUEST_STARTED",
+		"SMTP_REQUEST_DATA",
+		"SMTP_REQUEST_COMPLETE",
+		"SMTP_RESPONSE_STARTED",
+		"SMTP_RESPONSE_DATA",
+		"SMTP_RESPONSE_COMPLETE",
+		"FTP_REQUEST_STARTED",
+		"FTP_REQUEST_COMPLETE",
+		"FTP_RESPONSE_STARTED",
+		"FTP_RESPONSE_COMPLETE",
+		"FTP_DATA_REQUEST_STARTED",
+		"FTP_DATA_REQUEST_COMPLETE",
+		"FTP_DATA_RESPONSE_STARTED",
+		"FTP_DATA_RESPONSE_COMPLETE",
+		"SMB_REQUEST_STARTED",
+		"SMB_REQUEST_COMPLETE",
+		"SMB_RESPONSE_STARTED",
+		"SMB_RESPONSE_COMPLETE",
+		"DCERPC_REQUEST_STARTED",
+		"DCERPC_REQUEST_COMPLETE",
+		"DCERPC_RESPONSE_STARTED",
+		"DCERPC_RESPONSE_COMPLETE",
+		"NFS_REQUEST_STARTED",
+		"NFS_REQUEST_COMPLETE",
+		"NFS_RESPONSE_STARTED",
+		"NFS_RESPONSE_COMPLETE",
+		"KRB5_REQUEST_STARTED",
+		"KRB5_REQUEST_COMPLETE",
+		"KRB5_RESPONSE_STARTED",
+		"KRB5_RESPONSE_COMPLETE",
+		"IKE_REQUEST_STARTED",
+		"IKE_REQUEST_COMPLETE",
+		"IKE_RESPONSE_STARTED",
+		"IKE_RESPONSE_COMPLETE",
+		"TFTP_REQUEST_STARTED",
+		"TFTP_REQUEST_COMPLETE",
+		"TFTP_RESPONSE_STARTED",
+		"TFTP_RESPONSE_COMPLETE",
+		"DHCP_REQUEST_STARTED",
+		"DHCP_REQUEST_COMPLETE",
+		"DHCP_RESPONSE_STARTED",
+		"DHCP_RESPONSE_COMPLETE",
+		"QUIC_REQUEST_STARTED",
+		"QUIC_REQUEST_COMPLETE",
+		"QUIC_RESPONSE_STARTED",
+		"QUIC_RESPONSE_COMPLETE",
+		"RDP_REQUEST_STARTED",
+		"RDP_REQUEST_COMPLETE",
+		"RDP_RESPONSE_STARTED",
+		"RDP_RESPONSE_COMPLETE",
+		"RFB_REQUEST_STARTED",
+		"RFB_REQUEST_COMPLETE",
+		"RFB_RESPONSE_STARTED",
+		"RFB_RESPONSE_COMPLETE",
+		"MQTT_REQUEST_STARTED",
+		"MQTT_REQUEST_COMPLETE",
+		"MQTT_RESPONSE_STARTED",
+		"MQTT_RESPONSE_COMPLETE",
+		"PGSQL_REQUEST_STARTED",
+		"PGSQL_REQUEST_COMPLETE",
+		"PGSQL_RESPONSE_STARTED",
+		"PGSQL_RESPONSE_COMPLETE",
+		"SNMP_REQUEST_STARTED",
+		"SNMP_REQUEST_COMPLETE",
+		"SNMP_RESPONSE_STARTED",
+		"SNMP_RESPONSE_COMPLETE",
+		"NTP_REQUEST_STARTED",
+		"NTP_REQUEST_COMPLETE",
+		"NTP_RESPONSE_STARTED",
+		"NTP_RESPONSE_COMPLETE",
+		"TELNET_REQUEST_STARTED",
+		"TELNET_REQUEST_COMPLETE",
+		"TELNET_RESPONSE_STARTED",
+		"TELNET_RESPONSE_COMPLETE",
+		"WEBSOCKET_REQUEST_STARTED",
+		"WEBSOCKET_REQUEST_COMPLETE",
+		"WEBSOCKET_RESPONSE_STARTED",
+		"WEBSOCKET_RESPONSE_COMPLETE",
+		"LDAP_REQUEST_STARTED",
+		"LDAP_REQUEST_COMPLETE",
+		"LDAP_RESPONSE_STARTED",
+		"LDAP_RESPONSE_COMPLETE",
+		"POP3_REQUEST_STARTED",
+		"POP3_REQUEST_COMPLETE",
+		"POP3_RESPONSE_STARTED",
+		"POP3_RESPONSE_COMPLETE",
+		"MDNS_REQUEST_STARTED",
+		"MDNS_REQUEST_COMPLETE",
+		"MDNS_RESPONSE_STARTED",
+		"MDNS_RESPONSE_COMPLETE",
+		"BITTORRENT_DHT_REQUEST_STARTED",
+		"BITTORRENT_DHT_REQUEST_COMPLETE",
+		"BITTORRENT_DHT_RESPONSE_STARTED",
+		"BITTORRENT_DHT_RESPONSE_COMPLETE",
+		"DNP3_REQUEST_STARTED",
+		"DNP3_REQUEST_COMPLETE",
+		"DNP3_RESPONSE_STARTED",
+		"DNP3_RESPONSE_COMPLETE",
+		"SSH_REQUEST_IN_PROGRESS",
+		"SSH_REQUEST_BANNER_WAIT_EOL",
+		"SSH_REQUEST_BANNER_DONE",
+		"SSH_REQUEST_FINISHED",
+		"SSH_RESPONSE_IN_PROGRESS",
+		"SSH_RESPONSE_BANNER_WAIT_EOL",
+		"SSH_RESPONSE_BANNER_DONE",
+		"SSH_RESPONSE_FINISHED",
 	}
 }
 
@@ -386,6 +976,48 @@ func (PerObjectSyncStatus) Values() []PerObjectSyncStatus {
 	}
 }
 
+type PolicyDefaultAction string
+
+// Enum values for PolicyDefaultAction
+const (
+	PolicyDefaultActionDrop   PolicyDefaultAction = "DROP"
+	PolicyDefaultActionAccept PolicyDefaultAction = "ACCEPT"
+	PolicyDefaultActionReject PolicyDefaultAction = "REJECT"
+	PolicyDefaultActionAlert  PolicyDefaultAction = "ALERT"
+)
+
+// Values returns all known values for PolicyDefaultAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyDefaultAction) Values() []PolicyDefaultAction {
+	return []PolicyDefaultAction{
+		"DROP",
+		"ACCEPT",
+		"REJECT",
+		"ALERT",
+	}
+}
+
+type PolicyMode string
+
+// Enum values for PolicyMode
+const (
+	PolicyModeEnforce PolicyMode = "ENFORCE"
+	PolicyModeMonitor PolicyMode = "MONITOR"
+)
+
+// Values returns all known values for PolicyMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyMode) Values() []PolicyMode {
+	return []PolicyMode{
+		"ENFORCE",
+		"MONITOR",
+	}
+}
+
 type ProxyModifyState string
 
 // Enum values for ProxyModifyState
@@ -504,6 +1136,7 @@ const (
 	ResourceStatusActive   ResourceStatus = "ACTIVE"
 	ResourceStatusDeleting ResourceStatus = "DELETING"
 	ResourceStatusError    ResourceStatus = "ERROR"
+	ResourceStatusUpdating ResourceStatus = "UPDATING"
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
@@ -515,6 +1148,7 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"ACTIVE",
 		"DELETING",
 		"ERROR",
+		"UPDATING",
 	}
 }
 
@@ -536,6 +1170,28 @@ func (RevocationCheckAction) Values() []RevocationCheckAction {
 		"PASS",
 		"DROP",
 		"REJECT",
+	}
+}
+
+type Route53ResolvedIPValidationAction string
+
+// Enum values for Route53ResolvedIPValidationAction
+const (
+	Route53ResolvedIPValidationActionReject Route53ResolvedIPValidationAction = "REJECT"
+	Route53ResolvedIPValidationActionDrop   Route53ResolvedIPValidationAction = "DROP"
+	Route53ResolvedIPValidationActionAlert  Route53ResolvedIPValidationAction = "ALERT"
+)
+
+// Values returns all known values for Route53ResolvedIPValidationAction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Route53ResolvedIPValidationAction) Values() []Route53ResolvedIPValidationAction {
+	return []Route53ResolvedIPValidationAction{
+		"REJECT",
+		"DROP",
+		"ALERT",
 	}
 }
 
@@ -567,6 +1223,8 @@ const (
 	RuleGroupTypeStateless      RuleGroupType = "STATELESS"
 	RuleGroupTypeStateful       RuleGroupType = "STATEFUL"
 	RuleGroupTypeStatefulDomain RuleGroupType = "STATEFUL_DOMAIN"
+	RuleGroupTypeFirewall       RuleGroupType = "FIREWALL"
+	RuleGroupTypeIps            RuleGroupType = "IPS"
 )
 
 // Values returns all known values for RuleGroupType. Note that this can be
@@ -578,6 +1236,8 @@ func (RuleGroupType) Values() []RuleGroupType {
 		"STATELESS",
 		"STATEFUL",
 		"STATEFUL_DOMAIN",
+		"FIREWALL",
+		"IPS",
 	}
 }
 
@@ -597,6 +1257,25 @@ func (RuleOrder) Values() []RuleOrder {
 	return []RuleOrder{
 		"DEFAULT_ACTION_ORDER",
 		"STRICT_ORDER",
+	}
+}
+
+type RuleOutputFormat string
+
+// Enum values for RuleOutputFormat
+const (
+	RuleOutputFormatFirewallRules RuleOutputFormat = "FIREWALL_RULES"
+	RuleOutputFormatRulesString   RuleOutputFormat = "RULES_STRING"
+)
+
+// Values returns all known values for RuleOutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleOutputFormat) Values() []RuleOutputFormat {
+	return []RuleOutputFormat{
+		"FIREWALL_RULES",
+		"RULES_STRING",
 	}
 }
 
@@ -720,6 +1399,25 @@ func (StreamExceptionPolicy) Values() []StreamExceptionPolicy {
 	}
 }
 
+type StreamExceptionPolicyV2 string
+
+// Enum values for StreamExceptionPolicyV2
+const (
+	StreamExceptionPolicyV2Drop   StreamExceptionPolicyV2 = "DROP"
+	StreamExceptionPolicyV2Reject StreamExceptionPolicyV2 = "REJECT"
+)
+
+// Values returns all known values for StreamExceptionPolicyV2. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamExceptionPolicyV2) Values() []StreamExceptionPolicyV2 {
+	return []StreamExceptionPolicyV2{
+		"DROP",
+		"REJECT",
+	}
+}
+
 type SubscriptionStatus string
 
 // Enum values for SubscriptionStatus
@@ -764,8 +1462,9 @@ type TargetType string
 
 // Enum values for TargetType
 const (
-	TargetTypeTlsSni   TargetType = "TLS_SNI"
-	TargetTypeHttpHost TargetType = "HTTP_HOST"
+	TargetTypeTlsSni                   TargetType = "TLS_SNI"
+	TargetTypeHttpHost                 TargetType = "HTTP_HOST"
+	TargetTypeAwsRoute53ResolvedDomain TargetType = "AWS_ROUTE_53_RESOLVED_DOMAIN"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -776,6 +1475,7 @@ func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"TLS_SNI",
 		"HTTP_HOST",
+		"AWS_ROUTE_53_RESOLVED_DOMAIN",
 	}
 }
 

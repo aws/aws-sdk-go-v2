@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,35 @@ type SendBounceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBounceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendBounceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendBounceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BounceSender != nil {
+		s.WriteString(schemas.SendBounceRequest_BounceSender, *v.BounceSender)
+	}
+	if v.BounceSenderArn != nil {
+		s.WriteString(schemas.SendBounceRequest_BounceSenderArn, *v.BounceSenderArn)
+	}
+	if v.BouncedRecipientInfoList != nil {
+		serializeBouncedRecipientInfoList(s, schemas.SendBounceRequest_BouncedRecipientInfoList, v.BouncedRecipientInfoList)
+	}
+	if v.Explanation != nil {
+		s.WriteString(schemas.SendBounceRequest_Explanation, *v.Explanation)
+	}
+	if v.MessageDsn != nil {
+		s.WriteStruct(schemas.SendBounceRequest_MessageDsn)
+		v.MessageDsn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OriginalMessageId != nil {
+		s.WriteString(schemas.SendBounceRequest_OriginalMessageId, *v.OriginalMessageId)
+	}
+}
+
 // Represents a unique message ID.
 type SendBounceOutput struct {
 
@@ -88,13 +119,32 @@ type SendBounceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBounceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendBounceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendBounceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendBounceResponse_MessageId, *v.MessageId)
+	}
+}
+func (v *SendBounceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendBounceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendBounceResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendBounceResponse_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendBounceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendBounce{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBounce, schemas.SendBounceRequest, schemas.SendBounceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSendBounce{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBounce, schemas.SendBounceRequest, schemas.SendBounceResponse), output: &SendBounceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

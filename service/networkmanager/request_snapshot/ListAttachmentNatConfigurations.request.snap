@@ -1,0 +1,5 @@
+POST /nat-configurations
+
+Content-Type: application/json
+
+{"AttachmentId":"__AttachmentId__","CoreNetworkId":"__CoreNetworkId__","Filters":{"key0":["__Member__","__Member__"]},"MaxResults":1,"NextToken":"__NextToken__"}

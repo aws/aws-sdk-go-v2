@@ -134,7 +134,9 @@ func (v *ListNotebookExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Marker != nil {
 		s.WriteString(schemas.ListNotebookExecutionsOutput_Marker, *v.Marker)
 	}
-	serializeNotebookExecutionSummaryList(s, schemas.ListNotebookExecutionsOutput_NotebookExecutions, v.NotebookExecutions)
+	if v.NotebookExecutions != nil {
+		serializeNotebookExecutionSummaryList(s, schemas.ListNotebookExecutionsOutput_NotebookExecutions, v.NotebookExecutions)
+	}
 }
 func (v *ListNotebookExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotebookExecutionsOutput, func(s *smithy.Schema) error {

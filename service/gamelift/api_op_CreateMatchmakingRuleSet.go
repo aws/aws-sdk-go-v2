@@ -90,7 +90,9 @@ func (v *CreateMatchmakingRuleSetInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RuleSetBody != nil {
 		s.WriteString(schemas.CreateMatchmakingRuleSetInput_RuleSetBody, *v.RuleSetBody)
 	}
-	serializeTagList(s, schemas.CreateMatchmakingRuleSetInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMatchmakingRuleSetInput_Tags, v.Tags)
+	}
 }
 
 type CreateMatchmakingRuleSetOutput struct {

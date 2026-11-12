@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"code":"CLIENT_ERROR","findingId":"__FindingId__","message":"__Message__"},{"code":"CLIENT_ERROR","findingId":"__FindingId__","message":"__Message__"}]}

@@ -1,6 +1,7 @@
-POST /
+POST /service/ResourceGroupsTaggingAPI_20170126/operation/GetResources
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetResources
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ExcludeCompliantResources":true,"IncludeComplianceDetails":true,"PaginationToken":"__PaginationToken__","ResourceARNList":["__Member__","__Member__"],"ResourcesPerPage":1,"ResourceTypeFilters":["__Member__","__Member__"],"TagFilters":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"TagsPerPage":1}
+¿xExcludeCompliantResourcesõxIncludeComplianceDetailsõoPaginationTokens__PaginationToken__oResourceARNListŸj__Member__j__Member__ÿsResourceTypeFiltersŸj__Member__j__Member__ÿpResourcesPerPagejTagFiltersŸ¿cKeyg__Key__fValuesŸj__Member__j__Member__ÿÿ¿cKeyg__Key__fValuesŸj__Member__j__Member__ÿÿÿkTagsPerPageÿ

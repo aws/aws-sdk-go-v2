@@ -4,6 +4,8 @@ package sagemakerruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -155,6 +157,54 @@ type InvokeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.InvokeEndpointInput_Accept, *v.Accept)
+	}
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeEndpointInput_Body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeEndpointInput_ContentType, *v.ContentType)
+	}
+	if v.CustomAttributes != nil {
+		s.WriteString(schemas.InvokeEndpointInput_CustomAttributes, *v.CustomAttributes)
+	}
+	if v.EnableExplanations != nil {
+		s.WriteString(schemas.InvokeEndpointInput_EnableExplanations, *v.EnableExplanations)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.InvokeEndpointInput_EndpointName, *v.EndpointName)
+	}
+	if v.InferenceComponentName != nil {
+		s.WriteString(schemas.InvokeEndpointInput_InferenceComponentName, *v.InferenceComponentName)
+	}
+	if v.InferenceId != nil {
+		s.WriteString(schemas.InvokeEndpointInput_InferenceId, *v.InferenceId)
+	}
+	if v.PrefixAwareId != nil {
+		s.WriteString(schemas.InvokeEndpointInput_PrefixAwareId, *v.PrefixAwareId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeEndpointInput_SessionId, *v.SessionId)
+	}
+	if v.TargetContainerHostname != nil {
+		s.WriteString(schemas.InvokeEndpointInput_TargetContainerHostname, *v.TargetContainerHostname)
+	}
+	if v.TargetModel != nil {
+		s.WriteString(schemas.InvokeEndpointInput_TargetModel, *v.TargetModel)
+	}
+	if v.TargetVariant != nil {
+		s.WriteString(schemas.InvokeEndpointInput_TargetVariant, *v.TargetVariant)
+	}
+}
+
 type InvokeEndpointOutput struct {
 
 	// Includes the inference provided by the model.
@@ -212,13 +262,61 @@ type InvokeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeEndpointOutput_Body, v.Body)
+	}
+	if v.ClosedSessionId != nil {
+		s.WriteString(schemas.InvokeEndpointOutput_ClosedSessionId, *v.ClosedSessionId)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeEndpointOutput_ContentType, *v.ContentType)
+	}
+	if v.CustomAttributes != nil {
+		s.WriteString(schemas.InvokeEndpointOutput_CustomAttributes, *v.CustomAttributes)
+	}
+	if v.InvokedProductionVariant != nil {
+		s.WriteString(schemas.InvokeEndpointOutput_InvokedProductionVariant, *v.InvokedProductionVariant)
+	}
+	if v.NewSessionId != nil {
+		s.WriteString(schemas.InvokeEndpointOutput_NewSessionId, *v.NewSessionId)
+	}
+}
+func (v *InvokeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeEndpointOutput_Body:
+			return d.ReadBlob(schemas.InvokeEndpointOutput_Body, &v.Body)
+		case schemas.InvokeEndpointOutput_ClosedSessionId:
+			v.ClosedSessionId = new(string)
+			return d.ReadString(schemas.InvokeEndpointOutput_ClosedSessionId, v.ClosedSessionId)
+		case schemas.InvokeEndpointOutput_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeEndpointOutput_ContentType, v.ContentType)
+		case schemas.InvokeEndpointOutput_CustomAttributes:
+			v.CustomAttributes = new(string)
+			return d.ReadString(schemas.InvokeEndpointOutput_CustomAttributes, v.CustomAttributes)
+		case schemas.InvokeEndpointOutput_InvokedProductionVariant:
+			v.InvokedProductionVariant = new(string)
+			return d.ReadString(schemas.InvokeEndpointOutput_InvokedProductionVariant, v.InvokedProductionVariant)
+		case schemas.InvokeEndpointOutput_NewSessionId:
+			v.NewSessionId = new(string)
+			return d.ReadString(schemas.InvokeEndpointOutput_NewSessionId, v.NewSessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpoint, schemas.InvokeEndpointInput, schemas.InvokeEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpoint, schemas.InvokeEndpointInput, schemas.InvokeEndpointOutput), output: &InvokeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

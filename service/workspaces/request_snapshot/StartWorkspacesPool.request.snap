@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/StartWorkspacesPool
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.StartWorkspacesPool
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PoolId":"__PoolId__"}
+¿fPoolIdj__PoolId__ÿ

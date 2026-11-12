@@ -69,8 +69,12 @@ func (v *StartRecoveryPlanExecutionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.RecoveryPlanArn != nil {
 		s.WriteString(schemas.StartRecoveryPlanExecutionRequest_recoveryPlanArn, *v.RecoveryPlanArn)
 	}
-	serializeRecoveryPlanExecutionSourceServerList(s, schemas.StartRecoveryPlanExecutionRequest_sourceServers, v.SourceServers)
-	serializeTagsMap(s, schemas.StartRecoveryPlanExecutionRequest_tags, v.Tags)
+	if v.SourceServers != nil {
+		serializeRecoveryPlanExecutionSourceServerList(s, schemas.StartRecoveryPlanExecutionRequest_sourceServers, v.SourceServers)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartRecoveryPlanExecutionRequest_tags, v.Tags)
+	}
 }
 
 type StartRecoveryPlanExecutionOutput struct {

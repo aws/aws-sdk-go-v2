@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,33 @@ type SuspendProcessesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuspendProcessesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingProcessQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuspendProcessesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.ScalingProcessQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.ScalingProcesses != nil {
+		serializeProcessNames(s, schemas.ScalingProcessQuery_ScalingProcesses, v.ScalingProcesses)
+	}
+}
+func (v *SuspendProcessesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingProcessQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingProcessQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.ScalingProcessQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.ScalingProcessQuery_ScalingProcesses:
+			return deserializeProcessNames(d, schemas.ScalingProcessQuery_ScalingProcesses, &v.ScalingProcesses)
+		}
+		return nil
+	})
+}
+
 type SuspendProcessesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,13 +102,26 @@ type SuspendProcessesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuspendProcessesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuspendProcessesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SuspendProcessesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSuspendProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSuspendProcesses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SuspendProcesses, schemas.ScalingProcessQuery, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSuspendProcesses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SuspendProcesses, schemas.ScalingProcessQuery, nil), output: &SuspendProcessesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

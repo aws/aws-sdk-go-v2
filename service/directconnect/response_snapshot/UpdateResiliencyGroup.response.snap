@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.UpdateResiliencyGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"resiliencyGroup":{"ownerAccount":"__OwnerAccount__","resiliencyGroupArn":"__ResiliencyGroupArn__","resiliencyGroupId":"__ResiliencyGroupId__","resiliencyGroupName":"__ResiliencyGroupName__","resiliencyGroupType":"Managed","state":"pending","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}
+¿oresiliencyGroup¿lownerAccountp__OwnerAccount__rresiliencyGroupArnv__ResiliencyGroupArn__qresiliencyGroupIdu__ResiliencyGroupId__sresiliencyGroupNamew__ResiliencyGroupName__sresiliencyGroupTypegManagedestategpendingdtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿÿÿ

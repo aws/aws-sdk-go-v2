@@ -80,7 +80,9 @@ func (v *CreateSchedulingPolicyInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.QuotaSharePolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagrisTagsMap(s, schemas.CreateSchedulingPolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.CreateSchedulingPolicyRequest_tags, v.Tags)
+	}
 }
 
 type CreateSchedulingPolicyOutput struct {

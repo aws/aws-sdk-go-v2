@@ -82,7 +82,9 @@ func (v *UpdateDlpSettingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDlpSettingRequest_Name, *v.Name)
 	}
-	serializeProviderConfig(s, schemas.UpdateDlpSettingRequest_ProviderConfig, v.ProviderConfig)
+	if v.ProviderConfig != nil {
+		serializeProviderConfig(s, schemas.UpdateDlpSettingRequest_ProviderConfig, v.ProviderConfig)
+	}
 	if v.ProviderOutageAction != "" {
 		s.WriteString(schemas.UpdateDlpSettingRequest_ProviderOutageAction, string(v.ProviderOutageAction))
 	}

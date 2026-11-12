@@ -99,7 +99,9 @@ func (v *UpdateAIPromptInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelId != nil {
 		s.WriteString(schemas.UpdateAIPromptRequest_modelId, *v.ModelId)
 	}
-	serializeAIPromptTemplateConfiguration(s, schemas.UpdateAIPromptRequest_templateConfiguration, v.TemplateConfiguration)
+	if v.TemplateConfiguration != nil {
+		serializeAIPromptTemplateConfiguration(s, schemas.UpdateAIPromptRequest_templateConfiguration, v.TemplateConfiguration)
+	}
 	if v.VisibilityStatus != "" {
 		s.WriteString(schemas.UpdateAIPromptRequest_visibilityStatus, string(v.VisibilityStatus))
 	}

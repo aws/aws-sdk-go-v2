@@ -58,7 +58,9 @@ func (v *CreateRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSetId != nil {
 		s.WriteString(schemas.CreateRevisionRequest_DataSetId, *v.DataSetId)
 	}
-	serializeMapOf__string(s, schemas.CreateRevisionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateRevisionRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateRevisionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRevisionRequest, func(s *smithy.Schema) error {
@@ -166,7 +168,9 @@ func (v *CreateRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceId != nil {
 		s.WriteString(schemas.CreateRevisionResponse_SourceId, *v.SourceId)
 	}
-	serializeMapOf__string(s, schemas.CreateRevisionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateRevisionResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateRevisionResponse_UpdatedAt, *v.UpdatedAt)
 	}

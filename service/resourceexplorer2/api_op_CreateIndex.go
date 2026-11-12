@@ -105,7 +105,9 @@ func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateIndexInput_ClientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.CreateIndexInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIndexInput_Tags, v.Tags)
+	}
 }
 func (v *CreateIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateIndexInput, func(s *smithy.Schema) error {

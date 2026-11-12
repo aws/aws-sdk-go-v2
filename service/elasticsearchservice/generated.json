@@ -55,6 +55,7 @@
         "api_op_RemoveTags.go",
         "api_op_RevokeVpcEndpointAccess.go",
         "api_op_StartElasticsearchServiceSoftwareUpdate.go",
+        "api_op_UpdateClone.go",
         "api_op_UpdateElasticsearchDomainConfig.go",
         "api_op_UpdatePackage.go",
         "api_op_UpdateVpcEndpoint.go",
@@ -80,6 +81,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.24",

@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,21 @@ type SwitchoverBlueGreenDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverBlueGreenDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverBlueGreenDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverBlueGreenDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeploymentIdentifier != nil {
+		s.WriteString(schemas.SwitchoverBlueGreenDeploymentRequest_BlueGreenDeploymentIdentifier, *v.BlueGreenDeploymentIdentifier)
+	}
+	if v.SwitchoverTimeout != nil {
+		s.WriteInt32(schemas.SwitchoverBlueGreenDeploymentRequest_SwitchoverTimeout, *v.SwitchoverTimeout)
+	}
+}
+
 type SwitchoverBlueGreenDeploymentOutput struct {
 
 	// Details about a blue/green deployment.
@@ -71,13 +88,34 @@ type SwitchoverBlueGreenDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverBlueGreenDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverBlueGreenDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverBlueGreenDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeployment != nil {
+		s.WriteStruct(schemas.SwitchoverBlueGreenDeploymentResponse_BlueGreenDeployment)
+		v.BlueGreenDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SwitchoverBlueGreenDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SwitchoverBlueGreenDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SwitchoverBlueGreenDeploymentResponse_BlueGreenDeployment:
+			v.BlueGreenDeployment = &types.BlueGreenDeployment{}
+			return v.BlueGreenDeployment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSwitchoverBlueGreenDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSwitchoverBlueGreenDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverBlueGreenDeployment, schemas.SwitchoverBlueGreenDeploymentRequest, schemas.SwitchoverBlueGreenDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSwitchoverBlueGreenDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverBlueGreenDeployment, schemas.SwitchoverBlueGreenDeploymentRequest, schemas.SwitchoverBlueGreenDeploymentResponse), output: &SwitchoverBlueGreenDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

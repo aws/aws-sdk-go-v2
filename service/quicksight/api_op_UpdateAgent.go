@@ -84,15 +84,21 @@ func (v *UpdateAgentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateAgentRequestActionConnectorsToAddList(s, schemas.UpdateAgentRequest_ActionConnectorsToAdd, v.ActionConnectorsToAdd)
-	serializeUpdateAgentRequestActionConnectorsToRemoveList(s, schemas.UpdateAgentRequest_ActionConnectorsToRemove, v.ActionConnectorsToRemove)
+	if v.ActionConnectorsToAdd != nil {
+		serializeUpdateAgentRequestActionConnectorsToAddList(s, schemas.UpdateAgentRequest_ActionConnectorsToAdd, v.ActionConnectorsToAdd)
+	}
+	if v.ActionConnectorsToRemove != nil {
+		serializeUpdateAgentRequestActionConnectorsToRemoveList(s, schemas.UpdateAgentRequest_ActionConnectorsToRemove, v.ActionConnectorsToRemove)
+	}
 	if v.AgentId != nil {
 		s.WriteString(schemas.UpdateAgentRequest_AgentId, *v.AgentId)
 	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateAgentRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeCustomPromptInput(s, schemas.UpdateAgentRequest_CustomPromptInput, v.CustomPromptInput)
+	if v.CustomPromptInput != nil {
+		serializeCustomPromptInput(s, schemas.UpdateAgentRequest_CustomPromptInput, v.CustomPromptInput)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAgentRequest_Description, *v.Description)
 	}
@@ -102,9 +108,15 @@ func (v *UpdateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAgentRequest_Name, *v.Name)
 	}
-	serializeUpdateAgentRequestSpacesToAddList(s, schemas.UpdateAgentRequest_SpacesToAdd, v.SpacesToAdd)
-	serializeUpdateAgentRequestSpacesToRemoveList(s, schemas.UpdateAgentRequest_SpacesToRemove, v.SpacesToRemove)
-	serializeStarterPromptList(s, schemas.UpdateAgentRequest_StarterPrompts, v.StarterPrompts)
+	if v.SpacesToAdd != nil {
+		serializeUpdateAgentRequestSpacesToAddList(s, schemas.UpdateAgentRequest_SpacesToAdd, v.SpacesToAdd)
+	}
+	if v.SpacesToRemove != nil {
+		serializeUpdateAgentRequestSpacesToRemoveList(s, schemas.UpdateAgentRequest_SpacesToRemove, v.SpacesToRemove)
+	}
+	if v.StarterPrompts != nil {
+		serializeStarterPromptList(s, schemas.UpdateAgentRequest_StarterPrompts, v.StarterPrompts)
+	}
 	if v.WelcomeMessage != nil {
 		s.WriteString(schemas.UpdateAgentRequest_WelcomeMessage, *v.WelcomeMessage)
 	}
@@ -166,10 +178,18 @@ func (v *UpdateAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateAgentResponse_Arn, *v.Arn)
 	}
-	serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToAddActionConnectors, v.FailedToAddActionConnectors)
-	serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToAddSpaces, v.FailedToAddSpaces)
-	serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToRemoveActionConnectors, v.FailedToRemoveActionConnectors)
-	serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToRemoveSpaces, v.FailedToRemoveSpaces)
+	if v.FailedToAddActionConnectors != nil {
+		serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToAddActionConnectors, v.FailedToAddActionConnectors)
+	}
+	if v.FailedToAddSpaces != nil {
+		serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToAddSpaces, v.FailedToAddSpaces)
+	}
+	if v.FailedToRemoveActionConnectors != nil {
+		serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToRemoveActionConnectors, v.FailedToRemoveActionConnectors)
+	}
+	if v.FailedToRemoveSpaces != nil {
+		serializeFailedToUpdateAssociationList(s, schemas.UpdateAgentResponse_FailedToRemoveSpaces, v.FailedToRemoveSpaces)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateAgentResponse_RequestId, *v.RequestId)
 	}

@@ -4,12 +4,14 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new membership, granting a user access to an agent space within an
-// application.
+// Creates a new membership, granting a user or group access to an agent space
+// within an application.
 func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipInput, optFns ...func(*Options)) (*CreateMembershipOutput, error) {
 	if params == nil {
 		params = &CreateMembershipInput{}
@@ -38,7 +40,8 @@ type CreateMembershipInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The type of member. Currently, only USER is supported.
+	// The type of member. Use USER for an individual user or GROUP for an IAM
+	// Identity Center group. All members of a group have access to the agent space.
 	//
 	// This member is required.
 	MemberType types.MembershipType
@@ -54,6 +57,30 @@ type CreateMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateMembershipRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateMembershipRequest_applicationId, *v.ApplicationId)
+	}
+	if v.Config != nil {
+		serializeMembershipConfig(s, schemas.CreateMembershipRequest_config, v.Config)
+	}
+	if v.MemberType != "" {
+		s.WriteString(schemas.CreateMembershipRequest_memberType, string(v.MemberType))
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.CreateMembershipRequest_membershipId, *v.MembershipId)
+	}
+}
+
 // Response structure for adding a single member to an agent space.
 type CreateMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -62,13 +89,26 @@ type CreateMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembership, schemas.CreateMembershipRequest, schemas.CreateMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembership, schemas.CreateMembershipRequest, schemas.CreateMembershipResponse), output: &CreateMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

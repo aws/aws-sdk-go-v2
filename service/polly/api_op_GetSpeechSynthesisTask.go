@@ -4,7 +4,9 @@ package polly
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetSpeechSynthesisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSpeechSynthesisTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSpeechSynthesisTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSpeechSynthesisTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetSpeechSynthesisTaskInput_TaskId, *v.TaskId)
+	}
+}
+
 type GetSpeechSynthesisTaskOutput struct {
 
 	// SynthesisTask object that provides information from the requested task,
@@ -49,13 +63,34 @@ type GetSpeechSynthesisTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSpeechSynthesisTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSpeechSynthesisTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSpeechSynthesisTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SynthesisTask != nil {
+		s.WriteStruct(schemas.GetSpeechSynthesisTaskOutput_SynthesisTask)
+		v.SynthesisTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSpeechSynthesisTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSpeechSynthesisTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSpeechSynthesisTaskOutput_SynthesisTask:
+			v.SynthesisTask = &types.SynthesisTask{}
+			return v.SynthesisTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSpeechSynthesisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSpeechSynthesisTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpeechSynthesisTask, schemas.GetSpeechSynthesisTaskInput, schemas.GetSpeechSynthesisTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSpeechSynthesisTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpeechSynthesisTask, schemas.GetSpeechSynthesisTaskInput, schemas.GetSpeechSynthesisTaskOutput), output: &GetSpeechSynthesisTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

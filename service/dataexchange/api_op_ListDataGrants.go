@@ -76,7 +76,9 @@ func (v *ListDataGrantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDataGrantSummaryEntry(s, schemas.ListDataGrantsResponse_DataGrantSummaries, v.DataGrantSummaries)
+	if v.DataGrantSummaries != nil {
+		serializeListOfDataGrantSummaryEntry(s, schemas.ListDataGrantsResponse_DataGrantSummaries, v.DataGrantSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataGrantsResponse_NextToken, *v.NextToken)
 	}

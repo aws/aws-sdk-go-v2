@@ -121,7 +121,9 @@ func (v *AdminResetUserPasswordInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminResetUserPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientMetadataType(s, schemas.AdminResetUserPasswordRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.AdminResetUserPasswordRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.AdminResetUserPasswordRequest_UserPoolId, *v.UserPoolId)
 	}

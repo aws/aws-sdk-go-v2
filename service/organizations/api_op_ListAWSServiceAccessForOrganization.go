@@ -96,7 +96,9 @@ func (v *ListAWSServiceAccessForOrganizationOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListAWSServiceAccessForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnabledServicePrincipals(s, schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals, v.EnabledServicePrincipals)
+	if v.EnabledServicePrincipals != nil {
+		serializeEnabledServicePrincipals(s, schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals, v.EnabledServicePrincipals)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAWSServiceAccessForOrganizationResponse_NextToken, *v.NextToken)
 	}

@@ -88,7 +88,9 @@ func (v *DescribeWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UserName != nil {
 		s.WriteString(schemas.DescribeWorkspacesRequest_UserName, *v.UserName)
 	}
-	serializeWorkspaceIdList(s, schemas.DescribeWorkspacesRequest_WorkspaceIds, v.WorkspaceIds)
+	if v.WorkspaceIds != nil {
+		serializeWorkspaceIdList(s, schemas.DescribeWorkspacesRequest_WorkspaceIds, v.WorkspaceIds)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.DescribeWorkspacesRequest_WorkspaceName, *v.WorkspaceName)
 	}
@@ -122,7 +124,9 @@ func (v *DescribeWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspacesResult_NextToken, *v.NextToken)
 	}
-	serializeWorkspaceList(s, schemas.DescribeWorkspacesResult_Workspaces, v.Workspaces)
+	if v.Workspaces != nil {
+		serializeWorkspaceList(s, schemas.DescribeWorkspacesResult_Workspaces, v.Workspaces)
+	}
 }
 func (v *DescribeWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeWorkspacesResult, func(s *smithy.Schema) error {
@@ -151,6 +155,9 @@ func (c *Client) addOperationDescribeWorkspacesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

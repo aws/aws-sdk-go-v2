@@ -242,11 +242,35 @@ func TestCheckSnapshot_ListWorkerConfigurations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PauseConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PauseConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PauseConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RestartConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RestartConnector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RestartConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ResumeConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResumeConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResumeConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -469,11 +493,35 @@ func TestUpdateSnapshot_ListWorkerConfigurations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PauseConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PauseConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PauseConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RestartConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RestartConnector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RestartConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResumeConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResumeConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResumeConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

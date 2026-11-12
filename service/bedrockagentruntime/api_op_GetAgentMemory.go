@@ -113,7 +113,9 @@ func (v *GetAgentMemoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAgentMemoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemories(s, schemas.GetAgentMemoryResponse_memoryContents, v.MemoryContents)
+	if v.MemoryContents != nil {
+		serializeMemories(s, schemas.GetAgentMemoryResponse_memoryContents, v.MemoryContents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAgentMemoryResponse_nextToken, *v.NextToken)
 	}

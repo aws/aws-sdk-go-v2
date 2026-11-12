@@ -90,7 +90,9 @@ func (v *DescribeTrainingPlanExtensionHistoryOutput) SerializeMembers(s smithy.S
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeTrainingPlanExtensionHistoryResponse_NextToken, *v.NextToken)
 	}
-	serializeTrainingPlanExtensions(s, schemas.DescribeTrainingPlanExtensionHistoryResponse_TrainingPlanExtensions, v.TrainingPlanExtensions)
+	if v.TrainingPlanExtensions != nil {
+		serializeTrainingPlanExtensions(s, schemas.DescribeTrainingPlanExtensionHistoryResponse_TrainingPlanExtensions, v.TrainingPlanExtensions)
+	}
 }
 func (v *DescribeTrainingPlanExtensionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTrainingPlanExtensionHistoryResponse, func(s *smithy.Schema) error {

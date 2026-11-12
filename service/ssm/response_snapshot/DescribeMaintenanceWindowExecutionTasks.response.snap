@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeMaintenanceWindowExecutionTasks
+
+{"NextToken":"__NextToken__","WindowExecutionTaskIdentities":[{"AlarmConfiguration":{"Alarms":[{"Name":"__Name__"},{"Name":"__Name__"}],"IgnorePollAlarmFailure":true},"EndTime":946684800,"StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","TaskArn":"__TaskArn__","TaskExecutionId":"__TaskExecutionId__","TaskType":"RUN_COMMAND","TriggeredAlarms":[{"Name":"__Name__","State":"UNKNOWN"},{"Name":"__Name__","State":"UNKNOWN"}],"WindowExecutionId":"__WindowExecutionId__"},{"AlarmConfiguration":{"Alarms":[{"Name":"__Name__"},{"Name":"__Name__"}],"IgnorePollAlarmFailure":true},"EndTime":946684800,"StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","TaskArn":"__TaskArn__","TaskExecutionId":"__TaskExecutionId__","TaskType":"RUN_COMMAND","TriggeredAlarms":[{"Name":"__Name__","State":"UNKNOWN"},{"Name":"__Name__","State":"UNKNOWN"}],"WindowExecutionId":"__WindowExecutionId__"}]}

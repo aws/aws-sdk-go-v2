@@ -136,7 +136,9 @@ func (v *CreateLanguageModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelName != nil {
 		s.WriteString(schemas.CreateLanguageModelRequest_ModelName, *v.ModelName)
 	}
-	serializeTagList(s, schemas.CreateLanguageModelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLanguageModelRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLanguageModelOutput struct {
@@ -240,6 +242,9 @@ func (c *Client) addOperationCreateLanguageModelMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

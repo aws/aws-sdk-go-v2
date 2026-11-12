@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type UpdateGuestUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGuestUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGuestUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGuestUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Block != nil {
+		s.WriteBool(schemas.UpdateGuestUserRequest_block, *v.Block)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.UpdateGuestUserRequest_networkId, *v.NetworkId)
+	}
+	if v.UsernameHash != nil {
+		s.WriteString(schemas.UpdateGuestUserRequest_usernameHash, *v.UsernameHash)
+	}
+}
+
 type UpdateGuestUserOutput struct {
 
 	// A message indicating the result of the update operation.
@@ -55,13 +75,32 @@ type UpdateGuestUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGuestUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGuestUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGuestUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateGuestUserResponse_message, *v.Message)
+	}
+}
+func (v *UpdateGuestUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGuestUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGuestUserResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateGuestUserResponse_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGuestUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGuestUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGuestUser, schemas.UpdateGuestUserRequest, schemas.UpdateGuestUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGuestUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGuestUser, schemas.UpdateGuestUserRequest, schemas.UpdateGuestUserResponse), output: &UpdateGuestUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

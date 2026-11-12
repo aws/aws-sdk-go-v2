@@ -88,7 +88,9 @@ func (v *CreateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MetadataProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLineageEntityParameters(s, schemas.CreateActionRequest_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeLineageEntityParameters(s, schemas.CreateActionRequest_Properties, v.Properties)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.CreateActionRequest_Source)
 		v.Source.SerializeMembers(s)
@@ -97,7 +99,9 @@ func (v *CreateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateActionRequest_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateActionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateActionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateActionOutput struct {

@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Retrieves the current traffic distribution for a given traffic distribution
@@ -64,6 +65,11 @@ type GetTrafficDistributionOutput struct {
 	// was created. The ARN must be provided if the call is from the replicated Region.
 	Id *string
 
+	// The timestamp of the most recent failover for the traffic distribution group.
+	// This value is updated each time UpdateTrafficDistribution is called to change
+	// the traffic distribution.
+	LastFailoverTime *time.Time
+
 	// The distribution that determines which Amazon Web Services Regions should be
 	// used to sign in agents in to both the instance and its replica(s).
 	SignInConfig *types.SignInConfig
@@ -95,6 +101,9 @@ func (v *GetTrafficDistributionOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Id != nil {
 		s.WriteString(schemas.GetTrafficDistributionResponse_Id, *v.Id)
 	}
+	if v.LastFailoverTime != nil {
+		s.WriteTime(schemas.GetTrafficDistributionResponse_LastFailoverTime, *v.LastFailoverTime)
+	}
 	if v.SignInConfig != nil {
 		s.WriteStruct(schemas.GetTrafficDistributionResponse_SignInConfig)
 		v.SignInConfig.SerializeMembers(s)
@@ -118,6 +127,9 @@ func (v *GetTrafficDistributionOutput) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.GetTrafficDistributionResponse_Id:
 			v.Id = new(string)
 			return d.ReadString(schemas.GetTrafficDistributionResponse_Id, v.Id)
+		case schemas.GetTrafficDistributionResponse_LastFailoverTime:
+			v.LastFailoverTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrafficDistributionResponse_LastFailoverTime, v.LastFailoverTime)
 		case schemas.GetTrafficDistributionResponse_SignInConfig:
 			v.SignInConfig = &types.SignInConfig{}
 			return v.SignInConfig.Deserialize(d)

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuredAudienceModels":[{"audienceModelArn":"__AudienceModelArn__","configuredAudienceModelArn":"__ConfiguredAudienceModelArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","outputConfig":{"destination":{"s3Destination":{"s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__"},"status":"ACTIVE","updateTime":"2000-01-01T00:00:00Z"},{"audienceModelArn":"__AudienceModelArn__","configuredAudienceModelArn":"__ConfiguredAudienceModelArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","outputConfig":{"destination":{"s3Destination":{"s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__"},"status":"ACTIVE","updateTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

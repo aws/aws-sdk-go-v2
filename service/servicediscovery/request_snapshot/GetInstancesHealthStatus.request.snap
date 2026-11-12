@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/GetInstancesHealthStatus
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.GetInstancesHealthStatus
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Instances":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","ServiceId":"__ServiceId__"}
+¿iInstancesŸj__Member__j__Member__ÿjMaxResultsiNextTokenm__NextToken__iServiceIdm__ServiceId__ÿ

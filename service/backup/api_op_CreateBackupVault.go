@@ -70,7 +70,9 @@ func (v *CreateBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BackupVaultName != nil {
 		s.WriteString(schemas.CreateBackupVaultInput_BackupVaultName, *v.BackupVaultName)
 	}
-	serializeTags(s, schemas.CreateBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	if v.BackupVaultTags != nil {
+		serializeTags(s, schemas.CreateBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	}
 	if v.CreatorRequestId != nil {
 		s.WriteString(schemas.CreateBackupVaultInput_CreatorRequestId, *v.CreatorRequestId)
 	}

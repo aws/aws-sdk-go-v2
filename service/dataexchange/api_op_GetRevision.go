@@ -159,7 +159,9 @@ func (v *GetRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceId != nil {
 		s.WriteString(schemas.GetRevisionResponse_SourceId, *v.SourceId)
 	}
-	serializeMapOf__string(s, schemas.GetRevisionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.GetRevisionResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetRevisionResponse_UpdatedAt, *v.UpdatedAt)
 	}

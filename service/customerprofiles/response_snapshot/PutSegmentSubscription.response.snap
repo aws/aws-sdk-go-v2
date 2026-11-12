@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ScheduleConfiguration":{"Interval":1,"Unit":"HOURLY"},"StartedAt":946684800,"Status":"STARTING"}

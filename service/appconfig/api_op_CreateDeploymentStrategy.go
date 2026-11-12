@@ -136,7 +136,9 @@ func (v *CreateDeploymentStrategyInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ReplicateTo != "" {
 		s.WriteString(schemas.CreateDeploymentStrategyRequest_ReplicateTo, string(v.ReplicateTo))
 	}
-	serializeTagMap(s, schemas.CreateDeploymentStrategyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDeploymentStrategyRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDeploymentStrategyOutput struct {

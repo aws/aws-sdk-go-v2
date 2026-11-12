@@ -32,7 +32,10 @@ type ListDistributionConfigurationsInput struct {
 	// You can filter on name to streamline results.
 	Filters []types.Filter
 
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. Use the nextToken value from a
@@ -49,7 +52,9 @@ func (v *ListDistributionConfigurationsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListDistributionConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListDistributionConfigurationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListDistributionConfigurationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDistributionConfigurationsRequest_maxResults, *v.MaxResults)
 	}
@@ -84,7 +89,9 @@ func (v *ListDistributionConfigurationsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListDistributionConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistributionConfigurationSummaryList(s, schemas.ListDistributionConfigurationsResponse_distributionConfigurationSummaryList, v.DistributionConfigurationSummaryList)
+	if v.DistributionConfigurationSummaryList != nil {
+		serializeDistributionConfigurationSummaryList(s, schemas.ListDistributionConfigurationsResponse_distributionConfigurationSummaryList, v.DistributionConfigurationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDistributionConfigurationsResponse_nextToken, *v.NextToken)
 	}
@@ -148,7 +155,10 @@ func (c *Client) addOperationListDistributionConfigurationsMiddlewares(stack *mi
 // ListDistributionConfigurationsPaginatorOptions is the paginator options for
 // ListDistributionConfigurations
 type ListDistributionConfigurationsPaginatorOptions struct {
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

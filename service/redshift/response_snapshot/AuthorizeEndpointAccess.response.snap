@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<AuthorizeEndpointAccessResponse><AuthorizeEndpointAccessResult><AllowedAllVPCs>true</AllowedAllVPCs><AllowedVPCs><VpcIdentifier>__Member__</VpcIdentifier><VpcIdentifier>__Member__</VpcIdentifier></AllowedVPCs><AuthorizeTime>2000-01-01T00:00:00Z</AuthorizeTime><ClusterIdentifier>__ClusterIdentifier__</ClusterIdentifier><ClusterStatus>__ClusterStatus__</ClusterStatus><EndpointCount>1</EndpointCount><Grantee>__Grantee__</Grantee><Grantor>__Grantor__</Grantor><Status>Authorized</Status></AuthorizeEndpointAccessResult></AuthorizeEndpointAccessResponse>

@@ -71,8 +71,12 @@ func (v *GetEc2DeepInspectionConfigurationOutput) SerializeMembers(s smithy.Shap
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.GetEc2DeepInspectionConfigurationResponse_errorMessage, *v.ErrorMessage)
 	}
-	serializePathList(s, schemas.GetEc2DeepInspectionConfigurationResponse_orgPackagePaths, v.OrgPackagePaths)
-	serializePathList(s, schemas.GetEc2DeepInspectionConfigurationResponse_packagePaths, v.PackagePaths)
+	if v.OrgPackagePaths != nil {
+		serializePathList(s, schemas.GetEc2DeepInspectionConfigurationResponse_orgPackagePaths, v.OrgPackagePaths)
+	}
+	if v.PackagePaths != nil {
+		serializePathList(s, schemas.GetEc2DeepInspectionConfigurationResponse_packagePaths, v.PackagePaths)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetEc2DeepInspectionConfigurationResponse_status, string(v.Status))
 	}

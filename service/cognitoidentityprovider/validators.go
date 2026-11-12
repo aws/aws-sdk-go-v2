@@ -410,6 +410,26 @@ func (m *validateOpAdminListUserAuthEvents) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAdminListUserSessions struct {
+}
+
+func (*validateOpAdminListUserSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAdminListUserSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AdminListUserSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAdminListUserSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAdminRemoveUserFromGroup struct {
 }
 
@@ -465,6 +485,26 @@ func (m *validateOpAdminRespondToAuthChallenge) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAdminRespondToAuthChallengeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAdminRevokeUserSession struct {
+}
+
+func (*validateOpAdminRevokeUserSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAdminRevokeUserSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AdminRevokeUserSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAdminRevokeUserSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1690,6 +1730,26 @@ func (m *validateOpGetUser) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetUserPoolClientSessionConfiguration struct {
+}
+
+func (*validateOpGetUserPoolClientSessionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUserPoolClientSessionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUserPoolClientSessionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUserPoolClientSessionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetUserPoolMfaConfig struct {
 }
 
@@ -1705,6 +1765,26 @@ func (m *validateOpGetUserPoolMfaConfig) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetUserPoolMfaConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetUserPoolSessionConfiguration struct {
+}
+
+func (*validateOpGetUserPoolSessionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUserPoolSessionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUserPoolSessionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUserPoolSessionConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1970,6 +2050,26 @@ func (m *validateOpListUserPools) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListUserSessions struct {
+}
+
+func (*validateOpListUserSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUserSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUserSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUserSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListUsersInGroup struct {
 }
 
@@ -2090,6 +2190,26 @@ func (m *validateOpRevokeToken) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRevokeUserSession struct {
+}
+
+func (*validateOpRevokeUserSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeUserSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeUserSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeUserSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetLogDeliveryConfiguration struct {
 }
 
@@ -2170,6 +2290,26 @@ func (m *validateOpSetUserMFAPreference) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetUserPoolClientSessionConfiguration struct {
+}
+
+func (*validateOpSetUserPoolClientSessionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetUserPoolClientSessionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetUserPoolClientSessionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetUserPoolClientSessionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetUserPoolMfaConfig struct {
 }
 
@@ -2185,6 +2325,26 @@ func (m *validateOpSetUserPoolMfaConfig) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSetUserPoolMfaConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetUserPoolSessionConfiguration struct {
+}
+
+func (*validateOpSetUserPoolSessionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetUserPoolSessionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetUserPoolSessionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetUserPoolSessionConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2710,6 +2870,10 @@ func addOpAdminListUserAuthEventsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpAdminListUserAuthEvents{}, middleware.After)
 }
 
+func addOpAdminListUserSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAdminListUserSessions{}, middleware.After)
+}
+
 func addOpAdminRemoveUserFromGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdminRemoveUserFromGroup{}, middleware.After)
 }
@@ -2720,6 +2884,10 @@ func addOpAdminResetUserPasswordValidationMiddleware(stack *middleware.Stack) er
 
 func addOpAdminRespondToAuthChallengeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdminRespondToAuthChallenge{}, middleware.After)
+}
+
+func addOpAdminRevokeUserSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAdminRevokeUserSession{}, middleware.After)
 }
 
 func addOpAdminSetUserMFAPreferenceValidationMiddleware(stack *middleware.Stack) error {
@@ -2966,8 +3134,16 @@ func addOpGetUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUser{}, middleware.After)
 }
 
+func addOpGetUserPoolClientSessionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUserPoolClientSessionConfiguration{}, middleware.After)
+}
+
 func addOpGetUserPoolMfaConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUserPoolMfaConfig{}, middleware.After)
+}
+
+func addOpGetUserPoolSessionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUserPoolSessionConfiguration{}, middleware.After)
 }
 
 func addOpGlobalSignOutValidationMiddleware(stack *middleware.Stack) error {
@@ -3022,6 +3198,10 @@ func addOpListUserPoolsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUserPools{}, middleware.After)
 }
 
+func addOpListUserSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUserSessions{}, middleware.After)
+}
+
 func addOpListUsersInGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsersInGroup{}, middleware.After)
 }
@@ -3046,6 +3226,10 @@ func addOpRevokeTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeToken{}, middleware.After)
 }
 
+func addOpRevokeUserSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeUserSession{}, middleware.After)
+}
+
 func addOpSetLogDeliveryConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetLogDeliveryConfiguration{}, middleware.After)
 }
@@ -3062,8 +3246,16 @@ func addOpSetUserMFAPreferenceValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpSetUserMFAPreference{}, middleware.After)
 }
 
+func addOpSetUserPoolClientSessionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetUserPoolClientSessionConfiguration{}, middleware.After)
+}
+
 func addOpSetUserPoolMfaConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetUserPoolMfaConfig{}, middleware.After)
+}
+
+func addOpSetUserPoolSessionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetUserPoolSessionConfiguration{}, middleware.After)
 }
 
 func addOpSetUserSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -3332,6 +3524,21 @@ func validateAttributeType(v *types.AttributeType) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeType"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientSSOSessionConfigType(v *types.ClientSSOSessionConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientSSOSessionConfigType"}
+	if v.MaxValidityMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxValidityMinutes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3814,6 +4021,21 @@ func validateUserPoolAddOnsType(v *types.UserPoolAddOnsType) error {
 	}
 }
 
+func validateUserPoolTokenSessionConfigType(v *types.UserPoolTokenSessionConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserPoolTokenSessionConfigType"}
+	if v.MaxPerUser == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxPerUser"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddCustomAttributesInput(v *AddCustomAttributesInput) error {
 	if v == nil {
 		return nil
@@ -4207,6 +4429,24 @@ func validateOpAdminListUserAuthEventsInput(v *AdminListUserAuthEventsInput) err
 	}
 }
 
+func validateOpAdminListUserSessionsInput(v *AdminListUserSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdminListUserSessionsInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAdminRemoveUserFromGroupInput(v *AdminRemoveUserFromGroupInput) error {
 	if v == nil {
 		return nil
@@ -4264,6 +4504,27 @@ func validateOpAdminRespondToAuthChallengeInput(v *AdminRespondToAuthChallengeIn
 		if err := validateContextDataType(v.ContextData); err != nil {
 			invalidParams.AddNested("ContextData", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAdminRevokeUserSessionInput(v *AdminRevokeUserSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdminRevokeUserSessionInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5442,11 +5703,44 @@ func validateOpGetUserInput(v *GetUserInput) error {
 	}
 }
 
+func validateOpGetUserPoolClientSessionConfigurationInput(v *GetUserPoolClientSessionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUserPoolClientSessionConfigurationInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetUserPoolMfaConfigInput(v *GetUserPoolMfaConfigInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUserPoolMfaConfigInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUserPoolSessionConfigurationInput(v *GetUserPoolSessionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUserPoolSessionConfigurationInput"}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
@@ -5661,6 +5955,21 @@ func validateOpListUserPoolsInput(v *ListUserPoolsInput) error {
 	}
 }
 
+func validateOpListUserSessionsInput(v *ListUserSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUserSessionsInput"}
+	if v.AccessToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListUsersInGroupInput(v *ListUsersInGroupInput) error {
 	if v == nil {
 		return nil
@@ -5763,6 +6072,24 @@ func validateOpRevokeTokenInput(v *RevokeTokenInput) error {
 	}
 }
 
+func validateOpRevokeUserSessionInput(v *RevokeUserSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeUserSessionInput"}
+	if v.AccessToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSetLogDeliveryConfigurationInput(v *SetLogDeliveryConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -5840,6 +6167,31 @@ func validateOpSetUserMFAPreferenceInput(v *SetUserMFAPreferenceInput) error {
 	}
 }
 
+func validateOpSetUserPoolClientSessionConfigurationInput(v *SetUserPoolClientSessionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetUserPoolClientSessionConfigurationInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.SSOSession == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SSOSession"))
+	} else if v.SSOSession != nil {
+		if err := validateClientSSOSessionConfigType(v.SSOSession); err != nil {
+			invalidParams.AddNested("SSOSession", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSetUserPoolMfaConfigInput(v *SetUserPoolMfaConfigInput) error {
 	if v == nil {
 		return nil
@@ -5851,6 +6203,31 @@ func validateOpSetUserPoolMfaConfigInput(v *SetUserPoolMfaConfigInput) error {
 	if v.SmsMfaConfiguration != nil {
 		if err := validateSmsMfaConfigType(v.SmsMfaConfiguration); err != nil {
 			invalidParams.AddNested("SmsMfaConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetUserPoolSessionConfigurationInput(v *SetUserPoolSessionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetUserPoolSessionConfigurationInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if len(v.UserSessionTracking) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UserSessionTracking"))
+	}
+	if v.TokenSession == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenSession"))
+	} else if v.TokenSession != nil {
+		if err := validateUserPoolTokenSessionConfigType(v.TokenSession); err != nil {
+			invalidParams.AddNested("TokenSession", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

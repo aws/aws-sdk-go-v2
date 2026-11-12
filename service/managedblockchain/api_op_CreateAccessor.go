@@ -98,7 +98,9 @@ func (v *CreateAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkType != "" {
 		s.WriteString(schemas.CreateAccessorInput_NetworkType, string(v.NetworkType))
 	}
-	serializeInputTagMap(s, schemas.CreateAccessorInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagMap(s, schemas.CreateAccessorInput_Tags, v.Tags)
+	}
 }
 
 type CreateAccessorOutput struct {

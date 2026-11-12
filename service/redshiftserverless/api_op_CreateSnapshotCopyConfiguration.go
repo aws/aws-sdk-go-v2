@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type CreateSnapshotCopyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotCopyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotCopyConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotCopyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationKmsKeyId != nil {
+		s.WriteString(schemas.CreateSnapshotCopyConfigurationRequest_destinationKmsKeyId, *v.DestinationKmsKeyId)
+	}
+	if v.DestinationRegion != nil {
+		s.WriteString(schemas.CreateSnapshotCopyConfigurationRequest_destinationRegion, *v.DestinationRegion)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.CreateSnapshotCopyConfigurationRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.SnapshotRetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateSnapshotCopyConfigurationRequest_snapshotRetentionPeriod, *v.SnapshotRetentionPeriod)
+	}
+}
+
 type CreateSnapshotCopyConfigurationOutput struct {
 
 	// The snapshot copy configuration object that is returned.
@@ -61,13 +84,34 @@ type CreateSnapshotCopyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotCopyConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotCopyConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotCopyConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotCopyConfiguration != nil {
+		s.WriteStruct(schemas.CreateSnapshotCopyConfigurationResponse_snapshotCopyConfiguration)
+		v.SnapshotCopyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSnapshotCopyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSnapshotCopyConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSnapshotCopyConfigurationResponse_snapshotCopyConfiguration:
+			v.SnapshotCopyConfiguration = &types.SnapshotCopyConfiguration{}
+			return v.SnapshotCopyConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSnapshotCopyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSnapshotCopyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshotCopyConfiguration, schemas.CreateSnapshotCopyConfigurationRequest, schemas.CreateSnapshotCopyConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSnapshotCopyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshotCopyConfiguration, schemas.CreateSnapshotCopyConfigurationRequest, schemas.CreateSnapshotCopyConfigurationResponse), output: &CreateSnapshotCopyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

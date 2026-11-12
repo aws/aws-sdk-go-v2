@@ -149,7 +149,9 @@ func (v *DescribeDomainHealthOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DomainState != "" {
 		s.WriteString(schemas.DescribeDomainHealthResponse_DomainState, string(v.DomainState))
 	}
-	serializeEnvironmentInfoList(s, schemas.DescribeDomainHealthResponse_EnvironmentInformation, v.EnvironmentInformation)
+	if v.EnvironmentInformation != nil {
+		serializeEnvironmentInfoList(s, schemas.DescribeDomainHealthResponse_EnvironmentInformation, v.EnvironmentInformation)
+	}
 	if v.MasterEligibleNodeCount != nil {
 		s.WriteString(schemas.DescribeDomainHealthResponse_MasterEligibleNodeCount, *v.MasterEligibleNodeCount)
 	}

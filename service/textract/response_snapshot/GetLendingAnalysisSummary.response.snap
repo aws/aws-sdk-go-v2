@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.GetLendingAnalysisSummary
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AnalyzeLendingModelVersion":"__AnalyzeLendingModelVersion__","DocumentMetadata":{"Pages":1},"JobStatus":"IN_PROGRESS","StatusMessage":"__StatusMessage__","Summary":{"DocumentGroups":[{"DetectedSignatures":[{"Page":1},{"Page":1}],"SplitDocuments":[{"Index":1,"Pages":[1,1]},{"Index":1,"Pages":[1,1]}],"Type":"__Type__","UndetectedSignatures":[{"Page":1},{"Page":1}]},{"DetectedSignatures":[{"Page":1},{"Page":1}],"SplitDocuments":[{"Index":1,"Pages":[1,1]},{"Index":1,"Pages":[1,1]}],"Type":"__Type__","UndetectedSignatures":[{"Page":1},{"Page":1}]}],"UndetectedDocumentTypes":["__Member__","__Member__"]},"Warnings":[{"ErrorCode":"__ErrorCode__","Pages":[1,1]},{"ErrorCode":"__ErrorCode__","Pages":[1,1]}]}
+¿xAnalyzeLendingModelVersionx__AnalyzeLendingModelVersion__pDocumentMetadata¿ePagesÿiJobStatuskIN_PROGRESSmStatusMessageq__StatusMessage__gSummary¿nDocumentGroupsŸ¿rDetectedSignaturesŸ¿dPageÿ¿dPageÿÿnSplitDocumentsŸ¿eIndexePagesŸÿÿ¿eIndexePagesŸÿÿÿdTypeh__Type__tUndetectedSignaturesŸ¿dPageÿ¿dPageÿÿÿ¿rDetectedSignaturesŸ¿dPageÿ¿dPageÿÿnSplitDocumentsŸ¿eIndexePagesŸÿÿ¿eIndexePagesŸÿÿÿdTypeh__Type__tUndetectedSignaturesŸ¿dPageÿ¿dPageÿÿÿÿwUndetectedDocumentTypesŸj__Member__j__Member__ÿÿhWarningsŸ¿iErrorCodem__ErrorCode__ePagesŸÿÿ¿iErrorCodem__ErrorCode__ePagesŸÿÿÿÿ

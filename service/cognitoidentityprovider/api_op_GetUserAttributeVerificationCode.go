@@ -115,7 +115,9 @@ func (v *GetUserAttributeVerificationCodeInput) SerializeMembers(s smithy.ShapeS
 	if v.AttributeName != nil {
 		s.WriteString(schemas.GetUserAttributeVerificationCodeRequest_AttributeName, *v.AttributeName)
 	}
-	serializeClientMetadataType(s, schemas.GetUserAttributeVerificationCodeRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.GetUserAttributeVerificationCodeRequest_ClientMetadata, v.ClientMetadata)
+	}
 }
 
 // The verification code response returned by the server response to get the user

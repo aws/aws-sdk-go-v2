@@ -49,8 +49,12 @@ func (v *RemoveTagsFromOnPremisesInstancesInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *RemoveTagsFromOnPremisesInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceNameList(s, schemas.RemoveTagsFromOnPremisesInstancesInput_instanceNames, v.InstanceNames)
-	serializeTagList(s, schemas.RemoveTagsFromOnPremisesInstancesInput_tags, v.Tags)
+	if v.InstanceNames != nil {
+		serializeInstanceNameList(s, schemas.RemoveTagsFromOnPremisesInstancesInput_instanceNames, v.InstanceNames)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RemoveTagsFromOnPremisesInstancesInput_tags, v.Tags)
+	}
 }
 
 type RemoveTagsFromOnPremisesInstancesOutput struct {
@@ -90,6 +94,9 @@ func (c *Client) addOperationRemoveTagsFromOnPremisesInstancesMiddlewares(stack 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

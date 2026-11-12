@@ -56,9 +56,9 @@ func (v *CodeValidationException) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// Exception thrown as a result of concurrent modifications to an application.
-// This error can be the result of attempting to modify an application without
-// using the current application ID.
+// Exception thrown as a result of concurrent modifications to an application or
+// snapshot. This error can be the result of attempting to modify an application
+// without using the current application ID.
 type ConcurrentModificationException struct {
 	Message *string
 
@@ -295,7 +295,7 @@ func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The application is not available for this operation.
+// The application or snapshot is not available for this operation.
 type ResourceInUseException struct {
 	Message *string
 
@@ -342,7 +342,7 @@ func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Specified application can't be found.
+// The specified application, snapshot, or snapshot operation can't be found.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -577,8 +577,12 @@ func (v *UnableToDetectSchemaException) SerializeMembers(s smithy.ShapeSerialize
 	if v.Message != nil {
 		s.WriteString(schemas.UnableToDetectSchemaException_Message, *v.Message)
 	}
-	serializeProcessedInputRecords(s, schemas.UnableToDetectSchemaException_ProcessedInputRecords, v.ProcessedInputRecords)
-	serializeRawInputRecords(s, schemas.UnableToDetectSchemaException_RawInputRecords, v.RawInputRecords)
+	if v.ProcessedInputRecords != nil {
+		serializeProcessedInputRecords(s, schemas.UnableToDetectSchemaException_ProcessedInputRecords, v.ProcessedInputRecords)
+	}
+	if v.RawInputRecords != nil {
+		serializeRawInputRecords(s, schemas.UnableToDetectSchemaException_RawInputRecords, v.RawInputRecords)
+	}
 }
 func (v *UnableToDetectSchemaException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnableToDetectSchemaException, func(s *smithy.Schema) error {

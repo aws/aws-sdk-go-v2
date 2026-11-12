@@ -141,11 +141,15 @@ func (v *CreateAccessEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterName != nil {
 		s.WriteString(schemas.CreateAccessEntryRequest_clusterName, *v.ClusterName)
 	}
-	serializeStringList(s, schemas.CreateAccessEntryRequest_kubernetesGroups, v.KubernetesGroups)
+	if v.KubernetesGroups != nil {
+		serializeStringList(s, schemas.CreateAccessEntryRequest_kubernetesGroups, v.KubernetesGroups)
+	}
 	if v.PrincipalArn != nil {
 		s.WriteString(schemas.CreateAccessEntryRequest_principalArn, *v.PrincipalArn)
 	}
-	serializeTagMap(s, schemas.CreateAccessEntryRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAccessEntryRequest_tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateAccessEntryRequest_type, *v.Type)
 	}

@@ -101,7 +101,9 @@ func (v *GetInstrumentationConfigurationStatusInput) SerializeMembers(s smithy.S
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.GetInstrumentationConfigurationStatusRequest_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeLocationIdentifier(s, schemas.GetInstrumentationConfigurationStatusRequest_LocationIdentifier, v.LocationIdentifier)
+	if v.LocationIdentifier != nil {
+		serializeLocationIdentifier(s, schemas.GetInstrumentationConfigurationStatusRequest_LocationIdentifier, v.LocationIdentifier)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetInstrumentationConfigurationStatusRequest_MaxResults, *v.MaxResults)
 	}
@@ -174,8 +176,12 @@ func (v *GetInstrumentationConfigurationStatusOutput) SerializeMembers(s smithy.
 	if v.Environment != nil {
 		s.WriteString(schemas.GetInstrumentationConfigurationStatusResponse_Environment, *v.Environment)
 	}
-	serializeInstrumentationStatusEventList(s, schemas.GetInstrumentationConfigurationStatusResponse_Events, v.Events)
-	serializeLocation(s, schemas.GetInstrumentationConfigurationStatusResponse_Location, v.Location)
+	if v.Events != nil {
+		serializeInstrumentationStatusEventList(s, schemas.GetInstrumentationConfigurationStatusResponse_Events, v.Events)
+	}
+	if v.Location != nil {
+		serializeLocation(s, schemas.GetInstrumentationConfigurationStatusResponse_Location, v.Location)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInstrumentationConfigurationStatusResponse_NextToken, *v.NextToken)
 	}

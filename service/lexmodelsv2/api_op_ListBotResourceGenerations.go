@@ -127,7 +127,9 @@ func (v *ListBotResourceGenerationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListBotResourceGenerationsResponse_botVersion, *v.BotVersion)
 	}
-	serializeGenerationSummaryList(s, schemas.ListBotResourceGenerationsResponse_generationSummaries, v.GenerationSummaries)
+	if v.GenerationSummaries != nil {
+		serializeGenerationSummaryList(s, schemas.ListBotResourceGenerationsResponse_generationSummaries, v.GenerationSummaries)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListBotResourceGenerationsResponse_localeId, *v.LocaleId)
 	}

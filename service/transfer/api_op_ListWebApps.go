@@ -88,7 +88,9 @@ func (v *ListWebAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWebAppsResponse_NextToken, *v.NextToken)
 	}
-	serializeListedWebApps(s, schemas.ListWebAppsResponse_WebApps, v.WebApps)
+	if v.WebApps != nil {
+		serializeListedWebApps(s, schemas.ListWebAppsResponse_WebApps, v.WebApps)
+	}
 }
 func (v *ListWebAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWebAppsResponse, func(s *smithy.Schema) error {

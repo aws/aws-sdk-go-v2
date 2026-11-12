@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/UntagResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.UntagResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"resourceArn":"__ResourceArn__","tagKeys":["__Member__","__Member__"]}
+¿kresourceArno__ResourceArn__gtagKeysŸj__Member__j__Member__ÿÿ

@@ -120,7 +120,9 @@ func (v *CreateGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalAuthenticationProviders(s, schemas.CreateGraphqlApiRequest_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	if v.AdditionalAuthenticationProviders != nil {
+		serializeAdditionalAuthenticationProviders(s, schemas.CreateGraphqlApiRequest_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	}
 	if v.ApiType != "" {
 		s.WriteString(schemas.CreateGraphqlApiRequest_apiType, string(v.ApiType))
 	}
@@ -165,7 +167,9 @@ func (v *CreateGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResolverCountLimit != 0 {
 		s.WriteInt32(schemas.CreateGraphqlApiRequest_resolverCountLimit, v.ResolverCountLimit)
 	}
-	serializeTagMap(s, schemas.CreateGraphqlApiRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateGraphqlApiRequest_tags, v.Tags)
+	}
 	if v.UserPoolConfig != nil {
 		s.WriteStruct(schemas.CreateGraphqlApiRequest_userPoolConfig)
 		v.UserPoolConfig.SerializeMembers(s)

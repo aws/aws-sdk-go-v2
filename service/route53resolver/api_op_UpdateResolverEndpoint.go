@@ -149,7 +149,9 @@ func (v *UpdateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateResolverEndpointRequest_Name, *v.Name)
 	}
-	serializeProtocolList(s, schemas.UpdateResolverEndpointRequest_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocolList(s, schemas.UpdateResolverEndpointRequest_Protocols, v.Protocols)
+	}
 	if v.ResolverEndpointId != nil {
 		s.WriteString(schemas.UpdateResolverEndpointRequest_ResolverEndpointId, *v.ResolverEndpointId)
 	}
@@ -162,7 +164,9 @@ func (v *UpdateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TargetNameServerMetricsEnabled != nil {
 		s.WriteBool(schemas.UpdateResolverEndpointRequest_TargetNameServerMetricsEnabled, *v.TargetNameServerMetricsEnabled)
 	}
-	serializeUpdateIpAddresses(s, schemas.UpdateResolverEndpointRequest_UpdateIpAddresses, v.UpdateIpAddresses)
+	if v.UpdateIpAddresses != nil {
+		serializeUpdateIpAddresses(s, schemas.UpdateResolverEndpointRequest_UpdateIpAddresses, v.UpdateIpAddresses)
+	}
 }
 
 type UpdateResolverEndpointOutput struct {

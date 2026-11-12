@@ -109,7 +109,9 @@ func (v *ListPermissionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPermissionVersionsResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceSharePermissionList(s, schemas.ListPermissionVersionsResponse_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourceSharePermissionList(s, schemas.ListPermissionVersionsResponse_permissions, v.Permissions)
+	}
 }
 func (v *ListPermissionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPermissionVersionsResponse, func(s *smithy.Schema) error {

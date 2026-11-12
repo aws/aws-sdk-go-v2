@@ -1082,6 +1082,42 @@ func TestCheckSnapshot_GetSecurityControlDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSoftwareResourcesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSoftwareResourcesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSoftwareResourcesV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSoftwareStatisticsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSoftwareStatisticsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSoftwareStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSoftwareV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSoftwareV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSoftwareV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InviteMembers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InviteMembers(context.Background(), nil, func(o *Options) {
@@ -2550,6 +2586,42 @@ func TestUpdateSnapshot_GetSecurityControlDefinition(t *testing.T) {
 	_, err := svc.GetSecurityControlDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSecurityControlDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSoftwareResourcesV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSoftwareResourcesV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSoftwareResourcesV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSoftwareStatisticsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSoftwareStatisticsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSoftwareStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSoftwareV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSoftwareV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSoftwareV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

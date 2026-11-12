@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,27 @@ type DeregisterTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeregisterTypeInput_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DeregisterTypeInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.DeregisterTypeInput_TypeName, *v.TypeName)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DeregisterTypeInput_VersionId, *v.VersionId)
+	}
+}
+
 type DeregisterTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,13 +98,26 @@ type DeregisterTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterType, schemas.DeregisterTypeInput, schemas.DeregisterTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeregisterType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterType, schemas.DeregisterTypeInput, schemas.DeregisterTypeOutput), output: &DeregisterTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

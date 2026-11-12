@@ -44,6 +44,9 @@ type UpdateCollectionInput struct {
 	// A description of the collection.
 	Description *string
 
+	// Encryption settings for a collection.
+	EncryptionConfig *types.EncryptionConfig
+
 	// Configuration options for vector search capabilities in the collection.
 	VectorOptions *types.VectorOptions
 
@@ -65,6 +68,11 @@ func (v *UpdateCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateCollectionRequest_description, *v.Description)
+	}
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.UpdateCollectionRequest_encryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateCollectionRequest_id, *v.Id)
@@ -91,6 +99,9 @@ func (v *UpdateCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateCollectionRequest_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.UpdateCollectionRequest_description, v.Description)
+		case schemas.UpdateCollectionRequest_encryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
 		case schemas.UpdateCollectionRequest_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.UpdateCollectionRequest_id, v.Id)

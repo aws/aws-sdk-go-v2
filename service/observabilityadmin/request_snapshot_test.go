@@ -246,6 +246,7 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -1894,6 +1895,7 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -2571,6 +2573,7 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -4219,6 +4222,7 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{

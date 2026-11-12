@@ -102,7 +102,9 @@ func (v *DisassociateSoftwareFromImageBuilderInput) SerializeMembers(s smithy.Sh
 	if v.ImageBuilderName != nil {
 		s.WriteString(schemas.DisassociateSoftwareFromImageBuilderRequest_ImageBuilderName, *v.ImageBuilderName)
 	}
-	serializeStringList(s, schemas.DisassociateSoftwareFromImageBuilderRequest_SoftwareNames, v.SoftwareNames)
+	if v.SoftwareNames != nil {
+		serializeStringList(s, schemas.DisassociateSoftwareFromImageBuilderRequest_SoftwareNames, v.SoftwareNames)
+	}
 }
 
 type DisassociateSoftwareFromImageBuilderOutput struct {

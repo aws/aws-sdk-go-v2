@@ -67,7 +67,9 @@ func (v *CreateBackupPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BackupPlan.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateBackupPlanInput_BackupPlanTags, v.BackupPlanTags)
+	if v.BackupPlanTags != nil {
+		serializeTags(s, schemas.CreateBackupPlanInput_BackupPlanTags, v.BackupPlanTags)
+	}
 	if v.CreatorRequestId != nil {
 		s.WriteString(schemas.CreateBackupPlanInput_CreatorRequestId, *v.CreatorRequestId)
 	}
@@ -110,7 +112,9 @@ func (v *CreateBackupPlanOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateBackupPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedBackupSettings(s, schemas.CreateBackupPlanOutput_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	if v.AdvancedBackupSettings != nil {
+		serializeAdvancedBackupSettings(s, schemas.CreateBackupPlanOutput_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	}
 	if v.BackupPlanArn != nil {
 		s.WriteString(schemas.CreateBackupPlanOutput_BackupPlanArn, *v.BackupPlanArn)
 	}

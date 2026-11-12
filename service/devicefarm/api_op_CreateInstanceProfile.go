@@ -64,7 +64,9 @@ func (v *CreateInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Description != nil {
 		s.WriteString(schemas.CreateInstanceProfileRequest_description, *v.Description)
 	}
-	serializePackageIds(s, schemas.CreateInstanceProfileRequest_excludeAppPackagesFromCleanup, v.ExcludeAppPackagesFromCleanup)
+	if v.ExcludeAppPackagesFromCleanup != nil {
+		serializePackageIds(s, schemas.CreateInstanceProfileRequest_excludeAppPackagesFromCleanup, v.ExcludeAppPackagesFromCleanup)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateInstanceProfileRequest_name, *v.Name)
 	}

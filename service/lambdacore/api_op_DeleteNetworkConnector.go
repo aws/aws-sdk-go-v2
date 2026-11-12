@@ -118,7 +118,9 @@ func (v *DeleteNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Arn != nil {
 		s.WriteString(schemas.DeleteNetworkConnectorResponse_Arn, *v.Arn)
 	}
-	serializeNetworkConnectorConfiguration(s, schemas.DeleteNetworkConnectorResponse_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeNetworkConnectorConfiguration(s, schemas.DeleteNetworkConnectorResponse_Configuration, v.Configuration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.DeleteNetworkConnectorResponse_Id, *v.Id)
 	}

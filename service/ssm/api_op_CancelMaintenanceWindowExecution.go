@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type CancelMaintenanceWindowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMaintenanceWindowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMaintenanceWindowExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMaintenanceWindowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WindowExecutionId != nil {
+		s.WriteString(schemas.CancelMaintenanceWindowExecutionRequest_WindowExecutionId, *v.WindowExecutionId)
+	}
+}
+
 type CancelMaintenanceWindowExecutionOutput struct {
 
 	// The ID of the maintenance window execution that has been stopped.
@@ -46,13 +60,32 @@ type CancelMaintenanceWindowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMaintenanceWindowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMaintenanceWindowExecutionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMaintenanceWindowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WindowExecutionId != nil {
+		s.WriteString(schemas.CancelMaintenanceWindowExecutionResult_WindowExecutionId, *v.WindowExecutionId)
+	}
+}
+func (v *CancelMaintenanceWindowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMaintenanceWindowExecutionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMaintenanceWindowExecutionResult_WindowExecutionId:
+			v.WindowExecutionId = new(string)
+			return d.ReadString(schemas.CancelMaintenanceWindowExecutionResult_WindowExecutionId, v.WindowExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMaintenanceWindowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMaintenanceWindowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMaintenanceWindowExecution, schemas.CancelMaintenanceWindowExecutionRequest, schemas.CancelMaintenanceWindowExecutionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelMaintenanceWindowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMaintenanceWindowExecution, schemas.CancelMaintenanceWindowExecutionRequest, schemas.CancelMaintenanceWindowExecutionResult), output: &CancelMaintenanceWindowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

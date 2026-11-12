@@ -9,7 +9,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the label group.
+//	Updates the label group.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) UpdateLabelGroup(ctx context.Context, params *UpdateLabelGroupInput, optFns ...func(*Options)) (*UpdateLabelGroupOutput, error) {
 	if params == nil {
 		params = &UpdateLabelGroupInput{}
@@ -48,7 +52,9 @@ func (v *UpdateLabelGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLabelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaultCodes(s, schemas.UpdateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	if v.FaultCodes != nil {
+		serializeFaultCodes(s, schemas.UpdateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	}
 	if v.LabelGroupName != nil {
 		s.WriteString(schemas.UpdateLabelGroupRequest_LabelGroupName, *v.LabelGroupName)
 	}

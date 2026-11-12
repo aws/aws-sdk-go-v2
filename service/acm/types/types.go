@@ -488,7 +488,9 @@ func (v *AcmeAccount) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcmeExternalAccountBindingArn != nil {
 		s.WriteString(schemas.AcmeAccount_AcmeExternalAccountBindingArn, *v.AcmeExternalAccountBindingArn)
 	}
-	serializeContactList(s, schemas.AcmeAccount_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeContactList(s, schemas.AcmeAccount_Contacts, v.Contacts)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AcmeAccount_CreatedAt, *v.CreatedAt)
 	}
@@ -566,7 +568,9 @@ func (v *AcmeAccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcmeExternalAccountBindingArn != nil {
 		s.WriteString(schemas.AcmeAccountSummary_AcmeExternalAccountBindingArn, *v.AcmeExternalAccountBindingArn)
 	}
-	serializeContactList(s, schemas.AcmeAccountSummary_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeContactList(s, schemas.AcmeAccountSummary_Contacts, v.Contacts)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AcmeAccountSummary_CreatedAt, *v.CreatedAt)
 	}
@@ -663,7 +667,9 @@ func (v *AcmeDomainValidation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FailureDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrevalidationDetails(s, schemas.AcmeDomainValidation_PrevalidationDetails, v.PrevalidationDetails)
+	if v.PrevalidationDetails != nil {
+		serializePrevalidationDetails(s, schemas.AcmeDomainValidation_PrevalidationDetails, v.PrevalidationDetails)
+	}
 	if v.PrevalidationType != "" {
 		s.WriteString(schemas.AcmeDomainValidation_PrevalidationType, string(v.PrevalidationType))
 	}
@@ -773,7 +779,9 @@ func (v *AcmeDomainValidationSummary) SerializeMembers(s smithy.ShapeSerializer)
 		v.FailureDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrevalidationDetails(s, schemas.AcmeDomainValidationSummary_PrevalidationDetails, v.PrevalidationDetails)
+	if v.PrevalidationDetails != nil {
+		serializePrevalidationDetails(s, schemas.AcmeDomainValidationSummary_PrevalidationDetails, v.PrevalidationDetails)
+	}
 	if v.PrevalidationType != "" {
 		s.WriteString(schemas.AcmeDomainValidationSummary_PrevalidationType, string(v.PrevalidationType))
 	}
@@ -876,8 +884,12 @@ func (v *AcmeEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthorizationBehavior != "" {
 		s.WriteString(schemas.AcmeEndpoint_AuthorizationBehavior, string(v.AuthorizationBehavior))
 	}
-	serializeCertificateAuthority(s, schemas.AcmeEndpoint_CertificateAuthority, v.CertificateAuthority)
-	serializeTagList(s, schemas.AcmeEndpoint_CertificateTags, v.CertificateTags)
+	if v.CertificateAuthority != nil {
+		serializeCertificateAuthority(s, schemas.AcmeEndpoint_CertificateAuthority, v.CertificateAuthority)
+	}
+	if v.CertificateTags != nil {
+		serializeTagList(s, schemas.AcmeEndpoint_CertificateTags, v.CertificateTags)
+	}
 	if v.Contact != "" {
 		s.WriteString(schemas.AcmeEndpoint_Contact, string(v.Contact))
 	}
@@ -995,8 +1007,12 @@ func (v *AcmeEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthorizationBehavior != "" {
 		s.WriteString(schemas.AcmeEndpointSummary_AuthorizationBehavior, string(v.AuthorizationBehavior))
 	}
-	serializeCertificateAuthority(s, schemas.AcmeEndpointSummary_CertificateAuthority, v.CertificateAuthority)
-	serializeTagList(s, schemas.AcmeEndpointSummary_CertificateTags, v.CertificateTags)
+	if v.CertificateAuthority != nil {
+		serializeCertificateAuthority(s, schemas.AcmeEndpointSummary_CertificateAuthority, v.CertificateAuthority)
+	}
+	if v.CertificateTags != nil {
+		serializeTagList(s, schemas.AcmeEndpointSummary_CertificateTags, v.CertificateTags)
+	}
 	if v.Contact != "" {
 		s.WriteString(schemas.AcmeEndpointSummary_Contact, string(v.Contact))
 	}
@@ -1464,15 +1480,21 @@ func (v *CertificateDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.CertificateDetail_DomainName, *v.DomainName)
 	}
-	serializeDomainValidationList(s, schemas.CertificateDetail_DomainValidationOptions, v.DomainValidationOptions)
-	serializeExtendedKeyUsageList(s, schemas.CertificateDetail_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	if v.DomainValidationOptions != nil {
+		serializeDomainValidationList(s, schemas.CertificateDetail_DomainValidationOptions, v.DomainValidationOptions)
+	}
+	if v.ExtendedKeyUsages != nil {
+		serializeExtendedKeyUsageList(s, schemas.CertificateDetail_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	}
 	if v.FailureReason != "" {
 		s.WriteString(schemas.CertificateDetail_FailureReason, string(v.FailureReason))
 	}
 	if v.ImportedAt != nil {
 		s.WriteTime(schemas.CertificateDetail_ImportedAt, *v.ImportedAt)
 	}
-	serializeInUseList(s, schemas.CertificateDetail_InUseBy, v.InUseBy)
+	if v.InUseBy != nil {
+		serializeInUseList(s, schemas.CertificateDetail_InUseBy, v.InUseBy)
+	}
 	if v.IssuedAt != nil {
 		s.WriteTime(schemas.CertificateDetail_IssuedAt, *v.IssuedAt)
 	}
@@ -1482,7 +1504,9 @@ func (v *CertificateDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyAlgorithm != "" {
 		s.WriteString(schemas.CertificateDetail_KeyAlgorithm, string(v.KeyAlgorithm))
 	}
-	serializeKeyUsageList(s, schemas.CertificateDetail_KeyUsages, v.KeyUsages)
+	if v.KeyUsages != nil {
+		serializeKeyUsageList(s, schemas.CertificateDetail_KeyUsages, v.KeyUsages)
+	}
 	if v.ManagedBy != "" {
 		s.WriteString(schemas.CertificateDetail_ManagedBy, string(v.ManagedBy))
 	}
@@ -1523,7 +1547,9 @@ func (v *CertificateDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subject != nil {
 		s.WriteString(schemas.CertificateDetail_Subject, *v.Subject)
 	}
-	serializeDomainList(s, schemas.CertificateDetail_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	if v.SubjectAlternativeNames != nil {
+		serializeDomainList(s, schemas.CertificateDetail_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CertificateDetail_Type, string(v.Type))
 	}
@@ -1922,7 +1948,9 @@ func (v *CertificateSearchResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateArn != nil {
 		s.WriteString(schemas.CertificateSearchResult_CertificateArn, *v.CertificateArn)
 	}
-	serializeCertificateMetadata(s, schemas.CertificateSearchResult_CertificateMetadata, v.CertificateMetadata)
+	if v.CertificateMetadata != nil {
+		serializeCertificateMetadata(s, schemas.CertificateSearchResult_CertificateMetadata, v.CertificateMetadata)
+	}
 	if v.X509Attributes != nil {
 		s.WriteStruct(schemas.CertificateSearchResult_X509Attributes)
 		v.X509Attributes.SerializeMembers(s)
@@ -2093,7 +2121,9 @@ func (v *CertificateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Exported != nil {
 		s.WriteBool(schemas.CertificateSummary_Exported, *v.Exported)
 	}
-	serializeExtendedKeyUsageNames(s, schemas.CertificateSummary_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	if v.ExtendedKeyUsages != nil {
+		serializeExtendedKeyUsageNames(s, schemas.CertificateSummary_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	}
 	if v.HasAdditionalSubjectAlternativeNames != nil {
 		s.WriteBool(schemas.CertificateSummary_HasAdditionalSubjectAlternativeNames, *v.HasAdditionalSubjectAlternativeNames)
 	}
@@ -2109,7 +2139,9 @@ func (v *CertificateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyAlgorithm != "" {
 		s.WriteString(schemas.CertificateSummary_KeyAlgorithm, string(v.KeyAlgorithm))
 	}
-	serializeKeyUsageNames(s, schemas.CertificateSummary_KeyUsages, v.KeyUsages)
+	if v.KeyUsages != nil {
+		serializeKeyUsageNames(s, schemas.CertificateSummary_KeyUsages, v.KeyUsages)
+	}
 	if v.ManagedBy != "" {
 		s.WriteString(schemas.CertificateSummary_ManagedBy, string(v.ManagedBy))
 	}
@@ -2128,7 +2160,9 @@ func (v *CertificateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CertificateSummary_Status, string(v.Status))
 	}
-	serializeDomainList(s, schemas.CertificateSummary_SubjectAlternativeNameSummaries, v.SubjectAlternativeNameSummaries)
+	if v.SubjectAlternativeNameSummaries != nil {
+		serializeDomainList(s, schemas.CertificateSummary_SubjectAlternativeNameSummaries, v.SubjectAlternativeNameSummaries)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CertificateSummary_Type, string(v.Type))
 	}
@@ -2386,11 +2420,15 @@ func (v *DistinguishedName) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Country != nil {
 		s.WriteString(schemas.DistinguishedName_Country, *v.Country)
 	}
-	serializeCustomAttributeList(s, schemas.DistinguishedName_CustomAttributes, v.CustomAttributes)
+	if v.CustomAttributes != nil {
+		serializeCustomAttributeList(s, schemas.DistinguishedName_CustomAttributes, v.CustomAttributes)
+	}
 	if v.DistinguishedNameQualifier != nil {
 		s.WriteString(schemas.DistinguishedName_DistinguishedNameQualifier, *v.DistinguishedNameQualifier)
 	}
-	serializeDomainComponentList(s, schemas.DistinguishedName_DomainComponents, v.DomainComponents)
+	if v.DomainComponents != nil {
+		serializeDomainComponentList(s, schemas.DistinguishedName_DomainComponents, v.DomainComponents)
+	}
 	if v.GenerationQualifier != nil {
 		s.WriteString(schemas.DistinguishedName_GenerationQualifier, *v.GenerationQualifier)
 	}
@@ -2790,7 +2828,9 @@ func (v *DomainValidation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ValidationDomain != nil {
 		s.WriteString(schemas.DomainValidation_ValidationDomain, *v.ValidationDomain)
 	}
-	serializeValidationEmailList(s, schemas.DomainValidation_ValidationEmails, v.ValidationEmails)
+	if v.ValidationEmails != nil {
+		serializeValidationEmailList(s, schemas.DomainValidation_ValidationEmails, v.ValidationEmails)
+	}
 	if v.ValidationMethod != "" {
 		s.WriteString(schemas.DomainValidation_ValidationMethod, string(v.ValidationMethod))
 	}
@@ -3028,7 +3068,9 @@ func (v *EmailValidationChallenge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ValidationDomain != nil {
 		s.WriteString(schemas.EmailValidationChallenge_ValidationDomain, *v.ValidationDomain)
 	}
-	serializeValidationEmailList(s, schemas.EmailValidationChallenge_ValidationEmails, v.ValidationEmails)
+	if v.ValidationEmails != nil {
+		serializeValidationEmailList(s, schemas.EmailValidationChallenge_ValidationEmails, v.ValidationEmails)
+	}
 }
 func (v *EmailValidationChallenge) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmailValidationChallenge, func(s *smithy.Schema) error {
@@ -3273,9 +3315,15 @@ func (v *Filters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExportOption != "" {
 		s.WriteString(schemas.Filters_exportOption, string(v.ExportOption))
 	}
-	serializeExtendedKeyUsageFilterList(s, schemas.Filters_extendedKeyUsage, v.ExtendedKeyUsage)
-	serializeKeyAlgorithmList(s, schemas.Filters_keyTypes, v.KeyTypes)
-	serializeKeyUsageFilterList(s, schemas.Filters_keyUsage, v.KeyUsage)
+	if v.ExtendedKeyUsage != nil {
+		serializeExtendedKeyUsageFilterList(s, schemas.Filters_extendedKeyUsage, v.ExtendedKeyUsage)
+	}
+	if v.KeyTypes != nil {
+		serializeKeyAlgorithmList(s, schemas.Filters_keyTypes, v.KeyTypes)
+	}
+	if v.KeyUsage != nil {
+		serializeKeyUsageFilterList(s, schemas.Filters_keyUsage, v.KeyUsage)
+	}
 	if v.ManagedBy != "" {
 		s.WriteString(schemas.Filters_managedBy, string(v.ManagedBy))
 	}
@@ -3633,7 +3681,9 @@ func (v *PublicCertificateAuthority) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PublicCertificateAuthority) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePublicKeyAlgorithmList(s, schemas.PublicCertificateAuthority_AllowedKeyAlgorithms, v.AllowedKeyAlgorithms)
+	if v.AllowedKeyAlgorithms != nil {
+		serializePublicKeyAlgorithmList(s, schemas.PublicCertificateAuthority_AllowedKeyAlgorithms, v.AllowedKeyAlgorithms)
+	}
 }
 func (v *PublicCertificateAuthority) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublicCertificateAuthority, func(s *smithy.Schema) error {
@@ -3686,7 +3736,9 @@ func (v *RenewalSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RenewalSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainValidationList(s, schemas.RenewalSummary_DomainValidationOptions, v.DomainValidationOptions)
+	if v.DomainValidationOptions != nil {
+		serializeDomainValidationList(s, schemas.RenewalSummary_DomainValidationOptions, v.DomainValidationOptions)
+	}
 	if v.RenewalStatus != "" {
 		s.WriteString(schemas.RenewalSummary_RenewalStatus, string(v.RenewalStatus))
 	}
@@ -4135,7 +4187,9 @@ func (v *ValidationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationChallenge(s, schemas.ValidationConfiguration_ValidationChallenge, v.ValidationChallenge)
+	if v.ValidationChallenge != nil {
+		serializeValidationChallenge(s, schemas.ValidationConfiguration_ValidationChallenge, v.ValidationChallenge)
+	}
 	if v.ValidationMethod != "" {
 		s.WriteString(schemas.ValidationConfiguration_ValidationMethod, string(v.ValidationMethod))
 	}
@@ -4371,7 +4425,9 @@ func (v *X509Attributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *X509Attributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtendedKeyUsageNames(s, schemas.X509Attributes_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	if v.ExtendedKeyUsages != nil {
+		serializeExtendedKeyUsageNames(s, schemas.X509Attributes_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	}
 	if v.Issuer != nil {
 		s.WriteStruct(schemas.X509Attributes_Issuer)
 		v.Issuer.SerializeMembers(s)
@@ -4380,7 +4436,9 @@ func (v *X509Attributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyAlgorithm != "" {
 		s.WriteString(schemas.X509Attributes_KeyAlgorithm, string(v.KeyAlgorithm))
 	}
-	serializeKeyUsageNames(s, schemas.X509Attributes_KeyUsages, v.KeyUsages)
+	if v.KeyUsages != nil {
+		serializeKeyUsageNames(s, schemas.X509Attributes_KeyUsages, v.KeyUsages)
+	}
 	if v.NotAfter != nil {
 		s.WriteTime(schemas.X509Attributes_NotAfter, *v.NotAfter)
 	}
@@ -4395,7 +4453,9 @@ func (v *X509Attributes) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Subject.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGeneralNameList(s, schemas.X509Attributes_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	if v.SubjectAlternativeNames != nil {
+		serializeGeneralNameList(s, schemas.X509Attributes_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	}
 }
 func (v *X509Attributes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.X509Attributes, func(s *smithy.Schema) error {

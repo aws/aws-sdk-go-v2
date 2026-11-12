@@ -10582,6 +10582,361 @@ func TestCheckRequestSnapshot_GetSecurityControlDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetSoftwareResourcesV2(t *testing.T) {
+	input := &GetSoftwareResourcesV2Input{
+		PackageName:    ptr.String("__PackageName__"),
+		PackageType:    ptr.String("__PackageType__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+		Filters: &types.SoftwareFilters{
+			CompositeFilters: []types.SoftwareCompositeFilter{
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+			},
+			CompositeOperator: types.AllowedOperators("AND"),
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortCriteria: []types.SortCriterion{
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSoftwareResourcesV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSoftwareResourcesV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetSoftwareStatisticsV2(t *testing.T) {
+	input := &GetSoftwareStatisticsV2Input{
+		GroupByRules: []types.SoftwareGroupByRule{
+			{
+				GroupByField: types.SoftwareGroupByField("AccountId"),
+				Filters: &types.SoftwareFilters{
+					CompositeFilters: []types.SoftwareCompositeFilter{
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+			},
+			{
+				GroupByField: types.SoftwareGroupByField("AccountId"),
+				Filters: &types.SoftwareFilters{
+					CompositeFilters: []types.SoftwareCompositeFilter{
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+			},
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortOrder:           types.SortOrder("asc"),
+		MaxStatisticResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSoftwareStatisticsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSoftwareStatisticsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetSoftwareV2(t *testing.T) {
+	input := &GetSoftwareV2Input{
+		Filters: &types.SoftwareFilters{
+			CompositeFilters: []types.SoftwareCompositeFilter{
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+			},
+			CompositeOperator: types.AllowedOperators("AND"),
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortCriteria: []types.SortCriterion{
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSoftwareV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSoftwareV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_InviteMembers(t *testing.T) {
 	input := &InviteMembersInput{
 		AccountIds: []string{
@@ -25157,6 +25512,361 @@ func TestUpdateRequestSnapshot_GetSecurityControlDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSecurityControlDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetSoftwareResourcesV2(t *testing.T) {
+	input := &GetSoftwareResourcesV2Input{
+		PackageName:    ptr.String("__PackageName__"),
+		PackageType:    ptr.String("__PackageType__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+		Filters: &types.SoftwareFilters{
+			CompositeFilters: []types.SoftwareCompositeFilter{
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+			},
+			CompositeOperator: types.AllowedOperators("AND"),
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortCriteria: []types.SortCriterion{
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSoftwareResourcesV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSoftwareResourcesV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetSoftwareStatisticsV2(t *testing.T) {
+	input := &GetSoftwareStatisticsV2Input{
+		GroupByRules: []types.SoftwareGroupByRule{
+			{
+				GroupByField: types.SoftwareGroupByField("AccountId"),
+				Filters: &types.SoftwareFilters{
+					CompositeFilters: []types.SoftwareCompositeFilter{
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+			},
+			{
+				GroupByField: types.SoftwareGroupByField("AccountId"),
+				Filters: &types.SoftwareFilters{
+					CompositeFilters: []types.SoftwareCompositeFilter{
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+			},
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortOrder:           types.SortOrder("asc"),
+		MaxStatisticResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSoftwareStatisticsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSoftwareStatisticsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetSoftwareV2(t *testing.T) {
+	input := &GetSoftwareV2Input{
+		Filters: &types.SoftwareFilters{
+			CompositeFilters: []types.SoftwareCompositeFilter{
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+			},
+			CompositeOperator: types.AllowedOperators("AND"),
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortCriteria: []types.SortCriterion{
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSoftwareV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSoftwareV2"); err != nil {
 		t.Fatal(err)
 	}
 }

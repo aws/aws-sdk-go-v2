@@ -23,6 +23,11 @@ var BatchWriteItem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchWriteItem",
 }, smithy.ShapeTypeOperation, 0)
 
+var CancelBulkOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "CancelBulkOperation",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateBackup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "CreateBackup",
@@ -61,6 +66,11 @@ var DeleteTable = smithy.NewSchema(smithy.ShapeID{
 var DescribeBackup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "DescribeBackup",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeBulkOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DescribeBulkOperation",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeContinuousBackups = smithy.NewSchema(smithy.ShapeID{
@@ -168,6 +178,11 @@ var ListBackups = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListBackups",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListBulkOperations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "ListBulkOperations",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListContributorInsights = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ListContributorInsights",
@@ -231,6 +246,11 @@ var Scan = smithy.NewSchema(smithy.ShapeID{
 var SearchVectors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "SearchVectors",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartBulkPutItems = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "StartBulkPutItems",
 }, smithy.ShapeTypeOperation, 0)
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -762,6 +782,172 @@ var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BooleanObject",
 }, smithy.ShapeTypeBoolean, 0)
 
+var _BulkOperationArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationArn",
+}, smithy.ShapeTypeString, 0)
+
+var BulkOperationBytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationBytes",
+}, smithy.ShapeTypeStructure, 1)
+var BulkOperationBytes_BulkPutBytes *smithy.Schema
+
+var BulkOperationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationDescription",
+}, smithy.ShapeTypeStructure, 17)
+var BulkOperationDescription_BulkOperationArn *smithy.Schema
+
+var BulkOperationDescription_BulkOperationStatus *smithy.Schema
+
+var BulkOperationDescription_TableDetails *smithy.Schema
+
+var BulkOperationDescription_ClientToken *smithy.Schema
+
+var BulkOperationDescription_InputS3Configuration *smithy.Schema
+
+var BulkOperationDescription_OutputS3Configuration *smithy.Schema
+
+var BulkOperationDescription_StartTime *smithy.Schema
+
+var BulkOperationDescription_EndTime *smithy.Schema
+
+var BulkOperationDescription_ProcessedItemCount *smithy.Schema
+
+var BulkOperationDescription_ProcessedInputBytes *smithy.Schema
+
+var BulkOperationDescription_TotalInputBytes *smithy.Schema
+
+var BulkOperationDescription_BulkOperationUsage *smithy.Schema
+
+var BulkOperationDescription_FailedItemCount *smithy.Schema
+
+var BulkOperationDescription_FailureCode *smithy.Schema
+
+var BulkOperationDescription_FailureMessage *smithy.Schema
+
+var BulkOperationDescription_MaxWriteRequestUnits *smithy.Schema
+
+var BulkOperationDescription_PerformanceTier *smithy.Schema
+
+var _BulkOperationEndTime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationEndTime",
+}, smithy.ShapeTypeTimestamp, 0)
+
+var BulkOperationInputFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationInputFormat",
+}, smithy.ShapeTypeEnum, 2)
+var BulkOperationInputFormat_DYNAMODB_JSON *smithy.Schema
+
+var BulkOperationInputFormat_ION *smithy.Schema
+
+var _BulkOperationItemCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationItemCount",
+}, smithy.ShapeTypeLong, 0)
+
+var _BulkOperationMaxWriteRequestUnits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationMaxWriteRequestUnits",
+}, smithy.ShapeTypeLong, 0)
+
+var _BulkOperationNextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationNextToken",
+}, smithy.ShapeTypeString, 0)
+
+var BulkOperationPerformanceTier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationPerformanceTier",
+}, smithy.ShapeTypeEnum, 2)
+var BulkOperationPerformanceTier_STANDARD *smithy.Schema
+
+var BulkOperationPerformanceTier_ACCELERATED *smithy.Schema
+
+var _BulkOperationsSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationsSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _BulkOperationsSummaryList_member *smithy.Schema
+
+var _BulkOperationStartTime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationStartTime",
+}, smithy.ShapeTypeTimestamp, 0)
+
+var BulkOperationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationStatus",
+}, smithy.ShapeTypeEnum, 6)
+var BulkOperationStatus_IN_PROGRESS *smithy.Schema
+
+var BulkOperationStatus_COMPLETED *smithy.Schema
+
+var BulkOperationStatus_COMPLETED_WITH_ERRORS *smithy.Schema
+
+var BulkOperationStatus_CANCELLING *smithy.Schema
+
+var BulkOperationStatus_CANCELLED *smithy.Schema
+
+var BulkOperationStatus_FAILED *smithy.Schema
+
+var BulkOperationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationSummary",
+}, smithy.ShapeTypeStructure, 4)
+var BulkOperationSummary_BulkOperationArn *smithy.Schema
+
+var BulkOperationSummary_BulkOperationStatus *smithy.Schema
+
+var BulkOperationSummary_StartTime *smithy.Schema
+
+var BulkOperationSummary_EndTime *smithy.Schema
+
+var BulkOperationTableDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationTableDetail",
+}, smithy.ShapeTypeStructure, 2)
+var BulkOperationTableDetail_TableName *smithy.Schema
+
+var BulkOperationTableDetail_TableId *smithy.Schema
+
+var _BulkOperationTableDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationTableDetails",
+}, smithy.ShapeTypeList, 1)
+var _BulkOperationTableDetails_member *smithy.Schema
+
+var BulkOperationUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationUsage",
+}, smithy.ShapeTypeStructure, 6)
+var BulkOperationUsage_TableName *smithy.Schema
+
+var BulkOperationUsage_BulkPutBytes *smithy.Schema
+
+var BulkOperationUsage_Table *smithy.Schema
+
+var BulkOperationUsage_LocalSecondaryIndexes *smithy.Schema
+
+var BulkOperationUsage_GlobalSecondaryIndexes *smithy.Schema
+
+var BulkOperationUsage_VectorIndexes *smithy.Schema
+
+var _BulkOperationUsageMultiple = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationUsageMultiple",
+}, smithy.ShapeTypeList, 1)
+var _BulkOperationUsageMultiple_member *smithy.Schema
+
+var BulkOperationVectorBytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "BulkOperationVectorBytes",
+}, smithy.ShapeTypeStructure, 1)
+var BulkOperationVectorBytes_BulkPutVectorBytes *smithy.Schema
+
 var CancellationReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "CancellationReason",
@@ -1166,6 +1352,25 @@ var DestinationStatus_DISABLED *smithy.Schema
 var DestinationStatus_ENABLE_FAILED *smithy.Schema
 
 var DestinationStatus_UPDATING *smithy.Schema
+
+var DisassociateReplicationGroupMemberAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DisassociateReplicationGroupMemberAction",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateReplicationGroupMemberAction_RegionName *smithy.Schema
+
+var DisassociateReplicationGroupMemberAction_DisassociationMode *smithy.Schema
+
+var DisassociationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DisassociationMode",
+}, smithy.ShapeTypeEnum, 1)
+var DisassociationMode_WAIT_FOR_REPLICATION *smithy.Schema
+
+var _DisassociationProtectionEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DisassociationProtectionEnabled",
+}, smithy.ShapeTypeBoolean, 0)
 
 var _DoubleObject = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -1875,6 +2080,20 @@ var InputFormatOptions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var InputFormatOptions_Csv *smithy.Schema
 
+var InputS3Configuration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "InputS3Configuration",
+}, smithy.ShapeTypeStructure, 5)
+var InputS3Configuration_S3BucketOwner *smithy.Schema
+
+var InputS3Configuration_S3Bucket *smithy.Schema
+
+var InputS3Configuration_S3KeyPrefix *smithy.Schema
+
+var InputS3Configuration_InputFormat *smithy.Schema
+
+var InputS3Configuration_InputCompressionType *smithy.Schema
+
 var _Integer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "Integer",
@@ -2093,6 +2312,11 @@ var _ListAttributeValue = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ListAttributeValue_member *smithy.Schema
 
+var _ListBulkOperationsMaxLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "ListBulkOperationsMaxLimit",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListContributorInsightsLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ListContributorInsightsLimit",
@@ -2244,6 +2468,36 @@ var OnDemandThroughputOverride = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var OnDemandThroughputOverride_MaxReadRequestUnits *smithy.Schema
 
+var OutputS3Configuration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "OutputS3Configuration",
+}, smithy.ShapeTypeStructure, 6)
+var OutputS3Configuration_S3BucketOwner *smithy.Schema
+
+var OutputS3Configuration_S3Bucket *smithy.Schema
+
+var OutputS3Configuration_S3KeyPrefix *smithy.Schema
+
+var OutputS3Configuration_S3SseAlgorithm *smithy.Schema
+
+var OutputS3Configuration_S3SseKmsKeyId *smithy.Schema
+
+var OutputS3Configuration_OutputType *smithy.Schema
+
+var OutputTypeEnum = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "OutputTypeEnum",
+}, smithy.ShapeTypeEnum, 2)
+var OutputTypeEnum_ERROR *smithy.Schema
+
+var OutputTypeEnum_CONDITION_CHECK_FAILURE *smithy.Schema
+
+var _OutputTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "OutputTypeList",
+}, smithy.ShapeTypeList, 1)
+var _OutputTypeList_member *smithy.Schema
+
 var ParameterizedStatement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ParameterizedStatement",
@@ -2342,6 +2596,11 @@ var _PreparedStatementParameters = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PreparedStatementParameters",
 }, smithy.ShapeTypeList, 1)
 var _PreparedStatementParameters_member *smithy.Schema
+
+var _ProcessedInputBytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "ProcessedInputBytes",
+}, smithy.ShapeTypeLong, 0)
 
 var _ProcessedItemCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -2743,12 +3002,14 @@ var ReplicatedWriteConflictException_message *smithy.Schema
 var ReplicationGroupUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ReplicationGroupUpdate",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ReplicationGroupUpdate_Create *smithy.Schema
 
 var ReplicationGroupUpdate_Update *smithy.Schema
 
 var ReplicationGroupUpdate_Delete *smithy.Schema
+
+var ReplicationGroupUpdate_Disassociate *smithy.Schema
 
 var _ReplicationGroupUpdateList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -2966,6 +3227,14 @@ var _SearchVectorList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SearchVectorList",
 }, smithy.ShapeTypeList, 1)
 var _SearchVectorList_member *smithy.Schema
+
+var _SecondaryIndexesBulkBytesMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "SecondaryIndexesBulkBytesMap",
+}, smithy.ShapeTypeMap, 2)
+var _SecondaryIndexesBulkBytesMap_key *smithy.Schema
+
+var _SecondaryIndexesBulkBytesMap_value *smithy.Schema
 
 var _SecondaryIndexesCapacityMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -3189,7 +3458,7 @@ var TableCreationParameters_VectorIndexes *smithy.Schema
 var TableDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TableDescription",
-}, smithy.ShapeTypeStructure, 29)
+}, smithy.ShapeTypeStructure, 30)
 var TableDescription_AttributeDefinitions *smithy.Schema
 
 var TableDescription_TableName *smithy.Schema
@@ -3239,6 +3508,8 @@ var TableDescription_ArchivalSummary *smithy.Schema
 var TableDescription_TableClassSummary *smithy.Schema
 
 var TableDescription_DeletionProtectionEnabled *smithy.Schema
+
+var TableDescription_DisassociationProtectionEnabled *smithy.Schema
 
 var TableDescription_OnDemandThroughput *smithy.Schema
 
@@ -3413,6 +3684,11 @@ var _TopKInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TopKInteger",
 }, smithy.ShapeTypeInteger, 0)
+
+var _TotalInputBytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "TotalInputBytes",
+}, smithy.ShapeTypeLong, 0)
 
 var TransactGetItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -3604,6 +3880,14 @@ var _VectorIndexes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _VectorIndexes_member *smithy.Schema
 
+var _VectorIndexesBulkVectorBytesMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "VectorIndexesBulkVectorBytesMap",
+}, smithy.ShapeTypeMap, 2)
+var _VectorIndexesBulkVectorBytesMap_key *smithy.Schema
+
+var _VectorIndexesBulkVectorBytesMap_value *smithy.Schema
+
 var _VectorIndexesCapacityMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "VectorIndexesCapacityMap",
@@ -3733,6 +4017,20 @@ var BatchWriteItemOutput_UnprocessedItems *smithy.Schema
 var BatchWriteItemOutput_ItemCollectionMetrics *smithy.Schema
 
 var BatchWriteItemOutput_ConsumedCapacity *smithy.Schema
+
+var CancelBulkOperationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "CancelBulkOperationInput",
+}, smithy.ShapeTypeStructure, 1)
+var CancelBulkOperationInput_BulkOperationArn *smithy.Schema
+
+var CancelBulkOperationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "CancelBulkOperationOutput",
+}, smithy.ShapeTypeStructure, 2)
+var CancelBulkOperationOutput_BulkOperationArn *smithy.Schema
+
+var CancelBulkOperationOutput_BulkOperationStatus *smithy.Schema
 
 var CreateBackupInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -3893,6 +4191,18 @@ var DescribeBackupOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeBackupOutput",
 }, smithy.ShapeTypeStructure, 1)
 var DescribeBackupOutput_BackupDescription *smithy.Schema
+
+var DescribeBulkOperationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DescribeBulkOperationInput",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeBulkOperationInput_BulkOperationArn *smithy.Schema
+
+var DescribeBulkOperationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DescribeBulkOperationOutput",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeBulkOperationOutput_BulkOperationDescription *smithy.Schema
 
 var DescribeContinuousBackupsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -4250,6 +4560,22 @@ var ListBackupsOutput_BackupSummaries *smithy.Schema
 
 var ListBackupsOutput_LastEvaluatedBackupArn *smithy.Schema
 
+var ListBulkOperationsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "ListBulkOperationsInput",
+}, smithy.ShapeTypeStructure, 2)
+var ListBulkOperationsInput_MaxResults *smithy.Schema
+
+var ListBulkOperationsInput_NextToken *smithy.Schema
+
+var ListBulkOperationsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "ListBulkOperationsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListBulkOperationsOutput_BulkOperationsSummaryList *smithy.Schema
+
+var ListBulkOperationsOutput_NextToken *smithy.Schema
+
 var ListContributorInsightsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ListContributorInsightsInput",
@@ -4602,6 +4928,28 @@ var SearchVectorsOutput_ConsumedCapacity *smithy.Schema
 
 var SearchVectorsOutput_SearchResults *smithy.Schema
 
+var StartBulkPutItemsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "StartBulkPutItemsInput",
+}, smithy.ShapeTypeStructure, 6)
+var StartBulkPutItemsInput_ClientToken *smithy.Schema
+
+var StartBulkPutItemsInput_InputS3Configuration *smithy.Schema
+
+var StartBulkPutItemsInput_OutputS3Configuration *smithy.Schema
+
+var StartBulkPutItemsInput_TableName *smithy.Schema
+
+var StartBulkPutItemsInput_MaxWriteRequestUnits *smithy.Schema
+
+var StartBulkPutItemsInput_PerformanceTier *smithy.Schema
+
+var StartBulkPutItemsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "StartBulkPutItemsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var StartBulkPutItemsOutput_BulkOperationDescription *smithy.Schema
+
 var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TagResourceInput",
@@ -4795,7 +5143,7 @@ var UpdateKinesisStreamingDestinationOutput_UpdateKinesisStreamingConfiguration 
 var UpdateTableInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "UpdateTableInput",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var UpdateTableInput_AttributeDefinitions *smithy.Schema
 
 var UpdateTableInput_TableName *smithy.Schema
@@ -4825,6 +5173,8 @@ var UpdateTableInput_OnDemandThroughput *smithy.Schema
 var UpdateTableInput_WarmThroughput *smithy.Schema
 
 var UpdateTableInput_GlobalTableSettingsReplicationMode *smithy.Schema
+
+var UpdateTableInput_DisassociationProtectionEnabled *smithy.Schema
 
 var UpdateTableInput_VectorIndexUpdates *smithy.Schema
 
@@ -5321,6 +5671,140 @@ func init() {
 
 	BillingModeSummary_LastUpdateToPayPerRequestDateTime = BillingModeSummary.AddMember("LastUpdateToPayPerRequestDateTime", _Date)
 
+	BulkOperationBytes_BulkPutBytes = BulkOperationBytes.AddMember("BulkPutBytes", _NonNegativeLongObject)
+
+	BulkOperationStatus_IN_PROGRESS = BulkOperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	BulkOperationStatus_COMPLETED = BulkOperationStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	BulkOperationStatus_COMPLETED_WITH_ERRORS = BulkOperationStatus.AddMember("COMPLETED_WITH_ERRORS", smithyprelude.Unit)
+
+	BulkOperationStatus_CANCELLING = BulkOperationStatus.AddMember("CANCELLING", smithyprelude.Unit)
+
+	BulkOperationStatus_CANCELLED = BulkOperationStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	BulkOperationStatus_FAILED = BulkOperationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	BulkOperationTableDetail_TableName = BulkOperationTableDetail.AddMember("TableName", _TableArn)
+
+	BulkOperationTableDetail_TableId = BulkOperationTableDetail.AddMember("TableId", _TableId)
+
+	_BulkOperationTableDetails_member = _BulkOperationTableDetails.AddMember("member", BulkOperationTableDetail)
+
+	BulkOperationInputFormat_DYNAMODB_JSON = BulkOperationInputFormat.AddMember("DYNAMODB_JSON", smithyprelude.Unit)
+
+	BulkOperationInputFormat_ION = BulkOperationInputFormat.AddMember("ION", smithyprelude.Unit)
+
+	InputCompressionType_GZIP = InputCompressionType.AddMember("GZIP", smithyprelude.Unit)
+
+	InputCompressionType_ZSTD = InputCompressionType.AddMember("ZSTD", smithyprelude.Unit)
+
+	InputCompressionType_NONE = InputCompressionType.AddMember("NONE", smithyprelude.Unit)
+
+	InputS3Configuration_S3BucketOwner = InputS3Configuration.AddMember("S3BucketOwner", _S3BucketOwner)
+
+	InputS3Configuration_S3Bucket = InputS3Configuration.AddMember("S3Bucket", _S3Bucket)
+
+	InputS3Configuration_S3KeyPrefix = InputS3Configuration.AddMember("S3KeyPrefix", _S3Prefix)
+
+	InputS3Configuration_InputFormat = InputS3Configuration.AddMember("InputFormat", BulkOperationInputFormat)
+
+	InputS3Configuration_InputCompressionType = InputS3Configuration.AddMember("InputCompressionType", InputCompressionType)
+
+	S3SseAlgorithm_AES256 = S3SseAlgorithm.AddMember("AES256", smithyprelude.Unit)
+
+	S3SseAlgorithm_KMS = S3SseAlgorithm.AddMember("KMS", smithyprelude.Unit)
+
+	OutputTypeEnum_ERROR = OutputTypeEnum.AddMember("ERROR", smithyprelude.Unit)
+
+	OutputTypeEnum_CONDITION_CHECK_FAILURE = OutputTypeEnum.AddMember("CONDITION_CHECK_FAILURE", smithyprelude.Unit)
+
+	_OutputTypeList_member = _OutputTypeList.AddMember("member", OutputTypeEnum)
+
+	OutputS3Configuration_S3BucketOwner = OutputS3Configuration.AddMember("S3BucketOwner", _S3BucketOwner)
+
+	OutputS3Configuration_S3Bucket = OutputS3Configuration.AddMember("S3Bucket", _S3Bucket)
+
+	OutputS3Configuration_S3KeyPrefix = OutputS3Configuration.AddMember("S3KeyPrefix", _S3Prefix)
+
+	OutputS3Configuration_S3SseAlgorithm = OutputS3Configuration.AddMember("S3SseAlgorithm", S3SseAlgorithm)
+
+	OutputS3Configuration_S3SseKmsKeyId = OutputS3Configuration.AddMember("S3SseKmsKeyId", _S3SseKmsKeyId)
+
+	OutputS3Configuration_OutputType = OutputS3Configuration.AddMember("OutputType", _OutputTypeList)
+
+	_SecondaryIndexesBulkBytesMap_key = _SecondaryIndexesBulkBytesMap.AddMember("key", _IndexName)
+
+	_SecondaryIndexesBulkBytesMap_value = _SecondaryIndexesBulkBytesMap.AddMember("value", BulkOperationBytes)
+
+	BulkOperationVectorBytes_BulkPutVectorBytes = BulkOperationVectorBytes.AddMember("BulkPutVectorBytes", _NonNegativeLongObject)
+
+	_VectorIndexesBulkVectorBytesMap_key = _VectorIndexesBulkVectorBytesMap.AddMember("key", _IndexName)
+
+	_VectorIndexesBulkVectorBytesMap_value = _VectorIndexesBulkVectorBytesMap.AddMember("value", BulkOperationVectorBytes)
+
+	BulkOperationUsage_TableName = BulkOperationUsage.AddMember("TableName", _TableArn)
+
+	BulkOperationUsage_BulkPutBytes = BulkOperationUsage.AddMember("BulkPutBytes", _NonNegativeLongObject)
+
+	BulkOperationUsage_Table = BulkOperationUsage.AddMember("Table", BulkOperationBytes)
+
+	BulkOperationUsage_LocalSecondaryIndexes = BulkOperationUsage.AddMember("LocalSecondaryIndexes", _SecondaryIndexesBulkBytesMap)
+
+	BulkOperationUsage_GlobalSecondaryIndexes = BulkOperationUsage.AddMember("GlobalSecondaryIndexes", _SecondaryIndexesBulkBytesMap)
+
+	BulkOperationUsage_VectorIndexes = BulkOperationUsage.AddMember("VectorIndexes", _VectorIndexesBulkVectorBytesMap)
+
+	_BulkOperationUsageMultiple_member = _BulkOperationUsageMultiple.AddMember("member", BulkOperationUsage)
+
+	BulkOperationPerformanceTier_STANDARD = BulkOperationPerformanceTier.AddMember("STANDARD", smithyprelude.Unit)
+
+	BulkOperationPerformanceTier_ACCELERATED = BulkOperationPerformanceTier.AddMember("ACCELERATED", smithyprelude.Unit)
+
+	BulkOperationDescription_BulkOperationArn = BulkOperationDescription.AddMember("BulkOperationArn", _BulkOperationArn)
+
+	BulkOperationDescription_BulkOperationStatus = BulkOperationDescription.AddMember("BulkOperationStatus", BulkOperationStatus)
+
+	BulkOperationDescription_TableDetails = BulkOperationDescription.AddMember("TableDetails", _BulkOperationTableDetails)
+
+	BulkOperationDescription_ClientToken = BulkOperationDescription.AddMember("ClientToken", _ClientToken)
+
+	BulkOperationDescription_InputS3Configuration = BulkOperationDescription.AddMember("InputS3Configuration", InputS3Configuration)
+
+	BulkOperationDescription_OutputS3Configuration = BulkOperationDescription.AddMember("OutputS3Configuration", OutputS3Configuration)
+
+	BulkOperationDescription_StartTime = BulkOperationDescription.AddMember("StartTime", _BulkOperationStartTime)
+
+	BulkOperationDescription_EndTime = BulkOperationDescription.AddMember("EndTime", _BulkOperationEndTime)
+
+	BulkOperationDescription_ProcessedItemCount = BulkOperationDescription.AddMember("ProcessedItemCount", _BulkOperationItemCount)
+
+	BulkOperationDescription_ProcessedInputBytes = BulkOperationDescription.AddMember("ProcessedInputBytes", _ProcessedInputBytes)
+
+	BulkOperationDescription_TotalInputBytes = BulkOperationDescription.AddMember("TotalInputBytes", _TotalInputBytes)
+
+	BulkOperationDescription_BulkOperationUsage = BulkOperationDescription.AddMember("BulkOperationUsage", _BulkOperationUsageMultiple)
+
+	BulkOperationDescription_FailedItemCount = BulkOperationDescription.AddMember("FailedItemCount", _BulkOperationItemCount)
+
+	BulkOperationDescription_FailureCode = BulkOperationDescription.AddMember("FailureCode", _FailureCode)
+
+	BulkOperationDescription_FailureMessage = BulkOperationDescription.AddMember("FailureMessage", _FailureMessage)
+
+	BulkOperationDescription_MaxWriteRequestUnits = BulkOperationDescription.AddMember("MaxWriteRequestUnits", _BulkOperationMaxWriteRequestUnits)
+
+	BulkOperationDescription_PerformanceTier = BulkOperationDescription.AddMember("PerformanceTier", BulkOperationPerformanceTier)
+
+	BulkOperationSummary_BulkOperationArn = BulkOperationSummary.AddMember("BulkOperationArn", _BulkOperationArn)
+
+	BulkOperationSummary_BulkOperationStatus = BulkOperationSummary.AddMember("BulkOperationStatus", BulkOperationStatus)
+
+	BulkOperationSummary_StartTime = BulkOperationSummary.AddMember("StartTime", _BulkOperationStartTime)
+
+	BulkOperationSummary_EndTime = BulkOperationSummary.AddMember("EndTime", _BulkOperationEndTime)
+
+	_BulkOperationsSummaryList_member = _BulkOperationsSummaryList.AddMember("member", BulkOperationSummary)
+
 	CancellationReason_Item = CancellationReason.AddMember("Item", _AttributeMap)
 
 	CancellationReason_Code = CancellationReason.AddMember("Code", _Code)
@@ -5571,6 +6055,12 @@ func init() {
 
 	DestinationStatus_UPDATING = DestinationStatus.AddMember("UPDATING", smithyprelude.Unit)
 
+	DisassociationMode_WAIT_FOR_REPLICATION = DisassociationMode.AddMember("WAIT_FOR_REPLICATION", smithyprelude.Unit)
+
+	DisassociateReplicationGroupMemberAction_RegionName = DisassociateReplicationGroupMemberAction.AddMember("RegionName", _RegionName)
+
+	DisassociateReplicationGroupMemberAction_DisassociationMode = DisassociateReplicationGroupMemberAction.AddMember("DisassociationMode", DisassociationMode)
+
 	DuplicateItemException_message = DuplicateItemException.AddMember("message", _ErrorMessage)
 
 	EnableKinesisStreamingConfiguration_ApproximateCreationDateTimePrecision = EnableKinesisStreamingConfiguration.AddMember("ApproximateCreationDateTimePrecision", ApproximateCreationDateTimePrecision)
@@ -5600,10 +6090,6 @@ func init() {
 	ExportStatus_COMPLETED = ExportStatus.AddMember("COMPLETED", smithyprelude.Unit)
 
 	ExportStatus_FAILED = ExportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	S3SseAlgorithm_AES256 = S3SseAlgorithm.AddMember("AES256", smithyprelude.Unit)
-
-	S3SseAlgorithm_KMS = S3SseAlgorithm.AddMember("KMS", smithyprelude.Unit)
 
 	ExportFormat_DYNAMODB_JSON = ExportFormat.AddMember("DYNAMODB_JSON", smithyprelude.Unit)
 
@@ -5983,12 +6469,6 @@ func init() {
 
 	InputFormatOptions_Csv = InputFormatOptions.AddMember("Csv", CsvOptions)
 
-	InputCompressionType_GZIP = InputCompressionType.AddMember("GZIP", smithyprelude.Unit)
-
-	InputCompressionType_ZSTD = InputCompressionType.AddMember("ZSTD", smithyprelude.Unit)
-
-	InputCompressionType_NONE = InputCompressionType.AddMember("NONE", smithyprelude.Unit)
-
 	SSESpecification_Enabled = SSESpecification.AddMember("Enabled", _SSEEnabled)
 
 	SSESpecification_SSEType = SSESpecification.AddMember("SSEType", SSEType)
@@ -6295,6 +6775,8 @@ func init() {
 
 	ReplicationGroupUpdate_Delete = ReplicationGroupUpdate.AddMember("Delete", DeleteReplicationGroupMemberAction)
 
+	ReplicationGroupUpdate_Disassociate = ReplicationGroupUpdate.AddMember("Disassociate", DisassociateReplicationGroupMemberAction)
+
 	_ReplicationGroupUpdateList_member = _ReplicationGroupUpdateList.AddMember("member", ReplicationGroupUpdate)
 
 	ReplicaUpdate_Create = ReplicaUpdate.AddMember("Create", CreateReplicaAction)
@@ -6437,6 +6919,8 @@ func init() {
 
 	TableDescription_DeletionProtectionEnabled = TableDescription.AddMember("DeletionProtectionEnabled", _DeletionProtectionEnabled)
 
+	TableDescription_DisassociationProtectionEnabled = TableDescription.AddMember("DisassociationProtectionEnabled", _DisassociationProtectionEnabled)
+
 	TableDescription_OnDemandThroughput = TableDescription.AddMember("OnDemandThroughput", OnDemandThroughput)
 
 	TableDescription_WarmThroughput = TableDescription.AddMember("WarmThroughput", TableWarmThroughputDescription)
@@ -6541,6 +7025,12 @@ func init() {
 
 	BatchWriteItemOutput_ConsumedCapacity = BatchWriteItemOutput.AddMember("ConsumedCapacity", _ConsumedCapacityMultiple)
 
+	CancelBulkOperationInput_BulkOperationArn = CancelBulkOperationInput.AddMember("BulkOperationArn", _BulkOperationArn, &smithytraits.ContextParam{})
+
+	CancelBulkOperationOutput_BulkOperationArn = CancelBulkOperationOutput.AddMember("BulkOperationArn", _BulkOperationArn)
+
+	CancelBulkOperationOutput_BulkOperationStatus = CancelBulkOperationOutput.AddMember("BulkOperationStatus", BulkOperationStatus)
+
 	CreateBackupInput_TableName = CreateBackupInput.AddMember("TableName", _TableArn, &smithytraits.ContextParam{})
 
 	CreateBackupInput_BackupName = CreateBackupInput.AddMember("BackupName", _BackupName)
@@ -6636,6 +7126,10 @@ func init() {
 	DescribeBackupInput_BackupArn = DescribeBackupInput.AddMember("BackupArn", _BackupArn, &smithytraits.ContextParam{})
 
 	DescribeBackupOutput_BackupDescription = DescribeBackupOutput.AddMember("BackupDescription", BackupDescription)
+
+	DescribeBulkOperationInput_BulkOperationArn = DescribeBulkOperationInput.AddMember("BulkOperationArn", _BulkOperationArn, &smithytraits.ContextParam{})
+
+	DescribeBulkOperationOutput_BulkOperationDescription = DescribeBulkOperationOutput.AddMember("BulkOperationDescription", BulkOperationDescription)
 
 	DescribeContinuousBackupsInput_TableName = DescribeContinuousBackupsInput.AddMember("TableName", _TableArn, &smithytraits.ContextParam{})
 
@@ -6830,6 +7324,14 @@ func init() {
 	ListBackupsOutput_BackupSummaries = ListBackupsOutput.AddMember("BackupSummaries", _BackupSummaries)
 
 	ListBackupsOutput_LastEvaluatedBackupArn = ListBackupsOutput.AddMember("LastEvaluatedBackupArn", _BackupArn)
+
+	ListBulkOperationsInput_MaxResults = ListBulkOperationsInput.AddMember("MaxResults", _ListBulkOperationsMaxLimit)
+
+	ListBulkOperationsInput_NextToken = ListBulkOperationsInput.AddMember("NextToken", _BulkOperationNextToken)
+
+	ListBulkOperationsOutput_BulkOperationsSummaryList = ListBulkOperationsOutput.AddMember("BulkOperationsSummaryList", _BulkOperationsSummaryList)
+
+	ListBulkOperationsOutput_NextToken = ListBulkOperationsOutput.AddMember("NextToken", _BulkOperationNextToken)
 
 	ListContributorInsightsInput_TableName = ListContributorInsightsInput.AddMember("TableName", _TableArn, &smithytraits.ContextParam{})
 
@@ -7079,6 +7581,20 @@ func init() {
 
 	SearchVectorsOutput_SearchResults = SearchVectorsOutput.AddMember("SearchResults", _SearchResultList)
 
+	StartBulkPutItemsInput_ClientToken = StartBulkPutItemsInput.AddMember("ClientToken", _ClientToken)
+
+	StartBulkPutItemsInput_InputS3Configuration = StartBulkPutItemsInput.AddMember("InputS3Configuration", InputS3Configuration)
+
+	StartBulkPutItemsInput_OutputS3Configuration = StartBulkPutItemsInput.AddMember("OutputS3Configuration", OutputS3Configuration)
+
+	StartBulkPutItemsInput_TableName = StartBulkPutItemsInput.AddMember("TableName", _TableArn, &smithytraits.ContextParam{})
+
+	StartBulkPutItemsInput_MaxWriteRequestUnits = StartBulkPutItemsInput.AddMember("MaxWriteRequestUnits", _BulkOperationMaxWriteRequestUnits)
+
+	StartBulkPutItemsInput_PerformanceTier = StartBulkPutItemsInput.AddMember("PerformanceTier", BulkOperationPerformanceTier)
+
+	StartBulkPutItemsOutput_BulkOperationDescription = StartBulkPutItemsOutput.AddMember("BulkOperationDescription", BulkOperationDescription)
+
 	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _ResourceArnString, &smithytraits.ContextParam{})
 
 	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagList)
@@ -7226,6 +7742,8 @@ func init() {
 	UpdateTableInput_WarmThroughput = UpdateTableInput.AddMember("WarmThroughput", WarmThroughput)
 
 	UpdateTableInput_GlobalTableSettingsReplicationMode = UpdateTableInput.AddMember("GlobalTableSettingsReplicationMode", GlobalTableSettingsReplicationMode)
+
+	UpdateTableInput_DisassociationProtectionEnabled = UpdateTableInput.AddMember("DisassociationProtectionEnabled", _DisassociationProtectionEnabled)
 
 	UpdateTableInput_VectorIndexUpdates = UpdateTableInput.AddMember("VectorIndexUpdates", _VectorIndexUpdateList)
 

@@ -94,7 +94,9 @@ func (v *DescribeConnectionProposalOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Location != nil {
 		s.WriteString(schemas.DescribeConnectionProposalResponse_location, *v.Location)
 	}
-	serializeProvider(s, schemas.DescribeConnectionProposalResponse_provider, v.Provider)
+	if v.Provider != nil {
+		serializeProvider(s, schemas.DescribeConnectionProposalResponse_provider, v.Provider)
+	}
 }
 func (v *DescribeConnectionProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeConnectionProposalResponse, func(s *smithy.Schema) error {

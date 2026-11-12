@@ -159,7 +159,9 @@ func (v *CreateCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSeriali
 		v.RevocationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateCertificateAuthorityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCertificateAuthorityRequest_Tags, v.Tags)
+	}
 	if v.UsageMode != "" {
 		s.WriteString(schemas.CreateCertificateAuthorityRequest_UsageMode, string(v.UsageMode))
 	}
@@ -216,6 +218,9 @@ func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

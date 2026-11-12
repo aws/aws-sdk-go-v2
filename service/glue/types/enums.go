@@ -88,6 +88,23 @@ func (AllowFullTableExternalDataAccessEnum) Values() []AllowFullTableExternalDat
 	}
 }
 
+type AnalysisType string
+
+// Enum values for AnalysisType
+const (
+	AnalysisTypeAutoUpgrade AnalysisType = "AUTO_UPGRADE"
+)
+
+// Values returns all known values for AnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisType) Values() []AnalysisType {
+	return []AnalysisType{
+		"AUTO_UPGRADE",
+	}
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType
@@ -108,6 +125,33 @@ func (AuthenticationType) Values() []AuthenticationType {
 		"OAUTH2",
 		"CUSTOM",
 		"IAM",
+	}
+}
+
+type AutoUpgradeStatus string
+
+// Enum values for AutoUpgradeStatus
+const (
+	AutoUpgradeStatusObserving         AutoUpgradeStatus = "OBSERVING"
+	AutoUpgradeStatusUpgrading         AutoUpgradeStatus = "UPGRADING"
+	AutoUpgradeStatusUpgradeSucceeded  AutoUpgradeStatus = "UPGRADE_SUCCEEDED"
+	AutoUpgradeStatusUpgradeFailed     AutoUpgradeStatus = "UPGRADE_FAILED"
+	AutoUpgradeStatusStopped           AutoUpgradeStatus = "STOPPED"
+	AutoUpgradeStatusWaitingForConsent AutoUpgradeStatus = "WAITING_FOR_CONSENT"
+)
+
+// Values returns all known values for AutoUpgradeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoUpgradeStatus) Values() []AutoUpgradeStatus {
+	return []AutoUpgradeStatus{
+		"OBSERVING",
+		"UPGRADING",
+		"UPGRADE_SUCCEEDED",
+		"UPGRADE_FAILED",
+		"STOPPED",
+		"WAITING_FOR_CONSENT",
 	}
 }
 
@@ -1033,6 +1077,90 @@ func (DataQualityEngine) Values() []DataQualityEngine {
 	}
 }
 
+type DataQualityEvaluationConfigLevel string
+
+// Enum values for DataQualityEvaluationConfigLevel
+const (
+	DataQualityEvaluationConfigLevelCatalog  DataQualityEvaluationConfigLevel = "CATALOG"
+	DataQualityEvaluationConfigLevelDatabase DataQualityEvaluationConfigLevel = "DATABASE"
+	DataQualityEvaluationConfigLevelTable    DataQualityEvaluationConfigLevel = "TABLE"
+)
+
+// Values returns all known values for DataQualityEvaluationConfigLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationConfigLevel) Values() []DataQualityEvaluationConfigLevel {
+	return []DataQualityEvaluationConfigLevel{
+		"CATALOG",
+		"DATABASE",
+		"TABLE",
+	}
+}
+
+type DataQualityEvaluationConfigManagedRuleset string
+
+// Enum values for DataQualityEvaluationConfigManagedRuleset
+const (
+	DataQualityEvaluationConfigManagedRulesetSimple   DataQualityEvaluationConfigManagedRuleset = "SIMPLE"
+	DataQualityEvaluationConfigManagedRulesetAdvanced DataQualityEvaluationConfigManagedRuleset = "ADVANCED"
+)
+
+// Values returns all known values for DataQualityEvaluationConfigManagedRuleset.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationConfigManagedRuleset) Values() []DataQualityEvaluationConfigManagedRuleset {
+	return []DataQualityEvaluationConfigManagedRuleset{
+		"SIMPLE",
+		"ADVANCED",
+	}
+}
+
+type DataQualityEvaluationConfigTrigger string
+
+// Enum values for DataQualityEvaluationConfigTrigger
+const (
+	DataQualityEvaluationConfigTriggerOnce           DataQualityEvaluationConfigTrigger = "ONCE"
+	DataQualityEvaluationConfigTriggerSchedule       DataQualityEvaluationConfigTrigger = "SCHEDULE"
+	DataQualityEvaluationConfigTriggerMetadataChange DataQualityEvaluationConfigTrigger = "METADATA_CHANGE"
+)
+
+// Values returns all known values for DataQualityEvaluationConfigTrigger. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationConfigTrigger) Values() []DataQualityEvaluationConfigTrigger {
+	return []DataQualityEvaluationConfigTrigger{
+		"ONCE",
+		"SCHEDULE",
+		"METADATA_CHANGE",
+	}
+}
+
+type DataQualityEvaluationRunMode string
+
+// Enum values for DataQualityEvaluationRunMode
+const (
+	DataQualityEvaluationRunModeOnDemand         DataQualityEvaluationRunMode = "ON_DEMAND"
+	DataQualityEvaluationRunModeEvaluationConfig DataQualityEvaluationRunMode = "EVALUATION_CONFIG"
+)
+
+// Values returns all known values for DataQualityEvaluationRunMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationRunMode) Values() []DataQualityEvaluationRunMode {
+	return []DataQualityEvaluationRunMode{
+		"ON_DEMAND",
+		"EVALUATION_CONFIG",
+	}
+}
+
 type DataQualityModelStatus string
 
 // Enum values for DataQualityModelStatus
@@ -1643,6 +1771,25 @@ func (GlueResourceType) Values() []GlueResourceType {
 	return []GlueResourceType{
 		"JOB",
 		"SESSION",
+	}
+}
+
+type GovernanceMode string
+
+// Enum values for GovernanceMode
+const (
+	GovernanceModeIamOnly       GovernanceMode = "IAM_ONLY"
+	GovernanceModeLakeFormation GovernanceMode = "LAKE_FORMATION"
+)
+
+// Values returns all known values for GovernanceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GovernanceMode) Values() []GovernanceMode {
+	return []GovernanceMode{
+		"IAM_ONLY",
+		"LAKE_FORMATION",
 	}
 }
 
@@ -3237,6 +3384,35 @@ func (StatisticEvaluationLevel) Values() []StatisticEvaluationLevel {
 	}
 }
 
+type Status string
+
+// Enum values for Status
+const (
+	StatusObserving         Status = "OBSERVING"
+	StatusWaitingForConsent Status = "WAITING_FOR_CONSENT"
+	StatusUpgrading         Status = "UPGRADING"
+	StatusSucceeded         Status = "SUCCEEDED"
+	StatusFailed            Status = "FAILED"
+	StatusTimeout           Status = "TIMEOUT"
+	StatusStopped           Status = "STOPPED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"OBSERVING",
+		"WAITING_FOR_CONSENT",
+		"UPGRADING",
+		"SUCCEEDED",
+		"FAILED",
+		"TIMEOUT",
+		"STOPPED",
+	}
+}
+
 type SubObjectSourceType string
 
 // Enum values for SubObjectSourceType
@@ -3655,6 +3831,25 @@ func (UpdateCatalogBehavior) Values() []UpdateCatalogBehavior {
 	}
 }
 
+type UpgradeConsent string
+
+// Enum values for UpgradeConsent
+const (
+	UpgradeConsentApprove UpgradeConsent = "APPROVE"
+	UpgradeConsentDecline UpgradeConsent = "DECLINE"
+)
+
+// Values returns all known values for UpgradeConsent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpgradeConsent) Values() []UpgradeConsent {
+	return []UpgradeConsent{
+		"APPROVE",
+		"DECLINE",
+	}
+}
+
 type ViewDialect string
 
 // Enum values for ViewDialect
@@ -3706,10 +3901,16 @@ const (
 	WorkerTypeStandard WorkerType = "Standard"
 	WorkerTypeG1x      WorkerType = "G.1X"
 	WorkerTypeG2x      WorkerType = "G.2X"
-	WorkerTypeG025x    WorkerType = "G.025X"
 	WorkerTypeG4x      WorkerType = "G.4X"
 	WorkerTypeG8x      WorkerType = "G.8X"
+	WorkerTypeG025x    WorkerType = "G.025X"
 	WorkerTypeZ2x      WorkerType = "Z.2X"
+	WorkerTypeG12x     WorkerType = "G.12X"
+	WorkerTypeG16x     WorkerType = "G.16X"
+	WorkerTypeR1x      WorkerType = "R.1X"
+	WorkerTypeR2x      WorkerType = "R.2X"
+	WorkerTypeR4x      WorkerType = "R.4X"
+	WorkerTypeR8x      WorkerType = "R.8X"
 )
 
 // Values returns all known values for WorkerType. Note that this can be expanded
@@ -3721,10 +3922,16 @@ func (WorkerType) Values() []WorkerType {
 		"Standard",
 		"G.1X",
 		"G.2X",
-		"G.025X",
 		"G.4X",
 		"G.8X",
+		"G.025X",
 		"Z.2X",
+		"G.12X",
+		"G.16X",
+		"R.1X",
+		"R.2X",
+		"R.4X",
+		"R.8X",
 	}
 }
 

@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,22 @@ func (c *Client) GetSendQuota(ctx context.Context, params *GetSendQuotaInput, op
 
 type GetSendQuotaInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetSendQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSendQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetSendQuotaInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Represents your Amazon SES daily sending quota, maximum send rate, and the
@@ -53,13 +71,41 @@ type GetSendQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSendQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSendQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSendQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max24HourSend != 0 {
+		s.WriteFloat64(schemas.GetSendQuotaResponse_Max24HourSend, v.Max24HourSend)
+	}
+	if v.MaxSendRate != 0 {
+		s.WriteFloat64(schemas.GetSendQuotaResponse_MaxSendRate, v.MaxSendRate)
+	}
+	if v.SentLast24Hours != 0 {
+		s.WriteFloat64(schemas.GetSendQuotaResponse_SentLast24Hours, v.SentLast24Hours)
+	}
+}
+func (v *GetSendQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSendQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSendQuotaResponse_Max24HourSend:
+			return d.ReadFloat64(schemas.GetSendQuotaResponse_Max24HourSend, &v.Max24HourSend)
+		case schemas.GetSendQuotaResponse_MaxSendRate:
+			return d.ReadFloat64(schemas.GetSendQuotaResponse_MaxSendRate, &v.MaxSendRate)
+		case schemas.GetSendQuotaResponse_SentLast24Hours:
+			return d.ReadFloat64(schemas.GetSendQuotaResponse_SentLast24Hours, &v.SentLast24Hours)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSendQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSendQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSendQuota, nil, schemas.GetSendQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetSendQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSendQuota, nil, schemas.GetSendQuotaResponse), output: &GetSendQuotaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

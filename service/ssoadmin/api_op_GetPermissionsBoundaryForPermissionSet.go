@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetPermissionsBoundaryForPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPermissionsBoundaryForPermissionSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPermissionsBoundaryForPermissionSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPermissionsBoundaryForPermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.GetPermissionsBoundaryForPermissionSetRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.PermissionSetArn != nil {
+		s.WriteString(schemas.GetPermissionsBoundaryForPermissionSetRequest_PermissionSetArn, *v.PermissionSetArn)
+	}
+}
+
 type GetPermissionsBoundaryForPermissionSetOutput struct {
 
 	// The permissions boundary attached to the specified permission set.
@@ -51,13 +68,34 @@ type GetPermissionsBoundaryForPermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPermissionsBoundaryForPermissionSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPermissionsBoundaryForPermissionSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPermissionsBoundaryForPermissionSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PermissionsBoundary != nil {
+		s.WriteStruct(schemas.GetPermissionsBoundaryForPermissionSetResponse_PermissionsBoundary)
+		v.PermissionsBoundary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPermissionsBoundaryForPermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPermissionsBoundaryForPermissionSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPermissionsBoundaryForPermissionSetResponse_PermissionsBoundary:
+			v.PermissionsBoundary = &types.PermissionsBoundary{}
+			return v.PermissionsBoundary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPermissionsBoundaryForPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPermissionsBoundaryForPermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPermissionsBoundaryForPermissionSet, schemas.GetPermissionsBoundaryForPermissionSetRequest, schemas.GetPermissionsBoundaryForPermissionSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPermissionsBoundaryForPermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPermissionsBoundaryForPermissionSet, schemas.GetPermissionsBoundaryForPermissionSetRequest, schemas.GetPermissionsBoundaryForPermissionSetResponse), output: &GetPermissionsBoundaryForPermissionSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

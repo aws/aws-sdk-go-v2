@@ -138,7 +138,9 @@ func (v *ListClusterEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListClusterEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterEventSummaries(s, schemas.ListClusterEventsResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeClusterEventSummaries(s, schemas.ListClusterEventsResponse_Events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClusterEventsResponse_NextToken, *v.NextToken)
 	}

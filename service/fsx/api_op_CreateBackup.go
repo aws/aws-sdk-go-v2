@@ -113,7 +113,9 @@ func (v *CreateBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FileSystemId != nil {
 		s.WriteString(schemas.CreateBackupRequest_FileSystemId, *v.FileSystemId)
 	}
-	serializeTags(s, schemas.CreateBackupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateBackupRequest_Tags, v.Tags)
+	}
 	if v.VolumeId != nil {
 		s.WriteString(schemas.CreateBackupRequest_VolumeId, *v.VolumeId)
 	}

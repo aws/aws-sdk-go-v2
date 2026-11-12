@@ -4,7 +4,9 @@ package migrationhubstrategy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,36 @@ type UpdateServerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServerConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServerConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateServerConfigRequest_serverId, *v.ServerId)
+	}
+	if v.StrategyOption != nil {
+		s.WriteStruct(schemas.UpdateServerConfigRequest_strategyOption)
+		v.StrategyOption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServerConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServerConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServerConfigRequest_serverId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.UpdateServerConfigRequest_serverId, v.ServerId)
+		case schemas.UpdateServerConfigRequest_strategyOption:
+			v.StrategyOption = &types.StrategyOption{}
+			return v.StrategyOption.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateServerConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +77,26 @@ type UpdateServerConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServerConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServerConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServerConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateServerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServerConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServerConfig, schemas.UpdateServerConfigRequest, schemas.UpdateServerConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServerConfig, schemas.UpdateServerConfigRequest, schemas.UpdateServerConfigResponse), output: &UpdateServerConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

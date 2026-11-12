@@ -88,7 +88,9 @@ func (v *PurchaseOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Start != nil {
 		s.WriteString(schemas.PurchaseOfferingRequest_Start, *v.Start)
 	}
-	serializeTags(s, schemas.PurchaseOfferingRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PurchaseOfferingRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for PurchaseOfferingResponse

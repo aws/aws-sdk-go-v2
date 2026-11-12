@@ -43,6 +43,8 @@ const (
 	AcceleratorNameA10g          AcceleratorName = "a10g"
 	AcceleratorNameH100          AcceleratorName = "h100"
 	AcceleratorNameT4g           AcceleratorName = "t4g"
+	AcceleratorNameL40s          AcceleratorName = "l40s"
+	AcceleratorNameL4            AcceleratorName = "l4"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -63,6 +65,8 @@ func (AcceleratorName) Values() []AcceleratorName {
 		"a10g",
 		"h100",
 		"t4g",
+		"l40s",
+		"l4",
 	}
 }
 
@@ -91,7 +95,9 @@ type AccessType string
 
 // Enum values for AccessType
 const (
-	AccessTypePublic  AccessType = "PUBLIC"
+	// The resource is publicly accessible from the internet.
+	AccessTypePublic AccessType = "PUBLIC"
+	// The resource is private and reachable only from within the VPC.
 	AccessTypePrivate AccessType = "PRIVATE"
 )
 
@@ -170,6 +176,24 @@ func (AssignPublicIp) Values() []AssignPublicIp {
 	return []AssignPublicIp{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type AttestationPolicyStatus string
+
+// Enum values for AttestationPolicyStatus
+const (
+	// An attestation policy is configured for the task.
+	AttestationPolicyStatusConfigured AttestationPolicyStatus = "CONFIGURED"
+)
+
+// Values returns all known values for AttestationPolicyStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttestationPolicyStatus) Values() []AttestationPolicyStatus {
+	return []AttestationPolicyStatus{
+		"CONFIGURED",
 	}
 }
 
@@ -1180,6 +1204,241 @@ func (FirelensConfigurationType) Values() []FirelensConfigurationType {
 	}
 }
 
+type GatewayAlbDesyncMitigationMode string
+
+// Enum values for GatewayAlbDesyncMitigationMode
+const (
+	// The load balancers forward requests that are considered ambiguous but allow
+	// them to be monitored.
+	GatewayAlbDesyncMitigationModeMonitor GatewayAlbDesyncMitigationMode = "monitor"
+	// The load balancers allow through most requests but drop those that pose a
+	// significant security risk.
+	GatewayAlbDesyncMitigationModeDefensive GatewayAlbDesyncMitigationMode = "defensive"
+	// The load balancers allow through only requests that comply with HTTP/1.1.
+	GatewayAlbDesyncMitigationModeStrictest GatewayAlbDesyncMitigationMode = "strictest"
+)
+
+// Values returns all known values for GatewayAlbDesyncMitigationMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayAlbDesyncMitigationMode) Values() []GatewayAlbDesyncMitigationMode {
+	return []GatewayAlbDesyncMitigationMode{
+		"monitor",
+		"defensive",
+		"strictest",
+	}
+}
+
+type GatewayAlbProtocol string
+
+// Enum values for GatewayAlbProtocol
+const (
+	// The listener uses HTTP.
+	GatewayAlbProtocolHttp GatewayAlbProtocol = "HTTP"
+	// The listener uses HTTPS.
+	GatewayAlbProtocolHttps GatewayAlbProtocol = "HTTPS"
+)
+
+// Values returns all known values for GatewayAlbProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayAlbProtocol) Values() []GatewayAlbProtocol {
+	return []GatewayAlbProtocol{
+		"HTTP",
+		"HTTPS",
+	}
+}
+
+type GatewayClusterAssociationStatus string
+
+// Enum values for GatewayClusterAssociationStatus
+const (
+	// The association is active.
+	GatewayClusterAssociationStatusActive GatewayClusterAssociationStatus = "ACTIVE"
+	// The association is being removed and remains in this state until all gateway
+	// routes for the cluster are removed.
+	GatewayClusterAssociationStatusDisassociating GatewayClusterAssociationStatus = "DISASSOCIATING"
+	GatewayClusterAssociationStatusInactive       GatewayClusterAssociationStatus = "INACTIVE"
+)
+
+// Values returns all known values for GatewayClusterAssociationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayClusterAssociationStatus) Values() []GatewayClusterAssociationStatus {
+	return []GatewayClusterAssociationStatus{
+		"ACTIVE",
+		"DISASSOCIATING",
+		"INACTIVE",
+	}
+}
+
+type GatewayConnectorHealthCheckProtocol string
+
+// Enum values for GatewayConnectorHealthCheckProtocol
+const (
+	// The gateway performs health checks over HTTP.
+	GatewayConnectorHealthCheckProtocolHttp GatewayConnectorHealthCheckProtocol = "HTTP"
+	// The gateway performs health checks over HTTPS.
+	GatewayConnectorHealthCheckProtocolHttps GatewayConnectorHealthCheckProtocol = "HTTPS"
+)
+
+// Values returns all known values for GatewayConnectorHealthCheckProtocol. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayConnectorHealthCheckProtocol) Values() []GatewayConnectorHealthCheckProtocol {
+	return []GatewayConnectorHealthCheckProtocol{
+		"HTTP",
+		"HTTPS",
+	}
+}
+
+type GatewayElbIpAddressType string
+
+// Enum values for GatewayElbIpAddressType
+const (
+	// The load balancers use IPv4 addresses only.
+	GatewayElbIpAddressTypeIpv4 GatewayElbIpAddressType = "ipv4"
+	// The load balancers use both IPv4 and IPv6 addresses.
+	GatewayElbIpAddressTypeDualstack GatewayElbIpAddressType = "dualstack"
+	// The load balancers use IPv6 addresses and private IPv4 addresses, without
+	// public IPv4 addresses.
+	GatewayElbIpAddressTypeDualstackWithoutPublicIpv4 GatewayElbIpAddressType = "dualstack-without-public-ipv4"
+)
+
+// Values returns all known values for GatewayElbIpAddressType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayElbIpAddressType) Values() []GatewayElbIpAddressType {
+	return []GatewayElbIpAddressType{
+		"ipv4",
+		"dualstack",
+		"dualstack-without-public-ipv4",
+	}
+}
+
+type GatewayElbScheme string
+
+// Enum values for GatewayElbScheme
+const (
+	// The load balancers are internet-facing.
+	GatewayElbSchemeInternetFacing GatewayElbScheme = "internet-facing"
+	// The load balancers are internal.
+	GatewayElbSchemeInternal GatewayElbScheme = "internal"
+)
+
+// Values returns all known values for GatewayElbScheme. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayElbScheme) Values() []GatewayElbScheme {
+	return []GatewayElbScheme{
+		"internet-facing",
+		"internal",
+	}
+}
+
+type GatewayRouteStatus string
+
+// Enum values for GatewayRouteStatus
+const (
+	// The gateway route is active and routing traffic.
+	GatewayRouteStatusActive GatewayRouteStatus = "ACTIVE"
+	// The gateway route is being created.
+	GatewayRouteStatusCreateInProgress GatewayRouteStatus = "CREATE_IN_PROGRESS"
+	// The gateway route couldn't be created.
+	GatewayRouteStatusCreateFailed GatewayRouteStatus = "CREATE_FAILED"
+	// The gateway route is being updated.
+	GatewayRouteStatusUpdateInProgress GatewayRouteStatus = "UPDATE_IN_PROGRESS"
+	// The gateway route couldn't be updated.
+	GatewayRouteStatusUpdateFailed GatewayRouteStatus = "UPDATE_FAILED"
+	// The gateway route is being deleted.
+	GatewayRouteStatusDeleteInProgress GatewayRouteStatus = "DELETE_IN_PROGRESS"
+	// The gateway route couldn't be deleted.
+	GatewayRouteStatusDeleteFailed GatewayRouteStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for GatewayRouteStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayRouteStatus) Values() []GatewayRouteStatus {
+	return []GatewayRouteStatus{
+		"ACTIVE",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+	}
+}
+
+type GatewayStatus string
+
+// Enum values for GatewayStatus
+const (
+	// The gateway is active and available for use.
+	GatewayStatusActive GatewayStatus = "ACTIVE"
+	// An update to the gateway is in progress.
+	GatewayStatusUpdateInProgress GatewayStatus = "UPDATE_IN_PROGRESS"
+	// The update to the gateway completed successfully.
+	GatewayStatusUpdateComplete GatewayStatus = "UPDATE_COMPLETE"
+	// The update to the gateway failed. See statusReason for details.
+	GatewayStatusUpdateFailed GatewayStatus = "UPDATE_FAILED"
+	// The gateway is deleted.
+	GatewayStatusDeleted GatewayStatus = "DELETED"
+)
+
+// Values returns all known values for GatewayStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayStatus) Values() []GatewayStatus {
+	return []GatewayStatus{
+		"ACTIVE",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
+		"DELETED",
+	}
+}
+
+type GpuSharingMode string
+
+// Enum values for GpuSharingMode
+const (
+	// No containers are assigned to the GPU, and all of its memory is available.
+	GpuSharingModeIdle GpuSharingMode = "IDLE"
+	// One or more containers share the GPU by using NVIDIA Multi-Process Service
+	// (MPS). While the GPU is in this mode, Amazon ECS assigns it only to containers
+	// that use the nvidiaMps sharing strategy.
+	GpuSharingModeNvidiaMps GpuSharingMode = "NVIDIA_MPS"
+	// One container has exclusive use of the GPU. Amazon ECS assigns GPUs this way to
+	// containers that specify value instead of sharingStrategy for the GPU resource
+	// type.
+	GpuSharingModeDedicated GpuSharingMode = "DEDICATED"
+)
+
+// Values returns all known values for GpuSharingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GpuSharingMode) Values() []GpuSharingMode {
+	return []GpuSharingMode{
+		"IDLE",
+		"NVIDIA_MPS",
+		"DEDICATED",
+	}
+}
+
 type HealthStatus string
 
 // Enum values for HealthStatus
@@ -1284,6 +1543,43 @@ func (IpcMode) Values() []IpcMode {
 		"host",
 		"task",
 		"none",
+	}
+}
+
+type IsolationMode string
+
+// Enum values for IsolationMode
+const (
+	// The task shares the underlying Amazon EC2 instance with other tasks. This is
+	// the default isolation mode.
+	IsolationModeShared IsolationMode = "SHARED"
+	// The task runs in its own [Nitro Sandbox], which is a lightweight virtual machine that is
+	// isolated by the Amazon Web Services Nitro System. Each task's sandbox is
+	// isolated from every other task's sandbox on the same Amazon EC2 instance. For
+	// more information, see [Isolated and confidential tasks]in Amazon Elastic Container Service Developer Guide.
+	//
+	// [Nitro Sandbox]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+	// [Isolated and confidential tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+	IsolationModeIsolatedSandbox IsolationMode = "ISOLATED_SANDBOX"
+	// The task runs in its own [Nitro Sandbox], which is a lightweight virtual machine that is
+	// isolated by the Amazon Web Services Nitro System, with cryptographic
+	// attestation. The host can't access the sandbox's memory or storage. For more
+	// information, see [Isolated and confidential tasks]in Amazon Elastic Container Service Developer Guide.
+	//
+	// [Nitro Sandbox]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+	// [Isolated and confidential tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+	IsolationModeConfidentialSandbox IsolationMode = "CONFIDENTIAL_SANDBOX"
+)
+
+// Values returns all known values for IsolationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IsolationMode) Values() []IsolationMode {
+	return []IsolationMode{
+		"SHARED",
+		"ISOLATED_SANDBOX",
+		"CONFIDENTIAL_SANDBOX",
 	}
 }
 
@@ -1637,6 +1933,28 @@ func (PlatformDeviceType) Values() []PlatformDeviceType {
 	}
 }
 
+type PropagateGatewayTags string
+
+// Enum values for PropagateGatewayTags
+const (
+	// Tags aren't propagated to managed infrastructure.
+	PropagateGatewayTagsNone PropagateGatewayTags = "NONE"
+	// Tags on the gateway are propagated to the infrastructure that the gateway
+	// manages.
+	PropagateGatewayTagsGateway PropagateGatewayTags = "GATEWAY"
+)
+
+// Values returns all known values for PropagateGatewayTags. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PropagateGatewayTags) Values() []PropagateGatewayTags {
+	return []PropagateGatewayTags{
+		"NONE",
+		"GATEWAY",
+	}
+}
+
 type PropagateMITags string
 
 // Enum values for PropagateMITags
@@ -1806,6 +2124,26 @@ func (ServiceConnectAccessLoggingFormat) Values() []ServiceConnectAccessLoggingF
 	return []ServiceConnectAccessLoggingFormat{
 		"TEXT",
 		"JSON",
+	}
+}
+
+type ServiceConnectContainerLogLevel string
+
+// Enum values for ServiceConnectContainerLogLevel
+const (
+	ServiceConnectContainerLogLevelDebug ServiceConnectContainerLogLevel = "debug"
+	ServiceConnectContainerLogLevelInfo  ServiceConnectContainerLogLevel = "info"
+)
+
+// Values returns all known values for ServiceConnectContainerLogLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceConnectContainerLogLevel) Values() []ServiceConnectContainerLogLevel {
+	return []ServiceConnectContainerLogLevel{
+		"debug",
+		"info",
 	}
 }
 

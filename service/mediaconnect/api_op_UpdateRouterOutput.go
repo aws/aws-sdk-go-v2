@@ -88,13 +88,17 @@ func (v *UpdateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateRouterOutputRequest_Arn, *v.Arn)
 	}
-	serializeRouterOutputConfiguration(s, schemas.UpdateRouterOutputRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterOutputConfiguration(s, schemas.UpdateRouterOutputRequest_Configuration, v.Configuration)
+	}
 	if v.FabricConfiguration != nil {
 		s.WriteStruct(schemas.UpdateRouterOutputRequest_FabricConfiguration)
 		v.FabricConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMaintenanceConfiguration(s, schemas.UpdateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.UpdateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.UpdateRouterOutputRequest_MaximumBitrate, *v.MaximumBitrate)
 	}

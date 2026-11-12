@@ -4,6 +4,8 @@ package mediapackagev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type PutChannelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutChannelPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutChannelPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutChannelPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.PutChannelPolicyRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.PutChannelPolicyRequest_ChannelName, *v.ChannelName)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutChannelPolicyRequest_Policy, *v.Policy)
+	}
+}
+
 type PutChannelPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +75,26 @@ type PutChannelPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutChannelPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutChannelPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutChannelPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutChannelPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutChannelPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutChannelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutChannelPolicy, schemas.PutChannelPolicyRequest, schemas.PutChannelPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutChannelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutChannelPolicy, schemas.PutChannelPolicyRequest, schemas.PutChannelPolicyResponse), output: &PutChannelPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

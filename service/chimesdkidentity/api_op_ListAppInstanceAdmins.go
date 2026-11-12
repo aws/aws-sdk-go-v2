@@ -87,7 +87,9 @@ func (v *ListAppInstanceAdminsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppInstanceAdminsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppInstanceAdminList(s, schemas.ListAppInstanceAdminsResponse_AppInstanceAdmins, v.AppInstanceAdmins)
+	if v.AppInstanceAdmins != nil {
+		serializeAppInstanceAdminList(s, schemas.ListAppInstanceAdminsResponse_AppInstanceAdmins, v.AppInstanceAdmins)
+	}
 	if v.AppInstanceArn != nil {
 		s.WriteString(schemas.ListAppInstanceAdminsResponse_AppInstanceArn, *v.AppInstanceArn)
 	}

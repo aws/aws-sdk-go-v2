@@ -87,7 +87,9 @@ func (v *ListImpersonationRolesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImpersonationRolesResponse_NextToken, *v.NextToken)
 	}
-	serializeImpersonationRoleList(s, schemas.ListImpersonationRolesResponse_Roles, v.Roles)
+	if v.Roles != nil {
+		serializeImpersonationRoleList(s, schemas.ListImpersonationRolesResponse_Roles, v.Roles)
+	}
 }
 func (v *ListImpersonationRolesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListImpersonationRolesResponse, func(s *smithy.Schema) error {

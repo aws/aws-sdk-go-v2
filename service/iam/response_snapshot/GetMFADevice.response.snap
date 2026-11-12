@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetMFADeviceResponse><GetMFADeviceResult><Certifications><entry><key>key0</key><value>__Value__</value></entry></Certifications><EnableDate>2000-01-01T00:00:00Z</EnableDate><SerialNumber>__SerialNumber__</SerialNumber><UserName>__UserName__</UserName></GetMFADeviceResult></GetMFADeviceResponse>

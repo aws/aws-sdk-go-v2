@@ -84,7 +84,9 @@ func (v *DescribeAccountAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAccountAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountAttributeList(s, schemas.DescribeAccountAttributesResult_AccountAttributes, v.AccountAttributes)
+	if v.AccountAttributes != nil {
+		serializeAccountAttributeList(s, schemas.DescribeAccountAttributesResult_AccountAttributes, v.AccountAttributes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAccountAttributesResult_NextToken, *v.NextToken)
 	}

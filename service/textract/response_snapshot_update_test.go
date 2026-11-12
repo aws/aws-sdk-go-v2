@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -278,7 +278,7 @@ func TestUpdateResponseSnapshot_AnalyzeDocument(t *testing.T) {
 		},
 		AnalyzeDocumentModelVersion: ptr.String("__AnalyzeDocumentModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.AnalyzeDocumentResponse, schemas.AnalyzeDocumentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2076,7 +2076,7 @@ func TestUpdateResponseSnapshot_AnalyzeExpense(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeExpense, schemas.AnalyzeExpenseResponse, schemas.AnalyzeExpenseResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2431,7 +2431,7 @@ func TestUpdateResponseSnapshot_AnalyzeID(t *testing.T) {
 		},
 		AnalyzeIDModelVersion: ptr.String("__AnalyzeIDModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeID, schemas.AnalyzeIDResponse, schemas.AnalyzeIDResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2455,7 +2455,7 @@ func TestUpdateResponseSnapshot_CreateAdapter(t *testing.T) {
 	want := &CreateAdapterOutput{
 		AdapterId: ptr.String("__AdapterId__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapter, schemas.CreateAdapterResponse, schemas.CreateAdapterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2480,7 +2480,7 @@ func TestUpdateResponseSnapshot_CreateAdapterVersion(t *testing.T) {
 		AdapterId:      ptr.String("__AdapterId__"),
 		AdapterVersion: ptr.String("__AdapterVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapterVersion, schemas.CreateAdapterVersionResponse, schemas.CreateAdapterVersionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2502,7 +2502,7 @@ func TestUpdateResponseSnapshot_CreateAdapterVersion(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteAdapter(t *testing.T) {
 	want := &DeleteAdapterOutput{}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteAdapter, schemas.DeleteAdapterResponse, schemas.DeleteAdapterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2524,7 +2524,7 @@ func TestUpdateResponseSnapshot_DeleteAdapter(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteAdapterVersion(t *testing.T) {
 	want := &DeleteAdapterVersionOutput{}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteAdapterVersion, schemas.DeleteAdapterVersionResponse, schemas.DeleteAdapterVersionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2673,7 +2673,7 @@ func TestUpdateResponseSnapshot_DetectDocumentText(t *testing.T) {
 		},
 		DetectDocumentTextModelVersion: ptr.String("__DetectDocumentTextModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.DetectDocumentText, schemas.DetectDocumentTextResponse, schemas.DetectDocumentTextResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2708,7 +2708,7 @@ func TestUpdateResponseSnapshot_GetAdapter(t *testing.T) {
 			"key0": "__Value__",
 		},
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetAdapter, schemas.GetAdapterResponse, schemas.GetAdapterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2783,7 +2783,7 @@ func TestUpdateResponseSnapshot_GetAdapterVersion(t *testing.T) {
 			"key0": "__Value__",
 		},
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetAdapterVersion, schemas.GetAdapterVersionResponse, schemas.GetAdapterVersionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2951,7 +2951,7 @@ func TestUpdateResponseSnapshot_GetDocumentAnalysis(t *testing.T) {
 		StatusMessage:               ptr.String("__StatusMessage__"),
 		AnalyzeDocumentModelVersion: ptr.String("__AnalyzeDocumentModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetDocumentAnalysis, schemas.GetDocumentAnalysisResponse, schemas.GetDocumentAnalysisResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3119,7 +3119,7 @@ func TestUpdateResponseSnapshot_GetDocumentTextDetection(t *testing.T) {
 		StatusMessage:                  ptr.String("__StatusMessage__"),
 		DetectDocumentTextModelVersion: ptr.String("__DetectDocumentTextModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetDocumentTextDetection, schemas.GetDocumentTextDetectionResponse, schemas.GetDocumentTextDetectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4937,7 +4937,7 @@ func TestUpdateResponseSnapshot_GetExpenseAnalysis(t *testing.T) {
 		StatusMessage:              ptr.String("__StatusMessage__"),
 		AnalyzeExpenseModelVersion: ptr.String("__AnalyzeExpenseModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetExpenseAnalysis, schemas.GetExpenseAnalysisResponse, schemas.GetExpenseAnalysisResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10055,7 +10055,7 @@ func TestUpdateResponseSnapshot_GetLendingAnalysis(t *testing.T) {
 		StatusMessage:              ptr.String("__StatusMessage__"),
 		AnalyzeLendingModelVersion: ptr.String("__AnalyzeLendingModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetLendingAnalysis, schemas.GetLendingAnalysisResponse, schemas.GetLendingAnalysisResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10178,7 +10178,7 @@ func TestUpdateResponseSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 		StatusMessage:              ptr.String("__StatusMessage__"),
 		AnalyzeLendingModelVersion: ptr.String("__AnalyzeLendingModelVersion__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetLendingAnalysisSummary, schemas.GetLendingAnalysisSummaryResponse, schemas.GetLendingAnalysisSummaryResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10226,7 +10226,7 @@ func TestUpdateResponseSnapshot_ListAdapterVersions(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.ListAdapterVersions, schemas.ListAdapterVersionsResponse, schemas.ListAdapterVersionsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10270,7 +10270,7 @@ func TestUpdateResponseSnapshot_ListAdapters(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.ListAdapters, schemas.ListAdaptersResponse, schemas.ListAdaptersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10296,7 +10296,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 			"key0": "__Value__",
 		},
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10320,7 +10320,7 @@ func TestUpdateResponseSnapshot_StartDocumentAnalysis(t *testing.T) {
 	want := &StartDocumentAnalysisOutput{
 		JobId: ptr.String("__JobId__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.StartDocumentAnalysis, schemas.StartDocumentAnalysisResponse, schemas.StartDocumentAnalysisResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10344,7 +10344,7 @@ func TestUpdateResponseSnapshot_StartDocumentTextDetection(t *testing.T) {
 	want := &StartDocumentTextDetectionOutput{
 		JobId: ptr.String("__JobId__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.StartDocumentTextDetection, schemas.StartDocumentTextDetectionResponse, schemas.StartDocumentTextDetectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10368,7 +10368,7 @@ func TestUpdateResponseSnapshot_StartExpenseAnalysis(t *testing.T) {
 	want := &StartExpenseAnalysisOutput{
 		JobId: ptr.String("__JobId__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.StartExpenseAnalysis, schemas.StartExpenseAnalysisResponse, schemas.StartExpenseAnalysisResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10392,7 +10392,7 @@ func TestUpdateResponseSnapshot_StartLendingAnalysis(t *testing.T) {
 	want := &StartLendingAnalysisOutput{
 		JobId: ptr.String("__JobId__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.StartLendingAnalysis, schemas.StartLendingAnalysisResponse, schemas.StartLendingAnalysisResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10414,7 +10414,7 @@ func TestUpdateResponseSnapshot_StartLendingAnalysis(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10436,7 +10436,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10468,7 +10468,7 @@ func TestUpdateResponseSnapshot_UpdateAdapter(t *testing.T) {
 		},
 		AutoUpdate: types.AutoUpdate("ENABLED"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateAdapter, schemas.UpdateAdapterResponse, schemas.UpdateAdapterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10491,9 +10491,9 @@ func TestUpdateResponseSnapshot_UpdateAdapter(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("AccessDeniedException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10508,7 +10508,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10517,9 +10517,9 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 	want := &types.BadDocumentException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("BadDocumentException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.BadDocumentException, schemas.BadDocumentException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10534,7 +10534,7 @@ func TestUpdateResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("BadDocumentException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10543,9 +10543,9 @@ func TestUpdateResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ConflictException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapter, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10560,7 +10560,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10569,9 +10569,9 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_DocumentTooLargeException(t *testing.T) {
 	want := &types.DocumentTooLargeException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("DocumentTooLargeException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.DocumentTooLargeException, schemas.DocumentTooLargeException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10586,7 +10586,7 @@ func TestUpdateResponseSnapshot_Error_DocumentTooLargeException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DocumentTooLargeException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10598,9 +10598,9 @@ func TestUpdateResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing
 		QuotaCode:    ptr.String("__QuotaCode__"),
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Message:      ptr.String("__Message__"),
-		Code:         ptr.String("HumanLoopQuotaExceededException"),
+		Code:         ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.HumanLoopQuotaExceededException, schemas.HumanLoopQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10615,7 +10615,7 @@ func TestUpdateResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("HumanLoopQuotaExceededException.error", 402, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10624,9 +10624,9 @@ func TestUpdateResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing
 func TestUpdateResponseSnapshot_Error_IdempotentParameterMismatchException(t *testing.T) {
 	want := &types.IdempotentParameterMismatchException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("IdempotentParameterMismatchException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapter, schemas.IdempotentParameterMismatchException, schemas.IdempotentParameterMismatchException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10641,7 +10641,7 @@ func TestUpdateResponseSnapshot_Error_IdempotentParameterMismatchException(t *te
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("IdempotentParameterMismatchException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10650,9 +10650,9 @@ func TestUpdateResponseSnapshot_Error_IdempotentParameterMismatchException(t *te
 func TestUpdateResponseSnapshot_Error_InternalServerError(t *testing.T) {
 	want := &types.InternalServerError{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InternalServerError"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.InternalServerError, schemas.InternalServerError)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10667,7 +10667,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServerError.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10676,9 +10676,9 @@ func TestUpdateResponseSnapshot_Error_InternalServerError(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 	want := &types.InvalidJobIdException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidJobIdException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.GetDocumentAnalysis, schemas.InvalidJobIdException, schemas.InvalidJobIdException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10693,7 +10693,7 @@ func TestUpdateResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidJobIdException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10702,9 +10702,9 @@ func TestUpdateResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 	want := &types.InvalidKMSKeyException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidKMSKeyException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapterVersion, schemas.InvalidKMSKeyException, schemas.InvalidKMSKeyException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10719,7 +10719,7 @@ func TestUpdateResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidKMSKeyException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10728,9 +10728,9 @@ func TestUpdateResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidParameterException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.InvalidParameterException, schemas.InvalidParameterException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10745,7 +10745,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10754,9 +10754,9 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 	want := &types.InvalidS3ObjectException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("InvalidS3ObjectException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.InvalidS3ObjectException, schemas.InvalidS3ObjectException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10771,7 +10771,7 @@ func TestUpdateResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidS3ObjectException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10780,9 +10780,9 @@ func TestUpdateResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("LimitExceededException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapter, schemas.LimitExceededException, schemas.LimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10797,7 +10797,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10806,9 +10806,9 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_ProvisionedThroughputExceededException(t *testing.T) {
 	want := &types.ProvisionedThroughputExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ProvisionedThroughputExceededException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.ProvisionedThroughputExceededException, schemas.ProvisionedThroughputExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10823,7 +10823,7 @@ func TestUpdateResponseSnapshot_Error_ProvisionedThroughputExceededException(t *
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ProvisionedThroughputExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10832,9 +10832,9 @@ func TestUpdateResponseSnapshot_Error_ProvisionedThroughputExceededException(t *
 func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ResourceNotFoundException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapterVersion, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10849,7 +10849,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10858,9 +10858,9 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
 	want := &types.ServiceQuotaExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ServiceQuotaExceededException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapter, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10875,7 +10875,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceQuotaExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10884,9 +10884,9 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ThrottlingException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10901,7 +10901,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ThrottlingException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10910,9 +10910,9 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T) {
 	want := &types.UnsupportedDocumentException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("UnsupportedDocumentException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.UnsupportedDocumentException, schemas.UnsupportedDocumentException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10927,7 +10927,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedDocumentException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -10936,9 +10936,9 @@ func TestUpdateResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T)
 func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("ValidationException"),
+		Code:    ptr.String("__Code__"),
 	}
-	proto := awsjson.New11(schemas.Textract)
+	proto := rpcv2.NewCBOR(schemas.Textract)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAdapter, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -10953,7 +10953,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

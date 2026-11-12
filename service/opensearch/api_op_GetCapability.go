@@ -95,11 +95,15 @@ func (v *GetCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.GetCapabilityResponse_applicationId, *v.ApplicationId)
 	}
-	serializeCapabilityExtendedResponseConfig(s, schemas.GetCapabilityResponse_capabilityConfig, v.CapabilityConfig)
+	if v.CapabilityConfig != nil {
+		serializeCapabilityExtendedResponseConfig(s, schemas.GetCapabilityResponse_capabilityConfig, v.CapabilityConfig)
+	}
 	if v.CapabilityName != nil {
 		s.WriteString(schemas.GetCapabilityResponse_capabilityName, *v.CapabilityName)
 	}
-	serializeCapabilityFailures(s, schemas.GetCapabilityResponse_failures, v.Failures)
+	if v.Failures != nil {
+		serializeCapabilityFailures(s, schemas.GetCapabilityResponse_failures, v.Failures)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetCapabilityResponse_status, string(v.Status))
 	}

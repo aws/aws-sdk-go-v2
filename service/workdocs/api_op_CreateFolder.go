@@ -4,7 +4,9 @@ package workdocs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type CreateFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.CreateFolderRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFolderRequest_Name, *v.Name)
+	}
+	if v.ParentFolderId != nil {
+		s.WriteString(schemas.CreateFolderRequest_ParentFolderId, *v.ParentFolderId)
+	}
+}
+
 type CreateFolderOutput struct {
 
 	// The metadata of the folder.
@@ -52,13 +72,34 @@ type CreateFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFolderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.CreateFolderResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFolderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFolderResponse_Metadata:
+			v.Metadata = &types.FolderMetadata{}
+			return v.Metadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFolder, schemas.CreateFolderRequest, schemas.CreateFolderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFolder, schemas.CreateFolderRequest, schemas.CreateFolderResponse), output: &CreateFolderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

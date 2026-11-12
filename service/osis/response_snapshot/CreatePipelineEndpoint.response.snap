@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EndpointId":"__EndpointId__","PipelineArn":"__PipelineArn__","Status":"CREATING","VpcId":"__VpcId__"}

@@ -72,7 +72,9 @@ func (v *DeleteTaskDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteTaskDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DeleteTaskDefinitionsRequest_taskDefinitions, v.TaskDefinitions)
+	if v.TaskDefinitions != nil {
+		serializeStringList(s, schemas.DeleteTaskDefinitionsRequest_taskDefinitions, v.TaskDefinitions)
+	}
 }
 
 type DeleteTaskDefinitionsOutput struct {
@@ -96,8 +98,12 @@ func (v *DeleteTaskDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteTaskDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.DeleteTaskDefinitionsResponse_failures, v.Failures)
-	serializeTaskDefinitionList(s, schemas.DeleteTaskDefinitionsResponse_taskDefinitions, v.TaskDefinitions)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.DeleteTaskDefinitionsResponse_failures, v.Failures)
+	}
+	if v.TaskDefinitions != nil {
+		serializeTaskDefinitionList(s, schemas.DeleteTaskDefinitionsResponse_taskDefinitions, v.TaskDefinitions)
+	}
 }
 func (v *DeleteTaskDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteTaskDefinitionsResponse, func(s *smithy.Schema) error {

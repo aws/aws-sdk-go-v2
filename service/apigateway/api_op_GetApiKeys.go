@@ -101,11 +101,15 @@ func (v *GetApiKeysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetApiKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfApiKey(s, schemas.ApiKeys_items, v.Items)
+	if v.Items != nil {
+		serializeListOfApiKey(s, schemas.ApiKeys_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.ApiKeys_position, *v.Position)
 	}
-	serializeListOfString(s, schemas.ApiKeys_warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeListOfString(s, schemas.ApiKeys_warnings, v.Warnings)
+	}
 }
 func (v *GetApiKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApiKeys, func(s *smithy.Schema) error {

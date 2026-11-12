@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"findingsEscalated":1,"findingsEscalatedFalsePositive":1,"findingsEscalatedInProgress":1,"findingsIngestedGuardDuty":1,"findingsIngestedSecurityHub":1,"findingsInvestigated":1,"findingsInvestigatedFalsePositive":1,"findingsInvestigatedInProgress":1,"findingsTriaged":1,"findingsTriagedFalsePositive":1,"findingsTruePositive":1}

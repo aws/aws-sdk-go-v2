@@ -54,8 +54,12 @@ func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppConfigs(s, schemas.UpdateApplicationRequest_appConfigs, v.AppConfigs)
-	serializeDataSources(s, schemas.UpdateApplicationRequest_dataSources, v.DataSources)
+	if v.AppConfigs != nil {
+		serializeAppConfigs(s, schemas.UpdateApplicationRequest_appConfigs, v.AppConfigs)
+	}
+	if v.DataSources != nil {
+		serializeDataSources(s, schemas.UpdateApplicationRequest_dataSources, v.DataSources)
+	}
 	if v.IamIdentityCenterOptions != nil {
 		s.WriteStruct(schemas.UpdateApplicationRequest_iamIdentityCenterOptions)
 		v.IamIdentityCenterOptions.SerializeMembers(s)
@@ -108,14 +112,18 @@ func (v *UpdateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppConfigs(s, schemas.UpdateApplicationResponse_appConfigs, v.AppConfigs)
+	if v.AppConfigs != nil {
+		serializeAppConfigs(s, schemas.UpdateApplicationResponse_appConfigs, v.AppConfigs)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateApplicationResponse_arn, *v.Arn)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateApplicationResponse_createdAt, *v.CreatedAt)
 	}
-	serializeDataSources(s, schemas.UpdateApplicationResponse_dataSources, v.DataSources)
+	if v.DataSources != nil {
+		serializeDataSources(s, schemas.UpdateApplicationResponse_dataSources, v.DataSources)
+	}
 	if v.IamIdentityCenterOptions != nil {
 		s.WriteStruct(schemas.UpdateApplicationResponse_iamIdentityCenterOptions)
 		v.IamIdentityCenterOptions.SerializeMembers(s)

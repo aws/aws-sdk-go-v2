@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobs":[{"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","entityType":"VOCABULARY","jobArn":"__JobArn__","jobStatus":"IN_PROGRESS","operationType":"UPSERT"},{"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","entityType":"VOCABULARY","jobArn":"__JobArn__","jobStatus":"IN_PROGRESS","operationType":"UPSERT"}],"nextToken":"__NextToken__"}

@@ -4,6 +4,8 @@ package chatbot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteMicrosoftTeamsUserIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrosoftTeamsUserIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMicrosoftTeamsUserIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrosoftTeamsUserIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatConfigurationArn != nil {
+		s.WriteString(schemas.DeleteMicrosoftTeamsUserIdentityRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DeleteMicrosoftTeamsUserIdentityRequest_UserId, *v.UserId)
+	}
+}
+
 type DeleteMicrosoftTeamsUserIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteMicrosoftTeamsUserIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrosoftTeamsUserIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMicrosoftTeamsUserIdentityResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrosoftTeamsUserIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMicrosoftTeamsUserIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMicrosoftTeamsUserIdentityResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMicrosoftTeamsUserIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMicrosoftTeamsUserIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrosoftTeamsUserIdentity, schemas.DeleteMicrosoftTeamsUserIdentityRequest, schemas.DeleteMicrosoftTeamsUserIdentityResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMicrosoftTeamsUserIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrosoftTeamsUserIdentity, schemas.DeleteMicrosoftTeamsUserIdentityRequest, schemas.DeleteMicrosoftTeamsUserIdentityResult), output: &DeleteMicrosoftTeamsUserIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","cacheBehavior":"CACHE_ON_FAILURE","cacheS3Uri":"__CacheS3Uri__","creationTime":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","status":"ACTIVE"},{"arn":"__Arn__","cacheBehavior":"CACHE_ON_FAILURE","cacheS3Uri":"__CacheS3Uri__","creationTime":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","status":"ACTIVE"}],"nextToken":"__NextToken__"}

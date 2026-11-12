@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,24 @@ type StartProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProjectVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProjectVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProjectVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxInferenceUnits != nil {
+		s.WriteInt32(schemas.StartProjectVersionRequest_MaxInferenceUnits, *v.MaxInferenceUnits)
+	}
+	if v.MinInferenceUnits != nil {
+		s.WriteInt32(schemas.StartProjectVersionRequest_MinInferenceUnits, *v.MinInferenceUnits)
+	}
+	if v.ProjectVersionArn != nil {
+		s.WriteString(schemas.StartProjectVersionRequest_ProjectVersionArn, *v.ProjectVersionArn)
+	}
+}
+
 type StartProjectVersionOutput struct {
 
 	// The current running status of the model.
@@ -71,13 +91,36 @@ type StartProjectVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProjectVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProjectVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProjectVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.StartProjectVersionResponse_Status, string(v.Status))
+	}
+}
+func (v *StartProjectVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProjectVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProjectVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartProjectVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProjectVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProjectVersion, schemas.StartProjectVersionRequest, schemas.StartProjectVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProjectVersion, schemas.StartProjectVersionRequest, schemas.StartProjectVersionResponse), output: &StartProjectVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

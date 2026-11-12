@@ -4,7 +4,9 @@ package trustedadvisor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetOrganizationRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationRecommendationIdentifier != nil {
+		s.WriteString(schemas.GetOrganizationRecommendationRequest_organizationRecommendationIdentifier, *v.OrganizationRecommendationIdentifier)
+	}
+}
+
 type GetOrganizationRecommendationOutput struct {
 
 	// The Recommendation
@@ -47,13 +61,34 @@ type GetOrganizationRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationRecommendation != nil {
+		s.WriteStruct(schemas.GetOrganizationRecommendationResponse_organizationRecommendation)
+		v.OrganizationRecommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOrganizationRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOrganizationRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOrganizationRecommendationResponse_organizationRecommendation:
+			v.OrganizationRecommendation = &types.OrganizationRecommendation{}
+			return v.OrganizationRecommendation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOrganizationRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOrganizationRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationRecommendation, schemas.GetOrganizationRecommendationRequest, schemas.GetOrganizationRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOrganizationRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationRecommendation, schemas.GetOrganizationRecommendationRequest, schemas.GetOrganizationRecommendationResponse), output: &GetOrganizationRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

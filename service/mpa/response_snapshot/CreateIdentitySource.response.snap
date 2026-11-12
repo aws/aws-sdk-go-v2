@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreationTime":"2000-01-01T00:00:00Z","IdentitySourceArn":"__IdentitySourceArn__","IdentitySourceType":"IAM_IDENTITY_CENTER"}

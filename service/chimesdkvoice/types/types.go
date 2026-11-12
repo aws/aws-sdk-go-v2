@@ -372,7 +372,9 @@ func (v *EmergencyCallingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EmergencyCallingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDNISEmergencyCallingConfigurationList(s, schemas.EmergencyCallingConfiguration_DNIS, v.DNIS)
+	if v.DNIS != nil {
+		serializeDNISEmergencyCallingConfigurationList(s, schemas.EmergencyCallingConfiguration_DNIS, v.DNIS)
+	}
 }
 func (v *EmergencyCallingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmergencyCallingConfiguration, func(s *smithy.Schema) error {
@@ -404,8 +406,12 @@ func (v *ExternalSystemsConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExternalSystemsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactCenterSystemTypeList(s, schemas.ExternalSystemsConfiguration_ContactCenterSystemTypes, v.ContactCenterSystemTypes)
-	serializeSessionBorderControllerTypeList(s, schemas.ExternalSystemsConfiguration_SessionBorderControllerTypes, v.SessionBorderControllerTypes)
+	if v.ContactCenterSystemTypes != nil {
+		serializeContactCenterSystemTypeList(s, schemas.ExternalSystemsConfiguration_ContactCenterSystemTypes, v.ContactCenterSystemTypes)
+	}
+	if v.SessionBorderControllerTypes != nil {
+		serializeSessionBorderControllerTypeList(s, schemas.ExternalSystemsConfiguration_SessionBorderControllerTypes, v.SessionBorderControllerTypes)
+	}
 }
 func (v *ExternalSystemsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExternalSystemsConfiguration, func(s *smithy.Schema) error {
@@ -617,7 +623,9 @@ func (v *Origination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Disabled != nil {
 		s.WriteBool(schemas.Origination_Disabled, *v.Disabled)
 	}
-	serializeOriginationRouteList(s, schemas.Origination_Routes, v.Routes)
+	if v.Routes != nil {
+		serializeOriginationRouteList(s, schemas.Origination_Routes, v.Routes)
+	}
 }
 func (v *Origination) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Origination, func(s *smithy.Schema) error {
@@ -811,7 +819,9 @@ func (v *PhoneNumber) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PhoneNumber) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhoneNumberAssociationList(s, schemas.PhoneNumber_Associations, v.Associations)
+	if v.Associations != nil {
+		serializePhoneNumberAssociationList(s, schemas.PhoneNumber_Associations, v.Associations)
+	}
 	if v.CallingName != nil {
 		s.WriteString(schemas.PhoneNumber_CallingName, *v.CallingName)
 	}
@@ -1085,7 +1095,9 @@ func (v *PhoneNumberCountry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CountryCode != nil {
 		s.WriteString(schemas.PhoneNumberCountry_CountryCode, *v.CountryCode)
 	}
-	serializePhoneNumberTypeList(s, schemas.PhoneNumberCountry_SupportedPhoneNumberTypes, v.SupportedPhoneNumberTypes)
+	if v.SupportedPhoneNumberTypes != nil {
+		serializePhoneNumberTypeList(s, schemas.PhoneNumberCountry_SupportedPhoneNumberTypes, v.SupportedPhoneNumberTypes)
+	}
 }
 func (v *PhoneNumberCountry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PhoneNumberCountry, func(s *smithy.Schema) error {
@@ -1203,7 +1215,9 @@ func (v *PhoneNumberOrder) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OrderType != "" {
 		s.WriteString(schemas.PhoneNumberOrder_OrderType, string(v.OrderType))
 	}
-	serializeOrderedPhoneNumberList(s, schemas.PhoneNumberOrder_OrderedPhoneNumbers, v.OrderedPhoneNumbers)
+	if v.OrderedPhoneNumbers != nil {
+		serializeOrderedPhoneNumberList(s, schemas.PhoneNumberOrder_OrderedPhoneNumbers, v.OrderedPhoneNumbers)
+	}
 	if v.PhoneNumberOrderId != nil {
 		s.WriteString(schemas.PhoneNumberOrder_PhoneNumberOrderId, *v.PhoneNumberOrderId)
 	}
@@ -1295,7 +1309,9 @@ func (v *Proxy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FallBackPhoneNumber != nil {
 		s.WriteString(schemas.Proxy_FallBackPhoneNumber, *v.FallBackPhoneNumber)
 	}
-	serializeStringList(s, schemas.Proxy_PhoneNumberCountries, v.PhoneNumberCountries)
+	if v.PhoneNumberCountries != nil {
+		serializeStringList(s, schemas.Proxy_PhoneNumberCountries, v.PhoneNumberCountries)
+	}
 }
 func (v *Proxy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Proxy, func(s *smithy.Schema) error {
@@ -1370,7 +1386,9 @@ func (v *ProxySession) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProxySession) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityList(s, schemas.ProxySession_Capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeCapabilityList(s, schemas.ProxySession_Capabilities, v.Capabilities)
+	}
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.ProxySession_CreatedTimestamp, *v.CreatedTimestamp)
 	}
@@ -1394,7 +1412,9 @@ func (v *ProxySession) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberSelectionBehavior != "" {
 		s.WriteString(schemas.ProxySession_NumberSelectionBehavior, string(v.NumberSelectionBehavior))
 	}
-	serializeParticipants(s, schemas.ProxySession_Participants, v.Participants)
+	if v.Participants != nil {
+		serializeParticipants(s, schemas.ProxySession_Participants, v.Participants)
+	}
 	if v.ProxySessionId != nil {
 		s.WriteString(schemas.ProxySession_ProxySessionId, *v.ProxySessionId)
 	}
@@ -1544,7 +1564,9 @@ func (v *SipMediaApplication) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.SipMediaApplication_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeSipMediaApplicationEndpointList(s, schemas.SipMediaApplication_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeSipMediaApplicationEndpointList(s, schemas.SipMediaApplication_Endpoints, v.Endpoints)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SipMediaApplication_Name, *v.Name)
 	}
@@ -1614,7 +1636,9 @@ func (v *SipMediaApplicationAlexaSkillConfiguration) Serialize(s smithy.ShapeSer
 }
 
 func (v *SipMediaApplicationAlexaSkillConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlexaSkillIdList(s, schemas.SipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds, v.AlexaSkillIds)
+	if v.AlexaSkillIds != nil {
+		serializeAlexaSkillIdList(s, schemas.SipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds, v.AlexaSkillIds)
+	}
 	if v.AlexaSkillStatus != "" {
 		s.WriteString(schemas.SipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus, string(v.AlexaSkillStatus))
 	}
@@ -1785,7 +1809,9 @@ func (v *SipRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SipRuleId != nil {
 		s.WriteString(schemas.SipRule_SipRuleId, *v.SipRuleId)
 	}
-	serializeSipRuleTargetApplicationList(s, schemas.SipRule_TargetApplications, v.TargetApplications)
+	if v.TargetApplications != nil {
+		serializeSipRuleTargetApplicationList(s, schemas.SipRule_TargetApplications, v.TargetApplications)
+	}
 	if v.TriggerType != "" {
 		s.WriteString(schemas.SipRule_TriggerType, string(v.TriggerType))
 	}
@@ -1902,7 +1928,9 @@ func (v *SpeakerSearchDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SpeakerSearchDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSpeakerSearchResultList(s, schemas.SpeakerSearchDetails_Results, v.Results)
+	if v.Results != nil {
+		serializeSpeakerSearchResultList(s, schemas.SpeakerSearchDetails_Results, v.Results)
+	}
 	if v.VoiceprintGenerationStatus != nil {
 		s.WriteString(schemas.SpeakerSearchDetails_VoiceprintGenerationStatus, *v.VoiceprintGenerationStatus)
 	}
@@ -2101,7 +2129,9 @@ func (v *StreamingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MediaInsightsConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStreamingNotificationTargetList(s, schemas.StreamingConfiguration_StreamingNotificationTargets, v.StreamingNotificationTargets)
+	if v.StreamingNotificationTargets != nil {
+		serializeStreamingNotificationTargetList(s, schemas.StreamingConfiguration_StreamingNotificationTargets, v.StreamingNotificationTargets)
+	}
 }
 func (v *StreamingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StreamingConfiguration, func(s *smithy.Schema) error {
@@ -2232,8 +2262,12 @@ func (v *Termination) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Termination) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCallingRegionList(s, schemas.Termination_CallingRegions, v.CallingRegions)
-	serializeStringList(s, schemas.Termination_CidrAllowedList, v.CidrAllowedList)
+	if v.CallingRegions != nil {
+		serializeCallingRegionList(s, schemas.Termination_CallingRegions, v.CallingRegions)
+	}
+	if v.CidrAllowedList != nil {
+		serializeStringList(s, schemas.Termination_CidrAllowedList, v.CidrAllowedList)
+	}
 	if v.CpsLimit != nil {
 		s.WriteInt32(schemas.Termination_CpsLimit, *v.CpsLimit)
 	}
@@ -2549,7 +2583,9 @@ func (v *VoiceConnectorGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.VoiceConnectorGroupId != nil {
 		s.WriteString(schemas.VoiceConnectorGroup_VoiceConnectorGroupId, *v.VoiceConnectorGroupId)
 	}
-	serializeVoiceConnectorItemList(s, schemas.VoiceConnectorGroup_VoiceConnectorItems, v.VoiceConnectorItems)
+	if v.VoiceConnectorItems != nil {
+		serializeVoiceConnectorItemList(s, schemas.VoiceConnectorGroup_VoiceConnectorItems, v.VoiceConnectorItems)
+	}
 }
 func (v *VoiceConnectorGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VoiceConnectorGroup, func(s *smithy.Schema) error {

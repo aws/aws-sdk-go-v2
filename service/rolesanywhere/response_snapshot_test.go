@@ -209,9 +209,10 @@ func TestCheckResponseSnapshot_CreateTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -246,7 +247,8 @@ func TestCheckResponseSnapshot_CreateTrustAnchor(t *testing.T) {
 				Value: "__SourceDataMemberX509CertificateData__",
 			},
 		},
-		Enabled: ptr.Bool(true),
+		Enabled:                ptr.Bool(true),
+		CrlDpRevocationEnabled: ptr.Bool(true),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -463,9 +465,10 @@ func TestCheckResponseSnapshot_DeleteTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -614,9 +617,10 @@ func TestCheckResponseSnapshot_DisableTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -765,9 +769,10 @@ func TestCheckResponseSnapshot_EnableTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -981,9 +986,10 @@ func TestCheckResponseSnapshot_GetTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1318,9 +1324,10 @@ func TestCheckResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						Value: "__SourceDataMemberX509CertificateData__",
 					},
 				},
-				Enabled:   ptr.Bool(true),
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Enabled:                ptr.Bool(true),
+				CrlDpRevocationEnabled: ptr.Bool(true),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				NotificationSettings: []types.NotificationSettingDetail{
 					{
 						Enabled:      ptr.Bool(true),
@@ -1348,9 +1355,10 @@ func TestCheckResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						Value: "__SourceDataMemberX509CertificateData__",
 					},
 				},
-				Enabled:   ptr.Bool(true),
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Enabled:                ptr.Bool(true),
+				CrlDpRevocationEnabled: ptr.Bool(true),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				NotificationSettings: []types.NotificationSettingDetail{
 					{
 						Enabled:      ptr.Bool(true),
@@ -1478,9 +1486,10 @@ func TestCheckResponseSnapshot_PutNotificationSettings(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1544,9 +1553,10 @@ func TestCheckResponseSnapshot_ResetNotificationSettings(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1775,9 +1785,10 @@ func TestCheckResponseSnapshot_UpdateTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1813,6 +1824,7 @@ func TestCheckResponseSnapshot_UpdateTrustAnchor(t *testing.T) {
 				Value: "__SourceDataMemberX509CertificateData__",
 			},
 		},
+		CrlDpRevocationEnabled: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1901,6 +1913,57 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
+	want := &types.ServiceUnavailableException{
+		Message:           ptr.String("__Message__"),
+		RetryAfterSeconds: ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		Name:                      ptr.String("__Name__"),
+		RequireInstanceProperties: ptr.Bool(true),
+		SessionPolicy:             ptr.String("__SessionPolicy__"),
+		RoleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ManagedPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds: ptr.Int32(1),
+		Enabled:         ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AcceptRoleSessionName: ptr.Bool(true),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServiceUnavailableException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServiceUnavailableException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceUnavailableException.error", err)
 	}
 }
 

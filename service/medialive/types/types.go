@@ -764,7 +764,9 @@ func (v *AudioChannelMapping) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AudioChannelMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfInputChannelLevel(s, schemas.AudioChannelMapping_InputChannelLevels, v.InputChannelLevels)
+	if v.InputChannelLevels != nil {
+		serialize__listOfInputChannelLevel(s, schemas.AudioChannelMapping_InputChannelLevels, v.InputChannelLevels)
+	}
 	if v.OutputChannel != nil {
 		s.WriteInt32(schemas.AudioChannelMapping_OutputChannel, *v.OutputChannel)
 	}
@@ -956,7 +958,9 @@ func (v *AudioDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AudioDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDashRoleAudio(s, schemas.AudioDescription_AudioDashRoles, v.AudioDashRoles)
+	if v.AudioDashRoles != nil {
+		serialize__listOfDashRoleAudio(s, schemas.AudioDescription_AudioDashRoles, v.AudioDashRoles)
+	}
 	if v.AudioNormalizationSettings != nil {
 		s.WriteStruct(schemas.AudioDescription_AudioNormalizationSettings)
 		v.AudioNormalizationSettings.SerializeMembers(s)
@@ -1521,7 +1525,9 @@ func (v *AudioPidSelection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Pid != nil {
 		s.WriteInt32(schemas.AudioPidSelection_Pid, *v.Pid)
 	}
-	serialize__listOfAudioPid(s, schemas.AudioPidSelection_Pids, v.Pids)
+	if v.Pids != nil {
+		serialize__listOfAudioPid(s, schemas.AudioPidSelection_Pids, v.Pids)
+	}
 }
 func (v *AudioPidSelection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AudioPidSelection, func(s *smithy.Schema) error {
@@ -1833,7 +1839,9 @@ func (v *AudioTrackSelection) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DolbyEDecode.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfAudioTrack(s, schemas.AudioTrackSelection_Tracks, v.Tracks)
+	if v.Tracks != nil {
+		serialize__listOfAudioTrack(s, schemas.AudioTrackSelection_Tracks, v.Tracks)
+	}
 }
 func (v *AudioTrackSelection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AudioTrackSelection, func(s *smithy.Schema) error {
@@ -1881,6 +1889,33 @@ func (v *AudioWatermarkSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// System-managed filter selection. Resolves to the perceptual filter at strength
+// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+// enhanced_quality), and to no filter otherwise. An empty / undefined
+// filter_settings_choice is treated as "auto".
+//
+// Carries no body (extends EmptySettings, which sets additionalProperties:
+// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+type AutoFilterSettings struct {
+	noSmithyDocumentSerde
+}
+
+func (v *AutoFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AutoFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // The settings for Automatic Input Failover.
 type AutomaticInputFailoverSettings struct {
 
@@ -1917,7 +1952,9 @@ func (v *AutomaticInputFailoverSettings) SerializeMembers(s smithy.ShapeSerializ
 	if v.ErrorClearTimeMsec != nil {
 		s.WriteInt32(schemas.AutomaticInputFailoverSettings_ErrorClearTimeMsec, *v.ErrorClearTimeMsec)
 	}
-	serialize__listOfFailoverCondition(s, schemas.AutomaticInputFailoverSettings_FailoverConditions, v.FailoverConditions)
+	if v.FailoverConditions != nil {
+		serialize__listOfFailoverCondition(s, schemas.AutomaticInputFailoverSettings_FailoverConditions, v.FailoverConditions)
+	}
 	if v.InputPreference != "" {
 		s.WriteString(schemas.AutomaticInputFailoverSettings_InputPreference, string(v.InputPreference))
 	}
@@ -2025,6 +2062,72 @@ func (v *Av1ColorSpaceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Av1 Filter Settings
+type Av1FilterSettings struct {
+
+	// System-managed filter selection. Resolves to the perceptual filter at strength
+	// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+	// enhanced_quality), and to no filter otherwise. An empty / undefined
+	// filter_settings_choice is treated as "auto".
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	AutoFilterSettings *AutoFilterSettings
+
+	// Explicitly disables the video filter. This is the customer opt-out: a video
+	// description set to "none" never has a filter applied and is never overridden by
+	// the system-managed "auto" default.
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	NoneFilterSettings *NoneFilterSettings
+
+	// Perceptual Filter Settings
+	PerceptualFilterSettings *PerceptualFilterSettings
+
+	noSmithyDocumentSerde
+}
+
+func (v *Av1FilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Av1FilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Av1FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoFilterSettings != nil {
+		s.WriteStruct(schemas.Av1FilterSettings_AutoFilterSettings)
+		v.AutoFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoneFilterSettings != nil {
+		s.WriteStruct(schemas.Av1FilterSettings_NoneFilterSettings)
+		v.NoneFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerceptualFilterSettings != nil {
+		s.WriteStruct(schemas.Av1FilterSettings_PerceptualFilterSettings)
+		v.PerceptualFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Av1FilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Av1FilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Av1FilterSettings_AutoFilterSettings:
+			v.AutoFilterSettings = &AutoFilterSettings{}
+			return v.AutoFilterSettings.Deserialize(d)
+		case schemas.Av1FilterSettings_NoneFilterSettings:
+			v.NoneFilterSettings = &NoneFilterSettings{}
+			return v.NoneFilterSettings.Deserialize(d)
+		case schemas.Av1FilterSettings_PerceptualFilterSettings:
+			v.PerceptualFilterSettings = &PerceptualFilterSettings{}
+			return v.PerceptualFilterSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Av1 Settings
 type Av1Settings struct {
 
@@ -2060,6 +2163,9 @@ type Av1Settings struct {
 	// Specify the type of color space to apply or choose to pass through. The default
 	// is to pass through the color space that is in the source.
 	ColorSpaceSettings *Av1ColorSpaceSettings
+
+	// Optional filters that you can apply to an encode.
+	FilterSettings *Av1FilterSettings
 
 	// Complete this property only if you set the afdSignaling property to FIXED.
 	// Choose the AFD value (4 bits) to write on all frames of the video encode.
@@ -2187,6 +2293,11 @@ func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ColorSpaceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.FilterSettings != nil {
+		s.WriteStruct(schemas.Av1Settings_FilterSettings)
+		v.FilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.FixedAfd != "" {
 		s.WriteString(schemas.Av1Settings_FixedAfd, string(v.FixedAfd))
 	}
@@ -2273,6 +2384,9 @@ func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Av1Settings_ColorSpaceSettings:
 			v.ColorSpaceSettings = &Av1ColorSpaceSettings{}
 			return v.ColorSpaceSettings.Deserialize(d)
+		case schemas.Av1Settings_FilterSettings:
+			v.FilterSettings = &Av1FilterSettings{}
+			return v.FilterSettings.Deserialize(d)
 		case schemas.Av1Settings_FixedAfd:
 			var ev string
 			if err := d.ReadString(schemas.Av1Settings_FixedAfd, &ev); err != nil {
@@ -2667,7 +2781,9 @@ func (v *BatchScheduleActionCreateRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchScheduleActionCreateRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfScheduleAction(s, schemas.BatchScheduleActionCreateRequest_ScheduleActions, v.ScheduleActions)
+	if v.ScheduleActions != nil {
+		serialize__listOfScheduleAction(s, schemas.BatchScheduleActionCreateRequest_ScheduleActions, v.ScheduleActions)
+	}
 }
 func (v *BatchScheduleActionCreateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchScheduleActionCreateRequest, func(s *smithy.Schema) error {
@@ -2697,7 +2813,9 @@ func (v *BatchScheduleActionCreateResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchScheduleActionCreateResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfScheduleAction(s, schemas.BatchScheduleActionCreateResult_ScheduleActions, v.ScheduleActions)
+	if v.ScheduleActions != nil {
+		serialize__listOfScheduleAction(s, schemas.BatchScheduleActionCreateResult_ScheduleActions, v.ScheduleActions)
+	}
 }
 func (v *BatchScheduleActionCreateResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchScheduleActionCreateResult, func(s *smithy.Schema) error {
@@ -2727,7 +2845,9 @@ func (v *BatchScheduleActionDeleteRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchScheduleActionDeleteRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.BatchScheduleActionDeleteRequest_ActionNames, v.ActionNames)
+	if v.ActionNames != nil {
+		serialize__listOf__string(s, schemas.BatchScheduleActionDeleteRequest_ActionNames, v.ActionNames)
+	}
 }
 func (v *BatchScheduleActionDeleteRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchScheduleActionDeleteRequest, func(s *smithy.Schema) error {
@@ -2757,7 +2877,9 @@ func (v *BatchScheduleActionDeleteResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchScheduleActionDeleteResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfScheduleAction(s, schemas.BatchScheduleActionDeleteResult_ScheduleActions, v.ScheduleActions)
+	if v.ScheduleActions != nil {
+		serialize__listOfScheduleAction(s, schemas.BatchScheduleActionDeleteResult_ScheduleActions, v.ScheduleActions)
+	}
 }
 func (v *BatchScheduleActionDeleteResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchScheduleActionDeleteResult, func(s *smithy.Schema) error {
@@ -3223,7 +3345,9 @@ func (v *CaptionDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Accessibility != "" {
 		s.WriteString(schemas.CaptionDescription_Accessibility, string(v.Accessibility))
 	}
-	serialize__listOfDashRoleCaption(s, schemas.CaptionDescription_CaptionDashRoles, v.CaptionDashRoles)
+	if v.CaptionDashRoles != nil {
+		serialize__listOfDashRoleCaption(s, schemas.CaptionDescription_CaptionDashRoles, v.CaptionDashRoles)
+	}
 	if v.CaptionSelectorName != nil {
 		s.WriteString(schemas.CaptionDescription_CaptionSelectorName, *v.CaptionSelectorName)
 	}
@@ -3905,9 +4029,15 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChannelEngineVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.Channel_ChannelSecurityGroups, v.ChannelSecurityGroups)
-	serialize__listOfOutputDestination(s, schemas.Channel_Destinations, v.Destinations)
-	serialize__listOfChannelEgressEndpoint(s, schemas.Channel_EgressEndpoints, v.EgressEndpoints)
+	if v.ChannelSecurityGroups != nil {
+		serialize__listOf__string(s, schemas.Channel_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	}
+	if v.Destinations != nil {
+		serialize__listOfOutputDestination(s, schemas.Channel_Destinations, v.Destinations)
+	}
+	if v.EgressEndpoints != nil {
+		serialize__listOfChannelEgressEndpoint(s, schemas.Channel_EgressEndpoints, v.EgressEndpoints)
+	}
 	if v.EncoderSettings != nil {
 		s.WriteStruct(schemas.Channel_EncoderSettings)
 		v.EncoderSettings.SerializeMembers(s)
@@ -3921,7 +4051,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputAttachment(s, schemas.Channel_InputAttachments, v.InputAttachments)
+	if v.InputAttachments != nil {
+		serialize__listOfInputAttachment(s, schemas.Channel_InputAttachments, v.InputAttachments)
+	}
 	if v.InputSpecification != nil {
 		s.WriteStruct(schemas.Channel_InputSpecification)
 		v.InputSpecification.SerializeMembers(s)
@@ -3943,7 +4075,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Channel_Name, *v.Name)
 	}
-	serialize__listOfPipelineDetail(s, schemas.Channel_PipelineDetails, v.PipelineDetails)
+	if v.PipelineDetails != nil {
+		serialize__listOfPipelineDetail(s, schemas.Channel_PipelineDetails, v.PipelineDetails)
+	}
 	if v.PipelinesRunningCount != nil {
 		s.WriteInt32(schemas.Channel_PipelinesRunningCount, *v.PipelinesRunningCount)
 	}
@@ -3953,7 +4087,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Channel_State, string(v.State))
 	}
-	serializeTags(s, schemas.Channel_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Channel_Tags, v.Tags)
+	}
 	if v.Vpc != nil {
 		s.WriteStruct(schemas.Channel_Vpc)
 		v.Vpc.SerializeMembers(s)
@@ -4338,9 +4474,15 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChannelEngineVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.ChannelSummary_ChannelSecurityGroups, v.ChannelSecurityGroups)
-	serialize__listOfOutputDestination(s, schemas.ChannelSummary_Destinations, v.Destinations)
-	serialize__listOfChannelEgressEndpoint(s, schemas.ChannelSummary_EgressEndpoints, v.EgressEndpoints)
+	if v.ChannelSecurityGroups != nil {
+		serialize__listOf__string(s, schemas.ChannelSummary_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	}
+	if v.Destinations != nil {
+		serialize__listOfOutputDestination(s, schemas.ChannelSummary_Destinations, v.Destinations)
+	}
+	if v.EgressEndpoints != nil {
+		serialize__listOfChannelEgressEndpoint(s, schemas.ChannelSummary_EgressEndpoints, v.EgressEndpoints)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ChannelSummary_Id, *v.Id)
 	}
@@ -4349,7 +4491,9 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputAttachment(s, schemas.ChannelSummary_InputAttachments, v.InputAttachments)
+	if v.InputAttachments != nil {
+		serialize__listOfInputAttachment(s, schemas.ChannelSummary_InputAttachments, v.InputAttachments)
+	}
 	if v.InputSpecification != nil {
 		s.WriteStruct(schemas.ChannelSummary_InputSpecification)
 		v.InputSpecification.SerializeMembers(s)
@@ -4380,8 +4524,12 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.ChannelSummary_State, string(v.State))
 	}
-	serializeTags(s, schemas.ChannelSummary_Tags, v.Tags)
-	serialize__listOfChannelEngineVersionResponse(s, schemas.ChannelSummary_UsedChannelEngineVersions, v.UsedChannelEngineVersions)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ChannelSummary_Tags, v.Tags)
+	}
+	if v.UsedChannelEngineVersions != nil {
+		serialize__listOfChannelEngineVersionResponse(s, schemas.ChannelSummary_UsedChannelEngineVersions, v.UsedChannelEngineVersions)
+	}
 	if v.Vpc != nil {
 		s.WriteStruct(schemas.ChannelSummary_Vpc)
 		v.Vpc.SerializeMembers(s)
@@ -4535,7 +4683,9 @@ func (v *CloudWatchAlarmTemplateGroupSummary) SerializeMembers(s smithy.ShapeSer
 	if v.Name != nil {
 		s.WriteString(schemas.CloudWatchAlarmTemplateGroupSummary_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CloudWatchAlarmTemplateGroupSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CloudWatchAlarmTemplateGroupSummary_Tags, v.Tags)
+	}
 	if v.TemplateCount != nil {
 		s.WriteInt32(schemas.CloudWatchAlarmTemplateGroupSummary_TemplateCount, *v.TemplateCount)
 	}
@@ -4708,7 +4858,9 @@ func (v *CloudWatchAlarmTemplateSummary) SerializeMembers(s smithy.ShapeSerializ
 	if v.Statistic != "" {
 		s.WriteString(schemas.CloudWatchAlarmTemplateSummary_Statistic, string(v.Statistic))
 	}
-	serializeTagMap(s, schemas.CloudWatchAlarmTemplateSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CloudWatchAlarmTemplateSummary_Tags, v.Tags)
+	}
 	if v.TargetResourceType != "" {
 		s.WriteString(schemas.CloudWatchAlarmTemplateSummary_TargetResourceType, string(v.TargetResourceType))
 	}
@@ -4919,7 +5071,9 @@ func (v *ClusterNetworkSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultRoute != nil {
 		s.WriteString(schemas.ClusterNetworkSettings_DefaultRoute, *v.DefaultRoute)
 	}
-	serialize__listOfInterfaceMapping(s, schemas.ClusterNetworkSettings_InterfaceMappings, v.InterfaceMappings)
+	if v.InterfaceMappings != nil {
+		serialize__listOfInterfaceMapping(s, schemas.ClusterNetworkSettings_InterfaceMappings, v.InterfaceMappings)
+	}
 }
 func (v *ClusterNetworkSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterNetworkSettings, func(s *smithy.Schema) error {
@@ -4969,7 +5123,9 @@ func (v *ClusterNetworkSettingsCreateRequest) SerializeMembers(s smithy.ShapeSer
 	if v.DefaultRoute != nil {
 		s.WriteString(schemas.ClusterNetworkSettingsCreateRequest_DefaultRoute, *v.DefaultRoute)
 	}
-	serialize__listOfInterfaceMappingCreateRequest(s, schemas.ClusterNetworkSettingsCreateRequest_InterfaceMappings, v.InterfaceMappings)
+	if v.InterfaceMappings != nil {
+		serialize__listOfInterfaceMappingCreateRequest(s, schemas.ClusterNetworkSettingsCreateRequest_InterfaceMappings, v.InterfaceMappings)
+	}
 }
 func (v *ClusterNetworkSettingsCreateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterNetworkSettingsCreateRequest, func(s *smithy.Schema) error {
@@ -5022,7 +5178,9 @@ func (v *ClusterNetworkSettingsUpdateRequest) SerializeMembers(s smithy.ShapeSer
 	if v.DefaultRoute != nil {
 		s.WriteString(schemas.ClusterNetworkSettingsUpdateRequest_DefaultRoute, *v.DefaultRoute)
 	}
-	serialize__listOfInterfaceMappingUpdateRequest(s, schemas.ClusterNetworkSettingsUpdateRequest_InterfaceMappings, v.InterfaceMappings)
+	if v.InterfaceMappings != nil {
+		serialize__listOfInterfaceMappingUpdateRequest(s, schemas.ClusterNetworkSettingsUpdateRequest_InterfaceMappings, v.InterfaceMappings)
+	}
 }
 func (v *ClusterNetworkSettingsUpdateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterNetworkSettingsUpdateRequest, func(s *smithy.Schema) error {
@@ -5082,7 +5240,9 @@ func (v *CmafIngestAbWatermarkerIrdetoSettings) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CmafIngestAbWatermarkerIrdetoSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfOutputLocationRef(s, schemas.CmafIngestAbWatermarkerIrdetoSettings_AdditionalDestinationsAlternateDestinations, v.AdditionalDestinationsAlternateDestinations)
+	if v.AdditionalDestinationsAlternateDestinations != nil {
+		serialize__listOfOutputLocationRef(s, schemas.CmafIngestAbWatermarkerIrdetoSettings_AdditionalDestinationsAlternateDestinations, v.AdditionalDestinationsAlternateDestinations)
+	}
 	if v.AlternateDestination != nil {
 		s.WriteStruct(schemas.CmafIngestAbWatermarkerIrdetoSettings_AlternateDestination)
 		v.AlternateDestination.SerializeMembers(s)
@@ -5303,8 +5463,12 @@ func (v *CmafIngestGroupSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CmafIngestGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAdditionalDestinations(s, schemas.CmafIngestGroupSettings_AdditionalDestinations, v.AdditionalDestinations)
-	serialize__listOfCmafIngestCaptionLanguageMapping(s, schemas.CmafIngestGroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
+	if v.AdditionalDestinations != nil {
+		serialize__listOfAdditionalDestinations(s, schemas.CmafIngestGroupSettings_AdditionalDestinations, v.AdditionalDestinations)
+	}
+	if v.CaptionLanguageMappings != nil {
+		serialize__listOfCmafIngestCaptionLanguageMapping(s, schemas.CmafIngestGroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
+	}
 	if v.Destination != nil {
 		s.WriteStruct(schemas.CmafIngestGroupSettings_Destination)
 		v.Destination.SerializeMembers(s)
@@ -5601,7 +5765,9 @@ func (v *ColorCorrectionSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ColorCorrectionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfColorCorrection(s, schemas.ColorCorrectionSettings_GlobalColorCorrections, v.GlobalColorCorrections)
+	if v.GlobalColorCorrections != nil {
+		serialize__listOfColorCorrection(s, schemas.ColorCorrectionSettings_GlobalColorCorrections, v.GlobalColorCorrections)
+	}
 }
 func (v *ColorCorrectionSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ColorCorrectionSettings, func(s *smithy.Schema) error {
@@ -5714,7 +5880,9 @@ func (v *DescribeChannelPlacementGroupSummary) SerializeMembers(s smithy.ShapeSe
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeChannelPlacementGroupSummary_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupSummary_Channels, v.Channels)
+	if v.Channels != nil {
+		serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupSummary_Channels, v.Channels)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.DescribeChannelPlacementGroupSummary_ClusterId, *v.ClusterId)
 	}
@@ -5724,7 +5892,9 @@ func (v *DescribeChannelPlacementGroupSummary) SerializeMembers(s smithy.ShapeSe
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeChannelPlacementGroupSummary_Name, *v.Name)
 	}
-	serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupSummary_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serialize__listOf__string(s, schemas.DescribeChannelPlacementGroupSummary_Nodes, v.Nodes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DescribeChannelPlacementGroupSummary_State, string(v.State))
 	}
@@ -5808,7 +5978,9 @@ func (v *DescribeClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeClusterSummary_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DescribeClusterSummary_ChannelIds, v.ChannelIds)
+	if v.ChannelIds != nil {
+		serialize__listOf__string(s, schemas.DescribeClusterSummary_ChannelIds, v.ChannelIds)
+	}
 	if v.ClusterType != "" {
 		s.WriteString(schemas.DescribeClusterSummary_ClusterType, string(v.ClusterType))
 	}
@@ -5939,8 +6111,12 @@ func (v *DescribeInferenceSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInferenceSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAudioFeedInput(s, schemas.DescribeInferenceSettings_AudioFeedInputs, v.AudioFeedInputs)
-	serialize__listOfEnrichmentMethod(s, schemas.DescribeInferenceSettings_EnrichmentMethods, v.EnrichmentMethods)
+	if v.AudioFeedInputs != nil {
+		serialize__listOfAudioFeedInput(s, schemas.DescribeInferenceSettings_AudioFeedInputs, v.AudioFeedInputs)
+	}
+	if v.EnrichmentMethods != nil {
+		serialize__listOfEnrichmentMethod(s, schemas.DescribeInferenceSettings_EnrichmentMethods, v.EnrichmentMethods)
+	}
 	if v.FeedArn != nil {
 		s.WriteString(schemas.DescribeInferenceSettings_FeedArn, *v.FeedArn)
 	}
@@ -6048,15 +6224,21 @@ func (v *DescribeNetworkSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeNetworkSummary_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DescribeNetworkSummary_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.AssociatedClusterIds != nil {
+		serialize__listOf__string(s, schemas.DescribeNetworkSummary_AssociatedClusterIds, v.AssociatedClusterIds)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.DescribeNetworkSummary_Id, *v.Id)
 	}
-	serialize__listOfIpPool(s, schemas.DescribeNetworkSummary_IpPools, v.IpPools)
+	if v.IpPools != nil {
+		serialize__listOfIpPool(s, schemas.DescribeNetworkSummary_IpPools, v.IpPools)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeNetworkSummary_Name, *v.Name)
 	}
-	serialize__listOfRoute(s, schemas.DescribeNetworkSummary_Routes, v.Routes)
+	if v.Routes != nil {
+		serialize__listOfRoute(s, schemas.DescribeNetworkSummary_Routes, v.Routes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DescribeNetworkSummary_State, string(v.State))
 	}
@@ -6149,7 +6331,9 @@ func (v *DescribeNodeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeNodeSummary_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DescribeNodeSummary_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ChannelPlacementGroups != nil {
+		serialize__listOf__string(s, schemas.DescribeNodeSummary_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.DescribeNodeSummary_ClusterId, *v.ClusterId)
 	}
@@ -6168,11 +6352,15 @@ func (v *DescribeNodeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeNodeSummary_Name, *v.Name)
 	}
-	serialize__listOfNodeInterfaceMapping(s, schemas.DescribeNodeSummary_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.NodeInterfaceMappings != nil {
+		serialize__listOfNodeInterfaceMapping(s, schemas.DescribeNodeSummary_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.DescribeNodeSummary_Role, string(v.Role))
 	}
-	serializeSdiSourceMappings(s, schemas.DescribeNodeSummary_SdiSourceMappings, v.SdiSourceMappings)
+	if v.SdiSourceMappings != nil {
+		serializeSdiSourceMappings(s, schemas.DescribeNodeSummary_SdiSourceMappings, v.SdiSourceMappings)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DescribeNodeSummary_State, string(v.State))
 	}
@@ -6249,7 +6437,9 @@ func (v *DescribePrimaryChannelSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePrimaryChannelSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.DescribePrimaryChannelSettings_FollowingChannelArns, v.FollowingChannelArns)
+	if v.FollowingChannelArns != nil {
+		serialize__listOf__string(s, schemas.DescribePrimaryChannelSettings_FollowingChannelArns, v.FollowingChannelArns)
+	}
 	if v.LinkedChannelType != "" {
 		s.WriteString(schemas.DescribePrimaryChannelSettings_LinkedChannelType, string(v.LinkedChannelType))
 	}
@@ -7519,7 +7709,9 @@ func (v *EncoderSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncoderSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAudioDescription(s, schemas.EncoderSettings_AudioDescriptions, v.AudioDescriptions)
+	if v.AudioDescriptions != nil {
+		serialize__listOfAudioDescription(s, schemas.EncoderSettings_AudioDescriptions, v.AudioDescriptions)
+	}
 	if v.AvailBlanking != nil {
 		s.WriteStruct(schemas.EncoderSettings_AvailBlanking)
 		v.AvailBlanking.SerializeMembers(s)
@@ -7535,7 +7727,9 @@ func (v *EncoderSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BlackoutSlate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfCaptionDescription(s, schemas.EncoderSettings_CaptionDescriptions, v.CaptionDescriptions)
+	if v.CaptionDescriptions != nil {
+		serialize__listOfCaptionDescription(s, schemas.EncoderSettings_CaptionDescriptions, v.CaptionDescriptions)
+	}
 	if v.ColorCorrectionSettings != nil {
 		s.WriteStruct(schemas.EncoderSettings_ColorCorrectionSettings)
 		v.ColorCorrectionSettings.SerializeMembers(s)
@@ -7561,7 +7755,9 @@ func (v *EncoderSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NielsenConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfOutputGroup(s, schemas.EncoderSettings_OutputGroups, v.OutputGroups)
+	if v.OutputGroups != nil {
+		serialize__listOfOutputGroup(s, schemas.EncoderSettings_OutputGroups, v.OutputGroups)
+	}
 	if v.ThumbnailConfiguration != nil {
 		s.WriteStruct(schemas.EncoderSettings_ThumbnailConfiguration)
 		v.ThumbnailConfiguration.SerializeMembers(s)
@@ -7572,7 +7768,9 @@ func (v *EncoderSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TimecodeConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfVideoDescription(s, schemas.EncoderSettings_VideoDescriptions, v.VideoDescriptions)
+	if v.VideoDescriptions != nil {
+		serialize__listOfVideoDescription(s, schemas.EncoderSettings_VideoDescriptions, v.VideoDescriptions)
+	}
 }
 func (v *EncoderSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EncoderSettings, func(s *smithy.Schema) error {
@@ -7819,7 +8017,9 @@ func (v *EventBridgeRuleTemplateGroupSummary) SerializeMembers(s smithy.ShapeSer
 	if v.Name != nil {
 		s.WriteString(schemas.EventBridgeRuleTemplateGroupSummary_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.EventBridgeRuleTemplateGroupSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EventBridgeRuleTemplateGroupSummary_Tags, v.Tags)
+	}
 	if v.TemplateCount != nil {
 		s.WriteInt32(schemas.EventBridgeRuleTemplateGroupSummary_TemplateCount, *v.TemplateCount)
 	}
@@ -7942,7 +8142,9 @@ func (v *EventBridgeRuleTemplateSummary) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.EventBridgeRuleTemplateSummary_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.EventBridgeRuleTemplateSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EventBridgeRuleTemplateSummary_Tags, v.Tags)
+	}
 }
 func (v *EventBridgeRuleTemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventBridgeRuleTemplateSummary, func(s *smithy.Schema) error {
@@ -8827,8 +9029,28 @@ func (v *H264ColorSpaceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // H264 Filter Settings
 type H264FilterSettings struct {
 
+	// System-managed filter selection. Resolves to the perceptual filter at strength
+	// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+	// enhanced_quality), and to no filter otherwise. An empty / undefined
+	// filter_settings_choice is treated as "auto".
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	AutoFilterSettings *AutoFilterSettings
+
 	// Bandwidth Reduction Filter Settings
 	BandwidthReductionFilterSettings *BandwidthReductionFilterSettings
+
+	// Explicitly disables the video filter. This is the customer opt-out: a video
+	// description set to "none" never has a filter applied and is never overridden by
+	// the system-managed "auto" default.
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	NoneFilterSettings *NoneFilterSettings
+
+	// Perceptual Filter Settings
+	PerceptualFilterSettings *PerceptualFilterSettings
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
@@ -8843,9 +9065,24 @@ func (v *H264FilterSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *H264FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoFilterSettings != nil {
+		s.WriteStruct(schemas.H264FilterSettings_AutoFilterSettings)
+		v.AutoFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.BandwidthReductionFilterSettings != nil {
 		s.WriteStruct(schemas.H264FilterSettings_BandwidthReductionFilterSettings)
 		v.BandwidthReductionFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoneFilterSettings != nil {
+		s.WriteStruct(schemas.H264FilterSettings_NoneFilterSettings)
+		v.NoneFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerceptualFilterSettings != nil {
+		s.WriteStruct(schemas.H264FilterSettings_PerceptualFilterSettings)
+		v.PerceptualFilterSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.TemporalFilterSettings != nil {
@@ -8857,9 +9094,18 @@ func (v *H264FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *H264FilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.H264FilterSettings, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.H264FilterSettings_AutoFilterSettings:
+			v.AutoFilterSettings = &AutoFilterSettings{}
+			return v.AutoFilterSettings.Deserialize(d)
 		case schemas.H264FilterSettings_BandwidthReductionFilterSettings:
 			v.BandwidthReductionFilterSettings = &BandwidthReductionFilterSettings{}
 			return v.BandwidthReductionFilterSettings.Deserialize(d)
+		case schemas.H264FilterSettings_NoneFilterSettings:
+			v.NoneFilterSettings = &NoneFilterSettings{}
+			return v.NoneFilterSettings.Deserialize(d)
+		case schemas.H264FilterSettings_PerceptualFilterSettings:
+			v.PerceptualFilterSettings = &PerceptualFilterSettings{}
+			return v.PerceptualFilterSettings.Deserialize(d)
 		case schemas.H264FilterSettings_TemporalFilterSettings:
 			v.TemporalFilterSettings = &TemporalFilterSettings{}
 			return v.TemporalFilterSettings.Deserialize(d)
@@ -8884,6 +9130,15 @@ type H264Settings struct {
 	// cases where multiple AFD values are valid). If set to "fixed", the AFD value
 	// will be the value configured in the fixedAfd parameter.
 	AfdSignaling AfdSignaling
+
+	// Specifies whether the encoder may apply explicit weighted prediction (EWP), an
+	// H.264 coding tool that can improve compression. EWP applies a scaling factor and
+	// offset to reference frames, which helps when brightness changes between frames,
+	// such as during a fade. When this setting is enabled, the encoder decides whether
+	// to apply EWP based on the output's other codec settings, such as profile and
+	// quality level. We recommend that you keep the default, enabled. When disabled,
+	// the encoder never applies EWP.
+	AllowExplicitWeightedPrediction H264AllowExplicitWeightedPrediction
 
 	// Average bitrate in bits/second. Required when the rate control mode is VBR or
 	// CBR. Not used for QVBR. In an MS Smooth output group, each output must have a
@@ -9131,6 +9386,9 @@ func (v *H264Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AfdSignaling != "" {
 		s.WriteString(schemas.H264Settings_AfdSignaling, string(v.AfdSignaling))
 	}
+	if v.AllowExplicitWeightedPrediction != "" {
+		s.WriteString(schemas.H264Settings_AllowExplicitWeightedPrediction, string(v.AllowExplicitWeightedPrediction))
+	}
 	if v.Bitrate != nil {
 		s.WriteInt32(schemas.H264Settings_Bitrate, *v.Bitrate)
 	}
@@ -9280,6 +9538,13 @@ func (v *H264Settings) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.AfdSignaling = AfdSignaling(ev)
+			return nil
+		case schemas.H264Settings_AllowExplicitWeightedPrediction:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_AllowExplicitWeightedPrediction, &ev); err != nil {
+				return err
+			}
+			v.AllowExplicitWeightedPrediction = H264AllowExplicitWeightedPrediction(ev)
 			return nil
 		case schemas.H264Settings_Bitrate:
 			v.Bitrate = new(int32)
@@ -9587,8 +9852,28 @@ func (v *H265ColorSpaceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // H265 Filter Settings
 type H265FilterSettings struct {
 
+	// System-managed filter selection. Resolves to the perceptual filter at strength
+	// 1 where the codec is eligible (AV1 and H.265 unconditionally; H.264 only at
+	// enhanced_quality), and to no filter otherwise. An empty / undefined
+	// filter_settings_choice is treated as "auto".
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	AutoFilterSettings *AutoFilterSettings
+
 	// Bandwidth Reduction Filter Settings
 	BandwidthReductionFilterSettings *BandwidthReductionFilterSettings
+
+	// Explicitly disables the video filter. This is the customer opt-out: a video
+	// description set to "none" never has a filter applied and is never overridden by
+	// the system-managed "auto" default.
+	//
+	// Carries no body (extends EmptySettings, which sets additionalProperties:
+	// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+	NoneFilterSettings *NoneFilterSettings
+
+	// Perceptual Filter Settings
+	PerceptualFilterSettings *PerceptualFilterSettings
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
@@ -9603,9 +9888,24 @@ func (v *H265FilterSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *H265FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoFilterSettings != nil {
+		s.WriteStruct(schemas.H265FilterSettings_AutoFilterSettings)
+		v.AutoFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.BandwidthReductionFilterSettings != nil {
 		s.WriteStruct(schemas.H265FilterSettings_BandwidthReductionFilterSettings)
 		v.BandwidthReductionFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoneFilterSettings != nil {
+		s.WriteStruct(schemas.H265FilterSettings_NoneFilterSettings)
+		v.NoneFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerceptualFilterSettings != nil {
+		s.WriteStruct(schemas.H265FilterSettings_PerceptualFilterSettings)
+		v.PerceptualFilterSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.TemporalFilterSettings != nil {
@@ -9617,9 +9917,18 @@ func (v *H265FilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *H265FilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.H265FilterSettings, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.H265FilterSettings_AutoFilterSettings:
+			v.AutoFilterSettings = &AutoFilterSettings{}
+			return v.AutoFilterSettings.Deserialize(d)
 		case schemas.H265FilterSettings_BandwidthReductionFilterSettings:
 			v.BandwidthReductionFilterSettings = &BandwidthReductionFilterSettings{}
 			return v.BandwidthReductionFilterSettings.Deserialize(d)
+		case schemas.H265FilterSettings_NoneFilterSettings:
+			v.NoneFilterSettings = &NoneFilterSettings{}
+			return v.NoneFilterSettings.Deserialize(d)
+		case schemas.H265FilterSettings_PerceptualFilterSettings:
+			v.PerceptualFilterSettings = &PerceptualFilterSettings{}
+			return v.PerceptualFilterSettings.Deserialize(d)
 		case schemas.H265FilterSettings_TemporalFilterSettings:
 			v.TemporalFilterSettings = &TemporalFilterSettings{}
 			return v.TemporalFilterSettings.Deserialize(d)
@@ -10781,7 +11090,9 @@ func (v *HlsGroupSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HlsGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfHlsAdMarkers(s, schemas.HlsGroupSettings_AdMarkers, v.AdMarkers)
+	if v.AdMarkers != nil {
+		serialize__listOfHlsAdMarkers(s, schemas.HlsGroupSettings_AdMarkers, v.AdMarkers)
+	}
 	if v.BaseUrlContent != nil {
 		s.WriteString(schemas.HlsGroupSettings_BaseUrlContent, *v.BaseUrlContent)
 	}
@@ -10794,7 +11105,9 @@ func (v *HlsGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseUrlManifest1 != nil {
 		s.WriteString(schemas.HlsGroupSettings_BaseUrlManifest1, *v.BaseUrlManifest1)
 	}
-	serialize__listOfCaptionLanguageMapping(s, schemas.HlsGroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
+	if v.CaptionLanguageMappings != nil {
+		serialize__listOfCaptionLanguageMapping(s, schemas.HlsGroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
+	}
 	if v.CaptionLanguageSetting != "" {
 		s.WriteString(schemas.HlsGroupSettings_CaptionLanguageSetting, string(v.CaptionLanguageSetting))
 	}
@@ -11739,8 +12052,12 @@ func (v *InferenceSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InferenceSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAudioFeedInput(s, schemas.InferenceSettings_AudioFeedInputs, v.AudioFeedInputs)
-	serialize__listOfEnrichmentMethod(s, schemas.InferenceSettings_EnrichmentMethods, v.EnrichmentMethods)
+	if v.AudioFeedInputs != nil {
+		serialize__listOfAudioFeedInput(s, schemas.InferenceSettings_AudioFeedInputs, v.AudioFeedInputs)
+	}
+	if v.EnrichmentMethods != nil {
+		serialize__listOfEnrichmentMethod(s, schemas.InferenceSettings_EnrichmentMethods, v.EnrichmentMethods)
+	}
 	if v.FeedArn != nil {
 		s.WriteString(schemas.InferenceSettings_FeedArn, *v.FeedArn)
 	}
@@ -11854,23 +12171,33 @@ func (v *Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Input_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.Input_AttachedChannels, v.AttachedChannels)
-	serialize__listOfInputDestination(s, schemas.Input_Destinations, v.Destinations)
+	if v.AttachedChannels != nil {
+		serialize__listOf__string(s, schemas.Input_AttachedChannels, v.AttachedChannels)
+	}
+	if v.Destinations != nil {
+		serialize__listOfInputDestination(s, schemas.Input_Destinations, v.Destinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Input_Id, *v.Id)
 	}
 	if v.InputClass != "" {
 		s.WriteString(schemas.Input_InputClass, string(v.InputClass))
 	}
-	serialize__listOfInputDeviceSettings(s, schemas.Input_InputDevices, v.InputDevices)
+	if v.InputDevices != nil {
+		serialize__listOfInputDeviceSettings(s, schemas.Input_InputDevices, v.InputDevices)
+	}
 	if v.InputNetworkLocation != "" {
 		s.WriteString(schemas.Input_InputNetworkLocation, string(v.InputNetworkLocation))
 	}
-	serialize__listOf__string(s, schemas.Input_InputPartnerIds, v.InputPartnerIds)
+	if v.InputPartnerIds != nil {
+		serialize__listOf__string(s, schemas.Input_InputPartnerIds, v.InputPartnerIds)
+	}
 	if v.InputSourceType != "" {
 		s.WriteString(schemas.Input_InputSourceType, string(v.InputSourceType))
 	}
-	serialize__listOfMediaConnectFlow(s, schemas.Input_MediaConnectFlows, v.MediaConnectFlows)
+	if v.MediaConnectFlows != nil {
+		serialize__listOfMediaConnectFlow(s, schemas.Input_MediaConnectFlows, v.MediaConnectFlows)
+	}
 	if v.MulticastSettings != nil {
 		s.WriteStruct(schemas.Input_MulticastSettings)
 		v.MulticastSettings.SerializeMembers(s)
@@ -11887,14 +12214,20 @@ func (v *Input) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RouterSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputSdiSources(s, schemas.Input_SdiSources, v.SdiSources)
-	serialize__listOf__string(s, schemas.Input_SecurityGroups, v.SecurityGroups)
+	if v.SdiSources != nil {
+		serializeInputSdiSources(s, schemas.Input_SdiSources, v.SdiSources)
+	}
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.Input_SecurityGroups, v.SecurityGroups)
+	}
 	if v.Smpte2110ReceiverGroupSettings != nil {
 		s.WriteStruct(schemas.Input_Smpte2110ReceiverGroupSettings)
 		v.Smpte2110ReceiverGroupSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputSource(s, schemas.Input_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfInputSource(s, schemas.Input_Sources, v.Sources)
+	}
 	if v.SrtSettings != nil {
 		s.WriteStruct(schemas.Input_SrtSettings)
 		v.SrtSettings.SerializeMembers(s)
@@ -11903,7 +12236,9 @@ func (v *Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Input_State, string(v.State))
 	}
-	serializeTags(s, schemas.Input_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Input_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Input_Type, string(v.Type))
 	}
@@ -12040,7 +12375,9 @@ func (v *InputAttachment) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InputSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.InputAttachment_LogicalInterfaceNames, v.LogicalInterfaceNames)
+	if v.LogicalInterfaceNames != nil {
+		serialize__listOf__string(s, schemas.InputAttachment_LogicalInterfaceNames, v.LogicalInterfaceNames)
+	}
 }
 func (v *InputAttachment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InputAttachment, func(s *smithy.Schema) error {
@@ -12209,7 +12546,9 @@ func (v *InputDestination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Network != nil {
 		s.WriteString(schemas.InputDestination_Network, *v.Network)
 	}
-	serialize__listOfInputDestinationRoute(s, schemas.InputDestination_NetworkRoutes, v.NetworkRoutes)
+	if v.NetworkRoutes != nil {
+		serialize__listOfInputDestinationRoute(s, schemas.InputDestination_NetworkRoutes, v.NetworkRoutes)
+	}
 	if v.Port != nil {
 		s.WriteString(schemas.InputDestination_Port, *v.Port)
 	}
@@ -12279,7 +12618,9 @@ func (v *InputDestinationRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Network != nil {
 		s.WriteString(schemas.InputDestinationRequest_Network, *v.Network)
 	}
-	serialize__listOfInputRequestDestinationRoute(s, schemas.InputDestinationRequest_NetworkRoutes, v.NetworkRoutes)
+	if v.NetworkRoutes != nil {
+		serialize__listOfInputRequestDestinationRoute(s, schemas.InputDestinationRequest_NetworkRoutes, v.NetworkRoutes)
+	}
 	if v.StaticIpAddress != nil {
 		s.WriteString(schemas.InputDestinationRequest_StaticIpAddress, *v.StaticIpAddress)
 	}
@@ -12484,7 +12825,9 @@ func (v *InputDeviceConfigurableSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputDeviceConfigurableSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfInputDeviceConfigurableAudioChannelPairConfig(s, schemas.InputDeviceConfigurableSettings_AudioChannelPairs, v.AudioChannelPairs)
+	if v.AudioChannelPairs != nil {
+		serialize__listOfInputDeviceConfigurableAudioChannelPairConfig(s, schemas.InputDeviceConfigurableSettings_AudioChannelPairs, v.AudioChannelPairs)
+	}
 	if v.Codec != "" {
 		s.WriteString(schemas.InputDeviceConfigurableSettings_Codec, string(v.Codec))
 	}
@@ -12815,7 +13158,9 @@ func (v *InputDeviceNetworkSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputDeviceNetworkSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.InputDeviceNetworkSettings_DnsAddresses, v.DnsAddresses)
+	if v.DnsAddresses != nil {
+		serialize__listOf__string(s, schemas.InputDeviceNetworkSettings_DnsAddresses, v.DnsAddresses)
+	}
 	if v.Gateway != nil {
 		s.WriteString(schemas.InputDeviceNetworkSettings_Gateway, *v.Gateway)
 	}
@@ -13011,7 +13356,9 @@ func (v *InputDeviceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacAddress != nil {
 		s.WriteString(schemas.InputDeviceSummary_MacAddress, *v.MacAddress)
 	}
-	serialize__listOf__string(s, schemas.InputDeviceSummary_MedialiveInputArns, v.MedialiveInputArns)
+	if v.MedialiveInputArns != nil {
+		serialize__listOf__string(s, schemas.InputDeviceSummary_MedialiveInputArns, v.MedialiveInputArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.InputDeviceSummary_Name, *v.Name)
 	}
@@ -13026,7 +13373,9 @@ func (v *InputDeviceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SerialNumber != nil {
 		s.WriteString(schemas.InputDeviceSummary_SerialNumber, *v.SerialNumber)
 	}
-	serializeTags(s, schemas.InputDeviceSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.InputDeviceSummary_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.InputDeviceSummary_Type, string(v.Type))
 	}
@@ -13223,7 +13572,9 @@ func (v *InputDeviceUhdSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActiveInput != "" {
 		s.WriteString(schemas.InputDeviceUhdSettings_ActiveInput, string(v.ActiveInput))
 	}
-	serialize__listOfInputDeviceUhdAudioChannelPairConfig(s, schemas.InputDeviceUhdSettings_AudioChannelPairs, v.AudioChannelPairs)
+	if v.AudioChannelPairs != nil {
+		serialize__listOfInputDeviceUhdAudioChannelPairConfig(s, schemas.InputDeviceUhdSettings_AudioChannelPairs, v.AudioChannelPairs)
+	}
 	if v.Codec != "" {
 		s.WriteString(schemas.InputDeviceUhdSettings_Codec, string(v.Codec))
 	}
@@ -13524,7 +13875,9 @@ func (v *InputPrepareScheduleActionSettings) SerializeMembers(s smithy.ShapeSeri
 		v.InputClippingSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.InputPrepareScheduleActionSettings_UrlPath, v.UrlPath)
+	if v.UrlPath != nil {
+		serialize__listOf__string(s, schemas.InputPrepareScheduleActionSettings_UrlPath, v.UrlPath)
+	}
 }
 func (v *InputPrepareScheduleActionSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InputPrepareScheduleActionSettings, func(s *smithy.Schema) error {
@@ -13661,16 +14014,24 @@ func (v *InputSecurityGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.InputSecurityGroup_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.InputSecurityGroup_Channels, v.Channels)
+	if v.Channels != nil {
+		serialize__listOf__string(s, schemas.InputSecurityGroup_Channels, v.Channels)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.InputSecurityGroup_Id, *v.Id)
 	}
-	serialize__listOf__string(s, schemas.InputSecurityGroup_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serialize__listOf__string(s, schemas.InputSecurityGroup_Inputs, v.Inputs)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.InputSecurityGroup_State, string(v.State))
 	}
-	serializeTags(s, schemas.InputSecurityGroup_Tags, v.Tags)
-	serialize__listOfInputWhitelistRule(s, schemas.InputSecurityGroup_WhitelistRules, v.WhitelistRules)
+	if v.Tags != nil {
+		serializeTags(s, schemas.InputSecurityGroup_Tags, v.Tags)
+	}
+	if v.WhitelistRules != nil {
+		serialize__listOfInputWhitelistRule(s, schemas.InputSecurityGroup_WhitelistRules, v.WhitelistRules)
+	}
 }
 func (v *InputSecurityGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InputSecurityGroup, func(s *smithy.Schema) error {
@@ -13763,8 +14124,12 @@ func (v *InputSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAudioSelector(s, schemas.InputSettings_AudioSelectors, v.AudioSelectors)
-	serialize__listOfCaptionSelector(s, schemas.InputSettings_CaptionSelectors, v.CaptionSelectors)
+	if v.AudioSelectors != nil {
+		serialize__listOfAudioSelector(s, schemas.InputSettings_AudioSelectors, v.AudioSelectors)
+	}
+	if v.CaptionSelectors != nil {
+		serialize__listOfCaptionSelector(s, schemas.InputSettings_CaptionSelectors, v.CaptionSelectors)
+	}
 	if v.DeblockFilter != "" {
 		s.WriteString(schemas.InputSettings_DeblockFilter, string(v.DeblockFilter))
 	}
@@ -14053,7 +14418,9 @@ func (v *InputSwitchScheduleActionSettings) SerializeMembers(s smithy.ShapeSeria
 		v.InputClippingSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.InputSwitchScheduleActionSettings_UrlPath, v.UrlPath)
+	if v.UrlPath != nil {
+		serialize__listOf__string(s, schemas.InputSwitchScheduleActionSettings_UrlPath, v.UrlPath)
+	}
 }
 func (v *InputSwitchScheduleActionSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InputSwitchScheduleActionSettings, func(s *smithy.Schema) error {
@@ -14098,8 +14465,12 @@ func (v *InputVpcRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputVpcRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.InputVpcRequest_SecurityGroupIds, v.SecurityGroupIds)
-	serialize__listOf__string(s, schemas.InputVpcRequest_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serialize__listOf__string(s, schemas.InputVpcRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serialize__listOf__string(s, schemas.InputVpcRequest_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *InputVpcRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InputVpcRequest, func(s *smithy.Schema) error {
@@ -15629,7 +16000,9 @@ func (v *MediaConnectRouterGroupSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MediaConnectRouterGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.MediaConnectRouterGroupSettings_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serialize__listOf__string(s, schemas.MediaConnectRouterGroupSettings_AvailabilityZones, v.AvailabilityZones)
+	}
 }
 func (v *MediaConnectRouterGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MediaConnectRouterGroupSettings, func(s *smithy.Schema) error {
@@ -16061,7 +16434,9 @@ func (v *MediaPackageV2AbWatermarkerIrdetoSettings) Serialize(s smithy.ShapeSeri
 }
 
 func (v *MediaPackageV2AbWatermarkerIrdetoSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfOutputLocationRef(s, schemas.MediaPackageV2AbWatermarkerIrdetoSettings_AdditionalDestinationsAlternateDestinations, v.AdditionalDestinationsAlternateDestinations)
+	if v.AdditionalDestinationsAlternateDestinations != nil {
+		serialize__listOfOutputLocationRef(s, schemas.MediaPackageV2AbWatermarkerIrdetoSettings_AdditionalDestinationsAlternateDestinations, v.AdditionalDestinationsAlternateDestinations)
+	}
 	if v.AlternateDestination != nil {
 		s.WriteStruct(schemas.MediaPackageV2AbWatermarkerIrdetoSettings_AlternateDestination)
 		v.AlternateDestination.SerializeMembers(s)
@@ -16198,7 +16573,9 @@ func (v *MediaPackageV2DestinationSettings) SerializeMembers(s smithy.ShapeSeria
 	if v.HlsDefault != "" {
 		s.WriteString(schemas.MediaPackageV2DestinationSettings_HlsDefault, string(v.HlsDefault))
 	}
-	serialize__listOfOutputUsage(s, schemas.MediaPackageV2DestinationSettings_OutputUsage, v.OutputUsage)
+	if v.OutputUsage != nil {
+		serialize__listOfOutputUsage(s, schemas.MediaPackageV2DestinationSettings_OutputUsage, v.OutputUsage)
+	}
 }
 func (v *MediaPackageV2DestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MediaPackageV2DestinationSettings, func(s *smithy.Schema) error {
@@ -16299,8 +16676,12 @@ func (v *MediaPackageV2GroupSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MediaPackageV2GroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMediaPackageAdditionalDestinations(s, schemas.MediaPackageV2GroupSettings_AdditionalDestinations, v.AdditionalDestinations)
-	serialize__listOfCaptionLanguageMapping(s, schemas.MediaPackageV2GroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
+	if v.AdditionalDestinations != nil {
+		serialize__listOfMediaPackageAdditionalDestinations(s, schemas.MediaPackageV2GroupSettings_AdditionalDestinations, v.AdditionalDestinations)
+	}
+	if v.CaptionLanguageMappings != nil {
+		serialize__listOfCaptionLanguageMapping(s, schemas.MediaPackageV2GroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
+	}
 	if v.Id3Behavior != "" {
 		s.WriteString(schemas.MediaPackageV2GroupSettings_Id3Behavior, string(v.Id3Behavior))
 	}
@@ -16459,11 +16840,15 @@ func (v *MediaResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MediaResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMediaResourceNeighbor(s, schemas.MediaResource_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serialize__listOfMediaResourceNeighbor(s, schemas.MediaResource_Destinations, v.Destinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.MediaResource_Name, *v.Name)
 	}
-	serialize__listOfMediaResourceNeighbor(s, schemas.MediaResource_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfMediaResourceNeighbor(s, schemas.MediaResource_Sources, v.Sources)
+	}
 }
 func (v *MediaResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MediaResource, func(s *smithy.Schema) error {
@@ -17451,7 +17836,9 @@ func (v *MulticastSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMulticastSource(s, schemas.MulticastSettings_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfMulticastSource(s, schemas.MulticastSettings_Sources, v.Sources)
+	}
 }
 func (v *MulticastSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSettings, func(s *smithy.Schema) error {
@@ -17480,7 +17867,9 @@ func (v *MulticastSettingsCreateRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSettingsCreateRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMulticastSourceCreateRequest(s, schemas.MulticastSettingsCreateRequest_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfMulticastSourceCreateRequest(s, schemas.MulticastSettingsCreateRequest_Sources, v.Sources)
+	}
 }
 func (v *MulticastSettingsCreateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSettingsCreateRequest, func(s *smithy.Schema) error {
@@ -17509,7 +17898,9 @@ func (v *MulticastSettingsUpdateRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSettingsUpdateRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMulticastSourceUpdateRequest(s, schemas.MulticastSettingsUpdateRequest_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfMulticastSourceUpdateRequest(s, schemas.MulticastSettingsUpdateRequest_Sources, v.Sources)
+	}
 }
 func (v *MulticastSettingsUpdateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSettingsUpdateRequest, func(s *smithy.Schema) error {
@@ -17530,6 +17921,14 @@ type MulticastSource struct {
 	// This member is required.
 	Url *string
 
+	// This represents the ip address of the device sending the secondary multicast
+	// stream.
+	SecondarySourceIp *string
+
+	// This represents the customer's secondary source URL where the redundant
+	// multicast stream (SMPTE 2022-7) is pulled from.
+	SecondaryUrl *string
+
 	// This represents the ip address of the device sending the multicast stream.
 	SourceIp *string
 
@@ -17543,6 +17942,12 @@ func (v *MulticastSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecondarySourceIp != nil {
+		s.WriteString(schemas.MulticastSource_SecondarySourceIp, *v.SecondarySourceIp)
+	}
+	if v.SecondaryUrl != nil {
+		s.WriteString(schemas.MulticastSource_SecondaryUrl, *v.SecondaryUrl)
+	}
 	if v.SourceIp != nil {
 		s.WriteString(schemas.MulticastSource_SourceIp, *v.SourceIp)
 	}
@@ -17553,6 +17958,12 @@ func (v *MulticastSource) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MulticastSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSource, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MulticastSource_SecondarySourceIp:
+			v.SecondarySourceIp = new(string)
+			return d.ReadString(schemas.MulticastSource_SecondarySourceIp, v.SecondarySourceIp)
+		case schemas.MulticastSource_SecondaryUrl:
+			v.SecondaryUrl = new(string)
+			return d.ReadString(schemas.MulticastSource_SecondaryUrl, v.SecondaryUrl)
 		case schemas.MulticastSource_SourceIp:
 			v.SourceIp = new(string)
 			return d.ReadString(schemas.MulticastSource_SourceIp, v.SourceIp)
@@ -17573,6 +17984,14 @@ type MulticastSourceCreateRequest struct {
 	// This member is required.
 	Url *string
 
+	// This represents the ip address of the device sending the secondary multicast
+	// stream.
+	SecondarySourceIp *string
+
+	// This represents the customer's secondary source URL where the redundant
+	// multicast stream (SMPTE 2022-7) is pulled from.
+	SecondaryUrl *string
+
 	// This represents the ip address of the device sending the multicast stream.
 	SourceIp *string
 
@@ -17586,6 +18005,12 @@ func (v *MulticastSourceCreateRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSourceCreateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecondarySourceIp != nil {
+		s.WriteString(schemas.MulticastSourceCreateRequest_SecondarySourceIp, *v.SecondarySourceIp)
+	}
+	if v.SecondaryUrl != nil {
+		s.WriteString(schemas.MulticastSourceCreateRequest_SecondaryUrl, *v.SecondaryUrl)
+	}
 	if v.SourceIp != nil {
 		s.WriteString(schemas.MulticastSourceCreateRequest_SourceIp, *v.SourceIp)
 	}
@@ -17596,6 +18021,12 @@ func (v *MulticastSourceCreateRequest) SerializeMembers(s smithy.ShapeSerializer
 func (v *MulticastSourceCreateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSourceCreateRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MulticastSourceCreateRequest_SecondarySourceIp:
+			v.SecondarySourceIp = new(string)
+			return d.ReadString(schemas.MulticastSourceCreateRequest_SecondarySourceIp, v.SecondarySourceIp)
+		case schemas.MulticastSourceCreateRequest_SecondaryUrl:
+			v.SecondaryUrl = new(string)
+			return d.ReadString(schemas.MulticastSourceCreateRequest_SecondaryUrl, v.SecondaryUrl)
 		case schemas.MulticastSourceCreateRequest_SourceIp:
 			v.SourceIp = new(string)
 			return d.ReadString(schemas.MulticastSourceCreateRequest_SourceIp, v.SourceIp)
@@ -17616,6 +18047,14 @@ type MulticastSourceUpdateRequest struct {
 	// This member is required.
 	Url *string
 
+	// This represents the ip address of the device sending the secondary multicast
+	// stream.
+	SecondarySourceIp *string
+
+	// This represents the customer's secondary source URL where the redundant
+	// multicast stream (SMPTE 2022-7) is pulled from.
+	SecondaryUrl *string
+
 	// This represents the ip address of the device sending the multicast stream.
 	SourceIp *string
 
@@ -17629,6 +18068,12 @@ func (v *MulticastSourceUpdateRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSourceUpdateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecondarySourceIp != nil {
+		s.WriteString(schemas.MulticastSourceUpdateRequest_SecondarySourceIp, *v.SecondarySourceIp)
+	}
+	if v.SecondaryUrl != nil {
+		s.WriteString(schemas.MulticastSourceUpdateRequest_SecondaryUrl, *v.SecondaryUrl)
+	}
 	if v.SourceIp != nil {
 		s.WriteString(schemas.MulticastSourceUpdateRequest_SourceIp, *v.SourceIp)
 	}
@@ -17639,6 +18084,12 @@ func (v *MulticastSourceUpdateRequest) SerializeMembers(s smithy.ShapeSerializer
 func (v *MulticastSourceUpdateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSourceUpdateRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MulticastSourceUpdateRequest_SecondarySourceIp:
+			v.SecondarySourceIp = new(string)
+			return d.ReadString(schemas.MulticastSourceUpdateRequest_SecondarySourceIp, v.SecondarySourceIp)
+		case schemas.MulticastSourceUpdateRequest_SecondaryUrl:
+			v.SecondaryUrl = new(string)
+			return d.ReadString(schemas.MulticastSourceUpdateRequest_SecondaryUrl, v.SecondaryUrl)
 		case schemas.MulticastSourceUpdateRequest_SourceIp:
 			v.SourceIp = new(string)
 			return d.ReadString(schemas.MulticastSourceUpdateRequest_SourceIp, v.SourceIp)
@@ -17696,8 +18147,12 @@ func (v *Multiplex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Multiplex_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.Multiplex_AvailabilityZones, v.AvailabilityZones)
-	serialize__listOfMultiplexOutputDestination(s, schemas.Multiplex_Destinations, v.Destinations)
+	if v.AvailabilityZones != nil {
+		serialize__listOf__string(s, schemas.Multiplex_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.Destinations != nil {
+		serialize__listOfMultiplexOutputDestination(s, schemas.Multiplex_Destinations, v.Destinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Multiplex_Id, *v.Id)
 	}
@@ -17718,7 +18173,9 @@ func (v *Multiplex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Multiplex_State, string(v.State))
 	}
-	serializeTags(s, schemas.Multiplex_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Multiplex_Tags, v.Tags)
+	}
 }
 func (v *Multiplex) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Multiplex, func(s *smithy.Schema) error {
@@ -18275,7 +18732,9 @@ func (v *MultiplexProgram) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PacketIdentifiersMap.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfMultiplexProgramPipelineDetail(s, schemas.MultiplexProgram_PipelineDetails, v.PipelineDetails)
+	if v.PipelineDetails != nil {
+		serialize__listOfMultiplexProgramPipelineDetail(s, schemas.MultiplexProgram_PipelineDetails, v.PipelineDetails)
+	}
 	if v.ProgramName != nil {
 		s.WriteString(schemas.MultiplexProgram_ProgramName, *v.ProgramName)
 	}
@@ -18414,12 +18873,18 @@ func (v *MultiplexProgramPacketIdentifiersMap) SerializeMembers(s smithy.ShapeSe
 	if v.AribCaptionsPid != nil {
 		s.WriteInt32(schemas.MultiplexProgramPacketIdentifiersMap_AribCaptionsPid, *v.AribCaptionsPid)
 	}
-	serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_AudioPids, v.AudioPids)
-	serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_DvbSubPids, v.DvbSubPids)
+	if v.AudioPids != nil {
+		serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_AudioPids, v.AudioPids)
+	}
+	if v.DvbSubPids != nil {
+		serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_DvbSubPids, v.DvbSubPids)
+	}
 	if v.DvbTeletextPid != nil {
 		s.WriteInt32(schemas.MultiplexProgramPacketIdentifiersMap_DvbTeletextPid, *v.DvbTeletextPid)
 	}
-	serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_DvbTeletextPids, v.DvbTeletextPids)
+	if v.DvbTeletextPids != nil {
+		serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_DvbTeletextPids, v.DvbTeletextPids)
+	}
 	if v.EcmPid != nil {
 		s.WriteInt32(schemas.MultiplexProgramPacketIdentifiersMap_EcmPid, *v.EcmPid)
 	}
@@ -18429,7 +18894,9 @@ func (v *MultiplexProgramPacketIdentifiersMap) SerializeMembers(s smithy.ShapeSe
 	if v.EtvSignalPid != nil {
 		s.WriteInt32(schemas.MultiplexProgramPacketIdentifiersMap_EtvSignalPid, *v.EtvSignalPid)
 	}
-	serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_KlvDataPids, v.KlvDataPids)
+	if v.KlvDataPids != nil {
+		serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_KlvDataPids, v.KlvDataPids)
+	}
 	if v.PcrPid != nil {
 		s.WriteInt32(schemas.MultiplexProgramPacketIdentifiersMap_PcrPid, *v.PcrPid)
 	}
@@ -18439,7 +18906,9 @@ func (v *MultiplexProgramPacketIdentifiersMap) SerializeMembers(s smithy.ShapeSe
 	if v.PrivateMetadataPid != nil {
 		s.WriteInt32(schemas.MultiplexProgramPacketIdentifiersMap_PrivateMetadataPid, *v.PrivateMetadataPid)
 	}
-	serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_Scte27Pids, v.Scte27Pids)
+	if v.Scte27Pids != nil {
+		serialize__listOf__integer(s, schemas.MultiplexProgramPacketIdentifiersMap_Scte27Pids, v.Scte27Pids)
+	}
 	if v.Scte35Pid != nil {
 		s.WriteInt32(schemas.MultiplexProgramPacketIdentifiersMap_Scte35Pid, *v.Scte35Pid)
 	}
@@ -18889,7 +19358,9 @@ func (v *MultiplexSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.MultiplexSummary_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.MultiplexSummary_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serialize__listOf__string(s, schemas.MultiplexSummary_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.MultiplexSummary_Id, *v.Id)
 	}
@@ -18910,7 +19381,9 @@ func (v *MultiplexSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.MultiplexSummary_State, string(v.State))
 	}
-	serializeTags(s, schemas.MultiplexSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.MultiplexSummary_Tags, v.Tags)
+	}
 }
 func (v *MultiplexSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MultiplexSummary, func(s *smithy.Schema) error {
@@ -19383,7 +19856,9 @@ func (v *NodeInterfaceMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkInterfaceMode != "" {
 		s.WriteString(schemas.NodeInterfaceMapping_NetworkInterfaceMode, string(v.NetworkInterfaceMode))
 	}
-	serialize__listOf__string(s, schemas.NodeInterfaceMapping_PhysicalInterfaceIpAddresses, v.PhysicalInterfaceIpAddresses)
+	if v.PhysicalInterfaceIpAddresses != nil {
+		serialize__listOf__string(s, schemas.NodeInterfaceMapping_PhysicalInterfaceIpAddresses, v.PhysicalInterfaceIpAddresses)
+	}
 	if v.PhysicalInterfaceName != nil {
 		s.WriteString(schemas.NodeInterfaceMapping_PhysicalInterfaceName, *v.PhysicalInterfaceName)
 	}
@@ -19461,6 +19936,32 @@ func (v *NodeInterfaceMappingCreateRequest) Deserialize(d smithy.ShapeDeserializ
 		case schemas.NodeInterfaceMappingCreateRequest_PhysicalInterfaceName:
 			v.PhysicalInterfaceName = new(string)
 			return d.ReadString(schemas.NodeInterfaceMappingCreateRequest_PhysicalInterfaceName, v.PhysicalInterfaceName)
+		}
+		return nil
+	})
+}
+
+// Explicitly disables the video filter. This is the customer opt-out: a video
+// description set to "none" never has a filter applied and is never overridden by
+// the system-managed "auto" default.
+//
+// Carries no body (extends EmptySettings, which sets additionalProperties:
+// false), mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+type NoneFilterSettings struct {
+	noSmithyDocumentSerde
+}
+
+func (v *NoneFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoneFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoneFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NoneFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoneFilterSettings, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -19629,8 +20130,12 @@ func (v *Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.Output_AudioDescriptionNames, v.AudioDescriptionNames)
-	serialize__listOf__string(s, schemas.Output_CaptionDescriptionNames, v.CaptionDescriptionNames)
+	if v.AudioDescriptionNames != nil {
+		serialize__listOf__string(s, schemas.Output_AudioDescriptionNames, v.AudioDescriptionNames)
+	}
+	if v.CaptionDescriptionNames != nil {
+		serialize__listOf__string(s, schemas.Output_CaptionDescriptionNames, v.CaptionDescriptionNames)
+	}
 	if v.OutputName != nil {
 		s.WriteString(schemas.Output_OutputName, *v.OutputName)
 	}
@@ -19705,16 +20210,26 @@ func (v *OutputDestination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.OutputDestination_Id, *v.Id)
 	}
-	serialize__listOf__string(s, schemas.OutputDestination_LogicalInterfaceNames, v.LogicalInterfaceNames)
-	serialize__listOfMediaConnectRouterOutputDestinationSettings(s, schemas.OutputDestination_MediaConnectRouterSettings, v.MediaConnectRouterSettings)
-	serialize__listOfMediaPackageOutputDestinationSettings(s, schemas.OutputDestination_MediaPackageSettings, v.MediaPackageSettings)
+	if v.LogicalInterfaceNames != nil {
+		serialize__listOf__string(s, schemas.OutputDestination_LogicalInterfaceNames, v.LogicalInterfaceNames)
+	}
+	if v.MediaConnectRouterSettings != nil {
+		serialize__listOfMediaConnectRouterOutputDestinationSettings(s, schemas.OutputDestination_MediaConnectRouterSettings, v.MediaConnectRouterSettings)
+	}
+	if v.MediaPackageSettings != nil {
+		serialize__listOfMediaPackageOutputDestinationSettings(s, schemas.OutputDestination_MediaPackageSettings, v.MediaPackageSettings)
+	}
 	if v.MultiplexSettings != nil {
 		s.WriteStruct(schemas.OutputDestination_MultiplexSettings)
 		v.MultiplexSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfOutputDestinationSettings(s, schemas.OutputDestination_Settings, v.Settings)
-	serialize__listOfSrtOutputDestinationSettings(s, schemas.OutputDestination_SrtSettings, v.SrtSettings)
+	if v.Settings != nil {
+		serialize__listOfOutputDestinationSettings(s, schemas.OutputDestination_Settings, v.Settings)
+	}
+	if v.SrtSettings != nil {
+		serialize__listOfSrtOutputDestinationSettings(s, schemas.OutputDestination_SrtSettings, v.SrtSettings)
+	}
 }
 func (v *OutputDestination) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OutputDestination, func(s *smithy.Schema) error {
@@ -19842,7 +20357,9 @@ func (v *OutputGroup) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputGroupSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfOutput(s, schemas.OutputGroup_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfOutput(s, schemas.OutputGroup_Outputs, v.Outputs)
+	}
 }
 func (v *OutputGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OutputGroup, func(s *smithy.Schema) error {
@@ -20269,13 +20786,55 @@ func (v *PauseStateScheduleActionSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PauseStateScheduleActionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfPipelinePauseStateSettings(s, schemas.PauseStateScheduleActionSettings_Pipelines, v.Pipelines)
+	if v.Pipelines != nil {
+		serialize__listOfPipelinePauseStateSettings(s, schemas.PauseStateScheduleActionSettings_Pipelines, v.Pipelines)
+	}
 }
 func (v *PauseStateScheduleActionSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PauseStateScheduleActionSettings, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.PauseStateScheduleActionSettings_Pipelines:
 			return deserialize__listOfPipelinePauseStateSettings(d, schemas.PauseStateScheduleActionSettings_Pipelines, &v.Pipelines)
+		}
+		return nil
+	})
+}
+
+// Perceptual Filter Settings
+type PerceptualFilterSettings struct {
+
+	// Selects the perceptual noise filter strength. Strength 1 (perceptual lite) is
+	// the recommended default and adds approximately 30% of an AVC encode of compute
+	// on the highest rendition. Strength 2 adds approximately 60% of an AVC encode of
+	// compute and can introduce slight softening on noisy content.
+	//
+	// This member is required.
+	Strength PerceptualFilterStrength
+
+	noSmithyDocumentSerde
+}
+
+func (v *PerceptualFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerceptualFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerceptualFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Strength != "" {
+		s.WriteString(schemas.PerceptualFilterSettings_Strength, string(v.Strength))
+	}
+}
+func (v *PerceptualFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerceptualFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerceptualFilterSettings_Strength:
+			var ev string
+			if err := d.ReadString(schemas.PerceptualFilterSettings_Strength, &ev); err != nil {
+				return err
+			}
+			v.Strength = PerceptualFilterStrength(ev)
+			return nil
 		}
 		return nil
 	})
@@ -20336,7 +20895,9 @@ func (v *PipelineDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChannelEngineVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMediaConnectRouterOutputConnections(s, schemas.PipelineDetail_MediaConnectRouterOutputConnectionMap, v.MediaConnectRouterOutputConnectionMap)
+	if v.MediaConnectRouterOutputConnectionMap != nil {
+		serializeMediaConnectRouterOutputConnections(s, schemas.PipelineDetail_MediaConnectRouterOutputConnectionMap, v.MediaConnectRouterOutputConnectionMap)
+	}
 	if v.PipelineId != nil {
 		s.WriteString(schemas.PipelineDetail_PipelineId, *v.PipelineId)
 	}
@@ -20579,7 +21140,9 @@ func (v *RemixSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RemixSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAudioChannelMapping(s, schemas.RemixSettings_ChannelMappings, v.ChannelMappings)
+	if v.ChannelMappings != nil {
+		serialize__listOfAudioChannelMapping(s, schemas.RemixSettings_ChannelMappings, v.ChannelMappings)
+	}
 	if v.ChannelsIn != nil {
 		s.WriteInt32(schemas.RemixSettings_ChannelsIn, *v.ChannelsIn)
 	}
@@ -20775,7 +21338,9 @@ func (v *Reservation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Reservation_State, string(v.State))
 	}
-	serializeTags(s, schemas.Reservation_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Reservation_Tags, v.Tags)
+	}
 	if v.UsagePrice != nil {
 		s.WriteFloat64(schemas.Reservation_UsagePrice, *v.UsagePrice)
 	}
@@ -21160,7 +21725,9 @@ func (v *RouterInputSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouterInputSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRouterDestination(s, schemas.RouterInputSettings_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serialize__listOfRouterDestination(s, schemas.RouterInputSettings_Destinations, v.Destinations)
+	}
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.RouterInputSettings_EncryptionType, string(v.EncryptionType))
 	}
@@ -21215,7 +21782,9 @@ func (v *RouterSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouterSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRouterDestinationSettings(s, schemas.RouterSettings_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serialize__listOfRouterDestinationSettings(s, schemas.RouterSettings_Destinations, v.Destinations)
+	}
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.RouterSettings_EncryptionType, string(v.EncryptionType))
 	}
@@ -21362,7 +21931,9 @@ func (v *RtmpGroupSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RtmpGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRtmpAdMarkers(s, schemas.RtmpGroupSettings_AdMarkers, v.AdMarkers)
+	if v.AdMarkers != nil {
+		serialize__listOfRtmpAdMarkers(s, schemas.RtmpGroupSettings_AdMarkers, v.AdMarkers)
+	}
 	if v.AuthenticationScheme != "" {
 		s.WriteString(schemas.RtmpGroupSettings_AuthenticationScheme, string(v.AuthenticationScheme))
 	}
@@ -22551,7 +23122,9 @@ func (v *Scte35TimeSignalScheduleActionSettings) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *Scte35TimeSignalScheduleActionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfScte35Descriptor(s, schemas.Scte35TimeSignalScheduleActionSettings_Scte35Descriptors, v.Scte35Descriptors)
+	if v.Scte35Descriptors != nil {
+		serialize__listOfScte35Descriptor(s, schemas.Scte35TimeSignalScheduleActionSettings_Scte35Descriptors, v.Scte35Descriptors)
+	}
 }
 func (v *Scte35TimeSignalScheduleActionSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Scte35TimeSignalScheduleActionSettings, func(s *smithy.Schema) error {
@@ -22609,7 +23182,9 @@ func (v *SdiSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.SdiSource_Id, *v.Id)
 	}
-	serialize__listOf__string(s, schemas.SdiSource_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serialize__listOf__string(s, schemas.SdiSource_Inputs, v.Inputs)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.SdiSource_Mode, string(v.Mode))
 	}
@@ -22814,7 +23389,9 @@ func (v *SdiSourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.SdiSourceSummary_Id, *v.Id)
 	}
-	serialize__listOf__string(s, schemas.SdiSourceSummary_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serialize__listOf__string(s, schemas.SdiSourceSummary_Inputs, v.Inputs)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.SdiSourceSummary_Mode, string(v.Mode))
 	}
@@ -22946,7 +23523,9 @@ func (v *SignalMapSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.SignalMapSummary_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.SignalMapSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.SignalMapSummary_Tags, v.Tags)
+	}
 }
 func (v *SignalMapSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SignalMapSummary, func(s *smithy.Schema) error {
@@ -23099,8 +23678,12 @@ func (v *Smpte2110ReceiverGroupSdpSettings) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *Smpte2110ReceiverGroupSdpSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfInputSdpLocation(s, schemas.Smpte2110ReceiverGroupSdpSettings_AncillarySdps, v.AncillarySdps)
-	serialize__listOfInputSdpLocation(s, schemas.Smpte2110ReceiverGroupSdpSettings_AudioSdps, v.AudioSdps)
+	if v.AncillarySdps != nil {
+		serialize__listOfInputSdpLocation(s, schemas.Smpte2110ReceiverGroupSdpSettings_AncillarySdps, v.AncillarySdps)
+	}
+	if v.AudioSdps != nil {
+		serialize__listOfInputSdpLocation(s, schemas.Smpte2110ReceiverGroupSdpSettings_AudioSdps, v.AudioSdps)
+	}
 	if v.VideoSdp != nil {
 		s.WriteStruct(schemas.Smpte2110ReceiverGroupSdpSettings_VideoSdp)
 		v.VideoSdp.SerializeMembers(s)
@@ -23138,7 +23721,9 @@ func (v *Smpte2110ReceiverGroupSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Smpte2110ReceiverGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSmpte2110ReceiverGroup(s, schemas.Smpte2110ReceiverGroupSettings_Smpte2110ReceiverGroups, v.Smpte2110ReceiverGroups)
+	if v.Smpte2110ReceiverGroups != nil {
+		serialize__listOfSmpte2110ReceiverGroup(s, schemas.Smpte2110ReceiverGroupSettings_Smpte2110ReceiverGroups, v.Smpte2110ReceiverGroups)
+	}
 }
 func (v *Smpte2110ReceiverGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Smpte2110ReceiverGroupSettings, func(s *smithy.Schema) error {
@@ -23889,7 +24474,9 @@ func (v *SrtSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SrtSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSrtCallerSource(s, schemas.SrtSettings_SrtCallerSources, v.SrtCallerSources)
+	if v.SrtCallerSources != nil {
+		serialize__listOfSrtCallerSource(s, schemas.SrtSettings_SrtCallerSources, v.SrtCallerSources)
+	}
 	if v.SrtListenerSettings != nil {
 		s.WriteStruct(schemas.SrtSettings_SrtListenerSettings)
 		v.SrtListenerSettings.SerializeMembers(s)
@@ -23931,7 +24518,9 @@ func (v *SrtSettingsRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SrtSettingsRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSrtCallerSourceRequest(s, schemas.SrtSettingsRequest_SrtCallerSources, v.SrtCallerSources)
+	if v.SrtCallerSources != nil {
+		serialize__listOfSrtCallerSourceRequest(s, schemas.SrtSettingsRequest_SrtCallerSources, v.SrtCallerSources)
+	}
 	if v.SrtListenerSettings != nil {
 		s.WriteStruct(schemas.SrtSettingsRequest_SrtListenerSettings)
 		v.SrtListenerSettings.SerializeMembers(s)
@@ -24304,7 +24893,9 @@ func (v *StaticImageOutputActivateScheduleActionSettings) SerializeMembers(s smi
 	if v.Opacity != nil {
 		s.WriteInt32(schemas.StaticImageOutputActivateScheduleActionSettings_Opacity, *v.Opacity)
 	}
-	serialize__listOf__string(s, schemas.StaticImageOutputActivateScheduleActionSettings_OutputNames, v.OutputNames)
+	if v.OutputNames != nil {
+		serialize__listOf__string(s, schemas.StaticImageOutputActivateScheduleActionSettings_OutputNames, v.OutputNames)
+	}
 	if v.Width != nil {
 		s.WriteInt32(schemas.StaticImageOutputActivateScheduleActionSettings_Width, *v.Width)
 	}
@@ -24379,7 +24970,9 @@ func (v *StaticImageOutputDeactivateScheduleActionSettings) SerializeMembers(s s
 	if v.Layer != nil {
 		s.WriteInt32(schemas.StaticImageOutputDeactivateScheduleActionSettings_Layer, *v.Layer)
 	}
-	serialize__listOf__string(s, schemas.StaticImageOutputDeactivateScheduleActionSettings_OutputNames, v.OutputNames)
+	if v.OutputNames != nil {
+		serialize__listOf__string(s, schemas.StaticImageOutputDeactivateScheduleActionSettings_OutputNames, v.OutputNames)
+	}
 }
 func (v *StaticImageOutputDeactivateScheduleActionSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StaticImageOutputDeactivateScheduleActionSettings, func(s *smithy.Schema) error {
@@ -24812,7 +25405,9 @@ func (v *ThumbnailDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineId != nil {
 		s.WriteString(schemas.ThumbnailDetail_PipelineId, *v.PipelineId)
 	}
-	serialize__listOfThumbnail(s, schemas.ThumbnailDetail_Thumbnails, v.Thumbnails)
+	if v.Thumbnails != nil {
+		serialize__listOfThumbnail(s, schemas.ThumbnailDetail_Thumbnails, v.Thumbnails)
+	}
 }
 func (v *ThumbnailDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ThumbnailDetail, func(s *smithy.Schema) error {
@@ -25916,9 +26511,15 @@ func (v *VpcOutputSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcOutputSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.VpcOutputSettings_PublicAddressAllocationIds, v.PublicAddressAllocationIds)
-	serialize__listOf__string(s, schemas.VpcOutputSettings_SecurityGroupIds, v.SecurityGroupIds)
-	serialize__listOf__string(s, schemas.VpcOutputSettings_SubnetIds, v.SubnetIds)
+	if v.PublicAddressAllocationIds != nil {
+		serialize__listOf__string(s, schemas.VpcOutputSettings_PublicAddressAllocationIds, v.PublicAddressAllocationIds)
+	}
+	if v.SecurityGroupIds != nil {
+		serialize__listOf__string(s, schemas.VpcOutputSettings_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serialize__listOf__string(s, schemas.VpcOutputSettings_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcOutputSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcOutputSettings, func(s *smithy.Schema) error {
@@ -25963,10 +26564,18 @@ func (v *VpcOutputSettingsDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcOutputSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_AvailabilityZones, v.AvailabilityZones)
-	serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_NetworkInterfaceIds, v.NetworkInterfaceIds)
-	serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_SecurityGroupIds, v.SecurityGroupIds)
-	serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_SubnetIds, v.SubnetIds)
+	if v.AvailabilityZones != nil {
+		serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.NetworkInterfaceIds != nil {
+		serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	}
+	if v.SecurityGroupIds != nil {
+		serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serialize__listOf__string(s, schemas.VpcOutputSettingsDescription_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcOutputSettingsDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcOutputSettingsDescription, func(s *smithy.Schema) error {

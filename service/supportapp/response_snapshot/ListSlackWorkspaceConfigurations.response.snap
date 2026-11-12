@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","slackWorkspaceConfigurations":[{"allowOrganizationMemberAccount":true,"teamId":"__TeamId__","teamName":"__TeamName__"},{"allowOrganizationMemberAccount":true,"teamId":"__TeamId__","teamName":"__TeamName__"}]}

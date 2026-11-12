@@ -48,7 +48,9 @@ func (v *DisassociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DisassociateAccountsInput_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DisassociateAccountsInput_AccountIds, v.AccountIds)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.DisassociateAccountsInput_Arn, *v.Arn)
 	}

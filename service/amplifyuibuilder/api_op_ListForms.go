@@ -111,7 +111,9 @@ func (v *ListFormsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFormSummaryList(s, schemas.ListFormsResponse_entities, v.Entities)
+	if v.Entities != nil {
+		serializeFormSummaryList(s, schemas.ListFormsResponse_entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFormsResponse_nextToken, *v.NextToken)
 	}

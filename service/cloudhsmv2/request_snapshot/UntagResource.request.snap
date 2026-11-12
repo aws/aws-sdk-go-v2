@@ -1,6 +1,7 @@
-POST /
+POST /service/BaldrApiService/operation/UntagResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.UntagResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__","TagKeyList":["__Member__","__Member__"]}
+¿jResourceIdn__ResourceId__jTagKeyListŸj__Member__j__Member__ÿÿ

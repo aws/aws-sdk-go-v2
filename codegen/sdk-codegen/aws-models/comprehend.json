@@ -1414,6 +1414,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>Amazon Comprehend is an Amazon Web Services service for gaining insight into the content of documents.\n      Use these actions to determine the topics contained in your documents, the topics they\n      discuss, the predominant sentiment expressed in them, the predominant language used, and\n      more.</p>",
                 "smithy.api#title": "Amazon Comprehend",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

@@ -1199,6 +1199,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Creates a container for a collection of data being ingested for analysis. The dataset\n         contains the metadata describing where the data is and what the data actually looks like.\n         For example, it contains the location of the data source, the data schema, and other\n         information. A dataset also contains any tags associated with the ingested data. </p>"
             }
         },
@@ -1301,6 +1305,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Creates a scheduled inference. Scheduling an inference is setting up a continuous\n         real-time inference plan to analyze new measurement data. When setting up the schedule, you\n         provide an S3 bucket location for the input data, assign it a delimiter between separate\n         entries in the data, set an offset delay if desired, and set the frequency of inferencing.\n         You must also provide an S3 bucket location for the output data. </p>"
             }
         },
@@ -1444,6 +1452,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Creates a label for an event. </p>"
             }
         },
@@ -1476,6 +1488,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Creates a group of labels. </p>"
             }
         },
@@ -1642,6 +1658,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Creates a machine learning model for data inference. </p>\n         <p>A machine-learning (ML) model is a mathematical model that finds patterns in your data.\n         In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal\n         behavior that could be potential equipment failure (or maintenance events). The models are\n         made by analyzing normal data and abnormalities in machine behavior that have already\n         occurred.</p>\n         <p>Your model is trained using a portion of the data from your dataset and uses that data\n         to learn patterns of normal behavior and abnormal patterns that lead to equipment failure.\n         Another portion of the data is used to evaluate the model's accuracy. </p>"
             }
         },
@@ -1796,6 +1816,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Creates a retraining scheduler on the specified model. </p>",
                 "smithy.api#examples": [
                     {
@@ -2201,6 +2225,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Deletes a dataset and associated artifacts. The operation will check to see if any\n         inference scheduler or data ingestion job is currently using the dataset, and if there\n         isn't, the dataset, its metadata, and any associated data stored in S3 will be deleted.\n         This does not affect any models that used this dataset for training and evaluation, but\n         does prevent it from being used in the future. </p>"
             }
         },
@@ -2248,6 +2276,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Deletes an inference scheduler that has been set up. Prior inference results will not be\n         deleted.</p>"
             }
         },
@@ -2295,6 +2327,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Deletes a label. </p>"
             }
         },
@@ -2327,6 +2363,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Deletes a group of labels. </p>"
             }
         },
@@ -2396,6 +2436,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Deletes a machine learning model currently available for Amazon Lookout for Equipment. This will prevent it\n         from being used with an inference scheduler, even one that is already set up. </p>"
             }
         },
@@ -2443,6 +2487,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Deletes the resource policy attached to the resource.</p>"
             }
         },
@@ -2490,6 +2538,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Deletes a retraining scheduler from a model. The retraining scheduler must be in the\n            <code>STOPPED</code> status. </p>",
                 "smithy.api#examples": [
                     {
@@ -2543,6 +2595,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Provides information on a specific data ingestion job such as creation time, dataset\n         ARN, and status.</p>"
             }
         },
@@ -2676,6 +2732,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Provides a JSON description of the data in each time series dataset, including names,\n         column names, and data types.</p>"
             }
         },
@@ -2812,6 +2872,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Specifies information about the inference scheduler being used, including name, model,\n         status, and associated metadata </p>"
             }
         },
@@ -2948,6 +3012,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Returns the name of the label. </p>"
             }
         },
@@ -2977,6 +3045,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Returns information about the label group. </p>"
             }
         },
@@ -3149,6 +3221,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Provides a JSON containing the overall information about a specific machine learning\n         model, including model name and ARN, dataset, training and evaluation information, status,\n         and so on. </p>"
             }
         },
@@ -3453,6 +3529,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Retrieves information about a specific machine learning model version.</p>"
             }
         },
@@ -3716,6 +3796,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Provides the details of a resource policy attached to a resource.</p>"
             }
         },
@@ -3792,6 +3876,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Provides a description of the retraining scheduler, including information such as the\n         model name and retraining parameters. </p>",
                 "smithy.api#examples": [
                     {
@@ -4011,6 +4099,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Imports a dataset.</p>"
             }
         },
@@ -4119,6 +4211,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Imports a model that has been trained successfully.</p>"
             }
         },
@@ -5114,6 +5210,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Provides a list of all data ingestion jobs, including dataset name and ARN, S3 location\n         of the input data, status, and so on. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5197,6 +5297,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Lists all datasets currently available in your account, filtering on the dataset name.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5277,6 +5381,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Lists all inference events that have been found for the specified inference scheduler.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5372,6 +5480,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Lists all inference executions that have been performed by the specified inference\n         scheduler. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5468,6 +5580,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of all inference schedulers currently available for your account.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5557,6 +5673,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Returns a list of the label groups. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5634,6 +5754,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Provides a list of labels. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5739,6 +5863,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Generates a list of all model versions for a given model, including the model version,\n         model version ARN, and status. To list a subset of versions, use the\n            <code>MaxModelVersion</code> and <code>MinModelVersion</code> fields.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5853,6 +5981,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Generates a list of all models in the account, including model name and ARN, dataset,\n         and status. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5953,6 +6085,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Lists all retraining schedulers in your account, filtering by model name prefix and\n         status. </p>",
                 "smithy.api#examples": [
                     {
@@ -6076,6 +6212,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Lists statistics about the data collected for each of the sensors that have been\n         successfully ingested in the particular dataset. Can also be used to retreive Sensor\n         Statistics for a previous ingestion job. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -6163,6 +6303,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Lists all the tags for a specified resource, including key and value. </p>"
             }
         },
@@ -6766,6 +6910,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Creates a resource control policy for a given resource.</p>"
             }
         },
@@ -7158,6 +7306,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Starts a data ingestion job. Amazon Lookout for Equipment returns the job status. </p>"
             }
         },
@@ -7247,6 +7399,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Starts an inference scheduler. </p>"
             }
         },
@@ -7332,6 +7488,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Starts a retraining scheduler. </p>",
                 "smithy.api#examples": [
                     {
@@ -7436,6 +7596,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Stops an inference scheduler. </p>"
             }
         },
@@ -7521,6 +7685,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Stops a retraining scheduler. </p>",
                 "smithy.api#examples": [
                     {
@@ -7684,6 +7852,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Associates a given tag to a resource in your account. A tag is a key-value pair which\n         can be added to an Amazon Lookout for Equipment resource as metadata. Tags can be used for organizing your\n         resources as well as helping you to search and filter by tag. Multiple tags can be added to\n         a resource, either when you create it, or later. Up to 50 tags can be associated with each\n         resource. </p>"
             }
         },
@@ -7863,6 +8035,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Removes a specific tag from a given resource. The tag is specified by its key. </p>"
             }
         },
@@ -7924,6 +8100,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Sets the active model version for a given machine learning model.</p>"
             }
         },
@@ -8022,6 +8202,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Updates an inference scheduler. </p>"
             }
         },
@@ -8099,6 +8283,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p> Updates the label group. </p>"
             }
         },
@@ -8152,6 +8340,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Updates a model in the account.</p>",
                 "smithy.api#examples": [
                     {
@@ -8226,6 +8418,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2026-10-07",
+                    "message": "End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/"
+                },
                 "smithy.api#documentation": "<p>Updates a retraining scheduler. </p>",
                 "smithy.api#examples": [
                     {

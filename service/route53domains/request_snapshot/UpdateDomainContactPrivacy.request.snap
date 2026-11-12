@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53Domains_v20140515/operation/UpdateDomainContactPrivacy
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.UpdateDomainContactPrivacy
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AdminPrivacy":true,"BillingPrivacy":true,"DomainName":"__DomainName__","RegistrantPrivacy":true,"TechPrivacy":true}
+¿lAdminPrivacyõnBillingPrivacyõjDomainNamen__DomainName__qRegistrantPrivacyõkTechPrivacyõÿ

@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAlarms(s smithy.ShapeSerializer, schema *smithy.Schema, v []Alarm) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeAlarms(s smithy.ShapeSerializer, schema *smithy.Schema, v []Alarm)
 }
 
 func serializeLoadForecasts(s smithy.ShapeSerializer, schema *smithy.Schema, v []LoadForecast) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeLoadForecasts(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeMetricDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetricDimension) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeMetricDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeNotScaledReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v []NotScaledReason) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -60,9 +48,6 @@ func serializeNotScaledReasons(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializePredictiveScalingForecastTimestamps(s smithy.ShapeSerializer, schema *smithy.Schema, v []time.Time) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteTime(schema.ListMember(), vv)
@@ -71,9 +56,6 @@ func serializePredictiveScalingForecastTimestamps(s smithy.ShapeSerializer, sche
 }
 
 func serializePredictiveScalingForecastValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -82,9 +64,6 @@ func serializePredictiveScalingForecastValues(s smithy.ShapeSerializer, schema *
 }
 
 func serializePredictiveScalingMetricDataQueries(s smithy.ShapeSerializer, schema *smithy.Schema, v []PredictiveScalingMetricDataQuery) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -95,9 +74,6 @@ func serializePredictiveScalingMetricDataQueries(s smithy.ShapeSerializer, schem
 }
 
 func serializePredictiveScalingMetricDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, v []PredictiveScalingMetricDimension) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -108,9 +84,6 @@ func serializePredictiveScalingMetricDimensions(s smithy.ShapeSerializer, schema
 }
 
 func serializePredictiveScalingMetricSpecifications(s smithy.ShapeSerializer, schema *smithy.Schema, v []PredictiveScalingMetricSpecification) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -121,9 +94,6 @@ func serializePredictiveScalingMetricSpecifications(s smithy.ShapeSerializer, sc
 }
 
 func serializeResourceIdsMaxLen1600(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -132,9 +102,6 @@ func serializeResourceIdsMaxLen1600(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeScalableTargets(s smithy.ShapeSerializer, schema *smithy.Schema, v []ScalableTarget) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -145,9 +112,6 @@ func serializeScalableTargets(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeScalingActivities(s smithy.ShapeSerializer, schema *smithy.Schema, v []ScalingActivity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -158,9 +122,6 @@ func serializeScalingActivities(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeScalingPolicies(s smithy.ShapeSerializer, schema *smithy.Schema, v []ScalingPolicy) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -171,9 +132,6 @@ func serializeScalingPolicies(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeScheduledActions(s smithy.ShapeSerializer, schema *smithy.Schema, v []ScheduledAction) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -184,9 +142,6 @@ func serializeScheduledActions(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeStepAdjustments(s smithy.ShapeSerializer, schema *smithy.Schema, v []StepAdjustment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -197,9 +152,6 @@ func serializeStepAdjustments(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -208,9 +160,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTargetTrackingMetricDataQueries(s smithy.ShapeSerializer, schema *smithy.Schema, v []TargetTrackingMetricDataQuery) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -221,9 +170,6 @@ func serializeTargetTrackingMetricDataQueries(s smithy.ShapeSerializer, schema *
 }
 
 func serializeTargetTrackingMetricDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, v []TargetTrackingMetricDimension) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -626,9 +572,6 @@ func deserializeTargetTrackingMetricDimensions(d smithy.ShapeDeserializer, s *sm
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

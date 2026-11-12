@@ -98,18 +98,24 @@ func (v *CreateFeaturedResultsSetInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Description != nil {
 		s.WriteString(schemas.CreateFeaturedResultsSetRequest_Description, *v.Description)
 	}
-	serializeFeaturedDocumentList(s, schemas.CreateFeaturedResultsSetRequest_FeaturedDocuments, v.FeaturedDocuments)
+	if v.FeaturedDocuments != nil {
+		serializeFeaturedDocumentList(s, schemas.CreateFeaturedResultsSetRequest_FeaturedDocuments, v.FeaturedDocuments)
+	}
 	if v.FeaturedResultsSetName != nil {
 		s.WriteString(schemas.CreateFeaturedResultsSetRequest_FeaturedResultsSetName, *v.FeaturedResultsSetName)
 	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.CreateFeaturedResultsSetRequest_IndexId, *v.IndexId)
 	}
-	serializeQueryTextList(s, schemas.CreateFeaturedResultsSetRequest_QueryTexts, v.QueryTexts)
+	if v.QueryTexts != nil {
+		serializeQueryTextList(s, schemas.CreateFeaturedResultsSetRequest_QueryTexts, v.QueryTexts)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateFeaturedResultsSetRequest_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateFeaturedResultsSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFeaturedResultsSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFeaturedResultsSetOutput struct {

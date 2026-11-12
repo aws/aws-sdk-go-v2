@@ -50,7 +50,9 @@ func (v *RevokeIpRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupId != nil {
 		s.WriteString(schemas.RevokeIpRulesRequest_GroupId, *v.GroupId)
 	}
-	serializeIpRevokedRuleList(s, schemas.RevokeIpRulesRequest_UserRules, v.UserRules)
+	if v.UserRules != nil {
+		serializeIpRevokedRuleList(s, schemas.RevokeIpRulesRequest_UserRules, v.UserRules)
+	}
 }
 
 type RevokeIpRulesOutput struct {
@@ -90,6 +92,9 @@ func (c *Client) addOperationRevokeIpRulesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

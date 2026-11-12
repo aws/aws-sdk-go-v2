@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecurityGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DeleteSecurityGroupRequest_groupId, *v.GroupId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.DeleteSecurityGroupRequest_networkId, *v.NetworkId)
+	}
+}
+
 type DeleteSecurityGroupOutput struct {
 
 	// The ID of the security group that was deleted.
@@ -56,13 +73,44 @@ type DeleteSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecurityGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DeleteSecurityGroupResponse_groupId, *v.GroupId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteSecurityGroupResponse_message, *v.Message)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.DeleteSecurityGroupResponse_networkId, *v.NetworkId)
+	}
+}
+func (v *DeleteSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSecurityGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSecurityGroupResponse_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DeleteSecurityGroupResponse_groupId, v.GroupId)
+		case schemas.DeleteSecurityGroupResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteSecurityGroupResponse_message, v.Message)
+		case schemas.DeleteSecurityGroupResponse_networkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.DeleteSecurityGroupResponse_networkId, v.NetworkId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityGroup, schemas.DeleteSecurityGroupRequest, schemas.DeleteSecurityGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityGroup, schemas.DeleteSecurityGroupRequest, schemas.DeleteSecurityGroupResponse), output: &DeleteSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -42,6 +43,27 @@ func (e *InvalidContentLocation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidContentLocation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidContentLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidContentLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidContentLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidContentLocation_message, *v.Message)
+	}
+}
+func (v *InvalidContentLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidContentLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidContentLocation_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidContentLocation_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested email is not eligible for update. This is usually the case for a
 // redirected email.
@@ -69,6 +91,27 @@ func (e *MessageFrozen) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MessageFrozen) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MessageFrozen) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageFrozen)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageFrozen) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MessageFrozen_message, *v.Message)
+	}
+}
+func (v *MessageFrozen) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageFrozen, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageFrozen_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MessageFrozen_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested email could not be updated due to an error in the MIME content.
 // Check the error message for more information about what caused the error.
@@ -96,6 +139,27 @@ func (e *MessageRejected) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MessageRejected) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageRejected)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageRejected) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MessageRejected_message, *v.Message)
+	}
+}
+func (v *MessageRejected) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageRejected, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageRejected_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MessageRejected_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested email message is not found.
 type ResourceNotFoundException struct {
@@ -122,3 +186,24 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}

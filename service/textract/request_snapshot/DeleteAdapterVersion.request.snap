@@ -1,6 +1,7 @@
-POST /
+POST /service/Textract/operation/DeleteAdapterVersion
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.DeleteAdapterVersion
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AdapterId":"__AdapterId__","AdapterVersion":"__AdapterVersion__"}
+¿iAdapterIdm__AdapterId__nAdapterVersionr__AdapterVersion__ÿ

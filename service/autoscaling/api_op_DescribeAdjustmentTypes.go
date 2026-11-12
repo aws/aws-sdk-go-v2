@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,22 @@ type DescribeAdjustmentTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAdjustmentTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAdjustmentTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeAdjustmentTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeAdjustmentTypesOutput struct {
 
 	// The policy adjustment types.
@@ -48,13 +66,31 @@ type DescribeAdjustmentTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAdjustmentTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAdjustmentTypesAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAdjustmentTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentTypes != nil {
+		serializeAdjustmentTypes(s, schemas.DescribeAdjustmentTypesAnswer_AdjustmentTypes, v.AdjustmentTypes)
+	}
+}
+func (v *DescribeAdjustmentTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAdjustmentTypesAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAdjustmentTypesAnswer_AdjustmentTypes:
+			return deserializeAdjustmentTypes(d, schemas.DescribeAdjustmentTypesAnswer_AdjustmentTypes, &v.AdjustmentTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAdjustmentTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAdjustmentTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAdjustmentTypes, nil, schemas.DescribeAdjustmentTypesAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAdjustmentTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAdjustmentTypes, nil, schemas.DescribeAdjustmentTypesAnswer), output: &DescribeAdjustmentTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

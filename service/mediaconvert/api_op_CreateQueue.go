@@ -101,7 +101,9 @@ func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateQueueRequest_Status, string(v.Status))
 	}
-	serialize__mapOf__string(s, schemas.CreateQueueRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateQueueRequest_Tags, v.Tags)
+	}
 }
 
 type CreateQueueOutput struct {

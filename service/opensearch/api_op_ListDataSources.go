@@ -71,7 +71,9 @@ func (v *ListDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceList(s, schemas.ListDataSourcesResponse_DataSources, v.DataSources)
+	if v.DataSources != nil {
+		serializeDataSourceList(s, schemas.ListDataSourcesResponse_DataSources, v.DataSources)
+	}
 }
 func (v *ListDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataSourcesResponse, func(s *smithy.Schema) error {

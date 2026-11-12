@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeEngineVersions
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeEngineVersions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DefaultOnly":true,"Engine":"__Engine__","EngineVersion":"__EngineVersion__","MaxResults":1,"NextToken":"__NextToken__","ParameterGroupFamily":"__ParameterGroupFamily__"}
+¿kDefaultOnlyõfEnginej__Engine__mEngineVersionq__EngineVersion__jMaxResultsiNextTokenm__NextToken__tParameterGroupFamilyx__ParameterGroupFamily__ÿ

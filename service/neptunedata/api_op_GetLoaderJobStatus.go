@@ -5,6 +5,10 @@ package neptunedata
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +68,30 @@ type GetLoaderJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoaderJobStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoaderJobStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoaderJobStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteBool(schemas.GetLoaderJobStatusInput_details, *v.Details)
+	}
+	if v.Errors != nil {
+		s.WriteBool(schemas.GetLoaderJobStatusInput_errors, *v.Errors)
+	}
+	if v.ErrorsPerPage != nil {
+		s.WriteInt32(schemas.GetLoaderJobStatusInput_errorsPerPage, *v.ErrorsPerPage)
+	}
+	if v.LoadId != nil {
+		s.WriteString(schemas.GetLoaderJobStatusInput_loadId, *v.LoadId)
+	}
+	if v.Page != nil {
+		s.WriteInt32(schemas.GetLoaderJobStatusInput_page, *v.Page)
+	}
+}
+
 type GetLoaderJobStatusOutput struct {
 
 	// Status information about the load job, in a layout that could look like this:
@@ -82,13 +110,44 @@ type GetLoaderJobStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoaderJobStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoaderJobStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoaderJobStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteDocument(schemas.GetLoaderJobStatusOutput_payload, &smithydocument.Opaque{Value: v.Payload})
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetLoaderJobStatusOutput_status, *v.Status)
+	}
+}
+func (v *GetLoaderJobStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLoaderJobStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLoaderJobStatusOutput_payload:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetLoaderJobStatusOutput_payload, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Payload = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetLoaderJobStatusOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetLoaderJobStatusOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLoaderJobStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLoaderJobStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoaderJobStatus, schemas.GetLoaderJobStatusInput, schemas.GetLoaderJobStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLoaderJobStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoaderJobStatus, schemas.GetLoaderJobStatusInput, schemas.GetLoaderJobStatusOutput), output: &GetLoaderJobStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -83,18 +83,24 @@ func (v *AllQueryStringTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryBoolean != nil {
 		s.WriteBool(schemas.AllQueryStringTypesInput_queryBoolean, *v.QueryBoolean)
 	}
-	serializeBooleanList(s, schemas.AllQueryStringTypesInput_queryBooleanList, v.QueryBooleanList)
+	if v.QueryBooleanList != nil {
+		serializeBooleanList(s, schemas.AllQueryStringTypesInput_queryBooleanList, v.QueryBooleanList)
+	}
 	if v.QueryByte != nil {
 		s.WriteInt8(schemas.AllQueryStringTypesInput_queryByte, *v.QueryByte)
 	}
 	if v.QueryDouble != nil {
 		s.WriteFloat64(schemas.AllQueryStringTypesInput_queryDouble, *v.QueryDouble)
 	}
-	serializeDoubleList(s, schemas.AllQueryStringTypesInput_queryDoubleList, v.QueryDoubleList)
+	if v.QueryDoubleList != nil {
+		serializeDoubleList(s, schemas.AllQueryStringTypesInput_queryDoubleList, v.QueryDoubleList)
+	}
 	if v.QueryEnum != "" {
 		s.WriteString(schemas.AllQueryStringTypesInput_queryEnum, string(v.QueryEnum))
 	}
-	serializeFooEnumList(s, schemas.AllQueryStringTypesInput_queryEnumList, v.QueryEnumList)
+	if v.QueryEnumList != nil {
+		serializeFooEnumList(s, schemas.AllQueryStringTypesInput_queryEnumList, v.QueryEnumList)
+	}
 	if v.QueryFloat != nil {
 		s.WriteFloat32(schemas.AllQueryStringTypesInput_queryFloat, *v.QueryFloat)
 	}
@@ -104,25 +110,39 @@ func (v *AllQueryStringTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryIntegerEnum != 0 {
 		s.WriteInt32(schemas.AllQueryStringTypesInput_queryIntegerEnum, int32(v.QueryIntegerEnum))
 	}
-	serializeIntegerEnumList(s, schemas.AllQueryStringTypesInput_queryIntegerEnumList, v.QueryIntegerEnumList)
-	serializeIntegerList(s, schemas.AllQueryStringTypesInput_queryIntegerList, v.QueryIntegerList)
-	serializeIntegerSet(s, schemas.AllQueryStringTypesInput_queryIntegerSet, v.QueryIntegerSet)
+	if v.QueryIntegerEnumList != nil {
+		serializeIntegerEnumList(s, schemas.AllQueryStringTypesInput_queryIntegerEnumList, v.QueryIntegerEnumList)
+	}
+	if v.QueryIntegerList != nil {
+		serializeIntegerList(s, schemas.AllQueryStringTypesInput_queryIntegerList, v.QueryIntegerList)
+	}
+	if v.QueryIntegerSet != nil {
+		serializeIntegerSet(s, schemas.AllQueryStringTypesInput_queryIntegerSet, v.QueryIntegerSet)
+	}
 	if v.QueryLong != nil {
 		s.WriteInt64(schemas.AllQueryStringTypesInput_queryLong, *v.QueryLong)
 	}
-	serializeStringListMap(s, schemas.AllQueryStringTypesInput_queryParamsMapOfStringList, v.QueryParamsMapOfStringList)
+	if v.QueryParamsMapOfStringList != nil {
+		serializeStringListMap(s, schemas.AllQueryStringTypesInput_queryParamsMapOfStringList, v.QueryParamsMapOfStringList)
+	}
 	if v.QueryShort != nil {
 		s.WriteInt16(schemas.AllQueryStringTypesInput_queryShort, *v.QueryShort)
 	}
 	if v.QueryString != nil {
 		s.WriteString(schemas.AllQueryStringTypesInput_queryString, *v.QueryString)
 	}
-	serializeStringList(s, schemas.AllQueryStringTypesInput_queryStringList, v.QueryStringList)
-	serializeStringSet(s, schemas.AllQueryStringTypesInput_queryStringSet, v.QueryStringSet)
+	if v.QueryStringList != nil {
+		serializeStringList(s, schemas.AllQueryStringTypesInput_queryStringList, v.QueryStringList)
+	}
+	if v.QueryStringSet != nil {
+		serializeStringSet(s, schemas.AllQueryStringTypesInput_queryStringSet, v.QueryStringSet)
+	}
 	if v.QueryTimestamp != nil {
 		s.WriteTime(schemas.AllQueryStringTypesInput_queryTimestamp, *v.QueryTimestamp)
 	}
-	serializeTimestampList(s, schemas.AllQueryStringTypesInput_queryTimestampList, v.QueryTimestampList)
+	if v.QueryTimestampList != nil {
+		serializeTimestampList(s, schemas.AllQueryStringTypesInput_queryTimestampList, v.QueryTimestampList)
+	}
 }
 func (v *AllQueryStringTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AllQueryStringTypesInput, func(s *smithy.Schema) error {

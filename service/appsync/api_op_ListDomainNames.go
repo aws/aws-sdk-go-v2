@@ -76,7 +76,9 @@ func (v *ListDomainNamesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainNameConfigs(s, schemas.ListDomainNamesResponse_domainNameConfigs, v.DomainNameConfigs)
+	if v.DomainNameConfigs != nil {
+		serializeDomainNameConfigs(s, schemas.ListDomainNamesResponse_domainNameConfigs, v.DomainNameConfigs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainNamesResponse_nextToken, *v.NextToken)
 	}

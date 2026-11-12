@@ -75,7 +75,9 @@ func (v *DescribeFleetAdvisorDatabasesInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeFleetAdvisorDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeFleetAdvisorDatabasesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeFleetAdvisorDatabasesRequest_Filters, v.Filters)
+	}
 	if v.MaxRecords != nil {
 		s.WriteInt32(schemas.DescribeFleetAdvisorDatabasesRequest_MaxRecords, *v.MaxRecords)
 	}
@@ -109,7 +111,9 @@ func (v *DescribeFleetAdvisorDatabasesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeFleetAdvisorDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseList(s, schemas.DescribeFleetAdvisorDatabasesResponse_Databases, v.Databases)
+	if v.Databases != nil {
+		serializeDatabaseList(s, schemas.DescribeFleetAdvisorDatabasesResponse_Databases, v.Databases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetAdvisorDatabasesResponse_NextToken, *v.NextToken)
 	}

@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,22 @@ type DeletePropertygraphStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePropertygraphStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePropertygraphStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePropertygraphStatisticsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DeletePropertygraphStatisticsOutput struct {
 
 	// The deletion payload.
@@ -52,13 +70,46 @@ type DeletePropertygraphStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePropertygraphStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePropertygraphStatisticsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePropertygraphStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteStruct(schemas.DeletePropertygraphStatisticsOutput_payload)
+		v.Payload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DeletePropertygraphStatisticsOutput_status, *v.Status)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.DeletePropertygraphStatisticsOutput_statusCode, *v.StatusCode)
+	}
+}
+func (v *DeletePropertygraphStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePropertygraphStatisticsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePropertygraphStatisticsOutput_payload:
+			v.Payload = &types.DeleteStatisticsValueMap{}
+			return v.Payload.Deserialize(d)
+		case schemas.DeletePropertygraphStatisticsOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeletePropertygraphStatisticsOutput_status, v.Status)
+		case schemas.DeletePropertygraphStatisticsOutput_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.DeletePropertygraphStatisticsOutput_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePropertygraphStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePropertygraphStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePropertygraphStatistics, nil, schemas.DeletePropertygraphStatisticsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePropertygraphStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePropertygraphStatistics, nil, schemas.DeletePropertygraphStatisticsOutput), output: &DeletePropertygraphStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

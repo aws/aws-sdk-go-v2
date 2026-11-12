@@ -5419,6 +5419,7 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://directoryservice.amazonaws.com/doc/2015-04-16/"
                 },
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

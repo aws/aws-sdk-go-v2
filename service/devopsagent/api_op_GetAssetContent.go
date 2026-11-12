@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type GetAssetContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.GetAssetContentRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetAssetContentRequest_assetId, *v.AssetId)
+	}
+	if v.AssetVersion != nil {
+		s.WriteInt32(schemas.GetAssetContentRequest_assetVersion, *v.AssetVersion)
+	}
+}
+
 // Response structure for getting an asset's content as a zip bundle
 type GetAssetContentOutput struct {
 
@@ -65,13 +85,40 @@ type GetAssetContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteStruct(schemas.GetAssetContentResponse_content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.GetAssetContentResponse_version, *v.Version)
+	}
+}
+func (v *GetAssetContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetContentResponse_content:
+			v.Content = &types.AssetZipContent{}
+			return v.Content.Deserialize(d)
+		case schemas.GetAssetContentResponse_version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.GetAssetContentResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetContent, schemas.GetAssetContentRequest, schemas.GetAssetContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetContent, schemas.GetAssetContentRequest, schemas.GetAssetContentResponse), output: &GetAssetContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

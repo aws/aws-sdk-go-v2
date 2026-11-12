@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/EnableRadius
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.EnableRadius
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DirectoryId":"__DirectoryId__","RadiusSettings":{"AuthenticationProtocol":"PAP","DisplayLabel":"__DisplayLabel__","RadiusPort":1,"RadiusRetries":1,"RadiusServers":["__Member__","__Member__"],"RadiusServersIpv6":["__Member__","__Member__"],"RadiusTimeout":1,"SharedSecret":"__SharedSecret__","UseSameUsername":true}}
+¿kDirectoryIdo__DirectoryId__nRadiusSettings¿vAuthenticationProtocolcPAPlDisplayLabelp__DisplayLabel__jRadiusPortmRadiusRetriesmRadiusServersŸj__Member__j__Member__ÿqRadiusServersIpv6Ÿj__Member__j__Member__ÿmRadiusTimeoutlSharedSecretp__SharedSecret__oUseSameUsernameõÿÿ

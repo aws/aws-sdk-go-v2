@@ -31,7 +31,9 @@ func (v *AsPathSegment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AsPathSegment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAsPathList(s, schemas.AsPathSegment_path, v.Path)
+	if v.Path != nil {
+		serializeAsPathList(s, schemas.AsPathSegment_path, v.Path)
+	}
 	if v.PathType != "" {
 		s.WriteString(schemas.AsPathSegment_pathType, string(v.PathType))
 	}
@@ -190,11 +192,15 @@ func (v *AvailableBillingMode) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AvailableBillingMode) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailablePortSpeeds(s, schemas.AvailableBillingMode_availablePortSpeeds, v.AvailablePortSpeeds)
+	if v.AvailablePortSpeeds != nil {
+		serializeAvailablePortSpeeds(s, schemas.AvailableBillingMode_availablePortSpeeds, v.AvailablePortSpeeds)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.AvailableBillingMode_billingMode, string(v.BillingMode))
 	}
-	serializeIncludedRegionList(s, schemas.AvailableBillingMode_includedRegions, v.IncludedRegions)
+	if v.IncludedRegions != nil {
+		serializeIncludedRegionList(s, schemas.AvailableBillingMode_includedRegions, v.IncludedRegions)
+	}
 }
 func (v *AvailableBillingMode) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AvailableBillingMode, func(s *smithy.Schema) error {
@@ -586,7 +592,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacSecCapable != nil {
 		s.WriteBool(schemas.Connection_macSecCapable, *v.MacSecCapable)
 	}
-	serializeMacSecKeyList(s, schemas.Connection_macSecKeys, v.MacSecKeys)
+	if v.MacSecKeys != nil {
+		serializeMacSecKeyList(s, schemas.Connection_macSecKeys, v.MacSecKeys)
+	}
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.Connection_ownerAccount, *v.OwnerAccount)
 	}
@@ -622,7 +630,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.Connection_region, *v.Region)
 	}
-	serializeTagList(s, schemas.Connection_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Connection_tags, v.Tags)
+	}
 	if v.Vlan != 0 {
 		s.WriteInt32(schemas.Connection_vlan, v.Vlan)
 	}
@@ -836,7 +846,9 @@ func (v *DirectConnectGateway) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StateChangeError != nil {
 		s.WriteString(schemas.DirectConnectGateway_stateChangeError, *v.StateChangeError)
 	}
-	serializeTagList(s, schemas.DirectConnectGateway_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DirectConnectGateway_tags, v.Tags)
+	}
 	if v.TotalPrefixPoolAllocations != nil {
 		s.WriteInt32(schemas.DirectConnectGateway_totalPrefixPoolAllocations, *v.TotalPrefixPoolAllocations)
 	}
@@ -942,7 +954,9 @@ func (v *DirectConnectGatewayAssociation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DirectConnectGatewayAssociation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway, v.AllowedPrefixesToDirectConnectGateway)
+	if v.AllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway, v.AllowedPrefixesToDirectConnectGateway)
+	}
 	if v.AssociatedCoreNetwork != nil {
 		s.WriteStruct(schemas.DirectConnectGatewayAssociation_associatedCoreNetwork)
 		v.AssociatedCoreNetwork.SerializeMembers(s)
@@ -1077,14 +1091,18 @@ func (v *DirectConnectGatewayAssociationProposal) SerializeMembers(s smithy.Shap
 	if v.DirectConnectGatewayOwnerAccount != nil {
 		s.WriteString(schemas.DirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount, *v.DirectConnectGatewayOwnerAccount)
 	}
-	serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway, v.ExistingAllowedPrefixesToDirectConnectGateway)
+	if v.ExistingAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway, v.ExistingAllowedPrefixesToDirectConnectGateway)
+	}
 	if v.ProposalId != nil {
 		s.WriteString(schemas.DirectConnectGatewayAssociationProposal_proposalId, *v.ProposalId)
 	}
 	if v.ProposalState != "" {
 		s.WriteString(schemas.DirectConnectGatewayAssociationProposal_proposalState, string(v.ProposalState))
 	}
-	serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway, v.RequestedAllowedPrefixesToDirectConnectGateway)
+	if v.RequestedAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway, v.RequestedAllowedPrefixesToDirectConnectGateway)
+	}
 }
 func (v *DirectConnectGatewayAssociationProposal) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DirectConnectGatewayAssociationProposal, func(s *smithy.Schema) error {
@@ -1360,7 +1378,9 @@ func (v *Interconnect) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacSecCapable != nil {
 		s.WriteBool(schemas.Interconnect_macSecCapable, *v.MacSecCapable)
 	}
-	serializeMacSecKeyList(s, schemas.Interconnect_macSecKeys, v.MacSecKeys)
+	if v.MacSecKeys != nil {
+		serializeMacSecKeyList(s, schemas.Interconnect_macSecKeys, v.MacSecKeys)
+	}
 	if v.PortEncryptionStatus != nil {
 		s.WriteString(schemas.Interconnect_portEncryptionStatus, *v.PortEncryptionStatus)
 	}
@@ -1370,7 +1390,9 @@ func (v *Interconnect) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.Interconnect_region, *v.Region)
 	}
-	serializeTagList(s, schemas.Interconnect_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Interconnect_tags, v.Tags)
+	}
 }
 func (v *Interconnect) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Interconnect, func(s *smithy.Schema) error {
@@ -1586,7 +1608,9 @@ func (v *Lag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BillingMode != "" {
 		s.WriteString(schemas.Lag_billingMode, string(v.BillingMode))
 	}
-	serializeConnectionList(s, schemas.Lag_connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionList(s, schemas.Lag_connections, v.Connections)
+	}
 	if v.ConnectionsBandwidth != nil {
 		s.WriteString(schemas.Lag_connectionsBandwidth, *v.ConnectionsBandwidth)
 	}
@@ -1614,7 +1638,9 @@ func (v *Lag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacSecCapable != nil {
 		s.WriteBool(schemas.Lag_macSecCapable, *v.MacSecCapable)
 	}
-	serializeMacSecKeyList(s, schemas.Lag_macSecKeys, v.MacSecKeys)
+	if v.MacSecKeys != nil {
+		serializeMacSecKeyList(s, schemas.Lag_macSecKeys, v.MacSecKeys)
+	}
 	if v.MinimumLinks != 0 {
 		s.WriteInt32(schemas.Lag_minimumLinks, v.MinimumLinks)
 	}
@@ -1647,7 +1673,9 @@ func (v *Lag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.Lag_region, *v.Region)
 	}
-	serializeTagList(s, schemas.Lag_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Lag_tags, v.Tags)
+	}
 }
 func (v *Lag) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Lag, func(s *smithy.Schema) error {
@@ -1825,10 +1853,18 @@ func (v *Location) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailableBillingModeList(s, schemas.Location_availableBillingModes, v.AvailableBillingModes)
-	serializeAvailableMacSecPortSpeeds(s, schemas.Location_availableMacSecPortSpeeds, v.AvailableMacSecPortSpeeds)
-	serializeAvailablePortSpeeds(s, schemas.Location_availablePortSpeeds, v.AvailablePortSpeeds)
-	serializeProviderList(s, schemas.Location_availableProviders, v.AvailableProviders)
+	if v.AvailableBillingModes != nil {
+		serializeAvailableBillingModeList(s, schemas.Location_availableBillingModes, v.AvailableBillingModes)
+	}
+	if v.AvailableMacSecPortSpeeds != nil {
+		serializeAvailableMacSecPortSpeeds(s, schemas.Location_availableMacSecPortSpeeds, v.AvailableMacSecPortSpeeds)
+	}
+	if v.AvailablePortSpeeds != nil {
+		serializeAvailablePortSpeeds(s, schemas.Location_availablePortSpeeds, v.AvailablePortSpeeds)
+	}
+	if v.AvailableProviders != nil {
+		serializeProviderList(s, schemas.Location_availableProviders, v.AvailableProviders)
+	}
 	if v.LocationCode != nil {
 		s.WriteString(schemas.Location_locationCode, *v.LocationCode)
 	}
@@ -2159,7 +2195,9 @@ func (v *NewPrivateVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RateLimit != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterface_rateLimit, *v.RateLimit)
 	}
-	serializeTagList(s, schemas.NewPrivateVirtualInterface_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.NewPrivateVirtualInterface_tags, v.Tags)
+	}
 	if v.VirtualGatewayId != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
 	}
@@ -2338,7 +2376,9 @@ func (v *NewPrivateVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSe
 	if v.RateLimit != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_rateLimit, *v.RateLimit)
 	}
-	serializeTagList(s, schemas.NewPrivateVirtualInterfaceAllocation_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.NewPrivateVirtualInterfaceAllocation_tags, v.Tags)
+	}
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
@@ -2494,8 +2534,12 @@ func (v *NewPublicVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RateLimit != nil {
 		s.WriteString(schemas.NewPublicVirtualInterface_rateLimit, *v.RateLimit)
 	}
-	serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
-	serializeTagList(s, schemas.NewPublicVirtualInterface_tags, v.Tags)
+	if v.RouteFilterPrefixes != nil {
+		serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.NewPublicVirtualInterface_tags, v.Tags)
+	}
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPublicVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
@@ -2652,8 +2696,12 @@ func (v *NewPublicVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSer
 	if v.RateLimit != nil {
 		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_rateLimit, *v.RateLimit)
 	}
-	serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes, v.RouteFilterPrefixes)
-	serializeTagList(s, schemas.NewPublicVirtualInterfaceAllocation_tags, v.Tags)
+	if v.RouteFilterPrefixes != nil {
+		serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes, v.RouteFilterPrefixes)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.NewPublicVirtualInterfaceAllocation_tags, v.Tags)
+	}
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
@@ -2831,7 +2879,9 @@ func (v *NewTransitVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RateLimit != nil {
 		s.WriteString(schemas.NewTransitVirtualInterface_rateLimit, *v.RateLimit)
 	}
-	serializeTagList(s, schemas.NewTransitVirtualInterface_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.NewTransitVirtualInterface_tags, v.Tags)
+	}
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewTransitVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
@@ -3002,7 +3052,9 @@ func (v *NewTransitVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSe
 	if v.RateLimit != nil {
 		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_rateLimit, *v.RateLimit)
 	}
-	serializeTagList(s, schemas.NewTransitVirtualInterfaceAllocation_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.NewTransitVirtualInterfaceAllocation_tags, v.Tags)
+	}
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
@@ -3162,7 +3214,9 @@ func (v *ResiliencyGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.ResiliencyGroup_state, string(v.State))
 	}
-	serializeTagList(s, schemas.ResiliencyGroup_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResiliencyGroup_tags, v.Tags)
+	}
 }
 func (v *ResiliencyGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResiliencyGroup, func(s *smithy.Schema) error {
@@ -3360,7 +3414,9 @@ func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ResourceTag_resourceArn, *v.ResourceArn)
 	}
-	serializeTagList(s, schemas.ResourceTag_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceTag_tags, v.Tags)
+	}
 }
 func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
@@ -3418,14 +3474,18 @@ func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressFamily != "" {
 		s.WriteString(schemas.Route_addressFamily, string(v.AddressFamily))
 	}
-	serializeAsPathSegmentList(s, schemas.Route_asPath, v.AsPath)
+	if v.AsPath != nil {
+		serializeAsPathSegmentList(s, schemas.Route_asPath, v.AsPath)
+	}
 	if v.AwsLogicalDeviceId != nil {
 		s.WriteString(schemas.Route_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
 	}
 	if v.Cidr != nil {
 		s.WriteString(schemas.Route_cidr, *v.Cidr)
 	}
-	serializeCommunityList(s, schemas.Route_communities, v.Communities)
+	if v.Communities != nil {
+		serializeCommunityList(s, schemas.Route_communities, v.Communities)
+	}
 	if v.RouteDirection != "" {
 		s.WriteString(schemas.Route_routeDirection, string(v.RouteDirection))
 	}
@@ -3537,9 +3597,15 @@ func (v *RouteFilters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressFamily != "" {
 		s.WriteString(schemas.RouteFilters_addressFamily, string(v.AddressFamily))
 	}
-	serializeAsPathList(s, schemas.RouteFilters_asPath, v.AsPath)
-	serializeRouteFilterCidrStringList(s, schemas.RouteFilters_cidrs, v.Cidrs)
-	serializeCommunityList(s, schemas.RouteFilters_communities, v.Communities)
+	if v.AsPath != nil {
+		serializeAsPathList(s, schemas.RouteFilters_asPath, v.AsPath)
+	}
+	if v.Cidrs != nil {
+		serializeRouteFilterCidrStringList(s, schemas.RouteFilters_cidrs, v.Cidrs)
+	}
+	if v.Communities != nil {
+		serializeCommunityList(s, schemas.RouteFilters_communities, v.Communities)
+	}
 	if v.RouteDirection != "" {
 		s.WriteString(schemas.RouteFilters_routeDirection, string(v.RouteDirection))
 	}
@@ -3950,7 +4016,9 @@ func (v *VirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsLogicalDeviceId != nil {
 		s.WriteString(schemas.VirtualInterface_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
 	}
-	serializeBGPPeerList(s, schemas.VirtualInterface_bgpPeers, v.BgpPeers)
+	if v.BgpPeers != nil {
+		serializeBGPPeerList(s, schemas.VirtualInterface_bgpPeers, v.BgpPeers)
+	}
 	if v.ConnectionId != nil {
 		s.WriteString(schemas.VirtualInterface_connectionId, *v.ConnectionId)
 	}
@@ -3987,11 +4055,15 @@ func (v *VirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.VirtualInterface_region, *v.Region)
 	}
-	serializeRouteFilterPrefixList(s, schemas.VirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	if v.RouteFilterPrefixes != nil {
+		serializeRouteFilterPrefixList(s, schemas.VirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	}
 	if v.SiteLinkEnabled != nil {
 		s.WriteBool(schemas.VirtualInterface_siteLinkEnabled, *v.SiteLinkEnabled)
 	}
-	serializeTagList(s, schemas.VirtualInterface_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.VirtualInterface_tags, v.Tags)
+	}
 	if v.VirtualGatewayId != nil {
 		s.WriteString(schemas.VirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
 	}
@@ -4150,7 +4222,9 @@ func (v *VirtualInterfaceTestHistory) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VirtualInterfaceTestHistory) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBGPPeerIdList(s, schemas.VirtualInterfaceTestHistory_bgpPeers, v.BgpPeers)
+	if v.BgpPeers != nil {
+		serializeBGPPeerIdList(s, schemas.VirtualInterfaceTestHistory_bgpPeers, v.BgpPeers)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.VirtualInterfaceTestHistory_endTime, *v.EndTime)
 	}

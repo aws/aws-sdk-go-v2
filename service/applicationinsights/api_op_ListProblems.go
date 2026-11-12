@@ -128,7 +128,9 @@ func (v *ListProblemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProblemsResponse_NextToken, *v.NextToken)
 	}
-	serializeProblemList(s, schemas.ListProblemsResponse_ProblemList, v.ProblemList)
+	if v.ProblemList != nil {
+		serializeProblemList(s, schemas.ListProblemsResponse_ProblemList, v.ProblemList)
+	}
 	if v.ResourceGroupName != nil {
 		s.WriteString(schemas.ListProblemsResponse_ResourceGroupName, *v.ResourceGroupName)
 	}

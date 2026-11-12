@@ -28,7 +28,6 @@ func (c *Client) ListBudgets(ctx context.Context, params *ListBudgetsInput, optF
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListBudgetsInput struct {
 
 	// The farm ID associated with the budgets.
@@ -70,7 +69,6 @@ func (v *ListBudgetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListBudgetsOutput struct {
 
 	// The budgets to include on the list.
@@ -99,7 +97,9 @@ func (v *ListBudgetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBudgetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgetSummaries(s, schemas.ListBudgetsResponse_budgets, v.Budgets)
+	if v.Budgets != nil {
+		serializeBudgetSummaries(s, schemas.ListBudgetsResponse_budgets, v.Budgets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBudgetsResponse_nextToken, *v.NextToken)
 	}

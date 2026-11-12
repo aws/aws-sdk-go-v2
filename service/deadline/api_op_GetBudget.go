@@ -59,8 +59,6 @@ func (v *GetBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetBudgetOutput struct {
 
 	// The budget actions for the budget.
@@ -151,7 +149,9 @@ func (v *GetBudgetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResponseBudgetActionList(s, schemas.GetBudgetResponse_actions, v.Actions)
+	if v.Actions != nil {
+		serializeResponseBudgetActionList(s, schemas.GetBudgetResponse_actions, v.Actions)
+	}
 	if v.ApproximateDollarLimit != nil {
 		s.WriteFloat32(schemas.GetBudgetResponse_approximateDollarLimit, *v.ApproximateDollarLimit)
 	}
@@ -173,7 +173,9 @@ func (v *GetBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueueStoppedAt != nil {
 		s.WriteTime(schemas.GetBudgetResponse_queueStoppedAt, *v.QueueStoppedAt)
 	}
-	serializeBudgetSchedule(s, schemas.GetBudgetResponse_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeBudgetSchedule(s, schemas.GetBudgetResponse_schedule, v.Schedule)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetBudgetResponse_status, string(v.Status))
 	}
@@ -183,7 +185,9 @@ func (v *GetBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedBy != nil {
 		s.WriteString(schemas.GetBudgetResponse_updatedBy, *v.UpdatedBy)
 	}
-	serializeUsageTrackingResource(s, schemas.GetBudgetResponse_usageTrackingResource, v.UsageTrackingResource)
+	if v.UsageTrackingResource != nil {
+		serializeUsageTrackingResource(s, schemas.GetBudgetResponse_usageTrackingResource, v.UsageTrackingResource)
+	}
 	if v.Usages != nil {
 		s.WriteStruct(schemas.GetBudgetResponse_usages)
 		v.Usages.SerializeMembers(s)

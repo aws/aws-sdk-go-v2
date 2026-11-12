@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListIdentitiesResponse><ListIdentitiesResult><Identities><member>__Member__</member><member>__Member__</member></Identities><NextToken>__NextToken__</NextToken></ListIdentitiesResult></ListIdentitiesResponse>

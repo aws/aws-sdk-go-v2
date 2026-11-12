@@ -91,7 +91,9 @@ func (v *ListEntitledApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEntitledApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntitledApplicationList(s, schemas.ListEntitledApplicationsResult_EntitledApplications, v.EntitledApplications)
+	if v.EntitledApplications != nil {
+		serializeEntitledApplicationList(s, schemas.ListEntitledApplicationsResult_EntitledApplications, v.EntitledApplications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEntitledApplicationsResult_NextToken, *v.NextToken)
 	}

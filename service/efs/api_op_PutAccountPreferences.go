@@ -4,7 +4,9 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,18 @@ type PutAccountPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdType != "" {
+		s.WriteString(schemas.PutAccountPreferencesRequest_ResourceIdType, string(v.ResourceIdType))
+	}
+}
+
 type PutAccountPreferencesOutput struct {
 
 	// Describes the resource type and its ID preference for the user's Amazon Web
@@ -64,13 +78,34 @@ type PutAccountPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdPreference != nil {
+		s.WriteStruct(schemas.PutAccountPreferencesResponse_ResourceIdPreference)
+		v.ResourceIdPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutAccountPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAccountPreferencesResponse_ResourceIdPreference:
+			v.ResourceIdPreference = &types.ResourceIdPreference{}
+			return v.ResourceIdPreference.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountPreferences, schemas.PutAccountPreferencesRequest, schemas.PutAccountPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountPreferences, schemas.PutAccountPreferencesRequest, schemas.PutAccountPreferencesResponse), output: &PutAccountPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

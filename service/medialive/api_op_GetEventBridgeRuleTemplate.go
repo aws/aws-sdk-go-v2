@@ -109,7 +109,9 @@ func (v *GetEventBridgeRuleTemplateOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Description != nil {
 		s.WriteString(schemas.GetEventBridgeRuleTemplateResponse_Description, *v.Description)
 	}
-	serialize__listOfEventBridgeRuleTemplateTarget(s, schemas.GetEventBridgeRuleTemplateResponse_EventTargets, v.EventTargets)
+	if v.EventTargets != nil {
+		serialize__listOfEventBridgeRuleTemplateTarget(s, schemas.GetEventBridgeRuleTemplateResponse_EventTargets, v.EventTargets)
+	}
 	if v.EventType != "" {
 		s.WriteString(schemas.GetEventBridgeRuleTemplateResponse_EventType, string(v.EventType))
 	}
@@ -125,7 +127,9 @@ func (v *GetEventBridgeRuleTemplateOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Name != nil {
 		s.WriteString(schemas.GetEventBridgeRuleTemplateResponse_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.GetEventBridgeRuleTemplateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetEventBridgeRuleTemplateResponse_Tags, v.Tags)
+	}
 }
 func (v *GetEventBridgeRuleTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEventBridgeRuleTemplateResponse, func(s *smithy.Schema) error {

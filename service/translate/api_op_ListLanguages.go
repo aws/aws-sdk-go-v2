@@ -89,7 +89,9 @@ func (v *ListLanguagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayLanguageCode != "" {
 		s.WriteString(schemas.ListLanguagesResponse_DisplayLanguageCode, string(v.DisplayLanguageCode))
 	}
-	serializeLanguagesList(s, schemas.ListLanguagesResponse_Languages, v.Languages)
+	if v.Languages != nil {
+		serializeLanguagesList(s, schemas.ListLanguagesResponse_Languages, v.Languages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLanguagesResponse_NextToken, *v.NextToken)
 	}

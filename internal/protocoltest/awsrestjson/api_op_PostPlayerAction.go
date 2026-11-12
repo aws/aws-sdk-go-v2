@@ -39,7 +39,9 @@ func (v *PostPlayerActionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PostPlayerActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlayerAction(s, schemas.PostPlayerActionInput_action, v.Action)
+	if v.Action != nil {
+		serializePlayerAction(s, schemas.PostPlayerActionInput_action, v.Action)
+	}
 }
 
 type PostPlayerActionOutput struct {
@@ -60,7 +62,9 @@ func (v *PostPlayerActionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PostPlayerActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlayerAction(s, schemas.PostPlayerActionOutput_action, v.Action)
+	if v.Action != nil {
+		serializePlayerAction(s, schemas.PostPlayerActionOutput_action, v.Action)
+	}
 }
 func (v *PostPlayerActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PostPlayerActionOutput, func(s *smithy.Schema) error {

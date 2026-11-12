@@ -167,7 +167,9 @@ func (v *ListModelInvocationJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelInvocationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelInvocationJobSummaries(s, schemas.ListModelInvocationJobsResponse_invocationJobSummaries, v.InvocationJobSummaries)
+	if v.InvocationJobSummaries != nil {
+		serializeModelInvocationJobSummaries(s, schemas.ListModelInvocationJobsResponse_invocationJobSummaries, v.InvocationJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelInvocationJobsResponse_nextToken, *v.NextToken)
 	}

@@ -100,7 +100,9 @@ func (v *ListCisScanConfigurationsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCisScanConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serializeCisScanConfigurationList(s, schemas.ListCisScanConfigurationsResponse_scanConfigurations, v.ScanConfigurations)
+	if v.ScanConfigurations != nil {
+		serializeCisScanConfigurationList(s, schemas.ListCisScanConfigurationsResponse_scanConfigurations, v.ScanConfigurations)
+	}
 }
 func (v *ListCisScanConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCisScanConfigurationsResponse, func(s *smithy.Schema) error {

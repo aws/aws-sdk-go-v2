@@ -1,6 +1,7 @@
-POST /
+POST /service/BaldrApiService/operation/InitializeCluster
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.InitializeCluster
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterId":"__ClusterId__","SignedCert":"__SignedCert__","TrustAnchor":"__TrustAnchor__"}
+¿iClusterIdm__ClusterId__jSignedCertn__SignedCert__kTrustAnchoro__TrustAnchor__ÿ

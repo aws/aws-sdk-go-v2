@@ -110,7 +110,9 @@ func (v *ListDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseSummaryList(s, schemas.ListDatabasesOutput_Databases, v.Databases)
+	if v.Databases != nil {
+		serializeDatabaseSummaryList(s, schemas.ListDatabasesOutput_Databases, v.Databases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatabasesOutput_NextToken, *v.NextToken)
 	}

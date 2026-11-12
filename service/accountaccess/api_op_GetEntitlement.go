@@ -99,7 +99,9 @@ func (v *GetEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetEntitlementResponse_createdAt, *v.CreatedAt)
 	}
-	serializeEntitlementDetails(s, schemas.GetEntitlementResponse_entitlement, v.Entitlement)
+	if v.Entitlement != nil {
+		serializeEntitlementDetails(s, schemas.GetEntitlementResponse_entitlement, v.Entitlement)
+	}
 	if v.EntitlementId != nil {
 		s.WriteString(schemas.GetEntitlementResponse_entitlementId, *v.EntitlementId)
 	}

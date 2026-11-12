@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdDate":946684800,"importId":"__ImportId__","importStatus":"IN_PROGRESS","mergeStrategy":"OVERWRITE_LATEST","name":"__Name__","resourceType":"BOT","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

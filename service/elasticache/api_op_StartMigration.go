@@ -4,11 +4,13 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Start the migration of data.
+// Starts the migration of data.
 func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput, optFns ...func(*Options)) (*StartMigrationOutput, error) {
 	if params == nil {
 		params = &StartMigrationInput{}
@@ -26,18 +28,52 @@ func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput
 
 type StartMigrationInput struct {
 
-	// List of endpoints from which data should be migrated. For Valkey or Redis OSS
-	// (cluster mode disabled), the list should have only one element.
-	//
-	// This member is required.
+	// Specifies whether ElastiCache automatically attempts to complete the migration
+	// after data sync is established.
+	AutoCutover *bool
+
+	// Specifies whether ElastiCache deletes existing data in the serverless cache
+	// before migration begins. After StopMigration , StartMigration requires this
+	// option to restart the data sync.
+	ClearTargetCacheData *bool
+
+	// The list of endpoints from which to migrate data. For Valkey or Redis OSS
+	// (cluster mode disabled), the list should have only one element. For serverless
+	// cache migrations, ElastiCache uses the endpoint that you provided in
+	// PrepareMigration .
 	CustomerNodeEndpointList []types.CustomerNodeEndpoint
 
 	// The ID of the replication group to which data should be migrated.
-	//
-	// This member is required.
 	ReplicationGroupId *string
 
+	// The name of the serverless cache to which data is being migrated.
+	ServerlessCacheName *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *StartMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMigrationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoCutover != nil {
+		s.WriteBool(schemas.StartMigrationMessage_AutoCutover, *v.AutoCutover)
+	}
+	if v.ClearTargetCacheData != nil {
+		s.WriteBool(schemas.StartMigrationMessage_ClearTargetCacheData, *v.ClearTargetCacheData)
+	}
+	if v.CustomerNodeEndpointList != nil {
+		serializeCustomerNodeEndpointList(s, schemas.StartMigrationMessage_CustomerNodeEndpointList, v.CustomerNodeEndpointList)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.StartMigrationMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.StartMigrationMessage_ServerlessCacheName, *v.ServerlessCacheName)
+	}
 }
 
 type StartMigrationOutput struct {
@@ -46,19 +82,52 @@ type StartMigrationOutput struct {
 	// group.
 	ReplicationGroup *types.ReplicationGroup
 
+	// Provides the details of the serverless cache to which ElastiCache is migrating
+	// data.
+	ServerlessCache *types.ServerlessCache
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *StartMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.StartMigrationResponse_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerlessCache != nil {
+		s.WriteStruct(schemas.StartMigrationResponse_ServerlessCache)
+		v.ServerlessCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMigrationResponse_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		case schemas.StartMigrationResponse_ServerlessCache:
+			v.ServerlessCache = &types.ServerlessCache{}
+			return v.ServerlessCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMigration, schemas.StartMigrationMessage, schemas.StartMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMigration, schemas.StartMigrationMessage, schemas.StartMigrationResponse), output: &StartMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -72,9 +141,6 @@ func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpStartMigrationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

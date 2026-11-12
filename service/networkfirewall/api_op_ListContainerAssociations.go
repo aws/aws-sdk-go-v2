@@ -86,7 +86,9 @@ func (v *ListContainerAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContainerAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerAssociations(s, schemas.ListContainerAssociationsResponse_ContainerAssociations, v.ContainerAssociations)
+	if v.ContainerAssociations != nil {
+		serializeContainerAssociations(s, schemas.ListContainerAssociationsResponse_ContainerAssociations, v.ContainerAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContainerAssociationsResponse_NextToken, *v.NextToken)
 	}
@@ -118,6 +120,9 @@ func (c *Client) addOperationListContainerAssociationsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

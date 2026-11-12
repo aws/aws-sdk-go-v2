@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,27 @@ func (e *AccountSendingPausedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountSendingPausedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountSendingPausedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSendingPausedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSendingPausedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountSendingPausedException_message, *v.Message)
+	}
+}
+func (v *AccountSendingPausedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSendingPausedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSendingPausedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountSendingPausedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a resource could not be created because of a naming conflict.
 type AlreadyExistsException struct {
@@ -62,6 +84,33 @@ func (e *AlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AlreadyExistsException_Name, *v.Name)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AlreadyExistsException_message, *v.Message)
+	}
+}
+func (v *AlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlreadyExistsException_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AlreadyExistsException_Name, v.Name)
+		case schemas.AlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the delete operation could not be completed.
 type CannotDeleteException struct {
@@ -90,6 +139,33 @@ func (e *CannotDeleteException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CannotDeleteException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CannotDeleteException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CannotDeleteException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CannotDeleteException_Name, *v.Name)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CannotDeleteException_message, *v.Message)
+	}
+}
+func (v *CannotDeleteException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CannotDeleteException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CannotDeleteException_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CannotDeleteException_Name, v.Name)
+		case schemas.CannotDeleteException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CannotDeleteException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the configuration set could not be created because of a naming
 // conflict.
@@ -121,6 +197,33 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorCode() string {
 func (e *ConfigurationSetAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ConfigurationSetAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationSetAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationSetAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.ConfigurationSetAlreadyExistsException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConfigurationSetAlreadyExistsException_message, *v.Message)
+	}
+}
+func (v *ConfigurationSetAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationSetAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationSetAlreadyExistsException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.ConfigurationSetAlreadyExistsException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.ConfigurationSetAlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConfigurationSetAlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the configuration set does not exist.
 type ConfigurationSetDoesNotExistException struct {
@@ -150,6 +253,33 @@ func (e *ConfigurationSetDoesNotExistException) ErrorCode() string {
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *ConfigurationSetDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationSetDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationSetDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.ConfigurationSetDoesNotExistException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConfigurationSetDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *ConfigurationSetDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationSetDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationSetDoesNotExistException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.ConfigurationSetDoesNotExistException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.ConfigurationSetDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConfigurationSetDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Indicates that email sending is disabled for the configuration set.
@@ -183,6 +313,33 @@ func (e *ConfigurationSetSendingPausedException) ErrorCode() string {
 func (e *ConfigurationSetSendingPausedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ConfigurationSetSendingPausedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationSetSendingPausedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationSetSendingPausedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.ConfigurationSetSendingPausedException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConfigurationSetSendingPausedException_message, *v.Message)
+	}
+}
+func (v *ConfigurationSetSendingPausedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationSetSendingPausedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationSetSendingPausedException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.ConfigurationSetSendingPausedException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.ConfigurationSetSendingPausedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConfigurationSetSendingPausedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that custom verification email template provided content is invalid.
 type CustomVerificationEmailInvalidContentException struct {
@@ -210,6 +367,27 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorCode() string {
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *CustomVerificationEmailInvalidContentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomVerificationEmailInvalidContentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomVerificationEmailInvalidContentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CustomVerificationEmailInvalidContentException_message, *v.Message)
+	}
+}
+func (v *CustomVerificationEmailInvalidContentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomVerificationEmailInvalidContentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomVerificationEmailInvalidContentException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CustomVerificationEmailInvalidContentException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Indicates that a custom verification email template with the name you specified
@@ -242,6 +420,33 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorCode() stri
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *CustomVerificationEmailTemplateAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomVerificationEmailTemplateAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomVerificationEmailTemplateAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomVerificationEmailTemplateName != nil {
+		s.WriteString(schemas.CustomVerificationEmailTemplateAlreadyExistsException_CustomVerificationEmailTemplateName, *v.CustomVerificationEmailTemplateName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CustomVerificationEmailTemplateAlreadyExistsException_message, *v.Message)
+	}
+}
+func (v *CustomVerificationEmailTemplateAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomVerificationEmailTemplateAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomVerificationEmailTemplateAlreadyExistsException_CustomVerificationEmailTemplateName:
+			v.CustomVerificationEmailTemplateName = new(string)
+			return d.ReadString(schemas.CustomVerificationEmailTemplateAlreadyExistsException_CustomVerificationEmailTemplateName, v.CustomVerificationEmailTemplateName)
+		case schemas.CustomVerificationEmailTemplateAlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CustomVerificationEmailTemplateAlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a custom verification email template with the name you specified
 // does not exist.
@@ -272,6 +477,33 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorCode() strin
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *CustomVerificationEmailTemplateDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomVerificationEmailTemplateDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomVerificationEmailTemplateDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomVerificationEmailTemplateName != nil {
+		s.WriteString(schemas.CustomVerificationEmailTemplateDoesNotExistException_CustomVerificationEmailTemplateName, *v.CustomVerificationEmailTemplateName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CustomVerificationEmailTemplateDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *CustomVerificationEmailTemplateDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomVerificationEmailTemplateDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomVerificationEmailTemplateDoesNotExistException_CustomVerificationEmailTemplateName:
+			v.CustomVerificationEmailTemplateName = new(string)
+			return d.ReadString(schemas.CustomVerificationEmailTemplateDoesNotExistException_CustomVerificationEmailTemplateName, v.CustomVerificationEmailTemplateName)
+		case schemas.CustomVerificationEmailTemplateDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CustomVerificationEmailTemplateDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Indicates that the event destination could not be created because of a naming
@@ -305,6 +537,39 @@ func (e *EventDestinationAlreadyExistsException) ErrorCode() string {
 func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *EventDestinationAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDestinationAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDestinationAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.EventDestinationAlreadyExistsException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.EventDestinationAlreadyExistsException_EventDestinationName, *v.EventDestinationName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EventDestinationAlreadyExistsException_message, *v.Message)
+	}
+}
+func (v *EventDestinationAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDestinationAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDestinationAlreadyExistsException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.EventDestinationAlreadyExistsException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.EventDestinationAlreadyExistsException_EventDestinationName:
+			v.EventDestinationName = new(string)
+			return d.ReadString(schemas.EventDestinationAlreadyExistsException_EventDestinationName, v.EventDestinationName)
+		case schemas.EventDestinationAlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EventDestinationAlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the event destination does not exist.
 type EventDestinationDoesNotExistException struct {
@@ -335,6 +600,39 @@ func (e *EventDestinationDoesNotExistException) ErrorCode() string {
 }
 func (e *EventDestinationDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *EventDestinationDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDestinationDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDestinationDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.EventDestinationDoesNotExistException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.EventDestinationDoesNotExistException_EventDestinationName, *v.EventDestinationName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EventDestinationDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *EventDestinationDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDestinationDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDestinationDoesNotExistException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.EventDestinationDoesNotExistException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.EventDestinationDoesNotExistException_EventDestinationName:
+			v.EventDestinationName = new(string)
+			return d.ReadString(schemas.EventDestinationDoesNotExistException_EventDestinationName, v.EventDestinationName)
+		case schemas.EventDestinationDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EventDestinationDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Indicates that the sender address specified for a custom verification email is
@@ -368,6 +666,33 @@ func (e *FromEmailAddressNotVerifiedException) ErrorCode() string {
 func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *FromEmailAddressNotVerifiedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FromEmailAddressNotVerifiedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FromEmailAddressNotVerifiedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.FromEmailAddressNotVerifiedException_FromEmailAddress, *v.FromEmailAddress)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FromEmailAddressNotVerifiedException_message, *v.Message)
+	}
+}
+func (v *FromEmailAddressNotVerifiedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FromEmailAddressNotVerifiedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FromEmailAddressNotVerifiedException_FromEmailAddress:
+			v.FromEmailAddress = new(string)
+			return d.ReadString(schemas.FromEmailAddressNotVerifiedException_FromEmailAddress, v.FromEmailAddress)
+		case schemas.FromEmailAddressNotVerifiedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FromEmailAddressNotVerifiedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the Amazon CloudWatch destination is invalid. See the error
 // message for details.
@@ -400,6 +725,39 @@ func (e *InvalidCloudWatchDestinationException) ErrorCode() string {
 func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *InvalidCloudWatchDestinationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidCloudWatchDestinationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidCloudWatchDestinationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.InvalidCloudWatchDestinationException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.InvalidCloudWatchDestinationException_EventDestinationName, *v.EventDestinationName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidCloudWatchDestinationException_message, *v.Message)
+	}
+}
+func (v *InvalidCloudWatchDestinationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidCloudWatchDestinationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidCloudWatchDestinationException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.InvalidCloudWatchDestinationException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.InvalidCloudWatchDestinationException_EventDestinationName:
+			v.EventDestinationName = new(string)
+			return d.ReadString(schemas.InvalidCloudWatchDestinationException_EventDestinationName, v.EventDestinationName)
+		case schemas.InvalidCloudWatchDestinationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidCloudWatchDestinationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the configuration set is invalid. See the error message for
 // details.
@@ -427,6 +785,27 @@ func (e *InvalidConfigurationSetException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidConfigurationSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidConfigurationSetException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidConfigurationSetException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidConfigurationSetException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidConfigurationSetException_message, *v.Message)
+	}
+}
+func (v *InvalidConfigurationSetException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidConfigurationSetException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidConfigurationSetException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidConfigurationSetException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that provided delivery option is invalid.
 type InvalidDeliveryOptionsException struct {
@@ -453,6 +832,27 @@ func (e *InvalidDeliveryOptionsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidDeliveryOptionsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidDeliveryOptionsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidDeliveryOptionsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidDeliveryOptionsException_message, *v.Message)
+	}
+}
+func (v *InvalidDeliveryOptionsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidDeliveryOptionsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidDeliveryOptionsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidDeliveryOptionsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the Amazon Kinesis Firehose destination is invalid. See the
 // error message for details.
@@ -484,6 +884,39 @@ func (e *InvalidFirehoseDestinationException) ErrorCode() string {
 }
 func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *InvalidFirehoseDestinationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidFirehoseDestinationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidFirehoseDestinationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.InvalidFirehoseDestinationException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.InvalidFirehoseDestinationException_EventDestinationName, *v.EventDestinationName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidFirehoseDestinationException_message, *v.Message)
+	}
+}
+func (v *InvalidFirehoseDestinationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidFirehoseDestinationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidFirehoseDestinationException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.InvalidFirehoseDestinationException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.InvalidFirehoseDestinationException_EventDestinationName:
+			v.EventDestinationName = new(string)
+			return d.ReadString(schemas.InvalidFirehoseDestinationException_EventDestinationName, v.EventDestinationName)
+		case schemas.InvalidFirehoseDestinationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidFirehoseDestinationException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Indicates that the provided Amazon Web Services Lambda function is invalid, or
@@ -517,6 +950,33 @@ func (e *InvalidLambdaFunctionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidLambdaFunctionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidLambdaFunctionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidLambdaFunctionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidLambdaFunctionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.InvalidLambdaFunctionException_FunctionArn, *v.FunctionArn)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidLambdaFunctionException_message, *v.Message)
+	}
+}
+func (v *InvalidLambdaFunctionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidLambdaFunctionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidLambdaFunctionException_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.InvalidLambdaFunctionException_FunctionArn, v.FunctionArn)
+		case schemas.InvalidLambdaFunctionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidLambdaFunctionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the provided policy is invalid. Check the error stack for more
 // information about what caused the error.
@@ -544,6 +1004,27 @@ func (e *InvalidPolicyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPolicyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidPolicyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidPolicyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidPolicyException_message, *v.Message)
+	}
+}
+func (v *InvalidPolicyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidPolicyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidPolicyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidPolicyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that one or more of the replacement values you provided is invalid.
 // This error may occur when the TemplateData object contains invalid JSON.
@@ -574,6 +1055,33 @@ func (e *InvalidRenderingParameterException) ErrorCode() string {
 }
 func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *InvalidRenderingParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRenderingParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRenderingParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.InvalidRenderingParameterException_TemplateName, *v.TemplateName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRenderingParameterException_message, *v.Message)
+	}
+}
+func (v *InvalidRenderingParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRenderingParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRenderingParameterException_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.InvalidRenderingParameterException_TemplateName, v.TemplateName)
+		case schemas.InvalidRenderingParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRenderingParameterException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Indicates that the provided Amazon S3 bucket or Amazon Web Services KMS
@@ -608,6 +1116,33 @@ func (e *InvalidS3ConfigurationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidS3ConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidS3ConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidS3ConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.InvalidS3ConfigurationException_Bucket, *v.Bucket)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidS3ConfigurationException_message, *v.Message)
+	}
+}
+func (v *InvalidS3ConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidS3ConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidS3ConfigurationException_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.InvalidS3ConfigurationException_Bucket, v.Bucket)
+		case schemas.InvalidS3ConfigurationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidS3ConfigurationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the Amazon Simple Notification Service (Amazon SNS) destination
 // is invalid. See the error message for details.
@@ -638,6 +1173,39 @@ func (e *InvalidSNSDestinationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSNSDestinationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSNSDestinationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSNSDestinationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.InvalidSNSDestinationException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.InvalidSNSDestinationException_EventDestinationName, *v.EventDestinationName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSNSDestinationException_message, *v.Message)
+	}
+}
+func (v *InvalidSNSDestinationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSNSDestinationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSNSDestinationException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.InvalidSNSDestinationException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.InvalidSNSDestinationException_EventDestinationName:
+			v.EventDestinationName = new(string)
+			return d.ReadString(schemas.InvalidSNSDestinationException_EventDestinationName, v.EventDestinationName)
+		case schemas.InvalidSNSDestinationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSNSDestinationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES
 // could not publish to the topic, possibly due to permissions issues. For
@@ -670,6 +1238,33 @@ func (e *InvalidSnsTopicException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSnsTopicException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSnsTopicException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSnsTopicException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSnsTopicException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Topic != nil {
+		s.WriteString(schemas.InvalidSnsTopicException_Topic, *v.Topic)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSnsTopicException_message, *v.Message)
+	}
+}
+func (v *InvalidSnsTopicException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSnsTopicException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSnsTopicException_Topic:
+			v.Topic = new(string)
+			return d.ReadString(schemas.InvalidSnsTopicException_Topic, v.Topic)
+		case schemas.InvalidSnsTopicException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSnsTopicException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the template that you specified could not be rendered. This
 // issue may occur when a template refers to a partial that does not exist.
@@ -699,6 +1294,33 @@ func (e *InvalidTemplateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTemplateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTemplateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTemplateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.InvalidTemplateException_TemplateName, *v.TemplateName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTemplateException_message, *v.Message)
+	}
+}
+func (v *InvalidTemplateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTemplateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTemplateException_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.InvalidTemplateException_TemplateName, v.TemplateName)
+		case schemas.InvalidTemplateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTemplateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the custom domain to be used for open and click tracking
 // redirects is invalid. This error appears most often in the following situations:
@@ -730,6 +1352,27 @@ func (e *InvalidTrackingOptionsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTrackingOptionsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTrackingOptionsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTrackingOptionsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTrackingOptionsException_message, *v.Message)
+	}
+}
+func (v *InvalidTrackingOptionsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTrackingOptionsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTrackingOptionsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTrackingOptionsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a resource could not be created because of service limits. For a
 // list of Amazon SES limits, see the [Amazon SES Developer Guide].
@@ -759,6 +1402,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	Indicates that the message could not be sent because Amazon SES could not read
 //
@@ -792,6 +1456,27 @@ func (e *MailFromDomainNotVerifiedException) ErrorCode() string {
 func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *MailFromDomainNotVerifiedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MailFromDomainNotVerifiedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MailFromDomainNotVerifiedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MailFromDomainNotVerifiedException_message, *v.Message)
+	}
+}
+func (v *MailFromDomainNotVerifiedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MailFromDomainNotVerifiedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MailFromDomainNotVerifiedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MailFromDomainNotVerifiedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the action failed, and the message could not be sent. Check the
 // error stack for more information about what caused the error.
@@ -819,6 +1504,27 @@ func (e *MessageRejected) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MessageRejected) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageRejected)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageRejected) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MessageRejected_message, *v.Message)
+	}
+}
+func (v *MessageRejected) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageRejected, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageRejected_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MessageRejected_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that one or more of the replacement values for the specified template
 // was not specified. Ensure that the TemplateData object contains references to
@@ -851,6 +1557,33 @@ func (e *MissingRenderingAttributeException) ErrorCode() string {
 func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *MissingRenderingAttributeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingRenderingAttributeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingRenderingAttributeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.MissingRenderingAttributeException_TemplateName, *v.TemplateName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MissingRenderingAttributeException_message, *v.Message)
+	}
+}
+func (v *MissingRenderingAttributeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingRenderingAttributeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingRenderingAttributeException_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.MissingRenderingAttributeException_TemplateName, v.TemplateName)
+		case schemas.MissingRenderingAttributeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingRenderingAttributeException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the account has not been granted production access.
 type ProductionAccessNotGrantedException struct {
@@ -878,6 +1611,27 @@ func (e *ProductionAccessNotGrantedException) ErrorCode() string {
 }
 func (e *ProductionAccessNotGrantedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *ProductionAccessNotGrantedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProductionAccessNotGrantedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProductionAccessNotGrantedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ProductionAccessNotGrantedException_message, *v.Message)
+	}
+}
+func (v *ProductionAccessNotGrantedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProductionAccessNotGrantedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProductionAccessNotGrantedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ProductionAccessNotGrantedException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Indicates that the provided receipt rule does not exist.
@@ -907,6 +1661,33 @@ func (e *RuleDoesNotExistException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RuleDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RuleDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RuleDoesNotExistException_Name, *v.Name)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RuleDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *RuleDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleDoesNotExistException_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleDoesNotExistException_Name, v.Name)
+		case schemas.RuleDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RuleDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the provided receipt rule set does not exist.
 type RuleSetDoesNotExistException struct {
@@ -935,6 +1716,33 @@ func (e *RuleSetDoesNotExistException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RuleSetDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RuleSetDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleSetDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleSetDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RuleSetDoesNotExistException_Name, *v.Name)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RuleSetDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *RuleSetDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleSetDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleSetDoesNotExistException_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleSetDoesNotExistException_Name, v.Name)
+		case schemas.RuleSetDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RuleSetDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the Template object you specified does not exist in your Amazon
 // SES account.
@@ -964,6 +1772,33 @@ func (e *TemplateDoesNotExistException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TemplateDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TemplateDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.TemplateDoesNotExistException_TemplateName, *v.TemplateName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TemplateDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *TemplateDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateDoesNotExistException_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.TemplateDoesNotExistException_TemplateName, v.TemplateName)
+		case schemas.TemplateDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TemplateDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the configuration set you specified already contains a
 // TrackingOptions object.
@@ -995,6 +1830,33 @@ func (e *TrackingOptionsAlreadyExistsException) ErrorCode() string {
 func (e *TrackingOptionsAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *TrackingOptionsAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrackingOptionsAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrackingOptionsAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.TrackingOptionsAlreadyExistsException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TrackingOptionsAlreadyExistsException_message, *v.Message)
+	}
+}
+func (v *TrackingOptionsAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrackingOptionsAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrackingOptionsAlreadyExistsException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.TrackingOptionsAlreadyExistsException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.TrackingOptionsAlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TrackingOptionsAlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the TrackingOptions object you specified does not exist.
 type TrackingOptionsDoesNotExistException struct {
@@ -1024,4 +1886,31 @@ func (e *TrackingOptionsDoesNotExistException) ErrorCode() string {
 }
 func (e *TrackingOptionsDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *TrackingOptionsDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrackingOptionsDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrackingOptionsDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.TrackingOptionsDoesNotExistException_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TrackingOptionsDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *TrackingOptionsDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrackingOptionsDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrackingOptionsDoesNotExistException_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.TrackingOptionsDoesNotExistException_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.TrackingOptionsDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TrackingOptionsDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
 }

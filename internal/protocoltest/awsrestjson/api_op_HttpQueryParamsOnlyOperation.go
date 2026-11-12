@@ -38,7 +38,9 @@ func (v *HttpQueryParamsOnlyOperationInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *HttpQueryParamsOnlyOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryMap(s, schemas.HttpQueryParamsOnlyInput_queryMap, v.QueryMap)
+	if v.QueryMap != nil {
+		serializeQueryMap(s, schemas.HttpQueryParamsOnlyInput_queryMap, v.QueryMap)
+	}
 }
 func (v *HttpQueryParamsOnlyOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HttpQueryParamsOnlyInput, func(s *smithy.Schema) error {

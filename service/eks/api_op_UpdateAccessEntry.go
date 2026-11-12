@@ -88,7 +88,9 @@ func (v *UpdateAccessEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterName != nil {
 		s.WriteString(schemas.UpdateAccessEntryRequest_clusterName, *v.ClusterName)
 	}
-	serializeStringList(s, schemas.UpdateAccessEntryRequest_kubernetesGroups, v.KubernetesGroups)
+	if v.KubernetesGroups != nil {
+		serializeStringList(s, schemas.UpdateAccessEntryRequest_kubernetesGroups, v.KubernetesGroups)
+	}
 	if v.PrincipalArn != nil {
 		s.WriteString(schemas.UpdateAccessEntryRequest_principalArn, *v.PrincipalArn)
 	}

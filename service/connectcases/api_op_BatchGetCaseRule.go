@@ -10,8 +10,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets a batch of case rules. In the Amazon Connect admin website, case rules are
-// known as case field conditions. For more information about case field
+// Gets a batch of case rules. In the Connect Customer admin website, case rules
+// are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
@@ -52,7 +52,9 @@ func (v *BatchGetCaseRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCaseRuleIdentifierList(s, schemas.BatchGetCaseRuleRequest_caseRules, v.CaseRules)
+	if v.CaseRules != nil {
+		serializeCaseRuleIdentifierList(s, schemas.BatchGetCaseRuleRequest_caseRules, v.CaseRules)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.BatchGetCaseRuleRequest_domainId, *v.DomainId)
 	}
@@ -86,9 +88,15 @@ func (v *BatchGetCaseRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCaseRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetCaseRuleList(s, schemas.BatchGetCaseRuleResponse_caseRules, v.CaseRules)
-	serializeBatchGetCaseRuleErrorList(s, schemas.BatchGetCaseRuleResponse_errors, v.Errors)
-	serializeBatchGetCaseRuleUnprocessedList(s, schemas.BatchGetCaseRuleResponse_unprocessedCaseRules, v.UnprocessedCaseRules)
+	if v.CaseRules != nil {
+		serializeBatchGetCaseRuleList(s, schemas.BatchGetCaseRuleResponse_caseRules, v.CaseRules)
+	}
+	if v.Errors != nil {
+		serializeBatchGetCaseRuleErrorList(s, schemas.BatchGetCaseRuleResponse_errors, v.Errors)
+	}
+	if v.UnprocessedCaseRules != nil {
+		serializeBatchGetCaseRuleUnprocessedList(s, schemas.BatchGetCaseRuleResponse_unprocessedCaseRules, v.UnprocessedCaseRules)
+	}
 }
 func (v *BatchGetCaseRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCaseRuleResponse, func(s *smithy.Schema) error {

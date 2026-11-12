@@ -69,7 +69,9 @@ func (v *CreateParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParameterGroupName != nil {
 		s.WriteString(schemas.CreateParameterGroupRequest_ParameterGroupName, *v.ParameterGroupName)
 	}
-	serializeTagList(s, schemas.CreateParameterGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateParameterGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateParameterGroupOutput struct {
@@ -121,6 +123,9 @@ func (c *Client) addOperationCreateParameterGroupMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

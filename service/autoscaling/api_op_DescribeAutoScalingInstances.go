@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,11 @@ func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *Descr
 
 type DescribeAutoScalingInstancesInput struct {
 
+	//  Specifies whether to include managed Auto Scaling instances in the response.
+	// When set to true (default), the response includes managed Auto Scaling
+	// instances.
+	IncludeManagedResources *bool
+
 	// The IDs of the instances. If you omit this property, all Auto Scaling instances
 	// are described. If you specify an ID that does not exist, it is ignored with no
 	// error.
@@ -36,6 +43,11 @@ type DescribeAutoScalingInstancesInput struct {
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 50 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -43,6 +55,45 @@ type DescribeAutoScalingInstancesInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAutoScalingInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoScalingInstancesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.DescribeAutoScalingInstancesType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.DescribeAutoScalingInstancesType_InstanceIds, v.InstanceIds)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeAutoScalingInstancesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAutoScalingInstancesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutoScalingInstancesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutoScalingInstancesType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.DescribeAutoScalingInstancesType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.DescribeAutoScalingInstancesType_InstanceIds:
+			return deserializeInstanceIds(d, schemas.DescribeAutoScalingInstancesType_InstanceIds, &v.InstanceIds)
+		case schemas.DescribeAutoScalingInstancesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeAutoScalingInstancesType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeAutoScalingInstancesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAutoScalingInstancesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 type DescribeAutoScalingInstancesOutput struct {
@@ -62,13 +113,37 @@ type DescribeAutoScalingInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingInstancesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingInstances != nil {
+		serializeAutoScalingInstances(s, schemas.AutoScalingInstancesType_AutoScalingInstances, v.AutoScalingInstances)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AutoScalingInstancesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingInstancesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingInstancesType_AutoScalingInstances:
+			return deserializeAutoScalingInstances(d, schemas.AutoScalingInstancesType_AutoScalingInstances, &v.AutoScalingInstances)
+		case schemas.AutoScalingInstancesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AutoScalingInstancesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoScalingInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAutoScalingInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingInstances, schemas.DescribeAutoScalingInstancesType, schemas.AutoScalingInstancesType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAutoScalingInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingInstances, schemas.DescribeAutoScalingInstancesType, schemas.AutoScalingInstancesType), output: &DescribeAutoScalingInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -107,6 +182,11 @@ func (c *Client) addOperationDescribeAutoScalingInstancesMiddlewares(stack *midd
 type DescribeAutoScalingInstancesPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 50 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

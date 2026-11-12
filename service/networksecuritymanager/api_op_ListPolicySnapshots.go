@@ -93,7 +93,9 @@ func (v *ListPolicySnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicySnapshotsOutput_nextToken, *v.NextToken)
 	}
-	serializePolicySummaryList(s, schemas.ListPolicySnapshotsOutput_snapshots, v.Snapshots)
+	if v.Snapshots != nil {
+		serializePolicySummaryList(s, schemas.ListPolicySnapshotsOutput_snapshots, v.Snapshots)
+	}
 }
 func (v *ListPolicySnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPolicySnapshotsOutput, func(s *smithy.Schema) error {

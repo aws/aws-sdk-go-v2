@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeDeploy_20141006/operation/DeregisterOnPremisesInstance
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.DeregisterOnPremisesInstance
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"instanceName":"__InstanceName__"}
+¿linstanceNamep__InstanceName__ÿ

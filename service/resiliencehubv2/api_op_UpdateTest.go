@@ -65,14 +65,18 @@ func (v *UpdateTestInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LoggingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTestParameters(s, schemas.UpdateTestRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeTestParameters(s, schemas.UpdateTestRequest_parameters, v.Parameters)
+	}
 	if v.RoleName != nil {
 		s.WriteString(schemas.UpdateTestRequest_roleName, *v.RoleName)
 	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.UpdateTestRequest_serviceArn, *v.ServiceArn)
 	}
-	serializeStopConditionList(s, schemas.UpdateTestRequest_stopConditions, v.StopConditions)
+	if v.StopConditions != nil {
+		serializeStopConditionList(s, schemas.UpdateTestRequest_stopConditions, v.StopConditions)
+	}
 	if v.TestId != nil {
 		s.WriteString(schemas.UpdateTestRequest_testId, *v.TestId)
 	}

@@ -160,7 +160,9 @@ func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneList(s, schemas.CreateClusterRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZoneList(s, schemas.CreateClusterRequest_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.ClusterEndpointEncryptionType != "" {
 		s.WriteString(schemas.CreateClusterRequest_ClusterEndpointEncryptionType, string(v.ClusterEndpointEncryptionType))
 	}
@@ -194,11 +196,15 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SSESpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupIdentifierList(s, schemas.CreateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdentifierList(s, schemas.CreateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetGroupName != nil {
 		s.WriteString(schemas.CreateClusterRequest_SubnetGroupName, *v.SubnetGroupName)
 	}
-	serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {

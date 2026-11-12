@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type ManagePropertygraphStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagePropertygraphStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagePropertygraphStatisticsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagePropertygraphStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.ManagePropertygraphStatisticsInput_mode, string(v.Mode))
+	}
+}
+
 type ManagePropertygraphStatisticsOutput struct {
 
 	// The HTTP return code of the request. If the request succeeded, the code is 200.
@@ -55,13 +69,40 @@ type ManagePropertygraphStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagePropertygraphStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagePropertygraphStatisticsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagePropertygraphStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteStruct(schemas.ManagePropertygraphStatisticsOutput_payload)
+		v.Payload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ManagePropertygraphStatisticsOutput_status, *v.Status)
+	}
+}
+func (v *ManagePropertygraphStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagePropertygraphStatisticsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagePropertygraphStatisticsOutput_payload:
+			v.Payload = &types.RefreshStatisticsIdMap{}
+			return v.Payload.Deserialize(d)
+		case schemas.ManagePropertygraphStatisticsOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ManagePropertygraphStatisticsOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationManagePropertygraphStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpManagePropertygraphStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ManagePropertygraphStatistics, schemas.ManagePropertygraphStatisticsInput, schemas.ManagePropertygraphStatisticsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpManagePropertygraphStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ManagePropertygraphStatistics, schemas.ManagePropertygraphStatisticsInput, schemas.ManagePropertygraphStatisticsOutput), output: &ManagePropertygraphStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/DescribeCopyProductStatus
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeCopyProductStatus
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","CopyProductToken":"__CopyProductToken__"}
+¿nAcceptLanguager__AcceptLanguage__pCopyProductTokent__CopyProductToken__ÿ

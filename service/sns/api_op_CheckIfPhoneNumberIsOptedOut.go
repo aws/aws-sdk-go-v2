@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type CheckIfPhoneNumberIsOptedOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckIfPhoneNumberIsOptedOutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckIfPhoneNumberIsOptedOutInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckIfPhoneNumberIsOptedOutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.CheckIfPhoneNumberIsOptedOutInput_phoneNumber, *v.PhoneNumber)
+	}
+}
+
 // The response from the CheckIfPhoneNumberIsOptedOut action.
 type CheckIfPhoneNumberIsOptedOutOutput struct {
 
@@ -57,13 +71,31 @@ type CheckIfPhoneNumberIsOptedOutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckIfPhoneNumberIsOptedOutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckIfPhoneNumberIsOptedOutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckIfPhoneNumberIsOptedOutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsOptedOut != false {
+		s.WriteBool(schemas.CheckIfPhoneNumberIsOptedOutResponse_isOptedOut, v.IsOptedOut)
+	}
+}
+func (v *CheckIfPhoneNumberIsOptedOutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckIfPhoneNumberIsOptedOutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckIfPhoneNumberIsOptedOutResponse_isOptedOut:
+			return d.ReadBool(schemas.CheckIfPhoneNumberIsOptedOutResponse_isOptedOut, &v.IsOptedOut)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckIfPhoneNumberIsOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCheckIfPhoneNumberIsOptedOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckIfPhoneNumberIsOptedOut, schemas.CheckIfPhoneNumberIsOptedOutInput, schemas.CheckIfPhoneNumberIsOptedOutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCheckIfPhoneNumberIsOptedOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckIfPhoneNumberIsOptedOut, schemas.CheckIfPhoneNumberIsOptedOutInput, schemas.CheckIfPhoneNumberIsOptedOutResponse), output: &CheckIfPhoneNumberIsOptedOutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

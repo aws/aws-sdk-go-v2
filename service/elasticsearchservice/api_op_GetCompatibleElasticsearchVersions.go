@@ -72,7 +72,9 @@ func (v *GetCompatibleElasticsearchVersionsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetCompatibleElasticsearchVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleElasticsearchVersionsList(s, schemas.GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions, v.CompatibleElasticsearchVersions)
+	if v.CompatibleElasticsearchVersions != nil {
+		serializeCompatibleElasticsearchVersionsList(s, schemas.GetCompatibleElasticsearchVersionsResponse_CompatibleElasticsearchVersions, v.CompatibleElasticsearchVersions)
+	}
 }
 func (v *GetCompatibleElasticsearchVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCompatibleElasticsearchVersionsResponse, func(s *smithy.Schema) error {

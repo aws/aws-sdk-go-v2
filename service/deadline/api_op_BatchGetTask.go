@@ -52,7 +52,9 @@ func (v *BatchGetTaskInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetTaskIdentifiers(s, schemas.BatchGetTaskRequest_identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeBatchGetTaskIdentifiers(s, schemas.BatchGetTaskRequest_identifiers, v.Identifiers)
+	}
 }
 
 type BatchGetTaskOutput struct {
@@ -80,8 +82,12 @@ func (v *BatchGetTaskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetTaskErrors(s, schemas.BatchGetTaskResponse_errors, v.Errors)
-	serializeBatchGetTaskItems(s, schemas.BatchGetTaskResponse_tasks, v.Tasks)
+	if v.Errors != nil {
+		serializeBatchGetTaskErrors(s, schemas.BatchGetTaskResponse_errors, v.Errors)
+	}
+	if v.Tasks != nil {
+		serializeBatchGetTaskItems(s, schemas.BatchGetTaskResponse_tasks, v.Tasks)
+	}
 }
 func (v *BatchGetTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetTaskResponse, func(s *smithy.Schema) error {

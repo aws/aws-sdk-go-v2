@@ -84,7 +84,9 @@ func (v *ListBatchInferenceJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchInferenceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchInferenceJobs(s, schemas.ListBatchInferenceJobsResponse_batchInferenceJobs, v.BatchInferenceJobs)
+	if v.BatchInferenceJobs != nil {
+		serializeBatchInferenceJobs(s, schemas.ListBatchInferenceJobsResponse_batchInferenceJobs, v.BatchInferenceJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBatchInferenceJobsResponse_nextToken, *v.NextToken)
 	}

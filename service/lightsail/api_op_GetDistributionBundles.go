@@ -61,7 +61,9 @@ func (v *GetDistributionBundlesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDistributionBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistributionBundleList(s, schemas.GetDistributionBundlesResult_bundles, v.Bundles)
+	if v.Bundles != nil {
+		serializeDistributionBundleList(s, schemas.GetDistributionBundlesResult_bundles, v.Bundles)
+	}
 }
 func (v *GetDistributionBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDistributionBundlesResult, func(s *smithy.Schema) error {

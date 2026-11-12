@@ -160,7 +160,9 @@ func (v *GetReservationUtilizationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Granularity != "" {
 		s.WriteString(schemas.GetReservationUtilizationRequest_Granularity, string(v.Granularity))
 	}
-	serializeGroupDefinitions(s, schemas.GetReservationUtilizationRequest_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeGroupDefinitions(s, schemas.GetReservationUtilizationRequest_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetReservationUtilizationRequest_MaxResults, *v.MaxResults)
 	}
@@ -215,7 +217,9 @@ func (v *GetReservationUtilizationOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.Total.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUtilizationsByTime(s, schemas.GetReservationUtilizationResponse_UtilizationsByTime, v.UtilizationsByTime)
+	if v.UtilizationsByTime != nil {
+		serializeUtilizationsByTime(s, schemas.GetReservationUtilizationResponse_UtilizationsByTime, v.UtilizationsByTime)
+	}
 }
 func (v *GetReservationUtilizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetReservationUtilizationResponse, func(s *smithy.Schema) error {

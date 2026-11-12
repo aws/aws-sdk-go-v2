@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DetectStackSetDriftResponse><DetectStackSetDriftResult><OperationId>__OperationId__</OperationId></DetectStackSetDriftResult></DetectStackSetDriftResponse>

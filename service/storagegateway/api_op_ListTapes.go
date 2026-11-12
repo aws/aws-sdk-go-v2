@@ -73,7 +73,9 @@ func (v *ListTapesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListTapesInput_Marker, *v.Marker)
 	}
-	serializeTapeARNs(s, schemas.ListTapesInput_TapeARNs, v.TapeARNs)
+	if v.TapeARNs != nil {
+		serializeTapeARNs(s, schemas.ListTapesInput_TapeARNs, v.TapeARNs)
+	}
 }
 
 // A JSON object containing the following fields:
@@ -109,7 +111,9 @@ func (v *ListTapesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListTapesOutput_Marker, *v.Marker)
 	}
-	serializeTapeInfos(s, schemas.ListTapesOutput_TapeInfos, v.TapeInfos)
+	if v.TapeInfos != nil {
+		serializeTapeInfos(s, schemas.ListTapesOutput_TapeInfos, v.TapeInfos)
+	}
 }
 func (v *ListTapesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTapesOutput, func(s *smithy.Schema) error {

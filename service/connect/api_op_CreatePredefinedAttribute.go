@@ -95,8 +95,12 @@ func (v *CreatePredefinedAttributeInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePredefinedAttributeRequest_Name, *v.Name)
 	}
-	serializePredefinedAttributePurposeNameList(s, schemas.CreatePredefinedAttributeRequest_Purposes, v.Purposes)
-	serializePredefinedAttributeValues(s, schemas.CreatePredefinedAttributeRequest_Values, v.Values)
+	if v.Purposes != nil {
+		serializePredefinedAttributePurposeNameList(s, schemas.CreatePredefinedAttributeRequest_Purposes, v.Purposes)
+	}
+	if v.Values != nil {
+		serializePredefinedAttributeValues(s, schemas.CreatePredefinedAttributeRequest_Values, v.Values)
+	}
 }
 
 type CreatePredefinedAttributeOutput struct {

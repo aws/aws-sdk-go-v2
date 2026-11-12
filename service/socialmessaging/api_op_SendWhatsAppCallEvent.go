@@ -4,6 +4,8 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type SendWhatsAppCallEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendWhatsAppCallEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWhatsAppCallEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWhatsAppCallEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallEvent != nil {
+		s.WriteBlob(schemas.SendWhatsAppCallEventInput_callEvent, v.CallEvent)
+	}
+	if v.MetaApiVersion != nil {
+		s.WriteString(schemas.SendWhatsAppCallEventInput_metaApiVersion, *v.MetaApiVersion)
+	}
+	if v.OriginationPhoneNumberId != nil {
+		s.WriteString(schemas.SendWhatsAppCallEventInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
+	}
+}
+
 type SendWhatsAppCallEventOutput struct {
 
 	// The unique identifier that Meta assigns to the call.
@@ -63,13 +83,32 @@ type SendWhatsAppCallEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendWhatsAppCallEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWhatsAppCallEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWhatsAppCallEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallId != nil {
+		s.WriteString(schemas.SendWhatsAppCallEventOutput_callId, *v.CallId)
+	}
+}
+func (v *SendWhatsAppCallEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendWhatsAppCallEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendWhatsAppCallEventOutput_callId:
+			v.CallId = new(string)
+			return d.ReadString(schemas.SendWhatsAppCallEventOutput_callId, v.CallId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendWhatsAppCallEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendWhatsAppCallEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWhatsAppCallEvent, schemas.SendWhatsAppCallEventInput, schemas.SendWhatsAppCallEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendWhatsAppCallEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWhatsAppCallEvent, schemas.SendWhatsAppCallEventInput, schemas.SendWhatsAppCallEventOutput), output: &SendWhatsAppCallEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

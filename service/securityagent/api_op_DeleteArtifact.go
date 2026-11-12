@@ -4,6 +4,8 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArtifactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.DeleteArtifactInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ArtifactId != nil {
+		s.WriteString(schemas.DeleteArtifactInput_artifactId, *v.ArtifactId)
+	}
+}
+
 type DeleteArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArtifactOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteArtifactOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArtifact, schemas.DeleteArtifactInput, schemas.DeleteArtifactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArtifact, schemas.DeleteArtifactInput, schemas.DeleteArtifactOutput), output: &DeleteArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

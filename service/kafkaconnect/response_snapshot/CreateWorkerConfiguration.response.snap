@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationTime":"2000-01-01T00:00:00Z","latestRevision":{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},"name":"__Name__","workerConfigurationArn":"__WorkerConfigurationArn__","workerConfigurationState":"ACTIVE"}

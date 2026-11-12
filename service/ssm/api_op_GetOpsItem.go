@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type GetOpsItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpsItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpsItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpsItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OpsItemArn != nil {
+		s.WriteString(schemas.GetOpsItemRequest_OpsItemArn, *v.OpsItemArn)
+	}
+	if v.OpsItemId != nil {
+		s.WriteString(schemas.GetOpsItemRequest_OpsItemId, *v.OpsItemId)
+	}
+}
+
 type GetOpsItemOutput struct {
 
 	// The OpsItem.
@@ -58,13 +75,34 @@ type GetOpsItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpsItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpsItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpsItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OpsItem != nil {
+		s.WriteStruct(schemas.GetOpsItemResponse_OpsItem)
+		v.OpsItem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOpsItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOpsItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOpsItemResponse_OpsItem:
+			v.OpsItem = &types.OpsItem{}
+			return v.OpsItem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOpsItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpsItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpsItem, schemas.GetOpsItemRequest, schemas.GetOpsItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOpsItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpsItem, schemas.GetOpsItemRequest, schemas.GetOpsItemResponse), output: &GetOpsItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

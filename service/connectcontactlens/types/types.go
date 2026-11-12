@@ -32,8 +32,12 @@ func (v *Categories) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Categories) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchedCategories(s, schemas.Categories_MatchedCategories, v.MatchedCategories)
-	serializeMatchedDetails(s, schemas.Categories_MatchedDetails, v.MatchedDetails)
+	if v.MatchedCategories != nil {
+		serializeMatchedCategories(s, schemas.Categories_MatchedCategories, v.MatchedCategories)
+	}
+	if v.MatchedDetails != nil {
+		serializeMatchedDetails(s, schemas.Categories_MatchedDetails, v.MatchedDetails)
+	}
 }
 func (v *Categories) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Categories, func(s *smithy.Schema) error {
@@ -47,6 +51,96 @@ func (v *Categories) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A list of tag conditions that the filter evaluates together using AND logic. A
+// category segment matches only when the tags on its rule satisfy every tag
+// condition in the list.
+type CategoriesAttributeAndCondition struct {
+
+	// A list of tag conditions. All of the tag conditions must be met for the
+	// condition to match.
+	TagConditions []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *CategoriesAttributeAndCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoriesAttributeAndCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoriesAttributeAndCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagConditions != nil {
+		serializeTagAndConditionList(s, schemas.CategoriesAttributeAndCondition_TagConditions, v.TagConditions)
+	}
+}
+func (v *CategoriesAttributeAndCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoriesAttributeAndCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoriesAttributeAndCondition_TagConditions:
+			return deserializeTagAndConditionList(d, schemas.CategoriesAttributeAndCondition_TagConditions, &v.TagConditions)
+		}
+		return nil
+	})
+}
+
+// A filter that matches category segments based on the tags assigned to the rules
+// that create the categories. Provide exactly one of OrConditions , AndCondition ,
+// or TagCondition .
+type CategoriesAttributeFilter struct {
+
+	// A condition that the filter evaluates using AND logic. A category segment
+	// matches only when all of the tag conditions in the condition are met.
+	AndCondition *CategoriesAttributeAndCondition
+
+	// A list of conditions that the filter evaluates using OR logic. A category
+	// segment matches when at least one of the conditions in the list is met.
+	OrConditions []CategoriesAttributeAndCondition
+
+	// A single tag condition that a category segment must match. The category's rule
+	// must have the specified tag.
+	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *CategoriesAttributeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoriesAttributeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoriesAttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AndCondition != nil {
+		s.WriteStruct(schemas.CategoriesAttributeFilter_AndCondition)
+		v.AndCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrConditions != nil {
+		serializeCategoriesAttributeOrConditionList(s, schemas.CategoriesAttributeFilter_OrConditions, v.OrConditions)
+	}
+	if v.TagCondition != nil {
+		s.WriteStruct(schemas.CategoriesAttributeFilter_TagCondition)
+		v.TagCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CategoriesAttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoriesAttributeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoriesAttributeFilter_AndCondition:
+			v.AndCondition = &CategoriesAttributeAndCondition{}
+			return v.AndCondition.Deserialize(d)
+		case schemas.CategoriesAttributeFilter_OrConditions:
+			return deserializeCategoriesAttributeOrConditionList(d, schemas.CategoriesAttributeFilter_OrConditions, &v.OrConditions)
+		case schemas.CategoriesAttributeFilter_TagCondition:
+			v.TagCondition = &TagCondition{}
+			return v.TagCondition.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides information about the category rule that was matched.
 type CategoryDetails struct {
 
@@ -54,6 +148,9 @@ type CategoryDetails struct {
 	//
 	// This member is required.
 	PointsOfInterest []PointOfInterest
+
+	// The unique identifier of the rule that created the matched category.
+	RuleId *string
 
 	noSmithyDocumentSerde
 }
@@ -65,13 +162,21 @@ func (v *CategoryDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CategoryDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePointsOfInterest(s, schemas.CategoryDetails_PointsOfInterest, v.PointsOfInterest)
+	if v.PointsOfInterest != nil {
+		serializePointsOfInterest(s, schemas.CategoryDetails_PointsOfInterest, v.PointsOfInterest)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.CategoryDetails_RuleId, *v.RuleId)
+	}
 }
 func (v *CategoryDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CategoryDetails, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.CategoryDetails_PointsOfInterest:
 			return deserializePointsOfInterest(d, schemas.CategoryDetails_PointsOfInterest, &v.PointsOfInterest)
+		case schemas.CategoryDetails_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.CategoryDetails_RuleId, v.RuleId)
 		}
 		return nil
 	})
@@ -170,7 +275,9 @@ func (v *ExtractedInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExtractedInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtractedInformationValues(s, schemas.ExtractedInformation_ExtractedValues, v.ExtractedValues)
+	if v.ExtractedValues != nil {
+		serializeExtractedInformationValues(s, schemas.ExtractedInformation_ExtractedValues, v.ExtractedValues)
+	}
 	if v.ExtractionDefinitionDisplayLabel != nil {
 		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel, *v.ExtractionDefinitionDisplayLabel)
 	}
@@ -238,7 +345,9 @@ func (v *ExtractedInformationValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Content != nil {
 		s.WriteString(schemas.ExtractedInformationValue_Content, *v.Content)
 	}
-	serializePointsOfInterest(s, schemas.ExtractedInformationValue_PointsOfInterest, v.PointsOfInterest)
+	if v.PointsOfInterest != nil {
+		serializePointsOfInterest(s, schemas.ExtractedInformationValue_PointsOfInterest, v.PointsOfInterest)
+	}
 }
 func (v *ExtractedInformationValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExtractedInformationValue, func(s *smithy.Schema) error {
@@ -475,6 +584,98 @@ func (v *RealtimeContactAnalysisSegment) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// A filter that restricts the segments returned by
+// ListRealtimeContactAnalysisSegments . It supports filtering category segments by
+// the tags on the rules that create them, which enforces tag-based access control
+// on the categories a caller can view.
+type RealTimeContactAnalysisSegmentsFilter struct {
+
+	// A filter applied to category segments based on the tags of the rules that
+	// create the matched categories.
+	CategoriesAttributeFilter *CategoriesAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *RealTimeContactAnalysisSegmentsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RealTimeContactAnalysisSegmentsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RealTimeContactAnalysisSegmentsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoriesAttributeFilter != nil {
+		s.WriteStruct(schemas.RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter)
+		v.CategoriesAttributeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RealTimeContactAnalysisSegmentsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RealTimeContactAnalysisSegmentsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter:
+			v.CategoriesAttributeFilter = &CategoriesAttributeFilter{}
+			return v.CategoriesAttributeFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A tag condition that consists of a tag key, a tag value, and a comparison
+// operator.
+type TagCondition struct {
+
+	// The comparison operator for the tag condition. Valid values: EQUALS | NOT_EQUALS
+	// .
+	ComparisonType TagComparisonType
+
+	// The tag key in the tag condition.
+	TagKey *string
+
+	// The tag value in the tag condition.
+	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TagCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonType != "" {
+		s.WriteString(schemas.TagCondition_ComparisonType, string(v.ComparisonType))
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.TagCondition_TagKey, *v.TagKey)
+	}
+	if v.TagValue != nil {
+		s.WriteString(schemas.TagCondition_TagValue, *v.TagValue)
+	}
+}
+func (v *TagCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagCondition_ComparisonType:
+			var ev string
+			if err := d.ReadString(schemas.TagCondition_ComparisonType, &ev); err != nil {
+				return err
+			}
+			v.ComparisonType = TagComparisonType(ev)
+			return nil
+		case schemas.TagCondition_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.TagCondition_TagKey, v.TagKey)
+		case schemas.TagCondition_TagValue:
+			v.TagValue = new(string)
+			return d.ReadString(schemas.TagCondition_TagValue, v.TagValue)
+		}
+		return nil
+	})
+}
+
 // A list of messages in the session.
 type Transcript struct {
 
@@ -536,7 +737,9 @@ func (v *Transcript) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Transcript_Id, *v.Id)
 	}
-	serializeIssuesDetected(s, schemas.Transcript_IssuesDetected, v.IssuesDetected)
+	if v.IssuesDetected != nil {
+		serializeIssuesDetected(s, schemas.Transcript_IssuesDetected, v.IssuesDetected)
+	}
 	if v.ParticipantId != nil {
 		s.WriteString(schemas.Transcript_ParticipantId, *v.ParticipantId)
 	}

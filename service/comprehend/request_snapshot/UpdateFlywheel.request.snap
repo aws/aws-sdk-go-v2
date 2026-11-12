@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/UpdateFlywheel
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.UpdateFlywheel
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ActiveModelArn":"__ActiveModelArn__","DataAccessRoleArn":"__DataAccessRoleArn__","DataSecurityConfig":{"ModelKmsKeyId":"__ModelKmsKeyId__","VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}},"FlywheelArn":"__FlywheelArn__"}
+¿nActiveModelArnr__ActiveModelArn__qDataAccessRoleArnu__DataAccessRoleArn__rDataSecurityConfig¿mModelKmsKeyIdq__ModelKmsKeyId__nVolumeKmsKeyIdr__VolumeKmsKeyId__iVpcConfig¿pSecurityGroupIdsŸj__Member__j__Member__ÿgSubnetsŸj__Member__j__Member__ÿÿÿkFlywheelArno__FlywheelArn__ÿ

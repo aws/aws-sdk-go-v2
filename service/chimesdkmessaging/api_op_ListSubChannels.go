@@ -103,7 +103,9 @@ func (v *ListSubChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSubChannelsResponse_NextToken, *v.NextToken)
 	}
-	serializeSubChannelSummaryList(s, schemas.ListSubChannelsResponse_SubChannels, v.SubChannels)
+	if v.SubChannels != nil {
+		serializeSubChannelSummaryList(s, schemas.ListSubChannelsResponse_SubChannels, v.SubChannels)
+	}
 }
 func (v *ListSubChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSubChannelsResponse, func(s *smithy.Schema) error {

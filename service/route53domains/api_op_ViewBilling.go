@@ -107,7 +107,9 @@ func (v *ViewBillingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ViewBillingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingRecords(s, schemas.ViewBillingResponse_BillingRecords, v.BillingRecords)
+	if v.BillingRecords != nil {
+		serializeBillingRecords(s, schemas.ViewBillingResponse_BillingRecords, v.BillingRecords)
+	}
 	if v.NextPageMarker != nil {
 		s.WriteString(schemas.ViewBillingResponse_NextPageMarker, *v.NextPageMarker)
 	}
@@ -139,6 +141,9 @@ func (c *Client) addOperationViewBillingMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

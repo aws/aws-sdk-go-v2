@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/CreateLocationNfs
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CreateLocationNfs
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MountOptions":{"Version":"AUTOMATIC"},"OnPremConfig":{"AgentArns":["__Member__","__Member__"]},"ServerHostname":"__ServerHostname__","Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿lMountOptions¿gVersioniAUTOMATICÿlOnPremConfig¿iAgentArnsŸj__Member__j__Member__ÿÿnServerHostnamer__ServerHostname__lSubdirectoryp__Subdirectory__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

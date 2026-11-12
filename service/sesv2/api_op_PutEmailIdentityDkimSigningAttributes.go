@@ -172,7 +172,9 @@ func (v *PutEmailIdentityDkimSigningAttributesOutput) SerializeMembers(s smithy.
 	if v.DkimStatus != "" {
 		s.WriteString(schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimStatus, string(v.DkimStatus))
 	}
-	serializeDnsTokenList(s, schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimTokens, v.DkimTokens)
+	if v.DkimTokens != nil {
+		serializeDnsTokenList(s, schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimTokens, v.DkimTokens)
+	}
 	if v.SigningHostedZone != nil {
 		s.WriteString(schemas.PutEmailIdentityDkimSigningAttributesResponse_SigningHostedZone, *v.SigningHostedZone)
 	}

@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeletePaymentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.DeletePaymentSessionRequest_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.PaymentSessionId != nil {
+		s.WriteString(schemas.DeletePaymentSessionRequest_paymentSessionId, *v.PaymentSessionId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DeletePaymentSessionRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for deleting a payment session.
 type DeletePaymentSessionOutput struct {
 
@@ -57,13 +77,36 @@ type DeletePaymentSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePaymentSessionResponse_status, string(v.Status))
+	}
+}
+func (v *DeletePaymentSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePaymentSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePaymentSessionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePaymentSessionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentSessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePaymentSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePaymentSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentSession, schemas.DeletePaymentSessionRequest, schemas.DeletePaymentSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePaymentSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentSession, schemas.DeletePaymentSessionRequest, schemas.DeletePaymentSessionResponse), output: &DeletePaymentSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

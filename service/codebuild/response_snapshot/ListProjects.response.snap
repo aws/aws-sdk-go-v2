@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.ListProjects
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"nextToken":"__NextToken__","projects":["__Member__","__Member__"]}
+¿inextTokenm__NextToken__hprojectsŸj__Member__j__Member__ÿÿ

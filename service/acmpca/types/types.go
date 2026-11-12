@@ -256,7 +256,9 @@ func (v *ASN1Subject) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Country != nil {
 		s.WriteString(schemas.ASN1Subject_Country, *v.Country)
 	}
-	serializeCustomAttributeList(s, schemas.ASN1Subject_CustomAttributes, v.CustomAttributes)
+	if v.CustomAttributes != nil {
+		serializeCustomAttributeList(s, schemas.ASN1Subject_CustomAttributes, v.CustomAttributes)
+	}
 	if v.DistinguishedNameQualifier != nil {
 		s.WriteString(schemas.ASN1Subject_DistinguishedNameQualifier, *v.DistinguishedNameQualifier)
 	}
@@ -964,7 +966,9 @@ func (v *CsrExtensions) SerializeMembers(s smithy.ShapeSerializer) {
 		v.KeyUsage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAccessDescriptionList(s, schemas.CsrExtensions_SubjectInformationAccess, v.SubjectInformationAccess)
+	if v.SubjectInformationAccess != nil {
+		serializeAccessDescriptionList(s, schemas.CsrExtensions_SubjectInformationAccess, v.SubjectInformationAccess)
+	}
 }
 func (v *CsrExtensions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CsrExtensions, func(s *smithy.Schema) error {
@@ -1221,15 +1225,23 @@ func (v *Extensions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Extensions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificatePolicyList(s, schemas.Extensions_CertificatePolicies, v.CertificatePolicies)
-	serializeCustomExtensionList(s, schemas.Extensions_CustomExtensions, v.CustomExtensions)
-	serializeExtendedKeyUsageList(s, schemas.Extensions_ExtendedKeyUsage, v.ExtendedKeyUsage)
+	if v.CertificatePolicies != nil {
+		serializeCertificatePolicyList(s, schemas.Extensions_CertificatePolicies, v.CertificatePolicies)
+	}
+	if v.CustomExtensions != nil {
+		serializeCustomExtensionList(s, schemas.Extensions_CustomExtensions, v.CustomExtensions)
+	}
+	if v.ExtendedKeyUsage != nil {
+		serializeExtendedKeyUsageList(s, schemas.Extensions_ExtendedKeyUsage, v.ExtendedKeyUsage)
+	}
 	if v.KeyUsage != nil {
 		s.WriteStruct(schemas.Extensions_KeyUsage)
 		v.KeyUsage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGeneralNameList(s, schemas.Extensions_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	if v.SubjectAlternativeNames != nil {
+		serializeGeneralNameList(s, schemas.Extensions_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	}
 }
 func (v *Extensions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Extensions, func(s *smithy.Schema) error {
@@ -1606,7 +1618,9 @@ func (v *Permission) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Permission) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.Permission_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.Permission_Actions, v.Actions)
+	}
 	if v.CertificateAuthorityArn != nil {
 		s.WriteString(schemas.Permission_CertificateAuthorityArn, *v.CertificateAuthorityArn)
 	}
@@ -1676,7 +1690,9 @@ func (v *PolicyInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertPolicyId != nil {
 		s.WriteString(schemas.PolicyInformation_CertPolicyId, *v.CertPolicyId)
 	}
-	serializePolicyQualifierInfoList(s, schemas.PolicyInformation_PolicyQualifiers, v.PolicyQualifiers)
+	if v.PolicyQualifiers != nil {
+		serializePolicyQualifierInfoList(s, schemas.PolicyInformation_PolicyQualifiers, v.PolicyQualifiers)
+	}
 }
 func (v *PolicyInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolicyInformation, func(s *smithy.Schema) error {

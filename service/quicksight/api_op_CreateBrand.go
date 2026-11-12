@@ -65,7 +65,9 @@ func (v *CreateBrandInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BrandId != nil {
 		s.WriteString(schemas.CreateBrandRequest_BrandId, *v.BrandId)
 	}
-	serializeTagList(s, schemas.CreateBrandRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBrandRequest_Tags, v.Tags)
+	}
 }
 
 type CreateBrandOutput struct {

@@ -58,7 +58,9 @@ func (v *BatchDetectEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.BatchDetectEntitiesRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeCustomerInputStringList(s, schemas.BatchDetectEntitiesRequest_TextList, v.TextList)
+	if v.TextList != nil {
+		serializeCustomerInputStringList(s, schemas.BatchDetectEntitiesRequest_TextList, v.TextList)
+	}
 }
 
 type BatchDetectEntitiesOutput struct {
@@ -92,8 +94,12 @@ func (v *BatchDetectEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDetectEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchItemErrorList(s, schemas.BatchDetectEntitiesResponse_ErrorList, v.ErrorList)
-	serializeListOfDetectEntitiesResult(s, schemas.BatchDetectEntitiesResponse_ResultList, v.ResultList)
+	if v.ErrorList != nil {
+		serializeBatchItemErrorList(s, schemas.BatchDetectEntitiesResponse_ErrorList, v.ErrorList)
+	}
+	if v.ResultList != nil {
+		serializeListOfDetectEntitiesResult(s, schemas.BatchDetectEntitiesResponse_ResultList, v.ResultList)
+	}
 }
 func (v *BatchDetectEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDetectEntitiesResponse, func(s *smithy.Schema) error {
@@ -121,6 +127,9 @@ func (c *Client) addOperationBatchDetectEntitiesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

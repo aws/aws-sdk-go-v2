@@ -81,6 +81,9 @@
                     "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -171,6 +174,9 @@
                     "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -204,6 +210,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the trust anchor is enabled.</p>"
+                    }
+                },
+                "crlDpRevocationEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the trust anchor checks certificate revocation status against CRL distribution points.</p>"
                     }
                 },
                 "tags": {
@@ -394,6 +406,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -507,6 +522,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -532,6 +550,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -557,6 +578,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -582,6 +606,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -606,6 +633,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -630,6 +660,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -654,6 +687,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -678,6 +714,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -702,6 +741,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -723,6 +765,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -748,6 +793,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -773,6 +821,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 }
             ],
             "traits": {
@@ -800,6 +851,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -823,6 +877,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
@@ -952,6 +1009,9 @@
                     "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -997,6 +1057,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
@@ -1069,6 +1132,9 @@
                     "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -1119,6 +1185,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -1166,6 +1235,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
@@ -1590,6 +1662,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -1706,6 +1781,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -1814,6 +1892,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
@@ -3059,6 +3140,30 @@
                 }
             }
         },
+        "com.amazonaws.rolesanywhere#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended number of seconds after which the client should retry the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request has failed due to a temporary failure of the service.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {}
+            }
+        },
         "com.amazonaws.rolesanywhere#Source": {
             "type": "structure",
             "members": {
@@ -3334,6 +3439,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#TooManyTagsException"
                 },
                 {
@@ -3473,6 +3581,12 @@
                         "smithy.api#documentation": "<p>Indicates whether the trust anchor is enabled.</p>"
                     }
                 },
+                "crlDpRevocationEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the trust anchor checks certificate revocation status against CRL distribution points.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -3551,6 +3665,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -3600,6 +3717,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
@@ -3656,6 +3776,9 @@
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
@@ -3743,6 +3866,9 @@
                     "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#ValidationException"
                 }
             ],
@@ -3776,6 +3902,12 @@
                     "target": "com.amazonaws.rolesanywhere#Source",
                     "traits": {
                         "smithy.api#documentation": "<p>The trust anchor type and its related certificate data.</p>"
+                    }
+                },
+                "crlDpRevocationEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the trust anchor checks certificate revocation status against CRL distribution points.</p>"
                     }
                 }
             }

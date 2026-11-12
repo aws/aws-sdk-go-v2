@@ -51,7 +51,9 @@ func (v *AddFlowVpcInterfacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowArn != nil {
 		s.WriteString(schemas.AddFlowVpcInterfacesRequest_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfVpcInterfaceRequest(s, schemas.AddFlowVpcInterfacesRequest_VpcInterfaces, v.VpcInterfaces)
+	if v.VpcInterfaces != nil {
+		serialize__listOfVpcInterfaceRequest(s, schemas.AddFlowVpcInterfacesRequest_VpcInterfaces, v.VpcInterfaces)
+	}
 }
 
 type AddFlowVpcInterfacesOutput struct {
@@ -78,7 +80,9 @@ func (v *AddFlowVpcInterfacesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FlowArn != nil {
 		s.WriteString(schemas.AddFlowVpcInterfacesResponse_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfVpcInterface(s, schemas.AddFlowVpcInterfacesResponse_VpcInterfaces, v.VpcInterfaces)
+	if v.VpcInterfaces != nil {
+		serialize__listOfVpcInterface(s, schemas.AddFlowVpcInterfacesResponse_VpcInterfaces, v.VpcInterfaces)
+	}
 }
 func (v *AddFlowVpcInterfacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddFlowVpcInterfacesResponse, func(s *smithy.Schema) error {

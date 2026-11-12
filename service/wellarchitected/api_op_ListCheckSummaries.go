@@ -118,7 +118,9 @@ func (v *ListCheckSummariesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCheckSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCheckSummaries(s, schemas.ListCheckSummariesOutput_CheckSummaries, v.CheckSummaries)
+	if v.CheckSummaries != nil {
+		serializeCheckSummaries(s, schemas.ListCheckSummariesOutput_CheckSummaries, v.CheckSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCheckSummariesOutput_NextToken, *v.NextToken)
 	}

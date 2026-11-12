@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,24 @@ type ListSSHPublicKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSSHPublicKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSSHPublicKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSSHPublicKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListSSHPublicKeysRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListSSHPublicKeysRequest_MaxItems, *v.MaxItems)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ListSSHPublicKeysRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the response to a successful [ListSSHPublicKeys] request.
 //
 // [ListSSHPublicKeys]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSSHPublicKeys.html
@@ -95,13 +115,42 @@ type ListSSHPublicKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSSHPublicKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSSHPublicKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSSHPublicKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListSSHPublicKeysResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListSSHPublicKeysResponse_Marker, *v.Marker)
+	}
+	if v.SSHPublicKeys != nil {
+		serializeSSHPublicKeyListType(s, schemas.ListSSHPublicKeysResponse_SSHPublicKeys, v.SSHPublicKeys)
+	}
+}
+func (v *ListSSHPublicKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSSHPublicKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSSHPublicKeysResponse_IsTruncated:
+			return d.ReadBool(schemas.ListSSHPublicKeysResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListSSHPublicKeysResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListSSHPublicKeysResponse_Marker, v.Marker)
+		case schemas.ListSSHPublicKeysResponse_SSHPublicKeys:
+			return deserializeSSHPublicKeyListType(d, schemas.ListSSHPublicKeysResponse_SSHPublicKeys, &v.SSHPublicKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSSHPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSSHPublicKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSSHPublicKeys, schemas.ListSSHPublicKeysRequest, schemas.ListSSHPublicKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListSSHPublicKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSSHPublicKeys, schemas.ListSSHPublicKeysRequest, schemas.ListSSHPublicKeysResponse), output: &ListSSHPublicKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

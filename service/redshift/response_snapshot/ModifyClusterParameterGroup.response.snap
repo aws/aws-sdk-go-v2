@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyClusterParameterGroupResponse><ModifyClusterParameterGroupResult><ParameterGroupName>__ParameterGroupName__</ParameterGroupName><ParameterGroupStatus>__ParameterGroupStatus__</ParameterGroupStatus></ModifyClusterParameterGroupResult></ModifyClusterParameterGroupResponse>

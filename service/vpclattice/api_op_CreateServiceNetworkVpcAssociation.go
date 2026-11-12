@@ -100,11 +100,15 @@ func (v *CreateServiceNetworkVpcAssociationInput) SerializeMembers(s smithy.Shap
 	if v.PrivateDnsEnabled != nil {
 		s.WriteBool(schemas.CreateServiceNetworkVpcAssociationRequest_privateDnsEnabled, *v.PrivateDnsEnabled)
 	}
-	serializeSecurityGroupList(s, schemas.CreateServiceNetworkVpcAssociationRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.CreateServiceNetworkVpcAssociationRequest_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.ServiceNetworkIdentifier != nil {
 		s.WriteString(schemas.CreateServiceNetworkVpcAssociationRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateServiceNetworkVpcAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceNetworkVpcAssociationRequest_tags, v.Tags)
+	}
 	if v.VpcIdentifier != nil {
 		s.WriteString(schemas.CreateServiceNetworkVpcAssociationRequest_vpcIdentifier, *v.VpcIdentifier)
 	}
@@ -189,7 +193,9 @@ func (v *CreateServiceNetworkVpcAssociationOutput) SerializeMembers(s smithy.Sha
 	if v.PrivateDnsEnabled != nil {
 		s.WriteBool(schemas.CreateServiceNetworkVpcAssociationResponse_privateDnsEnabled, *v.PrivateDnsEnabled)
 	}
-	serializeSecurityGroupList(s, schemas.CreateServiceNetworkVpcAssociationResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.CreateServiceNetworkVpcAssociationResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateServiceNetworkVpcAssociationResponse_status, string(v.Status))
 	}

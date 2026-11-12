@@ -97,7 +97,9 @@ func (v *ListAppAuthorizationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppAuthorizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppAuthorizationSummaryList(s, schemas.ListAppAuthorizationsResponse_appAuthorizationSummaryList, v.AppAuthorizationSummaryList)
+	if v.AppAuthorizationSummaryList != nil {
+		serializeAppAuthorizationSummaryList(s, schemas.ListAppAuthorizationsResponse_appAuthorizationSummaryList, v.AppAuthorizationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppAuthorizationsResponse_nextToken, *v.NextToken)
 	}

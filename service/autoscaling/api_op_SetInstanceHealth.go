@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,40 @@ type SetInstanceHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetInstanceHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetInstanceHealthQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetInstanceHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthStatus != nil {
+		s.WriteString(schemas.SetInstanceHealthQuery_HealthStatus, *v.HealthStatus)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SetInstanceHealthQuery_InstanceId, *v.InstanceId)
+	}
+	if v.ShouldRespectGracePeriod != nil {
+		s.WriteBool(schemas.SetInstanceHealthQuery_ShouldRespectGracePeriod, *v.ShouldRespectGracePeriod)
+	}
+}
+func (v *SetInstanceHealthInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetInstanceHealthQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetInstanceHealthQuery_HealthStatus:
+			v.HealthStatus = new(string)
+			return d.ReadString(schemas.SetInstanceHealthQuery_HealthStatus, v.HealthStatus)
+		case schemas.SetInstanceHealthQuery_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.SetInstanceHealthQuery_InstanceId, v.InstanceId)
+		case schemas.SetInstanceHealthQuery_ShouldRespectGracePeriod:
+			v.ShouldRespectGracePeriod = new(bool)
+			return d.ReadBool(schemas.SetInstanceHealthQuery_ShouldRespectGracePeriod, v.ShouldRespectGracePeriod)
+		}
+		return nil
+	})
+}
+
 type SetInstanceHealthOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +98,26 @@ type SetInstanceHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetInstanceHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetInstanceHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetInstanceHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetInstanceHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetInstanceHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetInstanceHealth, schemas.SetInstanceHealthQuery, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetInstanceHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetInstanceHealth, schemas.SetInstanceHealthQuery, nil), output: &SetInstanceHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

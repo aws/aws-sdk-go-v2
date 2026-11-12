@@ -278,15 +278,21 @@ func (v *CreateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OpenZFSConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupIds(s, schemas.CreateFileSystemRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.CreateFileSystemRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.StorageCapacity != nil {
 		s.WriteInt32(schemas.CreateFileSystemRequest_StorageCapacity, *v.StorageCapacity)
 	}
 	if v.StorageType != "" {
 		s.WriteString(schemas.CreateFileSystemRequest_StorageType, string(v.StorageType))
 	}
-	serializeSubnetIds(s, schemas.CreateFileSystemRequest_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.CreateFileSystemRequest_Tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.CreateFileSystemRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFileSystemRequest_Tags, v.Tags)
+	}
 	if v.WindowsConfiguration != nil {
 		s.WriteStruct(schemas.CreateFileSystemRequest_WindowsConfiguration)
 		v.WindowsConfiguration.SerializeMembers(s)

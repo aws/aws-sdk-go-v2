@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/ListAllowedNodeTypeUpdates
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.ListAllowedNodeTypeUpdates
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterName":"__ClusterName__"}
+¿kClusterNameo__ClusterName__ÿ

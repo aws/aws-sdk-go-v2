@@ -28,7 +28,6 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListFleetsInput struct {
 
 	// The farm ID of the fleets.
@@ -86,7 +85,6 @@ func (v *ListFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListFleetsOutput struct {
 
 	// The fleets on the list.
@@ -115,7 +113,9 @@ func (v *ListFleetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetSummaries(s, schemas.ListFleetsResponse_fleets, v.Fleets)
+	if v.Fleets != nil {
+		serializeFleetSummaries(s, schemas.ListFleetsResponse_fleets, v.Fleets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFleetsResponse_nextToken, *v.NextToken)
 	}

@@ -76,7 +76,9 @@ func (v *ListMultiplexesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMultiplexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMultiplexSummary(s, schemas.ListMultiplexesResponse_Multiplexes, v.Multiplexes)
+	if v.Multiplexes != nil {
+		serialize__listOfMultiplexSummary(s, schemas.ListMultiplexesResponse_Multiplexes, v.Multiplexes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMultiplexesResponse_NextToken, *v.NextToken)
 	}

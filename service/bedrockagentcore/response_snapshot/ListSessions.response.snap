@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","sessionSummaries":[{"actorId":"__ActorId__","createdAt":946684800,"sessionId":"__SessionId__"},{"actorId":"__ActorId__","createdAt":946684800,"sessionId":"__SessionId__"}]}

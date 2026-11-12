@@ -21,6 +21,25 @@ func (ApplicationType) Values() []ApplicationType {
 	}
 }
 
+type AssociationStatus string
+
+// Enum values for AssociationStatus
+const (
+	AssociationStatusAssociated    AssociationStatus = "ASSOCIATED"
+	AssociationStatusNotAssociated AssociationStatus = "NOT_ASSOCIATED"
+)
+
+// Values returns all known values for AssociationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationStatus) Values() []AssociationStatus {
+	return []AssociationStatus{
+		"ASSOCIATED",
+		"NOT_ASSOCIATED",
+	}
+}
+
 type BillingDomain string
 
 // Enum values for BillingDomain
@@ -165,6 +184,44 @@ func (BillingViewType) Values() []BillingViewType {
 	}
 }
 
+type ContractRestriction string
+
+// Enum values for ContractRestriction
+const (
+	ContractRestrictionAttestationSelfServiceBlocked ContractRestriction = "ATTESTATION_SELF_SERVICE_BLOCKED"
+)
+
+// Values returns all known values for ContractRestriction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContractRestriction) Values() []ContractRestriction {
+	return []ContractRestriction{
+		"ATTESTATION_SELF_SERVICE_BLOCKED",
+	}
+}
+
+type ContractType string
+
+// Enum values for ContractType
+const (
+	ContractTypeCrossService    ContractType = "Cross-Service"
+	ContractTypeServiceSpecific ContractType = "Service-Specific"
+	ContractTypeOther           ContractType = "Other"
+)
+
+// Values returns all known values for ContractType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContractType) Values() []ContractType {
+	return []ContractType{
+		"Cross-Service",
+		"Service-Specific",
+		"Other",
+	}
+}
+
 type CreditSharingType string
 
 // Enum values for CreditSharingType
@@ -221,6 +278,71 @@ const (
 func (Dimension) Values() []Dimension {
 	return []Dimension{
 		"LINKED_ACCOUNT",
+	}
+}
+
+type InvestmentAttestationStatus string
+
+// Enum values for InvestmentAttestationStatus
+const (
+	InvestmentAttestationStatusPendingReview         InvestmentAttestationStatus = "PENDING_REVIEW"
+	InvestmentAttestationStatusPendingCLevelApproval InvestmentAttestationStatus = "PENDING_C_LEVEL_APPROVAL"
+	InvestmentAttestationStatusPendingCancellation   InvestmentAttestationStatus = "PENDING_CANCELLATION"
+	InvestmentAttestationStatusRejected              InvestmentAttestationStatus = "REJECTED"
+	InvestmentAttestationStatusCancelled             InvestmentAttestationStatus = "CANCELLED"
+	InvestmentAttestationStatusDisbursed             InvestmentAttestationStatus = "DISBURSED"
+)
+
+// Values returns all known values for InvestmentAttestationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestmentAttestationStatus) Values() []InvestmentAttestationStatus {
+	return []InvestmentAttestationStatus{
+		"PENDING_REVIEW",
+		"PENDING_C_LEVEL_APPROVAL",
+		"PENDING_CANCELLATION",
+		"REJECTED",
+		"CANCELLED",
+		"DISBURSED",
+	}
+}
+
+type InvestmentType string
+
+// Enum values for InvestmentType
+const (
+	InvestmentTypeMilestoneBased InvestmentType = "MILESTONE_BASED"
+	InvestmentTypeOutcomeBased   InvestmentType = "OUTCOME_BASED"
+)
+
+// Values returns all known values for InvestmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestmentType) Values() []InvestmentType {
+	return []InvestmentType{
+		"MILESTONE_BASED",
+		"OUTCOME_BASED",
+	}
+}
+
+type MultiplierType string
+
+// Enum values for MultiplierType
+const (
+	MultiplierTypePercentage     MultiplierType = "PERCENTAGE"
+	MultiplierTypeCurrencyAmount MultiplierType = "CURRENCY_AMOUNT"
+)
+
+// Values returns all known values for MultiplierType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultiplierType) Values() []MultiplierType {
+	return []MultiplierType{
+		"PERCENTAGE",
+		"CURRENCY_AMOUNT",
 	}
 }
 

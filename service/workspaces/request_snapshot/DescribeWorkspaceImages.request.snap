@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeWorkspaceImages
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspaceImages
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ImageIds":["__Member__","__Member__"],"ImageType":"OWNED","MaxResults":1,"NextToken":"__NextToken__"}
+¿hImageIdsŸj__Member__j__Member__ÿiImageTypeeOWNEDjMaxResultsiNextTokenm__NextToken__ÿ

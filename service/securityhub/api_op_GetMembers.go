@@ -52,7 +52,9 @@ func (v *GetMembersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.GetMembersRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.GetMembersRequest_AccountIds, v.AccountIds)
+	}
 }
 
 type GetMembersOutput struct {
@@ -77,8 +79,12 @@ func (v *GetMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberList(s, schemas.GetMembersResponse_Members, v.Members)
-	serializeResultList(s, schemas.GetMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.Members != nil {
+		serializeMemberList(s, schemas.GetMembersResponse_Members, v.Members)
+	}
+	if v.UnprocessedAccounts != nil {
+		serializeResultList(s, schemas.GetMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *GetMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMembersResponse, func(s *smithy.Schema) error {

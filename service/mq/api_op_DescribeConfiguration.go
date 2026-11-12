@@ -132,7 +132,9 @@ func (v *DescribeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeConfigurationResponse_Name, *v.Name)
 	}
-	serialize__mapOf__string(s, schemas.DescribeConfigurationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeConfigurationResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeConfigurationResponse, func(s *smithy.Schema) error {

@@ -230,8 +230,12 @@ func (v *CreateContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSer
 	if v.OperatingSystem != "" {
 		s.WriteString(schemas.CreateContainerGroupDefinitionInput_OperatingSystem, string(v.OperatingSystem))
 	}
-	serializeSupportContainerDefinitionInputList(s, schemas.CreateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
-	serializeTagList(s, schemas.CreateContainerGroupDefinitionInput_Tags, v.Tags)
+	if v.SupportContainerDefinitions != nil {
+		serializeSupportContainerDefinitionInputList(s, schemas.CreateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateContainerGroupDefinitionInput_Tags, v.Tags)
+	}
 	if v.TotalMemoryLimitMebibytes != nil {
 		s.WriteInt32(schemas.CreateContainerGroupDefinitionInput_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
 	}

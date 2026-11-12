@@ -116,14 +116,18 @@ func (v *GetBenefitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetBenefitOutput_Description, *v.Description)
 	}
-	serializeFulfillmentTypes(s, schemas.GetBenefitOutput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.GetBenefitOutput_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetBenefitOutput_Id, *v.Id)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetBenefitOutput_Name, *v.Name)
 	}
-	serializePrograms(s, schemas.GetBenefitOutput_Programs, v.Programs)
+	if v.Programs != nil {
+		serializePrograms(s, schemas.GetBenefitOutput_Programs, v.Programs)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetBenefitOutput_Status, string(v.Status))
 	}

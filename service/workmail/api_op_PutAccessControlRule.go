@@ -87,26 +87,42 @@ func (v *PutAccessControlRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAccessControlRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsList(s, schemas.PutAccessControlRuleRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionsList(s, schemas.PutAccessControlRuleRequest_Actions, v.Actions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.PutAccessControlRuleRequest_Description, *v.Description)
 	}
 	if v.Effect != "" {
 		s.WriteString(schemas.PutAccessControlRuleRequest_Effect, string(v.Effect))
 	}
-	serializeImpersonationRoleIdList(s, schemas.PutAccessControlRuleRequest_ImpersonationRoleIds, v.ImpersonationRoleIds)
-	serializeIpRangeList(s, schemas.PutAccessControlRuleRequest_IpRanges, v.IpRanges)
+	if v.ImpersonationRoleIds != nil {
+		serializeImpersonationRoleIdList(s, schemas.PutAccessControlRuleRequest_ImpersonationRoleIds, v.ImpersonationRoleIds)
+	}
+	if v.IpRanges != nil {
+		serializeIpRangeList(s, schemas.PutAccessControlRuleRequest_IpRanges, v.IpRanges)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.PutAccessControlRuleRequest_Name, *v.Name)
 	}
-	serializeActionsList(s, schemas.PutAccessControlRuleRequest_NotActions, v.NotActions)
-	serializeImpersonationRoleIdList(s, schemas.PutAccessControlRuleRequest_NotImpersonationRoleIds, v.NotImpersonationRoleIds)
-	serializeIpRangeList(s, schemas.PutAccessControlRuleRequest_NotIpRanges, v.NotIpRanges)
-	serializeUserIdList(s, schemas.PutAccessControlRuleRequest_NotUserIds, v.NotUserIds)
+	if v.NotActions != nil {
+		serializeActionsList(s, schemas.PutAccessControlRuleRequest_NotActions, v.NotActions)
+	}
+	if v.NotImpersonationRoleIds != nil {
+		serializeImpersonationRoleIdList(s, schemas.PutAccessControlRuleRequest_NotImpersonationRoleIds, v.NotImpersonationRoleIds)
+	}
+	if v.NotIpRanges != nil {
+		serializeIpRangeList(s, schemas.PutAccessControlRuleRequest_NotIpRanges, v.NotIpRanges)
+	}
+	if v.NotUserIds != nil {
+		serializeUserIdList(s, schemas.PutAccessControlRuleRequest_NotUserIds, v.NotUserIds)
+	}
 	if v.OrganizationId != nil {
 		s.WriteString(schemas.PutAccessControlRuleRequest_OrganizationId, *v.OrganizationId)
 	}
-	serializeUserIdList(s, schemas.PutAccessControlRuleRequest_UserIds, v.UserIds)
+	if v.UserIds != nil {
+		serializeUserIdList(s, schemas.PutAccessControlRuleRequest_UserIds, v.UserIds)
+	}
 }
 
 type PutAccessControlRuleOutput struct {

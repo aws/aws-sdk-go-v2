@@ -23,6 +23,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeSSPrefix = "request_snapshot"
@@ -401,6 +402,53 @@ func TestCheckRequestSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateScheduleAction(t *testing.T) {
+	input := &CreateScheduleActionInput{
+		Id:         ptr.String("__Id__"),
+		ActionName: ptr.String("__ActionName__"),
+		StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+			Value: types.FixedModeScheduleActionStartSettings{
+				ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Operations: []types.ScheduleActionOperation{
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateScheduleAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateScheduleAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteDictionary(t *testing.T) {
 	input := &DeleteDictionaryInput{
 		Id: ptr.String("__Id__"),
@@ -478,6 +526,34 @@ func TestCheckRequestSnapshot_DeleteFeedPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteScheduleAction(t *testing.T) {
+	input := &DeleteScheduleActionInput{
+		Id:         ptr.String("__Id__"),
+		ActionName: ptr.String("__ActionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteScheduleAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteScheduleAction"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -698,6 +774,35 @@ func TestCheckRequestSnapshot_ListFeeds(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFeeds"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListScheduleActions(t *testing.T) {
+	input := &ListScheduleActionsInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListScheduleActions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListScheduleActions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1173,6 +1278,53 @@ func TestUpdateRequestSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateScheduleAction(t *testing.T) {
+	input := &CreateScheduleActionInput{
+		Id:         ptr.String("__Id__"),
+		ActionName: ptr.String("__ActionName__"),
+		StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+			Value: types.FixedModeScheduleActionStartSettings{
+				ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Operations: []types.ScheduleActionOperation{
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateScheduleAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateScheduleAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteDictionary(t *testing.T) {
 	input := &DeleteDictionaryInput{
 		Id: ptr.String("__Id__"),
@@ -1250,6 +1402,34 @@ func TestUpdateRequestSnapshot_DeleteFeedPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteScheduleAction(t *testing.T) {
+	input := &DeleteScheduleActionInput{
+		Id:         ptr.String("__Id__"),
+		ActionName: ptr.String("__ActionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteScheduleAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteScheduleAction"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1470,6 +1650,35 @@ func TestUpdateRequestSnapshot_ListFeeds(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFeeds"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListScheduleActions(t *testing.T) {
+	input := &ListScheduleActionsInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListScheduleActions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListScheduleActions"); err != nil {
 		t.Fatal(err)
 	}
 }

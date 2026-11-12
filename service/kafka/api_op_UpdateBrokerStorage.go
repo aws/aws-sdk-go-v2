@@ -61,7 +61,9 @@ func (v *UpdateBrokerStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CurrentVersion != nil {
 		s.WriteString(schemas.UpdateBrokerStorageRequest_CurrentVersion, *v.CurrentVersion)
 	}
-	serialize__listOfBrokerEBSVolumeInfo(s, schemas.UpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo, v.TargetBrokerEBSVolumeInfo)
+	if v.TargetBrokerEBSVolumeInfo != nil {
+		serialize__listOfBrokerEBSVolumeInfo(s, schemas.UpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo, v.TargetBrokerEBSVolumeInfo)
+	}
 }
 
 type UpdateBrokerStorageOutput struct {

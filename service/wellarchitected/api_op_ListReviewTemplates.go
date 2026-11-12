@@ -77,7 +77,9 @@ func (v *ListReviewTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReviewTemplatesOutput_NextToken, *v.NextToken)
 	}
-	serializeReviewTemplates(s, schemas.ListReviewTemplatesOutput_ReviewTemplates, v.ReviewTemplates)
+	if v.ReviewTemplates != nil {
+		serializeReviewTemplates(s, schemas.ListReviewTemplatesOutput_ReviewTemplates, v.ReviewTemplates)
+	}
 }
 func (v *ListReviewTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReviewTemplatesOutput, func(s *smithy.Schema) error {

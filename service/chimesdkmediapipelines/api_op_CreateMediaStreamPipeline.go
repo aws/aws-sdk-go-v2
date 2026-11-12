@@ -58,9 +58,15 @@ func (v *CreateMediaStreamPipelineInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateMediaStreamPipelineRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
-	serializeMediaStreamSinkList(s, schemas.CreateMediaStreamPipelineRequest_Sinks, v.Sinks)
-	serializeMediaStreamSourceList(s, schemas.CreateMediaStreamPipelineRequest_Sources, v.Sources)
-	serializeTagList(s, schemas.CreateMediaStreamPipelineRequest_Tags, v.Tags)
+	if v.Sinks != nil {
+		serializeMediaStreamSinkList(s, schemas.CreateMediaStreamPipelineRequest_Sinks, v.Sinks)
+	}
+	if v.Sources != nil {
+		serializeMediaStreamSourceList(s, schemas.CreateMediaStreamPipelineRequest_Sources, v.Sources)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMediaStreamPipelineRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMediaStreamPipelineOutput struct {

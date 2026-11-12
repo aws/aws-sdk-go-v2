@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidPolicy</Code><message>__Message__</message></Error></ErrorResponse>

@@ -1,0 +1,3 @@
+POST /storage/indexes/rebuilds/__RebuildId__/cancel
+
+

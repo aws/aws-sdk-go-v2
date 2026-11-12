@@ -100,7 +100,9 @@ func (v *GetSessionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthTokenExpirationTime != nil {
 		s.WriteTime(schemas.GetSessionEndpointOutput_AuthTokenExpirationTime, *v.AuthTokenExpirationTime)
 	}
-	serializeCredentials(s, schemas.GetSessionEndpointOutput_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeCredentials(s, schemas.GetSessionEndpointOutput_Credentials, v.Credentials)
+	}
 	if v.Endpoint != nil {
 		s.WriteString(schemas.GetSessionEndpointOutput_Endpoint, *v.Endpoint)
 	}

@@ -73,7 +73,9 @@ func (v *DescribeConfigurationAggregatorSourcesStatusInput) SerializeMembers(s s
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusRequest_NextToken, *v.NextToken)
 	}
-	serializeAggregatedSourceStatusTypeList(s, schemas.DescribeConfigurationAggregatorSourcesStatusRequest_UpdateStatus, v.UpdateStatus)
+	if v.UpdateStatus != nil {
+		serializeAggregatedSourceStatusTypeList(s, schemas.DescribeConfigurationAggregatorSourcesStatusRequest_UpdateStatus, v.UpdateStatus)
+	}
 }
 
 type DescribeConfigurationAggregatorSourcesStatusOutput struct {
@@ -98,7 +100,9 @@ func (v *DescribeConfigurationAggregatorSourcesStatusOutput) Serialize(s smithy.
 }
 
 func (v *DescribeConfigurationAggregatorSourcesStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregatedSourceStatusList(s, schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList, v.AggregatedSourceStatusList)
+	if v.AggregatedSourceStatusList != nil {
+		serializeAggregatedSourceStatusList(s, schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList, v.AggregatedSourceStatusList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusResponse_NextToken, *v.NextToken)
 	}

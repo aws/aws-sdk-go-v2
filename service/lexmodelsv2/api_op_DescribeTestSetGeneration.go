@@ -103,7 +103,9 @@ func (v *DescribeTestSetGenerationOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeTestSetGenerationResponse_description, *v.Description)
 	}
-	serializeFailureReasons(s, schemas.DescribeTestSetGenerationResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeTestSetGenerationResponse_failureReasons, v.FailureReasons)
+	}
 	if v.GenerationDataSource != nil {
 		s.WriteStruct(schemas.DescribeTestSetGenerationResponse_generationDataSource)
 		v.GenerationDataSource.SerializeMembers(s)

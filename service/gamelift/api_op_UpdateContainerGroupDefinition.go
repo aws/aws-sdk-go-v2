@@ -162,11 +162,15 @@ func (v *UpdateContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSer
 	if v.OperatingSystem != "" {
 		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_OperatingSystem, string(v.OperatingSystem))
 	}
-	serializeContainerGroupDefinitionRemoveAttributeList(s, schemas.UpdateContainerGroupDefinitionInput_RemoveAttributes, v.RemoveAttributes)
+	if v.RemoveAttributes != nil {
+		serializeContainerGroupDefinitionRemoveAttributeList(s, schemas.UpdateContainerGroupDefinitionInput_RemoveAttributes, v.RemoveAttributes)
+	}
 	if v.SourceVersionNumber != nil {
 		s.WriteInt32(schemas.UpdateContainerGroupDefinitionInput_SourceVersionNumber, *v.SourceVersionNumber)
 	}
-	serializeSupportContainerDefinitionInputList(s, schemas.UpdateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	if v.SupportContainerDefinitions != nil {
+		serializeSupportContainerDefinitionInputList(s, schemas.UpdateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	}
 	if v.TotalMemoryLimitMebibytes != nil {
 		s.WriteInt32(schemas.UpdateContainerGroupDefinitionInput_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
 	}

@@ -86,7 +86,9 @@ func (v *ListViewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeViewSummaryList(s, schemas.ListViewsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeViewSummaryList(s, schemas.ListViewsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListViewsResponse_nextToken, *v.NextToken)
 	}

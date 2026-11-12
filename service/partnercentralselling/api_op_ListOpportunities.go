@@ -125,15 +125,23 @@ func (v *ListOpportunitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CreatedDate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ListOpportunitiesRequest_CustomerCompanyName, v.CustomerCompanyName)
-	serializeFilterIdentifier(s, schemas.ListOpportunitiesRequest_Identifier, v.Identifier)
+	if v.CustomerCompanyName != nil {
+		serializeStringList(s, schemas.ListOpportunitiesRequest_CustomerCompanyName, v.CustomerCompanyName)
+	}
+	if v.Identifier != nil {
+		serializeFilterIdentifier(s, schemas.ListOpportunitiesRequest_Identifier, v.Identifier)
+	}
 	if v.LastModifiedDate != nil {
 		s.WriteStruct(schemas.ListOpportunitiesRequest_LastModifiedDate)
 		v.LastModifiedDate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFilterLifeCycleReviewStatus(s, schemas.ListOpportunitiesRequest_LifeCycleReviewStatus, v.LifeCycleReviewStatus)
-	serializeFilterLifeCycleStage(s, schemas.ListOpportunitiesRequest_LifeCycleStage, v.LifeCycleStage)
+	if v.LifeCycleReviewStatus != nil {
+		serializeFilterLifeCycleReviewStatus(s, schemas.ListOpportunitiesRequest_LifeCycleReviewStatus, v.LifeCycleReviewStatus)
+	}
+	if v.LifeCycleStage != nil {
+		serializeFilterLifeCycleStage(s, schemas.ListOpportunitiesRequest_LifeCycleStage, v.LifeCycleStage)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListOpportunitiesRequest_MaxResults, *v.MaxResults)
 	}
@@ -181,7 +189,9 @@ func (v *ListOpportunitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOpportunitiesResponse_NextToken, *v.NextToken)
 	}
-	serializeOpportunitySummaries(s, schemas.ListOpportunitiesResponse_OpportunitySummaries, v.OpportunitySummaries)
+	if v.OpportunitySummaries != nil {
+		serializeOpportunitySummaries(s, schemas.ListOpportunitiesResponse_OpportunitySummaries, v.OpportunitySummaries)
+	}
 }
 func (v *ListOpportunitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOpportunitiesResponse, func(s *smithy.Schema) error {

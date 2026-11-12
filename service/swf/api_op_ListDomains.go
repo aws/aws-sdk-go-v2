@@ -131,7 +131,9 @@ func (v *ListDomainsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainInfoList(s, schemas.DomainInfos_domainInfos, v.DomainInfos)
+	if v.DomainInfos != nil {
+		serializeDomainInfoList(s, schemas.DomainInfos_domainInfos, v.DomainInfos)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.DomainInfos_nextPageToken, *v.NextPageToken)
 	}

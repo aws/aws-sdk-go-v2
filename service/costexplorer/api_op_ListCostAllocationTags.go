@@ -70,7 +70,9 @@ func (v *ListCostAllocationTagsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Status != "" {
 		s.WriteString(schemas.ListCostAllocationTagsRequest_Status, string(v.Status))
 	}
-	serializeCostAllocationTagKeyList(s, schemas.ListCostAllocationTagsRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeCostAllocationTagKeyList(s, schemas.ListCostAllocationTagsRequest_TagKeys, v.TagKeys)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ListCostAllocationTagsRequest_Type, string(v.Type))
 	}
@@ -100,7 +102,9 @@ func (v *ListCostAllocationTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCostAllocationTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostAllocationTagList(s, schemas.ListCostAllocationTagsResponse_CostAllocationTags, v.CostAllocationTags)
+	if v.CostAllocationTags != nil {
+		serializeCostAllocationTagList(s, schemas.ListCostAllocationTagsResponse_CostAllocationTags, v.CostAllocationTags)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCostAllocationTagsResponse_NextToken, *v.NextToken)
 	}

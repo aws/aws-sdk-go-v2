@@ -261,7 +261,29 @@ func TestCheckRequestSnapshot_CreateDbCluster(t *testing.T) {
 			"__Member__",
 		},
 		DeploymentType: types.ClusterDeploymentType("MULTI_NODE_READ_REPLICAS"),
-		FailoverMode:   types.FailoverMode("AUTOMATIC"),
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
+		},
+		FailoverMode: types.FailoverMode("AUTOMATIC"),
 		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
 			S3Configuration: &types.S3Configuration{
 				BucketName: ptr.String("__BucketName__"),
@@ -1043,7 +1065,29 @@ func TestCheckRequestSnapshot_UpdateDbCluster(t *testing.T) {
 		DbParameterGroupIdentifier: ptr.String("__DbParameterGroupIdentifier__"),
 		Port:                       ptr.Int32(1),
 		DbInstanceType:             types.DbInstanceType("db.influx.medium"),
-		FailoverMode:               types.FailoverMode("AUTOMATIC"),
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
+		},
+		FailoverMode: types.FailoverMode("AUTOMATIC"),
 		MaintenanceSchedule: &types.MaintenanceSchedule{
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
@@ -1197,7 +1241,29 @@ func TestUpdateRequestSnapshot_CreateDbCluster(t *testing.T) {
 			"__Member__",
 		},
 		DeploymentType: types.ClusterDeploymentType("MULTI_NODE_READ_REPLICAS"),
-		FailoverMode:   types.FailoverMode("AUTOMATIC"),
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
+		},
+		FailoverMode: types.FailoverMode("AUTOMATIC"),
 		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
 			S3Configuration: &types.S3Configuration{
 				BucketName: ptr.String("__BucketName__"),
@@ -1979,7 +2045,29 @@ func TestUpdateRequestSnapshot_UpdateDbCluster(t *testing.T) {
 		DbParameterGroupIdentifier: ptr.String("__DbParameterGroupIdentifier__"),
 		Port:                       ptr.Int32(1),
 		DbInstanceType:             types.DbInstanceType("db.influx.medium"),
-		FailoverMode:               types.FailoverMode("AUTOMATIC"),
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
+		},
+		FailoverMode: types.FailoverMode("AUTOMATIC"),
 		MaintenanceSchedule: &types.MaintenanceSchedule{
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),

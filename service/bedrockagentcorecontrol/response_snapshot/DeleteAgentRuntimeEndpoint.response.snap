@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentRuntimeId":"__AgentRuntimeId__","endpointName":"__EndpointName__","status":"CREATING"}

@@ -105,7 +105,9 @@ func (v *CreateStorageVirtualMachineInput) SerializeMembers(s smithy.ShapeSerial
 	if v.SvmAdminPassword != nil {
 		s.WriteString(schemas.CreateStorageVirtualMachineRequest_SvmAdminPassword, *v.SvmAdminPassword)
 	}
-	serializeTags(s, schemas.CreateStorageVirtualMachineRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStorageVirtualMachineRequest_Tags, v.Tags)
+	}
 }
 
 type CreateStorageVirtualMachineOutput struct {

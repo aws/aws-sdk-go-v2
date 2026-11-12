@@ -112,7 +112,9 @@ func (v *CreateIPSetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIPAddresses(s, schemas.CreateIPSetRequest_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeIPAddresses(s, schemas.CreateIPSetRequest_Addresses, v.Addresses)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateIPSetRequest_Description, *v.Description)
 	}
@@ -125,7 +127,9 @@ func (v *CreateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Scope != "" {
 		s.WriteString(schemas.CreateIPSetRequest_Scope, string(v.Scope))
 	}
-	serializeTagList(s, schemas.CreateIPSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIPSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateIPSetOutput struct {

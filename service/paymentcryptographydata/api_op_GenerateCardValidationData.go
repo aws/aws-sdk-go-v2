@@ -89,7 +89,9 @@ func (v *GenerateCardValidationDataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateCardValidationDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCardGenerationAttributes(s, schemas.GenerateCardValidationDataInput_GenerationAttributes, v.GenerationAttributes)
+	if v.GenerationAttributes != nil {
+		serializeCardGenerationAttributes(s, schemas.GenerateCardValidationDataInput_GenerationAttributes, v.GenerationAttributes)
+	}
 	if v.KeyIdentifier != nil {
 		s.WriteString(schemas.GenerateCardValidationDataInput_KeyIdentifier, *v.KeyIdentifier)
 	}

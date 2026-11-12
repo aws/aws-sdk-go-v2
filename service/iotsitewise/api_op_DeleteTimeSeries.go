@@ -5,6 +5,8 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,30 @@ type DeleteTimeSeriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTimeSeriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTimeSeriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTimeSeriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.DeleteTimeSeriesRequest_alias, *v.Alias)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.DeleteTimeSeriesRequest_assetId, *v.AssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteTimeSeriesRequest_clientToken, *v.ClientToken)
+	}
+	if v.PropertyId != nil {
+		s.WriteString(schemas.DeleteTimeSeriesRequest_propertyId, *v.PropertyId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DeleteTimeSeriesRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type DeleteTimeSeriesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +104,26 @@ type DeleteTimeSeriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTimeSeriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTimeSeriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTimeSeriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTimeSeries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimeSeries, schemas.DeleteTimeSeriesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTimeSeries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimeSeries, schemas.DeleteTimeSeriesRequest, nil), output: &DeleteTimeSeriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

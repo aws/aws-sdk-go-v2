@@ -221,7 +221,9 @@ func (v *CreateExpressGatewayServiceInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ServiceName != nil {
 		s.WriteString(schemas.CreateExpressGatewayServiceRequest_serviceName, *v.ServiceName)
 	}
-	serializeTags(s, schemas.CreateExpressGatewayServiceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateExpressGatewayServiceRequest_tags, v.Tags)
+	}
 	if v.TaskDefinitionArn != nil {
 		s.WriteString(schemas.CreateExpressGatewayServiceRequest_taskDefinitionArn, *v.TaskDefinitionArn)
 	}

@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifySelfservicePermissions
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifySelfservicePermissions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__","SelfservicePermissions":{"ChangeComputeType":"ENABLED","IncreaseVolumeSize":"ENABLED","RebuildWorkspace":"ENABLED","RestartWorkspace":"ENABLED","SwitchRunningMode":"ENABLED"}}
+¿jResourceIdn__ResourceId__vSelfservicePermissions¿qChangeComputeTypegENABLEDrIncreaseVolumeSizegENABLEDpRebuildWorkspacegENABLEDpRestartWorkspacegENABLEDqSwitchRunningModegENABLEDÿÿ

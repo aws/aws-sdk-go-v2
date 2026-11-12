@@ -139,7 +139,9 @@ func (v *ListHubContentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHubContentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHubContentInfoList(s, schemas.ListHubContentVersionsResponse_HubContentSummaries, v.HubContentSummaries)
+	if v.HubContentSummaries != nil {
+		serializeHubContentInfoList(s, schemas.ListHubContentVersionsResponse_HubContentSummaries, v.HubContentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHubContentVersionsResponse_NextToken, *v.NextToken)
 	}

@@ -4,7 +4,9 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,21 @@ type GetUserDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetUserDetailsRequest_id, *v.Id)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.GetUserDetailsRequest_userName, *v.UserName)
+	}
+}
+
 type GetUserDetailsOutput struct {
 
 	// The friendly name displayed for the user in Amazon CodeCatalyst.
@@ -58,13 +75,58 @@ type GetUserDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetUserDetailsResponse_displayName, *v.DisplayName)
+	}
+	if v.PrimaryEmail != nil {
+		s.WriteStruct(schemas.GetUserDetailsResponse_primaryEmail)
+		v.PrimaryEmail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetUserDetailsResponse_userId, *v.UserId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.GetUserDetailsResponse_userName, *v.UserName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetUserDetailsResponse_version, *v.Version)
+	}
+}
+func (v *GetUserDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserDetailsResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetUserDetailsResponse_displayName, v.DisplayName)
+		case schemas.GetUserDetailsResponse_primaryEmail:
+			v.PrimaryEmail = &types.EmailAddress{}
+			return v.PrimaryEmail.Deserialize(d)
+		case schemas.GetUserDetailsResponse_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.GetUserDetailsResponse_userId, v.UserId)
+		case schemas.GetUserDetailsResponse_userName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.GetUserDetailsResponse_userName, v.UserName)
+		case schemas.GetUserDetailsResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetUserDetailsResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUserDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserDetails, schemas.GetUserDetailsRequest, schemas.GetUserDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUserDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserDetails, schemas.GetUserDetailsRequest, schemas.GetUserDetailsResponse), output: &GetUserDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

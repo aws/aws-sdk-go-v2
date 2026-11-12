@@ -74,7 +74,9 @@ func (v *DescribeFileCachesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFileCachesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileCacheIds(s, schemas.DescribeFileCachesRequest_FileCacheIds, v.FileCacheIds)
+	if v.FileCacheIds != nil {
+		serializeFileCacheIds(s, schemas.DescribeFileCachesRequest_FileCacheIds, v.FileCacheIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeFileCachesRequest_MaxResults, *v.MaxResults)
 	}
@@ -106,7 +108,9 @@ func (v *DescribeFileCachesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFileCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileCaches(s, schemas.DescribeFileCachesResponse_FileCaches, v.FileCaches)
+	if v.FileCaches != nil {
+		serializeFileCaches(s, schemas.DescribeFileCachesResponse_FileCaches, v.FileCaches)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFileCachesResponse_NextToken, *v.NextToken)
 	}

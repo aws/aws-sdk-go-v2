@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","Description":"__Description__","Expression":"__Expression__","ExpressionType":"RuleName","Name":"__Name__","RoleArn":"__RoleArn__"}

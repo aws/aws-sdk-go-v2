@@ -72,7 +72,9 @@ func (v *DescribeTrailsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncludeShadowTrails != nil {
 		s.WriteBool(schemas.DescribeTrailsRequest_includeShadowTrails, *v.IncludeShadowTrails)
 	}
-	serializeTrailNameList(s, schemas.DescribeTrailsRequest_trailNameList, v.TrailNameList)
+	if v.TrailNameList != nil {
+		serializeTrailNameList(s, schemas.DescribeTrailsRequest_trailNameList, v.TrailNameList)
+	}
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -99,7 +101,9 @@ func (v *DescribeTrailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTrailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTrailList(s, schemas.DescribeTrailsResponse_trailList, v.TrailList)
+	if v.TrailList != nil {
+		serializeTrailList(s, schemas.DescribeTrailsResponse_trailList, v.TrailList)
+	}
 }
 func (v *DescribeTrailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTrailsResponse, func(s *smithy.Schema) error {

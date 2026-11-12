@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DeleteContainerAssociation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ContainerAssociationArn":"__ContainerAssociationArn__","ContainerAssociationName":"__ContainerAssociationName__","Status":"ACTIVE"}
+¿wContainerAssociationArnx__ContainerAssociationArn__xContainerAssociationNamex__ContainerAssociationName__fStatusfACTIVEÿ

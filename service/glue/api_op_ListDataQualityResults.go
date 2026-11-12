@@ -87,7 +87,9 @@ func (v *ListDataQualityResultsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityResultsResponse_NextToken, *v.NextToken)
 	}
-	serializeDataQualityResultDescriptionList(s, schemas.ListDataQualityResultsResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeDataQualityResultDescriptionList(s, schemas.ListDataQualityResultsResponse_Results, v.Results)
+	}
 }
 func (v *ListDataQualityResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataQualityResultsResponse, func(s *smithy.Schema) error {

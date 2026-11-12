@@ -83,7 +83,9 @@ func (v *DescribeBudgetNotificationsForAccountOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *DescribeBudgetNotificationsForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgetNotificationsForAccountList(s, schemas.DescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount, v.BudgetNotificationsForAccount)
+	if v.BudgetNotificationsForAccount != nil {
+		serializeBudgetNotificationsForAccountList(s, schemas.DescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount, v.BudgetNotificationsForAccount)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeBudgetNotificationsForAccountResponse_NextToken, *v.NextToken)
 	}

@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeConnectClientAddIns
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AddIns":[{"AddInId":"__AddInId__","Name":"__Name__","ResourceId":"__ResourceId__","URL":"__URL__"},{"AddInId":"__AddInId__","Name":"__Name__","ResourceId":"__ResourceId__","URL":"__URL__"}],"NextToken":"__NextToken__"}
+¿fAddInsŸ¿gAddInIdk__AddInId__dNameh__Name__jResourceIdn__ResourceId__cURLg__URL__ÿ¿gAddInIdk__AddInId__dNameh__Name__jResourceIdn__ResourceId__cURLg__URL__ÿÿiNextTokenm__NextToken__ÿ

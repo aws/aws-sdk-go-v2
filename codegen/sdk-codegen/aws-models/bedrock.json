@@ -14459,6 +14459,12 @@
                         "smithy.api#documentation": "<p>The filter details for the guardrails contextual grounding policy.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tier": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for contextual grounding.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14474,10 +14480,66 @@
                         "smithy.api#documentation": "<p>The filter configuration details for the guardrails contextual grounding policy.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tierConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingTierConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for contextual grounding.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The policy configuration details for the guardrails contextual grounding policy.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingTier": {
+            "type": "structure",
+            "members": {
+                "tierName": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingTierName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for contextual grounding. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established contextual grounding functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier, with support for reasoning, conversational content and more comprehensive language support. This tier requires that your guardrail use <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">cross-Region inference</a>.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the tier that your guardrail uses for contextual grounding checks.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingTierConfig": {
+            "type": "structure",
+            "members": {
+                "tierName": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingTierName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier that your guardrail uses for contextual grounding. Valid values include:</p> <ul> <li> <p> <code>CLASSIC</code> tier – Provides established contextual grounding functionality supporting English, French, and Spanish languages.</p> </li> <li> <p> <code>STANDARD</code> tier – Provides a more robust solution than the <code>CLASSIC</code> tier, with support for reasoning, conversational content and more comprehensive language support. This tier requires that your guardrail use <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html\">cross-Region inference</a>.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the tier that your guardrail uses for contextual grounding checks.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingTierName": {
+            "type": "enum",
+            "members": {
+                "CLASSIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLASSIC"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrock#GuardrailCrossRegionConfig": {
@@ -15246,7 +15308,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10
+                    "max": 30
                 }
             }
         },

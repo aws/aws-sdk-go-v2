@@ -110,7 +110,9 @@ func (v *ListAccountsForParentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccountsForParentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccounts(s, schemas.ListAccountsForParentResponse_Accounts, v.Accounts)
+	if v.Accounts != nil {
+		serializeAccounts(s, schemas.ListAccountsForParentResponse_Accounts, v.Accounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountsForParentResponse_NextToken, *v.NextToken)
 	}

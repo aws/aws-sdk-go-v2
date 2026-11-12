@@ -4,7 +4,9 @@ package verifiedpermissions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,40 @@ type IsAuthorizedWithTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IsAuthorizedWithTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsAuthorizedWithTokenInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsAuthorizedWithTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.IsAuthorizedWithTokenInput_accessToken, *v.AccessToken)
+	}
+	if v.Action != nil {
+		s.WriteStruct(schemas.IsAuthorizedWithTokenInput_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Context != nil {
+		serializeContextDefinition(s, schemas.IsAuthorizedWithTokenInput_context, v.Context)
+	}
+	if v.Entities != nil {
+		serializeEntitiesDefinition(s, schemas.IsAuthorizedWithTokenInput_entities, v.Entities)
+	}
+	if v.IdentityToken != nil {
+		s.WriteString(schemas.IsAuthorizedWithTokenInput_identityToken, *v.IdentityToken)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.IsAuthorizedWithTokenInput_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.IsAuthorizedWithTokenInput_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type IsAuthorizedWithTokenOutput struct {
 
 	// An authorization decision that indicates if the authorization request should be
@@ -140,13 +176,54 @@ type IsAuthorizedWithTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IsAuthorizedWithTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsAuthorizedWithTokenOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsAuthorizedWithTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Decision != "" {
+		s.WriteString(schemas.IsAuthorizedWithTokenOutput_decision, string(v.Decision))
+	}
+	if v.DeterminingPolicies != nil {
+		serializeDeterminingPolicyList(s, schemas.IsAuthorizedWithTokenOutput_determiningPolicies, v.DeterminingPolicies)
+	}
+	if v.Errors != nil {
+		serializeEvaluationErrorList(s, schemas.IsAuthorizedWithTokenOutput_errors, v.Errors)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.IsAuthorizedWithTokenOutput_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IsAuthorizedWithTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IsAuthorizedWithTokenOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IsAuthorizedWithTokenOutput_decision:
+			var ev string
+			if err := d.ReadString(schemas.IsAuthorizedWithTokenOutput_decision, &ev); err != nil {
+				return err
+			}
+			v.Decision = types.Decision(ev)
+			return nil
+		case schemas.IsAuthorizedWithTokenOutput_determiningPolicies:
+			return deserializeDeterminingPolicyList(d, schemas.IsAuthorizedWithTokenOutput_determiningPolicies, &v.DeterminingPolicies)
+		case schemas.IsAuthorizedWithTokenOutput_errors:
+			return deserializeEvaluationErrorList(d, schemas.IsAuthorizedWithTokenOutput_errors, &v.Errors)
+		case schemas.IsAuthorizedWithTokenOutput_principal:
+			v.Principal = &types.EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIsAuthorizedWithTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpIsAuthorizedWithToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsAuthorizedWithToken, schemas.IsAuthorizedWithTokenInput, schemas.IsAuthorizedWithTokenOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpIsAuthorizedWithToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsAuthorizedWithToken, schemas.IsAuthorizedWithTokenInput, schemas.IsAuthorizedWithTokenOutput), output: &IsAuthorizedWithTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

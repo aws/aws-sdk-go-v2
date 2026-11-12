@@ -94,7 +94,9 @@ func (v *GetRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextShardIterator != nil {
 		s.WriteString(schemas.GetRecordsOutput_NextShardIterator, *v.NextShardIterator)
 	}
-	serializeRecordList(s, schemas.GetRecordsOutput_Records, v.Records)
+	if v.Records != nil {
+		serializeRecordList(s, schemas.GetRecordsOutput_Records, v.Records)
+	}
 }
 func (v *GetRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecordsOutput, func(s *smithy.Schema) error {

@@ -402,16 +402,24 @@ func (v *QueryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.QueryInput_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeAttributeNameList(s, schemas.QueryInput_AttributesToGet, v.AttributesToGet)
+	}
 	if v.ConditionalOperator != "" {
 		s.WriteString(schemas.QueryInput_ConditionalOperator, string(v.ConditionalOperator))
 	}
 	if v.ConsistentRead != nil {
 		s.WriteBool(schemas.QueryInput_ConsistentRead, *v.ConsistentRead)
 	}
-	serializeKey(s, schemas.QueryInput_ExclusiveStartKey, v.ExclusiveStartKey)
-	serializeExpressionAttributeNameMap(s, schemas.QueryInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.QueryInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	if v.ExclusiveStartKey != nil {
+		serializeKey(s, schemas.QueryInput_ExclusiveStartKey, v.ExclusiveStartKey)
+	}
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.QueryInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.QueryInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
 	if v.FilterExpression != nil {
 		s.WriteString(schemas.QueryInput_FilterExpression, *v.FilterExpression)
 	}
@@ -421,14 +429,18 @@ func (v *QueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyConditionExpression != nil {
 		s.WriteString(schemas.QueryInput_KeyConditionExpression, *v.KeyConditionExpression)
 	}
-	serializeKeyConditions(s, schemas.QueryInput_KeyConditions, v.KeyConditions)
+	if v.KeyConditions != nil {
+		serializeKeyConditions(s, schemas.QueryInput_KeyConditions, v.KeyConditions)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.QueryInput_Limit, *v.Limit)
 	}
 	if v.ProjectionExpression != nil {
 		s.WriteString(schemas.QueryInput_ProjectionExpression, *v.ProjectionExpression)
 	}
-	serializeFilterConditionMap(s, schemas.QueryInput_QueryFilter, v.QueryFilter)
+	if v.QueryFilter != nil {
+		serializeFilterConditionMap(s, schemas.QueryInput_QueryFilter, v.QueryFilter)
+	}
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.QueryInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
@@ -517,8 +529,12 @@ func (v *QueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != 0 {
 		s.WriteInt32(schemas.QueryOutput_Count, v.Count)
 	}
-	serializeItemList(s, schemas.QueryOutput_Items, v.Items)
-	serializeKey(s, schemas.QueryOutput_LastEvaluatedKey, v.LastEvaluatedKey)
+	if v.Items != nil {
+		serializeItemList(s, schemas.QueryOutput_Items, v.Items)
+	}
+	if v.LastEvaluatedKey != nil {
+		serializeKey(s, schemas.QueryOutput_LastEvaluatedKey, v.LastEvaluatedKey)
+	}
 	if v.ScannedCount != 0 {
 		s.WriteInt32(schemas.QueryOutput_ScannedCount, v.ScannedCount)
 	}

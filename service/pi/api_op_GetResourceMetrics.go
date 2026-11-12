@@ -137,7 +137,9 @@ func (v *GetResourceMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetResourceMetricsRequest_MaxResults, *v.MaxResults)
 	}
-	serializeMetricQueryList(s, schemas.GetResourceMetricsRequest_MetricQueries, v.MetricQueries)
+	if v.MetricQueries != nil {
+		serializeMetricQueryList(s, schemas.GetResourceMetricsRequest_MetricQueries, v.MetricQueries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceMetricsRequest_NextToken, *v.NextToken)
 	}
@@ -204,7 +206,9 @@ func (v *GetResourceMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.GetResourceMetricsResponse_Identifier, *v.Identifier)
 	}
-	serializeMetricKeyDataPointsList(s, schemas.GetResourceMetricsResponse_MetricList, v.MetricList)
+	if v.MetricList != nil {
+		serializeMetricKeyDataPointsList(s, schemas.GetResourceMetricsResponse_MetricList, v.MetricList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceMetricsResponse_NextToken, *v.NextToken)
 	}

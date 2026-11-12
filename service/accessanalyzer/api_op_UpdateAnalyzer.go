@@ -52,7 +52,9 @@ func (v *UpdateAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalyzerName != nil {
 		s.WriteString(schemas.UpdateAnalyzerRequest_analyzerName, *v.AnalyzerName)
 	}
-	serializeAnalyzerConfiguration(s, schemas.UpdateAnalyzerRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAnalyzerConfiguration(s, schemas.UpdateAnalyzerRequest_configuration, v.Configuration)
+	}
 }
 
 type UpdateAnalyzerOutput struct {
@@ -74,7 +76,9 @@ func (v *UpdateAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyzerConfiguration(s, schemas.UpdateAnalyzerResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAnalyzerConfiguration(s, schemas.UpdateAnalyzerResponse_configuration, v.Configuration)
+	}
 }
 func (v *UpdateAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateAnalyzerResponse, func(s *smithy.Schema) error {

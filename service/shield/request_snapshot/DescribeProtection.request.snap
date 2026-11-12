@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShield_20160616/operation/DescribeProtection
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.DescribeProtection
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ProtectionId":"__ProtectionId__","ResourceArn":"__ResourceArn__"}
+¿lProtectionIdp__ProtectionId__kResourceArno__ResourceArn__ÿ

@@ -312,6 +312,25 @@ func (CapacityReservationPreference) Values() []CapacityReservationPreference {
 	}
 }
 
+type CircuitBreakerMode string
+
+// Enum values for CircuitBreakerMode
+const (
+	CircuitBreakerModeEnabled  CircuitBreakerMode = "ENABLED"
+	CircuitBreakerModeDisabled CircuitBreakerMode = "DISABLED"
+)
+
+// Values returns all known values for CircuitBreakerMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CircuitBreakerMode) Values() []CircuitBreakerMode {
+	return []CircuitBreakerMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ClaimMatchOperatorType string
 
 // Enum values for ClaimMatchOperatorType
@@ -932,6 +951,36 @@ func (ExtractionType) Values() []ExtractionType {
 	}
 }
 
+type FallbackError string
+
+// Enum values for FallbackError
+const (
+	// The gateway could not establish a connection to the destination (connection
+	// refused/reset, or connection timeout) — the attempt never reached the provider.
+	// Feeds the circuit breaker.
+	FallbackErrorConnectionError FallbackError = "CONNECTION_ERROR"
+	// The destination accepted the connection but did not return the first response
+	// byte within firstByteTimeoutMilliseconds; the attempt is abandoned before any
+	// byte reaches the client. Feeds the circuit breaker.
+	FallbackErrorFirstByteTimeout FallbackError = "FIRST_BYTE_TIMEOUT"
+	// Gateway-side: the target could not be routed to (target missing, or it does not
+	// support the request's API path). Deterministic — advances the chain but does NOT
+	// feed the breaker.
+	FallbackErrorUnroutable FallbackError = "UNROUTABLE"
+)
+
+// Values returns all known values for FallbackError. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FallbackError) Values() []FallbackError {
+	return []FallbackError{
+		"CONNECTION_ERROR",
+		"FIRST_BYTE_TIMEOUT",
+		"UNROUTABLE",
+	}
+}
+
 type FilterOperator string
 
 // Enum values for FilterOperator
@@ -1407,6 +1456,25 @@ func (ListingMode) Values() []ListingMode {
 	}
 }
 
+type MatchOperator string
+
+// Enum values for MatchOperator
+const (
+	MatchOperatorStringEquals MatchOperator = "StringEquals"
+	MatchOperatorStringLike   MatchOperator = "StringLike"
+)
+
+// Values returns all known values for MatchOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MatchOperator) Values() []MatchOperator {
+	return []MatchOperator{
+		"StringEquals",
+		"StringLike",
+	}
+}
+
 type MemoryStatus string
 
 // Enum values for MemoryStatus
@@ -1576,6 +1644,24 @@ func (OAuthGrantType) Values() []OAuthGrantType {
 		"CLIENT_CREDENTIALS",
 		"AUTHORIZATION_CODE",
 		"TOKEN_EXCHANGE",
+	}
+}
+
+type OnBehalfOfClientAuthenticationMethod string
+
+// Enum values for OnBehalfOfClientAuthenticationMethod
+const (
+	OnBehalfOfClientAuthenticationMethodNoClient OnBehalfOfClientAuthenticationMethod = "NO_CLIENT"
+)
+
+// Values returns all known values for OnBehalfOfClientAuthenticationMethod. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnBehalfOfClientAuthenticationMethod) Values() []OnBehalfOfClientAuthenticationMethod {
+	return []OnBehalfOfClientAuthenticationMethod{
+		"NO_CLIENT",
 	}
 }
 

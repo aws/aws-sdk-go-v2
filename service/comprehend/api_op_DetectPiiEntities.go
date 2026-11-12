@@ -78,7 +78,9 @@ func (v *DetectPiiEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectPiiEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPiiEntities(s, schemas.DetectPiiEntitiesResponse_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeListOfPiiEntities(s, schemas.DetectPiiEntitiesResponse_Entities, v.Entities)
+	}
 }
 func (v *DetectPiiEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectPiiEntitiesResponse, func(s *smithy.Schema) error {
@@ -104,6 +106,9 @@ func (c *Client) addOperationDetectPiiEntitiesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

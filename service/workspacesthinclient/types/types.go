@@ -511,7 +511,9 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DesktopType != "" {
 		s.WriteString(schemas.Environment_desktopType, string(v.DesktopType))
 	}
-	serializeDeviceCreationTagsMap(s, schemas.Environment_deviceCreationTags, v.DeviceCreationTags)
+	if v.DeviceCreationTags != nil {
+		serializeDeviceCreationTagsMap(s, schemas.Environment_deviceCreationTags, v.DeviceCreationTags)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Environment_id, *v.Id)
 	}
@@ -833,7 +835,9 @@ func (v *MaintenanceWindow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplyTimeOf != "" {
 		s.WriteString(schemas.MaintenanceWindow_applyTimeOf, string(v.ApplyTimeOf))
 	}
-	serializeDayOfWeekList(s, schemas.MaintenanceWindow_daysOfTheWeek, v.DaysOfTheWeek)
+	if v.DaysOfTheWeek != nil {
+		serializeDayOfWeekList(s, schemas.MaintenanceWindow_daysOfTheWeek, v.DaysOfTheWeek)
+	}
 	if v.EndTimeHour != nil {
 		s.WriteInt32(schemas.MaintenanceWindow_endTimeHour, *v.EndTimeHour)
 	}
@@ -969,7 +973,9 @@ func (v *SoftwareSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReleasedAt != nil {
 		s.WriteTime(schemas.SoftwareSet_releasedAt, *v.ReleasedAt)
 	}
-	serializeSoftwareList(s, schemas.SoftwareSet_software, v.Software)
+	if v.Software != nil {
+		serializeSoftwareList(s, schemas.SoftwareSet_software, v.Software)
+	}
 	if v.SupportedUntil != nil {
 		s.WriteTime(schemas.SoftwareSet_supportedUntil, *v.SupportedUntil)
 	}

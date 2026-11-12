@@ -91,7 +91,9 @@ func (v *DescribeLDAPSSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeLDAPSSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLDAPSSettingsInfo(s, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, v.LDAPSSettingsInfo)
+	if v.LDAPSSettingsInfo != nil {
+		serializeLDAPSSettingsInfo(s, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, v.LDAPSSettingsInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeLDAPSSettingsResult_NextToken, *v.NextToken)
 	}
@@ -123,6 +125,9 @@ func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

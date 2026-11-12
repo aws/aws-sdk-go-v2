@@ -87,14 +87,18 @@ func (v *UpdateAlertInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAlertInput_name, *v.Name)
 	}
-	serializeNotificationRuleList(s, schemas.UpdateAlertInput_notificationRules, v.NotificationRules)
+	if v.NotificationRules != nil {
+		serializeNotificationRuleList(s, schemas.UpdateAlertInput_notificationRules, v.NotificationRules)
+	}
 	if v.NotificationsEnabled != nil {
 		s.WriteBool(schemas.UpdateAlertInput_notificationsEnabled, *v.NotificationsEnabled)
 	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.UpdateAlertInput_profileId, *v.ProfileId)
 	}
-	serializeRule(s, schemas.UpdateAlertInput_rule, v.Rule)
+	if v.Rule != nil {
+		serializeRule(s, schemas.UpdateAlertInput_rule, v.Rule)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.UpdateAlertInput_spaceId, *v.SpaceId)
 	}

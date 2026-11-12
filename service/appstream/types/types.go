@@ -213,7 +213,9 @@ func (v *AgentAccessConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScreenshotsUploadEnabled != nil {
 		s.WriteBool(schemas.AgentAccessConfig_ScreenshotsUploadEnabled, *v.ScreenshotsUploadEnabled)
 	}
-	serializeAgentAccessSettingList(s, schemas.AgentAccessConfig_Settings, v.Settings)
+	if v.Settings != nil {
+		serializeAgentAccessSettingList(s, schemas.AgentAccessConfig_Settings, v.Settings)
+	}
 	if v.UserControlMode != "" {
 		s.WriteString(schemas.AgentAccessConfig_UserControlMode, string(v.UserControlMode))
 	}
@@ -302,7 +304,9 @@ func (v *AgentAccessConfigForUpdate) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ScreenshotsUploadEnabled != nil {
 		s.WriteBool(schemas.AgentAccessConfigForUpdate_ScreenshotsUploadEnabled, *v.ScreenshotsUploadEnabled)
 	}
-	serializeAgentAccessSettingList(s, schemas.AgentAccessConfigForUpdate_Settings, v.Settings)
+	if v.Settings != nil {
+		serializeAgentAccessSettingList(s, schemas.AgentAccessConfigForUpdate_Settings, v.Settings)
+	}
 	if v.UserControlMode != "" {
 		s.WriteString(schemas.AgentAccessConfigForUpdate_UserControlMode, string(v.UserControlMode))
 	}
@@ -469,7 +473,9 @@ func (v *AppBlock) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AppBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeErrorDetailsList(s, schemas.AppBlock_AppBlockErrors, v.AppBlockErrors)
+	if v.AppBlockErrors != nil {
+		serializeErrorDetailsList(s, schemas.AppBlock_AppBlockErrors, v.AppBlockErrors)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.AppBlock_Arn, *v.Arn)
 	}
@@ -629,8 +635,12 @@ func (v *AppBlockBuilder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AppBlockBuilder) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.AppBlockBuilder_AccessEndpoints, v.AccessEndpoints)
-	serializeResourceErrors(s, schemas.AppBlockBuilder_AppBlockBuilderErrors, v.AppBlockBuilderErrors)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.AppBlockBuilder_AccessEndpoints, v.AccessEndpoints)
+	}
+	if v.AppBlockBuilderErrors != nil {
+		serializeResourceErrors(s, schemas.AppBlockBuilder_AppBlockBuilderErrors, v.AppBlockBuilderErrors)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.AppBlockBuilder_Arn, *v.Arn)
 	}
@@ -906,18 +916,24 @@ func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IconURL != nil {
 		s.WriteString(schemas.Application_IconURL, *v.IconURL)
 	}
-	serializeStringList(s, schemas.Application_InstanceFamilies, v.InstanceFamilies)
+	if v.InstanceFamilies != nil {
+		serializeStringList(s, schemas.Application_InstanceFamilies, v.InstanceFamilies)
+	}
 	if v.LaunchParameters != nil {
 		s.WriteString(schemas.Application_LaunchParameters, *v.LaunchParameters)
 	}
 	if v.LaunchPath != nil {
 		s.WriteString(schemas.Application_LaunchPath, *v.LaunchPath)
 	}
-	serializeMetadata(s, schemas.Application_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.Application_Metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Application_Name, *v.Name)
 	}
-	serializePlatforms(s, schemas.Application_Platforms, v.Platforms)
+	if v.Platforms != nil {
+		serializePlatforms(s, schemas.Application_Platforms, v.Platforms)
+	}
 	if v.WorkingDirectory != nil {
 		s.WriteString(schemas.Application_WorkingDirectory, *v.WorkingDirectory)
 	}
@@ -1549,7 +1565,9 @@ func (v *DirectoryConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryName != nil {
 		s.WriteString(schemas.DirectoryConfig_DirectoryName, *v.DirectoryName)
 	}
-	serializeOrganizationalUnitDistinguishedNamesList(s, schemas.DirectoryConfig_OrganizationalUnitDistinguishedNames, v.OrganizationalUnitDistinguishedNames)
+	if v.OrganizationalUnitDistinguishedNames != nil {
+		serializeOrganizationalUnitDistinguishedNamesList(s, schemas.DirectoryConfig_OrganizationalUnitDistinguishedNames, v.OrganizationalUnitDistinguishedNames)
+	}
 	if v.ServiceAccountCredentials != nil {
 		s.WriteStruct(schemas.DirectoryConfig_ServiceAccountCredentials)
 		v.ServiceAccountCredentials.SerializeMembers(s)
@@ -1703,7 +1721,9 @@ func (v *Entitlement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVisibility != "" {
 		s.WriteString(schemas.Entitlement_AppVisibility, string(v.AppVisibility))
 	}
-	serializeEntitlementAttributeList(s, schemas.Entitlement_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeEntitlementAttributeList(s, schemas.Entitlement_Attributes, v.Attributes)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.Entitlement_CreatedTime, *v.CreatedTime)
 	}
@@ -1922,14 +1942,18 @@ func (v *ExportImageTask) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.ExportImageTask_CreatedDate, *v.CreatedDate)
 	}
-	serializeErrorDetailsList(s, schemas.ExportImageTask_ErrorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetailsList(s, schemas.ExportImageTask_ErrorDetails, v.ErrorDetails)
+	}
 	if v.ImageArn != nil {
 		s.WriteString(schemas.ExportImageTask_ImageArn, *v.ImageArn)
 	}
 	if v.State != "" {
 		s.WriteString(schemas.ExportImageTask_State, string(v.State))
 	}
-	serializeTags(s, schemas.ExportImageTask_TagSpecifications, v.TagSpecifications)
+	if v.TagSpecifications != nil {
+		serializeTags(s, schemas.ExportImageTask_TagSpecifications, v.TagSpecifications)
+	}
 	if v.TaskId != nil {
 		s.WriteString(schemas.ExportImageTask_TaskId, *v.TaskId)
 	}
@@ -2000,7 +2024,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_Name, *v.Name)
 	}
-	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -2302,7 +2328,9 @@ func (v *Fleet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableDefaultInternetAccess != nil {
 		s.WriteBool(schemas.Fleet_EnableDefaultInternetAccess, *v.EnableDefaultInternetAccess)
 	}
-	serializeFleetErrors(s, schemas.Fleet_FleetErrors, v.FleetErrors)
+	if v.FleetErrors != nil {
+		serializeFleetErrors(s, schemas.Fleet_FleetErrors, v.FleetErrors)
+	}
 	if v.FleetType != "" {
 		s.WriteString(schemas.Fleet_FleetType, string(v.FleetType))
 	}
@@ -2352,7 +2380,9 @@ func (v *Fleet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamView != "" {
 		s.WriteString(schemas.Fleet_StreamView, string(v.StreamView))
 	}
-	serializeUsbDeviceFilterStrings(s, schemas.Fleet_UsbDeviceFilterStrings, v.UsbDeviceFilterStrings)
+	if v.UsbDeviceFilterStrings != nil {
+		serializeUsbDeviceFilterStrings(s, schemas.Fleet_UsbDeviceFilterStrings, v.UsbDeviceFilterStrings)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.Fleet_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)
@@ -2618,7 +2648,9 @@ func (v *Image) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Image) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplications(s, schemas.Image_Applications, v.Applications)
+	if v.Applications != nil {
+		serializeApplications(s, schemas.Image_Applications, v.Applications)
+	}
 	if v.AppstreamAgentVersion != nil {
 		s.WriteString(schemas.Image_AppstreamAgentVersion, *v.AppstreamAgentVersion)
 	}
@@ -2646,7 +2678,9 @@ func (v *Image) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageBuilderSupported != nil {
 		s.WriteBool(schemas.Image_ImageBuilderSupported, *v.ImageBuilderSupported)
 	}
-	serializeResourceErrors(s, schemas.Image_ImageErrors, v.ImageErrors)
+	if v.ImageErrors != nil {
+		serializeResourceErrors(s, schemas.Image_ImageErrors, v.ImageErrors)
+	}
 	if v.ImagePermissions != nil {
 		s.WriteStruct(schemas.Image_ImagePermissions)
 		v.ImagePermissions.SerializeMembers(s)
@@ -2686,7 +2720,9 @@ func (v *Image) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StateChangeReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.Image_SupportedInstanceFamilies, v.SupportedInstanceFamilies)
+	if v.SupportedInstanceFamilies != nil {
+		serializeStringList(s, schemas.Image_SupportedInstanceFamilies, v.SupportedInstanceFamilies)
+	}
 	if v.Visibility != "" {
 		s.WriteString(schemas.Image_Visibility, string(v.Visibility))
 	}
@@ -2984,7 +3020,9 @@ func (v *ImageBuilder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageBuilder) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.ImageBuilder_AccessEndpoints, v.AccessEndpoints)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.ImageBuilder_AccessEndpoints, v.AccessEndpoints)
+	}
 	if v.AppstreamAgentVersion != nil {
 		s.WriteString(schemas.ImageBuilder_AppstreamAgentVersion, *v.AppstreamAgentVersion)
 	}
@@ -3017,7 +3055,9 @@ func (v *ImageBuilder) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageArn != nil {
 		s.WriteString(schemas.ImageBuilder_ImageArn, *v.ImageArn)
 	}
-	serializeResourceErrors(s, schemas.ImageBuilder_ImageBuilderErrors, v.ImageBuilderErrors)
+	if v.ImageBuilderErrors != nil {
+		serializeResourceErrors(s, schemas.ImageBuilder_ImageBuilderErrors, v.ImageBuilderErrors)
+	}
 	if v.InstanceType != nil {
 		s.WriteString(schemas.ImageBuilder_InstanceType, *v.InstanceType)
 	}
@@ -3371,7 +3411,9 @@ func (v *NetworkAccessConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.EniId != nil {
 		s.WriteString(schemas.NetworkAccessConfiguration_EniId, *v.EniId)
 	}
-	serializeStringList(s, schemas.NetworkAccessConfiguration_EniIpv6Addresses, v.EniIpv6Addresses)
+	if v.EniIpv6Addresses != nil {
+		serializeStringList(s, schemas.NetworkAccessConfiguration_EniIpv6Addresses, v.EniIpv6Addresses)
+	}
 	if v.EniPrivateIpAddress != nil {
 		s.WriteString(schemas.NetworkAccessConfiguration_EniPrivateIpAddress, *v.EniPrivateIpAddress)
 	}
@@ -3936,7 +3978,9 @@ func (v *SoftwareAssociations) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SoftwareAssociations) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeErrorDetailsList(s, schemas.SoftwareAssociations_DeploymentError, v.DeploymentError)
+	if v.DeploymentError != nil {
+		serializeErrorDetailsList(s, schemas.SoftwareAssociations_DeploymentError, v.DeploymentError)
+	}
 	if v.SoftwareName != nil {
 		s.WriteString(schemas.SoftwareAssociations_SoftwareName, *v.SoftwareName)
 	}
@@ -4043,7 +4087,9 @@ func (v *Stack) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Stack) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.Stack_AccessEndpoints, v.AccessEndpoints)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.Stack_AccessEndpoints, v.AccessEndpoints)
+	}
 	if v.AgentAccessConfig != nil {
 		s.WriteStruct(schemas.Stack_AgentAccessConfig)
 		v.AgentAccessConfig.SerializeMembers(s)
@@ -4071,7 +4117,9 @@ func (v *Stack) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.Stack_DisplayName, *v.DisplayName)
 	}
-	serializeEmbedHostDomains(s, schemas.Stack_EmbedHostDomains, v.EmbedHostDomains)
+	if v.EmbedHostDomains != nil {
+		serializeEmbedHostDomains(s, schemas.Stack_EmbedHostDomains, v.EmbedHostDomains)
+	}
 	if v.FeedbackURL != nil {
 		s.WriteString(schemas.Stack_FeedbackURL, *v.FeedbackURL)
 	}
@@ -4081,17 +4129,23 @@ func (v *Stack) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RedirectURL != nil {
 		s.WriteString(schemas.Stack_RedirectURL, *v.RedirectURL)
 	}
-	serializeStackErrors(s, schemas.Stack_StackErrors, v.StackErrors)
+	if v.StackErrors != nil {
+		serializeStackErrors(s, schemas.Stack_StackErrors, v.StackErrors)
+	}
 	if v.StorageConnectorAuthentication != "" {
 		s.WriteString(schemas.Stack_StorageConnectorAuthentication, string(v.StorageConnectorAuthentication))
 	}
-	serializeStorageConnectorList(s, schemas.Stack_StorageConnectors, v.StorageConnectors)
+	if v.StorageConnectors != nil {
+		serializeStorageConnectorList(s, schemas.Stack_StorageConnectors, v.StorageConnectors)
+	}
 	if v.StreamingExperienceSettings != nil {
 		s.WriteStruct(schemas.Stack_StreamingExperienceSettings)
 		v.StreamingExperienceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserSettingList(s, schemas.Stack_UserSettings, v.UserSettings)
+	if v.UserSettings != nil {
+		serializeUserSettingList(s, schemas.Stack_UserSettings, v.UserSettings)
+	}
 }
 func (v *Stack) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Stack, func(s *smithy.Schema) error {
@@ -4227,8 +4281,12 @@ func (v *StorageConnector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorType != "" {
 		s.WriteString(schemas.StorageConnector_ConnectorType, string(v.ConnectorType))
 	}
-	serializeDomainList(s, schemas.StorageConnector_Domains, v.Domains)
-	serializeDomainList(s, schemas.StorageConnector_DomainsRequireAdminConsent, v.DomainsRequireAdminConsent)
+	if v.Domains != nil {
+		serializeDomainList(s, schemas.StorageConnector_Domains, v.Domains)
+	}
+	if v.DomainsRequireAdminConsent != nil {
+		serializeDomainList(s, schemas.StorageConnector_DomainsRequireAdminConsent, v.DomainsRequireAdminConsent)
+	}
 	if v.ResourceIdentifier != nil {
 		s.WriteString(schemas.StorageConnector_ResourceIdentifier, *v.ResourceIdentifier)
 	}
@@ -4343,7 +4401,9 @@ func (v *Theme) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ThemeFaviconURL != nil {
 		s.WriteString(schemas.Theme_ThemeFaviconURL, *v.ThemeFaviconURL)
 	}
-	serializeThemeFooterLinks(s, schemas.Theme_ThemeFooterLinks, v.ThemeFooterLinks)
+	if v.ThemeFooterLinks != nil {
+		serializeThemeFooterLinks(s, schemas.Theme_ThemeFooterLinks, v.ThemeFooterLinks)
+	}
 	if v.ThemeOrganizationLogoURL != nil {
 		s.WriteString(schemas.Theme_ThemeOrganizationLogoURL, *v.ThemeOrganizationLogoURL)
 	}
@@ -4461,8 +4521,12 @@ func (v *UrlRedirectionConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UrlRedirectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUrlPatternList(s, schemas.UrlRedirectionConfig_AllowedUrls, v.AllowedUrls)
-	serializeUrlPatternList(s, schemas.UrlRedirectionConfig_DeniedUrls, v.DeniedUrls)
+	if v.AllowedUrls != nil {
+		serializeUrlPatternList(s, schemas.UrlRedirectionConfig_AllowedUrls, v.AllowedUrls)
+	}
+	if v.DeniedUrls != nil {
+		serializeUrlPatternList(s, schemas.UrlRedirectionConfig_DeniedUrls, v.DeniedUrls)
+	}
 	if v.Enabled != nil {
 		s.WriteBool(schemas.UrlRedirectionConfig_Enabled, *v.Enabled)
 	}
@@ -4524,7 +4588,9 @@ func (v *UsageReportSubscription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Schedule != "" {
 		s.WriteString(schemas.UsageReportSubscription_Schedule, string(v.Schedule))
 	}
-	serializeLastReportGenerationExecutionErrors(s, schemas.UsageReportSubscription_SubscriptionErrors, v.SubscriptionErrors)
+	if v.SubscriptionErrors != nil {
+		serializeLastReportGenerationExecutionErrors(s, schemas.UsageReportSubscription_SubscriptionErrors, v.SubscriptionErrors)
+	}
 }
 func (v *UsageReportSubscription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageReportSubscription, func(s *smithy.Schema) error {
@@ -4918,8 +4984,12 @@ func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.VpcConfig_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.VpcConfig_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcConfig_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.VpcConfig_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {

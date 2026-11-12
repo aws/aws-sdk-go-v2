@@ -58,7 +58,9 @@ func (v *StartClusterHealthCheckInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClusterName != nil {
 		s.WriteString(schemas.StartClusterHealthCheckRequest_ClusterName, *v.ClusterName)
 	}
-	serializeDeepHealthCheckConfigurations(s, schemas.StartClusterHealthCheckRequest_DeepHealthCheckConfigurations, v.DeepHealthCheckConfigurations)
+	if v.DeepHealthCheckConfigurations != nil {
+		serializeDeepHealthCheckConfigurations(s, schemas.StartClusterHealthCheckRequest_DeepHealthCheckConfigurations, v.DeepHealthCheckConfigurations)
+	}
 }
 
 type StartClusterHealthCheckOutput struct {

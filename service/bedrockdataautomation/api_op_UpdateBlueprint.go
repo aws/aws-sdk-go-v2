@@ -4,7 +4,9 @@ package bedrockdataautomation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,29 @@ type UpdateBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBlueprintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBlueprintRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintArn != nil {
+		s.WriteString(schemas.UpdateBlueprintRequest_blueprintArn, *v.BlueprintArn)
+	}
+	if v.BlueprintStage != "" {
+		s.WriteString(schemas.UpdateBlueprintRequest_blueprintStage, string(v.BlueprintStage))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateBlueprintRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.UpdateBlueprintRequest_schema, *v.Schema)
+	}
+}
+
 // Update Blueprint Response
 type UpdateBlueprintOutput struct {
 
@@ -60,13 +85,34 @@ type UpdateBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBlueprintOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBlueprintResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBlueprintOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blueprint != nil {
+		s.WriteStruct(schemas.UpdateBlueprintResponse_blueprint)
+		v.Blueprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBlueprintResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBlueprintResponse_blueprint:
+			v.Blueprint = &types.Blueprint{}
+			return v.Blueprint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBlueprint, schemas.UpdateBlueprintRequest, schemas.UpdateBlueprintResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBlueprint, schemas.UpdateBlueprintRequest, schemas.UpdateBlueprintResponse), output: &UpdateBlueprintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -84,7 +84,9 @@ func (v *CreateTapePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageClass != "" {
 		s.WriteString(schemas.CreateTapePoolInput_StorageClass, string(v.StorageClass))
 	}
-	serializeTags(s, schemas.CreateTapePoolInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTapePoolInput_Tags, v.Tags)
+	}
 }
 
 type CreateTapePoolOutput struct {

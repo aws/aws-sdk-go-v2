@@ -110,7 +110,9 @@ func (v *CreateMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateMetricRequest_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateMetricRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMetricRequest_Tags, v.Tags)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.CreateMetricRequest_Unit, string(v.Unit))
 	}

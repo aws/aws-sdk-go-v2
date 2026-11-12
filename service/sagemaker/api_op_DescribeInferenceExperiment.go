@@ -191,7 +191,9 @@ func (v *DescribeInferenceExperimentOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeInferenceExperimentResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeModelVariantConfigSummaryList(s, schemas.DescribeInferenceExperimentResponse_ModelVariants, v.ModelVariants)
+	if v.ModelVariants != nil {
+		serializeModelVariantConfigSummaryList(s, schemas.DescribeInferenceExperimentResponse_ModelVariants, v.ModelVariants)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeInferenceExperimentResponse_Name, *v.Name)
 	}

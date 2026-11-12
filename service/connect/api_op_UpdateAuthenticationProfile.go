@@ -92,11 +92,15 @@ func (v *UpdateAuthenticationProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAuthenticationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpCidrList(s, schemas.UpdateAuthenticationProfileRequest_AllowedIps, v.AllowedIps)
+	if v.AllowedIps != nil {
+		serializeIpCidrList(s, schemas.UpdateAuthenticationProfileRequest_AllowedIps, v.AllowedIps)
+	}
 	if v.AuthenticationProfileId != nil {
 		s.WriteString(schemas.UpdateAuthenticationProfileRequest_AuthenticationProfileId, *v.AuthenticationProfileId)
 	}
-	serializeIpCidrList(s, schemas.UpdateAuthenticationProfileRequest_BlockedIps, v.BlockedIps)
+	if v.BlockedIps != nil {
+		serializeIpCidrList(s, schemas.UpdateAuthenticationProfileRequest_BlockedIps, v.BlockedIps)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAuthenticationProfileRequest_Description, *v.Description)
 	}

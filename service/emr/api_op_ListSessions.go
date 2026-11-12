@@ -65,7 +65,9 @@ func (v *ListSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionsInput_NextToken, *v.NextToken)
 	}
-	serializeSessionStateList(s, schemas.ListSessionsInput_SessionStates, v.SessionStates)
+	if v.SessionStates != nil {
+		serializeSessionStateList(s, schemas.ListSessionsInput_SessionStates, v.SessionStates)
+	}
 }
 
 // Output of the ListSessions operation.
@@ -94,7 +96,9 @@ func (v *ListSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionsOutput_NextToken, *v.NextToken)
 	}
-	serializeSessionList(s, schemas.ListSessionsOutput_Sessions, v.Sessions)
+	if v.Sessions != nil {
+		serializeSessionList(s, schemas.ListSessionsOutput_Sessions, v.Sessions)
+	}
 }
 func (v *ListSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionsOutput, func(s *smithy.Schema) error {

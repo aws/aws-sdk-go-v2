@@ -3,7 +3,8 @@
 // Package controltower provides the API client, operations, and parameter types
 // for AWS Control Tower.
 //
-// Amazon Web Services Control Tower offers application programming interface
+//	Amazon Web Services Control Tower offers application programming interface
+//
 // (API) operations that support programmatic interaction with these types of
 // resources:
 //

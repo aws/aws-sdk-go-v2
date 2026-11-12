@@ -4,6 +4,8 @@ package devopsguru
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInsightInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInsightRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInsightInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteInsightRequest_Id, *v.Id)
+	}
+}
+
 type DeleteInsightOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteInsightOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInsightOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInsightResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInsightOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteInsightOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInsightResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInsight{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInsight, schemas.DeleteInsightRequest, schemas.DeleteInsightResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInsight{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInsight, schemas.DeleteInsightRequest, schemas.DeleteInsightResponse), output: &DeleteInsightOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

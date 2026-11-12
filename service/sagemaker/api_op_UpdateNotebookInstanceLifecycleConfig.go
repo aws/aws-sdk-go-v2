@@ -64,8 +64,12 @@ func (v *UpdateNotebookInstanceLifecycleConfigInput) SerializeMembers(s smithy.S
 	if v.NotebookInstanceLifecycleConfigName != nil {
 		s.WriteString(schemas.UpdateNotebookInstanceLifecycleConfigInput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
 	}
-	serializeNotebookInstanceLifecycleConfigList(s, schemas.UpdateNotebookInstanceLifecycleConfigInput_OnCreate, v.OnCreate)
-	serializeNotebookInstanceLifecycleConfigList(s, schemas.UpdateNotebookInstanceLifecycleConfigInput_OnStart, v.OnStart)
+	if v.OnCreate != nil {
+		serializeNotebookInstanceLifecycleConfigList(s, schemas.UpdateNotebookInstanceLifecycleConfigInput_OnCreate, v.OnCreate)
+	}
+	if v.OnStart != nil {
+		serializeNotebookInstanceLifecycleConfigList(s, schemas.UpdateNotebookInstanceLifecycleConfigInput_OnStart, v.OnStart)
+	}
 }
 
 type UpdateNotebookInstanceLifecycleConfigOutput struct {

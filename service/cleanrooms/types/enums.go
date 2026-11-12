@@ -148,6 +148,7 @@ type AnalysisFormat string
 const (
 	AnalysisFormatSql       AnalysisFormat = "SQL"
 	AnalysisFormatPyspark10 AnalysisFormat = "PYSPARK_1_0"
+	AnalysisFormatPyspark20 AnalysisFormat = "PYSPARK_2_0"
 )
 
 // Values returns all known values for AnalysisFormat. Note that this can be
@@ -158,6 +159,7 @@ func (AnalysisFormat) Values() []AnalysisFormat {
 	return []AnalysisFormat{
 		"SQL",
 		"PYSPARK_1_0",
+		"PYSPARK_2_0",
 	}
 }
 
@@ -1677,6 +1679,29 @@ func (SyntheticDataColumnType) Values() []SyntheticDataColumnType {
 	return []SyntheticDataColumnType{
 		"CATEGORICAL",
 		"NUMERICAL",
+	}
+}
+
+type TableReferenceType string
+
+// Enum values for TableReferenceType
+const (
+	TableReferenceTypeGlue       TableReferenceType = "GLUE"
+	TableReferenceTypeSnowflake  TableReferenceType = "SNOWFLAKE"
+	TableReferenceTypeAthena     TableReferenceType = "ATHENA"
+	TableReferenceTypeDatabricks TableReferenceType = "DATABRICKS"
+)
+
+// Values returns all known values for TableReferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableReferenceType) Values() []TableReferenceType {
+	return []TableReferenceType{
+		"GLUE",
+		"SNOWFLAKE",
+		"ATHENA",
+		"DATABRICKS",
 	}
 }
 

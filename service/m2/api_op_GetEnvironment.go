@@ -226,16 +226,24 @@ func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != false {
 		s.WriteBool(schemas.GetEnvironmentResponse_publiclyAccessible, v.PubliclyAccessible)
 	}
-	serializeString50List(s, schemas.GetEnvironmentResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeString50List(s, schemas.GetEnvironmentResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetEnvironmentResponse_status, string(v.Status))
 	}
 	if v.StatusReason != nil {
 		s.WriteString(schemas.GetEnvironmentResponse_statusReason, *v.StatusReason)
 	}
-	serializeStorageConfigurationList(s, schemas.GetEnvironmentResponse_storageConfigurations, v.StorageConfigurations)
-	serializeString50List(s, schemas.GetEnvironmentResponse_subnetIds, v.SubnetIds)
-	serializeTagMap(s, schemas.GetEnvironmentResponse_tags, v.Tags)
+	if v.StorageConfigurations != nil {
+		serializeStorageConfigurationList(s, schemas.GetEnvironmentResponse_storageConfigurations, v.StorageConfigurations)
+	}
+	if v.SubnetIds != nil {
+		serializeString50List(s, schemas.GetEnvironmentResponse_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetEnvironmentResponse_tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.GetEnvironmentResponse_vpcId, *v.VpcId)
 	}

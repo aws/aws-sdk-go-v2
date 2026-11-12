@@ -82,7 +82,9 @@ func (v *DescribeSourceNetworksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSourceNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceNetworksList(s, schemas.DescribeSourceNetworksResponse_items, v.Items)
+	if v.Items != nil {
+		serializeSourceNetworksList(s, schemas.DescribeSourceNetworksResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSourceNetworksResponse_nextToken, *v.NextToken)
 	}

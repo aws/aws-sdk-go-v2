@@ -100,7 +100,9 @@ func (v *ListWorkspacePagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkspacePagesResponse_NextToken, *v.NextToken)
 	}
-	serializeWorkspacePageList(s, schemas.ListWorkspacePagesResponse_WorkspacePageList, v.WorkspacePageList)
+	if v.WorkspacePageList != nil {
+		serializeWorkspacePageList(s, schemas.ListWorkspacePagesResponse_WorkspacePageList, v.WorkspacePageList)
+	}
 }
 func (v *ListWorkspacePagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkspacePagesResponse, func(s *smithy.Schema) error {

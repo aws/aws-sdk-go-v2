@@ -99,7 +99,9 @@ func (v *CreateResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ResourceType != "" {
 		s.WriteString(schemas.CreateResourceSnapshotJobRequest_ResourceType, string(v.ResourceType))
 	}
-	serializeTagList(s, schemas.CreateResourceSnapshotJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResourceSnapshotJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateResourceSnapshotJobOutput struct {

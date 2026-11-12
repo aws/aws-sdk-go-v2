@@ -48,7 +48,9 @@ func (v *BatchGetQueryExecutionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetQueryExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryExecutionIdList(s, schemas.BatchGetQueryExecutionInput_QueryExecutionIds, v.QueryExecutionIds)
+	if v.QueryExecutionIds != nil {
+		serializeQueryExecutionIdList(s, schemas.BatchGetQueryExecutionInput_QueryExecutionIds, v.QueryExecutionIds)
+	}
 }
 
 type BatchGetQueryExecutionOutput struct {
@@ -72,8 +74,12 @@ func (v *BatchGetQueryExecutionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetQueryExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryExecutionList(s, schemas.BatchGetQueryExecutionOutput_QueryExecutions, v.QueryExecutions)
-	serializeUnprocessedQueryExecutionIdList(s, schemas.BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds, v.UnprocessedQueryExecutionIds)
+	if v.QueryExecutions != nil {
+		serializeQueryExecutionList(s, schemas.BatchGetQueryExecutionOutput_QueryExecutions, v.QueryExecutions)
+	}
+	if v.UnprocessedQueryExecutionIds != nil {
+		serializeUnprocessedQueryExecutionIdList(s, schemas.BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds, v.UnprocessedQueryExecutionIds)
+	}
 }
 func (v *BatchGetQueryExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetQueryExecutionOutput, func(s *smithy.Schema) error {

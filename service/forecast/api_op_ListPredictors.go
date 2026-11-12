@@ -73,7 +73,9 @@ func (v *ListPredictorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPredictorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListPredictorsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListPredictorsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListPredictorsRequest_MaxResults, *v.MaxResults)
 	}
@@ -107,7 +109,9 @@ func (v *ListPredictorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPredictorsResponse_NextToken, *v.NextToken)
 	}
-	serializePredictors(s, schemas.ListPredictorsResponse_Predictors, v.Predictors)
+	if v.Predictors != nil {
+		serializePredictors(s, schemas.ListPredictorsResponse_Predictors, v.Predictors)
+	}
 }
 func (v *ListPredictorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPredictorsResponse, func(s *smithy.Schema) error {

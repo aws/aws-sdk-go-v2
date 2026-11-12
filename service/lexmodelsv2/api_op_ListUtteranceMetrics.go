@@ -133,20 +133,30 @@ func (v *ListUtteranceMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUtteranceMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyticsUtteranceAttributes(s, schemas.ListUtteranceMetricsRequest_attributes, v.Attributes)
-	serializeAnalyticsBinByList(s, schemas.ListUtteranceMetricsRequest_binBy, v.BinBy)
+	if v.Attributes != nil {
+		serializeAnalyticsUtteranceAttributes(s, schemas.ListUtteranceMetricsRequest_attributes, v.Attributes)
+	}
+	if v.BinBy != nil {
+		serializeAnalyticsBinByList(s, schemas.ListUtteranceMetricsRequest_binBy, v.BinBy)
+	}
 	if v.BotId != nil {
 		s.WriteString(schemas.ListUtteranceMetricsRequest_botId, *v.BotId)
 	}
 	if v.EndDateTime != nil {
 		s.WriteTime(schemas.ListUtteranceMetricsRequest_endDateTime, *v.EndDateTime)
 	}
-	serializeAnalyticsUtteranceFilters(s, schemas.ListUtteranceMetricsRequest_filters, v.Filters)
-	serializeAnalyticsUtteranceGroupByList(s, schemas.ListUtteranceMetricsRequest_groupBy, v.GroupBy)
+	if v.Filters != nil {
+		serializeAnalyticsUtteranceFilters(s, schemas.ListUtteranceMetricsRequest_filters, v.Filters)
+	}
+	if v.GroupBy != nil {
+		serializeAnalyticsUtteranceGroupByList(s, schemas.ListUtteranceMetricsRequest_groupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListUtteranceMetricsRequest_maxResults, *v.MaxResults)
 	}
-	serializeAnalyticsUtteranceMetrics(s, schemas.ListUtteranceMetricsRequest_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeAnalyticsUtteranceMetrics(s, schemas.ListUtteranceMetricsRequest_metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUtteranceMetricsRequest_nextToken, *v.NextToken)
 	}
@@ -191,7 +201,9 @@ func (v *ListUtteranceMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUtteranceMetricsResponse_nextToken, *v.NextToken)
 	}
-	serializeAnalyticsUtteranceResults(s, schemas.ListUtteranceMetricsResponse_results, v.Results)
+	if v.Results != nil {
+		serializeAnalyticsUtteranceResults(s, schemas.ListUtteranceMetricsResponse_results, v.Results)
+	}
 }
 func (v *ListUtteranceMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUtteranceMetricsResponse, func(s *smithy.Schema) error {

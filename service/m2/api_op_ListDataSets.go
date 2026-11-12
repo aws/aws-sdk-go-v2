@@ -109,7 +109,9 @@ func (v *ListDataSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSetsSummaryList(s, schemas.ListDataSetsResponse_dataSets, v.DataSets)
+	if v.DataSets != nil {
+		serializeDataSetsSummaryList(s, schemas.ListDataSetsResponse_dataSets, v.DataSets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataSetsResponse_nextToken, *v.NextToken)
 	}

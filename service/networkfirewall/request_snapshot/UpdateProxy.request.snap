@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/UpdateProxy
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.UpdateProxy
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ListenerPropertiesToAdd":[{"Port":1,"Type":"HTTP"},{"Port":1,"Type":"HTTP"}],"ListenerPropertiesToRemove":[{"Port":1,"Type":"HTTP"},{"Port":1,"Type":"HTTP"}],"NatGatewayId":"__NatGatewayId__","ProxyArn":"__ProxyArn__","ProxyName":"__ProxyName__","TlsInterceptProperties":{"PcaArn":"__PcaArn__","TlsInterceptMode":"ENABLED"},"UpdateToken":"__UpdateToken__"}
+¿wListenerPropertiesToAddŸ¿dPortdTypedHTTPÿ¿dPortdTypedHTTPÿÿxListenerPropertiesToRemoveŸ¿dPortdTypedHTTPÿ¿dPortdTypedHTTPÿÿlNatGatewayIdp__NatGatewayId__hProxyArnl__ProxyArn__iProxyNamem__ProxyName__vTlsInterceptProperties¿fPcaArnj__PcaArn__pTlsInterceptModegENABLEDÿkUpdateTokeno__UpdateToken__ÿ

@@ -193,8 +193,10 @@ var AccessDeniedException_message *smithy.Schema
 var Architecture = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "Architecture",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var Architecture_ARM_64 *smithy.Schema
+
+var Architecture_X86_64 *smithy.Schema
 
 var _AuthTokenKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
@@ -233,8 +235,10 @@ var _CapabilityList_member *smithy.Schema
 var Chipset = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "Chipset",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var Chipset_GRAVITON *smithy.Schema
+
+var Chipset_INTEL *smithy.Schema
 
 var CloudWatchLogging = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
@@ -387,12 +391,14 @@ var _ManagedMicrovmImageSummaryList_member *smithy.Schema
 var ManagedMicrovmImageVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "ManagedMicrovmImageVersion",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ManagedMicrovmImageVersion_imageArn *smithy.Schema
 
 var ManagedMicrovmImageVersion_imageVersion *smithy.Schema
 
 var ManagedMicrovmImageVersion_status *smithy.Schema
+
+var ManagedMicrovmImageVersion_supportedCpuConfigurations *smithy.Schema
 
 var ManagedMicrovmImageVersion_createdAt *smithy.Schema
 
@@ -407,10 +413,12 @@ var _ManagedMicrovmImageVersionList_member *smithy.Schema
 var ManagedMicrovmImageVersionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "ManagedMicrovmImageVersionStatus",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var ManagedMicrovmImageVersionStatus_AVAILABLE *smithy.Schema
 
 var ManagedMicrovmImageVersionStatus_DEPRECATED *smithy.Schema
+
+var ManagedMicrovmImageVersionStatus_RECALLED *smithy.Schema
 
 var MicrovmHooks = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
@@ -1497,6 +1505,8 @@ func init() {
 
 	Architecture_ARM_64 = Architecture.AddMember("ARM_64", smithyprelude.Unit)
 
+	Architecture_X86_64 = Architecture.AddMember("X86_64", smithyprelude.Unit)
+
 	BuildState_PENDING = BuildState.AddMember("PENDING", smithyprelude.Unit)
 
 	BuildState_IN_PROGRESS = BuildState.AddMember("IN_PROGRESS", smithyprelude.Unit)
@@ -1510,6 +1520,8 @@ func init() {
 	_CapabilityList_member = _CapabilityList.AddMember("member", Capability)
 
 	Chipset_GRAVITON = Chipset.AddMember("GRAVITON", smithyprelude.Unit)
+
+	Chipset_INTEL = Chipset.AddMember("INTEL", smithyprelude.Unit)
 
 	CloudWatchLogging_logGroup = CloudWatchLogging.AddMember("logGroup", _String)
 
@@ -1609,11 +1621,15 @@ func init() {
 
 	ManagedMicrovmImageVersionStatus_DEPRECATED = ManagedMicrovmImageVersionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
 
+	ManagedMicrovmImageVersionStatus_RECALLED = ManagedMicrovmImageVersionStatus.AddMember("RECALLED", smithyprelude.Unit)
+
 	ManagedMicrovmImageVersion_imageArn = ManagedMicrovmImageVersion.AddMember("imageArn", _NonBlankString)
 
 	ManagedMicrovmImageVersion_imageVersion = ManagedMicrovmImageVersion.AddMember("imageVersion", _NonBlankString)
 
 	ManagedMicrovmImageVersion_status = ManagedMicrovmImageVersion.AddMember("status", ManagedMicrovmImageVersionStatus)
+
+	ManagedMicrovmImageVersion_supportedCpuConfigurations = ManagedMicrovmImageVersion.AddMember("supportedCpuConfigurations", _CpuConfigurationList)
 
 	ManagedMicrovmImageVersion_createdAt = ManagedMicrovmImageVersion.AddMember("createdAt", smithyprelude.Timestamp)
 

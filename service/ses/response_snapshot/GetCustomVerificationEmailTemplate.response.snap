@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetCustomVerificationEmailTemplateResponse><GetCustomVerificationEmailTemplateResult><FailureRedirectionURL>__FailureRedirectionURL__</FailureRedirectionURL><FromEmailAddress>__FromEmailAddress__</FromEmailAddress><SuccessRedirectionURL>__SuccessRedirectionURL__</SuccessRedirectionURL><TemplateContent>__TemplateContent__</TemplateContent><TemplateName>__TemplateName__</TemplateName><TemplateSubject>__TemplateSubject__</TemplateSubject></GetCustomVerificationEmailTemplateResult></GetCustomVerificationEmailTemplateResponse>

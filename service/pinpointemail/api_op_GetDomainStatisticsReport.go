@@ -101,7 +101,9 @@ func (v *GetDomainStatisticsReportOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDomainStatisticsReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDailyVolumes(s, schemas.GetDomainStatisticsReportResponse_DailyVolumes, v.DailyVolumes)
+	if v.DailyVolumes != nil {
+		serializeDailyVolumes(s, schemas.GetDomainStatisticsReportResponse_DailyVolumes, v.DailyVolumes)
+	}
 	if v.OverallVolume != nil {
 		s.WriteStruct(schemas.GetDomainStatisticsReportResponse_OverallVolume)
 		v.OverallVolume.SerializeMembers(s)

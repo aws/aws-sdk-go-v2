@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.CreateIngestionJob
+
+{"clientToken":"__ClientToken__","collectionId":"__CollectionId__","failureIndexName":"__FailureIndexName__","indexName":"__IndexName__","ingestionJobName":"__IngestionJobName__","source":{"s3":{"bucket":"__Bucket__","bucketOwnerAccountId":"__BucketOwnerAccountId__","keyPrefix":"__KeyPrefix__"}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

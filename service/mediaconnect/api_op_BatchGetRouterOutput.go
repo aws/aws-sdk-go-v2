@@ -45,7 +45,9 @@ func (v *BatchGetRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouterOutputArnList(s, schemas.BatchGetRouterOutputRequest_Arns, v.Arns)
+	if v.Arns != nil {
+		serializeRouterOutputArnList(s, schemas.BatchGetRouterOutputRequest_Arns, v.Arns)
+	}
 }
 
 type BatchGetRouterOutputOutput struct {
@@ -73,8 +75,12 @@ func (v *BatchGetRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetRouterOutputErrorList(s, schemas.BatchGetRouterOutputResponse_Errors, v.Errors)
-	serializeRouterOutputList(s, schemas.BatchGetRouterOutputResponse_RouterOutputs, v.RouterOutputs)
+	if v.Errors != nil {
+		serializeBatchGetRouterOutputErrorList(s, schemas.BatchGetRouterOutputResponse_Errors, v.Errors)
+	}
+	if v.RouterOutputs != nil {
+		serializeRouterOutputList(s, schemas.BatchGetRouterOutputResponse_RouterOutputs, v.RouterOutputs)
+	}
 }
 func (v *BatchGetRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetRouterOutputResponse, func(s *smithy.Schema) error {

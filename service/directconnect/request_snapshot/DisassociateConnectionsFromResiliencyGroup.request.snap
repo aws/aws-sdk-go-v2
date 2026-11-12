@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DisassociateConnectionsFromResiliencyGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DisassociateConnectionsFromResiliencyGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"clientToken":"__ClientToken__","connectionIdentifiers":["__Member__","__Member__"],"resiliencyGroupId":"__ResiliencyGroupId__"}
+¿kclientTokeno__ClientToken__uconnectionIdentifiersŸj__Member__j__Member__ÿqresiliencyGroupIdu__ResiliencyGroupId__ÿ

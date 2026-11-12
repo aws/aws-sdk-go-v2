@@ -113,6 +113,11 @@ var CreateCluster = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateCluster",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateClusterExtension = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateClusterExtension",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateClusterSchedulerConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateClusterSchedulerConfig",
@@ -473,6 +478,11 @@ var DeleteCluster = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteCluster",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteClusterExtension = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteClusterExtension",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteClusterSchedulerConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteClusterSchedulerConfig",
@@ -801,6 +811,11 @@ var DescribeCluster = smithy.NewSchema(smithy.ShapeID{
 var DescribeClusterEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeClusterEvent",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeClusterExtension = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeClusterExtension",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeClusterNode = smithy.NewSchema(smithy.ShapeID{
@@ -1251,6 +1266,11 @@ var ListCandidatesForAutoMLJob = smithy.NewSchema(smithy.ShapeID{
 var ListClusterEvents = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListClusterEvents",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListClusterExtensions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterExtensions",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListClusterNodes = smithy.NewSchema(smithy.ShapeID{
@@ -1848,6 +1868,11 @@ var UpdateCluster = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateCluster",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateClusterExtension = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateClusterExtension",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateClusterSchedulerConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "UpdateClusterSchedulerConfig",
@@ -2073,6 +2098,29 @@ var AcceleratorPartitionConfig = smithy.NewSchema(smithy.ShapeID{
 var AcceleratorPartitionConfig_Type *smithy.Schema
 
 var AcceleratorPartitionConfig_Count *smithy.Schema
+
+var AcceleratorPartitionLayout = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionLayout",
+}, smithy.ShapeTypeStructure, 1)
+var AcceleratorPartitionLayout_AcceleratorPartitionTypes *smithy.Schema
+
+var _AcceleratorPartitionLayouts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionLayouts",
+}, smithy.ShapeTypeList, 1)
+var _AcceleratorPartitionLayouts_member *smithy.Schema
+
+var _AcceleratorPartitionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionType",
+}, smithy.ShapeTypeString, 0)
+
+var _AcceleratorPartitionTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionTypeList",
+}, smithy.ShapeTypeList, 1)
+var _AcceleratorPartitionTypeList_member *smithy.Schema
 
 var _AcceleratorsAmount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -3107,6 +3155,14 @@ var AlgorithmValidationSpecification = smithy.NewSchema(smithy.ShapeID{
 var AlgorithmValidationSpecification_ValidationRole *smithy.Schema
 
 var AlgorithmValidationSpecification_ValidationProfiles *smithy.Schema
+
+var AliasOperations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AliasOperations",
+}, smithy.ShapeTypeStructure, 2)
+var AliasOperations_Add *smithy.Schema
+
+var AliasOperations_Remove *smithy.Schema
 
 var AmazonQSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -8414,10 +8470,12 @@ var _DeepHealthChecks_member *smithy.Schema
 var DeepHealthCheckType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeepHealthCheckType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var DeepHealthCheckType_INSTANCE_STRESS *smithy.Schema
 
 var DeepHealthCheckType_INSTANCE_CONNECTIVITY *smithy.Schema
+
+var DeepHealthCheckType_MULTI_NODE_TRAINING_VALIDATION *smithy.Schema
 
 var _DefaultDomainIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9975,6 +10033,99 @@ var ExplainerConfig = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ExplainerConfig_ClarifyExplainerConfig *smithy.Schema
 
+var _ExtensionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionArn",
+}, smithy.ShapeTypeString, 0)
+
+var _ExtensionConfigurationValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionConfigurationValues",
+}, smithy.ShapeTypeString, 0)
+
+var ExtensionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionDetails",
+}, smithy.ShapeTypeStructure, 8)
+var ExtensionDetails_ClusterArn *smithy.Schema
+
+var ExtensionDetails_ExtensionArn *smithy.Schema
+
+var ExtensionDetails_ExtensionName *smithy.Schema
+
+var ExtensionDetails_ExtensionVersion *smithy.Schema
+
+var ExtensionDetails_Status *smithy.Schema
+
+var ExtensionDetails_ConfigurationValues *smithy.Schema
+
+var ExtensionDetails_CreationTime *smithy.Schema
+
+var ExtensionDetails_LastModifiedTime *smithy.Schema
+
+var _ExtensionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionName",
+}, smithy.ShapeTypeString, 0)
+
+var _ExtensionNodeCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionNodeCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var ExtensionNodeSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionNodeSummary",
+}, smithy.ShapeTypeStructure, 2)
+var ExtensionNodeSummary_TotalCount *smithy.Schema
+
+var ExtensionNodeSummary_ActiveCount *smithy.Schema
+
+var ExtensionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionStatus",
+}, smithy.ShapeTypeEnum, 8)
+var ExtensionStatus_CREATING *smithy.Schema
+
+var ExtensionStatus_ACTIVE *smithy.Schema
+
+var ExtensionStatus_CREATE_FAILED *smithy.Schema
+
+var ExtensionStatus_UPDATING *smithy.Schema
+
+var ExtensionStatus_DELETING *smithy.Schema
+
+var ExtensionStatus_DELETE_FAILED *smithy.Schema
+
+var ExtensionStatus_DEGRADED *smithy.Schema
+
+var ExtensionStatus_UPDATE_FAILED *smithy.Schema
+
+var _ExtensionSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionSummaries",
+}, smithy.ShapeTypeList, 1)
+var _ExtensionSummaries_member *smithy.Schema
+
+var ExtensionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionSummary",
+}, smithy.ShapeTypeStructure, 5)
+var ExtensionSummary_ExtensionArn *smithy.Schema
+
+var ExtensionSummary_ExtensionName *smithy.Schema
+
+var ExtensionSummary_ExtensionVersion *smithy.Schema
+
+var ExtensionSummary_Status *smithy.Schema
+
+var ExtensionSummary_CreationTime *smithy.Schema
+
+var _ExtensionVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionVersion",
+}, smithy.ShapeTypeString, 0)
+
 var FailStepMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "FailStepMetadata",
@@ -10903,6 +11054,14 @@ var HubContentStatus_DELETE_FAILED *smithy.Schema
 var HubContentStatus_PENDING_IMPORT *smithy.Schema
 
 var HubContentStatus_PENDING_DELETE *smithy.Schema
+
+var HubContentStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "HubContentStepMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var HubContentStepMetadata_HubArn *smithy.Schema
+
+var HubContentStepMetadata_HubContentArn *smithy.Schema
 
 var HubContentSupportStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -11907,7 +12066,7 @@ var InferenceComponentCapacitySizeType_CAPACITY_PERCENT *smithy.Schema
 var InferenceComponentComputeResourceRequirements = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "InferenceComponentComputeResourceRequirements",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var InferenceComponentComputeResourceRequirements_NumberOfCpuCoresRequired *smithy.Schema
 
 var InferenceComponentComputeResourceRequirements_NumberOfAcceleratorDevicesRequired *smithy.Schema
@@ -11915,6 +12074,8 @@ var InferenceComponentComputeResourceRequirements_NumberOfAcceleratorDevicesRequ
 var InferenceComponentComputeResourceRequirements_MinMemoryRequiredInMb *smithy.Schema
 
 var InferenceComponentComputeResourceRequirements_MaxMemoryRequiredInMb *smithy.Schema
+
+var InferenceComponentComputeResourceRequirements_AcceleratorPartitionType *smithy.Schema
 
 var InferenceComponentContainerSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17310,7 +17471,7 @@ var PendingDeploymentSummary_ShadowProductionVariants *smithy.Schema
 var PendingProductionVariantSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PendingProductionVariantSummary",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var PendingProductionVariantSummary_VariantName *smithy.Schema
 
 var PendingProductionVariantSummary_DeployedImages *smithy.Schema
@@ -17338,6 +17499,8 @@ var PendingProductionVariantSummary_DesiredServerlessConfig *smithy.Schema
 var PendingProductionVariantSummary_ManagedInstanceScaling *smithy.Schema
 
 var PendingProductionVariantSummary_RoutingConfig *smithy.Schema
+
+var PendingProductionVariantSummary_AcceleratorPartitionLayouts *smithy.Schema
 
 var _PendingProductionVariantSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17530,7 +17693,7 @@ var _PipelineExecutionStepList_member *smithy.Schema
 var PipelineExecutionStepMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStepMetadata",
-}, smithy.ShapeTypeStructure, 27)
+}, smithy.ShapeTypeStructure, 28)
 var PipelineExecutionStepMetadata_TrainingJob *smithy.Schema
 
 var PipelineExecutionStepMetadata_ProcessingJob *smithy.Schema
@@ -17585,10 +17748,12 @@ var PipelineExecutionStepMetadata_Cleanup *smithy.Schema
 
 var PipelineExecutionStepMetadata_ForEach *smithy.Schema
 
+var PipelineExecutionStepMetadata_HubContent *smithy.Schema
+
 var PipelineExecutionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionSummary",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var PipelineExecutionSummary_PipelineExecutionArn *smithy.Schema
 
 var PipelineExecutionSummary_StartTime *smithy.Schema
@@ -17600,6 +17765,8 @@ var PipelineExecutionSummary_PipelineExecutionDescription *smithy.Schema
 var PipelineExecutionSummary_PipelineExecutionDisplayName *smithy.Schema
 
 var PipelineExecutionSummary_PipelineExecutionFailureReason *smithy.Schema
+
+var PipelineExecutionSummary_PipelineVersionAliases *smithy.Schema
 
 var _PipelineExecutionSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17614,6 +17781,14 @@ var PipelineExperimentConfig = smithy.NewSchema(smithy.ShapeID{
 var PipelineExperimentConfig_ExperimentName *smithy.Schema
 
 var PipelineExperimentConfig_TrialName *smithy.Schema
+
+var PipelineManagedBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "PipelineManagedBy",
+}, smithy.ShapeTypeEnum, 2)
+var PipelineManagedBy_AWS *smithy.Schema
+
+var PipelineManagedBy_CUSTOMER *smithy.Schema
 
 var _PipelineName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17667,7 +17842,7 @@ var _PipelineSummaryList_member *smithy.Schema
 var PipelineVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineVersion",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var PipelineVersion_PipelineArn *smithy.Schema
 
 var PipelineVersion_PipelineVersionId *smithy.Schema
@@ -17690,6 +17865,19 @@ var PipelineVersion_LastExecutedPipelineExecutionDisplayName *smithy.Schema
 
 var PipelineVersion_LastExecutedPipelineExecutionStatus *smithy.Schema
 
+var PipelineVersion_PipelineVersionAliases *smithy.Schema
+
+var _PipelineVersionAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "PipelineVersionAlias",
+}, smithy.ShapeTypeString, 0)
+
+var _PipelineVersionAliasList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "PipelineVersionAliasList",
+}, smithy.ShapeTypeList, 1)
+var _PipelineVersionAliasList_member *smithy.Schema
+
 var _PipelineVersionDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineVersionDescription",
@@ -17708,7 +17896,7 @@ var _PipelineVersionName = smithy.NewSchema(smithy.ShapeID{
 var PipelineVersionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineVersionSummary",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var PipelineVersionSummary_PipelineArn *smithy.Schema
 
 var PipelineVersionSummary_PipelineVersionId *smithy.Schema
@@ -17720,6 +17908,8 @@ var PipelineVersionSummary_PipelineVersionDescription *smithy.Schema
 var PipelineVersionSummary_PipelineVersionDisplayName *smithy.Schema
 
 var PipelineVersionSummary_LastExecutionPipelineExecutionArn *smithy.Schema
+
+var PipelineVersionSummary_PipelineVersionAliases *smithy.Schema
 
 var _PipelineVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -18566,7 +18756,7 @@ var _ProductId = smithy.NewSchema(smithy.ShapeID{
 var ProductionVariant = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProductionVariant",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var ProductionVariant_VariantName *smithy.Schema
 
 var ProductionVariant_ModelName *smithy.Schema
@@ -18602,6 +18792,8 @@ var ProductionVariant_RoutingConfig *smithy.Schema
 var ProductionVariant_InferenceAmiVersion *smithy.Schema
 
 var ProductionVariant_CapacityReservationConfig *smithy.Schema
+
+var ProductionVariant_AcceleratorPartitionLayouts *smithy.Schema
 
 var ProductionVariantAcceleratorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -19311,7 +19503,7 @@ var _ProductionVariantStatusList_member *smithy.Schema
 var ProductionVariantSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProductionVariantSummary",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var ProductionVariantSummary_VariantName *smithy.Schema
 
 var ProductionVariantSummary_DeployedImages *smithy.Schema
@@ -19337,6 +19529,8 @@ var ProductionVariantSummary_ManagedInstanceScaling *smithy.Schema
 var ProductionVariantSummary_RoutingConfig *smithy.Schema
 
 var ProductionVariantSummary_CapacityReservationConfig *smithy.Schema
+
+var ProductionVariantSummary_AcceleratorPartitionLayouts *smithy.Schema
 
 var _ProductionVariantSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -25835,6 +26029,28 @@ var CreateAutoMLJobV2Response = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateAutoMLJobV2Response_AutoMLJobArn *smithy.Schema
 
+var CreateClusterExtensionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateClusterExtensionRequest",
+}, smithy.ShapeTypeStructure, 6)
+var CreateClusterExtensionRequest_ClusterArn *smithy.Schema
+
+var CreateClusterExtensionRequest_ExtensionName *smithy.Schema
+
+var CreateClusterExtensionRequest_ExtensionVersion *smithy.Schema
+
+var CreateClusterExtensionRequest_ConfigurationValues *smithy.Schema
+
+var CreateClusterExtensionRequest_Tags *smithy.Schema
+
+var CreateClusterExtensionRequest_ClientToken *smithy.Schema
+
+var CreateClusterExtensionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateClusterExtensionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateClusterExtensionResponse_ExtensionArn *smithy.Schema
+
 var CreateClusterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateClusterRequest",
@@ -26994,7 +27210,7 @@ var CreatePartnerAppPresignedUrlResponse_Url *smithy.Schema
 var CreatePipelineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreatePipelineRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CreatePipelineRequest_PipelineName *smithy.Schema
 
 var CreatePipelineRequest_PipelineDisplayName *smithy.Schema
@@ -27012,6 +27228,8 @@ var CreatePipelineRequest_RoleArn *smithy.Schema
 var CreatePipelineRequest_Tags *smithy.Schema
 
 var CreatePipelineRequest_ParallelismConfiguration *smithy.Schema
+
+var CreatePipelineRequest_PipelineVersionAliases *smithy.Schema
 
 var CreatePipelineResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -27554,6 +27772,20 @@ var DeleteAssociationResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteAssociationResponse_SourceArn *smithy.Schema
 
 var DeleteAssociationResponse_DestinationArn *smithy.Schema
+
+var DeleteClusterExtensionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteClusterExtensionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteClusterExtensionRequest_ClusterArn *smithy.Schema
+
+var DeleteClusterExtensionRequest_ExtensionArn *smithy.Schema
+
+var DeleteClusterExtensionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteClusterExtensionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteClusterExtensionResponse_ExtensionArn *smithy.Schema
 
 var DeleteClusterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -28420,6 +28652,22 @@ var DescribeClusterEventResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeClusterEventResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DescribeClusterEventResponse_EventDetails *smithy.Schema
+
+var DescribeClusterExtensionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeClusterExtensionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeClusterExtensionRequest_ClusterArn *smithy.Schema
+
+var DescribeClusterExtensionRequest_ExtensionArn *smithy.Schema
+
+var DescribeClusterExtensionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeClusterExtensionResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeClusterExtensionResponse_ExtensionDetails *smithy.Schema
+
+var DescribeClusterExtensionResponse_NodeSummary *smithy.Schema
 
 var DescribeClusterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -30178,7 +30426,7 @@ var DescribePipelineExecutionRequest_PipelineExecutionArn *smithy.Schema
 var DescribePipelineExecutionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribePipelineExecutionResponse",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var DescribePipelineExecutionResponse_PipelineArn *smithy.Schema
 
 var DescribePipelineExecutionResponse_PipelineExecutionArn *smithy.Schema
@@ -30209,18 +30457,24 @@ var DescribePipelineExecutionResponse_PipelineVersionId *smithy.Schema
 
 var DescribePipelineExecutionResponse_MLflowConfig *smithy.Schema
 
+var DescribePipelineExecutionResponse_PipelineVersionAliases *smithy.Schema
+
+var DescribePipelineExecutionResponse_RoleArn *smithy.Schema
+
 var DescribePipelineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribePipelineRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DescribePipelineRequest_PipelineName *smithy.Schema
 
 var DescribePipelineRequest_PipelineVersionId *smithy.Schema
 
+var DescribePipelineRequest_PipelineVersionAlias *smithy.Schema
+
 var DescribePipelineResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribePipelineResponse",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var DescribePipelineResponse_PipelineArn *smithy.Schema
 
 var DescribePipelineResponse_PipelineName *smithy.Schema
@@ -30250,6 +30504,8 @@ var DescribePipelineResponse_ParallelismConfiguration *smithy.Schema
 var DescribePipelineResponse_PipelineVersionDisplayName *smithy.Schema
 
 var DescribePipelineResponse_PipelineVersionDescription *smithy.Schema
+
+var DescribePipelineResponse_PipelineVersionAliases *smithy.Schema
 
 var DescribeProcessingJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -31401,6 +31657,28 @@ var ListClusterEventsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListClusterEventsResponse_NextToken *smithy.Schema
 
 var ListClusterEventsResponse_Events *smithy.Schema
+
+var ListClusterExtensionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterExtensionsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListClusterExtensionsRequest_ClusterArn *smithy.Schema
+
+var ListClusterExtensionsRequest_MaxResults *smithy.Schema
+
+var ListClusterExtensionsRequest_NextToken *smithy.Schema
+
+var ListClusterExtensionsRequest_CreationTimeAfter *smithy.Schema
+
+var ListClusterExtensionsRequest_CreationTimeBefore *smithy.Schema
+
+var ListClusterExtensionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterExtensionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListClusterExtensionsResponse_Extensions *smithy.Schema
+
+var ListClusterExtensionsResponse_NextToken *smithy.Schema
 
 var ListClusterNodesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -32965,7 +33243,7 @@ var ListPartnerAppsResponse_NextToken *smithy.Schema
 var ListPipelineExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListPipelineExecutionsRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ListPipelineExecutionsRequest_PipelineName *smithy.Schema
 
 var ListPipelineExecutionsRequest_CreatedAfter *smithy.Schema
@@ -32979,6 +33257,8 @@ var ListPipelineExecutionsRequest_SortOrder *smithy.Schema
 var ListPipelineExecutionsRequest_NextToken *smithy.Schema
 
 var ListPipelineExecutionsRequest_MaxResults *smithy.Schema
+
+var ListPipelineExecutionsRequest_PipelineVersionAlias *smithy.Schema
 
 var ListPipelineExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -33029,7 +33309,7 @@ var ListPipelineParametersForExecutionResponse_NextToken *smithy.Schema
 var ListPipelinesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListPipelinesRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ListPipelinesRequest_PipelineNamePrefix *smithy.Schema
 
 var ListPipelinesRequest_CreatedAfter *smithy.Schema
@@ -33043,6 +33323,8 @@ var ListPipelinesRequest_SortOrder *smithy.Schema
 var ListPipelinesRequest_NextToken *smithy.Schema
 
 var ListPipelinesRequest_MaxResults *smithy.Schema
+
+var ListPipelinesRequest_ManagedBy *smithy.Schema
 
 var ListPipelinesResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -33801,7 +34083,7 @@ var StartNotebookInstanceInput_NotebookInstanceName *smithy.Schema
 var StartPipelineExecutionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "StartPipelineExecutionRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var StartPipelineExecutionRequest_PipelineName *smithy.Schema
 
 var StartPipelineExecutionRequest_PipelineExecutionDisplayName *smithy.Schema
@@ -33819,6 +34101,10 @@ var StartPipelineExecutionRequest_SelectiveExecutionConfig *smithy.Schema
 var StartPipelineExecutionRequest_PipelineVersionId *smithy.Schema
 
 var StartPipelineExecutionRequest_MlflowExperimentName *smithy.Schema
+
+var StartPipelineExecutionRequest_PipelineVersionAlias *smithy.Schema
+
+var StartPipelineExecutionRequest_RoleArn *smithy.Schema
 
 var StartPipelineExecutionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -34071,6 +34357,26 @@ var UpdateArtifactResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateArtifactResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateArtifactResponse_ArtifactArn *smithy.Schema
+
+var UpdateClusterExtensionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateClusterExtensionRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateClusterExtensionRequest_ClusterArn *smithy.Schema
+
+var UpdateClusterExtensionRequest_ExtensionArn *smithy.Schema
+
+var UpdateClusterExtensionRequest_ExtensionVersion *smithy.Schema
+
+var UpdateClusterExtensionRequest_ConfigurationValues *smithy.Schema
+
+var UpdateClusterExtensionRequest_ClientToken *smithy.Schema
+
+var UpdateClusterExtensionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateClusterExtensionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateClusterExtensionResponse_ExtensionArn *smithy.Schema
 
 var UpdateClusterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -34753,7 +35059,7 @@ var UpdatePipelineExecutionResponse_PipelineExecutionArn *smithy.Schema
 var UpdatePipelineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "UpdatePipelineRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var UpdatePipelineRequest_PipelineName *smithy.Schema
 
 var UpdatePipelineRequest_PipelineDisplayName *smithy.Schema
@@ -34768,6 +35074,8 @@ var UpdatePipelineRequest_RoleArn *smithy.Schema
 
 var UpdatePipelineRequest_ParallelismConfiguration *smithy.Schema
 
+var UpdatePipelineRequest_PipelineVersionAliases *smithy.Schema
+
 var UpdatePipelineResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "UpdatePipelineResponse",
@@ -34779,7 +35087,7 @@ var UpdatePipelineResponse_PipelineVersionId *smithy.Schema
 var UpdatePipelineVersionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "UpdatePipelineVersionRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdatePipelineVersionRequest_PipelineArn *smithy.Schema
 
 var UpdatePipelineVersionRequest_PipelineVersionId *smithy.Schema
@@ -34787,6 +35095,8 @@ var UpdatePipelineVersionRequest_PipelineVersionId *smithy.Schema
 var UpdatePipelineVersionRequest_PipelineVersionDisplayName *smithy.Schema
 
 var UpdatePipelineVersionRequest_PipelineVersionDescription *smithy.Schema
+
+var UpdatePipelineVersionRequest_PipelineVersionAliasOperations *smithy.Schema
 
 var UpdatePipelineVersionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -35450,6 +35760,12 @@ func init() {
 	ComputeQuotaResourceConfig_AcceleratorPartition = ComputeQuotaResourceConfig.AddMember("AcceleratorPartition", AcceleratorPartitionConfig)
 
 	_AbsoluteBorrowLimitResourceList_member = _AbsoluteBorrowLimitResourceList.AddMember("member", ComputeQuotaResourceConfig)
+
+	_AcceleratorPartitionTypeList_member = _AcceleratorPartitionTypeList.AddMember("member", _AcceleratorPartitionType)
+
+	AcceleratorPartitionLayout_AcceleratorPartitionTypes = AcceleratorPartitionLayout.AddMember("AcceleratorPartitionTypes", _AcceleratorPartitionTypeList)
+
+	_AcceleratorPartitionLayouts_member = _AcceleratorPartitionLayouts.AddMember("member", AcceleratorPartitionLayout)
 
 	AccountDefaultStatus_ENABLED = AccountDefaultStatus.AddMember("ENABLED", smithyprelude.Unit)
 
@@ -37574,6 +37890,12 @@ func init() {
 	AlgorithmValidationSpecification_ValidationRole = AlgorithmValidationSpecification.AddMember("ValidationRole", _RoleArn)
 
 	AlgorithmValidationSpecification_ValidationProfiles = AlgorithmValidationSpecification.AddMember("ValidationProfiles", _AlgorithmValidationProfiles)
+
+	_PipelineVersionAliasList_member = _PipelineVersionAliasList.AddMember("member", _PipelineVersionAlias)
+
+	AliasOperations_Add = AliasOperations.AddMember("Add", _PipelineVersionAliasList)
+
+	AliasOperations_Remove = AliasOperations.AddMember("Remove", _PipelineVersionAliasList)
 
 	FeatureStatus_Enabled = FeatureStatus.AddMember("Enabled", smithyprelude.Unit)
 
@@ -39790,6 +40112,8 @@ func init() {
 	DeepHealthCheckType_INSTANCE_STRESS = DeepHealthCheckType.AddMember("INSTANCE_STRESS", smithyprelude.Unit)
 
 	DeepHealthCheckType_INSTANCE_CONNECTIVITY = DeepHealthCheckType.AddMember("INSTANCE_CONNECTIVITY", smithyprelude.Unit)
+
+	DeepHealthCheckType_MULTI_NODE_TRAINING_VALIDATION = DeepHealthCheckType.AddMember("MULTI_NODE_TRAINING_VALIDATION", smithyprelude.Unit)
 
 	_OnStartDeepHealthChecks_member = _OnStartDeepHealthChecks.AddMember("member", DeepHealthCheckType)
 
@@ -42073,6 +42397,8 @@ func init() {
 
 	ProductionVariantSummary_CapacityReservationConfig = ProductionVariantSummary.AddMember("CapacityReservationConfig", ProductionVariantCapacityReservationSummary)
 
+	ProductionVariantSummary_AcceleratorPartitionLayouts = ProductionVariantSummary.AddMember("AcceleratorPartitionLayouts", _AcceleratorPartitionLayouts)
+
 	_ProductionVariantSummaryList_member = _ProductionVariantSummaryList.AddMember("member", ProductionVariantSummary)
 
 	EndpointStatus_OUT_OF_SERVICE = EndpointStatus.AddMember("OUT_OF_SERVICE", smithyprelude.Unit)
@@ -42438,6 +42764,54 @@ func init() {
 	Explainability_Report = Explainability.AddMember("Report", MetricsSource)
 
 	ExplainerConfig_ClarifyExplainerConfig = ExplainerConfig.AddMember("ClarifyExplainerConfig", ClarifyExplainerConfig)
+
+	ExtensionStatus_CREATING = ExtensionStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	ExtensionStatus_ACTIVE = ExtensionStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ExtensionStatus_CREATE_FAILED = ExtensionStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	ExtensionStatus_UPDATING = ExtensionStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	ExtensionStatus_DELETING = ExtensionStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	ExtensionStatus_DELETE_FAILED = ExtensionStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
+	ExtensionStatus_DEGRADED = ExtensionStatus.AddMember("DEGRADED", smithyprelude.Unit)
+
+	ExtensionStatus_UPDATE_FAILED = ExtensionStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
+	ExtensionDetails_ClusterArn = ExtensionDetails.AddMember("ClusterArn", _ClusterArn)
+
+	ExtensionDetails_ExtensionArn = ExtensionDetails.AddMember("ExtensionArn", _ExtensionArn)
+
+	ExtensionDetails_ExtensionName = ExtensionDetails.AddMember("ExtensionName", _ExtensionName)
+
+	ExtensionDetails_ExtensionVersion = ExtensionDetails.AddMember("ExtensionVersion", _ExtensionVersion)
+
+	ExtensionDetails_Status = ExtensionDetails.AddMember("Status", ExtensionStatus)
+
+	ExtensionDetails_ConfigurationValues = ExtensionDetails.AddMember("ConfigurationValues", _ExtensionConfigurationValues)
+
+	ExtensionDetails_CreationTime = ExtensionDetails.AddMember("CreationTime", _Timestamp)
+
+	ExtensionDetails_LastModifiedTime = ExtensionDetails.AddMember("LastModifiedTime", _Timestamp)
+
+	ExtensionNodeSummary_TotalCount = ExtensionNodeSummary.AddMember("TotalCount", _ExtensionNodeCount)
+
+	ExtensionNodeSummary_ActiveCount = ExtensionNodeSummary.AddMember("ActiveCount", _ExtensionNodeCount)
+
+	ExtensionSummary_ExtensionArn = ExtensionSummary.AddMember("ExtensionArn", _ExtensionArn)
+
+	ExtensionSummary_ExtensionName = ExtensionSummary.AddMember("ExtensionName", _ExtensionName)
+
+	ExtensionSummary_ExtensionVersion = ExtensionSummary.AddMember("ExtensionVersion", _ExtensionVersion)
+
+	ExtensionSummary_Status = ExtensionSummary.AddMember("Status", ExtensionStatus)
+
+	ExtensionSummary_CreationTime = ExtensionSummary.AddMember("CreationTime", _Timestamp)
+
+	_ExtensionSummaries_member = _ExtensionSummaries.AddMember("member", ExtensionSummary)
 
 	FailStepMetadata_ErrorMessage = FailStepMetadata.AddMember("ErrorMessage", _String3072)
 
@@ -42928,6 +43302,10 @@ func init() {
 	HubContentSortBy_CREATION_TIME = HubContentSortBy.AddMember("CREATION_TIME", smithyprelude.Unit)
 
 	HubContentSortBy_HUB_CONTENT_STATUS = HubContentSortBy.AddMember("HUB_CONTENT_STATUS", smithyprelude.Unit)
+
+	HubContentStepMetadata_HubArn = HubContentStepMetadata.AddMember("HubArn", _String2048)
+
+	HubContentStepMetadata_HubContentArn = HubContentStepMetadata.AddMember("HubContentArn", _String2048)
 
 	_HubSearchKeywordList_member = _HubSearchKeywordList.AddMember("member", _HubSearchKeyword)
 
@@ -43492,6 +43870,8 @@ func init() {
 	InferenceComponentComputeResourceRequirements_MinMemoryRequiredInMb = InferenceComponentComputeResourceRequirements.AddMember("MinMemoryRequiredInMb", _MemoryInMb)
 
 	InferenceComponentComputeResourceRequirements_MaxMemoryRequiredInMb = InferenceComponentComputeResourceRequirements.AddMember("MaxMemoryRequiredInMb", _MemoryInMb)
+
+	InferenceComponentComputeResourceRequirements_AcceleratorPartitionType = InferenceComponentComputeResourceRequirements.AddMember("AcceleratorPartitionType", _AcceleratorPartitionType)
 
 	InferenceComponentContainerSpecification_Image = InferenceComponentContainerSpecification.AddMember("Image", _ContainerImage)
 
@@ -45885,6 +46265,8 @@ func init() {
 
 	PendingProductionVariantSummary_RoutingConfig = PendingProductionVariantSummary.AddMember("RoutingConfig", ProductionVariantRoutingConfig)
 
+	PendingProductionVariantSummary_AcceleratorPartitionLayouts = PendingProductionVariantSummary.AddMember("AcceleratorPartitionLayouts", _AcceleratorPartitionLayouts)
+
 	_PendingProductionVariantSummaryList_member = _PendingProductionVariantSummaryList.AddMember("member", PendingProductionVariantSummary)
 
 	PendingDeploymentSummary_EndpointConfigName = PendingDeploymentSummary.AddMember("EndpointConfigName", _EndpointConfigName)
@@ -46091,6 +46473,8 @@ func init() {
 
 	PipelineExecutionStepMetadata_ForEach = PipelineExecutionStepMetadata.AddMember("ForEach", ForEachStepMetadata)
 
+	PipelineExecutionStepMetadata_HubContent = PipelineExecutionStepMetadata.AddMember("HubContent", HubContentStepMetadata)
+
 	SelectiveExecutionResult_SourcePipelineExecutionArn = SelectiveExecutionResult.AddMember("SourcePipelineExecutionArn", _PipelineExecutionArn)
 
 	PipelineExecutionStep_StepName = PipelineExecutionStep.AddMember("StepName", _StepName)
@@ -46131,7 +46515,13 @@ func init() {
 
 	PipelineExecutionSummary_PipelineExecutionFailureReason = PipelineExecutionSummary.AddMember("PipelineExecutionFailureReason", _String3072)
 
+	PipelineExecutionSummary_PipelineVersionAliases = PipelineExecutionSummary.AddMember("PipelineVersionAliases", _PipelineVersionAliasList)
+
 	_PipelineExecutionSummaryList_member = _PipelineExecutionSummaryList.AddMember("member", PipelineExecutionSummary)
+
+	PipelineManagedBy_AWS = PipelineManagedBy.AddMember("AWS", smithyprelude.Unit)
+
+	PipelineManagedBy_CUSTOMER = PipelineManagedBy.AddMember("CUSTOMER", smithyprelude.Unit)
 
 	PipelineSummary_PipelineArn = PipelineSummary.AddMember("PipelineArn", _PipelineArn)
 
@@ -46173,6 +46563,8 @@ func init() {
 
 	PipelineVersion_LastExecutedPipelineExecutionStatus = PipelineVersion.AddMember("LastExecutedPipelineExecutionStatus", PipelineExecutionStatus)
 
+	PipelineVersion_PipelineVersionAliases = PipelineVersion.AddMember("PipelineVersionAliases", _PipelineVersionAliasList)
+
 	PipelineVersionSummary_PipelineArn = PipelineVersionSummary.AddMember("PipelineArn", _PipelineArn)
 
 	PipelineVersionSummary_PipelineVersionId = PipelineVersionSummary.AddMember("PipelineVersionId", _PipelineVersionId)
@@ -46184,6 +46576,8 @@ func init() {
 	PipelineVersionSummary_PipelineVersionDisplayName = PipelineVersionSummary.AddMember("PipelineVersionDisplayName", _PipelineVersionName)
 
 	PipelineVersionSummary_LastExecutionPipelineExecutionArn = PipelineVersionSummary.AddMember("LastExecutionPipelineExecutionArn", _PipelineExecutionArn)
+
+	PipelineVersionSummary_PipelineVersionAliases = PipelineVersionSummary.AddMember("PipelineVersionAliases", _PipelineVersionAliasList)
 
 	_PipelineVersionSummaryList_member = _PipelineVersionSummaryList.AddMember("member", PipelineVersionSummary)
 
@@ -46406,6 +46800,8 @@ func init() {
 	ProductionVariant_InferenceAmiVersion = ProductionVariant.AddMember("InferenceAmiVersion", ProductionVariantInferenceAmiVersion)
 
 	ProductionVariant_CapacityReservationConfig = ProductionVariant.AddMember("CapacityReservationConfig", ProductionVariantCapacityReservationConfig)
+
+	ProductionVariant_AcceleratorPartitionLayouts = ProductionVariant.AddMember("AcceleratorPartitionLayouts", _AcceleratorPartitionLayouts)
 
 	_ProductionVariantList_member = _ProductionVariantList.AddMember("member", ProductionVariant)
 
@@ -48473,6 +48869,20 @@ func init() {
 
 	CreateAutoMLJobV2Response_AutoMLJobArn = CreateAutoMLJobV2Response.AddMember("AutoMLJobArn", _AutoMLJobArn)
 
+	CreateClusterExtensionRequest_ClusterArn = CreateClusterExtensionRequest.AddMember("ClusterArn", _ClusterArn)
+
+	CreateClusterExtensionRequest_ExtensionName = CreateClusterExtensionRequest.AddMember("ExtensionName", _ExtensionName)
+
+	CreateClusterExtensionRequest_ExtensionVersion = CreateClusterExtensionRequest.AddMember("ExtensionVersion", _ExtensionVersion)
+
+	CreateClusterExtensionRequest_ConfigurationValues = CreateClusterExtensionRequest.AddMember("ConfigurationValues", _ExtensionConfigurationValues)
+
+	CreateClusterExtensionRequest_Tags = CreateClusterExtensionRequest.AddMember("Tags", _TagList)
+
+	CreateClusterExtensionRequest_ClientToken = CreateClusterExtensionRequest.AddMember("ClientToken", _String)
+
+	CreateClusterExtensionResponse_ExtensionArn = CreateClusterExtensionResponse.AddMember("ExtensionArn", _ExtensionArn)
+
 	CreateClusterRequest_ClusterName = CreateClusterRequest.AddMember("ClusterName", _ClusterName)
 
 	CreateClusterRequest_InstanceGroups = CreateClusterRequest.AddMember("InstanceGroups", _ClusterInstanceGroupSpecifications)
@@ -49299,6 +49709,8 @@ func init() {
 
 	CreatePipelineRequest_ParallelismConfiguration = CreatePipelineRequest.AddMember("ParallelismConfiguration", ParallelismConfiguration)
 
+	CreatePipelineRequest_PipelineVersionAliases = CreatePipelineRequest.AddMember("PipelineVersionAliases", _PipelineVersionAliasList)
+
 	CreatePipelineResponse_PipelineArn = CreatePipelineResponse.AddMember("PipelineArn", _PipelineArn)
 
 	CreatePresignedDomainUrlRequest_DomainId = CreatePresignedDomainUrlRequest.AddMember("DomainId", _DomainId)
@@ -49640,6 +50052,12 @@ func init() {
 	DeleteAssociationResponse_SourceArn = DeleteAssociationResponse.AddMember("SourceArn", _AssociationEntityArn)
 
 	DeleteAssociationResponse_DestinationArn = DeleteAssociationResponse.AddMember("DestinationArn", _AssociationEntityArn)
+
+	DeleteClusterExtensionRequest_ClusterArn = DeleteClusterExtensionRequest.AddMember("ClusterArn", _ClusterArn)
+
+	DeleteClusterExtensionRequest_ExtensionArn = DeleteClusterExtensionRequest.AddMember("ExtensionArn", _ExtensionArn)
+
+	DeleteClusterExtensionResponse_ExtensionArn = DeleteClusterExtensionResponse.AddMember("ExtensionArn", _ExtensionArn)
 
 	DeleteClusterRequest_ClusterName = DeleteClusterRequest.AddMember("ClusterName", _ClusterNameOrArn)
 
@@ -50114,6 +50532,14 @@ func init() {
 	DescribeClusterEventRequest_ClusterName = DescribeClusterEventRequest.AddMember("ClusterName", _ClusterNameOrArn)
 
 	DescribeClusterEventResponse_EventDetails = DescribeClusterEventResponse.AddMember("EventDetails", ClusterEventDetail)
+
+	DescribeClusterExtensionRequest_ClusterArn = DescribeClusterExtensionRequest.AddMember("ClusterArn", _ClusterArn)
+
+	DescribeClusterExtensionRequest_ExtensionArn = DescribeClusterExtensionRequest.AddMember("ExtensionArn", _ExtensionArn)
+
+	DescribeClusterExtensionResponse_ExtensionDetails = DescribeClusterExtensionResponse.AddMember("ExtensionDetails", ExtensionDetails)
+
+	DescribeClusterExtensionResponse_NodeSummary = DescribeClusterExtensionResponse.AddMember("NodeSummary", ExtensionNodeSummary)
 
 	DescribeClusterRequest_ClusterName = DescribeClusterRequest.AddMember("ClusterName", _ClusterNameOrArn)
 
@@ -51511,9 +51937,15 @@ func init() {
 
 	DescribePipelineExecutionResponse_MLflowConfig = DescribePipelineExecutionResponse.AddMember("MLflowConfig", MLflowConfiguration)
 
+	DescribePipelineExecutionResponse_PipelineVersionAliases = DescribePipelineExecutionResponse.AddMember("PipelineVersionAliases", _PipelineVersionAliasList)
+
+	DescribePipelineExecutionResponse_RoleArn = DescribePipelineExecutionResponse.AddMember("RoleArn", _RoleArn)
+
 	DescribePipelineRequest_PipelineName = DescribePipelineRequest.AddMember("PipelineName", _PipelineNameOrArn)
 
 	DescribePipelineRequest_PipelineVersionId = DescribePipelineRequest.AddMember("PipelineVersionId", _PipelineVersionId)
+
+	DescribePipelineRequest_PipelineVersionAlias = DescribePipelineRequest.AddMember("PipelineVersionAlias", _PipelineVersionAlias)
 
 	DescribePipelineResponse_PipelineArn = DescribePipelineResponse.AddMember("PipelineArn", _PipelineArn)
 
@@ -51544,6 +51976,8 @@ func init() {
 	DescribePipelineResponse_PipelineVersionDisplayName = DescribePipelineResponse.AddMember("PipelineVersionDisplayName", _PipelineVersionName)
 
 	DescribePipelineResponse_PipelineVersionDescription = DescribePipelineResponse.AddMember("PipelineVersionDescription", _PipelineVersionDescription)
+
+	DescribePipelineResponse_PipelineVersionAliases = DescribePipelineResponse.AddMember("PipelineVersionAliases", _PipelineVersionAliasList)
 
 	DescribeProcessingJobRequest_ProcessingJobName = DescribeProcessingJobRequest.AddMember("ProcessingJobName", _ProcessingJobName)
 
@@ -52362,6 +52796,20 @@ func init() {
 	ListClusterEventsResponse_NextToken = ListClusterEventsResponse.AddMember("NextToken", _NextToken)
 
 	ListClusterEventsResponse_Events = ListClusterEventsResponse.AddMember("Events", _ClusterEventSummaries)
+
+	ListClusterExtensionsRequest_ClusterArn = ListClusterExtensionsRequest.AddMember("ClusterArn", _ClusterArn)
+
+	ListClusterExtensionsRequest_MaxResults = ListClusterExtensionsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListClusterExtensionsRequest_NextToken = ListClusterExtensionsRequest.AddMember("NextToken", _NextToken)
+
+	ListClusterExtensionsRequest_CreationTimeAfter = ListClusterExtensionsRequest.AddMember("CreationTimeAfter", _Timestamp)
+
+	ListClusterExtensionsRequest_CreationTimeBefore = ListClusterExtensionsRequest.AddMember("CreationTimeBefore", _Timestamp)
+
+	ListClusterExtensionsResponse_Extensions = ListClusterExtensionsResponse.AddMember("Extensions", _ExtensionSummaries)
+
+	ListClusterExtensionsResponse_NextToken = ListClusterExtensionsResponse.AddMember("NextToken", _NextToken)
 
 	ListClusterNodesRequest_ClusterName = ListClusterNodesRequest.AddMember("ClusterName", _ClusterNameOrArn)
 
@@ -53505,6 +53953,8 @@ func init() {
 
 	ListPipelineExecutionsRequest_MaxResults = ListPipelineExecutionsRequest.AddMember("MaxResults", _MaxResults)
 
+	ListPipelineExecutionsRequest_PipelineVersionAlias = ListPipelineExecutionsRequest.AddMember("PipelineVersionAlias", _PipelineVersionAlias)
+
 	ListPipelineExecutionsResponse_PipelineExecutionSummaries = ListPipelineExecutionsResponse.AddMember("PipelineExecutionSummaries", _PipelineExecutionSummaryList)
 
 	ListPipelineExecutionsResponse_NextToken = ListPipelineExecutionsResponse.AddMember("NextToken", _NextToken)
@@ -53544,6 +53994,8 @@ func init() {
 	ListPipelinesRequest_NextToken = ListPipelinesRequest.AddMember("NextToken", _NextToken)
 
 	ListPipelinesRequest_MaxResults = ListPipelinesRequest.AddMember("MaxResults", _MaxResults)
+
+	ListPipelinesRequest_ManagedBy = ListPipelinesRequest.AddMember("ManagedBy", PipelineManagedBy)
 
 	ListPipelinesResponse_PipelineSummaries = ListPipelinesResponse.AddMember("PipelineSummaries", _PipelineSummaryList)
 
@@ -54049,6 +54501,10 @@ func init() {
 
 	StartPipelineExecutionRequest_MlflowExperimentName = StartPipelineExecutionRequest.AddMember("MlflowExperimentName", _MlflowExperimentEntityName)
 
+	StartPipelineExecutionRequest_PipelineVersionAlias = StartPipelineExecutionRequest.AddMember("PipelineVersionAlias", _PipelineVersionAlias)
+
+	StartPipelineExecutionRequest_RoleArn = StartPipelineExecutionRequest.AddMember("RoleArn", _RoleArn)
+
 	StartPipelineExecutionResponse_PipelineExecutionArn = StartPipelineExecutionResponse.AddMember("PipelineExecutionArn", _PipelineExecutionArn)
 
 	StartSessionRequest_ResourceIdentifier = StartSessionRequest.AddMember("ResourceIdentifier", _ResourceIdentifier)
@@ -54154,6 +54610,18 @@ func init() {
 	UpdateArtifactRequest_PropertiesToRemove = UpdateArtifactRequest.AddMember("PropertiesToRemove", _ListLineageEntityParameterKey)
 
 	UpdateArtifactResponse_ArtifactArn = UpdateArtifactResponse.AddMember("ArtifactArn", _ArtifactArn)
+
+	UpdateClusterExtensionRequest_ClusterArn = UpdateClusterExtensionRequest.AddMember("ClusterArn", _ClusterArn)
+
+	UpdateClusterExtensionRequest_ExtensionArn = UpdateClusterExtensionRequest.AddMember("ExtensionArn", _ExtensionArn)
+
+	UpdateClusterExtensionRequest_ExtensionVersion = UpdateClusterExtensionRequest.AddMember("ExtensionVersion", _ExtensionVersion)
+
+	UpdateClusterExtensionRequest_ConfigurationValues = UpdateClusterExtensionRequest.AddMember("ConfigurationValues", _ExtensionConfigurationValues)
+
+	UpdateClusterExtensionRequest_ClientToken = UpdateClusterExtensionRequest.AddMember("ClientToken", _String)
+
+	UpdateClusterExtensionResponse_ExtensionArn = UpdateClusterExtensionResponse.AddMember("ExtensionArn", _ExtensionArn)
 
 	UpdateClusterRequest_ClusterName = UpdateClusterRequest.AddMember("ClusterName", _ClusterNameOrArn)
 
@@ -54601,6 +55069,8 @@ func init() {
 
 	UpdatePipelineRequest_ParallelismConfiguration = UpdatePipelineRequest.AddMember("ParallelismConfiguration", ParallelismConfiguration)
 
+	UpdatePipelineRequest_PipelineVersionAliases = UpdatePipelineRequest.AddMember("PipelineVersionAliases", _PipelineVersionAliasList)
+
 	UpdatePipelineResponse_PipelineArn = UpdatePipelineResponse.AddMember("PipelineArn", _PipelineArn)
 
 	UpdatePipelineResponse_PipelineVersionId = UpdatePipelineResponse.AddMember("PipelineVersionId", _PipelineVersionId)
@@ -54612,6 +55082,8 @@ func init() {
 	UpdatePipelineVersionRequest_PipelineVersionDisplayName = UpdatePipelineVersionRequest.AddMember("PipelineVersionDisplayName", _PipelineVersionName)
 
 	UpdatePipelineVersionRequest_PipelineVersionDescription = UpdatePipelineVersionRequest.AddMember("PipelineVersionDescription", _PipelineVersionDescription)
+
+	UpdatePipelineVersionRequest_PipelineVersionAliasOperations = UpdatePipelineVersionRequest.AddMember("PipelineVersionAliasOperations", AliasOperations)
 
 	UpdatePipelineVersionResponse_PipelineArn = UpdatePipelineVersionResponse.AddMember("PipelineArn", _PipelineArn)
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UpdateStackResponse><UpdateStackResult><OperationId>__OperationId__</OperationId><StackId>__StackId__</StackId></UpdateStackResult></UpdateStackResponse>

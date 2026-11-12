@@ -4,6 +4,8 @@ package qapps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type UpdateLibraryItemMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLibraryItemMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLibraryItemMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLibraryItemMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateLibraryItemMetadataInput_instanceId, *v.InstanceId)
+	}
+	if v.IsVerified != nil {
+		s.WriteBool(schemas.UpdateLibraryItemMetadataInput_isVerified, *v.IsVerified)
+	}
+	if v.LibraryItemId != nil {
+		s.WriteString(schemas.UpdateLibraryItemMetadataInput_libraryItemId, *v.LibraryItemId)
+	}
+}
+
 type UpdateLibraryItemMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +68,26 @@ type UpdateLibraryItemMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLibraryItemMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLibraryItemMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLibraryItemMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLibraryItemMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLibraryItemMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLibraryItemMetadata, schemas.UpdateLibraryItemMetadataInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLibraryItemMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLibraryItemMetadata, schemas.UpdateLibraryItemMetadataInput, nil), output: &UpdateLibraryItemMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -28,6 +28,7 @@ type documentMarshaler struct {
 	value interface{}
 }
 
+func (m *documentMarshaler) Value() any { return m.value }
 func (m *documentMarshaler) UnmarshalSmithyDocument(v interface{}) error {
 	mBytes, err := m.MarshalSmithyDocument()
 	if err != nil {
@@ -57,6 +58,7 @@ type documentUnmarshaler struct {
 	value interface{}
 }
 
+func (m *documentUnmarshaler) Value() any { return m.value }
 func (m *documentUnmarshaler) UnmarshalSmithyDocument(v interface{}) error {
 	decoder := smithydocumentjson.NewDecoder()
 	return decoder.DecodeJSONInterface(m.value, v)

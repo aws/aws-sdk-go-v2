@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,45 @@ type CreateRedshiftIdcApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRedshiftIdcApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRedshiftIdcApplicationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRedshiftIdcApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.CreateRedshiftIdcApplicationMessage_ApplicationType, string(v.ApplicationType))
+	}
+	if v.AuthorizedTokenIssuerList != nil {
+		serializeAuthorizedTokenIssuerList(s, schemas.CreateRedshiftIdcApplicationMessage_AuthorizedTokenIssuerList, v.AuthorizedTokenIssuerList)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateRedshiftIdcApplicationMessage_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IdcDisplayName != nil {
+		s.WriteString(schemas.CreateRedshiftIdcApplicationMessage_IdcDisplayName, *v.IdcDisplayName)
+	}
+	if v.IdcInstanceArn != nil {
+		s.WriteString(schemas.CreateRedshiftIdcApplicationMessage_IdcInstanceArn, *v.IdcInstanceArn)
+	}
+	if v.IdentityNamespace != nil {
+		s.WriteString(schemas.CreateRedshiftIdcApplicationMessage_IdentityNamespace, *v.IdentityNamespace)
+	}
+	if v.RedshiftIdcApplicationName != nil {
+		s.WriteString(schemas.CreateRedshiftIdcApplicationMessage_RedshiftIdcApplicationName, *v.RedshiftIdcApplicationName)
+	}
+	if v.ServiceIntegrations != nil {
+		serializeServiceIntegrationList(s, schemas.CreateRedshiftIdcApplicationMessage_ServiceIntegrations, v.ServiceIntegrations)
+	}
+	if v.SsoTagKeys != nil {
+		serializeTagKeyList(s, schemas.CreateRedshiftIdcApplicationMessage_SsoTagKeys, v.SsoTagKeys)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRedshiftIdcApplicationMessage_Tags, v.Tags)
+	}
+}
+
 type CreateRedshiftIdcApplicationOutput struct {
 
 	// Contains properties for the Redshift IDC application.
@@ -88,13 +129,34 @@ type CreateRedshiftIdcApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRedshiftIdcApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRedshiftIdcApplicationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRedshiftIdcApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RedshiftIdcApplication != nil {
+		s.WriteStruct(schemas.CreateRedshiftIdcApplicationResult_RedshiftIdcApplication)
+		v.RedshiftIdcApplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRedshiftIdcApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRedshiftIdcApplicationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRedshiftIdcApplicationResult_RedshiftIdcApplication:
+			v.RedshiftIdcApplication = &types.RedshiftIdcApplication{}
+			return v.RedshiftIdcApplication.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRedshiftIdcApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateRedshiftIdcApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRedshiftIdcApplication, schemas.CreateRedshiftIdcApplicationMessage, schemas.CreateRedshiftIdcApplicationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateRedshiftIdcApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRedshiftIdcApplication, schemas.CreateRedshiftIdcApplicationMessage, schemas.CreateRedshiftIdcApplicationResult), output: &CreateRedshiftIdcApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

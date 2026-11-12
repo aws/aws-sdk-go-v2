@@ -2953,6 +2953,11 @@ func TestCheckRequestSnapshot_PutConnector(t *testing.T) {
 				TenantIdentifier: ptr.String("__TenantIdentifier__"),
 				ClientIdentifier: ptr.String("__ClientIdentifier__"),
 			},
+			Gcp: &types.GcpConnectorConfiguration{
+				GcpOrganizationId:            ptr.String("__GcpOrganizationId__"),
+				ServiceAccountEmail:          ptr.String("__ServiceAccountEmail__"),
+				WorkloadIdentityPoolProvider: ptr.String("__WorkloadIdentityPoolProvider__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -6602,6 +6607,11 @@ func TestUpdateRequestSnapshot_PutConnector(t *testing.T) {
 			Azure: &types.AzureConnectorConfiguration{
 				TenantIdentifier: ptr.String("__TenantIdentifier__"),
 				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+			Gcp: &types.GcpConnectorConfiguration{
+				GcpOrganizationId:            ptr.String("__GcpOrganizationId__"),
+				ServiceAccountEmail:          ptr.String("__ServiceAccountEmail__"),
+				WorkloadIdentityPoolProvider: ptr.String("__WorkloadIdentityPoolProvider__"),
 			},
 		},
 		Tags: []types.Tag{

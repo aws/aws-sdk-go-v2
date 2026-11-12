@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"capacityProviderArn":"__CapacityProviderArn__","capacityProviderId":"__CapacityProviderId__","name":"__Name__","status":"CREATING"}

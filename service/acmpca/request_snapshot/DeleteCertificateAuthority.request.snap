@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/DeleteCertificateAuthority
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.DeleteCertificateAuthority
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CertificateAuthorityArn":"__CertificateAuthorityArn__","PermanentDeletionTimeInDays":1}
+¿wCertificateAuthorityArnx__CertificateAuthorityArn__xPermanentDeletionTimeInDaysÿ

@@ -39,7 +39,9 @@ func (v *DocumentTypeAsMapValueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentTypeAsMapValueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentValuedMap(s, schemas.DocumentTypeAsMapValueInputOutput_docValuedMap, v.DocValuedMap)
+	if v.DocValuedMap != nil {
+		serializeDocumentValuedMap(s, schemas.DocumentTypeAsMapValueInputOutput_docValuedMap, v.DocValuedMap)
+	}
 }
 func (v *DocumentTypeAsMapValueInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentTypeAsMapValueInputOutput, func(s *smithy.Schema) error {
@@ -67,7 +69,9 @@ func (v *DocumentTypeAsMapValueOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentTypeAsMapValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentValuedMap(s, schemas.DocumentTypeAsMapValueInputOutput_docValuedMap, v.DocValuedMap)
+	if v.DocValuedMap != nil {
+		serializeDocumentValuedMap(s, schemas.DocumentTypeAsMapValueInputOutput_docValuedMap, v.DocValuedMap)
+	}
 }
 func (v *DocumentTypeAsMapValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentTypeAsMapValueInputOutput, func(s *smithy.Schema) error {

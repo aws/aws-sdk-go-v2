@@ -100,7 +100,9 @@ func (v *GetClientCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PemEncodedCertificate != nil {
 		s.WriteString(schemas.ClientCertificate_pemEncodedCertificate, *v.PemEncodedCertificate)
 	}
-	serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+	}
 }
 func (v *GetClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClientCertificate, func(s *smithy.Schema) error {

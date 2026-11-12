@@ -118,15 +118,21 @@ func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddresses(s, schemas.CreateUserRequest_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeAddresses(s, schemas.CreateUserRequest_Addresses, v.Addresses)
+	}
 	if v.Birthdate != nil {
 		s.WriteString(schemas.CreateUserRequest_Birthdate, *v.Birthdate)
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateUserRequest_DisplayName, *v.DisplayName)
 	}
-	serializeEmails(s, schemas.CreateUserRequest_Emails, v.Emails)
-	serializeExtensions(s, schemas.CreateUserRequest_Extensions, v.Extensions)
+	if v.Emails != nil {
+		serializeEmails(s, schemas.CreateUserRequest_Emails, v.Emails)
+	}
+	if v.Extensions != nil {
+		serializeExtensions(s, schemas.CreateUserRequest_Extensions, v.Extensions)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.CreateUserRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
@@ -141,15 +147,21 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NickName != nil {
 		s.WriteString(schemas.CreateUserRequest_NickName, *v.NickName)
 	}
-	serializePhoneNumbers(s, schemas.CreateUserRequest_PhoneNumbers, v.PhoneNumbers)
-	serializePhotos(s, schemas.CreateUserRequest_Photos, v.Photos)
+	if v.PhoneNumbers != nil {
+		serializePhoneNumbers(s, schemas.CreateUserRequest_PhoneNumbers, v.PhoneNumbers)
+	}
+	if v.Photos != nil {
+		serializePhotos(s, schemas.CreateUserRequest_Photos, v.Photos)
+	}
 	if v.PreferredLanguage != nil {
 		s.WriteString(schemas.CreateUserRequest_PreferredLanguage, *v.PreferredLanguage)
 	}
 	if v.ProfileUrl != nil {
 		s.WriteString(schemas.CreateUserRequest_ProfileUrl, *v.ProfileUrl)
 	}
-	serializeRoles(s, schemas.CreateUserRequest_Roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.CreateUserRequest_Roles, v.Roles)
+	}
 	if v.Timezone != nil {
 		s.WriteString(schemas.CreateUserRequest_Timezone, *v.Timezone)
 	}

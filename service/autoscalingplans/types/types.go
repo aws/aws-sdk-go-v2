@@ -31,7 +31,9 @@ func (v *ApplicationSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CloudFormationStackARN != nil {
 		s.WriteString(schemas.ApplicationSource_CloudFormationStackARN, *v.CloudFormationStackARN)
 	}
-	serializeTagFilters(s, schemas.ApplicationSource_TagFilters, v.TagFilters)
+	if v.TagFilters != nil {
+		serializeTagFilters(s, schemas.ApplicationSource_TagFilters, v.TagFilters)
+	}
 }
 func (v *ApplicationSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationSource, func(s *smithy.Schema) error {
@@ -114,7 +116,9 @@ func (v *CustomizedLoadMetricSpecification) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CustomizedLoadMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensions(s, schemas.CustomizedLoadMetricSpecification_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeMetricDimensions(s, schemas.CustomizedLoadMetricSpecification_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.CustomizedLoadMetricSpecification_MetricName, *v.MetricName)
 	}
@@ -210,7 +214,9 @@ func (v *CustomizedScalingMetricSpecification) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *CustomizedScalingMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensions(s, schemas.CustomizedScalingMetricSpecification_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeMetricDimensions(s, schemas.CustomizedScalingMetricSpecification_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.CustomizedScalingMetricSpecification_MetricName, *v.MetricName)
 	}
@@ -715,7 +721,9 @@ func (v *ScalingInstruction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceNamespace != "" {
 		s.WriteString(schemas.ScalingInstruction_ServiceNamespace, string(v.ServiceNamespace))
 	}
-	serializeTargetTrackingConfigurations(s, schemas.ScalingInstruction_TargetTrackingConfigurations, v.TargetTrackingConfigurations)
+	if v.TargetTrackingConfigurations != nil {
+		serializeTargetTrackingConfigurations(s, schemas.ScalingInstruction_TargetTrackingConfigurations, v.TargetTrackingConfigurations)
+	}
 }
 func (v *ScalingInstruction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScalingInstruction, func(s *smithy.Schema) error {
@@ -859,7 +867,9 @@ func (v *ScalingPlan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.ScalingPlan_CreationTime, *v.CreationTime)
 	}
-	serializeScalingInstructions(s, schemas.ScalingPlan_ScalingInstructions, v.ScalingInstructions)
+	if v.ScalingInstructions != nil {
+		serializeScalingInstructions(s, schemas.ScalingPlan_ScalingInstructions, v.ScalingInstructions)
+	}
 	if v.ScalingPlanName != nil {
 		s.WriteString(schemas.ScalingPlan_ScalingPlanName, *v.ScalingPlanName)
 	}
@@ -1027,7 +1037,9 @@ func (v *ScalingPlanResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScalingPlanVersion != nil {
 		s.WriteInt64(schemas.ScalingPlanResource_ScalingPlanVersion, *v.ScalingPlanVersion)
 	}
-	serializeScalingPolicies(s, schemas.ScalingPlanResource_ScalingPolicies, v.ScalingPolicies)
+	if v.ScalingPolicies != nil {
+		serializeScalingPolicies(s, schemas.ScalingPlanResource_ScalingPolicies, v.ScalingPolicies)
+	}
 	if v.ScalingStatusCode != "" {
 		s.WriteString(schemas.ScalingPlanResource_ScalingStatusCode, string(v.ScalingStatusCode))
 	}
@@ -1163,7 +1175,9 @@ func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.TagFilter_Key, *v.Key)
 	}
-	serializeTagValues(s, schemas.TagFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeTagValues(s, schemas.TagFilter_Values, v.Values)
+	}
 }
 func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {

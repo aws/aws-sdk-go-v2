@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAliasList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AliasListEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeAliasList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeCustomKeyStoresList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CustomKeyStoresListEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,14 @@ func serializeCustomKeyStoresList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeDryRunModifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DryRunModifierType) {
-	if v == nil {
-		return
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
+	s.CloseList()
+}
+
+func serializeEncapsulationAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EncapsulationAlgorithmSpec) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -45,9 +44,6 @@ func serializeDryRunModifierList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeEncryptionAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EncryptionAlgorithmSpec) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -56,9 +52,6 @@ func serializeEncryptionAlgorithmSpecList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeGrantList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GrantListEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -69,9 +62,6 @@ func serializeGrantList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeGrantOperationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GrantOperation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -80,9 +70,6 @@ func serializeGrantOperationList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeGrantTokenList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -91,9 +78,6 @@ func serializeGrantTokenList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeKeyAgreementAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.KeyAgreementAlgorithmSpec) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -102,9 +86,6 @@ func serializeKeyAgreementAlgorithmSpecList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.KeyListEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -115,9 +96,6 @@ func serializeKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeMacAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MacAlgorithmSpec) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -126,9 +104,6 @@ func serializeMacAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeMultiRegionKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MultiRegionKey) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -139,9 +114,6 @@ func serializeMultiRegionKeyList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializePolicyNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -150,9 +122,6 @@ func serializePolicyNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeRotationsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RotationsListEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -163,9 +132,6 @@ func serializeRotationsList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeSigningAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SigningAlgorithmSpec) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -174,9 +140,6 @@ func serializeSigningAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -185,9 +148,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -258,6 +218,27 @@ func deserializeDryRunModifierList(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		*v = append(*v, types.DryRunModifierType(vv))
+		return nil
+	})
+}
+
+func deserializeEncapsulationAlgorithmSpecList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EncapsulationAlgorithmSpec) error {
+	*v = make([]types.EncapsulationAlgorithmSpec, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EncapsulationAlgorithmSpec
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.EncapsulationAlgorithmSpec(vv))
 		return nil
 	})
 }
@@ -541,9 +522,6 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func serializeEncryptionContextType(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

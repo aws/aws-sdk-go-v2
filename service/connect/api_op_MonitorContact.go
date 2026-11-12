@@ -69,7 +69,9 @@ func (v *MonitorContactInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MonitorContactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedMonitorCapabilities(s, schemas.MonitorContactRequest_AllowedMonitorCapabilities, v.AllowedMonitorCapabilities)
+	if v.AllowedMonitorCapabilities != nil {
+		serializeAllowedMonitorCapabilities(s, schemas.MonitorContactRequest_AllowedMonitorCapabilities, v.AllowedMonitorCapabilities)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.MonitorContactRequest_ClientToken, *v.ClientToken)
 	}

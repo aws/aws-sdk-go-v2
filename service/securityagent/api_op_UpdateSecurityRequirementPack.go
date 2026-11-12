@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type UpdateSecurityRequirementPackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityRequirementPackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityRequirementPackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityRequirementPackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSecurityRequirementPackInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSecurityRequirementPackInput_name, *v.Name)
+	}
+	if v.PackId != nil {
+		s.WriteString(schemas.UpdateSecurityRequirementPackInput_packId, *v.PackId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSecurityRequirementPackInput_status, string(v.Status))
+	}
+}
+
 type UpdateSecurityRequirementPackOutput struct {
 
 	// The unique identifier of the security requirement pack.
@@ -66,13 +89,54 @@ type UpdateSecurityRequirementPackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityRequirementPackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityRequirementPackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityRequirementPackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSecurityRequirementPackOutput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSecurityRequirementPackOutput_name, *v.Name)
+	}
+	if v.PackId != nil {
+		s.WriteString(schemas.UpdateSecurityRequirementPackOutput_packId, *v.PackId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSecurityRequirementPackOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateSecurityRequirementPackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecurityRequirementPackOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSecurityRequirementPackOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSecurityRequirementPackOutput_description, v.Description)
+		case schemas.UpdateSecurityRequirementPackOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateSecurityRequirementPackOutput_name, v.Name)
+		case schemas.UpdateSecurityRequirementPackOutput_packId:
+			v.PackId = new(string)
+			return d.ReadString(schemas.UpdateSecurityRequirementPackOutput_packId, v.PackId)
+		case schemas.UpdateSecurityRequirementPackOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSecurityRequirementPackOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SecurityRequirementPackStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecurityRequirementPackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityRequirementPack, schemas.UpdateSecurityRequirementPackInput, schemas.UpdateSecurityRequirementPackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityRequirementPack, schemas.UpdateSecurityRequirementPackInput, schemas.UpdateSecurityRequirementPackOutput), output: &UpdateSecurityRequirementPackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

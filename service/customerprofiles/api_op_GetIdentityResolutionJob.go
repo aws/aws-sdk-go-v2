@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type GetIdentityResolutionJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIdentityResolutionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityResolutionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityResolutionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetIdentityResolutionJobRequest_DomainName, *v.DomainName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetIdentityResolutionJobRequest_JobId, *v.JobId)
+	}
 }
 
 type GetIdentityResolutionJobOutput struct {
@@ -107,13 +124,102 @@ type GetIdentityResolutionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityResolutionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityResolutionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityResolutionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMerging != nil {
+		s.WriteStruct(schemas.GetIdentityResolutionJobResponse_AutoMerging)
+		v.AutoMerging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetIdentityResolutionJobResponse_DomainName, *v.DomainName)
+	}
+	if v.ExportingLocation != nil {
+		s.WriteStruct(schemas.GetIdentityResolutionJobResponse_ExportingLocation)
+		v.ExportingLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobEndTime != nil {
+		s.WriteTime(schemas.GetIdentityResolutionJobResponse_JobEndTime, *v.JobEndTime)
+	}
+	if v.JobExpirationTime != nil {
+		s.WriteTime(schemas.GetIdentityResolutionJobResponse_JobExpirationTime, *v.JobExpirationTime)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetIdentityResolutionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStartTime != nil {
+		s.WriteTime(schemas.GetIdentityResolutionJobResponse_JobStartTime, *v.JobStartTime)
+	}
+	if v.JobStats != nil {
+		s.WriteStruct(schemas.GetIdentityResolutionJobResponse_JobStats)
+		v.JobStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetIdentityResolutionJobResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetIdentityResolutionJobResponse_Message, *v.Message)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetIdentityResolutionJobResponse_Status, string(v.Status))
+	}
+}
+func (v *GetIdentityResolutionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityResolutionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityResolutionJobResponse_AutoMerging:
+			v.AutoMerging = &types.AutoMerging{}
+			return v.AutoMerging.Deserialize(d)
+		case schemas.GetIdentityResolutionJobResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetIdentityResolutionJobResponse_DomainName, v.DomainName)
+		case schemas.GetIdentityResolutionJobResponse_ExportingLocation:
+			v.ExportingLocation = &types.ExportingLocation{}
+			return v.ExportingLocation.Deserialize(d)
+		case schemas.GetIdentityResolutionJobResponse_JobEndTime:
+			v.JobEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetIdentityResolutionJobResponse_JobEndTime, v.JobEndTime)
+		case schemas.GetIdentityResolutionJobResponse_JobExpirationTime:
+			v.JobExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetIdentityResolutionJobResponse_JobExpirationTime, v.JobExpirationTime)
+		case schemas.GetIdentityResolutionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetIdentityResolutionJobResponse_JobId, v.JobId)
+		case schemas.GetIdentityResolutionJobResponse_JobStartTime:
+			v.JobStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetIdentityResolutionJobResponse_JobStartTime, v.JobStartTime)
+		case schemas.GetIdentityResolutionJobResponse_JobStats:
+			v.JobStats = &types.JobStats{}
+			return v.JobStats.Deserialize(d)
+		case schemas.GetIdentityResolutionJobResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetIdentityResolutionJobResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetIdentityResolutionJobResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetIdentityResolutionJobResponse_Message, v.Message)
+		case schemas.GetIdentityResolutionJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetIdentityResolutionJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IdentityResolutionJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityResolutionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdentityResolutionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityResolutionJob, schemas.GetIdentityResolutionJobRequest, schemas.GetIdentityResolutionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdentityResolutionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityResolutionJob, schemas.GetIdentityResolutionJobRequest, schemas.GetIdentityResolutionJobResponse), output: &GetIdentityResolutionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

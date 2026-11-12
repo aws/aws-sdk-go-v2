@@ -57,8 +57,8 @@ type DefinitionS3Location struct {
 	// This member is required.
 	ObjectKey *string
 
-	// Optional. The version ID of the workflow definition file in Amazon S3. If not
-	// specified, the latest version is used.
+	// Optional. The version ID of the workflow definition file in Amazon S3. If you
+	// don't specify a version, we use the latest version.
 	VersionId *string
 
 	noSmithyDocumentSerde
@@ -153,6 +153,56 @@ func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Contains the environment variables that tasks in a workflow use during
+// execution.
+type Environment struct {
+
+	// A map of environment variable names to values. Your workflow tasks use these
+	// variables while they run. You can specify up to 50 environment variables. Each
+	// name must be between 1 and 128 characters, start with a letter, and contain only
+	// letters, numbers, and underscores. Each value can be up to 255 characters.
+	//
+	// Names that start with AWS_ or AIRFLOW__ are reserved. You can use the following
+	// Apache Airflow secrets backend settings, which are exceptions:
+	//
+	//   - AIRFLOW__WORKERS__SECRETS_BACKEND – The secrets backend class that workers
+	//   use.
+	//
+	//   - AIRFLOW__WORKERS__SECRETS_BACKEND_KWARGS – The keyword arguments for the
+	//   secrets backend, as a JSON string.
+	//
+	//   - AIRFLOW__WORKERS__SECRETS_BACKEND_KWARG__* – Names with this prefix, for
+	//   additional secrets backend configuration.
+	//
+	// If you set EncryptionConfiguration to use a customer managed AWS KMS key, we
+	// encrypt the environment variables with that key. Otherwise, we store them with
+	// default encryption at rest.
+	Variables map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Environment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Environment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Variables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.Environment_Variables, v.Variables)
+	}
+}
+func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Environment_Variables:
+			return deserializeEnvironmentVariablesMap(d, schemas.Environment_Variables, &v.Variables)
+		}
+		return nil
+	})
+}
+
 // Configuration for workflow logging that specifies where you should store your
 // workflow execution logs. Amazon Managed Workflows for Apache Airflow Serverless
 // provides comprehensive logging capabilities that capture workflow execution
@@ -220,8 +270,12 @@ func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
@@ -314,8 +368,8 @@ type S3Location struct {
 	// This member is required.
 	ObjectKey *string
 
-	// The version ID of the object in Amazon S3. If not specified, the latest version
-	// is used.
+	// Specifies the version ID of the object in Amazon S3. If you don't specify a
+	// version, we use the latest version.
 	VersionId *string
 
 	noSmithyDocumentSerde
@@ -618,7 +672,9 @@ func (v *WorkflowRunDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartedOn != nil {
 		s.WriteTime(schemas.WorkflowRunDetail_StartedOn, *v.StartedOn)
 	}
-	serializeTaskInstanceIds(s, schemas.WorkflowRunDetail_TaskInstances, v.TaskInstances)
+	if v.TaskInstances != nil {
+		serializeTaskInstanceIds(s, schemas.WorkflowRunDetail_TaskInstances, v.TaskInstances)
+	}
 	if v.WorkflowArn != nil {
 		s.WriteString(schemas.WorkflowRunDetail_WorkflowArn, *v.WorkflowArn)
 	}

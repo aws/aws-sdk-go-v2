@@ -123,18 +123,24 @@ func (v *StartCacheReportInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartCacheReportInput_ClientToken, *v.ClientToken)
 	}
-	serializeCacheReportFilterList(s, schemas.StartCacheReportInput_ExclusionFilters, v.ExclusionFilters)
+	if v.ExclusionFilters != nil {
+		serializeCacheReportFilterList(s, schemas.StartCacheReportInput_ExclusionFilters, v.ExclusionFilters)
+	}
 	if v.FileShareARN != nil {
 		s.WriteString(schemas.StartCacheReportInput_FileShareARN, *v.FileShareARN)
 	}
-	serializeCacheReportFilterList(s, schemas.StartCacheReportInput_InclusionFilters, v.InclusionFilters)
+	if v.InclusionFilters != nil {
+		serializeCacheReportFilterList(s, schemas.StartCacheReportInput_InclusionFilters, v.InclusionFilters)
+	}
 	if v.LocationARN != nil {
 		s.WriteString(schemas.StartCacheReportInput_LocationARN, *v.LocationARN)
 	}
 	if v.Role != nil {
 		s.WriteString(schemas.StartCacheReportInput_Role, *v.Role)
 	}
-	serializeTags(s, schemas.StartCacheReportInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartCacheReportInput_Tags, v.Tags)
+	}
 	if v.VPCEndpointDNSName != nil {
 		s.WriteString(schemas.StartCacheReportInput_VPCEndpointDNSName, *v.VPCEndpointDNSName)
 	}

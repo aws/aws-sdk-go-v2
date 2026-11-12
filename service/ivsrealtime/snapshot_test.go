@@ -434,6 +434,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RevokeConnectionToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeConnectionToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeConnectionToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartComposition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartComposition(context.Background(), nil, func(o *Options) {
@@ -894,6 +906,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RevokeConnectionToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeConnectionToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeConnectionToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

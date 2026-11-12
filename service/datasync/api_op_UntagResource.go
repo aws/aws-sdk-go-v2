@@ -49,7 +49,9 @@ func (v *UntagResourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagKeyList(s, schemas.UntagResourceRequest_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeTagKeyList(s, schemas.UntagResourceRequest_Keys, v.Keys)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UntagResourceRequest_ResourceArn, *v.ResourceArn)
 	}
@@ -92,6 +94,9 @@ func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

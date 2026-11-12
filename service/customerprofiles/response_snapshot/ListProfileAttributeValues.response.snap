@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttributeName":"__AttributeName__","DomainName":"__DomainName__","Items":[{"Value":"__Value__"},{"Value":"__Value__"}],"StatusCode":200}

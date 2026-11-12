@@ -11,6 +11,7 @@ const (
 	AuditEventTypeRelatedItemCreated AuditEventType = "RelatedItem.Created"
 	AuditEventTypeRelatedItemDeleted AuditEventType = "RelatedItem.Deleted"
 	AuditEventTypeRelatedItemUpdated AuditEventType = "RelatedItem.Updated"
+	AuditEventTypeCaseMerged         AuditEventType = "Case.Merged"
 )
 
 // Values returns all known values for AuditEventType. Note that this can be
@@ -24,6 +25,7 @@ func (AuditEventType) Values() []AuditEventType {
 		"RelatedItem.Created",
 		"RelatedItem.Deleted",
 		"RelatedItem.Updated",
+		"Case.Merged",
 	}
 }
 
@@ -110,6 +112,29 @@ func (FieldType) Values() []FieldType {
 		"SingleSelect",
 		"Url",
 		"User",
+	}
+}
+
+type MergeStatus string
+
+// Enum values for MergeStatus
+const (
+	// The merge is running. The primary and secondary cases can't be modified until
+	// it finishes.
+	MergeStatusInProgress MergeStatus = "IN_PROGRESS"
+	// The merge finished and this case was the secondary. The case is closed and
+	// permanently read-only, but can be deleted.
+	MergeStatusCompleted MergeStatus = "COMPLETED"
+)
+
+// Values returns all known values for MergeStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MergeStatus) Values() []MergeStatus {
+	return []MergeStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
 	}
 }
 

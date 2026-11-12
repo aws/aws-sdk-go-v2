@@ -216,10 +216,18 @@ func (v *DeleteItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConditionalOperator != "" {
 		s.WriteString(schemas.DeleteItemInput_ConditionalOperator, string(v.ConditionalOperator))
 	}
-	serializeExpectedAttributeMap(s, schemas.DeleteItemInput_Expected, v.Expected)
-	serializeExpressionAttributeNameMap(s, schemas.DeleteItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.DeleteItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
-	serializeKey(s, schemas.DeleteItemInput_Key, v.Key)
+	if v.Expected != nil {
+		serializeExpectedAttributeMap(s, schemas.DeleteItemInput_Expected, v.Expected)
+	}
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.DeleteItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.DeleteItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
+	if v.Key != nil {
+		serializeKey(s, schemas.DeleteItemInput_Key, v.Key)
+	}
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.DeleteItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
@@ -296,7 +304,9 @@ func (v *DeleteItemOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMap(s, schemas.DeleteItemOutput_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeMap(s, schemas.DeleteItemOutput_Attributes, v.Attributes)
+	}
 	if v.ConsumedCapacity != nil {
 		s.WriteStruct(schemas.DeleteItemOutput_ConsumedCapacity)
 		v.ConsumedCapacity.SerializeMembers(s)

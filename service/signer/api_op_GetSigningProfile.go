@@ -152,14 +152,18 @@ func (v *GetSigningProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SigningMaterial.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningParameters(s, schemas.GetSigningProfileResponse_signingParameters, v.SigningParameters)
+	if v.SigningParameters != nil {
+		serializeSigningParameters(s, schemas.GetSigningProfileResponse_signingParameters, v.SigningParameters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetSigningProfileResponse_status, string(v.Status))
 	}
 	if v.StatusReason != nil {
 		s.WriteString(schemas.GetSigningProfileResponse_statusReason, *v.StatusReason)
 	}
-	serializeTagMap(s, schemas.GetSigningProfileResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetSigningProfileResponse_tags, v.Tags)
+	}
 }
 func (v *GetSigningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSigningProfileResponse, func(s *smithy.Schema) error {

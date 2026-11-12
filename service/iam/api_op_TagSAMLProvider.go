@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,21 @@ type TagSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagSAMLProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagSAMLProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagSAMLProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SAMLProviderArn != nil {
+		s.WriteString(schemas.TagSAMLProviderRequest_SAMLProviderArn, *v.SAMLProviderArn)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.TagSAMLProviderRequest_Tags, v.Tags)
+	}
+}
+
 type TagSAMLProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,13 +97,26 @@ type TagSAMLProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagSAMLProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagSAMLProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TagSAMLProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagSAMLProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagSAMLProvider, schemas.TagSAMLProviderRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTagSAMLProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagSAMLProvider, schemas.TagSAMLProviderRequest, nil), output: &TagSAMLProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

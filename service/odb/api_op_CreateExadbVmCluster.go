@@ -109,8 +109,7 @@ type CreateExadbVmClusterInput struct {
 	// listener.
 	ScanListenerPortTcp *int32
 
-	// The port number for TCP connections with SSL to the Single Client Access Name
-	// (SCAN) listener.
+	// Reserved for future use.
 	ScanListenerPortTcpSsl *int32
 
 	// The shape attribute for the Exascale VM cluster.
@@ -182,11 +181,15 @@ func (v *CreateExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShapeAttribute != "" {
 		s.WriteString(schemas.CreateExadbVmClusterInput_shapeAttribute, string(v.ShapeAttribute))
 	}
-	serializeStringList(s, schemas.CreateExadbVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	if v.SshPublicKeys != nil {
+		serializeStringList(s, schemas.CreateExadbVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	}
 	if v.SystemVersion != nil {
 		s.WriteString(schemas.CreateExadbVmClusterInput_systemVersion, *v.SystemVersion)
 	}
-	serializeRequestTagMap(s, schemas.CreateExadbVmClusterInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateExadbVmClusterInput_tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateExadbVmClusterInput_timeZone, *v.TimeZone)
 	}

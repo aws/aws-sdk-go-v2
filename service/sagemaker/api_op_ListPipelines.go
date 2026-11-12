@@ -36,6 +36,11 @@ type ListPipelinesInput struct {
 	// A filter that returns the pipelines that were created before a specified time.
 	CreatedBefore *time.Time
 
+	// Filters the pipelines by who manages them. Specify AWS to return pipelines that
+	// AWS manages, or CUSTOMER to return pipelines that you created. If you don't
+	// specify a value, the response includes both.
+	ManagedBy types.PipelineManagedBy
+
 	// The maximum number of pipelines to return in the response.
 	MaxResults *int32
 
@@ -68,6 +73,9 @@ func (v *ListPipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreatedBefore != nil {
 		s.WriteTime(schemas.ListPipelinesRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.ListPipelinesRequest_ManagedBy, string(v.ManagedBy))
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListPipelinesRequest_MaxResults, *v.MaxResults)
@@ -115,7 +123,9 @@ func (v *ListPipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPipelinesResponse_NextToken, *v.NextToken)
 	}
-	serializePipelineSummaryList(s, schemas.ListPipelinesResponse_PipelineSummaries, v.PipelineSummaries)
+	if v.PipelineSummaries != nil {
+		serializePipelineSummaryList(s, schemas.ListPipelinesResponse_PipelineSummaries, v.PipelineSummaries)
+	}
 }
 func (v *ListPipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPipelinesResponse, func(s *smithy.Schema) error {

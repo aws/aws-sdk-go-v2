@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -52,6 +54,27 @@ type GetReadSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReadSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReadSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReadSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.File != "" {
+		s.WriteString(schemas.GetReadSetRequest_file, string(v.File))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetReadSetRequest_id, *v.Id)
+	}
+	if v.PartNumber != nil {
+		s.WriteInt32(schemas.GetReadSetRequest_partNumber, *v.PartNumber)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.GetReadSetRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+}
+
 type GetReadSetOutput struct {
 
 	// The read set file payload.
@@ -63,13 +86,34 @@ type GetReadSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReadSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReadSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReadSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetReadSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReadSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+func (v *GetReadSetOutput) GetPayloadStream() io.Reader { return v.Payload }
+
+var _ smithy.StreamingInput = (*GetReadSetOutput)(nil)
+
+func (v *GetReadSetOutput) SetPayloadStream(r io.ReadCloser) { v.Payload = r }
+
+var _ smithy.StreamingOutput = (*GetReadSetOutput)(nil)
+
 func (c *Client) addOperationGetReadSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReadSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadSet, schemas.GetReadSetRequest, schemas.GetReadSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReadSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadSet, schemas.GetReadSetRequest, schemas.GetReadSetResponse), output: &GetReadSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

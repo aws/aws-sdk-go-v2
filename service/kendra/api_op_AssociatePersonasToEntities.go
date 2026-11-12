@@ -68,7 +68,9 @@ func (v *AssociatePersonasToEntitiesInput) SerializeMembers(s smithy.ShapeSerial
 	if v.IndexId != nil {
 		s.WriteString(schemas.AssociatePersonasToEntitiesRequest_IndexId, *v.IndexId)
 	}
-	serializeEntityPersonaConfigurationList(s, schemas.AssociatePersonasToEntitiesRequest_Personas, v.Personas)
+	if v.Personas != nil {
+		serializeEntityPersonaConfigurationList(s, schemas.AssociatePersonasToEntitiesRequest_Personas, v.Personas)
+	}
 }
 
 type AssociatePersonasToEntitiesOutput struct {
@@ -90,7 +92,9 @@ func (v *AssociatePersonasToEntitiesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *AssociatePersonasToEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedEntityList(s, schemas.AssociatePersonasToEntitiesResponse_FailedEntityList, v.FailedEntityList)
+	if v.FailedEntityList != nil {
+		serializeFailedEntityList(s, schemas.AssociatePersonasToEntitiesResponse_FailedEntityList, v.FailedEntityList)
+	}
 }
 func (v *AssociatePersonasToEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociatePersonasToEntitiesResponse, func(s *smithy.Schema) error {

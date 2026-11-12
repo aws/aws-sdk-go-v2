@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -155,7 +155,7 @@ func TestUpdateResponseSnapshot_AcceptSharedDirectory(t *testing.T) {
 			LastUpdatedDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptSharedDirectory, schemas.AcceptSharedDirectoryResult, schemas.AcceptSharedDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -177,7 +177,7 @@ func TestUpdateResponseSnapshot_AcceptSharedDirectory(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AddIpRoutes(t *testing.T) {
 	want := &AddIpRoutesOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddIpRoutes, schemas.AddIpRoutesResult, schemas.AddIpRoutesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -199,7 +199,7 @@ func TestUpdateResponseSnapshot_AddIpRoutes(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AddRegion(t *testing.T) {
 	want := &AddRegionOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddRegion, schemas.AddRegionResult, schemas.AddRegionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -221,7 +221,7 @@ func TestUpdateResponseSnapshot_AddRegion(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AddTagsToResource(t *testing.T) {
 	want := &AddTagsToResourceOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddTagsToResource, schemas.AddTagsToResourceResult, schemas.AddTagsToResourceResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -243,7 +243,7 @@ func TestUpdateResponseSnapshot_AddTagsToResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CancelSchemaExtension(t *testing.T) {
 	want := &CancelSchemaExtensionOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CancelSchemaExtension, schemas.CancelSchemaExtensionResult, schemas.CancelSchemaExtensionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -267,7 +267,7 @@ func TestUpdateResponseSnapshot_ConnectDirectory(t *testing.T) {
 	want := &ConnectDirectoryOutput{
 		DirectoryId: ptr.String("__DirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ConnectDirectory, schemas.ConnectDirectoryResult, schemas.ConnectDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -292,7 +292,7 @@ func TestUpdateResponseSnapshot_CreateAlias(t *testing.T) {
 		DirectoryId: ptr.String("__DirectoryId__"),
 		Alias:       ptr.String("__Alias__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAlias, schemas.CreateAliasResult, schemas.CreateAliasResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -329,7 +329,7 @@ func TestUpdateResponseSnapshot_CreateComputer(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateComputer, schemas.CreateComputerResult, schemas.CreateComputerResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -351,7 +351,7 @@ func TestUpdateResponseSnapshot_CreateComputer(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateConditionalForwarder(t *testing.T) {
 	want := &CreateConditionalForwarderOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateConditionalForwarder, schemas.CreateConditionalForwarderResult, schemas.CreateConditionalForwarderResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -375,7 +375,7 @@ func TestUpdateResponseSnapshot_CreateDirectory(t *testing.T) {
 	want := &CreateDirectoryOutput{
 		DirectoryId: ptr.String("__DirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateDirectory, schemas.CreateDirectoryResult, schemas.CreateDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -399,7 +399,7 @@ func TestUpdateResponseSnapshot_CreateHybridAD(t *testing.T) {
 	want := &CreateHybridADOutput{
 		DirectoryId: ptr.String("__DirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHybridAD, schemas.CreateHybridADResult, schemas.CreateHybridADResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -421,7 +421,7 @@ func TestUpdateResponseSnapshot_CreateHybridAD(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateLogSubscription(t *testing.T) {
 	want := &CreateLogSubscriptionOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLogSubscription, schemas.CreateLogSubscriptionResult, schemas.CreateLogSubscriptionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -445,7 +445,7 @@ func TestUpdateResponseSnapshot_CreateMicrosoftAD(t *testing.T) {
 	want := &CreateMicrosoftADOutput{
 		DirectoryId: ptr.String("__DirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateMicrosoftAD, schemas.CreateMicrosoftADResult, schemas.CreateMicrosoftADResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -469,7 +469,7 @@ func TestUpdateResponseSnapshot_CreateSnapshot(t *testing.T) {
 	want := &CreateSnapshotOutput{
 		SnapshotId: ptr.String("__SnapshotId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.CreateSnapshotResult, schemas.CreateSnapshotResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -493,7 +493,7 @@ func TestUpdateResponseSnapshot_CreateTrust(t *testing.T) {
 	want := &CreateTrustOutput{
 		TrustId: ptr.String("__TrustId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTrust, schemas.CreateTrustResult, schemas.CreateTrustResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -517,7 +517,7 @@ func TestUpdateResponseSnapshot_DeleteADAssessment(t *testing.T) {
 	want := &DeleteADAssessmentOutput{
 		AssessmentId: ptr.String("__AssessmentId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteADAssessment, schemas.DeleteADAssessmentResult, schemas.DeleteADAssessmentResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -539,7 +539,7 @@ func TestUpdateResponseSnapshot_DeleteADAssessment(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteConditionalForwarder(t *testing.T) {
 	want := &DeleteConditionalForwarderOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteConditionalForwarder, schemas.DeleteConditionalForwarderResult, schemas.DeleteConditionalForwarderResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -563,7 +563,7 @@ func TestUpdateResponseSnapshot_DeleteDirectory(t *testing.T) {
 	want := &DeleteDirectoryOutput{
 		DirectoryId: ptr.String("__DirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteDirectory, schemas.DeleteDirectoryResult, schemas.DeleteDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -585,7 +585,7 @@ func TestUpdateResponseSnapshot_DeleteDirectory(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteLogSubscription(t *testing.T) {
 	want := &DeleteLogSubscriptionOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteLogSubscription, schemas.DeleteLogSubscriptionResult, schemas.DeleteLogSubscriptionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -609,7 +609,7 @@ func TestUpdateResponseSnapshot_DeleteSnapshot(t *testing.T) {
 	want := &DeleteSnapshotOutput{
 		SnapshotId: ptr.String("__SnapshotId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteSnapshot, schemas.DeleteSnapshotResult, schemas.DeleteSnapshotResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -633,7 +633,7 @@ func TestUpdateResponseSnapshot_DeleteTrust(t *testing.T) {
 	want := &DeleteTrustOutput{
 		TrustId: ptr.String("__TrustId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTrust, schemas.DeleteTrustResult, schemas.DeleteTrustResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -655,7 +655,7 @@ func TestUpdateResponseSnapshot_DeleteTrust(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeregisterCertificate(t *testing.T) {
 	want := &DeregisterCertificateOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeregisterCertificate, schemas.DeregisterCertificateResult, schemas.DeregisterCertificateResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -677,7 +677,7 @@ func TestUpdateResponseSnapshot_DeregisterCertificate(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeregisterEventTopic(t *testing.T) {
 	want := &DeregisterEventTopicOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeregisterEventTopic, schemas.DeregisterEventTopicResult, schemas.DeregisterEventTopicResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -777,7 +777,7 @@ func TestUpdateResponseSnapshot_DescribeADAssessment(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeADAssessment, schemas.DescribeADAssessmentResult, schemas.DescribeADAssessmentResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -805,7 +805,7 @@ func TestUpdateResponseSnapshot_DescribeCAEnrollmentPolicy(t *testing.T) {
 		LastUpdatedDateTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CaEnrollmentPolicyStatusReason: ptr.String("__CaEnrollmentPolicyStatusReason__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeCAEnrollmentPolicy, schemas.DescribeCAEnrollmentPolicyResult, schemas.DescribeCAEnrollmentPolicyResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -840,7 +840,7 @@ func TestUpdateResponseSnapshot_DescribeCertificate(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeCertificate, schemas.DescribeCertificateResult, schemas.DescribeCertificateResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -876,7 +876,7 @@ func TestUpdateResponseSnapshot_DescribeClientAuthenticationSettings(t *testing.
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeClientAuthenticationSettings, schemas.DescribeClientAuthenticationSettingsResult, schemas.DescribeClientAuthenticationSettingsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -925,7 +925,7 @@ func TestUpdateResponseSnapshot_DescribeConditionalForwarders(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConditionalForwarders, schemas.DescribeConditionalForwardersResult, schemas.DescribeConditionalForwardersResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1233,7 +1233,7 @@ func TestUpdateResponseSnapshot_DescribeDirectories(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDirectories, schemas.DescribeDirectoriesResult, schemas.DescribeDirectoriesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1257,7 +1257,7 @@ func TestUpdateResponseSnapshot_DescribeDirectoryDataAccess(t *testing.T) {
 	want := &DescribeDirectoryDataAccessOutput{
 		DataAccessStatus: types.DataAccessStatus("Disabled"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDirectoryDataAccess, schemas.DescribeDirectoryDataAccessResult, schemas.DescribeDirectoryDataAccessResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1309,7 +1309,7 @@ func TestUpdateResponseSnapshot_DescribeDomainControllers(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDomainControllers, schemas.DescribeDomainControllersResult, schemas.DescribeDomainControllersResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1348,7 +1348,7 @@ func TestUpdateResponseSnapshot_DescribeEventTopics(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEventTopics, schemas.DescribeEventTopicsResult, schemas.DescribeEventTopicsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1490,7 +1490,7 @@ func TestUpdateResponseSnapshot_DescribeHybridADUpdate(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeHybridADUpdate, schemas.DescribeHybridADUpdateResult, schemas.DescribeHybridADUpdateResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1526,7 +1526,7 @@ func TestUpdateResponseSnapshot_DescribeLDAPSSettings(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLDAPSSettings, schemas.DescribeLDAPSSettingsResult, schemas.DescribeLDAPSSettingsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1586,7 +1586,7 @@ func TestUpdateResponseSnapshot_DescribeRegions(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeRegions, schemas.DescribeRegionsResult, schemas.DescribeRegionsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1643,7 +1643,7 @@ func TestUpdateResponseSnapshot_DescribeSettings(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeSettings, schemas.DescribeSettingsResult, schemas.DescribeSettingsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1691,7 +1691,7 @@ func TestUpdateResponseSnapshot_DescribeSharedDirectories(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeSharedDirectories, schemas.DescribeSharedDirectoriesResult, schemas.DescribeSharedDirectoriesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1733,7 +1733,7 @@ func TestUpdateResponseSnapshot_DescribeSnapshots(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeSnapshots, schemas.DescribeSnapshotsResult, schemas.DescribeSnapshotsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1785,7 +1785,7 @@ func TestUpdateResponseSnapshot_DescribeTrusts(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTrusts, schemas.DescribeTrustsResult, schemas.DescribeTrustsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1847,7 +1847,7 @@ func TestUpdateResponseSnapshot_DescribeUpdateDirectory(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeUpdateDirectory, schemas.DescribeUpdateDirectoryResult, schemas.DescribeUpdateDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1869,7 +1869,7 @@ func TestUpdateResponseSnapshot_DescribeUpdateDirectory(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableCAEnrollmentPolicy(t *testing.T) {
 	want := &DisableCAEnrollmentPolicyOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableCAEnrollmentPolicy, schemas.DisableCAEnrollmentPolicyResult, schemas.DisableCAEnrollmentPolicyResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1891,7 +1891,7 @@ func TestUpdateResponseSnapshot_DisableCAEnrollmentPolicy(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableClientAuthentication(t *testing.T) {
 	want := &DisableClientAuthenticationOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableClientAuthentication, schemas.DisableClientAuthenticationResult, schemas.DisableClientAuthenticationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1913,7 +1913,7 @@ func TestUpdateResponseSnapshot_DisableClientAuthentication(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableDirectoryDataAccess(t *testing.T) {
 	want := &DisableDirectoryDataAccessOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableDirectoryDataAccess, schemas.DisableDirectoryDataAccessResult, schemas.DisableDirectoryDataAccessResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1935,7 +1935,7 @@ func TestUpdateResponseSnapshot_DisableDirectoryDataAccess(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableLDAPS(t *testing.T) {
 	want := &DisableLDAPSOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableLDAPS, schemas.DisableLDAPSResult, schemas.DisableLDAPSResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1957,7 +1957,7 @@ func TestUpdateResponseSnapshot_DisableLDAPS(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableRadius(t *testing.T) {
 	want := &DisableRadiusOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableRadius, schemas.DisableRadiusResult, schemas.DisableRadiusResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1979,7 +1979,7 @@ func TestUpdateResponseSnapshot_DisableRadius(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableSso(t *testing.T) {
 	want := &DisableSsoOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableSso, schemas.DisableSsoResult, schemas.DisableSsoResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2001,7 +2001,7 @@ func TestUpdateResponseSnapshot_DisableSso(t *testing.T) {
 
 func TestUpdateResponseSnapshot_EnableCAEnrollmentPolicy(t *testing.T) {
 	want := &EnableCAEnrollmentPolicyOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableCAEnrollmentPolicy, schemas.EnableCAEnrollmentPolicyResult, schemas.EnableCAEnrollmentPolicyResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2023,7 +2023,7 @@ func TestUpdateResponseSnapshot_EnableCAEnrollmentPolicy(t *testing.T) {
 
 func TestUpdateResponseSnapshot_EnableClientAuthentication(t *testing.T) {
 	want := &EnableClientAuthenticationOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableClientAuthentication, schemas.EnableClientAuthenticationResult, schemas.EnableClientAuthenticationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2045,7 +2045,7 @@ func TestUpdateResponseSnapshot_EnableClientAuthentication(t *testing.T) {
 
 func TestUpdateResponseSnapshot_EnableDirectoryDataAccess(t *testing.T) {
 	want := &EnableDirectoryDataAccessOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableDirectoryDataAccess, schemas.EnableDirectoryDataAccessResult, schemas.EnableDirectoryDataAccessResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2067,7 +2067,7 @@ func TestUpdateResponseSnapshot_EnableDirectoryDataAccess(t *testing.T) {
 
 func TestUpdateResponseSnapshot_EnableLDAPS(t *testing.T) {
 	want := &EnableLDAPSOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableLDAPS, schemas.EnableLDAPSResult, schemas.EnableLDAPSResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2089,7 +2089,7 @@ func TestUpdateResponseSnapshot_EnableLDAPS(t *testing.T) {
 
 func TestUpdateResponseSnapshot_EnableRadius(t *testing.T) {
 	want := &EnableRadiusOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableRadius, schemas.EnableRadiusResult, schemas.EnableRadiusResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2111,7 +2111,7 @@ func TestUpdateResponseSnapshot_EnableRadius(t *testing.T) {
 
 func TestUpdateResponseSnapshot_EnableSso(t *testing.T) {
 	want := &EnableSsoOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableSso, schemas.EnableSsoResult, schemas.EnableSsoResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2145,7 +2145,7 @@ func TestUpdateResponseSnapshot_GetDirectoryLimits(t *testing.T) {
 			ConnectedDirectoriesLimitReached: true,
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.GetDirectoryLimits, schemas.GetDirectoryLimitsResult, schemas.GetDirectoryLimitsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2173,7 +2173,7 @@ func TestUpdateResponseSnapshot_GetSnapshotLimits(t *testing.T) {
 			ManualSnapshotsLimitReached: true,
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.GetSnapshotLimits, schemas.GetSnapshotLimitsResult, schemas.GetSnapshotLimitsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2225,7 +2225,7 @@ func TestUpdateResponseSnapshot_ListADAssessments(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ListADAssessments, schemas.ListADAssessmentsResult, schemas.ListADAssessmentsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2265,7 +2265,7 @@ func TestUpdateResponseSnapshot_ListCertificates(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ListCertificates, schemas.ListCertificatesResult, schemas.ListCertificatesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2309,7 +2309,7 @@ func TestUpdateResponseSnapshot_ListIpRoutes(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ListIpRoutes, schemas.ListIpRoutesResult, schemas.ListIpRoutesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2345,7 +2345,7 @@ func TestUpdateResponseSnapshot_ListLogSubscriptions(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ListLogSubscriptions, schemas.ListLogSubscriptionsResult, schemas.ListLogSubscriptionsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2389,7 +2389,7 @@ func TestUpdateResponseSnapshot_ListSchemaExtensions(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ListSchemaExtensions, schemas.ListSchemaExtensionsResult, schemas.ListSchemaExtensionsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2423,7 +2423,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResult, schemas.ListTagsForResourceResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2447,7 +2447,7 @@ func TestUpdateResponseSnapshot_RegisterCertificate(t *testing.T) {
 	want := &RegisterCertificateOutput{
 		CertificateId: ptr.String("__CertificateId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.RegisterCertificateResult, schemas.RegisterCertificateResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2469,7 +2469,7 @@ func TestUpdateResponseSnapshot_RegisterCertificate(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RegisterEventTopic(t *testing.T) {
 	want := &RegisterEventTopicOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterEventTopic, schemas.RegisterEventTopicResult, schemas.RegisterEventTopicResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2493,7 +2493,7 @@ func TestUpdateResponseSnapshot_RejectSharedDirectory(t *testing.T) {
 	want := &RejectSharedDirectoryOutput{
 		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RejectSharedDirectory, schemas.RejectSharedDirectoryResult, schemas.RejectSharedDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2515,7 +2515,7 @@ func TestUpdateResponseSnapshot_RejectSharedDirectory(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RemoveIpRoutes(t *testing.T) {
 	want := &RemoveIpRoutesOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RemoveIpRoutes, schemas.RemoveIpRoutesResult, schemas.RemoveIpRoutesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2537,7 +2537,7 @@ func TestUpdateResponseSnapshot_RemoveIpRoutes(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RemoveRegion(t *testing.T) {
 	want := &RemoveRegionOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RemoveRegion, schemas.RemoveRegionResult, schemas.RemoveRegionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2559,7 +2559,7 @@ func TestUpdateResponseSnapshot_RemoveRegion(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RemoveTagsFromResource(t *testing.T) {
 	want := &RemoveTagsFromResourceOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RemoveTagsFromResource, schemas.RemoveTagsFromResourceResult, schemas.RemoveTagsFromResourceResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2581,7 +2581,7 @@ func TestUpdateResponseSnapshot_RemoveTagsFromResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ResetUserPassword(t *testing.T) {
 	want := &ResetUserPasswordOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ResetUserPassword, schemas.ResetUserPasswordResult, schemas.ResetUserPasswordResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2603,7 +2603,7 @@ func TestUpdateResponseSnapshot_ResetUserPassword(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RestoreFromSnapshot(t *testing.T) {
 	want := &RestoreFromSnapshotOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RestoreFromSnapshot, schemas.RestoreFromSnapshotResult, schemas.RestoreFromSnapshotResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2627,7 +2627,7 @@ func TestUpdateResponseSnapshot_ShareDirectory(t *testing.T) {
 	want := &ShareDirectoryOutput{
 		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ShareDirectory, schemas.ShareDirectoryResult, schemas.ShareDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2651,7 +2651,7 @@ func TestUpdateResponseSnapshot_StartADAssessment(t *testing.T) {
 	want := &StartADAssessmentOutput{
 		AssessmentId: ptr.String("__AssessmentId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.StartADAssessment, schemas.StartADAssessmentResult, schemas.StartADAssessmentResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2675,7 +2675,7 @@ func TestUpdateResponseSnapshot_StartSchemaExtension(t *testing.T) {
 	want := &StartSchemaExtensionOutput{
 		SchemaExtensionId: ptr.String("__SchemaExtensionId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.StartSchemaExtension, schemas.StartSchemaExtensionResult, schemas.StartSchemaExtensionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2699,7 +2699,7 @@ func TestUpdateResponseSnapshot_UnshareDirectory(t *testing.T) {
 	want := &UnshareDirectoryOutput{
 		SharedDirectoryId: ptr.String("__SharedDirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UnshareDirectory, schemas.UnshareDirectoryResult, schemas.UnshareDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2721,7 +2721,7 @@ func TestUpdateResponseSnapshot_UnshareDirectory(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateConditionalForwarder(t *testing.T) {
 	want := &UpdateConditionalForwarderOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateConditionalForwarder, schemas.UpdateConditionalForwarderResult, schemas.UpdateConditionalForwarderResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2743,7 +2743,7 @@ func TestUpdateResponseSnapshot_UpdateConditionalForwarder(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateDirectorySetup(t *testing.T) {
 	want := &UpdateDirectorySetupOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateDirectorySetup, schemas.UpdateDirectorySetupResult, schemas.UpdateDirectorySetupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2768,7 +2768,7 @@ func TestUpdateResponseSnapshot_UpdateHybridAD(t *testing.T) {
 		DirectoryId:  ptr.String("__DirectoryId__"),
 		AssessmentId: ptr.String("__AssessmentId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateHybridAD, schemas.UpdateHybridADResult, schemas.UpdateHybridADResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2790,7 +2790,7 @@ func TestUpdateResponseSnapshot_UpdateHybridAD(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateNumberOfDomainControllers(t *testing.T) {
 	want := &UpdateNumberOfDomainControllersOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateNumberOfDomainControllers, schemas.UpdateNumberOfDomainControllersResult, schemas.UpdateNumberOfDomainControllersResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2812,7 +2812,7 @@ func TestUpdateResponseSnapshot_UpdateNumberOfDomainControllers(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateRadius(t *testing.T) {
 	want := &UpdateRadiusOutput{}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRadius, schemas.UpdateRadiusResult, schemas.UpdateRadiusResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2836,7 +2836,7 @@ func TestUpdateResponseSnapshot_UpdateSettings(t *testing.T) {
 	want := &UpdateSettingsOutput{
 		DirectoryId: ptr.String("__DirectoryId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UpdateSettingsResult, schemas.UpdateSettingsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2861,7 +2861,7 @@ func TestUpdateResponseSnapshot_UpdateTrust(t *testing.T) {
 		RequestId: ptr.String("__RequestId__"),
 		TrustId:   ptr.String("__TrustId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTrust, schemas.UpdateTrustResult, schemas.UpdateTrustResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2885,7 +2885,7 @@ func TestUpdateResponseSnapshot_VerifyTrust(t *testing.T) {
 	want := &VerifyTrustOutput{
 		TrustId: ptr.String("__TrustId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.VerifyTrust, schemas.VerifyTrustResult, schemas.VerifyTrustResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2910,7 +2910,7 @@ func TestUpdateResponseSnapshot_Error_ADAssessmentLimitExceededException(t *test
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHybridAD, schemas.ADAssessmentLimitExceededException, schemas.ADAssessmentLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2925,7 +2925,7 @@ func TestUpdateResponseSnapshot_Error_ADAssessmentLimitExceededException(t *test
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ADAssessmentLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2936,7 +2936,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddRegion, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2951,7 +2951,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2962,7 +2962,7 @@ func TestUpdateResponseSnapshot_Error_AuthenticationFailedException(t *testing.T
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateComputer, schemas.AuthenticationFailedException, schemas.AuthenticationFailedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2977,7 +2977,7 @@ func TestUpdateResponseSnapshot_Error_AuthenticationFailedException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AuthenticationFailedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2988,7 +2988,7 @@ func TestUpdateResponseSnapshot_Error_CertificateAlreadyExistsException(t *testi
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.CertificateAlreadyExistsException, schemas.CertificateAlreadyExistsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3003,7 +3003,7 @@ func TestUpdateResponseSnapshot_Error_CertificateAlreadyExistsException(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CertificateAlreadyExistsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3014,7 +3014,7 @@ func TestUpdateResponseSnapshot_Error_CertificateDoesNotExistException(t *testin
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeregisterCertificate, schemas.CertificateDoesNotExistException, schemas.CertificateDoesNotExistException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3029,7 +3029,7 @@ func TestUpdateResponseSnapshot_Error_CertificateDoesNotExistException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CertificateDoesNotExistException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3040,7 +3040,7 @@ func TestUpdateResponseSnapshot_Error_CertificateInUseException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DeregisterCertificate, schemas.CertificateInUseException, schemas.CertificateInUseException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3055,7 +3055,7 @@ func TestUpdateResponseSnapshot_Error_CertificateInUseException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CertificateInUseException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3066,7 +3066,7 @@ func TestUpdateResponseSnapshot_Error_CertificateLimitExceededException(t *testi
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.CertificateLimitExceededException, schemas.CertificateLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3081,7 +3081,7 @@ func TestUpdateResponseSnapshot_Error_CertificateLimitExceededException(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CertificateLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3092,7 +3092,7 @@ func TestUpdateResponseSnapshot_Error_ClientException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptSharedDirectory, schemas.ClientException, schemas.ClientException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3107,7 +3107,7 @@ func TestUpdateResponseSnapshot_Error_ClientException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ClientException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3118,7 +3118,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryAlreadyInRegionException(t *testi
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddRegion, schemas.DirectoryAlreadyInRegionException, schemas.DirectoryAlreadyInRegionException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3133,7 +3133,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryAlreadyInRegionException(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectoryAlreadyInRegionException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3144,7 +3144,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryAlreadySharedException(t *testing
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptSharedDirectory, schemas.DirectoryAlreadySharedException, schemas.DirectoryAlreadySharedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3159,7 +3159,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryAlreadySharedException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectoryAlreadySharedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3170,7 +3170,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryDoesNotExistException(t *testing.
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddRegion, schemas.DirectoryDoesNotExistException, schemas.DirectoryDoesNotExistException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3185,7 +3185,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryDoesNotExistException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectoryDoesNotExistException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3196,7 +3196,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryInDesiredStateException(t *testin
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableDirectoryDataAccess, schemas.DirectoryInDesiredStateException, schemas.DirectoryInDesiredStateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3211,7 +3211,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryInDesiredStateException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectoryInDesiredStateException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3222,7 +3222,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryLimitExceededException(t *testing
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ConnectDirectory, schemas.DirectoryLimitExceededException, schemas.DirectoryLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3237,7 +3237,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryLimitExceededException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectoryLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3248,7 +3248,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryNotSharedException(t *testing.T) 
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UnshareDirectory, schemas.DirectoryNotSharedException, schemas.DirectoryNotSharedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3263,7 +3263,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryNotSharedException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectoryNotSharedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3274,7 +3274,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryUnavailableException(t *testing.T
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddIpRoutes, schemas.DirectoryUnavailableException, schemas.DirectoryUnavailableException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3289,7 +3289,7 @@ func TestUpdateResponseSnapshot_Error_DirectoryUnavailableException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectoryUnavailableException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3300,7 +3300,7 @@ func TestUpdateResponseSnapshot_Error_DisableAlreadyInProgressException(t *testi
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableCAEnrollmentPolicy, schemas.DisableAlreadyInProgressException, schemas.DisableAlreadyInProgressException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3315,7 +3315,7 @@ func TestUpdateResponseSnapshot_Error_DisableAlreadyInProgressException(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DisableAlreadyInProgressException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3326,7 +3326,7 @@ func TestUpdateResponseSnapshot_Error_DomainControllerLimitExceededException(t *
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateNumberOfDomainControllers, schemas.DomainControllerLimitExceededException, schemas.DomainControllerLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3341,7 +3341,7 @@ func TestUpdateResponseSnapshot_Error_DomainControllerLimitExceededException(t *
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DomainControllerLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3352,7 +3352,7 @@ func TestUpdateResponseSnapshot_Error_EnableAlreadyInProgressException(t *testin
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableCAEnrollmentPolicy, schemas.EnableAlreadyInProgressException, schemas.EnableAlreadyInProgressException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3367,7 +3367,7 @@ func TestUpdateResponseSnapshot_Error_EnableAlreadyInProgressException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("EnableAlreadyInProgressException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3378,7 +3378,7 @@ func TestUpdateResponseSnapshot_Error_EntityAlreadyExistsException(t *testing.T)
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddIpRoutes, schemas.EntityAlreadyExistsException, schemas.EntityAlreadyExistsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3393,7 +3393,7 @@ func TestUpdateResponseSnapshot_Error_EntityAlreadyExistsException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("EntityAlreadyExistsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3404,7 +3404,7 @@ func TestUpdateResponseSnapshot_Error_EntityDoesNotExistException(t *testing.T) 
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptSharedDirectory, schemas.EntityDoesNotExistException, schemas.EntityDoesNotExistException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3419,7 +3419,7 @@ func TestUpdateResponseSnapshot_Error_EntityDoesNotExistException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("EntityDoesNotExistException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3430,7 +3430,7 @@ func TestUpdateResponseSnapshot_Error_IncompatibleSettingsException(t *testing.T
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateSettings, schemas.IncompatibleSettingsException, schemas.IncompatibleSettingsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3445,7 +3445,7 @@ func TestUpdateResponseSnapshot_Error_IncompatibleSettingsException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("IncompatibleSettingsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3456,7 +3456,7 @@ func TestUpdateResponseSnapshot_Error_InsufficientPermissionsException(t *testin
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLogSubscription, schemas.InsufficientPermissionsException, schemas.InsufficientPermissionsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3471,7 +3471,7 @@ func TestUpdateResponseSnapshot_Error_InsufficientPermissionsException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InsufficientPermissionsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3482,7 +3482,7 @@ func TestUpdateResponseSnapshot_Error_InvalidCertificateException(t *testing.T) 
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.InvalidCertificateException, schemas.InvalidCertificateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3497,7 +3497,7 @@ func TestUpdateResponseSnapshot_Error_InvalidCertificateException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidCertificateException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3508,7 +3508,7 @@ func TestUpdateResponseSnapshot_Error_InvalidClientAuthStatusException(t *testin
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableClientAuthentication, schemas.InvalidClientAuthStatusException, schemas.InvalidClientAuthStatusException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3523,7 +3523,7 @@ func TestUpdateResponseSnapshot_Error_InvalidClientAuthStatusException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidClientAuthStatusException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3534,7 +3534,7 @@ func TestUpdateResponseSnapshot_Error_InvalidLDAPSStatusException(t *testing.T) 
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DisableLDAPS, schemas.InvalidLDAPSStatusException, schemas.InvalidLDAPSStatusException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3549,7 +3549,7 @@ func TestUpdateResponseSnapshot_Error_InvalidLDAPSStatusException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidLDAPSStatusException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3560,7 +3560,7 @@ func TestUpdateResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDirectories, schemas.InvalidNextTokenException, schemas.InvalidNextTokenException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3575,7 +3575,7 @@ func TestUpdateResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidNextTokenException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3586,7 +3586,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptSharedDirectory, schemas.InvalidParameterException, schemas.InvalidParameterException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3601,7 +3601,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3612,7 +3612,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPasswordException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ResetUserPassword, schemas.InvalidPasswordException, schemas.InvalidPasswordException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3627,7 +3627,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPasswordException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidPasswordException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3638,7 +3638,7 @@ func TestUpdateResponseSnapshot_Error_InvalidTargetException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ShareDirectory, schemas.InvalidTargetException, schemas.InvalidTargetException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3653,7 +3653,7 @@ func TestUpdateResponseSnapshot_Error_InvalidTargetException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidTargetException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3664,7 +3664,7 @@ func TestUpdateResponseSnapshot_Error_IpRouteLimitExceededException(t *testing.T
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddIpRoutes, schemas.IpRouteLimitExceededException, schemas.IpRouteLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3679,7 +3679,7 @@ func TestUpdateResponseSnapshot_Error_IpRouteLimitExceededException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("IpRouteLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3690,7 +3690,7 @@ func TestUpdateResponseSnapshot_Error_NoAvailableCertificateException(t *testing
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.EnableClientAuthentication, schemas.NoAvailableCertificateException, schemas.NoAvailableCertificateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3705,7 +3705,7 @@ func TestUpdateResponseSnapshot_Error_NoAvailableCertificateException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NoAvailableCertificateException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3716,7 +3716,7 @@ func TestUpdateResponseSnapshot_Error_OrganizationsException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ShareDirectory, schemas.OrganizationsException, schemas.OrganizationsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3731,7 +3731,7 @@ func TestUpdateResponseSnapshot_Error_OrganizationsException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OrganizationsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3742,7 +3742,7 @@ func TestUpdateResponseSnapshot_Error_RegionLimitExceededException(t *testing.T)
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddRegion, schemas.RegionLimitExceededException, schemas.RegionLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3757,7 +3757,7 @@ func TestUpdateResponseSnapshot_Error_RegionLimitExceededException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("RegionLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3768,7 +3768,7 @@ func TestUpdateResponseSnapshot_Error_ServiceException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptSharedDirectory, schemas.ServiceException, schemas.ServiceException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3783,7 +3783,7 @@ func TestUpdateResponseSnapshot_Error_ServiceException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3794,7 +3794,7 @@ func TestUpdateResponseSnapshot_Error_ShareLimitExceededException(t *testing.T) 
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ShareDirectory, schemas.ShareLimitExceededException, schemas.ShareLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3809,7 +3809,7 @@ func TestUpdateResponseSnapshot_Error_ShareLimitExceededException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ShareLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3820,7 +3820,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotLimitExceededException(t *testing.
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.SnapshotLimitExceededException, schemas.SnapshotLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3835,7 +3835,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotLimitExceededException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SnapshotLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3846,7 +3846,7 @@ func TestUpdateResponseSnapshot_Error_TagLimitExceededException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddTagsToResource, schemas.TagLimitExceededException, schemas.TagLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3861,7 +3861,7 @@ func TestUpdateResponseSnapshot_Error_TagLimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TagLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3872,7 +3872,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedOperationException(t *testing.T
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.AddRegion, schemas.UnsupportedOperationException, schemas.UnsupportedOperationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3887,7 +3887,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedOperationException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedOperationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3898,7 +3898,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedSettingsException(t *testing.T)
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UnsupportedSettingsException, schemas.UnsupportedSettingsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3913,7 +3913,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedSettingsException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedSettingsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3924,7 +3924,7 @@ func TestUpdateResponseSnapshot_Error_UserDoesNotExistException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
-	proto := awsjson.New11(schemas.DirectoryService_20150416)
+	proto := rpcv2.NewCBOR(schemas.DirectoryService_20150416)
 	opSchema := smithy.NewOperationSchema(schemas.ResetUserPassword, schemas.UserDoesNotExistException, schemas.UserDoesNotExistException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3939,7 +3939,7 @@ func TestUpdateResponseSnapshot_Error_UserDoesNotExistException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UserDoesNotExistException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

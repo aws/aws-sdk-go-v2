@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type PutApplicationSessionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationSessionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApplicationSessionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationSessionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.PutApplicationSessionConfigurationRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.UserBackgroundSessionApplicationStatus != "" {
+		s.WriteString(schemas.PutApplicationSessionConfigurationRequest_UserBackgroundSessionApplicationStatus, string(v.UserBackgroundSessionApplicationStatus))
+	}
+}
+
 type PutApplicationSessionConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type PutApplicationSessionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationSessionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApplicationSessionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationSessionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutApplicationSessionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutApplicationSessionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutApplicationSessionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutApplicationSessionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationSessionConfiguration, schemas.PutApplicationSessionConfigurationRequest, schemas.PutApplicationSessionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutApplicationSessionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationSessionConfiguration, schemas.PutApplicationSessionConfigurationRequest, schemas.PutApplicationSessionConfigurationResponse), output: &PutApplicationSessionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

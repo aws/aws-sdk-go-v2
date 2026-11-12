@@ -4,7 +4,9 @@ package polly
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetLexiconInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLexiconInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLexiconInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLexiconInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetLexiconInput_Name, *v.Name)
+	}
+}
+
 type GetLexiconOutput struct {
 
 	// Lexicon object that provides name and the string content of the lexicon.
@@ -53,13 +67,42 @@ type GetLexiconOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLexiconOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLexiconOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLexiconOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lexicon != nil {
+		s.WriteStruct(schemas.GetLexiconOutput_Lexicon)
+		v.Lexicon.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LexiconAttributes != nil {
+		s.WriteStruct(schemas.GetLexiconOutput_LexiconAttributes)
+		v.LexiconAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLexiconOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLexiconOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLexiconOutput_Lexicon:
+			v.Lexicon = &types.Lexicon{}
+			return v.Lexicon.Deserialize(d)
+		case schemas.GetLexiconOutput_LexiconAttributes:
+			v.LexiconAttributes = &types.LexiconAttributes{}
+			return v.LexiconAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLexicon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLexicon, schemas.GetLexiconInput, schemas.GetLexiconOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLexicon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLexicon, schemas.GetLexiconInput, schemas.GetLexiconOutput), output: &GetLexiconOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

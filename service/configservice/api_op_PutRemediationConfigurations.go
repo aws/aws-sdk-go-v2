@@ -82,7 +82,9 @@ func (v *PutRemediationConfigurationsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *PutRemediationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemediationConfigurations(s, schemas.PutRemediationConfigurationsRequest_RemediationConfigurations, v.RemediationConfigurations)
+	if v.RemediationConfigurations != nil {
+		serializeRemediationConfigurations(s, schemas.PutRemediationConfigurationsRequest_RemediationConfigurations, v.RemediationConfigurations)
+	}
 }
 
 type PutRemediationConfigurationsOutput struct {
@@ -103,7 +105,9 @@ func (v *PutRemediationConfigurationsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *PutRemediationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRemediationBatches(s, schemas.PutRemediationConfigurationsResponse_FailedBatches, v.FailedBatches)
+	if v.FailedBatches != nil {
+		serializeFailedRemediationBatches(s, schemas.PutRemediationConfigurationsResponse_FailedBatches, v.FailedBatches)
+	}
 }
 func (v *PutRemediationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutRemediationConfigurationsResponse, func(s *smithy.Schema) error {

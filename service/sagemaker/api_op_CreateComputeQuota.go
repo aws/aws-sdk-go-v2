@@ -97,7 +97,9 @@ func (v *CreateComputeQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateComputeQuotaRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateComputeQuotaRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateComputeQuotaRequest_Tags, v.Tags)
+	}
 }
 
 type CreateComputeQuotaOutput struct {

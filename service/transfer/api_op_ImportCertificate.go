@@ -137,7 +137,9 @@ func (v *ImportCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrivateKey != nil {
 		s.WriteString(schemas.ImportCertificateRequest_PrivateKey, *v.PrivateKey)
 	}
-	serializeTags(s, schemas.ImportCertificateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ImportCertificateRequest_Tags, v.Tags)
+	}
 	if v.Usage != "" {
 		s.WriteString(schemas.ImportCertificateRequest_Usage, string(v.Usage))
 	}

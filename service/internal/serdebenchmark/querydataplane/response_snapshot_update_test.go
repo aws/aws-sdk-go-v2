@@ -14,8 +14,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
+	smithytraits "github.com/aws/smithy-go/traits"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsquery"
+	"github.com/aws/smithy-go/transport/http/protocol/restxml"
 	"io"
 	"io/fs"
 	"net/http"
@@ -141,6 +142,24 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+
+func serdeRespQueryOpSchema(op, in, out *smithy.Schema) *smithy.OperationSchema {
+	withHTTP := smithy.NewSchema(op.ID(), smithy.ShapeTypeOperation, 0,
+		&smithytraits.HTTP{Method: "POST", URI: "/", Code: 200})
+	return smithy.NewOperationSchema(withHTTP, in, out)
+}
+
+// awsQuery wraps the output in <Op>Response><Op>Result>, unlike restXml's bare output element
+func serdeRespQueryResultEnvelope(body []byte, op string) []byte {
+	inner := ""
+	s := strings.TrimSpace(string(body))
+	if start := strings.Index(s, ">"); start >= 0 {
+		if end := strings.LastIndex(s, "<"); end > start {
+			inner = s[start+1 : end]
+		}
+	}
+	return []byte("<" + op + "Response><" + op + "Result>" + inner + "</" + op + "Result></" + op + "Response>")
+}
 func TestUpdateResponseSnapshot_GetItem(t *testing.T) {
 	want := &GetItemOutput{
 		Item: map[string]types.AttributeValue{
@@ -155,8 +174,8 @@ func TestUpdateResponseSnapshot_GetItem(t *testing.T) {
 			WriteCapacityUnits: ptr.Float64(1.0),
 		},
 	}
-	proto := awsquery.New(schemas.AwsQueryDataPlane)
-	opSchema := smithy.NewOperationSchema(schemas.GetItem, schemas.GetItemOutput, schemas.GetItemOutput)
+	proto := restxml.New(schemas.AwsQueryDataPlane)
+	opSchema := serdeRespQueryOpSchema(schemas.GetItem, schemas.GetItemOutput, schemas.GetItemOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -170,6 +189,7 @@ func TestUpdateResponseSnapshot_GetItem(t *testing.T) {
 		}
 		body = b
 	}
+	body = serdeRespQueryResultEnvelope(body, "GetItem")
 	if err := serdeRespWriteSnapshot("GetItem.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -237,8 +257,8 @@ func TestUpdateResponseSnapshot_GetMetricData(t *testing.T) {
 			},
 		},
 	}
-	proto := awsquery.New(schemas.AwsQueryDataPlane)
-	opSchema := smithy.NewOperationSchema(schemas.GetMetricData, schemas.GetMetricDataOutput, schemas.GetMetricDataOutput)
+	proto := restxml.New(schemas.AwsQueryDataPlane)
+	opSchema := serdeRespQueryOpSchema(schemas.GetMetricData, schemas.GetMetricDataOutput, schemas.GetMetricDataOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -252,6 +272,7 @@ func TestUpdateResponseSnapshot_GetMetricData(t *testing.T) {
 		}
 		body = b
 	}
+	body = serdeRespQueryResultEnvelope(body, "GetMetricData")
 	if err := serdeRespWriteSnapshot("GetMetricData.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -261,8 +282,8 @@ func TestUpdateResponseSnapshot_Healthcheck(t *testing.T) {
 	want := &HealthcheckOutput{
 		Ok: ptr.String("__Ok__"),
 	}
-	proto := awsquery.New(schemas.AwsQueryDataPlane)
-	opSchema := smithy.NewOperationSchema(schemas.Healthcheck, schemas.HealthcheckOutput, schemas.HealthcheckOutput)
+	proto := restxml.New(schemas.AwsQueryDataPlane)
+	opSchema := serdeRespQueryOpSchema(schemas.Healthcheck, schemas.HealthcheckOutput, schemas.HealthcheckOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -276,6 +297,7 @@ func TestUpdateResponseSnapshot_Healthcheck(t *testing.T) {
 		}
 		body = b
 	}
+	body = serdeRespQueryResultEnvelope(body, "Healthcheck")
 	if err := serdeRespWriteSnapshot("Healthcheck.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -306,8 +328,8 @@ func TestUpdateResponseSnapshot_PutItem(t *testing.T) {
 			},
 		},
 	}
-	proto := awsquery.New(schemas.AwsQueryDataPlane)
-	opSchema := smithy.NewOperationSchema(schemas.PutItem, schemas.PutItemOutput, schemas.PutItemOutput)
+	proto := restxml.New(schemas.AwsQueryDataPlane)
+	opSchema := serdeRespQueryOpSchema(schemas.PutItem, schemas.PutItemOutput, schemas.PutItemOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -321,6 +343,7 @@ func TestUpdateResponseSnapshot_PutItem(t *testing.T) {
 		}
 		body = b
 	}
+	body = serdeRespQueryResultEnvelope(body, "PutItem")
 	if err := serdeRespWriteSnapshot("PutItem.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -328,8 +351,8 @@ func TestUpdateResponseSnapshot_PutItem(t *testing.T) {
 
 func TestUpdateResponseSnapshot_PutMetricData(t *testing.T) {
 	want := &PutMetricDataOutput{}
-	proto := awsquery.New(schemas.AwsQueryDataPlane)
-	opSchema := smithy.NewOperationSchema(schemas.PutMetricData, nil, nil)
+	proto := restxml.New(schemas.AwsQueryDataPlane)
+	opSchema := serdeRespQueryOpSchema(schemas.PutMetricData, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -343,6 +366,7 @@ func TestUpdateResponseSnapshot_PutMetricData(t *testing.T) {
 		}
 		body = b
 	}
+	body = serdeRespQueryResultEnvelope(body, "PutMetricData")
 	if err := serdeRespWriteSnapshot("PutMetricData.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

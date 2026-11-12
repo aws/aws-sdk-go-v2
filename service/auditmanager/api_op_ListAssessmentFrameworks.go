@@ -85,7 +85,9 @@ func (v *ListAssessmentFrameworksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssessmentFrameworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFrameworkMetadataList(s, schemas.ListAssessmentFrameworksResponse_frameworkMetadataList, v.FrameworkMetadataList)
+	if v.FrameworkMetadataList != nil {
+		serializeFrameworkMetadataList(s, schemas.ListAssessmentFrameworksResponse_frameworkMetadataList, v.FrameworkMetadataList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssessmentFrameworksResponse_nextToken, *v.NextToken)
 	}

@@ -78,7 +78,9 @@ func (v *GetAutoSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAutoSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoSnapshotDetailsList(s, schemas.GetAutoSnapshotsResult_autoSnapshots, v.AutoSnapshots)
+	if v.AutoSnapshots != nil {
+		serializeAutoSnapshotDetailsList(s, schemas.GetAutoSnapshotsResult_autoSnapshots, v.AutoSnapshots)
+	}
 	if v.ResourceName != nil {
 		s.WriteString(schemas.GetAutoSnapshotsResult_resourceName, *v.ResourceName)
 	}

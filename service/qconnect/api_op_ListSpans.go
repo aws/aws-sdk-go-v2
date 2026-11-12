@@ -97,7 +97,9 @@ func (v *ListSpansOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSpansResponse_nextToken, *v.NextToken)
 	}
-	serializeSpanList(s, schemas.ListSpansResponse_spans, v.Spans)
+	if v.Spans != nil {
+		serializeSpanList(s, schemas.ListSpansResponse_spans, v.Spans)
+	}
 }
 func (v *ListSpansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSpansResponse, func(s *smithy.Schema) error {

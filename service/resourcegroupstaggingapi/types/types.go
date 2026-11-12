@@ -39,9 +39,15 @@ func (v *ComplianceDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComplianceStatus != nil {
 		s.WriteBool(schemas.ComplianceDetails_ComplianceStatus, *v.ComplianceStatus)
 	}
-	serializeTagKeyList(s, schemas.ComplianceDetails_KeysWithNoncompliantValues, v.KeysWithNoncompliantValues)
-	serializeTagKeyList(s, schemas.ComplianceDetails_MissingTagKeys, v.MissingTagKeys)
-	serializeTagKeyList(s, schemas.ComplianceDetails_NoncompliantKeys, v.NoncompliantKeys)
+	if v.KeysWithNoncompliantValues != nil {
+		serializeTagKeyList(s, schemas.ComplianceDetails_KeysWithNoncompliantValues, v.KeysWithNoncompliantValues)
+	}
+	if v.MissingTagKeys != nil {
+		serializeTagKeyList(s, schemas.ComplianceDetails_MissingTagKeys, v.MissingTagKeys)
+	}
+	if v.NoncompliantKeys != nil {
+		serializeTagKeyList(s, schemas.ComplianceDetails_NoncompliantKeys, v.NoncompliantKeys)
+	}
 }
 func (v *ComplianceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComplianceDetails, func(s *smithy.Schema) error {
@@ -162,8 +168,12 @@ func (v *RequiredTag) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequiredTag) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudFormationResourceTypes(s, schemas.RequiredTag_CloudFormationResourceTypes, v.CloudFormationResourceTypes)
-	serializeReportingTagKeys(s, schemas.RequiredTag_ReportingTagKeys, v.ReportingTagKeys)
+	if v.CloudFormationResourceTypes != nil {
+		serializeCloudFormationResourceTypes(s, schemas.RequiredTag_CloudFormationResourceTypes, v.CloudFormationResourceTypes)
+	}
+	if v.ReportingTagKeys != nil {
+		serializeReportingTagKeys(s, schemas.RequiredTag_ReportingTagKeys, v.ReportingTagKeys)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.RequiredTag_ResourceType, *v.ResourceType)
 	}
@@ -215,7 +225,9 @@ func (v *ResourceTagMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceARN != nil {
 		s.WriteString(schemas.ResourceTagMapping_ResourceARN, *v.ResourceARN)
 	}
-	serializeTagList(s, schemas.ResourceTagMapping_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceTagMapping_Tags, v.Tags)
+	}
 }
 func (v *ResourceTagMapping) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceTagMapping, func(s *smithy.Schema) error {
@@ -391,7 +403,9 @@ func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.TagFilter_Key, *v.Key)
 	}
-	serializeTagValueList(s, schemas.TagFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeTagValueList(s, schemas.TagFilter_Values, v.Values)
+	}
 }
 func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {

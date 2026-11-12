@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/StartCommandExecution
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.StartCommandExecution
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"command":"__Command__","sandboxId":"__SandboxId__","type":"SHELL"}
+¿gcommandk__Command__isandboxIdm__SandboxId__dtypeeSHELLÿ

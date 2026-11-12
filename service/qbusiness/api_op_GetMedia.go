@@ -4,6 +4,8 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type GetMediaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetMediaRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ConversationId != nil {
+		s.WriteString(schemas.GetMediaRequest_conversationId, *v.ConversationId)
+	}
+	if v.MediaId != nil {
+		s.WriteString(schemas.GetMediaRequest_mediaId, *v.MediaId)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.GetMediaRequest_messageId, *v.MessageId)
+	}
+}
+
 type GetMediaOutput struct {
 
 	// The base64-encoded bytes of the media object.
@@ -71,13 +94,37 @@ type GetMediaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaBytes != nil {
+		s.WriteBlob(schemas.GetMediaResponse_mediaBytes, v.MediaBytes)
+	}
+	if v.MediaMimeType != nil {
+		s.WriteString(schemas.GetMediaResponse_mediaMimeType, *v.MediaMimeType)
+	}
+}
+func (v *GetMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMediaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMediaResponse_mediaBytes:
+			return d.ReadBlob(schemas.GetMediaResponse_mediaBytes, &v.MediaBytes)
+		case schemas.GetMediaResponse_mediaMimeType:
+			v.MediaMimeType = new(string)
+			return d.ReadString(schemas.GetMediaResponse_mediaMimeType, v.MediaMimeType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMedia, schemas.GetMediaRequest, schemas.GetMediaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMedia, schemas.GetMediaRequest, schemas.GetMediaResponse), output: &GetMediaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyLoadBalancerAttributesResponse><ModifyLoadBalancerAttributesResult><Attributes><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Attributes></ModifyLoadBalancerAttributesResult></ModifyLoadBalancerAttributesResponse>

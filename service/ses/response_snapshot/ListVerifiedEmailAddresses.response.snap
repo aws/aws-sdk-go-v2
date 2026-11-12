@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListVerifiedEmailAddressesResponse><ListVerifiedEmailAddressesResult><VerifiedEmailAddresses><member>__Member__</member><member>__Member__</member></VerifiedEmailAddresses></ListVerifiedEmailAddressesResult></ListVerifiedEmailAddressesResponse>

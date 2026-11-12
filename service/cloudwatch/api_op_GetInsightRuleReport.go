@@ -136,7 +136,9 @@ func (v *GetInsightRuleReportInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxContributorCount != nil {
 		s.WriteInt32(schemas.GetInsightRuleReportInput_MaxContributorCount, *v.MaxContributorCount)
 	}
-	serializeInsightRuleMetricList(s, schemas.GetInsightRuleReportInput_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeInsightRuleMetricList(s, schemas.GetInsightRuleReportInput_Metrics, v.Metrics)
+	}
 	if v.OrderBy != nil {
 		s.WriteString(schemas.GetInsightRuleReportInput_OrderBy, *v.OrderBy)
 	}
@@ -200,9 +202,15 @@ func (v *GetInsightRuleReportOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ApproximateUniqueCount != nil {
 		s.WriteInt64(schemas.GetInsightRuleReportOutput_ApproximateUniqueCount, *v.ApproximateUniqueCount)
 	}
-	serializeInsightRuleContributors(s, schemas.GetInsightRuleReportOutput_Contributors, v.Contributors)
-	serializeInsightRuleContributorKeyLabels(s, schemas.GetInsightRuleReportOutput_KeyLabels, v.KeyLabels)
-	serializeInsightRuleMetricDatapoints(s, schemas.GetInsightRuleReportOutput_MetricDatapoints, v.MetricDatapoints)
+	if v.Contributors != nil {
+		serializeInsightRuleContributors(s, schemas.GetInsightRuleReportOutput_Contributors, v.Contributors)
+	}
+	if v.KeyLabels != nil {
+		serializeInsightRuleContributorKeyLabels(s, schemas.GetInsightRuleReportOutput_KeyLabels, v.KeyLabels)
+	}
+	if v.MetricDatapoints != nil {
+		serializeInsightRuleMetricDatapoints(s, schemas.GetInsightRuleReportOutput_MetricDatapoints, v.MetricDatapoints)
+	}
 }
 func (v *GetInsightRuleReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetInsightRuleReportOutput, func(s *smithy.Schema) error {

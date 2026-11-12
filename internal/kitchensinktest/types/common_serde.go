@@ -7,9 +7,6 @@ import (
 )
 
 func serializeDenseIntegerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteInt32(schema.ListMember(), int32(vv))
@@ -18,9 +15,6 @@ func serializeDenseIntegerList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeDenseStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serializeDenseStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeDenseStructList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListValueStruct) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -42,9 +33,6 @@ func serializeDenseStructList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSparseStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []*string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		if vv != nil {
@@ -144,9 +132,6 @@ func deserializeSparseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func serializeDenseIntegerMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]int32) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -156,9 +141,6 @@ func serializeDenseIntegerMap(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeDenseStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -168,9 +150,6 @@ func serializeDenseStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeDenseStructMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]MapValueStruct) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -182,9 +161,6 @@ func serializeDenseStructMap(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeSparseStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]*string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

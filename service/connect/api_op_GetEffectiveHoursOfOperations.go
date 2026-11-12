@@ -102,8 +102,12 @@ func (v *GetEffectiveHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetEffectiveHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEffectiveHoursOfOperationList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList, v.EffectiveHoursOfOperationList)
-	serializeEffectiveOverrideHoursList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList, v.EffectiveOverrideHoursList)
+	if v.EffectiveHoursOfOperationList != nil {
+		serializeEffectiveHoursOfOperationList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList, v.EffectiveHoursOfOperationList)
+	}
+	if v.EffectiveOverrideHoursList != nil {
+		serializeEffectiveOverrideHoursList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList, v.EffectiveOverrideHoursList)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.GetEffectiveHoursOfOperationsResponse_TimeZone, *v.TimeZone)
 	}

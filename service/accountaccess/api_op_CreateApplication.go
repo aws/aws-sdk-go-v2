@@ -50,8 +50,12 @@ func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentitySource(s, schemas.CreateApplicationRequest_identitySource, v.IdentitySource)
-	serializeTagsMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	if v.IdentitySource != nil {
+		serializeIdentitySource(s, schemas.CreateApplicationRequest_identitySource, v.IdentitySource)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	}
 }
 
 type CreateApplicationOutput struct {

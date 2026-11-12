@@ -61,7 +61,9 @@ func (v *DisassociateQueueQuickConnectsInput) SerializeMembers(s smithy.ShapeSer
 	if v.QueueId != nil {
 		s.WriteString(schemas.DisassociateQueueQuickConnectsRequest_QueueId, *v.QueueId)
 	}
-	serializeQuickConnectsList(s, schemas.DisassociateQueueQuickConnectsRequest_QuickConnectIds, v.QuickConnectIds)
+	if v.QuickConnectIds != nil {
+		serializeQuickConnectsList(s, schemas.DisassociateQueueQuickConnectsRequest_QuickConnectIds, v.QuickConnectIds)
+	}
 }
 
 type DisassociateQueueQuickConnectsOutput struct {

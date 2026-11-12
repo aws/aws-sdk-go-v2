@@ -89,8 +89,12 @@ func (v *GetEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationConfigurations(s, schemas.GetEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
-	serializeContextKeySelectors(s, schemas.GetEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	if v.AggregationConfigurations != nil {
+		serializeAggregationConfigurations(s, schemas.GetEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
+	}
+	if v.ContextKeySelectors != nil {
+		serializeContextKeySelectors(s, schemas.GetEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	}
 	if v.EventDataStoreArn != nil {
 		s.WriteString(schemas.GetEventConfigurationResponse_EventDataStoreArn, *v.EventDataStoreArn)
 	}

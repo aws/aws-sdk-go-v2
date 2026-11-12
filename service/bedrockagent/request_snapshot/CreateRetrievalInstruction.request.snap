@@ -1,0 +1,5 @@
+POST /retrievalinstructions/
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","customerEncryptionKeyArn":"__CustomerEncryptionKeyArn__","description":"__Description__","instruction":{"answerFormat":"__AnswerFormat__","answerPolicy":"__AnswerPolicy__","persona":"__Persona__","retrievalGuidance":"__RetrievalGuidance__"},"name":"__Name__","tags":{"key0":"__Value__"}}

@@ -68,7 +68,9 @@ func (v *BatchGetJobEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FleetId != nil {
 		s.WriteString(schemas.BatchGetJobEntityRequest_fleetId, *v.FleetId)
 	}
-	serializeJobEntityIdentifiers(s, schemas.BatchGetJobEntityRequest_identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeJobEntityIdentifiers(s, schemas.BatchGetJobEntityRequest_identifiers, v.Identifiers)
+	}
 	if v.WorkerId != nil {
 		s.WriteString(schemas.BatchGetJobEntityRequest_workerId, *v.WorkerId)
 	}
@@ -99,8 +101,12 @@ func (v *BatchGetJobEntityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetJobEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetJobEntityList(s, schemas.BatchGetJobEntityResponse_entities, v.Entities)
-	serializeBatchGetJobEntityErrors(s, schemas.BatchGetJobEntityResponse_errors, v.Errors)
+	if v.Entities != nil {
+		serializeBatchGetJobEntityList(s, schemas.BatchGetJobEntityResponse_entities, v.Entities)
+	}
+	if v.Errors != nil {
+		serializeBatchGetJobEntityErrors(s, schemas.BatchGetJobEntityResponse_errors, v.Errors)
+	}
 }
 func (v *BatchGetJobEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetJobEntityResponse, func(s *smithy.Schema) error {

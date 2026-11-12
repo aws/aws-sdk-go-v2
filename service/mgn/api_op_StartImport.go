@@ -59,7 +59,9 @@ func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.S3BucketSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.StartImportRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartImportRequest_tags, v.Tags)
+	}
 }
 func (v *StartImportInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartImportRequest, func(s *smithy.Schema) error {

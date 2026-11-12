@@ -4,7 +4,9 @@ package iotdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -127,6 +129,45 @@ type SendDirectMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDirectMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDirectMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDirectMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.SendDirectMessageRequest_clientId, *v.ClientId)
+	}
+	if v.Confirmation != false {
+		s.WriteBool(schemas.SendDirectMessageRequest_confirmation, v.Confirmation)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SendDirectMessageRequest_contentType, *v.ContentType)
+	}
+	if v.CorrelationData != nil {
+		s.WriteString(schemas.SendDirectMessageRequest_correlationData, *v.CorrelationData)
+	}
+	if v.Payload != nil {
+		s.WriteBlob(schemas.SendDirectMessageRequest_payload, v.Payload)
+	}
+	if v.PayloadFormatIndicator != "" {
+		s.WriteString(schemas.SendDirectMessageRequest_payloadFormatIndicator, string(v.PayloadFormatIndicator))
+	}
+	if v.ResponseTopic != nil {
+		s.WriteString(schemas.SendDirectMessageRequest_responseTopic, *v.ResponseTopic)
+	}
+	if v.Timeout != 0 {
+		s.WriteInt32(schemas.SendDirectMessageRequest_timeout, v.Timeout)
+	}
+	if v.Topic != nil {
+		s.WriteString(schemas.SendDirectMessageRequest_topic, *v.Topic)
+	}
+	if v.UserProperties != nil {
+		s.WriteString(schemas.SendDirectMessageRequest_userProperties, *v.UserProperties)
+	}
+}
+
 // The output from the SendDirectMessage operation.
 type SendDirectMessageOutput struct {
 
@@ -143,13 +184,38 @@ type SendDirectMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDirectMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDirectMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDirectMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SendDirectMessageResponse_message, *v.Message)
+	}
+	if v.TraceId != nil {
+		s.WriteString(schemas.SendDirectMessageResponse_traceId, *v.TraceId)
+	}
+}
+func (v *SendDirectMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendDirectMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendDirectMessageResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SendDirectMessageResponse_message, v.Message)
+		case schemas.SendDirectMessageResponse_traceId:
+			v.TraceId = new(string)
+			return d.ReadString(schemas.SendDirectMessageResponse_traceId, v.TraceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendDirectMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendDirectMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDirectMessage, schemas.SendDirectMessageRequest, schemas.SendDirectMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendDirectMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDirectMessage, schemas.SendDirectMessageRequest, schemas.SendDirectMessageResponse), output: &SendDirectMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

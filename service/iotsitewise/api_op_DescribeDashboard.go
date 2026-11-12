@@ -5,6 +5,8 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -34,6 +36,18 @@ type DescribeDashboardInput struct {
 	DashboardId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardRequest_dashboardId, *v.DashboardId)
+	}
 }
 
 type DescribeDashboardOutput struct {
@@ -89,13 +103,74 @@ type DescribeDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.DescribeDashboardResponse_dashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardCreationDate != nil {
+		s.WriteTime(schemas.DescribeDashboardResponse_dashboardCreationDate, *v.DashboardCreationDate)
+	}
+	if v.DashboardDefinition != nil {
+		s.WriteString(schemas.DescribeDashboardResponse_dashboardDefinition, *v.DashboardDefinition)
+	}
+	if v.DashboardDescription != nil {
+		s.WriteString(schemas.DescribeDashboardResponse_dashboardDescription, *v.DashboardDescription)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardResponse_dashboardId, *v.DashboardId)
+	}
+	if v.DashboardLastUpdateDate != nil {
+		s.WriteTime(schemas.DescribeDashboardResponse_dashboardLastUpdateDate, *v.DashboardLastUpdateDate)
+	}
+	if v.DashboardName != nil {
+		s.WriteString(schemas.DescribeDashboardResponse_dashboardName, *v.DashboardName)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.DescribeDashboardResponse_projectId, *v.ProjectId)
+	}
+}
+func (v *DescribeDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardResponse_dashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.DescribeDashboardResponse_dashboardArn, v.DashboardArn)
+		case schemas.DescribeDashboardResponse_dashboardCreationDate:
+			v.DashboardCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDashboardResponse_dashboardCreationDate, v.DashboardCreationDate)
+		case schemas.DescribeDashboardResponse_dashboardDefinition:
+			v.DashboardDefinition = new(string)
+			return d.ReadString(schemas.DescribeDashboardResponse_dashboardDefinition, v.DashboardDefinition)
+		case schemas.DescribeDashboardResponse_dashboardDescription:
+			v.DashboardDescription = new(string)
+			return d.ReadString(schemas.DescribeDashboardResponse_dashboardDescription, v.DashboardDescription)
+		case schemas.DescribeDashboardResponse_dashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.DescribeDashboardResponse_dashboardId, v.DashboardId)
+		case schemas.DescribeDashboardResponse_dashboardLastUpdateDate:
+			v.DashboardLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDashboardResponse_dashboardLastUpdateDate, v.DashboardLastUpdateDate)
+		case schemas.DescribeDashboardResponse_dashboardName:
+			v.DashboardName = new(string)
+			return d.ReadString(schemas.DescribeDashboardResponse_dashboardName, v.DashboardName)
+		case schemas.DescribeDashboardResponse_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.DescribeDashboardResponse_projectId, v.ProjectId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboard, schemas.DescribeDashboardRequest, schemas.DescribeDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboard, schemas.DescribeDashboardRequest, schemas.DescribeDashboardResponse), output: &DescribeDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

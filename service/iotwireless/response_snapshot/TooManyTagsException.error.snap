@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"TooManyTagsException","Message":"__Message__","ResourceName":"__ResourceName__"}

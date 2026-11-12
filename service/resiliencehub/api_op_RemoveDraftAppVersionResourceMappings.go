@@ -74,12 +74,24 @@ func (v *RemoveDraftAppVersionResourceMappingsInput) SerializeMembers(s smithy.S
 	if v.AppArn != nil {
 		s.WriteString(schemas.RemoveDraftAppVersionResourceMappingsRequest_appArn, *v.AppArn)
 	}
-	serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_appRegistryAppNames, v.AppRegistryAppNames)
-	serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_eksSourceNames, v.EksSourceNames)
-	serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_logicalStackNames, v.LogicalStackNames)
-	serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceGroupNames, v.ResourceGroupNames)
-	serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceNames, v.ResourceNames)
-	serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_terraformSourceNames, v.TerraformSourceNames)
+	if v.AppRegistryAppNames != nil {
+		serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_appRegistryAppNames, v.AppRegistryAppNames)
+	}
+	if v.EksSourceNames != nil {
+		serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_eksSourceNames, v.EksSourceNames)
+	}
+	if v.LogicalStackNames != nil {
+		serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_logicalStackNames, v.LogicalStackNames)
+	}
+	if v.ResourceGroupNames != nil {
+		serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceGroupNames, v.ResourceGroupNames)
+	}
+	if v.ResourceNames != nil {
+		serializeEntityNameList(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_resourceNames, v.ResourceNames)
+	}
+	if v.TerraformSourceNames != nil {
+		serializeString255List(s, schemas.RemoveDraftAppVersionResourceMappingsRequest_terraformSourceNames, v.TerraformSourceNames)
+	}
 }
 func (v *RemoveDraftAppVersionResourceMappingsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RemoveDraftAppVersionResourceMappingsRequest, func(s *smithy.Schema) error {

@@ -62,60 +62,105 @@ func (v *AgentInputMessage) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Represents a response message from the agent during chat-based profile
+// Represents the response stream type from the agent during chat-based profile
 // customization.
-type AgentOutputMessage struct {
+//
+// The following types satisfy this interface:
+//
+//	AgentOutputMessageStreamMemberEndOfOutputEvent
+//	AgentOutputMessageStreamMemberErrorEvent
+//	AgentOutputMessageStreamMemberHeartbeatEvent
+//	AgentOutputMessageStreamMemberProgressEvent
+//	AgentOutputMessageStreamMemberTextMessageEvent
+type AgentOutputMessageStream interface {
+	isAgentOutputMessageStream()
+}
 
-	// The text of the agent's response.
-	//
-	// This member is required.
-	Body *string
-
-	// The type of output message, which indicates how to interpret the agent's
-	// response.
-	//
-	// This member is required.
-	Type AgentOutputMessageType
-
-	// A list of selectable options presented when the response type is options .
-	OptionsList []string
+// The final event in the response stream from the agent during chat-based profile
+// customization. The caller can assume that the stream has ended upon receiving
+// this event.
+type AgentOutputMessageStreamMemberEndOfOutputEvent struct {
+	Value EndOfOutputEvent
 
 	noSmithyDocumentSerde
 }
 
-func (v *AgentOutputMessage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AgentOutputMessage)
-	v.SerializeMembers(s)
+func (*AgentOutputMessageStreamMemberEndOfOutputEvent) isAgentOutputMessageStream() {}
+func (v *AgentOutputMessageStreamMemberEndOfOutputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentOutputMessageStream_EndOfOutputEvent)
+	v.Value.SerializeMembers(s)
 	s.CloseStruct()
 }
-
-func (v *AgentOutputMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Body != nil {
-		s.WriteString(schemas.AgentOutputMessage_Body, *v.Body)
-	}
-	serializeDataTransformationChatOptionsList(s, schemas.AgentOutputMessage_OptionsList, v.OptionsList)
-	if v.Type != "" {
-		s.WriteString(schemas.AgentOutputMessage_Type, string(v.Type))
-	}
+func (v *AgentOutputMessageStreamMemberEndOfOutputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
-func (v *AgentOutputMessage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AgentOutputMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AgentOutputMessage_Body:
-			v.Body = new(string)
-			return d.ReadString(schemas.AgentOutputMessage_Body, v.Body)
-		case schemas.AgentOutputMessage_OptionsList:
-			return deserializeDataTransformationChatOptionsList(d, schemas.AgentOutputMessage_OptionsList, &v.OptionsList)
-		case schemas.AgentOutputMessage_Type:
-			var ev string
-			if err := d.ReadString(schemas.AgentOutputMessage_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = AgentOutputMessageType(ev)
-			return nil
-		}
-		return nil
-	})
+
+// An exception encountered while serving the request.
+type AgentOutputMessageStreamMemberErrorEvent struct {
+	Value ErrorEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentOutputMessageStreamMemberErrorEvent) isAgentOutputMessageStream() {}
+func (v *AgentOutputMessageStreamMemberErrorEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentOutputMessageStream_ErrorEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgentOutputMessageStreamMemberErrorEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Periodically emitted event to keep the connection alive.
+type AgentOutputMessageStreamMemberHeartbeatEvent struct {
+	Value HeartbeatEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentOutputMessageStreamMemberHeartbeatEvent) isAgentOutputMessageStream() {}
+func (v *AgentOutputMessageStreamMemberHeartbeatEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentOutputMessageStream_HeartbeatEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgentOutputMessageStreamMemberHeartbeatEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An incremental progress update from the agent.
+type AgentOutputMessageStreamMemberProgressEvent struct {
+	Value ProgressEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentOutputMessageStreamMemberProgressEvent) isAgentOutputMessageStream() {}
+func (v *AgentOutputMessageStreamMemberProgressEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentOutputMessageStream_ProgressEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgentOutputMessageStreamMemberProgressEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An incremental text update from the agent.
+type AgentOutputMessageStreamMemberTextMessageEvent struct {
+	Value TextMessageEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentOutputMessageStreamMemberTextMessageEvent) isAgentOutputMessageStream() {}
+func (v *AgentOutputMessageStreamMemberTextMessageEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentOutputMessageStream_TextMessageEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgentOutputMessageStreamMemberTextMessageEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The analytics configuration for a data store.
@@ -915,6 +960,59 @@ func (v *DataTransformationS3Configuration) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// Contains the final response event from the agent, including the response
+// message, response options, and conversation ID.
+type EndOfOutputEvent struct {
+
+	// The final response message from the agent.
+	//
+	// This member is required.
+	FinalResponseMessage *string
+
+	// The conversation ID of the request. You can use this ID to continue the profile
+	// mapping based on this request's context at a later time.
+	ConversationId *string
+
+	// The response options that you can use to easily answer follow-up questions from
+	// the agent.
+	Options []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EndOfOutputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndOfOutputEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndOfOutputEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConversationId != nil {
+		s.WriteString(schemas.EndOfOutputEvent_ConversationId, *v.ConversationId)
+	}
+	if v.FinalResponseMessage != nil {
+		s.WriteString(schemas.EndOfOutputEvent_FinalResponseMessage, *v.FinalResponseMessage)
+	}
+	if v.Options != nil {
+		serializeDataTransformationChatOptionsList(s, schemas.EndOfOutputEvent_Options, v.Options)
+	}
+}
+func (v *EndOfOutputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndOfOutputEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndOfOutputEvent_ConversationId:
+			v.ConversationId = new(string)
+			return d.ReadString(schemas.EndOfOutputEvent_ConversationId, v.ConversationId)
+		case schemas.EndOfOutputEvent_FinalResponseMessage:
+			v.FinalResponseMessage = new(string)
+			return d.ReadString(schemas.EndOfOutputEvent_FinalResponseMessage, v.FinalResponseMessage)
+		case schemas.EndOfOutputEvent_Options:
+			return deserializeDataTransformationChatOptionsList(d, schemas.EndOfOutputEvent_Options, &v.Options)
+		}
+		return nil
+	})
+}
+
 // The error information for CreateFHIRDatastore and DeleteFHIRDatastore actions.
 type ErrorCause struct {
 
@@ -954,6 +1052,55 @@ func (v *ErrorCause) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ErrorCause_ErrorMessage:
 			v.ErrorMessage = new(string)
 			return d.ReadString(schemas.ErrorCause_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// The type of an event that returns an exception encountered while serving the
+// request.
+type ErrorEvent struct {
+
+	// The type of the exception.
+	//
+	// This member is required.
+	Error AgentErrorType
+
+	// The exception message.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ErrorEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != "" {
+		s.WriteString(schemas.ErrorEvent_Error, string(v.Error))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ErrorEvent_Message, *v.Message)
+	}
+}
+func (v *ErrorEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorEvent_Error:
+			var ev string
+			if err := d.ReadString(schemas.ErrorEvent_Error, &ev); err != nil {
+				return err
+			}
+			v.Error = AgentErrorType(ev)
+			return nil
+		case schemas.ErrorEvent_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ErrorEvent_Message, v.Message)
 		}
 		return nil
 	})
@@ -1075,7 +1222,9 @@ func (v *ExportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ExportJobProperties_Message, *v.Message)
 	}
-	serializeOutputDataConfig(s, schemas.ExportJobProperties_OutputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeOutputDataConfig(s, schemas.ExportJobProperties_OutputDataConfig, v.OutputDataConfig)
+	}
 	if v.SubmitTime != nil {
 		s.WriteTime(schemas.ExportJobProperties_SubmitTime, *v.SubmitTime)
 	}
@@ -1113,6 +1262,27 @@ func (v *ExportJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ExportJobProperties_SubmitTime:
 			v.SubmitTime = new(time.Time)
 			return d.ReadTime(schemas.ExportJobProperties_SubmitTime, v.SubmitTime)
+		}
+		return nil
+	})
+}
+
+// The type for a periodically emitted event to keep the connection alive.
+type HeartbeatEvent struct {
+	noSmithyDocumentSerde
+}
+
+func (v *HeartbeatEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HeartbeatEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HeartbeatEvent) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HeartbeatEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HeartbeatEvent, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -1284,14 +1454,18 @@ func (v *ImportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ImportJobProperties_EndTime, *v.EndTime)
 	}
-	serializeInputDataConfig(s, schemas.ImportJobProperties_InputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeInputDataConfig(s, schemas.ImportJobProperties_InputDataConfig, v.InputDataConfig)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.ImportJobProperties_JobId, *v.JobId)
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.ImportJobProperties_JobName, *v.JobName)
 	}
-	serializeOutputDataConfig(s, schemas.ImportJobProperties_JobOutputDataConfig, v.JobOutputDataConfig)
+	if v.JobOutputDataConfig != nil {
+		serializeOutputDataConfig(s, schemas.ImportJobProperties_JobOutputDataConfig, v.JobOutputDataConfig)
+	}
 	if v.JobProgressReport != nil {
 		s.WriteStruct(schemas.ImportJobProperties_JobProgressReport)
 		v.JobProgressReport.SerializeMembers(s)
@@ -1730,7 +1904,9 @@ func (v *ProfileConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProfileConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDefaultProfiles(s, schemas.ProfileConfiguration_DefaultProfiles, v.DefaultProfiles)
+	if v.DefaultProfiles != nil {
+		serializeDefaultProfiles(s, schemas.ProfileConfiguration_DefaultProfiles, v.DefaultProfiles)
+	}
 }
 func (v *ProfileConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProfileConfiguration, func(s *smithy.Schema) error {
@@ -1761,13 +1937,48 @@ func (v *ProfileMappingSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProfileMappingSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.ProfileMappingSource_ProfileMapping, v.ProfileMapping)
+	if v.ProfileMapping != nil {
+		serializeStringMap(s, schemas.ProfileMappingSource_ProfileMapping, v.ProfileMapping)
+	}
 }
 func (v *ProfileMappingSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProfileMappingSource, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.ProfileMappingSource_ProfileMapping:
 			return deserializeStringMap(d, schemas.ProfileMappingSource_ProfileMapping, &v.ProfileMapping)
+		}
+		return nil
+	})
+}
+
+// The type for an incremental progress update from the agent.
+type ProgressEvent struct {
+
+	// An incremental progress update message by the agent
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProgressEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProgressEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProgressEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ProgressEvent_Message, *v.Message)
+	}
+}
+func (v *ProgressEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProgressEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProgressEvent_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ProgressEvent_Message, v.Message)
 		}
 		return nil
 	})
@@ -1992,6 +2203,39 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Tag_Value:
 			v.Value = new(string)
 			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// The type for an incremental text update from the agent.
+type TextMessageEvent struct {
+
+	// An incremental text update from the agent.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TextMessageEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextMessageEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextMessageEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TextMessageEvent_Message, *v.Message)
+	}
+}
+func (v *TextMessageEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextMessageEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextMessageEvent_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TextMessageEvent_Message, v.Message)
 		}
 		return nil
 	})
@@ -2440,6 +2684,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAgentOutputMessageStream()              {}
 func (*UnknownUnionMember) isCreateDataTransformationProfileSource() {}
 func (*UnknownUnionMember) isInputDataConfig()                       {}
 func (*UnknownUnionMember) isOutputDataConfig()                      {}

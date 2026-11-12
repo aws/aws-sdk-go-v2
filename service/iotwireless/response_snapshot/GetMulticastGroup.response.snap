@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","Id":"__Id__","LoRaWAN":{"DefaultSessionParameters":{"DlDr":1,"DlFreq":1},"DlClass":"ClassB","NumberOfDevicesInGroup":1,"NumberOfDevicesRequested":1,"ParticipatingGateways":{"GatewayList":["__Member__","__Member__"],"TransmissionInterval":1},"RfRegion":"EU868"},"Name":"__Name__","Status":"__Status__"}

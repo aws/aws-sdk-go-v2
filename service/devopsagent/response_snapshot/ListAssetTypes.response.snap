@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"assetType":"__AssetType__","description":"__Description__"},{"assetType":"__AssetType__","description":"__Description__"}],"nextToken":"__NextToken__"}

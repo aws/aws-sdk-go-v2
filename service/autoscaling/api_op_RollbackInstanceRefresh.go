@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,28 @@ type RollbackInstanceRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackInstanceRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackInstanceRefreshType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackInstanceRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.RollbackInstanceRefreshType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+}
+func (v *RollbackInstanceRefreshInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackInstanceRefreshType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackInstanceRefreshType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.RollbackInstanceRefreshType_AutoScalingGroupName, v.AutoScalingGroupName)
+		}
+		return nil
+	})
+}
+
 type RollbackInstanceRefreshOutput struct {
 
 	// The instance refresh ID associated with the request. This is the unique ID
@@ -70,13 +94,32 @@ type RollbackInstanceRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackInstanceRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackInstanceRefreshAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackInstanceRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceRefreshId != nil {
+		s.WriteString(schemas.RollbackInstanceRefreshAnswer_InstanceRefreshId, *v.InstanceRefreshId)
+	}
+}
+func (v *RollbackInstanceRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackInstanceRefreshAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackInstanceRefreshAnswer_InstanceRefreshId:
+			v.InstanceRefreshId = new(string)
+			return d.ReadString(schemas.RollbackInstanceRefreshAnswer_InstanceRefreshId, v.InstanceRefreshId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRollbackInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRollbackInstanceRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackInstanceRefresh, schemas.RollbackInstanceRefreshType, schemas.RollbackInstanceRefreshAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRollbackInstanceRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackInstanceRefresh, schemas.RollbackInstanceRefreshType, schemas.RollbackInstanceRefreshAnswer), output: &RollbackInstanceRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

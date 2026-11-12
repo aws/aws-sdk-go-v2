@@ -510,6 +510,8 @@ type UnprocessableContentException struct {
 
 	ErrorCodeOverride *string
 
+	Reason UnprocessableContentReason
+
 	noSmithyDocumentSerde
 }
 
@@ -539,6 +541,9 @@ func (v *UnprocessableContentException) SerializeMembers(s smithy.ShapeSerialize
 	if v.Message != nil {
 		s.WriteString(schemas.UnprocessableContentException_message, *v.Message)
 	}
+	if v.Reason != "" {
+		s.WriteString(schemas.UnprocessableContentException_reason, string(v.Reason))
+	}
 }
 func (v *UnprocessableContentException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnprocessableContentException, func(s *smithy.Schema) error {
@@ -546,6 +551,13 @@ func (v *UnprocessableContentException) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.UnprocessableContentException_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.UnprocessableContentException_message, v.Message)
+		case schemas.UnprocessableContentException_reason:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessableContentException_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = UnprocessableContentReason(ev)
+			return nil
 		}
 		return nil
 	})

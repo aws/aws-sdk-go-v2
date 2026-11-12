@@ -39,7 +39,9 @@ func (v *HttpPayloadWithUnionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpPayloadWithUnionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnionPayload(s, schemas.HttpPayloadWithUnionInputOutput_nested, v.Nested)
+	if v.Nested != nil {
+		serializeUnionPayload(s, schemas.HttpPayloadWithUnionInputOutput_nested, v.Nested)
+	}
 }
 func (v *HttpPayloadWithUnionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HttpPayloadWithUnionInputOutput, func(s *smithy.Schema) error {
@@ -67,7 +69,9 @@ func (v *HttpPayloadWithUnionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpPayloadWithUnionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnionPayload(s, schemas.HttpPayloadWithUnionInputOutput_nested, v.Nested)
+	if v.Nested != nil {
+		serializeUnionPayload(s, schemas.HttpPayloadWithUnionInputOutput_nested, v.Nested)
+	}
 }
 func (v *HttpPayloadWithUnionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HttpPayloadWithUnionInputOutput, func(s *smithy.Schema) error {

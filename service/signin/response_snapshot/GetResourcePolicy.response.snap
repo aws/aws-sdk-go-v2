@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"signinResourceBasedPolicy":{"Statement":[{"Action":["__Member__","__Member__"],"Condition":{"key0":{"key0":["__Member__","__Member__"]}},"Effect":"__Effect__","Principal":{"key0":"__Value__"},"Resource":"__Resource__"},{"Action":["__Member__","__Member__"],"Condition":{"key0":{"key0":["__Member__","__Member__"]}},"Effect":"__Effect__","Principal":{"key0":"__Value__"},"Resource":"__Resource__"}],"Version":"__Version__"}}

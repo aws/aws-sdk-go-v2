@@ -290,6 +290,10 @@ func TestUpdateResponseSnapshot_CreateKey(t *testing.T) {
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 			},
+			EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+			},
 			MultiRegion: ptr.Bool(true),
 			MultiRegionConfiguration: &types.MultiRegionConfiguration{
 				MultiRegionKeyType: types.MultiRegionKeyType("PRIMARY"),
@@ -335,6 +339,32 @@ func TestUpdateResponseSnapshot_CreateKey(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateKey.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Decapsulate(t *testing.T) {
+	want := &DecapsulateOutput{
+		KeyId:                  ptr.String("__KeyId__"),
+		SharedSecret:           []byte("blob"),
+		EncapsulationAlgorithm: types.EncapsulationAlgorithmSpec("ML_KEM"),
+	}
+	proto := awsjson.New11(schemas.TrentService)
+	opSchema := smithy.NewOperationSchema(schemas.Decapsulate, schemas.DecapsulateResponse, schemas.DecapsulateResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("Decapsulate.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -559,6 +589,10 @@ func TestUpdateResponseSnapshot_DescribeKey(t *testing.T) {
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 			},
+			EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+			},
 			MultiRegion: ptr.Bool(true),
 			MultiRegionConfiguration: &types.MultiRegionConfiguration{
 				MultiRegionKeyType: types.MultiRegionKeyType("PRIMARY"),
@@ -714,6 +748,33 @@ func TestUpdateResponseSnapshot_EnableKeyRotation(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("EnableKeyRotation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Encapsulate(t *testing.T) {
+	want := &EncapsulateOutput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecret:               []byte("blob"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
+	}
+	proto := awsjson.New11(schemas.TrentService)
+	opSchema := smithy.NewOperationSchema(schemas.Encapsulate, schemas.EncapsulateResponse, schemas.EncapsulateResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("Encapsulate.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1037,6 +1098,10 @@ func TestUpdateResponseSnapshot_GetPublicKey(t *testing.T) {
 		KeyAgreementAlgorithms: []types.KeyAgreementAlgorithmSpec{
 			types.KeyAgreementAlgorithmSpec("ECDH"),
 			types.KeyAgreementAlgorithmSpec("ECDH"),
+		},
+		EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+			types.EncapsulationAlgorithmSpec("ML_KEM"),
+			types.EncapsulationAlgorithmSpec("ML_KEM"),
 		},
 	}
 	proto := awsjson.New11(schemas.TrentService)
@@ -1506,6 +1571,10 @@ func TestUpdateResponseSnapshot_ReplicateKey(t *testing.T) {
 			KeyAgreementAlgorithms: []types.KeyAgreementAlgorithmSpec{
 				types.KeyAgreementAlgorithmSpec("ECDH"),
 				types.KeyAgreementAlgorithmSpec("ECDH"),
+			},
+			EncapsulationAlgorithms: []types.EncapsulationAlgorithmSpec{
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
+				types.EncapsulationAlgorithmSpec("ML_KEM"),
 			},
 			MultiRegion: ptr.Bool(true),
 			MultiRegionConfiguration: &types.MultiRegionConfiguration{
@@ -2377,7 +2446,7 @@ func TestUpdateResponseSnapshot_Error_InvalidCiphertextException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.TrentService)
-	opSchema := smithy.NewOperationSchema(schemas.Decrypt, schemas.InvalidCiphertextException, schemas.InvalidCiphertextException)
+	opSchema := smithy.NewOperationSchema(schemas.Decapsulate, schemas.InvalidCiphertextException, schemas.InvalidCiphertextException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2477,7 +2546,7 @@ func TestUpdateResponseSnapshot_Error_InvalidKeyUsageException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.TrentService)
-	opSchema := smithy.NewOperationSchema(schemas.Decrypt, schemas.InvalidKeyUsageException, schemas.InvalidKeyUsageException)
+	opSchema := smithy.NewOperationSchema(schemas.Decapsulate, schemas.InvalidKeyUsageException, schemas.InvalidKeyUsageException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2627,7 +2696,7 @@ func TestUpdateResponseSnapshot_Error_KeyUnavailableException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.TrentService)
-	opSchema := smithy.NewOperationSchema(schemas.Decrypt, schemas.KeyUnavailableException, schemas.KeyUnavailableException)
+	opSchema := smithy.NewOperationSchema(schemas.Decapsulate, schemas.KeyUnavailableException, schemas.KeyUnavailableException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

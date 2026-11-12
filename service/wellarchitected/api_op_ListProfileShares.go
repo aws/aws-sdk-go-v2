@@ -98,7 +98,9 @@ func (v *ListProfileSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileSharesOutput_NextToken, *v.NextToken)
 	}
-	serializeProfileShareSummaries(s, schemas.ListProfileSharesOutput_ProfileShareSummaries, v.ProfileShareSummaries)
+	if v.ProfileShareSummaries != nil {
+		serializeProfileShareSummaries(s, schemas.ListProfileSharesOutput_ProfileShareSummaries, v.ProfileShareSummaries)
+	}
 }
 func (v *ListProfileSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProfileSharesOutput, func(s *smithy.Schema) error {

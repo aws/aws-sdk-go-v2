@@ -176,8 +176,12 @@ func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Definition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFolderArnList(s, schemas.CreateDashboardRequest_FolderArns, v.FolderArns)
-	serializeLinkEntityArnList(s, schemas.CreateDashboardRequest_LinkEntities, v.LinkEntities)
+	if v.FolderArns != nil {
+		serializeFolderArnList(s, schemas.CreateDashboardRequest_FolderArns, v.FolderArns)
+	}
+	if v.LinkEntities != nil {
+		serializeLinkEntityArnList(s, schemas.CreateDashboardRequest_LinkEntities, v.LinkEntities)
+	}
 	if v.LinkSharingConfiguration != nil {
 		s.WriteStruct(schemas.CreateDashboardRequest_LinkSharingConfiguration)
 		v.LinkSharingConfiguration.SerializeMembers(s)
@@ -191,13 +195,17 @@ func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Parameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourcePermissionList(s, schemas.CreateDashboardRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateDashboardRequest_Permissions, v.Permissions)
+	}
 	if v.SourceEntity != nil {
 		s.WriteStruct(schemas.CreateDashboardRequest_SourceEntity)
 		v.SourceEntity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDashboardRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDashboardRequest_Tags, v.Tags)
+	}
 	if v.ThemeArn != nil {
 		s.WriteString(schemas.CreateDashboardRequest_ThemeArn, *v.ThemeArn)
 	}

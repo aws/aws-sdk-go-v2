@@ -117,7 +117,9 @@ func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionIdleTimeoutInMinutes != nil {
 		s.WriteInt32(schemas.StartSessionRequest_SessionIdleTimeoutInMinutes, *v.SessionIdleTimeoutInMinutes)
 	}
-	serializeTagList(s, schemas.StartSessionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartSessionRequest_Tags, v.Tags)
+	}
 	if v.WorkGroup != nil {
 		s.WriteString(schemas.StartSessionRequest_WorkGroup, *v.WorkGroup)
 	}

@@ -122,7 +122,9 @@ func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Capacity != nil {
 		s.WriteInt64(schemas.CreateRuleGroupRequest_Capacity, *v.Capacity)
 	}
-	serializeCustomResponseBodies(s, schemas.CreateRuleGroupRequest_CustomResponseBodies, v.CustomResponseBodies)
+	if v.CustomResponseBodies != nil {
+		serializeCustomResponseBodies(s, schemas.CreateRuleGroupRequest_CustomResponseBodies, v.CustomResponseBodies)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRuleGroupRequest_Description, *v.Description)
 	}
@@ -134,11 +136,15 @@ func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRuleGroupRequest_Name, *v.Name)
 	}
-	serializeRules(s, schemas.CreateRuleGroupRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.CreateRuleGroupRequest_Rules, v.Rules)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.CreateRuleGroupRequest_Scope, string(v.Scope))
 	}
-	serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	}
 	if v.VisibilityConfig != nil {
 		s.WriteStruct(schemas.CreateRuleGroupRequest_VisibilityConfig)
 		v.VisibilityConfig.SerializeMembers(s)

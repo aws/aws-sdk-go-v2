@@ -4,6 +4,8 @@ package supportapp
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteSlackWorkspaceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSlackWorkspaceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSlackWorkspaceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlackWorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TeamId != nil {
+		s.WriteString(schemas.DeleteSlackWorkspaceConfigurationRequest_teamId, *v.TeamId)
+	}
+}
+func (v *DeleteSlackWorkspaceConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSlackWorkspaceConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSlackWorkspaceConfigurationRequest_teamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.DeleteSlackWorkspaceConfigurationRequest_teamId, v.TeamId)
+		}
+		return nil
+	})
+}
+
 type DeleteSlackWorkspaceConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +66,26 @@ type DeleteSlackWorkspaceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSlackWorkspaceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSlackWorkspaceConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlackWorkspaceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSlackWorkspaceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSlackWorkspaceConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSlackWorkspaceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSlackWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlackWorkspaceConfiguration, schemas.DeleteSlackWorkspaceConfigurationRequest, schemas.DeleteSlackWorkspaceConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSlackWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlackWorkspaceConfiguration, schemas.DeleteSlackWorkspaceConfigurationRequest, schemas.DeleteSlackWorkspaceConfigurationResult), output: &DeleteSlackWorkspaceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

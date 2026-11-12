@@ -12,6 +12,10 @@ import (
 )
 
 // Imports a dataset.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ImportDataset(ctx context.Context, params *ImportDatasetInput, optFns ...func(*Options)) (*ImportDatasetOutput, error) {
 	if params == nil {
 		params = &ImportDatasetInput{}
@@ -74,7 +78,9 @@ func (v *ImportDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceDatasetArn != nil {
 		s.WriteString(schemas.ImportDatasetRequest_SourceDatasetArn, *v.SourceDatasetArn)
 	}
-	serializeTagList(s, schemas.ImportDatasetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportDatasetRequest_Tags, v.Tags)
+	}
 }
 
 type ImportDatasetOutput struct {

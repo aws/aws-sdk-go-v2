@@ -1189,6 +1189,24 @@ func TestCheckRequestSnapshot_CreateCodeReview(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -1423,6 +1441,24 @@ func TestCheckRequestSnapshot_CreatePentest(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -1812,6 +1848,24 @@ func TestCheckRequestSnapshot_CreateThreatModel(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -3511,6 +3565,24 @@ func TestCheckRequestSnapshot_UpdateCodeReview(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -3895,6 +3967,24 @@ func TestCheckRequestSnapshot_UpdatePentest(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ExcludeRiskTypes: []types.RiskType{
 			types.RiskType("CROSS_SITE_SCRIPTING"),
@@ -4249,6 +4339,24 @@ func TestCheckRequestSnapshot_UpdateThreatModel(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -5316,6 +5424,24 @@ func TestUpdateRequestSnapshot_CreateCodeReview(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -5550,6 +5676,24 @@ func TestUpdateRequestSnapshot_CreatePentest(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -5939,6 +6083,24 @@ func TestUpdateRequestSnapshot_CreateThreatModel(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -7638,6 +7800,24 @@ func TestUpdateRequestSnapshot_UpdateCodeReview(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -8022,6 +8202,24 @@ func TestUpdateRequestSnapshot_UpdatePentest(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ExcludeRiskTypes: []types.RiskType{
 			types.RiskType("CROSS_SITE_SCRIPTING"),
@@ -8376,6 +8574,24 @@ func TestUpdateRequestSnapshot_UpdateThreatModel(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},

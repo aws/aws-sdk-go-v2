@@ -112,7 +112,9 @@ func (v *DescribeChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeSetDescription(s, schemas.DescribeChangeSetResponse_ChangeSet, v.ChangeSet)
+	if v.ChangeSet != nil {
+		serializeChangeSetDescription(s, schemas.DescribeChangeSetResponse_ChangeSet, v.ChangeSet)
+	}
 	if v.ChangeSetArn != nil {
 		s.WriteString(schemas.DescribeChangeSetResponse_ChangeSetArn, *v.ChangeSetArn)
 	}

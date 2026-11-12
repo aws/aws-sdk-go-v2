@@ -223,7 +223,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentName != nil {
 		s.WriteString(schemas.CreateEnvironmentRequest_environmentName, *v.EnvironmentName)
 	}
-	serializeHostInfoForCreateList(s, schemas.CreateEnvironmentRequest_hosts, v.Hosts)
+	if v.Hosts != nil {
+		serializeHostInfoForCreateList(s, schemas.CreateEnvironmentRequest_hosts, v.Hosts)
+	}
 	if v.InitialVlans != nil {
 		s.WriteStruct(schemas.CreateEnvironmentRequest_initialVlans)
 		v.InitialVlans.SerializeMembers(s)
@@ -232,7 +234,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateEnvironmentRequest_kmsKeyId, *v.KmsKeyId)
 	}
-	serializeLicenseInfoList(s, schemas.CreateEnvironmentRequest_licenseInfo, v.LicenseInfo)
+	if v.LicenseInfo != nil {
+		serializeLicenseInfoList(s, schemas.CreateEnvironmentRequest_licenseInfo, v.LicenseInfo)
+	}
 	if v.ServiceAccessSecurityGroups != nil {
 		s.WriteStruct(schemas.CreateEnvironmentRequest_serviceAccessSecurityGroups)
 		v.ServiceAccessSecurityGroups.SerializeMembers(s)
@@ -244,7 +248,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SiteId != nil {
 		s.WriteString(schemas.CreateEnvironmentRequest_siteId, *v.SiteId)
 	}
-	serializeRequestTagMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
+	}
 	if v.TermsAccepted != nil {
 		s.WriteBool(schemas.CreateEnvironmentRequest_termsAccepted, *v.TermsAccepted)
 	}

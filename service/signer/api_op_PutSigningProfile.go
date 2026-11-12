@@ -90,8 +90,12 @@ func (v *PutSigningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SigningMaterial.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningParameters(s, schemas.PutSigningProfileRequest_signingParameters, v.SigningParameters)
-	serializeTagMap(s, schemas.PutSigningProfileRequest_tags, v.Tags)
+	if v.SigningParameters != nil {
+		serializeSigningParameters(s, schemas.PutSigningProfileRequest_signingParameters, v.SigningParameters)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutSigningProfileRequest_tags, v.Tags)
+	}
 }
 
 type PutSigningProfileOutput struct {

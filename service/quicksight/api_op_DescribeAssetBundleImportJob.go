@@ -166,7 +166,9 @@ func (v *DescribeAssetBundleImportJobOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.DescribeAssetBundleImportJobResponse_CreatedTime, *v.CreatedTime)
 	}
-	serializeAssetBundleImportJobErrorList(s, schemas.DescribeAssetBundleImportJobResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeAssetBundleImportJobErrorList(s, schemas.DescribeAssetBundleImportJobResponse_Errors, v.Errors)
+	}
 	if v.FailureAction != "" {
 		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_FailureAction, string(v.FailureAction))
 	}
@@ -196,11 +198,15 @@ func (v *DescribeAssetBundleImportJobOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_RequestId, *v.RequestId)
 	}
-	serializeAssetBundleImportJobErrorList(s, schemas.DescribeAssetBundleImportJobResponse_RollbackErrors, v.RollbackErrors)
+	if v.RollbackErrors != nil {
+		serializeAssetBundleImportJobErrorList(s, schemas.DescribeAssetBundleImportJobResponse_RollbackErrors, v.RollbackErrors)
+	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.DescribeAssetBundleImportJobResponse_Status, v.Status)
 	}
-	serializeAssetBundleImportJobWarningList(s, schemas.DescribeAssetBundleImportJobResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeAssetBundleImportJobWarningList(s, schemas.DescribeAssetBundleImportJobResponse_Warnings, v.Warnings)
+	}
 }
 func (v *DescribeAssetBundleImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAssetBundleImportJobResponse, func(s *smithy.Schema) error {

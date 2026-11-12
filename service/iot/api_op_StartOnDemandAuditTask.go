@@ -50,7 +50,9 @@ func (v *StartOnDemandAuditTaskInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartOnDemandAuditTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetAuditCheckNames(s, schemas.StartOnDemandAuditTaskRequest_targetCheckNames, v.TargetCheckNames)
+	if v.TargetCheckNames != nil {
+		serializeTargetAuditCheckNames(s, schemas.StartOnDemandAuditTaskRequest_targetCheckNames, v.TargetCheckNames)
+	}
 }
 
 type StartOnDemandAuditTaskOutput struct {

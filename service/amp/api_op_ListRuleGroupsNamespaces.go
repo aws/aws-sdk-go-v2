@@ -125,7 +125,9 @@ func (v *ListRuleGroupsNamespacesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRuleGroupsNamespacesResponse_nextToken, *v.NextToken)
 	}
-	serializeRuleGroupsNamespaceSummaryList(s, schemas.ListRuleGroupsNamespacesResponse_ruleGroupsNamespaces, v.RuleGroupsNamespaces)
+	if v.RuleGroupsNamespaces != nil {
+		serializeRuleGroupsNamespaceSummaryList(s, schemas.ListRuleGroupsNamespacesResponse_ruleGroupsNamespaces, v.RuleGroupsNamespaces)
+	}
 }
 func (v *ListRuleGroupsNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRuleGroupsNamespacesResponse, func(s *smithy.Schema) error {

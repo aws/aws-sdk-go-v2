@@ -180,8 +180,7 @@ type InquirySupportMode string
 
 // Enum values for InquirySupportMode
 const (
-	InquirySupportModeAiOnly      InquirySupportMode = "AI_ONLY"
-	InquirySupportModeFullSupport InquirySupportMode = "FULL_SUPPORT"
+	InquirySupportModeAiOnly InquirySupportMode = "AI_ONLY"
 )
 
 // Values returns all known values for InquirySupportMode. Note that this can be
@@ -191,7 +190,6 @@ const (
 func (InquirySupportMode) Values() []InquirySupportMode {
 	return []InquirySupportMode{
 		"AI_ONLY",
-		"FULL_SUPPORT",
 	}
 }
 

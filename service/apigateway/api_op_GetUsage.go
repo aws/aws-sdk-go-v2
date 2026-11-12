@@ -123,7 +123,9 @@ func (v *GetUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndDate != nil {
 		s.WriteString(schemas.Usage_endDate, *v.EndDate)
 	}
-	serializeMapOfKeyUsages(s, schemas.Usage_items, v.Items)
+	if v.Items != nil {
+		serializeMapOfKeyUsages(s, schemas.Usage_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.Usage_position, *v.Position)
 	}

@@ -187,7 +187,9 @@ func (v *GetGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetGuardrailResponse_description, *v.Description)
 	}
-	serializeGuardrailFailureRecommendations(s, schemas.GetGuardrailResponse_failureRecommendations, v.FailureRecommendations)
+	if v.FailureRecommendations != nil {
+		serializeGuardrailFailureRecommendations(s, schemas.GetGuardrailResponse_failureRecommendations, v.FailureRecommendations)
+	}
 	if v.GuardrailArn != nil {
 		s.WriteString(schemas.GetGuardrailResponse_guardrailArn, *v.GuardrailArn)
 	}
@@ -208,7 +210,9 @@ func (v *GetGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetGuardrailResponse_status, string(v.Status))
 	}
-	serializeGuardrailStatusReasons(s, schemas.GetGuardrailResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeGuardrailStatusReasons(s, schemas.GetGuardrailResponse_statusReasons, v.StatusReasons)
+	}
 	if v.TopicPolicy != nil {
 		s.WriteStruct(schemas.GetGuardrailResponse_topicPolicy)
 		v.TopicPolicy.SerializeMembers(s)

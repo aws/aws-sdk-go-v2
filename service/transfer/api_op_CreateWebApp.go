@@ -85,13 +85,21 @@ func (v *CreateWebAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessEndpoint != nil {
 		s.WriteString(schemas.CreateWebAppRequest_AccessEndpoint, *v.AccessEndpoint)
 	}
-	serializeWebAppEndpointDetails(s, schemas.CreateWebAppRequest_EndpointDetails, v.EndpointDetails)
-	serializeWebAppIdentityProviderDetails(s, schemas.CreateWebAppRequest_IdentityProviderDetails, v.IdentityProviderDetails)
-	serializeTags(s, schemas.CreateWebAppRequest_Tags, v.Tags)
+	if v.EndpointDetails != nil {
+		serializeWebAppEndpointDetails(s, schemas.CreateWebAppRequest_EndpointDetails, v.EndpointDetails)
+	}
+	if v.IdentityProviderDetails != nil {
+		serializeWebAppIdentityProviderDetails(s, schemas.CreateWebAppRequest_IdentityProviderDetails, v.IdentityProviderDetails)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWebAppRequest_Tags, v.Tags)
+	}
 	if v.WebAppEndpointPolicy != "" {
 		s.WriteString(schemas.CreateWebAppRequest_WebAppEndpointPolicy, string(v.WebAppEndpointPolicy))
 	}
-	serializeWebAppUnits(s, schemas.CreateWebAppRequest_WebAppUnits, v.WebAppUnits)
+	if v.WebAppUnits != nil {
+		serializeWebAppUnits(s, schemas.CreateWebAppRequest_WebAppUnits, v.WebAppUnits)
+	}
 }
 
 type CreateWebAppOutput struct {

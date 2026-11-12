@@ -4,6 +4,8 @@ package elementalinference
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetFeedPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFeedPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFeedPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFeedPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetFeedPolicyRequest_id, *v.Id)
+	}
+}
+
 type GetFeedPolicyOutput struct {
 
 	// The resource-based policy document attached to the feed.
@@ -46,13 +60,32 @@ type GetFeedPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFeedPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFeedPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFeedPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetFeedPolicyResponse_policy, *v.Policy)
+	}
+}
+func (v *GetFeedPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFeedPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFeedPolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetFeedPolicyResponse_policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFeedPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFeedPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeedPolicy, schemas.GetFeedPolicyRequest, schemas.GetFeedPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFeedPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeedPolicy, schemas.GetFeedPolicyRequest, schemas.GetFeedPolicyResponse), output: &GetFeedPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

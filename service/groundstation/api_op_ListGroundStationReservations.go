@@ -77,7 +77,9 @@ func (v *ListGroundStationReservationsInput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroundStationReservationsRequest_nextToken, *v.NextToken)
 	}
-	serializeReservationTypeFilterList(s, schemas.ListGroundStationReservationsRequest_reservationTypes, v.ReservationTypes)
+	if v.ReservationTypes != nil {
+		serializeReservationTypeFilterList(s, schemas.ListGroundStationReservationsRequest_reservationTypes, v.ReservationTypes)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ListGroundStationReservationsRequest_startTime, *v.StartTime)
 	}
@@ -110,7 +112,9 @@ func (v *ListGroundStationReservationsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroundStationReservationsResponse_nextToken, *v.NextToken)
 	}
-	serializeGroundStationReservationList(s, schemas.ListGroundStationReservationsResponse_reservationList, v.ReservationList)
+	if v.ReservationList != nil {
+		serializeGroundStationReservationList(s, schemas.ListGroundStationReservationsResponse_reservationList, v.ReservationList)
+	}
 }
 func (v *ListGroundStationReservationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListGroundStationReservationsResponse, func(s *smithy.Schema) error {

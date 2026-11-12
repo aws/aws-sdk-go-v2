@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetTableBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableBucketReplicationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableBucketReplicationOutput struct {
 
 	// The replication configuration for the table bucket, including the IAM role and
@@ -60,13 +74,40 @@ type GetTableBucketReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetTableBucketReplicationResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.GetTableBucketReplicationResponse_versionToken, *v.VersionToken)
+	}
+}
+func (v *GetTableBucketReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableBucketReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableBucketReplicationResponse_configuration:
+			v.Configuration = &types.TableBucketReplicationConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetTableBucketReplicationResponse_versionToken:
+			v.VersionToken = new(string)
+			return d.ReadString(schemas.GetTableBucketReplicationResponse_versionToken, v.VersionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableBucketReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableBucketReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketReplication, schemas.GetTableBucketReplicationRequest, schemas.GetTableBucketReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableBucketReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketReplication, schemas.GetTableBucketReplicationRequest, schemas.GetTableBucketReplicationResponse), output: &GetTableBucketReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

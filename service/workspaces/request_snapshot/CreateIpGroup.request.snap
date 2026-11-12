@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/CreateIpGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateIpGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"GroupDesc":"__GroupDesc__","GroupName":"__GroupName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]}
+¿iGroupDescm__GroupDesc__iGroupNamem__GroupName__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿiUserRulesŸ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿÿÿ

@@ -134,6 +134,18 @@ func TestCheckSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetRouterInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetRouterInput(context.Background(), nil, func(o *Options) {
@@ -163,6 +175,30 @@ func TestCheckSnapshot_BatchGetRouterOutput(t *testing.T) {
 	_, err := svc.BatchGetRouterOutput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchGetRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetSourceEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ConnectEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConnectEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ConnectEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,11 +350,35 @@ func TestCheckSnapshot_DeleteRouterOutput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeregisterDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeregisterDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeregisterGatewayInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterGatewayInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeregisterGatewayInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeregisterSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeregisterSourceEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -422,6 +482,30 @@ func TestCheckSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisconnectEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisconnectEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisconnectEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRouterInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRouterInput(context.Background(), nil, func(o *Options) {
@@ -482,6 +566,18 @@ func TestCheckSnapshot_GetRouterOutput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSourceEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GrantFlowEntitlements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GrantFlowEntitlements(context.Background(), nil, func(o *Options) {
@@ -499,6 +595,18 @@ func TestCheckSnapshot_ListBridges(t *testing.T) {
 	_, err := svc.ListBridges(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBridges")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDestinationEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDestinationEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDestinationEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -614,6 +722,18 @@ func TestCheckSnapshot_ListRouterOutputs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSourceEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourceEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSourceEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForGlobalResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForGlobalResource(context.Background(), nil, func(o *Options) {
@@ -643,6 +763,30 @@ func TestCheckSnapshot_PurchaseOffering(t *testing.T) {
 	_, err := svc.PurchaseOffering(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PurchaseOffering")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RegisterDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RegisterSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterSourceEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -938,6 +1082,18 @@ func TestCheckSnapshot_UpdateBridgeState(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFlow(context.Background(), nil, func(o *Options) {
@@ -1045,6 +1201,18 @@ func TestCheckSnapshot_UpdateRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSourceEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AddBridgeOutputs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddBridgeOutputs(context.Background(), nil, func(o *Options) {
@@ -1117,6 +1285,18 @@ func TestUpdateSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetRouterInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetRouterInput(context.Background(), nil, func(o *Options) {
@@ -1146,6 +1326,30 @@ func TestUpdateSnapshot_BatchGetRouterOutput(t *testing.T) {
 	_, err := svc.BatchGetRouterOutput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetSourceEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ConnectEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConnectEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ConnectEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1297,11 +1501,35 @@ func TestUpdateSnapshot_DeleteRouterOutput(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeregisterDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeregisterDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeregisterGatewayInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterGatewayInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeregisterGatewayInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeregisterSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeregisterSourceEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1405,6 +1633,30 @@ func TestUpdateSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisconnectEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisconnectEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisconnectEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRouterInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRouterInput(context.Background(), nil, func(o *Options) {
@@ -1465,6 +1717,18 @@ func TestUpdateSnapshot_GetRouterOutput(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSourceEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GrantFlowEntitlements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GrantFlowEntitlements(context.Background(), nil, func(o *Options) {
@@ -1482,6 +1746,18 @@ func TestUpdateSnapshot_ListBridges(t *testing.T) {
 	_, err := svc.ListBridges(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBridges")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDestinationEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDestinationEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDestinationEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1597,6 +1873,18 @@ func TestUpdateSnapshot_ListRouterOutputs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListSourceEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourceEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSourceEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForGlobalResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForGlobalResource(context.Background(), nil, func(o *Options) {
@@ -1626,6 +1914,30 @@ func TestUpdateSnapshot_PurchaseOffering(t *testing.T) {
 	_, err := svc.PurchaseOffering(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PurchaseOffering")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterSourceEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1921,6 +2233,18 @@ func TestUpdateSnapshot_UpdateBridgeState(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateDestinationEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDestinationEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDestinationEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFlow(context.Background(), nil, func(o *Options) {
@@ -2022,6 +2346,18 @@ func TestUpdateSnapshot_UpdateRouterOutput(t *testing.T) {
 	_, err := svc.UpdateRouterOutput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSourceEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSourceEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSourceEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

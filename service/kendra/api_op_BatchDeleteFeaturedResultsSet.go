@@ -50,7 +50,9 @@ func (v *BatchDeleteFeaturedResultsSetInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchDeleteFeaturedResultsSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeaturedResultsSetIdList(s, schemas.BatchDeleteFeaturedResultsSetRequest_FeaturedResultsSetIds, v.FeaturedResultsSetIds)
+	if v.FeaturedResultsSetIds != nil {
+		serializeFeaturedResultsSetIdList(s, schemas.BatchDeleteFeaturedResultsSetRequest_FeaturedResultsSetIds, v.FeaturedResultsSetIds)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.BatchDeleteFeaturedResultsSetRequest_IndexId, *v.IndexId)
 	}
@@ -77,7 +79,9 @@ func (v *BatchDeleteFeaturedResultsSetOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchDeleteFeaturedResultsSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteFeaturedResultsSetErrors(s, schemas.BatchDeleteFeaturedResultsSetResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDeleteFeaturedResultsSetErrors(s, schemas.BatchDeleteFeaturedResultsSetResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchDeleteFeaturedResultsSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteFeaturedResultsSetResponse, func(s *smithy.Schema) error {

@@ -67,7 +67,9 @@ func (v *AssociateProactiveEngagementDetailsInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *AssociateProactiveEngagementDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEmergencyContactList(s, schemas.AssociateProactiveEngagementDetailsRequest_EmergencyContactList, v.EmergencyContactList)
+	if v.EmergencyContactList != nil {
+		serializeEmergencyContactList(s, schemas.AssociateProactiveEngagementDetailsRequest_EmergencyContactList, v.EmergencyContactList)
+	}
 }
 
 type AssociateProactiveEngagementDetailsOutput struct {
@@ -107,6 +109,9 @@ func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

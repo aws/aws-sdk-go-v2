@@ -99,7 +99,9 @@ func (v *ListIdentityPropagationConfigsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListIdentityPropagationConfigsResponse_RequestId, *v.RequestId)
 	}
-	serializeAuthorizedTargetsByServices(s, schemas.ListIdentityPropagationConfigsResponse_Services, v.Services)
+	if v.Services != nil {
+		serializeAuthorizedTargetsByServices(s, schemas.ListIdentityPropagationConfigsResponse_Services, v.Services)
+	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListIdentityPropagationConfigsResponse_Status, v.Status)
 	}

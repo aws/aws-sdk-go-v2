@@ -57,7 +57,9 @@ func (v *UpdateCustomRoutingListenerInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ListenerArn != nil {
 		s.WriteString(schemas.UpdateCustomRoutingListenerRequest_ListenerArn, *v.ListenerArn)
 	}
-	serializePortRanges(s, schemas.UpdateCustomRoutingListenerRequest_PortRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.UpdateCustomRoutingListenerRequest_PortRanges, v.PortRanges)
+	}
 }
 
 type UpdateCustomRoutingListenerOutput struct {

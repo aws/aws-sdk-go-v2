@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,21 @@ type StartThreatModelJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartThreatModelJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartThreatModelJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartThreatModelJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.StartThreatModelJobInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ThreatModelId != nil {
+		s.WriteString(schemas.StartThreatModelJobInput_threatModelId, *v.ThreatModelId)
+	}
+}
+
 // Output for the StartThreatModelJob operation.
 type StartThreatModelJobOutput struct {
 
@@ -73,13 +90,72 @@ type StartThreatModelJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartThreatModelJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartThreatModelJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartThreatModelJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.StartThreatModelJobOutput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartThreatModelJobOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartThreatModelJobOutput_status, string(v.Status))
+	}
+	if v.ThreatModelId != nil {
+		s.WriteString(schemas.StartThreatModelJobOutput_threatModelId, *v.ThreatModelId)
+	}
+	if v.ThreatModelJobId != nil {
+		s.WriteString(schemas.StartThreatModelJobOutput_threatModelJobId, *v.ThreatModelJobId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.StartThreatModelJobOutput_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.StartThreatModelJobOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *StartThreatModelJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartThreatModelJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartThreatModelJobOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.StartThreatModelJobOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.StartThreatModelJobOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartThreatModelJobOutput_createdAt, v.CreatedAt)
+		case schemas.StartThreatModelJobOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartThreatModelJobOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		case schemas.StartThreatModelJobOutput_threatModelId:
+			v.ThreatModelId = new(string)
+			return d.ReadString(schemas.StartThreatModelJobOutput_threatModelId, v.ThreatModelId)
+		case schemas.StartThreatModelJobOutput_threatModelJobId:
+			v.ThreatModelJobId = new(string)
+			return d.ReadString(schemas.StartThreatModelJobOutput_threatModelJobId, v.ThreatModelJobId)
+		case schemas.StartThreatModelJobOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.StartThreatModelJobOutput_title, v.Title)
+		case schemas.StartThreatModelJobOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartThreatModelJobOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartThreatModelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartThreatModelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartThreatModelJob, schemas.StartThreatModelJobInput, schemas.StartThreatModelJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartThreatModelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartThreatModelJob, schemas.StartThreatModelJobInput, schemas.StartThreatModelJobOutput), output: &StartThreatModelJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -96,11 +96,15 @@ func (v *CreateQuickResponseInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateQuickResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannels(s, schemas.CreateQuickResponseRequest_channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.CreateQuickResponseRequest_channels, v.Channels)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateQuickResponseRequest_clientToken, *v.ClientToken)
 	}
-	serializeQuickResponseDataProvider(s, schemas.CreateQuickResponseRequest_content, v.Content)
+	if v.Content != nil {
+		serializeQuickResponseDataProvider(s, schemas.CreateQuickResponseRequest_content, v.Content)
+	}
 	if v.ContentType != nil {
 		s.WriteString(schemas.CreateQuickResponseRequest_contentType, *v.ContentType)
 	}
@@ -127,7 +131,9 @@ func (v *CreateQuickResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShortcutKey != nil {
 		s.WriteString(schemas.CreateQuickResponseRequest_shortcutKey, *v.ShortcutKey)
 	}
-	serializeTags(s, schemas.CreateQuickResponseRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateQuickResponseRequest_tags, v.Tags)
+	}
 }
 
 type CreateQuickResponseOutput struct {

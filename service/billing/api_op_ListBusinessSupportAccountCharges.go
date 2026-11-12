@@ -126,7 +126,9 @@ func (v *ListBusinessSupportAccountChargesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListBusinessSupportAccountChargesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBusinessSupportAccountChargeList(s, schemas.ListBusinessSupportAccountChargesResponse_accountCharges, v.AccountCharges)
+	if v.AccountCharges != nil {
+		serializeBusinessSupportAccountChargeList(s, schemas.ListBusinessSupportAccountChargesResponse_accountCharges, v.AccountCharges)
+	}
 	if v.AccountCount != nil {
 		s.WriteInt32(schemas.ListBusinessSupportAccountChargesResponse_accountCount, *v.AccountCount)
 	}

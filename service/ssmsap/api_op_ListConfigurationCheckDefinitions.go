@@ -76,7 +76,9 @@ func (v *ListConfigurationCheckDefinitionsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListConfigurationCheckDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationCheckDefinitionList(s, schemas.ListConfigurationCheckDefinitionsOutput_ConfigurationChecks, v.ConfigurationChecks)
+	if v.ConfigurationChecks != nil {
+		serializeConfigurationCheckDefinitionList(s, schemas.ListConfigurationCheckDefinitionsOutput_ConfigurationChecks, v.ConfigurationChecks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationCheckDefinitionsOutput_NextToken, *v.NextToken)
 	}

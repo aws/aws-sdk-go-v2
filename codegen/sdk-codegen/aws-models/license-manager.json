@@ -1516,6 +1516,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CreateToken"
                     }
+                },
+                "LIST_RECEIVED_LICENSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ListReceivedLicenses"
+                    }
                 }
             }
         },
@@ -2170,7 +2176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a grant for the specified license. A grant shares the use of license\n         entitlements with a specific Amazon Web Services account, an organization, or an\n         organizational unit (OU). For more information, see <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html\">Granted licenses in License Manager</a> in the <i>License Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a grant for the specified license. A grant shares the use of license\n         entitlements with a specific Amazon Web Services account, an organization, or an\n         organizational unit (OU). For more information, see <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html\">Granted licenses in License Manager</a> in the <i>License Manager User Guide</i>.</p>\n         <p>Set the type of grant with the <code>GrantType</code> field:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BuyerGrant</code> - The default grant type, created by the seller when a\n               customer subscribes to a product. The seller creates a license for the subscription\n               and a buyer grant for the customer. With a buyer grant, the customer can use,\n               consume, and distribute the license, according to the permissions the seller sets in\n               the product contract.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DelegateGrant</code> - A delegate grant gives the grantee read-only\n               visibility into the licenses and grants that you have distributed to buyers for a\n               product. The grantee can monitor that activity on your behalf, and can also listen\n               for the related Amazon EventBridge events. A delegate grant conveys no entitlement to\n               use the licenses, and its only allowed operation is <code>ListReceivedLicenses</code>.\n               You must create the delegate grant, and its license, from the same\n               Amazon Web Services account that you used to create those buyer licenses and grants.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.licensemanager#CreateGrantRequest": {
@@ -2222,6 +2228,18 @@
                     "target": "com.amazonaws.licensemanager#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags to add to the grant. For more information about tagging support in\n         License Manager, see the <a href=\"https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html\">TagResource</a> operation.</p>"
+                    }
+                },
+                "GrantType": {
+                    "target": "com.amazonaws.licensemanager#GrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of grant to create. For more information about each type, see the preceding\n         description of this operation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BuyerGrant</code> - The default grant type if you don't specify a value.\n               Conveys the entitlement to use the license.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DelegateGrant</code> - Gives the grantee read-only visibility into the\n               licenses and grants that you have distributed to buyers, with no entitlement to use\n               them.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Options": {
+                    "target": "com.amazonaws.licensemanager#Options",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options for the grant: the status to set after creation, and how activating the\n         grant affects other active grants for the same product.</p>"
                     }
                 }
             },
@@ -5323,6 +5341,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The options specified for the grant.</p>"
                     }
+                },
+                "GrantType": {
+                    "target": "com.amazonaws.licensemanager#GrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the grant. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BuyerGrant</code> - Grants the entitlement to use the license.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DelegateGrant</code> - Gives the grantee read-only visibility into the\n               licenses and grants distributed to buyers, with no entitlement to use them.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -5390,6 +5414,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WORKFLOW_COMPLETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#GrantType": {
+            "type": "enum",
+            "members": {
+                "BUYER_GRANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BuyerGrant"
+                    }
+                },
+                "DELEGATE_GRANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DelegateGrant"
                     }
                 }
             }
@@ -8477,12 +8518,18 @@
                 "ActivationOverrideBehavior": {
                     "target": "com.amazonaws.licensemanager#ActivationOverrideBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>An activation option for your grant that determines the behavior of activating a grant.\n         Activation options can only be used with granted licenses sourced from the Amazon Web Services Marketplace. Additionally, the operation must specify the value of <code>ACTIVE</code> for the\n            <code>Status</code> parameter.</p>\n         <ul>\n            <li>\n               <p>As a license administrator, you can optionally specify an\n                  <code>ActivationOverrideBehavior</code> when activating a grant.</p>\n            </li>\n            <li>\n               <p>As a grantor, you can optionally specify an\n                  <code>ActivationOverrideBehavior</code> when you activate a grant for a grantee\n               account in your organization.</p>\n            </li>\n            <li>\n               <p>As a grantee, if the grantor creating the distributed grant doesn’t specify an\n                  <code>ActivationOverrideBehavior</code>, you can optionally specify one when you\n               are activating the grant.</p>\n            </li>\n         </ul>\n         <dl>\n            <dt>DISTRIBUTED_GRANTS_ONLY</dt>\n            <dd>\n               <p>Use this value to activate a grant without replacing any member account’s\n                  active grants for the same product.</p>\n            </dd>\n            <dt>ALL_GRANTS_PERMITTED_BY_ISSUER</dt>\n            <dd>\n               <p>Use this value to activate a grant and disable other active grants in any\n                  member accounts for the same product. This action will also replace their\n                  previously activated grants with this activated grant.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>An activation option for your grant that determines the behavior of activating a grant.\n         Activation options can only be used with granted licenses sourced from the Amazon Web Services Marketplace. Additionally, the operation must activate the grant. For the\n            <code>CreateGrantVersion</code> operation, specify <code>ACTIVE</code> for the\n            <code>Status</code> parameter. For the <code>CreateGrant</code> operation, specify\n            <code>ACTIVE</code> for the <code>DesiredStatus</code> option.</p>\n         <ul>\n            <li>\n               <p>As a license administrator, you can optionally specify an\n                  <code>ActivationOverrideBehavior</code> when activating a grant.</p>\n            </li>\n            <li>\n               <p>As a grantor, you can optionally specify an\n                  <code>ActivationOverrideBehavior</code> when you activate a grant for a grantee\n               account in your organization.</p>\n            </li>\n            <li>\n               <p>As a grantee, if the grantor creating the distributed grant doesn’t specify an\n                  <code>ActivationOverrideBehavior</code>, you can optionally specify one when you\n               are activating the grant.</p>\n            </li>\n         </ul>\n         <dl>\n            <dt>DISTRIBUTED_GRANTS_ONLY</dt>\n            <dd>\n               <p>Use this value to activate a grant without replacing any member account’s\n                  active grants for the same product.</p>\n            </dd>\n            <dt>ALL_GRANTS_PERMITTED_BY_ISSUER</dt>\n            <dd>\n               <p>Use this value to activate a grant and disable other active grants in any\n                  member accounts for the same product. This action will also replace their\n                  previously activated grants with this activated grant.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "DesiredStatus": {
+                    "target": "com.amazonaws.licensemanager#GrantStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the grant after License Manager creates it. The only supported value is\n            <code>ACTIVE</code>. Specify <code>ACTIVE</code> to create and activate the grant in one\n         request.</p>\n         <p>You can specify this option only for the <code>CreateGrant</code> operation, and only\n         when the grant principal is an organization or an organizational unit (OU). To change the\n         status of an existing grant, use the <code>Status</code> parameter of the\n            <code>CreateGrantVersion</code> operation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The options you can specify when you create a new version of a grant, such as activation\n         override behavior. For more information, see <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html\">Granted licenses in License Manager</a> in the <i>License Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The options you can specify when you create a grant or a new version of a grant, such as\n         activation override behavior. For more information, see <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html\">Granted licenses in License Manager</a> in the <i>License Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.licensemanager#OrRuleStatement": {
@@ -8691,6 +8738,12 @@
                     "target": "com.amazonaws.licensemanager#AllowedOperationList",
                     "traits": {
                         "smithy.api#documentation": "<p>Allowed operations.</p>"
+                    }
+                },
+                "GrantType": {
+                    "target": "com.amazonaws.licensemanager#GrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the grant through which the license was received. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BuyerGrant</code> - Grants you the entitlement to use the license.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DelegateGrant</code> - Gives you read-only visibility into the licenses and\n               grants distributed to buyers, with no entitlement to use them.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

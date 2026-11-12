@@ -102,7 +102,9 @@ func (v *ListAvailableManagedRuleGroupsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListAvailableManagedRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedRuleGroupSummaries(s, schemas.ListAvailableManagedRuleGroupsResponse_ManagedRuleGroups, v.ManagedRuleGroups)
+	if v.ManagedRuleGroups != nil {
+		serializeManagedRuleGroupSummaries(s, schemas.ListAvailableManagedRuleGroupsResponse_ManagedRuleGroups, v.ManagedRuleGroups)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListAvailableManagedRuleGroupsResponse_NextMarker, *v.NextMarker)
 	}

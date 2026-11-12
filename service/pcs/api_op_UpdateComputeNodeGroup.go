@@ -5,7 +5,9 @@ package pcs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,8 +41,11 @@ type UpdateComputeNodeGroupInput struct {
 	// This member is required.
 	ComputeNodeGroupIdentifier *string
 
-	// The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances. If
-	// not provided, PCS uses the AMI ID specified in the custom launch template.
+	// The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances.
+	// This value overrides the AMI ID in the custom launch template. Specify an empty
+	// string ( "" ) to remove the AMI ID from the compute node group and use the AMI
+	// ID specified in the custom launch template. Omit this value to leave the current
+	// setting unchanged.
 	AmiId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -48,10 +53,19 @@ type UpdateComputeNodeGroupInput struct {
 	// With an idempotent request, if the original request completes successfully, the
 	// subsequent retries with the same client token return the result from the
 	// original successful request and they have no additional effect. If you don't
-	// specify a client token, the CLI and SDK automatically generate 1 for you.
+	// specify a client token, the CLI and SDK automatically generate one for you.
 	ClientToken *string
 
-	// An Amazon EC2 launch template PCS uses to launch compute nodes.
+	// The custom Amazon EC2 launch template to associate with the compute node group.
+	// To set or change the custom launch template, specify id and version . If you
+	// provide this value and omit launchTemplateMode , the compute node group must
+	// already use CUSTOM mode. To switch from MANAGED to CUSTOM , specify
+	// launchTemplateMode as CUSTOM and provide this value. If the compute node group
+	// already uses CUSTOM , omit this value while also omitting launchTemplateMode ,
+	// or while specifying CUSTOM , to keep the existing custom launch template. For
+	// more information, see [Migrating a compute node group from a custom launch template]in the PCS User Guide.
+	//
+	// [Migrating a compute node group from a custom launch template]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings-migrate.html
 	CustomLaunchTemplate *types.CustomLaunchTemplate
 
 	// The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM
@@ -62,6 +76,23 @@ type UpdateComputeNodeGroupInput struct {
 	//
 	// [IAM instance profiles for PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html
 	IamInstanceProfileArn *string
+
+	// Specifies whether the compute node group uses a custom launch template or a
+	// launch template that PCS manages. Omit this value to keep the current mode.
+	//
+	// Valid values:
+	//
+	//   - CUSTOM – Use a custom launch template. To switch from MANAGED , also provide
+	//   customLaunchTemplate . If the compute node group already uses CUSTOM and you
+	//   omit customLaunchTemplate , the existing launch template is unchanged.
+	//
+	//   - MANAGED – Use a launch template created and managed by PCS. Omit
+	//   customLaunchTemplate . Switching to this mode removes the custom launch
+	//   template association but doesn't delete the launch template.
+	//
+	// When switching to MANAGED , the compute node group must have amiId and
+	// securityGroupIds configured. You can set these values in the same request.
+	LaunchTemplateMode types.LaunchTemplateMode
 
 	// The lifecycle actions to run on compute nodes in the compute node group. Use
 	// lifecycle actions to run custom scripts at defined stages of a compute node's
@@ -88,6 +119,15 @@ type UpdateComputeNodeGroupInput struct {
 	// Specifies the boundaries of the compute node group auto scaling.
 	ScalingConfiguration *types.ScalingConfigurationRequest
 
+	// The IDs of the EC2 security groups to configure directly on the compute node
+	// group. The security groups must be in the same VPC as the cluster. PCS uses
+	// these security groups instead of the security groups in the custom launch
+	// template. You can't specify this value if the custom launch template defines
+	// network interfaces. Specify an empty list ( [] ) to remove the security groups
+	// from the compute node group and use the security groups in the custom launch
+	// template. Omit this value to leave the current setting unchanged.
+	SecurityGroupIds []string
+
 	// Additional options related to the Slurm scheduler.
 	SlurmConfiguration *types.UpdateComputeNodeGroupSlurmConfigurationRequest
 
@@ -95,11 +135,84 @@ type UpdateComputeNodeGroupInput struct {
 	// CreateComputeNodeGroup API action.
 	SpotOptions *types.SpotOptions
 
+	// The name of the EC2 key pair to configure directly on the compute node group.
+	// The key pair must exist in your account and Amazon Web Services Region. PCS uses
+	// this key pair instead of the key pair in the custom launch template. Specify an
+	// empty string ( "" ) to remove the key pair from the compute node group and use
+	// the key pair in the custom launch template. Omit this value to leave the current
+	// setting unchanged. You must have permission for ec2:DescribeKeyPairs to specify
+	// a key pair. If you delete the key pair later, future instance launches can fail.
+	SshKeyName *string
+
 	// The list of subnet IDs where the compute node group provisions instances. The
 	// subnets must be in the same VPC as the cluster.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateComputeNodeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComputeNodeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiId != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_amiId, *v.AmiId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ComputeNodeGroupIdentifier != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_computeNodeGroupIdentifier, *v.ComputeNodeGroupIdentifier)
+	}
+	if v.CustomLaunchTemplate != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_customLaunchTemplate)
+		v.CustomLaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamInstanceProfileArn != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_iamInstanceProfileArn, *v.IamInstanceProfileArn)
+	}
+	if v.LaunchTemplateMode != "" {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_launchTemplateMode, string(v.LaunchTemplateMode))
+	}
+	if v.NodeLifecycleActions != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_nodeLifecycleActions)
+		v.NodeLifecycleActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PurchaseOption != "" {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_purchaseOption, string(v.PurchaseOption))
+	}
+	if v.ScalingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_scalingConfiguration)
+		v.ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdListOrEmpty(s, schemas.UpdateComputeNodeGroupRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SlurmConfiguration != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_slurmConfiguration)
+		v.SlurmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpotOptions != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_spotOptions)
+		v.SpotOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SshKeyName != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_sshKeyName, *v.SshKeyName)
+	}
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.UpdateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
+	}
 }
 
 type UpdateComputeNodeGroupOutput struct {
@@ -113,13 +226,34 @@ type UpdateComputeNodeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComputeNodeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComputeNodeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComputeNodeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeNodeGroup != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupResponse_computeNodeGroup)
+		v.ComputeNodeGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateComputeNodeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComputeNodeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComputeNodeGroupResponse_computeNodeGroup:
+			v.ComputeNodeGroup = &types.ComputeNodeGroup{}
+			return v.ComputeNodeGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateComputeNodeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateComputeNodeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputeNodeGroup, schemas.UpdateComputeNodeGroupRequest, schemas.UpdateComputeNodeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateComputeNodeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputeNodeGroup, schemas.UpdateComputeNodeGroupRequest, schemas.UpdateComputeNodeGroupResponse), output: &UpdateComputeNodeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

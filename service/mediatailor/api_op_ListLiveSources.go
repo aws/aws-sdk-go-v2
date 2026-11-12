@@ -116,7 +116,9 @@ func (v *ListLiveSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLiveSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfLiveSource(s, schemas.ListLiveSourcesResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfLiveSource(s, schemas.ListLiveSourcesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLiveSourcesResponse_NextToken, *v.NextToken)
 	}

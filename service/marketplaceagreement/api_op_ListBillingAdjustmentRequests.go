@@ -121,7 +121,9 @@ func (v *ListBillingAdjustmentRequestsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListBillingAdjustmentRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingAdjustmentSummaryList(s, schemas.ListBillingAdjustmentRequestsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeBillingAdjustmentSummaryList(s, schemas.ListBillingAdjustmentRequestsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillingAdjustmentRequestsOutput_nextToken, *v.NextToken)
 	}

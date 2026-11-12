@@ -4,6 +4,8 @@ package codestarnotifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForceUnsubscribeAll != false {
+		s.WriteBool(schemas.DeleteTargetRequest_ForceUnsubscribeAll, v.ForceUnsubscribeAll)
+	}
+	if v.TargetAddress != nil {
+		s.WriteString(schemas.DeleteTargetRequest_TargetAddress, *v.TargetAddress)
+	}
+}
+
 type DeleteTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTargetResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTarget, schemas.DeleteTargetRequest, schemas.DeleteTargetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTarget, schemas.DeleteTargetRequest, schemas.DeleteTargetResult), output: &DeleteTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

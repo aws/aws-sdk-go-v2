@@ -246,6 +246,13 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/untagresource",
 	Code: 200})
 
+var UpdatePermission = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "UpdatePermission",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/updatepermission",
+	Code: 200})
+
 var UpdateResourceShare = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "UpdateResourceShare",
@@ -263,7 +270,7 @@ var AmazonResourceSharing = smithy.NewServiceSchema(_AmazonResourceSharing, "201
 var AssociatedPermission = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "AssociatedPermission",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AssociatedPermission_arn *smithy.Schema
 
 var AssociatedPermission_permissionVersion *smithy.Schema
@@ -279,6 +286,8 @@ var AssociatedPermission_featureSet *smithy.Schema
 var AssociatedPermission_lastUpdatedTime *smithy.Schema
 
 var AssociatedPermission_resourceShareArn *smithy.Schema
+
+var AssociatedPermission_permissionTemplateParameters *smithy.Schema
 
 var _AssociatedPermissionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
@@ -447,6 +456,20 @@ var PermissionAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 		StatusCode: 409})
 var PermissionAlreadyExistsException_message *smithy.Schema
 
+var PermissionArnAndTemplateParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionArnAndTemplateParameters",
+}, smithy.ShapeTypeStructure, 2)
+var PermissionArnAndTemplateParameters_permissionArn *smithy.Schema
+
+var PermissionArnAndTemplateParameters_permissionTemplateParameters *smithy.Schema
+
+var _PermissionArnAndTemplateParametersList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionArnAndTemplateParametersList",
+}, smithy.ShapeTypeList, 1)
+var _PermissionArnAndTemplateParametersList_member *smithy.Schema
+
 var _PermissionArnList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "PermissionArnList",
@@ -480,7 +503,7 @@ var _PermissionName = smithy.NewSchema(smithy.ShapeID{
 var PermissionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "PermissionStatus",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var PermissionStatus_ATTACHABLE *smithy.Schema
 
 var PermissionStatus_UNATTACHABLE *smithy.Schema
@@ -488,6 +511,70 @@ var PermissionStatus_UNATTACHABLE *smithy.Schema
 var PermissionStatus_DELETING *smithy.Schema
 
 var PermissionStatus_DELETED *smithy.Schema
+
+var PermissionStatus_DEPRECATED *smithy.Schema
+
+var PermissionTemplateParameter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameter",
+}, smithy.ShapeTypeStructure, 4)
+var PermissionTemplateParameter_name *smithy.Schema
+
+var PermissionTemplateParameter_type *smithy.Schema
+
+var PermissionTemplateParameter_description *smithy.Schema
+
+var PermissionTemplateParameter_values *smithy.Schema
+
+var PermissionTemplateParameterDeclaration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameterDeclaration",
+}, smithy.ShapeTypeStructure, 3)
+var PermissionTemplateParameterDeclaration_name *smithy.Schema
+
+var PermissionTemplateParameterDeclaration_type *smithy.Schema
+
+var PermissionTemplateParameterDeclaration_description *smithy.Schema
+
+var _PermissionTemplateParameterDeclarationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameterDeclarationList",
+}, smithy.ShapeTypeList, 1)
+var _PermissionTemplateParameterDeclarationList_member *smithy.Schema
+
+var PermissionTemplateParameterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameterInput",
+}, smithy.ShapeTypeStructure, 2)
+var PermissionTemplateParameterInput_name *smithy.Schema
+
+var PermissionTemplateParameterInput_values *smithy.Schema
+
+var _PermissionTemplateParameterInputList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameterInputList",
+}, smithy.ShapeTypeList, 1)
+var _PermissionTemplateParameterInputList_member *smithy.Schema
+
+var _PermissionTemplateParameterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameterList",
+}, smithy.ShapeTypeList, 1)
+var _PermissionTemplateParameterList_member *smithy.Schema
+
+var PermissionTemplateParameterType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameterType",
+}, smithy.ShapeTypeEnum, 2)
+var PermissionTemplateParameterType_STRING *smithy.Schema
+
+var PermissionTemplateParameterType_STRING_LIST *smithy.Schema
+
+var _PermissionTemplateParameterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "PermissionTemplateParameterValueList",
+}, smithy.ShapeTypeList, 1)
+var _PermissionTemplateParameterValueList_member *smithy.Schema
 
 var PermissionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
@@ -556,7 +643,7 @@ var _PrincipalList_member *smithy.Schema
 var ReplacePermissionAssociationsWork = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ReplacePermissionAssociationsWork",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ReplacePermissionAssociationsWork_id *smithy.Schema
 
 var ReplacePermissionAssociationsWork_fromPermissionArn *smithy.Schema
@@ -566,6 +653,8 @@ var ReplacePermissionAssociationsWork_fromPermissionVersion *smithy.Schema
 var ReplacePermissionAssociationsWork_toPermissionArn *smithy.Schema
 
 var ReplacePermissionAssociationsWork_toPermissionVersion *smithy.Schema
+
+var ReplacePermissionAssociationsWork_permissionTemplateParameters *smithy.Schema
 
 var ReplacePermissionAssociationsWork_status *smithy.Schema
 
@@ -872,7 +961,7 @@ var _ResourceShareList_member *smithy.Schema
 var ResourceSharePermissionDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceSharePermissionDetail",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 15)
 var ResourceSharePermissionDetail_arn *smithy.Schema
 
 var ResourceSharePermissionDetail_version *smithy.Schema
@@ -884,6 +973,8 @@ var ResourceSharePermissionDetail_name *smithy.Schema
 var ResourceSharePermissionDetail_resourceType *smithy.Schema
 
 var ResourceSharePermissionDetail_permission *smithy.Schema
+
+var ResourceSharePermissionDetail_permissionTemplateParameters *smithy.Schema
 
 var ResourceSharePermissionDetail_creationTime *smithy.Schema
 
@@ -899,6 +990,8 @@ var ResourceSharePermissionDetail_status *smithy.Schema
 
 var ResourceSharePermissionDetail_tags *smithy.Schema
 
+var ResourceSharePermissionDetail_resourceOwner *smithy.Schema
+
 var _ResourceSharePermissionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceSharePermissionList",
@@ -908,7 +1001,7 @@ var _ResourceSharePermissionList_member *smithy.Schema
 var ResourceSharePermissionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceSharePermissionSummary",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var ResourceSharePermissionSummary_arn *smithy.Schema
 
 var ResourceSharePermissionSummary_version *smithy.Schema
@@ -931,7 +1024,11 @@ var ResourceSharePermissionSummary_permissionType *smithy.Schema
 
 var ResourceSharePermissionSummary_featureSet *smithy.Schema
 
+var ResourceSharePermissionSummary_permissionTemplateParameters *smithy.Schema
+
 var ResourceSharePermissionSummary_tags *smithy.Schema
+
+var ResourceSharePermissionSummary_resourceOwner *smithy.Schema
 
 var ResourceShareStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
@@ -1101,6 +1198,14 @@ var UnmatchedPolicyPermissionException = smithy.NewSchema(smithy.ShapeID{
 		StatusCode: 400})
 var UnmatchedPolicyPermissionException_message *smithy.Schema
 
+var UpdatePermissionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "UpdatePermissionStatus",
+}, smithy.ShapeTypeEnum, 2)
+var UpdatePermissionStatus_ATTACHABLE *smithy.Schema
+
+var UpdatePermissionStatus_DEPRECATED *smithy.Schema
+
 var AcceptResourceShareInvitationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "AcceptResourceShareInvitationRequest",
@@ -1142,10 +1247,12 @@ var AssociateResourceShareResponse_clientToken *smithy.Schema
 var AssociateResourceSharePermissionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "AssociateResourceSharePermissionRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var AssociateResourceSharePermissionRequest_resourceShareArn *smithy.Schema
 
 var AssociateResourceSharePermissionRequest_permissionArn *smithy.Schema
+
+var AssociateResourceSharePermissionRequest_permissionTemplateParameters *smithy.Schema
 
 var AssociateResourceSharePermissionRequest_replace *smithy.Schema
 
@@ -1164,12 +1271,14 @@ var AssociateResourceSharePermissionResponse_clientToken *smithy.Schema
 var CreatePermissionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "CreatePermissionRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var CreatePermissionRequest_name *smithy.Schema
 
 var CreatePermissionRequest_resourceType *smithy.Schema
 
 var CreatePermissionRequest_policyTemplate *smithy.Schema
+
+var CreatePermissionRequest_permissionTemplateParameters *smithy.Schema
 
 var CreatePermissionRequest_clientToken *smithy.Schema
 
@@ -1186,10 +1295,12 @@ var CreatePermissionResponse_clientToken *smithy.Schema
 var CreatePermissionVersionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "CreatePermissionVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var CreatePermissionVersionRequest_permissionArn *smithy.Schema
 
 var CreatePermissionVersionRequest_policyTemplate *smithy.Schema
+
+var CreatePermissionVersionRequest_permissionTemplateParameters *smithy.Schema
 
 var CreatePermissionVersionRequest_clientToken *smithy.Schema
 
@@ -1204,7 +1315,7 @@ var CreatePermissionVersionResponse_clientToken *smithy.Schema
 var CreateResourceShareRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "CreateResourceShareRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CreateResourceShareRequest_name *smithy.Schema
 
 var CreateResourceShareRequest_resourceArns *smithy.Schema
@@ -1220,6 +1331,8 @@ var CreateResourceShareRequest_clientToken *smithy.Schema
 var CreateResourceShareRequest_permissionArns *smithy.Schema
 
 var CreateResourceShareRequest_sources *smithy.Schema
+
+var CreateResourceShareRequest_permissionTemplateParameters *smithy.Schema
 
 var CreateResourceShareRequest_resourceShareConfiguration *smithy.Schema
 
@@ -1339,10 +1452,12 @@ var EnableSharingWithAwsOrganizationResponse_returnValue *smithy.Schema
 var GetPermissionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "GetPermissionRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var GetPermissionRequest_permissionArn *smithy.Schema
 
 var GetPermissionRequest_permissionVersion *smithy.Schema
+
+var GetPermissionRequest_permissionTemplateParameters *smithy.Schema
 
 var GetPermissionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
@@ -1469,7 +1584,7 @@ var ListPendingInvitationResourcesResponse_nextToken *smithy.Schema
 var ListPermissionAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ListPermissionAssociationsRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var ListPermissionAssociationsRequest_permissionArn *smithy.Schema
 
 var ListPermissionAssociationsRequest_permissionVersion *smithy.Schema
@@ -1481,6 +1596,10 @@ var ListPermissionAssociationsRequest_resourceType *smithy.Schema
 var ListPermissionAssociationsRequest_featureSet *smithy.Schema
 
 var ListPermissionAssociationsRequest_defaultVersion *smithy.Schema
+
+var ListPermissionAssociationsRequest_resourceOwner *smithy.Schema
+
+var ListPermissionAssociationsRequest_resourceShareArn *smithy.Schema
 
 var ListPermissionAssociationsRequest_nextToken *smithy.Schema
 
@@ -1497,14 +1616,18 @@ var ListPermissionAssociationsResponse_nextToken *smithy.Schema
 var ListPermissionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ListPermissionsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var ListPermissionsRequest_resourceType *smithy.Schema
+
+var ListPermissionsRequest_resourceOwner *smithy.Schema
 
 var ListPermissionsRequest_nextToken *smithy.Schema
 
 var ListPermissionsRequest_maxResults *smithy.Schema
 
 var ListPermissionsRequest_permissionType *smithy.Schema
+
+var ListPermissionsRequest_permissionStatus *smithy.Schema
 
 var ListPermissionsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
@@ -1715,12 +1838,14 @@ var RejectResourceShareInvitationResponse_clientToken *smithy.Schema
 var ReplacePermissionAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ReplacePermissionAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ReplacePermissionAssociationsRequest_fromPermissionArn *smithy.Schema
 
 var ReplacePermissionAssociationsRequest_fromPermissionVersion *smithy.Schema
 
 var ReplacePermissionAssociationsRequest_toPermissionArn *smithy.Schema
+
+var ReplacePermissionAssociationsRequest_permissionTemplateParameters *smithy.Schema
 
 var ReplacePermissionAssociationsRequest_clientToken *smithy.Schema
 
@@ -1780,6 +1905,24 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdatePermissionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "UpdatePermissionRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdatePermissionRequest_permissionArn *smithy.Schema
+
+var UpdatePermissionRequest_status *smithy.Schema
+
+var UpdatePermissionRequest_clientToken *smithy.Schema
+
+var UpdatePermissionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ram",
+	Name:      "UpdatePermissionResponse",
+}, smithy.ShapeTypeStructure, 2)
+var UpdatePermissionResponse_clientToken *smithy.Schema
+
+var UpdatePermissionResponse_permissionStatus *smithy.Schema
+
 var UpdateResourceShareRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "UpdateResourceShareRequest",
@@ -1809,6 +1952,22 @@ func init() {
 
 	PermissionFeatureSet_STANDARD = PermissionFeatureSet.AddMember("STANDARD", smithyprelude.Unit)
 
+	PermissionTemplateParameterType_STRING = PermissionTemplateParameterType.AddMember("STRING", smithyprelude.Unit)
+
+	PermissionTemplateParameterType_STRING_LIST = PermissionTemplateParameterType.AddMember("STRING_LIST", smithyprelude.Unit)
+
+	_PermissionTemplateParameterValueList_member = _PermissionTemplateParameterValueList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
+
+	PermissionTemplateParameter_name = PermissionTemplateParameter.AddMember("name", _String)
+
+	PermissionTemplateParameter_type = PermissionTemplateParameter.AddMember("type", PermissionTemplateParameterType)
+
+	PermissionTemplateParameter_description = PermissionTemplateParameter.AddMember("description", _String)
+
+	PermissionTemplateParameter_values = PermissionTemplateParameter.AddMember("values", _PermissionTemplateParameterValueList)
+
+	_PermissionTemplateParameterList_member = _PermissionTemplateParameterList.AddMember("member", PermissionTemplateParameter, &smithytraits.XMLName{Name: "item"})
+
 	AssociatedPermission_arn = AssociatedPermission.AddMember("arn", _String)
 
 	AssociatedPermission_permissionVersion = AssociatedPermission.AddMember("permissionVersion", _String)
@@ -1824,6 +1983,8 @@ func init() {
 	AssociatedPermission_lastUpdatedTime = AssociatedPermission.AddMember("lastUpdatedTime", _DateTime)
 
 	AssociatedPermission_resourceShareArn = AssociatedPermission.AddMember("resourceShareArn", _String)
+
+	AssociatedPermission_permissionTemplateParameters = AssociatedPermission.AddMember("permissionTemplateParameters", _PermissionTemplateParameterList)
 
 	_AssociatedPermissionList_member = _AssociatedPermissionList.AddMember("member", AssociatedPermission, &smithytraits.XMLName{Name: "item"})
 
@@ -1869,6 +2030,18 @@ func init() {
 
 	PermissionAlreadyExistsException_message = PermissionAlreadyExistsException.AddMember("message", _String)
 
+	PermissionTemplateParameterInput_name = PermissionTemplateParameterInput.AddMember("name", _String)
+
+	PermissionTemplateParameterInput_values = PermissionTemplateParameterInput.AddMember("values", _PermissionTemplateParameterValueList)
+
+	_PermissionTemplateParameterInputList_member = _PermissionTemplateParameterInputList.AddMember("member", PermissionTemplateParameterInput, &smithytraits.XMLName{Name: "item"})
+
+	PermissionArnAndTemplateParameters_permissionArn = PermissionArnAndTemplateParameters.AddMember("permissionArn", _String)
+
+	PermissionArnAndTemplateParameters_permissionTemplateParameters = PermissionArnAndTemplateParameters.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
+
+	_PermissionArnAndTemplateParametersList_member = _PermissionArnAndTemplateParametersList.AddMember("member", PermissionArnAndTemplateParameters, &smithytraits.XMLName{Name: "item"})
+
 	_PermissionArnList_member = _PermissionArnList.AddMember("member", _String, &smithytraits.XMLName{Name: "item"})
 
 	PermissionLimitExceededException_message = PermissionLimitExceededException.AddMember("message", _String)
@@ -1880,6 +2053,16 @@ func init() {
 	PermissionStatus_DELETING = PermissionStatus.AddMember("DELETING", smithyprelude.Unit)
 
 	PermissionStatus_DELETED = PermissionStatus.AddMember("DELETED", smithyprelude.Unit)
+
+	PermissionStatus_DEPRECATED = PermissionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
+
+	PermissionTemplateParameterDeclaration_name = PermissionTemplateParameterDeclaration.AddMember("name", _String)
+
+	PermissionTemplateParameterDeclaration_type = PermissionTemplateParameterDeclaration.AddMember("type", PermissionTemplateParameterType)
+
+	PermissionTemplateParameterDeclaration_description = PermissionTemplateParameterDeclaration.AddMember("description", _String)
+
+	_PermissionTemplateParameterDeclarationList_member = _PermissionTemplateParameterDeclarationList.AddMember("member", PermissionTemplateParameterDeclaration, &smithytraits.XMLName{Name: "item"})
 
 	PermissionType_CUSTOMER_MANAGED = PermissionType.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
 
@@ -1924,6 +2107,8 @@ func init() {
 	ReplacePermissionAssociationsWork_toPermissionArn = ReplacePermissionAssociationsWork.AddMember("toPermissionArn", _String)
 
 	ReplacePermissionAssociationsWork_toPermissionVersion = ReplacePermissionAssociationsWork.AddMember("toPermissionVersion", _String)
+
+	ReplacePermissionAssociationsWork_permissionTemplateParameters = ReplacePermissionAssociationsWork.AddMember("permissionTemplateParameters", _PermissionTemplateParameterList)
 
 	ReplacePermissionAssociationsWork_status = ReplacePermissionAssociationsWork.AddMember("status", ReplacePermissionAssociationsWorkStatus)
 
@@ -2129,6 +2314,8 @@ func init() {
 
 	ResourceSharePermissionDetail_permission = ResourceSharePermissionDetail.AddMember("permission", _String)
 
+	ResourceSharePermissionDetail_permissionTemplateParameters = ResourceSharePermissionDetail.AddMember("permissionTemplateParameters", _PermissionTemplateParameterDeclarationList)
+
 	ResourceSharePermissionDetail_creationTime = ResourceSharePermissionDetail.AddMember("creationTime", _DateTime)
 
 	ResourceSharePermissionDetail_lastUpdatedTime = ResourceSharePermissionDetail.AddMember("lastUpdatedTime", _DateTime)
@@ -2142,6 +2329,8 @@ func init() {
 	ResourceSharePermissionDetail_status = ResourceSharePermissionDetail.AddMember("status", PermissionStatus)
 
 	ResourceSharePermissionDetail_tags = ResourceSharePermissionDetail.AddMember("tags", _TagList)
+
+	ResourceSharePermissionDetail_resourceOwner = ResourceSharePermissionDetail.AddMember("resourceOwner", ResourceOwner)
 
 	ResourceSharePermissionSummary_arn = ResourceSharePermissionSummary.AddMember("arn", _String)
 
@@ -2165,7 +2354,11 @@ func init() {
 
 	ResourceSharePermissionSummary_featureSet = ResourceSharePermissionSummary.AddMember("featureSet", PermissionFeatureSet)
 
+	ResourceSharePermissionSummary_permissionTemplateParameters = ResourceSharePermissionSummary.AddMember("permissionTemplateParameters", _PermissionTemplateParameterList)
+
 	ResourceSharePermissionSummary_tags = ResourceSharePermissionSummary.AddMember("tags", _TagList)
+
+	ResourceSharePermissionSummary_resourceOwner = ResourceSharePermissionSummary.AddMember("resourceOwner", ResourceOwner)
 
 	_ResourceSharePermissionList_member = _ResourceSharePermissionList.AddMember("member", ResourceSharePermissionSummary, &smithytraits.XMLName{Name: "item"})
 
@@ -2203,6 +2396,10 @@ func init() {
 
 	UnmatchedPolicyPermissionException_message = UnmatchedPolicyPermissionException.AddMember("message", _String)
 
+	UpdatePermissionStatus_ATTACHABLE = UpdatePermissionStatus.AddMember("ATTACHABLE", smithyprelude.Unit)
+
+	UpdatePermissionStatus_DEPRECATED = UpdatePermissionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
+
 	AcceptResourceShareInvitationRequest_resourceShareInvitationArn = AcceptResourceShareInvitationRequest.AddMember("resourceShareInvitationArn", _String)
 
 	AcceptResourceShareInvitationRequest_clientToken = AcceptResourceShareInvitationRequest.AddMember("clientToken", _String)
@@ -2229,6 +2426,8 @@ func init() {
 
 	AssociateResourceSharePermissionRequest_permissionArn = AssociateResourceSharePermissionRequest.AddMember("permissionArn", _String)
 
+	AssociateResourceSharePermissionRequest_permissionTemplateParameters = AssociateResourceSharePermissionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
+
 	AssociateResourceSharePermissionRequest_replace = AssociateResourceSharePermissionRequest.AddMember("replace", _Boolean)
 
 	AssociateResourceSharePermissionRequest_clientToken = AssociateResourceSharePermissionRequest.AddMember("clientToken", _String)
@@ -2245,6 +2444,8 @@ func init() {
 
 	CreatePermissionRequest_policyTemplate = CreatePermissionRequest.AddMember("policyTemplate", _Policy)
 
+	CreatePermissionRequest_permissionTemplateParameters = CreatePermissionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterDeclarationList)
+
 	CreatePermissionRequest_clientToken = CreatePermissionRequest.AddMember("clientToken", _String)
 
 	CreatePermissionRequest_tags = CreatePermissionRequest.AddMember("tags", _TagList)
@@ -2256,6 +2457,8 @@ func init() {
 	CreatePermissionVersionRequest_permissionArn = CreatePermissionVersionRequest.AddMember("permissionArn", _String)
 
 	CreatePermissionVersionRequest_policyTemplate = CreatePermissionVersionRequest.AddMember("policyTemplate", _Policy)
+
+	CreatePermissionVersionRequest_permissionTemplateParameters = CreatePermissionVersionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterDeclarationList)
 
 	CreatePermissionVersionRequest_clientToken = CreatePermissionVersionRequest.AddMember("clientToken", _String)
 
@@ -2278,6 +2481,8 @@ func init() {
 	CreateResourceShareRequest_permissionArns = CreateResourceShareRequest.AddMember("permissionArns", _PermissionArnList)
 
 	CreateResourceShareRequest_sources = CreateResourceShareRequest.AddMember("sources", _SourceArnOrAccountList)
+
+	CreateResourceShareRequest_permissionTemplateParameters = CreateResourceShareRequest.AddMember("permissionTemplateParameters", _PermissionArnAndTemplateParametersList)
 
 	CreateResourceShareRequest_resourceShareConfiguration = CreateResourceShareRequest.AddMember("resourceShareConfiguration", ResourceShareConfiguration)
 
@@ -2344,6 +2549,8 @@ func init() {
 	GetPermissionRequest_permissionArn = GetPermissionRequest.AddMember("permissionArn", _String)
 
 	GetPermissionRequest_permissionVersion = GetPermissionRequest.AddMember("permissionVersion", _Integer)
+
+	GetPermissionRequest_permissionTemplateParameters = GetPermissionRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
 
 	GetPermissionResponse_permission = GetPermissionResponse.AddMember("permission", ResourceSharePermissionDetail)
 
@@ -2435,6 +2642,10 @@ func init() {
 
 	ListPermissionAssociationsRequest_defaultVersion = ListPermissionAssociationsRequest.AddMember("defaultVersion", _Boolean)
 
+	ListPermissionAssociationsRequest_resourceOwner = ListPermissionAssociationsRequest.AddMember("resourceOwner", ResourceOwner)
+
+	ListPermissionAssociationsRequest_resourceShareArn = ListPermissionAssociationsRequest.AddMember("resourceShareArn", _String)
+
 	ListPermissionAssociationsRequest_nextToken = ListPermissionAssociationsRequest.AddMember("nextToken", _String)
 
 	ListPermissionAssociationsRequest_maxResults = ListPermissionAssociationsRequest.AddMember("maxResults", _MaxResults)
@@ -2445,11 +2656,15 @@ func init() {
 
 	ListPermissionsRequest_resourceType = ListPermissionsRequest.AddMember("resourceType", _String)
 
+	ListPermissionsRequest_resourceOwner = ListPermissionsRequest.AddMember("resourceOwner", ResourceOwner)
+
 	ListPermissionsRequest_nextToken = ListPermissionsRequest.AddMember("nextToken", _String)
 
 	ListPermissionsRequest_maxResults = ListPermissionsRequest.AddMember("maxResults", _MaxResults)
 
 	ListPermissionsRequest_permissionType = ListPermissionsRequest.AddMember("permissionType", PermissionTypeFilter)
+
+	ListPermissionsRequest_permissionStatus = ListPermissionsRequest.AddMember("permissionStatus", PermissionStatus)
 
 	ListPermissionsResponse_permissions = ListPermissionsResponse.AddMember("permissions", _ResourceSharePermissionList)
 
@@ -2579,6 +2794,8 @@ func init() {
 
 	ReplacePermissionAssociationsRequest_toPermissionArn = ReplacePermissionAssociationsRequest.AddMember("toPermissionArn", _String)
 
+	ReplacePermissionAssociationsRequest_permissionTemplateParameters = ReplacePermissionAssociationsRequest.AddMember("permissionTemplateParameters", _PermissionTemplateParameterInputList)
+
 	ReplacePermissionAssociationsRequest_clientToken = ReplacePermissionAssociationsRequest.AddMember("clientToken", _String)
 
 	ReplacePermissionAssociationsResponse_replacePermissionAssociationsWork = ReplacePermissionAssociationsResponse.AddMember("replacePermissionAssociationsWork", ReplacePermissionAssociationsWork)
@@ -2606,6 +2823,16 @@ func init() {
 	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
 
 	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _String)
+
+	UpdatePermissionRequest_permissionArn = UpdatePermissionRequest.AddMember("permissionArn", _String)
+
+	UpdatePermissionRequest_status = UpdatePermissionRequest.AddMember("status", UpdatePermissionStatus)
+
+	UpdatePermissionRequest_clientToken = UpdatePermissionRequest.AddMember("clientToken", _String)
+
+	UpdatePermissionResponse_clientToken = UpdatePermissionResponse.AddMember("clientToken", _String)
+
+	UpdatePermissionResponse_permissionStatus = UpdatePermissionResponse.AddMember("permissionStatus", UpdatePermissionStatus)
 
 	UpdateResourceShareRequest_resourceShareArn = UpdateResourceShareRequest.AddMember("resourceShareArn", _String)
 

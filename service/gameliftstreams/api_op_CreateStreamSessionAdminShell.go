@@ -4,6 +4,8 @@ package gameliftstreams
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,21 @@ type CreateStreamSessionAdminShellInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamSessionAdminShellInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamSessionAdminShellInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamSessionAdminShellInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.CreateStreamSessionAdminShellInput_Identifier, *v.Identifier)
+	}
+	if v.StreamSessionIdentifier != nil {
+		s.WriteString(schemas.CreateStreamSessionAdminShellInput_StreamSessionIdentifier, *v.StreamSessionIdentifier)
+	}
+}
+
 type CreateStreamSessionAdminShellOutput struct {
 
 	// An Amazon Web Services Systems Manager session identifier that uniquely
@@ -90,13 +107,44 @@ type CreateStreamSessionAdminShellOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamSessionAdminShellOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamSessionAdminShellOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamSessionAdminShellOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreateStreamSessionAdminShellOutput_SessionId, *v.SessionId)
+	}
+	if v.StreamUrl != nil {
+		s.WriteString(schemas.CreateStreamSessionAdminShellOutput_StreamUrl, *v.StreamUrl)
+	}
+	if v.TokenValue != nil {
+		s.WriteString(schemas.CreateStreamSessionAdminShellOutput_TokenValue, *v.TokenValue)
+	}
+}
+func (v *CreateStreamSessionAdminShellOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamSessionAdminShellOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamSessionAdminShellOutput_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.CreateStreamSessionAdminShellOutput_SessionId, v.SessionId)
+		case schemas.CreateStreamSessionAdminShellOutput_StreamUrl:
+			v.StreamUrl = new(string)
+			return d.ReadString(schemas.CreateStreamSessionAdminShellOutput_StreamUrl, v.StreamUrl)
+		case schemas.CreateStreamSessionAdminShellOutput_TokenValue:
+			v.TokenValue = new(string)
+			return d.ReadString(schemas.CreateStreamSessionAdminShellOutput_TokenValue, v.TokenValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamSessionAdminShellMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStreamSessionAdminShell{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamSessionAdminShell, schemas.CreateStreamSessionAdminShellInput, schemas.CreateStreamSessionAdminShellOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStreamSessionAdminShell{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamSessionAdminShell, schemas.CreateStreamSessionAdminShellInput, schemas.CreateStreamSessionAdminShellOutput), output: &CreateStreamSessionAdminShellOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

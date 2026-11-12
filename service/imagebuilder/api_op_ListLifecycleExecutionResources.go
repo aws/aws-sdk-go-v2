@@ -35,7 +35,10 @@ type ListLifecycleExecutionResourcesInput struct {
 	// This member is required.
 	LifecycleExecutionId *string
 
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. Use the nextToken value from a
@@ -115,7 +118,9 @@ func (v *ListLifecycleExecutionResourcesOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLifecycleExecutionResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeLifecycleExecutionResourceList(s, schemas.ListLifecycleExecutionResourcesResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeLifecycleExecutionResourceList(s, schemas.ListLifecycleExecutionResourcesResponse_resources, v.Resources)
+	}
 }
 func (v *ListLifecycleExecutionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLifecycleExecutionResourcesResponse, func(s *smithy.Schema) error {
@@ -179,7 +184,10 @@ func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *m
 // ListLifecycleExecutionResourcesPaginatorOptions is the paginator options for
 // ListLifecycleExecutionResources
 type ListLifecycleExecutionResourcesPaginatorOptions struct {
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

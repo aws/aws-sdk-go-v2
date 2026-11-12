@@ -1,0 +1,4 @@
+424
+Content-Type: application/json
+
+{"__type":"ModelError","LogStreamArn":"__LogStreamArn__","Message":"__Message__","OriginalMessage":"__OriginalMessage__","OriginalStatusCode":1}

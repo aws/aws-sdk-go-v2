@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeClusterParameterGroupsResponse><DescribeClusterParameterGroupsResult><Marker>__Marker__</Marker><ParameterGroups><ClusterParameterGroup><Description>__Description__</Description><ParameterGroupFamily>__ParameterGroupFamily__</ParameterGroupFamily><ParameterGroupName>__ParameterGroupName__</ParameterGroupName><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></ClusterParameterGroup><ClusterParameterGroup><Description>__Description__</Description><ParameterGroupFamily>__ParameterGroupFamily__</ParameterGroupFamily><ParameterGroupName>__ParameterGroupName__</ParameterGroupName><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></ClusterParameterGroup></ParameterGroups></DescribeClusterParameterGroupsResult></DescribeClusterParameterGroupsResponse>

@@ -4,7 +4,9 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetTrustStoreCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrustStoreCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrustStoreCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrustStoreCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Thumbprint != nil {
+		s.WriteString(schemas.GetTrustStoreCertificateRequest_thumbprint, *v.Thumbprint)
+	}
+	if v.TrustStoreArn != nil {
+		s.WriteString(schemas.GetTrustStoreCertificateRequest_trustStoreArn, *v.TrustStoreArn)
+	}
+}
+
 type GetTrustStoreCertificateOutput struct {
 
 	// The ARN of the trust store certificate.
@@ -55,13 +72,40 @@ type GetTrustStoreCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrustStoreCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrustStoreCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrustStoreCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteStruct(schemas.GetTrustStoreCertificateResponse_certificate)
+		v.Certificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrustStoreArn != nil {
+		s.WriteString(schemas.GetTrustStoreCertificateResponse_trustStoreArn, *v.TrustStoreArn)
+	}
+}
+func (v *GetTrustStoreCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrustStoreCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrustStoreCertificateResponse_certificate:
+			v.Certificate = &types.Certificate{}
+			return v.Certificate.Deserialize(d)
+		case schemas.GetTrustStoreCertificateResponse_trustStoreArn:
+			v.TrustStoreArn = new(string)
+			return d.ReadString(schemas.GetTrustStoreCertificateResponse_trustStoreArn, v.TrustStoreArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrustStoreCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrustStoreCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustStoreCertificate, schemas.GetTrustStoreCertificateRequest, schemas.GetTrustStoreCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrustStoreCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustStoreCertificate, schemas.GetTrustStoreCertificateRequest, schemas.GetTrustStoreCertificateResponse), output: &GetTrustStoreCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

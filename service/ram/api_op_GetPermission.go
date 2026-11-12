@@ -11,6 +11,12 @@ import (
 )
 
 // Retrieves the contents of a managed permission in JSON format.
+//
+// If the permission has template parameters, you can include the
+// permissionTemplateParameters parameter in your request. The operation then
+// renders the returned policy with the specified values in place of the template
+// parameter placeholders. If you omit permissionTemplateParameters , the operation
+// returns the raw policy template with @{parameterName} placeholders unchanged.
 func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, optFns ...func(*Options)) (*GetPermissionOutput, error) {
 	if params == nil {
 		params = &GetPermissionInput{}
@@ -39,6 +45,19 @@ type GetPermissionInput struct {
 	// This member is required.
 	PermissionArn *string
 
+	// Specifies the template parameter values to use when rendering the permission's
+	// policy template. Each entry supplies a parameter name and its values. When you
+	// provide this parameter, the response contains the rendered policy with the
+	// specified values in place of the template parameter placeholders.
+	//
+	// For STRING type parameters, provide a single value. For STRING_LIST type
+	// parameters, provide one or more values.
+	//
+	// You can specify this parameter only for permissions that declare template
+	// parameters. You must provide values for all parameters declared in the
+	// permission template.
+	PermissionTemplateParameters []types.PermissionTemplateParameterInput
+
 	// Specifies the version number of the RAM permission to retrieve. If you don't
 	// specify this parameter, the operation retrieves the default version.
 	//
@@ -57,6 +76,9 @@ func (v *GetPermissionInput) Serialize(s smithy.ShapeSerializer) {
 func (v *GetPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PermissionArn != nil {
 		s.WriteString(schemas.GetPermissionRequest_permissionArn, *v.PermissionArn)
+	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterInputList(s, schemas.GetPermissionRequest_permissionTemplateParameters, v.PermissionTemplateParameters)
 	}
 	if v.PermissionVersion != nil {
 		s.WriteInt32(schemas.GetPermissionRequest_permissionVersion, *v.PermissionVersion)

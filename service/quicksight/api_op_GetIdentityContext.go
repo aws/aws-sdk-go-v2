@@ -151,7 +151,9 @@ func (v *GetIdentityContextInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionExpiresAt != nil {
 		s.WriteTime(schemas.GetIdentityContextRequest_SessionExpiresAt, *v.SessionExpiresAt)
 	}
-	serializeUserIdentifier(s, schemas.GetIdentityContextRequest_UserIdentifier, v.UserIdentifier)
+	if v.UserIdentifier != nil {
+		serializeUserIdentifier(s, schemas.GetIdentityContextRequest_UserIdentifier, v.UserIdentifier)
+	}
 }
 
 type GetIdentityContextOutput struct {

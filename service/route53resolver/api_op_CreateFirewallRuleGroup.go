@@ -62,7 +62,9 @@ func (v *CreateFirewallRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFirewallRuleGroupRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateFirewallRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFirewallRuleGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFirewallRuleGroupOutput struct {

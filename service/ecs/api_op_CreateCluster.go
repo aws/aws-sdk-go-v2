@@ -146,7 +146,9 @@ func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CreateClusterRequest_capacityProviders, v.CapacityProviders)
+	if v.CapacityProviders != nil {
+		serializeStringList(s, schemas.CreateClusterRequest_capacityProviders, v.CapacityProviders)
+	}
 	if v.ClusterName != nil {
 		s.WriteString(schemas.CreateClusterRequest_clusterName, *v.ClusterName)
 	}
@@ -155,14 +157,20 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCapacityProviderStrategy(s, schemas.CreateClusterRequest_defaultCapacityProviderStrategy, v.DefaultCapacityProviderStrategy)
+	if v.DefaultCapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.CreateClusterRequest_defaultCapacityProviderStrategy, v.DefaultCapacityProviderStrategy)
+	}
 	if v.ServiceConnectDefaults != nil {
 		s.WriteStruct(schemas.CreateClusterRequest_serviceConnectDefaults)
 		v.ServiceConnectDefaults.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeClusterSettings(s, schemas.CreateClusterRequest_settings, v.Settings)
-	serializeTags(s, schemas.CreateClusterRequest_tags, v.Tags)
+	if v.Settings != nil {
+		serializeClusterSettings(s, schemas.CreateClusterRequest_settings, v.Settings)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateClusterRequest_tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {

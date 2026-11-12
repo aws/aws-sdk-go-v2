@@ -1674,6 +1674,13 @@ var ListRealtimeContactAnalysisSegmentsV2 = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/contact/list-real-time-analysis-segments-v2/{InstanceId}/{ContactId}",
 	Code: 200})
 
+var ListReplicationFindings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListReplicationFindings",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/replication-findings/{InstanceId}",
+	Code: 200})
+
 var ListRoutingProfileManualAssignmentQueues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListRoutingProfileManualAssignmentQueues",
@@ -2542,6 +2549,13 @@ var UpdateNotificationContent = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/notifications/{InstanceId}/{NotificationId}",
 	Code: 200})
 
+var UpdateOutboundEmailContactMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContactMessage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/instances/{InstanceId}/contacts/{ContactId}/outbound-email-message",
+	Code: 200})
+
 var UpdateParticipantAuthentication = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateParticipantAuthentication",
@@ -2884,7 +2898,7 @@ var ActionSummary_ActionType *smithy.Schema
 var ActionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ActionType",
-}, smithy.ShapeTypeEnum, 11)
+}, smithy.ShapeTypeEnum, 12)
 var ActionType_CREATE_TASK *smithy.Schema
 
 var ActionType_ASSIGN_CONTACT_CATEGORY *smithy.Schema
@@ -2900,6 +2914,8 @@ var ActionType_UPDATE_CASE *smithy.Schema
 var ActionType_ASSIGN_SLA *smithy.Schema
 
 var ActionType_END_ASSOCIATED_TASKS *smithy.Schema
+
+var ActionType_END_ASSOCIATED_EMAILS *smithy.Schema
 
 var ActionType_SUBMIT_AUTO_EVALUATION *smithy.Schema
 
@@ -3553,6 +3569,22 @@ var ApplicationType = smithy.NewSchema(smithy.ShapeID{
 var ApplicationType_MCP *smithy.Schema
 
 var ApplicationType_THIRD_PARTY_APPLICATION *smithy.Schema
+
+var ApproximateDriftedResourceCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ApproximateDriftedResourceCount",
+}, smithy.ShapeTypeStructure, 3)
+var ApproximateDriftedResourceCount_Region *smithy.Schema
+
+var ApproximateDriftedResourceCount_Count *smithy.Schema
+
+var ApproximateDriftedResourceCount_Timestamp *smithy.Schema
+
+var _ApproximateDriftedResourceCounts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ApproximateDriftedResourceCounts",
+}, smithy.ShapeTypeList, 1)
+var _ApproximateDriftedResourceCounts_member *smithy.Schema
 
 var _ApproximateTotalCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -4305,6 +4337,30 @@ var _CampaignId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CampaignId",
 }, smithy.ShapeTypeString, 0)
 
+var _CaseEntries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseEntries",
+}, smithy.ShapeTypeList, 1)
+var _CaseEntries_member *smithy.Schema
+
+var CaseEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseEntry",
+}, smithy.ShapeTypeStructure, 2)
+var CaseEntry_CaseId *smithy.Schema
+
+var CaseEntry_CaseReferenceNumber *smithy.Schema
+
+var _CaseId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseId",
+}, smithy.ShapeTypeString, 0)
+
+var _CaseReferenceNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseReferenceNumber",
+}, smithy.ShapeTypeString, 0)
+
 var CaseSlaConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CaseSlaConfiguration",
@@ -4318,6 +4374,28 @@ var CaseSlaConfiguration_FieldId *smithy.Schema
 var CaseSlaConfiguration_TargetFieldValues *smithy.Schema
 
 var CaseSlaConfiguration_TargetSlaMinutes *smithy.Schema
+
+var CategoriesAttributeAndCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeAndCondition",
+}, smithy.ShapeTypeStructure, 1)
+var CategoriesAttributeAndCondition_TagConditions *smithy.Schema
+
+var CategoriesAttributeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeFilter",
+}, smithy.ShapeTypeStructure, 3)
+var CategoriesAttributeFilter_OrConditions *smithy.Schema
+
+var CategoriesAttributeFilter_AndCondition *smithy.Schema
+
+var CategoriesAttributeFilter_TagCondition *smithy.Schema
+
+var _CategoriesAttributeOrConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeOrConditionList",
+}, smithy.ShapeTypeList, 1)
+var _CategoriesAttributeOrConditionList_member *smithy.Schema
 
 var Channel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -4615,7 +4693,7 @@ var _ConnectionTypeList_member *smithy.Schema
 var Contact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 48)
+}, smithy.ShapeTypeStructure, 50)
 var Contact_Arn *smithy.Schema
 
 var Contact_Id *smithy.Schema
@@ -4702,6 +4780,8 @@ var Contact_ContactEvaluations *smithy.Schema
 
 var Contact_TaskTemplateInfo *smithy.Schema
 
+var Contact_Cases *smithy.Schema
+
 var Contact_ContactDetails *smithy.Schema
 
 var Contact_OutboundStrategy *smithy.Schema
@@ -4711,6 +4791,8 @@ var Contact_Attributes *smithy.Schema
 var Contact_NextContacts *smithy.Schema
 
 var Contact_GlobalResiliencyMetadata *smithy.Schema
+
+var Contact_ContactLens *smithy.Schema
 
 var ContactAnalysis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -4733,6 +4815,14 @@ var ContactAnalysisReference_Arn *smithy.Schema
 var ContactAnalysisReference_AnalyticsMode *smithy.Schema
 
 var ContactAnalysisReference_IsRedacted *smithy.Schema
+
+var ContactAnalysisReferenceState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactAnalysisReferenceState",
+}, smithy.ShapeTypeStructure, 2)
+var ContactAnalysisReferenceState_Status *smithy.Schema
+
+var ContactAnalysisReferenceState_StatusReason *smithy.Schema
 
 var ContactConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -5375,6 +5465,60 @@ var ContactInteractionType_AUTOMATED *smithy.Schema
 
 var ContactInteractionType_CUSTOMER *smithy.Schema
 
+var ContactLens = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLens",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLens_ConversationalAnalytics *smithy.Schema
+
+var _ContactLensAnalyticsModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensAnalyticsModeList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensAnalyticsModeList_member *smithy.Schema
+
+var ContactLensChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensChannelConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensChannelConfiguration_AnalyticsModes *smithy.Schema
+
+var ContactLensRedactionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensRedactionConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var ContactLensRedactionConfiguration_Behavior *smithy.Schema
+
+var ContactLensRedactionConfiguration_Policy *smithy.Schema
+
+var ContactLensRedactionConfiguration_Entities *smithy.Schema
+
+var ContactLensRedactionConfiguration_MaskMode *smithy.Schema
+
+var _ContactLensRedactionEntitiesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensRedactionEntitiesList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensRedactionEntitiesList_member *smithy.Schema
+
+var ContactLensSentimentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSentimentConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensSentimentConfiguration_Behavior *smithy.Schema
+
+var ContactLensSummaryConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSummaryConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensSummaryConfiguration_SummaryModes *smithy.Schema
+
+var _ContactLensSummaryModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSummaryModeList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensSummaryModeList_member *smithy.Schema
+
 var ContactMediaProcessingFailureMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactMediaProcessingFailureMode",
@@ -5624,6 +5768,14 @@ var ContentAttributes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ContentAttributes_RecommenderConfig *smithy.Schema
 
+var ContentDisposition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContentDisposition",
+}, smithy.ShapeTypeEnum, 2)
+var ContentDisposition_INLINE *smithy.Schema
+
+var ContentDisposition_ATTACHMENT *smithy.Schema
+
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContentType",
@@ -5660,6 +5812,32 @@ var ControlPlaneUserAttributeFilter_AndCondition *smithy.Schema
 var ControlPlaneUserAttributeFilter_TagCondition *smithy.Schema
 
 var ControlPlaneUserAttributeFilter_HierarchyGroupCondition *smithy.Schema
+
+var ConversationalAnalytics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConversationalAnalytics",
+}, smithy.ShapeTypeStructure, 2)
+var ConversationalAnalytics_Configuration *smithy.Schema
+
+var ConversationalAnalytics_ContactAnalysisReferenceState *smithy.Schema
+
+var ConversationalAnalyticsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConversationalAnalyticsConfiguration",
+}, smithy.ShapeTypeStructure, 7)
+var ConversationalAnalyticsConfiguration_Enabled *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_LanguageLocale *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_LanguageLocales *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_ChannelConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_RedactionConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_SummaryConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_SentimentConfiguration *smithy.Schema
 
 var _Count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -6728,6 +6906,11 @@ var EncryptionType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var EncryptionType_KMS *smithy.Schema
 
+var EndAssociatedEmailsActionDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EndAssociatedEmailsActionDefinition",
+}, smithy.ShapeTypeStructure, 0)
+
 var EndAssociatedTasksActionDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EndAssociatedTasksActionDefinition",
@@ -7238,7 +7421,7 @@ var _EvaluationFormItemWeight = smithy.NewSchema(smithy.ShapeID{
 var EvaluationFormLanguageCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormLanguageCode",
-}, smithy.ShapeTypeEnum, 10)
+}, smithy.ShapeTypeEnum, 106)
 var EvaluationFormLanguageCode_DE_DE *smithy.Schema
 
 var EvaluationFormLanguageCode_EN_US *smithy.Schema
@@ -7258,6 +7441,198 @@ var EvaluationFormLanguageCode_KO_KR *smithy.Schema
 var EvaluationFormLanguageCode_ZH_CN *smithy.Schema
 
 var EvaluationFormLanguageCode_MS_MY *smithy.Schema
+
+var EvaluationFormLanguageCode_AF_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_SQ_AL *smithy.Schema
+
+var EvaluationFormLanguageCode_AM_ET *smithy.Schema
+
+var EvaluationFormLanguageCode_AR_AE *smithy.Schema
+
+var EvaluationFormLanguageCode_AR_SA *smithy.Schema
+
+var EvaluationFormLanguageCode_HY_AM *smithy.Schema
+
+var EvaluationFormLanguageCode_EU_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_BE_BY *smithy.Schema
+
+var EvaluationFormLanguageCode_BS_BA *smithy.Schema
+
+var EvaluationFormLanguageCode_BG_BG *smithy.Schema
+
+var EvaluationFormLanguageCode_CA_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_CKB_IR *smithy.Schema
+
+var EvaluationFormLanguageCode_CKB_IQ *smithy.Schema
+
+var EvaluationFormLanguageCode_ZH_TW *smithy.Schema
+
+var EvaluationFormLanguageCode_HR_HR *smithy.Schema
+
+var EvaluationFormLanguageCode_CS_CZ *smithy.Schema
+
+var EvaluationFormLanguageCode_DA_DK *smithy.Schema
+
+var EvaluationFormLanguageCode_NL_BE *smithy.Schema
+
+var EvaluationFormLanguageCode_NL_NL *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_AU *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_IE *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_NZ *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_AB *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_SG *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_GB *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_WL *smithy.Schema
+
+var EvaluationFormLanguageCode_FA_IR *smithy.Schema
+
+var EvaluationFormLanguageCode_FA_AF *smithy.Schema
+
+var EvaluationFormLanguageCode_FI_FI *smithy.Schema
+
+var EvaluationFormLanguageCode_FR_BE *smithy.Schema
+
+var EvaluationFormLanguageCode_FR_CA *smithy.Schema
+
+var EvaluationFormLanguageCode_GA_IE *smithy.Schema
+
+var EvaluationFormLanguageCode_GL_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_KA_GE *smithy.Schema
+
+var EvaluationFormLanguageCode_DE_AT *smithy.Schema
+
+var EvaluationFormLanguageCode_DE_CH *smithy.Schema
+
+var EvaluationFormLanguageCode_EL_GR *smithy.Schema
+
+var EvaluationFormLanguageCode_GU_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_HT_HT *smithy.Schema
+
+var EvaluationFormLanguageCode_HE_IL *smithy.Schema
+
+var EvaluationFormLanguageCode_HI_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_HU_HU *smithy.Schema
+
+var EvaluationFormLanguageCode_IS_IS *smithy.Schema
+
+var EvaluationFormLanguageCode_ID_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_JV_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_KM_KH *smithy.Schema
+
+var EvaluationFormLanguageCode_KN_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_KK_KZ *smithy.Schema
+
+var EvaluationFormLanguageCode_LO_LA *smithy.Schema
+
+var EvaluationFormLanguageCode_LV_LV *smithy.Schema
+
+var EvaluationFormLanguageCode_LT_LT *smithy.Schema
+
+var EvaluationFormLanguageCode_MK_MK *smithy.Schema
+
+var EvaluationFormLanguageCode_ML_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_MR_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_NE_NP *smithy.Schema
+
+var EvaluationFormLanguageCode_NO_NO *smithy.Schema
+
+var EvaluationFormLanguageCode_OR_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_PS_AF *smithy.Schema
+
+var EvaluationFormLanguageCode_PL_PL *smithy.Schema
+
+var EvaluationFormLanguageCode_PT_PT *smithy.Schema
+
+var EvaluationFormLanguageCode_PA_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_RO_RO *smithy.Schema
+
+var EvaluationFormLanguageCode_RU_RU *smithy.Schema
+
+var EvaluationFormLanguageCode_SR_RS *smithy.Schema
+
+var EvaluationFormLanguageCode_SI_LK *smithy.Schema
+
+var EvaluationFormLanguageCode_SK_SK *smithy.Schema
+
+var EvaluationFormLanguageCode_SL_SI *smithy.Schema
+
+var EvaluationFormLanguageCode_ES_MX *smithy.Schema
+
+var EvaluationFormLanguageCode_ES_US *smithy.Schema
+
+var EvaluationFormLanguageCode_SU_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_BI *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_KE *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_RW *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_TZ *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_UG *smithy.Schema
+
+var EvaluationFormLanguageCode_SV_SE *smithy.Schema
+
+var EvaluationFormLanguageCode_TL_PH *smithy.Schema
+
+var EvaluationFormLanguageCode_TA_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_TE_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_TH_TH *smithy.Schema
+
+var EvaluationFormLanguageCode_TR_TR *smithy.Schema
+
+var EvaluationFormLanguageCode_UK_UA *smithy.Schema
+
+var EvaluationFormLanguageCode_UZ_UZ *smithy.Schema
+
+var EvaluationFormLanguageCode_VI_VN *smithy.Schema
+
+var EvaluationFormLanguageCode_ZU_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_MY_MM *smithy.Schema
+
+var EvaluationFormLanguageCode_SO_SO *smithy.Schema
+
+var EvaluationFormLanguageCode_YUE_HK *smithy.Schema
+
+var EvaluationFormLanguageCode_ET_EE *smithy.Schema
+
+var EvaluationFormLanguageCode_HMN *smithy.Schema
+
+var EvaluationFormLanguageCode_LG_UG *smithy.Schema
+
+var EvaluationFormLanguageCode_CY_GB *smithy.Schema
+
+var EvaluationFormLanguageCode_XH_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_BN_BD *smithy.Schema
 
 var EvaluationFormLanguageConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -8644,7 +9019,7 @@ var _FileSourceUri = smithy.NewSchema(smithy.ShapeID{
 var FileStatusType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "FileStatusType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var FileStatusType_APPROVED *smithy.Schema
 
 var FileStatusType_REJECTED *smithy.Schema
@@ -8652,6 +9027,8 @@ var FileStatusType_REJECTED *smithy.Schema
 var FileStatusType_PROCESSING *smithy.Schema
 
 var FileStatusType_FAILED *smithy.Schema
+
+var FileStatusType_DRAFTING *smithy.Schema
 
 var FileUseCaseType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -9937,6 +10314,12 @@ var _LanguageLocale = smithy.NewSchema(smithy.ShapeID{
 	Name:      "LanguageLocale",
 }, smithy.ShapeTypeString, 0)
 
+var _LanguageLocales = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "LanguageLocales",
+}, smithy.ShapeTypeList, 1)
+var _LanguageLocales_member *smithy.Schema
+
 var _LargeNextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "LargeNextToken",
@@ -10941,6 +11324,12 @@ var NotificationType_WIDGET_VIEW *smithy.Schema
 
 var NotificationType_WIDGET_ACTION *smithy.Schema
 
+var NullableAdditionalRecipients = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "NullableAdditionalRecipients",
+}, smithy.ShapeTypeStructure, 1)
+var NullableAdditionalRecipients_CcEmailAddresses *smithy.Schema
+
 var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "NullableBoolean",
@@ -11077,6 +11466,12 @@ var OperationalStatus = smithy.NewSchema(smithy.ShapeID{
 var OperationalStatus_OPEN *smithy.Schema
 
 var OperationalStatus_CLOSED *smithy.Schema
+
+var _OptionalEmailAddressRecipientList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "OptionalEmailAddressRecipientList",
+}, smithy.ShapeTypeList, 1)
+var _OptionalEmailAddressRecipientList_member *smithy.Schema
 
 var _Origin = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -12339,8 +12734,10 @@ var PreEvaluationFilterOperator_EQUALS *smithy.Schema
 var PreEvaluationFilterResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "PreEvaluationFilterResourceType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var PreEvaluationFilterResourceType_CONTACT *smithy.Schema
+
+var PreEvaluationFilterResourceType_CONTACT_EVALUATION *smithy.Schema
 
 var PreEvaluationFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -13022,7 +13419,9 @@ var _RealTimeContactAnalysisAttachments_member *smithy.Schema
 var RealTimeContactAnalysisCategoryDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RealTimeContactAnalysisCategoryDetails",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
+var RealTimeContactAnalysisCategoryDetails_RuleId *smithy.Schema
+
 var RealTimeContactAnalysisCategoryDetails_PointsOfInterest *smithy.Schema
 
 var _RealTimeContactAnalysisCategoryName = smithy.NewSchema(smithy.ShapeID{
@@ -13255,6 +13654,12 @@ var _RealtimeContactAnalysisSegments = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RealtimeContactAnalysisSegments",
 }, smithy.ShapeTypeList, 1)
 var _RealtimeContactAnalysisSegments_member *smithy.Schema
+
+var RealTimeContactAnalysisSegmentsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "RealTimeContactAnalysisSegmentsFilter",
+}, smithy.ShapeTypeStructure, 1)
+var RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter *smithy.Schema
 
 var RealTimeContactAnalysisSegmentTranscript = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -13569,7 +13974,7 @@ var _ReferenceKey = smithy.NewSchema(smithy.ShapeID{
 var ReferenceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReferenceStatus",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var ReferenceStatus_AVAILABLE *smithy.Schema
 
 var ReferenceStatus_DELETED *smithy.Schema
@@ -13581,6 +13986,8 @@ var ReferenceStatus_REJECTED *smithy.Schema
 var ReferenceStatus_PROCESSING *smithy.Schema
 
 var ReferenceStatus_FAILED *smithy.Schema
+
+var ReferenceStatus_DRAFTING *smithy.Schema
 
 var _ReferenceStatusReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -13694,6 +14101,57 @@ var ReplicationConfiguration_SourceRegion *smithy.Schema
 
 var ReplicationConfiguration_GlobalSignInEndpoint *smithy.Schema
 
+var ReplicationFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFinding",
+}, smithy.ShapeTypeStructure, 8)
+var ReplicationFinding_Arn *smithy.Schema
+
+var ReplicationFinding_Id *smithy.Schema
+
+var ReplicationFinding_Region *smithy.Schema
+
+var ReplicationFinding_ResourceType *smithy.Schema
+
+var ReplicationFinding_Name *smithy.Schema
+
+var ReplicationFinding_Operation *smithy.Schema
+
+var ReplicationFinding_ReferenceCode *smithy.Schema
+
+var ReplicationFinding_Message *smithy.Schema
+
+var _ReplicationFindingMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingMessage",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingOperation",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingReferenceCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingReferenceCode",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingResourceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingResourceName",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingResourceType",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingsList",
+}, smithy.ShapeTypeList, 1)
+var _ReplicationFindingsList_member *smithy.Schema
+
 var _ReplicationStatusReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReplicationStatusReason",
@@ -13779,6 +14237,25 @@ var ResourceNotReadyException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 409})
 var ResourceNotReadyException_Message *smithy.Schema
+
+var ResourceReplicationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ResourceReplicationStatus",
+}, smithy.ShapeTypeStructure, 2)
+var ResourceReplicationStatus_Region *smithy.Schema
+
+var ResourceReplicationStatus_Status *smithy.Schema
+
+var _ResourceReplicationStatuses = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ResourceReplicationStatuses",
+}, smithy.ShapeTypeList, 1)
+var _ResourceReplicationStatuses_member *smithy.Schema
+
+var _ResourceReplicationStatusValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ResourceReplicationStatusValue",
+}, smithy.ShapeTypeString, 0)
 
 var ResourceTagsSearchCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14119,7 +14596,7 @@ var Rule_Tags *smithy.Schema
 var RuleAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleAction",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RuleAction_ActionType *smithy.Schema
 
 var RuleAction_TaskAction *smithy.Schema
@@ -14137,6 +14614,8 @@ var RuleAction_UpdateCaseAction *smithy.Schema
 var RuleAction_AssignSlaAction *smithy.Schema
 
 var RuleAction_EndAssociatedTasksAction *smithy.Schema
+
+var RuleAction_EndAssociatedEmailsAction *smithy.Schema
 
 var RuleAction_SubmitAutoEvaluationAction *smithy.Schema
 
@@ -14192,6 +14671,11 @@ var _RuleFunction = smithy.NewSchema(smithy.ShapeID{
 var _RuleId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleId",
+}, smithy.ShapeTypeString, 0)
+
+var _RuleId256 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "RuleId256",
 }, smithy.ShapeTypeString, 0)
 
 var _RuleName = smithy.NewSchema(smithy.ShapeID{
@@ -14585,7 +15069,7 @@ var _SecurityKeysList_member *smithy.Schema
 var SecurityProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfile",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var SecurityProfile_Id *smithy.Schema
 
 var SecurityProfile_OrganizationResourceId *smithy.Schema
@@ -14611,6 +15095,8 @@ var SecurityProfile_HierarchyRestrictedResources *smithy.Schema
 var SecurityProfile_AllowedAccessControlHierarchyGroupId *smithy.Schema
 
 var SecurityProfile_GranularAccessControlConfiguration *smithy.Schema
+
+var SecurityProfile_Type *smithy.Schema
 
 var _SecurityProfileDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14685,7 +15171,7 @@ var SecurityProfileSearchCriteria_StringCondition *smithy.Schema
 var SecurityProfileSearchSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfileSearchSummary",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var SecurityProfileSearchSummary_Id *smithy.Schema
 
 var SecurityProfileSearchSummary_OrganizationResourceId *smithy.Schema
@@ -14697,6 +15183,8 @@ var SecurityProfileSearchSummary_SecurityProfileName *smithy.Schema
 var SecurityProfileSearchSummary_Description *smithy.Schema
 
 var SecurityProfileSearchSummary_Tags *smithy.Schema
+
+var SecurityProfileSearchSummary_Type *smithy.Schema
 
 var SecurityProfilesSearchFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14713,7 +15201,7 @@ var _SecurityProfilesSearchSummaryList_member *smithy.Schema
 var SecurityProfileSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfileSummary",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var SecurityProfileSummary_Id *smithy.Schema
 
 var SecurityProfileSummary_Arn *smithy.Schema
@@ -14724,11 +15212,21 @@ var SecurityProfileSummary_LastModifiedTime *smithy.Schema
 
 var SecurityProfileSummary_LastModifiedRegion *smithy.Schema
 
+var SecurityProfileSummary_Type *smithy.Schema
+
 var _SecurityProfileSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfileSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _SecurityProfileSummaryList_member *smithy.Schema
+
+var SecurityProfileType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "SecurityProfileType",
+}, smithy.ShapeTypeEnum, 2)
+var SecurityProfileType_AWS_MANAGED *smithy.Schema
+
+var SecurityProfileType_CUSTOMER_MANAGED *smithy.Schema
 
 var _SecurityToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -15352,6 +15850,12 @@ var TaskTemplateConstraints_ReadOnlyFields *smithy.Schema
 
 var TaskTemplateConstraints_InvisibleFields *smithy.Schema
 
+var TaskTemplateContactHooks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "TaskTemplateContactHooks",
+}, smithy.ShapeTypeStructure, 1)
+var TaskTemplateContactHooks_WrapUpFlowId *smithy.Schema
+
 var TaskTemplateDefaultFieldValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "TaskTemplateDefaultFieldValue",
@@ -15952,6 +16456,28 @@ var _UpdateHoursOfOperationDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateHoursOfOperationDescription",
 }, smithy.ShapeTypeString, 0)
+
+var UpdateOutboundEmailContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContent",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateOutboundEmailContent_MessageSourceType *smithy.Schema
+
+var UpdateOutboundEmailContent_RawMessage *smithy.Schema
+
+var UpdateOutboundEmailMessageSourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailMessageSourceType",
+}, smithy.ShapeTypeEnum, 1)
+var UpdateOutboundEmailMessageSourceType_RAW *smithy.Schema
+
+var UpdateOutboundRawMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundRawMessage",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateOutboundRawMessage_Body *smithy.Schema
+
+var UpdateOutboundRawMessage_ContentType *smithy.Schema
 
 var UpdateParticipantRoleConfigChannelInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -18560,7 +19086,7 @@ var CreateSecurityProfileResponse_SecurityProfileArn *smithy.Schema
 var CreateTaskTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateTaskTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateTaskTemplateRequest_InstanceId *smithy.Schema
 
 var CreateTaskTemplateRequest_Name *smithy.Schema
@@ -18570,6 +19096,8 @@ var CreateTaskTemplateRequest_Description *smithy.Schema
 var CreateTaskTemplateRequest_ContactFlowId *smithy.Schema
 
 var CreateTaskTemplateRequest_SelfAssignFlowId *smithy.Schema
+
+var CreateTaskTemplateRequest_ContactHooks *smithy.Schema
 
 var CreateTaskTemplateRequest_Constraints *smithy.Schema
 
@@ -20146,7 +20674,7 @@ var EvaluateDataTableValuesResponse_NextToken *smithy.Schema
 var GetAttachedFileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetAttachedFileRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var GetAttachedFileRequest_InstanceId *smithy.Schema
 
 var GetAttachedFileRequest_FileId *smithy.Schema
@@ -20154,6 +20682,8 @@ var GetAttachedFileRequest_FileId *smithy.Schema
 var GetAttachedFileRequest_UrlExpiryInSeconds *smithy.Schema
 
 var GetAttachedFileRequest_AssociatedResourceArn *smithy.Schema
+
+var GetAttachedFileRequest_UrlContentDisposition *smithy.Schema
 
 var GetAttachedFileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -20454,7 +20984,7 @@ var GetTaskTemplateRequest_SnapshotVersion *smithy.Schema
 var GetTaskTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetTaskTemplateResponse",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var GetTaskTemplateResponse_InstanceId *smithy.Schema
 
 var GetTaskTemplateResponse_Id *smithy.Schema
@@ -20468,6 +20998,8 @@ var GetTaskTemplateResponse_Description *smithy.Schema
 var GetTaskTemplateResponse_ContactFlowId *smithy.Schema
 
 var GetTaskTemplateResponse_SelfAssignFlowId *smithy.Schema
+
+var GetTaskTemplateResponse_ContactHooks *smithy.Schema
 
 var GetTaskTemplateResponse_Constraints *smithy.Schema
 
@@ -20514,7 +21046,7 @@ var GetTrafficDistributionRequest_Id *smithy.Schema
 var GetTrafficDistributionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetTrafficDistributionResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var GetTrafficDistributionResponse_TelephonyConfig *smithy.Schema
 
 var GetTrafficDistributionResponse_Id *smithy.Schema
@@ -20524,6 +21056,8 @@ var GetTrafficDistributionResponse_Arn *smithy.Schema
 var GetTrafficDistributionResponse_SignInConfig *smithy.Schema
 
 var GetTrafficDistributionResponse_AgentConfig *smithy.Schema
+
+var GetTrafficDistributionResponse_LastFailoverTime *smithy.Schema
 
 var ImportPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -21491,7 +22025,7 @@ var ListQuickConnectsResponse_NextToken *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsV2Request = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListRealtimeContactAnalysisSegmentsV2Request",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var ListRealtimeContactAnalysisSegmentsV2Request_InstanceId *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Request_ContactId *smithy.Schema
@@ -21504,6 +22038,8 @@ var ListRealtimeContactAnalysisSegmentsV2Request_OutputType *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes *smithy.Schema
 
+var ListRealtimeContactAnalysisSegmentsV2Request_ListFilter *smithy.Schema
+
 var ListRealtimeContactAnalysisSegmentsV2Response = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListRealtimeContactAnalysisSegmentsV2Response",
@@ -21515,6 +22051,30 @@ var ListRealtimeContactAnalysisSegmentsV2Response_Status *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsV2Response_Segments *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Response_NextToken *smithy.Schema
+
+var ListReplicationFindingsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListReplicationFindingsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListReplicationFindingsRequest_InstanceId *smithy.Schema
+
+var ListReplicationFindingsRequest_ResourceType *smithy.Schema
+
+var ListReplicationFindingsRequest_MaxResults *smithy.Schema
+
+var ListReplicationFindingsRequest_NextToken *smithy.Schema
+
+var ListReplicationFindingsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListReplicationFindingsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListReplicationFindingsResponse_ReplicationFindingsList *smithy.Schema
+
+var ListReplicationFindingsResponse_ApproximateDriftedResourceCounts *smithy.Schema
+
+var ListReplicationFindingsResponse_NextToken *smithy.Schema
+
+var ListReplicationFindingsResponse_ResourceReplicationStatuses *smithy.Schema
 
 var ListRoutingProfileManualAssignmentQueuesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -23836,7 +24396,7 @@ var UpdateContactFlowNameResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateContactRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateContactRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateContactRequest_InstanceId *smithy.Schema
 
 var UpdateContactRequest_ContactId *smithy.Schema
@@ -23856,6 +24416,8 @@ var UpdateContactRequest_UserInfo *smithy.Schema
 var UpdateContactRequest_CustomerEndpoint *smithy.Schema
 
 var UpdateContactRequest_SystemEndpoint *smithy.Schema
+
+var UpdateContactRequest_AdditionalRecipients *smithy.Schema
 
 var UpdateContactResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -24198,6 +24760,22 @@ var UpdateNotificationContentResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateNotificationContentResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateOutboundEmailContactMessageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContactMessageRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateOutboundEmailContactMessageRequest_InstanceId *smithy.Schema
+
+var UpdateOutboundEmailContactMessageRequest_ContactId *smithy.Schema
+
+var UpdateOutboundEmailContactMessageRequest_EmailMessage *smithy.Schema
+
+var UpdateOutboundEmailContactMessageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContactMessageResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateOutboundEmailContactMessageResponse_ContactId *smithy.Schema
+
 var UpdateParticipantAuthenticationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateParticipantAuthenticationRequest",
@@ -24483,7 +25061,7 @@ var UpdateSecurityProfileRequest_GranularAccessControlConfiguration *smithy.Sche
 var UpdateTaskTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateTaskTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateTaskTemplateRequest_TaskTemplateId *smithy.Schema
 
 var UpdateTaskTemplateRequest_InstanceId *smithy.Schema
@@ -24496,6 +25074,8 @@ var UpdateTaskTemplateRequest_ContactFlowId *smithy.Schema
 
 var UpdateTaskTemplateRequest_SelfAssignFlowId *smithy.Schema
 
+var UpdateTaskTemplateRequest_ContactHooks *smithy.Schema
+
 var UpdateTaskTemplateRequest_Constraints *smithy.Schema
 
 var UpdateTaskTemplateRequest_Defaults *smithy.Schema
@@ -24507,7 +25087,7 @@ var UpdateTaskTemplateRequest_Fields *smithy.Schema
 var UpdateTaskTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateTaskTemplateResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var UpdateTaskTemplateResponse_InstanceId *smithy.Schema
 
 var UpdateTaskTemplateResponse_Id *smithy.Schema
@@ -24521,6 +25101,8 @@ var UpdateTaskTemplateResponse_Description *smithy.Schema
 var UpdateTaskTemplateResponse_ContactFlowId *smithy.Schema
 
 var UpdateTaskTemplateResponse_SelfAssignFlowId *smithy.Schema
+
+var UpdateTaskTemplateResponse_ContactHooks *smithy.Schema
 
 var UpdateTaskTemplateResponse_Constraints *smithy.Schema
 
@@ -24826,6 +25408,8 @@ func init() {
 	ActionType_ASSIGN_SLA = ActionType.AddMember("ASSIGN_SLA", smithyprelude.Unit)
 
 	ActionType_END_ASSOCIATED_TASKS = ActionType.AddMember("END_ASSOCIATED_TASKS", smithyprelude.Unit)
+
+	ActionType_END_ASSOCIATED_EMAILS = ActionType.AddMember("END_ASSOCIATED_EMAILS", smithyprelude.Unit)
 
 	ActionType_SUBMIT_AUTO_EVALUATION = ActionType.AddMember("SUBMIT_AUTO_EVALUATION", smithyprelude.Unit)
 
@@ -25351,6 +25935,14 @@ func init() {
 
 	_Applications_member = _Applications.AddMember("member", Application)
 
+	ApproximateDriftedResourceCount_Region = ApproximateDriftedResourceCount.AddMember("Region", _AwsRegion)
+
+	ApproximateDriftedResourceCount_Count = ApproximateDriftedResourceCount.AddMember("Count", _ApproximateTotalCount)
+
+	ApproximateDriftedResourceCount_Timestamp = ApproximateDriftedResourceCount.AddMember("Timestamp", _Timestamp)
+
+	_ApproximateDriftedResourceCounts_member = _ApproximateDriftedResourceCounts.AddMember("member", ApproximateDriftedResourceCount)
+
 	ArtifactStatus_APPROVED = ArtifactStatus.AddMember("APPROVED", smithyprelude.Unit)
 
 	ArtifactStatus_REJECTED = ArtifactStatus.AddMember("REJECTED", smithyprelude.Unit)
@@ -25414,6 +26006,8 @@ func init() {
 	FileStatusType_PROCESSING = FileStatusType.AddMember("PROCESSING", smithyprelude.Unit)
 
 	FileStatusType_FAILED = FileStatusType.AddMember("FAILED", smithyprelude.Unit)
+
+	FileStatusType_DRAFTING = FileStatusType.AddMember("DRAFTING", smithyprelude.Unit)
 
 	CreatedByInfo_ConnectUserArn = CreatedByInfo.AddMember("ConnectUserArn", _ARN)
 
@@ -25514,6 +26108,8 @@ func init() {
 	ReferenceStatus_PROCESSING = ReferenceStatus.AddMember("PROCESSING", smithyprelude.Unit)
 
 	ReferenceStatus_FAILED = ReferenceStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ReferenceStatus_DRAFTING = ReferenceStatus.AddMember("DRAFTING", smithyprelude.Unit)
 
 	AttachmentReference_Name = AttachmentReference.AddMember("Name", _ReferenceKey)
 
@@ -26419,6 +27015,22 @@ func init() {
 
 	Campaign_CampaignId = Campaign.AddMember("CampaignId", _CampaignId)
 
+	CaseEntry_CaseId = CaseEntry.AddMember("CaseId", _CaseId)
+
+	CaseEntry_CaseReferenceNumber = CaseEntry.AddMember("CaseReferenceNumber", _CaseReferenceNumber)
+
+	_CaseEntries_member = _CaseEntries.AddMember("member", CaseEntry)
+
+	CategoriesAttributeAndCondition_TagConditions = CategoriesAttributeAndCondition.AddMember("TagConditions", _TagAndConditionList)
+
+	_CategoriesAttributeOrConditionList_member = _CategoriesAttributeOrConditionList.AddMember("member", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_OrConditions = CategoriesAttributeFilter.AddMember("OrConditions", _CategoriesAttributeOrConditionList)
+
+	CategoriesAttributeFilter_AndCondition = CategoriesAttributeFilter.AddMember("AndCondition", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_TagCondition = CategoriesAttributeFilter.AddMember("TagCondition", TagCondition)
+
 	_ChannelList_member = _ChannelList.AddMember("member", Channel)
 
 	_Channels_member = _Channels.AddMember("member", Channel)
@@ -26857,6 +27469,52 @@ func init() {
 
 	GlobalResiliencyMetadata_TrafficDistributionGroupId = GlobalResiliencyMetadata.AddMember("TrafficDistributionGroupId", _TrafficDistributionGroupId)
 
+	_LanguageLocales_member = _LanguageLocales.AddMember("member", _LanguageLocale)
+
+	_ContactLensAnalyticsModeList_member = _ContactLensAnalyticsModeList.AddMember("member", _String)
+
+	ContactLensChannelConfiguration_AnalyticsModes = ContactLensChannelConfiguration.AddMember("AnalyticsModes", _ContactLensAnalyticsModeList)
+
+	_ContactLensRedactionEntitiesList_member = _ContactLensRedactionEntitiesList.AddMember("member", _String)
+
+	ContactLensRedactionConfiguration_Behavior = ContactLensRedactionConfiguration.AddMember("Behavior", _String)
+
+	ContactLensRedactionConfiguration_Policy = ContactLensRedactionConfiguration.AddMember("Policy", _String)
+
+	ContactLensRedactionConfiguration_Entities = ContactLensRedactionConfiguration.AddMember("Entities", _ContactLensRedactionEntitiesList)
+
+	ContactLensRedactionConfiguration_MaskMode = ContactLensRedactionConfiguration.AddMember("MaskMode", _String)
+
+	_ContactLensSummaryModeList_member = _ContactLensSummaryModeList.AddMember("member", _String)
+
+	ContactLensSummaryConfiguration_SummaryModes = ContactLensSummaryConfiguration.AddMember("SummaryModes", _ContactLensSummaryModeList)
+
+	ContactLensSentimentConfiguration_Behavior = ContactLensSentimentConfiguration.AddMember("Behavior", _String)
+
+	ConversationalAnalyticsConfiguration_Enabled = ConversationalAnalyticsConfiguration.AddMember("Enabled", _Boolean)
+
+	ConversationalAnalyticsConfiguration_LanguageLocale = ConversationalAnalyticsConfiguration.AddMember("LanguageLocale", _String)
+
+	ConversationalAnalyticsConfiguration_LanguageLocales = ConversationalAnalyticsConfiguration.AddMember("LanguageLocales", _LanguageLocales)
+
+	ConversationalAnalyticsConfiguration_ChannelConfiguration = ConversationalAnalyticsConfiguration.AddMember("ChannelConfiguration", ContactLensChannelConfiguration)
+
+	ConversationalAnalyticsConfiguration_RedactionConfiguration = ConversationalAnalyticsConfiguration.AddMember("RedactionConfiguration", ContactLensRedactionConfiguration)
+
+	ConversationalAnalyticsConfiguration_SummaryConfiguration = ConversationalAnalyticsConfiguration.AddMember("SummaryConfiguration", ContactLensSummaryConfiguration)
+
+	ConversationalAnalyticsConfiguration_SentimentConfiguration = ConversationalAnalyticsConfiguration.AddMember("SentimentConfiguration", ContactLensSentimentConfiguration)
+
+	ContactAnalysisReferenceState_Status = ContactAnalysisReferenceState.AddMember("Status", _String)
+
+	ContactAnalysisReferenceState_StatusReason = ContactAnalysisReferenceState.AddMember("StatusReason", _String)
+
+	ConversationalAnalytics_Configuration = ConversationalAnalytics.AddMember("Configuration", ConversationalAnalyticsConfiguration)
+
+	ConversationalAnalytics_ContactAnalysisReferenceState = ConversationalAnalytics.AddMember("ContactAnalysisReferenceState", ContactAnalysisReferenceState)
+
+	ContactLens_ConversationalAnalytics = ContactLens.AddMember("ConversationalAnalytics", ConversationalAnalytics)
+
 	Contact_Arn = Contact.AddMember("Arn", _ARN)
 
 	Contact_Id = Contact.AddMember("Id", _ContactId)
@@ -26943,6 +27601,8 @@ func init() {
 
 	Contact_TaskTemplateInfo = Contact.AddMember("TaskTemplateInfo", TaskTemplateInfoV2)
 
+	Contact_Cases = Contact.AddMember("Cases", _CaseEntries)
+
 	Contact_ContactDetails = Contact.AddMember("ContactDetails", ContactDetails)
 
 	Contact_OutboundStrategy = Contact.AddMember("OutboundStrategy", OutboundStrategy)
@@ -26952,6 +27612,8 @@ func init() {
 	Contact_NextContacts = Contact.AddMember("NextContacts", _NextContacts)
 
 	Contact_GlobalResiliencyMetadata = Contact.AddMember("GlobalResiliencyMetadata", GlobalResiliencyMetadata)
+
+	Contact_ContactLens = Contact.AddMember("ContactLens", ContactLens)
 
 	ParticipantRole_AGENT = ParticipantRole.AddMember("AGENT", smithyprelude.Unit)
 
@@ -27480,6 +28142,10 @@ func init() {
 	RecommenderConfig_Context = RecommenderConfig.AddMember("Context", _RecommenderContext)
 
 	ContentAttributes_RecommenderConfig = ContentAttributes.AddMember("RecommenderConfig", RecommenderConfig)
+
+	ContentDisposition_INLINE = ContentDisposition.AddMember("INLINE", smithyprelude.Unit)
+
+	ContentDisposition_ATTACHMENT = ContentDisposition.AddMember("ATTACHMENT", smithyprelude.Unit)
 
 	ControlPlaneUserAttributeFilter_OrConditions = ControlPlaneUserAttributeFilter.AddMember("OrConditions", _AttributeOrConditionList)
 
@@ -28590,6 +29256,198 @@ func init() {
 	EvaluationFormLanguageCode_ZH_CN = EvaluationFormLanguageCode.AddMember("ZH_CN", smithyprelude.Unit)
 
 	EvaluationFormLanguageCode_MS_MY = EvaluationFormLanguageCode.AddMember("MS_MY", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AF_ZA = EvaluationFormLanguageCode.AddMember("AF_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SQ_AL = EvaluationFormLanguageCode.AddMember("SQ_AL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AM_ET = EvaluationFormLanguageCode.AddMember("AM_ET", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AR_AE = EvaluationFormLanguageCode.AddMember("AR_AE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AR_SA = EvaluationFormLanguageCode.AddMember("AR_SA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HY_AM = EvaluationFormLanguageCode.AddMember("HY_AM", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EU_ES = EvaluationFormLanguageCode.AddMember("EU_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BE_BY = EvaluationFormLanguageCode.AddMember("BE_BY", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BS_BA = EvaluationFormLanguageCode.AddMember("BS_BA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BG_BG = EvaluationFormLanguageCode.AddMember("BG_BG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CA_ES = EvaluationFormLanguageCode.AddMember("CA_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CKB_IR = EvaluationFormLanguageCode.AddMember("CKB_IR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CKB_IQ = EvaluationFormLanguageCode.AddMember("CKB_IQ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ZH_TW = EvaluationFormLanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HR_HR = EvaluationFormLanguageCode.AddMember("HR_HR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CS_CZ = EvaluationFormLanguageCode.AddMember("CS_CZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DA_DK = EvaluationFormLanguageCode.AddMember("DA_DK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NL_BE = EvaluationFormLanguageCode.AddMember("NL_BE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NL_NL = EvaluationFormLanguageCode.AddMember("NL_NL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_AU = EvaluationFormLanguageCode.AddMember("EN_AU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_IN = EvaluationFormLanguageCode.AddMember("EN_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_IE = EvaluationFormLanguageCode.AddMember("EN_IE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_NZ = EvaluationFormLanguageCode.AddMember("EN_NZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_AB = EvaluationFormLanguageCode.AddMember("EN_AB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_SG = EvaluationFormLanguageCode.AddMember("EN_SG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_ZA = EvaluationFormLanguageCode.AddMember("EN_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_GB = EvaluationFormLanguageCode.AddMember("EN_GB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_WL = EvaluationFormLanguageCode.AddMember("EN_WL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FA_IR = EvaluationFormLanguageCode.AddMember("FA_IR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FA_AF = EvaluationFormLanguageCode.AddMember("FA_AF", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FI_FI = EvaluationFormLanguageCode.AddMember("FI_FI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FR_BE = EvaluationFormLanguageCode.AddMember("FR_BE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FR_CA = EvaluationFormLanguageCode.AddMember("FR_CA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GA_IE = EvaluationFormLanguageCode.AddMember("GA_IE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GL_ES = EvaluationFormLanguageCode.AddMember("GL_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KA_GE = EvaluationFormLanguageCode.AddMember("KA_GE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DE_AT = EvaluationFormLanguageCode.AddMember("DE_AT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DE_CH = EvaluationFormLanguageCode.AddMember("DE_CH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EL_GR = EvaluationFormLanguageCode.AddMember("EL_GR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GU_IN = EvaluationFormLanguageCode.AddMember("GU_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HT_HT = EvaluationFormLanguageCode.AddMember("HT_HT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HE_IL = EvaluationFormLanguageCode.AddMember("HE_IL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HI_IN = EvaluationFormLanguageCode.AddMember("HI_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HU_HU = EvaluationFormLanguageCode.AddMember("HU_HU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_IS_IS = EvaluationFormLanguageCode.AddMember("IS_IS", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ID_ID = EvaluationFormLanguageCode.AddMember("ID_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_JV_ID = EvaluationFormLanguageCode.AddMember("JV_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KM_KH = EvaluationFormLanguageCode.AddMember("KM_KH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KN_IN = EvaluationFormLanguageCode.AddMember("KN_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KK_KZ = EvaluationFormLanguageCode.AddMember("KK_KZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LO_LA = EvaluationFormLanguageCode.AddMember("LO_LA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LV_LV = EvaluationFormLanguageCode.AddMember("LV_LV", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LT_LT = EvaluationFormLanguageCode.AddMember("LT_LT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MK_MK = EvaluationFormLanguageCode.AddMember("MK_MK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ML_IN = EvaluationFormLanguageCode.AddMember("ML_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MR_IN = EvaluationFormLanguageCode.AddMember("MR_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NE_NP = EvaluationFormLanguageCode.AddMember("NE_NP", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NO_NO = EvaluationFormLanguageCode.AddMember("NO_NO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_OR_IN = EvaluationFormLanguageCode.AddMember("OR_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PS_AF = EvaluationFormLanguageCode.AddMember("PS_AF", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PL_PL = EvaluationFormLanguageCode.AddMember("PL_PL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PT_PT = EvaluationFormLanguageCode.AddMember("PT_PT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PA_IN = EvaluationFormLanguageCode.AddMember("PA_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_RO_RO = EvaluationFormLanguageCode.AddMember("RO_RO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_RU_RU = EvaluationFormLanguageCode.AddMember("RU_RU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SR_RS = EvaluationFormLanguageCode.AddMember("SR_RS", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SI_LK = EvaluationFormLanguageCode.AddMember("SI_LK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SK_SK = EvaluationFormLanguageCode.AddMember("SK_SK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SL_SI = EvaluationFormLanguageCode.AddMember("SL_SI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ES_MX = EvaluationFormLanguageCode.AddMember("ES_MX", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ES_US = EvaluationFormLanguageCode.AddMember("ES_US", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SU_ID = EvaluationFormLanguageCode.AddMember("SU_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_BI = EvaluationFormLanguageCode.AddMember("SW_BI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_KE = EvaluationFormLanguageCode.AddMember("SW_KE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_RW = EvaluationFormLanguageCode.AddMember("SW_RW", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_TZ = EvaluationFormLanguageCode.AddMember("SW_TZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_UG = EvaluationFormLanguageCode.AddMember("SW_UG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SV_SE = EvaluationFormLanguageCode.AddMember("SV_SE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TL_PH = EvaluationFormLanguageCode.AddMember("TL_PH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TA_IN = EvaluationFormLanguageCode.AddMember("TA_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TE_IN = EvaluationFormLanguageCode.AddMember("TE_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TH_TH = EvaluationFormLanguageCode.AddMember("TH_TH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TR_TR = EvaluationFormLanguageCode.AddMember("TR_TR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_UK_UA = EvaluationFormLanguageCode.AddMember("UK_UA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_UZ_UZ = EvaluationFormLanguageCode.AddMember("UZ_UZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_VI_VN = EvaluationFormLanguageCode.AddMember("VI_VN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ZU_ZA = EvaluationFormLanguageCode.AddMember("ZU_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MY_MM = EvaluationFormLanguageCode.AddMember("MY_MM", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SO_SO = EvaluationFormLanguageCode.AddMember("SO_SO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_YUE_HK = EvaluationFormLanguageCode.AddMember("YUE_HK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ET_EE = EvaluationFormLanguageCode.AddMember("ET_EE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HMN = EvaluationFormLanguageCode.AddMember("HMN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LG_UG = EvaluationFormLanguageCode.AddMember("LG_UG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CY_GB = EvaluationFormLanguageCode.AddMember("CY_GB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_XH_ZA = EvaluationFormLanguageCode.AddMember("XH_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BN_BD = EvaluationFormLanguageCode.AddMember("BN_BD", smithyprelude.Unit)
 
 	EvaluationFormLanguageConfiguration_FormLanguage = EvaluationFormLanguageConfiguration.AddMember("FormLanguage", EvaluationFormLanguageCode)
 
@@ -30135,6 +30993,10 @@ func init() {
 
 	NotificationType_WIDGET_ACTION = NotificationType.AddMember("WIDGET_ACTION", smithyprelude.Unit)
 
+	_OptionalEmailAddressRecipientList_member = _OptionalEmailAddressRecipientList.AddMember("member", EmailAddressInfo)
+
+	NullableAdditionalRecipients_CcEmailAddresses = NullableAdditionalRecipients.AddMember("CcEmailAddresses", _OptionalEmailAddressRecipientList)
+
 	NumberReference_Name = NumberReference.AddMember("Name", _ReferenceKey)
 
 	NumberReference_Value = NumberReference.AddMember("Value", _ReferenceValue)
@@ -30330,6 +31192,8 @@ func init() {
 	_PredefinedAttributeSummaryList_member = _PredefinedAttributeSummaryList.AddMember("member", PredefinedAttributeSummary)
 
 	PreEvaluationFilterResourceType_CONTACT = PreEvaluationFilterResourceType.AddMember("CONTACT", smithyprelude.Unit)
+
+	PreEvaluationFilterResourceType_CONTACT_EVALUATION = PreEvaluationFilterResourceType.AddMember("CONTACT_EVALUATION", smithyprelude.Unit)
 
 	PreEvaluationFilterType_TAG = PreEvaluationFilterType.AddMember("TAG", smithyprelude.Unit)
 
@@ -30591,6 +31455,8 @@ func init() {
 
 	_RealTimeContactAnalysisPointsOfInterest_member = _RealTimeContactAnalysisPointsOfInterest.AddMember("member", RealTimeContactAnalysisPointOfInterest)
 
+	RealTimeContactAnalysisCategoryDetails_RuleId = RealTimeContactAnalysisCategoryDetails.AddMember("RuleId", _RuleId256)
+
 	RealTimeContactAnalysisCategoryDetails_PointsOfInterest = RealTimeContactAnalysisCategoryDetails.AddMember("PointsOfInterest", _RealTimeContactAnalysisPointsOfInterest)
 
 	_RealTimeContactAnalysisCharacterIntervals_member = _RealTimeContactAnalysisCharacterIntervals.AddMember("member", RealTimeContactAnalysisCharacterInterval)
@@ -30733,6 +31599,8 @@ func init() {
 
 	_RealtimeContactAnalysisSegments_member = _RealtimeContactAnalysisSegments.AddMember("member", RealtimeContactAnalysisSegment)
 
+	RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter = RealTimeContactAnalysisSegmentsFilter.AddMember("CategoriesAttributeFilter", CategoriesAttributeFilter)
+
 	RealTimeContactAnalysisSegmentType_Transcript = RealTimeContactAnalysisSegmentType.AddMember("Transcript", smithyprelude.Unit)
 
 	RealTimeContactAnalysisSegmentType_Categories = RealTimeContactAnalysisSegmentType.AddMember("Categories", smithyprelude.Unit)
@@ -30809,6 +31677,24 @@ func init() {
 
 	ReplicationConfiguration_GlobalSignInEndpoint = ReplicationConfiguration.AddMember("GlobalSignInEndpoint", _GlobalSignInEndpoint)
 
+	ReplicationFinding_Arn = ReplicationFinding.AddMember("Arn", _ARN)
+
+	ReplicationFinding_Id = ReplicationFinding.AddMember("Id", _ResourceId)
+
+	ReplicationFinding_Region = ReplicationFinding.AddMember("Region", _AwsRegion)
+
+	ReplicationFinding_ResourceType = ReplicationFinding.AddMember("ResourceType", _ReplicationFindingResourceType)
+
+	ReplicationFinding_Name = ReplicationFinding.AddMember("Name", _ReplicationFindingResourceName)
+
+	ReplicationFinding_Operation = ReplicationFinding.AddMember("Operation", _ReplicationFindingOperation)
+
+	ReplicationFinding_ReferenceCode = ReplicationFinding.AddMember("ReferenceCode", _ReplicationFindingReferenceCode)
+
+	ReplicationFinding_Message = ReplicationFinding.AddMember("Message", _ReplicationFindingMessage)
+
+	_ReplicationFindingsList_member = _ReplicationFindingsList.AddMember("member", ReplicationFinding)
+
 	RequiredFieldInfo_Id = RequiredFieldInfo.AddMember("Id", TaskTemplateFieldIdentifier)
 
 	_RequiredTaskTemplateFields_member = _RequiredTaskTemplateFields.AddMember("member", RequiredFieldInfo)
@@ -30842,6 +31728,12 @@ func init() {
 	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
 
 	ResourceNotReadyException_Message = ResourceNotReadyException.AddMember("Message", _Message)
+
+	ResourceReplicationStatus_Region = ResourceReplicationStatus.AddMember("Region", _AwsRegion)
+
+	ResourceReplicationStatus_Status = ResourceReplicationStatus.AddMember("Status", _ResourceReplicationStatusValue)
+
+	_ResourceReplicationStatuses_member = _ResourceReplicationStatuses.AddMember("member", ResourceReplicationStatus)
 
 	TagSearchCondition_tagKey = TagSearchCondition.AddMember("tagKey", _TagKeyString)
 
@@ -31022,6 +31914,8 @@ func init() {
 	RuleAction_AssignSlaAction = RuleAction.AddMember("AssignSlaAction", AssignSlaActionDefinition)
 
 	RuleAction_EndAssociatedTasksAction = RuleAction.AddMember("EndAssociatedTasksAction", EndAssociatedTasksActionDefinition)
+
+	RuleAction_EndAssociatedEmailsAction = RuleAction.AddMember("EndAssociatedEmailsAction", EndAssociatedEmailsActionDefinition)
 
 	RuleAction_SubmitAutoEvaluationAction = RuleAction.AddMember("SubmitAutoEvaluationAction", SubmitAutoEvaluationActionDefinition)
 
@@ -31231,6 +32125,10 @@ func init() {
 
 	_TagRestrictedResourceList_member = _TagRestrictedResourceList.AddMember("member", _TagRestrictedResourceName)
 
+	SecurityProfileType_AWS_MANAGED = SecurityProfileType.AddMember("AWS_MANAGED", smithyprelude.Unit)
+
+	SecurityProfileType_CUSTOMER_MANAGED = SecurityProfileType.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
+
 	SecurityProfile_Id = SecurityProfile.AddMember("Id", _SecurityProfileId)
 
 	SecurityProfile_OrganizationResourceId = SecurityProfile.AddMember("OrganizationResourceId", _InstanceId)
@@ -31256,6 +32154,8 @@ func init() {
 	SecurityProfile_AllowedAccessControlHierarchyGroupId = SecurityProfile.AddMember("AllowedAccessControlHierarchyGroupId", _HierarchyGroupId)
 
 	SecurityProfile_GranularAccessControlConfiguration = SecurityProfile.AddMember("GranularAccessControlConfiguration", GranularAccessControlConfiguration)
+
+	SecurityProfile_Type = SecurityProfile.AddMember("Type", SecurityProfileType)
 
 	SecurityProfileItem_Id = SecurityProfileItem.AddMember("Id", _SecurityProfileId)
 
@@ -31283,6 +32183,8 @@ func init() {
 
 	SecurityProfileSearchSummary_Tags = SecurityProfileSearchSummary.AddMember("Tags", _TagMap)
 
+	SecurityProfileSearchSummary_Type = SecurityProfileSearchSummary.AddMember("Type", SecurityProfileType)
+
 	SecurityProfilesSearchFilter_TagFilter = SecurityProfilesSearchFilter.AddMember("TagFilter", ControlPlaneTagFilter)
 
 	_SecurityProfilesSearchSummaryList_member = _SecurityProfilesSearchSummaryList.AddMember("member", SecurityProfileSearchSummary)
@@ -31296,6 +32198,8 @@ func init() {
 	SecurityProfileSummary_LastModifiedTime = SecurityProfileSummary.AddMember("LastModifiedTime", _Timestamp)
 
 	SecurityProfileSummary_LastModifiedRegion = SecurityProfileSummary.AddMember("LastModifiedRegion", _RegionName)
+
+	SecurityProfileSummary_Type = SecurityProfileSummary.AddMember("Type", SecurityProfileType)
 
 	_SecurityProfileSummaryList_member = _SecurityProfileSummaryList.AddMember("member", SecurityProfileSummary)
 
@@ -31366,6 +32270,8 @@ func init() {
 	TaskTemplateConstraints_ReadOnlyFields = TaskTemplateConstraints.AddMember("ReadOnlyFields", _ReadOnlyTaskTemplateFields)
 
 	TaskTemplateConstraints_InvisibleFields = TaskTemplateConstraints.AddMember("InvisibleFields", _InvisibleTaskTemplateFields)
+
+	TaskTemplateContactHooks_WrapUpFlowId = TaskTemplateContactHooks.AddMember("WrapUpFlowId", _ContactFlowModuleId)
 
 	TaskTemplateDefaultFieldValue_Id = TaskTemplateDefaultFieldValue.AddMember("Id", TaskTemplateFieldIdentifier)
 
@@ -31584,6 +32490,16 @@ func init() {
 	TrafficType_GENERAL = TrafficType.AddMember("GENERAL", smithyprelude.Unit)
 
 	TrafficType_CAMPAIGN = TrafficType.AddMember("CAMPAIGN", smithyprelude.Unit)
+
+	UpdateOutboundEmailMessageSourceType_RAW = UpdateOutboundEmailMessageSourceType.AddMember("RAW", smithyprelude.Unit)
+
+	UpdateOutboundRawMessage_Body = UpdateOutboundRawMessage.AddMember("Body", _Body)
+
+	UpdateOutboundRawMessage_ContentType = UpdateOutboundRawMessage.AddMember("ContentType", _EmailMessageContentType)
+
+	UpdateOutboundEmailContent_MessageSourceType = UpdateOutboundEmailContent.AddMember("MessageSourceType", UpdateOutboundEmailMessageSourceType)
+
+	UpdateOutboundEmailContent_RawMessage = UpdateOutboundEmailContent.AddMember("RawMessage", UpdateOutboundRawMessage)
 
 	UpdateParticipantRoleConfigChannelInfo_Chat = UpdateParticipantRoleConfigChannelInfo.AddMember("Chat", ChatParticipantRoleConfig)
 
@@ -32959,6 +33875,8 @@ func init() {
 
 	CreateTaskTemplateRequest_SelfAssignFlowId = CreateTaskTemplateRequest.AddMember("SelfAssignFlowId", _ContactFlowId)
 
+	CreateTaskTemplateRequest_ContactHooks = CreateTaskTemplateRequest.AddMember("ContactHooks", TaskTemplateContactHooks)
+
 	CreateTaskTemplateRequest_Constraints = CreateTaskTemplateRequest.AddMember("Constraints", TaskTemplateConstraints)
 
 	CreateTaskTemplateRequest_Defaults = CreateTaskTemplateRequest.AddMember("Defaults", TaskTemplateDefaults)
@@ -33755,6 +34673,8 @@ func init() {
 
 	GetAttachedFileRequest_AssociatedResourceArn = GetAttachedFileRequest.AddMember("AssociatedResourceArn", _ARN, &smithytraits.HTTPQuery{Name: "associatedResourceArn"})
 
+	GetAttachedFileRequest_UrlContentDisposition = GetAttachedFileRequest.AddMember("UrlContentDisposition", ContentDisposition, &smithytraits.HTTPQuery{Name: "urlContentDisposition"})
+
 	GetAttachedFileResponse_FileArn = GetAttachedFileResponse.AddMember("FileArn", _ARN)
 
 	GetAttachedFileResponse_FileId = GetAttachedFileResponse.AddMember("FileId", _FileId)
@@ -33961,6 +34881,8 @@ func init() {
 
 	GetTaskTemplateResponse_SelfAssignFlowId = GetTaskTemplateResponse.AddMember("SelfAssignFlowId", _ContactFlowId)
 
+	GetTaskTemplateResponse_ContactHooks = GetTaskTemplateResponse.AddMember("ContactHooks", TaskTemplateContactHooks)
+
 	GetTaskTemplateResponse_Constraints = GetTaskTemplateResponse.AddMember("Constraints", TaskTemplateConstraints)
 
 	GetTaskTemplateResponse_Defaults = GetTaskTemplateResponse.AddMember("Defaults", TaskTemplateDefaults)
@@ -34000,6 +34922,8 @@ func init() {
 	GetTrafficDistributionResponse_SignInConfig = GetTrafficDistributionResponse.AddMember("SignInConfig", SignInConfig)
 
 	GetTrafficDistributionResponse_AgentConfig = GetTrafficDistributionResponse.AddMember("AgentConfig", AgentConfig)
+
+	GetTrafficDistributionResponse_LastFailoverTime = GetTrafficDistributionResponse.AddMember("LastFailoverTime", _Timestamp)
 
 	ImportPhoneNumberRequest_InstanceId = ImportPhoneNumberRequest.AddMember("InstanceId", _InstanceId)
 
@@ -34591,6 +35515,8 @@ func init() {
 
 	ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("SegmentTypes", _RealTimeContactAnalysisSegmentTypes)
 
+	ListRealtimeContactAnalysisSegmentsV2Request_ListFilter = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("ListFilter", RealTimeContactAnalysisSegmentsFilter)
+
 	ListRealtimeContactAnalysisSegmentsV2Response_Channel = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("Channel", RealTimeContactAnalysisSupportedChannel)
 
 	ListRealtimeContactAnalysisSegmentsV2Response_Status = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("Status", RealTimeContactAnalysisStatus)
@@ -34598,6 +35524,22 @@ func init() {
 	ListRealtimeContactAnalysisSegmentsV2Response_Segments = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("Segments", _RealtimeContactAnalysisSegments)
 
 	ListRealtimeContactAnalysisSegmentsV2Response_NextToken = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("NextToken", _LargeNextToken)
+
+	ListReplicationFindingsRequest_InstanceId = ListReplicationFindingsRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	ListReplicationFindingsRequest_ResourceType = ListReplicationFindingsRequest.AddMember("ResourceType", _ReplicationFindingResourceType, &smithytraits.HTTPQuery{Name: "resourceType"})
+
+	ListReplicationFindingsRequest_MaxResults = ListReplicationFindingsRequest.AddMember("MaxResults", _MaxResult100, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListReplicationFindingsRequest_NextToken = ListReplicationFindingsRequest.AddMember("NextToken", _LargeNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListReplicationFindingsResponse_ReplicationFindingsList = ListReplicationFindingsResponse.AddMember("ReplicationFindingsList", _ReplicationFindingsList)
+
+	ListReplicationFindingsResponse_ApproximateDriftedResourceCounts = ListReplicationFindingsResponse.AddMember("ApproximateDriftedResourceCounts", _ApproximateDriftedResourceCounts)
+
+	ListReplicationFindingsResponse_NextToken = ListReplicationFindingsResponse.AddMember("NextToken", _LargeNextToken)
+
+	ListReplicationFindingsResponse_ResourceReplicationStatuses = ListReplicationFindingsResponse.AddMember("ResourceReplicationStatuses", _ResourceReplicationStatuses)
 
 	ListRoutingProfileManualAssignmentQueuesRequest_InstanceId = ListRoutingProfileManualAssignmentQueuesRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
@@ -36083,6 +37025,8 @@ func init() {
 
 	UpdateContactRequest_SystemEndpoint = UpdateContactRequest.AddMember("SystemEndpoint", Endpoint)
 
+	UpdateContactRequest_AdditionalRecipients = UpdateContactRequest.AddMember("AdditionalRecipients", NullableAdditionalRecipients)
+
 	UpdateContactRoutingDataRequest_InstanceId = UpdateContactRoutingDataRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
 	UpdateContactRoutingDataRequest_ContactId = UpdateContactRoutingDataRequest.AddMember("ContactId", _ContactId, &smithytraits.HTTPLabel{})
@@ -36291,6 +37235,14 @@ func init() {
 
 	UpdateNotificationContentRequest_Content = UpdateNotificationContentRequest.AddMember("Content", _NotificationContent)
 
+	UpdateOutboundEmailContactMessageRequest_InstanceId = UpdateOutboundEmailContactMessageRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
+
+	UpdateOutboundEmailContactMessageRequest_ContactId = UpdateOutboundEmailContactMessageRequest.AddMember("ContactId", _ContactId, &smithytraits.HTTPLabel{})
+
+	UpdateOutboundEmailContactMessageRequest_EmailMessage = UpdateOutboundEmailContactMessageRequest.AddMember("EmailMessage", UpdateOutboundEmailContent)
+
+	UpdateOutboundEmailContactMessageResponse_ContactId = UpdateOutboundEmailContactMessageResponse.AddMember("ContactId", _ContactId)
+
 	UpdateParticipantAuthenticationRequest_State = UpdateParticipantAuthenticationRequest.AddMember("State", _ParticipantToken)
 
 	UpdateParticipantAuthenticationRequest_InstanceId = UpdateParticipantAuthenticationRequest.AddMember("InstanceId", _InstanceId)
@@ -36483,6 +37435,8 @@ func init() {
 
 	UpdateTaskTemplateRequest_SelfAssignFlowId = UpdateTaskTemplateRequest.AddMember("SelfAssignFlowId", _ContactFlowId)
 
+	UpdateTaskTemplateRequest_ContactHooks = UpdateTaskTemplateRequest.AddMember("ContactHooks", TaskTemplateContactHooks)
+
 	UpdateTaskTemplateRequest_Constraints = UpdateTaskTemplateRequest.AddMember("Constraints", TaskTemplateConstraints)
 
 	UpdateTaskTemplateRequest_Defaults = UpdateTaskTemplateRequest.AddMember("Defaults", TaskTemplateDefaults)
@@ -36504,6 +37458,8 @@ func init() {
 	UpdateTaskTemplateResponse_ContactFlowId = UpdateTaskTemplateResponse.AddMember("ContactFlowId", _ContactFlowId)
 
 	UpdateTaskTemplateResponse_SelfAssignFlowId = UpdateTaskTemplateResponse.AddMember("SelfAssignFlowId", _ContactFlowId)
+
+	UpdateTaskTemplateResponse_ContactHooks = UpdateTaskTemplateResponse.AddMember("ContactHooks", TaskTemplateContactHooks)
 
 	UpdateTaskTemplateResponse_Constraints = UpdateTaskTemplateResponse.AddMember("Constraints", TaskTemplateConstraints)
 

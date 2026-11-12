@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DeleteIpGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DeleteIpGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"GroupId":"__GroupId__"}
+¿gGroupIdk__GroupId__ÿ

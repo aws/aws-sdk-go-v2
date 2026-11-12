@@ -125,7 +125,9 @@ func (v *GenerateMacInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.GenerateMacRequest_DryRun, *v.DryRun)
 	}
-	serializeGrantTokenList(s, schemas.GenerateMacRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.GenerateMacRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.GenerateMacRequest_KeyId, *v.KeyId)
 	}

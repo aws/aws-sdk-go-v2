@@ -126,7 +126,9 @@ func (v *ListStateMachineAliasesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStateMachineAliasesOutput_nextToken, *v.NextToken)
 	}
-	serializeStateMachineAliasList(s, schemas.ListStateMachineAliasesOutput_stateMachineAliases, v.StateMachineAliases)
+	if v.StateMachineAliases != nil {
+		serializeStateMachineAliasList(s, schemas.ListStateMachineAliasesOutput_stateMachineAliases, v.StateMachineAliases)
+	}
 }
 func (v *ListStateMachineAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStateMachineAliasesOutput, func(s *smithy.Schema) error {

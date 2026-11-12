@@ -13088,6 +13088,33 @@ func TestUpdateResponseSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeResourcePermissions(t *testing.T) {
+	want := &DescribeResourcePermissionsOutput{
+		RoleType:               types.ServiceRoleType("QUICKSIGHT_MANAGED"),
+		CustomerManagedRoleArn: ptr.String("__CustomerManagedRoleArn__"),
+		RequestId:              ptr.String("__RequestId__"),
+		Status:                 200,
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeResourcePermissions, schemas.DescribeResourcePermissionsResponse, schemas.DescribeResourcePermissionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeResourcePermissions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeRoleCustomPermission(t *testing.T) {
 	want := &DescribeRoleCustomPermissionOutput{
 		CustomPermissionsName: ptr.String("__CustomPermissionsName__"),
@@ -27931,6 +27958,33 @@ func TestUpdateResponseSnapshot_UpdateRefreshSchedule(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateRefreshSchedule.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateResourcePermissions(t *testing.T) {
+	want := &UpdateResourcePermissionsOutput{
+		RoleType:               types.ServiceRoleType("QUICKSIGHT_MANAGED"),
+		CustomerManagedRoleArn: ptr.String("__CustomerManagedRoleArn__"),
+		RequestId:              ptr.String("__RequestId__"),
+		Status:                 200,
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateResourcePermissions, schemas.UpdateResourcePermissionsResponse, schemas.UpdateResourcePermissionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateResourcePermissions.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

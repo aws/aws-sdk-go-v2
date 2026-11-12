@@ -98,7 +98,9 @@ func (v *ListIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentitiesList(s, schemas.ListIdentitiesResponse_Identities, v.Identities)
+	if v.Identities != nil {
+		serializeIdentitiesList(s, schemas.ListIdentitiesResponse_Identities, v.Identities)
+	}
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.ListIdentitiesResponse_IdentityPoolId, *v.IdentityPoolId)
 	}

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type DeletePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.DeletePipelineRequest_pipelineName, *v.PipelineName)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DeletePipelineRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for DeletePipeline operation.
 type DeletePipelineOutput struct {
 
@@ -60,13 +77,34 @@ type DeletePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.DeletePipelineResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeletePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePipelineResponse_status:
+			v.Status = &types.ResourceStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePipeline, schemas.DeletePipelineRequest, schemas.DeletePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePipeline, schemas.DeletePipelineRequest, schemas.DeletePipelineResponse), output: &DeletePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

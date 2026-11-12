@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","summaries":[{"createdAt":946684800,"runId":"__RunId__","scanName":"__ScanName__","scanNameArn":"__ScanNameArn__","scanState":"InProgress","updatedAt":946684800},{"createdAt":946684800,"runId":"__RunId__","scanName":"__ScanName__","scanNameArn":"__ScanNameArn__","scanState":"InProgress","updatedAt":946684800}]}

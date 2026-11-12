@@ -64,7 +64,9 @@ func (v *CreateCoreDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCoreDefinitionRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateCoreDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCoreDefinitionRequest_tags, v.Tags)
+	}
 }
 
 type CreateCoreDefinitionOutput struct {

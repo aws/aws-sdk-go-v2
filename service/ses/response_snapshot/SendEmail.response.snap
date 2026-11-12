@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SendEmailResponse><SendEmailResult><MessageId>__MessageId__</MessageId></SendEmailResult></SendEmailResponse>

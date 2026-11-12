@@ -185,8 +185,12 @@ func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecondaryStatus != "" {
 		s.WriteString(schemas.DescribeJobResponse_SecondaryStatus, string(v.SecondaryStatus))
 	}
-	serializeJobSecondaryStatusTransitions(s, schemas.DescribeJobResponse_SecondaryStatusTransitions, v.SecondaryStatusTransitions)
-	serializeTagList(s, schemas.DescribeJobResponse_Tags, v.Tags)
+	if v.SecondaryStatusTransitions != nil {
+		serializeJobSecondaryStatusTransitions(s, schemas.DescribeJobResponse_SecondaryStatusTransitions, v.SecondaryStatusTransitions)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DescribeJobResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeJobResponse, func(s *smithy.Schema) error {

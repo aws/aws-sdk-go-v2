@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Errors":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","MetricDefinitionId":"__MetricDefinitionId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","MetricDefinitionId":"__MetricDefinitionId__"}],"MetricDefinitionIds":["__Member__","__Member__"]}

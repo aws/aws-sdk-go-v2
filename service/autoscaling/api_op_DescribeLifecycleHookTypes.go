@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,22 @@ type DescribeLifecycleHookTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLifecycleHookTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLifecycleHookTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeLifecycleHookTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeLifecycleHookTypesOutput struct {
 
 	// The lifecycle hook types.
@@ -44,13 +62,31 @@ type DescribeLifecycleHookTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLifecycleHookTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLifecycleHookTypesAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLifecycleHookTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleHookTypes != nil {
+		serializeAutoScalingNotificationTypes(s, schemas.DescribeLifecycleHookTypesAnswer_LifecycleHookTypes, v.LifecycleHookTypes)
+	}
+}
+func (v *DescribeLifecycleHookTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLifecycleHookTypesAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLifecycleHookTypesAnswer_LifecycleHookTypes:
+			return deserializeAutoScalingNotificationTypes(d, schemas.DescribeLifecycleHookTypesAnswer_LifecycleHookTypes, &v.LifecycleHookTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLifecycleHookTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLifecycleHookTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLifecycleHookTypes, nil, schemas.DescribeLifecycleHookTypesAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeLifecycleHookTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLifecycleHookTypes, nil, schemas.DescribeLifecycleHookTypesAnswer), output: &DescribeLifecycleHookTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -173,7 +173,9 @@ func (v *SearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchOutput_NextToken, *v.NextToken)
 	}
-	serializeResourceList(s, schemas.SearchOutput_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.SearchOutput_Resources, v.Resources)
+	}
 	if v.ViewArn != nil {
 		s.WriteString(schemas.SearchOutput_ViewArn, *v.ViewArn)
 	}

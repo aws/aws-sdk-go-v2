@@ -403,6 +403,12 @@ var _ClientID = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClientID",
 }, smithy.ShapeTypeString, 0)
 
+var CloudWatchLogsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.xray",
+	Name:      "CloudWatchLogsConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var CloudWatchLogsConfiguration_SpansLogGroupKmsKeyId *smithy.Schema
+
 var _CooldownWindowMinutes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "CooldownWindowMinutes",
@@ -965,6 +971,11 @@ var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InvalidRequestException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
+
+var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.xray",
+	Name:      "KmsKeyId",
+}, smithy.ShapeTypeString, 0)
 
 var _LinksList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
@@ -2547,8 +2558,10 @@ var UpdateSamplingRuleResult_SamplingRuleRecord *smithy.Schema
 var UpdateTraceSegmentDestinationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
 	Name:      "UpdateTraceSegmentDestinationRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var UpdateTraceSegmentDestinationRequest_Destination *smithy.Schema
+
+var UpdateTraceSegmentDestinationRequest_CloudWatchLogsConfiguration *smithy.Schema
 
 var UpdateTraceSegmentDestinationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.xray",
@@ -2620,6 +2633,8 @@ func init() {
 	BackendConnectionErrors_UnknownHostCount = BackendConnectionErrors.AddMember("UnknownHostCount", _NullableInteger)
 
 	BackendConnectionErrors_OtherCount = BackendConnectionErrors.AddMember("OtherCount", _NullableInteger)
+
+	CloudWatchLogsConfiguration_SpansLogGroupKmsKeyId = CloudWatchLogsConfiguration.AddMember("SpansLogGroupKmsKeyId", _KmsKeyId)
 
 	ErrorStatistics_ThrottleCount = ErrorStatistics.AddMember("ThrottleCount", _NullableLong)
 
@@ -3636,6 +3651,8 @@ func init() {
 	UpdateSamplingRuleResult_SamplingRuleRecord = UpdateSamplingRuleResult.AddMember("SamplingRuleRecord", SamplingRuleRecord)
 
 	UpdateTraceSegmentDestinationRequest_Destination = UpdateTraceSegmentDestinationRequest.AddMember("Destination", TraceSegmentDestination)
+
+	UpdateTraceSegmentDestinationRequest_CloudWatchLogsConfiguration = UpdateTraceSegmentDestinationRequest.AddMember("CloudWatchLogsConfiguration", CloudWatchLogsConfiguration)
 
 	UpdateTraceSegmentDestinationResult_Destination = UpdateTraceSegmentDestinationResult.AddMember("Destination", TraceSegmentDestination)
 

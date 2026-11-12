@@ -46,7 +46,8 @@ import (
 // deletion. Instead, first [disable the key]and monitor CloudTrail for DisabledException entries,
 // as there could be infrequent workflows that are dependent on the key. By looking
 // for this exception, you can identify potential dependencies and workload
-// failures before they occur.
+// failures before they occur. CloudTrail remains the authoritative source for all
+// API calls made to your key.
 //
 // Cross-account use: No. You cannot perform this operation on a KMS key in a
 // different Amazon Web Services account.
@@ -126,7 +127,7 @@ type GetKeyLastUsageOutput struct {
 
 	// Contains usage information about the last time the KMS key was used for a
 	// successful cryptographic operation. If the key has not been used since tracking
-	// began, this response element is empty.
+	// began, this response element is an empty object.
 	KeyLastUsage *types.KeyLastUsageData
 
 	// The date from which KMS began recording cryptographic activity for this key, or

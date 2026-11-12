@@ -95,7 +95,9 @@ func (v *StartImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.StartImportJobRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeContentMetadata(s, schemas.StartImportJobRequest_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeContentMetadata(s, schemas.StartImportJobRequest_metadata, v.Metadata)
+	}
 	if v.UploadId != nil {
 		s.WriteString(schemas.StartImportJobRequest_uploadId, *v.UploadId)
 	}

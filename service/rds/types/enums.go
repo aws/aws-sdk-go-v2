@@ -225,6 +225,39 @@ func (DatabaseInsightsMode) Values() []DatabaseInsightsMode {
 	}
 }
 
+type DBCapacityReservationState string
+
+// Enum values for DBCapacityReservationState
+const (
+	DBCapacityReservationStateActive      DBCapacityReservationState = "active"
+	DBCapacityReservationStateExpired     DBCapacityReservationState = "expired"
+	DBCapacityReservationStateCancelled   DBCapacityReservationState = "cancelled"
+	DBCapacityReservationStatePending     DBCapacityReservationState = "pending"
+	DBCapacityReservationStateFailed      DBCapacityReservationState = "failed"
+	DBCapacityReservationStateAssessing   DBCapacityReservationState = "assessing"
+	DBCapacityReservationStateScheduled   DBCapacityReservationState = "scheduled"
+	DBCapacityReservationStateDelayed     DBCapacityReservationState = "delayed"
+	DBCapacityReservationStateUnsupported DBCapacityReservationState = "unsupported"
+)
+
+// Values returns all known values for DBCapacityReservationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DBCapacityReservationState) Values() []DBCapacityReservationState {
+	return []DBCapacityReservationState{
+		"active",
+		"expired",
+		"cancelled",
+		"pending",
+		"failed",
+		"assessing",
+		"scheduled",
+		"delayed",
+		"unsupported",
+	}
+}
+
 type DBProxyEndpointStatus string
 
 // Enum values for DBProxyEndpointStatus
@@ -320,6 +353,25 @@ func (DefaultAuthScheme) Values() []DefaultAuthScheme {
 	return []DefaultAuthScheme{
 		"IAM_AUTH",
 		"NONE",
+	}
+}
+
+type EndDateType string
+
+// Enum values for EndDateType
+const (
+	EndDateTypeUnlimited EndDateType = "unlimited"
+	EndDateTypeLimited   EndDateType = "limited"
+)
+
+// Values returns all known values for EndDateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndDateType) Values() []EndDateType {
+	return []EndDateType{
+		"unlimited",
+		"limited",
 	}
 }
 

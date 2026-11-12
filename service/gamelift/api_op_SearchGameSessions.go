@@ -253,7 +253,9 @@ func (v *SearchGameSessionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchGameSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGameSessionList(s, schemas.SearchGameSessionsOutput_GameSessions, v.GameSessions)
+	if v.GameSessions != nil {
+		serializeGameSessionList(s, schemas.SearchGameSessionsOutput_GameSessions, v.GameSessions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchGameSessionsOutput_NextToken, *v.NextToken)
 	}

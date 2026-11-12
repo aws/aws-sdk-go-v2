@@ -137,7 +137,9 @@ func (v *VerifyPinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryAccountNumber != nil {
 		s.WriteString(schemas.VerifyPinDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
 	}
-	serializePinVerificationAttributes(s, schemas.VerifyPinDataInput_VerificationAttributes, v.VerificationAttributes)
+	if v.VerificationAttributes != nil {
+		serializePinVerificationAttributes(s, schemas.VerifyPinDataInput_VerificationAttributes, v.VerificationAttributes)
+	}
 	if v.VerificationKeyIdentifier != nil {
 		s.WriteString(schemas.VerifyPinDataInput_VerificationKeyIdentifier, *v.VerificationKeyIdentifier)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetTemplateResponse><GetTemplateResult><Template><HtmlPart>__HtmlPart__</HtmlPart><SubjectPart>__SubjectPart__</SubjectPart><TemplateName>__TemplateName__</TemplateName><TextPart>__TextPart__</TextPart></Template></GetTemplateResult></GetTemplateResponse>

@@ -94,10 +94,23 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 // Each UsageAllocation indicates the usage quantity for a specific set of tags.
 type UsageAllocation struct {
 
-	// The total quantity allocated to this bucket of usage.
+	// The total quantity allocated to this bucket of usage, as a whole number.
 	//
-	// This member is required.
+	// Use AllocatedUsageQuantityAsDecimal instead. Each allocation must specify
+	// exactly one of AllocatedUsageQuantity or AllocatedUsageQuantityAsDecimal .
+	//
+	// Deprecated: Use AllocatedUsageQuantityAsDecimal instead.
 	AllocatedUsageQuantity *int32
+
+	// The total quantity allocated to this bucket of usage, as a decimal string. Use
+	// this when the usage quantity of the request or usage record is specified as a
+	// decimal ( UsageQuantityAsDecimal or QuantityAsDecimal ).
+	//
+	// A non-negative decimal number, for example 17.42 .
+	//
+	// Each allocation must specify exactly one of AllocatedUsageQuantity or
+	// AllocatedUsageQuantityAsDecimal .
+	AllocatedUsageQuantityAsDecimal *string
 
 	// The set of tags that define the bucket of usage. For the bucket of items with
 	// no tags, this parameter can be left out.
@@ -116,7 +129,12 @@ func (v *UsageAllocation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedUsageQuantity != nil {
 		s.WriteInt32(schemas.UsageAllocation_AllocatedUsageQuantity, *v.AllocatedUsageQuantity)
 	}
-	serializeTagList(s, schemas.UsageAllocation_Tags, v.Tags)
+	if v.AllocatedUsageQuantityAsDecimal != nil {
+		s.WriteString(schemas.UsageAllocation_AllocatedUsageQuantityAsDecimal, *v.AllocatedUsageQuantityAsDecimal)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UsageAllocation_Tags, v.Tags)
+	}
 }
 func (v *UsageAllocation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageAllocation, func(s *smithy.Schema) error {
@@ -124,6 +142,9 @@ func (v *UsageAllocation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UsageAllocation_AllocatedUsageQuantity:
 			v.AllocatedUsageQuantity = new(int32)
 			return d.ReadInt32(schemas.UsageAllocation_AllocatedUsageQuantity, v.AllocatedUsageQuantity)
+		case schemas.UsageAllocation_AllocatedUsageQuantityAsDecimal:
+			v.AllocatedUsageQuantityAsDecimal = new(string)
+			return d.ReadString(schemas.UsageAllocation_AllocatedUsageQuantityAsDecimal, v.AllocatedUsageQuantityAsDecimal)
 		case schemas.UsageAllocation_Tags:
 			return deserializeTagList(d, schemas.UsageAllocation_Tags, &v.Tags)
 		}
@@ -184,11 +205,36 @@ type UsageRecord struct {
 	LicenseArn *string
 
 	// The quantity of usage consumed by the customer for the given dimension and
-	// time. Defaults to 0 if not specified.
+	// time, as a whole number. Defaults to 0 if neither Quantity nor QuantityAsDecimal
+	// is specified.
+	//
+	// Use QuantityAsDecimal instead. You can't specify both Quantity and
+	// QuantityAsDecimal in a usage record.
+	//
+	// Deprecated: Use QuantityAsDecimal instead.
 	Quantity *int32
 
+	// The quantity of usage consumed by the customer for the given dimension and
+	// time, as a decimal string. Use this instead of Quantity to report fractional
+	// usage.
+	//
+	// A non-negative decimal number, for example 17.42 .
+	//
+	// You can't specify both Quantity and QuantityAsDecimal in a usage record. If you
+	// provide UsageAllocations , each allocation must use
+	// AllocatedUsageQuantityAsDecimal . If any usage record fails these checks, the
+	// entire BatchMeterUsage request fails and no records are processed.
+	//
+	// Quantities are compared by value when checking for duplicate records, so 17 ,
+	// 17.0 , and 17.00 are the same quantity, whether you send it in Quantity or
+	// QuantityAsDecimal .
+	QuantityAsDecimal *string
+
 	// The set of UsageAllocations to submit. The sum of all UsageAllocation
-	// quantities must equal the Quantity of the UsageRecord .
+	// quantities must equal the quantity of the UsageRecord ( Quantity or
+	// QuantityAsDecimal ). Allocations must use the same type of quantity as the usage
+	// record: AllocatedUsageQuantity with Quantity , or
+	// AllocatedUsageQuantityAsDecimal with QuantityAsDecimal .
 	UsageAllocations []UsageAllocation
 
 	noSmithyDocumentSerde
@@ -216,10 +262,15 @@ func (v *UsageRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Quantity != nil {
 		s.WriteInt32(schemas.UsageRecord_Quantity, *v.Quantity)
 	}
+	if v.QuantityAsDecimal != nil {
+		s.WriteString(schemas.UsageRecord_QuantityAsDecimal, *v.QuantityAsDecimal)
+	}
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.UsageRecord_Timestamp, *v.Timestamp)
 	}
-	serializeUsageAllocations(s, schemas.UsageRecord_UsageAllocations, v.UsageAllocations)
+	if v.UsageAllocations != nil {
+		serializeUsageAllocations(s, schemas.UsageRecord_UsageAllocations, v.UsageAllocations)
+	}
 }
 func (v *UsageRecord) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageRecord, func(s *smithy.Schema) error {
@@ -239,6 +290,9 @@ func (v *UsageRecord) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UsageRecord_Quantity:
 			v.Quantity = new(int32)
 			return d.ReadInt32(schemas.UsageRecord_Quantity, v.Quantity)
+		case schemas.UsageRecord_QuantityAsDecimal:
+			v.QuantityAsDecimal = new(string)
+			return d.ReadString(schemas.UsageRecord_QuantityAsDecimal, v.QuantityAsDecimal)
 		case schemas.UsageRecord_Timestamp:
 			v.Timestamp = new(time.Time)
 			return d.ReadTime(schemas.UsageRecord_Timestamp, v.Timestamp)

@@ -4,6 +4,8 @@ package devopsguru
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type RemoveNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveNotificationChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveNotificationChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveNotificationChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RemoveNotificationChannelRequest_Id, *v.Id)
+	}
+}
+
 type RemoveNotificationChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type RemoveNotificationChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveNotificationChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveNotificationChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveNotificationChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveNotificationChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveNotificationChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveNotificationChannel, schemas.RemoveNotificationChannelRequest, schemas.RemoveNotificationChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveNotificationChannel, schemas.RemoveNotificationChannelRequest, schemas.RemoveNotificationChannelResponse), output: &RemoveNotificationChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

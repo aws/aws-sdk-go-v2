@@ -12,8 +12,8 @@ import (
 // Deletes a Cases domain.
 //
 // After deleting your domain you must disassociate the deleted domain from your
-// Amazon Connect instance with another API call before being able to use Cases
-// again with this Amazon Connect instance. See [DeleteIntegrationAssociation].
+// Connect Customer instance with another API call before being able to use Cases
+// again with this Connect Customer instance. See [DeleteIntegrationAssociation].
 //
 // [DeleteIntegrationAssociation]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {

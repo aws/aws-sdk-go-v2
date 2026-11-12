@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/CopyProduct
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.CopyProduct
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","CopyOptions":["CopyTags","CopyTags"],"IdempotencyToken":"__IdempotencyToken__","SourceProductArn":"__SourceProductArn__","SourceProvisioningArtifactIdentifiers":[{"key0":"__Value__"},{"key0":"__Value__"}],"TargetProductId":"__TargetProductId__","TargetProductName":"__TargetProductName__"}
+¿nAcceptLanguager__AcceptLanguage__kCopyOptionsŸhCopyTagshCopyTagsÿpIdempotencyTokent__IdempotencyToken__pSourceProductArnt__SourceProductArn__x%SourceProvisioningArtifactIdentifiersŸ¿dkey0i__Value__ÿ¿dkey0i__Value__ÿÿoTargetProductIds__TargetProductId__qTargetProductNameu__TargetProductName__ÿ

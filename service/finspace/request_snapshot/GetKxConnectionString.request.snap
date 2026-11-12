@@ -1,3 +1,0 @@
-GET /kx/environments/__EnvironmentId__/connectionString?clusterName=__ClusterName__&userArn=__UserArn__
-
-

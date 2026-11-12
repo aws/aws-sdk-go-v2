@@ -4,7 +4,9 @@ package osis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,45 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferOptions != nil {
+		s.WriteStruct(schemas.UpdatePipelineRequest_BufferOptions)
+		v.BufferOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionAtRestOptions != nil {
+		s.WriteStruct(schemas.UpdatePipelineRequest_EncryptionAtRestOptions)
+		v.EncryptionAtRestOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogPublishingOptions != nil {
+		s.WriteStruct(schemas.UpdatePipelineRequest_LogPublishingOptions)
+		v.LogPublishingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxUnits != nil {
+		s.WriteInt32(schemas.UpdatePipelineRequest_MaxUnits, *v.MaxUnits)
+	}
+	if v.MinUnits != nil {
+		s.WriteInt32(schemas.UpdatePipelineRequest_MinUnits, *v.MinUnits)
+	}
+	if v.PipelineConfigurationBody != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_PipelineConfigurationBody, *v.PipelineConfigurationBody)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_PipelineName, *v.PipelineName)
+	}
+	if v.PipelineRoleArn != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_PipelineRoleArn, *v.PipelineRoleArn)
+	}
+}
+
 type UpdatePipelineOutput struct {
 
 	// Container for information about the updated pipeline.
@@ -72,13 +113,34 @@ type UpdatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.UpdatePipelineResponse_Pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipelineResponse_Pipeline:
+			v.Pipeline = &types.Pipeline{}
+			return v.Pipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineRequest, schemas.UpdatePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineRequest, schemas.UpdatePipelineResponse), output: &UpdatePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

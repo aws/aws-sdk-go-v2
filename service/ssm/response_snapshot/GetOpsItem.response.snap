@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetOpsItem
+
+{"OpsItem":{"ActualEndTime":946684800,"ActualStartTime":946684800,"Category":"__Category__","CreatedBy":"__CreatedBy__","CreatedTime":946684800,"Description":"__Description__","LastModifiedBy":"__LastModifiedBy__","LastModifiedTime":946684800,"Notifications":[{"Arn":"__Arn__"},{"Arn":"__Arn__"}],"OperationalData":{"key0":{"Type":"SearchableString","Value":"__Value__"}},"OpsItemArn":"__OpsItemArn__","OpsItemId":"__OpsItemId__","OpsItemType":"__OpsItemType__","PlannedEndTime":946684800,"PlannedStartTime":946684800,"Priority":1,"RelatedOpsItems":[{"OpsItemId":"__OpsItemId__"},{"OpsItemId":"__OpsItemId__"}],"Severity":"__Severity__","Source":"__Source__","Status":"Open","Title":"__Title__","Version":"__Version__"}}

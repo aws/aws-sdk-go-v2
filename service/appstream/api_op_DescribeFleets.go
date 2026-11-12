@@ -50,7 +50,9 @@ func (v *DescribeFleetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeFleetsRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeStringList(s, schemas.DescribeFleetsRequest_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetsRequest_NextToken, *v.NextToken)
 	}
@@ -78,7 +80,9 @@ func (v *DescribeFleetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetList(s, schemas.DescribeFleetsResult_Fleets, v.Fleets)
+	if v.Fleets != nil {
+		serializeFleetList(s, schemas.DescribeFleetsResult_Fleets, v.Fleets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetsResult_NextToken, *v.NextToken)
 	}

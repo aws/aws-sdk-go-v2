@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,30 @@ type ListDocumentMetadataHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentMetadataHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentMetadataHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentMetadataHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.ListDocumentMetadataHistoryRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDocumentMetadataHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Metadata != "" {
+		s.WriteString(schemas.ListDocumentMetadataHistoryRequest_Metadata, string(v.Metadata))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListDocumentMetadataHistoryRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentMetadataHistoryRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDocumentMetadataHistoryOutput struct {
 
 	// The user ID of the person in the organization who requested the review of the
@@ -83,13 +109,58 @@ type ListDocumentMetadataHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentMetadataHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentMetadataHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentMetadataHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Author != nil {
+		s.WriteString(schemas.ListDocumentMetadataHistoryResponse_Author, *v.Author)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.ListDocumentMetadataHistoryResponse_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ListDocumentMetadataHistoryResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListDocumentMetadataHistoryResponse_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentMetadataHistoryResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDocumentMetadataHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDocumentMetadataHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDocumentMetadataHistoryResponse_Author:
+			v.Author = new(string)
+			return d.ReadString(schemas.ListDocumentMetadataHistoryResponse_Author, v.Author)
+		case schemas.ListDocumentMetadataHistoryResponse_DocumentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.ListDocumentMetadataHistoryResponse_DocumentVersion, v.DocumentVersion)
+		case schemas.ListDocumentMetadataHistoryResponse_Metadata:
+			v.Metadata = &types.DocumentMetadataResponseInfo{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ListDocumentMetadataHistoryResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListDocumentMetadataHistoryResponse_Name, v.Name)
+		case schemas.ListDocumentMetadataHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDocumentMetadataHistoryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDocumentMetadataHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDocumentMetadataHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentMetadataHistory, schemas.ListDocumentMetadataHistoryRequest, schemas.ListDocumentMetadataHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDocumentMetadataHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentMetadataHistory, schemas.ListDocumentMetadataHistoryRequest, schemas.ListDocumentMetadataHistoryResponse), output: &ListDocumentMetadataHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

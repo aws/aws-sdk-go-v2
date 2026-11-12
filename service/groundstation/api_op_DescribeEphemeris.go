@@ -112,7 +112,9 @@ func (v *DescribeEphemerisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EphemerisId != nil {
 		s.WriteString(schemas.DescribeEphemerisResponse_ephemerisId, *v.EphemerisId)
 	}
-	serializeEphemerisErrorReasonList(s, schemas.DescribeEphemerisResponse_errorReasons, v.ErrorReasons)
+	if v.ErrorReasons != nil {
+		serializeEphemerisErrorReasonList(s, schemas.DescribeEphemerisResponse_errorReasons, v.ErrorReasons)
+	}
 	if v.InvalidReason != "" {
 		s.WriteString(schemas.DescribeEphemerisResponse_invalidReason, string(v.InvalidReason))
 	}
@@ -128,8 +130,12 @@ func (v *DescribeEphemerisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeEphemerisResponse_status, string(v.Status))
 	}
-	serializeEphemerisTypeDescription(s, schemas.DescribeEphemerisResponse_suppliedData, v.SuppliedData)
-	serializeTagsMap(s, schemas.DescribeEphemerisResponse_tags, v.Tags)
+	if v.SuppliedData != nil {
+		serializeEphemerisTypeDescription(s, schemas.DescribeEphemerisResponse_suppliedData, v.SuppliedData)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.DescribeEphemerisResponse_tags, v.Tags)
+	}
 }
 func (v *DescribeEphemerisOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEphemerisResponse, func(s *smithy.Schema) error {

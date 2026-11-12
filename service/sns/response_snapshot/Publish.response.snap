@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<PublishResponse><PublishResult><MessageId>__MessageId__</MessageId><SequenceNumber>__SequenceNumber__</SequenceNumber></PublishResult></PublishResponse>

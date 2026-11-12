@@ -83,7 +83,9 @@ func (v *ListSlotTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListSlotTypesRequest_botVersion, *v.BotVersion)
 	}
-	serializeSlotTypeFilters(s, schemas.ListSlotTypesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSlotTypeFilters(s, schemas.ListSlotTypesRequest_filters, v.Filters)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListSlotTypesRequest_localeId, *v.LocaleId)
 	}
@@ -148,7 +150,9 @@ func (v *ListSlotTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSlotTypesResponse_nextToken, *v.NextToken)
 	}
-	serializeSlotTypeSummaryList(s, schemas.ListSlotTypesResponse_slotTypeSummaries, v.SlotTypeSummaries)
+	if v.SlotTypeSummaries != nil {
+		serializeSlotTypeSummaryList(s, schemas.ListSlotTypesResponse_slotTypeSummaries, v.SlotTypeSummaries)
+	}
 }
 func (v *ListSlotTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSlotTypesResponse, func(s *smithy.Schema) error {

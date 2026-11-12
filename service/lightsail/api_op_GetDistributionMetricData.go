@@ -112,6 +112,21 @@ type GetDistributionMetricDataInput struct {
 	//
 	// Unit : The published unit is Percent .
 	//
+	//   - WafAllowedRequests - The number of viewer requests that Web Application
+	//   Firewall (WAF) allowed. This metric is available only when WAF is enabled for
+	//   the distribution.
+	//
+	// Statistics : The most useful statistic is Sum .
+	//
+	// Unit : The published unit is None .
+	//
+	//   - WafBlockedRequests - The number of viewer requests that WAF blocked. This
+	//   metric is available only when WAF is enabled for the distribution.
+	//
+	// Statistics : The most useful statistic is Sum .
+	//
+	// Unit : The published unit is None .
+	//
 	// This member is required.
 	MetricName types.DistributionMetricName
 
@@ -197,7 +212,9 @@ func (v *GetDistributionMetricDataInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetDistributionMetricDataRequest_startTime, *v.StartTime)
 	}
-	serializeMetricStatisticList(s, schemas.GetDistributionMetricDataRequest_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeMetricStatisticList(s, schemas.GetDistributionMetricDataRequest_statistics, v.Statistics)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.GetDistributionMetricDataRequest_unit, string(v.Unit))
 	}
@@ -224,7 +241,9 @@ func (v *GetDistributionMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDistributionMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDatapointList(s, schemas.GetDistributionMetricDataResult_metricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricDatapointList(s, schemas.GetDistributionMetricDataResult_metricData, v.MetricData)
+	}
 	if v.MetricName != "" {
 		s.WriteString(schemas.GetDistributionMetricDataResult_metricName, string(v.MetricName))
 	}

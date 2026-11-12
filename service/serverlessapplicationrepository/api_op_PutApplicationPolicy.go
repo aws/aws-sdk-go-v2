@@ -54,7 +54,9 @@ func (v *PutApplicationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.PutApplicationPolicyRequest_ApplicationId, *v.ApplicationId)
 	}
-	serialize__listOfApplicationPolicyStatement(s, schemas.PutApplicationPolicyRequest_Statements, v.Statements)
+	if v.Statements != nil {
+		serialize__listOfApplicationPolicyStatement(s, schemas.PutApplicationPolicyRequest_Statements, v.Statements)
+	}
 }
 
 type PutApplicationPolicyOutput struct {
@@ -75,7 +77,9 @@ func (v *PutApplicationPolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutApplicationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfApplicationPolicyStatement(s, schemas.PutApplicationPolicyResponse_Statements, v.Statements)
+	if v.Statements != nil {
+		serialize__listOfApplicationPolicyStatement(s, schemas.PutApplicationPolicyResponse_Statements, v.Statements)
+	}
 }
 func (v *PutApplicationPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutApplicationPolicyResponse, func(s *smithy.Schema) error {

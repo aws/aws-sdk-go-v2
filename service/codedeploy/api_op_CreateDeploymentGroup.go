@@ -78,6 +78,10 @@ type CreateDeploymentGroupInput struct {
 	// to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *types.DeploymentStyle
 
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *types.EC2DeploymentOptions
+
 	// The Amazon EC2 tags on which to filter. The deployment group includes Amazon
 	// EC2 instances with any of the specified tags. Cannot be used in the same call as
 	// ec2TagSet.
@@ -171,7 +175,9 @@ func (v *CreateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.AutoRollbackConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoScalingGroupNameList(s, schemas.CreateDeploymentGroupInput_autoScalingGroups, v.AutoScalingGroups)
+	if v.AutoScalingGroups != nil {
+		serializeAutoScalingGroupNameList(s, schemas.CreateDeploymentGroupInput_autoScalingGroups, v.AutoScalingGroups)
+	}
 	if v.BlueGreenDeploymentConfiguration != nil {
 		s.WriteStruct(schemas.CreateDeploymentGroupInput_blueGreenDeploymentConfiguration)
 		v.BlueGreenDeploymentConfiguration.SerializeMembers(s)
@@ -188,19 +194,30 @@ func (v *CreateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.DeploymentStyle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEC2TagFilterList(s, schemas.CreateDeploymentGroupInput_ec2TagFilters, v.Ec2TagFilters)
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.CreateDeploymentGroupInput_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ec2TagFilters != nil {
+		serializeEC2TagFilterList(s, schemas.CreateDeploymentGroupInput_ec2TagFilters, v.Ec2TagFilters)
+	}
 	if v.Ec2TagSet != nil {
 		s.WriteStruct(schemas.CreateDeploymentGroupInput_ec2TagSet)
 		v.Ec2TagSet.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeECSServiceList(s, schemas.CreateDeploymentGroupInput_ecsServices, v.EcsServices)
+	if v.EcsServices != nil {
+		serializeECSServiceList(s, schemas.CreateDeploymentGroupInput_ecsServices, v.EcsServices)
+	}
 	if v.LoadBalancerInfo != nil {
 		s.WriteStruct(schemas.CreateDeploymentGroupInput_loadBalancerInfo)
 		v.LoadBalancerInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagFilterList(s, schemas.CreateDeploymentGroupInput_onPremisesInstanceTagFilters, v.OnPremisesInstanceTagFilters)
+	if v.OnPremisesInstanceTagFilters != nil {
+		serializeTagFilterList(s, schemas.CreateDeploymentGroupInput_onPremisesInstanceTagFilters, v.OnPremisesInstanceTagFilters)
+	}
 	if v.OnPremisesTagSet != nil {
 		s.WriteStruct(schemas.CreateDeploymentGroupInput_onPremisesTagSet)
 		v.OnPremisesTagSet.SerializeMembers(s)
@@ -212,11 +229,15 @@ func (v *CreateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ServiceRoleArn != nil {
 		s.WriteString(schemas.CreateDeploymentGroupInput_serviceRoleArn, *v.ServiceRoleArn)
 	}
-	serializeTagList(s, schemas.CreateDeploymentGroupInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDeploymentGroupInput_tags, v.Tags)
+	}
 	if v.TerminationHookEnabled != nil {
 		s.WriteBool(schemas.CreateDeploymentGroupInput_terminationHookEnabled, *v.TerminationHookEnabled)
 	}
-	serializeTriggerConfigList(s, schemas.CreateDeploymentGroupInput_triggerConfigurations, v.TriggerConfigurations)
+	if v.TriggerConfigurations != nil {
+		serializeTriggerConfigList(s, schemas.CreateDeploymentGroupInput_triggerConfigurations, v.TriggerConfigurations)
+	}
 }
 
 // Represents the output of a CreateDeploymentGroup operation.
@@ -267,6 +288,9 @@ func (c *Client) addOperationCreateDeploymentGroupMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

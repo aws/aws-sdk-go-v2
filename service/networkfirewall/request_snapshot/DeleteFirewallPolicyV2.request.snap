@@ -1,0 +1,7 @@
+POST /service/NetworkFirewall_20201112/operation/DeleteFirewallPolicyV2
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿sFirewallPolicyV2Arnw__FirewallPolicyV2Arn__tFirewallPolicyV2Namex__FirewallPolicyV2Name__ÿ

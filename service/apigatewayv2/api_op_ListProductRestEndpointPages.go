@@ -89,7 +89,9 @@ func (v *ListProductRestEndpointPagesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListProductRestEndpointPagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfProductRestEndpointPageSummaryNoBody(s, schemas.ListProductRestEndpointPagesResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfProductRestEndpointPageSummaryNoBody(s, schemas.ListProductRestEndpointPagesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProductRestEndpointPagesResponse_NextToken, *v.NextToken)
 	}

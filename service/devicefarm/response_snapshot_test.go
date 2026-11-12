@@ -2031,9 +2031,10 @@ func TestCheckResponseSnapshot_GetRun(t *testing.T) {
 					"__Member__",
 				},
 			},
-			WebUrl:        ptr.String("__WebUrl__"),
-			SkipAppResign: ptr.Bool(true),
-			TestSpecArn:   ptr.String("__TestSpecArn__"),
+			WebUrl:         ptr.String("__WebUrl__"),
+			SkipAppResign:  ptr.Bool(true),
+			TestSpecArn:    ptr.String("__TestSpecArn__"),
+			TestPackageArn: ptr.String("__TestPackageArn__"),
 			DeviceSelectionResult: &types.DeviceSelectionResult{
 				Filters: []types.DeviceFilter{
 					{
@@ -3732,9 +3733,10 @@ func TestCheckResponseSnapshot_ListRuns(t *testing.T) {
 						"__Member__",
 					},
 				},
-				WebUrl:        ptr.String("__WebUrl__"),
-				SkipAppResign: ptr.Bool(true),
-				TestSpecArn:   ptr.String("__TestSpecArn__"),
+				WebUrl:         ptr.String("__WebUrl__"),
+				SkipAppResign:  ptr.Bool(true),
+				TestSpecArn:    ptr.String("__TestSpecArn__"),
+				TestPackageArn: ptr.String("__TestPackageArn__"),
 				DeviceSelectionResult: &types.DeviceSelectionResult{
 					Filters: []types.DeviceFilter{
 						{
@@ -3881,9 +3883,10 @@ func TestCheckResponseSnapshot_ListRuns(t *testing.T) {
 						"__Member__",
 					},
 				},
-				WebUrl:        ptr.String("__WebUrl__"),
-				SkipAppResign: ptr.Bool(true),
-				TestSpecArn:   ptr.String("__TestSpecArn__"),
+				WebUrl:         ptr.String("__WebUrl__"),
+				SkipAppResign:  ptr.Bool(true),
+				TestSpecArn:    ptr.String("__TestSpecArn__"),
+				TestPackageArn: ptr.String("__TestPackageArn__"),
 				DeviceSelectionResult: &types.DeviceSelectionResult{
 					Filters: []types.DeviceFilter{
 						{
@@ -5082,9 +5085,10 @@ func TestCheckResponseSnapshot_ScheduleRun(t *testing.T) {
 					"__Member__",
 				},
 			},
-			WebUrl:        ptr.String("__WebUrl__"),
-			SkipAppResign: ptr.Bool(true),
-			TestSpecArn:   ptr.String("__TestSpecArn__"),
+			WebUrl:         ptr.String("__WebUrl__"),
+			SkipAppResign:  ptr.Bool(true),
+			TestSpecArn:    ptr.String("__TestSpecArn__"),
+			TestPackageArn: ptr.String("__TestPackageArn__"),
 			DeviceSelectionResult: &types.DeviceSelectionResult{
 				Filters: []types.DeviceFilter{
 					{
@@ -5627,9 +5631,10 @@ func TestCheckResponseSnapshot_StopRun(t *testing.T) {
 					"__Member__",
 				},
 			},
-			WebUrl:        ptr.String("__WebUrl__"),
-			SkipAppResign: ptr.Bool(true),
-			TestSpecArn:   ptr.String("__TestSpecArn__"),
+			WebUrl:         ptr.String("__WebUrl__"),
+			SkipAppResign:  ptr.Bool(true),
+			TestSpecArn:    ptr.String("__TestSpecArn__"),
+			TestPackageArn: ptr.String("__TestPackageArn__"),
 			DeviceSelectionResult: &types.DeviceSelectionResult{
 				Filters: []types.DeviceFilter{
 					{

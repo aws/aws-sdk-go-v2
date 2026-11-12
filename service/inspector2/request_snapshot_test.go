@@ -1279,6 +1279,46 @@ func TestCheckRequestSnapshot_CreateFilter(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -2024,6 +2064,46 @@ func TestCheckRequestSnapshot_CreateFindingsReport(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -2217,9 +2297,10 @@ func TestCheckRequestSnapshot_CreateFindingsReport(t *testing.T) {
 		},
 		ReportFormat: types.ReportFormat("CSV"),
 		S3Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2449,9 +2530,10 @@ func TestCheckRequestSnapshot_CreateSbomExport(t *testing.T) {
 		},
 		ReportFormat: types.SbomReportFormat("CYCLONEDX_1_4"),
 		S3Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3178,6 +3260,35 @@ func TestCheckRequestSnapshot_GetMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMember"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetOnDemandScanStatus(t *testing.T) {
+	input := &GetOnDemandScanStatusInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ScanId:       ptr.String("__ScanId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetOnDemandScanStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOnDemandScanStatus"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3981,6 +4092,18 @@ func TestCheckRequestSnapshot_ListCoverage(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			LastScannedAt: []types.CoverageDateFilter{
 				{
 					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -4334,6 +4457,18 @@ func TestCheckRequestSnapshot_ListCoverageStatistics(t *testing.T) {
 				},
 				{
 					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
 					Value:      ptr.String("__Value__"),
 				},
 			},
@@ -5203,6 +5338,46 @@ func TestCheckRequestSnapshot_ListFindings(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -5447,6 +5622,36 @@ func TestCheckRequestSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMembers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListOnDemandScans(t *testing.T) {
+	input := &ListOnDemandScansInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOnDemandScans(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOnDemandScans"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5699,6 +5904,35 @@ func TestCheckRequestSnapshot_StartCodeSecurityScan(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartOnDemandScan(t *testing.T) {
+	input := &StartOnDemandScanInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartOnDemandScan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartOnDemandScan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StopCisSession(t *testing.T) {
 	input := &StopCisSessionInput{
 		ScanJobId:    ptr.String("__ScanJobId__"),
@@ -5940,9 +6174,29 @@ func TestCheckRequestSnapshot_UpdateConfiguration(t *testing.T) {
 			ScanMode:          types.Ec2ScanMode("EC2_SSM_AGENT_BASED"),
 			ActivateVMScanner: ptr.Bool(true),
 		},
+		AmiConfiguration: &types.AmiConfiguration{
+			LastLaunchedWithin: types.AmiScanDuration("DAYS_180"),
+			CreatedWithin:      types.AmiScanDuration("DAYS_180"),
+			ScanModeConfiguration: &types.AmiScanModeConfiguration{
+				ScanMode: types.AmiScanMode("SCAN_ALL"),
+				Tags: []types.AmiTagFilter{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ExcludeCopiedAmis:    ptr.Bool(true),
+				ExcludeBackupDlmAmis: ptr.Bool(true),
+			},
+		},
 		UpdateConfigurationInheritance: &types.UpdateConfigurationInheritance{
 			Ec2Configuration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
 			EcrConfiguration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
+			AmiConfiguration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6648,6 +6902,46 @@ func TestCheckRequestSnapshot_UpdateFilter(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -6874,6 +7168,7 @@ func TestCheckRequestSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 			Lambda:         ptr.Bool(true),
 			LambdaCode:     ptr.Bool(true),
 			CodeRepository: ptr.Bool(true),
+			Ami:            ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -8001,6 +8296,46 @@ func TestUpdateRequestSnapshot_CreateFilter(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -8746,6 +9081,46 @@ func TestUpdateRequestSnapshot_CreateFindingsReport(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -8939,9 +9314,10 @@ func TestUpdateRequestSnapshot_CreateFindingsReport(t *testing.T) {
 		},
 		ReportFormat: types.ReportFormat("CSV"),
 		S3Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -9171,9 +9547,10 @@ func TestUpdateRequestSnapshot_CreateSbomExport(t *testing.T) {
 		},
 		ReportFormat: types.SbomReportFormat("CYCLONEDX_1_4"),
 		S3Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -9900,6 +10277,35 @@ func TestUpdateRequestSnapshot_GetMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMember"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetOnDemandScanStatus(t *testing.T) {
+	input := &GetOnDemandScanStatusInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ScanId:       ptr.String("__ScanId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetOnDemandScanStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOnDemandScanStatus"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10703,6 +11109,18 @@ func TestUpdateRequestSnapshot_ListCoverage(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			LastScannedAt: []types.CoverageDateFilter{
 				{
 					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -11056,6 +11474,18 @@ func TestUpdateRequestSnapshot_ListCoverageStatistics(t *testing.T) {
 				},
 				{
 					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
 					Value:      ptr.String("__Value__"),
 				},
 			},
@@ -11925,6 +12355,46 @@ func TestUpdateRequestSnapshot_ListFindings(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -12169,6 +12639,36 @@ func TestUpdateRequestSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMembers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListOnDemandScans(t *testing.T) {
+	input := &ListOnDemandScansInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOnDemandScans(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOnDemandScans"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12421,6 +12921,35 @@ func TestUpdateRequestSnapshot_StartCodeSecurityScan(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartOnDemandScan(t *testing.T) {
+	input := &StartOnDemandScanInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartOnDemandScan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartOnDemandScan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StopCisSession(t *testing.T) {
 	input := &StopCisSessionInput{
 		ScanJobId:    ptr.String("__ScanJobId__"),
@@ -12662,9 +13191,29 @@ func TestUpdateRequestSnapshot_UpdateConfiguration(t *testing.T) {
 			ScanMode:          types.Ec2ScanMode("EC2_SSM_AGENT_BASED"),
 			ActivateVMScanner: ptr.Bool(true),
 		},
+		AmiConfiguration: &types.AmiConfiguration{
+			LastLaunchedWithin: types.AmiScanDuration("DAYS_180"),
+			CreatedWithin:      types.AmiScanDuration("DAYS_180"),
+			ScanModeConfiguration: &types.AmiScanModeConfiguration{
+				ScanMode: types.AmiScanMode("SCAN_ALL"),
+				Tags: []types.AmiTagFilter{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ExcludeCopiedAmis:    ptr.Bool(true),
+				ExcludeBackupDlmAmis: ptr.Bool(true),
+			},
+		},
 		UpdateConfigurationInheritance: &types.UpdateConfigurationInheritance{
 			Ec2Configuration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
 			EcrConfiguration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
+			AmiConfiguration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -13370,6 +13919,46 @@ func TestUpdateRequestSnapshot_UpdateFilter(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -13596,6 +14185,7 @@ func TestUpdateRequestSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 			Lambda:         ptr.Bool(true),
 			LambdaCode:     ptr.Bool(true),
 			CodeRepository: ptr.Bool(true),
+			Ami:            ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}

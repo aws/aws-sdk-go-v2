@@ -94,7 +94,9 @@ func (v *CreateBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableObjectVersioning != nil {
 		s.WriteBool(schemas.CreateBucketRequest_enableObjectVersioning, *v.EnableObjectVersioning)
 	}
-	serializeTagList(s, schemas.CreateBucketRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBucketRequest_tags, v.Tags)
+	}
 }
 
 type CreateBucketOutput struct {
@@ -125,7 +127,9 @@ func (v *CreateBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Bucket.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOperationList(s, schemas.CreateBucketResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateBucketResult_operations, v.Operations)
+	}
 }
 func (v *CreateBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateBucketResult, func(s *smithy.Schema) error {

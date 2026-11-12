@@ -112,7 +112,9 @@ func (v *DescribeAppVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAppVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInfoMap(s, schemas.DescribeAppVersionResponse_additionalInfo, v.AdditionalInfo)
+	if v.AdditionalInfo != nil {
+		serializeAdditionalInfoMap(s, schemas.DescribeAppVersionResponse_additionalInfo, v.AdditionalInfo)
+	}
 	if v.AppArn != nil {
 		s.WriteString(schemas.DescribeAppVersionResponse_appArn, *v.AppArn)
 	}

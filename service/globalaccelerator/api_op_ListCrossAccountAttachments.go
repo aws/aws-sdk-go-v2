@@ -77,7 +77,9 @@ func (v *ListCrossAccountAttachmentsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListCrossAccountAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachments(s, schemas.ListCrossAccountAttachmentsResponse_CrossAccountAttachments, v.CrossAccountAttachments)
+	if v.CrossAccountAttachments != nil {
+		serializeAttachments(s, schemas.ListCrossAccountAttachmentsResponse_CrossAccountAttachments, v.CrossAccountAttachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCrossAccountAttachmentsResponse_NextToken, *v.NextToken)
 	}

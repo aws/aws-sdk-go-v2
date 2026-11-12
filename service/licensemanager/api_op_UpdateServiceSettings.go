@@ -58,7 +58,9 @@ func (v *UpdateServiceSettingsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.EnableCrossAccountsDiscovery != nil {
 		s.WriteBool(schemas.UpdateServiceSettingsRequest_EnableCrossAccountsDiscovery, *v.EnableCrossAccountsDiscovery)
 	}
-	serializeStringList(s, schemas.UpdateServiceSettingsRequest_EnabledDiscoverySourceRegions, v.EnabledDiscoverySourceRegions)
+	if v.EnabledDiscoverySourceRegions != nil {
+		serializeStringList(s, schemas.UpdateServiceSettingsRequest_EnabledDiscoverySourceRegions, v.EnabledDiscoverySourceRegions)
+	}
 	if v.OrganizationConfiguration != nil {
 		s.WriteStruct(schemas.UpdateServiceSettingsRequest_OrganizationConfiguration)
 		v.OrganizationConfiguration.SerializeMembers(s)

@@ -51,7 +51,9 @@ func (v *AssociatePricingRulesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Arn != nil {
 		s.WriteString(schemas.AssociatePricingRulesInput_Arn, *v.Arn)
 	}
-	serializePricingRuleArnsNonEmptyInput(s, schemas.AssociatePricingRulesInput_PricingRuleArns, v.PricingRuleArns)
+	if v.PricingRuleArns != nil {
+		serializePricingRuleArnsNonEmptyInput(s, schemas.AssociatePricingRulesInput_PricingRuleArns, v.PricingRuleArns)
+	}
 }
 func (v *AssociatePricingRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociatePricingRulesInput, func(s *smithy.Schema) error {

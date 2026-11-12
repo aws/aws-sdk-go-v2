@@ -67,7 +67,9 @@ func (v *ListContactFlowsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContactFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactFlowTypes(s, schemas.ListContactFlowsRequest_ContactFlowTypes, v.ContactFlowTypes)
+	if v.ContactFlowTypes != nil {
+		serializeContactFlowTypes(s, schemas.ListContactFlowsRequest_ContactFlowTypes, v.ContactFlowTypes)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListContactFlowsRequest_InstanceId, *v.InstanceId)
 	}
@@ -100,7 +102,9 @@ func (v *ListContactFlowsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContactFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactFlowSummaryList(s, schemas.ListContactFlowsResponse_ContactFlowSummaryList, v.ContactFlowSummaryList)
+	if v.ContactFlowSummaryList != nil {
+		serializeContactFlowSummaryList(s, schemas.ListContactFlowsResponse_ContactFlowSummaryList, v.ContactFlowSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactFlowsResponse_NextToken, *v.NextToken)
 	}

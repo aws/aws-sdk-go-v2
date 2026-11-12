@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/UpdateTaskExecution
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.UpdateTaskExecution
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Options":{"Atime":"NONE","BytesPerSecond":1,"Gid":"NONE","LogLevel":"OFF","Mtime":"NONE","ObjectMetadata":"PRESERVE","ObjectTags":"PRESERVE","OverwriteMode":"ALWAYS","PosixPermissions":"NONE","PreserveDeletedFiles":"PRESERVE","PreserveDevices":"NONE","SecurityDescriptorCopyFlags":"NONE","TaskQueueing":"ENABLED","TransferMode":"CHANGED","Uid":"NONE","VerifyMode":"POINT_IN_TIME_CONSISTENT"},"TaskExecutionArn":"__TaskExecutionArn__"}
+¿gOptions¿eAtimedNONEnBytesPerSecondcGiddNONEhLogLevelcOFFeMtimedNONEnObjectMetadatahPRESERVEjObjectTagshPRESERVEmOverwriteModefALWAYSpPosixPermissionsdNONEtPreserveDeletedFileshPRESERVEoPreserveDevicesdNONExSecurityDescriptorCopyFlagsdNONElTaskQueueinggENABLEDlTransferModegCHANGEDcUiddNONEjVerifyModexPOINT_IN_TIME_CONSISTENTÿpTaskExecutionArnt__TaskExecutionArn__ÿ

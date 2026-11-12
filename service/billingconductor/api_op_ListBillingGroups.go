@@ -110,7 +110,9 @@ func (v *ListBillingGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBillingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingGroupList(s, schemas.ListBillingGroupsOutput_BillingGroups, v.BillingGroups)
+	if v.BillingGroups != nil {
+		serializeBillingGroupList(s, schemas.ListBillingGroupsOutput_BillingGroups, v.BillingGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillingGroupsOutput_NextToken, *v.NextToken)
 	}

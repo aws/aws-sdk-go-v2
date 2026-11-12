@@ -1,3 +1,40 @@
+# v1.23.0 (2026-11-10)
+
+* **Feature**: Adds RetryableConflictException to UpdatePlan so AWS SDKs automatically retry updates that conflict with a concurrent change.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.7 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.6 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.5 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.4 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
+# v1.22.3 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.2 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.22.0 (2026-10-14)
 
 * **Feature**: Features - Adds support for an optional payload to invoke the Lambda function with as part of the Custom action Lambda execution block

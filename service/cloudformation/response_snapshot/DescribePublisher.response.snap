@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribePublisherResponse><DescribePublisherResult><IdentityProvider>AWS_Marketplace</IdentityProvider><PublisherId>__PublisherId__</PublisherId><PublisherProfile>__PublisherProfile__</PublisherProfile><PublisherStatus>VERIFIED</PublisherStatus></DescribePublisherResult></DescribePublisherResponse>

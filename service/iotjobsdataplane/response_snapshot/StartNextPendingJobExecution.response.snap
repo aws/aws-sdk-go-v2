@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"execution":{"approximateSecondsBeforeTimedOut":1,"executionNumber":1,"jobDocument":"__JobDocument__","jobId":"__JobId__","lastUpdatedAt":1,"queuedAt":1,"startedAt":1,"status":"QUEUED","statusDetails":{"key0":"__Value__"},"thingName":"__ThingName__","versionNumber":1}}

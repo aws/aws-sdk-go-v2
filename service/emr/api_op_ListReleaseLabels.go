@@ -95,7 +95,9 @@ func (v *ListReleaseLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReleaseLabelsOutput_NextToken, *v.NextToken)
 	}
-	serializeStringList(s, schemas.ListReleaseLabelsOutput_ReleaseLabels, v.ReleaseLabels)
+	if v.ReleaseLabels != nil {
+		serializeStringList(s, schemas.ListReleaseLabelsOutput_ReleaseLabels, v.ReleaseLabels)
+	}
 }
 func (v *ListReleaseLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReleaseLabelsOutput, func(s *smithy.Schema) error {

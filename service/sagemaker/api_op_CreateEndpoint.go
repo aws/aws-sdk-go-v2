@@ -146,7 +146,9 @@ func (v *CreateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointName != nil {
 		s.WriteString(schemas.CreateEndpointInput_EndpointName, *v.EndpointName)
 	}
-	serializeTagList(s, schemas.CreateEndpointInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEndpointInput_Tags, v.Tags)
+	}
 }
 
 type CreateEndpointOutput struct {

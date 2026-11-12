@@ -50,7 +50,9 @@ func (v *GetDiscoveredSchemaInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDiscoveredSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfGetDiscoveredSchemaVersionItemInput(s, schemas.GetDiscoveredSchemaRequest_Events, v.Events)
+	if v.Events != nil {
+		serialize__listOfGetDiscoveredSchemaVersionItemInput(s, schemas.GetDiscoveredSchemaRequest_Events, v.Events)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetDiscoveredSchemaRequest_Type, string(v.Type))
 	}

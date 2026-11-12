@@ -4,6 +4,8 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,24 @@ type CreateCustomDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomDomainAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomDomainAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainCertificateArn != nil {
+		s.WriteString(schemas.CreateCustomDomainAssociationRequest_customDomainCertificateArn, *v.CustomDomainCertificateArn)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.CreateCustomDomainAssociationRequest_customDomainName, *v.CustomDomainName)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.CreateCustomDomainAssociationRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type CreateCustomDomainAssociationOutput struct {
 
 	// The custom domain name’s certificate Amazon resource name (ARN).
@@ -64,13 +84,50 @@ type CreateCustomDomainAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomDomainAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomDomainAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomDomainAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainCertificateArn != nil {
+		s.WriteString(schemas.CreateCustomDomainAssociationResponse_customDomainCertificateArn, *v.CustomDomainCertificateArn)
+	}
+	if v.CustomDomainCertificateExpiryTime != nil {
+		s.WriteTime(schemas.CreateCustomDomainAssociationResponse_customDomainCertificateExpiryTime, *v.CustomDomainCertificateExpiryTime)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.CreateCustomDomainAssociationResponse_customDomainName, *v.CustomDomainName)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.CreateCustomDomainAssociationResponse_workgroupName, *v.WorkgroupName)
+	}
+}
+func (v *CreateCustomDomainAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomDomainAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomDomainAssociationResponse_customDomainCertificateArn:
+			v.CustomDomainCertificateArn = new(string)
+			return d.ReadString(schemas.CreateCustomDomainAssociationResponse_customDomainCertificateArn, v.CustomDomainCertificateArn)
+		case schemas.CreateCustomDomainAssociationResponse_customDomainCertificateExpiryTime:
+			v.CustomDomainCertificateExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.CreateCustomDomainAssociationResponse_customDomainCertificateExpiryTime, v.CustomDomainCertificateExpiryTime)
+		case schemas.CreateCustomDomainAssociationResponse_customDomainName:
+			v.CustomDomainName = new(string)
+			return d.ReadString(schemas.CreateCustomDomainAssociationResponse_customDomainName, v.CustomDomainName)
+		case schemas.CreateCustomDomainAssociationResponse_workgroupName:
+			v.WorkgroupName = new(string)
+			return d.ReadString(schemas.CreateCustomDomainAssociationResponse_workgroupName, v.WorkgroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomDomainAssociation, schemas.CreateCustomDomainAssociationRequest, schemas.CreateCustomDomainAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCustomDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomDomainAssociation, schemas.CreateCustomDomainAssociationRequest, schemas.CreateCustomDomainAssociationResponse), output: &CreateCustomDomainAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

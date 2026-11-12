@@ -112,7 +112,9 @@ func (v *ListIdentityPoolUsageOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Count != 0 {
 		s.WriteInt32(schemas.ListIdentityPoolUsageResponse_Count, v.Count)
 	}
-	serializeIdentityPoolUsageList(s, schemas.ListIdentityPoolUsageResponse_IdentityPoolUsages, v.IdentityPoolUsages)
+	if v.IdentityPoolUsages != nil {
+		serializeIdentityPoolUsageList(s, schemas.ListIdentityPoolUsageResponse_IdentityPoolUsages, v.IdentityPoolUsages)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.ListIdentityPoolUsageResponse_MaxResults, v.MaxResults)
 	}

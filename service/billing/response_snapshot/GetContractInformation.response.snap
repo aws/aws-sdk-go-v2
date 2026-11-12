@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.GetContractInformation
+
+{"contract":{"privatePricingAddendum":{"contractArn":"__ContractArn__","contractRestrictions":["ATTESTATION_SELF_SERVICE_BLOCKED","ATTESTATION_SELF_SERVICE_BLOCKED"],"contractTerm":{"endDateInclusive":946684800,"startDateInclusive":946684800},"eligiblePayerAccounts":["__Member__","__Member__"],"investmentAccounts":["__Member__","__Member__"],"legalEntities":[{"legalEntityName":"__LegalEntityName__"},{"legalEntityName":"__LegalEntityName__"}]}}}

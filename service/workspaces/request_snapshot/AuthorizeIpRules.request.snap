@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/AuthorizeIpRules
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.AuthorizeIpRules
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"GroupId":"__GroupId__","UserRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]}
+¿gGroupIdk__GroupId__iUserRulesŸ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿ¿fipRulej__IpRule__hruleDescl__RuleDesc__ÿÿÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/ImportModel
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.ImportModel
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DataAccessRoleArn":"__DataAccessRoleArn__","ModelKmsKeyId":"__ModelKmsKeyId__","ModelName":"__ModelName__","SourceModelArn":"__SourceModelArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VersionName":"__VersionName__"}
+¿qDataAccessRoleArnu__DataAccessRoleArn__mModelKmsKeyIdq__ModelKmsKeyId__iModelNamem__ModelName__nSourceModelArnr__SourceModelArn__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿkVersionNameo__VersionName__ÿ

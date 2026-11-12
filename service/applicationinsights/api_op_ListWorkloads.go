@@ -100,7 +100,9 @@ func (v *ListWorkloadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkloadsResponse_NextToken, *v.NextToken)
 	}
-	serializeWorkloadList(s, schemas.ListWorkloadsResponse_WorkloadList, v.WorkloadList)
+	if v.WorkloadList != nil {
+		serializeWorkloadList(s, schemas.ListWorkloadsResponse_WorkloadList, v.WorkloadList)
+	}
 }
 func (v *ListWorkloadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkloadsResponse, func(s *smithy.Schema) error {

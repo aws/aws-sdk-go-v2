@@ -67,7 +67,9 @@ func (v *CreateEventBridgeRuleTemplateGroupInput) SerializeMembers(s smithy.Shap
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateEventBridgeRuleTemplateGroupRequest_RequestId, *v.RequestId)
 	}
-	serializeTagMap(s, schemas.CreateEventBridgeRuleTemplateGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEventBridgeRuleTemplateGroupRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateEventBridgeRuleTemplateGroupResponse
@@ -127,7 +129,9 @@ func (v *CreateEventBridgeRuleTemplateGroupOutput) SerializeMembers(s smithy.Sha
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEventBridgeRuleTemplateGroupResponse_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateEventBridgeRuleTemplateGroupResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEventBridgeRuleTemplateGroupResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateEventBridgeRuleTemplateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEventBridgeRuleTemplateGroupResponse, func(s *smithy.Schema) error {

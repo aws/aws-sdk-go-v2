@@ -69,7 +69,9 @@ func (v *GetTelemetryMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTelemetryMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTelemetryMetadataList(s, schemas.GetTelemetryMetadataResponse_telemetryMetadata, v.TelemetryMetadata)
+	if v.TelemetryMetadata != nil {
+		serializeTelemetryMetadataList(s, schemas.GetTelemetryMetadataResponse_telemetryMetadata, v.TelemetryMetadata)
+	}
 }
 func (v *GetTelemetryMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTelemetryMetadataResponse, func(s *smithy.Schema) error {

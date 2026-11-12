@@ -53,7 +53,9 @@ func (v *ListWebFunctionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWebFunctionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListWebFunctionsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListWebFunctionsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListWebFunctionsRequest_maxResults, *v.MaxResults)
 	}
@@ -88,7 +90,9 @@ func (v *ListWebFunctionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWebFunctionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionSummaryList(s, schemas.ListWebFunctionsResponse_functions, v.Functions)
+	if v.Functions != nil {
+		serializeFunctionSummaryList(s, schemas.ListWebFunctionsResponse_functions, v.Functions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWebFunctionsResponse_nextToken, *v.NextToken)
 	}

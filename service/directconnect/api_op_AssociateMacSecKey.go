@@ -123,7 +123,9 @@ func (v *AssociateMacSecKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionId != nil {
 		s.WriteString(schemas.AssociateMacSecKeyResponse_connectionId, *v.ConnectionId)
 	}
-	serializeMacSecKeyList(s, schemas.AssociateMacSecKeyResponse_macSecKeys, v.MacSecKeys)
+	if v.MacSecKeys != nil {
+		serializeMacSecKeyList(s, schemas.AssociateMacSecKeyResponse_macSecKeys, v.MacSecKeys)
+	}
 }
 func (v *AssociateMacSecKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateMacSecKeyResponse, func(s *smithy.Schema) error {
@@ -152,6 +154,9 @@ func (c *Client) addOperationAssociateMacSecKeyMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

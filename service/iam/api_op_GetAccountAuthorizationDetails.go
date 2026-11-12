@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,24 @@ type GetAccountAuthorizationDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountAuthorizationDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountAuthorizationDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountAuthorizationDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		serializeentityListType(s, schemas.GetAccountAuthorizationDetailsRequest_Filter, v.Filter)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.GetAccountAuthorizationDetailsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.GetAccountAuthorizationDetailsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 // Contains the response to a successful [GetAccountAuthorizationDetails] request.
 //
 // [GetAccountAuthorizationDetails]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html
@@ -105,13 +125,57 @@ type GetAccountAuthorizationDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountAuthorizationDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountAuthorizationDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountAuthorizationDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupDetailList != nil {
+		serializegroupDetailListType(s, schemas.GetAccountAuthorizationDetailsResponse_GroupDetailList, v.GroupDetailList)
+	}
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.GetAccountAuthorizationDetailsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.GetAccountAuthorizationDetailsResponse_Marker, *v.Marker)
+	}
+	if v.Policies != nil {
+		serializeManagedPolicyDetailListType(s, schemas.GetAccountAuthorizationDetailsResponse_Policies, v.Policies)
+	}
+	if v.RoleDetailList != nil {
+		serializeroleDetailListType(s, schemas.GetAccountAuthorizationDetailsResponse_RoleDetailList, v.RoleDetailList)
+	}
+	if v.UserDetailList != nil {
+		serializeuserDetailListType(s, schemas.GetAccountAuthorizationDetailsResponse_UserDetailList, v.UserDetailList)
+	}
+}
+func (v *GetAccountAuthorizationDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountAuthorizationDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountAuthorizationDetailsResponse_GroupDetailList:
+			return deserializegroupDetailListType(d, schemas.GetAccountAuthorizationDetailsResponse_GroupDetailList, &v.GroupDetailList)
+		case schemas.GetAccountAuthorizationDetailsResponse_IsTruncated:
+			return d.ReadBool(schemas.GetAccountAuthorizationDetailsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.GetAccountAuthorizationDetailsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.GetAccountAuthorizationDetailsResponse_Marker, v.Marker)
+		case schemas.GetAccountAuthorizationDetailsResponse_Policies:
+			return deserializeManagedPolicyDetailListType(d, schemas.GetAccountAuthorizationDetailsResponse_Policies, &v.Policies)
+		case schemas.GetAccountAuthorizationDetailsResponse_RoleDetailList:
+			return deserializeroleDetailListType(d, schemas.GetAccountAuthorizationDetailsResponse_RoleDetailList, &v.RoleDetailList)
+		case schemas.GetAccountAuthorizationDetailsResponse_UserDetailList:
+			return deserializeuserDetailListType(d, schemas.GetAccountAuthorizationDetailsResponse_UserDetailList, &v.UserDetailList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountAuthorizationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccountAuthorizationDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountAuthorizationDetails, schemas.GetAccountAuthorizationDetailsRequest, schemas.GetAccountAuthorizationDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetAccountAuthorizationDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountAuthorizationDetails, schemas.GetAccountAuthorizationDetailsRequest, schemas.GetAccountAuthorizationDetailsResponse), output: &GetAccountAuthorizationDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

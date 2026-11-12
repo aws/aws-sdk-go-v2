@@ -69,7 +69,9 @@ func (v *ListCrawlsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CrawlerName != nil {
 		s.WriteString(schemas.ListCrawlsRequest_CrawlerName, *v.CrawlerName)
 	}
-	serializeCrawlsFilterList(s, schemas.ListCrawlsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeCrawlsFilterList(s, schemas.ListCrawlsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCrawlsRequest_MaxResults, *v.MaxResults)
 	}
@@ -101,7 +103,9 @@ func (v *ListCrawlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCrawlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlerHistoryList(s, schemas.ListCrawlsResponse_Crawls, v.Crawls)
+	if v.Crawls != nil {
+		serializeCrawlerHistoryList(s, schemas.ListCrawlsResponse_Crawls, v.Crawls)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCrawlsResponse_NextToken, *v.NextToken)
 	}

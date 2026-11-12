@@ -1,0 +1,5 @@
+POST /v1/destinationEndpoint
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":{"standard":{"destinationNetworkingConfiguration":{"public":{"destinationAllowRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}},"destinationNetworkingType":"PUBLIC","name":"__Name__","protocol":"RTP","protocolConfiguration":{"rist":{"destinationAddress":"__DestinationAddress__","destinationIngestPort":1}}}},"description":"__Description__","regionName":"__RegionName__","tags":{"key0":"__Value__"}}

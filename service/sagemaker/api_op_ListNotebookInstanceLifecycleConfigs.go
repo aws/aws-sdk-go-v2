@@ -131,7 +131,9 @@ func (v *ListNotebookInstanceLifecycleConfigsOutput) SerializeMembers(s smithy.S
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotebookInstanceLifecycleConfigsOutput_NextToken, *v.NextToken)
 	}
-	serializeNotebookInstanceLifecycleConfigSummaryList(s, schemas.ListNotebookInstanceLifecycleConfigsOutput_NotebookInstanceLifecycleConfigs, v.NotebookInstanceLifecycleConfigs)
+	if v.NotebookInstanceLifecycleConfigs != nil {
+		serializeNotebookInstanceLifecycleConfigSummaryList(s, schemas.ListNotebookInstanceLifecycleConfigsOutput_NotebookInstanceLifecycleConfigs, v.NotebookInstanceLifecycleConfigs)
+	}
 }
 func (v *ListNotebookInstanceLifecycleConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotebookInstanceLifecycleConfigsOutput, func(s *smithy.Schema) error {

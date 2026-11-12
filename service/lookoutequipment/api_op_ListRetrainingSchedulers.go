@@ -13,6 +13,10 @@ import (
 
 // Lists all retraining schedulers in your account, filtering by model name prefix
 // and status.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListRetrainingSchedulers(ctx context.Context, params *ListRetrainingSchedulersInput, optFns ...func(*Options)) (*ListRetrainingSchedulersOutput, error) {
 	if params == nil {
 		params = &ListRetrainingSchedulersInput{}
@@ -96,7 +100,9 @@ func (v *ListRetrainingSchedulersOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRetrainingSchedulersResponse_NextToken, *v.NextToken)
 	}
-	serializeRetrainingSchedulerSummaries(s, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, v.RetrainingSchedulerSummaries)
+	if v.RetrainingSchedulerSummaries != nil {
+		serializeRetrainingSchedulerSummaries(s, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, v.RetrainingSchedulerSummaries)
+	}
 }
 func (v *ListRetrainingSchedulersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRetrainingSchedulersResponse, func(s *smithy.Schema) error {

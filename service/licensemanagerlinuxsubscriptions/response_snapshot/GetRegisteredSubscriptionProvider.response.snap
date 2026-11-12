@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LastSuccessfulDataRetrievalTime":"__LastSuccessfulDataRetrievalTime__","SecretArn":"__SecretArn__","SubscriptionProviderArn":"__SubscriptionProviderArn__","SubscriptionProviderSource":"RedHat","SubscriptionProviderStatus":"ACTIVE","SubscriptionProviderStatusMessage":"__SubscriptionProviderStatusMessage__"}

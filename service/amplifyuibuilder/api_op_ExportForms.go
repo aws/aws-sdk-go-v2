@@ -103,7 +103,9 @@ func (v *ExportFormsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFormList(s, schemas.ExportFormsResponse_entities, v.Entities)
+	if v.Entities != nil {
+		serializeFormList(s, schemas.ExportFormsResponse_entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExportFormsResponse_nextToken, *v.NextToken)
 	}

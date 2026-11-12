@@ -34,7 +34,7 @@ type SendDurableExecutionCallbackSuccessInput struct {
 	// This member is required.
 	CallbackId *string
 
-	// The result data from the successful callback operation. Maximum size is 256 KB.
+	// The result data from the successful callback operation. Maximum size is 1 MB.
 	Result []byte
 
 	noSmithyDocumentSerde

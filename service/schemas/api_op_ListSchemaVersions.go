@@ -96,7 +96,9 @@ func (v *ListSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSchemaVersionsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfSchemaVersionSummary(s, schemas.ListSchemaVersionsResponse_SchemaVersions, v.SchemaVersions)
+	if v.SchemaVersions != nil {
+		serialize__listOfSchemaVersionSummary(s, schemas.ListSchemaVersionsResponse_SchemaVersions, v.SchemaVersions)
+	}
 }
 func (v *ListSchemaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSchemaVersionsResponse, func(s *smithy.Schema) error {

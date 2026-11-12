@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"integrationId":"__IntegrationId__","secret":"__Secret__","webhookUrl":"__WebhookUrl__"}

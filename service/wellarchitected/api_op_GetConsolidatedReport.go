@@ -104,7 +104,9 @@ func (v *GetConsolidatedReportOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Base64String != nil {
 		s.WriteString(schemas.GetConsolidatedReportOutput_Base64String, *v.Base64String)
 	}
-	serializeConsolidatedReportMetrics(s, schemas.GetConsolidatedReportOutput_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeConsolidatedReportMetrics(s, schemas.GetConsolidatedReportOutput_Metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetConsolidatedReportOutput_NextToken, *v.NextToken)
 	}

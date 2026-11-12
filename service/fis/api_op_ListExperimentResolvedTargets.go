@@ -93,7 +93,9 @@ func (v *ListExperimentResolvedTargetsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExperimentResolvedTargetsResponse_nextToken, *v.NextToken)
 	}
-	serializeResolvedTargetList(s, schemas.ListExperimentResolvedTargetsResponse_resolvedTargets, v.ResolvedTargets)
+	if v.ResolvedTargets != nil {
+		serializeResolvedTargetList(s, schemas.ListExperimentResolvedTargetsResponse_resolvedTargets, v.ResolvedTargets)
+	}
 }
 func (v *ListExperimentResolvedTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListExperimentResolvedTargetsResponse, func(s *smithy.Schema) error {

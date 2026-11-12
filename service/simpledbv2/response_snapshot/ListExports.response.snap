@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"exportSummaries":[{"domainName":"__DomainName__","exportArn":"__ExportArn__","exportStatus":"PENDING","requestedAt":946684800},{"domainName":"__DomainName__","exportArn":"__ExportArn__","exportStatus":"PENDING","requestedAt":946684800}],"nextToken":"__NextToken__"}

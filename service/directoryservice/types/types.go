@@ -78,7 +78,9 @@ func (v *Assessment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssessmentId != nil {
 		s.WriteString(schemas.Assessment_AssessmentId, *v.AssessmentId)
 	}
-	serializeCustomerDnsIps(s, schemas.Assessment_CustomerDnsIps, v.CustomerDnsIps)
+	if v.CustomerDnsIps != nil {
+		serializeCustomerDnsIps(s, schemas.Assessment_CustomerDnsIps, v.CustomerDnsIps)
+	}
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.Assessment_DirectoryId, *v.DirectoryId)
 	}
@@ -91,8 +93,12 @@ func (v *Assessment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReportType != nil {
 		s.WriteString(schemas.Assessment_ReportType, *v.ReportType)
 	}
-	serializeSecurityGroupIds(s, schemas.Assessment_SecurityGroupIds, v.SecurityGroupIds)
-	serializeAssessmentInstanceIds(s, schemas.Assessment_SelfManagedInstanceIds, v.SelfManagedInstanceIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.Assessment_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SelfManagedInstanceIds != nil {
+		serializeAssessmentInstanceIds(s, schemas.Assessment_SelfManagedInstanceIds, v.SelfManagedInstanceIds)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.Assessment_StartTime, *v.StartTime)
 	}
@@ -105,7 +111,9 @@ func (v *Assessment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.Assessment_StatusReason, *v.StatusReason)
 	}
-	serializeSubnetIds(s, schemas.Assessment_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.Assessment_SubnetIds, v.SubnetIds)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.Assessment_Version, *v.Version)
 	}
@@ -203,12 +211,18 @@ func (v *AssessmentConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssessmentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerDnsIps(s, schemas.AssessmentConfiguration_CustomerDnsIps, v.CustomerDnsIps)
+	if v.CustomerDnsIps != nil {
+		serializeCustomerDnsIps(s, schemas.AssessmentConfiguration_CustomerDnsIps, v.CustomerDnsIps)
+	}
 	if v.DnsName != nil {
 		s.WriteString(schemas.AssessmentConfiguration_DnsName, *v.DnsName)
 	}
-	serializeAssessmentInstanceIds(s, schemas.AssessmentConfiguration_InstanceIds, v.InstanceIds)
-	serializeSecurityGroupIds(s, schemas.AssessmentConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.InstanceIds != nil {
+		serializeAssessmentInstanceIds(s, schemas.AssessmentConfiguration_InstanceIds, v.InstanceIds)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.AssessmentConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.VpcSettings != nil {
 		s.WriteStruct(schemas.AssessmentConfiguration_VpcSettings)
 		v.VpcSettings.SerializeMembers(s)
@@ -259,7 +273,9 @@ func (v *AssessmentReport) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainControllerIp != nil {
 		s.WriteString(schemas.AssessmentReport_DomainControllerIp, *v.DomainControllerIp)
 	}
-	serializeAssessmentValidations(s, schemas.AssessmentReport_Validations, v.Validations)
+	if v.Validations != nil {
+		serializeAssessmentValidations(s, schemas.AssessmentReport_Validations, v.Validations)
+	}
 }
 func (v *AssessmentReport) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssessmentReport, func(s *smithy.Schema) error {
@@ -319,7 +335,9 @@ func (v *AssessmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssessmentId != nil {
 		s.WriteString(schemas.AssessmentSummary_AssessmentId, *v.AssessmentId)
 	}
-	serializeCustomerDnsIps(s, schemas.AssessmentSummary_CustomerDnsIps, v.CustomerDnsIps)
+	if v.CustomerDnsIps != nil {
+		serializeCustomerDnsIps(s, schemas.AssessmentSummary_CustomerDnsIps, v.CustomerDnsIps)
+	}
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.AssessmentSummary_DirectoryId, *v.DirectoryId)
 	}
@@ -799,7 +817,9 @@ func (v *Computer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Computer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.Computer_ComputerAttributes, v.ComputerAttributes)
+	if v.ComputerAttributes != nil {
+		serializeAttributes(s, schemas.Computer_ComputerAttributes, v.ComputerAttributes)
+	}
 	if v.ComputerId != nil {
 		s.WriteString(schemas.Computer_ComputerId, *v.ComputerId)
 	}
@@ -857,8 +877,12 @@ func (v *ConditionalForwarder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConditionalForwarder) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsIpAddrs(s, schemas.ConditionalForwarder_DnsIpAddrs, v.DnsIpAddrs)
-	serializeDnsIpv6Addrs(s, schemas.ConditionalForwarder_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.DnsIpAddrs != nil {
+		serializeDnsIpAddrs(s, schemas.ConditionalForwarder_DnsIpAddrs, v.DnsIpAddrs)
+	}
+	if v.DnsIpv6Addrs != nil {
+		serializeDnsIpv6Addrs(s, schemas.ConditionalForwarder_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	}
 	if v.RemoteDomainName != nil {
 		s.WriteString(schemas.ConditionalForwarder_RemoteDomainName, *v.RemoteDomainName)
 	}
@@ -931,12 +955,18 @@ func (v *DirectoryConnectSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DirectoryConnectSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsIpAddrs(s, schemas.DirectoryConnectSettings_CustomerDnsIps, v.CustomerDnsIps)
-	serializeDnsIpv6Addrs(s, schemas.DirectoryConnectSettings_CustomerDnsIpsV6, v.CustomerDnsIpsV6)
+	if v.CustomerDnsIps != nil {
+		serializeDnsIpAddrs(s, schemas.DirectoryConnectSettings_CustomerDnsIps, v.CustomerDnsIps)
+	}
+	if v.CustomerDnsIpsV6 != nil {
+		serializeDnsIpv6Addrs(s, schemas.DirectoryConnectSettings_CustomerDnsIpsV6, v.CustomerDnsIpsV6)
+	}
 	if v.CustomerUserName != nil {
 		s.WriteString(schemas.DirectoryConnectSettings_CustomerUserName, *v.CustomerUserName)
 	}
-	serializeSubnetIds(s, schemas.DirectoryConnectSettings_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.DirectoryConnectSettings_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.DirectoryConnectSettings_VpcId, *v.VpcId)
 	}
@@ -995,16 +1025,24 @@ func (v *DirectoryConnectSettingsDescription) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DirectoryConnectSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.DirectoryConnectSettingsDescription_AvailabilityZones, v.AvailabilityZones)
-	serializeIpAddrs(s, schemas.DirectoryConnectSettingsDescription_ConnectIps, v.ConnectIps)
-	serializeIpV6Addrs(s, schemas.DirectoryConnectSettingsDescription_ConnectIpsV6, v.ConnectIpsV6)
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.DirectoryConnectSettingsDescription_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.ConnectIps != nil {
+		serializeIpAddrs(s, schemas.DirectoryConnectSettingsDescription_ConnectIps, v.ConnectIps)
+	}
+	if v.ConnectIpsV6 != nil {
+		serializeIpV6Addrs(s, schemas.DirectoryConnectSettingsDescription_ConnectIpsV6, v.ConnectIpsV6)
+	}
 	if v.CustomerUserName != nil {
 		s.WriteString(schemas.DirectoryConnectSettingsDescription_CustomerUserName, *v.CustomerUserName)
 	}
 	if v.SecurityGroupId != nil {
 		s.WriteString(schemas.DirectoryConnectSettingsDescription_SecurityGroupId, *v.SecurityGroupId)
 	}
-	serializeSubnetIds(s, schemas.DirectoryConnectSettingsDescription_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.DirectoryConnectSettingsDescription_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.DirectoryConnectSettingsDescription_VpcId, *v.VpcId)
 	}
@@ -1174,8 +1212,12 @@ func (v *DirectoryDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.DirectoryDescription_DirectoryId, *v.DirectoryId)
 	}
-	serializeDnsIpAddrs(s, schemas.DirectoryDescription_DnsIpAddrs, v.DnsIpAddrs)
-	serializeDnsIpv6Addrs(s, schemas.DirectoryDescription_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.DnsIpAddrs != nil {
+		serializeDnsIpAddrs(s, schemas.DirectoryDescription_DnsIpAddrs, v.DnsIpAddrs)
+	}
+	if v.DnsIpv6Addrs != nil {
+		serializeDnsIpv6Addrs(s, schemas.DirectoryDescription_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	}
 	if v.Edition != "" {
 		s.WriteString(schemas.DirectoryDescription_Edition, string(v.Edition))
 	}
@@ -1538,7 +1580,9 @@ func (v *DirectoryVpcSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DirectoryVpcSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubnetIds(s, schemas.DirectoryVpcSettings_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.DirectoryVpcSettings_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.DirectoryVpcSettings_VpcId, *v.VpcId)
 	}
@@ -1581,11 +1625,15 @@ func (v *DirectoryVpcSettingsDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DirectoryVpcSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.DirectoryVpcSettingsDescription_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.DirectoryVpcSettingsDescription_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.SecurityGroupId != nil {
 		s.WriteString(schemas.DirectoryVpcSettingsDescription_SecurityGroupId, *v.SecurityGroupId)
 	}
-	serializeSubnetIds(s, schemas.DirectoryVpcSettingsDescription_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.DirectoryVpcSettingsDescription_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.DirectoryVpcSettingsDescription_VpcId, *v.VpcId)
 	}
@@ -1868,8 +1916,12 @@ func (v *HybridCustomerInstancesSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HybridCustomerInstancesSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerDnsIps(s, schemas.HybridCustomerInstancesSettings_CustomerDnsIps, v.CustomerDnsIps)
-	serializeAssessmentInstanceIds(s, schemas.HybridCustomerInstancesSettings_InstanceIds, v.InstanceIds)
+	if v.CustomerDnsIps != nil {
+		serializeCustomerDnsIps(s, schemas.HybridCustomerInstancesSettings_CustomerDnsIps, v.CustomerDnsIps)
+	}
+	if v.InstanceIds != nil {
+		serializeAssessmentInstanceIds(s, schemas.HybridCustomerInstancesSettings_InstanceIds, v.InstanceIds)
+	}
 }
 func (v *HybridCustomerInstancesSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HybridCustomerInstancesSettings, func(s *smithy.Schema) error {
@@ -1903,8 +1955,12 @@ func (v *HybridSettingsDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HybridSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpAddrs(s, schemas.HybridSettingsDescription_SelfManagedDnsIpAddrs, v.SelfManagedDnsIpAddrs)
-	serializeAssessmentInstanceIds(s, schemas.HybridSettingsDescription_SelfManagedInstanceIds, v.SelfManagedInstanceIds)
+	if v.SelfManagedDnsIpAddrs != nil {
+		serializeIpAddrs(s, schemas.HybridSettingsDescription_SelfManagedDnsIpAddrs, v.SelfManagedDnsIpAddrs)
+	}
+	if v.SelfManagedInstanceIds != nil {
+		serializeAssessmentInstanceIds(s, schemas.HybridSettingsDescription_SelfManagedInstanceIds, v.SelfManagedInstanceIds)
+	}
 }
 func (v *HybridSettingsDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HybridSettingsDescription, func(s *smithy.Schema) error {
@@ -1940,8 +1996,12 @@ func (v *HybridUpdateActivities) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HybridUpdateActivities) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHybridUpdateInfoEntries(s, schemas.HybridUpdateActivities_HybridAdministratorAccount, v.HybridAdministratorAccount)
-	serializeHybridUpdateInfoEntries(s, schemas.HybridUpdateActivities_SelfManagedInstances, v.SelfManagedInstances)
+	if v.HybridAdministratorAccount != nil {
+		serializeHybridUpdateInfoEntries(s, schemas.HybridUpdateActivities_HybridAdministratorAccount, v.HybridAdministratorAccount)
+	}
+	if v.SelfManagedInstances != nil {
+		serializeHybridUpdateInfoEntries(s, schemas.HybridUpdateActivities_SelfManagedInstances, v.SelfManagedInstances)
+	}
 }
 func (v *HybridUpdateActivities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HybridUpdateActivities, func(s *smithy.Schema) error {
@@ -2083,8 +2143,12 @@ func (v *HybridUpdateValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HybridUpdateValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerDnsIps(s, schemas.HybridUpdateValue_DnsIps, v.DnsIps)
-	serializeAssessmentInstanceIds(s, schemas.HybridUpdateValue_InstanceIds, v.InstanceIds)
+	if v.DnsIps != nil {
+		serializeCustomerDnsIps(s, schemas.HybridUpdateValue_DnsIps, v.DnsIps)
+	}
+	if v.InstanceIds != nil {
+		serializeAssessmentInstanceIds(s, schemas.HybridUpdateValue_InstanceIds, v.InstanceIds)
+	}
 }
 func (v *HybridUpdateValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HybridUpdateValue, func(s *smithy.Schema) error {
@@ -2365,7 +2429,9 @@ func (v *NetworkUpdateSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkUpdateSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsIpv6Addrs(s, schemas.NetworkUpdateSettings_CustomerDnsIpsV6, v.CustomerDnsIpsV6)
+	if v.CustomerDnsIpsV6 != nil {
+		serializeDnsIpv6Addrs(s, schemas.NetworkUpdateSettings_CustomerDnsIpsV6, v.CustomerDnsIpsV6)
+	}
 	if v.NetworkType != "" {
 		s.WriteString(schemas.NetworkUpdateSettings_NetworkType, string(v.NetworkType))
 	}
@@ -2466,8 +2532,12 @@ func (v *OwnerDirectoryDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.OwnerDirectoryDescription_DirectoryId, *v.DirectoryId)
 	}
-	serializeDnsIpAddrs(s, schemas.OwnerDirectoryDescription_DnsIpAddrs, v.DnsIpAddrs)
-	serializeDnsIpv6Addrs(s, schemas.OwnerDirectoryDescription_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.DnsIpAddrs != nil {
+		serializeDnsIpAddrs(s, schemas.OwnerDirectoryDescription_DnsIpAddrs, v.DnsIpAddrs)
+	}
+	if v.DnsIpv6Addrs != nil {
+		serializeDnsIpv6Addrs(s, schemas.OwnerDirectoryDescription_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	}
 	if v.NetworkType != "" {
 		s.WriteString(schemas.OwnerDirectoryDescription_NetworkType, string(v.NetworkType))
 	}
@@ -2581,8 +2651,12 @@ func (v *RadiusSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RadiusRetries != 0 {
 		s.WriteInt32(schemas.RadiusSettings_RadiusRetries, v.RadiusRetries)
 	}
-	serializeServers(s, schemas.RadiusSettings_RadiusServers, v.RadiusServers)
-	serializeServers(s, schemas.RadiusSettings_RadiusServersIpv6, v.RadiusServersIpv6)
+	if v.RadiusServers != nil {
+		serializeServers(s, schemas.RadiusSettings_RadiusServers, v.RadiusServers)
+	}
+	if v.RadiusServersIpv6 != nil {
+		serializeServers(s, schemas.RadiusSettings_RadiusServersIpv6, v.RadiusServersIpv6)
+	}
 	if v.RadiusTimeout != nil {
 		s.WriteInt32(schemas.RadiusSettings_RadiusTimeout, *v.RadiusTimeout)
 	}
@@ -2763,7 +2837,9 @@ func (v *RegionsInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegionsInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalRegions(s, schemas.RegionsInfo_AdditionalRegions, v.AdditionalRegions)
+	if v.AdditionalRegions != nil {
+		serializeAdditionalRegions(s, schemas.RegionsInfo_AdditionalRegions, v.AdditionalRegions)
+	}
 	if v.PrimaryRegion != nil {
 		s.WriteString(schemas.RegionsInfo_PrimaryRegion, *v.PrimaryRegion)
 	}
@@ -2993,7 +3069,9 @@ func (v *SettingEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SettingEntry_Name, *v.Name)
 	}
-	serializeDirectoryConfigurationSettingRequestDetailedStatus(s, schemas.SettingEntry_RequestDetailedStatus, v.RequestDetailedStatus)
+	if v.RequestDetailedStatus != nil {
+		serializeDirectoryConfigurationSettingRequestDetailedStatus(s, schemas.SettingEntry_RequestDetailedStatus, v.RequestDetailedStatus)
+	}
 	if v.RequestStatus != "" {
 		s.WriteString(schemas.SettingEntry_RequestStatus, string(v.RequestStatus))
 	}

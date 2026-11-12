@@ -51,18 +51,24 @@ func (v *AgentDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AgentDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentCpuCoresList(s, schemas.AgentDetails_agentCpuCores, v.AgentCpuCores)
+	if v.AgentCpuCores != nil {
+		serializeAgentCpuCoresList(s, schemas.AgentDetails_agentCpuCores, v.AgentCpuCores)
+	}
 	if v.AgentVersion != nil {
 		s.WriteString(schemas.AgentDetails_agentVersion, *v.AgentVersion)
 	}
-	serializeComponentVersionList(s, schemas.AgentDetails_componentVersions, v.ComponentVersions)
+	if v.ComponentVersions != nil {
+		serializeComponentVersionList(s, schemas.AgentDetails_componentVersions, v.ComponentVersions)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.AgentDetails_instanceId, *v.InstanceId)
 	}
 	if v.InstanceType != nil {
 		s.WriteString(schemas.AgentDetails_instanceType, *v.InstanceType)
 	}
-	serializeAgentCpuCoresList(s, schemas.AgentDetails_reservedCpuCores, v.ReservedCpuCores)
+	if v.ReservedCpuCores != nil {
+		serializeAgentCpuCoresList(s, schemas.AgentDetails_reservedCpuCores, v.ReservedCpuCores)
+	}
 }
 func (v *AgentDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AgentDetails, func(s *smithy.Schema) error {
@@ -108,7 +114,9 @@ func (v *AggregateStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AggregateStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSignatureMap(s, schemas.AggregateStatus_signatureMap, v.SignatureMap)
+	if v.SignatureMap != nil {
+		serializeSignatureMap(s, schemas.AggregateStatus_signatureMap, v.SignatureMap)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AggregateStatus_status, string(v.Status))
 	}
@@ -504,7 +512,9 @@ func (v *AzElEphemeris) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AzElEphemeris) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAzElSegmentsData(s, schemas.AzElEphemeris_data, v.Data)
+	if v.Data != nil {
+		serializeAzElSegmentsData(s, schemas.AzElEphemeris_data, v.Data)
+	}
 	if v.GroundStation != nil {
 		s.WriteString(schemas.AzElEphemeris_groundStation, *v.GroundStation)
 	}
@@ -633,7 +643,9 @@ func (v *AzElSegment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AzElSegment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimeAzElList(s, schemas.AzElSegment_azElList, v.AzElList)
+	if v.AzElList != nil {
+		serializeTimeAzElList(s, schemas.AzElSegment_azElList, v.AzElList)
+	}
 	if v.ReferenceEpoch != nil {
 		s.WriteTime(schemas.AzElSegment_referenceEpoch, *v.ReferenceEpoch)
 	}
@@ -692,7 +704,9 @@ func (v *AzElSegments) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AngleUnit != "" {
 		s.WriteString(schemas.AzElSegments_angleUnit, string(v.AngleUnit))
 	}
-	serializeAzElSegmentList(s, schemas.AzElSegments_azElSegmentList, v.AzElSegmentList)
+	if v.AzElSegmentList != nil {
+		serializeAzElSegmentList(s, schemas.AzElSegments_azElSegmentList, v.AzElSegmentList)
+	}
 }
 func (v *AzElSegments) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AzElSegments, func(s *smithy.Schema) error {
@@ -885,7 +899,9 @@ func (v *ComponentVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComponentType != nil {
 		s.WriteString(schemas.ComponentVersion_componentType, *v.ComponentType)
 	}
-	serializeVersionStringList(s, schemas.ComponentVersion_versions, v.Versions)
+	if v.Versions != nil {
+		serializeVersionStringList(s, schemas.ComponentVersion_versions, v.Versions)
+	}
 }
 func (v *ComponentVersion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComponentVersion, func(s *smithy.Schema) error {
@@ -1349,7 +1365,9 @@ func (v *ContactData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ContactData_startTime, *v.StartTime)
 	}
-	serializeTagsMap(s, schemas.ContactData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ContactData_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteStruct(schemas.ContactData_version)
 		v.Version.SerializeMembers(s)
@@ -1500,7 +1518,9 @@ func (v *ContactVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Created != nil {
 		s.WriteTime(schemas.ContactVersion_created, *v.Created)
 	}
-	serializeVersionFailureReasonCodes(s, schemas.ContactVersion_failureCodes, v.FailureCodes)
+	if v.FailureCodes != nil {
+		serializeVersionFailureReasonCodes(s, schemas.ContactVersion_failureCodes, v.FailureCodes)
+	}
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.ContactVersion_failureMessage, *v.FailureMessage)
 	}
@@ -1887,7 +1907,9 @@ func (v *Destination) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Destination) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigDetails(s, schemas.Destination_configDetails, v.ConfigDetails)
+	if v.ConfigDetails != nil {
+		serializeConfigDetails(s, schemas.Destination_configDetails, v.ConfigDetails)
+	}
 	if v.ConfigId != nil {
 		s.WriteString(schemas.Destination_configId, *v.ConfigId)
 	}
@@ -1949,9 +1971,15 @@ func (v *DiscoveryData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DiscoveryData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityArnList(s, schemas.DiscoveryData_capabilityArns, v.CapabilityArns)
-	serializeIpAddressList(s, schemas.DiscoveryData_privateIpAddresses, v.PrivateIpAddresses)
-	serializeIpAddressList(s, schemas.DiscoveryData_publicIpAddresses, v.PublicIpAddresses)
+	if v.CapabilityArns != nil {
+		serializeCapabilityArnList(s, schemas.DiscoveryData_capabilityArns, v.CapabilityArns)
+	}
+	if v.PrivateIpAddresses != nil {
+		serializeIpAddressList(s, schemas.DiscoveryData_privateIpAddresses, v.PrivateIpAddresses)
+	}
+	if v.PublicIpAddresses != nil {
+		serializeIpAddressList(s, schemas.DiscoveryData_publicIpAddresses, v.PublicIpAddresses)
+	}
 }
 func (v *DiscoveryData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DiscoveryData, func(s *smithy.Schema) error {
@@ -1990,7 +2018,9 @@ func (v *DownlinkAwsGroundStationAgentEndpoint) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DownlinkAwsGroundStationAgentEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDownlinkDataflowDetails(s, schemas.DownlinkAwsGroundStationAgentEndpoint_dataflowDetails, v.DataflowDetails)
+	if v.DataflowDetails != nil {
+		serializeDownlinkDataflowDetails(s, schemas.DownlinkAwsGroundStationAgentEndpoint_dataflowDetails, v.DataflowDetails)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DownlinkAwsGroundStationAgentEndpoint_name, *v.Name)
 	}
@@ -2043,7 +2073,9 @@ func (v *DownlinkAwsGroundStationAgentEndpointDetails) SerializeMembers(s smithy
 	if v.AuditResults != "" {
 		s.WriteString(schemas.DownlinkAwsGroundStationAgentEndpointDetails_auditResults, string(v.AuditResults))
 	}
-	serializeDownlinkDataflowDetails(s, schemas.DownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails, v.DataflowDetails)
+	if v.DataflowDetails != nil {
+		serializeDownlinkDataflowDetails(s, schemas.DownlinkAwsGroundStationAgentEndpointDetails_dataflowDetails, v.DataflowDetails)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DownlinkAwsGroundStationAgentEndpointDetails_name, *v.Name)
 	}
@@ -2297,7 +2329,9 @@ func (v *EndpointDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Endpoint.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCapabilityHealthReasonList(s, schemas.EndpointDetails_healthReasons, v.HealthReasons)
+	if v.HealthReasons != nil {
+		serializeCapabilityHealthReasonList(s, schemas.EndpointDetails_healthReasons, v.HealthReasons)
+	}
 	if v.HealthStatus != "" {
 		s.WriteString(schemas.EndpointDetails_healthStatus, string(v.HealthStatus))
 	}
@@ -3054,7 +3088,9 @@ func (v *GroundStationReservationListItem) SerializeMembers(s smithy.ShapeSerial
 	if v.GroundStationId != nil {
 		s.WriteString(schemas.GroundStationReservationListItem_groundStationId, *v.GroundStationId)
 	}
-	serializeReservationDetails(s, schemas.GroundStationReservationListItem_reservationDetails, v.ReservationDetails)
+	if v.ReservationDetails != nil {
+		serializeReservationDetails(s, schemas.GroundStationReservationListItem_reservationDetails, v.ReservationDetails)
+	}
 	if v.ReservationType != "" {
 		s.WriteString(schemas.GroundStationReservationListItem_reservationType, string(v.ReservationType))
 	}
@@ -3832,7 +3868,9 @@ func (v *SatelliteListItem) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CurrentEphemeris.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroundStationIdList(s, schemas.SatelliteListItem_groundStations, v.GroundStations)
+	if v.GroundStations != nil {
+		serializeGroundStationIdList(s, schemas.SatelliteListItem_groundStations, v.GroundStations)
+	}
 	if v.NoradSatelliteID != 0 {
 		s.WriteInt32(schemas.SatelliteListItem_noradSatelliteID, v.NoradSatelliteID)
 	}
@@ -3896,8 +3934,12 @@ func (v *SecurityDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.SecurityDetails_roleArn, *v.RoleArn)
 	}
-	serializeSecurityGroupIdList(s, schemas.SecurityDetails_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetList(s, schemas.SecurityDetails_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.SecurityDetails_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetList(s, schemas.SecurityDetails_subnetIds, v.SubnetIds)
+	}
 }
 func (v *SecurityDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityDetails, func(s *smithy.Schema) error {
@@ -3984,7 +4026,9 @@ func (v *Source) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigDetails(s, schemas.Source_configDetails, v.ConfigDetails)
+	if v.ConfigDetails != nil {
+		serializeConfigDetails(s, schemas.Source_configDetails, v.ConfigDetails)
+	}
 	if v.ConfigId != nil {
 		s.WriteString(schemas.Source_configId, *v.ConfigId)
 	}
@@ -4112,7 +4156,9 @@ func (v *TelemetrySinkConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TelemetrySinkConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTelemetrySinkData(s, schemas.TelemetrySinkConfig_telemetrySinkData, v.TelemetrySinkData)
+	if v.TelemetrySinkData != nil {
+		serializeTelemetrySinkData(s, schemas.TelemetrySinkConfig_telemetrySinkData, v.TelemetrySinkData)
+	}
 	if v.TelemetrySinkType != "" {
 		s.WriteString(schemas.TelemetrySinkConfig_telemetrySinkType, string(v.TelemetrySinkType))
 	}
@@ -4373,7 +4419,9 @@ func (v *TLEEphemeris) SerializeMembers(s smithy.ShapeSerializer) {
 		v.S3Object.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTLEDataList(s, schemas.TLEEphemeris_tleData, v.TleData)
+	if v.TleData != nil {
+		serializeTLEDataList(s, schemas.TLEEphemeris_tleData, v.TleData)
+	}
 }
 func (v *TLEEphemeris) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TLEEphemeris, func(s *smithy.Schema) error {
@@ -4475,7 +4523,9 @@ func (v *TrackingOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrackingOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProgramTrackSettings(s, schemas.TrackingOverrides_programTrackSettings, v.ProgramTrackSettings)
+	if v.ProgramTrackSettings != nil {
+		serializeProgramTrackSettings(s, schemas.TrackingOverrides_programTrackSettings, v.ProgramTrackSettings)
+	}
 }
 func (v *TrackingOverrides) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrackingOverrides, func(s *smithy.Schema) error {
@@ -4510,7 +4560,9 @@ func (v *UplinkAwsGroundStationAgentEndpoint) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UplinkAwsGroundStationAgentEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUplinkDataflowDetails(s, schemas.UplinkAwsGroundStationAgentEndpoint_dataflowDetails, v.DataflowDetails)
+	if v.DataflowDetails != nil {
+		serializeUplinkDataflowDetails(s, schemas.UplinkAwsGroundStationAgentEndpoint_dataflowDetails, v.DataflowDetails)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UplinkAwsGroundStationAgentEndpoint_name, *v.Name)
 	}
@@ -4563,7 +4615,9 @@ func (v *UplinkAwsGroundStationAgentEndpointDetails) SerializeMembers(s smithy.S
 	if v.AuditResults != "" {
 		s.WriteString(schemas.UplinkAwsGroundStationAgentEndpointDetails_auditResults, string(v.AuditResults))
 	}
-	serializeUplinkDataflowDetails(s, schemas.UplinkAwsGroundStationAgentEndpointDetails_dataflowDetails, v.DataflowDetails)
+	if v.DataflowDetails != nil {
+		serializeUplinkDataflowDetails(s, schemas.UplinkAwsGroundStationAgentEndpointDetails_dataflowDetails, v.DataflowDetails)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UplinkAwsGroundStationAgentEndpointDetails_name, *v.Name)
 	}

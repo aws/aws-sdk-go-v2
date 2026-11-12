@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,36 @@ type StartTextDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTextDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTextDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTextDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartTextDetectionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.StartTextDetectionRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartTextDetectionRequest_JobTag, *v.JobTag)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartTextDetectionRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.StartTextDetectionRequest_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartTextDetectionOutput struct {
 
 	// Identifier for the text detection job. Use JobId to identify the job in a
@@ -84,13 +116,32 @@ type StartTextDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTextDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTextDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTextDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartTextDetectionResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartTextDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTextDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTextDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartTextDetectionResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTextDetection, schemas.StartTextDetectionRequest, schemas.StartTextDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTextDetection, schemas.StartTextDetectionRequest, schemas.StartTextDetectionResponse), output: &StartTextDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

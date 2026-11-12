@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeConnectionAliasPermissions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AliasId":"__AliasId__","ConnectionAliasPermissions":[{"AllowAssociation":true,"SharedAccountId":"__SharedAccountId__"},{"AllowAssociation":true,"SharedAccountId":"__SharedAccountId__"}],"NextToken":"__NextToken__"}
+¿gAliasIdk__AliasId__xConnectionAliasPermissionsŸ¿pAllowAssociationõoSharedAccountIds__SharedAccountId__ÿ¿pAllowAssociationõoSharedAccountIds__SharedAccountId__ÿÿiNextTokenm__NextToken__ÿ

@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,27 @@ type ListAttachedRolePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachedRolePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachedRolePoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachedRolePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListAttachedRolePoliciesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListAttachedRolePoliciesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.PathPrefix != nil {
+		s.WriteString(schemas.ListAttachedRolePoliciesRequest_PathPrefix, *v.PathPrefix)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.ListAttachedRolePoliciesRequest_RoleName, *v.RoleName)
+	}
+}
+
 // Contains the response to a successful [ListAttachedRolePolicies] request.
 //
 // [ListAttachedRolePolicies]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedRolePolicies.html
@@ -109,13 +132,42 @@ type ListAttachedRolePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachedRolePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachedRolePoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachedRolePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachedPolicies != nil {
+		serializeattachedPoliciesListType(s, schemas.ListAttachedRolePoliciesResponse_AttachedPolicies, v.AttachedPolicies)
+	}
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListAttachedRolePoliciesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListAttachedRolePoliciesResponse_Marker, *v.Marker)
+	}
+}
+func (v *ListAttachedRolePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttachedRolePoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttachedRolePoliciesResponse_AttachedPolicies:
+			return deserializeattachedPoliciesListType(d, schemas.ListAttachedRolePoliciesResponse_AttachedPolicies, &v.AttachedPolicies)
+		case schemas.ListAttachedRolePoliciesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListAttachedRolePoliciesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListAttachedRolePoliciesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListAttachedRolePoliciesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttachedRolePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAttachedRolePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedRolePolicies, schemas.ListAttachedRolePoliciesRequest, schemas.ListAttachedRolePoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListAttachedRolePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedRolePolicies, schemas.ListAttachedRolePoliciesRequest, schemas.ListAttachedRolePoliciesResponse), output: &ListAttachedRolePoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

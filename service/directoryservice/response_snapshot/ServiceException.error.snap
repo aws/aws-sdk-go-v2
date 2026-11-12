@@ -1,5 +1,6 @@
 500
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.AcceptSharedDirectory
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ServiceException","Message":"__Message__","RequestId":"__RequestId__"}
+¿f__typepServiceExceptiongMessagek__Message__iRequestIdm__RequestId__ÿ

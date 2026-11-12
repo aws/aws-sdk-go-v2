@@ -96,7 +96,9 @@ func (v *ListRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegionsRequest_NextToken, *v.NextToken)
 	}
-	serializeRegionOptStatusList(s, schemas.ListRegionsRequest_RegionOptStatusContains, v.RegionOptStatusContains)
+	if v.RegionOptStatusContains != nil {
+		serializeRegionOptStatusList(s, schemas.ListRegionsRequest_RegionOptStatusContains, v.RegionOptStatusContains)
+	}
 }
 
 type ListRegionsOutput struct {
@@ -126,7 +128,9 @@ func (v *ListRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegionsResponse_NextToken, *v.NextToken)
 	}
-	serializeRegionOptList(s, schemas.ListRegionsResponse_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionOptList(s, schemas.ListRegionsResponse_Regions, v.Regions)
+	}
 }
 func (v *ListRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegionsResponse, func(s *smithy.Schema) error {

@@ -4,6 +4,8 @@ package mediapackagev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type DeleteOriginEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOriginEndpointPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOriginEndpointPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOriginEndpointPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.DeleteOriginEndpointPolicyRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.DeleteOriginEndpointPolicyRequest_ChannelName, *v.ChannelName)
+	}
+	if v.OriginEndpointName != nil {
+		s.WriteString(schemas.DeleteOriginEndpointPolicyRequest_OriginEndpointName, *v.OriginEndpointName)
+	}
+}
+
 type DeleteOriginEndpointPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +75,26 @@ type DeleteOriginEndpointPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOriginEndpointPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOriginEndpointPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOriginEndpointPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteOriginEndpointPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOriginEndpointPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOriginEndpointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOriginEndpointPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOriginEndpointPolicy, schemas.DeleteOriginEndpointPolicyRequest, schemas.DeleteOriginEndpointPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOriginEndpointPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOriginEndpointPolicy, schemas.DeleteOriginEndpointPolicyRequest, schemas.DeleteOriginEndpointPolicyResponse), output: &DeleteOriginEndpointPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

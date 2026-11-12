@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeParameters
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","Parameters":[{"AllowedValues":"__AllowedValues__","DataType":"__DataType__","Description":"__Description__","MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","Value":"__Value__"},{"AllowedValues":"__AllowedValues__","DataType":"__DataType__","Description":"__Description__","MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","Value":"__Value__"}]}
+¿iNextTokenm__NextToken__jParametersŸ¿mAllowedValuesq__AllowedValues__hDataTypel__DataType__kDescriptiono__Description__tMinimumEngineVersionx__MinimumEngineVersion__dNameh__Name__eValuei__Value__ÿ¿mAllowedValuesq__AllowedValues__hDataTypel__DataType__kDescriptiono__Description__tMinimumEngineVersionx__MinimumEngineVersion__dNameh__Name__eValuei__Value__ÿÿÿ

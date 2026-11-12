@@ -49,11 +49,15 @@ func (v *UpdateDirectConnectGatewayAssociationInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *UpdateDirectConnectGatewayAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteFilterPrefixList(s, schemas.UpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway, v.AddAllowedPrefixesToDirectConnectGateway)
+	if v.AddAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.UpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway, v.AddAllowedPrefixesToDirectConnectGateway)
+	}
 	if v.AssociationId != nil {
 		s.WriteString(schemas.UpdateDirectConnectGatewayAssociationRequest_associationId, *v.AssociationId)
 	}
-	serializeRouteFilterPrefixList(s, schemas.UpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway, v.RemoveAllowedPrefixesToDirectConnectGateway)
+	if v.RemoveAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.UpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway, v.RemoveAllowedPrefixesToDirectConnectGateway)
+	}
 }
 
 type UpdateDirectConnectGatewayAssociationOutput struct {
@@ -106,6 +110,9 @@ func (c *Client) addOperationUpdateDirectConnectGatewayAssociationMiddlewares(st
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

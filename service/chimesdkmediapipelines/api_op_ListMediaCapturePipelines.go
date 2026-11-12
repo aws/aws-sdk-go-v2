@@ -74,7 +74,9 @@ func (v *ListMediaCapturePipelinesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMediaCapturePipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaCapturePipelineSummaryList(s, schemas.ListMediaCapturePipelinesResponse_MediaCapturePipelines, v.MediaCapturePipelines)
+	if v.MediaCapturePipelines != nil {
+		serializeMediaCapturePipelineSummaryList(s, schemas.ListMediaCapturePipelinesResponse_MediaCapturePipelines, v.MediaCapturePipelines)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMediaCapturePipelinesResponse_NextToken, *v.NextToken)
 	}

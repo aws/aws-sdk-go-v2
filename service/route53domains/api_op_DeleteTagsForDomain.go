@@ -54,7 +54,9 @@ func (v *DeleteTagsForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.DeleteTagsForDomainRequest_DomainName, *v.DomainName)
 	}
-	serializeTagKeyList(s, schemas.DeleteTagsForDomainRequest_TagsToDelete, v.TagsToDelete)
+	if v.TagsToDelete != nil {
+		serializeTagKeyList(s, schemas.DeleteTagsForDomainRequest_TagsToDelete, v.TagsToDelete)
+	}
 }
 
 type DeleteTagsForDomainOutput struct {
@@ -94,6 +96,9 @@ func (c *Client) addOperationDeleteTagsForDomainMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

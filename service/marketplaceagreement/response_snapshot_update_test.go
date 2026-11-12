@@ -507,6 +507,9 @@ func TestUpdateResponseSnapshot_DescribeAgreement(t *testing.T) {
 				OfferId: ptr.String("__OfferId__"),
 			},
 		},
+		FreeTrialSummary: &types.FreeTrialSummary{
+			TrialEndTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 	}
 	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAgreement, schemas.DescribeAgreementOutput, schemas.DescribeAgreementOutput)
@@ -1097,6 +1100,7 @@ func TestUpdateResponseSnapshot_SearchAgreements(t *testing.T) {
 				InitialAgreementId:        ptr.String("__InitialAgreementId__"),
 				EndTimeBehaviorType:       types.EndTimeBehaviorType("RENEW"),
 				EndTimeBehaviorReasonCode: types.EndTimeBehaviorReasonCode("PROPOSER_RENEW_OPTED_OUT"),
+				FreeTrialEndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				AgreementId:    ptr.String("__AgreementId__"),
@@ -1137,6 +1141,7 @@ func TestUpdateResponseSnapshot_SearchAgreements(t *testing.T) {
 				InitialAgreementId:        ptr.String("__InitialAgreementId__"),
 				EndTimeBehaviorType:       types.EndTimeBehaviorType("RENEW"),
 				EndTimeBehaviorReasonCode: types.EndTimeBehaviorReasonCode("PROPOSER_RENEW_OPTED_OUT"),
+				FreeTrialEndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

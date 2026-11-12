@@ -122,7 +122,9 @@ func (v *CreateCustomLineItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PresentationDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateCustomLineItemInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCustomLineItemInput_Tags, v.Tags)
+	}
 }
 func (v *CreateCustomLineItemInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCustomLineItemInput, func(s *smithy.Schema) error {

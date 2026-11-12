@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,24 @@ type ListVirtualMFADevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualMFADevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualMFADevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualMFADevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentStatus != "" {
+		s.WriteString(schemas.ListVirtualMFADevicesRequest_AssignmentStatus, string(v.AssignmentStatus))
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVirtualMFADevicesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListVirtualMFADevicesRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 // Contains the response to a successful [ListVirtualMFADevices] request.
 //
 // [ListVirtualMFADevices]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListVirtualMFADevices.html
@@ -93,13 +113,42 @@ type ListVirtualMFADevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualMFADevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualMFADevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualMFADevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListVirtualMFADevicesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVirtualMFADevicesResponse_Marker, *v.Marker)
+	}
+	if v.VirtualMFADevices != nil {
+		serializevirtualMFADeviceListType(s, schemas.ListVirtualMFADevicesResponse_VirtualMFADevices, v.VirtualMFADevices)
+	}
+}
+func (v *ListVirtualMFADevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualMFADevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualMFADevicesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListVirtualMFADevicesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListVirtualMFADevicesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListVirtualMFADevicesResponse_Marker, v.Marker)
+		case schemas.ListVirtualMFADevicesResponse_VirtualMFADevices:
+			return deserializevirtualMFADeviceListType(d, schemas.ListVirtualMFADevicesResponse_VirtualMFADevices, &v.VirtualMFADevices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVirtualMFADevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListVirtualMFADevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualMFADevices, schemas.ListVirtualMFADevicesRequest, schemas.ListVirtualMFADevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListVirtualMFADevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualMFADevices, schemas.ListVirtualMFADevicesRequest, schemas.ListVirtualMFADevicesResponse), output: &ListVirtualMFADevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

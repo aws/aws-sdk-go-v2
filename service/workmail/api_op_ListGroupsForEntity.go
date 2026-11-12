@@ -109,7 +109,9 @@ func (v *ListGroupsForEntityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGroupsForEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupIdentifiers(s, schemas.ListGroupsForEntityResponse_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroupIdentifiers(s, schemas.ListGroupsForEntityResponse_Groups, v.Groups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupsForEntityResponse_NextToken, *v.NextToken)
 	}

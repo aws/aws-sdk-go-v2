@@ -59,7 +59,9 @@ func (v *AssociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.AssociateAccountsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.AssociateAccountsRequest_accountIds, v.AccountIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.AssociateAccountsRequest_clientToken, *v.ClientToken)
 	}
@@ -86,8 +88,12 @@ func (v *AssociateAccountsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.AssociateAccountsResponse_accountIds, v.AccountIds)
-	serializeStringList(s, schemas.AssociateAccountsResponse_errors, v.Errors)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.AssociateAccountsResponse_accountIds, v.AccountIds)
+	}
+	if v.Errors != nil {
+		serializeStringList(s, schemas.AssociateAccountsResponse_errors, v.Errors)
+	}
 }
 func (v *AssociateAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateAccountsResponse, func(s *smithy.Schema) error {

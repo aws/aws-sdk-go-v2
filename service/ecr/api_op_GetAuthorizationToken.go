@@ -58,7 +58,9 @@ func (v *GetAuthorizationTokenInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAuthorizationTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetAuthorizationTokenRegistryIdList(s, schemas.GetAuthorizationTokenRequest_registryIds, v.RegistryIds)
+	if v.RegistryIds != nil {
+		serializeGetAuthorizationTokenRegistryIdList(s, schemas.GetAuthorizationTokenRequest_registryIds, v.RegistryIds)
+	}
 }
 
 type GetAuthorizationTokenOutput struct {
@@ -83,7 +85,9 @@ func (v *GetAuthorizationTokenOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAuthorizationTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizationDataList(s, schemas.GetAuthorizationTokenResponse_authorizationData, v.AuthorizationData)
+	if v.AuthorizationData != nil {
+		serializeAuthorizationDataList(s, schemas.GetAuthorizationTokenResponse_authorizationData, v.AuthorizationData)
+	}
 }
 func (v *GetAuthorizationTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAuthorizationTokenResponse, func(s *smithy.Schema) error {

@@ -115,7 +115,9 @@ func (v *ListAlertsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAlert(s, schemas.ListAlertsResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfAlert(s, schemas.ListAlertsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAlertsResponse_NextToken, *v.NextToken)
 	}

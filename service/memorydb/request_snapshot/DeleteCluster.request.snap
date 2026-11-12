@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DeleteCluster
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DeleteCluster
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterName":"__ClusterName__","FinalSnapshotName":"__FinalSnapshotName__","MultiRegionClusterName":"__MultiRegionClusterName__"}
+¿kClusterNameo__ClusterName__qFinalSnapshotNameu__FinalSnapshotName__vMultiRegionClusterNamex__MultiRegionClusterName__ÿ

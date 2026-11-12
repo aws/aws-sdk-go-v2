@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RetrieveEnvironmentInfoResponse><RetrieveEnvironmentInfoResult><EnvironmentInfo><member><Ec2InstanceId>__Ec2InstanceId__</Ec2InstanceId><InfoType>tail</InfoType><Message>__Message__</Message><SampleTimestamp>2000-01-01T00:00:00Z</SampleTimestamp></member><member><Ec2InstanceId>__Ec2InstanceId__</Ec2InstanceId><InfoType>tail</InfoType><Message>__Message__</Message><SampleTimestamp>2000-01-01T00:00:00Z</SampleTimestamp></member></EnvironmentInfo></RetrieveEnvironmentInfoResult></RetrieveEnvironmentInfoResponse>

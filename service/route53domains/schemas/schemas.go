@@ -143,6 +143,11 @@ var ResendOperationAuthorization = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResendOperationAuthorization",
 }, smithy.ShapeTypeOperation, 0)
 
+var RestoreDomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "RestoreDomain",
+}, smithy.ShapeTypeOperation, 0)
+
 var RetrieveDomainAuthCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "RetrieveDomainAuthCode",
@@ -2001,6 +2006,20 @@ var ResendOperationAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ResendOperationAuthorizationRequest_OperationId *smithy.Schema
 
+var RestoreDomainRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "RestoreDomainRequest",
+}, smithy.ShapeTypeStructure, 2)
+var RestoreDomainRequest_DomainName *smithy.Schema
+
+var RestoreDomainRequest_Consent *smithy.Schema
+
+var RestoreDomainResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53domains",
+	Name:      "RestoreDomainResponse",
+}, smithy.ShapeTypeStructure, 1)
+var RestoreDomainResponse_OperationId *smithy.Schema
+
 var RetrieveDomainAuthCodeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "RetrieveDomainAuthCodeRequest",
@@ -3298,6 +3317,12 @@ func init() {
 	ResendContactReachabilityEmailResponse_isAlreadyVerified = ResendContactReachabilityEmailResponse.AddMember("isAlreadyVerified", _Boolean)
 
 	ResendOperationAuthorizationRequest_OperationId = ResendOperationAuthorizationRequest.AddMember("OperationId", _OperationId)
+
+	RestoreDomainRequest_DomainName = RestoreDomainRequest.AddMember("DomainName", _DomainName)
+
+	RestoreDomainRequest_Consent = RestoreDomainRequest.AddMember("Consent", Consent)
+
+	RestoreDomainResponse_OperationId = RestoreDomainResponse.AddMember("OperationId", _OperationId)
 
 	RetrieveDomainAuthCodeRequest_DomainName = RetrieveDomainAuthCodeRequest.AddMember("DomainName", _DomainName)
 

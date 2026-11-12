@@ -38,9 +38,9 @@ type CreateVpcEndpointAssociationInput struct {
 	FirewallArn *string
 
 	// The ID for a subnet that's used in an association with a firewall. This is used
-	// in CreateFirewall, AssociateSubnets, and CreateVpcEndpointAssociation. Network Firewall creates an instance of the associated firewall in
-	// each subnet that you specify, to filter traffic in the subnet's Availability
-	// Zone.
+	// in CreateFirewall , AssociateSubnets , and CreateVpcEndpointAssociation .
+	// Network Firewall creates an instance of the associated firewall in each subnet
+	// that you specify, to filter traffic in the subnet's Availability Zone.
 	//
 	// This member is required.
 	SubnetMapping *types.SubnetMapping
@@ -77,7 +77,9 @@ func (v *CreateVpcEndpointAssociationInput) SerializeMembers(s smithy.ShapeSeria
 		v.SubnetMapping.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateVpcEndpointAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVpcEndpointAssociationRequest_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateVpcEndpointAssociationRequest_VpcId, *v.VpcId)
 	}
@@ -145,6 +147,9 @@ func (c *Client) addOperationCreateVpcEndpointAssociationMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

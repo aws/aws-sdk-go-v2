@@ -94,7 +94,9 @@ func (v *ListFoundationModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFoundationModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFoundationModelSummaryList(s, schemas.ListFoundationModelsResponse_modelSummaries, v.ModelSummaries)
+	if v.ModelSummaries != nil {
+		serializeFoundationModelSummaryList(s, schemas.ListFoundationModelsResponse_modelSummaries, v.ModelSummaries)
+	}
 }
 func (v *ListFoundationModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListFoundationModelsResponse, func(s *smithy.Schema) error {

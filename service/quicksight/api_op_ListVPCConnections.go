@@ -100,7 +100,9 @@ func (v *ListVPCConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListVPCConnectionsResponse_Status, v.Status)
 	}
-	serializeVPCConnectionSummaryList(s, schemas.ListVPCConnectionsResponse_VPCConnectionSummaries, v.VPCConnectionSummaries)
+	if v.VPCConnectionSummaries != nil {
+		serializeVPCConnectionSummaryList(s, schemas.ListVPCConnectionsResponse_VPCConnectionSummaries, v.VPCConnectionSummaries)
+	}
 }
 func (v *ListVPCConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVPCConnectionsResponse, func(s *smithy.Schema) error {

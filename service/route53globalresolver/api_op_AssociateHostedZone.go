@@ -4,7 +4,9 @@ package route53globalresolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,24 @@ type AssociateHostedZoneInput struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssociateHostedZoneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateHostedZoneInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateHostedZoneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.AssociateHostedZoneInput_hostedZoneId, *v.HostedZoneId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssociateHostedZoneInput_name, *v.Name)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateHostedZoneInput_resourceArn, *v.ResourceArn)
+	}
 }
 
 type AssociateHostedZoneOutput struct {
@@ -105,13 +125,78 @@ type AssociateHostedZoneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateHostedZoneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateHostedZoneOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateHostedZoneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AssociateHostedZoneOutput_createdAt, *v.CreatedAt)
+	}
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.AssociateHostedZoneOutput_hostedZoneId, *v.HostedZoneId)
+	}
+	if v.HostedZoneName != nil {
+		s.WriteString(schemas.AssociateHostedZoneOutput_hostedZoneName, *v.HostedZoneName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssociateHostedZoneOutput_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssociateHostedZoneOutput_name, *v.Name)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateHostedZoneOutput_resourceArn, *v.ResourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssociateHostedZoneOutput_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AssociateHostedZoneOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AssociateHostedZoneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateHostedZoneOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateHostedZoneOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssociateHostedZoneOutput_createdAt, v.CreatedAt)
+		case schemas.AssociateHostedZoneOutput_hostedZoneId:
+			v.HostedZoneId = new(string)
+			return d.ReadString(schemas.AssociateHostedZoneOutput_hostedZoneId, v.HostedZoneId)
+		case schemas.AssociateHostedZoneOutput_hostedZoneName:
+			v.HostedZoneName = new(string)
+			return d.ReadString(schemas.AssociateHostedZoneOutput_hostedZoneName, v.HostedZoneName)
+		case schemas.AssociateHostedZoneOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssociateHostedZoneOutput_id, v.Id)
+		case schemas.AssociateHostedZoneOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssociateHostedZoneOutput_name, v.Name)
+		case schemas.AssociateHostedZoneOutput_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.AssociateHostedZoneOutput_resourceArn, v.ResourceArn)
+		case schemas.AssociateHostedZoneOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.AssociateHostedZoneOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.HostedZoneAssociationStatus(ev)
+			return nil
+		case schemas.AssociateHostedZoneOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssociateHostedZoneOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateHostedZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateHostedZone, schemas.AssociateHostedZoneInput, schemas.AssociateHostedZoneOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateHostedZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateHostedZone, schemas.AssociateHostedZoneInput, schemas.AssociateHostedZoneOutput), output: &AssociateHostedZoneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

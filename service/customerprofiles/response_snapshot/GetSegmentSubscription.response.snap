@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LastUpdatedAt":946684800,"Message":"__Message__","ScheduleConfiguration":{"Interval":1,"Unit":"HOURLY"},"ScheduledExecutions":{"LastExecutedAt":946684800,"NextExecutedAt":946684800},"StartedAt":946684800,"Status":"STARTING"}

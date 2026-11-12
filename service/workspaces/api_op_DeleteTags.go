@@ -52,7 +52,9 @@ func (v *DeleteTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.DeleteTagsRequest_ResourceId, *v.ResourceId)
 	}
-	serializeTagKeyList(s, schemas.DeleteTagsRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DeleteTagsRequest_TagKeys, v.TagKeys)
+	}
 }
 
 type DeleteTagsOutput struct {
@@ -92,6 +94,9 @@ func (c *Client) addOperationDeleteTagsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -124,7 +124,9 @@ func (v *EvaluateCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EvaluationResult != nil {
 		s.WriteString(schemas.EvaluateCodeResponse_evaluationResult, *v.EvaluationResult)
 	}
-	serializeLogs(s, schemas.EvaluateCodeResponse_logs, v.Logs)
+	if v.Logs != nil {
+		serializeLogs(s, schemas.EvaluateCodeResponse_logs, v.Logs)
+	}
 	if v.OutErrors != nil {
 		s.WriteString(schemas.EvaluateCodeResponse_outErrors, *v.OutErrors)
 	}

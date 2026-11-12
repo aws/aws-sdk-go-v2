@@ -106,7 +106,9 @@ func (v *DescribePullRequestEventsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribePullRequestEventsOutput_nextToken, *v.NextToken)
 	}
-	serializePullRequestEventList(s, schemas.DescribePullRequestEventsOutput_pullRequestEvents, v.PullRequestEvents)
+	if v.PullRequestEvents != nil {
+		serializePullRequestEventList(s, schemas.DescribePullRequestEventsOutput_pullRequestEvents, v.PullRequestEvents)
+	}
 }
 func (v *DescribePullRequestEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePullRequestEventsOutput, func(s *smithy.Schema) error {

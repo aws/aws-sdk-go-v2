@@ -63,19 +63,27 @@ func (v *ListBenefitAllocationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBenefitAllocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBenefitApplicationIdentifierList(s, schemas.ListBenefitAllocationsInput_BenefitApplicationIdentifiers, v.BenefitApplicationIdentifiers)
-	serializeBenefitIdentifiers(s, schemas.ListBenefitAllocationsInput_BenefitIdentifiers, v.BenefitIdentifiers)
+	if v.BenefitApplicationIdentifiers != nil {
+		serializeBenefitApplicationIdentifierList(s, schemas.ListBenefitAllocationsInput_BenefitApplicationIdentifiers, v.BenefitApplicationIdentifiers)
+	}
+	if v.BenefitIdentifiers != nil {
+		serializeBenefitIdentifiers(s, schemas.ListBenefitAllocationsInput_BenefitIdentifiers, v.BenefitIdentifiers)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListBenefitAllocationsInput_Catalog, *v.Catalog)
 	}
-	serializeFulfillmentTypes(s, schemas.ListBenefitAllocationsInput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.ListBenefitAllocationsInput_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBenefitAllocationsInput_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBenefitAllocationsInput_NextToken, *v.NextToken)
 	}
-	serializeBenefitAllocationStatusList(s, schemas.ListBenefitAllocationsInput_Status, v.Status)
+	if v.Status != nil {
+		serializeBenefitAllocationStatusList(s, schemas.ListBenefitAllocationsInput_Status, v.Status)
+	}
 }
 
 type ListBenefitAllocationsOutput struct {
@@ -100,7 +108,9 @@ func (v *ListBenefitAllocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBenefitAllocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBenefitAllocationSummaries(s, schemas.ListBenefitAllocationsOutput_BenefitAllocationSummaries, v.BenefitAllocationSummaries)
+	if v.BenefitAllocationSummaries != nil {
+		serializeBenefitAllocationSummaries(s, schemas.ListBenefitAllocationsOutput_BenefitAllocationSummaries, v.BenefitAllocationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBenefitAllocationsOutput_NextToken, *v.NextToken)
 	}

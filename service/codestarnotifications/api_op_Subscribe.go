@@ -4,7 +4,9 @@ package codestarnotifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,26 @@ type SubscribeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SubscribeRequest_Arn, *v.Arn)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.SubscribeRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.SubscribeRequest_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SubscribeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the notification rule for which you have
@@ -60,13 +82,32 @@ type SubscribeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SubscribeResult_Arn, *v.Arn)
+	}
+}
+func (v *SubscribeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscribeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscribeResult_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SubscribeResult_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubscribe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Subscribe, schemas.SubscribeRequest, schemas.SubscribeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubscribe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Subscribe, schemas.SubscribeRequest, schemas.SubscribeResult), output: &SubscribeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

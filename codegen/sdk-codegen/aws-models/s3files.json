@@ -377,7 +377,7 @@
                 "status": {
                     "target": "com.amazonaws.s3files#LifeCycleState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle state of the file system. Valid values are: <code>AVAILABLE</code> (the file system is available for use), <code>CREATING</code> (the file system is being created), <code>DELETING</code> (the file system is being deleted), <code>DELETED</code> (the file system has been deleted), <code>ERROR</code> (the file system is in an error state), or <code>UPDATING</code> (the file system is being updated).</p>"
+                        "smithy.api#documentation": "<p>The lifecycle state of the file system. Valid values are: <code>AVAILABLE</code> (the file system is available for use), <code>CREATING</code> (the file system is being created), <code>DELETING</code> (the file system is being deleted), <code>DELETED</code> (the file system has been deleted), <code>ERROR</code> (the file system is in an error state), <code>MISCONFIGURED</code> (the file system has a misconfiguration), or <code>UPDATING</code> (the file system is being updated).</p>"
                     }
                 },
                 "statusMessage": {
@@ -1610,6 +1610,15 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "updating",
+                        "smithy.api#suppress": [
+                            "EnumShape"
+                        ]
+                    }
+                },
+                "misconfigured": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "misconfigured",
                         "smithy.api#suppress": [
                             "EnumShape"
                         ]

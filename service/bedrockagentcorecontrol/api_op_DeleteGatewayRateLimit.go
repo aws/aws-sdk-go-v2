@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteGatewayRateLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGatewayRateLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGatewayRateLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGatewayRateLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.DeleteGatewayRateLimitRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	if v.RateLimitId != nil {
+		s.WriteString(schemas.DeleteGatewayRateLimitRequest_rateLimitId, *v.RateLimitId)
+	}
+}
+
 type DeleteGatewayRateLimitOutput struct {
 
 	// The unique identifier of the deleted rate limit.
@@ -57,13 +74,42 @@ type DeleteGatewayRateLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGatewayRateLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGatewayRateLimitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGatewayRateLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RateLimitId != nil {
+		s.WriteString(schemas.DeleteGatewayRateLimitResponse_rateLimitId, *v.RateLimitId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteGatewayRateLimitResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteGatewayRateLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGatewayRateLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGatewayRateLimitResponse_rateLimitId:
+			v.RateLimitId = new(string)
+			return d.ReadString(schemas.DeleteGatewayRateLimitResponse_rateLimitId, v.RateLimitId)
+		case schemas.DeleteGatewayRateLimitResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteGatewayRateLimitResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GatewayRateLimitStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGatewayRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGatewayRateLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayRateLimit, schemas.DeleteGatewayRateLimitRequest, schemas.DeleteGatewayRateLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGatewayRateLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayRateLimit, schemas.DeleteGatewayRateLimitRequest, schemas.DeleteGatewayRateLimitResponse), output: &DeleteGatewayRateLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

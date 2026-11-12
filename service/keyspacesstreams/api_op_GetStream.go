@@ -169,7 +169,9 @@ func (v *GetStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetStreamOutput_nextToken, *v.NextToken)
 	}
-	serializeShardDescriptionList(s, schemas.GetStreamOutput_shards, v.Shards)
+	if v.Shards != nil {
+		serializeShardDescriptionList(s, schemas.GetStreamOutput_shards, v.Shards)
+	}
 	if v.StreamArn != nil {
 		s.WriteString(schemas.GetStreamOutput_streamArn, *v.StreamArn)
 	}

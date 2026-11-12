@@ -171,6 +171,9 @@
                     "target": "com.amazonaws.ivsrealtime#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.ivsrealtime#RevokeConnectionToken"
+                },
+                {
                     "target": "com.amazonaws.ivsrealtime#StartComposition"
                 },
                 {
@@ -1446,6 +1449,16 @@
                 "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.ivsrealtime#ConnectionTokenId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
             }
         },
         "com.amazonaws.ivsrealtime#CreateEncoderConfiguration": {
@@ -6008,6 +6021,55 @@
                 "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ivsrealtime#RevokeConnectionToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#RevokeConnectionTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#RevokeConnectionTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Revokes the specified connection token so that it can no longer connect to a stage. This operation disconnects any participant currently connected with the revoked token.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/RevokeConnectionToken"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#RevokeConnectionTokenRequest": {
+            "type": "structure",
+            "members": {
+                "tokenId": {
+                    "target": "com.amazonaws.ivsrealtime#ConnectionTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the connection token to revoke.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#RevokeConnectionTokenResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ivsrealtime#S3BucketName": {

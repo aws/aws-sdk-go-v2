@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","retrievers":[{"applicationId":"__ApplicationId__","displayName":"__DisplayName__","retrieverId":"__RetrieverId__","status":"CREATING","type":"NATIVE_INDEX"},{"applicationId":"__ApplicationId__","displayName":"__DisplayName__","retrieverId":"__RetrieverId__","status":"CREATING","type":"NATIVE_INDEX"}]}

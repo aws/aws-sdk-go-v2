@@ -65,7 +65,9 @@ func (v *PutEventsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventList(s, schemas.PutEventsRequest_eventList, v.EventList)
+	if v.EventList != nil {
+		serializeEventList(s, schemas.PutEventsRequest_eventList, v.EventList)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.PutEventsRequest_sessionId, *v.SessionId)
 	}

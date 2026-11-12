@@ -28,7 +28,6 @@ func (c *Client) ListMonitors(ctx context.Context, params *ListMonitorsInput, op
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListMonitorsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -56,7 +55,6 @@ func (v *ListMonitorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListMonitorsOutput struct {
 
 	// A list of MonitorSummary objects that describe your monitors in the Deadline
@@ -86,7 +84,9 @@ func (v *ListMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitorSummaries(s, schemas.ListMonitorsResponse_monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorSummaries(s, schemas.ListMonitorsResponse_monitors, v.Monitors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitorsResponse_nextToken, *v.NextToken)
 	}

@@ -208,21 +208,29 @@ func (v *UpdateContainerFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InstanceConnectionPortRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIpPermissionsList(s, schemas.UpdateContainerFleetInput_InstanceInboundPermissionAuthorizations, v.InstanceInboundPermissionAuthorizations)
-	serializeIpPermissionsList(s, schemas.UpdateContainerFleetInput_InstanceInboundPermissionRevocations, v.InstanceInboundPermissionRevocations)
+	if v.InstanceInboundPermissionAuthorizations != nil {
+		serializeIpPermissionsList(s, schemas.UpdateContainerFleetInput_InstanceInboundPermissionAuthorizations, v.InstanceInboundPermissionAuthorizations)
+	}
+	if v.InstanceInboundPermissionRevocations != nil {
+		serializeIpPermissionsList(s, schemas.UpdateContainerFleetInput_InstanceInboundPermissionRevocations, v.InstanceInboundPermissionRevocations)
+	}
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.UpdateContainerFleetInput_LogConfiguration)
 		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricGroupList(s, schemas.UpdateContainerFleetInput_MetricGroups, v.MetricGroups)
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.UpdateContainerFleetInput_MetricGroups, v.MetricGroups)
+	}
 	if v.NewGameSessionProtectionPolicy != "" {
 		s.WriteString(schemas.UpdateContainerFleetInput_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
 	}
 	if v.PerInstanceContainerGroupDefinitionName != nil {
 		s.WriteString(schemas.UpdateContainerFleetInput_PerInstanceContainerGroupDefinitionName, *v.PerInstanceContainerGroupDefinitionName)
 	}
-	serializeContainerFleetRemoveAttributeList(s, schemas.UpdateContainerFleetInput_RemoveAttributes, v.RemoveAttributes)
+	if v.RemoveAttributes != nil {
+		serializeContainerFleetRemoveAttributeList(s, schemas.UpdateContainerFleetInput_RemoveAttributes, v.RemoveAttributes)
+	}
 }
 
 type UpdateContainerFleetOutput struct {

@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type PutRolePermissionsBoundaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRolePermissionsBoundaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRolePermissionsBoundaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRolePermissionsBoundaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PermissionsBoundary != nil {
+		s.WriteString(schemas.PutRolePermissionsBoundaryRequest_PermissionsBoundary, *v.PermissionsBoundary)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.PutRolePermissionsBoundaryRequest_RoleName, *v.RoleName)
+	}
+}
+
 type PutRolePermissionsBoundaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +87,26 @@ type PutRolePermissionsBoundaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRolePermissionsBoundaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRolePermissionsBoundaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutRolePermissionsBoundaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRolePermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutRolePermissionsBoundary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRolePermissionsBoundary, schemas.PutRolePermissionsBoundaryRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutRolePermissionsBoundary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRolePermissionsBoundary, schemas.PutRolePermissionsBoundaryRequest, nil), output: &PutRolePermissionsBoundaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

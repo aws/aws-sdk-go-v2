@@ -70,7 +70,9 @@ func (v *CreateRestoreTestingPlanInput) SerializeMembers(s smithy.ShapeSerialize
 		v.RestoreTestingPlan.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSensitiveStringMap(s, schemas.CreateRestoreTestingPlanInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeSensitiveStringMap(s, schemas.CreateRestoreTestingPlanInput_Tags, v.Tags)
+	}
 }
 
 type CreateRestoreTestingPlanOutput struct {

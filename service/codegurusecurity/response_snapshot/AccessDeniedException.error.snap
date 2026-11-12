@@ -1,0 +1,4 @@
+403
+Content-Type: application/json
+
+{"__type":"AccessDeniedException","errorCode":"__ErrorCode___","message":"__Message__","resourceId":"__ResourceId__","resourceType":"__ResourceType__"}

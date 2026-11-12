@@ -125,7 +125,9 @@ func (v *ListFirewallRuleGroupAssociationsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListFirewallRuleGroupAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFirewallRuleGroupAssociations(s, schemas.ListFirewallRuleGroupAssociationsResponse_FirewallRuleGroupAssociations, v.FirewallRuleGroupAssociations)
+	if v.FirewallRuleGroupAssociations != nil {
+		serializeFirewallRuleGroupAssociations(s, schemas.ListFirewallRuleGroupAssociationsResponse_FirewallRuleGroupAssociations, v.FirewallRuleGroupAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFirewallRuleGroupAssociationsResponse_NextToken, *v.NextToken)
 	}

@@ -4,7 +4,9 @@ package repostspace
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,32 @@ type UpdateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSpaceInput_description, *v.Description)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateSpaceInput_roleArn, *v.RoleArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.UpdateSpaceInput_spaceId, *v.SpaceId)
+	}
+	if v.SupportedEmailDomains != nil {
+		s.WriteStruct(schemas.UpdateSpaceInput_supportedEmailDomains)
+		v.SupportedEmailDomains.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.UpdateSpaceInput_tier, string(v.Tier))
+	}
+}
+
 type UpdateSpaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +83,26 @@ type UpdateSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpace, schemas.UpdateSpaceInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpace, schemas.UpdateSpaceInput, nil), output: &UpdateSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

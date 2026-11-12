@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/RegisterWorkspaceDirectory
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.RegisterWorkspaceDirectory
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ActiveDirectoryConfig":{"DomainName":"__DomainName__","ServiceAccountSecretArn":"__ServiceAccountSecretArn__"},"DirectoryId":"__DirectoryId__","EnableSelfService":true,"IdcInstanceArn":"__IdcInstanceArn__","MicrosoftEntraConfig":{"ApplicationConfigSecretArn":"__ApplicationConfigSecretArn__","TenantId":"__TenantId__"},"SubnetIds":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Tenancy":"DEDICATED","UserIdentityType":"CUSTOMER_MANAGED","WorkspaceDirectoryDescription":"__WorkspaceDirectoryDescription__","WorkspaceDirectoryName":"__WorkspaceDirectoryName__","WorkspaceType":"PERSONAL"}
+¿uActiveDirectoryConfig¿jDomainNamen__DomainName__wServiceAccountSecretArnx__ServiceAccountSecretArn__ÿkDirectoryIdo__DirectoryId__qEnableSelfServiceõnIdcInstanceArnr__IdcInstanceArn__tMicrosoftEntraConfig¿xApplicationConfigSecretArnx__ApplicationConfigSecretArn__hTenantIdl__TenantId__ÿiSubnetIdsŸj__Member__j__Member__ÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿgTenancyiDEDICATEDpUserIdentityTypepCUSTOMER_MANAGEDxWorkspaceDirectoryDescriptionx!__WorkspaceDirectoryDescription__vWorkspaceDirectoryNamex__WorkspaceDirectoryName__mWorkspaceTypehPERSONALÿ

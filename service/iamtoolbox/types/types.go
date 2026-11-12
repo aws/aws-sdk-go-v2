@@ -95,11 +95,15 @@ func (v *Evaluation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != nil {
 		s.WriteString(schemas.Evaluation_action, *v.Action)
 	}
-	serializeAuthorizationContext(s, schemas.Evaluation_context, v.Context)
+	if v.Context != nil {
+		serializeAuthorizationContext(s, schemas.Evaluation_context, v.Context)
+	}
 	if v.EvaluatedEffect != "" {
 		s.WriteString(schemas.Evaluation_evaluatedEffect, string(v.EvaluatedEffect))
 	}
-	serializeMatchedPolicyList(s, schemas.Evaluation_matchedPolicies, v.MatchedPolicies)
+	if v.MatchedPolicies != nil {
+		serializeMatchedPolicyList(s, schemas.Evaluation_matchedPolicies, v.MatchedPolicies)
+	}
 	if v.Resource != nil {
 		s.WriteString(schemas.Evaluation_resource, *v.Resource)
 	}
@@ -156,7 +160,9 @@ func (v *MatchedPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MatchedPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchedStatementList(s, schemas.MatchedPolicy_matchedStatements, v.MatchedStatements)
+	if v.MatchedStatements != nil {
+		serializeMatchedStatementList(s, schemas.MatchedPolicy_matchedStatements, v.MatchedStatements)
+	}
 	if v.Uri != nil {
 		s.WriteString(schemas.MatchedPolicy_uri, *v.Uri)
 	}
@@ -277,7 +283,9 @@ func (v *PolicyInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PolicyInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachedToList(s, schemas.PolicyInfo_attachedTo, v.AttachedTo)
+	if v.AttachedTo != nil {
+		serializeAttachedToList(s, schemas.PolicyInfo_attachedTo, v.AttachedTo)
+	}
 	if v.Inline != nil {
 		s.WriteBool(schemas.PolicyInfo_inline, *v.Inline)
 	}

@@ -58,7 +58,9 @@ func (v *UpdateChannelClassInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelId != nil {
 		s.WriteString(schemas.UpdateChannelClassRequest_ChannelId, *v.ChannelId)
 	}
-	serialize__listOfOutputDestination(s, schemas.UpdateChannelClassRequest_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serialize__listOfOutputDestination(s, schemas.UpdateChannelClassRequest_Destinations, v.Destinations)
+	}
 }
 
 // Placeholder documentation for UpdateChannelClassResponse

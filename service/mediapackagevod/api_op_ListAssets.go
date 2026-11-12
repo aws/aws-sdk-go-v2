@@ -80,7 +80,9 @@ func (v *ListAssetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAssetShallow(s, schemas.ListAssetsResponse_Assets, v.Assets)
+	if v.Assets != nil {
+		serialize__listOfAssetShallow(s, schemas.ListAssetsResponse_Assets, v.Assets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetsResponse_NextToken, *v.NextToken)
 	}

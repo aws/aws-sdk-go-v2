@@ -146,7 +146,9 @@ func (v *UpdateFlowOutputInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.UpdateFlowOutputRequest_CidrAllowList, v.CidrAllowList)
+	if v.CidrAllowList != nil {
+		serialize__listOfString(s, schemas.UpdateFlowOutputRequest_CidrAllowList, v.CidrAllowList)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateFlowOutputRequest_Description, *v.Description)
 	}
@@ -164,7 +166,9 @@ func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxLatency != nil {
 		s.WriteInt32(schemas.UpdateFlowOutputRequest_MaxLatency, *v.MaxLatency)
 	}
-	serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.UpdateFlowOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	if v.MediaStreamOutputConfigurations != nil {
+		serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.UpdateFlowOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	}
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.UpdateFlowOutputRequest_MinLatency, *v.MinLatency)
 	}

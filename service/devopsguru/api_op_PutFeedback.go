@@ -4,7 +4,9 @@ package devopsguru
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,20 @@ type PutFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightFeedback != nil {
+		s.WriteStruct(schemas.PutFeedbackRequest_InsightFeedback)
+		v.InsightFeedback.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -39,13 +55,26 @@ type PutFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFeedback, schemas.PutFeedbackRequest, schemas.PutFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFeedback, schemas.PutFeedbackRequest, schemas.PutFeedbackResponse), output: &PutFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

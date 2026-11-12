@@ -91,7 +91,9 @@ func (v *ListAgreementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgreementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListedAgreements(s, schemas.ListAgreementsResponse_Agreements, v.Agreements)
+	if v.Agreements != nil {
+		serializeListedAgreements(s, schemas.ListAgreementsResponse_Agreements, v.Agreements)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgreementsResponse_NextToken, *v.NextToken)
 	}

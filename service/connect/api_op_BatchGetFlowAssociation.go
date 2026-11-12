@@ -63,7 +63,9 @@ func (v *BatchGetFlowAssociationInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchGetFlowAssociationRequest_InstanceId, *v.InstanceId)
 	}
-	serializeresourceArnListMaxLimit100(s, schemas.BatchGetFlowAssociationRequest_ResourceIds, v.ResourceIds)
+	if v.ResourceIds != nil {
+		serializeresourceArnListMaxLimit100(s, schemas.BatchGetFlowAssociationRequest_ResourceIds, v.ResourceIds)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.BatchGetFlowAssociationRequest_ResourceType, string(v.ResourceType))
 	}
@@ -87,7 +89,9 @@ func (v *BatchGetFlowAssociationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFlowAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowAssociationSummaryList(s, schemas.BatchGetFlowAssociationResponse_FlowAssociationSummaryList, v.FlowAssociationSummaryList)
+	if v.FlowAssociationSummaryList != nil {
+		serializeFlowAssociationSummaryList(s, schemas.BatchGetFlowAssociationResponse_FlowAssociationSummaryList, v.FlowAssociationSummaryList)
+	}
 }
 func (v *BatchGetFlowAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFlowAssociationResponse, func(s *smithy.Schema) error {

@@ -220,6 +220,7 @@ func TestCheckRequestSnapshot_AssociateProfile(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -510,6 +511,7 @@ func TestCheckRequestSnapshot_ListProfileResourceAssociations(t *testing.T) {
 	input := &ListProfileResourceAssociationsInput{
 		ProfileId:    ptr.String("__ProfileId__"),
 		ResourceType: ptr.String("__ResourceType__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
 		MaxResults:   ptr.Int32(1),
 		NextToken:    ptr.String("__NextToken__"),
 	}
@@ -652,6 +654,35 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateProfileAssociation(t *testing.T) {
+	input := &UpdateProfileAssociationInput{
+		ProfileAssociationId: ptr.String("__ProfileAssociationId__"),
+		Name:                 ptr.String("__Name__"),
+		Priority:             ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProfileAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProfileAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateProfileResourceAssociation(t *testing.T) {
 	input := &UpdateProfileResourceAssociationInput{
 		ProfileResourceAssociationId: ptr.String("__ProfileResourceAssociationId__"),
@@ -695,6 +726,7 @@ func TestUpdateRequestSnapshot_AssociateProfile(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Priority: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -985,6 +1017,7 @@ func TestUpdateRequestSnapshot_ListProfileResourceAssociations(t *testing.T) {
 	input := &ListProfileResourceAssociationsInput{
 		ProfileId:    ptr.String("__ProfileId__"),
 		ResourceType: ptr.String("__ResourceType__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
 		MaxResults:   ptr.Int32(1),
 		NextToken:    ptr.String("__NextToken__"),
 	}
@@ -1123,6 +1156,35 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateProfileAssociation(t *testing.T) {
+	input := &UpdateProfileAssociationInput{
+		ProfileAssociationId: ptr.String("__ProfileAssociationId__"),
+		Name:                 ptr.String("__Name__"),
+		Priority:             ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProfileAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProfileAssociation"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -96,7 +96,9 @@ func (v *CreateContactFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateContactFlowRequest_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateContactFlowRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateContactFlowRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateContactFlowRequest_Type, string(v.Type))
 	}

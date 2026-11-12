@@ -28,7 +28,6 @@ func (c *Client) ListVolumes(ctx context.Context, params *ListVolumesInput, optF
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListVolumesInput struct {
 
 	// The farm ID of the farm that contains the fleet.
@@ -72,7 +71,6 @@ func (v *ListVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListVolumesOutput struct {
 
 	// The volumes on the list.
@@ -104,7 +102,9 @@ func (v *ListVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVolumesResponse_nextToken, *v.NextToken)
 	}
-	serializeVolumeSummaries(s, schemas.ListVolumesResponse_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumeSummaries(s, schemas.ListVolumesResponse_volumes, v.Volumes)
+	}
 }
 func (v *ListVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVolumesResponse, func(s *smithy.Schema) error {

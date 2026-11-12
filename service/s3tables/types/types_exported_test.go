@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
 )
 
+func ExampleSourceConfiguration_outputUsage() {
+	var union types.SourceConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SourceConfigurationMemberGlueTable:
+		_ = v.Value // Value is types.GlueTableSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GlueTableSource
+
 func ExampleTableBucketMaintenanceSettings_outputUsage() {
 	var union types.TableBucketMaintenanceSettings
 	// type switches can be used to check the union value

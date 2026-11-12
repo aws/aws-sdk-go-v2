@@ -142,8 +142,12 @@ func (v *GetSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SnapShotTimeFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSnapshotsDataRecords(s, schemas.GetSnapshotsResponse_SnapshotsData, v.SnapshotsData)
-	serializeSnapshotsDataHeaderFields(s, schemas.GetSnapshotsResponse_SnapshotsDataHeader, v.SnapshotsDataHeader)
+	if v.SnapshotsData != nil {
+		serializeSnapshotsDataRecords(s, schemas.GetSnapshotsResponse_SnapshotsData, v.SnapshotsData)
+	}
+	if v.SnapshotsDataHeader != nil {
+		serializeSnapshotsDataHeaderFields(s, schemas.GetSnapshotsResponse_SnapshotsDataHeader, v.SnapshotsDataHeader)
+	}
 }
 func (v *GetSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSnapshotsResponse, func(s *smithy.Schema) error {

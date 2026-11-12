@@ -53,6 +53,14 @@ type GetAttachedFileInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// Specifies how a browser handles the file at the pre-signed URL. The valid
+	// values are the following:
+	//
+	// INLINE Displays the file in the browser.
+	//
+	// ATTACHMENT Downloads the file. This is the default.
+	UrlContentDisposition types.ContentDisposition
+
 	// Optional override for the expiry of the pre-signed S3 URL in seconds. The
 	// default value is 300.
 	UrlExpiryInSeconds *int32
@@ -75,6 +83,9 @@ func (v *GetAttachedFileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.GetAttachedFileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UrlContentDisposition != "" {
+		s.WriteString(schemas.GetAttachedFileRequest_UrlContentDisposition, string(v.UrlContentDisposition))
 	}
 	if v.UrlExpiryInSeconds != nil {
 		s.WriteInt32(schemas.GetAttachedFileRequest_UrlExpiryInSeconds, *v.UrlExpiryInSeconds)
@@ -143,7 +154,9 @@ func (v *GetAttachedFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociatedResourceArn != nil {
 		s.WriteString(schemas.GetAttachedFileResponse_AssociatedResourceArn, *v.AssociatedResourceArn)
 	}
-	serializeCreatedByInfo(s, schemas.GetAttachedFileResponse_CreatedBy, v.CreatedBy)
+	if v.CreatedBy != nil {
+		serializeCreatedByInfo(s, schemas.GetAttachedFileResponse_CreatedBy, v.CreatedBy)
+	}
 	if v.CreationTime != nil {
 		s.WriteString(schemas.GetAttachedFileResponse_CreationTime, *v.CreationTime)
 	}
@@ -170,7 +183,9 @@ func (v *GetAttachedFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FileUseCaseType != "" {
 		s.WriteString(schemas.GetAttachedFileResponse_FileUseCaseType, string(v.FileUseCaseType))
 	}
-	serializeTagMap(s, schemas.GetAttachedFileResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetAttachedFileResponse_Tags, v.Tags)
+	}
 }
 func (v *GetAttachedFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAttachedFileResponse, func(s *smithy.Schema) error {

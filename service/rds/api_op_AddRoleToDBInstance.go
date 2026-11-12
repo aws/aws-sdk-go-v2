@@ -4,6 +4,8 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type AddRoleToDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddRoleToDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddRoleToDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddRoleToDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.AddRoleToDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.FeatureName != nil {
+		s.WriteString(schemas.AddRoleToDBInstanceMessage_FeatureName, *v.FeatureName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.AddRoleToDBInstanceMessage_RoleArn, *v.RoleArn)
+	}
+}
+
 type AddRoleToDBInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type AddRoleToDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddRoleToDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddRoleToDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddRoleToDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddRoleToDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddRoleToDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddRoleToDBInstance, schemas.AddRoleToDBInstanceMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAddRoleToDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddRoleToDBInstance, schemas.AddRoleToDBInstanceMessage, nil), output: &AddRoleToDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

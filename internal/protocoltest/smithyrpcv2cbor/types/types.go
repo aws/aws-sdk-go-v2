@@ -191,11 +191,15 @@ func (v *Defaults) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultInteger != nil {
 		s.WriteInt32(schemas.Defaults_defaultInteger, *v.DefaultInteger)
 	}
-	serializeTestStringList(s, schemas.Defaults_defaultList, v.DefaultList)
+	if v.DefaultList != nil {
+		serializeTestStringList(s, schemas.Defaults_defaultList, v.DefaultList)
+	}
 	if v.DefaultLong != nil {
 		s.WriteInt64(schemas.Defaults_defaultLong, *v.DefaultLong)
 	}
-	serializeTestStringMap(s, schemas.Defaults_defaultMap, v.DefaultMap)
+	if v.DefaultMap != nil {
+		serializeTestStringMap(s, schemas.Defaults_defaultMap, v.DefaultMap)
+	}
 	if v.DefaultShort != nil {
 		s.WriteInt16(schemas.Defaults_defaultShort, *v.DefaultShort)
 	}

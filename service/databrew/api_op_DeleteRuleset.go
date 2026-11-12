@@ -4,6 +4,8 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteRulesetRequest_Name, *v.Name)
+	}
+}
+
 type DeleteRulesetOutput struct {
 
 	// The name of the deleted ruleset.
@@ -46,13 +60,32 @@ type DeleteRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteRulesetResponse_Name, *v.Name)
+	}
+}
+func (v *DeleteRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRulesetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteRulesetResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRuleset, schemas.DeleteRulesetRequest, schemas.DeleteRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRuleset, schemas.DeleteRulesetRequest, schemas.DeleteRulesetResponse), output: &DeleteRulesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

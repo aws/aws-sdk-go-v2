@@ -95,7 +95,9 @@ func (v *DescribeParameterGroupsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeParameterGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeParameterGroupList(s, schemas.DescribeParameterGroupsResponse_ParameterGroups, v.ParameterGroups)
+	if v.ParameterGroups != nil {
+		serializeParameterGroupList(s, schemas.DescribeParameterGroupsResponse_ParameterGroups, v.ParameterGroups)
+	}
 }
 func (v *DescribeParameterGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeParameterGroupsResponse, func(s *smithy.Schema) error {
@@ -124,6 +126,9 @@ func (c *Client) addOperationDescribeParameterGroupsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

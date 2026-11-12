@@ -290,6 +290,18 @@ func TestCheckSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDesignation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
@@ -619,6 +631,18 @@ func TestCheckSnapshot_DeleteDataSource(t *testing.T) {
 	_, err := svc.DeleteDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDesignation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1003,6 +1027,18 @@ func TestCheckSnapshot_GetDataSourceRun(t *testing.T) {
 	_, err := svc.GetDataSourceRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDataSourceRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDesignation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1471,6 +1507,18 @@ func TestCheckSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDesignations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDesignations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDesignations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2126,6 +2174,18 @@ func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDesignation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDomain(context.Background(), nil, func(o *Options) {
@@ -2569,6 +2629,18 @@ func TestUpdateSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDesignation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
@@ -2898,6 +2970,18 @@ func TestUpdateSnapshot_DeleteDataSource(t *testing.T) {
 	_, err := svc.DeleteDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDesignation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3282,6 +3366,18 @@ func TestUpdateSnapshot_GetDataSourceRun(t *testing.T) {
 	_, err := svc.GetDataSourceRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDataSourceRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDesignation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3750,6 +3846,18 @@ func TestUpdateSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDesignations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDesignations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDesignations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4398,6 +4506,18 @@ func TestUpdateSnapshot_UpdateDataSource(t *testing.T) {
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDesignation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDesignation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDesignation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

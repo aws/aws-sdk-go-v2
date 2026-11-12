@@ -99,20 +99,48 @@ func (v *XmlListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *XmlListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanList(s, schemas.XmlListsOutput_booleanList, v.BooleanList)
-	serializeFooEnumList(s, schemas.XmlListsOutput_enumList, v.EnumList)
-	serializeRenamedListMembers(s, schemas.XmlListsOutput_flattenedList, v.FlattenedList)
-	serializeRenamedListMembers(s, schemas.XmlListsOutput_flattenedList2, v.FlattenedList2)
-	serializeListWithMemberNamespace(s, schemas.XmlListsOutput_flattenedListWithMemberNamespace, v.FlattenedListWithMemberNamespace)
-	serializeListWithNamespace(s, schemas.XmlListsOutput_flattenedListWithNamespace, v.FlattenedListWithNamespace)
-	serializeIntegerEnumList(s, schemas.XmlListsOutput_intEnumList, v.IntEnumList)
-	serializeIntegerList(s, schemas.XmlListsOutput_integerList, v.IntegerList)
-	serializeNestedStringList(s, schemas.XmlListsOutput_nestedStringList, v.NestedStringList)
-	serializeRenamedListMembers(s, schemas.XmlListsOutput_renamedListMembers, v.RenamedListMembers)
-	serializeStringList(s, schemas.XmlListsOutput_stringList, v.StringList)
-	serializeStringSet(s, schemas.XmlListsOutput_stringSet, v.StringSet)
-	serializeStructureList(s, schemas.XmlListsOutput_structureList, v.StructureList)
-	serializeTimestampList(s, schemas.XmlListsOutput_timestampList, v.TimestampList)
+	if v.BooleanList != nil {
+		serializeBooleanList(s, schemas.XmlListsOutput_booleanList, v.BooleanList)
+	}
+	if v.EnumList != nil {
+		serializeFooEnumList(s, schemas.XmlListsOutput_enumList, v.EnumList)
+	}
+	if v.FlattenedList != nil {
+		serializeRenamedListMembers(s, schemas.XmlListsOutput_flattenedList, v.FlattenedList)
+	}
+	if v.FlattenedList2 != nil {
+		serializeRenamedListMembers(s, schemas.XmlListsOutput_flattenedList2, v.FlattenedList2)
+	}
+	if v.FlattenedListWithMemberNamespace != nil {
+		serializeListWithMemberNamespace(s, schemas.XmlListsOutput_flattenedListWithMemberNamespace, v.FlattenedListWithMemberNamespace)
+	}
+	if v.FlattenedListWithNamespace != nil {
+		serializeListWithNamespace(s, schemas.XmlListsOutput_flattenedListWithNamespace, v.FlattenedListWithNamespace)
+	}
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.XmlListsOutput_intEnumList, v.IntEnumList)
+	}
+	if v.IntegerList != nil {
+		serializeIntegerList(s, schemas.XmlListsOutput_integerList, v.IntegerList)
+	}
+	if v.NestedStringList != nil {
+		serializeNestedStringList(s, schemas.XmlListsOutput_nestedStringList, v.NestedStringList)
+	}
+	if v.RenamedListMembers != nil {
+		serializeRenamedListMembers(s, schemas.XmlListsOutput_renamedListMembers, v.RenamedListMembers)
+	}
+	if v.StringList != nil {
+		serializeStringList(s, schemas.XmlListsOutput_stringList, v.StringList)
+	}
+	if v.StringSet != nil {
+		serializeStringSet(s, schemas.XmlListsOutput_stringSet, v.StringSet)
+	}
+	if v.StructureList != nil {
+		serializeStructureList(s, schemas.XmlListsOutput_structureList, v.StructureList)
+	}
+	if v.TimestampList != nil {
+		serializeTimestampList(s, schemas.XmlListsOutput_timestampList, v.TimestampList)
+	}
 }
 func (v *XmlListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlListsOutput, func(s *smithy.Schema) error {

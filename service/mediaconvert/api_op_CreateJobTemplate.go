@@ -52,6 +52,9 @@ type CreateJobTemplateInput struct {
 	// Optional. A description of the job template you are creating.
 	Description *string
 
+	// The Elemental Inference settings used in this job.
+	ElementalInferenceSettings *types.ElementalInferenceSettings
+
 	// Optional. Use queue hopping to avoid overly long waits in the backlog of the
 	// queue that you submit your job to. Specify an alternate queue and the maximum
 	// time that your job will wait in the initial queue before hopping. For more
@@ -99,7 +102,14 @@ func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_Description, *v.Description)
 	}
-	serialize__listOfHopDestination(s, schemas.CreateJobTemplateRequest_HopDestinations, v.HopDestinations)
+	if v.ElementalInferenceSettings != nil {
+		s.WriteStruct(schemas.CreateJobTemplateRequest_ElementalInferenceSettings)
+		v.ElementalInferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HopDestinations != nil {
+		serialize__listOfHopDestination(s, schemas.CreateJobTemplateRequest_HopDestinations, v.HopDestinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_Name, *v.Name)
 	}
@@ -117,7 +127,9 @@ func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusUpdateInterval != "" {
 		s.WriteString(schemas.CreateJobTemplateRequest_StatusUpdateInterval, string(v.StatusUpdateInterval))
 	}
-	serialize__mapOf__string(s, schemas.CreateJobTemplateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateJobTemplateRequest_Tags, v.Tags)
+	}
 }
 
 type CreateJobTemplateOutput struct {

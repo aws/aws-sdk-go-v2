@@ -61,7 +61,9 @@ func (v *UpdateIntermediateTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntermediateTableColumnList(s, schemas.UpdateIntermediateTableInput_columns, v.Columns)
+	if v.Columns != nil {
+		serializeIntermediateTableColumnList(s, schemas.UpdateIntermediateTableInput_columns, v.Columns)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateIntermediateTableInput_description, *v.Description)
 	}

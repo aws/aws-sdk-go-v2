@@ -59,7 +59,9 @@ func (v *UpdateQuotaShareInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateQuotaShareInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuotaShareCapacityLimits(s, schemas.UpdateQuotaShareRequest_capacityLimits, v.CapacityLimits)
+	if v.CapacityLimits != nil {
+		serializeQuotaShareCapacityLimits(s, schemas.UpdateQuotaShareRequest_capacityLimits, v.CapacityLimits)
+	}
 	if v.PreemptionConfiguration != nil {
 		s.WriteStruct(schemas.UpdateQuotaShareRequest_preemptionConfiguration)
 		v.PreemptionConfiguration.SerializeMembers(s)

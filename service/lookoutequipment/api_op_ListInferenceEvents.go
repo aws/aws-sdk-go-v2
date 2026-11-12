@@ -15,6 +15,10 @@ import (
 //	Lists all inference events that have been found for the specified inference
 //
 // scheduler.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListInferenceEvents(ctx context.Context, params *ListInferenceEventsInput, optFns ...func(*Options)) (*ListInferenceEventsOutput, error) {
 	if params == nil {
 		params = &ListInferenceEventsInput{}
@@ -107,7 +111,9 @@ func (v *ListInferenceEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceEventSummaries(s, schemas.ListInferenceEventsResponse_InferenceEventSummaries, v.InferenceEventSummaries)
+	if v.InferenceEventSummaries != nil {
+		serializeInferenceEventSummaries(s, schemas.ListInferenceEventsResponse_InferenceEventSummaries, v.InferenceEventSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceEventsResponse_NextToken, *v.NextToken)
 	}

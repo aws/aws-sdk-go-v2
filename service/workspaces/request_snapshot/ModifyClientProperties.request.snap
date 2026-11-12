@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifyClientProperties
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifyClientProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientProperties":{"ClientExperiencePolicy":"__ClientExperiencePolicy__","LogUploadEnabled":"ENABLED","ReconnectEnabled":"ENABLED"},"ResourceId":"__ResourceId__"}
+¿pClientProperties¿vClientExperiencePolicyx__ClientExperiencePolicy__pLogUploadEnabledgENABLEDpReconnectEnabledgENABLEDÿjResourceIdn__ResourceId__ÿ

@@ -191,6 +191,23 @@ func (QuotaCode) Values() []QuotaCode {
 	}
 }
 
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeLexicon ResourceType = "lexicon"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"lexicon",
+	}
+}
+
 type ServiceCode string
 
 // Enum values for ServiceCode
@@ -406,6 +423,16 @@ const (
 	VoiceIdLennart   VoiceId = "Lennart"
 	VoiceIdLorenzo   VoiceId = "Lorenzo"
 	VoiceIdTiffany   VoiceId = "Tiffany"
+	VoiceIdArjun     VoiceId = "Arjun"
+	VoiceIdCarlos    VoiceId = "Carlos"
+	VoiceIdCarolina  VoiceId = "Carolina"
+	VoiceIdCurtis    VoiceId = "Curtis"
+	VoiceIdHyunduk   VoiceId = "Hyunduk"
+	VoiceIdKenneth   VoiceId = "Kenneth"
+	VoiceIdKiara     VoiceId = "Kiara"
+	VoiceIdLeo       VoiceId = "Leo"
+	VoiceIdNate      VoiceId = "Nate"
+	VoiceIdTina      VoiceId = "Tina"
 )
 
 // Values returns all known values for VoiceId. Note that this can be expanded in
@@ -520,5 +547,15 @@ func (VoiceId) Values() []VoiceId {
 		"Lennart",
 		"Lorenzo",
 		"Tiffany",
+		"Arjun",
+		"Carlos",
+		"Carolina",
+		"Curtis",
+		"Hyunduk",
+		"Kenneth",
+		"Kiara",
+		"Leo",
+		"Nate",
+		"Tina",
 	}
 }

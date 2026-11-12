@@ -116,7 +116,9 @@ func (v *GetDomainSuggestionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDomainSuggestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainSuggestionsList(s, schemas.GetDomainSuggestionsResponse_SuggestionsList, v.SuggestionsList)
+	if v.SuggestionsList != nil {
+		serializeDomainSuggestionsList(s, schemas.GetDomainSuggestionsResponse_SuggestionsList, v.SuggestionsList)
+	}
 }
 func (v *GetDomainSuggestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDomainSuggestionsResponse, func(s *smithy.Schema) error {
@@ -142,6 +144,9 @@ func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

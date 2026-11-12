@@ -62,7 +62,9 @@ func (v *ListAutomationEventSummariesInput) SerializeMembers(s smithy.ShapeSeria
 	if v.EndDateExclusive != nil {
 		s.WriteString(schemas.ListAutomationEventSummariesRequest_endDateExclusive, *v.EndDateExclusive)
 	}
-	serializeAutomationEventFilterList(s, schemas.ListAutomationEventSummariesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeAutomationEventFilterList(s, schemas.ListAutomationEventSummariesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAutomationEventSummariesRequest_maxResults, *v.MaxResults)
 	}
@@ -96,7 +98,9 @@ func (v *ListAutomationEventSummariesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListAutomationEventSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationEventSummaryList(s, schemas.ListAutomationEventSummariesResponse_automationEventSummaries, v.AutomationEventSummaries)
+	if v.AutomationEventSummaries != nil {
+		serializeAutomationEventSummaryList(s, schemas.ListAutomationEventSummariesResponse_automationEventSummaries, v.AutomationEventSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomationEventSummariesResponse_nextToken, *v.NextToken)
 	}

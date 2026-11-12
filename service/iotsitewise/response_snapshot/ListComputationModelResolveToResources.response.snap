@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"computationModelResolveToResourceSummaries":[{"resolveTo":{"assetId":"__AssetId__"}},{"resolveTo":{"assetId":"__AssetId__"}}],"nextToken":"__NextToken__"}

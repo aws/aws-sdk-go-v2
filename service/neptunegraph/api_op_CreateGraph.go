@@ -98,7 +98,9 @@ func (v *CreateGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReplicaCount != nil {
 		s.WriteInt32(schemas.CreateGraphInput_replicaCount, *v.ReplicaCount)
 	}
-	serializeTagMap(s, schemas.CreateGraphInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateGraphInput_tags, v.Tags)
+	}
 	if v.VectorSearchConfiguration != nil {
 		s.WriteStruct(schemas.CreateGraphInput_vectorSearchConfiguration)
 		v.VectorSearchConfiguration.SerializeMembers(s)

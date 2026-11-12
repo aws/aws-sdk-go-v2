@@ -82,7 +82,9 @@ func (v *CreateAppInstanceBotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAppInstanceBotRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateAppInstanceBotRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAppInstanceBotRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAppInstanceBotOutput struct {

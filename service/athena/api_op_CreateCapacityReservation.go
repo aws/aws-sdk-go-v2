@@ -55,7 +55,9 @@ func (v *CreateCapacityReservationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCapacityReservationInput_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateCapacityReservationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCapacityReservationInput_Tags, v.Tags)
+	}
 	if v.TargetDpus != nil {
 		s.WriteInt32(schemas.CreateCapacityReservationInput_TargetDpus, *v.TargetDpus)
 	}

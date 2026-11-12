@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"competitors":[{"isHome":true,"name":"__Name__"},{"isHome":true,"name":"__Name__"}],"fixtureGroup":"__FixtureGroup__","fixtureId":"__FixtureId__","name":"__Name__","scheduledStart":"2000-01-01T00:00:00Z","status":"__Status__"}

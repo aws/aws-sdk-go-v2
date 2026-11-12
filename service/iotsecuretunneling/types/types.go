@@ -78,7 +78,9 @@ func (v *DestinationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DestinationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceList(s, schemas.DestinationConfig_services, v.Services)
+	if v.Services != nil {
+		serializeServiceList(s, schemas.DestinationConfig_services, v.Services)
+	}
 	if v.ThingName != nil {
 		s.WriteString(schemas.DestinationConfig_thingName, *v.ThingName)
 	}
@@ -249,7 +251,9 @@ func (v *Tunnel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Tunnel_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.Tunnel_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Tunnel_tags, v.Tags)
+	}
 	if v.TimeoutConfig != nil {
 		s.WriteStruct(schemas.Tunnel_timeoutConfig)
 		v.TimeoutConfig.SerializeMembers(s)

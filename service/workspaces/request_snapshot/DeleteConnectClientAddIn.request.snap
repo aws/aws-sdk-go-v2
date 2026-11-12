@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DeleteConnectClientAddIn
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DeleteConnectClientAddIn
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AddInId":"__AddInId__","ResourceId":"__ResourceId__"}
+¿gAddInIdk__AddInId__jResourceIdn__ResourceId__ÿ

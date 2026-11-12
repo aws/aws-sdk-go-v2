@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -66,6 +68,24 @@ type GetCommandInvocationInput struct {
 	PluginName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCommandInvocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommandInvocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommandInvocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandId != nil {
+		s.WriteString(schemas.GetCommandInvocationRequest_CommandId, *v.CommandId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetCommandInvocationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PluginName != nil {
+		s.WriteString(schemas.GetCommandInvocationRequest_PluginName, *v.PluginName)
+	}
 }
 
 type GetCommandInvocationOutput struct {
@@ -200,13 +220,133 @@ type GetCommandInvocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCommandInvocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommandInvocationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommandInvocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchOutputConfig != nil {
+		s.WriteStruct(schemas.GetCommandInvocationResult_CloudWatchOutputConfig)
+		v.CloudWatchOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CommandId != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_CommandId, *v.CommandId)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_Comment, *v.Comment)
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_DocumentName, *v.DocumentName)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.ExecutionElapsedTime != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_ExecutionElapsedTime, *v.ExecutionElapsedTime)
+	}
+	if v.ExecutionEndDateTime != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_ExecutionEndDateTime, *v.ExecutionEndDateTime)
+	}
+	if v.ExecutionStartDateTime != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_ExecutionStartDateTime, *v.ExecutionStartDateTime)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_InstanceId, *v.InstanceId)
+	}
+	if v.PluginName != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_PluginName, *v.PluginName)
+	}
+	if v.ResponseCode != 0 {
+		s.WriteInt32(schemas.GetCommandInvocationResult_ResponseCode, v.ResponseCode)
+	}
+	if v.StandardErrorContent != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_StandardErrorContent, *v.StandardErrorContent)
+	}
+	if v.StandardErrorUrl != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_StandardErrorUrl, *v.StandardErrorUrl)
+	}
+	if v.StandardOutputContent != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_StandardOutputContent, *v.StandardOutputContent)
+	}
+	if v.StandardOutputUrl != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_StandardOutputUrl, *v.StandardOutputUrl)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCommandInvocationResult_Status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteString(schemas.GetCommandInvocationResult_StatusDetails, *v.StatusDetails)
+	}
+}
+func (v *GetCommandInvocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCommandInvocationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCommandInvocationResult_CloudWatchOutputConfig:
+			v.CloudWatchOutputConfig = &types.CloudWatchOutputConfig{}
+			return v.CloudWatchOutputConfig.Deserialize(d)
+		case schemas.GetCommandInvocationResult_CommandId:
+			v.CommandId = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_CommandId, v.CommandId)
+		case schemas.GetCommandInvocationResult_Comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_Comment, v.Comment)
+		case schemas.GetCommandInvocationResult_DocumentName:
+			v.DocumentName = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_DocumentName, v.DocumentName)
+		case schemas.GetCommandInvocationResult_DocumentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_DocumentVersion, v.DocumentVersion)
+		case schemas.GetCommandInvocationResult_ExecutionElapsedTime:
+			v.ExecutionElapsedTime = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_ExecutionElapsedTime, v.ExecutionElapsedTime)
+		case schemas.GetCommandInvocationResult_ExecutionEndDateTime:
+			v.ExecutionEndDateTime = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_ExecutionEndDateTime, v.ExecutionEndDateTime)
+		case schemas.GetCommandInvocationResult_ExecutionStartDateTime:
+			v.ExecutionStartDateTime = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_ExecutionStartDateTime, v.ExecutionStartDateTime)
+		case schemas.GetCommandInvocationResult_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_InstanceId, v.InstanceId)
+		case schemas.GetCommandInvocationResult_PluginName:
+			v.PluginName = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_PluginName, v.PluginName)
+		case schemas.GetCommandInvocationResult_ResponseCode:
+			return d.ReadInt32(schemas.GetCommandInvocationResult_ResponseCode, &v.ResponseCode)
+		case schemas.GetCommandInvocationResult_StandardErrorContent:
+			v.StandardErrorContent = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_StandardErrorContent, v.StandardErrorContent)
+		case schemas.GetCommandInvocationResult_StandardErrorUrl:
+			v.StandardErrorUrl = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_StandardErrorUrl, v.StandardErrorUrl)
+		case schemas.GetCommandInvocationResult_StandardOutputContent:
+			v.StandardOutputContent = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_StandardOutputContent, v.StandardOutputContent)
+		case schemas.GetCommandInvocationResult_StandardOutputUrl:
+			v.StandardOutputUrl = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_StandardOutputUrl, v.StandardOutputUrl)
+		case schemas.GetCommandInvocationResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetCommandInvocationResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CommandInvocationStatus(ev)
+			return nil
+		case schemas.GetCommandInvocationResult_StatusDetails:
+			v.StatusDetails = new(string)
+			return d.ReadString(schemas.GetCommandInvocationResult_StatusDetails, v.StatusDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCommandInvocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCommandInvocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommandInvocation, schemas.GetCommandInvocationRequest, schemas.GetCommandInvocationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCommandInvocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommandInvocation, schemas.GetCommandInvocationRequest, schemas.GetCommandInvocationResult), output: &GetCommandInvocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

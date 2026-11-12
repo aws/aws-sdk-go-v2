@@ -4,6 +4,8 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetSourceRepositoryCloneUrlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSourceRepositoryCloneUrlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSourceRepositoryCloneUrlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSourceRepositoryCloneUrlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GetSourceRepositoryCloneUrlsRequest_projectName, *v.ProjectName)
+	}
+	if v.SourceRepositoryName != nil {
+		s.WriteString(schemas.GetSourceRepositoryCloneUrlsRequest_sourceRepositoryName, *v.SourceRepositoryName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetSourceRepositoryCloneUrlsRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type GetSourceRepositoryCloneUrlsOutput struct {
 
 	// The HTTPS URL to use when cloning the source repository.
@@ -57,13 +77,32 @@ type GetSourceRepositoryCloneUrlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSourceRepositoryCloneUrlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSourceRepositoryCloneUrlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSourceRepositoryCloneUrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Https != nil {
+		s.WriteString(schemas.GetSourceRepositoryCloneUrlsResponse_https, *v.Https)
+	}
+}
+func (v *GetSourceRepositoryCloneUrlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSourceRepositoryCloneUrlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSourceRepositoryCloneUrlsResponse_https:
+			v.Https = new(string)
+			return d.ReadString(schemas.GetSourceRepositoryCloneUrlsResponse_https, v.Https)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSourceRepositoryCloneUrlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSourceRepositoryCloneUrls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSourceRepositoryCloneUrls, schemas.GetSourceRepositoryCloneUrlsRequest, schemas.GetSourceRepositoryCloneUrlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSourceRepositoryCloneUrls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSourceRepositoryCloneUrls, schemas.GetSourceRepositoryCloneUrlsRequest, schemas.GetSourceRepositoryCloneUrlsResponse), output: &GetSourceRepositoryCloneUrlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -67,7 +67,9 @@ func (v *PutStoredQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoredQuery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.PutStoredQueryRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutStoredQueryRequest_Tags, v.Tags)
+	}
 }
 
 type PutStoredQueryOutput struct {

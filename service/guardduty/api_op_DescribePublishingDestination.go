@@ -126,7 +126,9 @@ func (v *DescribePublishingDestinationOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Status != "" {
 		s.WriteString(schemas.DescribePublishingDestinationResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.DescribePublishingDestinationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribePublishingDestinationResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribePublishingDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePublishingDestinationResponse, func(s *smithy.Schema) error {

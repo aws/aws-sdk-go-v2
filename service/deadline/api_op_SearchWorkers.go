@@ -28,8 +28,6 @@ func (c *Client) SearchWorkers(ctx context.Context, params *SearchWorkersInput, 
 	return out, nil
 }
 
-// Shared input fields for all Search operations (filterExpressions,
-// sortExpressions, itemOffset, pageSize).
 type SearchWorkersInput struct {
 
 	// The farm ID in the workers search.
@@ -74,17 +72,20 @@ func (v *SearchWorkersInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FilterExpressions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFleetIds(s, schemas.SearchWorkersRequest_fleetIds, v.FleetIds)
+	if v.FleetIds != nil {
+		serializeFleetIds(s, schemas.SearchWorkersRequest_fleetIds, v.FleetIds)
+	}
 	if v.ItemOffset != nil {
 		s.WriteInt32(schemas.SearchWorkersRequest_itemOffset, *v.ItemOffset)
 	}
 	if v.PageSize != nil {
 		s.WriteInt32(schemas.SearchWorkersRequest_pageSize, *v.PageSize)
 	}
-	serializeSearchSortExpressions(s, schemas.SearchWorkersRequest_sortExpressions, v.SortExpressions)
+	if v.SortExpressions != nil {
+		serializeSearchSortExpressions(s, schemas.SearchWorkersRequest_sortExpressions, v.SortExpressions)
+	}
 }
 
-// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchWorkersOutput struct {
 
 	// The total number of results in the search.
@@ -119,7 +120,9 @@ func (v *SearchWorkersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TotalResults != nil {
 		s.WriteInt32(schemas.SearchWorkersResponse_totalResults, *v.TotalResults)
 	}
-	serializeWorkerSearchSummaries(s, schemas.SearchWorkersResponse_workers, v.Workers)
+	if v.Workers != nil {
+		serializeWorkerSearchSummaries(s, schemas.SearchWorkersResponse_workers, v.Workers)
+	}
 }
 func (v *SearchWorkersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchWorkersResponse, func(s *smithy.Schema) error {

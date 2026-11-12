@@ -4,7 +4,9 @@ package pcaconnectorscep
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetChallengeMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChallengeMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChallengeMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChallengeMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChallengeArn != nil {
+		s.WriteString(schemas.GetChallengeMetadataRequest_ChallengeArn, *v.ChallengeArn)
+	}
+}
+
 type GetChallengeMetadataOutput struct {
 
 	// The metadata for the challenge.
@@ -47,13 +61,34 @@ type GetChallengeMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChallengeMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChallengeMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChallengeMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChallengeMetadata != nil {
+		s.WriteStruct(schemas.GetChallengeMetadataResponse_ChallengeMetadata)
+		v.ChallengeMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetChallengeMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChallengeMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChallengeMetadataResponse_ChallengeMetadata:
+			v.ChallengeMetadata = &types.ChallengeMetadata{}
+			return v.ChallengeMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChallengeMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChallengeMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChallengeMetadata, schemas.GetChallengeMetadataRequest, schemas.GetChallengeMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChallengeMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChallengeMetadata, schemas.GetChallengeMetadataRequest, schemas.GetChallengeMetadataResponse), output: &GetChallengeMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

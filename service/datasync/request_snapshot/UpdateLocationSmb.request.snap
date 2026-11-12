@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/UpdateLocationSmb
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.UpdateLocationSmb
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AgentArns":["__Member__","__Member__"],"AuthenticationType":"NTLM","CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"DnsIpAddresses":["__Member__","__Member__"],"Domain":"__Domain__","KerberosKeytab":"YmxvYg==","KerberosKrb5Conf":"YmxvYg==","KerberosPrincipal":"__KerberosPrincipal__","LocationArn":"__LocationArn__","MountOptions":{"Version":"AUTOMATIC"},"Password":"__Password__","ServerHostname":"__ServerHostname__","Subdirectory":"__Subdirectory__","User":"__User__"}
+¿iAgentArnsŸj__Member__j__Member__ÿrAuthenticationTypedNTLMoCmkSecretConfig¿iKmsKeyArnm__KmsKeyArn__iSecretArnm__SecretArn__ÿrCustomSecretConfig¿sSecretAccessRoleArnw__SecretAccessRoleArn__iSecretArnm__SecretArn__ÿnDnsIpAddressesŸj__Member__j__Member__ÿfDomainj__Domain__nKerberosKeytabDblobpKerberosKrb5ConfDblobqKerberosPrincipalu__KerberosPrincipal__kLocationArno__LocationArn__lMountOptions¿gVersioniAUTOMATICÿhPasswordl__Password__nServerHostnamer__ServerHostname__lSubdirectoryp__Subdirectory__dUserh__User__ÿ

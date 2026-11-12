@@ -255,7 +255,9 @@ func (v *DescribeStateMachineOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Type != "" {
 		s.WriteString(schemas.DescribeStateMachineOutput_type, string(v.Type))
 	}
-	serializeVariableReferences(s, schemas.DescribeStateMachineOutput_variableReferences, v.VariableReferences)
+	if v.VariableReferences != nil {
+		serializeVariableReferences(s, schemas.DescribeStateMachineOutput_variableReferences, v.VariableReferences)
+	}
 }
 func (v *DescribeStateMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeStateMachineOutput, func(s *smithy.Schema) error {

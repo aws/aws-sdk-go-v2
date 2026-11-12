@@ -1,6 +1,7 @@
-POST /
+POST /service/BaldrApiService/operation/DescribeBackups
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.DescribeBackups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Filters":{"key0":["__Member__","__Member__"]},"MaxResults":1,"NextToken":"__NextToken__","Shared":true,"SortAscending":true}
+¿gFilters¿dkey0Ÿj__Member__j__Member__ÿÿjMaxResultsiNextTokenm__NextToken__fSharedõmSortAscendingõÿ

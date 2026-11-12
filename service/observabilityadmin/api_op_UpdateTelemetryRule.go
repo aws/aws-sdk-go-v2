@@ -4,7 +4,9 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type UpdateTelemetryRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTelemetryRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTelemetryRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTelemetryRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.UpdateTelemetryRuleInput_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.UpdateTelemetryRuleInput_RuleIdentifier, *v.RuleIdentifier)
+	}
+}
+
 type UpdateTelemetryRuleOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the updated telemetry rule.
@@ -54,13 +73,32 @@ type UpdateTelemetryRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTelemetryRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTelemetryRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTelemetryRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleArn != nil {
+		s.WriteString(schemas.UpdateTelemetryRuleOutput_RuleArn, *v.RuleArn)
+	}
+}
+func (v *UpdateTelemetryRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTelemetryRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTelemetryRuleOutput_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.UpdateTelemetryRuleOutput_RuleArn, v.RuleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTelemetryRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTelemetryRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTelemetryRule, schemas.UpdateTelemetryRuleInput, schemas.UpdateTelemetryRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTelemetryRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTelemetryRule, schemas.UpdateTelemetryRuleInput, schemas.UpdateTelemetryRuleOutput), output: &UpdateTelemetryRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

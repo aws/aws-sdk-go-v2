@@ -255,15 +255,21 @@ func (v *AnomalyDetectorDescription) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Arn != nil {
 		s.WriteString(schemas.AnomalyDetectorDescription_arn, *v.Arn)
 	}
-	serializeAnomalyDetectorConfiguration(s, schemas.AnomalyDetectorDescription_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAnomalyDetectorConfiguration(s, schemas.AnomalyDetectorDescription_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AnomalyDetectorDescription_createdAt, *v.CreatedAt)
 	}
 	if v.EvaluationIntervalInSeconds != nil {
 		s.WriteInt32(schemas.AnomalyDetectorDescription_evaluationIntervalInSeconds, *v.EvaluationIntervalInSeconds)
 	}
-	serializePrometheusMetricLabelMap(s, schemas.AnomalyDetectorDescription_labels, v.Labels)
-	serializeAnomalyDetectorMissingDataAction(s, schemas.AnomalyDetectorDescription_missingDataAction, v.MissingDataAction)
+	if v.Labels != nil {
+		serializePrometheusMetricLabelMap(s, schemas.AnomalyDetectorDescription_labels, v.Labels)
+	}
+	if v.MissingDataAction != nil {
+		serializeAnomalyDetectorMissingDataAction(s, schemas.AnomalyDetectorDescription_missingDataAction, v.MissingDataAction)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.AnomalyDetectorDescription_modifiedAt, *v.ModifiedAt)
 	}
@@ -272,7 +278,9 @@ func (v *AnomalyDetectorDescription) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.AnomalyDetectorDescription_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AnomalyDetectorDescription_tags, v.Tags)
+	}
 }
 func (v *AnomalyDetectorDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnomalyDetectorDescription, func(s *smithy.Schema) error {
@@ -464,7 +472,9 @@ func (v *AnomalyDetectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.AnomalyDetectorSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AnomalyDetectorSummary_tags, v.Tags)
+	}
 }
 func (v *AnomalyDetectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnomalyDetectorSummary, func(s *smithy.Schema) error {
@@ -579,7 +589,9 @@ func (v *ComponentConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ComponentConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.ComponentConfig_options, v.Options)
+	if v.Options != nil {
+		serializeStringMap(s, schemas.ComponentConfig_options, v.Options)
+	}
 }
 func (v *ComponentConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComponentConfig, func(s *smithy.Schema) error {
@@ -665,8 +677,12 @@ func (v *EksConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.EksConfiguration_clusterArn, *v.ClusterArn)
 	}
-	serializeSecurityGroupIds(s, schemas.EksConfiguration_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.EksConfiguration_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.EksConfiguration_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.EksConfiguration_subnetIds, v.SubnetIds)
+	}
 }
 func (v *EksConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksConfiguration, func(s *smithy.Schema) error {
@@ -687,9 +703,28 @@ func (v *EksConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	ExporterConfigurationMemberKafkaConfiguration
 //	ExporterConfigurationMemberOpenSearchConfiguration
 type ExporterConfiguration interface {
 	isExporterConfiguration()
+}
+
+// The configuration that the scraper uses to collect metrics from an Amazon MSK
+// cluster through a managed Kafka exporter.
+type ExporterConfigurationMemberKafkaConfiguration struct {
+	Value KafkaExporterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExporterConfigurationMemberKafkaConfiguration) isExporterConfiguration() {}
+func (v *ExporterConfigurationMemberKafkaConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExporterConfiguration_kafkaConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExporterConfigurationMemberKafkaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The configuration that the scraper uses to export metrics to an Amazon
@@ -753,6 +788,77 @@ func (v *IgnoreNearExpectedMemberRatio) Deserialize(d smithy.ShapeDeserializer) 
 	return d.ReadFloat64(schemas.IgnoreNearExpected_ratio, &v.Value)
 }
 
+// The configuration for collecting broker, topic, and consumer-group metrics from
+// an Amazon MSK cluster through a managed Kafka exporter. The cluster must be
+// active, have IAM authentication enabled, and be in the same account and Region
+// as the scraper. Provisioned clusters with Standard brokers are supported. MSK
+// Serverless clusters are not supported.
+//
+// Use a VPC source that can connect to the cluster's IAM bootstrap brokers. The
+// exporter authenticates with the scraper's service-linked role. Metrics can be
+// sent to an Amazon Managed Service for Prometheus workspace or a CloudWatch
+// dataset.
+//
+// You must have an Amazon MSK cluster policy that grants the scraper's
+// service-linked role access to the cluster. Without this policy, the scraper
+// collects no Kafka metrics. For the required actions and example policies, see [Grant the scraper access to the cluster]
+// in the Amazon Managed Service for Prometheus User Guide.
+//
+// [Grant the scraper access to the cluster]: https://docs.aws.amazon.com/prometheus/latest/userguide/prom-msk-kafka-exporter.html#prom-msk-kafka-exporter-access
+type KafkaExporterConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon MSK cluster.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// An anchored RE2 regular expression that selects the Kafka consumer groups to
+	// monitor. The expression must start with ^ and end with $ . If omitted, the
+	// default is ^.*$ , which selects all consumer groups.
+	ConsumerGroupFilter *string
+
+	// An anchored RE2 regular expression that selects the Kafka topics to monitor.
+	// The expression must start with ^ and end with $ . If omitted, the default is
+	// ^.*$ , which selects all topics.
+	TopicFilter *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *KafkaExporterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KafkaExporterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KafkaExporterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.KafkaExporterConfiguration_clusterArn, *v.ClusterArn)
+	}
+	if v.ConsumerGroupFilter != nil {
+		s.WriteString(schemas.KafkaExporterConfiguration_consumerGroupFilter, *v.ConsumerGroupFilter)
+	}
+	if v.TopicFilter != nil {
+		s.WriteString(schemas.KafkaExporterConfiguration_topicFilter, *v.TopicFilter)
+	}
+}
+func (v *KafkaExporterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KafkaExporterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KafkaExporterConfiguration_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.KafkaExporterConfiguration_clusterArn, v.ClusterArn)
+		case schemas.KafkaExporterConfiguration_consumerGroupFilter:
+			v.ConsumerGroupFilter = new(string)
+			return d.ReadString(schemas.KafkaExporterConfiguration_consumerGroupFilter, v.ConsumerGroupFilter)
+		case schemas.KafkaExporterConfiguration_topicFilter:
+			v.TopicFilter = new(string)
+			return d.ReadString(schemas.KafkaExporterConfiguration_topicFilter, v.TopicFilter)
+		}
+		return nil
+	})
+}
+
 // This structure defines one label set used to enforce active time series limits
 // for the workspace, and defines the limit for that label set.
 //
@@ -787,7 +893,9 @@ func (v *LimitsPerLabelSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LimitsPerLabelSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLabelSet(s, schemas.LimitsPerLabelSet_labelSet, v.LabelSet)
+	if v.LabelSet != nil {
+		serializeLabelSet(s, schemas.LimitsPerLabelSet_labelSet, v.LabelSet)
+	}
 	if v.Limits != nil {
 		s.WriteStruct(schemas.LimitsPerLabelSet_limits)
 		v.Limits.SerializeMembers(s)
@@ -1130,7 +1238,9 @@ func (v *QueryLoggingConfigurationMetadata) SerializeMembers(s smithy.ShapeSeria
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.QueryLoggingConfigurationMetadata_createdAt, *v.CreatedAt)
 	}
-	serializeLoggingDestinations(s, schemas.QueryLoggingConfigurationMetadata_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeLoggingDestinations(s, schemas.QueryLoggingConfigurationMetadata_destinations, v.Destinations)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.QueryLoggingConfigurationMetadata_modifiedAt, *v.ModifiedAt)
 	}
@@ -1255,8 +1365,12 @@ func (v *RandomCutForestConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RandomCutForestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIgnoreNearExpected(s, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromAbove, v.IgnoreNearExpectedFromAbove)
-	serializeIgnoreNearExpected(s, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromBelow, v.IgnoreNearExpectedFromBelow)
+	if v.IgnoreNearExpectedFromAbove != nil {
+		serializeIgnoreNearExpected(s, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromAbove, v.IgnoreNearExpectedFromAbove)
+	}
+	if v.IgnoreNearExpectedFromBelow != nil {
+		serializeIgnoreNearExpected(s, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromBelow, v.IgnoreNearExpectedFromBelow)
+	}
 	if v.Query != nil {
 		s.WriteString(schemas.RandomCutForestConfiguration_query, *v.Query)
 	}
@@ -1408,7 +1522,9 @@ func (v *RuleGroupsNamespaceDescription) SerializeMembers(s smithy.ShapeSerializ
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.RuleGroupsNamespaceDescription_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RuleGroupsNamespaceDescription_tags, v.Tags)
+	}
 }
 func (v *RuleGroupsNamespaceDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleGroupsNamespaceDescription, func(s *smithy.Schema) error {
@@ -1543,7 +1659,9 @@ func (v *RuleGroupsNamespaceSummary) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.RuleGroupsNamespaceSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RuleGroupsNamespaceSummary_tags, v.Tags)
+	}
 }
 func (v *RuleGroupsNamespaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleGroupsNamespaceSummary, func(s *smithy.Schema) error {
@@ -1706,7 +1824,8 @@ type ScraperDescription struct {
 	Alias *string
 
 	// The exporter configurations for the scraper, if configured. The list contains
-	// at most one configuration for an Amazon OpenSearch Service domain.
+	// at most one configuration, for either an Amazon OpenSearch Service domain or an
+	// Amazon MSK cluster.
 	Exporters []ExporterConfiguration
 
 	// This structure displays information about the IAM roles used for cross-account
@@ -1738,8 +1857,12 @@ func (v *ScraperDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ScraperDescription_createdAt, *v.CreatedAt)
 	}
-	serializeDestination(s, schemas.ScraperDescription_destination, v.Destination)
-	serializeExporterList(s, schemas.ScraperDescription_exporters, v.Exporters)
+	if v.Destination != nil {
+		serializeDestination(s, schemas.ScraperDescription_destination, v.Destination)
+	}
+	if v.Exporters != nil {
+		serializeExporterList(s, schemas.ScraperDescription_exporters, v.Exporters)
+	}
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.ScraperDescription_lastModifiedAt, *v.LastModifiedAt)
 	}
@@ -1751,11 +1874,15 @@ func (v *ScraperDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RoleConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScrapeConfiguration(s, schemas.ScraperDescription_scrapeConfiguration, v.ScrapeConfiguration)
+	if v.ScrapeConfiguration != nil {
+		serializeScrapeConfiguration(s, schemas.ScraperDescription_scrapeConfiguration, v.ScrapeConfiguration)
+	}
 	if v.ScraperId != nil {
 		s.WriteString(schemas.ScraperDescription_scraperId, *v.ScraperId)
 	}
-	serializeSource(s, schemas.ScraperDescription_source, v.Source)
+	if v.Source != nil {
+		serializeSource(s, schemas.ScraperDescription_source, v.Source)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.ScraperDescription_status)
 		v.Status.SerializeMembers(s)
@@ -1764,7 +1891,9 @@ func (v *ScraperDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.ScraperDescription_statusReason, *v.StatusReason)
 	}
-	serializeTagMap(s, schemas.ScraperDescription_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ScraperDescription_tags, v.Tags)
+	}
 }
 func (v *ScraperDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScraperDescription, func(s *smithy.Schema) error {
@@ -1970,7 +2099,8 @@ type ScraperSummary struct {
 	Alias *string
 
 	// The exporter configurations for the scraper, if configured. The list contains
-	// at most one configuration for an Amazon OpenSearch Service domain.
+	// at most one configuration, for either an Amazon OpenSearch Service domain or an
+	// Amazon MSK cluster.
 	Exporters []ExporterConfiguration
 
 	// This structure displays information about the IAM roles used for cross-account
@@ -2002,8 +2132,12 @@ func (v *ScraperSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ScraperSummary_createdAt, *v.CreatedAt)
 	}
-	serializeDestination(s, schemas.ScraperSummary_destination, v.Destination)
-	serializeExporterList(s, schemas.ScraperSummary_exporters, v.Exporters)
+	if v.Destination != nil {
+		serializeDestination(s, schemas.ScraperSummary_destination, v.Destination)
+	}
+	if v.Exporters != nil {
+		serializeExporterList(s, schemas.ScraperSummary_exporters, v.Exporters)
+	}
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.ScraperSummary_lastModifiedAt, *v.LastModifiedAt)
 	}
@@ -2018,7 +2152,9 @@ func (v *ScraperSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScraperId != nil {
 		s.WriteString(schemas.ScraperSummary_scraperId, *v.ScraperId)
 	}
-	serializeSource(s, schemas.ScraperSummary_source, v.Source)
+	if v.Source != nil {
+		serializeSource(s, schemas.ScraperSummary_source, v.Source)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.ScraperSummary_status)
 		v.Status.SerializeMembers(s)
@@ -2027,7 +2163,9 @@ func (v *ScraperSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.ScraperSummary_statusReason, *v.StatusReason)
 	}
-	serializeTagMap(s, schemas.ScraperSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ScraperSummary_tags, v.Tags)
+	}
 }
 func (v *ScraperSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScraperSummary, func(s *smithy.Schema) error {
@@ -2193,8 +2331,12 @@ func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfiguration_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfiguration_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
@@ -2242,7 +2384,9 @@ func (v *WorkspaceConfigurationDescription) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *WorkspaceConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLimitsPerLabelSetList(s, schemas.WorkspaceConfigurationDescription_limitsPerLabelSet, v.LimitsPerLabelSet)
+	if v.LimitsPerLabelSet != nil {
+		serializeLimitsPerLabelSetList(s, schemas.WorkspaceConfigurationDescription_limitsPerLabelSet, v.LimitsPerLabelSet)
+	}
 	if v.OutOfOrderTimeWindowInSeconds != nil {
 		s.WriteInt32(schemas.WorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds, *v.OutOfOrderTimeWindowInSeconds)
 	}
@@ -2400,7 +2544,9 @@ func (v *WorkspaceDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.WorkspaceDescription_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.WorkspaceDescription_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.WorkspaceDescription_workspaceId, *v.WorkspaceId)
 	}
@@ -2535,7 +2681,9 @@ func (v *WorkspaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.WorkspaceSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.WorkspaceSummary_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.WorkspaceSummary_workspaceId, *v.WorkspaceId)
 	}

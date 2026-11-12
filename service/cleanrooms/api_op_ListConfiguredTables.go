@@ -91,7 +91,9 @@ func (v *ListConfiguredTablesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfiguredTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredTableSummaryList(s, schemas.ListConfiguredTablesOutput_configuredTableSummaries, v.ConfiguredTableSummaries)
+	if v.ConfiguredTableSummaries != nil {
+		serializeConfiguredTableSummaryList(s, schemas.ListConfiguredTablesOutput_configuredTableSummaries, v.ConfiguredTableSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfiguredTablesOutput_nextToken, *v.NextToken)
 	}

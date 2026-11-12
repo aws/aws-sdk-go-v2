@@ -5,5 +5,5 @@
 //
 //	With Amazon Route 53 Profiles you can share Route 53 configurations with VPCs
 //
-// and AWS accounts
+// and Amazon Web Services accounts
 package route53profiles

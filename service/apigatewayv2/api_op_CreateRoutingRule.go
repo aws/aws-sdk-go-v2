@@ -64,8 +64,12 @@ func (v *CreateRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRoutingRuleAction(s, schemas.CreateRoutingRuleRequest_Actions, v.Actions)
-	serialize__listOfRoutingRuleCondition(s, schemas.CreateRoutingRuleRequest_Conditions, v.Conditions)
+	if v.Actions != nil {
+		serialize__listOfRoutingRuleAction(s, schemas.CreateRoutingRuleRequest_Actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serialize__listOfRoutingRuleCondition(s, schemas.CreateRoutingRuleRequest_Conditions, v.Conditions)
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.CreateRoutingRuleRequest_DomainName, *v.DomainName)
 	}
@@ -110,8 +114,12 @@ func (v *CreateRoutingRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRoutingRuleAction(s, schemas.CreateRoutingRuleResponse_Actions, v.Actions)
-	serialize__listOfRoutingRuleCondition(s, schemas.CreateRoutingRuleResponse_Conditions, v.Conditions)
+	if v.Actions != nil {
+		serialize__listOfRoutingRuleAction(s, schemas.CreateRoutingRuleResponse_Actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serialize__listOfRoutingRuleCondition(s, schemas.CreateRoutingRuleResponse_Conditions, v.Conditions)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.CreateRoutingRuleResponse_Priority, *v.Priority)
 	}

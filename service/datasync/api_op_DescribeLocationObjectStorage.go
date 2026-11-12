@@ -76,6 +76,10 @@ type DescribeLocationObjectStorageOutput struct {
 	// Management (IAM) role that provides access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
 
+	// The federated identity configuration that DataSync uses to access your object
+	// storage using an OpenID Connect (OIDC) token.
+	FederatedIdentity *types.ObjectStorageFederatedIdentityConfig
+
 	// The ARN of the object storage system location.
 	LocationArn *string
 
@@ -115,7 +119,9 @@ func (v *DescribeLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSer
 	if v.AccessKey != nil {
 		s.WriteString(schemas.DescribeLocationObjectStorageResponse_AccessKey, *v.AccessKey)
 	}
-	serializeAgentArnList(s, schemas.DescribeLocationObjectStorageResponse_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.DescribeLocationObjectStorageResponse_AgentArns, v.AgentArns)
+	}
 	if v.CmkSecretConfig != nil {
 		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_CmkSecretConfig)
 		v.CmkSecretConfig.SerializeMembers(s)
@@ -127,6 +133,11 @@ func (v *DescribeLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSer
 	if v.CustomSecretConfig != nil {
 		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_CustomSecretConfig)
 		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FederatedIdentity != nil {
+		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_FederatedIdentity)
+		v.FederatedIdentity.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.LocationArn != nil {
@@ -167,6 +178,9 @@ func (v *DescribeLocationObjectStorageOutput) Deserialize(d smithy.ShapeDeserial
 		case schemas.DescribeLocationObjectStorageResponse_CustomSecretConfig:
 			v.CustomSecretConfig = &types.CustomSecretConfig{}
 			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationObjectStorageResponse_FederatedIdentity:
+			v.FederatedIdentity = &types.ObjectStorageFederatedIdentityConfig{}
+			return v.FederatedIdentity.Deserialize(d)
 		case schemas.DescribeLocationObjectStorageResponse_LocationArn:
 			v.LocationArn = new(string)
 			return d.ReadString(schemas.DescribeLocationObjectStorageResponse_LocationArn, v.LocationArn)
@@ -207,6 +221,9 @@ func (c *Client) addOperationDescribeLocationObjectStorageMiddlewares(stack *mid
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

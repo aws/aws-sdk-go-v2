@@ -71,7 +71,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SignalCatalogArn != nil {
 		s.WriteString(schemas.CreateFleetRequest_signalCatalogArn, *v.SignalCatalogArn)
 	}
-	serializeTagList(s, schemas.CreateFleetRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFleetRequest_tags, v.Tags)
+	}
 }
 func (v *CreateFleetInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateFleetRequest, func(s *smithy.Schema) error {

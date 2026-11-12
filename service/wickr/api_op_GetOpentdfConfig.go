@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,18 @@ type GetOpentdfConfigInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetOpentdfConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpentdfConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpentdfConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetOpentdfConfigRequest_networkId, *v.NetworkId)
+	}
 }
 
 type GetOpentdfConfigOutput struct {
@@ -61,13 +75,50 @@ type GetOpentdfConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpentdfConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpentdfConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpentdfConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetOpentdfConfigResponse_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.GetOpentdfConfigResponse_clientSecret, *v.ClientSecret)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.GetOpentdfConfigResponse_domain, *v.Domain)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.GetOpentdfConfigResponse_provider, *v.Provider)
+	}
+}
+func (v *GetOpentdfConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOpentdfConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOpentdfConfigResponse_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.GetOpentdfConfigResponse_clientId, v.ClientId)
+		case schemas.GetOpentdfConfigResponse_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.GetOpentdfConfigResponse_clientSecret, v.ClientSecret)
+		case schemas.GetOpentdfConfigResponse_domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.GetOpentdfConfigResponse_domain, v.Domain)
+		case schemas.GetOpentdfConfigResponse_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.GetOpentdfConfigResponse_provider, v.Provider)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOpentdfConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOpentdfConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpentdfConfig, schemas.GetOpentdfConfigRequest, schemas.GetOpentdfConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOpentdfConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpentdfConfig, schemas.GetOpentdfConfigRequest, schemas.GetOpentdfConfigResponse), output: &GetOpentdfConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

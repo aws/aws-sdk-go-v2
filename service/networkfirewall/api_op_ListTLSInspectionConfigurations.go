@@ -92,7 +92,9 @@ func (v *ListTLSInspectionConfigurationsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTLSInspectionConfigurationsResponse_NextToken, *v.NextToken)
 	}
-	serializeTLSInspectionConfigurations(s, schemas.ListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations, v.TLSInspectionConfigurations)
+	if v.TLSInspectionConfigurations != nil {
+		serializeTLSInspectionConfigurations(s, schemas.ListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations, v.TLSInspectionConfigurations)
+	}
 }
 func (v *ListTLSInspectionConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTLSInspectionConfigurationsResponse, func(s *smithy.Schema) error {
@@ -121,6 +123,9 @@ func (c *Client) addOperationListTLSInspectionConfigurationsMiddlewares(stack *m
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

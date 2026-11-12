@@ -107,6 +107,89 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_BatchCreateRelatedItem(t *testing.T) {
+	want := &BatchCreateRelatedItemOutput{
+		SuccessfulItems: []types.BatchCreateRelatedItemSuccessEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				RelatedItemId:  ptr.String("__RelatedItemId__"),
+				RelatedItemArn: ptr.String("__RelatedItemArn__"),
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				RelatedItemId:  ptr.String("__RelatedItemId__"),
+				RelatedItemArn: ptr.String("__RelatedItemArn__"),
+			},
+		},
+		FailedItems: []types.BatchCreateRelatedItemErrorEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchCreateRelatedItem.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
+		DomainId: ptr.String("__DomainId__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
+			},
+		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchCreateRelatedItem.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchGetCaseRule(t *testing.T) {
 	want := &BatchGetCaseRuleOutput{
 		CaseRules: []types.GetCaseRuleResponse{
@@ -363,6 +446,101 @@ func TestCheckResponseSnapshot_BatchPutFieldOptions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "BatchPutFieldOptions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchUpdateCase(t *testing.T) {
+	want := &BatchUpdateCaseOutput{
+		SuccessfulCases: []types.BatchUpdateCaseSuccessEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+			},
+		},
+		FailedCases: []types.BatchUpdateCaseErrorEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchUpdateCase.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchUpdateCase(context.Background(), &BatchUpdateCaseInput{
+		DomainId: ptr.String("__DomainId__"),
+		Cases: []types.BatchUpdateCaseIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		Fields: []types.FieldValueInput{
+			{
+				FieldIdentifier: &types.FieldIdentifierUnionMemberId{
+					Value: "__FieldIdentifierUnionMemberId__",
+				},
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+			{
+				FieldIdentifier: &types.FieldIdentifierUnionMemberId{
+					Value: "__FieldIdentifierUnionMemberId__",
+				},
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		Title:       ptr.String("__Title__"),
+		Status:      ptr.String("__Status__"),
+		CustomerId:  ptr.String("__CustomerId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchUpdateCase.response", err)
 	}
 }
 
@@ -949,6 +1127,11 @@ func TestCheckResponseSnapshot_GetCaseAuditEvents(t *testing.T) {
 					},
 					IamPrincipalArn: ptr.String("__IamPrincipalArn__"),
 				},
+				MergeMetadata: &types.AuditMergeMetadata{
+					MergeEventId:    ptr.String("__MergeEventId__"),
+					PrimaryCaseId:   ptr.String("__PrimaryCaseId__"),
+					SecondaryCaseId: ptr.String("__SecondaryCaseId__"),
+				},
 			},
 			{
 				EventId:         ptr.String("__EventId__"),
@@ -980,6 +1163,11 @@ func TestCheckResponseSnapshot_GetCaseAuditEvents(t *testing.T) {
 						Value: "__UserUnionMemberUserArn__",
 					},
 					IamPrincipalArn: ptr.String("__IamPrincipalArn__"),
+				},
+				MergeMetadata: &types.AuditMergeMetadata{
+					MergeEventId:    ptr.String("__MergeEventId__"),
+					PrimaryCaseId:   ptr.String("__PrimaryCaseId__"),
+					SecondaryCaseId: ptr.String("__SecondaryCaseId__"),
 				},
 			},
 		},
@@ -1169,6 +1357,35 @@ func TestCheckResponseSnapshot_GetLayout(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetLayout.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetMergeCasesStatus(t *testing.T) {
+	want := &GetMergeCasesStatusOutput{
+		Status:        types.MergeStatus("IN_PROGRESS"),
+		PrimaryCaseId: ptr.String("__PrimaryCaseId__"),
+		SecondaryCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetMergeCasesStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetMergeCasesStatus(context.Background(), &GetMergeCasesStatusInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetMergeCasesStatus.response", err)
 	}
 }
 
@@ -1897,6 +2114,65 @@ func TestCheckResponseSnapshot_SearchRelatedItems(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartMergeCases(t *testing.T) {
+	want := &StartMergeCasesOutput{}
+	status, header, body, err := serdeRespReadSnapshot("StartMergeCases.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartMergeCases(context.Background(), &StartMergeCasesInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+		SecondaryCaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FieldsConfiguration: []types.FieldsConfiguration{
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+			{
+				FieldIds: []types.FieldIdentifier{
+					{
+						Id: ptr.String("__Id__"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+					},
+				},
+				SourceCaseId: ptr.String("__SourceCaseId__"),
+			},
+		},
+		RelatedItemsConfiguration: &types.RelatedItemsConfiguration{
+			Comment:     ptr.Bool(true),
+			ConnectCase: ptr.Bool(true),
+			Contact:     ptr.Bool(true),
+			Custom:      ptr.Bool(true),
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartMergeCases.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -2279,16 +2555,29 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+	_, opErr := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
 		DomainId: ptr.String("__DomainId__"),
-		CaseRules: []types.CaseRuleIdentifier{
-			{
-				Id: ptr.String("__Id__"),
-			},
-			{
-				Id: ptr.String("__Id__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
 			},
 		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2314,30 +2603,29 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCase(context.Background(), &CreateCaseInput{
-		DomainId:   ptr.String("__DomainId__"),
-		TemplateId: ptr.String("__TemplateId__"),
-		Fields: []types.FieldValue{
+	_, opErr := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
+		DomainId: ptr.String("__DomainId__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
+			},
+		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
 			{
-				Id: ptr.String("__Id__"),
-				Value: &types.FieldValueUnionMemberStringValue{
-					Value: "__FieldValueUnionMemberStringValue__",
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
 				},
 			},
 			{
-				Id: ptr.String("__Id__"),
-				Value: &types.FieldValueUnionMemberStringValue{
-					Value: "__FieldValueUnionMemberStringValue__",
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
 				},
 			},
 		},
-		ClientToken: ptr.String("__ClientToken__"),
 		PerformedBy: &types.UserUnionMemberUserArn{
 			Value: "__UserUnionMemberUserArn__",
 		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2364,16 +2652,29 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+	_, opErr := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
 		DomainId: ptr.String("__DomainId__"),
-		CaseRules: []types.CaseRuleIdentifier{
-			{
-				Id: ptr.String("__Id__"),
-			},
-			{
-				Id: ptr.String("__Id__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
 			},
 		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2401,16 +2702,29 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+	_, opErr := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
 		DomainId: ptr.String("__DomainId__"),
-		CaseRules: []types.CaseRuleIdentifier{
-			{
-				Id: ptr.String("__Id__"),
-			},
-			{
-				Id: ptr.String("__Id__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
 			},
 		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2436,21 +2750,29 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutFieldOptions(context.Background(), &BatchPutFieldOptionsInput{
+	_, opErr := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
 		DomainId: ptr.String("__DomainId__"),
-		FieldId:  ptr.String("__FieldId__"),
-		Options: []types.FieldOption{
-			{
-				Name:   ptr.String("__Name__"),
-				Value:  ptr.String("__Value__"),
-				Active: ptr.Bool(true),
-			},
-			{
-				Name:   ptr.String("__Name__"),
-				Value:  ptr.String("__Value__"),
-				Active: ptr.Bool(true),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
 			},
 		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2476,16 +2798,29 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+	_, opErr := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
 		DomainId: ptr.String("__DomainId__"),
-		CaseRules: []types.CaseRuleIdentifier{
-			{
-				Id: ptr.String("__Id__"),
-			},
-			{
-				Id: ptr.String("__Id__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
 			},
 		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2511,16 +2846,29 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+	_, opErr := svc.BatchCreateRelatedItem(context.Background(), &BatchCreateRelatedItemInput{
 		DomainId: ptr.String("__DomainId__"),
-		CaseRules: []types.CaseRuleIdentifier{
-			{
-				Id: ptr.String("__Id__"),
-			},
-			{
-				Id: ptr.String("__Id__"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
 			},
 		},
+		Cases: []types.BatchCreateRelatedItemIdentifier{
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifierUnionMemberCaseId{
+					Value: "__CaseIdentifierUnionMemberCaseId__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

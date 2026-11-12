@@ -1580,6 +1580,80 @@ func TestCheckResponseSnapshot_DescribeRegistry(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeReplicationBackfillResults(t *testing.T) {
+	want := &DescribeReplicationBackfillResultsOutput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+		Status:      types.ReplicationBackfillStatus("PREPARING"),
+		FailureCode: ptr.String("__FailureCode__"),
+		Progress: &types.ReplicationBackfillProgress{
+			TotalReplicationCount:     ptr.Int32(1),
+			CompletedReplicationCount: ptr.Int32(1),
+			FailedReplicationCount:    ptr.Int32(1),
+			FailureCodes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Results: []types.ReplicationBackfillResult{
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				ImageId: &types.ImageIdentifier{
+					ImageDigest: ptr.String("__ImageDigest__"),
+					ImageTag:    ptr.String("__ImageTag__"),
+				},
+				Status:      types.ReplicationBackfillResultStatus("COMPLETE"),
+				FailureCode: ptr.String("__FailureCode__"),
+				SubImageFailureCodes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				ImageId: &types.ImageIdentifier{
+					ImageDigest: ptr.String("__ImageDigest__"),
+					ImageTag:    ptr.String("__ImageTag__"),
+				},
+				Status:      types.ReplicationBackfillResultStatus("COMPLETE"),
+				FailureCode: ptr.String("__FailureCode__"),
+				SubImageFailureCodes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeReplicationBackfillResults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeReplicationBackfillResults(context.Background(), &DescribeReplicationBackfillResultsInput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		ResultStatusFilter:    types.ReplicationBackfillResultStatus("COMPLETE"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeReplicationBackfillResults.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeRepositories(t *testing.T) {
 	want := &DescribeRepositoriesOutput{
 		Repositories: []types.Repository{
@@ -2270,6 +2344,74 @@ func TestCheckResponseSnapshot_ListPullTimeUpdateExclusions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListReplicationBackfills(t *testing.T) {
+	want := &ListReplicationBackfillsOutput{
+		RegistryId: ptr.String("__RegistryId__"),
+		Backfills: []types.ReplicationBackfillSummary{
+			{
+				ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+				Destination: &types.ReplicationDestination{
+					Region:     ptr.String("__Region__"),
+					RegistryId: ptr.String("__RegistryId__"),
+				},
+				Status:      types.ReplicationBackfillStatus("PREPARING"),
+				FailureCode: ptr.String("__FailureCode__"),
+				Progress: &types.ReplicationBackfillProgress{
+					TotalReplicationCount:     ptr.Int32(1),
+					CompletedReplicationCount: ptr.Int32(1),
+					FailedReplicationCount:    ptr.Int32(1),
+					FailureCodes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+				Destination: &types.ReplicationDestination{
+					Region:     ptr.String("__Region__"),
+					RegistryId: ptr.String("__RegistryId__"),
+				},
+				Status:      types.ReplicationBackfillStatus("PREPARING"),
+				FailureCode: ptr.String("__FailureCode__"),
+				Progress: &types.ReplicationBackfillProgress{
+					TotalReplicationCount:     ptr.Int32(1),
+					CompletedReplicationCount: ptr.Int32(1),
+					FailedReplicationCount:    ptr.Int32(1),
+					FailureCodes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListReplicationBackfills.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListReplicationBackfills(context.Background(), &ListReplicationBackfillsInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListReplicationBackfills.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: []types.Tag{
@@ -2886,6 +3028,71 @@ func TestCheckResponseSnapshot_StartLifecyclePolicyPreview(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartLifecyclePolicyPreview.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartReplicationBackfill(t *testing.T) {
+	want := &StartReplicationBackfillOutput{
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		RegistryId:            ptr.String("__RegistryId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+		Status:    types.ReplicationBackfillStatus("PREPARING"),
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartReplicationBackfill.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartReplicationBackfill(context.Background(), &StartReplicationBackfillInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartReplicationBackfill.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopReplicationBackfill(t *testing.T) {
+	want := &StopReplicationBackfillOutput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+		Status:    types.ReplicationBackfillStatus("PREPARING"),
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StopReplicationBackfill.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopReplicationBackfill(context.Background(), &StopReplicationBackfillInput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopReplicationBackfill.response", err)
 	}
 }
 
@@ -4074,6 +4281,96 @@ func TestCheckResponseSnapshot_Error_RegistryPolicyNotFoundException(t *testing.
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "RegistryPolicyNotFoundException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ReplicationBackfillInProgressException(t *testing.T) {
+	want := &types.ReplicationBackfillInProgressException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ReplicationBackfillInProgressException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.StartReplicationBackfill(context.Background(), &StartReplicationBackfillInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		Destination: &types.ReplicationDestination{
+			Region:     ptr.String("__Region__"),
+			RegistryId: ptr.String("__RegistryId__"),
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ReplicationBackfillInProgressException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ReplicationBackfillInProgressException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ReplicationBackfillInProgressException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ReplicationBackfillInvalidStatusException(t *testing.T) {
+	want := &types.ReplicationBackfillInvalidStatusException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ReplicationBackfillInvalidStatusException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.StopReplicationBackfill(context.Background(), &StopReplicationBackfillInput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ReplicationBackfillInvalidStatusException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ReplicationBackfillInvalidStatusException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ReplicationBackfillInvalidStatusException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ReplicationBackfillNotFoundException(t *testing.T) {
+	want := &types.ReplicationBackfillNotFoundException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ReplicationBackfillNotFoundException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DescribeReplicationBackfillResults(context.Background(), &DescribeReplicationBackfillResultsInput{
+		RegistryId:            ptr.String("__RegistryId__"),
+		ReplicationBackfillId: ptr.String("__ReplicationBackfillId__"),
+		ResultStatusFilter:    types.ReplicationBackfillResultStatus("COMPLETE"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ReplicationBackfillNotFoundException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ReplicationBackfillNotFoundException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ReplicationBackfillNotFoundException.error", err)
 	}
 }
 

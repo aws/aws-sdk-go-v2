@@ -75,7 +75,9 @@ func (v *CreateKeyspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReplicationSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateKeyspaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateKeyspaceRequest_tags, v.Tags)
+	}
 }
 func (v *CreateKeyspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateKeyspaceRequest, func(s *smithy.Schema) error {

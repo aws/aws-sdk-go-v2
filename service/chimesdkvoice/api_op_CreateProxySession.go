@@ -78,7 +78,9 @@ func (v *CreateProxySessionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateProxySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityList(s, schemas.CreateProxySessionRequest_Capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeCapabilityList(s, schemas.CreateProxySessionRequest_Capabilities, v.Capabilities)
+	}
 	if v.ExpiryMinutes != nil {
 		s.WriteInt32(schemas.CreateProxySessionRequest_ExpiryMinutes, *v.ExpiryMinutes)
 	}
@@ -96,7 +98,9 @@ func (v *CreateProxySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberSelectionBehavior != "" {
 		s.WriteString(schemas.CreateProxySessionRequest_NumberSelectionBehavior, string(v.NumberSelectionBehavior))
 	}
-	serializeParticipantPhoneNumberList(s, schemas.CreateProxySessionRequest_ParticipantPhoneNumbers, v.ParticipantPhoneNumbers)
+	if v.ParticipantPhoneNumbers != nil {
+		serializeParticipantPhoneNumberList(s, schemas.CreateProxySessionRequest_ParticipantPhoneNumbers, v.ParticipantPhoneNumbers)
+	}
 	if v.VoiceConnectorId != nil {
 		s.WriteString(schemas.CreateProxySessionRequest_VoiceConnectorId, *v.VoiceConnectorId)
 	}

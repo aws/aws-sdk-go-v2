@@ -68,7 +68,9 @@ func (v *DisassociateFileSystemAliasesInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DisassociateFileSystemAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlternateDNSNames(s, schemas.DisassociateFileSystemAliasesRequest_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeAlternateDNSNames(s, schemas.DisassociateFileSystemAliasesRequest_Aliases, v.Aliases)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.DisassociateFileSystemAliasesRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
@@ -99,7 +101,9 @@ func (v *DisassociateFileSystemAliasesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DisassociateFileSystemAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAliases(s, schemas.DisassociateFileSystemAliasesResponse_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeAliases(s, schemas.DisassociateFileSystemAliasesResponse_Aliases, v.Aliases)
+	}
 }
 func (v *DisassociateFileSystemAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisassociateFileSystemAliasesResponse, func(s *smithy.Schema) error {

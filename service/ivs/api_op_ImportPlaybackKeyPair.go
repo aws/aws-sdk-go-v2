@@ -65,7 +65,9 @@ func (v *ImportPlaybackKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PublicKeyMaterial != nil {
 		s.WriteString(schemas.ImportPlaybackKeyPairRequest_publicKeyMaterial, *v.PublicKeyMaterial)
 	}
-	serializeTags(s, schemas.ImportPlaybackKeyPairRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ImportPlaybackKeyPairRequest_tags, v.Tags)
+	}
 }
 func (v *ImportPlaybackKeyPairInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImportPlaybackKeyPairRequest, func(s *smithy.Schema) error {

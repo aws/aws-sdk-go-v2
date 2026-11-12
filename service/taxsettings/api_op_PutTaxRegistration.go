@@ -16,6 +16,11 @@ import (
 // To call this API operation for specific countries, see the following
 // country-specific requirements.
 //
+// Argentina
+//
+//   - RegistrationType valid values are CUIT (Clave Única de Identificación
+//     Tributaria) and CDI (Clave de Identificación).
+//
 // Bangladesh
 //
 //   - You must specify the tax registration certificate document in the
@@ -29,6 +34,14 @@ import (
 //
 //   - For Amazon Web Services accounts created through Organizations, you can
 //     call this API operation when you don't have a billing address.
+//
+// Colombia
+//
+//   - You can provide a Registro Único Tributario (RUT) document in the
+//     verificationDetails field.
+//
+//   - If you provide the RUT document, you do not need to provide address and
+//     legal name. These will be populated based on your document.
 //
 // Georgia
 //
@@ -181,6 +194,11 @@ import (
 //
 //   - The sector valid values are Business and Individual .
 //
+// Uruguay
+//
+//   - RegistrationType valid values are RUT (Registro Único Tributario), NIE
+//     (Numero de Identificacion del Extranjero), and CI (Cedula Identidad).
+//
 // Philippines
 //
 //   - You can optionally specify the isVatRegistered in the
@@ -209,6 +227,17 @@ import (
 //
 //   - You must specify the businessNumber in the monacoAdditionalInfo field of the
 //     additionalTaxInformation object.
+//
+// Germany
+//
+//   - You must provide at least one of the following: a Tax Registration Number
+//     (TRN) ( registrationId ), the economicIdentificationNumber , or the
+//     steuernummer .
+//
+//   - You can optionally specify the economicIdentificationNumber
+//     (Wirtschafts-Identifikationsnummer, or W-IdNr) and the steuernummer (tax
+//     number issued by the local tax office) in the germanyAdditionalInfo field of
+//     the additionalTaxInformation object.
 //
 // Poland
 //

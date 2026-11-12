@@ -7,9 +7,6 @@ import (
 )
 
 func serializeBandwidthRateLimitIntervals(s smithy.ShapeSerializer, schema *smithy.Schema, v []BandwidthRateLimitInterval) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeBandwidthRateLimitIntervals(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeDaysOfWeek(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteInt32(schema.ListMember(), int32(vv))
@@ -31,9 +25,6 @@ func serializeDaysOfWeek(s smithy.ShapeSerializer, schema *smithy.Schema, v []in
 }
 
 func serializeGateways(s smithy.ShapeSerializer, schema *smithy.Schema, v []Gateway) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -44,9 +35,6 @@ func serializeGateways(s smithy.ShapeSerializer, schema *smithy.Schema, v []Gate
 }
 
 func serializeHypervisors(s smithy.ShapeSerializer, schema *smithy.Schema, v []Hypervisor) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeHypervisors(s smithy.ShapeSerializer, schema *smithy.Schema, v []H
 }
 
 func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -68,9 +53,6 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -81,9 +63,6 @@ func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
 }
 
 func serializeVirtualMachines(s smithy.ShapeSerializer, schema *smithy.Schema, v []VirtualMachine) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serializeVirtualMachines(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeVmwareTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []VmwareTag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -107,9 +83,6 @@ func serializeVmwareTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Vm
 }
 
 func serializeVmwareToAwsTagMappings(s smithy.ShapeSerializer, schema *smithy.Schema, v []VmwareToAwsTagMapping) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

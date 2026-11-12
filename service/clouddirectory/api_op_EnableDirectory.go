@@ -4,6 +4,8 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type EnableDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.EnableDirectoryRequest_DirectoryArn, *v.DirectoryArn)
+	}
+}
+
 type EnableDirectoryOutput struct {
 
 	// The ARN of the enabled directory.
@@ -47,13 +61,32 @@ type EnableDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDirectoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.EnableDirectoryResponse_DirectoryArn, *v.DirectoryArn)
+	}
+}
+func (v *EnableDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableDirectoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableDirectoryResponse_DirectoryArn:
+			v.DirectoryArn = new(string)
+			return d.ReadString(schemas.EnableDirectoryResponse_DirectoryArn, v.DirectoryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDirectory, schemas.EnableDirectoryRequest, schemas.EnableDirectoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDirectory, schemas.EnableDirectoryRequest, schemas.EnableDirectoryResponse), output: &EnableDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

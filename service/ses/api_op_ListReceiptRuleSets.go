@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type ListReceiptRuleSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceiptRuleSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceiptRuleSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceiptRuleSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceiptRuleSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // A list of receipt rule sets that exist under your Amazon Web Services account.
 type ListReceiptRuleSetsOutput struct {
 
@@ -65,13 +79,37 @@ type ListReceiptRuleSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceiptRuleSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceiptRuleSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceiptRuleSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceiptRuleSetsResponse_NextToken, *v.NextToken)
+	}
+	if v.RuleSets != nil {
+		serializeReceiptRuleSetsLists(s, schemas.ListReceiptRuleSetsResponse_RuleSets, v.RuleSets)
+	}
+}
+func (v *ListReceiptRuleSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReceiptRuleSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReceiptRuleSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReceiptRuleSetsResponse_NextToken, v.NextToken)
+		case schemas.ListReceiptRuleSetsResponse_RuleSets:
+			return deserializeReceiptRuleSetsLists(d, schemas.ListReceiptRuleSetsResponse_RuleSets, &v.RuleSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReceiptRuleSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListReceiptRuleSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceiptRuleSets, schemas.ListReceiptRuleSetsRequest, schemas.ListReceiptRuleSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListReceiptRuleSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceiptRuleSets, schemas.ListReceiptRuleSetsRequest, schemas.ListReceiptRuleSetsResponse), output: &ListReceiptRuleSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

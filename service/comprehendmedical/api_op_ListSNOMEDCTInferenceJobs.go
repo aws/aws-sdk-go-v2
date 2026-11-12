@@ -81,7 +81,9 @@ func (v *ListSNOMEDCTInferenceJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSNOMEDCTInferenceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	if v.ComprehendMedicalAsyncJobPropertiesList != nil {
+		serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSNOMEDCTInferenceJobsResponse_NextToken, *v.NextToken)
 	}

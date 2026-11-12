@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ImportCustomWorkspaceImage
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ImportCustomWorkspaceImage
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ComputeType":"BASE","ImageDescription":"__ImageDescription__","ImageName":"__ImageName__","ImageSource":{"Ec2ImportTaskId":"__ImageSourceIdentifierMemberEc2ImportTaskId__"},"InfrastructureConfigurationArn":"__InfrastructureConfigurationArn__","OsVersion":"Windows_10","Platform":"WINDOWS","Protocol":"PCOIP","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿kComputeTypedBASEpImageDescriptiont__ImageDescription__iImageNamem__ImageName__kImageSource¡oEc2ImportTaskIdx.__ImageSourceIdentifierMemberEc2ImportTaskId__sImageValidationModepCUSTOMER_MANAGEDxInfrastructureConfigurationArnx"__InfrastructureConfigurationArn__iOsVersionjWindows_10hPlatformgWINDOWShProtocolePCOIPdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

@@ -210,13 +210,17 @@ func (v *PutPlaybackConfigurationInput) SerializeMembers(s smithy.ShapeSerialize
 		v.CdnConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConfigurationAliasesRequest(s, schemas.PutPlaybackConfigurationRequest_ConfigurationAliases, v.ConfigurationAliases)
+	if v.ConfigurationAliases != nil {
+		serializeConfigurationAliasesRequest(s, schemas.PutPlaybackConfigurationRequest_ConfigurationAliases, v.ConfigurationAliases)
+	}
 	if v.DashConfiguration != nil {
 		s.WriteStruct(schemas.PutPlaybackConfigurationRequest_DashConfiguration)
 		v.DashConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFunctionMapping(s, schemas.PutPlaybackConfigurationRequest_FunctionMapping, v.FunctionMapping)
+	if v.FunctionMapping != nil {
+		serializeFunctionMapping(s, schemas.PutPlaybackConfigurationRequest_FunctionMapping, v.FunctionMapping)
+	}
 	if v.InsertionMode != "" {
 		s.WriteString(schemas.PutPlaybackConfigurationRequest_InsertionMode, string(v.InsertionMode))
 	}
@@ -239,7 +243,9 @@ func (v *PutPlaybackConfigurationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SlateAdUrl != nil {
 		s.WriteString(schemas.PutPlaybackConfigurationRequest_SlateAdUrl, *v.SlateAdUrl)
 	}
-	serialize__mapOf__string(s, schemas.PutPlaybackConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.PutPlaybackConfigurationRequest_Tags, v.Tags)
+	}
 	if v.TranscodeProfileName != nil {
 		s.WriteString(schemas.PutPlaybackConfigurationRequest_TranscodeProfileName, *v.TranscodeProfileName)
 	}
@@ -533,7 +539,9 @@ func (v *PutPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.CdnConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConfigurationAliasesResponse(s, schemas.PutPlaybackConfigurationResponse_ConfigurationAliases, v.ConfigurationAliases)
+	if v.ConfigurationAliases != nil {
+		serializeConfigurationAliasesResponse(s, schemas.PutPlaybackConfigurationResponse_ConfigurationAliases, v.ConfigurationAliases)
+	}
 	if v.DashConfiguration != nil {
 		s.WriteStruct(schemas.PutPlaybackConfigurationResponse_DashConfiguration)
 		v.DashConfiguration.SerializeMembers(s)
@@ -545,7 +553,9 @@ func (v *PutPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DualStackSessionInitializationEndpointPrefix != nil {
 		s.WriteString(schemas.PutPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix, *v.DualStackSessionInitializationEndpointPrefix)
 	}
-	serializeFunctionMapping(s, schemas.PutPlaybackConfigurationResponse_FunctionMapping, v.FunctionMapping)
+	if v.FunctionMapping != nil {
+		serializeFunctionMapping(s, schemas.PutPlaybackConfigurationResponse_FunctionMapping, v.FunctionMapping)
+	}
 	if v.HlsConfiguration != nil {
 		s.WriteStruct(schemas.PutPlaybackConfigurationResponse_HlsConfiguration)
 		v.HlsConfiguration.SerializeMembers(s)
@@ -587,7 +597,9 @@ func (v *PutPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.SlateAdUrl != nil {
 		s.WriteString(schemas.PutPlaybackConfigurationResponse_SlateAdUrl, *v.SlateAdUrl)
 	}
-	serialize__mapOf__string(s, schemas.PutPlaybackConfigurationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.PutPlaybackConfigurationResponse_Tags, v.Tags)
+	}
 	if v.TranscodeProfileName != nil {
 		s.WriteString(schemas.PutPlaybackConfigurationResponse_TranscodeProfileName, *v.TranscodeProfileName)
 	}

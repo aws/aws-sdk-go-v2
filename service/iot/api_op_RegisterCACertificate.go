@@ -106,7 +106,9 @@ func (v *RegisterCACertificateInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SetAsActive != false {
 		s.WriteBool(schemas.RegisterCACertificateRequest_setAsActive, v.SetAsActive)
 	}
-	serializeTagList(s, schemas.RegisterCACertificateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RegisterCACertificateRequest_tags, v.Tags)
+	}
 	if v.VerificationCertificate != nil {
 		s.WriteString(schemas.RegisterCACertificateRequest_verificationCertificate, *v.VerificationCertificate)
 	}

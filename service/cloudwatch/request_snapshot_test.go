@@ -1549,7 +1549,9 @@ func TestCheckRequestSnapshot_PutAnomalyDetector(t *testing.T) {
 					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			MetricTimezone: ptr.String("__MetricTimezone__"),
+			MetricTimezone:           ptr.String("__MetricTimezone__"),
+			AdaptationSpeed:          types.AnomalyDetectorAdaptationSpeed("FAST"),
+			OutlierFilteringStrength: types.AnomalyDetectorOutlierFilteringStrength("MINIMAL"),
 		},
 		MetricCharacteristics: &types.MetricCharacteristics{
 			PeriodicSpikes: ptr.Bool(true),
@@ -1683,6 +1685,19 @@ func TestCheckRequestSnapshot_PutCompositeAlarm(t *testing.T) {
 		ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 		ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 		ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1847,6 +1862,19 @@ func TestCheckRequestSnapshot_PutLogAlarm(t *testing.T) {
 		WarmUpConfiguration: &types.WarmUpConfiguration{
 			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+		},
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2051,6 +2079,19 @@ func TestCheckRequestSnapshot_PutMetricAlarm(t *testing.T) {
 			},
 		},
 		EvaluationInterval: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4119,7 +4160,9 @@ func TestUpdateRequestSnapshot_PutAnomalyDetector(t *testing.T) {
 					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			MetricTimezone: ptr.String("__MetricTimezone__"),
+			MetricTimezone:           ptr.String("__MetricTimezone__"),
+			AdaptationSpeed:          types.AnomalyDetectorAdaptationSpeed("FAST"),
+			OutlierFilteringStrength: types.AnomalyDetectorOutlierFilteringStrength("MINIMAL"),
 		},
 		MetricCharacteristics: &types.MetricCharacteristics{
 			PeriodicSpikes: ptr.Bool(true),
@@ -4253,6 +4296,19 @@ func TestUpdateRequestSnapshot_PutCompositeAlarm(t *testing.T) {
 		ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 		ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 		ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4417,6 +4473,19 @@ func TestUpdateRequestSnapshot_PutLogAlarm(t *testing.T) {
 		WarmUpConfiguration: &types.WarmUpConfiguration{
 			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+		},
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4621,6 +4690,19 @@ func TestUpdateRequestSnapshot_PutMetricAlarm(t *testing.T) {
 			},
 		},
 		EvaluationInterval: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

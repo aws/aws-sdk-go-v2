@@ -84,7 +84,9 @@ func (v *ListReportPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReportPlansOutput_NextToken, *v.NextToken)
 	}
-	serializeReportPlanList(s, schemas.ListReportPlansOutput_ReportPlans, v.ReportPlans)
+	if v.ReportPlans != nil {
+		serializeReportPlanList(s, schemas.ListReportPlansOutput_ReportPlans, v.ReportPlans)
+	}
 }
 func (v *ListReportPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReportPlansOutput, func(s *smithy.Schema) error {

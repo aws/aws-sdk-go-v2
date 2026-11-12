@@ -58,8 +58,12 @@ func (v *ListLicensesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLicensesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListLicensesRequest_Filters, v.Filters)
-	serializeArnList(s, schemas.ListLicensesRequest_LicenseArns, v.LicenseArns)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListLicensesRequest_Filters, v.Filters)
+	}
+	if v.LicenseArns != nil {
+		serializeArnList(s, schemas.ListLicensesRequest_LicenseArns, v.LicenseArns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLicensesRequest_MaxResults, *v.MaxResults)
 	}
@@ -89,7 +93,9 @@ func (v *ListLicensesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLicensesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseList(s, schemas.ListLicensesResponse_Licenses, v.Licenses)
+	if v.Licenses != nil {
+		serializeLicenseList(s, schemas.ListLicensesResponse_Licenses, v.Licenses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicensesResponse_NextToken, *v.NextToken)
 	}

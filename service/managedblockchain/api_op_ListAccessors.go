@@ -86,7 +86,9 @@ func (v *ListAccessorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessorSummaryList(s, schemas.ListAccessorsOutput_Accessors, v.Accessors)
+	if v.Accessors != nil {
+		serializeAccessorSummaryList(s, schemas.ListAccessorsOutput_Accessors, v.Accessors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessorsOutput_NextToken, *v.NextToken)
 	}

@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/CopySnapshot
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.CopySnapshot
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"KmsKeyId":"__KmsKeyId__","SourceSnapshotName":"__SourceSnapshotName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TargetBucket":"__TargetBucket__","TargetSnapshotName":"__TargetSnapshotName__"}
+¿hKmsKeyIdl__KmsKeyId__rSourceSnapshotNamev__SourceSnapshotName__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿlTargetBucketp__TargetBucket__rTargetSnapshotNamev__TargetSnapshotName__ÿ

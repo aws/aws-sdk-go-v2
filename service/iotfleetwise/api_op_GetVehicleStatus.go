@@ -109,7 +109,9 @@ func (v *GetVehicleStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetVehicleStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVehicleStatusList(s, schemas.GetVehicleStatusResponse_campaigns, v.Campaigns)
+	if v.Campaigns != nil {
+		serializeVehicleStatusList(s, schemas.GetVehicleStatusResponse_campaigns, v.Campaigns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetVehicleStatusResponse_nextToken, *v.NextToken)
 	}

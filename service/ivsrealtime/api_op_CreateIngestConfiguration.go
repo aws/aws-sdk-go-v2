@@ -82,7 +82,9 @@ func (v *CreateIngestConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateIngestConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipantAttributes(s, schemas.CreateIngestConfigurationRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeParticipantAttributes(s, schemas.CreateIngestConfigurationRequest_attributes, v.Attributes)
+	}
 	if v.IngestProtocol != "" {
 		s.WriteString(schemas.CreateIngestConfigurationRequest_ingestProtocol, string(v.IngestProtocol))
 	}
@@ -98,7 +100,9 @@ func (v *CreateIngestConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.StageArn != nil {
 		s.WriteString(schemas.CreateIngestConfigurationRequest_stageArn, *v.StageArn)
 	}
-	serializeTags(s, schemas.CreateIngestConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateIngestConfigurationRequest_tags, v.Tags)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.CreateIngestConfigurationRequest_userId, *v.UserId)
 	}

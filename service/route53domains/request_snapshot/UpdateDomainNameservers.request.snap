@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53Domains_v20140515/operation/UpdateDomainNameservers
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.UpdateDomainNameservers
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DomainName":"__DomainName__","FIAuthKey":"__FIAuthKey__","Nameservers":[{"GlueIps":["__Member__","__Member__"],"Name":"__Name__"},{"GlueIps":["__Member__","__Member__"],"Name":"__Name__"}]}
+¿jDomainNamen__DomainName__iFIAuthKeym__FIAuthKey__kNameserversŸ¿gGlueIpsŸj__Member__j__Member__ÿdNameh__Name__ÿ¿gGlueIpsŸj__Member__j__Member__ÿdNameh__Name__ÿÿÿ

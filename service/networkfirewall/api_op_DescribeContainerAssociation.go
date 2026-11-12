@@ -122,7 +122,9 @@ func (v *DescribeContainerAssociationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.ContainerAssociationName != nil {
 		s.WriteString(schemas.DescribeContainerAssociationResponse_ContainerAssociationName, *v.ContainerAssociationName)
 	}
-	serializeContainerMonitoringConfigurations(s, schemas.DescribeContainerAssociationResponse_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	if v.ContainerMonitoringConfigurations != nil {
+		serializeContainerMonitoringConfigurations(s, schemas.DescribeContainerAssociationResponse_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeContainerAssociationResponse_Description, *v.Description)
 	}
@@ -135,7 +137,9 @@ func (v *DescribeContainerAssociationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeContainerAssociationResponse_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.DescribeContainerAssociationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DescribeContainerAssociationResponse_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribeContainerAssociationResponse_Type, string(v.Type))
 	}
@@ -201,6 +205,9 @@ func (c *Client) addOperationDescribeContainerAssociationMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

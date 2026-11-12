@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type CreateSnapshotCopyGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotCopyGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotCopyGrantMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotCopyGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateSnapshotCopyGrantMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SnapshotCopyGrantName != nil {
+		s.WriteString(schemas.CreateSnapshotCopyGrantMessage_SnapshotCopyGrantName, *v.SnapshotCopyGrantName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSnapshotCopyGrantMessage_Tags, v.Tags)
+	}
+}
+
 type CreateSnapshotCopyGrantOutput struct {
 
 	// The snapshot copy grant that grants Amazon Redshift permission to encrypt
@@ -80,13 +100,34 @@ type CreateSnapshotCopyGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotCopyGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotCopyGrantResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotCopyGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotCopyGrant != nil {
+		s.WriteStruct(schemas.CreateSnapshotCopyGrantResult_SnapshotCopyGrant)
+		v.SnapshotCopyGrant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSnapshotCopyGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSnapshotCopyGrantResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSnapshotCopyGrantResult_SnapshotCopyGrant:
+			v.SnapshotCopyGrant = &types.SnapshotCopyGrant{}
+			return v.SnapshotCopyGrant.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSnapshotCopyGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateSnapshotCopyGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshotCopyGrant, schemas.CreateSnapshotCopyGrantMessage, schemas.CreateSnapshotCopyGrantResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateSnapshotCopyGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshotCopyGrant, schemas.CreateSnapshotCopyGrantMessage, schemas.CreateSnapshotCopyGrantResult), output: &CreateSnapshotCopyGrantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3607,14 +3607,38 @@ var GuardrailContextualGroundingFilterType_RELEVANCE *smithy.Schema
 var GuardrailContextualGroundingPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "GuardrailContextualGroundingPolicy",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GuardrailContextualGroundingPolicy_filters *smithy.Schema
+
+var GuardrailContextualGroundingPolicy_tier *smithy.Schema
 
 var GuardrailContextualGroundingPolicyConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "GuardrailContextualGroundingPolicyConfig",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GuardrailContextualGroundingPolicyConfig_filtersConfig *smithy.Schema
+
+var GuardrailContextualGroundingPolicyConfig_tierConfig *smithy.Schema
+
+var GuardrailContextualGroundingTier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GuardrailContextualGroundingTier",
+}, smithy.ShapeTypeStructure, 1)
+var GuardrailContextualGroundingTier_tierName *smithy.Schema
+
+var GuardrailContextualGroundingTierConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GuardrailContextualGroundingTierConfig",
+}, smithy.ShapeTypeStructure, 1)
+var GuardrailContextualGroundingTierConfig_tierName *smithy.Schema
+
+var GuardrailContextualGroundingTierName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GuardrailContextualGroundingTierName",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var GuardrailContextualGroundingTierName_CLASSIC *smithy.Schema
+
+var GuardrailContextualGroundingTierName_STANDARD *smithy.Schema
 
 var GuardrailCrossRegionConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -9919,9 +9943,21 @@ func init() {
 
 	_GuardrailContextualGroundingFiltersConfig_member = _GuardrailContextualGroundingFiltersConfig.AddMember("member", GuardrailContextualGroundingFilterConfig)
 
+	GuardrailContextualGroundingTierName_CLASSIC = GuardrailContextualGroundingTierName.AddMember("CLASSIC", smithyprelude.Unit)
+
+	GuardrailContextualGroundingTierName_STANDARD = GuardrailContextualGroundingTierName.AddMember("STANDARD", smithyprelude.Unit)
+
+	GuardrailContextualGroundingTier_tierName = GuardrailContextualGroundingTier.AddMember("tierName", GuardrailContextualGroundingTierName)
+
 	GuardrailContextualGroundingPolicy_filters = GuardrailContextualGroundingPolicy.AddMember("filters", _GuardrailContextualGroundingFilters)
 
+	GuardrailContextualGroundingPolicy_tier = GuardrailContextualGroundingPolicy.AddMember("tier", GuardrailContextualGroundingTier)
+
+	GuardrailContextualGroundingTierConfig_tierName = GuardrailContextualGroundingTierConfig.AddMember("tierName", GuardrailContextualGroundingTierName)
+
 	GuardrailContextualGroundingPolicyConfig_filtersConfig = GuardrailContextualGroundingPolicyConfig.AddMember("filtersConfig", _GuardrailContextualGroundingFiltersConfig)
+
+	GuardrailContextualGroundingPolicyConfig_tierConfig = GuardrailContextualGroundingPolicyConfig.AddMember("tierConfig", GuardrailContextualGroundingTierConfig)
 
 	GuardrailCrossRegionConfig_guardrailProfileIdentifier = GuardrailCrossRegionConfig.AddMember("guardrailProfileIdentifier", _GuardrailCrossRegionGuardrailProfileIdentifier)
 

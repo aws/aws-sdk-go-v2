@@ -135,7 +135,9 @@ func (v *CreateDatasetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateDatasetGroupRequest_roleArn, *v.RoleArn)
 	}
-	serializeTags(s, schemas.CreateDatasetGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDatasetGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateDatasetGroupOutput struct {

@@ -28,8 +28,6 @@ func (c *Client) UpdateQueueFleetAssociation(ctx context.Context, params *Update
 	return out, nil
 }
 
-// Identifier mixin for queue-fleet association operations. Composes
-// QueueIdentifierMixin (farmId + queueId) and adds fleetId.
 type UpdateQueueFleetAssociationInput struct {
 
 	// The farm ID to update.

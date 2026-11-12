@@ -102,7 +102,9 @@ func (v *ListMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitorList(s, schemas.ListMonitorsOutput_Monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorList(s, schemas.ListMonitorsOutput_Monitors, v.Monitors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitorsOutput_NextToken, *v.NextToken)
 	}

@@ -85,7 +85,9 @@ func (v *CreateUserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SingleSignOnUserValue != nil {
 		s.WriteString(schemas.CreateUserProfileRequest_SingleSignOnUserValue, *v.SingleSignOnUserValue)
 	}
-	serializeTagList(s, schemas.CreateUserProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUserProfileRequest_Tags, v.Tags)
+	}
 	if v.UserProfileName != nil {
 		s.WriteString(schemas.CreateUserProfileRequest_UserProfileName, *v.UserProfileName)
 	}

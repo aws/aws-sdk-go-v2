@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","eTagAlgorithmFamily":"MD5up","fallbackLocation":"__FallbackLocation__","id":"__Id__","name":"__Name__","propagatedSetLevelTags":["__Member__","__Member__"],"s3Access":{"accessLogLocation":"__AccessLogLocation__","s3AccessPointArn":"__S3AccessPointArn__","s3Uri":"__S3Uri__"},"sseConfig":{"keyArn":"__KeyArn__","type":"KMS"},"status":"CREATING","statusMessage":"__StatusMessage__"}

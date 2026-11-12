@@ -93,7 +93,9 @@ func (v *UpdateDevicePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDevicePoolRequest_name, *v.Name)
 	}
-	serializeRules(s, schemas.UpdateDevicePoolRequest_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.UpdateDevicePoolRequest_rules, v.Rules)
+	}
 }
 
 // Represents the result of an update device pool request.

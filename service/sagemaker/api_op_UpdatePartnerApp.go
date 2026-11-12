@@ -126,7 +126,9 @@ func (v *UpdatePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MaintenanceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.UpdatePartnerAppRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UpdatePartnerAppRequest_Tags, v.Tags)
+	}
 	if v.Tier != nil {
 		s.WriteString(schemas.UpdatePartnerAppRequest_Tier, *v.Tier)
 	}

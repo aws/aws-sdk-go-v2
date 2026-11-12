@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"scan":{"completedAt":"2000-01-01T00:00:00Z","createdAt":"2000-01-01T00:00:00Z","failureMessage":"__FailureMessage__","failureStage":"SUBMITTED","origin":"MANUAL","scanRunId":"__ScanRunId__","status":"SUBMITTED"}}

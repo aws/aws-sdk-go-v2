@@ -4,6 +4,8 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type PutFileSystemPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFileSystemPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFileSystemPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFileSystemPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassPolicyLockoutSafetyCheck != false {
+		s.WriteBool(schemas.PutFileSystemPolicyRequest_BypassPolicyLockoutSafetyCheck, v.BypassPolicyLockoutSafetyCheck)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.PutFileSystemPolicyRequest_FileSystemId, *v.FileSystemId)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutFileSystemPolicyRequest_Policy, *v.Policy)
+	}
+}
+
 type PutFileSystemPolicyOutput struct {
 
 	// Specifies the EFS file system to which the FileSystemPolicy applies.
@@ -80,13 +100,38 @@ type PutFileSystemPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFileSystemPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemPolicyDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFileSystemPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.FileSystemPolicyDescription_FileSystemId, *v.FileSystemId)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.FileSystemPolicyDescription_Policy, *v.Policy)
+	}
+}
+func (v *PutFileSystemPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemPolicyDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemPolicyDescription_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.FileSystemPolicyDescription_FileSystemId, v.FileSystemId)
+		case schemas.FileSystemPolicyDescription_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.FileSystemPolicyDescription_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFileSystemPolicy, schemas.PutFileSystemPolicyRequest, schemas.FileSystemPolicyDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFileSystemPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFileSystemPolicy, schemas.PutFileSystemPolicyRequest, schemas.FileSystemPolicyDescription), output: &PutFileSystemPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

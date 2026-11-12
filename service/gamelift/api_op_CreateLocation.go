@@ -56,7 +56,9 @@ func (v *CreateLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocationName != nil {
 		s.WriteString(schemas.CreateLocationInput_LocationName, *v.LocationName)
 	}
-	serializeTagList(s, schemas.CreateLocationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLocationInput_Tags, v.Tags)
+	}
 }
 
 type CreateLocationOutput struct {

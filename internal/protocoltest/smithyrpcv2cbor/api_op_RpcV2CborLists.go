@@ -65,16 +65,36 @@ func (v *RpcV2CborListsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RpcV2CborListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlobList(s, schemas.RpcV2CborListInputOutput_blobList, v.BlobList)
-	serializeBooleanList(s, schemas.RpcV2CborListInputOutput_booleanList, v.BooleanList)
-	serializeFooEnumList(s, schemas.RpcV2CborListInputOutput_enumList, v.EnumList)
-	serializeIntegerEnumList(s, schemas.RpcV2CborListInputOutput_intEnumList, v.IntEnumList)
-	serializeIntegerList(s, schemas.RpcV2CborListInputOutput_integerList, v.IntegerList)
-	serializeNestedStringList(s, schemas.RpcV2CborListInputOutput_nestedStringList, v.NestedStringList)
-	serializeStringList(s, schemas.RpcV2CborListInputOutput_stringList, v.StringList)
-	serializeStringSet(s, schemas.RpcV2CborListInputOutput_stringSet, v.StringSet)
-	serializeStructureList(s, schemas.RpcV2CborListInputOutput_structureList, v.StructureList)
-	serializeTimestampList(s, schemas.RpcV2CborListInputOutput_timestampList, v.TimestampList)
+	if v.BlobList != nil {
+		serializeBlobList(s, schemas.RpcV2CborListInputOutput_blobList, v.BlobList)
+	}
+	if v.BooleanList != nil {
+		serializeBooleanList(s, schemas.RpcV2CborListInputOutput_booleanList, v.BooleanList)
+	}
+	if v.EnumList != nil {
+		serializeFooEnumList(s, schemas.RpcV2CborListInputOutput_enumList, v.EnumList)
+	}
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.RpcV2CborListInputOutput_intEnumList, v.IntEnumList)
+	}
+	if v.IntegerList != nil {
+		serializeIntegerList(s, schemas.RpcV2CborListInputOutput_integerList, v.IntegerList)
+	}
+	if v.NestedStringList != nil {
+		serializeNestedStringList(s, schemas.RpcV2CborListInputOutput_nestedStringList, v.NestedStringList)
+	}
+	if v.StringList != nil {
+		serializeStringList(s, schemas.RpcV2CborListInputOutput_stringList, v.StringList)
+	}
+	if v.StringSet != nil {
+		serializeStringSet(s, schemas.RpcV2CborListInputOutput_stringSet, v.StringSet)
+	}
+	if v.StructureList != nil {
+		serializeStructureList(s, schemas.RpcV2CborListInputOutput_structureList, v.StructureList)
+	}
+	if v.TimestampList != nil {
+		serializeTimestampList(s, schemas.RpcV2CborListInputOutput_timestampList, v.TimestampList)
+	}
 }
 func (v *RpcV2CborListsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RpcV2CborListInputOutput, func(s *smithy.Schema) error {
@@ -139,16 +159,36 @@ func (v *RpcV2CborListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RpcV2CborListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlobList(s, schemas.RpcV2CborListInputOutput_blobList, v.BlobList)
-	serializeBooleanList(s, schemas.RpcV2CborListInputOutput_booleanList, v.BooleanList)
-	serializeFooEnumList(s, schemas.RpcV2CborListInputOutput_enumList, v.EnumList)
-	serializeIntegerEnumList(s, schemas.RpcV2CborListInputOutput_intEnumList, v.IntEnumList)
-	serializeIntegerList(s, schemas.RpcV2CborListInputOutput_integerList, v.IntegerList)
-	serializeNestedStringList(s, schemas.RpcV2CborListInputOutput_nestedStringList, v.NestedStringList)
-	serializeStringList(s, schemas.RpcV2CborListInputOutput_stringList, v.StringList)
-	serializeStringSet(s, schemas.RpcV2CborListInputOutput_stringSet, v.StringSet)
-	serializeStructureList(s, schemas.RpcV2CborListInputOutput_structureList, v.StructureList)
-	serializeTimestampList(s, schemas.RpcV2CborListInputOutput_timestampList, v.TimestampList)
+	if v.BlobList != nil {
+		serializeBlobList(s, schemas.RpcV2CborListInputOutput_blobList, v.BlobList)
+	}
+	if v.BooleanList != nil {
+		serializeBooleanList(s, schemas.RpcV2CborListInputOutput_booleanList, v.BooleanList)
+	}
+	if v.EnumList != nil {
+		serializeFooEnumList(s, schemas.RpcV2CborListInputOutput_enumList, v.EnumList)
+	}
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.RpcV2CborListInputOutput_intEnumList, v.IntEnumList)
+	}
+	if v.IntegerList != nil {
+		serializeIntegerList(s, schemas.RpcV2CborListInputOutput_integerList, v.IntegerList)
+	}
+	if v.NestedStringList != nil {
+		serializeNestedStringList(s, schemas.RpcV2CborListInputOutput_nestedStringList, v.NestedStringList)
+	}
+	if v.StringList != nil {
+		serializeStringList(s, schemas.RpcV2CborListInputOutput_stringList, v.StringList)
+	}
+	if v.StringSet != nil {
+		serializeStringSet(s, schemas.RpcV2CborListInputOutput_stringSet, v.StringSet)
+	}
+	if v.StructureList != nil {
+		serializeStructureList(s, schemas.RpcV2CborListInputOutput_structureList, v.StructureList)
+	}
+	if v.TimestampList != nil {
+		serializeTimestampList(s, schemas.RpcV2CborListInputOutput_timestampList, v.TimestampList)
+	}
 }
 func (v *RpcV2CborListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RpcV2CborListInputOutput, func(s *smithy.Schema) error {

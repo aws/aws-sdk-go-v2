@@ -113,7 +113,9 @@ func (v *AssociateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Password != nil {
 		s.WriteString(schemas.AssociateFileSystemInput_Password, *v.Password)
 	}
-	serializeTags(s, schemas.AssociateFileSystemInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AssociateFileSystemInput_Tags, v.Tags)
+	}
 	if v.UserName != nil {
 		s.WriteString(schemas.AssociateFileSystemInput_UserName, *v.UserName)
 	}

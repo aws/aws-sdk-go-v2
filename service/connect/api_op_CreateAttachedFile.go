@@ -104,7 +104,9 @@ func (v *CreateAttachedFileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateAttachedFileRequest_InstanceId, *v.InstanceId)
 	}
-	serializeTagMap(s, schemas.CreateAttachedFileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAttachedFileRequest_Tags, v.Tags)
+	}
 }
 
 // Response from CreateAttachedFile API.

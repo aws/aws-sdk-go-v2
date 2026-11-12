@@ -113,7 +113,9 @@ func (v *ListAlgorithmsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAlgorithmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlgorithmSummaryList(s, schemas.ListAlgorithmsOutput_AlgorithmSummaryList, v.AlgorithmSummaryList)
+	if v.AlgorithmSummaryList != nil {
+		serializeAlgorithmSummaryList(s, schemas.ListAlgorithmsOutput_AlgorithmSummaryList, v.AlgorithmSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAlgorithmsOutput_NextToken, *v.NextToken)
 	}

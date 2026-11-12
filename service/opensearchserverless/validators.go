@@ -70,6 +70,26 @@ func (m *validateOpBatchGetVpcEndpoint) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelIngestionJob struct {
+}
+
+func (*validateOpCancelIngestionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelIngestionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelIngestionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelIngestionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAccessPolicy struct {
 }
 
@@ -145,6 +165,46 @@ func (m *validateOpCreateIndex) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateIngestionJob struct {
+}
+
+func (*validateOpCreateIngestionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIngestionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIngestionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIngestionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateIngestionStream struct {
+}
+
+func (*validateOpCreateIngestionStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIngestionStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIngestionStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIngestionStreamInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +370,26 @@ func (m *validateOpDeleteIndex) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIngestionStream struct {
+}
+
+func (*validateOpDeleteIngestionStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIngestionStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIngestionStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIngestionStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteLifecyclePolicy struct {
 }
 
@@ -430,6 +510,46 @@ func (m *validateOpGetIndex) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetIngestionJob struct {
+}
+
+func (*validateOpGetIngestionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIngestionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIngestionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIngestionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIngestionStream struct {
+}
+
+func (*validateOpGetIngestionStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIngestionStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIngestionStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIngestionStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSecurityConfig struct {
 }
 
@@ -485,6 +605,46 @@ func (m *validateOpListAccessPolicies) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAccessPoliciesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIngestionJobs struct {
+}
+
+func (*validateOpListIngestionJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIngestionJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIngestionJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIngestionJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIngestionStreams struct {
+}
+
+func (*validateOpListIngestionStreams) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIngestionStreams) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIngestionStreamsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIngestionStreamsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -782,6 +942,10 @@ func addOpBatchGetVpcEndpointValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpBatchGetVpcEndpoint{}, middleware.After)
 }
 
+func addOpCancelIngestionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelIngestionJob{}, middleware.After)
+}
+
 func addOpCreateAccessPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessPolicy{}, middleware.After)
 }
@@ -796,6 +960,14 @@ func addOpCreateCollectionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIndex{}, middleware.After)
+}
+
+func addOpCreateIngestionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIngestionJob{}, middleware.After)
+}
+
+func addOpCreateIngestionStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIngestionStream{}, middleware.After)
 }
 
 func addOpCreateLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -830,6 +1002,10 @@ func addOpDeleteIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIndex{}, middleware.After)
 }
 
+func addOpDeleteIngestionStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIngestionStream{}, middleware.After)
+}
+
 func addOpDeleteLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLifecyclePolicy{}, middleware.After)
 }
@@ -854,6 +1030,14 @@ func addOpGetIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIndex{}, middleware.After)
 }
 
+func addOpGetIngestionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIngestionJob{}, middleware.After)
+}
+
+func addOpGetIngestionStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIngestionStream{}, middleware.After)
+}
+
 func addOpGetSecurityConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSecurityConfig{}, middleware.After)
 }
@@ -864,6 +1048,14 @@ func addOpGetSecurityPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAccessPoliciesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPolicies{}, middleware.After)
+}
+
+func addOpListIngestionJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIngestionJobs{}, middleware.After)
+}
+
+func addOpListIngestionStreamsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIngestionStreams{}, middleware.After)
 }
 
 func addOpListLifecyclePoliciesValidationMiddleware(stack *middleware.Stack) error {
@@ -929,6 +1121,60 @@ func validateCreateIamIdentityCenterConfigOptions(v *types.CreateIamIdentityCent
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIamIdentityCenterConfigOptions"}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngestionJobSource(v *types.IngestionJobSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestionJobSource"}
+	if v.S3 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngestionStreamS3Source(v *types.IngestionStreamS3Source) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestionStreamS3Source"}
+	if v.SqsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SqsArn"))
+	}
+	if v.Buckets != nil {
+		if err := validateStreamBucketConfigs(v.Buckets); err != nil {
+			invalidParams.AddNested("Buckets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngestionStreamSource(v *types.IngestionStreamSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestionStreamSource"}
+	if v.S3 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3"))
+	} else if v.S3 != nil {
+		if err := validateIngestionStreamS3Source(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1014,6 +1260,38 @@ func validateSamlConfigOptions(v *types.SamlConfigOptions) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SamlConfigOptions"}
 	if v.Metadata == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamBucketConfig(v *types.StreamBucketConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamBucketConfig"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamBucketConfigs(v []types.StreamBucketConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamBucketConfigs"}
+	for i := range v {
+		if err := validateStreamBucketConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1125,6 +1403,24 @@ func validateOpBatchGetVpcEndpointInput(v *BatchGetVpcEndpointInput) error {
 	}
 }
 
+func validateOpCancelIngestionJobInput(v *CancelIngestionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelIngestionJobInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.IngestionJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestionJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAccessPolicyInput(v *CreateAccessPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1204,6 +1500,75 @@ func validateOpCreateIndexInput(v *CreateIndexInput) error {
 	}
 	if v.IndexName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateIngestionJobInput(v *CreateIngestionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIngestionJobInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.IngestionJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestionJobName"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateIngestionJobSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateIngestionStreamInput(v *CreateIngestionStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIngestionStreamInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.IngestionStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestionStreamName"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateIngestionStreamSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1369,6 +1734,24 @@ func validateOpDeleteIndexInput(v *DeleteIndexInput) error {
 	}
 }
 
+func validateOpDeleteIngestionStreamInput(v *DeleteIngestionStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIngestionStreamInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.IngestionStreamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestionStreamId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteLifecyclePolicyInput(v *DeleteLifecyclePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1471,6 +1854,42 @@ func validateOpGetIndexInput(v *GetIndexInput) error {
 	}
 }
 
+func validateOpGetIngestionJobInput(v *GetIngestionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIngestionJobInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.IngestionJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestionJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIngestionStreamInput(v *GetIngestionStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIngestionStreamInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.IngestionStreamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestionStreamId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSecurityConfigInput(v *GetSecurityConfigInput) error {
 	if v == nil {
 		return nil
@@ -1511,6 +1930,36 @@ func validateOpListAccessPoliciesInput(v *ListAccessPoliciesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccessPoliciesInput"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIngestionJobsInput(v *ListIngestionJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIngestionJobsInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIngestionStreamsInput(v *ListIngestionStreamsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIngestionStreamsInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

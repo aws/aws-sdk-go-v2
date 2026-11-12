@@ -4,7 +4,10 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +51,29 @@ type ScanProvisionedProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScanProvisionedProductsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanProvisionedProductsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanProvisionedProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ScanProvisionedProductsInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.AccessLevelFilter != nil {
+		s.WriteStruct(schemas.ScanProvisionedProductsInput_AccessLevelFilter)
+		v.AccessLevelFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ScanProvisionedProductsInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ScanProvisionedProductsInput_PageToken, *v.PageToken)
+	}
+}
+
 type ScanProvisionedProductsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -63,13 +89,37 @@ type ScanProvisionedProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScanProvisionedProductsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanProvisionedProductsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanProvisionedProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ScanProvisionedProductsOutput_NextPageToken, *v.NextPageToken)
+	}
+	if v.ProvisionedProducts != nil {
+		serializeProvisionedProductDetails(s, schemas.ScanProvisionedProductsOutput_ProvisionedProducts, v.ProvisionedProducts)
+	}
+}
+func (v *ScanProvisionedProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanProvisionedProductsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanProvisionedProductsOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ScanProvisionedProductsOutput_NextPageToken, v.NextPageToken)
+		case schemas.ScanProvisionedProductsOutput_ProvisionedProducts:
+			return deserializeProvisionedProductDetails(d, schemas.ScanProvisionedProductsOutput_ProvisionedProducts, &v.ProvisionedProducts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationScanProvisionedProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpScanProvisionedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ScanProvisionedProducts, schemas.ScanProvisionedProductsInput, schemas.ScanProvisionedProductsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpScanProvisionedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ScanProvisionedProducts, schemas.ScanProvisionedProductsInput, schemas.ScanProvisionedProductsOutput), output: &ScanProvisionedProductsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -80,6 +130,9 @@ func (c *Client) addOperationScanProvisionedProductsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -102,3 +155,94 @@ func (c *Client) addOperationScanProvisionedProductsMiddlewares(stack *middlewar
 	}
 	return nil
 }
+
+// ScanProvisionedProductsPaginatorOptions is the paginator options for
+// ScanProvisionedProducts
+type ScanProvisionedProductsPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ScanProvisionedProductsPaginator is a paginator for ScanProvisionedProducts
+type ScanProvisionedProductsPaginator struct {
+	options   ScanProvisionedProductsPaginatorOptions
+	client    ScanProvisionedProductsAPIClient
+	params    *ScanProvisionedProductsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewScanProvisionedProductsPaginator returns a new
+// ScanProvisionedProductsPaginator
+func NewScanProvisionedProductsPaginator(client ScanProvisionedProductsAPIClient, params *ScanProvisionedProductsInput, optFns ...func(*ScanProvisionedProductsPaginatorOptions)) *ScanProvisionedProductsPaginator {
+	if params == nil {
+		params = &ScanProvisionedProductsInput{}
+	}
+
+	options := ScanProvisionedProductsPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ScanProvisionedProductsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.PageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ScanProvisionedProductsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ScanProvisionedProducts page.
+func (p *ScanProvisionedProductsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ScanProvisionedProductsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ScanProvisionedProducts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ScanProvisionedProductsAPIClient is a client that implements the
+// ScanProvisionedProducts operation.
+type ScanProvisionedProductsAPIClient interface {
+	ScanProvisionedProducts(context.Context, *ScanProvisionedProductsInput, ...func(*Options)) (*ScanProvisionedProductsOutput, error)
+}
+
+var _ ScanProvisionedProductsAPIClient = (*Client)(nil)

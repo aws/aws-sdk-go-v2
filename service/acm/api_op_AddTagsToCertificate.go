@@ -79,7 +79,9 @@ func (v *AddTagsToCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateArn != nil {
 		s.WriteString(schemas.AddTagsToCertificateRequest_CertificateArn, *v.CertificateArn)
 	}
-	serializeTagList(s, schemas.AddTagsToCertificateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AddTagsToCertificateRequest_Tags, v.Tags)
+	}
 }
 func (in *AddTagsToCertificateInput) bindEndpointParams(p *EndpointParameters) {
 

@@ -93,7 +93,9 @@ func (v *ListRoutingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoutingRulesResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfRoutingRule(s, schemas.ListRoutingRulesResponse_RoutingRules, v.RoutingRules)
+	if v.RoutingRules != nil {
+		serialize__listOfRoutingRule(s, schemas.ListRoutingRulesResponse_RoutingRules, v.RoutingRules)
+	}
 }
 func (v *ListRoutingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoutingRulesResponse, func(s *smithy.Schema) error {

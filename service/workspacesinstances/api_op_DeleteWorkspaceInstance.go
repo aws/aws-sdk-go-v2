@@ -4,6 +4,8 @@ package workspacesinstances
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteWorkspaceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceInstanceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceInstanceRequest_WorkspaceInstanceId, *v.WorkspaceInstanceId)
+	}
+}
+
 // Confirms the successful deletion of the specified WorkSpace Instance.
 type DeleteWorkspaceInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -44,13 +58,26 @@ type DeleteWorkspaceInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWorkspaceInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteWorkspaceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceInstance, schemas.DeleteWorkspaceInstanceRequest, schemas.DeleteWorkspaceInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteWorkspaceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceInstance, schemas.DeleteWorkspaceInstanceRequest, schemas.DeleteWorkspaceInstanceResponse), output: &DeleteWorkspaceInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

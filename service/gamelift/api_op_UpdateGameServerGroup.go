@@ -125,7 +125,9 @@ func (v *UpdateGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.GameServerProtectionPolicy != "" {
 		s.WriteString(schemas.UpdateGameServerGroupInput_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
 	}
-	serializeInstanceDefinitions(s, schemas.UpdateGameServerGroupInput_InstanceDefinitions, v.InstanceDefinitions)
+	if v.InstanceDefinitions != nil {
+		serializeInstanceDefinitions(s, schemas.UpdateGameServerGroupInput_InstanceDefinitions, v.InstanceDefinitions)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateGameServerGroupInput_RoleArn, *v.RoleArn)
 	}

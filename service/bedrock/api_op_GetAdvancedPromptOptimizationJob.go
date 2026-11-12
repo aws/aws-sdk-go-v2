@@ -142,7 +142,9 @@ func (v *GetAdvancedPromptOptimizationJobOutput) SerializeMembers(s smithy.Shape
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.GetAdvancedPromptOptimizationJobResponse_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeModelConfigurations(s, schemas.GetAdvancedPromptOptimizationJobResponse_modelConfigurations, v.ModelConfigurations)
+	if v.ModelConfigurations != nil {
+		serializeModelConfigurations(s, schemas.GetAdvancedPromptOptimizationJobResponse_modelConfigurations, v.ModelConfigurations)
+	}
 	if v.OutputConfig != nil {
 		s.WriteStruct(schemas.GetAdvancedPromptOptimizationJobResponse_outputConfig)
 		v.OutputConfig.SerializeMembers(s)

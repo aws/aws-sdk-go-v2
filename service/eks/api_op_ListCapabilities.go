@@ -92,7 +92,9 @@ func (v *ListCapabilitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCapabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilitySummaryList(s, schemas.ListCapabilitiesResponse_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeCapabilitySummaryList(s, schemas.ListCapabilitiesResponse_capabilities, v.Capabilities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCapabilitiesResponse_nextToken, *v.NextToken)
 	}

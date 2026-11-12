@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,27 @@ type CancelPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelPipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelPipelineExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.CancelPipelineExecutionRequest_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.CancelPipelineExecutionRequest_pipelineName, *v.PipelineName)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.CancelPipelineExecutionRequest_reason, *v.Reason)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CancelPipelineExecutionRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for CancelPipelineExecution operation.
 type CancelPipelineExecutionOutput struct {
 
@@ -71,13 +94,36 @@ type CancelPipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelPipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelPipelineExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelPipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.CancelPipelineExecutionResponse_state, string(v.State))
+	}
+}
+func (v *CancelPipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelPipelineExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelPipelineExecutionResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.CancelPipelineExecutionResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.PipelineExecutionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPipelineExecution, schemas.CancelPipelineExecutionRequest, schemas.CancelPipelineExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPipelineExecution, schemas.CancelPipelineExecutionRequest, schemas.CancelPipelineExecutionResponse), output: &CancelPipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

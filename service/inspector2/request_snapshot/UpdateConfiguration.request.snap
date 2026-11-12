@@ -2,4 +2,4 @@ POST /configuration/update
 
 Content-Type: application/json
 
-{"accountId":"__AccountId__","ec2Configuration":{"activateVMScanner":true,"scanMode":"EC2_SSM_AGENT_BASED"},"ecrConfiguration":{"pullDateRescanDuration":"DAYS_14","pullDateRescanMode":"LAST_PULL_DATE","rescanDuration":"LIFETIME"},"updateConfigurationInheritance":{"ec2Configuration":"INHERIT_FROM_ADMIN","ecrConfiguration":"INHERIT_FROM_ADMIN"}}
+{"accountId":"__AccountId__","amiConfiguration":{"createdWithin":"DAYS_180","lastLaunchedWithin":"DAYS_180","scanModeConfiguration":{"excludeBackupDlmAmis":true,"excludeCopiedAmis":true,"scanMode":"SCAN_ALL","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}},"ec2Configuration":{"activateVMScanner":true,"scanMode":"EC2_SSM_AGENT_BASED"},"ecrConfiguration":{"pullDateRescanDuration":"DAYS_14","pullDateRescanMode":"LAST_PULL_DATE","rescanDuration":"LIFETIME"},"updateConfigurationInheritance":{"amiConfiguration":"INHERIT_FROM_ADMIN","ec2Configuration":"INHERIT_FROM_ADMIN","ecrConfiguration":"INHERIT_FROM_ADMIN"}}

@@ -79,7 +79,9 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsoleAccess != nil {
 		s.WriteBool(schemas.CreateUserRequest_ConsoleAccess, *v.ConsoleAccess)
 	}
-	serialize__listOf__string(s, schemas.CreateUserRequest_Groups, v.Groups)
+	if v.Groups != nil {
+		serialize__listOf__string(s, schemas.CreateUserRequest_Groups, v.Groups)
+	}
 	if v.Password != nil {
 		s.WriteString(schemas.CreateUserRequest_Password, *v.Password)
 	}

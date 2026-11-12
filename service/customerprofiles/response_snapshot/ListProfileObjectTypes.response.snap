@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"CreatedAt":946684800,"Description":"__Description__","LastUpdatedAt":946684800,"MaxAvailableProfileObjectCount":1,"MaxProfileObjectCount":1,"ObjectTypeName":"__ObjectTypeName__","SourcePriority":1,"Tags":{"key0":"__Value__"}},{"CreatedAt":946684800,"Description":"__Description__","LastUpdatedAt":946684800,"MaxAvailableProfileObjectCount":1,"MaxProfileObjectCount":1,"ObjectTypeName":"__ObjectTypeName__","SourcePriority":1,"Tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

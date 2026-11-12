@@ -97,7 +97,9 @@ func (v *ListDashboardVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDashboardVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashboardVersionSummaryList(s, schemas.ListDashboardVersionsResponse_DashboardVersionSummaryList, v.DashboardVersionSummaryList)
+	if v.DashboardVersionSummaryList != nil {
+		serializeDashboardVersionSummaryList(s, schemas.ListDashboardVersionsResponse_DashboardVersionSummaryList, v.DashboardVersionSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDashboardVersionsResponse_NextToken, *v.NextToken)
 	}

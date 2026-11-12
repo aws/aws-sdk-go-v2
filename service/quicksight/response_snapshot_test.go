@@ -11036,6 +11036,19 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 				ClientSecret: ptr.String("__ClientSecret__"),
 				Username:     ptr.String("__Username__"),
 			},
+			ServiceAccountCredentials: &types.ServiceAccountCredentials{
+				AdminAccountEmail:        ptr.String("__AdminAccountEmail__"),
+				ServiceAccountPrivateKey: ptr.String("__ServiceAccountPrivateKey__"),
+				ClientEmail:              ptr.String("__ClientEmail__"),
+			},
+			SharePointClientCredentials: &types.SharePointClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
+			OneDriveClientCredentials: &types.OneDriveClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
 		},
 		Permissions: []types.ResourcePermission{
 			{
@@ -27548,6 +27561,32 @@ func TestCheckResponseSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeRefreshSchedule.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeResourcePermissions(t *testing.T) {
+	want := &DescribeResourcePermissionsOutput{
+		RoleType:               types.ServiceRoleType("QUICKSIGHT_MANAGED"),
+		CustomerManagedRoleArn: ptr.String("__CustomerManagedRoleArn__"),
+		RequestId:              ptr.String("__RequestId__"),
+		Status:                 200,
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeResourcePermissions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeResourcePermissions(context.Background(), &DescribeResourcePermissionsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeResourcePermissions.response", err)
 	}
 }
 
@@ -50115,6 +50154,19 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 				ClientSecret: ptr.String("__ClientSecret__"),
 				Username:     ptr.String("__Username__"),
 			},
+			ServiceAccountCredentials: &types.ServiceAccountCredentials{
+				AdminAccountEmail:        ptr.String("__AdminAccountEmail__"),
+				ServiceAccountPrivateKey: ptr.String("__ServiceAccountPrivateKey__"),
+				ClientEmail:              ptr.String("__ClientEmail__"),
+			},
+			SharePointClientCredentials: &types.SharePointClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
+			OneDriveClientCredentials: &types.OneDriveClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
 		},
 		VpcConnectionProperties: &types.VpcConnectionProperties{
 			VpcConnectionArn: ptr.String("__VpcConnectionArn__"),
@@ -50984,6 +51036,34 @@ func TestCheckResponseSnapshot_UpdateRefreshSchedule(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRefreshSchedule.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateResourcePermissions(t *testing.T) {
+	want := &UpdateResourcePermissionsOutput{
+		RoleType:               types.ServiceRoleType("QUICKSIGHT_MANAGED"),
+		CustomerManagedRoleArn: ptr.String("__CustomerManagedRoleArn__"),
+		RequestId:              ptr.String("__RequestId__"),
+		Status:                 200,
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateResourcePermissions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateResourcePermissions(context.Background(), &UpdateResourcePermissionsInput{
+		AwsAccountId:           ptr.String("__AwsAccountId__"),
+		RoleType:               types.ServiceRoleType("QUICKSIGHT_MANAGED"),
+		CustomerManagedRoleArn: ptr.String("__CustomerManagedRoleArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateResourcePermissions.response", err)
 	}
 }
 
@@ -59547,6 +59627,19 @@ func TestCheckResponseSnapshot_Error_CustomerManagedKeyUnavailableException(t *t
 				ClientId:     ptr.String("__ClientId__"),
 				ClientSecret: ptr.String("__ClientSecret__"),
 				Username:     ptr.String("__Username__"),
+			},
+			ServiceAccountCredentials: &types.ServiceAccountCredentials{
+				AdminAccountEmail:        ptr.String("__AdminAccountEmail__"),
+				ServiceAccountPrivateKey: ptr.String("__ServiceAccountPrivateKey__"),
+				ClientEmail:              ptr.String("__ClientEmail__"),
+			},
+			SharePointClientCredentials: &types.SharePointClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
+			OneDriveClientCredentials: &types.OneDriveClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
 			},
 		},
 		Permissions: []types.ResourcePermission{

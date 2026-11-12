@@ -117,7 +117,9 @@ func (v *GetImportedModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelArn != nil {
 		s.WriteString(schemas.GetImportedModelResponse_modelArn, *v.ModelArn)
 	}
-	serializeModelDataSource(s, schemas.GetImportedModelResponse_modelDataSource, v.ModelDataSource)
+	if v.ModelDataSource != nil {
+		serializeModelDataSource(s, schemas.GetImportedModelResponse_modelDataSource, v.ModelDataSource)
+	}
 	if v.ModelKmsKeyArn != nil {
 		s.WriteString(schemas.GetImportedModelResponse_modelKmsKeyArn, *v.ModelKmsKeyArn)
 	}

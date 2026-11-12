@@ -115,12 +115,18 @@ func (v *ExportLambdaFunctionRecommendationsInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ExportLambdaFunctionRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportLambdaFunctionRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableLambdaFunctionFields(s, schemas.ExportLambdaFunctionRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportLambdaFunctionRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableLambdaFunctionFields(s, schemas.ExportLambdaFunctionRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportLambdaFunctionRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeLambdaFunctionRecommendationFilters(s, schemas.ExportLambdaFunctionRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeLambdaFunctionRecommendationFilters(s, schemas.ExportLambdaFunctionRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportLambdaFunctionRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

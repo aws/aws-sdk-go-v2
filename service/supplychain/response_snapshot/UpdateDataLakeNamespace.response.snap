@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"namespace":{"arn":"__Arn__","createdTime":946684800,"description":"__Description__","instanceId":"__InstanceId__","lastModifiedTime":946684800,"name":"__Name__"}}

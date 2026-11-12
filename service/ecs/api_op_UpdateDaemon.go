@@ -110,7 +110,9 @@ func (v *UpdateDaemonInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDaemonInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.UpdateDaemonRequest_capacityProviderArns, v.CapacityProviderArns)
+	if v.CapacityProviderArns != nil {
+		serializeStringList(s, schemas.UpdateDaemonRequest_capacityProviderArns, v.CapacityProviderArns)
+	}
 	if v.Critical != nil {
 		s.WriteBool(schemas.UpdateDaemonRequest_critical, *v.Critical)
 	}

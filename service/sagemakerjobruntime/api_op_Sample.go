@@ -4,6 +4,8 @@ package sagemakerjobruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerjobruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type SampleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SampleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SampleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SampleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.SampleRequest_Body, v.Body)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.SampleRequest_JobArn, *v.JobArn)
+	}
+	if v.TrajectoryId != nil {
+		s.WriteString(schemas.SampleRequest_TrajectoryId, *v.TrajectoryId)
+	}
+}
+
 type SampleOutput struct {
 
 	// The raw inference response body from the model.
@@ -63,13 +83,37 @@ type SampleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SampleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SampleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SampleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.SampleResponse_Body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SampleResponse_ContentType, *v.ContentType)
+	}
+}
+func (v *SampleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SampleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SampleResponse_Body:
+			return d.ReadBlob(schemas.SampleResponse_Body, &v.Body)
+		case schemas.SampleResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.SampleResponse_ContentType, v.ContentType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSampleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSample{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Sample, schemas.SampleRequest, schemas.SampleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSample{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Sample, schemas.SampleRequest, schemas.SampleResponse), output: &SampleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

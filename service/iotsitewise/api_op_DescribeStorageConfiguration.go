@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -29,6 +31,15 @@ func (c *Client) DescribeStorageConfiguration(ctx context.Context, params *Descr
 
 type DescribeStorageConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeStorageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStorageConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStorageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeStorageConfigurationOutput struct {
@@ -96,13 +107,100 @@ type DescribeStorageConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStorageConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStorageConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStorageConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationStatus != nil {
+		s.WriteStruct(schemas.DescribeStorageConfigurationResponse_configurationStatus)
+		v.ConfigurationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisallowIngestNullNaN != nil {
+		s.WriteBool(schemas.DescribeStorageConfigurationResponse_disallowIngestNullNaN, *v.DisallowIngestNullNaN)
+	}
+	if v.DisassociatedDataStorage != "" {
+		s.WriteString(schemas.DescribeStorageConfigurationResponse_disassociatedDataStorage, string(v.DisassociatedDataStorage))
+	}
+	if v.LastUpdateDate != nil {
+		s.WriteTime(schemas.DescribeStorageConfigurationResponse_lastUpdateDate, *v.LastUpdateDate)
+	}
+	if v.MultiLayerStorage != nil {
+		s.WriteStruct(schemas.DescribeStorageConfigurationResponse_multiLayerStorage)
+		v.MultiLayerStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.DescribeStorageConfigurationResponse_retentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.DescribeStorageConfigurationResponse_storageType, string(v.StorageType))
+	}
+	if v.WarmTier != "" {
+		s.WriteString(schemas.DescribeStorageConfigurationResponse_warmTier, string(v.WarmTier))
+	}
+	if v.WarmTierRetentionPeriod != nil {
+		s.WriteStruct(schemas.DescribeStorageConfigurationResponse_warmTierRetentionPeriod)
+		v.WarmTierRetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStorageConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStorageConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStorageConfigurationResponse_configurationStatus:
+			v.ConfigurationStatus = &types.ConfigurationStatus{}
+			return v.ConfigurationStatus.Deserialize(d)
+		case schemas.DescribeStorageConfigurationResponse_disallowIngestNullNaN:
+			v.DisallowIngestNullNaN = new(bool)
+			return d.ReadBool(schemas.DescribeStorageConfigurationResponse_disallowIngestNullNaN, v.DisallowIngestNullNaN)
+		case schemas.DescribeStorageConfigurationResponse_disassociatedDataStorage:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStorageConfigurationResponse_disassociatedDataStorage, &ev); err != nil {
+				return err
+			}
+			v.DisassociatedDataStorage = types.DisassociatedDataStorageState(ev)
+			return nil
+		case schemas.DescribeStorageConfigurationResponse_lastUpdateDate:
+			v.LastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeStorageConfigurationResponse_lastUpdateDate, v.LastUpdateDate)
+		case schemas.DescribeStorageConfigurationResponse_multiLayerStorage:
+			v.MultiLayerStorage = &types.MultiLayerStorage{}
+			return v.MultiLayerStorage.Deserialize(d)
+		case schemas.DescribeStorageConfigurationResponse_retentionPeriod:
+			v.RetentionPeriod = &types.RetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.DescribeStorageConfigurationResponse_storageType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStorageConfigurationResponse_storageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = types.StorageType(ev)
+			return nil
+		case schemas.DescribeStorageConfigurationResponse_warmTier:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStorageConfigurationResponse_warmTier, &ev); err != nil {
+				return err
+			}
+			v.WarmTier = types.WarmTierState(ev)
+			return nil
+		case schemas.DescribeStorageConfigurationResponse_warmTierRetentionPeriod:
+			v.WarmTierRetentionPeriod = &types.WarmTierRetentionPeriod{}
+			return v.WarmTierRetentionPeriod.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorageConfiguration, schemas.DescribeStorageConfigurationRequest, schemas.DescribeStorageConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorageConfiguration, schemas.DescribeStorageConfigurationRequest, schemas.DescribeStorageConfigurationResponse), output: &DescribeStorageConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

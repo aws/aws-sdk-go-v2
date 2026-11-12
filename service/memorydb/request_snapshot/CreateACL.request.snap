@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/CreateACL
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.CreateACL
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ACLName":"__ACLName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserNames":["__Member__","__Member__"]}
+¿gACLNamek__ACLName__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿiUserNamesŸj__Member__j__Member__ÿÿ

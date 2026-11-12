@@ -70,8 +70,12 @@ func (v *CreateIpGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupName != nil {
 		s.WriteString(schemas.CreateIpGroupRequest_GroupName, *v.GroupName)
 	}
-	serializeTagList(s, schemas.CreateIpGroupRequest_Tags, v.Tags)
-	serializeIpRuleList(s, schemas.CreateIpGroupRequest_UserRules, v.UserRules)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIpGroupRequest_Tags, v.Tags)
+	}
+	if v.UserRules != nil {
+		serializeIpRuleList(s, schemas.CreateIpGroupRequest_UserRules, v.UserRules)
+	}
 }
 
 type CreateIpGroupOutput struct {
@@ -121,6 +125,9 @@ func (c *Client) addOperationCreateIpGroupMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

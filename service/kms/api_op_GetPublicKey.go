@@ -134,7 +134,9 @@ func (v *GetPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrantTokenList(s, schemas.GetPublicKeyRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.GetPublicKeyRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.GetPublicKeyRequest_KeyId, *v.KeyId)
 	}
@@ -150,6 +152,11 @@ type GetPublicKeyOutput struct {
 	//
 	// Deprecated: This field has been deprecated. Instead, use the KeySpec field.
 	CustomerMasterKeySpec types.CustomerMasterKeySpec
+
+	// The key encapsulation algorithm used to establish a shared secret. This field
+	// is present only when the KMS key has a KeyUsage value of ENCAPSULATE_DECAPSULATE
+	// .
+	EncapsulationAlgorithms []types.EncapsulationAlgorithmSpec
 
 	// The encryption algorithms that KMS supports for this key.
 	//
@@ -211,8 +218,15 @@ func (v *GetPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerMasterKeySpec != "" {
 		s.WriteString(schemas.GetPublicKeyResponse_CustomerMasterKeySpec, string(v.CustomerMasterKeySpec))
 	}
-	serializeEncryptionAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncryptionAlgorithms, v.EncryptionAlgorithms)
-	serializeKeyAgreementAlgorithmSpecList(s, schemas.GetPublicKeyResponse_KeyAgreementAlgorithms, v.KeyAgreementAlgorithms)
+	if v.EncapsulationAlgorithms != nil {
+		serializeEncapsulationAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncapsulationAlgorithms, v.EncapsulationAlgorithms)
+	}
+	if v.EncryptionAlgorithms != nil {
+		serializeEncryptionAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncryptionAlgorithms, v.EncryptionAlgorithms)
+	}
+	if v.KeyAgreementAlgorithms != nil {
+		serializeKeyAgreementAlgorithmSpecList(s, schemas.GetPublicKeyResponse_KeyAgreementAlgorithms, v.KeyAgreementAlgorithms)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.GetPublicKeyResponse_KeyId, *v.KeyId)
 	}
@@ -225,7 +239,9 @@ func (v *GetPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PublicKey != nil {
 		s.WriteBlob(schemas.GetPublicKeyResponse_PublicKey, v.PublicKey)
 	}
-	serializeSigningAlgorithmSpecList(s, schemas.GetPublicKeyResponse_SigningAlgorithms, v.SigningAlgorithms)
+	if v.SigningAlgorithms != nil {
+		serializeSigningAlgorithmSpecList(s, schemas.GetPublicKeyResponse_SigningAlgorithms, v.SigningAlgorithms)
+	}
 }
 func (v *GetPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPublicKeyResponse, func(s *smithy.Schema) error {
@@ -237,6 +253,8 @@ func (v *GetPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CustomerMasterKeySpec = types.CustomerMasterKeySpec(ev)
 			return nil
+		case schemas.GetPublicKeyResponse_EncapsulationAlgorithms:
+			return deserializeEncapsulationAlgorithmSpecList(d, schemas.GetPublicKeyResponse_EncapsulationAlgorithms, &v.EncapsulationAlgorithms)
 		case schemas.GetPublicKeyResponse_EncryptionAlgorithms:
 			return deserializeEncryptionAlgorithmSpecList(d, schemas.GetPublicKeyResponse_EncryptionAlgorithms, &v.EncryptionAlgorithms)
 		case schemas.GetPublicKeyResponse_KeyAgreementAlgorithms:

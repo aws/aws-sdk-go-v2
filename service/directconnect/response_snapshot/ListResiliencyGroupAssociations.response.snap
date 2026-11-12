@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.ListResiliencyGroupAssociations
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"items":[{"connectionArn":"__ConnectionArn__","resiliencyGroupId":"__ResiliencyGroupId__","state":"associating"},{"connectionArn":"__ConnectionArn__","resiliencyGroupId":"__ResiliencyGroupId__","state":"associating"}],"nextToken":"__NextToken__"}
+¿eitemsŸ¿mconnectionArnq__ConnectionArn__qresiliencyGroupIdu__ResiliencyGroupId__estatekassociatingÿ¿mconnectionArnq__ConnectionArn__qresiliencyGroupIdu__ResiliencyGroupId__estatekassociatingÿÿinextTokenm__NextToken__ÿ

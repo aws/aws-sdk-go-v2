@@ -697,6 +697,14 @@ func TestCheckRequestSnapshot_CreateImage(t *testing.T) {
 					"__Member__",
 				},
 			},
+			ImageScanningTypes: []types.ImageScanningType{
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+			},
+			ScanResultCondition: &types.ScanResultCondition{
+				MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+				FixAvailable:         ptr.Bool(true),
+			},
 		},
 		Workflows: []types.WorkflowConfiguration{
 			{
@@ -807,6 +815,14 @@ func TestCheckRequestSnapshot_CreateImagePipeline(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+			},
+			ImageScanningTypes: []types.ImageScanningType{
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+			},
+			ScanResultCondition: &types.ScanResultCondition{
+				MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+				FixAvailable:         ptr.Bool(true),
 			},
 		},
 		Workflows: []types.WorkflowConfiguration{
@@ -3541,6 +3557,14 @@ func TestCheckRequestSnapshot_UpdateImagePipeline(t *testing.T) {
 					"__Member__",
 				},
 			},
+			ImageScanningTypes: []types.ImageScanningType{
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+			},
+			ScanResultCondition: &types.ScanResultCondition{
+				MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+				FixAvailable:         ptr.Bool(true),
+			},
 		},
 		Workflows: []types.WorkflowConfiguration{
 			{
@@ -4303,6 +4327,14 @@ func TestUpdateRequestSnapshot_CreateImage(t *testing.T) {
 					"__Member__",
 				},
 			},
+			ImageScanningTypes: []types.ImageScanningType{
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+			},
+			ScanResultCondition: &types.ScanResultCondition{
+				MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+				FixAvailable:         ptr.Bool(true),
+			},
 		},
 		Workflows: []types.WorkflowConfiguration{
 			{
@@ -4413,6 +4445,14 @@ func TestUpdateRequestSnapshot_CreateImagePipeline(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+			},
+			ImageScanningTypes: []types.ImageScanningType{
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+			},
+			ScanResultCondition: &types.ScanResultCondition{
+				MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+				FixAvailable:         ptr.Bool(true),
 			},
 		},
 		Workflows: []types.WorkflowConfiguration{
@@ -7146,6 +7186,14 @@ func TestUpdateRequestSnapshot_UpdateImagePipeline(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+			},
+			ImageScanningTypes: []types.ImageScanningType{
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+				types.ImageScanningType("TEST_INSTANCE_CVE"),
+			},
+			ScanResultCondition: &types.ScanResultCondition{
+				MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+				FixAvailable:         ptr.Bool(true),
 			},
 		},
 		Workflows: []types.WorkflowConfiguration{

@@ -111,7 +111,9 @@ func (v *ExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExecuteStatementInput_NextToken, *v.NextToken)
 	}
-	serializePreparedStatementParameters(s, schemas.ExecuteStatementInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePreparedStatementParameters(s, schemas.ExecuteStatementInput_Parameters, v.Parameters)
+	}
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.ExecuteStatementInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
@@ -171,8 +173,12 @@ func (v *ExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConsumedCapacity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeItemList(s, schemas.ExecuteStatementOutput_Items, v.Items)
-	serializeKey(s, schemas.ExecuteStatementOutput_LastEvaluatedKey, v.LastEvaluatedKey)
+	if v.Items != nil {
+		serializeItemList(s, schemas.ExecuteStatementOutput_Items, v.Items)
+	}
+	if v.LastEvaluatedKey != nil {
+		serializeKey(s, schemas.ExecuteStatementOutput_LastEvaluatedKey, v.LastEvaluatedKey)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExecuteStatementOutput_NextToken, *v.NextToken)
 	}

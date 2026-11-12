@@ -15,6 +15,10 @@ import (
 // Generates a list of all model versions for a given model, including the model
 // version, model version ARN, and status. To list a subset of versions, use the
 // MaxModelVersion and MinModelVersion fields.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListModelVersions(ctx context.Context, params *ListModelVersionsInput, optFns ...func(*Options)) (*ListModelVersionsOutput, error) {
 	if params == nil {
 		params = &ListModelVersionsInput{}
@@ -133,7 +137,9 @@ func (v *ListModelVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelVersionSummaries(s, schemas.ListModelVersionsResponse_ModelVersionSummaries, v.ModelVersionSummaries)
+	if v.ModelVersionSummaries != nil {
+		serializeModelVersionSummaries(s, schemas.ListModelVersionsResponse_ModelVersionSummaries, v.ModelVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelVersionsResponse_NextToken, *v.NextToken)
 	}

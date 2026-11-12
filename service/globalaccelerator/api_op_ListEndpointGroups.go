@@ -85,7 +85,9 @@ func (v *ListEndpointGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEndpointGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointGroups(s, schemas.ListEndpointGroupsResponse_EndpointGroups, v.EndpointGroups)
+	if v.EndpointGroups != nil {
+		serializeEndpointGroups(s, schemas.ListEndpointGroupsResponse_EndpointGroups, v.EndpointGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEndpointGroupsResponse_NextToken, *v.NextToken)
 	}

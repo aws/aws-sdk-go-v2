@@ -120,7 +120,9 @@ func (v *PutConformancePackInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutConformancePackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConformancePackInputParameters(s, schemas.PutConformancePackRequest_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	if v.ConformancePackInputParameters != nil {
+		serializeConformancePackInputParameters(s, schemas.PutConformancePackRequest_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	}
 	if v.ConformancePackName != nil {
 		s.WriteString(schemas.PutConformancePackRequest_ConformancePackName, *v.ConformancePackName)
 	}
@@ -130,7 +132,9 @@ func (v *PutConformancePackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeliveryS3KeyPrefix != nil {
 		s.WriteString(schemas.PutConformancePackRequest_DeliveryS3KeyPrefix, *v.DeliveryS3KeyPrefix)
 	}
-	serializeTagsList(s, schemas.PutConformancePackRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutConformancePackRequest_Tags, v.Tags)
+	}
 	if v.TemplateBody != nil {
 		s.WriteString(schemas.PutConformancePackRequest_TemplateBody, *v.TemplateBody)
 	}

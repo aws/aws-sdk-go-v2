@@ -87,7 +87,9 @@ func (v *GetFreeTierUsageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFreeTierUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFreeTierUsages(s, schemas.GetFreeTierUsageResponse_freeTierUsages, v.FreeTierUsages)
+	if v.FreeTierUsages != nil {
+		serializeFreeTierUsages(s, schemas.GetFreeTierUsageResponse_freeTierUsages, v.FreeTierUsages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFreeTierUsageResponse_nextToken, *v.NextToken)
 	}

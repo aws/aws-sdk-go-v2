@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/AssociateTagOptionWithResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.AssociateTagOptionWithResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__","TagOptionId":"__TagOptionId__"}
+¿jResourceIdn__ResourceId__kTagOptionIdo__TagOptionId__ÿ

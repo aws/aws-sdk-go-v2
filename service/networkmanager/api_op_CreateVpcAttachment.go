@@ -47,6 +47,15 @@ type CreateVpcAttachmentInput struct {
 	// The client token associated with the request.
 	ClientToken *string
 
+	// The NAT rules for the VPC attachment, up to 50 rules.
+	NatGatewayRules []types.NatRuleRequest
+
+	// Specifies whether to enable NAT gateway support on the VPC attachment. To
+	// enable NAT gateway support, you must also specify at least one NAT rule. If you
+	// don't specify a value, NAT gateway support is disabled. Only the core network
+	// owner can configure NAT on an attachment.
+	NatGatewaySupport types.NatGatewaySupportValue
+
 	// Options for the VPC attachment.
 	Options *types.VpcOptions
 
@@ -73,6 +82,12 @@ func (v *CreateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.CreateVpcAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
 	}
+	if v.NatGatewayRules != nil {
+		serializeNatRuleRequestList(s, schemas.CreateVpcAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	}
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
+	}
 	if v.Options != nil {
 		s.WriteStruct(schemas.CreateVpcAttachmentRequest_Options)
 		v.Options.SerializeMembers(s)
@@ -81,8 +96,12 @@ func (v *CreateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateVpcAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}
-	serializeSubnetArnList(s, schemas.CreateVpcAttachmentRequest_SubnetArns, v.SubnetArns)
-	serializeTagList(s, schemas.CreateVpcAttachmentRequest_Tags, v.Tags)
+	if v.SubnetArns != nil {
+		serializeSubnetArnList(s, schemas.CreateVpcAttachmentRequest_SubnetArns, v.SubnetArns)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVpcAttachmentRequest_Tags, v.Tags)
+	}
 	if v.VpcArn != nil {
 		s.WriteString(schemas.CreateVpcAttachmentRequest_VpcArn, *v.VpcArn)
 	}

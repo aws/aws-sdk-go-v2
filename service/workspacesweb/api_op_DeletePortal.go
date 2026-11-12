@@ -4,6 +4,8 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalArn != nil {
+		s.WriteString(schemas.DeletePortalRequest_portalArn, *v.PortalArn)
+	}
+}
+
 type DeletePortalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortal, schemas.DeletePortalRequest, schemas.DeletePortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortal, schemas.DeletePortalRequest, schemas.DeletePortalResponse), output: &DeletePortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

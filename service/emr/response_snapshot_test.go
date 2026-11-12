@@ -1751,6 +1751,13 @@ func TestCheckResponseSnapshot_DescribeStep(t *testing.T) {
 			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
 			LogUri:           ptr.String("__LogUri__"),
 			EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			AdditionalInfo: &types.StepAdditionalInfo{
+				ResourceManagerApplicationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceManager: ptr.String("__ResourceManager__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeStep.response")
@@ -3560,6 +3567,13 @@ func TestCheckResponseSnapshot_ListSteps(t *testing.T) {
 				},
 				LogUri:           ptr.String("__LogUri__"),
 				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+				AdditionalInfo: &types.StepAdditionalInfo{
+					ResourceManagerApplicationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ResourceManager: ptr.String("__ResourceManager__"),
+				},
 			},
 			{
 				Id:   ptr.String("__Id__"),
@@ -3595,6 +3609,13 @@ func TestCheckResponseSnapshot_ListSteps(t *testing.T) {
 				},
 				LogUri:           ptr.String("__LogUri__"),
 				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+				AdditionalInfo: &types.StepAdditionalInfo{
+					ResourceManagerApplicationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ResourceManager: ptr.String("__ResourceManager__"),
+				},
 			},
 		},
 		Marker: ptr.String("__Marker__"),

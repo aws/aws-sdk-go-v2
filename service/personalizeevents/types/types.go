@@ -162,7 +162,9 @@ func (v *ActionInteraction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventType != nil {
 		s.WriteString(schemas.ActionInteraction_eventType, *v.EventType)
 	}
-	serializeActionImpression(s, schemas.ActionInteraction_impression, v.Impression)
+	if v.Impression != nil {
+		serializeActionImpression(s, schemas.ActionInteraction_impression, v.Impression)
+	}
 	if v.Properties != nil {
 		s.WriteString(schemas.ActionInteraction_properties, *v.Properties)
 	}
@@ -319,7 +321,9 @@ func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventValue != nil {
 		s.WriteFloat32(schemas.Event_eventValue, *v.EventValue)
 	}
-	serializeImpression(s, schemas.Event_impression, v.Impression)
+	if v.Impression != nil {
+		serializeImpression(s, schemas.Event_impression, v.Impression)
+	}
 	if v.ItemId != nil {
 		s.WriteString(schemas.Event_itemId, *v.ItemId)
 	}

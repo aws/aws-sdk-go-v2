@@ -77,7 +77,9 @@ func (v *CreateMeshInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Spec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateMeshInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMeshInput_tags, v.Tags)
+	}
 }
 func (v *CreateMeshInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMeshInput, func(s *smithy.Schema) error {

@@ -37,7 +37,9 @@ func (v *MalformedMapInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MalformedMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSimpleMap(s, schemas.MalformedMapInput_bodyMap, v.BodyMap)
+	if v.BodyMap != nil {
+		serializeSimpleMap(s, schemas.MalformedMapInput_bodyMap, v.BodyMap)
+	}
 }
 func (v *MalformedMapInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MalformedMapInput, func(s *smithy.Schema) error {

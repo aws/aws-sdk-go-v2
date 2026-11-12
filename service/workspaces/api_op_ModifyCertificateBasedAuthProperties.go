@@ -55,7 +55,9 @@ func (v *ModifyCertificateBasedAuthPropertiesInput) SerializeMembers(s smithy.Sh
 		v.CertificateBasedAuthProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDeletableCertificateBasedAuthPropertiesList(s, schemas.ModifyCertificateBasedAuthPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	if v.PropertiesToDelete != nil {
+		serializeDeletableCertificateBasedAuthPropertiesList(s, schemas.ModifyCertificateBasedAuthPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.ModifyCertificateBasedAuthPropertiesRequest_ResourceId, *v.ResourceId)
 	}
@@ -98,6 +100,9 @@ func (c *Client) addOperationModifyCertificateBasedAuthPropertiesMiddlewares(sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

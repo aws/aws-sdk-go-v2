@@ -94,7 +94,9 @@ func (v *CreateImportedImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSoftwareVersion != "" {
 		s.WriteString(schemas.CreateImportedImageRequest_AgentSoftwareVersion, string(v.AgentSoftwareVersion))
 	}
-	serializeAppCatalogConfig(s, schemas.CreateImportedImageRequest_AppCatalogConfig, v.AppCatalogConfig)
+	if v.AppCatalogConfig != nil {
+		serializeAppCatalogConfig(s, schemas.CreateImportedImageRequest_AppCatalogConfig, v.AppCatalogConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateImportedImageRequest_Description, *v.Description)
 	}
@@ -118,7 +120,9 @@ func (v *CreateImportedImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceAmiId != nil {
 		s.WriteString(schemas.CreateImportedImageRequest_SourceAmiId, *v.SourceAmiId)
 	}
-	serializeTags(s, schemas.CreateImportedImageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateImportedImageRequest_Tags, v.Tags)
+	}
 	if v.WorkspaceImageId != nil {
 		s.WriteString(schemas.CreateImportedImageRequest_WorkspaceImageId, *v.WorkspaceImageId)
 	}

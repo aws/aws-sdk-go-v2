@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Metadata":{"CreatedTimestamp":946684800,"CreatorId":"__CreatorId__","Id":"__Id__","Labels":["__Member__","__Member__"],"LatestVersionSize":1,"ModifiedTimestamp":946684800,"Name":"__Name__","ParentFolderId":"__ParentFolderId__","ResourceState":"ACTIVE","Signature":"__Signature__","Size":1}}

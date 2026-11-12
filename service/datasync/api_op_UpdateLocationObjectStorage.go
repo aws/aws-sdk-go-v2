@@ -62,6 +62,12 @@ type UpdateLocationObjectStorageInput struct {
 	// Management (IAM) role that provides access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
 
+	// Specifies the federated identity configuration that allows DataSync to access
+	// your object storage using an OpenID Connect (OIDC) token instead of a long-term
+	// access key and secret key. Provide either FederatedIdentity or the AccessKey /
+	// SecretKey credentials, but not both.
+	FederatedIdentity *types.ObjectStorageFederatedIdentityConfig
+
 	// Specifies the secret key (for example, a password) if credentials are required
 	// to authenticate with the object storage server.
 	//
@@ -125,7 +131,9 @@ func (v *UpdateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AccessKey != nil {
 		s.WriteString(schemas.UpdateLocationObjectStorageRequest_AccessKey, *v.AccessKey)
 	}
-	serializeAgentArnList(s, schemas.UpdateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.UpdateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	}
 	if v.CmkSecretConfig != nil {
 		s.WriteStruct(schemas.UpdateLocationObjectStorageRequest_CmkSecretConfig)
 		v.CmkSecretConfig.SerializeMembers(s)
@@ -134,6 +142,11 @@ func (v *UpdateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CustomSecretConfig != nil {
 		s.WriteStruct(schemas.UpdateLocationObjectStorageRequest_CustomSecretConfig)
 		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FederatedIdentity != nil {
+		s.WriteStruct(schemas.UpdateLocationObjectStorageRequest_FederatedIdentity)
+		v.FederatedIdentity.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.LocationArn != nil {
@@ -196,6 +209,9 @@ func (c *Client) addOperationUpdateLocationObjectStorageMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

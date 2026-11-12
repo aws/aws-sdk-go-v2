@@ -250,7 +250,9 @@ func (v *CallAnalyticsJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CallAnalyticsJobStatus != "" {
 		s.WriteString(schemas.CallAnalyticsJob_CallAnalyticsJobStatus, string(v.CallAnalyticsJobStatus))
 	}
-	serializeChannelDefinitions(s, schemas.CallAnalyticsJob_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeChannelDefinitions(s, schemas.CallAnalyticsJob_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.CompletionTime != nil {
 		s.WriteTime(schemas.CallAnalyticsJob_CompletionTime, *v.CompletionTime)
 	}
@@ -288,7 +290,9 @@ func (v *CallAnalyticsJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CallAnalyticsJob_StartTime, *v.StartTime)
 	}
-	serializeTagList(s, schemas.CallAnalyticsJob_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CallAnalyticsJob_Tags, v.Tags)
+	}
 	if v.Transcript != nil {
 		s.WriteStruct(schemas.CallAnalyticsJob_Transcript)
 		v.Transcript.SerializeMembers(s)
@@ -385,7 +389,9 @@ func (v *CallAnalyticsJobDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CallAnalyticsJobDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCallAnalyticsSkippedFeatureList(s, schemas.CallAnalyticsJobDetails_Skipped, v.Skipped)
+	if v.Skipped != nil {
+		serializeCallAnalyticsSkippedFeatureList(s, schemas.CallAnalyticsJobDetails_Skipped, v.Skipped)
+	}
 }
 func (v *CallAnalyticsJobDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CallAnalyticsJobDetails, func(s *smithy.Schema) error {
@@ -504,11 +510,15 @@ func (v *CallAnalyticsJobSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ContentRedaction.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLanguageIdSettingsMap(s, schemas.CallAnalyticsJobSettings_LanguageIdSettings, v.LanguageIdSettings)
+	if v.LanguageIdSettings != nil {
+		serializeLanguageIdSettingsMap(s, schemas.CallAnalyticsJobSettings_LanguageIdSettings, v.LanguageIdSettings)
+	}
 	if v.LanguageModelName != nil {
 		s.WriteString(schemas.CallAnalyticsJobSettings_LanguageModelName, *v.LanguageModelName)
 	}
-	serializeLanguageOptions(s, schemas.CallAnalyticsJobSettings_LanguageOptions, v.LanguageOptions)
+	if v.LanguageOptions != nil {
+		serializeLanguageOptions(s, schemas.CallAnalyticsJobSettings_LanguageOptions, v.LanguageOptions)
+	}
 	if v.Summarization != nil {
 		s.WriteStruct(schemas.CallAnalyticsJobSettings_Summarization)
 		v.Summarization.SerializeMembers(s)
@@ -809,8 +819,12 @@ func (v *CategoryProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdateTime != nil {
 		s.WriteTime(schemas.CategoryProperties_LastUpdateTime, *v.LastUpdateTime)
 	}
-	serializeRuleList(s, schemas.CategoryProperties_Rules, v.Rules)
-	serializeTagList(s, schemas.CategoryProperties_Tags, v.Tags)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.CategoryProperties_Rules, v.Rules)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CategoryProperties_Tags, v.Tags)
+	}
 }
 func (v *CategoryProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CategoryProperties, func(s *smithy.Schema) error {
@@ -987,7 +1001,9 @@ func (v *ContentRedaction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContentRedaction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePiiEntityTypes(s, schemas.ContentRedaction_PiiEntityTypes, v.PiiEntityTypes)
+	if v.PiiEntityTypes != nil {
+		serializePiiEntityTypes(s, schemas.ContentRedaction_PiiEntityTypes, v.PiiEntityTypes)
+	}
 	if v.RedactionOutput != "" {
 		s.WriteString(schemas.ContentRedaction_RedactionOutput, string(v.RedactionOutput))
 	}
@@ -1053,7 +1069,9 @@ func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKMSEncryptionContextMap(s, schemas.EncryptionConfiguration_KMSEncryptionContext, v.KMSEncryptionContext)
+	if v.KMSEncryptionContext != nil {
+		serializeKMSEncryptionContextMap(s, schemas.EncryptionConfiguration_KMSEncryptionContext, v.KMSEncryptionContext)
+	}
 	if v.KMSKey != nil {
 		s.WriteString(schemas.EncryptionConfiguration_KMSKey, *v.KMSKey)
 	}
@@ -1895,7 +1913,9 @@ func (v *MedicalScribeJob) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalScribeJob) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeJob_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeJob_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.CompletionTime != nil {
 		s.WriteTime(schemas.MedicalScribeJob_CompletionTime, *v.CompletionTime)
 	}
@@ -1938,7 +1958,9 @@ func (v *MedicalScribeJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.MedicalScribeJob_StartTime, *v.StartTime)
 	}
-	serializeTagList(s, schemas.MedicalScribeJob_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.MedicalScribeJob_Tags, v.Tags)
+	}
 }
 func (v *MedicalScribeJob) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MedicalScribeJob, func(s *smithy.Schema) error {
@@ -2532,7 +2554,9 @@ func (v *MedicalTranscriptionJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.MedicalTranscriptionJob_StartTime, *v.StartTime)
 	}
-	serializeTagList(s, schemas.MedicalTranscriptionJob_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.MedicalTranscriptionJob_Tags, v.Tags)
+	}
 	if v.Transcript != nil {
 		s.WriteStruct(schemas.MedicalTranscriptionJob_Transcript)
 		v.Transcript.SerializeMembers(s)
@@ -3299,7 +3323,9 @@ func (v *SentimentFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RelativeTimeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSentimentValueList(s, schemas.SentimentFilter_Sentiments, v.Sentiments)
+	if v.Sentiments != nil {
+		serializeSentimentValueList(s, schemas.SentimentFilter_Sentiments, v.Sentiments)
+	}
 }
 func (v *SentimentFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SentimentFilter, func(s *smithy.Schema) error {
@@ -3517,7 +3543,9 @@ func (v *Subtitles) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Subtitles) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubtitleFormats(s, schemas.Subtitles_Formats, v.Formats)
+	if v.Formats != nil {
+		serializeSubtitleFormats(s, schemas.Subtitles_Formats, v.Formats)
+	}
 	if v.OutputStartIndex != nil {
 		s.WriteInt32(schemas.Subtitles_OutputStartIndex, *v.OutputStartIndex)
 	}
@@ -3576,11 +3604,15 @@ func (v *SubtitlesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubtitlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubtitleFormats(s, schemas.SubtitlesOutput_Formats, v.Formats)
+	if v.Formats != nil {
+		serializeSubtitleFormats(s, schemas.SubtitlesOutput_Formats, v.Formats)
+	}
 	if v.OutputStartIndex != nil {
 		s.WriteInt32(schemas.SubtitlesOutput_OutputStartIndex, *v.OutputStartIndex)
 	}
-	serializeSubtitleFileUris(s, schemas.SubtitlesOutput_SubtitleFileUris, v.SubtitleFileUris)
+	if v.SubtitleFileUris != nil {
+		serializeSubtitleFileUris(s, schemas.SubtitlesOutput_SubtitleFileUris, v.SubtitleFileUris)
+	}
 }
 func (v *SubtitlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SubtitlesOutput, func(s *smithy.Schema) error {
@@ -3716,7 +3748,9 @@ func (v *ToxicityDetectionSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ToxicityDetectionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeToxicityCategories(s, schemas.ToxicityDetectionSettings_ToxicityCategories, v.ToxicityCategories)
+	if v.ToxicityCategories != nil {
+		serializeToxicityCategories(s, schemas.ToxicityDetectionSettings_ToxicityCategories, v.ToxicityCategories)
+	}
 }
 func (v *ToxicityDetectionSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ToxicityDetectionSettings, func(s *smithy.Schema) error {
@@ -3874,7 +3908,9 @@ func (v *TranscriptFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RelativeTimeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringTargetList(s, schemas.TranscriptFilter_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeStringTargetList(s, schemas.TranscriptFilter_Targets, v.Targets)
+	}
 	if v.TranscriptFilterType != "" {
 		s.WriteString(schemas.TranscriptFilter_TranscriptFilterType, string(v.TranscriptFilterType))
 	}
@@ -4108,9 +4144,15 @@ func (v *TranscriptionJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.TranscriptionJob_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLanguageCodeList(s, schemas.TranscriptionJob_LanguageCodes, v.LanguageCodes)
-	serializeLanguageIdSettingsMap(s, schemas.TranscriptionJob_LanguageIdSettings, v.LanguageIdSettings)
-	serializeLanguageOptions(s, schemas.TranscriptionJob_LanguageOptions, v.LanguageOptions)
+	if v.LanguageCodes != nil {
+		serializeLanguageCodeList(s, schemas.TranscriptionJob_LanguageCodes, v.LanguageCodes)
+	}
+	if v.LanguageIdSettings != nil {
+		serializeLanguageIdSettingsMap(s, schemas.TranscriptionJob_LanguageIdSettings, v.LanguageIdSettings)
+	}
+	if v.LanguageOptions != nil {
+		serializeLanguageOptions(s, schemas.TranscriptionJob_LanguageOptions, v.LanguageOptions)
+	}
 	if v.Media != nil {
 		s.WriteStruct(schemas.TranscriptionJob_Media)
 		v.Media.SerializeMembers(s)
@@ -4140,8 +4182,12 @@ func (v *TranscriptionJob) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Subtitles.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.TranscriptionJob_Tags, v.Tags)
-	serializeToxicityDetection(s, schemas.TranscriptionJob_ToxicityDetection, v.ToxicityDetection)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.TranscriptionJob_Tags, v.Tags)
+	}
+	if v.ToxicityDetection != nil {
+		serializeToxicityDetection(s, schemas.TranscriptionJob_ToxicityDetection, v.ToxicityDetection)
+	}
 	if v.Transcript != nil {
 		s.WriteStruct(schemas.TranscriptionJob_Transcript)
 		v.Transcript.SerializeMembers(s)
@@ -4369,7 +4415,9 @@ func (v *TranscriptionJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.TranscriptionJobSummary_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLanguageCodeList(s, schemas.TranscriptionJobSummary_LanguageCodes, v.LanguageCodes)
+	if v.LanguageCodes != nil {
+		serializeLanguageCodeList(s, schemas.TranscriptionJobSummary_LanguageCodes, v.LanguageCodes)
+	}
 	if v.ModelSettings != nil {
 		s.WriteStruct(schemas.TranscriptionJobSummary_ModelSettings)
 		v.ModelSettings.SerializeMembers(s)
@@ -4381,7 +4429,9 @@ func (v *TranscriptionJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.TranscriptionJobSummary_StartTime, *v.StartTime)
 	}
-	serializeToxicityDetection(s, schemas.TranscriptionJobSummary_ToxicityDetection, v.ToxicityDetection)
+	if v.ToxicityDetection != nil {
+		serializeToxicityDetection(s, schemas.TranscriptionJobSummary_ToxicityDetection, v.ToxicityDetection)
+	}
 	if v.TranscriptionJobName != nil {
 		s.WriteString(schemas.TranscriptionJobSummary_TranscriptionJobName, *v.TranscriptionJobName)
 	}

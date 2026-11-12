@@ -71,6 +71,9 @@ type CreateTaskTemplateInput struct {
 	// a ContactFlowId or a field of type QUICK_CONNECT .
 	ContactFlowId *string
 
+	// The event hooks that are set on tasks created by using this template.
+	ContactHooks *types.TaskTemplateContactHooks
+
 	// The default values for fields when a task is created by referencing this
 	// template.
 	Defaults *types.TaskTemplateDefaults
@@ -108,6 +111,11 @@ func (v *CreateTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactFlowId != nil {
 		s.WriteString(schemas.CreateTaskTemplateRequest_ContactFlowId, *v.ContactFlowId)
 	}
+	if v.ContactHooks != nil {
+		s.WriteStruct(schemas.CreateTaskTemplateRequest_ContactHooks)
+		v.ContactHooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Defaults != nil {
 		s.WriteStruct(schemas.CreateTaskTemplateRequest_Defaults)
 		v.Defaults.SerializeMembers(s)
@@ -116,7 +124,9 @@ func (v *CreateTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateTaskTemplateRequest_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.CreateTaskTemplateRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.CreateTaskTemplateRequest_Fields, v.Fields)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateTaskTemplateRequest_InstanceId, *v.InstanceId)
 	}

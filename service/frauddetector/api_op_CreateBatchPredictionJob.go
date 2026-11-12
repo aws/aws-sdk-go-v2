@@ -101,7 +101,9 @@ func (v *CreateBatchPredictionJobInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.OutputPath != nil {
 		s.WriteString(schemas.CreateBatchPredictionJobRequest_outputPath, *v.OutputPath)
 	}
-	serializetagList(s, schemas.CreateBatchPredictionJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreateBatchPredictionJobRequest_tags, v.Tags)
+	}
 }
 
 type CreateBatchPredictionJobOutput struct {

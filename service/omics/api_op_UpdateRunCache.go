@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,27 @@ type UpdateRunCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRunCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRunCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRunCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheBehavior != "" {
+		s.WriteString(schemas.UpdateRunCacheRequest_cacheBehavior, string(v.CacheBehavior))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRunCacheRequest_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRunCacheRequest_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRunCacheRequest_name, *v.Name)
+	}
+}
+
 type UpdateRunCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +83,26 @@ type UpdateRunCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRunCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRunCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRunCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRunCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRunCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRunCache, schemas.UpdateRunCacheRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRunCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRunCache, schemas.UpdateRunCacheRequest, nil), output: &UpdateRunCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

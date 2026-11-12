@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreatePlatformApplicationResponse><CreatePlatformApplicationResult><PlatformApplicationArn>__PlatformApplicationArn__</PlatformApplicationArn></CreatePlatformApplicationResult></CreatePlatformApplicationResponse>

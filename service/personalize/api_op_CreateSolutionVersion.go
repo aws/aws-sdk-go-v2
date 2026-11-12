@@ -124,7 +124,9 @@ func (v *CreateSolutionVersionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SolutionArn != nil {
 		s.WriteString(schemas.CreateSolutionVersionRequest_solutionArn, *v.SolutionArn)
 	}
-	serializeTags(s, schemas.CreateSolutionVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSolutionVersionRequest_tags, v.Tags)
+	}
 	if v.TrainingMode != "" {
 		s.WriteString(schemas.CreateSolutionVersionRequest_trainingMode, string(v.TrainingMode))
 	}

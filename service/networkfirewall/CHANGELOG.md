@@ -1,3 +1,48 @@
+# v1.79.0 (2026-11-11)
+
+* **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+
+# v1.78.0 (2026-11-10)
+
+* **Feature**: Firewall Policy V2 for Network Firewall
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.6 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.5 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.4 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.3 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
+# v1.77.2 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.0 (2026-10-21)
+
+* **Feature**: Adds support for Network Firewall Resolved IP validation.
+
+# v1.76.2 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.76.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

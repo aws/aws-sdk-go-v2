@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EarthObservationJobSummaries":[{"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","DurationInSeconds":1,"Name":"__Name__","OperationType":"__OperationType__","Status":"INITIALIZING","Tags":{"key0":"__Value__"}},{"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","DurationInSeconds":1,"Name":"__Name__","OperationType":"__OperationType__","Status":"INITIALIZING","Tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

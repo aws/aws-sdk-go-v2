@@ -94,7 +94,9 @@ func (v *CheckNoPublicAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.CheckNoPublicAccessResponse_message, *v.Message)
 	}
-	serializeReasonSummaryList(s, schemas.CheckNoPublicAccessResponse_reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeReasonSummaryList(s, schemas.CheckNoPublicAccessResponse_reasons, v.Reasons)
+	}
 	if v.Result != "" {
 		s.WriteString(schemas.CheckNoPublicAccessResponse_result, string(v.Result))
 	}

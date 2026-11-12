@@ -5,6 +5,8 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,30 @@ type StopBrowserSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBrowserSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBrowserSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBrowserSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserIdentifier != nil {
+		s.WriteString(schemas.StopBrowserSessionRequest_browserIdentifier, *v.BrowserIdentifier)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StopBrowserSessionRequest_clientToken, *v.ClientToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StopBrowserSessionRequest_sessionId, *v.SessionId)
+	}
+	if v.TraceId != nil {
+		s.WriteString(schemas.StopBrowserSessionRequest_traceId, *v.TraceId)
+	}
+	if v.TraceParent != nil {
+		s.WriteString(schemas.StopBrowserSessionRequest_traceParent, *v.TraceParent)
+	}
+}
+
 type StopBrowserSessionOutput struct {
 
 	// The identifier of the browser.
@@ -89,13 +115,44 @@ type StopBrowserSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBrowserSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBrowserSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBrowserSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserIdentifier != nil {
+		s.WriteString(schemas.StopBrowserSessionResponse_browserIdentifier, *v.BrowserIdentifier)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.StopBrowserSessionResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StopBrowserSessionResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *StopBrowserSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBrowserSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopBrowserSessionResponse_browserIdentifier:
+			v.BrowserIdentifier = new(string)
+			return d.ReadString(schemas.StopBrowserSessionResponse_browserIdentifier, v.BrowserIdentifier)
+		case schemas.StopBrowserSessionResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StopBrowserSessionResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.StopBrowserSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StopBrowserSessionResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBrowserSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBrowserSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBrowserSession, schemas.StopBrowserSessionRequest, schemas.StopBrowserSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBrowserSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBrowserSession, schemas.StopBrowserSessionRequest, schemas.StopBrowserSessionResponse), output: &StopBrowserSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

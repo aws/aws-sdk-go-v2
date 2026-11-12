@@ -180,7 +180,9 @@ func (v *ListProfileTimesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileTimesResponse_nextToken, *v.NextToken)
 	}
-	serializeProfileTimes(s, schemas.ListProfileTimesResponse_profileTimes, v.ProfileTimes)
+	if v.ProfileTimes != nil {
+		serializeProfileTimes(s, schemas.ListProfileTimesResponse_profileTimes, v.ProfileTimes)
+	}
 }
 func (v *ListProfileTimesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProfileTimesResponse, func(s *smithy.Schema) error {

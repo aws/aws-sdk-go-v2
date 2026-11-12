@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"consentPortals":[{"consentPortalArn":"__ConsentPortalArn__","consentPortalId":"__ConsentPortalId__","createdAt":946684800,"description":"__Description__","name":"__Name__","portalUrl":"__PortalUrl__","sources":[{"identifier":"__Identifier__","type":"agentcore-gateway"},{"identifier":"__Identifier__","type":"agentcore-gateway"}],"status":"CREATING","updatedAt":946684800},{"consentPortalArn":"__ConsentPortalArn__","consentPortalId":"__ConsentPortalId__","createdAt":946684800,"description":"__Description__","name":"__Name__","portalUrl":"__PortalUrl__","sources":[{"identifier":"__Identifier__","type":"agentcore-gateway"},{"identifier":"__Identifier__","type":"agentcore-gateway"}],"status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

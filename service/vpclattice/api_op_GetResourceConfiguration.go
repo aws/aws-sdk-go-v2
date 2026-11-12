@@ -183,11 +183,15 @@ func (v *GetResourceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.GetResourceConfigurationResponse_name, *v.Name)
 	}
-	serializePortRangeList(s, schemas.GetResourceConfigurationResponse_portRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRangeList(s, schemas.GetResourceConfigurationResponse_portRanges, v.PortRanges)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.GetResourceConfigurationResponse_protocol, string(v.Protocol))
 	}
-	serializeResourceConfigurationDefinition(s, schemas.GetResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationDefinition != nil {
+		serializeResourceConfigurationDefinition(s, schemas.GetResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	}
 	if v.ResourceConfigurationGroupId != nil {
 		s.WriteString(schemas.GetResourceConfigurationResponse_resourceConfigurationGroupId, *v.ResourceConfigurationGroupId)
 	}

@@ -32,7 +32,9 @@ func (v *Action) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrossRegionCopyActionList(s, schemas.Action_CrossRegionCopy, v.CrossRegionCopy)
+	if v.CrossRegionCopy != nil {
+		serializeCrossRegionCopyActionList(s, schemas.Action_CrossRegionCopy, v.CrossRegionCopy)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Action_Name, *v.Name)
 	}
@@ -221,8 +223,12 @@ func (v *CreateRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Location != "" {
 		s.WriteString(schemas.CreateRule_Location, string(v.Location))
 	}
-	serializeScriptsList(s, schemas.CreateRule_Scripts, v.Scripts)
-	serializeTimesList(s, schemas.CreateRule_Times, v.Times)
+	if v.Scripts != nil {
+		serializeScriptsList(s, schemas.CreateRule_Scripts, v.Scripts)
+	}
+	if v.Times != nil {
+		serializeTimesList(s, schemas.CreateRule_Times, v.Times)
+	}
 }
 func (v *CreateRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRule, func(s *smithy.Schema) error {
@@ -721,7 +727,9 @@ func (v *EventParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventType != "" {
 		s.WriteString(schemas.EventParameters_EventType, string(v.EventType))
 	}
-	serializeSnapshotOwnerList(s, schemas.EventParameters_SnapshotOwner, v.SnapshotOwner)
+	if v.SnapshotOwner != nil {
+		serializeSnapshotOwnerList(s, schemas.EventParameters_SnapshotOwner, v.SnapshotOwner)
+	}
 }
 func (v *EventParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventParameters, func(s *smithy.Schema) error {
@@ -828,8 +836,12 @@ func (v *Exclusions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExcludeBootVolumes != nil {
 		s.WriteBool(schemas.Exclusions_ExcludeBootVolumes, *v.ExcludeBootVolumes)
 	}
-	serializeExcludeTagsList(s, schemas.Exclusions_ExcludeTags, v.ExcludeTags)
-	serializeExcludeVolumeTypesList(s, schemas.Exclusions_ExcludeVolumeTypes, v.ExcludeVolumeTypes)
+	if v.ExcludeTags != nil {
+		serializeExcludeTagsList(s, schemas.Exclusions_ExcludeTags, v.ExcludeTags)
+	}
+	if v.ExcludeVolumeTypes != nil {
+		serializeExcludeVolumeTypesList(s, schemas.Exclusions_ExcludeVolumeTypes, v.ExcludeVolumeTypes)
+	}
 }
 func (v *Exclusions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Exclusions, func(s *smithy.Schema) error {
@@ -878,8 +890,12 @@ func (v *FastRestoreRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FastRestoreRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneIdList(s, schemas.FastRestoreRule_AvailabilityZoneIds, v.AvailabilityZoneIds)
-	serializeAvailabilityZoneList(s, schemas.FastRestoreRule_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZoneIds != nil {
+		serializeAvailabilityZoneIdList(s, schemas.FastRestoreRule_AvailabilityZoneIds, v.AvailabilityZoneIds)
+	}
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZoneList(s, schemas.FastRestoreRule_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.Count != nil {
 		s.WriteInt32(schemas.FastRestoreRule_Count, *v.Count)
 	}
@@ -999,7 +1015,9 @@ func (v *LifecyclePolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.LifecyclePolicy_StatusMessage, *v.StatusMessage)
 	}
-	serializeTagMap(s, schemas.LifecyclePolicy_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.LifecyclePolicy_Tags, v.Tags)
+	}
 }
 func (v *LifecyclePolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LifecyclePolicy, func(s *smithy.Schema) error {
@@ -1099,7 +1117,9 @@ func (v *LifecyclePolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.LifecyclePolicySummary_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.LifecyclePolicySummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.LifecyclePolicySummary_Tags, v.Tags)
+	}
 }
 func (v *LifecyclePolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LifecyclePolicySummary, func(s *smithy.Schema) error {
@@ -1182,7 +1202,9 @@ func (v *Parameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExcludeBootVolume != nil {
 		s.WriteBool(schemas.Parameters_ExcludeBootVolume, *v.ExcludeBootVolume)
 	}
-	serializeExcludeDataVolumeTagList(s, schemas.Parameters_ExcludeDataVolumeTags, v.ExcludeDataVolumeTags)
+	if v.ExcludeDataVolumeTags != nil {
+		serializeExcludeDataVolumeTagList(s, schemas.Parameters_ExcludeDataVolumeTags, v.ExcludeDataVolumeTags)
+	}
 	if v.NoReboot != nil {
 		s.WriteBool(schemas.Parameters_NoReboot, *v.NoReboot)
 	}
@@ -1349,14 +1371,18 @@ func (v *PolicyDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PolicyDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.PolicyDetails_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.PolicyDetails_Actions, v.Actions)
+	}
 	if v.CopyTags != nil {
 		s.WriteBool(schemas.PolicyDetails_CopyTags, *v.CopyTags)
 	}
 	if v.CreateInterval != nil {
 		s.WriteInt32(schemas.PolicyDetails_CreateInterval, *v.CreateInterval)
 	}
-	serializeCrossRegionCopyTargetList(s, schemas.PolicyDetails_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	if v.CrossRegionCopyTargets != nil {
+		serializeCrossRegionCopyTargetList(s, schemas.PolicyDetails_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	}
 	if v.EventSource != nil {
 		s.WriteStruct(schemas.PolicyDetails_EventSource)
 		v.EventSource.SerializeMembers(s)
@@ -1381,16 +1407,24 @@ func (v *PolicyDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyType != "" {
 		s.WriteString(schemas.PolicyDetails_PolicyType, string(v.PolicyType))
 	}
-	serializeResourceLocationList(s, schemas.PolicyDetails_ResourceLocations, v.ResourceLocations)
+	if v.ResourceLocations != nil {
+		serializeResourceLocationList(s, schemas.PolicyDetails_ResourceLocations, v.ResourceLocations)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.PolicyDetails_ResourceType, string(v.ResourceType))
 	}
-	serializeResourceTypeValuesList(s, schemas.PolicyDetails_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeValuesList(s, schemas.PolicyDetails_ResourceTypes, v.ResourceTypes)
+	}
 	if v.RetainInterval != nil {
 		s.WriteInt32(schemas.PolicyDetails_RetainInterval, *v.RetainInterval)
 	}
-	serializeScheduleList(s, schemas.PolicyDetails_Schedules, v.Schedules)
-	serializeTargetTagList(s, schemas.PolicyDetails_TargetTags, v.TargetTags)
+	if v.Schedules != nil {
+		serializeScheduleList(s, schemas.PolicyDetails_Schedules, v.Schedules)
+	}
+	if v.TargetTags != nil {
+		serializeTargetTagList(s, schemas.PolicyDetails_TargetTags, v.TargetTags)
+	}
 }
 func (v *PolicyDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolicyDetails, func(s *smithy.Schema) error {
@@ -1704,7 +1738,9 @@ func (v *Schedule) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CreateRule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCrossRegionCopyRules(s, schemas.Schedule_CrossRegionCopyRules, v.CrossRegionCopyRules)
+	if v.CrossRegionCopyRules != nil {
+		serializeCrossRegionCopyRules(s, schemas.Schedule_CrossRegionCopyRules, v.CrossRegionCopyRules)
+	}
 	if v.DeprecateRule != nil {
 		s.WriteStruct(schemas.Schedule_DeprecateRule)
 		v.DeprecateRule.SerializeMembers(s)
@@ -1723,9 +1759,15 @@ func (v *Schedule) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RetainRule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeShareRules(s, schemas.Schedule_ShareRules, v.ShareRules)
-	serializeTagsToAddList(s, schemas.Schedule_TagsToAdd, v.TagsToAdd)
-	serializeVariableTagsList(s, schemas.Schedule_VariableTags, v.VariableTags)
+	if v.ShareRules != nil {
+		serializeShareRules(s, schemas.Schedule_ShareRules, v.ShareRules)
+	}
+	if v.TagsToAdd != nil {
+		serializeTagsToAddList(s, schemas.Schedule_TagsToAdd, v.TagsToAdd)
+	}
+	if v.VariableTags != nil {
+		serializeVariableTagsList(s, schemas.Schedule_VariableTags, v.VariableTags)
+	}
 }
 func (v *Schedule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Schedule, func(s *smithy.Schema) error {
@@ -1888,7 +1930,9 @@ func (v *Script) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumRetryCount != nil {
 		s.WriteInt32(schemas.Script_MaximumRetryCount, *v.MaximumRetryCount)
 	}
-	serializeStagesList(s, schemas.Script_Stages, v.Stages)
+	if v.Stages != nil {
+		serializeStagesList(s, schemas.Script_Stages, v.Stages)
+	}
 }
 func (v *Script) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Script, func(s *smithy.Schema) error {
@@ -1946,7 +1990,9 @@ func (v *ShareRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ShareRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeShareTargetAccountList(s, schemas.ShareRule_TargetAccounts, v.TargetAccounts)
+	if v.TargetAccounts != nil {
+		serializeShareTargetAccountList(s, schemas.ShareRule_TargetAccounts, v.TargetAccounts)
+	}
 	if v.UnshareInterval != nil {
 		s.WriteInt32(schemas.ShareRule_UnshareInterval, *v.UnshareInterval)
 	}

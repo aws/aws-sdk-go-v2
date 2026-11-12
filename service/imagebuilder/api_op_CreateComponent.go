@@ -164,8 +164,12 @@ func (v *CreateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SemanticVersion != nil {
 		s.WriteString(schemas.CreateComponentRequest_semanticVersion, *v.SemanticVersion)
 	}
-	serializeOsVersionList(s, schemas.CreateComponentRequest_supportedOsVersions, v.SupportedOsVersions)
-	serializeTagMap(s, schemas.CreateComponentRequest_tags, v.Tags)
+	if v.SupportedOsVersions != nil {
+		serializeOsVersionList(s, schemas.CreateComponentRequest_supportedOsVersions, v.SupportedOsVersions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateComponentRequest_tags, v.Tags)
+	}
 	if v.Uri != nil {
 		s.WriteString(schemas.CreateComponentRequest_uri, *v.Uri)
 	}

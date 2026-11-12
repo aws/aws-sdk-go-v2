@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type PutS3AccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutS3AccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutS3AccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutS3AccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3AccessPointArn != nil {
+		s.WriteString(schemas.PutS3AccessPolicyRequest_s3AccessPointArn, *v.S3AccessPointArn)
+	}
+	if v.S3AccessPolicy != nil {
+		s.WriteString(schemas.PutS3AccessPolicyRequest_s3AccessPolicy, *v.S3AccessPolicy)
+	}
+}
+
 type PutS3AccessPolicyOutput struct {
 
 	// The S3 access point ARN that now has the access policy.
@@ -60,13 +77,48 @@ type PutS3AccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutS3AccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutS3AccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutS3AccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3AccessPointArn != nil {
+		s.WriteString(schemas.PutS3AccessPolicyResponse_s3AccessPointArn, *v.S3AccessPointArn)
+	}
+	if v.StoreId != nil {
+		s.WriteString(schemas.PutS3AccessPolicyResponse_storeId, *v.StoreId)
+	}
+	if v.StoreType != "" {
+		s.WriteString(schemas.PutS3AccessPolicyResponse_storeType, string(v.StoreType))
+	}
+}
+func (v *PutS3AccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutS3AccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutS3AccessPolicyResponse_s3AccessPointArn:
+			v.S3AccessPointArn = new(string)
+			return d.ReadString(schemas.PutS3AccessPolicyResponse_s3AccessPointArn, v.S3AccessPointArn)
+		case schemas.PutS3AccessPolicyResponse_storeId:
+			v.StoreId = new(string)
+			return d.ReadString(schemas.PutS3AccessPolicyResponse_storeId, v.StoreId)
+		case schemas.PutS3AccessPolicyResponse_storeType:
+			var ev string
+			if err := d.ReadString(schemas.PutS3AccessPolicyResponse_storeType, &ev); err != nil {
+				return err
+			}
+			v.StoreType = types.StoreType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutS3AccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutS3AccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutS3AccessPolicy, schemas.PutS3AccessPolicyRequest, schemas.PutS3AccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutS3AccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutS3AccessPolicy, schemas.PutS3AccessPolicyRequest, schemas.PutS3AccessPolicyResponse), output: &PutS3AccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

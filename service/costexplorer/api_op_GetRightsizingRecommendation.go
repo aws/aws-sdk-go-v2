@@ -220,7 +220,9 @@ func (v *GetRightsizingRecommendationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetRightsizingRecommendationResponse_NextPageToken, *v.NextPageToken)
 	}
-	serializeRightsizingRecommendationList(s, schemas.GetRightsizingRecommendationResponse_RightsizingRecommendations, v.RightsizingRecommendations)
+	if v.RightsizingRecommendations != nil {
+		serializeRightsizingRecommendationList(s, schemas.GetRightsizingRecommendationResponse_RightsizingRecommendations, v.RightsizingRecommendations)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.GetRightsizingRecommendationResponse_Summary)
 		v.Summary.SerializeMembers(s)

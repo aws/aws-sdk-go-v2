@@ -185,8 +185,12 @@ func (v *AttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S != nil {
 		s.WriteString(schemas.AttributeValue_S, *v.S)
 	}
-	serializePlayerAttributeStringDoubleMap(s, schemas.AttributeValue_SDM, v.SDM)
-	serializePlayerAttributeStringList(s, schemas.AttributeValue_SL, v.SL)
+	if v.SDM != nil {
+		serializePlayerAttributeStringDoubleMap(s, schemas.AttributeValue_SDM, v.SDM)
+	}
+	if v.SL != nil {
+		serializePlayerAttributeStringList(s, schemas.AttributeValue_SL, v.SL)
+	}
 }
 func (v *AttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeValue, func(s *smithy.Schema) error {
@@ -487,7 +491,9 @@ func (v *ClaimFilterOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClaimFilterOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterInstanceStatuses(s, schemas.ClaimFilterOption_InstanceStatuses, v.InstanceStatuses)
+	if v.InstanceStatuses != nil {
+		serializeFilterInstanceStatuses(s, schemas.ClaimFilterOption_InstanceStatuses, v.InstanceStatuses)
+	}
 }
 func (v *ClaimFilterOption) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClaimFilterOption, func(s *smithy.Schema) error {
@@ -600,7 +606,9 @@ func (v *Compute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComputeStatus != "" {
 		s.WriteString(schemas.Compute_ComputeStatus, string(v.ComputeStatus))
 	}
-	serializeContainerAttributes(s, schemas.Compute_ContainerAttributes, v.ContainerAttributes)
+	if v.ContainerAttributes != nil {
+		serializeContainerAttributes(s, schemas.Compute_ContainerAttributes, v.ContainerAttributes)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.Compute_CreationTime, *v.CreationTime)
 	}
@@ -1137,11 +1145,15 @@ func (v *ContainerFleet) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InstanceConnectionPortRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIpPermissionsList(s, schemas.ContainerFleet_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	if v.InstanceInboundPermissions != nil {
+		serializeIpPermissionsList(s, schemas.ContainerFleet_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	}
 	if v.InstanceType != nil {
 		s.WriteString(schemas.ContainerFleet_InstanceType, *v.InstanceType)
 	}
-	serializeContainerFleetLocationAttributesList(s, schemas.ContainerFleet_LocationAttributes, v.LocationAttributes)
+	if v.LocationAttributes != nil {
+		serializeContainerFleetLocationAttributesList(s, schemas.ContainerFleet_LocationAttributes, v.LocationAttributes)
+	}
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.ContainerFleet_LogConfiguration)
 		v.LogConfiguration.SerializeMembers(s)
@@ -1150,7 +1162,9 @@ func (v *ContainerFleet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumGameServerContainerGroupsPerInstance != nil {
 		s.WriteInt32(schemas.ContainerFleet_MaximumGameServerContainerGroupsPerInstance, *v.MaximumGameServerContainerGroupsPerInstance)
 	}
-	serializeMetricGroupList(s, schemas.ContainerFleet_MetricGroups, v.MetricGroups)
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.ContainerFleet_MetricGroups, v.MetricGroups)
+	}
 	if v.NewGameSessionProtectionPolicy != "" {
 		s.WriteString(schemas.ContainerFleet_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
 	}
@@ -1513,7 +1527,9 @@ func (v *ContainerGroupDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.ContainerGroupDefinition_StatusReason, *v.StatusReason)
 	}
-	serializeSupportContainerDefinitionList(s, schemas.ContainerGroupDefinition_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	if v.SupportContainerDefinitions != nil {
+		serializeSupportContainerDefinitionList(s, schemas.ContainerGroupDefinition_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	}
 	if v.TotalMemoryLimitMebibytes != nil {
 		s.WriteInt32(schemas.ContainerGroupDefinition_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
 	}
@@ -1618,7 +1634,9 @@ func (v *ContainerGroupPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerName != nil {
 		s.WriteString(schemas.ContainerGroupPortMapping_ContainerName, *v.ContainerName)
 	}
-	serializeContainerPortMappingList(s, schemas.ContainerGroupPortMapping_ContainerPortMappings, v.ContainerPortMappings)
+	if v.ContainerPortMappings != nil {
+		serializeContainerPortMappingList(s, schemas.ContainerGroupPortMapping_ContainerPortMappings, v.ContainerPortMappings)
+	}
 	if v.ContainerRuntimeId != nil {
 		s.WriteString(schemas.ContainerGroupPortMapping_ContainerRuntimeId, *v.ContainerRuntimeId)
 	}
@@ -1693,7 +1711,9 @@ func (v *ContainerHealthCheck) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerHealthCheck) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerCommandStringList(s, schemas.ContainerHealthCheck_Command, v.Command)
+	if v.Command != nil {
+		serializeContainerCommandStringList(s, schemas.ContainerHealthCheck_Command, v.Command)
+	}
 	if v.Interval != nil {
 		s.WriteInt32(schemas.ContainerHealthCheck_Interval, *v.Interval)
 	}
@@ -1883,7 +1903,9 @@ func (v *ContainerPortConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerPortConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerPortRangeList(s, schemas.ContainerPortConfiguration_ContainerPortRanges, v.ContainerPortRanges)
+	if v.ContainerPortRanges != nil {
+		serializeContainerPortRangeList(s, schemas.ContainerPortConfiguration_ContainerPortRanges, v.ContainerPortRanges)
+	}
 }
 func (v *ContainerPortConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContainerPortConfiguration, func(s *smithy.Schema) error {
@@ -2024,25 +2046,53 @@ func (v *ContainerPortRange) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Set of rules for processing a deployment for a container fleet update.
+// Set of rules for processing a deployment for a container fleet update. For how
+// Amazon GameLift Servers validates and rolls out a deployment, see [Container fleet deployments].
+//
+// [Container fleet deployments]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/containers-deployment-validation.html
 type DeploymentConfiguration struct {
 
-	// Determines what actions to take if a deployment fails. If the fleet is
-	// multi-location, this strategy applies across all fleet locations. With a
-	// rollback strategy, updated fleet instances are rolled back to the last
-	// successful deployment. Alternatively, you can maintain a few impaired containers
-	// for the purpose of debugging, while all other tasks return to the last
-	// successful deployment.
+	// Determines what actions to take if a deployment fails validation. If the fleet
+	// is multi-location, this strategy applies across all fleet locations.
+	//
+	//   - ROLLBACK -- Returns all of the fleet's containers to the last successful
+	//   deployment.
+	//
+	//   - MAINTAIN -- Keeps the containers that failed validation in place so that you
+	//   can inspect them, and returns all other containers to the last successful
+	//   deployment. Use this option when you're deploying a container image that you
+	//   want to be able to debug on failure.
+	//
+	// Default value: MAINTAIN
 	ImpairmentStrategy DeploymentImpairmentStrategy
 
-	// Sets a minimum level of healthy tasks to maintain during deployment activity.
+	// Sets the minimum percentage of the fleet's game server container groups to keep
+	// healthy during deployment activity. A low value favors deployment speed; a high
+	// value favors game server availability. For example, if the fleet runs 20 game
+	// server container groups and this value is 75, Amazon GameLift Servers keeps at
+	// least 15 of them healthy, so it replaces no more than 5 at a time.
+	//
+	// Default value: 75
 	MinimumHealthyPercentage *int32
 
 	// Determines how fleet deployment activity affects active game sessions on the
-	// fleet. With protection, a deployment honors game session protection, and delays
-	// actions that would interrupt a protected active game session until the game
-	// session ends. Without protection, deployment activity can shut down all running
-	// tasks, including active game sessions, regardless of game session protection.
+	// fleet. A protected game session can't be terminated while it's active; a fleet
+	// sets the default protection for its new game sessions with
+	// NewGameSessionProtectionPolicy .
+	//
+	//   - WITH_PROTECTION -- The deployment honors game session protection, and delays
+	//   actions that would interrupt a protected active game session until the game
+	//   session ends.
+	//
+	//   - IGNORE_PROTECTION -- The deployment replaces containers regardless of game
+	//   session activity, including active game sessions. This option is useful during
+	//   development and testing.
+	//
+	// This setting also affects how long deployment validation can take. When the
+	// fleet's NewGameSessionProtectionPolicy is FullProtection and the deployment
+	// uses WITH_PROTECTION , validation waits for protected game sessions to end.
+	//
+	// Default value: WITH_PROTECTION
 	ProtectionStrategy DeploymentProtectionStrategy
 
 	noSmithyDocumentSerde
@@ -2610,7 +2660,9 @@ func (v *FilterConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationList(s, schemas.FilterConfiguration_AllowedLocations, v.AllowedLocations)
+	if v.AllowedLocations != nil {
+		serializeLocationList(s, schemas.FilterConfiguration_AllowedLocations, v.AllowedLocations)
+	}
 }
 func (v *FilterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterConfiguration, func(s *smithy.Schema) error {
@@ -2900,8 +2952,12 @@ func (v *FleetAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceType != "" {
 		s.WriteString(schemas.FleetAttributes_InstanceType, string(v.InstanceType))
 	}
-	serializeStringList(s, schemas.FleetAttributes_LogPaths, v.LogPaths)
-	serializeMetricGroupList(s, schemas.FleetAttributes_MetricGroups, v.MetricGroups)
+	if v.LogPaths != nil {
+		serializeStringList(s, schemas.FleetAttributes_LogPaths, v.LogPaths)
+	}
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.FleetAttributes_MetricGroups, v.MetricGroups)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.FleetAttributes_Name, *v.Name)
 	}
@@ -2939,7 +2995,9 @@ func (v *FleetAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.FleetAttributes_Status, string(v.Status))
 	}
-	serializeFleetActionList(s, schemas.FleetAttributes_StoppedActions, v.StoppedActions)
+	if v.StoppedActions != nil {
+		serializeFleetActionList(s, schemas.FleetAttributes_StoppedActions, v.StoppedActions)
+	}
 	if v.TerminationTime != nil {
 		s.WriteTime(schemas.FleetAttributes_TerminationTime, *v.TerminationTime)
 	}
@@ -3194,22 +3252,35 @@ type FleetDeployment struct {
 	// A unique identifier for the deployment.
 	DeploymentId *string
 
-	// The status of fleet deployment activity in the location.
+	// The status of the fleet deployment. For per-location status, see
+	// LocationalDeployment .
 	//
-	//   - IN_PROGRESS -- The deployment is in progress.
+	//   - PENDING -- Amazon GameLift Servers has accepted the deployment and hasn't
+	//   started it yet.
 	//
-	//   - IMPAIRED -- The deployment failed and the fleet has some impaired
-	//   containers.
+	//   - IN_PROGRESS -- The deployment is in progress. This status covers validation
+	//   as well as the replacement of the fleet's containers.
 	//
-	//   - COMPLETE -- The deployment has completed successfully.
+	//   - IMPAIRED -- The deployment failed validation, and the fleet kept the
+	//   containers that failed validation so that you can inspect them. A deployment
+	//   reaches this status when its impairment strategy is MAINTAIN .
+	//
+	//   - COMPLETE -- The deployment has completed successfully in every fleet
+	//   location.
 	//
 	//   - ROLLBACK_IN_PROGRESS -- The deployment failed and rollback has been
-	//   initiated.
+	//   initiated. A deployment reaches this status when its impairment strategy is
+	//   ROLLBACK .
 	//
-	//   - ROLLBACK_IN_COMPLETE -- The deployment failed and rollback has been
-	//   completed.
+	//   - ROLLBACK_COMPLETE -- The deployment failed and rollback has been completed.
+	//   The fleet is running the configuration from the last successful deployment.
 	//
-	//   - CANCELLED -- The deployment was cancelled.
+	//   - CANCELLED -- The deployment was cancelled because a new deployment started
+	//   for the same fleet.
+	//
+	// For how to debug an impaired deployment or cancel one, see [Container fleet deployments].
+	//
+	// [Container fleet deployments]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/containers-deployment-validation.html
 	DeploymentStatus DeploymentStatus
 
 	// A unique identifier for the container fleet.
@@ -3733,8 +3804,12 @@ func (v *GameServerContainerDefinition) SerializeMembers(s smithy.ShapeSerialize
 	if v.ContainerName != nil {
 		s.WriteString(schemas.GameServerContainerDefinition_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.GameServerContainerDefinition_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.GameServerContainerDefinition_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.ImageUri != nil {
 		s.WriteString(schemas.GameServerContainerDefinition_ImageUri, *v.ImageUri)
 	}
@@ -3743,7 +3818,9 @@ func (v *GameServerContainerDefinition) SerializeMembers(s smithy.ShapeSerialize
 		v.LinuxCapabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContainerMountPointList(s, schemas.GameServerContainerDefinition_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.GameServerContainerDefinition_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.GameServerContainerDefinition_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)
@@ -3914,8 +3991,12 @@ func (v *GameServerContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ContainerName != nil {
 		s.WriteString(schemas.GameServerContainerDefinitionInput_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.GameServerContainerDefinitionInput_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.GameServerContainerDefinitionInput_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.ImageUri != nil {
 		s.WriteString(schemas.GameServerContainerDefinitionInput_ImageUri, *v.ImageUri)
 	}
@@ -3924,7 +4005,9 @@ func (v *GameServerContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeri
 		v.LinuxCapabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContainerMountPointList(s, schemas.GameServerContainerDefinitionInput_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.GameServerContainerDefinitionInput_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.GameServerContainerDefinitionInput_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)
@@ -4168,7 +4251,9 @@ func (v *GameServerGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GameServerProtectionPolicy != "" {
 		s.WriteString(schemas.GameServerGroup_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
 	}
-	serializeInstanceDefinitions(s, schemas.GameServerGroup_InstanceDefinitions, v.InstanceDefinitions)
+	if v.InstanceDefinitions != nil {
+		serializeInstanceDefinitions(s, schemas.GameServerGroup_InstanceDefinitions, v.InstanceDefinitions)
+	}
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.GameServerGroup_LastUpdatedTime, *v.LastUpdatedTime)
 	}
@@ -4181,7 +4266,9 @@ func (v *GameServerGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.GameServerGroup_StatusReason, *v.StatusReason)
 	}
-	serializeGameServerGroupActions(s, schemas.GameServerGroup_SuspendedActions, v.SuspendedActions)
+	if v.SuspendedActions != nil {
+		serializeGameServerGroupActions(s, schemas.GameServerGroup_SuspendedActions, v.SuspendedActions)
+	}
 }
 func (v *GameServerGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GameServerGroup, func(s *smithy.Schema) error {
@@ -4547,7 +4634,9 @@ func (v *GameSession) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FleetId != nil {
 		s.WriteString(schemas.GameSession_FleetId, *v.FleetId)
 	}
-	serializeGamePropertyList(s, schemas.GameSession_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.GameSession_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.GameSession_GameSessionData, *v.GameSessionData)
 	}
@@ -4745,7 +4834,9 @@ func (v *GameSessionConnectionInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddress != nil {
 		s.WriteString(schemas.GameSessionConnectionInfo_IpAddress, *v.IpAddress)
 	}
-	serializeMatchedPlayerSessionList(s, schemas.GameSessionConnectionInfo_MatchedPlayerSessions, v.MatchedPlayerSessions)
+	if v.MatchedPlayerSessions != nil {
+		serializeMatchedPlayerSessionList(s, schemas.GameSessionConnectionInfo_MatchedPlayerSessions, v.MatchedPlayerSessions)
+	}
 	if v.PlayerGatewayStatus != "" {
 		s.WriteString(schemas.GameSessionConnectionInfo_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
 	}
@@ -5063,7 +5154,9 @@ func (v *GameSessionPlacement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GameSessionPlacement_EndTime, *v.EndTime)
 	}
-	serializeGamePropertyList(s, schemas.GameSessionPlacement_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.GameSessionPlacement_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionArn != nil {
 		s.WriteString(schemas.GameSessionPlacement_GameSessionArn, *v.GameSessionArn)
 	}
@@ -5091,14 +5184,18 @@ func (v *GameSessionPlacement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumPlayerSessionCount != nil {
 		s.WriteInt32(schemas.GameSessionPlacement_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
 	}
-	serializePlacedPlayerSessionList(s, schemas.GameSessionPlacement_PlacedPlayerSessions, v.PlacedPlayerSessions)
+	if v.PlacedPlayerSessions != nil {
+		serializePlacedPlayerSessionList(s, schemas.GameSessionPlacement_PlacedPlayerSessions, v.PlacedPlayerSessions)
+	}
 	if v.PlacementId != nil {
 		s.WriteString(schemas.GameSessionPlacement_PlacementId, *v.PlacementId)
 	}
 	if v.PlayerGatewayStatus != "" {
 		s.WriteString(schemas.GameSessionPlacement_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
 	}
-	serializePlayerLatencyList(s, schemas.GameSessionPlacement_PlayerLatencies, v.PlayerLatencies)
+	if v.PlayerLatencies != nil {
+		serializePlayerLatencyList(s, schemas.GameSessionPlacement_PlayerLatencies, v.PlayerLatencies)
+	}
 	if v.Port != nil {
 		s.WriteInt32(schemas.GameSessionPlacement_Port, *v.Port)
 	}
@@ -5215,6 +5312,13 @@ type GameSessionQueue struct {
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	GameSessionQueueArn *string
 
+	// An optional configuration that delivers game session placement insight logs to
+	// one or more destinations of your choice. Use these logs to diagnose why a game
+	// session placement is FULFILLED , CANCELLED , TIMED_OUT , or FAILED , which
+	// locations were evaluated, and the latency and cost factors that influenced each
+	// decision.
+	LogConfiguration *GameSessionQueueLogConfiguration
+
 	// A descriptive label that is associated with game session queue. Queue names
 	// must be unique within each Region.
 	Name *string
@@ -5232,9 +5336,9 @@ type GameSessionQueue struct {
 	PlayerLatencyPolicies []PlayerLatencyPolicy
 
 	// Custom settings to use when prioritizing destinations and locations for game
-	// session placements. This configuration replaces the FleetIQ default
-	// prioritization process. Priority types that are not explicitly named will be
-	// automatically applied at the end of the prioritization process.
+	// session placements. This configuration replaces the default prioritization
+	// process. Priority types that are not explicitly named will be automatically
+	// applied at the end of the prioritization process.
 	PriorityConfiguration *PriorityConfiguration
 
 	// The maximum time, in seconds, that a new game session placement request remains
@@ -5257,7 +5361,9 @@ func (v *GameSessionQueue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomEventData != nil {
 		s.WriteString(schemas.GameSessionQueue_CustomEventData, *v.CustomEventData)
 	}
-	serializeGameSessionQueueDestinationList(s, schemas.GameSessionQueue_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeGameSessionQueueDestinationList(s, schemas.GameSessionQueue_Destinations, v.Destinations)
+	}
 	if v.FilterConfiguration != nil {
 		s.WriteStruct(schemas.GameSessionQueue_FilterConfiguration)
 		v.FilterConfiguration.SerializeMembers(s)
@@ -5266,13 +5372,20 @@ func (v *GameSessionQueue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GameSessionQueueArn != nil {
 		s.WriteString(schemas.GameSessionQueue_GameSessionQueueArn, *v.GameSessionQueueArn)
 	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.GameSessionQueue_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GameSessionQueue_Name, *v.Name)
 	}
 	if v.NotificationTarget != nil {
 		s.WriteString(schemas.GameSessionQueue_NotificationTarget, *v.NotificationTarget)
 	}
-	serializePlayerLatencyPolicyList(s, schemas.GameSessionQueue_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	if v.PlayerLatencyPolicies != nil {
+		serializePlayerLatencyPolicyList(s, schemas.GameSessionQueue_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	}
 	if v.PriorityConfiguration != nil {
 		s.WriteStruct(schemas.GameSessionQueue_PriorityConfiguration)
 		v.PriorityConfiguration.SerializeMembers(s)
@@ -5296,6 +5409,9 @@ func (v *GameSessionQueue) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GameSessionQueue_GameSessionQueueArn:
 			v.GameSessionQueueArn = new(string)
 			return d.ReadString(schemas.GameSessionQueue_GameSessionQueueArn, v.GameSessionQueueArn)
+		case schemas.GameSessionQueue_LogConfiguration:
+			v.LogConfiguration = &GameSessionQueueLogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
 		case schemas.GameSessionQueue_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.GameSessionQueue_Name, v.Name)
@@ -5345,6 +5461,41 @@ func (v *GameSessionQueueDestination) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.GameSessionQueueDestination_DestinationArn:
 			v.DestinationArn = new(string)
 			return d.ReadString(schemas.GameSessionQueueDestination_DestinationArn, v.DestinationArn)
+		}
+		return nil
+	})
+}
+
+// A configuration that delivers game session placement insight logs to one or
+// more destinations of your choice.
+type GameSessionQueueLogConfiguration struct {
+
+	// The destinations that receive game session placement insight logs for the
+	// queue. You can specify up to 3 destinations. Each destination must have a unique
+	// ARN.
+	//
+	// This member is required.
+	DeliveryDestinations []LogDeliveryDestination
+
+	noSmithyDocumentSerde
+}
+
+func (v *GameSessionQueueLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionQueueLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionQueueLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryDestinations != nil {
+		serializeLogDeliveryDestinationList(s, schemas.GameSessionQueueLogConfiguration_DeliveryDestinations, v.DeliveryDestinations)
+	}
+}
+func (v *GameSessionQueueLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionQueueLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionQueueLogConfiguration_DeliveryDestinations:
+			return deserializeLogDeliveryDestinationList(d, schemas.GameSessionQueueLogConfiguration_DeliveryDestinations, &v.DeliveryDestinations)
 		}
 		return nil
 	})
@@ -5872,7 +6023,9 @@ func (v *LinuxCapabilities) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LinuxCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinuxCapabilityList(s, schemas.LinuxCapabilities_Include, v.Include)
+	if v.Include != nil {
+		serializeLinuxCapabilityList(s, schemas.LinuxCapabilities_Include, v.Include)
+	}
 }
 func (v *LinuxCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LinuxCapabilities, func(s *smithy.Schema) error {
@@ -5890,20 +6043,26 @@ type LocationalDeployment struct {
 
 	// The status of fleet deployment activity in the location.
 	//
-	//   - IN_PROGRESS -- The deployment is in progress.
+	//   - IN_PROGRESS -- The deployment is in progress in the location. This status
+	//   covers validation as well as the replacement of the location's containers.
 	//
-	//   - IMPAIRED -- The deployment failed and the fleet has some impaired
-	//   containers.
+	//   - IMPAIRED -- The deployment failed validation in the location, and the
+	//   location kept the containers that failed validation so that you can inspect
+	//   them. A location reaches this status when the deployment's impairment strategy
+	//   is MAINTAIN .
 	//
-	//   - COMPLETE -- The deployment has completed successfully.
+	//   - COMPLETE -- The deployment has completed successfully in the location.
 	//
 	//   - ROLLBACK_IN_PROGRESS -- The deployment failed and rollback has been
-	//   initiated.
+	//   initiated in the location. A location reaches this status when the deployment's
+	//   impairment strategy is ROLLBACK .
 	//
-	//   - ROLLBACK_IN_COMPLETE -- The deployment failed and rollback has been
-	//   completed.
+	//   - ROLLBACK_COMPLETE -- The deployment failed and rollback has been completed
+	//   in the location. The location is running the configuration from the last
+	//   successful deployment.
 	//
-	//   - CANCELLED -- The deployment was cancelled.
+	//   - CANCELLED -- The deployment was cancelled because a new deployment started
+	//   for the same fleet.
 	DeploymentStatus DeploymentStatus
 
 	noSmithyDocumentSerde
@@ -5964,7 +6123,9 @@ func (v *LocationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LocationState.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFleetActionList(s, schemas.LocationAttributes_StoppedActions, v.StoppedActions)
+	if v.StoppedActions != nil {
+		serializeFleetActionList(s, schemas.LocationAttributes_StoppedActions, v.StoppedActions)
+	}
 	if v.UpdateStatus != "" {
 		s.WriteString(schemas.LocationAttributes_UpdateStatus, string(v.UpdateStatus))
 	}
@@ -6236,6 +6397,70 @@ func (v *LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LogConfiguration_S3BucketName:
 			v.S3BucketName = new(string)
 			return d.ReadString(schemas.LogConfiguration_S3BucketName, v.S3BucketName)
+		}
+		return nil
+	})
+}
+
+// A single destination that receives game session placement insight logs for a
+// game session queue.
+//
+// Amazon CloudWatch Logs vended log charges apply to each destination. Amazon S3
+// and Amazon Data Firehose destinations also incur their own service charges. For
+// more information, see [Amazon CloudWatch Pricing].
+//
+// [Amazon CloudWatch Pricing]: http://aws.amazon.com/cloudwatch/pricing/
+type LogDeliveryDestination struct {
+
+	// The type of Amazon Web Services resource that receives the game session
+	// placement insight logs. This value is required. Valid values are:
+	//
+	//   - CLOUDWATCH -- an Amazon CloudWatch Logs log group.
+	//
+	//   - S3 -- an Amazon S3 bucket.
+	//
+	//   - FIREHOSE -- an Amazon Data Firehose delivery stream.
+	//
+	// This member is required.
+	LogDestination LogDeliveryDestinationType
+
+	// The Amazon Resource Name (ARN) of the resource that receives the game session
+	// placement insight logs. This resource must match the type that you specify in
+	// LogDestination . This value is required for FIREHOSE destinations. For
+	// CLOUDWATCH and S3 , you can omit this value; Amazon GameLift Servers then
+	// creates a destination resource of the specified type on your behalf.
+	DestinationArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LogDeliveryDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogDeliveryDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogDeliveryDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.LogDeliveryDestination_DestinationArn, *v.DestinationArn)
+	}
+	if v.LogDestination != "" {
+		s.WriteString(schemas.LogDeliveryDestination_LogDestination, string(v.LogDestination))
+	}
+}
+func (v *LogDeliveryDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogDeliveryDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogDeliveryDestination_DestinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.LogDeliveryDestination_DestinationArn, v.DestinationArn)
+		case schemas.LogDeliveryDestination_LogDestination:
+			var ev string
+			if err := d.ReadString(schemas.LogDeliveryDestination_LogDestination, &ev); err != nil {
+				return err
+			}
+			v.LogDestination = LogDeliveryDestinationType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -6519,11 +6744,15 @@ func (v *MatchmakingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlexMatchMode != "" {
 		s.WriteString(schemas.MatchmakingConfiguration_FlexMatchMode, string(v.FlexMatchMode))
 	}
-	serializeGamePropertyList(s, schemas.MatchmakingConfiguration_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.MatchmakingConfiguration_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.MatchmakingConfiguration_GameSessionData, *v.GameSessionData)
 	}
-	serializeQueueArnsList(s, schemas.MatchmakingConfiguration_GameSessionQueueArns, v.GameSessionQueueArns)
+	if v.GameSessionQueueArns != nil {
+		serializeQueueArnsList(s, schemas.MatchmakingConfiguration_GameSessionQueueArns, v.GameSessionQueueArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.MatchmakingConfiguration_Name, *v.Name)
 	}
@@ -6814,7 +7043,9 @@ func (v *MatchmakingTicket) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GameSessionConnectionInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlayerList(s, schemas.MatchmakingTicket_Players, v.Players)
+	if v.Players != nil {
+		serializePlayerList(s, schemas.MatchmakingTicket_Players, v.Players)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.MatchmakingTicket_StartTime, *v.StartTime)
 	}
@@ -6996,8 +7227,12 @@ func (v *Player) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Player) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLatencyMap(s, schemas.Player_LatencyInMs, v.LatencyInMs)
-	serializePlayerAttributeMap(s, schemas.Player_PlayerAttributes, v.PlayerAttributes)
+	if v.LatencyInMs != nil {
+		serializeLatencyMap(s, schemas.Player_LatencyInMs, v.LatencyInMs)
+	}
+	if v.PlayerAttributes != nil {
+		serializePlayerAttributeMap(s, schemas.Player_PlayerAttributes, v.PlayerAttributes)
+	}
 	if v.PlayerId != nil {
 		s.WriteString(schemas.Player_PlayerId, *v.PlayerId)
 	}
@@ -7072,7 +7307,9 @@ func (v *PlayerConnectionDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PlayerConnectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlayerConnectionEndpointList(s, schemas.PlayerConnectionDetail_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializePlayerConnectionEndpointList(s, schemas.PlayerConnectionDetail_Endpoints, v.Endpoints)
+	}
 	if v.Expiration != nil {
 		s.WriteTime(schemas.PlayerConnectionDetail_Expiration, *v.Expiration)
 	}
@@ -7531,8 +7768,12 @@ func (v *PriorityConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PriorityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationList(s, schemas.PriorityConfiguration_LocationOrder, v.LocationOrder)
-	serializePriorityTypeList(s, schemas.PriorityConfiguration_PriorityOrder, v.PriorityOrder)
+	if v.LocationOrder != nil {
+		serializeLocationList(s, schemas.PriorityConfiguration_LocationOrder, v.LocationOrder)
+	}
+	if v.PriorityOrder != nil {
+		serializePriorityTypeList(s, schemas.PriorityConfiguration_PriorityOrder, v.PriorityOrder)
+	}
 }
 func (v *PriorityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PriorityConfiguration, func(s *smithy.Schema) error {
@@ -7592,7 +7833,9 @@ func (v *PriorityConfigurationOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PriorityConfigurationOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationOrderOverrideList(s, schemas.PriorityConfigurationOverride_LocationOrder, v.LocationOrder)
+	if v.LocationOrder != nil {
+		serializeLocationOrderOverrideList(s, schemas.PriorityConfigurationOverride_LocationOrder, v.LocationOrder)
+	}
 	if v.PlacementFallbackStrategy != "" {
 		s.WriteString(schemas.PriorityConfigurationOverride_PlacementFallbackStrategy, string(v.PlacementFallbackStrategy))
 	}
@@ -7789,7 +8032,9 @@ func (v *RuntimeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxConcurrentGameSessionActivations != nil {
 		s.WriteInt32(schemas.RuntimeConfiguration_MaxConcurrentGameSessionActivations, *v.MaxConcurrentGameSessionActivations)
 	}
-	serializeServerProcessList(s, schemas.RuntimeConfiguration_ServerProcesses, v.ServerProcesses)
+	if v.ServerProcesses != nil {
+		serializeServerProcessList(s, schemas.RuntimeConfiguration_ServerProcesses, v.ServerProcesses)
+	}
 }
 func (v *RuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuntimeConfiguration, func(s *smithy.Schema) error {
@@ -8421,8 +8666,12 @@ func (v *SupportContainerDefinition) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ContainerName != nil {
 		s.WriteString(schemas.SupportContainerDefinition_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.SupportContainerDefinition_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.SupportContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.SupportContainerDefinition_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.SupportContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.Essential != nil {
 		s.WriteBool(schemas.SupportContainerDefinition_Essential, *v.Essential)
 	}
@@ -8442,7 +8691,9 @@ func (v *SupportContainerDefinition) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.MemoryHardLimitMebibytes != nil {
 		s.WriteInt32(schemas.SupportContainerDefinition_MemoryHardLimitMebibytes, *v.MemoryHardLimitMebibytes)
 	}
-	serializeContainerMountPointList(s, schemas.SupportContainerDefinition_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.SupportContainerDefinition_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.SupportContainerDefinition_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)
@@ -8619,8 +8870,12 @@ func (v *SupportContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ContainerName != nil {
 		s.WriteString(schemas.SupportContainerDefinitionInput_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.SupportContainerDefinitionInput_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.SupportContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.SupportContainerDefinitionInput_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.SupportContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.Essential != nil {
 		s.WriteBool(schemas.SupportContainerDefinitionInput_Essential, *v.Essential)
 	}
@@ -8640,7 +8895,9 @@ func (v *SupportContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.MemoryHardLimitMebibytes != nil {
 		s.WriteInt32(schemas.SupportContainerDefinitionInput_MemoryHardLimitMebibytes, *v.MemoryHardLimitMebibytes)
 	}
-	serializeContainerMountPointList(s, schemas.SupportContainerDefinitionInput_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.SupportContainerDefinitionInput_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.SupportContainerDefinitionInput_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)

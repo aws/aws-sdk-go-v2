@@ -71,7 +71,9 @@ func (v *UpdateScalingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApplicationSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScalingInstructions(s, schemas.UpdateScalingPlanRequest_ScalingInstructions, v.ScalingInstructions)
+	if v.ScalingInstructions != nil {
+		serializeScalingInstructions(s, schemas.UpdateScalingPlanRequest_ScalingInstructions, v.ScalingInstructions)
+	}
 	if v.ScalingPlanName != nil {
 		s.WriteString(schemas.UpdateScalingPlanRequest_ScalingPlanName, *v.ScalingPlanName)
 	}

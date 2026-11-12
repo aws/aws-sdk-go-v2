@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListTypeRegistrationsResponse><ListTypeRegistrationsResult><NextToken>__NextToken__</NextToken><RegistrationTokenList><member>__Member__</member><member>__Member__</member></RegistrationTokenList></ListTypeRegistrationsResult></ListTypeRegistrationsResponse>

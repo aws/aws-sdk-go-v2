@@ -67,7 +67,9 @@ func (v *CreateDataIntegrationAssociationInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateDataIntegrationAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientAssociationMetadata(s, schemas.CreateDataIntegrationAssociationRequest_ClientAssociationMetadata, v.ClientAssociationMetadata)
+	if v.ClientAssociationMetadata != nil {
+		serializeClientAssociationMetadata(s, schemas.CreateDataIntegrationAssociationRequest_ClientAssociationMetadata, v.ClientAssociationMetadata)
+	}
 	if v.ClientId != nil {
 		s.WriteString(schemas.CreateDataIntegrationAssociationRequest_ClientId, *v.ClientId)
 	}
@@ -85,7 +87,9 @@ func (v *CreateDataIntegrationAssociationInput) SerializeMembers(s smithy.ShapeS
 		v.ExecutionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeObjectConfiguration(s, schemas.CreateDataIntegrationAssociationRequest_ObjectConfiguration, v.ObjectConfiguration)
+	if v.ObjectConfiguration != nil {
+		serializeObjectConfiguration(s, schemas.CreateDataIntegrationAssociationRequest_ObjectConfiguration, v.ObjectConfiguration)
+	}
 }
 
 type CreateDataIntegrationAssociationOutput struct {

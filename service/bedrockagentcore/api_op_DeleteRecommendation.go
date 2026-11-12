@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.DeleteRecommendationRequest_recommendationId, *v.RecommendationId)
+	}
+}
+
 type DeleteRecommendationOutput struct {
 
 	// The unique identifier of the deleted recommendation.
@@ -52,13 +66,42 @@ type DeleteRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.DeleteRecommendationResponse_recommendationId, *v.RecommendationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteRecommendationResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecommendationResponse_recommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.DeleteRecommendationResponse_recommendationId, v.RecommendationId)
+		case schemas.DeleteRecommendationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRecommendationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecommendationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommendation, schemas.DeleteRecommendationRequest, schemas.DeleteRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommendation, schemas.DeleteRecommendationRequest, schemas.DeleteRecommendationResponse), output: &DeleteRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

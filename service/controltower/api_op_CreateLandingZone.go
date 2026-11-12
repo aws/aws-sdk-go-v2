@@ -63,8 +63,12 @@ func (v *CreateLandingZoneInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Manifest != nil {
 		s.WriteDocument(schemas.CreateLandingZoneInput_manifest, &smithydocument.Opaque{Value: v.Manifest})
 	}
-	serializeRemediationTypes(s, schemas.CreateLandingZoneInput_remediationTypes, v.RemediationTypes)
-	serializeTagMap(s, schemas.CreateLandingZoneInput_tags, v.Tags)
+	if v.RemediationTypes != nil {
+		serializeRemediationTypes(s, schemas.CreateLandingZoneInput_remediationTypes, v.RemediationTypes)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateLandingZoneInput_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.CreateLandingZoneInput_version, *v.Version)
 	}

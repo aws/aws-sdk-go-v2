@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","resources":[{"arn":"__Arn__","id":"__Id__","resourceType":"__ResourceType__"},{"arn":"__Arn__","id":"__Id__","resourceType":"__ResourceType__"}]}

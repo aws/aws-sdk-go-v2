@@ -4,6 +4,8 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ExpireSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpireSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpireSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpireSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalId != nil {
+		s.WriteString(schemas.ExpireSessionRequest_portalId, *v.PortalId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ExpireSessionRequest_sessionId, *v.SessionId)
+	}
+}
+
 type ExpireSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type ExpireSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpireSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpireSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpireSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExpireSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpireSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExpireSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExpireSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExpireSession, schemas.ExpireSessionRequest, schemas.ExpireSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExpireSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExpireSession, schemas.ExpireSessionRequest, schemas.ExpireSessionResponse), output: &ExpireSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

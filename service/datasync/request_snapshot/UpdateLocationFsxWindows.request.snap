@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/UpdateLocationFsxWindows
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.UpdateLocationFsxWindows
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"Domain":"__Domain__","LocationArn":"__LocationArn__","Password":"__Password__","Subdirectory":"__Subdirectory__","User":"__User__"}
+¿oCmkSecretConfig¿iKmsKeyArnm__KmsKeyArn__iSecretArnm__SecretArn__ÿrCustomSecretConfig¿sSecretAccessRoleArnw__SecretAccessRoleArn__iSecretArnm__SecretArn__ÿfDomainj__Domain__kLocationArno__LocationArn__hPasswordl__Password__lSubdirectoryp__Subdirectory__dUserh__User__ÿ

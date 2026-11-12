@@ -11,8 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// If you provide a value for PerformedBy.UserArn you must also have [connect:DescribeUser] permission
-// on the User ARN resource that you provide
+// If you provide a value for PerformedBy.UserArn , you must also have the [connect:DescribeUser]
+// permission on the user ARN that you provide.
 //
 // Creates a case in the specified Cases domain. Case system and custom fields are
 // taken as an array id/value pairs with a declared data types.
@@ -20,13 +20,18 @@ import (
 // When creating a case from a template that has tag propagation configurations,
 // the specified tags are automatically applied to the case.
 //
-// The following fields are required when creating a case:
-//
-//   - customer_id - You must provide the full customer profile ARN in this format:
-//     arn:aws:profile:your_AWS_Region:your_AWS_account
-//     ID:domains/your_profiles_domain_name/profiles/profile_ID
+// The following field is always required when creating a case:
 //
 //   - title
+//
+// The following field may be required depending on the template configuration:
+//
+//   - customer_id - Required only if the template's requiredFields list includes
+//     customer_id . When required, provide the full customer profile ARN in this
+//     format:
+//     arn:aws:profile:your_AWS_Region:your_AWS_account_ID:domains/your_profiles_domain_name/profiles/profile_ID
+//     . When not required, the field is optional and can be omitted, added, changed,
+//     or removed after case creation.
 //
 // [connect:DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns ...func(*Options)) (*CreateCaseOutput, error) {
@@ -72,7 +77,7 @@ type CreateCaseInput struct {
 	// Represents the entity that performed the action.
 	PerformedBy types.UserUnion
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -92,9 +97,15 @@ func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.CreateCaseRequest_domainId, *v.DomainId)
 	}
-	serializeFieldValueList(s, schemas.CreateCaseRequest_fields, v.Fields)
-	serializeUserUnion(s, schemas.CreateCaseRequest_performedBy, v.PerformedBy)
-	serializeMutableTags(s, schemas.CreateCaseRequest_tags, v.Tags)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.CreateCaseRequest_fields, v.Fields)
+	}
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.CreateCaseRequest_performedBy, v.PerformedBy)
+	}
+	if v.Tags != nil {
+		serializeMutableTags(s, schemas.CreateCaseRequest_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.CreateCaseRequest_templateId, *v.TemplateId)
 	}

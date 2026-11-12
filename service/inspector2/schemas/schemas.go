@@ -295,6 +295,13 @@ var GetMember = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/members/get",
 	Code: 200})
 
+var GetOnDemandScanStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GetOnDemandScanStatus",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ondemand/scan/status",
+	Code: 200})
+
 var GetSbomExport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "GetSbomExport",
@@ -421,6 +428,13 @@ var ListMembers = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/members/list",
 	Code: 200})
 
+var ListOnDemandScans = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "ListOnDemandScans",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ondemand/scans",
+	Code: 200})
+
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ListTagsForResource",
@@ -476,6 +490,13 @@ var StartCodeSecurityScan = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/codesecurity/scan/start",
 	Code: 200})
+
+var StartOnDemandScan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "StartOnDemandScan",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ondemand/scan",
+	Code: 202})
 
 var StopCisSession = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -764,17 +785,19 @@ var _AggregationType = smithy.NewSchema(smithy.ShapeID{
 var AmiAggregation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "AmiAggregation",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var AmiAggregation_amis *smithy.Schema
 
 var AmiAggregation_sortOrder *smithy.Schema
 
 var AmiAggregation_sortBy *smithy.Schema
 
+var AmiAggregation_scanSources *smithy.Schema
+
 var AmiAggregationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "AmiAggregationResponse",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var AmiAggregationResponse_ami *smithy.Schema
 
 var AmiAggregationResponse_accountId *smithy.Schema
@@ -793,14 +816,91 @@ var AmiAggregationResponse_severityCounts *smithy.Schema
 
 var AmiAggregationResponse_affectedInstances *smithy.Schema
 
+var AmiAggregationResponse_scanSource *smithy.Schema
+
+var AmiConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var AmiConfiguration_lastLaunchedWithin *smithy.Schema
+
+var AmiConfiguration_createdWithin *smithy.Schema
+
+var AmiConfiguration_scanModeConfiguration *smithy.Schema
+
+var AmiConfigurationState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiConfigurationState",
+}, smithy.ShapeTypeStructure, 5)
+var AmiConfigurationState_lastLaunchedWithin *smithy.Schema
+
+var AmiConfigurationState_createdWithin *smithy.Schema
+
+var AmiConfigurationState_scanModeConfiguration *smithy.Schema
+
+var AmiConfigurationState_status *smithy.Schema
+
+var AmiConfigurationState_updatedAt *smithy.Schema
+
+var _AmiConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiConfigurationStatus",
+}, smithy.ShapeTypeString, 0)
+
 var _AmiId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "AmiId",
 }, smithy.ShapeTypeString, 0)
 
+var _AmiScanDuration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiScanDuration",
+}, smithy.ShapeTypeString, 0)
+
+var _AmiScanMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiScanMode",
+}, smithy.ShapeTypeString, 0)
+
+var AmiScanModeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiScanModeConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var AmiScanModeConfiguration_scanMode *smithy.Schema
+
+var AmiScanModeConfiguration_tags *smithy.Schema
+
+var AmiScanModeConfiguration_excludeCopiedAmis *smithy.Schema
+
+var AmiScanModeConfiguration_excludeBackupDlmAmis *smithy.Schema
+
 var _AmiSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "AmiSortBy",
+}, smithy.ShapeTypeString, 0)
+
+var AmiTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiTagFilter",
+}, smithy.ShapeTypeStructure, 2)
+var AmiTagFilter_key *smithy.Schema
+
+var AmiTagFilter_value *smithy.Schema
+
+var _AmiTagFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiTagFilterList",
+}, smithy.ShapeTypeList, 1)
+var _AmiTagFilterList_member *smithy.Schema
+
+var _AmiTagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiTagKey",
+}, smithy.ShapeTypeString, 0)
+
+var _AmiTagValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "AmiTagValue",
 }, smithy.ShapeTypeString, 0)
 
 var _Architecture = smithy.NewSchema(smithy.ShapeID{
@@ -874,7 +974,7 @@ var _AuthorizationUrl = smithy.NewSchema(smithy.ShapeID{
 var AutoEnable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "AutoEnable",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var AutoEnable_ec2 *smithy.Schema
 
 var AutoEnable_ecr *smithy.Schema
@@ -884,6 +984,8 @@ var AutoEnable_lambda *smithy.Schema
 var AutoEnable_lambdaCode *smithy.Schema
 
 var AutoEnable_codeRepository *smithy.Schema
+
+var AutoEnable_ami *smithy.Schema
 
 var _AwsConfigConnectorArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -2529,7 +2631,7 @@ var _CoverageDateFilterList_member *smithy.Schema
 var CoverageFilterCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "CoverageFilterCriteria",
-}, smithy.ShapeTypeStructure, 32)
+}, smithy.ShapeTypeStructure, 33)
 var CoverageFilterCriteria_scanStatusCode *smithy.Schema
 
 var CoverageFilterCriteria_scanStatusReason *smithy.Schema
@@ -2553,6 +2655,8 @@ var CoverageFilterCriteria_lambdaFunctionName *smithy.Schema
 var CoverageFilterCriteria_lambdaFunctionTags *smithy.Schema
 
 var CoverageFilterCriteria_lambdaFunctionRuntime *smithy.Schema
+
+var CoverageFilterCriteria_machineImageTags *smithy.Schema
 
 var CoverageFilterCriteria_lastScannedAt *smithy.Schema
 
@@ -2899,12 +3003,14 @@ var _DelegatedAdminStatus = smithy.NewSchema(smithy.ShapeID{
 var Destination = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var Destination_bucketName *smithy.Schema
 
 var Destination_keyPrefix *smithy.Schema
 
 var Destination_kmsKeyArn *smithy.Schema
+
+var Destination_expectedBucketOwner *smithy.Schema
 
 var _DetectionPlatforms = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -3326,7 +3432,7 @@ var _FilterArnList_member *smithy.Schema
 var FilterCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "FilterCriteria",
-}, smithy.ShapeTypeStructure, 65)
+}, smithy.ShapeTypeStructure, 69)
 var FilterCriteria_findingArn *smithy.Schema
 
 var FilterCriteria_awsAccountId *smithy.Schema
@@ -3418,6 +3524,14 @@ var FilterCriteria_epssScore *smithy.Schema
 var FilterCriteria_codeRepositoryProjectName *smithy.Schema
 
 var FilterCriteria_codeRepositoryProviderType *smithy.Schema
+
+var FilterCriteria_machineImageId *smithy.Schema
+
+var FilterCriteria_machineImageName *smithy.Schema
+
+var FilterCriteria_machineImageOwnerAccountId *smithy.Schema
+
+var FilterCriteria_machineImagePlatform *smithy.Schema
 
 var FilterCriteria_cloudProvider *smithy.Schema
 
@@ -4180,6 +4294,45 @@ var _ListUsageTotalsNextToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListUsageTotalsNextToken",
 }, smithy.ShapeTypeString, 0)
 
+var MachineImageDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "MachineImageDetails",
+}, smithy.ShapeTypeStructure, 11)
+var MachineImageDetails_machineImageId *smithy.Schema
+
+var MachineImageDetails_name *smithy.Schema
+
+var MachineImageDetails_ownerAccountId *smithy.Schema
+
+var MachineImageDetails_platform *smithy.Schema
+
+var MachineImageDetails_architecture *smithy.Schema
+
+var MachineImageDetails_creationDate *smithy.Schema
+
+var MachineImageDetails_state *smithy.Schema
+
+var MachineImageDetails_isPublic *smithy.Schema
+
+var MachineImageDetails_rootDeviceType *smithy.Schema
+
+var MachineImageDetails_virtualizationType *smithy.Schema
+
+var MachineImageDetails_sourceResourceId *smithy.Schema
+
+var MachineImageMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "MachineImageMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var MachineImageMetadata_tags *smithy.Schema
+
+var MachineImageMetadata_platform *smithy.Schema
+
+var _MachineImagePlatform = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "MachineImagePlatform",
+}, smithy.ShapeTypeString, 0)
+
 var _MapComparison = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "MapComparison",
@@ -4333,6 +4486,67 @@ var _NumberFilterList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NumberFilterList",
 }, smithy.ShapeTypeList, 1)
 var _NumberFilterList_member *smithy.Schema
+
+var OnDemandResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "OnDemandResourceType",
+}, smithy.ShapeTypeEnum, 1)
+var OnDemandResourceType_AMI *smithy.Schema
+
+var OnDemandScan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "OnDemandScan",
+}, smithy.ShapeTypeStructure, 7)
+var OnDemandScan_scanId *smithy.Schema
+
+var OnDemandScan_resourceId *smithy.Schema
+
+var OnDemandScan_resourceType *smithy.Schema
+
+var OnDemandScan_scanStatus *smithy.Schema
+
+var OnDemandScan_scanStatusReason *smithy.Schema
+
+var OnDemandScan_startedAt *smithy.Schema
+
+var OnDemandScan_completedAt *smithy.Schema
+
+var _OnDemandScanList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "OnDemandScanList",
+}, smithy.ShapeTypeList, 1)
+var _OnDemandScanList_member *smithy.Schema
+
+var _OnDemandScanNextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "OnDemandScanNextToken",
+}, smithy.ShapeTypeString, 0)
+
+var OnDemandScanStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "OnDemandScanStatus",
+}, smithy.ShapeTypeEnum, 3)
+var OnDemandScanStatus_IN_PROGRESS *smithy.Schema
+
+var OnDemandScanStatus_SUCCESSFUL *smithy.Schema
+
+var OnDemandScanStatus_FAILED *smithy.Schema
+
+var OnDemandScanStatusReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "OnDemandScanStatusReason",
+}, smithy.ShapeTypeEnum, 6)
+var OnDemandScanStatusReason_ACCESS_DENIED *smithy.Schema
+
+var OnDemandScanStatusReason_INTERNAL_ERROR *smithy.Schema
+
+var OnDemandScanStatusReason_STORAGE_LIMIT_EXCEEDED *smithy.Schema
+
+var OnDemandScanStatusReason_EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED *smithy.Schema
+
+var OnDemandScanStatusReason_UNSUPPORTED_OS *smithy.Schema
+
+var OnDemandScanStatusReason_RESOURCE_TERMINATED *smithy.Schema
 
 var _OneAccountIdFilterList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -4784,7 +4998,7 @@ var Resource_providerOrgId *smithy.Schema
 var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ResourceDetails",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ResourceDetails_awsEc2Instance *smithy.Schema
 
 var ResourceDetails_awsEcrContainerImage *smithy.Schema
@@ -4792,6 +5006,8 @@ var ResourceDetails_awsEcrContainerImage *smithy.Schema
 var ResourceDetails_awsLambdaFunction *smithy.Schema
 
 var ResourceDetails_codeRepository *smithy.Schema
+
+var ResourceDetails_machineImage *smithy.Schema
 
 var ResourceDetails_vm *smithy.Schema
 
@@ -4889,7 +5105,7 @@ var ResourceNotFoundException_message *smithy.Schema
 var ResourceScanMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ResourceScanMetadata",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var ResourceScanMetadata_ecrRepository *smithy.Schema
 
 var ResourceScanMetadata_ecrImage *smithy.Schema
@@ -4910,6 +5126,8 @@ var ResourceScanMetadata_containerRegistry *smithy.Schema
 
 var ResourceScanMetadata_serverlessFunction *smithy.Schema
 
+var ResourceScanMetadata_machineImage *smithy.Schema
+
 var _ResourceScanType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ResourceScanType",
@@ -4918,7 +5136,7 @@ var _ResourceScanType = smithy.NewSchema(smithy.ShapeID{
 var ResourceState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ResourceState",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ResourceState_ec2 *smithy.Schema
 
 var ResourceState_ecr *smithy.Schema
@@ -4929,10 +5147,12 @@ var ResourceState_lambdaCode *smithy.Schema
 
 var ResourceState_codeRepository *smithy.Schema
 
+var ResourceState_ami *smithy.Schema
+
 var ResourceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ResourceStatus",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ResourceStatus_ec2 *smithy.Schema
 
 var ResourceStatus_ecr *smithy.Schema
@@ -4942,6 +5162,8 @@ var ResourceStatus_lambda *smithy.Schema
 var ResourceStatus_lambdaCode *smithy.Schema
 
 var ResourceStatus_codeRepository *smithy.Schema
+
+var ResourceStatus_ami *smithy.Schema
 
 var _ResourceStringComparison = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -5024,10 +5246,26 @@ var _ScanConfigurationName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ScanConfigurationName",
 }, smithy.ShapeTypeString, 0)
 
+var _ScanId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "ScanId",
+}, smithy.ShapeTypeString, 0)
+
 var _ScanMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ScanMode",
 }, smithy.ShapeTypeString, 0)
+
+var _ScanSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "ScanSource",
+}, smithy.ShapeTypeString, 0)
+
+var _ScanSourceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "ScanSourceList",
+}, smithy.ShapeTypeList, 1)
+var _ScanSourceList_member *smithy.Schema
 
 var ScanStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -5672,10 +5910,12 @@ var UpdateCisTargets_targetResourceTags *smithy.Schema
 var UpdateConfigurationInheritance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "UpdateConfigurationInheritance",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var UpdateConfigurationInheritance_ec2Configuration *smithy.Schema
 
 var UpdateConfigurationInheritance_ecrConfiguration *smithy.Schema
+
+var UpdateConfigurationInheritance_amiConfiguration *smithy.Schema
 
 var UpdateGitHubIntegrationDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -6668,10 +6908,12 @@ var GetConfigurationRequest_accountId *smithy.Schema
 var GetConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "GetConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var GetConfigurationResponse_ecrConfiguration *smithy.Schema
 
 var GetConfigurationResponse_ec2Configuration *smithy.Schema
+
+var GetConfigurationResponse_amiConfiguration *smithy.Schema
 
 var GetDelegatedAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -6748,6 +6990,34 @@ var GetMemberResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetMemberResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetMemberResponse_member *smithy.Schema
+
+var GetOnDemandScanStatusRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GetOnDemandScanStatusRequest",
+}, smithy.ShapeTypeStructure, 3)
+var GetOnDemandScanStatusRequest_resourceId *smithy.Schema
+
+var GetOnDemandScanStatusRequest_scanId *smithy.Schema
+
+var GetOnDemandScanStatusRequest_resourceType *smithy.Schema
+
+var GetOnDemandScanStatusResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GetOnDemandScanStatusResponse",
+}, smithy.ShapeTypeStructure, 7)
+var GetOnDemandScanStatusResponse_scanId *smithy.Schema
+
+var GetOnDemandScanStatusResponse_resourceId *smithy.Schema
+
+var GetOnDemandScanStatusResponse_resourceType *smithy.Schema
+
+var GetOnDemandScanStatusResponse_scanStatus *smithy.Schema
+
+var GetOnDemandScanStatusResponse_scanStatusReason *smithy.Schema
+
+var GetOnDemandScanStatusResponse_startedAt *smithy.Schema
+
+var GetOnDemandScanStatusResponse_completedAt *smithy.Schema
 
 var GetSbomExportRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -7107,6 +7377,26 @@ var ListMembersResponse_members *smithy.Schema
 
 var ListMembersResponse_nextToken *smithy.Schema
 
+var ListOnDemandScansRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "ListOnDemandScansRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListOnDemandScansRequest_resourceId *smithy.Schema
+
+var ListOnDemandScansRequest_resourceType *smithy.Schema
+
+var ListOnDemandScansRequest_maxResults *smithy.Schema
+
+var ListOnDemandScansRequest_nextToken *smithy.Schema
+
+var ListOnDemandScansResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "ListOnDemandScansResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListOnDemandScansResponse_items *smithy.Schema
+
+var ListOnDemandScansResponse_nextToken *smithy.Schema
+
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ListTagsForResourceRequest",
@@ -7223,6 +7513,22 @@ var StartCodeSecurityScanResponse_scanId *smithy.Schema
 
 var StartCodeSecurityScanResponse_status *smithy.Schema
 
+var StartOnDemandScanRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "StartOnDemandScanRequest",
+}, smithy.ShapeTypeStructure, 3)
+var StartOnDemandScanRequest_resourceId *smithy.Schema
+
+var StartOnDemandScanRequest_resourceType *smithy.Schema
+
+var StartOnDemandScanRequest_clientToken *smithy.Schema
+
+var StartOnDemandScanResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "StartOnDemandScanResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartOnDemandScanResponse_scanId *smithy.Schema
+
 var StopCisSessionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "StopCisSessionRequest",
@@ -7317,12 +7623,14 @@ var UpdateCodeSecurityScanConfigurationResponse_scanConfigurationArn *smithy.Sch
 var UpdateConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "UpdateConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateConfigurationRequest_accountId *smithy.Schema
 
 var UpdateConfigurationRequest_ecrConfiguration *smithy.Schema
 
 var UpdateConfigurationRequest_ec2Configuration *smithy.Schema
+
+var UpdateConfigurationRequest_amiConfiguration *smithy.Schema
 
 var UpdateConfigurationRequest_updateConfigurationInheritance *smithy.Schema
 
@@ -7455,6 +7763,8 @@ func init() {
 
 	ResourceStatus_codeRepository = ResourceStatus.AddMember("codeRepository", _Status)
 
+	ResourceStatus_ami = ResourceStatus.AddMember("ami", _Status)
+
 	Account_accountId = Account.AddMember("accountId", _AccountId)
 
 	Account_status = Account.AddMember("status", _Status)
@@ -7523,6 +7833,8 @@ func init() {
 
 	ResourceState_codeRepository = ResourceState.AddMember("codeRepository", State)
 
+	ResourceState_ami = ResourceState.AddMember("ami", State)
+
 	AccountState_accountId = AccountState.AddMember("accountId", _AccountId)
 
 	AccountState_state = AccountState.AddMember("state", State)
@@ -7537,11 +7849,15 @@ func init() {
 
 	_StringFilterList_member = _StringFilterList.AddMember("member", StringFilter)
 
+	_ScanSourceList_member = _ScanSourceList.AddMember("member", _ScanSource)
+
 	AmiAggregation_amis = AmiAggregation.AddMember("amis", _StringFilterList)
 
 	AmiAggregation_sortOrder = AmiAggregation.AddMember("sortOrder", _SortOrder)
 
 	AmiAggregation_sortBy = AmiAggregation.AddMember("sortBy", _AmiSortBy)
+
+	AmiAggregation_scanSources = AmiAggregation.AddMember("scanSources", _ScanSourceList)
 
 	DateFilter_startInclusive = DateFilter.AddMember("startInclusive", smithyprelude.Timestamp)
 
@@ -7798,6 +8114,8 @@ func init() {
 	AmiAggregationResponse_severityCounts = AmiAggregationResponse.AddMember("severityCounts", SeverityCounts)
 
 	AmiAggregationResponse_affectedInstances = AmiAggregationResponse.AddMember("affectedInstances", smithyprelude.Long)
+
+	AmiAggregationResponse_scanSource = AmiAggregationResponse.AddMember("scanSource", _ScanSource)
 
 	_StringList_member = _StringList.AddMember("member", _NonEmptyString)
 
@@ -8067,6 +8385,36 @@ func init() {
 
 	_AggregationResponseList_member = _AggregationResponseList.AddMember("member", AggregationResponse)
 
+	AmiTagFilter_key = AmiTagFilter.AddMember("key", _AmiTagKey)
+
+	AmiTagFilter_value = AmiTagFilter.AddMember("value", _AmiTagValue)
+
+	_AmiTagFilterList_member = _AmiTagFilterList.AddMember("member", AmiTagFilter)
+
+	AmiScanModeConfiguration_scanMode = AmiScanModeConfiguration.AddMember("scanMode", _AmiScanMode)
+
+	AmiScanModeConfiguration_tags = AmiScanModeConfiguration.AddMember("tags", _AmiTagFilterList)
+
+	AmiScanModeConfiguration_excludeCopiedAmis = AmiScanModeConfiguration.AddMember("excludeCopiedAmis", smithyprelude.Boolean)
+
+	AmiScanModeConfiguration_excludeBackupDlmAmis = AmiScanModeConfiguration.AddMember("excludeBackupDlmAmis", smithyprelude.Boolean)
+
+	AmiConfiguration_lastLaunchedWithin = AmiConfiguration.AddMember("lastLaunchedWithin", _AmiScanDuration)
+
+	AmiConfiguration_createdWithin = AmiConfiguration.AddMember("createdWithin", _AmiScanDuration)
+
+	AmiConfiguration_scanModeConfiguration = AmiConfiguration.AddMember("scanModeConfiguration", AmiScanModeConfiguration)
+
+	AmiConfigurationState_lastLaunchedWithin = AmiConfigurationState.AddMember("lastLaunchedWithin", _AmiScanDuration)
+
+	AmiConfigurationState_createdWithin = AmiConfigurationState.AddMember("createdWithin", _AmiScanDuration)
+
+	AmiConfigurationState_scanModeConfiguration = AmiConfigurationState.AddMember("scanModeConfiguration", AmiScanModeConfiguration)
+
+	AmiConfigurationState_status = AmiConfigurationState.AddMember("status", _AmiConfigurationStatus)
+
+	AmiConfigurationState_updatedAt = AmiConfigurationState.AddMember("updatedAt", _DateTimeTimestamp)
+
 	_ArchitectureList_member = _ArchitectureList.AddMember("member", _Architecture)
 
 	CodeSecurityResource_projectId = CodeSecurityResource.AddMember("projectId", _ProjectId)
@@ -8110,6 +8458,8 @@ func init() {
 	AutoEnable_lambdaCode = AutoEnable.AddMember("lambdaCode", smithyprelude.Boolean)
 
 	AutoEnable_codeRepository = AutoEnable.AddMember("codeRepository", smithyprelude.Boolean)
+
+	AutoEnable_ami = AutoEnable.AddMember("ami", smithyprelude.Boolean)
 
 	AwsConfigConnectorArnComparison_EQUALS = AwsConfigConnectorArnComparison.AddMember("EQUALS", smithyprelude.Unit)
 
@@ -9105,6 +9455,8 @@ func init() {
 
 	CoverageFilterCriteria_lambdaFunctionRuntime = CoverageFilterCriteria.AddMember("lambdaFunctionRuntime", _CoverageStringFilterList)
 
+	CoverageFilterCriteria_machineImageTags = CoverageFilterCriteria.AddMember("machineImageTags", _CoverageMapFilterList)
+
 	CoverageFilterCriteria_lastScannedAt = CoverageFilterCriteria.AddMember("lastScannedAt", _CoverageDateFilterList)
 
 	CoverageFilterCriteria_scanMode = CoverageFilterCriteria.AddMember("scanMode", _CoverageStringFilterList)
@@ -9187,6 +9539,10 @@ func init() {
 
 	ServerlessFunctionMetadata_functionTags = ServerlessFunctionMetadata.AddMember("functionTags", _TagMap)
 
+	MachineImageMetadata_tags = MachineImageMetadata.AddMember("tags", _TagMap)
+
+	MachineImageMetadata_platform = MachineImageMetadata.AddMember("platform", _MachineImagePlatform)
+
 	ResourceScanMetadata_ecrRepository = ResourceScanMetadata.AddMember("ecrRepository", EcrRepositoryMetadata)
 
 	ResourceScanMetadata_ecrImage = ResourceScanMetadata.AddMember("ecrImage", EcrContainerImageMetadata)
@@ -9206,6 +9562,8 @@ func init() {
 	ResourceScanMetadata_containerRegistry = ResourceScanMetadata.AddMember("containerRegistry", ContainerRegistryMetadata)
 
 	ResourceScanMetadata_serverlessFunction = ResourceScanMetadata.AddMember("serverlessFunction", ServerlessFunctionMetadata)
+
+	ResourceScanMetadata_machineImage = ResourceScanMetadata.AddMember("machineImage", MachineImageMetadata)
 
 	CoveredResource_resourceType = CoveredResource.AddMember("resourceType", _CoverageResourceType)
 
@@ -9304,6 +9662,8 @@ func init() {
 	Destination_keyPrefix = Destination.AddMember("keyPrefix", smithyprelude.String)
 
 	Destination_kmsKeyArn = Destination.AddMember("kmsKeyArn", smithyprelude.String)
+
+	Destination_expectedBucketOwner = Destination.AddMember("expectedBucketOwner", _AccountId)
 
 	_DetectionPlatforms_member = _DetectionPlatforms.AddMember("member", _NonEmptyString)
 
@@ -9517,6 +9877,14 @@ func init() {
 
 	FilterCriteria_codeRepositoryProviderType = FilterCriteria.AddMember("codeRepositoryProviderType", _StringFilterList)
 
+	FilterCriteria_machineImageId = FilterCriteria.AddMember("machineImageId", _StringFilterList)
+
+	FilterCriteria_machineImageName = FilterCriteria.AddMember("machineImageName", _StringFilterList)
+
+	FilterCriteria_machineImageOwnerAccountId = FilterCriteria.AddMember("machineImageOwnerAccountId", _StringFilterList)
+
+	FilterCriteria_machineImagePlatform = FilterCriteria.AddMember("machineImagePlatform", _StringFilterList)
+
 	FilterCriteria_cloudProvider = FilterCriteria.AddMember("cloudProvider", _StringFilterList)
 
 	FilterCriteria_cloudProviderRegion = FilterCriteria.AddMember("cloudProviderRegion", _StringFilterList)
@@ -9584,6 +9952,28 @@ func init() {
 	Recommendation_Url = Recommendation.AddMember("Url", _NonEmptyString)
 
 	Remediation_recommendation = Remediation.AddMember("recommendation", Recommendation)
+
+	MachineImageDetails_machineImageId = MachineImageDetails.AddMember("machineImageId", _NonEmptyString)
+
+	MachineImageDetails_name = MachineImageDetails.AddMember("name", _NonEmptyString)
+
+	MachineImageDetails_ownerAccountId = MachineImageDetails.AddMember("ownerAccountId", _ProviderAccountId)
+
+	MachineImageDetails_platform = MachineImageDetails.AddMember("platform", _Platform)
+
+	MachineImageDetails_architecture = MachineImageDetails.AddMember("architecture", _Architecture)
+
+	MachineImageDetails_creationDate = MachineImageDetails.AddMember("creationDate", _DateTimeTimestamp)
+
+	MachineImageDetails_state = MachineImageDetails.AddMember("state", _NonEmptyString)
+
+	MachineImageDetails_isPublic = MachineImageDetails.AddMember("isPublic", smithyprelude.Boolean)
+
+	MachineImageDetails_rootDeviceType = MachineImageDetails.AddMember("rootDeviceType", _NonEmptyString)
+
+	MachineImageDetails_virtualizationType = MachineImageDetails.AddMember("virtualizationType", _NonEmptyString)
+
+	MachineImageDetails_sourceResourceId = MachineImageDetails.AddMember("sourceResourceId", _NonEmptyString)
 
 	Vm_type = Vm.AddMember("type", _NonEmptyString)
 
@@ -9662,6 +10052,8 @@ func init() {
 	ResourceDetails_awsLambdaFunction = ResourceDetails.AddMember("awsLambdaFunction", AwsLambdaFunctionDetails)
 
 	ResourceDetails_codeRepository = ResourceDetails.AddMember("codeRepository", CodeRepositoryDetails)
+
+	ResourceDetails_machineImage = ResourceDetails.AddMember("machineImage", MachineImageDetails)
 
 	ResourceDetails_vm = ResourceDetails.AddMember("vm", Vm)
 
@@ -9937,6 +10329,42 @@ func init() {
 
 	_MeteringAccountIdList_member = _MeteringAccountIdList.AddMember("member", _MeteringAccountId)
 
+	OnDemandResourceType_AMI = OnDemandResourceType.AddMember("AMI", smithyprelude.Unit)
+
+	OnDemandScanStatus_IN_PROGRESS = OnDemandScanStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	OnDemandScanStatus_SUCCESSFUL = OnDemandScanStatus.AddMember("SUCCESSFUL", smithyprelude.Unit)
+
+	OnDemandScanStatus_FAILED = OnDemandScanStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	OnDemandScanStatusReason_ACCESS_DENIED = OnDemandScanStatusReason.AddMember("ACCESS_DENIED", smithyprelude.Unit)
+
+	OnDemandScanStatusReason_INTERNAL_ERROR = OnDemandScanStatusReason.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	OnDemandScanStatusReason_STORAGE_LIMIT_EXCEEDED = OnDemandScanStatusReason.AddMember("STORAGE_LIMIT_EXCEEDED", smithyprelude.Unit)
+
+	OnDemandScanStatusReason_EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED = OnDemandScanStatusReason.AddMember("EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED", smithyprelude.Unit)
+
+	OnDemandScanStatusReason_UNSUPPORTED_OS = OnDemandScanStatusReason.AddMember("UNSUPPORTED_OS", smithyprelude.Unit)
+
+	OnDemandScanStatusReason_RESOURCE_TERMINATED = OnDemandScanStatusReason.AddMember("RESOURCE_TERMINATED", smithyprelude.Unit)
+
+	OnDemandScan_scanId = OnDemandScan.AddMember("scanId", _ScanId)
+
+	OnDemandScan_resourceId = OnDemandScan.AddMember("resourceId", _ResourceId)
+
+	OnDemandScan_resourceType = OnDemandScan.AddMember("resourceType", OnDemandResourceType)
+
+	OnDemandScan_scanStatus = OnDemandScan.AddMember("scanStatus", OnDemandScanStatus)
+
+	OnDemandScan_scanStatusReason = OnDemandScan.AddMember("scanStatusReason", OnDemandScanStatusReason)
+
+	OnDemandScan_startedAt = OnDemandScan.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	OnDemandScan_completedAt = OnDemandScan.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	_OnDemandScanList_member = _OnDemandScanList.AddMember("member", OnDemandScan)
+
 	_PathList_member = _PathList.AddMember("member", _Path)
 
 	Permission_service = Permission.AddMember("service", _Service)
@@ -10076,6 +10504,8 @@ func init() {
 	UpdateConfigurationInheritance_ec2Configuration = UpdateConfigurationInheritance.AddMember("ec2Configuration", _InheritanceMode)
 
 	UpdateConfigurationInheritance_ecrConfiguration = UpdateConfigurationInheritance.AddMember("ecrConfiguration", _InheritanceMode)
+
+	UpdateConfigurationInheritance_amiConfiguration = UpdateConfigurationInheritance.AddMember("amiConfiguration", _InheritanceMode)
 
 	UpdateGitHubIntegrationDetail_code = UpdateGitHubIntegrationDetail.AddMember("code", _GitHubAuthCode)
 
@@ -10459,6 +10889,8 @@ func init() {
 
 	GetConfigurationResponse_ec2Configuration = GetConfigurationResponse.AddMember("ec2Configuration", Ec2ConfigurationState)
 
+	GetConfigurationResponse_amiConfiguration = GetConfigurationResponse.AddMember("amiConfiguration", AmiConfigurationState)
+
 	GetDelegatedAdminAccountResponse_delegatedAdmin = GetDelegatedAdminAccountResponse.AddMember("delegatedAdmin", DelegatedAdmin)
 
 	GetEc2DeepInspectionConfigurationResponse_packagePaths = GetEc2DeepInspectionConfigurationResponse.AddMember("packagePaths", _PathList)
@@ -10492,6 +10924,26 @@ func init() {
 	GetMemberRequest_accountId = GetMemberRequest.AddMember("accountId", _AccountId)
 
 	GetMemberResponse_member = GetMemberResponse.AddMember("member", Member)
+
+	GetOnDemandScanStatusRequest_resourceId = GetOnDemandScanStatusRequest.AddMember("resourceId", _ResourceId)
+
+	GetOnDemandScanStatusRequest_scanId = GetOnDemandScanStatusRequest.AddMember("scanId", _ScanId)
+
+	GetOnDemandScanStatusRequest_resourceType = GetOnDemandScanStatusRequest.AddMember("resourceType", OnDemandResourceType)
+
+	GetOnDemandScanStatusResponse_scanId = GetOnDemandScanStatusResponse.AddMember("scanId", _ScanId)
+
+	GetOnDemandScanStatusResponse_resourceId = GetOnDemandScanStatusResponse.AddMember("resourceId", _ResourceId)
+
+	GetOnDemandScanStatusResponse_resourceType = GetOnDemandScanStatusResponse.AddMember("resourceType", OnDemandResourceType)
+
+	GetOnDemandScanStatusResponse_scanStatus = GetOnDemandScanStatusResponse.AddMember("scanStatus", OnDemandScanStatus)
+
+	GetOnDemandScanStatusResponse_scanStatusReason = GetOnDemandScanStatusResponse.AddMember("scanStatusReason", OnDemandScanStatusReason)
+
+	GetOnDemandScanStatusResponse_startedAt = GetOnDemandScanStatusResponse.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetOnDemandScanStatusResponse_completedAt = GetOnDemandScanStatusResponse.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	GetSbomExportRequest_reportId = GetSbomExportRequest.AddMember("reportId", _ReportId)
 
@@ -10707,6 +11159,18 @@ func init() {
 
 	ListMembersResponse_nextToken = ListMembersResponse.AddMember("nextToken", _NextToken)
 
+	ListOnDemandScansRequest_resourceId = ListOnDemandScansRequest.AddMember("resourceId", _ResourceId)
+
+	ListOnDemandScansRequest_resourceType = ListOnDemandScansRequest.AddMember("resourceType", OnDemandResourceType)
+
+	ListOnDemandScansRequest_maxResults = ListOnDemandScansRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListOnDemandScansRequest_nextToken = ListOnDemandScansRequest.AddMember("nextToken", _OnDemandScanNextToken)
+
+	ListOnDemandScansResponse_items = ListOnDemandScansResponse.AddMember("items", _OnDemandScanList)
+
+	ListOnDemandScansResponse_nextToken = ListOnDemandScansResponse.AddMember("nextToken", _OnDemandScanNextToken)
+
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
@@ -10755,6 +11219,14 @@ func init() {
 
 	StartCodeSecurityScanResponse_status = StartCodeSecurityScanResponse.AddMember("status", CodeScanStatus)
 
+	StartOnDemandScanRequest_resourceId = StartOnDemandScanRequest.AddMember("resourceId", _ResourceId)
+
+	StartOnDemandScanRequest_resourceType = StartOnDemandScanRequest.AddMember("resourceType", OnDemandResourceType)
+
+	StartOnDemandScanRequest_clientToken = StartOnDemandScanRequest.AddMember("clientToken", smithyprelude.String)
+
+	StartOnDemandScanResponse_scanId = StartOnDemandScanResponse.AddMember("scanId", _ScanId)
+
 	StopCisSessionRequest_scanJobId = StopCisSessionRequest.AddMember("scanJobId", _UUID)
 
 	StopCisSessionRequest_sessionToken = StopCisSessionRequest.AddMember("sessionToken", _UUID)
@@ -10800,6 +11272,8 @@ func init() {
 	UpdateConfigurationRequest_ecrConfiguration = UpdateConfigurationRequest.AddMember("ecrConfiguration", EcrConfiguration)
 
 	UpdateConfigurationRequest_ec2Configuration = UpdateConfigurationRequest.AddMember("ec2Configuration", Ec2Configuration)
+
+	UpdateConfigurationRequest_amiConfiguration = UpdateConfigurationRequest.AddMember("amiConfiguration", AmiConfiguration)
 
 	UpdateConfigurationRequest_updateConfigurationInheritance = UpdateConfigurationRequest.AddMember("updateConfigurationInheritance", UpdateConfigurationInheritance)
 

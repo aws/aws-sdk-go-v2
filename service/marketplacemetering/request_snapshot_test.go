@@ -214,9 +214,11 @@ func TestCheckRequestSnapshot_BatchMeterUsage(t *testing.T) {
 				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
 				Dimension:          ptr.String("__Dimension__"),
 				Quantity:           ptr.Int32(1),
+				QuantityAsDecimal:  ptr.String("__QuantityAsDecimal__"),
 				UsageAllocations: []types.UsageAllocation{
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -229,7 +231,8 @@ func TestCheckRequestSnapshot_BatchMeterUsage(t *testing.T) {
 						},
 					},
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -250,9 +253,11 @@ func TestCheckRequestSnapshot_BatchMeterUsage(t *testing.T) {
 				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
 				Dimension:          ptr.String("__Dimension__"),
 				Quantity:           ptr.Int32(1),
+				QuantityAsDecimal:  ptr.String("__QuantityAsDecimal__"),
 				UsageAllocations: []types.UsageAllocation{
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -265,7 +270,8 @@ func TestCheckRequestSnapshot_BatchMeterUsage(t *testing.T) {
 						},
 					},
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -309,14 +315,16 @@ func TestCheckRequestSnapshot_BatchMeterUsage(t *testing.T) {
 
 func TestCheckRequestSnapshot_MeterUsage(t *testing.T) {
 	input := &MeterUsageInput{
-		ProductCode:    ptr.String("__ProductCode__"),
-		Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UsageDimension: ptr.String("__UsageDimension__"),
-		UsageQuantity:  ptr.Int32(1),
-		DryRun:         ptr.Bool(true),
+		ProductCode:            ptr.String("__ProductCode__"),
+		Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageDimension:         ptr.String("__UsageDimension__"),
+		UsageQuantity:          ptr.Int32(1),
+		UsageQuantityAsDecimal: ptr.String("__UsageQuantityAsDecimal__"),
+		DryRun:                 ptr.Bool(true),
 		UsageAllocations: []types.UsageAllocation{
 			{
-				AllocatedUsageQuantity: ptr.Int32(1),
+				AllocatedUsageQuantity:          ptr.Int32(1),
+				AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -329,7 +337,8 @@ func TestCheckRequestSnapshot_MeterUsage(t *testing.T) {
 				},
 			},
 			{
-				AllocatedUsageQuantity: ptr.Int32(1),
+				AllocatedUsageQuantity:          ptr.Int32(1),
+				AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -430,9 +439,11 @@ func TestUpdateRequestSnapshot_BatchMeterUsage(t *testing.T) {
 				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
 				Dimension:          ptr.String("__Dimension__"),
 				Quantity:           ptr.Int32(1),
+				QuantityAsDecimal:  ptr.String("__QuantityAsDecimal__"),
 				UsageAllocations: []types.UsageAllocation{
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -445,7 +456,8 @@ func TestUpdateRequestSnapshot_BatchMeterUsage(t *testing.T) {
 						},
 					},
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -466,9 +478,11 @@ func TestUpdateRequestSnapshot_BatchMeterUsage(t *testing.T) {
 				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
 				Dimension:          ptr.String("__Dimension__"),
 				Quantity:           ptr.Int32(1),
+				QuantityAsDecimal:  ptr.String("__QuantityAsDecimal__"),
 				UsageAllocations: []types.UsageAllocation{
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -481,7 +495,8 @@ func TestUpdateRequestSnapshot_BatchMeterUsage(t *testing.T) {
 						},
 					},
 					{
-						AllocatedUsageQuantity: ptr.Int32(1),
+						AllocatedUsageQuantity:          ptr.Int32(1),
+						AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 						Tags: []types.Tag{
 							{
 								Key:   ptr.String("__Key__"),
@@ -525,14 +540,16 @@ func TestUpdateRequestSnapshot_BatchMeterUsage(t *testing.T) {
 
 func TestUpdateRequestSnapshot_MeterUsage(t *testing.T) {
 	input := &MeterUsageInput{
-		ProductCode:    ptr.String("__ProductCode__"),
-		Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UsageDimension: ptr.String("__UsageDimension__"),
-		UsageQuantity:  ptr.Int32(1),
-		DryRun:         ptr.Bool(true),
+		ProductCode:            ptr.String("__ProductCode__"),
+		Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageDimension:         ptr.String("__UsageDimension__"),
+		UsageQuantity:          ptr.Int32(1),
+		UsageQuantityAsDecimal: ptr.String("__UsageQuantityAsDecimal__"),
+		DryRun:                 ptr.Bool(true),
 		UsageAllocations: []types.UsageAllocation{
 			{
-				AllocatedUsageQuantity: ptr.Int32(1),
+				AllocatedUsageQuantity:          ptr.Int32(1),
+				AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -545,7 +562,8 @@ func TestUpdateRequestSnapshot_MeterUsage(t *testing.T) {
 				},
 			},
 			{
-				AllocatedUsageQuantity: ptr.Int32(1),
+				AllocatedUsageQuantity:          ptr.Int32(1),
+				AllocatedUsageQuantityAsDecimal: ptr.String("__AllocatedUsageQuantityAsDecimal__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),

@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -27,6 +29,15 @@ func (c *Client) GetMacieSession(ctx context.Context, params *GetMacieSessionInp
 
 type GetMacieSessionInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetMacieSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMacieSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMacieSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetMacieSessionOutput struct {
@@ -61,13 +72,64 @@ type GetMacieSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMacieSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMacieSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMacieSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetMacieSessionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.FindingPublishingFrequency != "" {
+		s.WriteString(schemas.GetMacieSessionResponse_findingPublishingFrequency, string(v.FindingPublishingFrequency))
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.GetMacieSessionResponse_serviceRole, *v.ServiceRole)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMacieSessionResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetMacieSessionResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetMacieSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMacieSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMacieSessionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMacieSessionResponse_createdAt, v.CreatedAt)
+		case schemas.GetMacieSessionResponse_findingPublishingFrequency:
+			var ev string
+			if err := d.ReadString(schemas.GetMacieSessionResponse_findingPublishingFrequency, &ev); err != nil {
+				return err
+			}
+			v.FindingPublishingFrequency = types.FindingPublishingFrequency(ev)
+			return nil
+		case schemas.GetMacieSessionResponse_serviceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.GetMacieSessionResponse_serviceRole, v.ServiceRole)
+		case schemas.GetMacieSessionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetMacieSessionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MacieStatus(ev)
+			return nil
+		case schemas.GetMacieSessionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMacieSessionResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMacieSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMacieSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMacieSession, schemas.GetMacieSessionRequest, schemas.GetMacieSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMacieSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMacieSession, schemas.GetMacieSessionRequest, schemas.GetMacieSessionResponse), output: &GetMacieSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

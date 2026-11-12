@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/UpdateTagOption
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.UpdateTagOption
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Active":true,"Id":"__Id__","Value":"__Value__"}
+¿fActiveõbIdf__Id__eValuei__Value__ÿ

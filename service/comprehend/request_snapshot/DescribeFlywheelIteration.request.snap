@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/DescribeFlywheelIteration
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.DescribeFlywheelIteration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FlywheelArn":"__FlywheelArn__","FlywheelIterationId":"__FlywheelIterationId__"}
+¿kFlywheelArno__FlywheelArn__sFlywheelIterationIdw__FlywheelIterationId__ÿ

@@ -4,7 +4,9 @@ package ebs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ebs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 )
@@ -62,6 +64,24 @@ type GetSnapshotBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnapshotBlockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSnapshotBlockRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSnapshotBlockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockIndex != nil {
+		s.WriteInt32(schemas.GetSnapshotBlockRequest_BlockIndex, *v.BlockIndex)
+	}
+	if v.BlockToken != nil {
+		s.WriteString(schemas.GetSnapshotBlockRequest_BlockToken, *v.BlockToken)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.GetSnapshotBlockRequest_SnapshotId, *v.SnapshotId)
+	}
+}
+
 type GetSnapshotBlockOutput struct {
 
 	// The data content of the block.
@@ -82,13 +102,56 @@ type GetSnapshotBlockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnapshotBlockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSnapshotBlockResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSnapshotBlockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.GetSnapshotBlockResponse_Checksum, *v.Checksum)
+	}
+	if v.ChecksumAlgorithm != "" {
+		s.WriteString(schemas.GetSnapshotBlockResponse_ChecksumAlgorithm, string(v.ChecksumAlgorithm))
+	}
+	if v.DataLength != nil {
+		s.WriteInt32(schemas.GetSnapshotBlockResponse_DataLength, *v.DataLength)
+	}
+}
+func (v *GetSnapshotBlockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSnapshotBlockResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSnapshotBlockResponse_Checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.GetSnapshotBlockResponse_Checksum, v.Checksum)
+		case schemas.GetSnapshotBlockResponse_ChecksumAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.GetSnapshotBlockResponse_ChecksumAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.ChecksumAlgorithm = types.ChecksumAlgorithm(ev)
+			return nil
+		case schemas.GetSnapshotBlockResponse_DataLength:
+			v.DataLength = new(int32)
+			return d.ReadInt32(schemas.GetSnapshotBlockResponse_DataLength, v.DataLength)
+		}
+		return nil
+	})
+}
+func (v *GetSnapshotBlockOutput) GetPayloadStream() io.Reader { return v.BlockData }
+
+var _ smithy.StreamingInput = (*GetSnapshotBlockOutput)(nil)
+
+func (v *GetSnapshotBlockOutput) SetPayloadStream(r io.ReadCloser) { v.BlockData = r }
+
+var _ smithy.StreamingOutput = (*GetSnapshotBlockOutput)(nil)
+
 func (c *Client) addOperationGetSnapshotBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSnapshotBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnapshotBlock, schemas.GetSnapshotBlockRequest, schemas.GetSnapshotBlockResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSnapshotBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnapshotBlock, schemas.GetSnapshotBlockRequest, schemas.GetSnapshotBlockResponse), output: &GetSnapshotBlockOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

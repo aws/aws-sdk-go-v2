@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errorEntries":[{"entryId":"__EntryId__","errors":[{"errorCode":"ResourceNotFoundException","errorMessage":"__ErrorMessage__","timestamps":[{"offsetInNanos":1,"timeInSeconds":1},{"offsetInNanos":1,"timeInSeconds":1}]},{"errorCode":"ResourceNotFoundException","errorMessage":"__ErrorMessage__","timestamps":[{"offsetInNanos":1,"timeInSeconds":1},{"offsetInNanos":1,"timeInSeconds":1}]}]},{"entryId":"__EntryId__","errors":[{"errorCode":"ResourceNotFoundException","errorMessage":"__ErrorMessage__","timestamps":[{"offsetInNanos":1,"timeInSeconds":1},{"offsetInNanos":1,"timeInSeconds":1}]},{"errorCode":"ResourceNotFoundException","errorMessage":"__ErrorMessage__","timestamps":[{"offsetInNanos":1,"timeInSeconds":1},{"offsetInNanos":1,"timeInSeconds":1}]}]}]}

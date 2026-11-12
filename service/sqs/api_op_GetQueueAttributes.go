@@ -214,7 +214,9 @@ func (v *GetQueueAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetQueueAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.GetQueueAttributesRequest_AttributeNames, v.AttributeNames)
+	if v.AttributeNames != nil {
+		serializeAttributeNameList(s, schemas.GetQueueAttributesRequest_AttributeNames, v.AttributeNames)
+	}
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.GetQueueAttributesRequest_QueueUrl, *v.QueueUrl)
 	}
@@ -239,7 +241,9 @@ func (v *GetQueueAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetQueueAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueueAttributeMap(s, schemas.GetQueueAttributesResult_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeQueueAttributeMap(s, schemas.GetQueueAttributesResult_Attributes, v.Attributes)
+	}
 }
 func (v *GetQueueAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetQueueAttributesResult, func(s *smithy.Schema) error {

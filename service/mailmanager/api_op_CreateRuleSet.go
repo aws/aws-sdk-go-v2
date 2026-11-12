@@ -63,8 +63,12 @@ func (v *CreateRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleSetName != nil {
 		s.WriteString(schemas.CreateRuleSetRequest_RuleSetName, *v.RuleSetName)
 	}
-	serializeRules(s, schemas.CreateRuleSetRequest_Rules, v.Rules)
-	serializeTagList(s, schemas.CreateRuleSetRequest_Tags, v.Tags)
+	if v.Rules != nil {
+		serializeRules(s, schemas.CreateRuleSetRequest_Rules, v.Rules)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRuleSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRuleSetOutput struct {

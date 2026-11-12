@@ -103,7 +103,9 @@ func (v *ExportThemesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportThemesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThemeList(s, schemas.ExportThemesResponse_entities, v.Entities)
+	if v.Entities != nil {
+		serializeThemeList(s, schemas.ExportThemesResponse_entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExportThemesResponse_nextToken, *v.NextToken)
 	}

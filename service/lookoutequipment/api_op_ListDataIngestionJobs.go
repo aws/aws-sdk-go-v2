@@ -13,6 +13,10 @@ import (
 
 // Provides a list of all data ingestion jobs, including dataset name and ARN, S3
 // location of the input data, status, and so on.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListDataIngestionJobs(ctx context.Context, params *ListDataIngestionJobsInput, optFns ...func(*Options)) (*ListDataIngestionJobsOutput, error) {
 	if params == nil {
 		params = &ListDataIngestionJobsInput{}
@@ -90,7 +94,9 @@ func (v *ListDataIngestionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataIngestionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataIngestionJobSummaries(s, schemas.ListDataIngestionJobsResponse_DataIngestionJobSummaries, v.DataIngestionJobSummaries)
+	if v.DataIngestionJobSummaries != nil {
+		serializeDataIngestionJobSummaries(s, schemas.ListDataIngestionJobsResponse_DataIngestionJobSummaries, v.DataIngestionJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataIngestionJobsResponse_NextToken, *v.NextToken)
 	}

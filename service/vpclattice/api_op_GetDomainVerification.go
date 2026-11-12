@@ -118,7 +118,9 @@ func (v *GetDomainVerificationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Status != "" {
 		s.WriteString(schemas.GetDomainVerificationResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetDomainVerificationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDomainVerificationResponse_tags, v.Tags)
+	}
 	if v.TxtMethodConfig != nil {
 		s.WriteStruct(schemas.GetDomainVerificationResponse_txtMethodConfig)
 		v.TxtMethodConfig.SerializeMembers(s)

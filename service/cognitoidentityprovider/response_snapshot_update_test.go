@@ -824,6 +824,62 @@ func TestUpdateResponseSnapshot_AdminListUserAuthEvents(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_AdminListUserSessions(t *testing.T) {
+	want := &AdminListUserSessionsOutput{
+		Sessions: []types.SessionDescriptionType{
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.AdminListUserSessions, schemas.AdminListUserSessionsResponse, schemas.AdminListUserSessionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AdminListUserSessions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AdminRemoveUserFromGroup(t *testing.T) {
 	want := &AdminRemoveUserFromGroupOutput{}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -907,6 +963,28 @@ func TestUpdateResponseSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("AdminRespondToAuthChallenge.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_AdminRevokeUserSession(t *testing.T) {
+	want := &AdminRevokeUserSessionOutput{}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.AdminRevokeUserSession, schemas.AdminRevokeUserSessionResponse, schemas.AdminRevokeUserSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AdminRevokeUserSession.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3321,6 +3399,34 @@ func TestUpdateResponseSnapshot_GetUserAuthFactors(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetUserPoolClientSessionConfiguration(t *testing.T) {
+	want := &GetUserPoolClientSessionConfigurationOutput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		SSOSession: &types.ClientSSOSessionConfigType{
+			MaxValidityMinutes: ptr.Int32(1),
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.GetUserPoolClientSessionConfiguration, schemas.GetUserPoolClientSessionConfigurationResponse, schemas.GetUserPoolClientSessionConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetUserPoolClientSessionConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	want := &GetUserPoolMfaConfigOutput{
 		SmsMfaConfiguration: &types.SmsMfaConfigType{
@@ -3370,6 +3476,34 @@ func TestUpdateResponseSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetUserPoolMfaConfig.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetUserPoolSessionConfiguration(t *testing.T) {
+	want := &GetUserPoolSessionConfigurationOutput{
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		UserSessionTracking: types.UserSessionTrackingType("ENABLED"),
+		TokenSession: &types.UserPoolTokenSessionConfigType{
+			MaxPerUser: ptr.Int32(1),
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.GetUserPoolSessionConfiguration, schemas.GetUserPoolSessionConfigurationResponse, schemas.GetUserPoolSessionConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetUserPoolSessionConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3975,6 +4109,62 @@ func TestUpdateResponseSnapshot_ListUserPools(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListUserSessions(t *testing.T) {
+	want := &ListUserSessionsOutput{
+		Sessions: []types.SessionDescriptionType{
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.ListUserSessions, schemas.ListUserSessionsResponse, schemas.ListUserSessionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListUserSessions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListUsers(t *testing.T) {
 	want := &ListUsersOutput{
 		Users: []types.UserType{
@@ -4276,6 +4466,28 @@ func TestUpdateResponseSnapshot_RevokeToken(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_RevokeUserSession(t *testing.T) {
+	want := &RevokeUserSessionOutput{}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.RevokeUserSession, schemas.RevokeUserSessionResponse, schemas.RevokeUserSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RevokeUserSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_SetLogDeliveryConfiguration(t *testing.T) {
 	want := &SetLogDeliveryConfigurationOutput{
 		LogDeliveryConfiguration: &types.LogDeliveryConfigurationType{
@@ -4467,6 +4679,34 @@ func TestUpdateResponseSnapshot_SetUserMFAPreference(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_SetUserPoolClientSessionConfiguration(t *testing.T) {
+	want := &SetUserPoolClientSessionConfigurationOutput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		SSOSession: &types.ClientSSOSessionConfigType{
+			MaxValidityMinutes: ptr.Int32(1),
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.SetUserPoolClientSessionConfiguration, schemas.SetUserPoolClientSessionConfigurationResponse, schemas.SetUserPoolClientSessionConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SetUserPoolClientSessionConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 	want := &SetUserPoolMfaConfigOutput{
 		SmsMfaConfiguration: &types.SmsMfaConfigType{
@@ -4516,6 +4756,34 @@ func TestUpdateResponseSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("SetUserPoolMfaConfig.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SetUserPoolSessionConfiguration(t *testing.T) {
+	want := &SetUserPoolSessionConfigurationOutput{
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		UserSessionTracking: types.UserSessionTrackingType("ENABLED"),
+		TokenSession: &types.UserPoolTokenSessionConfigType{
+			MaxPerUser: ptr.Int32(1),
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.SetUserPoolSessionConfiguration, schemas.SetUserPoolSessionConfigurationResponse, schemas.SetUserPoolSessionConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SetUserPoolSessionConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

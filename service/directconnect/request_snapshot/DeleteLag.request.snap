@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DeleteLag
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DeleteLag
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"lagId":"__LagId__"}
+¿elagIdi__LagId__ÿ

@@ -48,8 +48,12 @@ func (v *GetSamplingTargetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSamplingTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSamplingBoostStatisticsDocumentList(s, schemas.GetSamplingTargetsRequest_SamplingBoostStatisticsDocuments, v.SamplingBoostStatisticsDocuments)
-	serializeSamplingStatisticsDocumentList(s, schemas.GetSamplingTargetsRequest_SamplingStatisticsDocuments, v.SamplingStatisticsDocuments)
+	if v.SamplingBoostStatisticsDocuments != nil {
+		serializeSamplingBoostStatisticsDocumentList(s, schemas.GetSamplingTargetsRequest_SamplingBoostStatisticsDocuments, v.SamplingBoostStatisticsDocuments)
+	}
+	if v.SamplingStatisticsDocuments != nil {
+		serializeSamplingStatisticsDocumentList(s, schemas.GetSamplingTargetsRequest_SamplingStatisticsDocuments, v.SamplingStatisticsDocuments)
+	}
 }
 
 type GetSamplingTargetsOutput struct {
@@ -90,9 +94,15 @@ func (v *GetSamplingTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastRuleModification != nil {
 		s.WriteTime(schemas.GetSamplingTargetsResult_LastRuleModification, *v.LastRuleModification)
 	}
-	serializeSamplingTargetDocumentList(s, schemas.GetSamplingTargetsResult_SamplingTargetDocuments, v.SamplingTargetDocuments)
-	serializeUnprocessedStatisticsList(s, schemas.GetSamplingTargetsResult_UnprocessedBoostStatistics, v.UnprocessedBoostStatistics)
-	serializeUnprocessedStatisticsList(s, schemas.GetSamplingTargetsResult_UnprocessedStatistics, v.UnprocessedStatistics)
+	if v.SamplingTargetDocuments != nil {
+		serializeSamplingTargetDocumentList(s, schemas.GetSamplingTargetsResult_SamplingTargetDocuments, v.SamplingTargetDocuments)
+	}
+	if v.UnprocessedBoostStatistics != nil {
+		serializeUnprocessedStatisticsList(s, schemas.GetSamplingTargetsResult_UnprocessedBoostStatistics, v.UnprocessedBoostStatistics)
+	}
+	if v.UnprocessedStatistics != nil {
+		serializeUnprocessedStatisticsList(s, schemas.GetSamplingTargetsResult_UnprocessedStatistics, v.UnprocessedStatistics)
+	}
 }
 func (v *GetSamplingTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSamplingTargetsResult, func(s *smithy.Schema) error {

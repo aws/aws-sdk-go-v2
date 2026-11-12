@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"StreamARN":"__StreamARN__","StreamName":"__StreamName__","StreamStorageConfiguration":{"DefaultStorageTier":"HOT"}}

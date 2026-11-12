@@ -175,7 +175,9 @@ func (v *GenerateDataSetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerDefinedValues(s, schemas.GenerateDataSetRequest_customerDefinedValues, v.CustomerDefinedValues)
+	if v.CustomerDefinedValues != nil {
+		serializeCustomerDefinedValues(s, schemas.GenerateDataSetRequest_customerDefinedValues, v.CustomerDefinedValues)
+	}
 	if v.DataSetPublicationDate != nil {
 		s.WriteTime(schemas.GenerateDataSetRequest_dataSetPublicationDate, *v.DataSetPublicationDate)
 	}

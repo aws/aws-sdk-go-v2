@@ -1,0 +1,7 @@
+POST /service/EUCMIFrontendAPIService/operation/ModifyVolume
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦jVolumeTypehstandarddIopsjThroughputkClientTokeno__ClientToken__hVolumeIdl__VolumeId__hSizeInGB

@@ -198,11 +198,15 @@ func (v *Defaults) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultInteger != nil {
 		s.WriteInt32(schemas.Defaults_defaultInteger, *v.DefaultInteger)
 	}
-	serializeTestStringList(s, schemas.Defaults_defaultList, v.DefaultList)
+	if v.DefaultList != nil {
+		serializeTestStringList(s, schemas.Defaults_defaultList, v.DefaultList)
+	}
 	if v.DefaultLong != nil {
 		s.WriteInt64(schemas.Defaults_defaultLong, *v.DefaultLong)
 	}
-	serializeTestStringMap(s, schemas.Defaults_defaultMap, v.DefaultMap)
+	if v.DefaultMap != nil {
+		serializeTestStringMap(s, schemas.Defaults_defaultMap, v.DefaultMap)
+	}
 	if v.DefaultNullDocument != nil {
 		s.WriteDocument(schemas.Defaults_defaultNullDocument, &smithydocument.Opaque{Value: v.DefaultNullDocument})
 	}
@@ -1370,8 +1374,12 @@ func (v *TopLevel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Dialog.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDialogList(s, schemas.TopLevel_dialogList, v.DialogList)
-	serializeDialogMap(s, schemas.TopLevel_dialogMap, v.DialogMap)
+	if v.DialogList != nil {
+		serializeDialogList(s, schemas.TopLevel_dialogList, v.DialogList)
+	}
+	if v.DialogMap != nil {
+		serializeDialogMap(s, schemas.TopLevel_dialogMap, v.DialogMap)
+	}
 }
 func (v *TopLevel) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TopLevel, func(s *smithy.Schema) error {
@@ -1422,7 +1430,9 @@ func (v *UnionPayloadEvent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UnionPayloadEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePayloadUnion(s, schemas.UnionPayloadEvent_payload, v.Payload)
+	if v.Payload != nil {
+		serializePayloadUnion(s, schemas.UnionPayloadEvent_payload, v.Payload)
+	}
 }
 func (v *UnionPayloadEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnionPayloadEvent, func(s *smithy.Schema) error {

@@ -191,7 +191,9 @@ func (v *RestoreTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PointInTimeRecoveryOverride.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicaSpecificationList(s, schemas.RestoreTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	if v.ReplicaSpecifications != nil {
+		serializeReplicaSpecificationList(s, schemas.RestoreTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	}
 	if v.RestoreTimestamp != nil {
 		s.WriteTime(schemas.RestoreTableRequest_restoreTimestamp, *v.RestoreTimestamp)
 	}
@@ -201,7 +203,9 @@ func (v *RestoreTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceTableName != nil {
 		s.WriteString(schemas.RestoreTableRequest_sourceTableName, *v.SourceTableName)
 	}
-	serializeTagList(s, schemas.RestoreTableRequest_tagsOverride, v.TagsOverride)
+	if v.TagsOverride != nil {
+		serializeTagList(s, schemas.RestoreTableRequest_tagsOverride, v.TagsOverride)
+	}
 	if v.TargetKeyspaceName != nil {
 		s.WriteString(schemas.RestoreTableRequest_targetKeyspaceName, *v.TargetKeyspaceName)
 	}

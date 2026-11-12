@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"confidence":1,"createdAt":"2000-01-01T00:00:00Z","evidenceAvailability":"NONE","findingIds":["__Member__","__Member__"],"issueArn":"__IssueArn__","issueId":"__IssueId__","name":"__Name__","patchDelivery":{"failedCount":1,"failureReasons":["ARTIFACT_READ_FAILED","ARTIFACT_READ_FAILED"],"patchCount":1,"status":"PENDING","succeededCount":1},"phase":"VALIDATION","severity":"LOW","severityReasoning":"__SeverityReasoning__","status":"CREATED","statusMessage":"__StatusMessage__","statusReason":"INTERNAL_ERROR","statusUpdatedAt":"2000-01-01T00:00:00Z","summary":"__Summary__","synopsis":"__Synopsis__","updatedAt":"2000-01-01T00:00:00Z"}

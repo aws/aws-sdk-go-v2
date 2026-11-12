@@ -78,7 +78,9 @@ func (v *ListPickupLocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPickupLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddressList(s, schemas.ListPickupLocationsResult_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeAddressList(s, schemas.ListPickupLocationsResult_Addresses, v.Addresses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPickupLocationsResult_NextToken, *v.NextToken)
 	}

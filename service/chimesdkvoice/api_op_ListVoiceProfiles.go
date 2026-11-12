@@ -85,7 +85,9 @@ func (v *ListVoiceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVoiceProfilesResponse_NextToken, *v.NextToken)
 	}
-	serializeVoiceProfileSummaryList(s, schemas.ListVoiceProfilesResponse_VoiceProfiles, v.VoiceProfiles)
+	if v.VoiceProfiles != nil {
+		serializeVoiceProfileSummaryList(s, schemas.ListVoiceProfilesResponse_VoiceProfiles, v.VoiceProfiles)
+	}
 }
 func (v *ListVoiceProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVoiceProfilesResponse, func(s *smithy.Schema) error {

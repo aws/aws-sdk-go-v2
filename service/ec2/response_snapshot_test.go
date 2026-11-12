@@ -4391,6 +4391,98 @@ func TestCheckResponseSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 				Priority:           ptr.Int32(1),
 			},
 		},
+		InstanceRequirements: &types.InstanceRequirementsRequest{
+			VCpuCount: &types.VCpuCountRangeRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			MemoryMiB: &types.MemoryMiBRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			CpuManufacturers: []types.CpuManufacturer{
+				types.CpuManufacturer("intel"),
+				types.CpuManufacturer("intel"),
+			},
+			MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			ExcludedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InstanceGenerations: []types.InstanceGeneration{
+				types.InstanceGeneration("current"),
+				types.InstanceGeneration("current"),
+			},
+			SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+			OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+			BareMetal:               types.BareMetal("included"),
+			BurstablePerformance:    types.BurstablePerformance("included"),
+			RequireHibernateSupport: ptr.Bool(true),
+			NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			LocalStorage: types.LocalStorage("included"),
+			LocalStorageTypes: []types.LocalStorageType{
+				types.LocalStorageType("hdd"),
+				types.LocalStorageType("hdd"),
+			},
+			TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			AcceleratorTypes: []types.AcceleratorType{
+				types.AcceleratorType("gpu"),
+				types.AcceleratorType("gpu"),
+			},
+			AcceleratorCount: &types.AcceleratorCountRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			AcceleratorManufacturers: []types.AcceleratorManufacturer{
+				types.AcceleratorManufacturer("amazon-web-services"),
+				types.AcceleratorManufacturer("amazon-web-services"),
+			},
+			AcceleratorNames: []types.AcceleratorName{
+				types.AcceleratorName("a100"),
+				types.AcceleratorName("a100"),
+			},
+			AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			AllowedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+			BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+				Cpu: &types.CpuPerformanceFactorRequest{
+					References: []types.PerformanceFactorReferenceRequest{
+						{
+							InstanceFamily: ptr.String("__InstanceFamily__"),
+						},
+						{
+							InstanceFamily: ptr.String("__InstanceFamily__"),
+						},
+					},
+				},
+			},
+			RequireEncryptionInTransit: ptr.Bool(true),
+		},
+		AvailabilityZone:      ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:    ptr.String("__AvailabilityZoneId__"),
 		Tenancy:               types.FleetCapacityReservationTenancy("default"),
 		TotalTargetCapacity:   ptr.Int32(1),
 		EndDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -23440,6 +23532,98 @@ func TestCheckResponseSnapshot_DescribeCapacityReservationFleets(t *testing.T) {
 						Priority:              ptr.Int32(1),
 					},
 				},
+				InstanceRequirements: &types.InstanceRequirementsRequest{
+					VCpuCount: &types.VCpuCountRangeRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					CpuManufacturers: []types.CpuManufacturer{
+						types.CpuManufacturer("intel"),
+						types.CpuManufacturer("intel"),
+					},
+					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					ExcludedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InstanceGenerations: []types.InstanceGeneration{
+						types.InstanceGeneration("current"),
+						types.InstanceGeneration("current"),
+					},
+					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+					BareMetal:               types.BareMetal("included"),
+					BurstablePerformance:    types.BurstablePerformance("included"),
+					RequireHibernateSupport: ptr.Bool(true),
+					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					LocalStorage: types.LocalStorage("included"),
+					LocalStorageTypes: []types.LocalStorageType{
+						types.LocalStorageType("hdd"),
+						types.LocalStorageType("hdd"),
+					},
+					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorManufacturers: []types.AcceleratorManufacturer{
+						types.AcceleratorManufacturer("amazon-web-services"),
+						types.AcceleratorManufacturer("amazon-web-services"),
+					},
+					AcceleratorNames: []types.AcceleratorName{
+						types.AcceleratorName("a100"),
+						types.AcceleratorName("a100"),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					AllowedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+					BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+						Cpu: &types.CpuPerformanceFactorRequest{
+							References: []types.PerformanceFactorReferenceRequest{
+								{
+									InstanceFamily: ptr.String("__InstanceFamily__"),
+								},
+								{
+									InstanceFamily: ptr.String("__InstanceFamily__"),
+								},
+							},
+						},
+					},
+					RequireEncryptionInTransit: ptr.Bool(true),
+				},
+				AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -23490,6 +23674,98 @@ func TestCheckResponseSnapshot_DescribeCapacityReservationFleets(t *testing.T) {
 						Priority:              ptr.Int32(1),
 					},
 				},
+				InstanceRequirements: &types.InstanceRequirementsRequest{
+					VCpuCount: &types.VCpuCountRangeRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					CpuManufacturers: []types.CpuManufacturer{
+						types.CpuManufacturer("intel"),
+						types.CpuManufacturer("intel"),
+					},
+					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					ExcludedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InstanceGenerations: []types.InstanceGeneration{
+						types.InstanceGeneration("current"),
+						types.InstanceGeneration("current"),
+					},
+					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+					BareMetal:               types.BareMetal("included"),
+					BurstablePerformance:    types.BurstablePerformance("included"),
+					RequireHibernateSupport: ptr.Bool(true),
+					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					LocalStorage: types.LocalStorage("included"),
+					LocalStorageTypes: []types.LocalStorageType{
+						types.LocalStorageType("hdd"),
+						types.LocalStorageType("hdd"),
+					},
+					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorManufacturers: []types.AcceleratorManufacturer{
+						types.AcceleratorManufacturer("amazon-web-services"),
+						types.AcceleratorManufacturer("amazon-web-services"),
+					},
+					AcceleratorNames: []types.AcceleratorName{
+						types.AcceleratorName("a100"),
+						types.AcceleratorName("a100"),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+						Min: ptr.Float64(1.0),
+						Max: ptr.Float64(1.0),
+					},
+					AllowedInstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+					BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+						Cpu: &types.CpuPerformanceFactorRequest{
+							References: []types.PerformanceFactorReferenceRequest{
+								{
+									InstanceFamily: ptr.String("__InstanceFamily__"),
+								},
+								{
+									InstanceFamily: ptr.String("__InstanceFamily__"),
+								},
+							},
+						},
+					},
+					RequireEncryptionInTransit: ptr.Bool(true),
+				},
+				AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -29681,6 +29957,15 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						WatermarkCreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
+				ScanResults: &types.ScanResults{
+					HighestFindingSeverityLabel:    types.SeverityLabel("informational"),
+					FindingScanDate:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					InformationalFixAvailableSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LowFixAvailableSince:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					MediumFixAvailableSince:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					HighFixAvailableSince:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CriticalFixAvailableSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
 				InstanceTypeSpecification: &types.InstanceTypeSpecification{
 					SupportedInstanceTypes: []types.InstanceTypeItem{
 						{
@@ -29816,6 +30101,15 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						SourceImageCreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						WatermarkCreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+				},
+				ScanResults: &types.ScanResults{
+					HighestFindingSeverityLabel:    types.SeverityLabel("informational"),
+					FindingScanDate:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					InformationalFixAvailableSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LowFixAvailableSince:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					MediumFixAvailableSince:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					HighFixAvailableSince:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CriticalFixAvailableSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				InstanceTypeSpecification: &types.InstanceTypeSpecification{
 					SupportedInstanceTypes: []types.InstanceTypeItem{
@@ -31089,6 +31383,11 @@ func TestCheckResponseSnapshot_DescribeInstanceStatus(t *testing.T) {
 					Status:        types.SummaryStatus("ok"),
 					ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				PerformanceStatus: &types.PerformanceStatusSummary{
+					Status:        types.SummaryStatus("ok"),
+					ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Remediation:   ptr.String("__Remediation__"),
+				},
 			},
 			{
 				AvailabilityZone:   ptr.String("__AvailabilityZone__"),
@@ -31170,6 +31469,11 @@ func TestCheckResponseSnapshot_DescribeInstanceStatus(t *testing.T) {
 				ApplicationStatus: &types.ApplicationStatusSummary{
 					Status:        types.SummaryStatus("ok"),
 					ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				PerformanceStatus: &types.PerformanceStatusSummary{
+					Status:        types.SummaryStatus("ok"),
+					ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Remediation:   ptr.String("__Remediation__"),
 				},
 			},
 		},
@@ -38340,6 +38644,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -38592,6 +38911,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -38923,6 +39262,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -39414,6 +39773,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -39666,6 +40040,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -39997,6 +40391,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -40490,6 +40904,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -40742,6 +41171,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -41073,6 +41522,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -41564,6 +42033,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -41816,6 +42300,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -42147,6 +42651,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -42560,6 +43084,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTable: &types.AnalysisComponent{
+							Id:   ptr.String("__Id__"),
+							Arn:  ptr.String("__Arn__"),
+							Name: ptr.String("__Name__"),
+						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						TransitGatewayAttachment: &types.AnalysisComponent{
 							Id:   ptr.String("__Id__"),
 							Arn:  ptr.String("__Arn__"),
@@ -42890,6 +43434,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							AttachmentId:    ptr.String("__AttachmentId__"),
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
+						},
+						TransitGatewayPolicyTable: &types.AnalysisComponent{
+							Id:   ptr.String("__Id__"),
+							Arn:  ptr.String("__Arn__"),
+							Name: ptr.String("__Name__"),
+						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 						},
 						TransitGatewayAttachment: &types.AnalysisComponent{
 							Id:   ptr.String("__Id__"),
@@ -43350,6 +43914,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -43602,6 +44181,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -43933,6 +44532,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -44424,6 +45043,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -44676,6 +45310,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -45007,6 +45661,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -45500,6 +46174,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -45752,6 +46441,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -46083,6 +46792,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -46574,6 +47303,21 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -46826,6 +47570,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -47157,6 +47921,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -47570,6 +48354,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTable: &types.AnalysisComponent{
+							Id:   ptr.String("__Id__"),
+							Arn:  ptr.String("__Arn__"),
+							Name: ptr.String("__Name__"),
+						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						TransitGatewayAttachment: &types.AnalysisComponent{
 							Id:   ptr.String("__Id__"),
 							Arn:  ptr.String("__Arn__"),
@@ -47900,6 +48704,26 @@ func TestCheckResponseSnapshot_DescribeNetworkInsightsAnalyses(t *testing.T) {
 							AttachmentId:    ptr.String("__AttachmentId__"),
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
+						},
+						TransitGatewayPolicyTable: &types.AnalysisComponent{
+							Id:   ptr.String("__Id__"),
+							Arn:  ptr.String("__Arn__"),
+							Name: ptr.String("__Name__"),
+						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 						},
 						TransitGatewayAttachment: &types.AnalysisComponent{
 							Id:   ptr.String("__Id__"),
@@ -56308,6 +57132,7 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayAttachments(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				NatGatewaySupport: types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
 			},
 			{
 				TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
@@ -56333,6 +57158,7 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayAttachments(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				NatGatewaySupport: types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -64083,6 +64909,15 @@ func TestCheckResponseSnapshot_GetAllowedImagesSettings(t *testing.T) {
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
 				},
+				ScanResultCondition: &types.ScanResultCondition{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
+				},
 			},
 			{
 				ImageProviders: []string{
@@ -64116,6 +64951,15 @@ func TestCheckResponseSnapshot_GetAllowedImagesSettings(t *testing.T) {
 						MaximumDaysSinceSourceImageCreated: ptr.Int32(1),
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
+				},
+				ScanResultCondition: &types.ScanResultCondition{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
 				},
 			},
 		},
@@ -64636,6 +65480,152 @@ func TestCheckResponseSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetCapacityManagerMonitoredTagKeys.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCapacityManagerSupportabilityScores(t *testing.T) {
+	want := &GetCapacityManagerSupportabilityScoresOutput{
+		AggregateScore: types.SupportabilityScore("high"),
+		CapacityManagerSupportabilityScores: []types.CapacityManagerSupportabilityScore{
+			{
+				InstanceType:       ptr.String("__InstanceType__"),
+				AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+				Score:              types.SupportabilityScore("high"),
+			},
+			{
+				InstanceType:       ptr.String("__InstanceType__"),
+				AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+				Score:              types.SupportabilityScore("high"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCapacityManagerSupportabilityScores.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCapacityManagerSupportabilityScores(context.Background(), &GetCapacityManagerSupportabilityScoresInput{
+		MarketType:     types.SupportabilityMarketType("on-demand"),
+		CapacityAmount: ptr.Int32(1),
+		CapacityUnit:   types.CapacityUnit("vcpus"),
+		CapacityAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceRequirementsWithMetadata: &types.InstanceRequirementsWithMetadataRequest{
+			ArchitectureTypes: []types.ArchitectureType{
+				types.ArchitectureType("i386"),
+				types.ArchitectureType("i386"),
+			},
+			VirtualizationTypes: []types.VirtualizationType{
+				types.VirtualizationType("hvm"),
+				types.VirtualizationType("hvm"),
+			},
+			InstanceRequirements: &types.InstanceRequirementsRequest{
+				VCpuCount: &types.VCpuCountRangeRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				MemoryMiB: &types.MemoryMiBRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				CpuManufacturers: []types.CpuManufacturer{
+					types.CpuManufacturer("intel"),
+					types.CpuManufacturer("intel"),
+				},
+				MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				ExcludedInstanceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InstanceGenerations: []types.InstanceGeneration{
+					types.InstanceGeneration("current"),
+					types.InstanceGeneration("current"),
+				},
+				SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+				OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+				BareMetal:               types.BareMetal("included"),
+				BurstablePerformance:    types.BurstablePerformance("included"),
+				RequireHibernateSupport: ptr.Bool(true),
+				NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				LocalStorage: types.LocalStorage("included"),
+				LocalStorageTypes: []types.LocalStorageType{
+					types.LocalStorageType("hdd"),
+					types.LocalStorageType("hdd"),
+				},
+				TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				AcceleratorTypes: []types.AcceleratorType{
+					types.AcceleratorType("gpu"),
+					types.AcceleratorType("gpu"),
+				},
+				AcceleratorCount: &types.AcceleratorCountRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				AcceleratorManufacturers: []types.AcceleratorManufacturer{
+					types.AcceleratorManufacturer("amazon-web-services"),
+					types.AcceleratorManufacturer("amazon-web-services"),
+				},
+				AcceleratorNames: []types.AcceleratorName{
+					types.AcceleratorName("a100"),
+					types.AcceleratorName("a100"),
+				},
+				AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				AllowedInstanceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+					Cpu: &types.CpuPerformanceFactorRequest{
+						References: []types.PerformanceFactorReferenceRequest{
+							{
+								InstanceFamily: ptr.String("__InstanceFamily__"),
+							},
+							{
+								InstanceFamily: ptr.String("__InstanceFamily__"),
+							},
+						},
+					},
+				},
+				RequireEncryptionInTransit: ptr.Bool(true),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCapacityManagerSupportabilityScores.response", err)
 	}
 }
 
@@ -65194,6 +66184,60 @@ func TestCheckResponseSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetImageBlockPublicAccessState.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetImageFindings(t *testing.T) {
+	want := &GetImageFindingsOutput{
+		ImageFindings: []types.ImageFinding{
+			{
+				FixAvailable:    ptr.Bool(true),
+				Score:           ptr.Float64(1.0),
+				FirstObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Title:           ptr.String("__Title__"),
+				Paths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SeverityLabel: types.SeverityLabel("informational"),
+				SnapshotId:    ptr.String("__SnapshotId__"),
+			},
+			{
+				FixAvailable:    ptr.Bool(true),
+				Score:           ptr.Float64(1.0),
+				FirstObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Title:           ptr.String("__Title__"),
+				Paths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SeverityLabel: types.SeverityLabel("informational"),
+				SnapshotId:    ptr.String("__SnapshotId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetImageFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetImageFindings(context.Background(), &GetImageFindingsInput{
+		ImageId:    ptr.String("__ImageId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetImageFindings.response", err)
 	}
 }
 
@@ -67688,6 +68732,21 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -67940,6 +68999,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -68271,6 +69350,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -68762,6 +69861,21 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -69014,6 +70128,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -69345,6 +70479,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -69843,6 +70997,21 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -70095,6 +71264,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -70426,6 +71615,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -70917,6 +72126,21 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 							ResourceId:      ptr.String("__ResourceId__"),
 							ResourceType:    ptr.String("__ResourceType__"),
 						},
+						TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+							RuleNumber:      ptr.Int32(1),
+							Protocol:        ptr.String("__Protocol__"),
+							SourceCidr:      ptr.String("__SourceCidr__"),
+							DestinationCidr: ptr.String("__DestinationCidr__"),
+							SourcePortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							DestinationPortRange: &types.PortRange{
+								From: ptr.Int32(1),
+								To:   ptr.Int32(1),
+							},
+							TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+						},
 						Explanations: []types.Explanation{
 							{
 								Acl: &types.AnalysisComponent{
@@ -71169,6 +72393,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -71500,6 +72744,26 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *
 									AttachmentId:    ptr.String("__AttachmentId__"),
 									ResourceId:      ptr.String("__ResourceId__"),
 									ResourceType:    ptr.String("__ResourceType__"),
+								},
+								TransitGatewayPolicyTable: &types.AnalysisComponent{
+									Id:   ptr.String("__Id__"),
+									Arn:  ptr.String("__Arn__"),
+									Name: ptr.String("__Name__"),
+								},
+								TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+									RuleNumber:      ptr.Int32(1),
+									Protocol:        ptr.String("__Protocol__"),
+									SourceCidr:      ptr.String("__SourceCidr__"),
+									DestinationCidr: ptr.String("__DestinationCidr__"),
+									SourcePortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									DestinationPortRange: &types.PortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 								},
 								TransitGatewayAttachment: &types.AnalysisComponent{
 									Id:   ptr.String("__Id__"),
@@ -72837,6 +74101,46 @@ func TestCheckResponseSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSubnetCidrReservations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	want := &GetTransitGatewayAttachmentNatConfigurationOutput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRule{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTransitGatewayAttachmentNatConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), &GetTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTransitGatewayAttachmentNatConfiguration.response", err)
 	}
 }
 
@@ -78355,6 +79659,61 @@ func TestCheckResponseSnapshot_ModifyTransitGateway(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	want := &ModifyTransitGatewayAttachmentNatConfigurationOutput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRule{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyTransitGatewayAttachmentNatConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), &ModifyTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportValue("enable"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
+		ResetNatGatewayRules: ptr.Bool(true),
+		DryRun:               ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyTransitGatewayAttachmentNatConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	want := &ModifyTransitGatewayMeteringPolicyOutput{
 		TransitGatewayMeteringPolicy: &types.TransitGatewayMeteringPolicy{
@@ -82496,6 +83855,15 @@ func TestCheckResponseSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *te
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
 				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
+				},
 			},
 			{
 				ImageProviders: []string{
@@ -82529,6 +83897,15 @@ func TestCheckResponseSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *te
 						MaximumDaysSinceSourceImageCreated: ptr.Int32(1),
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
+				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
 				},
 			},
 		},
@@ -88059,6 +89436,21 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 						ResourceId:      ptr.String("__ResourceId__"),
 						ResourceType:    ptr.String("__ResourceType__"),
 					},
+					TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+						RuleNumber:      ptr.Int32(1),
+						Protocol:        ptr.String("__Protocol__"),
+						SourceCidr:      ptr.String("__SourceCidr__"),
+						DestinationCidr: ptr.String("__DestinationCidr__"),
+						SourcePortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						DestinationPortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+					},
 					Explanations: []types.Explanation{
 						{
 							Acl: &types.AnalysisComponent{
@@ -88311,6 +89703,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -88642,6 +90054,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -89133,6 +90565,21 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 						ResourceId:      ptr.String("__ResourceId__"),
 						ResourceType:    ptr.String("__ResourceType__"),
 					},
+					TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+						RuleNumber:      ptr.Int32(1),
+						Protocol:        ptr.String("__Protocol__"),
+						SourceCidr:      ptr.String("__SourceCidr__"),
+						DestinationCidr: ptr.String("__DestinationCidr__"),
+						SourcePortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						DestinationPortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+					},
 					Explanations: []types.Explanation{
 						{
 							Acl: &types.AnalysisComponent{
@@ -89385,6 +90832,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -89716,6 +91183,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -90209,6 +91696,21 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 						ResourceId:      ptr.String("__ResourceId__"),
 						ResourceType:    ptr.String("__ResourceType__"),
 					},
+					TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+						RuleNumber:      ptr.Int32(1),
+						Protocol:        ptr.String("__Protocol__"),
+						SourceCidr:      ptr.String("__SourceCidr__"),
+						DestinationCidr: ptr.String("__DestinationCidr__"),
+						SourcePortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						DestinationPortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+					},
 					Explanations: []types.Explanation{
 						{
 							Acl: &types.AnalysisComponent{
@@ -90461,6 +91963,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -90792,6 +92314,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -91283,6 +92825,21 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 						ResourceId:      ptr.String("__ResourceId__"),
 						ResourceType:    ptr.String("__ResourceType__"),
 					},
+					TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+						RuleNumber:      ptr.Int32(1),
+						Protocol:        ptr.String("__Protocol__"),
+						SourceCidr:      ptr.String("__SourceCidr__"),
+						DestinationCidr: ptr.String("__DestinationCidr__"),
+						SourcePortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						DestinationPortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+					},
 					Explanations: []types.Explanation{
 						{
 							Acl: &types.AnalysisComponent{
@@ -91535,6 +93092,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -91866,6 +93443,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 								AttachmentId:    ptr.String("__AttachmentId__"),
 								ResourceId:      ptr.String("__ResourceId__"),
 								ResourceType:    ptr.String("__ResourceType__"),
+							},
+							TransitGatewayPolicyTable: &types.AnalysisComponent{
+								Id:   ptr.String("__Id__"),
+								Arn:  ptr.String("__Arn__"),
+								Name: ptr.String("__Name__"),
+							},
+							TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+								RuleNumber:      ptr.Int32(1),
+								Protocol:        ptr.String("__Protocol__"),
+								SourceCidr:      ptr.String("__SourceCidr__"),
+								DestinationCidr: ptr.String("__DestinationCidr__"),
+								SourcePortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								DestinationPortRange: &types.PortRange{
+									From: ptr.Int32(1),
+									To:   ptr.Int32(1),
+								},
+								TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 							},
 							TransitGatewayAttachment: &types.AnalysisComponent{
 								Id:   ptr.String("__Id__"),
@@ -92279,6 +93876,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 						ResourceId:      ptr.String("__ResourceId__"),
 						ResourceType:    ptr.String("__ResourceType__"),
 					},
+					TransitGatewayPolicyTable: &types.AnalysisComponent{
+						Id:   ptr.String("__Id__"),
+						Arn:  ptr.String("__Arn__"),
+						Name: ptr.String("__Name__"),
+					},
+					TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+						RuleNumber:      ptr.Int32(1),
+						Protocol:        ptr.String("__Protocol__"),
+						SourceCidr:      ptr.String("__SourceCidr__"),
+						DestinationCidr: ptr.String("__DestinationCidr__"),
+						SourcePortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						DestinationPortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+					},
 					TransitGatewayAttachment: &types.AnalysisComponent{
 						Id:   ptr.String("__Id__"),
 						Arn:  ptr.String("__Arn__"),
@@ -92609,6 +94226,26 @@ func TestCheckResponseSnapshot_StartNetworkInsightsAnalysis(t *testing.T) {
 						AttachmentId:    ptr.String("__AttachmentId__"),
 						ResourceId:      ptr.String("__ResourceId__"),
 						ResourceType:    ptr.String("__ResourceType__"),
+					},
+					TransitGatewayPolicyTable: &types.AnalysisComponent{
+						Id:   ptr.String("__Id__"),
+						Arn:  ptr.String("__Arn__"),
+						Name: ptr.String("__Name__"),
+					},
+					TransitGatewayPolicyTableEntry: &types.AnalysisTransitGatewayPolicyTableEntry{
+						RuleNumber:      ptr.Int32(1),
+						Protocol:        ptr.String("__Protocol__"),
+						SourceCidr:      ptr.String("__SourceCidr__"),
+						DestinationCidr: ptr.String("__DestinationCidr__"),
+						SourcePortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						DestinationPortRange: &types.PortRange{
+							From: ptr.Int32(1),
+							To:   ptr.Int32(1),
+						},
+						TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
 					},
 					TransitGatewayAttachment: &types.AnalysisComponent{
 						Id:   ptr.String("__Id__"),

@@ -79,7 +79,9 @@ func (v *ListEncoderConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEncoderConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncoderConfigurationSummaryList(s, schemas.ListEncoderConfigurationsResponse_encoderConfigurations, v.EncoderConfigurations)
+	if v.EncoderConfigurations != nil {
+		serializeEncoderConfigurationSummaryList(s, schemas.ListEncoderConfigurationsResponse_encoderConfigurations, v.EncoderConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEncoderConfigurationsResponse_nextToken, *v.NextToken)
 	}

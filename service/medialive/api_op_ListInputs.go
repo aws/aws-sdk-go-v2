@@ -76,7 +76,9 @@ func (v *ListInputsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfInput(s, schemas.ListInputsResponse_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serialize__listOfInput(s, schemas.ListInputsResponse_Inputs, v.Inputs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInputsResponse_NextToken, *v.NextToken)
 	}

@@ -259,7 +259,9 @@ func (v *DescribeBackupJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BackupJobId != nil {
 		s.WriteString(schemas.DescribeBackupJobOutput_BackupJobId, *v.BackupJobId)
 	}
-	serializeBackupOptions(s, schemas.DescribeBackupJobOutput_BackupOptions, v.BackupOptions)
+	if v.BackupOptions != nil {
+		serializeBackupOptions(s, schemas.DescribeBackupJobOutput_BackupOptions, v.BackupOptions)
+	}
 	if v.BackupSizeInBytes != nil {
 		s.WriteInt64(schemas.DescribeBackupJobOutput_BackupSizeInBytes, *v.BackupSizeInBytes)
 	}
@@ -275,7 +277,9 @@ func (v *DescribeBackupJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BytesTransferred != nil {
 		s.WriteInt64(schemas.DescribeBackupJobOutput_BytesTransferred, *v.BytesTransferred)
 	}
-	serializeBackupJobChildJobsInState(s, schemas.DescribeBackupJobOutput_ChildJobsInState, v.ChildJobsInState)
+	if v.ChildJobsInState != nil {
+		serializeBackupJobChildJobsInState(s, schemas.DescribeBackupJobOutput_ChildJobsInState, v.ChildJobsInState)
+	}
 	if v.CompletionDate != nil {
 		s.WriteTime(schemas.DescribeBackupJobOutput_CompletionDate, *v.CompletionDate)
 	}

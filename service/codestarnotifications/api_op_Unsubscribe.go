@@ -4,6 +4,8 @@ package codestarnotifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type UnsubscribeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsubscribeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UnsubscribeRequest_Arn, *v.Arn)
+	}
+	if v.TargetAddress != nil {
+		s.WriteString(schemas.UnsubscribeRequest_TargetAddress, *v.TargetAddress)
+	}
+}
+
 type UnsubscribeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the the notification rule from which you have
@@ -55,13 +72,32 @@ type UnsubscribeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsubscribeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UnsubscribeResult_Arn, *v.Arn)
+	}
+}
+func (v *UnsubscribeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsubscribeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsubscribeResult_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UnsubscribeResult_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnsubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnsubscribe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Unsubscribe, schemas.UnsubscribeRequest, schemas.UnsubscribeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUnsubscribe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Unsubscribe, schemas.UnsubscribeRequest, schemas.UnsubscribeResult), output: &UnsubscribeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

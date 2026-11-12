@@ -106,7 +106,9 @@ func (v *ValidateResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.PolicyValidationPassed != false {
 		s.WriteBool(schemas.ValidateResourcePolicyResponse_PolicyValidationPassed, v.PolicyValidationPassed)
 	}
-	serializeValidationErrorsType(s, schemas.ValidateResourcePolicyResponse_ValidationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serializeValidationErrorsType(s, schemas.ValidateResourcePolicyResponse_ValidationErrors, v.ValidationErrors)
+	}
 }
 func (v *ValidateResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidateResourcePolicyResponse, func(s *smithy.Schema) error {

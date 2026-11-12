@@ -67,7 +67,9 @@ func (v *RemoveEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.RemoveEndpointsRequest_EndpointGroupArn, *v.EndpointGroupArn)
 	}
-	serializeEndpointIdentifiers(s, schemas.RemoveEndpointsRequest_EndpointIdentifiers, v.EndpointIdentifiers)
+	if v.EndpointIdentifiers != nil {
+		serializeEndpointIdentifiers(s, schemas.RemoveEndpointsRequest_EndpointIdentifiers, v.EndpointIdentifiers)
+	}
 }
 
 type RemoveEndpointsOutput struct {

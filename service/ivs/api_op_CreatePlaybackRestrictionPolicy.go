@@ -66,15 +66,21 @@ func (v *CreatePlaybackRestrictionPolicyInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *CreatePlaybackRestrictionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.CreatePlaybackRestrictionPolicyRequest_allowedCountries, v.AllowedCountries)
-	serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.CreatePlaybackRestrictionPolicyRequest_allowedOrigins, v.AllowedOrigins)
+	if v.AllowedCountries != nil {
+		serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.CreatePlaybackRestrictionPolicyRequest_allowedCountries, v.AllowedCountries)
+	}
+	if v.AllowedOrigins != nil {
+		serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.CreatePlaybackRestrictionPolicyRequest_allowedOrigins, v.AllowedOrigins)
+	}
 	if v.EnableStrictOriginEnforcement != nil {
 		s.WriteBool(schemas.CreatePlaybackRestrictionPolicyRequest_enableStrictOriginEnforcement, *v.EnableStrictOriginEnforcement)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePlaybackRestrictionPolicyRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreatePlaybackRestrictionPolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePlaybackRestrictionPolicyRequest_tags, v.Tags)
+	}
 }
 
 type CreatePlaybackRestrictionPolicyOutput struct {

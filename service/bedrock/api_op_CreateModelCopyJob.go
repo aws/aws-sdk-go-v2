@@ -81,7 +81,9 @@ func (v *CreateModelCopyJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetModelName != nil {
 		s.WriteString(schemas.CreateModelCopyJobRequest_targetModelName, *v.TargetModelName)
 	}
-	serializeTagList(s, schemas.CreateModelCopyJobRequest_targetModelTags, v.TargetModelTags)
+	if v.TargetModelTags != nil {
+		serializeTagList(s, schemas.CreateModelCopyJobRequest_targetModelTags, v.TargetModelTags)
+	}
 }
 
 type CreateModelCopyJobOutput struct {

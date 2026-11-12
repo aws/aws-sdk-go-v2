@@ -47,11 +47,21 @@ func (v *JsonMapsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JsonMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseBooleanMap(s, schemas.JsonMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
-	serializeDenseNumberMap(s, schemas.JsonMapsInputOutput_denseNumberMap, v.DenseNumberMap)
-	serializeDenseSetMap(s, schemas.JsonMapsInputOutput_denseSetMap, v.DenseSetMap)
-	serializeDenseStringMap(s, schemas.JsonMapsInputOutput_denseStringMap, v.DenseStringMap)
-	serializeDenseStructMap(s, schemas.JsonMapsInputOutput_denseStructMap, v.DenseStructMap)
+	if v.DenseBooleanMap != nil {
+		serializeDenseBooleanMap(s, schemas.JsonMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	}
+	if v.DenseNumberMap != nil {
+		serializeDenseNumberMap(s, schemas.JsonMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	}
+	if v.DenseSetMap != nil {
+		serializeDenseSetMap(s, schemas.JsonMapsInputOutput_denseSetMap, v.DenseSetMap)
+	}
+	if v.DenseStringMap != nil {
+		serializeDenseStringMap(s, schemas.JsonMapsInputOutput_denseStringMap, v.DenseStringMap)
+	}
+	if v.DenseStructMap != nil {
+		serializeDenseStructMap(s, schemas.JsonMapsInputOutput_denseStructMap, v.DenseStructMap)
+	}
 }
 func (v *JsonMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonMapsInputOutput, func(s *smithy.Schema) error {
@@ -95,11 +105,21 @@ func (v *JsonMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JsonMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseBooleanMap(s, schemas.JsonMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
-	serializeDenseNumberMap(s, schemas.JsonMapsInputOutput_denseNumberMap, v.DenseNumberMap)
-	serializeDenseSetMap(s, schemas.JsonMapsInputOutput_denseSetMap, v.DenseSetMap)
-	serializeDenseStringMap(s, schemas.JsonMapsInputOutput_denseStringMap, v.DenseStringMap)
-	serializeDenseStructMap(s, schemas.JsonMapsInputOutput_denseStructMap, v.DenseStructMap)
+	if v.DenseBooleanMap != nil {
+		serializeDenseBooleanMap(s, schemas.JsonMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	}
+	if v.DenseNumberMap != nil {
+		serializeDenseNumberMap(s, schemas.JsonMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	}
+	if v.DenseSetMap != nil {
+		serializeDenseSetMap(s, schemas.JsonMapsInputOutput_denseSetMap, v.DenseSetMap)
+	}
+	if v.DenseStringMap != nil {
+		serializeDenseStringMap(s, schemas.JsonMapsInputOutput_denseStringMap, v.DenseStringMap)
+	}
+	if v.DenseStructMap != nil {
+		serializeDenseStructMap(s, schemas.JsonMapsInputOutput_denseStructMap, v.DenseStructMap)
+	}
 }
 func (v *JsonMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonMapsInputOutput, func(s *smithy.Schema) error {

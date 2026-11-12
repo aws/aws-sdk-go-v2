@@ -125,7 +125,9 @@ func (v *GetServiceGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetServiceGraphResult_NextToken, *v.NextToken)
 	}
-	serializeServiceList(s, schemas.GetServiceGraphResult_Services, v.Services)
+	if v.Services != nil {
+		serializeServiceList(s, schemas.GetServiceGraphResult_Services, v.Services)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetServiceGraphResult_StartTime, *v.StartTime)
 	}

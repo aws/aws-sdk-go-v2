@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.ListTrustedTokenIssuers
+
+{"NextToken":"__NextToken__","TrustedTokenIssuers":[{"Name":"__Name__","TrustedTokenIssuerArn":"__TrustedTokenIssuerArn__","TrustedTokenIssuerType":"OIDC_JWT"},{"Name":"__Name__","TrustedTokenIssuerArn":"__TrustedTokenIssuerArn__","TrustedTokenIssuerType":"OIDC_JWT"}]}

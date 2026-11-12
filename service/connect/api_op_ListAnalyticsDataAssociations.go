@@ -97,7 +97,9 @@ func (v *ListAnalyticsDataAssociationsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnalyticsDataAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeAnalyticsDataAssociationResults(s, schemas.ListAnalyticsDataAssociationsResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeAnalyticsDataAssociationResults(s, schemas.ListAnalyticsDataAssociationsResponse_Results, v.Results)
+	}
 }
 func (v *ListAnalyticsDataAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAnalyticsDataAssociationsResponse, func(s *smithy.Schema) error {

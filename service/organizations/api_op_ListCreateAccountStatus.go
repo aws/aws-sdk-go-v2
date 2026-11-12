@@ -70,7 +70,9 @@ func (v *ListCreateAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCreateAccountStatusRequest_NextToken, *v.NextToken)
 	}
-	serializeCreateAccountStates(s, schemas.ListCreateAccountStatusRequest_States, v.States)
+	if v.States != nil {
+		serializeCreateAccountStates(s, schemas.ListCreateAccountStatusRequest_States, v.States)
+	}
 }
 
 type ListCreateAccountStatusOutput struct {
@@ -99,7 +101,9 @@ func (v *ListCreateAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCreateAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateAccountStatuses(s, schemas.ListCreateAccountStatusResponse_CreateAccountStatuses, v.CreateAccountStatuses)
+	if v.CreateAccountStatuses != nil {
+		serializeCreateAccountStatuses(s, schemas.ListCreateAccountStatusResponse_CreateAccountStatuses, v.CreateAccountStatuses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCreateAccountStatusResponse_NextToken, *v.NextToken)
 	}

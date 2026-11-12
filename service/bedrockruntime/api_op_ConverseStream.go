@@ -196,7 +196,9 @@ func (v *ConverseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalModelRequestFields != nil {
 		s.WriteDocument(schemas.ConverseStreamRequest_additionalModelRequestFields, &smithydocument.Opaque{Value: v.AdditionalModelRequestFields})
 	}
-	serializeAdditionalModelResponseFieldPaths(s, schemas.ConverseStreamRequest_additionalModelResponseFieldPaths, v.AdditionalModelResponseFieldPaths)
+	if v.AdditionalModelResponseFieldPaths != nil {
+		serializeAdditionalModelResponseFieldPaths(s, schemas.ConverseStreamRequest_additionalModelResponseFieldPaths, v.AdditionalModelResponseFieldPaths)
+	}
 	if v.GuardrailConfig != nil {
 		s.WriteStruct(schemas.ConverseStreamRequest_guardrailConfig)
 		v.GuardrailConfig.SerializeMembers(s)
@@ -207,7 +209,9 @@ func (v *ConverseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMessages(s, schemas.ConverseStreamRequest_messages, v.Messages)
+	if v.Messages != nil {
+		serializeMessages(s, schemas.ConverseStreamRequest_messages, v.Messages)
+	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.ConverseStreamRequest_modelId, *v.ModelId)
 	}
@@ -221,14 +225,20 @@ func (v *ConverseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PerformanceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePromptVariableMap(s, schemas.ConverseStreamRequest_promptVariables, v.PromptVariables)
-	serializeRequestMetadata(s, schemas.ConverseStreamRequest_requestMetadata, v.RequestMetadata)
+	if v.PromptVariables != nil {
+		serializePromptVariableMap(s, schemas.ConverseStreamRequest_promptVariables, v.PromptVariables)
+	}
+	if v.RequestMetadata != nil {
+		serializeRequestMetadata(s, schemas.ConverseStreamRequest_requestMetadata, v.RequestMetadata)
+	}
 	if v.ServiceTier != nil {
 		s.WriteStruct(schemas.ConverseStreamRequest_serviceTier)
 		v.ServiceTier.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSystemContentBlocks(s, schemas.ConverseStreamRequest_system, v.System)
+	if v.System != nil {
+		serializeSystemContentBlocks(s, schemas.ConverseStreamRequest_system, v.System)
+	}
 	if v.ToolConfig != nil {
 		s.WriteStruct(schemas.ConverseStreamRequest_toolConfig)
 		v.ToolConfig.SerializeMembers(s)

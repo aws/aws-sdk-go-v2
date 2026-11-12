@@ -73,15 +73,21 @@ func (v *SubmitTaskStateChangeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubmitTaskStateChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentStateChanges(s, schemas.SubmitTaskStateChangeRequest_attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAttachmentStateChanges(s, schemas.SubmitTaskStateChangeRequest_attachments, v.Attachments)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.SubmitTaskStateChangeRequest_cluster, *v.Cluster)
 	}
-	serializeContainerStateChanges(s, schemas.SubmitTaskStateChangeRequest_containers, v.Containers)
+	if v.Containers != nil {
+		serializeContainerStateChanges(s, schemas.SubmitTaskStateChangeRequest_containers, v.Containers)
+	}
 	if v.ExecutionStoppedAt != nil {
 		s.WriteTime(schemas.SubmitTaskStateChangeRequest_executionStoppedAt, *v.ExecutionStoppedAt)
 	}
-	serializeManagedAgentStateChanges(s, schemas.SubmitTaskStateChangeRequest_managedAgents, v.ManagedAgents)
+	if v.ManagedAgents != nil {
+		serializeManagedAgentStateChanges(s, schemas.SubmitTaskStateChangeRequest_managedAgents, v.ManagedAgents)
+	}
 	if v.PullStartedAt != nil {
 		s.WriteTime(schemas.SubmitTaskStateChangeRequest_pullStartedAt, *v.PullStartedAt)
 	}

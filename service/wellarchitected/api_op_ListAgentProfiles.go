@@ -82,7 +82,9 @@ func (v *ListAgentProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentProfileSummaries(s, schemas.ListAgentProfilesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAgentProfileSummaries(s, schemas.ListAgentProfilesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentProfilesResponse_nextToken, *v.NextToken)
 	}

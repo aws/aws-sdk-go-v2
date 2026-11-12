@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.CreateApplication
+
+{"ApplicationArn":"__ApplicationArn__","IdentityStoreArn":"__IdentityStoreArn__","InstanceArn":"__InstanceArn__"}

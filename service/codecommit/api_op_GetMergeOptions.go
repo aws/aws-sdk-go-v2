@@ -130,7 +130,9 @@ func (v *GetMergeOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DestinationCommitId != nil {
 		s.WriteString(schemas.GetMergeOptionsOutput_destinationCommitId, *v.DestinationCommitId)
 	}
-	serializeMergeOptions(s, schemas.GetMergeOptionsOutput_mergeOptions, v.MergeOptions)
+	if v.MergeOptions != nil {
+		serializeMergeOptions(s, schemas.GetMergeOptionsOutput_mergeOptions, v.MergeOptions)
+	}
 	if v.SourceCommitId != nil {
 		s.WriteString(schemas.GetMergeOptionsOutput_sourceCommitId, *v.SourceCommitId)
 	}

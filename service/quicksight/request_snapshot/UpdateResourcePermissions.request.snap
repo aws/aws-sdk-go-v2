@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/account-resource-permissions
+
+Content-Type: application/json
+
+{"CustomerManagedRoleArn":"__CustomerManagedRoleArn__","RoleType":"QUICKSIGHT_MANAGED"}

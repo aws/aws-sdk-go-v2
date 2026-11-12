@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApproximateResultCount":1,"Items":[{"Assets":{"key0":{"Href":"__Href__"}},"DateTime":946684800,"Geometry":{"Coordinates":[[[1,1],[1,1]],[[1,1],[1,1]]],"Type":"__Type__"},"Id":"__Id__","Properties":{"EoCloudCover":1,"LandsatCloudCoverLand":1,"Platform":"__Platform__","ViewOffNadir":1,"ViewSunAzimuth":1,"ViewSunElevation":1}},{"Assets":{"key0":{"Href":"__Href__"}},"DateTime":946684800,"Geometry":{"Coordinates":[[[1,1],[1,1]],[[1,1],[1,1]]],"Type":"__Type__"},"Id":"__Id__","Properties":{"EoCloudCover":1,"LandsatCloudCoverLand":1,"Platform":"__Platform__","ViewOffNadir":1,"ViewSunAzimuth":1,"ViewSunElevation":1}}],"NextToken":"__NextToken__"}

@@ -54,7 +54,9 @@ func (v *ValidateSecurityProfileBehaviorsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ValidateSecurityProfileBehaviorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBehaviors(s, schemas.ValidateSecurityProfileBehaviorsRequest_behaviors, v.Behaviors)
+	if v.Behaviors != nil {
+		serializeBehaviors(s, schemas.ValidateSecurityProfileBehaviorsRequest_behaviors, v.Behaviors)
+	}
 }
 
 type ValidateSecurityProfileBehaviorsOutput struct {
@@ -81,7 +83,9 @@ func (v *ValidateSecurityProfileBehaviorsOutput) SerializeMembers(s smithy.Shape
 	if v.Valid != false {
 		s.WriteBool(schemas.ValidateSecurityProfileBehaviorsResponse_valid, v.Valid)
 	}
-	serializeValidationErrors(s, schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serializeValidationErrors(s, schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors, v.ValidationErrors)
+	}
 }
 func (v *ValidateSecurityProfileBehaviorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidateSecurityProfileBehaviorsResponse, func(s *smithy.Schema) error {

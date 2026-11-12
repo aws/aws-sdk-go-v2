@@ -93,7 +93,9 @@ func (v *UpdatePackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Artifact.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceAttributes(s, schemas.UpdatePackageVersionRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeResourceAttributes(s, schemas.UpdatePackageVersionRequest_attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdatePackageVersionRequest_clientToken, *v.ClientToken)
 	}

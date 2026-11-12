@@ -140,7 +140,9 @@ func (v *ListComputeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComputeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeList(s, schemas.ListComputeOutput_ComputeList, v.ComputeList)
+	if v.ComputeList != nil {
+		serializeComputeList(s, schemas.ListComputeOutput_ComputeList, v.ComputeList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComputeOutput_NextToken, *v.NextToken)
 	}

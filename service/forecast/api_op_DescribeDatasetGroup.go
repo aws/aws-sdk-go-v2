@@ -121,7 +121,9 @@ func (v *DescribeDatasetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeDatasetGroupResponse_CreationTime, *v.CreationTime)
 	}
-	serializeArnList(s, schemas.DescribeDatasetGroupResponse_DatasetArns, v.DatasetArns)
+	if v.DatasetArns != nil {
+		serializeArnList(s, schemas.DescribeDatasetGroupResponse_DatasetArns, v.DatasetArns)
+	}
 	if v.DatasetGroupArn != nil {
 		s.WriteString(schemas.DescribeDatasetGroupResponse_DatasetGroupArn, *v.DatasetGroupArn)
 	}

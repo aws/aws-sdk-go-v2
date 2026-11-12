@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"webExperienceArn":"__WebExperienceArn__","webExperienceId":"__WebExperienceId__"}

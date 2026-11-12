@@ -91,7 +91,9 @@ func (v *ListIterableFormsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIterableFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIterableFormListItemList(s, schemas.ListIterableFormsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeIterableFormListItemList(s, schemas.ListIterableFormsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIterableFormsResponse_NextToken, *v.NextToken)
 	}

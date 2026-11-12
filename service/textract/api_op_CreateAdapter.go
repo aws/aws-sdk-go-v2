@@ -81,8 +81,12 @@ func (v *CreateAdapterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAdapterRequest_Description, *v.Description)
 	}
-	serializeFeatureTypes(s, schemas.CreateAdapterRequest_FeatureTypes, v.FeatureTypes)
-	serializeTagMap(s, schemas.CreateAdapterRequest_Tags, v.Tags)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.CreateAdapterRequest_FeatureTypes, v.FeatureTypes)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAdapterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAdapterOutput struct {
@@ -132,6 +136,9 @@ func (c *Client) addOperationCreateAdapterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

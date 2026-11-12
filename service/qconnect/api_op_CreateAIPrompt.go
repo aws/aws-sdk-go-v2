@@ -129,8 +129,12 @@ func (v *CreateAIPromptInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAIPromptRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateAIPromptRequest_tags, v.Tags)
-	serializeAIPromptTemplateConfiguration(s, schemas.CreateAIPromptRequest_templateConfiguration, v.TemplateConfiguration)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAIPromptRequest_tags, v.Tags)
+	}
+	if v.TemplateConfiguration != nil {
+		serializeAIPromptTemplateConfiguration(s, schemas.CreateAIPromptRequest_templateConfiguration, v.TemplateConfiguration)
+	}
 	if v.TemplateType != "" {
 		s.WriteString(schemas.CreateAIPromptRequest_templateType, string(v.TemplateType))
 	}

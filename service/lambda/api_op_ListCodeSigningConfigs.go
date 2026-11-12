@@ -78,7 +78,9 @@ func (v *ListCodeSigningConfigsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeSigningConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSigningConfigList(s, schemas.ListCodeSigningConfigsResponse_CodeSigningConfigs, v.CodeSigningConfigs)
+	if v.CodeSigningConfigs != nil {
+		serializeCodeSigningConfigList(s, schemas.ListCodeSigningConfigsResponse_CodeSigningConfigs, v.CodeSigningConfigs)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListCodeSigningConfigsResponse_NextMarker, *v.NextMarker)
 	}

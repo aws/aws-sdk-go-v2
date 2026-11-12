@@ -66,7 +66,9 @@ func (v *SearchChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChimeBearer != nil {
 		s.WriteString(schemas.SearchChannelsRequest_ChimeBearer, *v.ChimeBearer)
 	}
-	serializeSearchFields(s, schemas.SearchChannelsRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeSearchFields(s, schemas.SearchChannelsRequest_Fields, v.Fields)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchChannelsRequest_MaxResults, *v.MaxResults)
 	}
@@ -97,7 +99,9 @@ func (v *SearchChannelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelSummaryList(s, schemas.SearchChannelsResponse_Channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannelSummaryList(s, schemas.SearchChannelsResponse_Channels, v.Channels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchChannelsResponse_NextToken, *v.NextToken)
 	}

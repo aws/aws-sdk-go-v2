@@ -86,7 +86,9 @@ func (v *ListInputDeviceTransfersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInputDeviceTransfersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfTransferringInputDeviceSummary(s, schemas.ListInputDeviceTransfersResponse_InputDeviceTransfers, v.InputDeviceTransfers)
+	if v.InputDeviceTransfers != nil {
+		serialize__listOfTransferringInputDeviceSummary(s, schemas.ListInputDeviceTransfersResponse_InputDeviceTransfers, v.InputDeviceTransfers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInputDeviceTransfersResponse_NextToken, *v.NextToken)
 	}

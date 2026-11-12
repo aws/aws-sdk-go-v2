@@ -84,7 +84,9 @@ func (v *ReserveContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ReserveContactRequest_startTime, *v.StartTime)
 	}
-	serializeTagsMap(s, schemas.ReserveContactRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ReserveContactRequest_tags, v.Tags)
+	}
 	if v.TrackingOverrides != nil {
 		s.WriteStruct(schemas.ReserveContactRequest_trackingOverrides)
 		v.TrackingOverrides.SerializeMembers(s)

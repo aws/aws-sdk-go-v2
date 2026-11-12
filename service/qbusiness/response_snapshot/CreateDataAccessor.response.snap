@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataAccessorArn":"__DataAccessorArn__","dataAccessorId":"__DataAccessorId__","idcApplicationArn":"__IdcApplicationArn__"}

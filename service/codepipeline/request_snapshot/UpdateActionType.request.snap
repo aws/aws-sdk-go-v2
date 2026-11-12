@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/UpdateActionType
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.UpdateActionType
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"actionType":{"description":"__Description__","executor":{"configuration":{"jobWorkerExecutorConfiguration":{"pollingAccounts":["__Member__","__Member__"],"pollingServicePrincipals":["__Member__","__Member__"]},"lambdaExecutorConfiguration":{"lambdaFunctionArn":"__LambdaFunctionArn__"}},"jobTimeout":1,"policyStatementsTemplate":"__PolicyStatementsTemplate__","type":"JobWorker"},"id":{"category":"Source","owner":"__Owner__","provider":"__Provider__","version":"__Version__"},"inputArtifactDetails":{"maximumCount":1,"minimumCount":1},"outputArtifactDetails":{"maximumCount":1,"minimumCount":1},"permissions":{"allowedAccounts":["__Member__","__Member__"]},"properties":[{"description":"__Description__","key":true,"name":"__Name__","noEcho":true,"optional":true,"queryable":true},{"description":"__Description__","key":true,"name":"__Name__","noEcho":true,"optional":true,"queryable":true}],"urls":{"configurationUrl":"__ConfigurationUrl__","entityUrlTemplate":"__EntityUrlTemplate__","executionUrlTemplate":"__ExecutionUrlTemplate__","revisionUrlTemplate":"__RevisionUrlTemplate__"}}}
+¿jactionType¿kdescriptiono__Description__hexecutor¿mconfiguration¿xjobWorkerExecutorConfiguration¿opollingAccountsŸj__Member__j__Member__ÿxpollingServicePrincipalsŸj__Member__j__Member__ÿÿxlambdaExecutorConfiguration¿qlambdaFunctionArnu__LambdaFunctionArn__ÿÿjjobTimeoutxpolicyStatementsTemplatex__PolicyStatementsTemplate__dtypeiJobWorkerÿbid¿hcategoryfSourceeowneri__Owner__hproviderl__Provider__gversionk__Version__ÿtinputArtifactDetails¿lmaximumCountlminimumCountÿuoutputArtifactDetails¿lmaximumCountlminimumCountÿkpermissions¿oallowedAccountsŸj__Member__j__Member__ÿÿjpropertiesŸ¿kdescriptiono__Description__ckeyõdnameh__Name__fnoEchoõhoptionalõiqueryableõÿ¿kdescriptiono__Description__ckeyõdnameh__Name__fnoEchoõhoptionalõiqueryableõÿÿdurls¿pconfigurationUrlt__ConfigurationUrl__qentityUrlTemplateu__EntityUrlTemplate__texecutionUrlTemplatex__ExecutionUrlTemplate__srevisionUrlTemplatew__RevisionUrlTemplate__ÿÿÿ

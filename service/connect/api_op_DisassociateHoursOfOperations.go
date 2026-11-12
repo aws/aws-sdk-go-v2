@@ -66,7 +66,9 @@ func (v *DisassociateHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSeri
 	if v.InstanceId != nil {
 		s.WriteString(schemas.DisassociateHoursOfOperationsRequest_InstanceId, *v.InstanceId)
 	}
-	serializeParentHoursOfOperationIdList(s, schemas.DisassociateHoursOfOperationsRequest_ParentHoursOfOperationIds, v.ParentHoursOfOperationIds)
+	if v.ParentHoursOfOperationIds != nil {
+		serializeParentHoursOfOperationIdList(s, schemas.DisassociateHoursOfOperationsRequest_ParentHoursOfOperationIds, v.ParentHoursOfOperationIds)
+	}
 }
 
 type DisassociateHoursOfOperationsOutput struct {

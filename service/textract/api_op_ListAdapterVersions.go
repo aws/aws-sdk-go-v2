@@ -99,7 +99,9 @@ func (v *ListAdapterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAdapterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdapterVersionList(s, schemas.ListAdapterVersionsResponse_AdapterVersions, v.AdapterVersions)
+	if v.AdapterVersions != nil {
+		serializeAdapterVersionList(s, schemas.ListAdapterVersionsResponse_AdapterVersions, v.AdapterVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAdapterVersionsResponse_NextToken, *v.NextToken)
 	}
@@ -131,6 +133,9 @@ func (c *Client) addOperationListAdapterVersionsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

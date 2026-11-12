@@ -4,7 +4,9 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type GetAttachmentDownloadLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachmentDownloadLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachmentDownloadLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachmentDownloadLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.GetAttachmentDownloadLinkRequest_attachmentId, *v.AttachmentId)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.GetAttachmentDownloadLinkRequest_dryRun, *v.DryRun)
+	}
+}
+
 type GetAttachmentDownloadLinkOutput struct {
 
 	// The presigned download URL and the date and time the URL expires.
@@ -80,13 +97,40 @@ type GetAttachmentDownloadLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachmentDownloadLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachmentDownloadLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachmentDownloadLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DownloadUrl != nil {
+		s.WriteStruct(schemas.GetAttachmentDownloadLinkResponse_downloadUrl)
+		v.DownloadUrl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileName != nil {
+		s.WriteString(schemas.GetAttachmentDownloadLinkResponse_fileName, *v.FileName)
+	}
+}
+func (v *GetAttachmentDownloadLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAttachmentDownloadLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAttachmentDownloadLinkResponse_downloadUrl:
+			v.DownloadUrl = &types.DownloadUrl{}
+			return v.DownloadUrl.Deserialize(d)
+		case schemas.GetAttachmentDownloadLinkResponse_fileName:
+			v.FileName = new(string)
+			return d.ReadString(schemas.GetAttachmentDownloadLinkResponse_fileName, v.FileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAttachmentDownloadLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAttachmentDownloadLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachmentDownloadLink, schemas.GetAttachmentDownloadLinkRequest, schemas.GetAttachmentDownloadLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAttachmentDownloadLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachmentDownloadLink, schemas.GetAttachmentDownloadLinkRequest, schemas.GetAttachmentDownloadLinkResponse), output: &GetAttachmentDownloadLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

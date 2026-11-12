@@ -5,6 +5,8 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,24 @@ type ListRolePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRolePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRolePoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRolePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRolePoliciesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListRolePoliciesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.ListRolePoliciesRequest_RoleName, *v.RoleName)
+	}
+}
+
 // Contains the response to a successful [ListRolePolicies] request.
 //
 // [ListRolePolicies]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRolePolicies.html
@@ -97,13 +117,42 @@ type ListRolePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRolePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRolePoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRolePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListRolePoliciesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRolePoliciesResponse_Marker, *v.Marker)
+	}
+	if v.PolicyNames != nil {
+		serializepolicyNameListType(s, schemas.ListRolePoliciesResponse_PolicyNames, v.PolicyNames)
+	}
+}
+func (v *ListRolePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRolePoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRolePoliciesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListRolePoliciesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListRolePoliciesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListRolePoliciesResponse_Marker, v.Marker)
+		case schemas.ListRolePoliciesResponse_PolicyNames:
+			return deserializepolicyNameListType(d, schemas.ListRolePoliciesResponse_PolicyNames, &v.PolicyNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRolePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListRolePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRolePolicies, schemas.ListRolePoliciesRequest, schemas.ListRolePoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListRolePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRolePolicies, schemas.ListRolePoliciesRequest, schemas.ListRolePoliciesResponse), output: &ListRolePoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

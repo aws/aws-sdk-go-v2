@@ -56,7 +56,7 @@ func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // The request conflicts with the current state of the resource. Verify the
-// application's current state and retry the request.
+// resource's current state and retry the request.
 type ConflictException struct {
 	Message *string
 

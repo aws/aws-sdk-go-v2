@@ -4,7 +4,9 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,21 @@ type GetCollaborationConfiguredModelAlgorithmAssociationInput struct {
 	ConfiguredModelAlgorithmAssociationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCollaborationConfiguredModelAlgorithmAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationConfiguredModelAlgorithmAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationConfiguredModelAlgorithmAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationRequest_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.ConfiguredModelAlgorithmAssociationArn != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn, *v.ConfiguredModelAlgorithmAssociationArn)
+	}
 }
 
 type GetCollaborationConfiguredModelAlgorithmAssociationOutput struct {
@@ -102,13 +119,88 @@ type GetCollaborationConfiguredModelAlgorithmAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationConfiguredModelAlgorithmAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationConfiguredModelAlgorithmAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.ConfiguredModelAlgorithmArn != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn, *v.ConfiguredModelAlgorithmArn)
+	}
+	if v.ConfiguredModelAlgorithmAssociationArn != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn, *v.ConfiguredModelAlgorithmAssociationArn)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime, *v.CreateTime)
+	}
+	if v.CreatorAccountId != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId, *v.CreatorAccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_description, *v.Description)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_name, *v.Name)
+	}
+	if v.PrivacyConfiguration != nil {
+		s.WriteStruct(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration)
+		v.PrivacyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *GetCollaborationConfiguredModelAlgorithmAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn:
+			v.ConfiguredModelAlgorithmArn = new(string)
+			return d.ReadString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn, v.ConfiguredModelAlgorithmArn)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn:
+			v.ConfiguredModelAlgorithmAssociationArn = new(string)
+			return d.ReadString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn, v.ConfiguredModelAlgorithmAssociationArn)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime, v.CreateTime)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId:
+			v.CreatorAccountId = new(string)
+			return d.ReadString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId, v.CreatorAccountId)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_description, v.Description)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_name, v.Name)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration:
+			v.PrivacyConfiguration = &types.PrivacyConfiguration{}
+			return v.PrivacyConfiguration.Deserialize(d)
+		case schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationConfiguredModelAlgorithmAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationConfiguredModelAlgorithmAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationConfiguredModelAlgorithmAssociation, schemas.GetCollaborationConfiguredModelAlgorithmAssociationRequest, schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationConfiguredModelAlgorithmAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationConfiguredModelAlgorithmAssociation, schemas.GetCollaborationConfiguredModelAlgorithmAssociationRequest, schemas.GetCollaborationConfiguredModelAlgorithmAssociationResponse), output: &GetCollaborationConfiguredModelAlgorithmAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

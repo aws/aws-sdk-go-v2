@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/UpdateTrust
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.UpdateTrust
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"SelectiveAuth":"Enabled","TrustId":"__TrustId__"}
+¿mSelectiveAuthgEnabledgTrustIdk__TrustId__ÿ

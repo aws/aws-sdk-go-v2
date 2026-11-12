@@ -93,7 +93,9 @@ func (v *CreateNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateNotificationRequest_ClientToken, *v.ClientToken)
 	}
-	serializeNotificationContent(s, schemas.CreateNotificationRequest_Content, v.Content)
+	if v.Content != nil {
+		serializeNotificationContent(s, schemas.CreateNotificationRequest_Content, v.Content)
+	}
 	if v.ExpiresAt != nil {
 		s.WriteTime(schemas.CreateNotificationRequest_ExpiresAt, *v.ExpiresAt)
 	}
@@ -106,8 +108,12 @@ func (v *CreateNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Priority != "" {
 		s.WriteString(schemas.CreateNotificationRequest_Priority, string(v.Priority))
 	}
-	serializeRecipientList(s, schemas.CreateNotificationRequest_Recipients, v.Recipients)
-	serializeTagMap(s, schemas.CreateNotificationRequest_Tags, v.Tags)
+	if v.Recipients != nil {
+		serializeRecipientList(s, schemas.CreateNotificationRequest_Recipients, v.Recipients)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateNotificationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateNotificationOutput struct {

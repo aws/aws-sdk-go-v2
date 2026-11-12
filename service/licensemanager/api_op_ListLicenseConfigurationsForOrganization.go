@@ -50,8 +50,12 @@ func (v *ListLicenseConfigurationsForOrganizationInput) Serialize(s smithy.Shape
 }
 
 func (v *ListLicenseConfigurationsForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListLicenseConfigurationsForOrganizationRequest_Filters, v.Filters)
-	serializeStringList(s, schemas.ListLicenseConfigurationsForOrganizationRequest_LicenseConfigurationArns, v.LicenseConfigurationArns)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListLicenseConfigurationsForOrganizationRequest_Filters, v.Filters)
+	}
+	if v.LicenseConfigurationArns != nil {
+		serializeStringList(s, schemas.ListLicenseConfigurationsForOrganizationRequest_LicenseConfigurationArns, v.LicenseConfigurationArns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLicenseConfigurationsForOrganizationRequest_MaxResults, *v.MaxResults)
 	}
@@ -81,7 +85,9 @@ func (v *ListLicenseConfigurationsForOrganizationOutput) Serialize(s smithy.Shap
 }
 
 func (v *ListLicenseConfigurationsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseConfigurations(s, schemas.ListLicenseConfigurationsForOrganizationResponse_LicenseConfigurations, v.LicenseConfigurations)
+	if v.LicenseConfigurations != nil {
+		serializeLicenseConfigurations(s, schemas.ListLicenseConfigurationsForOrganizationResponse_LicenseConfigurations, v.LicenseConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicenseConfigurationsForOrganizationResponse_NextToken, *v.NextToken)
 	}

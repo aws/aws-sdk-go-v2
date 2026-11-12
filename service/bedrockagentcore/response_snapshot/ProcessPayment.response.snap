@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":"2000-01-01T00:00:00Z","paymentInstrumentId":"__PaymentInstrumentId__","paymentManagerArn":"__PaymentManagerArn__","paymentOutput":{"cryptoX402":{"payload":"__Document__","version":"__Version__"}},"paymentSessionId":"__PaymentSessionId__","paymentType":"CRYPTO_X402","processPaymentId":"__ProcessPaymentId__","status":"PROOF_GENERATED","updatedAt":"2000-01-01T00:00:00Z"}

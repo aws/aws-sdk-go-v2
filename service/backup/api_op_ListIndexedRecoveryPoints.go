@@ -131,7 +131,9 @@ func (v *ListIndexedRecoveryPointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIndexedRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexedRecoveryPointList(s, schemas.ListIndexedRecoveryPointsOutput_IndexedRecoveryPoints, v.IndexedRecoveryPoints)
+	if v.IndexedRecoveryPoints != nil {
+		serializeIndexedRecoveryPointList(s, schemas.ListIndexedRecoveryPointsOutput_IndexedRecoveryPoints, v.IndexedRecoveryPoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIndexedRecoveryPointsOutput_NextToken, *v.NextToken)
 	}

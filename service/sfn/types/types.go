@@ -2324,7 +2324,9 @@ func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogDestinationList(s, schemas.LoggingConfiguration_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeLogDestinationList(s, schemas.LoggingConfiguration_destinations, v.Destinations)
+	}
 	if v.IncludeExecutionData != false {
 		s.WriteBool(schemas.LoggingConfiguration_includeExecutionData, v.IncludeExecutionData)
 	}
@@ -3111,7 +3113,9 @@ func (v *StateExitedEventDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StateExitedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssignedVariables(s, schemas.StateExitedEventDetails_assignedVariables, v.AssignedVariables)
+	if v.AssignedVariables != nil {
+		serializeAssignedVariables(s, schemas.StateExitedEventDetails_assignedVariables, v.AssignedVariables)
+	}
 	if v.AssignedVariablesDetails != nil {
 		s.WriteStruct(schemas.StateExitedEventDetails_assignedVariablesDetails)
 		v.AssignedVariablesDetails.SerializeMembers(s)

@@ -2,4 +2,4 @@ POST /InsertAdBreak
 
 Content-Type: application/json
 
-{"channelArn":"__ChannelArn__","durationSeconds":1}
+{"adBreakId":"__AdBreakId__","channelArn":"__ChannelArn__","durationSeconds":1,"targetStartAt":"2000-01-01T00:00:00Z"}

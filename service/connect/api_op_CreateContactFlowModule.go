@@ -102,7 +102,9 @@ func (v *CreateContactFlowModuleInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Settings != nil {
 		s.WriteString(schemas.CreateContactFlowModuleRequest_Settings, *v.Settings)
 	}
-	serializeTagMap(s, schemas.CreateContactFlowModuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateContactFlowModuleRequest_Tags, v.Tags)
+	}
 }
 
 type CreateContactFlowModuleOutput struct {

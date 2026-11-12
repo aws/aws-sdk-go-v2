@@ -103,7 +103,9 @@ func (v *ListSignalCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSignalCatalogsResponse_nextToken, *v.NextToken)
 	}
-	serializesignalCatalogSummaries(s, schemas.ListSignalCatalogsResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializesignalCatalogSummaries(s, schemas.ListSignalCatalogsResponse_summaries, v.Summaries)
+	}
 }
 func (v *ListSignalCatalogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSignalCatalogsResponse, func(s *smithy.Schema) error {

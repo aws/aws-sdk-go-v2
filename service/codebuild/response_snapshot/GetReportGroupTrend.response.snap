@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.GetReportGroupTrend
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"rawData":[{"data":"__Data__","reportArn":"__ReportArn__"},{"data":"__Data__","reportArn":"__ReportArn__"}],"stats":{"average":"__Average__","max":"__Max__","min":"__Min__"}}
+¿grawDataŸ¿ddatah__Data__ireportArnm__ReportArn__ÿ¿ddatah__Data__ireportArnm__ReportArn__ÿÿestats¿gaveragek__Average__cmaxg__Max__cming__Min__ÿÿ

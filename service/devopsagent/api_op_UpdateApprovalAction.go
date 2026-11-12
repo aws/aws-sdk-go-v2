@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -82,6 +84,38 @@ type UpdateApprovalActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateApprovalActionRequest_action, string(v.Action))
+	}
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateApprovalActionRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ApprovalId != nil {
+		s.WriteString(schemas.UpdateApprovalActionRequest_approvalId, *v.ApprovalId)
+	}
+	if v.FinalPattern != nil {
+		s.WriteStruct(schemas.UpdateApprovalActionRequest_finalPattern)
+		v.FinalPattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.UpdateApprovalActionRequest_reason, *v.Reason)
+	}
+	if v.SingleUse != nil {
+		s.WriteBool(schemas.UpdateApprovalActionRequest_singleUse, *v.SingleUse)
+	}
+	if v.TtlSeconds != nil {
+		s.WriteInt32(schemas.UpdateApprovalActionRequest_ttlSeconds, *v.TtlSeconds)
+	}
+}
+
 // Response structure for UpdateApprovalAction. Reports the post-submission
 // lifecycle status of the approval request and, when applicable, the absolute
 // expiry timestamp. The status is a lifecycle state distinct from the action verb
@@ -114,13 +148,48 @@ type UpdateApprovalActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalId != nil {
+		s.WriteString(schemas.UpdateApprovalActionResponse_approvalId, *v.ApprovalId)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.UpdateApprovalActionResponse_expiresAt, *v.ExpiresAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateApprovalActionResponse_status, string(v.Status))
+	}
+}
+func (v *UpdateApprovalActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApprovalActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApprovalActionResponse_approvalId:
+			v.ApprovalId = new(string)
+			return d.ReadString(schemas.UpdateApprovalActionResponse_approvalId, v.ApprovalId)
+		case schemas.UpdateApprovalActionResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateApprovalActionResponse_expiresAt, v.ExpiresAt)
+		case schemas.UpdateApprovalActionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateApprovalActionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApprovalStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApprovalActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApprovalAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalAction, schemas.UpdateApprovalActionRequest, schemas.UpdateApprovalActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApprovalAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalAction, schemas.UpdateApprovalActionRequest, schemas.UpdateApprovalActionResponse), output: &UpdateApprovalActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

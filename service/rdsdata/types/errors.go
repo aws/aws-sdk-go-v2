@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There is an error in the call or in a SQL statement. This exception is
 // deprecated.
@@ -59,6 +81,27 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_message, *v.Message)
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was an error in processing the SQL statement.
 type DatabaseErrorException struct {
@@ -85,6 +128,27 @@ func (e *DatabaseErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DatabaseErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DatabaseErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DatabaseErrorException_message, *v.Message)
+	}
+}
+func (v *DatabaseErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DatabaseErrorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The DB cluster doesn't have a DB instance.
 type DatabaseNotFoundException struct {
@@ -111,6 +175,27 @@ func (e *DatabaseNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DatabaseNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DatabaseNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DatabaseNotFoundException_message, *v.Message)
+	}
+}
+func (v *DatabaseNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DatabaseNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A request was cancelled because the Aurora Serverless DB instance was paused.
 // The Data API request automatically resumes the DB instance. Wait a few seconds
@@ -139,6 +224,27 @@ func (e *DatabaseResumingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DatabaseResumingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DatabaseResumingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseResumingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseResumingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DatabaseResumingException_message, *v.Message)
+	}
+}
+func (v *DatabaseResumingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseResumingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseResumingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DatabaseResumingException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The writer instance in the DB cluster isn't available.
 type DatabaseUnavailableException struct {
@@ -165,6 +271,21 @@ func (e *DatabaseUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DatabaseUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DatabaseUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DatabaseUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 
 // There are insufficient privileges to make the call.
 type ForbiddenException struct {
@@ -191,6 +312,27 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForbiddenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ForbiddenException_message, *v.Message)
+	}
+}
+func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The HTTP endpoint for using RDS Data API isn't enabled for the DB cluster.
 type HttpEndpointNotEnabledException struct {
@@ -217,6 +359,27 @@ func (e *HttpEndpointNotEnabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HttpEndpointNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *HttpEndpointNotEnabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointNotEnabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointNotEnabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.HttpEndpointNotEnabledException_message, *v.Message)
+	}
+}
+func (v *HttpEndpointNotEnabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointNotEnabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointNotEnabledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.HttpEndpointNotEnabledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An internal error occurred.
 type InternalServerErrorException struct {
@@ -243,6 +406,21 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 
 // The resource is in an invalid state.
 type InvalidResourceStateException struct {
@@ -269,6 +447,27 @@ func (e *InvalidResourceStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidResourceStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidResourceStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidResourceStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidResourceStateException_message, *v.Message)
+	}
+}
+func (v *InvalidResourceStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidResourceStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidResourceStateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidResourceStateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Secrets Manager secret used with the request isn't valid.
 type InvalidSecretException struct {
@@ -295,6 +494,27 @@ func (e *InvalidSecretException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSecretException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSecretException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSecretException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSecretException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSecretException_message, *v.Message)
+	}
+}
+func (v *InvalidSecretException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSecretException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSecretException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSecretException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resourceArn , secretArn , or transactionId value can't be found.
 type NotFoundException struct {
@@ -321,6 +541,27 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_message, *v.Message)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was a problem with the Secrets Manager secret used with the request,
 // caused by one of the following conditions:
@@ -354,6 +595,27 @@ func (e *SecretsErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SecretsErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SecretsErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecretsErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecretsErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SecretsErrorException_message, *v.Message)
+	}
+}
+func (v *SecretsErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecretsErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecretsErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SecretsErrorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service specified by the resourceArn parameter isn't available.
 type ServiceUnavailableError struct {
@@ -380,6 +642,21 @@ func (e *ServiceUnavailableError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableError) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ServiceUnavailableError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableError, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 
 // The execution of the SQL statement timed out.
 type StatementTimeoutException struct {
@@ -408,6 +685,32 @@ func (e *StatementTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StatementTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *StatementTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatementTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatementTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbConnectionId != 0 {
+		s.WriteInt64(schemas.StatementTimeoutException_dbConnectionId, v.DbConnectionId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.StatementTimeoutException_message, *v.Message)
+	}
+}
+func (v *StatementTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatementTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatementTimeoutException_dbConnectionId:
+			return d.ReadInt64(schemas.StatementTimeoutException_dbConnectionId, &v.DbConnectionId)
+		case schemas.StatementTimeoutException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StatementTimeoutException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The transaction ID wasn't found.
 type TransactionNotFoundException struct {
@@ -434,6 +737,27 @@ func (e *TransactionNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TransactionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TransactionNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransactionNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransactionNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TransactionNotFoundException_message, *v.Message)
+	}
+}
+func (v *TransactionNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransactionNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransactionNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TransactionNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was a problem with the result because of one of the following conditions:
 //
@@ -466,3 +790,24 @@ func (e *UnsupportedResultException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedResultException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedResultException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedResultException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedResultException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedResultException_message, *v.Message)
+	}
+}
+func (v *UnsupportedResultException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedResultException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedResultException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedResultException_message, v.Message)
+		}
+		return nil
+	})
+}

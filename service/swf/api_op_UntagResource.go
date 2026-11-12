@@ -50,7 +50,9 @@ func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UntagResourceInput_resourceArn, *v.ResourceArn)
 	}
-	serializeResourceTagKeyList(s, schemas.UntagResourceInput_tagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeResourceTagKeyList(s, schemas.UntagResourceInput_tagKeys, v.TagKeys)
+	}
 }
 
 type UntagResourceOutput struct {

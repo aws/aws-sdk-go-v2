@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMaintenanceWindowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMaintenanceWindowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMaintenanceWindowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WindowId != nil {
+		s.WriteString(schemas.DeleteMaintenanceWindowRequest_WindowId, *v.WindowId)
+	}
+}
+
 type DeleteMaintenanceWindowOutput struct {
 
 	// The ID of the deleted maintenance window.
@@ -44,13 +58,32 @@ type DeleteMaintenanceWindowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMaintenanceWindowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMaintenanceWindowResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMaintenanceWindowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WindowId != nil {
+		s.WriteString(schemas.DeleteMaintenanceWindowResult_WindowId, *v.WindowId)
+	}
+}
+func (v *DeleteMaintenanceWindowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMaintenanceWindowResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMaintenanceWindowResult_WindowId:
+			v.WindowId = new(string)
+			return d.ReadString(schemas.DeleteMaintenanceWindowResult_WindowId, v.WindowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMaintenanceWindow, schemas.DeleteMaintenanceWindowRequest, schemas.DeleteMaintenanceWindowResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMaintenanceWindow, schemas.DeleteMaintenanceWindowRequest, schemas.DeleteMaintenanceWindowResult), output: &DeleteMaintenanceWindowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

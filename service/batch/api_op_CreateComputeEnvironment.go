@@ -211,7 +211,9 @@ func (v *CreateComputeEnvironmentInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.State != "" {
 		s.WriteString(schemas.CreateComputeEnvironmentRequest_state, string(v.State))
 	}
-	serializeTagrisTagsMap(s, schemas.CreateComputeEnvironmentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.CreateComputeEnvironmentRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateComputeEnvironmentRequest_type, string(v.Type))
 	}

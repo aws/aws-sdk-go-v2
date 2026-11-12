@@ -148,7 +148,9 @@ func (v *GetQuotaUtilizationReportOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetQuotaUtilizationReportResponse_NextToken, *v.NextToken)
 	}
-	serializeQuotaUtilizationInfoList(s, schemas.GetQuotaUtilizationReportResponse_Quotas, v.Quotas)
+	if v.Quotas != nil {
+		serializeQuotaUtilizationInfoList(s, schemas.GetQuotaUtilizationReportResponse_Quotas, v.Quotas)
+	}
 	if v.ReportId != nil {
 		s.WriteString(schemas.GetQuotaUtilizationReportResponse_ReportId, *v.ReportId)
 	}

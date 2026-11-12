@@ -27,8 +27,10 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"io"
 	"net"
 	"net/http"
+	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -339,6 +341,244 @@ func (c *Client) invokeOperation(
 	}
 
 	return result, metadata, err
+}
+
+func (c *Client) invokeEventStreamOperation(
+	ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error,
+) (
+	result interface{}, metadata middleware.Metadata, err error,
+) {
+	ctx = middleware.ClearStackValues(ctx)
+	ctx = middleware.WithServiceID(ctx, ServiceID)
+	ctx = middleware.WithOperationName(ctx, opID)
+
+	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
+	options := c.options.Copy()
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	finalizeOperationRetryMaxAttempts(&options, *c)
+
+	finalizeClientEndpointResolverOptions(&options)
+
+	ctx = setLoggerContext(ctx, options, opID)
+
+	ctx = resolveServiceMetadata(ctx, options, opID)
+
+	if err := c.addCommonMiddlewares(stack, options, opID); err != nil {
+		return nil, metadata, err
+	}
+
+	for _, fn := range stackFns {
+		if err := fn(stack, options); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	for _, fn := range options.APIOptions {
+		if err := fn(stack); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	ctx, err = withOperationMetrics(ctx, options.MeterProvider)
+	if err != nil {
+		return nil, metadata, err
+	}
+
+	tracer := operationTracer(options.TracerProvider)
+	spanName := fmt.Sprintf("%s.%s", ServiceID, opID)
+
+	ctx = tracing.WithOperationTracer(ctx, tracer)
+
+	ctx, span := tracer.StartSpan(ctx, spanName, func(o *tracing.SpanOptions) {
+		o.Kind = tracing.SpanKindClient
+		o.Properties.Set("rpc.system", "aws-api")
+		o.Properties.Set("rpc.method", opID)
+		o.Properties.Set("rpc.service", ServiceID)
+	})
+	endTimer := startMetricTimer(ctx, "client.call.duration")
+	defer endTimer()
+	defer span.End()
+
+	handler := smithyhttp.NewClientHandlerWithOptions(options.HTTPClient, func(o *smithyhttp.ClientHandler) {
+		o.Meter = options.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/healthlake")
+	})
+	decorated := middleware.DecorateHandler(handler, stack)
+	// create a channel that returns immediately as soon as the request to the server is made
+	results := make(chan PartialResult, 1)
+	ctx = context.WithValue(ctx, partialResultChan{}, results)
+	go func() {
+		_, _, asyncErr := decorated.Handle(ctx, params)
+		if asyncErr != nil {
+			span.SetProperty("exception.type", fmt.Sprintf("%T", asyncErr))
+			span.SetProperty("exception.message", asyncErr.Error())
+
+			var aerr smithy.APIError
+			if errors.As(asyncErr, &aerr) {
+				span.SetProperty("api.error_code", aerr.ErrorCode())
+				span.SetProperty("api.error_message", aerr.ErrorMessage())
+				span.SetProperty("api.error_fault", aerr.ErrorFault().String())
+			}
+
+			asyncErr = &smithy.OperationError{
+				ServiceID:     ServiceID,
+				OperationName: opID,
+				Err:           asyncErr,
+			}
+		}
+		span.SetProperty("error", asyncErr != nil)
+		if asyncErr == nil {
+			span.SetStatus(tracing.SpanStatusOK)
+		} else {
+			span.SetStatus(tracing.SpanStatusError)
+		}
+	}()
+	res := <-results
+	return res.Output, res.Metadata, res.Error
+}
+
+type partialResultChan struct {
+}
+
+type deserializeResult struct {
+	reader io.ReadCloser
+	err    error
+}
+
+type asyncEventStreamReader struct {
+	pipeReader *io.PipeReader
+	pipeWriter *io.PipeWriter
+}
+
+func newAsyncEventStreamReader(resultChan <-chan deserializeResult) *asyncEventStreamReader {
+	pipeReader, pipeWriter := io.Pipe()
+
+	reader := &asyncEventStreamReader{
+		pipeReader: pipeReader,
+		pipeWriter: pipeWriter,
+	}
+
+	// Start background copying
+	go func() {
+		for result := range resultChan {
+			if result.err != nil {
+				// consume the error, this can be retried
+				// and if we close the pipeline, it will prevent us
+				// from retrying
+				continue
+			}
+
+			// Copy response body to pipe
+			_, err := io.Copy(pipeWriter, result.reader)
+			pipeWriter.CloseWithError(err)
+		}
+	}()
+
+	return reader
+}
+
+// PartialResult represents a placeholder value to return
+// immediately when calling an event streaming operation. This contains no
+// meaningful result for the caller
+type PartialResult struct {
+	Output   any
+	Metadata middleware.Metadata
+	Error    error
+}
+
+// initialRequestWriter writes the already serialized initial-request message
+// ahead of everything else written to w.
+//
+// The message is written eagerly, since a server may not respond until it has
+// it, but any write that arrives first waits for it so that it always precedes
+// the first event. It is serialized by the caller because the protocol is not
+// safe to use from more than one goroutine at a time.
+type initialRequestWriter struct {
+	w       io.WriteCloser
+	initial []byte
+
+	once sync.Once
+	err  error
+}
+
+func newInitialRequestWriter(w io.WriteCloser, initial []byte) *initialRequestWriter {
+	irw := &initialRequestWriter{w: w, initial: initial}
+	go irw.writeInitial()
+	return irw
+}
+
+func (irw *initialRequestWriter) writeInitial() error {
+	irw.once.Do(func() {
+		_, irw.err = irw.w.Write(irw.initial)
+	})
+	return irw.err
+}
+
+func (irw *initialRequestWriter) Write(p []byte) (int, error) {
+	if err := irw.writeInitial(); err != nil {
+		return 0, err
+	}
+	return irw.w.Write(p)
+}
+
+func (irw *initialRequestWriter) Close() error {
+	err := irw.writeInitial()
+	if cerr := irw.w.Close(); err == nil {
+		err = cerr
+	}
+	return err
+}
+
+// initialResponseReader consumes the initial-response message from the front of
+// r, so that it is never seen as an event by whatever reads the rest.
+type initialResponseReader struct {
+	r    io.ReadCloser
+	out  smithy.Deserializable
+	read func(io.Reader, smithy.Deserializable) error
+
+	once sync.Once
+	done chan struct{}
+	err  error
+}
+
+func newInitialResponseReader(r io.ReadCloser, out smithy.Deserializable, read func(io.Reader, smithy.Deserializable) error) *initialResponseReader {
+	return &initialResponseReader{r: r, out: out, read: read, done: make(chan struct{})}
+}
+
+func (r *initialResponseReader) readInitial() error {
+	r.once.Do(func() {
+		r.err = r.read(r.r, r.out)
+		close(r.done)
+	})
+	return r.err
+}
+
+func (r *initialResponseReader) Read(p []byte) (int, error) {
+	if err := r.readInitial(); err != nil {
+		return 0, err
+	}
+	return r.r.Read(p)
+}
+
+func (r *initialResponseReader) Close() error {
+	return r.r.Close()
+}
+
+// wait blocks until the initial-response message has been read and returns the
+// value it was deserialized into.
+func (r *initialResponseReader) wait(ctx context.Context) (smithy.Deserializable, error) {
+	select {
+	case <-r.done:
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+	if r.err != nil {
+		return nil, r.err
+	}
+	return r.out, nil
 }
 
 type operationInputKey struct{}

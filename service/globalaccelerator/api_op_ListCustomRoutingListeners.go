@@ -85,7 +85,9 @@ func (v *ListCustomRoutingListenersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomRoutingListenersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomRoutingListeners(s, schemas.ListCustomRoutingListenersResponse_Listeners, v.Listeners)
+	if v.Listeners != nil {
+		serializeCustomRoutingListeners(s, schemas.ListCustomRoutingListenersResponse_Listeners, v.Listeners)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomRoutingListenersResponse_NextToken, *v.NextToken)
 	}

@@ -126,7 +126,9 @@ func (v *GetAggregateComplianceDetailsByConfigRuleOutput) Serialize(s smithy.Sha
 }
 
 func (v *GetAggregateComplianceDetailsByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateEvaluationResultList(s, schemas.GetAggregateComplianceDetailsByConfigRuleResponse_AggregateEvaluationResults, v.AggregateEvaluationResults)
+	if v.AggregateEvaluationResults != nil {
+		serializeAggregateEvaluationResultList(s, schemas.GetAggregateComplianceDetailsByConfigRuleResponse_AggregateEvaluationResults, v.AggregateEvaluationResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleResponse_NextToken, *v.NextToken)
 	}

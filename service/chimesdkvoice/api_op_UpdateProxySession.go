@@ -63,7 +63,9 @@ func (v *UpdateProxySessionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateProxySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityList(s, schemas.UpdateProxySessionRequest_Capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeCapabilityList(s, schemas.UpdateProxySessionRequest_Capabilities, v.Capabilities)
+	}
 	if v.ExpiryMinutes != nil {
 		s.WriteInt32(schemas.UpdateProxySessionRequest_ExpiryMinutes, *v.ExpiryMinutes)
 	}

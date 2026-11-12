@@ -4,6 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteCentralizationRuleForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCentralizationRuleForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCentralizationRuleForOrganizationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCentralizationRuleForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.DeleteCentralizationRuleForOrganizationInput_RuleIdentifier, *v.RuleIdentifier)
+	}
+}
+
 type DeleteCentralizationRuleForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteCentralizationRuleForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCentralizationRuleForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCentralizationRuleForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCentralizationRuleForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCentralizationRuleForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCentralizationRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCentralizationRuleForOrganization, schemas.DeleteCentralizationRuleForOrganizationInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCentralizationRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCentralizationRuleForOrganization, schemas.DeleteCentralizationRuleForOrganizationInput, nil), output: &DeleteCentralizationRuleForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,6 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿mNextPageTokenq__NextPageToken__jPrincipalsŸ¿lPrincipalARNp__PrincipalARN__mPrincipalTypecIAMÿ¿lPrincipalARNp__PrincipalARN__mPrincipalTypecIAMÿÿÿ

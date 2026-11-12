@@ -84,7 +84,9 @@ func (v *PutComplianceInquiryFeedbackInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Rating != "" {
 		s.WriteString(schemas.PutComplianceInquiryFeedbackRequest_rating, string(v.Rating))
 	}
-	serializeFeedbackReasonCodeList(s, schemas.PutComplianceInquiryFeedbackRequest_reasonCodes, v.ReasonCodes)
+	if v.ReasonCodes != nil {
+		serializeFeedbackReasonCodeList(s, schemas.PutComplianceInquiryFeedbackRequest_reasonCodes, v.ReasonCodes)
+	}
 	if v.ResponseRevisionId != nil {
 		s.WriteInt32(schemas.PutComplianceInquiryFeedbackRequest_responseRevisionId, *v.ResponseRevisionId)
 	}

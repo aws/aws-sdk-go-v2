@@ -56,7 +56,9 @@ func (v *ListRegistrationAssociationsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListRegistrationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistrationAssociationFilterList(s, schemas.ListRegistrationAssociationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeRegistrationAssociationFilterList(s, schemas.ListRegistrationAssociationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRegistrationAssociationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -114,7 +116,9 @@ func (v *ListRegistrationAssociationsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.RegistrationArn != nil {
 		s.WriteString(schemas.ListRegistrationAssociationsResult_RegistrationArn, *v.RegistrationArn)
 	}
-	serializeRegistrationAssociationMetadataList(s, schemas.ListRegistrationAssociationsResult_RegistrationAssociations, v.RegistrationAssociations)
+	if v.RegistrationAssociations != nil {
+		serializeRegistrationAssociationMetadataList(s, schemas.ListRegistrationAssociationsResult_RegistrationAssociations, v.RegistrationAssociations)
+	}
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.ListRegistrationAssociationsResult_RegistrationId, *v.RegistrationId)
 	}

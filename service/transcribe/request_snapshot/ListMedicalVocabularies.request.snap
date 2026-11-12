@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/ListMedicalVocabularies
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.ListMedicalVocabularies
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NameContains":"__NameContains__","NextToken":"__NextToken__","StateEquals":"PENDING"}
+¿jMaxResultslNameContainsp__NameContains__iNextTokenm__NextToken__kStateEqualsgPENDINGÿ

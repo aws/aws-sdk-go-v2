@@ -137,7 +137,9 @@ func (v *DescribeGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.DescribeGroupMembershipResponse_IdentityStoreId, *v.IdentityStoreId)
 	}
-	serializeMemberId(s, schemas.DescribeGroupMembershipResponse_MemberId, v.MemberId)
+	if v.MemberId != nil {
+		serializeMemberId(s, schemas.DescribeGroupMembershipResponse_MemberId, v.MemberId)
+	}
 	if v.MembershipArn != nil {
 		s.WriteString(schemas.DescribeGroupMembershipResponse_MembershipArn, *v.MembershipArn)
 	}

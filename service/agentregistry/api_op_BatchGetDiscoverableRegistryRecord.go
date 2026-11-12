@@ -47,7 +47,9 @@ func (v *BatchGetDiscoverableRegistryRecordInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *BatchGetDiscoverableRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryRecordsEntryList(s, schemas.BatchGetDiscoverableRegistryRecordRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeRegistryRecordsEntryList(s, schemas.BatchGetDiscoverableRegistryRecordRequest_entries, v.Entries)
+	}
 }
 
 type BatchGetDiscoverableRegistryRecordOutput struct {
@@ -77,8 +79,12 @@ func (v *BatchGetDiscoverableRegistryRecordOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *BatchGetDiscoverableRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetDiscoverableRegistryRecordErrorList(s, schemas.BatchGetDiscoverableRegistryRecordResponse_errors, v.Errors)
-	serializeRegistryRecordSummaryList(s, schemas.BatchGetDiscoverableRegistryRecordResponse_registryRecords, v.RegistryRecords)
+	if v.Errors != nil {
+		serializeBatchGetDiscoverableRegistryRecordErrorList(s, schemas.BatchGetDiscoverableRegistryRecordResponse_errors, v.Errors)
+	}
+	if v.RegistryRecords != nil {
+		serializeRegistryRecordSummaryList(s, schemas.BatchGetDiscoverableRegistryRecordResponse_registryRecords, v.RegistryRecords)
+	}
 }
 func (v *BatchGetDiscoverableRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDiscoverableRegistryRecordResponse, func(s *smithy.Schema) error {

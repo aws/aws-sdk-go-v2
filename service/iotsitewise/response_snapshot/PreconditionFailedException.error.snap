@@ -1,0 +1,4 @@
+412
+Content-Type: application/json
+
+{"__type":"PreconditionFailedException","message":"__Message__","resourceArn":"__ResourceArn__","resourceId":"__ResourceId__"}

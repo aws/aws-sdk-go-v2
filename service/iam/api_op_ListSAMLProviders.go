@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,15 @@ type ListSAMLProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSAMLProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSAMLProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSAMLProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Contains the response to a successful [ListSAMLProviders] request.
 //
 // [ListSAMLProviders]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSAMLProviders.html
@@ -52,13 +63,31 @@ type ListSAMLProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSAMLProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSAMLProvidersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSAMLProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SAMLProviderList != nil {
+		serializeSAMLProviderListType(s, schemas.ListSAMLProvidersResponse_SAMLProviderList, v.SAMLProviderList)
+	}
+}
+func (v *ListSAMLProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSAMLProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSAMLProvidersResponse_SAMLProviderList:
+			return deserializeSAMLProviderListType(d, schemas.ListSAMLProvidersResponse_SAMLProviderList, &v.SAMLProviderList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSAMLProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSAMLProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSAMLProviders, schemas.ListSAMLProvidersRequest, schemas.ListSAMLProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListSAMLProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSAMLProviders, schemas.ListSAMLProvidersRequest, schemas.ListSAMLProvidersResponse), output: &ListSAMLProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

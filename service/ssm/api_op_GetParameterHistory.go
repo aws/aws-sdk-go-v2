@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -20,6 +22,16 @@ import (
 // then you must also update the key alias the parameter uses to reference KMS.
 // Otherwise, GetParameterHistory retrieves whatever the original key alias was
 // referencing.
+//
+// This operation is authorized against the ssm:GetParameterHistory action, not
+// against ssm:GetParameter . Because parameter history includes every version of a
+// parameter, including the current one, a principal who is denied ssm:GetParameter
+// , ssm:GetParameters , and ssm:GetParametersByPath but allowed
+// ssm:GetParameterHistory can still read the current value. To restrict access to
+// a parameter value, deny every action that can return it. For more information,
+// see [How Parameter Store authorizes parameter retrieval]in the Amazon Web Services Systems Manager User Guide.
+//
+// [How Parameter Store authorizes parameter retrieval]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
 func (c *Client) GetParameterHistory(ctx context.Context, params *GetParameterHistoryInput, optFns ...func(*Options)) (*GetParameterHistoryOutput, error) {
 	if params == nil {
 		params = &GetParameterHistoryInput{}
@@ -59,6 +71,27 @@ type GetParameterHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParameterHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParameterHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParameterHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetParameterHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetParameterHistoryRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParameterHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.WithDecryption != nil {
+		s.WriteBool(schemas.GetParameterHistoryRequest_WithDecryption, *v.WithDecryption)
+	}
+}
+
 type GetParameterHistoryOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no
@@ -74,13 +107,37 @@ type GetParameterHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParameterHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParameterHistoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParameterHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetParameterHistoryResult_NextToken, *v.NextToken)
+	}
+	if v.Parameters != nil {
+		serializeParameterHistoryList(s, schemas.GetParameterHistoryResult_Parameters, v.Parameters)
+	}
+}
+func (v *GetParameterHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParameterHistoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParameterHistoryResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetParameterHistoryResult_NextToken, v.NextToken)
+		case schemas.GetParameterHistoryResult_Parameters:
+			return deserializeParameterHistoryList(d, schemas.GetParameterHistoryResult_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParameterHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParameterHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameterHistory, schemas.GetParameterHistoryRequest, schemas.GetParameterHistoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParameterHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameterHistory, schemas.GetParameterHistoryRequest, schemas.GetParameterHistoryResult), output: &GetParameterHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

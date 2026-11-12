@@ -98,7 +98,9 @@ func (v *CreateMultiRegionClusterInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.TLSEnabled != nil {
 		s.WriteBool(schemas.CreateMultiRegionClusterRequest_TLSEnabled, *v.TLSEnabled)
 	}
-	serializeTagList(s, schemas.CreateMultiRegionClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMultiRegionClusterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMultiRegionClusterOutput struct {
@@ -150,6 +152,9 @@ func (c *Client) addOperationCreateMultiRegionClusterMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

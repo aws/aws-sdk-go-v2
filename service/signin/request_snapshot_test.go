@@ -205,6 +205,35 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_CreateBearerToken(t *testing.T) {
+	input := &CreateBearerTokenInput{
+		GrantType:       ptr.String("__GrantType__"),
+		Resource:        ptr.String("__Resource__"),
+		DurationSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateBearerToken(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBearerToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateOAuth2Token(t *testing.T) {
 	input := &CreateOAuth2TokenInput{
 		TokenInput: &types.CreateOAuth2TokenRequestBody{
@@ -263,6 +292,37 @@ func TestCheckRequestSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOAuth2TokenWithIAM"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) {
+	input := &CreateOAuth2TokenWithTokenExchangeInput{
+		GrantType:        ptr.String("__GrantType__"),
+		SubjectToken:     ptr.String("__SubjectToken__"),
+		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Resource:         ptr.String("__Resource__"),
+		Scope:            ptr.String("__Scope__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOAuth2TokenWithTokenExchange"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -517,6 +577,35 @@ func TestCheckRequestSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_CreateBearerToken(t *testing.T) {
+	input := &CreateBearerTokenInput{
+		GrantType:       ptr.String("__GrantType__"),
+		Resource:        ptr.String("__Resource__"),
+		DurationSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateBearerToken(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBearerToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateOAuth2Token(t *testing.T) {
 	input := &CreateOAuth2TokenInput{
 		TokenInput: &types.CreateOAuth2TokenRequestBody{
@@ -575,6 +664,37 @@ func TestUpdateRequestSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOAuth2TokenWithIAM"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) {
+	input := &CreateOAuth2TokenWithTokenExchangeInput{
+		GrantType:        ptr.String("__GrantType__"),
+		SubjectToken:     ptr.String("__SubjectToken__"),
+		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Resource:         ptr.String("__Resource__"),
+		Scope:            ptr.String("__Scope__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateOAuth2TokenWithTokenExchange"); err != nil {
 		t.Fatal(err)
 	}
 }

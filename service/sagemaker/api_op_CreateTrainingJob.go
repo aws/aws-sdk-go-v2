@@ -342,7 +342,9 @@ func (v *CreateTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DebugHookConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDebugRuleConfigurations(s, schemas.CreateTrainingJobRequest_DebugRuleConfigurations, v.DebugRuleConfigurations)
+	if v.DebugRuleConfigurations != nil {
+		serializeDebugRuleConfigurations(s, schemas.CreateTrainingJobRequest_DebugRuleConfigurations, v.DebugRuleConfigurations)
+	}
 	if v.EnableInterContainerTrafficEncryption != nil {
 		s.WriteBool(schemas.CreateTrainingJobRequest_EnableInterContainerTrafficEncryption, *v.EnableInterContainerTrafficEncryption)
 	}
@@ -352,19 +354,25 @@ func (v *CreateTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableNetworkIsolation != nil {
 		s.WriteBool(schemas.CreateTrainingJobRequest_EnableNetworkIsolation, *v.EnableNetworkIsolation)
 	}
-	serializeTrainingEnvironmentMap(s, schemas.CreateTrainingJobRequest_Environment, v.Environment)
+	if v.Environment != nil {
+		serializeTrainingEnvironmentMap(s, schemas.CreateTrainingJobRequest_Environment, v.Environment)
+	}
 	if v.ExperimentConfig != nil {
 		s.WriteStruct(schemas.CreateTrainingJobRequest_ExperimentConfig)
 		v.ExperimentConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHyperParameters(s, schemas.CreateTrainingJobRequest_HyperParameters, v.HyperParameters)
+	if v.HyperParameters != nil {
+		serializeHyperParameters(s, schemas.CreateTrainingJobRequest_HyperParameters, v.HyperParameters)
+	}
 	if v.InfraCheckConfig != nil {
 		s.WriteStruct(schemas.CreateTrainingJobRequest_InfraCheckConfig)
 		v.InfraCheckConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputDataConfig(s, schemas.CreateTrainingJobRequest_InputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeInputDataConfig(s, schemas.CreateTrainingJobRequest_InputDataConfig, v.InputDataConfig)
+	}
 	if v.MlflowConfig != nil {
 		s.WriteStruct(schemas.CreateTrainingJobRequest_MlflowConfig)
 		v.MlflowConfig.SerializeMembers(s)
@@ -385,7 +393,9 @@ func (v *CreateTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProfilerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProfilerRuleConfigurations(s, schemas.CreateTrainingJobRequest_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	if v.ProfilerRuleConfigurations != nil {
+		serializeProfilerRuleConfigurations(s, schemas.CreateTrainingJobRequest_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	}
 	if v.RemoteDebugConfig != nil {
 		s.WriteStruct(schemas.CreateTrainingJobRequest_RemoteDebugConfig)
 		v.RemoteDebugConfig.SerializeMembers(s)
@@ -419,7 +429,9 @@ func (v *CreateTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTrainingJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrainingJobRequest_Tags, v.Tags)
+	}
 	if v.TensorBoardOutputConfig != nil {
 		s.WriteStruct(schemas.CreateTrainingJobRequest_TensorBoardOutputConfig)
 		v.TensorBoardOutputConfig.SerializeMembers(s)

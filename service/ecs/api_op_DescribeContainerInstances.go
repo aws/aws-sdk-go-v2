@@ -62,8 +62,12 @@ func (v *DescribeContainerInstancesInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Cluster != nil {
 		s.WriteString(schemas.DescribeContainerInstancesRequest_cluster, *v.Cluster)
 	}
-	serializeStringList(s, schemas.DescribeContainerInstancesRequest_containerInstances, v.ContainerInstances)
-	serializeContainerInstanceFieldList(s, schemas.DescribeContainerInstancesRequest_include, v.Include)
+	if v.ContainerInstances != nil {
+		serializeStringList(s, schemas.DescribeContainerInstancesRequest_containerInstances, v.ContainerInstances)
+	}
+	if v.Include != nil {
+		serializeContainerInstanceFieldList(s, schemas.DescribeContainerInstancesRequest_include, v.Include)
+	}
 }
 
 type DescribeContainerInstancesOutput struct {
@@ -87,8 +91,12 @@ func (v *DescribeContainerInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeContainerInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerInstances(s, schemas.DescribeContainerInstancesResponse_containerInstances, v.ContainerInstances)
-	serializeFailures(s, schemas.DescribeContainerInstancesResponse_failures, v.Failures)
+	if v.ContainerInstances != nil {
+		serializeContainerInstances(s, schemas.DescribeContainerInstancesResponse_containerInstances, v.ContainerInstances)
+	}
+	if v.Failures != nil {
+		serializeFailures(s, schemas.DescribeContainerInstancesResponse_failures, v.Failures)
+	}
 }
 func (v *DescribeContainerInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeContainerInstancesResponse, func(s *smithy.Schema) error {

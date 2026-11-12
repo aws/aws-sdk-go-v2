@@ -98,7 +98,7 @@
                     "name": "execute-api"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html\">Participant Service actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html\">Participant Service data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Connect Customer is an easy-to-use omnichannel cloud contact center service that\n            enables companies of any size to deliver superior customer service at a lower cost.\n                Connect Customer communications capabilities make it easy for companies to deliver\n            personalized interactions across communication channels, including chat. </p>\n         <p>Use the Connect Customer Participant Service to manage participants (for example,\n            agents, customers, and managers listening in), and to send messages and events within a\n            chat contact. The APIs in the service enable the following: sending chat messages,\n            attachment sharing, managing a participant's connection state and message events, and\n            retrieving chat transcripts.</p>",
+                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html\">Participant Service actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html\">Participant Service data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Use the Connect Customer Participant Service to manage participants (for example,\n            agents, customers, and managers listening in), and to send messages and events within a\n            chat contact. The APIs in the service enable the following: sending chat messages,\n            attachment sharing, managing a participant's connection state and message events, and\n            retrieving chat transcripts.</p>",
                 "smithy.api#title": "Amazon Connect Participant Service",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -1426,6 +1426,23 @@
                 }
             }
         },
+        "com.amazonaws.connectparticipant#ContentDisposition": {
+            "type": "enum",
+            "members": {
+                "INLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INLINE"
+                    }
+                },
+                "ATTACHMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connectparticipant#ContentType": {
             "type": "string",
             "traits": {
@@ -1715,6 +1732,12 @@
                     "target": "com.amazonaws.connectparticipant#URLExpiryInSeconds",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format:\n            yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
+                    }
+                },
+                "UrlContentDisposition": {
+                    "target": "com.amazonaws.connectparticipant#ContentDisposition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how a browser handles the file at the pre-signed URL. The following values\n            are valid:</p>\n         <dl>\n            <dt>INLINE</dt>\n            <dd>\n               <p>Displays the file in the browser.</p>\n            </dd>\n            <dt>ATTACHMENT</dt>\n            <dd>\n               <p>Downloads the file. This is the default behavior.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -2167,6 +2190,15 @@
                 }
             }
         },
+        "com.amazonaws.connectparticipant#MetadataUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.connectparticipant#MostRecent": {
             "type": "integer",
             "traits": {
@@ -2548,7 +2580,7 @@
                 "Content": {
                     "target": "com.amazonaws.connectparticipant#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length\n                    Constraints are Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1,\n                    Maximum of 12000. </p>\n            </li>\n            <li>\n               <p>For\n                        <code>application/vnd.amazonaws.connect.message.interactive.response</code>,\n                    the Length Constraints are Minimum of 1, Maximum of 12288.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The content of the message. Maximum of 16,384 bytes for all content types\n            (<code>text/plain</code>, <code>text/markdown</code>, <code>application/json</code>,\n            and <code>application/vnd.amazonaws.connect.message.interactive.response</code>).</p>\n         <p>Some messaging channels enforce lower limits. For channel-specific message size\n            limits, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html#chat-message-size-limits\">Chat message size limits by channel</a> in the <i>Amazon Connect Customer\n                Administrator Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2811,7 +2843,7 @@
             "type": "structure",
             "members": {
                 "Url": {
-                    "target": "com.amazonaws.connectparticipant#UploadMetadataUrl",
+                    "target": "com.amazonaws.connectparticipant#MetadataUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response \nto <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html\">StartAttachmentUpload</a>.</p>"
                     }
@@ -2823,7 +2855,7 @@
                     }
                 },
                 "HeadersToInclude": {
-                    "target": "com.amazonaws.connectparticipant#UploadMetadataSignedHeaders",
+                    "target": "com.amazonaws.connectparticipant#UrlMetadataSignedHeaders",
                     "traits": {
                         "smithy.api#documentation": "<p>The headers to be provided while uploading the file to the URL.</p>"
                     }
@@ -2833,16 +2865,16 @@
                 "smithy.api#documentation": "<p>Fields to be used while uploading the attachment.</p>"
             }
         },
-        "com.amazonaws.connectparticipant#UploadMetadataSignedHeaders": {
+        "com.amazonaws.connectparticipant#UrlMetadataSignedHeaders": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersKey"
+                "target": "com.amazonaws.connectparticipant#UrlMetadataSignedHeadersKey"
             },
             "value": {
-                "target": "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersValue"
+                "target": "com.amazonaws.connectparticipant#UrlMetadataSignedHeadersValue"
             }
         },
-        "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersKey": {
+        "com.amazonaws.connectparticipant#UrlMetadataSignedHeadersKey": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -2851,21 +2883,12 @@
                 }
             }
         },
-        "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersValue": {
+        "com.amazonaws.connectparticipant#UrlMetadataSignedHeadersValue": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
-                }
-            }
-        },
-        "com.amazonaws.connectparticipant#UploadMetadataUrl": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 2000
                 }
             }
         },

@@ -105,7 +105,9 @@ func (v *ListCisScanResultsAggregatedByChecksOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListCisScanResultsAggregatedByChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCisCheckAggregationList(s, schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations, v.CheckAggregations)
+	if v.CheckAggregations != nil {
+		serializeCisCheckAggregationList(s, schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations, v.CheckAggregations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksResponse_nextToken, *v.NextToken)
 	}

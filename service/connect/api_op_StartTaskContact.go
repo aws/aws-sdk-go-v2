@@ -183,8 +183,12 @@ func (v *StartTaskContactInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartTaskContactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTaskAttachments(s, schemas.StartTaskContactRequest_Attachments, v.Attachments)
-	serializeAttributes(s, schemas.StartTaskContactRequest_Attributes, v.Attributes)
+	if v.Attachments != nil {
+		serializeTaskAttachments(s, schemas.StartTaskContactRequest_Attachments, v.Attachments)
+	}
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.StartTaskContactRequest_Attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartTaskContactRequest_ClientToken, *v.ClientToken)
 	}
@@ -206,14 +210,18 @@ func (v *StartTaskContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QuickConnectId != nil {
 		s.WriteString(schemas.StartTaskContactRequest_QuickConnectId, *v.QuickConnectId)
 	}
-	serializeContactReferences(s, schemas.StartTaskContactRequest_References, v.References)
+	if v.References != nil {
+		serializeContactReferences(s, schemas.StartTaskContactRequest_References, v.References)
+	}
 	if v.RelatedContactId != nil {
 		s.WriteString(schemas.StartTaskContactRequest_RelatedContactId, *v.RelatedContactId)
 	}
 	if v.ScheduledTime != nil {
 		s.WriteTime(schemas.StartTaskContactRequest_ScheduledTime, *v.ScheduledTime)
 	}
-	serializeSegmentAttributes(s, schemas.StartTaskContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.SegmentAttributes != nil {
+		serializeSegmentAttributes(s, schemas.StartTaskContactRequest_SegmentAttributes, v.SegmentAttributes)
+	}
 	if v.TaskTemplateId != nil {
 		s.WriteString(schemas.StartTaskContactRequest_TaskTemplateId, *v.TaskTemplateId)
 	}

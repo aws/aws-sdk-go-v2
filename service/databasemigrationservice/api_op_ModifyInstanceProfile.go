@@ -112,7 +112,9 @@ func (v *ModifyInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SubnetGroupIdentifier != nil {
 		s.WriteString(schemas.ModifyInstanceProfileMessage_SubnetGroupIdentifier, *v.SubnetGroupIdentifier)
 	}
-	serializeStringList(s, schemas.ModifyInstanceProfileMessage_VpcSecurityGroups, v.VpcSecurityGroups)
+	if v.VpcSecurityGroups != nil {
+		serializeStringList(s, schemas.ModifyInstanceProfileMessage_VpcSecurityGroups, v.VpcSecurityGroups)
+	}
 }
 
 type ModifyInstanceProfileOutput struct {

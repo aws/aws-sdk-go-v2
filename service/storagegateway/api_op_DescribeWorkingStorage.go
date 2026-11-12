@@ -91,7 +91,9 @@ func (v *DescribeWorkingStorageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeWorkingStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDiskIds(s, schemas.DescribeWorkingStorageOutput_DiskIds, v.DiskIds)
+	if v.DiskIds != nil {
+		serializeDiskIds(s, schemas.DescribeWorkingStorageOutput_DiskIds, v.DiskIds)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.DescribeWorkingStorageOutput_GatewayARN, *v.GatewayARN)
 	}

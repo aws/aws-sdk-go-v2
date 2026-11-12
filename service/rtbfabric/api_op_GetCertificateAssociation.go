@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -44,6 +46,21 @@ type GetCertificateAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmCertificateArn != nil {
+		s.WriteString(schemas.GetCertificateAssociationRequest_acmCertificateArn, *v.AcmCertificateArn)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.GetCertificateAssociationRequest_gatewayId, *v.GatewayId)
+	}
+}
+
 type GetCertificateAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the ACM certificate.
@@ -73,13 +90,60 @@ type GetCertificateAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmCertificateArn != nil {
+		s.WriteString(schemas.GetCertificateAssociationResponse_acmCertificateArn, *v.AcmCertificateArn)
+	}
+	if v.AssociatedAt != nil {
+		s.WriteTime(schemas.GetCertificateAssociationResponse_associatedAt, *v.AssociatedAt)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.GetCertificateAssociationResponse_gatewayId, *v.GatewayId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCertificateAssociationResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetCertificateAssociationResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetCertificateAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCertificateAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCertificateAssociationResponse_acmCertificateArn:
+			v.AcmCertificateArn = new(string)
+			return d.ReadString(schemas.GetCertificateAssociationResponse_acmCertificateArn, v.AcmCertificateArn)
+		case schemas.GetCertificateAssociationResponse_associatedAt:
+			v.AssociatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCertificateAssociationResponse_associatedAt, v.AssociatedAt)
+		case schemas.GetCertificateAssociationResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.GetCertificateAssociationResponse_gatewayId, v.GatewayId)
+		case schemas.GetCertificateAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCertificateAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CertificateAssociationStatus(ev)
+			return nil
+		case schemas.GetCertificateAssociationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCertificateAssociationResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCertificateAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCertificateAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAssociation, schemas.GetCertificateAssociationRequest, schemas.GetCertificateAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCertificateAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAssociation, schemas.GetCertificateAssociationRequest, schemas.GetCertificateAssociationResponse), output: &GetCertificateAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

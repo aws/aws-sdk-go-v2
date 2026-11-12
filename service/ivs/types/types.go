@@ -55,7 +55,9 @@ func (v *AdConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.AdConfiguration_arn, *v.Arn)
 	}
-	serializeMediaTailorPlaybackConfigurationsList(s, schemas.AdConfiguration_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	if v.MediaTailorPlaybackConfigurations != nil {
+		serializeMediaTailorPlaybackConfigurationsList(s, schemas.AdConfiguration_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AdConfiguration_name, *v.Name)
 	}
@@ -64,7 +66,9 @@ func (v *AdConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PostRollConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.AdConfiguration_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AdConfiguration_tags, v.Tags)
+	}
 }
 func (v *AdConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdConfiguration, func(s *smithy.Schema) error {
@@ -132,7 +136,9 @@ func (v *AdConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.AdConfigurationSummary_arn, *v.Arn)
 	}
-	serializeMediaTailorPlaybackConfigurationsList(s, schemas.AdConfigurationSummary_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	if v.MediaTailorPlaybackConfigurations != nil {
+		serializeMediaTailorPlaybackConfigurationsList(s, schemas.AdConfigurationSummary_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AdConfigurationSummary_name, *v.Name)
 	}
@@ -141,7 +147,9 @@ func (v *AdConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PostRollConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.AdConfigurationSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AdConfigurationSummary_tags, v.Tags)
+	}
 }
 func (v *AdConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdConfigurationSummary, func(s *smithy.Schema) error {
@@ -418,6 +426,11 @@ type Channel struct {
 	// containerFormat may be set to TS or FRAGMENTED_MP4 . Default: TS .
 	ContainerFormat ContainerFormat
 
+	// Failover-slate-configuration ARN. A valid ARN value here both specifies the ARN
+	// and enables failover slate. Default: "" (empty string, no failover slate
+	// configuration is applied).
+	FailoverSlateConfigurationArn *string
+
 	// Channel ingest endpoint, part of the definition of an ingest server, used when
 	// you set up streaming software.
 	IngestEndpoint *string
@@ -496,6 +509,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerFormat != "" {
 		s.WriteString(schemas.Channel_containerFormat, string(v.ContainerFormat))
 	}
+	if v.FailoverSlateConfigurationArn != nil {
+		s.WriteString(schemas.Channel_failoverSlateConfigurationArn, *v.FailoverSlateConfigurationArn)
+	}
 	if v.IngestEndpoint != nil {
 		s.WriteString(schemas.Channel_ingestEndpoint, *v.IngestEndpoint)
 	}
@@ -530,7 +546,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Srt.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.Channel_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Channel_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Channel_type, string(v.Type))
 	}
@@ -553,6 +571,9 @@ func (v *Channel) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ContainerFormat = ContainerFormat(ev)
 			return nil
+		case schemas.Channel_failoverSlateConfigurationArn:
+			v.FailoverSlateConfigurationArn = new(string)
+			return d.ReadString(schemas.Channel_failoverSlateConfigurationArn, v.FailoverSlateConfigurationArn)
 		case schemas.Channel_ingestEndpoint:
 			v.IngestEndpoint = new(string)
 			return d.ReadString(schemas.Channel_ingestEndpoint, v.IngestEndpoint)
@@ -617,6 +638,11 @@ type ChannelSummary struct {
 	// false .
 	Authorized bool
 
+	// Failover-slate-configuration ARN. A valid ARN value here both specifies the ARN
+	// and enables failover slate. Default: "" (empty string, no failover slate
+	// configuration is applied).
+	FailoverSlateConfigurationArn *string
+
 	// Whether the channel allows insecure RTMP ingest. Default: false .
 	InsecureIngest bool
 
@@ -677,6 +703,9 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Authorized != false {
 		s.WriteBool(schemas.ChannelSummary_authorized, v.Authorized)
 	}
+	if v.FailoverSlateConfigurationArn != nil {
+		s.WriteString(schemas.ChannelSummary_failoverSlateConfigurationArn, *v.FailoverSlateConfigurationArn)
+	}
 	if v.InsecureIngest != false {
 		s.WriteBool(schemas.ChannelSummary_insecureIngest, v.InsecureIngest)
 	}
@@ -695,7 +724,9 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordingConfigurationArn != nil {
 		s.WriteString(schemas.ChannelSummary_recordingConfigurationArn, *v.RecordingConfigurationArn)
 	}
-	serializeTags(s, schemas.ChannelSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ChannelSummary_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ChannelSummary_type, string(v.Type))
 	}
@@ -711,6 +742,9 @@ func (v *ChannelSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ChannelSummary_arn, v.Arn)
 		case schemas.ChannelSummary_authorized:
 			return d.ReadBool(schemas.ChannelSummary_authorized, &v.Authorized)
+		case schemas.ChannelSummary_failoverSlateConfigurationArn:
+			v.FailoverSlateConfigurationArn = new(string)
+			return d.ReadString(schemas.ChannelSummary_failoverSlateConfigurationArn, v.FailoverSlateConfigurationArn)
 		case schemas.ChannelSummary_insecureIngest:
 			return d.ReadBool(schemas.ChannelSummary_insecureIngest, &v.InsecureIngest)
 		case schemas.ChannelSummary_latencyMode:
@@ -780,6 +814,206 @@ func (v *DestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.DestinationConfiguration_s3:
 			v.S3 = &S3DestinationConfiguration{}
 			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Object specifying a failover slate configuration.
+type FailoverSlateConfiguration struct {
+
+	// Failover-slate-configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// Current state of the failover slate configuration.
+	//
+	// This member is required.
+	State FailoverSlateConfigurationState
+
+	// Number of seconds of ingest interruption before the failover slate activates.
+	// Default: 3 .
+	ActivationThresholdSeconds *int32
+
+	// Maximum number of seconds that the failover slate displays. Default: 60 .
+	MaxSlateDisplaySeconds *int32
+
+	// Minimum number of seconds that the failover slate displays after activation.
+	// Default: 3 .
+	MinSlateDisplaySeconds *int32
+
+	// Failover-slate-configuration name.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FailoverSlateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverSlateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverSlateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationThresholdSeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfiguration_activationThresholdSeconds, *v.ActivationThresholdSeconds)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.FailoverSlateConfiguration_arn, *v.Arn)
+	}
+	if v.MaxSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfiguration_maxSlateDisplaySeconds, *v.MaxSlateDisplaySeconds)
+	}
+	if v.MinSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfiguration_minSlateDisplaySeconds, *v.MinSlateDisplaySeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FailoverSlateConfiguration_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.FailoverSlateConfiguration_state, string(v.State))
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.FailoverSlateConfiguration_tags, v.Tags)
+	}
+}
+func (v *FailoverSlateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverSlateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverSlateConfiguration_activationThresholdSeconds:
+			v.ActivationThresholdSeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfiguration_activationThresholdSeconds, v.ActivationThresholdSeconds)
+		case schemas.FailoverSlateConfiguration_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FailoverSlateConfiguration_arn, v.Arn)
+		case schemas.FailoverSlateConfiguration_maxSlateDisplaySeconds:
+			v.MaxSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfiguration_maxSlateDisplaySeconds, v.MaxSlateDisplaySeconds)
+		case schemas.FailoverSlateConfiguration_minSlateDisplaySeconds:
+			v.MinSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfiguration_minSlateDisplaySeconds, v.MinSlateDisplaySeconds)
+		case schemas.FailoverSlateConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FailoverSlateConfiguration_name, v.Name)
+		case schemas.FailoverSlateConfiguration_state:
+			var ev string
+			if err := d.ReadString(schemas.FailoverSlateConfiguration_state, &ev); err != nil {
+				return err
+			}
+			v.State = FailoverSlateConfigurationState(ev)
+			return nil
+		case schemas.FailoverSlateConfiguration_tags:
+			return deserializeTags(d, schemas.FailoverSlateConfiguration_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Summary information about a failover slate configuration.
+type FailoverSlateConfigurationSummary struct {
+
+	// Failover-slate-configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// Current state of the failover slate configuration.
+	//
+	// This member is required.
+	State FailoverSlateConfigurationState
+
+	// Number of seconds of ingest interruption before the failover slate activates.
+	// Default: 3 .
+	ActivationThresholdSeconds *int32
+
+	// Maximum number of seconds that the failover slate displays. Default: 60 .
+	MaxSlateDisplaySeconds *int32
+
+	// Minimum number of seconds that the failover slate displays after activation.
+	// Default: 3 .
+	MinSlateDisplaySeconds *int32
+
+	// Failover-slate-configuration name.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FailoverSlateConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverSlateConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverSlateConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationThresholdSeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfigurationSummary_activationThresholdSeconds, *v.ActivationThresholdSeconds)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.FailoverSlateConfigurationSummary_arn, *v.Arn)
+	}
+	if v.MaxSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfigurationSummary_maxSlateDisplaySeconds, *v.MaxSlateDisplaySeconds)
+	}
+	if v.MinSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfigurationSummary_minSlateDisplaySeconds, *v.MinSlateDisplaySeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FailoverSlateConfigurationSummary_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.FailoverSlateConfigurationSummary_state, string(v.State))
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.FailoverSlateConfigurationSummary_tags, v.Tags)
+	}
+}
+func (v *FailoverSlateConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverSlateConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverSlateConfigurationSummary_activationThresholdSeconds:
+			v.ActivationThresholdSeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfigurationSummary_activationThresholdSeconds, v.ActivationThresholdSeconds)
+		case schemas.FailoverSlateConfigurationSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FailoverSlateConfigurationSummary_arn, v.Arn)
+		case schemas.FailoverSlateConfigurationSummary_maxSlateDisplaySeconds:
+			v.MaxSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfigurationSummary_maxSlateDisplaySeconds, v.MaxSlateDisplaySeconds)
+		case schemas.FailoverSlateConfigurationSummary_minSlateDisplaySeconds:
+			v.MinSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfigurationSummary_minSlateDisplaySeconds, v.MinSlateDisplaySeconds)
+		case schemas.FailoverSlateConfigurationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FailoverSlateConfigurationSummary_name, v.Name)
+		case schemas.FailoverSlateConfigurationSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.FailoverSlateConfigurationSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = FailoverSlateConfigurationState(ev)
+			return nil
+		case schemas.FailoverSlateConfigurationSummary_tags:
+			return deserializeTags(d, schemas.FailoverSlateConfigurationSummary_tags, &v.Tags)
 		}
 		return nil
 	})
@@ -867,8 +1101,12 @@ func (v *IngestConfigurations) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngestConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudioConfigurationList(s, schemas.IngestConfigurations_audioConfigurations, v.AudioConfigurations)
-	serializeVideoConfigurationList(s, schemas.IngestConfigurations_videoConfigurations, v.VideoConfigurations)
+	if v.AudioConfigurations != nil {
+		serializeAudioConfigurationList(s, schemas.IngestConfigurations_audioConfigurations, v.AudioConfigurations)
+	}
+	if v.VideoConfigurations != nil {
+		serializeVideoConfigurationList(s, schemas.IngestConfigurations_videoConfigurations, v.VideoConfigurations)
+	}
 }
 func (v *IngestConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IngestConfigurations, func(s *smithy.Schema) error {
@@ -1016,7 +1254,9 @@ func (v *PlaybackKeyPair) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PlaybackKeyPair_name, *v.Name)
 	}
-	serializeTags(s, schemas.PlaybackKeyPair_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PlaybackKeyPair_tags, v.Tags)
+	}
 }
 func (v *PlaybackKeyPair) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PlaybackKeyPair, func(s *smithy.Schema) error {
@@ -1071,7 +1311,9 @@ func (v *PlaybackKeyPairSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PlaybackKeyPairSummary_name, *v.Name)
 	}
-	serializeTags(s, schemas.PlaybackKeyPairSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PlaybackKeyPairSummary_tags, v.Tags)
+	}
 }
 func (v *PlaybackKeyPairSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PlaybackKeyPairSummary, func(s *smithy.Schema) error {
@@ -1140,8 +1382,12 @@ func (v *PlaybackRestrictionPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PlaybackRestrictionPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.PlaybackRestrictionPolicy_allowedCountries, v.AllowedCountries)
-	serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.PlaybackRestrictionPolicy_allowedOrigins, v.AllowedOrigins)
+	if v.AllowedCountries != nil {
+		serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.PlaybackRestrictionPolicy_allowedCountries, v.AllowedCountries)
+	}
+	if v.AllowedOrigins != nil {
+		serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.PlaybackRestrictionPolicy_allowedOrigins, v.AllowedOrigins)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.PlaybackRestrictionPolicy_arn, *v.Arn)
 	}
@@ -1151,7 +1397,9 @@ func (v *PlaybackRestrictionPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PlaybackRestrictionPolicy_name, *v.Name)
 	}
-	serializeTags(s, schemas.PlaybackRestrictionPolicy_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PlaybackRestrictionPolicy_tags, v.Tags)
+	}
 }
 func (v *PlaybackRestrictionPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PlaybackRestrictionPolicy, func(s *smithy.Schema) error {
@@ -1226,8 +1474,12 @@ func (v *PlaybackRestrictionPolicySummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PlaybackRestrictionPolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.PlaybackRestrictionPolicySummary_allowedCountries, v.AllowedCountries)
-	serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.PlaybackRestrictionPolicySummary_allowedOrigins, v.AllowedOrigins)
+	if v.AllowedCountries != nil {
+		serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.PlaybackRestrictionPolicySummary_allowedCountries, v.AllowedCountries)
+	}
+	if v.AllowedOrigins != nil {
+		serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.PlaybackRestrictionPolicySummary_allowedOrigins, v.AllowedOrigins)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.PlaybackRestrictionPolicySummary_arn, *v.Arn)
 	}
@@ -1237,7 +1489,9 @@ func (v *PlaybackRestrictionPolicySummary) SerializeMembers(s smithy.ShapeSerial
 	if v.Name != nil {
 		s.WriteString(schemas.PlaybackRestrictionPolicySummary_name, *v.Name)
 	}
-	serializeTags(s, schemas.PlaybackRestrictionPolicySummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PlaybackRestrictionPolicySummary_tags, v.Tags)
+	}
 }
 func (v *PlaybackRestrictionPolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PlaybackRestrictionPolicySummary, func(s *smithy.Schema) error {
@@ -1380,7 +1634,9 @@ func (v *RecordingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RecordingConfiguration_state, string(v.State))
 	}
-	serializeTags(s, schemas.RecordingConfiguration_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RecordingConfiguration_tags, v.Tags)
+	}
 	if v.ThumbnailConfiguration != nil {
 		s.WriteStruct(schemas.RecordingConfiguration_thumbnailConfiguration)
 		v.ThumbnailConfiguration.SerializeMembers(s)
@@ -1477,7 +1733,9 @@ func (v *RecordingConfigurationSummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.State != "" {
 		s.WriteString(schemas.RecordingConfigurationSummary_state, string(v.State))
 	}
-	serializeTags(s, schemas.RecordingConfigurationSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RecordingConfigurationSummary_tags, v.Tags)
+	}
 }
 func (v *RecordingConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecordingConfigurationSummary, func(s *smithy.Schema) error {
@@ -1535,7 +1793,9 @@ func (v *RenditionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RenditionSelection != "" {
 		s.WriteString(schemas.RenditionConfiguration_renditionSelection, string(v.RenditionSelection))
 	}
-	serializeRenditionConfigurationRenditionList(s, schemas.RenditionConfiguration_renditions, v.Renditions)
+	if v.Renditions != nil {
+		serializeRenditionConfigurationRenditionList(s, schemas.RenditionConfiguration_renditions, v.Renditions)
+	}
 }
 func (v *RenditionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RenditionConfiguration, func(s *smithy.Schema) error {
@@ -1898,7 +2158,9 @@ func (v *StreamKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.StreamKey_channelArn, *v.ChannelArn)
 	}
-	serializeTags(s, schemas.StreamKey_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StreamKey_tags, v.Tags)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.StreamKey_value, *v.Value)
 	}
@@ -1956,7 +2218,9 @@ func (v *StreamKeySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.StreamKeySummary_channelArn, *v.ChannelArn)
 	}
-	serializeTags(s, schemas.StreamKeySummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StreamKeySummary_tags, v.Tags)
+	}
 }
 func (v *StreamKeySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StreamKeySummary, func(s *smithy.Schema) error {
@@ -1985,6 +2249,9 @@ type StreamSession struct {
 	// Time when the channel went offline. This is an ISO 8601 timestamp; note that
 	// this is returned as a string. For live streams, this is NULL .
 	EndTime *time.Time
+
+	// The properties of the failover slate configuration at the time of going live.
+	FailoverSlateConfiguration *FailoverSlateConfiguration
 
 	// The properties of the incoming RTMP stream.
 	//
@@ -2035,6 +2302,11 @@ func (v *StreamSession) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.StreamSession_endTime, *v.EndTime)
 	}
+	if v.FailoverSlateConfiguration != nil {
+		s.WriteStruct(schemas.StreamSession_failoverSlateConfiguration)
+		v.FailoverSlateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.IngestConfiguration != nil {
 		s.WriteStruct(schemas.StreamSession_ingestConfiguration)
 		v.IngestConfiguration.SerializeMembers(s)
@@ -2056,7 +2328,9 @@ func (v *StreamSession) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamId != nil {
 		s.WriteString(schemas.StreamSession_streamId, *v.StreamId)
 	}
-	serializeStreamEvents(s, schemas.StreamSession_truncatedEvents, v.TruncatedEvents)
+	if v.TruncatedEvents != nil {
+		serializeStreamEvents(s, schemas.StreamSession_truncatedEvents, v.TruncatedEvents)
+	}
 }
 func (v *StreamSession) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StreamSession, func(s *smithy.Schema) error {
@@ -2067,6 +2341,9 @@ func (v *StreamSession) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StreamSession_endTime:
 			v.EndTime = new(time.Time)
 			return d.ReadTime(schemas.StreamSession_endTime, v.EndTime)
+		case schemas.StreamSession_failoverSlateConfiguration:
+			v.FailoverSlateConfiguration = &FailoverSlateConfiguration{}
+			return v.FailoverSlateConfiguration.Deserialize(d)
 		case schemas.StreamSession_ingestConfiguration:
 			v.IngestConfiguration = &IngestConfiguration{}
 			return v.IngestConfiguration.Deserialize(d)
@@ -2289,7 +2566,9 @@ func (v *ThumbnailConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Resolution != "" {
 		s.WriteString(schemas.ThumbnailConfiguration_resolution, string(v.Resolution))
 	}
-	serializeThumbnailConfigurationStorageList(s, schemas.ThumbnailConfiguration_storage, v.Storage)
+	if v.Storage != nil {
+		serializeThumbnailConfigurationStorageList(s, schemas.ThumbnailConfiguration_storage, v.Storage)
+	}
 	if v.TargetIntervalSeconds != nil {
 		s.WriteInt64(schemas.ThumbnailConfiguration_targetIntervalSeconds, *v.TargetIntervalSeconds)
 	}

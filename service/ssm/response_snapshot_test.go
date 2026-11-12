@@ -2647,6 +2647,25 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeregisterDefaultHostManagementConfiguration(t *testing.T) {
+	want := &DeregisterDefaultHostManagementConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeregisterDefaultHostManagementConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeregisterDefaultHostManagementConfiguration(context.Background(), &DeregisterDefaultHostManagementConfigurationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeregisterDefaultHostManagementConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeregisterManagedInstance(t *testing.T) {
 	want := &DeregisterManagedInstanceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeregisterManagedInstance.response")
@@ -11205,6 +11224,31 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RegisterDefaultHostManagementConfiguration(t *testing.T) {
+	want := &RegisterDefaultHostManagementConfigurationOutput{
+		RoleArn: ptr.String("__RoleArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RegisterDefaultHostManagementConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RegisterDefaultHostManagementConfiguration(context.Background(), &RegisterDefaultHostManagementConfigurationInput{
+		PermissionModel: types.DHMCPermissionModel("SERVICE_MANAGED"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		Overwrite:       true,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RegisterDefaultHostManagementConfiguration.response", err)
 	}
 }
 

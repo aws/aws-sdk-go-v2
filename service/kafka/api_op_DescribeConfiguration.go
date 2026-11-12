@@ -96,7 +96,9 @@ func (v *DescribeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeConfigurationResponse_Description, *v.Description)
 	}
-	serialize__listOf__string(s, schemas.DescribeConfigurationResponse_KafkaVersions, v.KafkaVersions)
+	if v.KafkaVersions != nil {
+		serialize__listOf__string(s, schemas.DescribeConfigurationResponse_KafkaVersions, v.KafkaVersions)
+	}
 	if v.LatestRevision != nil {
 		s.WriteStruct(schemas.DescribeConfigurationResponse_LatestRevision)
 		v.LatestRevision.SerializeMembers(s)

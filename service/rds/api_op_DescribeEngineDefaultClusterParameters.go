@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineDefaultClusterParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineDefaultClusterParametersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineDefaultClusterParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeEngineDefaultClusterParametersMessage_DBParameterGroupFamily, *v.DBParameterGroupFamily)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeEngineDefaultClusterParametersMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEngineDefaultClusterParametersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEngineDefaultClusterParametersMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeEngineDefaultClusterParametersOutput struct {
 
 	// Contains the result of a successful invocation of the
@@ -71,13 +94,34 @@ type DescribeEngineDefaultClusterParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineDefaultClusterParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineDefaultClusterParametersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineDefaultClusterParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineDefaults != nil {
+		s.WriteStruct(schemas.DescribeEngineDefaultClusterParametersResult_EngineDefaults)
+		v.EngineDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEngineDefaultClusterParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEngineDefaultClusterParametersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEngineDefaultClusterParametersResult_EngineDefaults:
+			v.EngineDefaults = &types.EngineDefaults{}
+			return v.EngineDefaults.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEngineDefaultClusterParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEngineDefaultClusterParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineDefaultClusterParameters, schemas.DescribeEngineDefaultClusterParametersMessage, schemas.DescribeEngineDefaultClusterParametersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEngineDefaultClusterParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineDefaultClusterParameters, schemas.DescribeEngineDefaultClusterParametersMessage, schemas.DescribeEngineDefaultClusterParametersResult), output: &DescribeEngineDefaultClusterParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

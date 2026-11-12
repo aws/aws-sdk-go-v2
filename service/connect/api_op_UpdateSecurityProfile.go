@@ -96,13 +96,21 @@ func (v *UpdateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedAIAgents(s, schemas.UpdateSecurityProfileRequest_AllowedAIAgents, v.AllowedAIAgents)
+	if v.AllowedAIAgents != nil {
+		serializeAllowedAIAgents(s, schemas.UpdateSecurityProfileRequest_AllowedAIAgents, v.AllowedAIAgents)
+	}
 	if v.AllowedAccessControlHierarchyGroupId != nil {
 		s.WriteString(schemas.UpdateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId, *v.AllowedAccessControlHierarchyGroupId)
 	}
-	serializeAllowedAccessControlTags(s, schemas.UpdateSecurityProfileRequest_AllowedAccessControlTags, v.AllowedAccessControlTags)
-	serializeAllowedFlowModules(s, schemas.UpdateSecurityProfileRequest_AllowedFlowModules, v.AllowedFlowModules)
-	serializeApplications(s, schemas.UpdateSecurityProfileRequest_Applications, v.Applications)
+	if v.AllowedAccessControlTags != nil {
+		serializeAllowedAccessControlTags(s, schemas.UpdateSecurityProfileRequest_AllowedAccessControlTags, v.AllowedAccessControlTags)
+	}
+	if v.AllowedFlowModules != nil {
+		serializeAllowedFlowModules(s, schemas.UpdateSecurityProfileRequest_AllowedFlowModules, v.AllowedFlowModules)
+	}
+	if v.Applications != nil {
+		serializeApplications(s, schemas.UpdateSecurityProfileRequest_Applications, v.Applications)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateSecurityProfileRequest_Description, *v.Description)
 	}
@@ -111,15 +119,21 @@ func (v *UpdateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.GranularAccessControlConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHierarchyRestrictedResourceList(s, schemas.UpdateSecurityProfileRequest_HierarchyRestrictedResources, v.HierarchyRestrictedResources)
+	if v.HierarchyRestrictedResources != nil {
+		serializeHierarchyRestrictedResourceList(s, schemas.UpdateSecurityProfileRequest_HierarchyRestrictedResources, v.HierarchyRestrictedResources)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateSecurityProfileRequest_InstanceId, *v.InstanceId)
 	}
-	serializePermissionsList(s, schemas.UpdateSecurityProfileRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsList(s, schemas.UpdateSecurityProfileRequest_Permissions, v.Permissions)
+	}
 	if v.SecurityProfileId != nil {
 		s.WriteString(schemas.UpdateSecurityProfileRequest_SecurityProfileId, *v.SecurityProfileId)
 	}
-	serializeTagRestrictedResourceList(s, schemas.UpdateSecurityProfileRequest_TagRestrictedResources, v.TagRestrictedResources)
+	if v.TagRestrictedResources != nil {
+		serializeTagRestrictedResourceList(s, schemas.UpdateSecurityProfileRequest_TagRestrictedResources, v.TagRestrictedResources)
+	}
 }
 
 type UpdateSecurityProfileOutput struct {

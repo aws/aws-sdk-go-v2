@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","searchSummaries":[{"groupId":"__GroupId__","queryStatement":"__QueryStatement__","searchId":"__SearchId__","searchType":"DEEP","startedAt":946684800,"status":"QUEUED","statusReason":"__StatusReason__","workspaceName":"__WorkspaceName__"},{"groupId":"__GroupId__","queryStatement":"__QueryStatement__","searchId":"__SearchId__","searchType":"DEEP","startedAt":946684800,"status":"QUEUED","statusReason":"__StatusReason__","workspaceName":"__WorkspaceName__"}]}

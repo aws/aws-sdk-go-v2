@@ -116,12 +116,18 @@ func (v *CreateLicenseConfigurationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.LicenseExpiry != nil {
 		s.WriteInt64(schemas.CreateLicenseConfigurationRequest_LicenseExpiry, *v.LicenseExpiry)
 	}
-	serializeStringList(s, schemas.CreateLicenseConfigurationRequest_LicenseRules, v.LicenseRules)
+	if v.LicenseRules != nil {
+		serializeStringList(s, schemas.CreateLicenseConfigurationRequest_LicenseRules, v.LicenseRules)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateLicenseConfigurationRequest_Name, *v.Name)
 	}
-	serializeProductInformationList(s, schemas.CreateLicenseConfigurationRequest_ProductInformationList, v.ProductInformationList)
-	serializeTagList(s, schemas.CreateLicenseConfigurationRequest_Tags, v.Tags)
+	if v.ProductInformationList != nil {
+		serializeProductInformationList(s, schemas.CreateLicenseConfigurationRequest_ProductInformationList, v.ProductInformationList)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLicenseConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLicenseConfigurationOutput struct {

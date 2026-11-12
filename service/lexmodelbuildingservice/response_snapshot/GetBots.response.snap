@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"bots":[{"createdDate":946684800,"description":"__Description__","lastUpdatedDate":946684800,"name":"__Name__","status":"BUILDING","version":"__Version__"},{"createdDate":946684800,"description":"__Description__","lastUpdatedDate":946684800,"name":"__Name__","status":"BUILDING","version":"__Version__"}],"nextToken":"__NextToken__"}

@@ -393,6 +393,11 @@ var UpdateExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateExadbVmCluster",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateExascaleCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExascaleCloudExadataInfrastructure",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "UpdateExascaleDbStorageVault",
@@ -1500,7 +1505,7 @@ var CloudAutonomousVmClusterSummary_iamRoles *smithy.Schema
 var CloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudExadataInfrastructure",
-}, smithy.ShapeTypeStructure, 38)
+}, smithy.ShapeTypeStructure, 39)
 var CloudExadataInfrastructure_cloudExadataInfrastructureId *smithy.Schema
 
 var CloudExadataInfrastructure_displayName *smithy.Schema
@@ -1577,6 +1582,8 @@ var CloudExadataInfrastructure_storageServerType *smithy.Schema
 
 var CloudExadataInfrastructure_computeModel *smithy.Schema
 
+var CloudExadataInfrastructure_exascaleConfiguration *smithy.Schema
+
 var _CloudExadataInfrastructureList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudExadataInfrastructureList",
@@ -1586,7 +1593,7 @@ var _CloudExadataInfrastructureList_member *smithy.Schema
 var CloudExadataInfrastructureSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudExadataInfrastructureSummary",
-}, smithy.ShapeTypeStructure, 38)
+}, smithy.ShapeTypeStructure, 39)
 var CloudExadataInfrastructureSummary_cloudExadataInfrastructureId *smithy.Schema
 
 var CloudExadataInfrastructureSummary_displayName *smithy.Schema
@@ -1663,6 +1670,8 @@ var CloudExadataInfrastructureSummary_storageServerType *smithy.Schema
 
 var CloudExadataInfrastructureSummary_computeModel *smithy.Schema
 
+var CloudExadataInfrastructureSummary_exascaleConfiguration *smithy.Schema
+
 var CloudExadataInfrastructureUnallocatedResources = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudExadataInfrastructureUnallocatedResources",
@@ -1684,7 +1693,7 @@ var CloudExadataInfrastructureUnallocatedResources_ocpus *smithy.Schema
 var CloudVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudVmCluster",
-}, smithy.ShapeTypeStructure, 43)
+}, smithy.ShapeTypeStructure, 49)
 var CloudVmCluster_cloudVmClusterId *smithy.Schema
 
 var CloudVmCluster_displayName *smithy.Schema
@@ -1698,6 +1707,18 @@ var CloudVmCluster_cloudVmClusterArn *smithy.Schema
 var CloudVmCluster_cloudExadataInfrastructureId *smithy.Schema
 
 var CloudVmCluster_cloudExadataInfrastructureArn *smithy.Schema
+
+var CloudVmCluster_exascaleDbStorageVaultId *smithy.Schema
+
+var CloudVmCluster_exascaleDbStorageVaultArn *smithy.Schema
+
+var CloudVmCluster_storageManagementType *smithy.Schema
+
+var CloudVmCluster_vmFileSystemStorageType *smithy.Schema
+
+var CloudVmCluster_vmBackupStorageType *smithy.Schema
+
+var CloudVmCluster_fileSystemConfigurationDetails *smithy.Schema
 
 var CloudVmCluster_clusterName *smithy.Schema
 
@@ -1780,7 +1801,7 @@ var _CloudVmClusterList_member *smithy.Schema
 var CloudVmClusterSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CloudVmClusterSummary",
-}, smithy.ShapeTypeStructure, 43)
+}, smithy.ShapeTypeStructure, 49)
 var CloudVmClusterSummary_cloudVmClusterId *smithy.Schema
 
 var CloudVmClusterSummary_displayName *smithy.Schema
@@ -1794,6 +1815,18 @@ var CloudVmClusterSummary_cloudVmClusterArn *smithy.Schema
 var CloudVmClusterSummary_cloudExadataInfrastructureId *smithy.Schema
 
 var CloudVmClusterSummary_cloudExadataInfrastructureArn *smithy.Schema
+
+var CloudVmClusterSummary_exascaleDbStorageVaultId *smithy.Schema
+
+var CloudVmClusterSummary_exascaleDbStorageVaultArn *smithy.Schema
+
+var CloudVmClusterSummary_storageManagementType *smithy.Schema
+
+var CloudVmClusterSummary_vmFileSystemStorageType *smithy.Schema
+
+var CloudVmClusterSummary_vmBackupStorageType *smithy.Schema
+
+var CloudVmClusterSummary_fileSystemConfigurationDetails *smithy.Schema
 
 var CloudVmClusterSummary_clusterName *smithy.Schema
 
@@ -2775,6 +2808,18 @@ var ExadbVmClusterSummary_vipIds *smithy.Schema
 
 var ExadbVmClusterSummary_vmFileSystemStorage *smithy.Schema
 
+var ExascaleConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExascaleConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var ExascaleConfiguration_totalStorageSizeInGBs *smithy.Schema
+
+var ExascaleConfiguration_availableStorageSizeInGBs *smithy.Schema
+
+var ExascaleConfiguration_totalVmStorageSizeInGBs *smithy.Schema
+
+var ExascaleConfiguration_availableVmStorageSizeInGBs *smithy.Schema
+
 var ExascaleDbStorageDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ExascaleDbStorageDetails",
@@ -2786,7 +2831,7 @@ var ExascaleDbStorageDetails_totalSizeInGBs *smithy.Schema
 var ExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ExascaleDbStorageVault",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 25)
 var ExascaleDbStorageVault_exascaleDbStorageVaultId *smithy.Schema
 
 var ExascaleDbStorageVault_additionalFlashCacheInPercent *smithy.Schema
@@ -2798,6 +2843,10 @@ var ExascaleDbStorageVault_autoscaleLimitInGBs *smithy.Schema
 var ExascaleDbStorageVault_availabilityZone *smithy.Schema
 
 var ExascaleDbStorageVault_availabilityZoneId *smithy.Schema
+
+var ExascaleDbStorageVault_cloudExadataInfrastructureArn *smithy.Schema
+
+var ExascaleDbStorageVault_cloudExadataInfrastructureId *smithy.Schema
 
 var ExascaleDbStorageVault_createdAt *smithy.Schema
 
@@ -2831,6 +2880,8 @@ var ExascaleDbStorageVault_statusReason *smithy.Schema
 
 var ExascaleDbStorageVault_timeZone *smithy.Schema
 
+var ExascaleDbStorageVault_vaultType *smithy.Schema
+
 var _ExascaleDbStorageVaultList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ExascaleDbStorageVaultList",
@@ -2840,7 +2891,7 @@ var _ExascaleDbStorageVaultList_member *smithy.Schema
 var ExascaleDbStorageVaultSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ExascaleDbStorageVaultSummary",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 25)
 var ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId *smithy.Schema
 
 var ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent *smithy.Schema
@@ -2852,6 +2903,10 @@ var ExascaleDbStorageVaultSummary_autoscaleLimitInGBs *smithy.Schema
 var ExascaleDbStorageVaultSummary_availabilityZone *smithy.Schema
 
 var ExascaleDbStorageVaultSummary_availabilityZoneId *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId *smithy.Schema
 
 var ExascaleDbStorageVaultSummary_createdAt *smithy.Schema
 
@@ -2885,6 +2940,16 @@ var ExascaleDbStorageVaultSummary_statusReason *smithy.Schema
 
 var ExascaleDbStorageVaultSummary_timeZone *smithy.Schema
 
+var ExascaleDbStorageVaultSummary_vaultType *smithy.Schema
+
+var ExascaleDbStorageVaultType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExascaleDbStorageVaultType",
+}, smithy.ShapeTypeEnum, 2)
+var ExascaleDbStorageVaultType_EXASCALE_INFRASTRUCTURE *smithy.Schema
+
+var ExascaleDbStorageVaultType_DEDICATED_INFRASTRUCTURE *smithy.Schema
+
 var ExternalIdType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ExternalIdType",
@@ -2894,6 +2959,20 @@ var ExternalIdType_DATABASE_OCID *smithy.Schema
 var ExternalIdType_COMPARTMENT_OCID *smithy.Schema
 
 var ExternalIdType_TENANT_OCID *smithy.Schema
+
+var FileSystemConfigurationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "FileSystemConfigurationDetails",
+}, smithy.ShapeTypeStructure, 2)
+var FileSystemConfigurationDetails_mountPoint *smithy.Schema
+
+var FileSystemConfigurationDetails_fileSystemSizeInGBs *smithy.Schema
+
+var _FileSystemConfigurationDetailsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "FileSystemConfigurationDetailsList",
+}, smithy.ShapeTypeList, 1)
+var _FileSystemConfigurationDetailsList_member *smithy.Schema
 
 var _FlexComponentList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -3857,6 +3936,14 @@ var StandbyAllowlistedIpsSource_SEPARATE *smithy.Schema
 
 var StandbyAllowlistedIpsSource_NOT_APPLICABLE *smithy.Schema
 
+var StorageManagementType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StorageManagementType",
+}, smithy.ShapeTypeEnum, 2)
+var StorageManagementType_ASM *smithy.Schema
+
+var StorageManagementType_EXASCALE *smithy.Schema
+
 var _StringList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "StringList",
@@ -3988,6 +4075,14 @@ var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
 var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
 
 var ValidationExceptionReason_OTHER *smithy.Schema
+
+var VmStorageType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "VmStorageType",
+}, smithy.ShapeTypeEnum, 2)
+var VmStorageType_LOCAL *smithy.Schema
+
+var VmStorageType_EXASCALE *smithy.Schema
 
 var VpcEndpointType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -4330,8 +4425,16 @@ var CreateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId *smithy.
 var CreateCloudVmClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CreateCloudVmClusterInput",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 25)
 var CreateCloudVmClusterInput_cloudExadataInfrastructureId *smithy.Schema
+
+var CreateCloudVmClusterInput_exascaleDbStorageVaultId *smithy.Schema
+
+var CreateCloudVmClusterInput_vmFileSystemStorageType *smithy.Schema
+
+var CreateCloudVmClusterInput_vmBackupStorageType *smithy.Schema
+
+var CreateCloudVmClusterInput_fileSystemConfigurationDetails *smithy.Schema
 
 var CreateCloudVmClusterInput_cpuCoreCount *smithy.Schema
 
@@ -4446,7 +4549,7 @@ var CreateExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
 var CreateExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CreateExascaleDbStorageVaultInput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateExascaleDbStorageVaultInput_displayName *smithy.Schema
 
 var CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs *smithy.Schema
@@ -4454,6 +4557,8 @@ var CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs 
 var CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent *smithy.Schema
 
 var CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_cloudExadataInfrastructureId *smithy.Schema
 
 var CreateExascaleDbStorageVaultInput_availabilityZoneId *smithy.Schema
 
@@ -5180,10 +5285,14 @@ var ListExadbVmClustersOutput_exadbVmClusters *smithy.Schema
 var ListExascaleDbStorageVaultsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ListExascaleDbStorageVaultsInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var ListExascaleDbStorageVaultsInput_maxResults *smithy.Schema
 
 var ListExascaleDbStorageVaultsInput_nextToken *smithy.Schema
+
+var ListExascaleDbStorageVaultsInput_cloudExadataInfrastructureId *smithy.Schema
+
+var ListExascaleDbStorageVaultsInput_vaultType *smithy.Schema
 
 var ListExascaleDbStorageVaultsOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -5702,6 +5811,28 @@ var UpdateExadbVmClusterOutput_status *smithy.Schema
 var UpdateExadbVmClusterOutput_statusReason *smithy.Schema
 
 var UpdateExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
+
+var UpdateExascaleCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExascaleCloudExadataInfrastructureInput",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateExascaleCloudExadataInfrastructureInput_cloudExadataInfrastructureId *smithy.Schema
+
+var UpdateExascaleCloudExadataInfrastructureInput_totalStorageSizeInGBs *smithy.Schema
+
+var UpdateExascaleCloudExadataInfrastructureInput_totalVmStorageSizeInGBs *smithy.Schema
+
+var UpdateExascaleCloudExadataInfrastructureOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExascaleCloudExadataInfrastructureOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateExascaleCloudExadataInfrastructureOutput_displayName *smithy.Schema
+
+var UpdateExascaleCloudExadataInfrastructureOutput_status *smithy.Schema
+
+var UpdateExascaleCloudExadataInfrastructureOutput_statusReason *smithy.Schema
+
+var UpdateExascaleCloudExadataInfrastructureOutput_cloudExadataInfrastructureId *smithy.Schema
 
 var UpdateExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -7096,6 +7227,14 @@ func init() {
 
 	_CloudAutonomousVmClusterResourceDetailsList_member = _CloudAutonomousVmClusterResourceDetailsList.AddMember("member", CloudAutonomousVmClusterResourceDetails)
 
+	ExascaleConfiguration_totalStorageSizeInGBs = ExascaleConfiguration.AddMember("totalStorageSizeInGBs", smithyprelude.Integer)
+
+	ExascaleConfiguration_availableStorageSizeInGBs = ExascaleConfiguration.AddMember("availableStorageSizeInGBs", smithyprelude.Integer)
+
+	ExascaleConfiguration_totalVmStorageSizeInGBs = ExascaleConfiguration.AddMember("totalVmStorageSizeInGBs", smithyprelude.Integer)
+
+	ExascaleConfiguration_availableVmStorageSizeInGBs = ExascaleConfiguration.AddMember("availableVmStorageSizeInGBs", smithyprelude.Integer)
+
 	CloudExadataInfrastructure_cloudExadataInfrastructureId = CloudExadataInfrastructure.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
 
 	CloudExadataInfrastructure_displayName = CloudExadataInfrastructure.AddMember("displayName", smithyprelude.String)
@@ -7171,6 +7310,8 @@ func init() {
 	CloudExadataInfrastructure_storageServerType = CloudExadataInfrastructure.AddMember("storageServerType", smithyprelude.String)
 
 	CloudExadataInfrastructure_computeModel = CloudExadataInfrastructure.AddMember("computeModel", ComputeModel)
+
+	CloudExadataInfrastructure_exascaleConfiguration = CloudExadataInfrastructure.AddMember("exascaleConfiguration", ExascaleConfiguration)
 
 	CloudExadataInfrastructureSummary_cloudExadataInfrastructureId = CloudExadataInfrastructureSummary.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
 
@@ -7248,6 +7389,8 @@ func init() {
 
 	CloudExadataInfrastructureSummary_computeModel = CloudExadataInfrastructureSummary.AddMember("computeModel", ComputeModel)
 
+	CloudExadataInfrastructureSummary_exascaleConfiguration = CloudExadataInfrastructureSummary.AddMember("exascaleConfiguration", ExascaleConfiguration)
+
 	_CloudExadataInfrastructureList_member = _CloudExadataInfrastructureList.AddMember("member", CloudExadataInfrastructureSummary)
 
 	CloudExadataInfrastructureUnallocatedResources_cloudAutonomousVmClusters = CloudExadataInfrastructureUnallocatedResources.AddMember("cloudAutonomousVmClusters", _CloudAutonomousVmClusterResourceDetailsList)
@@ -7263,6 +7406,20 @@ func init() {
 	CloudExadataInfrastructureUnallocatedResources_memoryInGBs = CloudExadataInfrastructureUnallocatedResources.AddMember("memoryInGBs", smithyprelude.Integer)
 
 	CloudExadataInfrastructureUnallocatedResources_ocpus = CloudExadataInfrastructureUnallocatedResources.AddMember("ocpus", smithyprelude.Integer)
+
+	StorageManagementType_ASM = StorageManagementType.AddMember("ASM", smithyprelude.Unit)
+
+	StorageManagementType_EXASCALE = StorageManagementType.AddMember("EXASCALE", smithyprelude.Unit)
+
+	VmStorageType_LOCAL = VmStorageType.AddMember("LOCAL", smithyprelude.Unit)
+
+	VmStorageType_EXASCALE = VmStorageType.AddMember("EXASCALE", smithyprelude.Unit)
+
+	FileSystemConfigurationDetails_mountPoint = FileSystemConfigurationDetails.AddMember("mountPoint", smithyprelude.String)
+
+	FileSystemConfigurationDetails_fileSystemSizeInGBs = FileSystemConfigurationDetails.AddMember("fileSystemSizeInGBs", smithyprelude.Integer)
+
+	_FileSystemConfigurationDetailsList_member = _FileSystemConfigurationDetailsList.AddMember("member", FileSystemConfigurationDetails)
 
 	DataCollectionOptions_isDiagnosticsEventsEnabled = DataCollectionOptions.AddMember("isDiagnosticsEventsEnabled", smithyprelude.Boolean)
 
@@ -7325,6 +7482,18 @@ func init() {
 	CloudVmCluster_cloudExadataInfrastructureId = CloudVmCluster.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
 
 	CloudVmCluster_cloudExadataInfrastructureArn = CloudVmCluster.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
+
+	CloudVmCluster_exascaleDbStorageVaultId = CloudVmCluster.AddMember("exascaleDbStorageVaultId", _ResourceId)
+
+	CloudVmCluster_exascaleDbStorageVaultArn = CloudVmCluster.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
+
+	CloudVmCluster_storageManagementType = CloudVmCluster.AddMember("storageManagementType", StorageManagementType)
+
+	CloudVmCluster_vmFileSystemStorageType = CloudVmCluster.AddMember("vmFileSystemStorageType", VmStorageType)
+
+	CloudVmCluster_vmBackupStorageType = CloudVmCluster.AddMember("vmBackupStorageType", VmStorageType)
+
+	CloudVmCluster_fileSystemConfigurationDetails = CloudVmCluster.AddMember("fileSystemConfigurationDetails", _FileSystemConfigurationDetailsList)
 
 	CloudVmCluster_clusterName = CloudVmCluster.AddMember("clusterName", smithyprelude.String)
 
@@ -7411,6 +7580,18 @@ func init() {
 	CloudVmClusterSummary_cloudExadataInfrastructureId = CloudVmClusterSummary.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
 
 	CloudVmClusterSummary_cloudExadataInfrastructureArn = CloudVmClusterSummary.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
+
+	CloudVmClusterSummary_exascaleDbStorageVaultId = CloudVmClusterSummary.AddMember("exascaleDbStorageVaultId", _ResourceId)
+
+	CloudVmClusterSummary_exascaleDbStorageVaultArn = CloudVmClusterSummary.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
+
+	CloudVmClusterSummary_storageManagementType = CloudVmClusterSummary.AddMember("storageManagementType", StorageManagementType)
+
+	CloudVmClusterSummary_vmFileSystemStorageType = CloudVmClusterSummary.AddMember("vmFileSystemStorageType", VmStorageType)
+
+	CloudVmClusterSummary_vmBackupStorageType = CloudVmClusterSummary.AddMember("vmBackupStorageType", VmStorageType)
+
+	CloudVmClusterSummary_fileSystemConfigurationDetails = CloudVmClusterSummary.AddMember("fileSystemConfigurationDetails", _FileSystemConfigurationDetailsList)
 
 	CloudVmClusterSummary_clusterName = CloudVmClusterSummary.AddMember("clusterName", smithyprelude.String)
 
@@ -8012,6 +8193,10 @@ func init() {
 
 	_ResourceIdList_member = _ResourceIdList.AddMember("member", _ResourceId)
 
+	ExascaleDbStorageVaultType_EXASCALE_INFRASTRUCTURE = ExascaleDbStorageVaultType.AddMember("EXASCALE_INFRASTRUCTURE", smithyprelude.Unit)
+
+	ExascaleDbStorageVaultType_DEDICATED_INFRASTRUCTURE = ExascaleDbStorageVaultType.AddMember("DEDICATED_INFRASTRUCTURE", smithyprelude.Unit)
+
 	ExascaleDbStorageVault_exascaleDbStorageVaultId = ExascaleDbStorageVault.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
 
 	ExascaleDbStorageVault_additionalFlashCacheInPercent = ExascaleDbStorageVault.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
@@ -8023,6 +8208,10 @@ func init() {
 	ExascaleDbStorageVault_availabilityZone = ExascaleDbStorageVault.AddMember("availabilityZone", smithyprelude.String)
 
 	ExascaleDbStorageVault_availabilityZoneId = ExascaleDbStorageVault.AddMember("availabilityZoneId", smithyprelude.String)
+
+	ExascaleDbStorageVault_cloudExadataInfrastructureArn = ExascaleDbStorageVault.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
+
+	ExascaleDbStorageVault_cloudExadataInfrastructureId = ExascaleDbStorageVault.AddMember("cloudExadataInfrastructureId", _ResourceId)
 
 	ExascaleDbStorageVault_createdAt = ExascaleDbStorageVault.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
@@ -8056,6 +8245,8 @@ func init() {
 
 	ExascaleDbStorageVault_timeZone = ExascaleDbStorageVault.AddMember("timeZone", smithyprelude.String)
 
+	ExascaleDbStorageVault_vaultType = ExascaleDbStorageVault.AddMember("vaultType", ExascaleDbStorageVaultType)
+
 	ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId = ExascaleDbStorageVaultSummary.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
 
 	ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent = ExascaleDbStorageVaultSummary.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
@@ -8067,6 +8258,10 @@ func init() {
 	ExascaleDbStorageVaultSummary_availabilityZone = ExascaleDbStorageVaultSummary.AddMember("availabilityZone", smithyprelude.String)
 
 	ExascaleDbStorageVaultSummary_availabilityZoneId = ExascaleDbStorageVaultSummary.AddMember("availabilityZoneId", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn = ExascaleDbStorageVaultSummary.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
+
+	ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId = ExascaleDbStorageVaultSummary.AddMember("cloudExadataInfrastructureId", _ResourceId)
 
 	ExascaleDbStorageVaultSummary_createdAt = ExascaleDbStorageVaultSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
@@ -8099,6 +8294,8 @@ func init() {
 	ExascaleDbStorageVaultSummary_statusReason = ExascaleDbStorageVaultSummary.AddMember("statusReason", smithyprelude.String)
 
 	ExascaleDbStorageVaultSummary_timeZone = ExascaleDbStorageVaultSummary.AddMember("timeZone", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_vaultType = ExascaleDbStorageVaultSummary.AddMember("vaultType", ExascaleDbStorageVaultType)
 
 	_ExascaleDbStorageVaultList_member = _ExascaleDbStorageVaultList.AddMember("member", ExascaleDbStorageVaultSummary)
 
@@ -8744,6 +8941,14 @@ func init() {
 
 	CreateCloudVmClusterInput_cloudExadataInfrastructureId = CreateCloudVmClusterInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
 
+	CreateCloudVmClusterInput_exascaleDbStorageVaultId = CreateCloudVmClusterInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	CreateCloudVmClusterInput_vmFileSystemStorageType = CreateCloudVmClusterInput.AddMember("vmFileSystemStorageType", VmStorageType)
+
+	CreateCloudVmClusterInput_vmBackupStorageType = CreateCloudVmClusterInput.AddMember("vmBackupStorageType", VmStorageType)
+
+	CreateCloudVmClusterInput_fileSystemConfigurationDetails = CreateCloudVmClusterInput.AddMember("fileSystemConfigurationDetails", _FileSystemConfigurationDetailsList)
+
 	CreateCloudVmClusterInput_cpuCoreCount = CreateCloudVmClusterInput.AddMember("cpuCoreCount", smithyprelude.Integer)
 
 	CreateCloudVmClusterInput_displayName = CreateCloudVmClusterInput.AddMember("displayName", _ResourceDisplayName)
@@ -8849,6 +9054,8 @@ func init() {
 	CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent = CreateExascaleDbStorageVaultInput.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
 
 	CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs = CreateExascaleDbStorageVaultInput.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
+
+	CreateExascaleDbStorageVaultInput_cloudExadataInfrastructureId = CreateExascaleDbStorageVaultInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
 
 	CreateExascaleDbStorageVaultInput_availabilityZoneId = CreateExascaleDbStorageVaultInput.AddMember("availabilityZoneId", smithyprelude.String)
 
@@ -9216,6 +9423,10 @@ func init() {
 
 	ListExascaleDbStorageVaultsInput_nextToken = ListExascaleDbStorageVaultsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
 
+	ListExascaleDbStorageVaultsInput_cloudExadataInfrastructureId = ListExascaleDbStorageVaultsInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
+
+	ListExascaleDbStorageVaultsInput_vaultType = ListExascaleDbStorageVaultsInput.AddMember("vaultType", ExascaleDbStorageVaultType)
+
 	ListExascaleDbStorageVaultsOutput_nextToken = ListExascaleDbStorageVaultsOutput.AddMember("nextToken", smithyprelude.String)
 
 	ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults = ListExascaleDbStorageVaultsOutput.AddMember("exascaleDbStorageVaults", _ExascaleDbStorageVaultList)
@@ -9551,6 +9762,20 @@ func init() {
 	UpdateExadbVmClusterOutput_statusReason = UpdateExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
 
 	UpdateExadbVmClusterOutput_exadbVmClusterId = UpdateExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
+
+	UpdateExascaleCloudExadataInfrastructureInput_cloudExadataInfrastructureId = UpdateExascaleCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
+
+	UpdateExascaleCloudExadataInfrastructureInput_totalStorageSizeInGBs = UpdateExascaleCloudExadataInfrastructureInput.AddMember("totalStorageSizeInGBs", smithyprelude.Integer)
+
+	UpdateExascaleCloudExadataInfrastructureInput_totalVmStorageSizeInGBs = UpdateExascaleCloudExadataInfrastructureInput.AddMember("totalVmStorageSizeInGBs", smithyprelude.Integer)
+
+	UpdateExascaleCloudExadataInfrastructureOutput_displayName = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateExascaleCloudExadataInfrastructureOutput_status = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("status", ResourceStatus)
+
+	UpdateExascaleCloudExadataInfrastructureOutput_statusReason = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("statusReason", smithyprelude.String)
+
+	UpdateExascaleCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
 
 	UpdateExascaleDbStorageVaultInput_exascaleDbStorageVaultId = UpdateExascaleDbStorageVaultInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationJobId":"__CreationJobId__","creationTime":"2000-01-01T00:00:00Z","creationType":"IMPORT","description":"__Description__","files":{"index":{"contentLength":1,"partSize":1,"s3Access":{"s3Uri":"__S3Uri__"},"totalParts":1},"source":{"contentLength":1,"partSize":1,"s3Access":{"s3Uri":"__S3Uri__"},"totalParts":1}},"id":"__Id__","md5":"__Md5__","name":"__Name__","referenceStoreId":"__ReferenceStoreId__","status":"ACTIVE","updateTime":"2000-01-01T00:00:00Z"}

@@ -13,6 +13,10 @@ import (
 )
 
 // Creates a retraining scheduler on the specified model.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) CreateRetrainingScheduler(ctx context.Context, params *CreateRetrainingSchedulerInput, optFns ...func(*Options)) (*CreateRetrainingSchedulerOutput, error) {
 	if params == nil {
 		params = &CreateRetrainingSchedulerInput{}

@@ -1183,14 +1183,15 @@ type SourceEnvironment string
 
 // Enum values for SourceEnvironment
 const (
-	SourceEnvironmentNsx                   SourceEnvironment = "NSX"
-	SourceEnvironmentVsphere               SourceEnvironment = "VSPHERE"
-	SourceEnvironmentFortigateFirewall     SourceEnvironment = "FORTIGATE_FIREWALL"
-	SourceEnvironmentPaloAltoFirewall      SourceEnvironment = "PALO_ALTO_FIREWALL"
-	SourceEnvironmentCiscoAci              SourceEnvironment = "CISCO_ACI"
-	SourceEnvironmentLogicalModel          SourceEnvironment = "LOGICAL_MODEL"
-	SourceEnvironmentModelizeIt            SourceEnvironment = "MODELIZE_IT"
-	SourceEnvironmentAwsDiscoveryCollector SourceEnvironment = "AWS_DISCOVERY_COLLECTOR"
+	SourceEnvironmentNsx                        SourceEnvironment = "NSX"
+	SourceEnvironmentVsphere                    SourceEnvironment = "VSPHERE"
+	SourceEnvironmentFortigateFirewall          SourceEnvironment = "FORTIGATE_FIREWALL"
+	SourceEnvironmentPaloAltoFirewall           SourceEnvironment = "PALO_ALTO_FIREWALL"
+	SourceEnvironmentCiscoAci                   SourceEnvironment = "CISCO_ACI"
+	SourceEnvironmentLogicalModel               SourceEnvironment = "LOGICAL_MODEL"
+	SourceEnvironmentModelizeIt                 SourceEnvironment = "MODELIZE_IT"
+	SourceEnvironmentAwsDiscoveryCollector      SourceEnvironment = "AWS_DISCOVERY_COLLECTOR"
+	SourceEnvironmentMigrationPlanningArtifacts SourceEnvironment = "MIGRATION_PLANNING_ARTIFACTS"
 )
 
 // Values returns all known values for SourceEnvironment. Note that this can be
@@ -1207,6 +1208,7 @@ func (SourceEnvironment) Values() []SourceEnvironment {
 		"LOGICAL_MODEL",
 		"MODELIZE_IT",
 		"AWS_DISCOVERY_COLLECTOR",
+		"MIGRATION_PLANNING_ARTIFACTS",
 	}
 }
 

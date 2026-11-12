@@ -72,7 +72,9 @@ func (v *DeleteInstrumentationConfigurationInput) SerializeMembers(s smithy.Shap
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.DeleteInstrumentationConfigurationRequest_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeLocationIdentifier(s, schemas.DeleteInstrumentationConfigurationRequest_LocationIdentifier, v.LocationIdentifier)
+	if v.LocationIdentifier != nil {
+		serializeLocationIdentifier(s, schemas.DeleteInstrumentationConfigurationRequest_LocationIdentifier, v.LocationIdentifier)
+	}
 	if v.Service != nil {
 		s.WriteString(schemas.DeleteInstrumentationConfigurationRequest_Service, *v.Service)
 	}

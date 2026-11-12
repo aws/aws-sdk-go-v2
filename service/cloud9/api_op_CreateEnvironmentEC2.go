@@ -161,7 +161,9 @@ func (v *CreateEnvironmentEC2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubnetId != nil {
 		s.WriteString(schemas.CreateEnvironmentEC2Request_subnetId, *v.SubnetId)
 	}
-	serializeTagList(s, schemas.CreateEnvironmentEC2Request_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEnvironmentEC2Request_tags, v.Tags)
+	}
 }
 
 type CreateEnvironmentEC2Output struct {

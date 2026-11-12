@@ -22,6 +22,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ARM_64"
                     }
+                },
+                "X86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X86_64"
+                    }
                 }
             }
         },
@@ -105,6 +111,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GRAVITON"
                     }
+                },
+                "INTEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEL"
+                    }
                 }
             }
         },
@@ -174,7 +186,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>The request could not be completed due to a conflict with the current state of the resource.</p>",
                 "smithy.api#error": "client",
-                "smithy.api#httpError": 409
+                "smithy.api#httpError": 409,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.lambdamicrovms#CpuConfiguration": {
@@ -389,7 +402,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>",
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at image build time.</p>",
                         "smithy.api#length": {
                             "max": 1
                         }
@@ -536,7 +549,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>",
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at image build time.</p>",
                         "smithy.api#length": {
                             "max": 1
                         }
@@ -872,7 +885,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 50
+                    "max": 100
                 }
             }
         },
@@ -1300,7 +1313,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>",
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at image build time.</p>",
                         "smithy.api#length": {
                             "max": 1
                         }
@@ -1496,7 +1509,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors configured for the MicroVM.</p>"
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>"
                     }
                 }
             },
@@ -3315,6 +3328,12 @@
                         "smithy.api#documentation": "<p>The lifecycle status of the managed MicroVM image version. Valid values: AVAILABLE (the version is available for use) or DEPRECATED (the version is deprecated; do not use it for new MicroVM images).</p>"
                     }
                 },
+                "supportedCpuConfigurations": {
+                    "target": "com.amazonaws.lambdamicrovms#CpuConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "CPU configurations supported by this managed base image version."
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -3354,6 +3373,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version is deprecated. Do not use this version for new MicroVM images. Existing MicroVM images that use this version will continue to function.</p>",
                         "smithy.api#enumValue": "DEPRECATED"
+                    }
+                },
+                "RECALLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECALLED"
                     }
                 }
             },
@@ -3914,7 +3939,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>",
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at image build time.</p>",
                         "smithy.api#length": {
                             "max": 1
                         }
@@ -4436,7 +4461,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors to configure for the MicroVM.</p>"
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>"
                     }
                 },
                 "imageIdentifier": {
@@ -4591,7 +4616,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors configured for the MicroVM.</p>"
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>"
                     }
                 }
             },
@@ -5162,7 +5187,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>",
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at image build time.</p>",
                         "smithy.api#length": {
                             "max": 1
                         }
@@ -5304,7 +5329,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>",
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at image build time.</p>",
                         "smithy.api#length": {
                             "max": 1
                         }
@@ -5473,7 +5498,7 @@
                 "egressNetworkConnectors": {
                     "target": "com.amazonaws.lambdamicrovms#NetworkConnectorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at runtime.</p>",
+                        "smithy.api#documentation": "<p>The list of egress network connectors available to the MicroVM at image build time.</p>",
                         "smithy.api#length": {
                             "max": 1
                         }

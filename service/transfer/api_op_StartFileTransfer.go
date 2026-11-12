@@ -90,15 +90,21 @@ func (v *StartFileTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorId != nil {
 		s.WriteString(schemas.StartFileTransferRequest_ConnectorId, *v.ConnectorId)
 	}
-	serializeCustomHttpHeaders(s, schemas.StartFileTransferRequest_CustomHttpHeaders, v.CustomHttpHeaders)
+	if v.CustomHttpHeaders != nil {
+		serializeCustomHttpHeaders(s, schemas.StartFileTransferRequest_CustomHttpHeaders, v.CustomHttpHeaders)
+	}
 	if v.LocalDirectoryPath != nil {
 		s.WriteString(schemas.StartFileTransferRequest_LocalDirectoryPath, *v.LocalDirectoryPath)
 	}
 	if v.RemoteDirectoryPath != nil {
 		s.WriteString(schemas.StartFileTransferRequest_RemoteDirectoryPath, *v.RemoteDirectoryPath)
 	}
-	serializeFilePaths(s, schemas.StartFileTransferRequest_RetrieveFilePaths, v.RetrieveFilePaths)
-	serializeFilePaths(s, schemas.StartFileTransferRequest_SendFilePaths, v.SendFilePaths)
+	if v.RetrieveFilePaths != nil {
+		serializeFilePaths(s, schemas.StartFileTransferRequest_RetrieveFilePaths, v.RetrieveFilePaths)
+	}
+	if v.SendFilePaths != nil {
+		serializeFilePaths(s, schemas.StartFileTransferRequest_SendFilePaths, v.SendFilePaths)
+	}
 }
 
 type StartFileTransferOutput struct {

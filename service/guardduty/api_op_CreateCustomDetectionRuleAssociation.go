@@ -66,7 +66,9 @@ func (v *CreateCustomDetectionRuleAssociationInput) SerializeMembers(s smithy.Sh
 	if v.RuleId != nil {
 		s.WriteString(schemas.CreateCustomDetectionRuleAssociationRequest_RuleId, *v.RuleId)
 	}
-	serializeTagMap(s, schemas.CreateCustomDetectionRuleAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCustomDetectionRuleAssociationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCustomDetectionRuleAssociationOutput struct {

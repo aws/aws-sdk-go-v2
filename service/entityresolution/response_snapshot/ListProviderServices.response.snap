@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","providerServiceSummaries":[{"providerName":"__ProviderName__","providerServiceArn":"__ProviderServiceArn__","providerServiceDisplayName":"__ProviderServiceDisplayName__","providerServiceName":"__ProviderServiceName__","providerServiceType":"ASSIGNMENT"},{"providerName":"__ProviderName__","providerServiceArn":"__ProviderServiceArn__","providerServiceDisplayName":"__ProviderServiceDisplayName__","providerServiceName":"__ProviderServiceName__","providerServiceType":"ASSIGNMENT"}]}

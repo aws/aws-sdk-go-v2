@@ -5,7 +5,9 @@ package pcs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,7 +70,7 @@ type CreateClusterInput struct {
 	// With an idempotent request, if the original request completes successfully, the
 	// subsequent retries with the same client token return the result from the
 	// original successful request and they have no additional effect. If you don't
-	// specify a client token, the CLI and SDK automatically generate 1 for you.
+	// specify a client token, the CLI and SDK automatically generate one for you.
 	ClientToken *string
 
 	// Additional options related to the Slurm scheduler.
@@ -79,6 +81,42 @@ type CreateClusterInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateClusterRequest_clientToken, *v.ClientToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterRequest_clusterName, *v.ClusterName)
+	}
+	if v.Networking != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_networking)
+		v.Networking.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Scheduler != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_scheduler)
+		v.Scheduler.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Size != "" {
+		s.WriteString(schemas.CreateClusterRequest_size, string(v.Size))
+	}
+	if v.SlurmConfiguration != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_slurmConfiguration)
+		v.SlurmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {
@@ -92,13 +130,34 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.CreateClusterResponse_cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterResponse_cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

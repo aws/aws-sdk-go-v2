@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyDBCapacityReservation&CapacityPerAvailabilityZone=1&DBCapacityReservationIdentifier=__DBCapacityReservationIdentifier__&EndDate=2000-01-01T00%3A00%3A00Z&EndDateType=unlimited&Version=2014-10-31

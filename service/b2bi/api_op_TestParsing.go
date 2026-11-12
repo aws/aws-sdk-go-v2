@@ -68,7 +68,9 @@ func (v *TestParsingInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AdvancedOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEdiType(s, schemas.TestParsingRequest_ediType, v.EdiType)
+	if v.EdiType != nil {
+		serializeEdiType(s, schemas.TestParsingRequest_ediType, v.EdiType)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.TestParsingRequest_fileFormat, string(v.FileFormat))
 	}
@@ -115,8 +117,12 @@ func (v *TestParsingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParsedFileContent != nil {
 		s.WriteString(schemas.TestParsingResponse_parsedFileContent, *v.ParsedFileContent)
 	}
-	serializeParsedSplitFileContentsList(s, schemas.TestParsingResponse_parsedSplitFileContents, v.ParsedSplitFileContents)
-	serializeValidationMessages(s, schemas.TestParsingResponse_validationMessages, v.ValidationMessages)
+	if v.ParsedSplitFileContents != nil {
+		serializeParsedSplitFileContentsList(s, schemas.TestParsingResponse_parsedSplitFileContents, v.ParsedSplitFileContents)
+	}
+	if v.ValidationMessages != nil {
+		serializeValidationMessages(s, schemas.TestParsingResponse_validationMessages, v.ValidationMessages)
+	}
 }
 func (v *TestParsingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TestParsingResponse, func(s *smithy.Schema) error {

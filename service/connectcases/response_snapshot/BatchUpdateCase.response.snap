@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failedCases":[{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"},"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"},"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"}],"successfulCases":[{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"}},{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"}}]}

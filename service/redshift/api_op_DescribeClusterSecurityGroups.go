@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,30 @@ type DescribeClusterSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterSecurityGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterSecurityGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterSecurityGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSecurityGroupName != nil {
+		s.WriteString(schemas.DescribeClusterSecurityGroupsMessage_ClusterSecurityGroupName, *v.ClusterSecurityGroupName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeClusterSecurityGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeClusterSecurityGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DescribeClusterSecurityGroupsMessage_TagKeys, v.TagKeys)
+	}
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.DescribeClusterSecurityGroupsMessage_TagValues, v.TagValues)
+	}
+}
+
 type DescribeClusterSecurityGroupsOutput struct {
 
 	// A list of ClusterSecurityGroup instances.
@@ -108,13 +134,37 @@ type DescribeClusterSecurityGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSecurityGroups != nil {
+		serializeClusterSecurityGroups(s, schemas.ClusterSecurityGroupMessage_ClusterSecurityGroups, v.ClusterSecurityGroups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ClusterSecurityGroupMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeClusterSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSecurityGroupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSecurityGroupMessage_ClusterSecurityGroups:
+			return deserializeClusterSecurityGroups(d, schemas.ClusterSecurityGroupMessage_ClusterSecurityGroups, &v.ClusterSecurityGroups)
+		case schemas.ClusterSecurityGroupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ClusterSecurityGroupMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterSecurityGroups, schemas.DescribeClusterSecurityGroupsMessage, schemas.ClusterSecurityGroupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeClusterSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterSecurityGroups, schemas.DescribeClusterSecurityGroupsMessage, schemas.ClusterSecurityGroupMessage), output: &DescribeClusterSecurityGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

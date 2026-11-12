@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DeleteUser
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DeleteUser
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"UserName":"__UserName__"}
+¿hUserNamel__UserName__ÿ

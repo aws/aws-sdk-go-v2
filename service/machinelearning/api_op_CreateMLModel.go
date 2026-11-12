@@ -140,7 +140,9 @@ func (v *CreateMLModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MLModelType != "" {
 		s.WriteString(schemas.CreateMLModelInput_MLModelType, string(v.MLModelType))
 	}
-	serializeTrainingParameters(s, schemas.CreateMLModelInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeTrainingParameters(s, schemas.CreateMLModelInput_Parameters, v.Parameters)
+	}
 	if v.Recipe != nil {
 		s.WriteString(schemas.CreateMLModelInput_Recipe, *v.Recipe)
 	}

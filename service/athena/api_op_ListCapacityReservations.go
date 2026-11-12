@@ -79,7 +79,9 @@ func (v *ListCapacityReservationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCapacityReservationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityReservationsList(s, schemas.ListCapacityReservationsOutput_CapacityReservations, v.CapacityReservations)
+	if v.CapacityReservations != nil {
+		serializeCapacityReservationsList(s, schemas.ListCapacityReservationsOutput_CapacityReservations, v.CapacityReservations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCapacityReservationsOutput_NextToken, *v.NextToken)
 	}

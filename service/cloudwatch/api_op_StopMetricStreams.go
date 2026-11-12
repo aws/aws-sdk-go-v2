@@ -46,7 +46,9 @@ func (v *StopMetricStreamsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StopMetricStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricStreamNames(s, schemas.StopMetricStreamsInput_Names, v.Names)
+	if v.Names != nil {
+		serializeMetricStreamNames(s, schemas.StopMetricStreamsInput_Names, v.Names)
+	}
 }
 
 type StopMetricStreamsOutput struct {

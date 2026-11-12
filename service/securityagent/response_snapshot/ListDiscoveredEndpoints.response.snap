@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"discoveredEndpoints":[{"agentSpaceId":"__AgentSpaceId__","description":"__Description__","evidence":"__Evidence__","operation":"__Operation__","pentestJobId":"__PentestJobId__","taskId":"__TaskId__","uri":"__Uri__"},{"agentSpaceId":"__AgentSpaceId__","description":"__Description__","evidence":"__Evidence__","operation":"__Operation__","pentestJobId":"__PentestJobId__","taskId":"__TaskId__","uri":"__Uri__"}],"nextToken":"__NextToken__"}

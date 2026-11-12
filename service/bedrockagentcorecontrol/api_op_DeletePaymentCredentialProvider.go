@@ -4,6 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePaymentCredentialProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentCredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentCredentialProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentCredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePaymentCredentialProviderRequest_name, *v.Name)
+	}
+}
+
 type DeletePaymentCredentialProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePaymentCredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentCredentialProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentCredentialProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentCredentialProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePaymentCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePaymentCredentialProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePaymentCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePaymentCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentCredentialProvider, schemas.DeletePaymentCredentialProviderRequest, schemas.DeletePaymentCredentialProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePaymentCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentCredentialProvider, schemas.DeletePaymentCredentialProviderRequest, schemas.DeletePaymentCredentialProviderResponse), output: &DeletePaymentCredentialProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -93,7 +93,9 @@ func (v *GetDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainNameArn != nil {
 		s.WriteString(schemas.GetDomainNameResponse_DomainNameArn, *v.DomainNameArn)
 	}
-	serializeDomainNameConfigurations(s, schemas.GetDomainNameResponse_DomainNameConfigurations, v.DomainNameConfigurations)
+	if v.DomainNameConfigurations != nil {
+		serializeDomainNameConfigurations(s, schemas.GetDomainNameResponse_DomainNameConfigurations, v.DomainNameConfigurations)
+	}
 	if v.MutualTlsAuthentication != nil {
 		s.WriteStruct(schemas.GetDomainNameResponse_MutualTlsAuthentication)
 		v.MutualTlsAuthentication.SerializeMembers(s)
@@ -102,7 +104,9 @@ func (v *GetDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingMode != "" {
 		s.WriteString(schemas.GetDomainNameResponse_RoutingMode, string(v.RoutingMode))
 	}
-	serializeTags(s, schemas.GetDomainNameResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetDomainNameResponse_Tags, v.Tags)
+	}
 }
 func (v *GetDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDomainNameResponse, func(s *smithy.Schema) error {

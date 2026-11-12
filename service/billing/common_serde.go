@@ -3,14 +3,127 @@
 package billing
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
 	smithy "github.com/aws/smithy-go"
 )
 
-func serializeAdditionalChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AdditionalCharge) {
-	if v == nil {
-		return
+func serializeAttestationValue(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AttestationValue) {
+	switch vv := v.(type) {
+	case *types.AttestationValueMemberAttestationAmount:
+		s.WriteUnion(schema, schemas.AttestationValue_attestationAmount)
+		s.WriteStruct(schemas.AttestationValue_attestationAmount)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AttestationValueMemberAttestationQuantities:
+		s.WriteUnion(schema, schemas.AttestationValue_attestationQuantities)
+		serializeAttestationQuantities(s, schemas.AttestationValue_attestationQuantities, vv.Value)
+		s.CloseUnion()
 	}
+}
+
+func serializeContractDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ContractDetails) {
+	switch vv := v.(type) {
+	case *types.ContractDetailsMemberPrivatePricingAddendum:
+		s.WriteUnion(schema, schemas.ContractDetails_privatePricingAddendum)
+		s.WriteStruct(schemas.ContractDetails_privatePricingAddendum)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeInvestment(s smithy.ShapeSerializer, schema *smithy.Schema, v types.Investment) {
+	switch vv := v.(type) {
+	case *types.InvestmentMemberMilestoneBasedInvestment:
+		s.WriteUnion(schema, schemas.Investment_milestoneBasedInvestment)
+		s.WriteStruct(schemas.Investment_milestoneBasedInvestment)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.InvestmentMemberOutcomeBasedInvestment:
+		s.WriteUnion(schema, schemas.Investment_outcomeBasedInvestment)
+		s.WriteStruct(schemas.Investment_outcomeBasedInvestment)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeAttestationValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AttestationValue) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AttestationValue_attestationAmount:
+			vv := &types.AttestationValueMemberAttestationAmount{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AttestationValue_attestationQuantities:
+			vv := &types.AttestationValueMemberAttestationQuantities{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeContractDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ContractDetails) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ContractDetails_privatePricingAddendum:
+			vv := &types.ContractDetailsMemberPrivatePricingAddendum{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeInvestment(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.Investment) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.Investment_milestoneBasedInvestment:
+			vv := &types.InvestmentMemberMilestoneBasedInvestment{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.Investment_outcomeBasedInvestment:
+			vv := &types.InvestmentMemberOutcomeBasedInvestment{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func serializeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAdditionalChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AdditionalCharge) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAdditionalRecipients(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AdditionalRecipient) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAttestationQuantities(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AttestationQuantity) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +134,6 @@ func serializeAdditionalChargeList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeBillingFeatureFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingFeatureFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +144,6 @@ func serializeBillingFeatureFilters(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeBillingFeatureFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -45,9 +152,6 @@ func serializeBillingFeatureFilterValues(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeBillingFeatures(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -56,9 +160,6 @@ func serializeBillingFeatures(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeBillingPreferences(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingPreferenceSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -69,9 +170,6 @@ func serializeBillingPreferences(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeBillingPreferencesPerKey(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingPreferenceForKey) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -82,9 +180,6 @@ func serializeBillingPreferencesPerKey(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeBillingViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -93,9 +188,6 @@ func serializeBillingViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeBillingViewList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingViewListElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -106,9 +198,6 @@ func serializeBillingViewList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeBillingViewSegmentsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingViewSegmentsListElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -119,9 +208,6 @@ func serializeBillingViewSegmentsList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeBillingViewSourceViewsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -130,9 +216,6 @@ func serializeBillingViewSourceViewsList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeBillingViewStatusReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingViewStatusReason) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -141,9 +224,6 @@ func serializeBillingViewStatusReasons(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeBillingViewTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BillingViewType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -152,9 +232,6 @@ func serializeBillingViewTypeList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeBusinessSupportAccountChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BusinessSupportAccountCharge) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -165,9 +242,6 @@ func serializeBusinessSupportAccountChargeList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeBusinessSupportServiceSpendList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BusinessSupportServiceSpend) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -178,9 +252,6 @@ func serializeBusinessSupportServiceSpendList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeBusinessSupportSubscriptionContractList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BusinessSupportSubscriptionContract) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -191,9 +262,6 @@ func serializeBusinessSupportSubscriptionContractList(s smithy.ShapeSerializer, 
 }
 
 func serializeBusinessSupportTierChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BusinessSupportTierCharge) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -204,9 +272,6 @@ func serializeBusinessSupportTierChargeList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeChargeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChargeAccount) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -217,9 +282,24 @@ func serializeChargeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeContractAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContractAccount) {
-	if v == nil {
-		return
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
+	s.CloseList()
+}
+
+func serializeContractRestrictions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContractRestriction) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeContractSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContractSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -230,9 +310,6 @@ func serializeContractAccountList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeCreditAllocationHistoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CreditAllocationHistoryEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -243,9 +320,6 @@ func serializeCreditAllocationHistoryList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeCreditDataList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CreditData) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -256,9 +330,6 @@ func serializeCreditDataList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeFailedMonthsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -266,10 +337,75 @@ func serializeFailedMonthsList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
-func serializeLinkedAccountChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LinkedAccountCharge) {
-	if v == nil {
-		return
+func serializeInvestmentAttestations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InvestmentAttestation) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
+	s.CloseList()
+}
+
+func serializeInvestmentDistributions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InvestmentDistribution) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeInvestmentMultipliers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InvestmentMultiplier) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeInvestmentRestrictions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InvestmentRestriction) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeInvestments(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Investment) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeInvestment(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeInvestmentSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InvestmentSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeLegalEntities(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LegalEntity) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeLinkedAccountChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LinkedAccountCharge) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -280,9 +416,6 @@ func serializeLinkedAccountChargeList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializePricingPlanList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PricingPlan) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -293,9 +426,6 @@ func serializePricingPlanList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializePricingPlanTierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PricingPlanTier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -306,9 +436,6 @@ func serializePricingPlanTierList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeProductNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -317,9 +444,14 @@ func serializeProductNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializePurchaseTypeApplications(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
+	s.CloseList()
+}
+
+func serializeRejectionReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -328,9 +460,6 @@ func serializePurchaseTypeApplications(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeResourceTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -339,9 +468,6 @@ func serializeResourceTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeResourceTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceTag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -352,9 +478,6 @@ func serializeResourceTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeServiceLevelAccountUsageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServiceLevelAccountUsage) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -365,9 +488,6 @@ func serializeServiceLevelAccountUsageList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeShareableAccountIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -376,9 +496,6 @@ func serializeShareableAccountIds(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeStringSearches(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.StringSearch) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -389,9 +506,6 @@ func serializeStringSearches(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeTimePeriodList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EnterpriseSupportTimePeriod) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -402,9 +516,6 @@ func serializeTimePeriodList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -415,14 +526,32 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
+}
+
+func deserializeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeAdditionalChargeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AdditionalCharge) error {
@@ -438,6 +567,50 @@ func deserializeAdditionalChargeList(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		vv = types.AdditionalCharge{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAdditionalRecipients(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AdditionalRecipient) error {
+	*v = make([]types.AdditionalRecipient, 0)
+	var vv types.AdditionalRecipient
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AdditionalRecipient
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AdditionalRecipient{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAttestationQuantities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AttestationQuantity) error {
+	*v = make([]types.AttestationQuantity, 0)
+	var vv types.AttestationQuantity
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttestationQuantity
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AttestationQuantity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -815,6 +988,49 @@ func deserializeContractAccountList(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeContractRestrictions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContractRestriction) error {
+	*v = make([]types.ContractRestriction, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContractRestriction
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ContractRestriction(vv))
+		return nil
+	})
+}
+
+func deserializeContractSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContractSummary) error {
+	*v = make([]types.ContractSummary, 0)
+	var vv types.ContractSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContractSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ContractSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeCreditAllocationHistoryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CreditAllocationHistoryEntry) error {
 	*v = make([]types.CreditAllocationHistoryEntry, 0)
 	var vv types.CreditAllocationHistoryEntry
@@ -872,6 +1088,159 @@ func deserializeFailedMonthsList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInvestmentAttestations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InvestmentAttestation) error {
+	*v = make([]types.InvestmentAttestation, 0)
+	var vv types.InvestmentAttestation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InvestmentAttestation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InvestmentAttestation{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInvestmentDistributions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InvestmentDistribution) error {
+	*v = make([]types.InvestmentDistribution, 0)
+	var vv types.InvestmentDistribution
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InvestmentDistribution
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InvestmentDistribution{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInvestmentMultipliers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InvestmentMultiplier) error {
+	*v = make([]types.InvestmentMultiplier, 0)
+	var vv types.InvestmentMultiplier
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InvestmentMultiplier
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InvestmentMultiplier{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInvestmentRestrictions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InvestmentRestriction) error {
+	*v = make([]types.InvestmentRestriction, 0)
+	var vv types.InvestmentRestriction
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InvestmentRestriction
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InvestmentRestriction{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInvestments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Investment) error {
+	*v = make([]types.Investment, 0)
+	var vv types.Investment
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Investment
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeInvestment(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInvestmentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InvestmentSummary) error {
+	*v = make([]types.InvestmentSummary, 0)
+	var vv types.InvestmentSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InvestmentSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InvestmentSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeLegalEntities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LegalEntity) error {
+	*v = make([]types.LegalEntity, 0)
+	var vv types.LegalEntity
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.LegalEntity
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.LegalEntity{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -968,6 +1337,27 @@ func deserializeProductNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializePurchaseTypeApplications(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRejectionReasons(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

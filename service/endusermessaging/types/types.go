@@ -676,7 +676,9 @@ func (v *JobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationType != nil {
 		s.WriteString(schemas.JobSummary_operationType, *v.OperationType)
 	}
-	serializeJobResourceList(s, schemas.JobSummary_resources, v.Resources)
+	if v.Resources != nil {
+		serializeJobResourceList(s, schemas.JobSummary_resources, v.Resources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.JobSummary_status, string(v.Status))
 	}
@@ -1011,7 +1013,9 @@ func (v *TextParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TextParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationCountryParameters(s, schemas.TextParameters_destinationCountryParameters, v.DestinationCountryParameters)
+	if v.DestinationCountryParameters != nil {
+		serializeDestinationCountryParameters(s, schemas.TextParameters_destinationCountryParameters, v.DestinationCountryParameters)
+	}
 	if v.InlineTemplateBody != nil {
 		s.WriteString(schemas.TextParameters_inlineTemplateBody, *v.InlineTemplateBody)
 	}
@@ -1240,7 +1244,9 @@ func (v *UpdateTextParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTextParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateDestinationCountryParameters(s, schemas.UpdateTextParameters_destinationCountryParameters, v.DestinationCountryParameters)
+	if v.DestinationCountryParameters != nil {
+		serializeUpdateDestinationCountryParameters(s, schemas.UpdateTextParameters_destinationCountryParameters, v.DestinationCountryParameters)
+	}
 	if v.InlineTemplateBody != nil {
 		s.WriteString(schemas.UpdateTextParameters_inlineTemplateBody, *v.InlineTemplateBody)
 	}

@@ -62,11 +62,35 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateContract")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateSourceViews(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateSourceViews(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "AssociateSourceViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CancelContractualInvestmentAttestation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelContractualInvestmentAttestation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelContractualInvestmentAttestation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -86,11 +110,35 @@ func TestCheckSnapshot_CreateBillingView(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateContractualInvestmentAttestation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContractualInvestmentAttestation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContractualInvestmentAttestation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteBillingView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateContract")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -127,6 +175,18 @@ func TestCheckSnapshot_GetBillingView(t *testing.T) {
 	_, err := svc.GetBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetContractInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContractInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetContractInformation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -242,6 +302,54 @@ func TestCheckSnapshot_ListBusinessSupportSubscriptionHistory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListContracts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContracts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContracts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContractualInvestmentAttestations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContractualInvestmentAttestations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContractualInvestmentAttestations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContractualInvestments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContractualInvestments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContractualInvestments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContractualInvestmentSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContractualInvestmentSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContractualInvestmentSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnterpriseSupportLinkedAccountCharges(context.Background(), nil, func(o *Options) {
@@ -337,11 +445,35 @@ func TestCheckSnapshot_UpdateBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateContract")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateSourceViews(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateSourceViews(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateSourceViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelContractualInvestmentAttestation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelContractualInvestmentAttestation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelContractualInvestmentAttestation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -361,11 +493,35 @@ func TestUpdateSnapshot_CreateBillingView(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateContractualInvestmentAttestation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContractualInvestmentAttestation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContractualInvestmentAttestation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteBillingView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateContract")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -402,6 +558,18 @@ func TestUpdateSnapshot_GetBillingView(t *testing.T) {
 	_, err := svc.GetBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetContractInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContractInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetContractInformation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -510,6 +678,54 @@ func TestUpdateSnapshot_ListBusinessSupportSubscriptionHistory(t *testing.T) {
 	_, err := svc.ListBusinessSupportSubscriptionHistory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBusinessSupportSubscriptionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContracts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContracts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContracts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContractualInvestmentAttestations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContractualInvestmentAttestations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContractualInvestmentAttestations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContractualInvestments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContractualInvestments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContractualInvestments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContractualInvestmentSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContractualInvestmentSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContractualInvestmentSummaries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

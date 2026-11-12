@@ -105,7 +105,9 @@ func (v *DisabledApiException) Deserialize(d smithy.ShapeDeserializer) error {
 
 // A metering record has already been emitted by the same EC2 instance, ECS task,
 // or EKS pod for the given { usageDimension , timestamp } with a different
-// usageQuantity .
+// usageQuantity . Quantities are compared by value, so a whole-number and a
+// decimal quantity with the same value (for example, 17 and 17.00 ) are not
+// different.
 type DuplicateRequestException struct {
 	Message *string
 
@@ -682,7 +684,9 @@ func (v *InvalidTokenException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Sum of allocated usage quantities is not equal to the usage quantity.
+// Sum of allocated usage quantities is not equal to the usage quantity, or the
+// allocations don't use the same type of quantity (whole number or decimal) as the
+// usage quantity.
 type InvalidUsageAllocationsException struct {
 	Message *string
 

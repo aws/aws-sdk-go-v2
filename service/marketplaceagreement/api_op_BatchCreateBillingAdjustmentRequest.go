@@ -49,7 +49,9 @@ func (v *BatchCreateBillingAdjustmentRequestInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *BatchCreateBillingAdjustmentRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateBillingAdjustmentRequestEntryList(s, schemas.BatchCreateBillingAdjustmentRequestInput_billingAdjustmentRequestEntries, v.BillingAdjustmentRequestEntries)
+	if v.BillingAdjustmentRequestEntries != nil {
+		serializeBatchCreateBillingAdjustmentRequestEntryList(s, schemas.BatchCreateBillingAdjustmentRequestInput_billingAdjustmentRequestEntries, v.BillingAdjustmentRequestEntries)
+	}
 }
 
 type BatchCreateBillingAdjustmentRequestOutput struct {
@@ -79,8 +81,12 @@ func (v *BatchCreateBillingAdjustmentRequestOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *BatchCreateBillingAdjustmentRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateBillingAdjustmentErrorList(s, schemas.BatchCreateBillingAdjustmentRequestOutput_errors, v.Errors)
-	serializeBatchCreateBillingAdjustmentItemList(s, schemas.BatchCreateBillingAdjustmentRequestOutput_items, v.Items)
+	if v.Errors != nil {
+		serializeBatchCreateBillingAdjustmentErrorList(s, schemas.BatchCreateBillingAdjustmentRequestOutput_errors, v.Errors)
+	}
+	if v.Items != nil {
+		serializeBatchCreateBillingAdjustmentItemList(s, schemas.BatchCreateBillingAdjustmentRequestOutput_items, v.Items)
+	}
 }
 func (v *BatchCreateBillingAdjustmentRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateBillingAdjustmentRequestOutput, func(s *smithy.Schema) error {

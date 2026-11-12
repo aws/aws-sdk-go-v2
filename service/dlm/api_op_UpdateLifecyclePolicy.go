@@ -115,7 +115,9 @@ func (v *UpdateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreateInterval != nil {
 		s.WriteInt32(schemas.UpdateLifecyclePolicyRequest_CreateInterval, *v.CreateInterval)
 	}
-	serializeCrossRegionCopyTargetList(s, schemas.UpdateLifecyclePolicyRequest_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	if v.CrossRegionCopyTargets != nil {
+		serializeCrossRegionCopyTargetList(s, schemas.UpdateLifecyclePolicyRequest_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateLifecyclePolicyRequest_Description, *v.Description)
 	}

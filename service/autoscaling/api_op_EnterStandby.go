@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,39 @@ type EnterStandbyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnterStandbyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnterStandbyQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnterStandbyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.EnterStandbyQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.EnterStandbyQuery_InstanceIds, v.InstanceIds)
+	}
+	if v.ShouldDecrementDesiredCapacity != nil {
+		s.WriteBool(schemas.EnterStandbyQuery_ShouldDecrementDesiredCapacity, *v.ShouldDecrementDesiredCapacity)
+	}
+}
+func (v *EnterStandbyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnterStandbyQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnterStandbyQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.EnterStandbyQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.EnterStandbyQuery_InstanceIds:
+			return deserializeInstanceIds(d, schemas.EnterStandbyQuery_InstanceIds, &v.InstanceIds)
+		case schemas.EnterStandbyQuery_ShouldDecrementDesiredCapacity:
+			v.ShouldDecrementDesiredCapacity = new(bool)
+			return d.ReadBool(schemas.EnterStandbyQuery_ShouldDecrementDesiredCapacity, v.ShouldDecrementDesiredCapacity)
+		}
+		return nil
+	})
+}
+
 type EnterStandbyOutput struct {
 
 	// The activities related to moving instances into Standby mode.
@@ -67,13 +102,31 @@ type EnterStandbyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnterStandbyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnterStandbyAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnterStandbyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activities != nil {
+		serializeActivities(s, schemas.EnterStandbyAnswer_Activities, v.Activities)
+	}
+}
+func (v *EnterStandbyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnterStandbyAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnterStandbyAnswer_Activities:
+			return deserializeActivities(d, schemas.EnterStandbyAnswer_Activities, &v.Activities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnterStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnterStandby{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnterStandby, schemas.EnterStandbyQuery, schemas.EnterStandbyAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpEnterStandby{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnterStandby, schemas.EnterStandbyQuery, schemas.EnterStandbyAnswer), output: &EnterStandbyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

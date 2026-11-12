@@ -77,7 +77,9 @@ func (v *GetCrossRegionRoutingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCrossRegionRoutingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIsolatedRegionsList(s, schemas.GetCrossRegionRoutingResponse_IsolatedRegions, v.IsolatedRegions)
+	if v.IsolatedRegions != nil {
+		serializeIsolatedRegionsList(s, schemas.GetCrossRegionRoutingResponse_IsolatedRegions, v.IsolatedRegions)
+	}
 }
 func (v *GetCrossRegionRoutingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCrossRegionRoutingResponse, func(s *smithy.Schema) error {

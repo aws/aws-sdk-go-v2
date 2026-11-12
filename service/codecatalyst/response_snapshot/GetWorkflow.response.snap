@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdTime":"2000-01-01T00:00:00Z","definition":{"path":"__Path__"},"id":"__Id__","lastUpdatedTime":"2000-01-01T00:00:00Z","name":"__Name__","projectName":"__ProjectName__","runMode":"QUEUED","sourceBranchName":"__SourceBranchName__","sourceRepositoryName":"__SourceRepositoryName__","spaceName":"__SpaceName__","status":"INVALID"}

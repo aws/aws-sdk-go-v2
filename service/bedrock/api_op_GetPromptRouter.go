@@ -119,7 +119,9 @@ func (v *GetPromptRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FallbackModel.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePromptRouterTargetModels(s, schemas.GetPromptRouterResponse_models, v.Models)
+	if v.Models != nil {
+		serializePromptRouterTargetModels(s, schemas.GetPromptRouterResponse_models, v.Models)
+	}
 	if v.PromptRouterArn != nil {
 		s.WriteString(schemas.GetPromptRouterResponse_promptRouterArn, *v.PromptRouterArn)
 	}

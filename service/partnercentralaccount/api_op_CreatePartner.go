@@ -96,7 +96,9 @@ func (v *CreatePartnerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimarySolutionType != "" {
 		s.WriteString(schemas.CreatePartnerRequest_PrimarySolutionType, string(v.PrimarySolutionType))
 	}
-	serializeTagList(s, schemas.CreatePartnerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePartnerRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePartnerOutput struct {
@@ -162,7 +164,9 @@ func (v *CreatePartnerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreatePartnerResponse_Arn, *v.Arn)
 	}
-	serializePartnerDomainList(s, schemas.CreatePartnerResponse_AwsTrainingCertificationEmailDomains, v.AwsTrainingCertificationEmailDomains)
+	if v.AwsTrainingCertificationEmailDomains != nil {
+		serializePartnerDomainList(s, schemas.CreatePartnerResponse_AwsTrainingCertificationEmailDomains, v.AwsTrainingCertificationEmailDomains)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.CreatePartnerResponse_Catalog, *v.Catalog)
 	}

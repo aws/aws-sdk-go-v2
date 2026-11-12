@@ -54,8 +54,12 @@ func (v *TerminateTargetInstancesInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.AccountID != nil {
 		s.WriteString(schemas.TerminateTargetInstancesRequest_accountID, *v.AccountID)
 	}
-	serializeTerminateTargetInstancesRequestSourceServerIDs(s, schemas.TerminateTargetInstancesRequest_sourceServerIDs, v.SourceServerIDs)
-	serializeTagsMap(s, schemas.TerminateTargetInstancesRequest_tags, v.Tags)
+	if v.SourceServerIDs != nil {
+		serializeTerminateTargetInstancesRequestSourceServerIDs(s, schemas.TerminateTargetInstancesRequest_sourceServerIDs, v.SourceServerIDs)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.TerminateTargetInstancesRequest_tags, v.Tags)
+	}
 }
 func (v *TerminateTargetInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TerminateTargetInstancesRequest, func(s *smithy.Schema) error {

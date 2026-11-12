@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,21 @@ type ChangePasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangePasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangePasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangePasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewPassword != nil {
+		s.WriteString(schemas.ChangePasswordRequest_NewPassword, *v.NewPassword)
+	}
+	if v.OldPassword != nil {
+		s.WriteString(schemas.ChangePasswordRequest_OldPassword, *v.OldPassword)
+	}
+}
+
 type ChangePasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +85,26 @@ type ChangePasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangePasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangePasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ChangePasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationChangePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpChangePassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChangePassword, schemas.ChangePasswordRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpChangePassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChangePassword, schemas.ChangePasswordRequest, nil), output: &ChangePasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

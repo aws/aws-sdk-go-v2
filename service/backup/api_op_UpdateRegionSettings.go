@@ -59,8 +59,12 @@ func (v *UpdateRegionSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRegionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceTypeManagementPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
-	serializeResourceTypeOptInPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)
+	if v.ResourceTypeManagementPreference != nil {
+		serializeResourceTypeManagementPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
+	}
+	if v.ResourceTypeOptInPreference != nil {
+		serializeResourceTypeOptInPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)
+	}
 }
 
 type UpdateRegionSettingsOutput struct {

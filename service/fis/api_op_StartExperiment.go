@@ -67,7 +67,9 @@ func (v *StartExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExperimentTemplateId != nil {
 		s.WriteString(schemas.StartExperimentRequest_experimentTemplateId, *v.ExperimentTemplateId)
 	}
-	serializeTagMap(s, schemas.StartExperimentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartExperimentRequest_tags, v.Tags)
+	}
 }
 
 type StartExperimentOutput struct {

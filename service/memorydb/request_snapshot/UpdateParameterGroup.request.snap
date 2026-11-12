@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/UpdateParameterGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.UpdateParameterGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ParameterGroupName":"__ParameterGroupName__","ParameterNameValues":[{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"},{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"}]}
+¿rParameterGroupNamev__ParameterGroupName__sParameterNameValuesŸ¿mParameterNameq__ParameterName__nParameterValuer__ParameterValue__ÿ¿mParameterNameq__ParameterName__nParameterValuer__ParameterValue__ÿÿÿ

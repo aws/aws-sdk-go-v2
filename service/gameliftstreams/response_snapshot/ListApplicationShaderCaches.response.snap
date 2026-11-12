@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"ApplicationArn":"__ApplicationArn__","AssociatedStreamGroups":["__Member__","__Member__"],"Identifier":"__Identifier__","LastUpdatedAt":946684800,"Status":"INITIALIZED","StorageBytes":1},{"ApplicationArn":"__ApplicationArn__","AssociatedStreamGroups":["__Member__","__Member__"],"Identifier":"__Identifier__","LastUpdatedAt":946684800,"Status":"INITIALIZED","StorageBytes":1}]}

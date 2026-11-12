@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetReadSetMetadataInput struct {
 	SequenceStoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetReadSetMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReadSetMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReadSetMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetReadSetMetadataRequest_id, *v.Id)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.GetReadSetMetadataRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
 }
 
 type GetReadSetMetadataOutput struct {
@@ -117,13 +134,146 @@ type GetReadSetMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReadSetMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReadSetMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReadSetMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_arn, *v.Arn)
+	}
+	if v.CreationJobId != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_creationJobId, *v.CreationJobId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetReadSetMetadataResponse_creationTime, *v.CreationTime)
+	}
+	if v.CreationType != "" {
+		s.WriteString(schemas.GetReadSetMetadataResponse_creationType, string(v.CreationType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_description, *v.Description)
+	}
+	if v.Etag != nil {
+		s.WriteStruct(schemas.GetReadSetMetadataResponse_etag)
+		v.Etag.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileType != "" {
+		s.WriteString(schemas.GetReadSetMetadataResponse_fileType, string(v.FileType))
+	}
+	if v.Files != nil {
+		s.WriteStruct(schemas.GetReadSetMetadataResponse_files)
+		v.Files.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_name, *v.Name)
+	}
+	if v.ReferenceArn != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_referenceArn, *v.ReferenceArn)
+	}
+	if v.SampleId != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_sampleId, *v.SampleId)
+	}
+	if v.SequenceInformation != nil {
+		s.WriteStruct(schemas.GetReadSetMetadataResponse_sequenceInformation)
+		v.SequenceInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetReadSetMetadataResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.SubjectId != nil {
+		s.WriteString(schemas.GetReadSetMetadataResponse_subjectId, *v.SubjectId)
+	}
+}
+func (v *GetReadSetMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReadSetMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReadSetMetadataResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_arn, v.Arn)
+		case schemas.GetReadSetMetadataResponse_creationJobId:
+			v.CreationJobId = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_creationJobId, v.CreationJobId)
+		case schemas.GetReadSetMetadataResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetReadSetMetadataResponse_creationTime, v.CreationTime)
+		case schemas.GetReadSetMetadataResponse_creationType:
+			var ev string
+			if err := d.ReadString(schemas.GetReadSetMetadataResponse_creationType, &ev); err != nil {
+				return err
+			}
+			v.CreationType = types.CreationType(ev)
+			return nil
+		case schemas.GetReadSetMetadataResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_description, v.Description)
+		case schemas.GetReadSetMetadataResponse_etag:
+			v.Etag = &types.ETag{}
+			return v.Etag.Deserialize(d)
+		case schemas.GetReadSetMetadataResponse_fileType:
+			var ev string
+			if err := d.ReadString(schemas.GetReadSetMetadataResponse_fileType, &ev); err != nil {
+				return err
+			}
+			v.FileType = types.FileType(ev)
+			return nil
+		case schemas.GetReadSetMetadataResponse_files:
+			v.Files = &types.ReadSetFiles{}
+			return v.Files.Deserialize(d)
+		case schemas.GetReadSetMetadataResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_id, v.Id)
+		case schemas.GetReadSetMetadataResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_name, v.Name)
+		case schemas.GetReadSetMetadataResponse_referenceArn:
+			v.ReferenceArn = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_referenceArn, v.ReferenceArn)
+		case schemas.GetReadSetMetadataResponse_sampleId:
+			v.SampleId = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_sampleId, v.SampleId)
+		case schemas.GetReadSetMetadataResponse_sequenceInformation:
+			v.SequenceInformation = &types.SequenceInformation{}
+			return v.SequenceInformation.Deserialize(d)
+		case schemas.GetReadSetMetadataResponse_sequenceStoreId:
+			v.SequenceStoreId = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_sequenceStoreId, v.SequenceStoreId)
+		case schemas.GetReadSetMetadataResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetReadSetMetadataResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReadSetStatus(ev)
+			return nil
+		case schemas.GetReadSetMetadataResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_statusMessage, v.StatusMessage)
+		case schemas.GetReadSetMetadataResponse_subjectId:
+			v.SubjectId = new(string)
+			return d.ReadString(schemas.GetReadSetMetadataResponse_subjectId, v.SubjectId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReadSetMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReadSetMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadSetMetadata, schemas.GetReadSetMetadataRequest, schemas.GetReadSetMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReadSetMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadSetMetadata, schemas.GetReadSetMetadataRequest, schemas.GetReadSetMetadataResponse), output: &GetReadSetMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetPartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPartnerAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartnerAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartnerAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartnerAccountId != nil {
+		s.WriteString(schemas.GetPartnerAccountRequest_PartnerAccountId, *v.PartnerAccountId)
+	}
+	if v.PartnerType != "" {
+		s.WriteString(schemas.GetPartnerAccountRequest_PartnerType, string(v.PartnerType))
+	}
+}
+
 type GetPartnerAccountOutput struct {
 
 	// Whether the partner account is linked to the AWS account.
@@ -54,13 +71,39 @@ type GetPartnerAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPartnerAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartnerAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartnerAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountLinked != false {
+		s.WriteBool(schemas.GetPartnerAccountResponse_AccountLinked, v.AccountLinked)
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.GetPartnerAccountResponse_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPartnerAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPartnerAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPartnerAccountResponse_AccountLinked:
+			return d.ReadBool(schemas.GetPartnerAccountResponse_AccountLinked, &v.AccountLinked)
+		case schemas.GetPartnerAccountResponse_Sidewalk:
+			v.Sidewalk = &types.SidewalkAccountInfoWithFingerprint{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPartnerAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartnerAccount, schemas.GetPartnerAccountRequest, schemas.GetPartnerAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPartnerAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartnerAccount, schemas.GetPartnerAccountRequest, schemas.GetPartnerAccountResponse), output: &GetPartnerAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

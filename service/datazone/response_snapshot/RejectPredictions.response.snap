@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assetId":"__AssetId__","assetRevision":"__AssetRevision__","domainId":"__DomainId__"}

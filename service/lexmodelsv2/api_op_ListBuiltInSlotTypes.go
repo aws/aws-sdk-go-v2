@@ -109,7 +109,9 @@ func (v *ListBuiltInSlotTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBuiltInSlotTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuiltInSlotTypeSummaryList(s, schemas.ListBuiltInSlotTypesResponse_builtInSlotTypeSummaries, v.BuiltInSlotTypeSummaries)
+	if v.BuiltInSlotTypeSummaries != nil {
+		serializeBuiltInSlotTypeSummaryList(s, schemas.ListBuiltInSlotTypesResponse_builtInSlotTypeSummaries, v.BuiltInSlotTypeSummaries)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListBuiltInSlotTypesResponse_localeId, *v.LocaleId)
 	}

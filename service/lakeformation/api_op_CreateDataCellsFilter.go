@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,20 @@ type CreateDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataCellsFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataCellsFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataCellsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableData != nil {
+		s.WriteStruct(schemas.CreateDataCellsFilterRequest_TableData)
+		v.TableData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateDataCellsFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +58,26 @@ type CreateDataCellsFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataCellsFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataCellsFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataCellsFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateDataCellsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataCellsFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataCellsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataCellsFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataCellsFilter, schemas.CreateDataCellsFilterRequest, schemas.CreateDataCellsFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataCellsFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataCellsFilter, schemas.CreateDataCellsFilterRequest, schemas.CreateDataCellsFilterResponse), output: &CreateDataCellsFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

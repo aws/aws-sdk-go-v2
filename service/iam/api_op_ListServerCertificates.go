@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,24 @@ type ListServerCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServerCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServerCertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServerCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListServerCertificatesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListServerCertificatesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.PathPrefix != nil {
+		s.WriteString(schemas.ListServerCertificatesRequest_PathPrefix, *v.PathPrefix)
+	}
+}
+
 // Contains the response to a successful [ListServerCertificates] request.
 //
 // [ListServerCertificates]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListServerCertificates.html
@@ -104,13 +124,42 @@ type ListServerCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServerCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServerCertificatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServerCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListServerCertificatesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListServerCertificatesResponse_Marker, *v.Marker)
+	}
+	if v.ServerCertificateMetadataList != nil {
+		serializeserverCertificateMetadataListType(s, schemas.ListServerCertificatesResponse_ServerCertificateMetadataList, v.ServerCertificateMetadataList)
+	}
+}
+func (v *ListServerCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServerCertificatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServerCertificatesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListServerCertificatesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListServerCertificatesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListServerCertificatesResponse_Marker, v.Marker)
+		case schemas.ListServerCertificatesResponse_ServerCertificateMetadataList:
+			return deserializeserverCertificateMetadataListType(d, schemas.ListServerCertificatesResponse_ServerCertificateMetadataList, &v.ServerCertificateMetadataList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListServerCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServerCertificates, schemas.ListServerCertificatesRequest, schemas.ListServerCertificatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListServerCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServerCertificates, schemas.ListServerCertificatesRequest, schemas.ListServerCertificatesResponse), output: &ListServerCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

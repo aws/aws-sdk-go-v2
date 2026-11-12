@@ -521,6 +521,45 @@ func TestCheckRequestSnapshot_CreatePresignedNotebookUrl(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateSystemTableConfiguration(t *testing.T) {
+	input := &CreateSystemTableConfigurationInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		TableName:          types.SystemTableName("ALL"),
+		KmsKeyArn:          ptr.String("__KmsKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSystemTableConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateWorkGroup(t *testing.T) {
 	input := &CreateWorkGroupInput{
 		Name: ptr.String("__Name__"),
@@ -611,6 +650,16 @@ func TestCheckRequestSnapshot_CreateWorkGroup(t *testing.T) {
 				EnableS3AccessGrants:  ptr.Bool(true),
 				CreateUserLevelPrefix: ptr.Bool(true),
 				AuthenticationType:    types.AuthenticationType("DIRECTORY_IDENTITY"),
+			},
+			SystemTableStatuses: []types.SystemTableStatus{
+				{
+					TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+					Enabled:   ptr.Bool(true),
+				},
+				{
+					TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+					Enabled:   ptr.Bool(true),
+				},
 			},
 		},
 		Description: ptr.String("__Description__"),
@@ -781,6 +830,33 @@ func TestCheckRequestSnapshot_DeletePreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePreparedStatement"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteSystemTableConfiguration(t *testing.T) {
+	input := &DeleteSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSystemTableConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1306,6 +1382,33 @@ func TestCheckRequestSnapshot_GetSessionStatus(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetSystemTableConfiguration(t *testing.T) {
+	input := &GetSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSystemTableConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetTableMetadata(t *testing.T) {
 	input := &GetTableMetadataInput{
 		CatalogName:  ptr.String("__CatalogName__"),
@@ -1772,6 +1875,34 @@ func TestCheckRequestSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListSystemTableStatuses(t *testing.T) {
+	input := &ListSystemTableStatusesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSystemTableStatuses(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSystemTableStatuses"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2437,6 +2568,34 @@ func TestCheckRequestSnapshot_UpdatePreparedStatement(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateSystemTableConfiguration(t *testing.T) {
+	input := &UpdateSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSystemTableConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateWorkGroup(t *testing.T) {
 	input := &UpdateWorkGroupInput{
 		WorkGroup:   ptr.String("__WorkGroup__"),
@@ -2873,6 +3032,45 @@ func TestUpdateRequestSnapshot_CreatePresignedNotebookUrl(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateSystemTableConfiguration(t *testing.T) {
+	input := &CreateSystemTableConfigurationInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		TableName:          types.SystemTableName("ALL"),
+		KmsKeyArn:          ptr.String("__KmsKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSystemTableConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateWorkGroup(t *testing.T) {
 	input := &CreateWorkGroupInput{
 		Name: ptr.String("__Name__"),
@@ -2963,6 +3161,16 @@ func TestUpdateRequestSnapshot_CreateWorkGroup(t *testing.T) {
 				EnableS3AccessGrants:  ptr.Bool(true),
 				CreateUserLevelPrefix: ptr.Bool(true),
 				AuthenticationType:    types.AuthenticationType("DIRECTORY_IDENTITY"),
+			},
+			SystemTableStatuses: []types.SystemTableStatus{
+				{
+					TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+					Enabled:   ptr.Bool(true),
+				},
+				{
+					TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+					Enabled:   ptr.Bool(true),
+				},
 			},
 		},
 		Description: ptr.String("__Description__"),
@@ -3133,6 +3341,33 @@ func TestUpdateRequestSnapshot_DeletePreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePreparedStatement"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteSystemTableConfiguration(t *testing.T) {
+	input := &DeleteSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSystemTableConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3658,6 +3893,33 @@ func TestUpdateRequestSnapshot_GetSessionStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetSystemTableConfiguration(t *testing.T) {
+	input := &GetSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSystemTableConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetTableMetadata(t *testing.T) {
 	input := &GetTableMetadataInput{
 		CatalogName:  ptr.String("__CatalogName__"),
@@ -4124,6 +4386,34 @@ func TestUpdateRequestSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListSystemTableStatuses(t *testing.T) {
+	input := &ListSystemTableStatusesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSystemTableStatuses(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSystemTableStatuses"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4785,6 +5075,34 @@ func TestUpdateRequestSnapshot_UpdatePreparedStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePreparedStatement"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateSystemTableConfiguration(t *testing.T) {
+	input := &UpdateSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSystemTableConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSystemTableConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }

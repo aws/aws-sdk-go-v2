@@ -4,7 +4,9 @@ package osis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StartPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.StartPipelineRequest_PipelineName, *v.PipelineName)
+	}
+}
+
 type StartPipelineOutput struct {
 
 	// Information about an existing OpenSearch Ingestion pipeline.
@@ -47,13 +61,34 @@ type StartPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.StartPipelineResponse_Pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPipelineResponse_Pipeline:
+			v.Pipeline = &types.Pipeline{}
+			return v.Pipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipeline, schemas.StartPipelineRequest, schemas.StartPipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipeline, schemas.StartPipelineRequest, schemas.StartPipelineResponse), output: &StartPipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

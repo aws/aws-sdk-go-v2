@@ -1705,7 +1705,7 @@ var TaskTimedOutEventDetails_cause *smithy.Schema
 var _TaskToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "TaskToken",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var TestExecutionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",

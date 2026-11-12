@@ -120,7 +120,9 @@ func (v *GetExecutionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetExecutionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHistoryEventList(s, schemas.GetExecutionHistoryOutput_events, v.Events)
+	if v.Events != nil {
+		serializeHistoryEventList(s, schemas.GetExecutionHistoryOutput_events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetExecutionHistoryOutput_nextToken, *v.NextToken)
 	}

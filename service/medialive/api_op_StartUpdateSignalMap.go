@@ -66,14 +66,18 @@ func (v *StartUpdateSignalMapInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartUpdateSignalMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringPatternS(s, schemas.StartUpdateSignalMapRequest_CloudWatchAlarmTemplateGroupIdentifiers, v.CloudWatchAlarmTemplateGroupIdentifiers)
+	if v.CloudWatchAlarmTemplateGroupIdentifiers != nil {
+		serialize__listOf__stringPatternS(s, schemas.StartUpdateSignalMapRequest_CloudWatchAlarmTemplateGroupIdentifiers, v.CloudWatchAlarmTemplateGroupIdentifiers)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.StartUpdateSignalMapRequest_Description, *v.Description)
 	}
 	if v.DiscoveryEntryPointArn != nil {
 		s.WriteString(schemas.StartUpdateSignalMapRequest_DiscoveryEntryPointArn, *v.DiscoveryEntryPointArn)
 	}
-	serialize__listOf__stringPatternS(s, schemas.StartUpdateSignalMapRequest_EventBridgeRuleTemplateGroupIdentifiers, v.EventBridgeRuleTemplateGroupIdentifiers)
+	if v.EventBridgeRuleTemplateGroupIdentifiers != nil {
+		serialize__listOf__stringPatternS(s, schemas.StartUpdateSignalMapRequest_EventBridgeRuleTemplateGroupIdentifiers, v.EventBridgeRuleTemplateGroupIdentifiers)
+	}
 	if v.ForceRediscovery != nil {
 		s.WriteBool(schemas.StartUpdateSignalMapRequest_ForceRediscovery, *v.ForceRediscovery)
 	}
@@ -162,7 +166,9 @@ func (v *StartUpdateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Arn != nil {
 		s.WriteString(schemas.StartUpdateSignalMapResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartUpdateSignalMapResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	if v.CloudWatchAlarmTemplateGroupIds != nil {
+		serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartUpdateSignalMapResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.StartUpdateSignalMapResponse_CreatedAt, *v.CreatedAt)
 	}
@@ -175,8 +181,12 @@ func (v *StartUpdateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.StartUpdateSignalMapResponse_ErrorMessage, *v.ErrorMessage)
 	}
-	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartUpdateSignalMapResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
-	serializeFailedMediaResourceMap(s, schemas.StartUpdateSignalMapResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	if v.EventBridgeRuleTemplateGroupIds != nil {
+		serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartUpdateSignalMapResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
+	}
+	if v.FailedMediaResourceMap != nil {
+		serializeFailedMediaResourceMap(s, schemas.StartUpdateSignalMapResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.StartUpdateSignalMapResponse_Id, *v.Id)
 	}
@@ -188,7 +198,9 @@ func (v *StartUpdateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.LastSuccessfulMonitorDeployment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMediaResourceMap(s, schemas.StartUpdateSignalMapResponse_MediaResourceMap, v.MediaResourceMap)
+	if v.MediaResourceMap != nil {
+		serializeMediaResourceMap(s, schemas.StartUpdateSignalMapResponse_MediaResourceMap, v.MediaResourceMap)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.StartUpdateSignalMapResponse_ModifiedAt, *v.ModifiedAt)
 	}
@@ -206,7 +218,9 @@ func (v *StartUpdateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Status != "" {
 		s.WriteString(schemas.StartUpdateSignalMapResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.StartUpdateSignalMapResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartUpdateSignalMapResponse_Tags, v.Tags)
+	}
 }
 func (v *StartUpdateSignalMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartUpdateSignalMapResponse, func(s *smithy.Schema) error {

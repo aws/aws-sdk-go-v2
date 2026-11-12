@@ -1,6 +1,7 @@
-POST /
+POST /service/Textract/operation/AnalyzeDocument
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.AnalyzeDocument
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AdaptersConfig":{"Adapters":[{"AdapterId":"__AdapterId__","Pages":["__Member__","__Member__"],"Version":"__Version__"},{"AdapterId":"__AdapterId__","Pages":["__Member__","__Member__"],"Version":"__Version__"}]},"Document":{"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"FeatureTypes":["TABLES","TABLES"],"HumanLoopConfig":{"DataAttributes":{"ContentClassifiers":["FreeOfPersonallyIdentifiableInformation","FreeOfPersonallyIdentifiableInformation"]},"FlowDefinitionArn":"__FlowDefinitionArn__","HumanLoopName":"__HumanLoopName__"},"QueriesConfig":{"Queries":[{"Alias":"__Alias__","Pages":["__Member__","__Member__"],"Text":"__Text__"},{"Alias":"__Alias__","Pages":["__Member__","__Member__"],"Text":"__Text__"}]}}
+¿nAdaptersConfig¿hAdaptersŸ¿iAdapterIdm__AdapterId__ePagesŸj__Member__j__Member__ÿgVersionk__Version__ÿ¿iAdapterIdm__AdapterId__ePagesŸj__Member__j__Member__ÿgVersionk__Version__ÿÿÿhDocument¿eBytesDblobhS3Object¿fBucketj__Bucket__dNameh__Name__gVersionk__Version__ÿÿlFeatureTypesŸfTABLESfTABLESÿoHumanLoopConfig¿nDataAttributes¿rContentClassifiersŸx'FreeOfPersonallyIdentifiableInformationx'FreeOfPersonallyIdentifiableInformationÿÿqFlowDefinitionArnu__FlowDefinitionArn__mHumanLoopNameq__HumanLoopName__ÿmQueriesConfig¿gQueriesŸ¿eAliasi__Alias__ePagesŸj__Member__j__Member__ÿdTexth__Text__ÿ¿eAliasi__Alias__ePagesŸj__Member__j__Member__ÿdTexth__Text__ÿÿÿÿ

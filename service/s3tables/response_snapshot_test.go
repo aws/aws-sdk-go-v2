@@ -108,6 +108,27 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_CompleteTableMigration(t *testing.T) {
+	want := &CompleteTableMigrationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("CompleteTableMigration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CompleteTableMigration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateNamespace(t *testing.T) {
 	want := &CreateNamespaceOutput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -622,6 +643,39 @@ func TestCheckResponseSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetTableBucketLogging(t *testing.T) {
+	want := &GetTableBucketLoggingOutput{
+		TableBucketLoggingStatus: &types.TableBucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTableBucketLogging.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTableBucketLogging(context.Background(), &GetTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTableBucketLogging.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	want := &GetTableBucketMaintenanceConfigurationOutput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -896,6 +950,106 @@ func TestCheckResponseSnapshot_GetTableMetadataLocation(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetTableMetadataLocation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTableMigration(t *testing.T) {
+	want := &GetTableMigrationOutput{
+		MigrationId:         ptr.String("__MigrationId__"),
+		TableBucketARN:      ptr.String("__TableBucketARN__"),
+		Namespace:           ptr.String("__Namespace__"),
+		TableARN:            ptr.String("__TableARN__"),
+		Name:                ptr.String("__Name__"),
+		Type:                types.MigrationType("start"),
+		State:               types.MigrationState("new"),
+		RoleARN:             ptr.String("__RoleARN__"),
+		ReviewMigrationPlan: ptr.Bool(true),
+		HasValidPlan:        ptr.Bool(true),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StateUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: &types.MigrationFailureReason{
+			Code:   types.MigrationFailureCode("rolePermissions"),
+			Detail: ptr.String("__Detail__"),
+		},
+		PlanningStats: &types.PlanningStats{
+			ObjectsScanned: ptr.Int64(1),
+			ObjectsPlanned: ptr.Int64(1),
+			PartitionCount: ptr.Int64(1),
+		},
+		MigrationStats: &types.MigrationStats{
+			ObjectsMigrated:         ptr.Int64(1),
+			ObjectsFailedMigration:  ptr.Int64(1),
+			ObjectsPendingMigration: ptr.Int64(1),
+		},
+		SourceType: types.MigrationSourceType("glueTable"),
+		Source: &types.SourceConfigurationMemberGlueTable{
+			Value: types.GlueTableSource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+			},
+		},
+		DataMigration: &types.DataMigrationOverview{
+			MaintenanceSettings: &types.MaintenanceSettings{
+				IcebergCompaction: &types.MigrationCompactionSettings{
+					TargetFileSizeMB: ptr.Int32(1),
+					Strategy:         types.IcebergCompactionStrategy("auto"),
+				},
+				IcebergSnapshotManagement: &types.MigrationSnapshotManagementSettings{
+					MinSnapshotsToKeep:  ptr.Int32(1),
+					MaxSnapshotAgeHours: ptr.Int32(1),
+				},
+			},
+			MigrationPolicies: &types.MigrationPolicies{
+				UnmatchedSourceFieldsPolicy: types.UnmatchedSourceFieldsPolicy("fail"),
+				IncompatibleValuesPolicy:    types.IncompatibleValuesPolicy("fail"),
+			},
+		},
+		MigrationOutput: &types.MigrationOutputOverview{
+			Bucket: ptr.String("__Bucket__"),
+			TableCompatibilityReport: &types.ReportOverview{
+				Prefix:            ptr.String("__Prefix__"),
+				Key:               ptr.String("__Key__"),
+				ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+				InvalidFindings: map[string]int64{
+					"key0": 1,
+				},
+			},
+			ObjectCompatibilityReport: &types.ReportOverview{
+				Prefix:            ptr.String("__Prefix__"),
+				Key:               ptr.String("__Key__"),
+				ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+				InvalidFindings: map[string]int64{
+					"key0": 1,
+				},
+			},
+			ObjectMigrationReport: &types.ReportOverview{
+				Prefix:            ptr.String("__Prefix__"),
+				Key:               ptr.String("__Key__"),
+				ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+				InvalidFindings: map[string]int64{
+					"key0": 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTableMigration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTableMigration(context.Background(), &GetTableMigrationInput{
+		MigrationId: ptr.String("__MigrationId__"),
+		TableARN:    ptr.String("__TableARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTableMigration.response", err)
 	}
 }
 
@@ -1196,6 +1350,62 @@ func TestCheckResponseSnapshot_ListTableBuckets(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListTableMigrations(t *testing.T) {
+	want := &ListTableMigrationsOutput{
+		Migrations: []types.MigrationSummary{
+			{
+				MigrationId:    ptr.String("__MigrationId__"),
+				TableBucketARN: ptr.String("__TableBucketARN__"),
+				Namespace:      ptr.String("__Namespace__"),
+				TableARN:       ptr.String("__TableARN__"),
+				Name:           ptr.String("__Name__"),
+				Type:           types.MigrationType("start"),
+				State:          types.MigrationState("new"),
+				HasValidPlan:   ptr.Bool(true),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StateUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				MigrationId:    ptr.String("__MigrationId__"),
+				TableBucketARN: ptr.String("__TableBucketARN__"),
+				Namespace:      ptr.String("__Namespace__"),
+				TableARN:       ptr.String("__TableARN__"),
+				Name:           ptr.String("__Name__"),
+				Type:           types.MigrationType("start"),
+				State:          types.MigrationState("new"),
+				HasValidPlan:   ptr.Bool(true),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StateUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTableMigrations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTableMigrations(context.Background(), &ListTableMigrationsInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		TableARN:       ptr.String("__TableARN__"),
+		State:          types.MigrationState("new"),
+		HasValidPlan:   ptr.Bool(true),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTableMigrations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTables(t *testing.T) {
 	want := &ListTablesOutput{
 		Tables: []types.TableSummary{
@@ -1300,6 +1510,38 @@ func TestCheckResponseSnapshot_PutTableBucketEncryption(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutTableBucketEncryption.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutTableBucketLogging(t *testing.T) {
+	want := &PutTableBucketLoggingOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutTableBucketLogging.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutTableBucketLogging(context.Background(), &PutTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		TableBucketLoggingStatus: &types.TableBucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutTableBucketLogging.response", err)
 	}
 }
 
@@ -1611,6 +1853,159 @@ func TestCheckResponseSnapshot_RenameTable(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartTableMigration(t *testing.T) {
+	want := &StartTableMigrationOutput{
+		MigrationId: ptr.String("__MigrationId__"),
+		State:       types.MigrationState("new"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartTableMigration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartTableMigration(context.Background(), &StartTableMigrationInput{
+		RoleARN: ptr.String("__RoleARN__"),
+		DestinationTable: &types.DestinationTable{
+			TableBucketARN: ptr.String("__TableBucketARN__"),
+			Namespace:      ptr.String("__Namespace__"),
+			Name:           ptr.String("__Name__"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				SseAlgorithm: types.SSEAlgorithm("AES256"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+			StorageClassConfiguration: &types.StorageClassConfiguration{
+				StorageClass: types.StorageClass("STANDARD"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Properties: &types.MigrationTableProperties{
+				WriteFormat:          types.DataFileFormat("parquet"),
+				IcebergFormatVersion: ptr.Int32(1),
+				CompressionCodec:     types.CompressionCodec("zstd"),
+				DictionaryEncoding:   ptr.Bool(true),
+			},
+			Schema: &types.IcebergSchemaV2{
+				Type: types.SchemaV2FieldType("struct"),
+				Fields: []types.SchemaV2Field{
+					{
+						Id:       ptr.Int32(1),
+						Name:     ptr.String("__Name__"),
+						Type:     document.NewLazyDocument("__Document__"),
+						Required: ptr.Bool(true),
+						Doc:      ptr.String("__Doc__"),
+					},
+					{
+						Id:       ptr.Int32(1),
+						Name:     ptr.String("__Name__"),
+						Type:     document.NewLazyDocument("__Document__"),
+						Required: ptr.Bool(true),
+						Doc:      ptr.String("__Doc__"),
+					},
+				},
+				SchemaId: ptr.Int32(1),
+				IdentifierFieldIds: []int32{
+					1,
+					1,
+				},
+			},
+			IcebergSortOrder: &types.IcebergSortOrder{
+				OrderId: ptr.Int32(1),
+				Fields: []types.IcebergSortField{
+					{
+						SourceId:  ptr.Int32(1),
+						Transform: ptr.String("__Transform__"),
+						Direction: types.IcebergSortDirection("asc"),
+						NullOrder: types.IcebergNullOrder("nulls-first"),
+					},
+					{
+						SourceId:  ptr.Int32(1),
+						Transform: ptr.String("__Transform__"),
+						Direction: types.IcebergSortDirection("asc"),
+						NullOrder: types.IcebergNullOrder("nulls-first"),
+					},
+				},
+			},
+		},
+		SourceType: types.MigrationSourceType("glueTable"),
+		Source: &types.SourceConfigurationMemberGlueTable{
+			Value: types.GlueTableSource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+			},
+		},
+		DataMigration: &types.DataMigrationSettings{
+			MaintenanceSettings: &types.MaintenanceSettings{
+				IcebergCompaction: &types.MigrationCompactionSettings{
+					TargetFileSizeMB: ptr.Int32(1),
+					Strategy:         types.IcebergCompactionStrategy("auto"),
+				},
+				IcebergSnapshotManagement: &types.MigrationSnapshotManagementSettings{
+					MinSnapshotsToKeep:  ptr.Int32(1),
+					MaxSnapshotAgeHours: ptr.Int32(1),
+				},
+			},
+			MigrationPolicies: &types.MigrationPolicies{
+				UnmatchedSourceFieldsPolicy: types.UnmatchedSourceFieldsPolicy("fail"),
+				IncompatibleValuesPolicy:    types.IncompatibleValuesPolicy("fail"),
+			},
+		},
+		ReviewMigrationPlan: true,
+		MigrationOutput: &types.MigrationOutputConfiguration{
+			Bucket: ptr.String("__Bucket__"),
+			Prefixes: &types.MigrationReportPrefixes{
+				TableCompatibilityReport:  ptr.String("__TableCompatibilityReport__"),
+				ObjectCompatibilityReport: ptr.String("__ObjectCompatibilityReport__"),
+				ObjectMigrationReport:     ptr.String("__ObjectMigrationReport__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartTableMigration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SyncTableMigration(t *testing.T) {
+	want := &SyncTableMigrationOutput{
+		MigrationId: ptr.String("__MigrationId__"),
+		State:       types.MigrationState("new"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SyncTableMigration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SyncTableMigration(context.Background(), &SyncTableMigrationInput{
+		RoleARN:             ptr.String("__RoleARN__"),
+		TableARN:            ptr.String("__TableARN__"),
+		ReviewMigrationPlan: true,
+		MigrationOutput: &types.MigrationOutputConfiguration{
+			Bucket: ptr.String("__Bucket__"),
+			Prefixes: &types.MigrationReportPrefixes{
+				TableCompatibilityReport:  ptr.String("__TableCompatibilityReport__"),
+				ObjectCompatibilityReport: ptr.String("__ObjectCompatibilityReport__"),
+				ObjectMigrationReport:     ptr.String("__ObjectMigrationReport__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SyncTableMigration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -1694,6 +2089,34 @@ func TestCheckResponseSnapshot_UpdateTableMetadataLocation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateTableMigration(t *testing.T) {
+	want := &UpdateTableMigrationOutput{
+		MigrationId: ptr.String("__MigrationId__"),
+		State:       types.MigrationState("new"),
+		TableARN:    ptr.String("__TableARN__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateTableMigration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateTableMigration(context.Background(), &UpdateTableMigrationInput{
+		TableARN:          ptr.String("__TableARN__"),
+		MigrationId:       ptr.String("__MigrationId__"),
+		RequestedState:    types.MigrationRequestedState("queued"),
+		UpdateDescription: ptr.String("__UpdateDescription__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateTableMigration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
@@ -1706,9 +2129,8 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTableBucketReplication(context.Background(), &DeleteTableBucketReplicationInput{
-		TableBucketARN: ptr.String("__TableBucketARN__"),
-		VersionToken:   ptr.String("__VersionToken__"),
+	_, opErr := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1734,12 +2156,8 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
-		TableBucketARN: ptr.String("__TableBucketARN__"),
-		Namespace: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1765,12 +2183,8 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
-		TableBucketARN: ptr.String("__TableBucketARN__"),
-		Namespace: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1796,12 +2210,8 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
-		TableBucketARN: ptr.String("__TableBucketARN__"),
-		Namespace: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1827,12 +2237,8 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
-		TableBucketARN: ptr.String("__TableBucketARN__"),
-		Namespace: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1885,12 +2291,8 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
-		TableBucketARN: ptr.String("__TableBucketARN__"),
-		Namespace: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1916,12 +2318,8 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
-		TableBucketARN: ptr.String("__TableBucketARN__"),
-		Namespace: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.CompleteTableMigration(context.Background(), &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

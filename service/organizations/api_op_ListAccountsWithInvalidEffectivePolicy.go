@@ -177,7 +177,9 @@ func (v *ListAccountsWithInvalidEffectivePolicyOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListAccountsWithInvalidEffectivePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccounts(s, schemas.ListAccountsWithInvalidEffectivePolicyResponse_Accounts, v.Accounts)
+	if v.Accounts != nil {
+		serializeAccounts(s, schemas.ListAccountsWithInvalidEffectivePolicyResponse_Accounts, v.Accounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountsWithInvalidEffectivePolicyResponse_NextToken, *v.NextToken)
 	}

@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/UpdateWorkspaceBundle
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.UpdateWorkspaceBundle
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"BundleId":"__BundleId__","ImageId":"__ImageId__"}
+¿hBundleIdl__BundleId__gImageIdk__ImageId__ÿ

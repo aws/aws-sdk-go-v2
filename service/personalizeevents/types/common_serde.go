@@ -7,9 +7,6 @@ import (
 )
 
 func serializeActionImpression(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeActionImpression(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeActionInteractionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ActionInteraction) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -31,9 +25,6 @@ func serializeActionInteractionsList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Action) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -44,9 +35,6 @@ func serializeActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Ac
 }
 
 func serializeEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Event) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Eve
 }
 
 func serializeImpression(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -68,9 +53,6 @@ func serializeImpression(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Item) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -81,9 +63,6 @@ func serializeItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Item
 }
 
 func serializeUserList(s smithy.ShapeSerializer, schema *smithy.Schema, v []User) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

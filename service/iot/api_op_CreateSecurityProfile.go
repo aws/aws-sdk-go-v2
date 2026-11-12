@@ -86,10 +86,18 @@ func (v *CreateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalMetricsToRetainList(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
-	serializeAdditionalMetricsToRetainV2List(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
-	serializeAlertTargets(s, schemas.CreateSecurityProfileRequest_alertTargets, v.AlertTargets)
-	serializeBehaviors(s, schemas.CreateSecurityProfileRequest_behaviors, v.Behaviors)
+	if v.AdditionalMetricsToRetain != nil {
+		serializeAdditionalMetricsToRetainList(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	}
+	if v.AdditionalMetricsToRetainV2 != nil {
+		serializeAdditionalMetricsToRetainV2List(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	}
+	if v.AlertTargets != nil {
+		serializeAlertTargets(s, schemas.CreateSecurityProfileRequest_alertTargets, v.AlertTargets)
+	}
+	if v.Behaviors != nil {
+		serializeBehaviors(s, schemas.CreateSecurityProfileRequest_behaviors, v.Behaviors)
+	}
 	if v.MetricsExportConfig != nil {
 		s.WriteStruct(schemas.CreateSecurityProfileRequest_metricsExportConfig)
 		v.MetricsExportConfig.SerializeMembers(s)
@@ -101,7 +109,9 @@ func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SecurityProfileName != nil {
 		s.WriteString(schemas.CreateSecurityProfileRequest_securityProfileName, *v.SecurityProfileName)
 	}
-	serializeTagList(s, schemas.CreateSecurityProfileRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSecurityProfileRequest_tags, v.Tags)
+	}
 }
 
 type CreateSecurityProfileOutput struct {

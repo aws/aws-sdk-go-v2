@@ -92,7 +92,9 @@ func (v *UpdateContactAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateContactAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.UpdateContactAttributesRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.UpdateContactAttributesRequest_Attributes, v.Attributes)
+	}
 	if v.InitialContactId != nil {
 		s.WriteString(schemas.UpdateContactAttributesRequest_InitialContactId, *v.InitialContactId)
 	}

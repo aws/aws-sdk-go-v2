@@ -856,6 +856,9 @@ type AmiAggregation struct {
 	// The IDs of AMIs to aggregate findings for.
 	Amis []StringFilter
 
+	// The scan sources to filter the aggregation results by.
+	ScanSources []ScanSource
+
 	// The value to sort results by.
 	SortBy AmiSortBy
 
@@ -872,7 +875,12 @@ func (v *AmiAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AmiAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.AmiAggregation_amis, v.Amis)
+	if v.Amis != nil {
+		serializeStringFilterList(s, schemas.AmiAggregation_amis, v.Amis)
+	}
+	if v.ScanSources != nil {
+		serializeScanSourceList(s, schemas.AmiAggregation_scanSources, v.ScanSources)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.AmiAggregation_sortBy, string(v.SortBy))
 	}
@@ -885,6 +893,8 @@ func (v *AmiAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.AmiAggregation_amis:
 			return deserializeStringFilterList(d, schemas.AmiAggregation_amis, &v.Amis)
+		case schemas.AmiAggregation_scanSources:
+			return deserializeScanSourceList(d, schemas.AmiAggregation_scanSources, &v.ScanSources)
 		case schemas.AmiAggregation_sortBy:
 			var ev string
 			if err := d.ReadString(schemas.AmiAggregation_sortBy, &ev); err != nil {
@@ -952,6 +962,10 @@ type AmiAggregationResponse struct {
 	//   - An Azure region, such as eastus .
 	CloudRegion *string
 
+	// The source of the scan that generated the findings for the Amazon Machine Image
+	// (AMI).
+	ScanSource ScanSource
+
 	// An object that contains the count of matched findings per severity.
 	SeverityCounts *SeverityCounts
 
@@ -988,6 +1002,9 @@ func (v *AmiAggregationResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CloudRegion != nil {
 		s.WriteString(schemas.AmiAggregationResponse_cloudRegion, *v.CloudRegion)
+	}
+	if v.ScanSource != "" {
+		s.WriteString(schemas.AmiAggregationResponse_scanSource, string(v.ScanSource))
 	}
 	if v.SeverityCounts != nil {
 		s.WriteStruct(schemas.AmiAggregationResponse_severityCounts)
@@ -1026,9 +1043,273 @@ func (v *AmiAggregationResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AmiAggregationResponse_cloudRegion:
 			v.CloudRegion = new(string)
 			return d.ReadString(schemas.AmiAggregationResponse_cloudRegion, v.CloudRegion)
+		case schemas.AmiAggregationResponse_scanSource:
+			var ev string
+			if err := d.ReadString(schemas.AmiAggregationResponse_scanSource, &ev); err != nil {
+				return err
+			}
+			v.ScanSource = ScanSource(ev)
+			return nil
 		case schemas.AmiAggregationResponse_severityCounts:
 			v.SeverityCounts = &SeverityCounts{}
 			return v.SeverityCounts.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration that controls how Amazon Machine Images (AMIs) are scanned
+// for an account.
+type AmiConfiguration struct {
+
+	// The scan mode configuration that determines which AMIs are scanned.
+	//
+	// This member is required.
+	ScanModeConfiguration *AmiScanModeConfiguration
+
+	// Restricts scanning to AMIs that were created within the specified duration.
+	CreatedWithin AmiScanDuration
+
+	// Restricts scanning to AMIs that were last launched within the specified
+	// duration.
+	LastLaunchedWithin AmiScanDuration
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedWithin != "" {
+		s.WriteString(schemas.AmiConfiguration_createdWithin, string(v.CreatedWithin))
+	}
+	if v.LastLaunchedWithin != "" {
+		s.WriteString(schemas.AmiConfiguration_lastLaunchedWithin, string(v.LastLaunchedWithin))
+	}
+	if v.ScanModeConfiguration != nil {
+		s.WriteStruct(schemas.AmiConfiguration_scanModeConfiguration)
+		v.ScanModeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmiConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiConfiguration_createdWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfiguration_createdWithin, &ev); err != nil {
+				return err
+			}
+			v.CreatedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfiguration_lastLaunchedWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfiguration_lastLaunchedWithin, &ev); err != nil {
+				return err
+			}
+			v.LastLaunchedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfiguration_scanModeConfiguration:
+			v.ScanModeConfiguration = &AmiScanModeConfiguration{}
+			return v.ScanModeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The current state of the Amazon Machine Image (AMI) scan configuration for an
+// account.
+type AmiConfigurationState struct {
+
+	// Restricts scanning to AMIs that were created within the specified duration.
+	CreatedWithin AmiScanDuration
+
+	// Restricts scanning to AMIs that were last launched within the specified
+	// duration.
+	LastLaunchedWithin AmiScanDuration
+
+	// The scan mode configuration that determines which AMIs are scanned.
+	ScanModeConfiguration *AmiScanModeConfiguration
+
+	// The status of the AMI scan configuration.
+	Status AmiConfigurationStatus
+
+	// The date and time when the AMI scan configuration was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiConfigurationState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiConfigurationState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiConfigurationState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedWithin != "" {
+		s.WriteString(schemas.AmiConfigurationState_createdWithin, string(v.CreatedWithin))
+	}
+	if v.LastLaunchedWithin != "" {
+		s.WriteString(schemas.AmiConfigurationState_lastLaunchedWithin, string(v.LastLaunchedWithin))
+	}
+	if v.ScanModeConfiguration != nil {
+		s.WriteStruct(schemas.AmiConfigurationState_scanModeConfiguration)
+		v.ScanModeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AmiConfigurationState_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AmiConfigurationState_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AmiConfigurationState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiConfigurationState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiConfigurationState_createdWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfigurationState_createdWithin, &ev); err != nil {
+				return err
+			}
+			v.CreatedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfigurationState_lastLaunchedWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfigurationState_lastLaunchedWithin, &ev); err != nil {
+				return err
+			}
+			v.LastLaunchedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfigurationState_scanModeConfiguration:
+			v.ScanModeConfiguration = &AmiScanModeConfiguration{}
+			return v.ScanModeConfiguration.Deserialize(d)
+		case schemas.AmiConfigurationState_status:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfigurationState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AmiConfigurationStatus(ev)
+			return nil
+		case schemas.AmiConfigurationState_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AmiConfigurationState_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The scan mode configuration that determines which Amazon Machine Images (AMIs)
+// are scanned.
+type AmiScanModeConfiguration struct {
+
+	// The scan mode that determines whether all AMIs are scanned or only those
+	// matching the specified tags.
+	//
+	// This member is required.
+	ScanMode AmiScanMode
+
+	// Whether to exclude AMIs created by Amazon Data Lifecycle Manager (DLM) backups
+	// from scanning.
+	ExcludeBackupDlmAmis *bool
+
+	// Whether to exclude AMIs that are copies of other AMIs from scanning.
+	ExcludeCopiedAmis *bool
+
+	// The tag filters used to select which AMIs are scanned when using targeted
+	// scanning.
+	Tags []AmiTagFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiScanModeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiScanModeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiScanModeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExcludeBackupDlmAmis != nil {
+		s.WriteBool(schemas.AmiScanModeConfiguration_excludeBackupDlmAmis, *v.ExcludeBackupDlmAmis)
+	}
+	if v.ExcludeCopiedAmis != nil {
+		s.WriteBool(schemas.AmiScanModeConfiguration_excludeCopiedAmis, *v.ExcludeCopiedAmis)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.AmiScanModeConfiguration_scanMode, string(v.ScanMode))
+	}
+	if v.Tags != nil {
+		serializeAmiTagFilterList(s, schemas.AmiScanModeConfiguration_tags, v.Tags)
+	}
+}
+func (v *AmiScanModeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiScanModeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiScanModeConfiguration_excludeBackupDlmAmis:
+			v.ExcludeBackupDlmAmis = new(bool)
+			return d.ReadBool(schemas.AmiScanModeConfiguration_excludeBackupDlmAmis, v.ExcludeBackupDlmAmis)
+		case schemas.AmiScanModeConfiguration_excludeCopiedAmis:
+			v.ExcludeCopiedAmis = new(bool)
+			return d.ReadBool(schemas.AmiScanModeConfiguration_excludeCopiedAmis, v.ExcludeCopiedAmis)
+		case schemas.AmiScanModeConfiguration_scanMode:
+			var ev string
+			if err := d.ReadString(schemas.AmiScanModeConfiguration_scanMode, &ev); err != nil {
+				return err
+			}
+			v.ScanMode = AmiScanMode(ev)
+			return nil
+		case schemas.AmiScanModeConfiguration_tags:
+			return deserializeAmiTagFilterList(d, schemas.AmiScanModeConfiguration_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// A filter that matches Amazon Machine Images (AMIs) by tag key and, optionally,
+// tag value.
+type AmiTagFilter struct {
+
+	// The tag key to match against an AMI's tags.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag value to match against an AMI's tags. If omitted, the filter matches on
+	// the tag key alone.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiTagFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiTagFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiTagFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.AmiTagFilter_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AmiTagFilter_value, *v.Value)
+	}
+}
+func (v *AmiTagFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiTagFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiTagFilter_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.AmiTagFilter_key, v.Key)
+		case schemas.AmiTagFilter_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AmiTagFilter_value, v.Value)
 		}
 		return nil
 	})
@@ -1058,7 +1339,9 @@ func (v *AssociateConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityResource(s, schemas.AssociateConfigurationRequest_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.AssociateConfigurationRequest_resource, v.Resource)
+	}
 	if v.ScanConfigurationArn != nil {
 		s.WriteString(schemas.AssociateConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
 	}
@@ -1110,8 +1393,12 @@ func (v *AtigData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastSeen != nil {
 		s.WriteTime(schemas.AtigData_lastSeen, *v.LastSeen)
 	}
-	serializeTargets(s, schemas.AtigData_targets, v.Targets)
-	serializeTtps(s, schemas.AtigData_ttps, v.Ttps)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.AtigData_targets, v.Targets)
+	}
+	if v.Ttps != nil {
+		serializeTtps(s, schemas.AtigData_ttps, v.Ttps)
+	}
 }
 func (v *AtigData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AtigData, func(s *smithy.Schema) error {
@@ -1147,6 +1434,10 @@ type AutoEnable struct {
 	// This member is required.
 	Ecr *bool
 
+	// Represents whether Amazon Machine Image (AMI) scans are automatically enabled
+	// for new members of your Amazon Inspector organization.
+	Ami *bool
+
 	// Represents whether code repository scans are automatically enabled for new
 	// members of your Amazon Inspector organization.
 	CodeRepository *bool
@@ -1169,6 +1460,9 @@ func (v *AutoEnable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutoEnable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ami != nil {
+		s.WriteBool(schemas.AutoEnable_ami, *v.Ami)
+	}
 	if v.CodeRepository != nil {
 		s.WriteBool(schemas.AutoEnable_codeRepository, *v.CodeRepository)
 	}
@@ -1188,6 +1482,9 @@ func (v *AutoEnable) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *AutoEnable) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoEnable, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AutoEnable_ami:
+			v.Ami = new(bool)
+			return d.ReadBool(schemas.AutoEnable_ami, v.Ami)
 		case schemas.AutoEnable_codeRepository:
 			v.CodeRepository = new(bool)
 			return d.ReadBool(schemas.AutoEnable_codeRepository, v.CodeRepository)
@@ -1306,8 +1603,12 @@ func (v *AwsEc2InstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageId != nil {
 		s.WriteString(schemas.AwsEc2InstanceDetails_imageId, *v.ImageId)
 	}
-	serializeIpV4AddressList(s, schemas.AwsEc2InstanceDetails_ipV4Addresses, v.IpV4Addresses)
-	serializeIpV6AddressList(s, schemas.AwsEc2InstanceDetails_ipV6Addresses, v.IpV6Addresses)
+	if v.IpV4Addresses != nil {
+		serializeIpV4AddressList(s, schemas.AwsEc2InstanceDetails_ipV4Addresses, v.IpV4Addresses)
+	}
+	if v.IpV6Addresses != nil {
+		serializeIpV6AddressList(s, schemas.AwsEc2InstanceDetails_ipV6Addresses, v.IpV6Addresses)
+	}
 	if v.KeyName != nil {
 		s.WriteString(schemas.AwsEc2InstanceDetails_keyName, *v.KeyName)
 	}
@@ -1405,13 +1706,27 @@ func (v *AwsEcrContainerAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AwsEcrContainerAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_architectures, v.Architectures)
-	serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_imageShas, v.ImageShas)
-	serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_imageTags, v.ImageTags)
-	serializeNumberFilterList(s, schemas.AwsEcrContainerAggregation_inUseCount, v.InUseCount)
-	serializeDateFilterList(s, schemas.AwsEcrContainerAggregation_lastInUseAt, v.LastInUseAt)
-	serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_repositories, v.Repositories)
-	serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_resourceIds, v.ResourceIds)
+	if v.Architectures != nil {
+		serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_architectures, v.Architectures)
+	}
+	if v.ImageShas != nil {
+		serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_imageShas, v.ImageShas)
+	}
+	if v.ImageTags != nil {
+		serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_imageTags, v.ImageTags)
+	}
+	if v.InUseCount != nil {
+		serializeNumberFilterList(s, schemas.AwsEcrContainerAggregation_inUseCount, v.InUseCount)
+	}
+	if v.LastInUseAt != nil {
+		serializeDateFilterList(s, schemas.AwsEcrContainerAggregation_lastInUseAt, v.LastInUseAt)
+	}
+	if v.Repositories != nil {
+		serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_repositories, v.Repositories)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.AwsEcrContainerAggregation_resourceIds, v.ResourceIds)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.AwsEcrContainerAggregation_sortBy, string(v.SortBy))
 	}
@@ -1508,7 +1823,9 @@ func (v *AwsEcrContainerAggregationResponse) SerializeMembers(s smithy.ShapeSeri
 	if v.ImageSha != nil {
 		s.WriteString(schemas.AwsEcrContainerAggregationResponse_imageSha, *v.ImageSha)
 	}
-	serializeStringList(s, schemas.AwsEcrContainerAggregationResponse_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeStringList(s, schemas.AwsEcrContainerAggregationResponse_imageTags, v.ImageTags)
+	}
 	if v.InUseCount != nil {
 		s.WriteInt64(schemas.AwsEcrContainerAggregationResponse_inUseCount, *v.InUseCount)
 	}
@@ -1621,7 +1938,9 @@ func (v *AwsEcrContainerImageDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ImageHash != nil {
 		s.WriteString(schemas.AwsEcrContainerImageDetails_imageHash, *v.ImageHash)
 	}
-	serializeImageTagList(s, schemas.AwsEcrContainerImageDetails_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeImageTagList(s, schemas.AwsEcrContainerImageDetails_imageTags, v.ImageTags)
+	}
 	if v.InUseCount != nil {
 		s.WriteInt64(schemas.AwsEcrContainerImageDetails_inUseCount, *v.InUseCount)
 	}
@@ -1744,7 +2063,9 @@ func (v *AwsEksMetadataDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Namespace != nil {
 		s.WriteString(schemas.AwsEksMetadataDetails_namespace, *v.Namespace)
 	}
-	serializeAwsEksWorkloadInfoList(s, schemas.AwsEksMetadataDetails_workloadInfoList, v.WorkloadInfoList)
+	if v.WorkloadInfoList != nil {
+		serializeAwsEksWorkloadInfoList(s, schemas.AwsEksMetadataDetails_workloadInfoList, v.WorkloadInfoList)
+	}
 }
 func (v *AwsEksMetadataDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsEksMetadataDetails, func(s *smithy.Schema) error {
@@ -1864,7 +2185,9 @@ func (v *AwsLambdaFunctionDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AwsLambdaFunctionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchitectureList(s, schemas.AwsLambdaFunctionDetails_architectures, v.Architectures)
+	if v.Architectures != nil {
+		serializeArchitectureList(s, schemas.AwsLambdaFunctionDetails_architectures, v.Architectures)
+	}
 	if v.CodeSha256 != nil {
 		s.WriteString(schemas.AwsLambdaFunctionDetails_codeSha256, *v.CodeSha256)
 	}
@@ -1877,7 +2200,9 @@ func (v *AwsLambdaFunctionDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.AwsLambdaFunctionDetails_lastModifiedAt, *v.LastModifiedAt)
 	}
-	serializeLayerList(s, schemas.AwsLambdaFunctionDetails_layers, v.Layers)
+	if v.Layers != nil {
+		serializeLayerList(s, schemas.AwsLambdaFunctionDetails_layers, v.Layers)
+	}
 	if v.PackageType != "" {
 		s.WriteString(schemas.AwsLambdaFunctionDetails_packageType, string(v.PackageType))
 	}
@@ -1978,7 +2303,9 @@ func (v *AzureProviderDetailCreate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsConfigConnectorArn != nil {
 		s.WriteString(schemas.AzureProviderDetailCreate_awsConfigConnectorArn, *v.AwsConfigConnectorArn)
 	}
-	serializeAzureRegionList(s, schemas.AzureProviderDetailCreate_azureRegions, v.AzureRegions)
+	if v.AzureRegions != nil {
+		serializeAzureRegionList(s, schemas.AzureProviderDetailCreate_azureRegions, v.AzureRegions)
+	}
 	if v.ScopeConfiguration != nil {
 		s.WriteStruct(schemas.AzureProviderDetailCreate_scopeConfiguration)
 		v.ScopeConfiguration.SerializeMembers(s)
@@ -2031,7 +2358,9 @@ func (v *AzureProviderDetailUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutoInstallVMScanner != nil {
 		s.WriteBool(schemas.AzureProviderDetailUpdate_autoInstallVMScanner, *v.AutoInstallVMScanner)
 	}
-	serializeAzureRegionList(s, schemas.AzureProviderDetailUpdate_azureRegions, v.AzureRegions)
+	if v.AzureRegions != nil {
+		serializeAzureRegionList(s, schemas.AzureProviderDetailUpdate_azureRegions, v.AzureRegions)
+	}
 	if v.ScopeConfiguration != nil {
 		s.WriteStruct(schemas.AzureProviderDetailUpdate_scopeConfiguration)
 		v.ScopeConfiguration.SerializeMembers(s)
@@ -2676,11 +3005,15 @@ func (v *CisScanConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScanName != nil {
 		s.WriteString(schemas.CisScanConfiguration_scanName, *v.ScanName)
 	}
-	serializeSchedule(s, schemas.CisScanConfiguration_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeSchedule(s, schemas.CisScanConfiguration_schedule, v.Schedule)
+	}
 	if v.SecurityLevel != "" {
 		s.WriteString(schemas.CisScanConfiguration_securityLevel, string(v.SecurityLevel))
 	}
-	serializeCisTagMap(s, schemas.CisScanConfiguration_tags, v.Tags)
+	if v.Tags != nil {
+		serializeCisTagMap(s, schemas.CisScanConfiguration_tags, v.Tags)
+	}
 	if v.Targets != nil {
 		s.WriteStruct(schemas.CisScanConfiguration_targets)
 		v.Targets.SerializeMembers(s)
@@ -2887,11 +3220,21 @@ func (v *CisScanResultDetailsFilterCriteria) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CisScanResultDetailsFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCheckIdFilterList(s, schemas.CisScanResultDetailsFilterCriteria_checkIdFilters, v.CheckIdFilters)
-	serializeCisFindingArnFilterList(s, schemas.CisScanResultDetailsFilterCriteria_findingArnFilters, v.FindingArnFilters)
-	serializeCisFindingStatusFilterList(s, schemas.CisScanResultDetailsFilterCriteria_findingStatusFilters, v.FindingStatusFilters)
-	serializeCisSecurityLevelFilterList(s, schemas.CisScanResultDetailsFilterCriteria_securityLevelFilters, v.SecurityLevelFilters)
-	serializeTitleFilterList(s, schemas.CisScanResultDetailsFilterCriteria_titleFilters, v.TitleFilters)
+	if v.CheckIdFilters != nil {
+		serializeCheckIdFilterList(s, schemas.CisScanResultDetailsFilterCriteria_checkIdFilters, v.CheckIdFilters)
+	}
+	if v.FindingArnFilters != nil {
+		serializeCisFindingArnFilterList(s, schemas.CisScanResultDetailsFilterCriteria_findingArnFilters, v.FindingArnFilters)
+	}
+	if v.FindingStatusFilters != nil {
+		serializeCisFindingStatusFilterList(s, schemas.CisScanResultDetailsFilterCriteria_findingStatusFilters, v.FindingStatusFilters)
+	}
+	if v.SecurityLevelFilters != nil {
+		serializeCisSecurityLevelFilterList(s, schemas.CisScanResultDetailsFilterCriteria_securityLevelFilters, v.SecurityLevelFilters)
+	}
+	if v.TitleFilters != nil {
+		serializeTitleFilterList(s, schemas.CisScanResultDetailsFilterCriteria_titleFilters, v.TitleFilters)
+	}
 }
 func (v *CisScanResultDetailsFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CisScanResultDetailsFilterCriteria, func(s *smithy.Schema) error {
@@ -2942,12 +3285,24 @@ func (v *CisScanResultsAggregatedByChecksFilterCriteria) Serialize(s smithy.Shap
 }
 
 func (v *CisScanResultsAggregatedByChecksFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneAccountIdFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_accountIdFilters, v.AccountIdFilters)
-	serializeCheckIdFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_checkIdFilters, v.CheckIdFilters)
-	serializeCisNumberFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_failedResourcesFilters, v.FailedResourcesFilters)
-	serializePlatformFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_platformFilters, v.PlatformFilters)
-	serializeCisSecurityLevelFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_securityLevelFilters, v.SecurityLevelFilters)
-	serializeTitleFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_titleFilters, v.TitleFilters)
+	if v.AccountIdFilters != nil {
+		serializeOneAccountIdFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_accountIdFilters, v.AccountIdFilters)
+	}
+	if v.CheckIdFilters != nil {
+		serializeCheckIdFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_checkIdFilters, v.CheckIdFilters)
+	}
+	if v.FailedResourcesFilters != nil {
+		serializeCisNumberFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_failedResourcesFilters, v.FailedResourcesFilters)
+	}
+	if v.PlatformFilters != nil {
+		serializePlatformFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_platformFilters, v.PlatformFilters)
+	}
+	if v.SecurityLevelFilters != nil {
+		serializeCisSecurityLevelFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_securityLevelFilters, v.SecurityLevelFilters)
+	}
+	if v.TitleFilters != nil {
+		serializeTitleFilterList(s, schemas.CisScanResultsAggregatedByChecksFilterCriteria_titleFilters, v.TitleFilters)
+	}
 }
 func (v *CisScanResultsAggregatedByChecksFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CisScanResultsAggregatedByChecksFilterCriteria, func(s *smithy.Schema) error {
@@ -3009,15 +3364,33 @@ func (v *CisScanResultsAggregatedByTargetResourceFilterCriteria) Serialize(s smi
 }
 
 func (v *CisScanResultsAggregatedByTargetResourceFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_accountIdFilters, v.AccountIdFilters)
-	serializeCheckIdFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_checkIdFilters, v.CheckIdFilters)
-	serializeCisNumberFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_failedChecksFilters, v.FailedChecksFilters)
-	serializePlatformFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_platformFilters, v.PlatformFilters)
-	serializeCisResultStatusFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_statusFilters, v.StatusFilters)
-	serializeResourceIdFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetResourceIdFilters, v.TargetResourceIdFilters)
-	serializeResourceTagFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetResourceTagFilters, v.TargetResourceTagFilters)
-	serializeTargetStatusFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetStatusFilters, v.TargetStatusFilters)
-	serializeTargetStatusReasonFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetStatusReasonFilters, v.TargetStatusReasonFilters)
+	if v.AccountIdFilters != nil {
+		serializeAccountIdFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_accountIdFilters, v.AccountIdFilters)
+	}
+	if v.CheckIdFilters != nil {
+		serializeCheckIdFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_checkIdFilters, v.CheckIdFilters)
+	}
+	if v.FailedChecksFilters != nil {
+		serializeCisNumberFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_failedChecksFilters, v.FailedChecksFilters)
+	}
+	if v.PlatformFilters != nil {
+		serializePlatformFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_platformFilters, v.PlatformFilters)
+	}
+	if v.StatusFilters != nil {
+		serializeCisResultStatusFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_statusFilters, v.StatusFilters)
+	}
+	if v.TargetResourceIdFilters != nil {
+		serializeResourceIdFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetResourceIdFilters, v.TargetResourceIdFilters)
+	}
+	if v.TargetResourceTagFilters != nil {
+		serializeResourceTagFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetResourceTagFilters, v.TargetResourceTagFilters)
+	}
+	if v.TargetStatusFilters != nil {
+		serializeTargetStatusFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetStatusFilters, v.TargetStatusFilters)
+	}
+	if v.TargetStatusReasonFilters != nil {
+		serializeTargetStatusReasonFilterList(s, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria_targetStatusReasonFilters, v.TargetStatusReasonFilters)
+	}
 }
 func (v *CisScanResultsAggregatedByTargetResourceFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CisScanResultsAggregatedByTargetResourceFilterCriteria, func(s *smithy.Schema) error {
@@ -3313,7 +3686,9 @@ func (v *CisTargetResourceAggregation) SerializeMembers(s smithy.ShapeSerializer
 	if v.TargetResourceId != nil {
 		s.WriteString(schemas.CisTargetResourceAggregation_targetResourceId, *v.TargetResourceId)
 	}
-	serializeTargetResourceTags(s, schemas.CisTargetResourceAggregation_targetResourceTags, v.TargetResourceTags)
+	if v.TargetResourceTags != nil {
+		serializeTargetResourceTags(s, schemas.CisTargetResourceAggregation_targetResourceTags, v.TargetResourceTags)
+	}
 	if v.TargetStatus != "" {
 		s.WriteString(schemas.CisTargetResourceAggregation_targetStatus, string(v.TargetStatus))
 	}
@@ -3379,8 +3754,12 @@ func (v *CisTargets) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CisTargets) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCisAccountIdList(s, schemas.CisTargets_accountIds, v.AccountIds)
-	serializeTargetResourceTags(s, schemas.CisTargets_targetResourceTags, v.TargetResourceTags)
+	if v.AccountIds != nil {
+		serializeCisAccountIdList(s, schemas.CisTargets_accountIds, v.AccountIds)
+	}
+	if v.TargetResourceTags != nil {
+		serializeTargetResourceTags(s, schemas.CisTargets_targetResourceTags, v.TargetResourceTags)
+	}
 }
 func (v *CisTargets) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CisTargets, func(s *smithy.Schema) error {
@@ -3529,7 +3908,9 @@ func (v *ClusterDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClusterDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterMetadata(s, schemas.ClusterDetails_clusterMetadata, v.ClusterMetadata)
+	if v.ClusterMetadata != nil {
+		serializeClusterMetadata(s, schemas.ClusterDetails_clusterMetadata, v.ClusterMetadata)
+	}
 	if v.LastInUse != nil {
 		s.WriteTime(schemas.ClusterDetails_lastInUse, *v.LastInUse)
 	}
@@ -3616,7 +3997,9 @@ func (v *ClusterInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.ClusterInformation_clusterArn, *v.ClusterArn)
 	}
-	serializeClusterDetailsList(s, schemas.ClusterInformation_clusterDetails, v.ClusterDetails)
+	if v.ClusterDetails != nil {
+		serializeClusterDetailsList(s, schemas.ClusterInformation_clusterDetails, v.ClusterDetails)
+	}
 }
 func (v *ClusterInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterInformation, func(s *smithy.Schema) error {
@@ -3815,9 +4198,15 @@ func (v *CodeRepositoryAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CodeRepositoryAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.CodeRepositoryAggregation_projectNames, v.ProjectNames)
-	serializeStringFilterList(s, schemas.CodeRepositoryAggregation_providerTypes, v.ProviderTypes)
-	serializeStringFilterList(s, schemas.CodeRepositoryAggregation_resourceIds, v.ResourceIds)
+	if v.ProjectNames != nil {
+		serializeStringFilterList(s, schemas.CodeRepositoryAggregation_projectNames, v.ProjectNames)
+	}
+	if v.ProviderTypes != nil {
+		serializeStringFilterList(s, schemas.CodeRepositoryAggregation_providerTypes, v.ProviderTypes)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.CodeRepositoryAggregation_resourceIds, v.ResourceIds)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.CodeRepositoryAggregation_sortBy, string(v.SortBy))
 	}
@@ -4312,7 +4701,9 @@ func (v *CodeSecurityScanConfiguration) SerializeMembers(s smithy.ShapeSerialize
 		v.PeriodicScanConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleSetCategories(s, schemas.CodeSecurityScanConfiguration_ruleSetCategories, v.RuleSetCategories)
+	if v.RuleSetCategories != nil {
+		serializeRuleSetCategories(s, schemas.CodeSecurityScanConfiguration_ruleSetCategories, v.RuleSetCategories)
+	}
 }
 func (v *CodeSecurityScanConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CodeSecurityScanConfiguration, func(s *smithy.Schema) error {
@@ -4346,7 +4737,9 @@ func (v *CodeSecurityScanConfigurationAssociationSummary) Serialize(s smithy.Sha
 }
 
 func (v *CodeSecurityScanConfigurationAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityResource(s, schemas.CodeSecurityScanConfigurationAssociationSummary_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.CodeSecurityScanConfigurationAssociationSummary_resource, v.Resource)
+	}
 }
 func (v *CodeSecurityScanConfigurationAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CodeSecurityScanConfigurationAssociationSummary, func(s *smithy.Schema) error {
@@ -4405,7 +4798,9 @@ func (v *CodeSecurityScanConfigurationSummary) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *CodeSecurityScanConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContinuousIntegrationScanSupportedEvents(s, schemas.CodeSecurityScanConfigurationSummary_continuousIntegrationScanSupportedEvents, v.ContinuousIntegrationScanSupportedEvents)
+	if v.ContinuousIntegrationScanSupportedEvents != nil {
+		serializeContinuousIntegrationScanSupportedEvents(s, schemas.CodeSecurityScanConfigurationSummary_continuousIntegrationScanSupportedEvents, v.ContinuousIntegrationScanSupportedEvents)
+	}
 	if v.FrequencyExpression != nil {
 		s.WriteString(schemas.CodeSecurityScanConfigurationSummary_frequencyExpression, *v.FrequencyExpression)
 	}
@@ -4418,7 +4813,9 @@ func (v *CodeSecurityScanConfigurationSummary) SerializeMembers(s smithy.ShapeSe
 	if v.PeriodicScanFrequency != "" {
 		s.WriteString(schemas.CodeSecurityScanConfigurationSummary_periodicScanFrequency, string(v.PeriodicScanFrequency))
 	}
-	serializeRuleSetCategories(s, schemas.CodeSecurityScanConfigurationSummary_ruleSetCategories, v.RuleSetCategories)
+	if v.RuleSetCategories != nil {
+		serializeRuleSetCategories(s, schemas.CodeSecurityScanConfigurationSummary_ruleSetCategories, v.RuleSetCategories)
+	}
 	if v.ScanConfigurationArn != nil {
 		s.WriteString(schemas.CodeSecurityScanConfigurationSummary_scanConfigurationArn, *v.ScanConfigurationArn)
 	}
@@ -4552,7 +4949,9 @@ func (v *CodeSnippetResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CodeSnippetResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeLineList(s, schemas.CodeSnippetResult_codeSnippet, v.CodeSnippet)
+	if v.CodeSnippet != nil {
+		serializeCodeLineList(s, schemas.CodeSnippetResult_codeSnippet, v.CodeSnippet)
+	}
 	if v.EndLine != nil {
 		s.WriteInt32(schemas.CodeSnippetResult_endLine, *v.EndLine)
 	}
@@ -4562,7 +4961,9 @@ func (v *CodeSnippetResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartLine != nil {
 		s.WriteInt32(schemas.CodeSnippetResult_startLine, *v.StartLine)
 	}
-	serializeSuggestedFixes(s, schemas.CodeSnippetResult_suggestedFixes, v.SuggestedFixes)
+	if v.SuggestedFixes != nil {
+		serializeSuggestedFixes(s, schemas.CodeSnippetResult_suggestedFixes, v.SuggestedFixes)
+	}
 }
 func (v *CodeSnippetResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CodeSnippetResult, func(s *smithy.Schema) error {
@@ -4644,20 +5045,26 @@ func (v *CodeVulnerabilityDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CodeVulnerabilityDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCweList(s, schemas.CodeVulnerabilityDetails_cwes, v.Cwes)
+	if v.Cwes != nil {
+		serializeCweList(s, schemas.CodeVulnerabilityDetails_cwes, v.Cwes)
+	}
 	if v.DetectorId != nil {
 		s.WriteString(schemas.CodeVulnerabilityDetails_detectorId, *v.DetectorId)
 	}
 	if v.DetectorName != nil {
 		s.WriteString(schemas.CodeVulnerabilityDetails_detectorName, *v.DetectorName)
 	}
-	serializeDetectorTagList(s, schemas.CodeVulnerabilityDetails_detectorTags, v.DetectorTags)
+	if v.DetectorTags != nil {
+		serializeDetectorTagList(s, schemas.CodeVulnerabilityDetails_detectorTags, v.DetectorTags)
+	}
 	if v.FilePath != nil {
 		s.WriteStruct(schemas.CodeVulnerabilityDetails_filePath)
 		v.FilePath.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReferenceUrls(s, schemas.CodeVulnerabilityDetails_referenceUrls, v.ReferenceUrls)
+	if v.ReferenceUrls != nil {
+		serializeReferenceUrls(s, schemas.CodeVulnerabilityDetails_referenceUrls, v.ReferenceUrls)
+	}
 	if v.RuleId != nil {
 		s.WriteString(schemas.CodeVulnerabilityDetails_ruleId, *v.RuleId)
 	}
@@ -4817,7 +5224,9 @@ func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsConfigConnectorArn != nil {
 		s.WriteString(schemas.Connector_awsConfigConnectorArn, *v.AwsConfigConnectorArn)
 	}
-	serializeAzureRegionList(s, schemas.Connector_azureRegions, v.AzureRegions)
+	if v.AzureRegions != nil {
+		serializeAzureRegionList(s, schemas.Connector_azureRegions, v.AzureRegions)
+	}
 	if v.ConnectorArn != nil {
 		s.WriteString(schemas.Connector_connectorArn, *v.ConnectorArn)
 	}
@@ -4849,7 +5258,9 @@ func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScopeConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectorTagMap(s, schemas.Connector_tags, v.Tags)
+	if v.Tags != nil {
+		serializeConnectorTagMap(s, schemas.Connector_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Connector_updatedAt, *v.UpdatedAt)
 	}
@@ -5044,11 +5455,21 @@ func (v *ConnectorFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectorFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.ConnectorFilterCriteria_accounts, v.Accounts)
-	serializeAwsConfigConnectorArnFilterList(s, schemas.ConnectorFilterCriteria_awsConfigConnectorArns, v.AwsConfigConnectorArns)
-	serializeConnectorArnFilterList(s, schemas.ConnectorFilterCriteria_connectorArns, v.ConnectorArns)
-	serializeConnectorTypeFilterList(s, schemas.ConnectorFilterCriteria_connectorType, v.ConnectorType)
-	serializeProviderFilterList(s, schemas.ConnectorFilterCriteria_provider, v.Provider)
+	if v.Accounts != nil {
+		serializeStringFilterList(s, schemas.ConnectorFilterCriteria_accounts, v.Accounts)
+	}
+	if v.AwsConfigConnectorArns != nil {
+		serializeAwsConfigConnectorArnFilterList(s, schemas.ConnectorFilterCriteria_awsConfigConnectorArns, v.AwsConfigConnectorArns)
+	}
+	if v.ConnectorArns != nil {
+		serializeConnectorArnFilterList(s, schemas.ConnectorFilterCriteria_connectorArns, v.ConnectorArns)
+	}
+	if v.ConnectorType != nil {
+		serializeConnectorTypeFilterList(s, schemas.ConnectorFilterCriteria_connectorType, v.ConnectorType)
+	}
+	if v.Provider != nil {
+		serializeProviderFilterList(s, schemas.ConnectorFilterCriteria_provider, v.Provider)
+	}
 }
 func (v *ConnectorFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectorFilterCriteria, func(s *smithy.Schema) error {
@@ -5195,7 +5616,9 @@ func (v *ConnectorScanConfigurationItem) SerializeMembers(s smithy.ShapeSerializ
 	if v.AwsConfigConnectorArn != nil {
 		s.WriteString(schemas.ConnectorScanConfigurationItem_awsConfigConnectorArn, *v.AwsConfigConnectorArn)
 	}
-	serializeConnectorArnList(s, schemas.ConnectorScanConfigurationItem_connectorArns, v.ConnectorArns)
+	if v.ConnectorArns != nil {
+		serializeConnectorArnList(s, schemas.ConnectorScanConfigurationItem_connectorArns, v.ConnectorArns)
+	}
 	if v.ScanConfiguration != nil {
 		s.WriteStruct(schemas.ConnectorScanConfigurationItem_scanConfiguration)
 		v.ScanConfiguration.SerializeMembers(s)
@@ -5346,19 +5769,45 @@ func (v *ContainerImageAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerImageAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_architectures, v.Architectures)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudAccountIds, v.CloudAccountIds)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudOrgIds, v.CloudOrgIds)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudPartitions, v.CloudPartitions)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudProviders, v.CloudProviders)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudRegions, v.CloudRegions)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_imageDigests, v.ImageDigests)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_imageTags, v.ImageTags)
-	serializeNumberFilterList(s, schemas.ContainerImageAggregation_inUseCount, v.InUseCount)
-	serializeDateFilterList(s, schemas.ContainerImageAggregation_lastInUseAt, v.LastInUseAt)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_registries, v.Registries)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_repositories, v.Repositories)
-	serializeStringFilterList(s, schemas.ContainerImageAggregation_resourceIds, v.ResourceIds)
+	if v.Architectures != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_architectures, v.Architectures)
+	}
+	if v.CloudAccountIds != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudAccountIds, v.CloudAccountIds)
+	}
+	if v.CloudOrgIds != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudOrgIds, v.CloudOrgIds)
+	}
+	if v.CloudPartitions != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudPartitions, v.CloudPartitions)
+	}
+	if v.CloudProviders != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudProviders, v.CloudProviders)
+	}
+	if v.CloudRegions != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_cloudRegions, v.CloudRegions)
+	}
+	if v.ImageDigests != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_imageDigests, v.ImageDigests)
+	}
+	if v.ImageTags != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_imageTags, v.ImageTags)
+	}
+	if v.InUseCount != nil {
+		serializeNumberFilterList(s, schemas.ContainerImageAggregation_inUseCount, v.InUseCount)
+	}
+	if v.LastInUseAt != nil {
+		serializeDateFilterList(s, schemas.ContainerImageAggregation_lastInUseAt, v.LastInUseAt)
+	}
+	if v.Registries != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_registries, v.Registries)
+	}
+	if v.Repositories != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_repositories, v.Repositories)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.ContainerImageAggregation_resourceIds, v.ResourceIds)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.ContainerImageAggregation_sortBy, string(v.SortBy))
 	}
@@ -5529,7 +5978,9 @@ func (v *ContainerImageAggregationResponse) SerializeMembers(s smithy.ShapeSeria
 	if v.ImageDigest != nil {
 		s.WriteString(schemas.ContainerImageAggregationResponse_imageDigest, *v.ImageDigest)
 	}
-	serializeStringList(s, schemas.ContainerImageAggregationResponse_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeStringList(s, schemas.ContainerImageAggregationResponse_imageTags, v.ImageTags)
+	}
 	if v.InUseCount != nil {
 		s.WriteInt64(schemas.ContainerImageAggregationResponse_inUseCount, *v.InUseCount)
 	}
@@ -5641,7 +6092,9 @@ func (v *ContainerImageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImagePulledAt != nil {
 		s.WriteTime(schemas.ContainerImageMetadata_imagePulledAt, *v.ImagePulledAt)
 	}
-	serializeTagList(s, schemas.ContainerImageMetadata_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeTagList(s, schemas.ContainerImageMetadata_imageTags, v.ImageTags)
+	}
 	if v.InUseCount != nil {
 		s.WriteInt64(schemas.ContainerImageMetadata_inUseCount, *v.InUseCount)
 	}
@@ -5760,7 +6213,9 @@ func (v *ContinuousIntegrationScanConfiguration) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ContinuousIntegrationScanConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContinuousIntegrationScanSupportedEvents(s, schemas.ContinuousIntegrationScanConfiguration_supportedEvents, v.SupportedEvents)
+	if v.SupportedEvents != nil {
+		serializeContinuousIntegrationScanSupportedEvents(s, schemas.ContinuousIntegrationScanConfiguration_supportedEvents, v.SupportedEvents)
+	}
 }
 func (v *ContinuousIntegrationScanConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContinuousIntegrationScanConfiguration, func(s *smithy.Schema) error {
@@ -5943,6 +6398,9 @@ type CoverageFilterCriteria struct {
 	// commit.
 	LastScannedCommitId []CoverageStringFilter
 
+	// The machine image tags to filter coverage results by.
+	MachineImageTags []CoverageMapFilter
+
 	// An array of Amazon Web Services resource IDs to return coverage statistics for.
 	ResourceId []CoverageStringFilter
 
@@ -5976,38 +6434,105 @@ func (v *CoverageFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CoverageFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_accountId, v.AccountId)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudContainerImageTags, v.CloudContainerImageTags)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudContainerRegistryName, v.CloudContainerRegistryName)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudContainerRepositoryName, v.CloudContainerRepositoryName)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProvider, v.CloudProvider)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProviderAccountId, v.CloudProviderAccountId)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProviderOrgId, v.CloudProviderOrgId)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProviderRegion, v.CloudProviderRegion)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudServerlessFunctionName, v.CloudServerlessFunctionName)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudServerlessFunctionRuntime, v.CloudServerlessFunctionRuntime)
-	serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_cloudServerlessFunctionTags, v.CloudServerlessFunctionTags)
-	serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_cloudVmInstanceTags, v.CloudVmInstanceTags)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_codeRepositoryProjectName, v.CodeRepositoryProjectName)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_codeRepositoryProviderType, v.CodeRepositoryProviderType)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_codeRepositoryProviderTypeVisibility, v.CodeRepositoryProviderTypeVisibility)
-	serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_ec2InstanceTags, v.Ec2InstanceTags)
-	serializeCoverageNumberFilterList(s, schemas.CoverageFilterCriteria_ecrImageInUseCount, v.EcrImageInUseCount)
-	serializeCoverageDateFilterList(s, schemas.CoverageFilterCriteria_ecrImageLastInUseAt, v.EcrImageLastInUseAt)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_ecrImageTags, v.EcrImageTags)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_ecrRepositoryName, v.EcrRepositoryName)
-	serializeCoverageDateFilterList(s, schemas.CoverageFilterCriteria_imagePulledAt, v.ImagePulledAt)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_lambdaFunctionName, v.LambdaFunctionName)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_lambdaFunctionRuntime, v.LambdaFunctionRuntime)
-	serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_lambdaFunctionTags, v.LambdaFunctionTags)
-	serializeCoverageDateFilterList(s, schemas.CoverageFilterCriteria_lastScannedAt, v.LastScannedAt)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_lastScannedCommitId, v.LastScannedCommitId)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_resourceId, v.ResourceId)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_resourceType, v.ResourceType)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanMode, v.ScanMode)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanStatusCode, v.ScanStatusCode)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanStatusReason, v.ScanStatusReason)
-	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanType, v.ScanType)
+	if v.AccountId != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_accountId, v.AccountId)
+	}
+	if v.CloudContainerImageTags != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudContainerImageTags, v.CloudContainerImageTags)
+	}
+	if v.CloudContainerRegistryName != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudContainerRegistryName, v.CloudContainerRegistryName)
+	}
+	if v.CloudContainerRepositoryName != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudContainerRepositoryName, v.CloudContainerRepositoryName)
+	}
+	if v.CloudProvider != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProvider, v.CloudProvider)
+	}
+	if v.CloudProviderAccountId != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProviderAccountId, v.CloudProviderAccountId)
+	}
+	if v.CloudProviderOrgId != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProviderOrgId, v.CloudProviderOrgId)
+	}
+	if v.CloudProviderRegion != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudProviderRegion, v.CloudProviderRegion)
+	}
+	if v.CloudServerlessFunctionName != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudServerlessFunctionName, v.CloudServerlessFunctionName)
+	}
+	if v.CloudServerlessFunctionRuntime != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_cloudServerlessFunctionRuntime, v.CloudServerlessFunctionRuntime)
+	}
+	if v.CloudServerlessFunctionTags != nil {
+		serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_cloudServerlessFunctionTags, v.CloudServerlessFunctionTags)
+	}
+	if v.CloudVmInstanceTags != nil {
+		serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_cloudVmInstanceTags, v.CloudVmInstanceTags)
+	}
+	if v.CodeRepositoryProjectName != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_codeRepositoryProjectName, v.CodeRepositoryProjectName)
+	}
+	if v.CodeRepositoryProviderType != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_codeRepositoryProviderType, v.CodeRepositoryProviderType)
+	}
+	if v.CodeRepositoryProviderTypeVisibility != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_codeRepositoryProviderTypeVisibility, v.CodeRepositoryProviderTypeVisibility)
+	}
+	if v.Ec2InstanceTags != nil {
+		serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_ec2InstanceTags, v.Ec2InstanceTags)
+	}
+	if v.EcrImageInUseCount != nil {
+		serializeCoverageNumberFilterList(s, schemas.CoverageFilterCriteria_ecrImageInUseCount, v.EcrImageInUseCount)
+	}
+	if v.EcrImageLastInUseAt != nil {
+		serializeCoverageDateFilterList(s, schemas.CoverageFilterCriteria_ecrImageLastInUseAt, v.EcrImageLastInUseAt)
+	}
+	if v.EcrImageTags != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_ecrImageTags, v.EcrImageTags)
+	}
+	if v.EcrRepositoryName != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_ecrRepositoryName, v.EcrRepositoryName)
+	}
+	if v.ImagePulledAt != nil {
+		serializeCoverageDateFilterList(s, schemas.CoverageFilterCriteria_imagePulledAt, v.ImagePulledAt)
+	}
+	if v.LambdaFunctionName != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_lambdaFunctionName, v.LambdaFunctionName)
+	}
+	if v.LambdaFunctionRuntime != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_lambdaFunctionRuntime, v.LambdaFunctionRuntime)
+	}
+	if v.LambdaFunctionTags != nil {
+		serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_lambdaFunctionTags, v.LambdaFunctionTags)
+	}
+	if v.LastScannedAt != nil {
+		serializeCoverageDateFilterList(s, schemas.CoverageFilterCriteria_lastScannedAt, v.LastScannedAt)
+	}
+	if v.LastScannedCommitId != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_lastScannedCommitId, v.LastScannedCommitId)
+	}
+	if v.MachineImageTags != nil {
+		serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_machineImageTags, v.MachineImageTags)
+	}
+	if v.ResourceId != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_resourceId, v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_resourceType, v.ResourceType)
+	}
+	if v.ScanMode != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanMode, v.ScanMode)
+	}
+	if v.ScanStatusCode != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanStatusCode, v.ScanStatusCode)
+	}
+	if v.ScanStatusReason != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanStatusReason, v.ScanStatusReason)
+	}
+	if v.ScanType != nil {
+		serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanType, v.ScanType)
+	}
 }
 func (v *CoverageFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CoverageFilterCriteria, func(s *smithy.Schema) error {
@@ -6064,6 +6589,8 @@ func (v *CoverageFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeCoverageDateFilterList(d, schemas.CoverageFilterCriteria_lastScannedAt, &v.LastScannedAt)
 		case schemas.CoverageFilterCriteria_lastScannedCommitId:
 			return deserializeCoverageStringFilterList(d, schemas.CoverageFilterCriteria_lastScannedCommitId, &v.LastScannedCommitId)
+		case schemas.CoverageFilterCriteria_machineImageTags:
+			return deserializeCoverageMapFilterList(d, schemas.CoverageFilterCriteria_machineImageTags, &v.MachineImageTags)
 		case schemas.CoverageFilterCriteria_resourceId:
 			return deserializeCoverageStringFilterList(d, schemas.CoverageFilterCriteria_resourceId, &v.ResourceId)
 		case schemas.CoverageFilterCriteria_resourceType:
@@ -6416,8 +6943,12 @@ func (v *CreateCisTargets) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCisTargets) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetAccountList(s, schemas.CreateCisTargets_accountIds, v.AccountIds)
-	serializeTargetResourceTags(s, schemas.CreateCisTargets_targetResourceTags, v.TargetResourceTags)
+	if v.AccountIds != nil {
+		serializeTargetAccountList(s, schemas.CreateCisTargets_accountIds, v.AccountIds)
+	}
+	if v.TargetResourceTags != nil {
+		serializeTargetResourceTags(s, schemas.CreateCisTargets_targetResourceTags, v.TargetResourceTags)
+	}
 }
 func (v *CreateCisTargets) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCisTargets, func(s *smithy.Schema) error {
@@ -6776,7 +7307,9 @@ func (v *CvssScoreDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CvssScoreDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCvssScoreAdjustmentList(s, schemas.CvssScoreDetails_adjustments, v.Adjustments)
+	if v.Adjustments != nil {
+		serializeCvssScoreAdjustmentList(s, schemas.CvssScoreDetails_adjustments, v.Adjustments)
+	}
 	if v.CvssSource != nil {
 		s.WriteString(schemas.CvssScoreDetails_cvssSource, *v.CvssSource)
 	}
@@ -6996,6 +7529,10 @@ type Destination struct {
 	// This member is required.
 	KmsKeyArn *string
 
+	// The Amazon Web Services account ID of the expected owner of the Amazon S3
+	// bucket. If the actual bucket owner does not match, the export request fails.
+	ExpectedBucketOwner *string
+
 	// The prefix that the findings will be written under.
 	KeyPrefix *string
 
@@ -7012,6 +7549,9 @@ func (v *Destination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BucketName != nil {
 		s.WriteString(schemas.Destination_bucketName, *v.BucketName)
 	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.Destination_expectedBucketOwner, *v.ExpectedBucketOwner)
+	}
 	if v.KeyPrefix != nil {
 		s.WriteString(schemas.Destination_keyPrefix, *v.KeyPrefix)
 	}
@@ -7025,6 +7565,9 @@ func (v *Destination) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Destination_bucketName:
 			v.BucketName = new(string)
 			return d.ReadString(schemas.Destination_bucketName, v.BucketName)
+		case schemas.Destination_expectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.Destination_expectedBucketOwner, v.ExpectedBucketOwner)
 		case schemas.Destination_keyPrefix:
 			v.KeyPrefix = new(string)
 			return d.ReadString(schemas.Destination_keyPrefix, v.KeyPrefix)
@@ -7061,7 +7604,9 @@ func (v *DisassociateConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityResource(s, schemas.DisassociateConfigurationRequest_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.DisassociateConfigurationRequest_resource, v.Resource)
+	}
 	if v.ScanConfigurationArn != nil {
 		s.WriteString(schemas.DisassociateConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
 	}
@@ -7203,10 +7748,18 @@ func (v *Ec2InstanceAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Ec2InstanceAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.Ec2InstanceAggregation_amis, v.Amis)
-	serializeStringFilterList(s, schemas.Ec2InstanceAggregation_instanceIds, v.InstanceIds)
-	serializeMapFilterList(s, schemas.Ec2InstanceAggregation_instanceTags, v.InstanceTags)
-	serializeStringFilterList(s, schemas.Ec2InstanceAggregation_operatingSystems, v.OperatingSystems)
+	if v.Amis != nil {
+		serializeStringFilterList(s, schemas.Ec2InstanceAggregation_amis, v.Amis)
+	}
+	if v.InstanceIds != nil {
+		serializeStringFilterList(s, schemas.Ec2InstanceAggregation_instanceIds, v.InstanceIds)
+	}
+	if v.InstanceTags != nil {
+		serializeMapFilterList(s, schemas.Ec2InstanceAggregation_instanceTags, v.InstanceTags)
+	}
+	if v.OperatingSystems != nil {
+		serializeStringFilterList(s, schemas.Ec2InstanceAggregation_operatingSystems, v.OperatingSystems)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.Ec2InstanceAggregation_sortBy, string(v.SortBy))
 	}
@@ -7290,7 +7843,9 @@ func (v *Ec2InstanceAggregationResponse) SerializeMembers(s smithy.ShapeSerializ
 	if v.InstanceId != nil {
 		s.WriteString(schemas.Ec2InstanceAggregationResponse_instanceId, *v.InstanceId)
 	}
-	serializeTagMap(s, schemas.Ec2InstanceAggregationResponse_instanceTags, v.InstanceTags)
+	if v.InstanceTags != nil {
+		serializeTagMap(s, schemas.Ec2InstanceAggregationResponse_instanceTags, v.InstanceTags)
+	}
 	if v.NetworkFindings != nil {
 		s.WriteInt64(schemas.Ec2InstanceAggregationResponse_networkFindings, *v.NetworkFindings)
 	}
@@ -7359,7 +7914,9 @@ func (v *Ec2Metadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Platform != "" {
 		s.WriteString(schemas.Ec2Metadata_platform, string(v.Platform))
 	}
-	serializeTagMap(s, schemas.Ec2Metadata_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Ec2Metadata_tags, v.Tags)
+	}
 }
 func (v *Ec2Metadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Ec2Metadata, func(s *smithy.Schema) error {
@@ -7561,7 +8118,9 @@ func (v *EcrContainerImageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastInUseAt != nil {
 		s.WriteTime(schemas.EcrContainerImageMetadata_lastInUseAt, *v.LastInUseAt)
 	}
-	serializeTagList(s, schemas.EcrContainerImageMetadata_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.EcrContainerImageMetadata_tags, v.Tags)
+	}
 }
 func (v *EcrContainerImageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcrContainerImageMetadata, func(s *smithy.Schema) error {
@@ -8008,7 +8567,9 @@ func (v *FailedAssociationResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FailedAssociationResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityResource(s, schemas.FailedAssociationResult_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.FailedAssociationResult_resource, v.Resource)
+	}
 	if v.ScanConfigurationArn != nil {
 		s.WriteString(schemas.FailedAssociationResult_scanConfigurationArn, *v.ScanConfigurationArn)
 	}
@@ -8184,7 +8745,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Reason != nil {
 		s.WriteString(schemas.Filter_reason, *v.Reason)
 	}
-	serializeTagMap(s, schemas.Filter_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Filter_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Filter_updatedAt, *v.UpdatedAt)
 	}
@@ -8411,6 +8974,19 @@ type FilterCriteria struct {
 	// Details on the date and time a finding was last seen used to filter findings.
 	LastObservedAt []DateFilter
 
+	// The ID of the Amazon Machine Image (AMI) used to filter findings.
+	MachineImageId []StringFilter
+
+	// The name of the Amazon Machine Image (AMI) used to filter findings.
+	MachineImageName []StringFilter
+
+	// The ID of the Amazon Web Services account that owns the Amazon Machine Image
+	// (AMI) used to filter findings.
+	MachineImageOwnerAccountId []StringFilter
+
+	// The platform of the Amazon Machine Image (AMI) used to filter findings.
+	MachineImagePlatform []StringFilter
+
 	// Details on network protocol used to filter findings.
 	NetworkProtocol []StringFilter
 
@@ -8461,71 +9037,213 @@ func (v *FilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.FilterCriteria_awsAccountId, v.AwsAccountId)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudImageArchitecture, v.CloudImageArchitecture)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudImageDigest, v.CloudImageDigest)
-	serializeNumberFilterList(s, schemas.FilterCriteria_cloudImageInUseCount, v.CloudImageInUseCount)
-	serializeDateFilterList(s, schemas.FilterCriteria_cloudImageLastInUseAt, v.CloudImageLastInUseAt)
-	serializeDateFilterList(s, schemas.FilterCriteria_cloudImagePushedAt, v.CloudImagePushedAt)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudImageRegistry, v.CloudImageRegistry)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudImageRepositoryName, v.CloudImageRepositoryName)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudImageTags, v.CloudImageTags)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudProvider, v.CloudProvider)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudProviderAccountId, v.CloudProviderAccountId)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudProviderOrgId, v.CloudProviderOrgId)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudProviderRegion, v.CloudProviderRegion)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionExecutionRole, v.CloudServerlessFunctionExecutionRole)
-	serializeDateFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionLastModifiedAt, v.CloudServerlessFunctionLastModifiedAt)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionName, v.CloudServerlessFunctionName)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionRuntime, v.CloudServerlessFunctionRuntime)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudVmImageReference, v.CloudVmImageReference)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudVmNetworkId, v.CloudVmNetworkId)
-	serializeStringFilterList(s, schemas.FilterCriteria_cloudVmSubnetIds, v.CloudVmSubnetIds)
-	serializeStringFilterList(s, schemas.FilterCriteria_codeRepositoryProjectName, v.CodeRepositoryProjectName)
-	serializeStringFilterList(s, schemas.FilterCriteria_codeRepositoryProviderType, v.CodeRepositoryProviderType)
-	serializeStringFilterList(s, schemas.FilterCriteria_codeVulnerabilityDetectorName, v.CodeVulnerabilityDetectorName)
-	serializeStringFilterList(s, schemas.FilterCriteria_codeVulnerabilityDetectorTags, v.CodeVulnerabilityDetectorTags)
-	serializeStringFilterList(s, schemas.FilterCriteria_codeVulnerabilityFilePath, v.CodeVulnerabilityFilePath)
-	serializeStringFilterList(s, schemas.FilterCriteria_componentId, v.ComponentId)
-	serializeStringFilterList(s, schemas.FilterCriteria_componentType, v.ComponentType)
-	serializeStringFilterList(s, schemas.FilterCriteria_ec2InstanceImageId, v.Ec2InstanceImageId)
-	serializeStringFilterList(s, schemas.FilterCriteria_ec2InstanceSubnetId, v.Ec2InstanceSubnetId)
-	serializeStringFilterList(s, schemas.FilterCriteria_ec2InstanceVpcId, v.Ec2InstanceVpcId)
-	serializeStringFilterList(s, schemas.FilterCriteria_ecrImageArchitecture, v.EcrImageArchitecture)
-	serializeStringFilterList(s, schemas.FilterCriteria_ecrImageHash, v.EcrImageHash)
-	serializeNumberFilterList(s, schemas.FilterCriteria_ecrImageInUseCount, v.EcrImageInUseCount)
-	serializeDateFilterList(s, schemas.FilterCriteria_ecrImageLastInUseAt, v.EcrImageLastInUseAt)
-	serializeDateFilterList(s, schemas.FilterCriteria_ecrImagePushedAt, v.EcrImagePushedAt)
-	serializeStringFilterList(s, schemas.FilterCriteria_ecrImageRegistry, v.EcrImageRegistry)
-	serializeStringFilterList(s, schemas.FilterCriteria_ecrImageRepositoryName, v.EcrImageRepositoryName)
-	serializeStringFilterList(s, schemas.FilterCriteria_ecrImageTags, v.EcrImageTags)
-	serializeNumberFilterList(s, schemas.FilterCriteria_epssScore, v.EpssScore)
-	serializeStringFilterList(s, schemas.FilterCriteria_exploitAvailable, v.ExploitAvailable)
-	serializeStringFilterList(s, schemas.FilterCriteria_findingArn, v.FindingArn)
-	serializeStringFilterList(s, schemas.FilterCriteria_findingStatus, v.FindingStatus)
-	serializeStringFilterList(s, schemas.FilterCriteria_findingType, v.FindingType)
-	serializeDateFilterList(s, schemas.FilterCriteria_firstObservedAt, v.FirstObservedAt)
-	serializeStringFilterList(s, schemas.FilterCriteria_fixAvailable, v.FixAvailable)
-	serializeNumberFilterList(s, schemas.FilterCriteria_inspectorScore, v.InspectorScore)
-	serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionExecutionRoleArn, v.LambdaFunctionExecutionRoleArn)
-	serializeDateFilterList(s, schemas.FilterCriteria_lambdaFunctionLastModifiedAt, v.LambdaFunctionLastModifiedAt)
-	serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionLayers, v.LambdaFunctionLayers)
-	serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionName, v.LambdaFunctionName)
-	serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionRuntime, v.LambdaFunctionRuntime)
-	serializeDateFilterList(s, schemas.FilterCriteria_lastObservedAt, v.LastObservedAt)
-	serializeStringFilterList(s, schemas.FilterCriteria_networkProtocol, v.NetworkProtocol)
-	serializePortRangeFilterList(s, schemas.FilterCriteria_portRange, v.PortRange)
-	serializeStringFilterList(s, schemas.FilterCriteria_relatedVulnerabilities, v.RelatedVulnerabilities)
-	serializeStringFilterList(s, schemas.FilterCriteria_resourceId, v.ResourceId)
-	serializeMapFilterList(s, schemas.FilterCriteria_resourceTags, v.ResourceTags)
-	serializeStringFilterList(s, schemas.FilterCriteria_resourceType, v.ResourceType)
-	serializeStringFilterList(s, schemas.FilterCriteria_severity, v.Severity)
-	serializeStringFilterList(s, schemas.FilterCriteria_title, v.Title)
-	serializeDateFilterList(s, schemas.FilterCriteria_updatedAt, v.UpdatedAt)
-	serializeStringFilterList(s, schemas.FilterCriteria_vendorSeverity, v.VendorSeverity)
-	serializeStringFilterList(s, schemas.FilterCriteria_vulnerabilityId, v.VulnerabilityId)
-	serializeStringFilterList(s, schemas.FilterCriteria_vulnerabilitySource, v.VulnerabilitySource)
-	serializePackageFilterList(s, schemas.FilterCriteria_vulnerablePackages, v.VulnerablePackages)
+	if v.AwsAccountId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_awsAccountId, v.AwsAccountId)
+	}
+	if v.CloudImageArchitecture != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudImageArchitecture, v.CloudImageArchitecture)
+	}
+	if v.CloudImageDigest != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudImageDigest, v.CloudImageDigest)
+	}
+	if v.CloudImageInUseCount != nil {
+		serializeNumberFilterList(s, schemas.FilterCriteria_cloudImageInUseCount, v.CloudImageInUseCount)
+	}
+	if v.CloudImageLastInUseAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_cloudImageLastInUseAt, v.CloudImageLastInUseAt)
+	}
+	if v.CloudImagePushedAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_cloudImagePushedAt, v.CloudImagePushedAt)
+	}
+	if v.CloudImageRegistry != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudImageRegistry, v.CloudImageRegistry)
+	}
+	if v.CloudImageRepositoryName != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudImageRepositoryName, v.CloudImageRepositoryName)
+	}
+	if v.CloudImageTags != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudImageTags, v.CloudImageTags)
+	}
+	if v.CloudProvider != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudProvider, v.CloudProvider)
+	}
+	if v.CloudProviderAccountId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudProviderAccountId, v.CloudProviderAccountId)
+	}
+	if v.CloudProviderOrgId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudProviderOrgId, v.CloudProviderOrgId)
+	}
+	if v.CloudProviderRegion != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudProviderRegion, v.CloudProviderRegion)
+	}
+	if v.CloudServerlessFunctionExecutionRole != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionExecutionRole, v.CloudServerlessFunctionExecutionRole)
+	}
+	if v.CloudServerlessFunctionLastModifiedAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionLastModifiedAt, v.CloudServerlessFunctionLastModifiedAt)
+	}
+	if v.CloudServerlessFunctionName != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionName, v.CloudServerlessFunctionName)
+	}
+	if v.CloudServerlessFunctionRuntime != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudServerlessFunctionRuntime, v.CloudServerlessFunctionRuntime)
+	}
+	if v.CloudVmImageReference != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudVmImageReference, v.CloudVmImageReference)
+	}
+	if v.CloudVmNetworkId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudVmNetworkId, v.CloudVmNetworkId)
+	}
+	if v.CloudVmSubnetIds != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_cloudVmSubnetIds, v.CloudVmSubnetIds)
+	}
+	if v.CodeRepositoryProjectName != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_codeRepositoryProjectName, v.CodeRepositoryProjectName)
+	}
+	if v.CodeRepositoryProviderType != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_codeRepositoryProviderType, v.CodeRepositoryProviderType)
+	}
+	if v.CodeVulnerabilityDetectorName != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_codeVulnerabilityDetectorName, v.CodeVulnerabilityDetectorName)
+	}
+	if v.CodeVulnerabilityDetectorTags != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_codeVulnerabilityDetectorTags, v.CodeVulnerabilityDetectorTags)
+	}
+	if v.CodeVulnerabilityFilePath != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_codeVulnerabilityFilePath, v.CodeVulnerabilityFilePath)
+	}
+	if v.ComponentId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_componentId, v.ComponentId)
+	}
+	if v.ComponentType != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_componentType, v.ComponentType)
+	}
+	if v.Ec2InstanceImageId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ec2InstanceImageId, v.Ec2InstanceImageId)
+	}
+	if v.Ec2InstanceSubnetId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ec2InstanceSubnetId, v.Ec2InstanceSubnetId)
+	}
+	if v.Ec2InstanceVpcId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ec2InstanceVpcId, v.Ec2InstanceVpcId)
+	}
+	if v.EcrImageArchitecture != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ecrImageArchitecture, v.EcrImageArchitecture)
+	}
+	if v.EcrImageHash != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ecrImageHash, v.EcrImageHash)
+	}
+	if v.EcrImageInUseCount != nil {
+		serializeNumberFilterList(s, schemas.FilterCriteria_ecrImageInUseCount, v.EcrImageInUseCount)
+	}
+	if v.EcrImageLastInUseAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_ecrImageLastInUseAt, v.EcrImageLastInUseAt)
+	}
+	if v.EcrImagePushedAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_ecrImagePushedAt, v.EcrImagePushedAt)
+	}
+	if v.EcrImageRegistry != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ecrImageRegistry, v.EcrImageRegistry)
+	}
+	if v.EcrImageRepositoryName != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ecrImageRepositoryName, v.EcrImageRepositoryName)
+	}
+	if v.EcrImageTags != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_ecrImageTags, v.EcrImageTags)
+	}
+	if v.EpssScore != nil {
+		serializeNumberFilterList(s, schemas.FilterCriteria_epssScore, v.EpssScore)
+	}
+	if v.ExploitAvailable != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_exploitAvailable, v.ExploitAvailable)
+	}
+	if v.FindingArn != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_findingArn, v.FindingArn)
+	}
+	if v.FindingStatus != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_findingStatus, v.FindingStatus)
+	}
+	if v.FindingType != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_findingType, v.FindingType)
+	}
+	if v.FirstObservedAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_firstObservedAt, v.FirstObservedAt)
+	}
+	if v.FixAvailable != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_fixAvailable, v.FixAvailable)
+	}
+	if v.InspectorScore != nil {
+		serializeNumberFilterList(s, schemas.FilterCriteria_inspectorScore, v.InspectorScore)
+	}
+	if v.LambdaFunctionExecutionRoleArn != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionExecutionRoleArn, v.LambdaFunctionExecutionRoleArn)
+	}
+	if v.LambdaFunctionLastModifiedAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_lambdaFunctionLastModifiedAt, v.LambdaFunctionLastModifiedAt)
+	}
+	if v.LambdaFunctionLayers != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionLayers, v.LambdaFunctionLayers)
+	}
+	if v.LambdaFunctionName != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionName, v.LambdaFunctionName)
+	}
+	if v.LambdaFunctionRuntime != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionRuntime, v.LambdaFunctionRuntime)
+	}
+	if v.LastObservedAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_lastObservedAt, v.LastObservedAt)
+	}
+	if v.MachineImageId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_machineImageId, v.MachineImageId)
+	}
+	if v.MachineImageName != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_machineImageName, v.MachineImageName)
+	}
+	if v.MachineImageOwnerAccountId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_machineImageOwnerAccountId, v.MachineImageOwnerAccountId)
+	}
+	if v.MachineImagePlatform != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_machineImagePlatform, v.MachineImagePlatform)
+	}
+	if v.NetworkProtocol != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_networkProtocol, v.NetworkProtocol)
+	}
+	if v.PortRange != nil {
+		serializePortRangeFilterList(s, schemas.FilterCriteria_portRange, v.PortRange)
+	}
+	if v.RelatedVulnerabilities != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_relatedVulnerabilities, v.RelatedVulnerabilities)
+	}
+	if v.ResourceId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_resourceId, v.ResourceId)
+	}
+	if v.ResourceTags != nil {
+		serializeMapFilterList(s, schemas.FilterCriteria_resourceTags, v.ResourceTags)
+	}
+	if v.ResourceType != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_resourceType, v.ResourceType)
+	}
+	if v.Severity != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_severity, v.Severity)
+	}
+	if v.Title != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_title, v.Title)
+	}
+	if v.UpdatedAt != nil {
+		serializeDateFilterList(s, schemas.FilterCriteria_updatedAt, v.UpdatedAt)
+	}
+	if v.VendorSeverity != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_vendorSeverity, v.VendorSeverity)
+	}
+	if v.VulnerabilityId != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_vulnerabilityId, v.VulnerabilityId)
+	}
+	if v.VulnerabilitySource != nil {
+		serializeStringFilterList(s, schemas.FilterCriteria_vulnerabilitySource, v.VulnerabilitySource)
+	}
+	if v.VulnerablePackages != nil {
+		serializePackageFilterList(s, schemas.FilterCriteria_vulnerablePackages, v.VulnerablePackages)
+	}
 }
 func (v *FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterCriteria, func(s *smithy.Schema) error {
@@ -8634,6 +9352,14 @@ func (v *FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeStringFilterList(d, schemas.FilterCriteria_lambdaFunctionRuntime, &v.LambdaFunctionRuntime)
 		case schemas.FilterCriteria_lastObservedAt:
 			return deserializeDateFilterList(d, schemas.FilterCriteria_lastObservedAt, &v.LastObservedAt)
+		case schemas.FilterCriteria_machineImageId:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImageId, &v.MachineImageId)
+		case schemas.FilterCriteria_machineImageName:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImageName, &v.MachineImageName)
+		case schemas.FilterCriteria_machineImageOwnerAccountId:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImageOwnerAccountId, &v.MachineImageOwnerAccountId)
+		case schemas.FilterCriteria_machineImagePlatform:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImagePlatform, &v.MachineImagePlatform)
 		case schemas.FilterCriteria_networkProtocol:
 			return deserializeStringFilterList(d, schemas.FilterCriteria_networkProtocol, &v.NetworkProtocol)
 		case schemas.FilterCriteria_portRange:
@@ -8837,7 +9563,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Remediation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceList(s, schemas.Finding_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.Finding_resources, v.Resources)
+	}
 	if v.Severity != "" {
 		s.WriteString(schemas.Finding_severity, string(v.Severity))
 	}
@@ -8994,11 +9722,15 @@ func (v *FindingDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CisaData.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCwes(s, schemas.FindingDetail_cwes, v.Cwes)
+	if v.Cwes != nil {
+		serializeCwes(s, schemas.FindingDetail_cwes, v.Cwes)
+	}
 	if v.EpssScore != nil {
 		s.WriteFloat64(schemas.FindingDetail_epssScore, *v.EpssScore)
 	}
-	serializeEvidenceList(s, schemas.FindingDetail_evidences, v.Evidences)
+	if v.Evidences != nil {
+		serializeEvidenceList(s, schemas.FindingDetail_evidences, v.Evidences)
+	}
 	if v.ExploitObserved != nil {
 		s.WriteStruct(schemas.FindingDetail_exploitObserved)
 		v.ExploitObserved.SerializeMembers(s)
@@ -9007,12 +9739,18 @@ func (v *FindingDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FindingArn != nil {
 		s.WriteString(schemas.FindingDetail_findingArn, *v.FindingArn)
 	}
-	serializeVulnerabilityReferenceUrls(s, schemas.FindingDetail_referenceUrls, v.ReferenceUrls)
+	if v.ReferenceUrls != nil {
+		serializeVulnerabilityReferenceUrls(s, schemas.FindingDetail_referenceUrls, v.ReferenceUrls)
+	}
 	if v.RiskScore != nil {
 		s.WriteInt32(schemas.FindingDetail_riskScore, *v.RiskScore)
 	}
-	serializeTools(s, schemas.FindingDetail_tools, v.Tools)
-	serializeTtps(s, schemas.FindingDetail_ttps, v.Ttps)
+	if v.Tools != nil {
+		serializeTools(s, schemas.FindingDetail_tools, v.Tools)
+	}
+	if v.Ttps != nil {
+		serializeTtps(s, schemas.FindingDetail_ttps, v.Ttps)
+	}
 }
 func (v *FindingDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FindingDetail, func(s *smithy.Schema) error {
@@ -9331,7 +10069,9 @@ func (v *FreeTrialAccountInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.FreeTrialAccountInfo_accountId, *v.AccountId)
 	}
-	serializeFreeTrialInfoList(s, schemas.FreeTrialAccountInfo_freeTrialInfo, v.FreeTrialInfo)
+	if v.FreeTrialInfo != nil {
+		serializeFreeTrialInfoList(s, schemas.FreeTrialAccountInfo_freeTrialInfo, v.FreeTrialInfo)
+	}
 }
 func (v *FreeTrialAccountInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FreeTrialAccountInfo, func(s *smithy.Schema) error {
@@ -9547,7 +10287,9 @@ func (v *Image) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageDigest != nil {
 		s.WriteString(schemas.Image_imageDigest, *v.ImageDigest)
 	}
-	serializeImageTagList(s, schemas.Image_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeImageTagList(s, schemas.Image_imageTags, v.ImageTags)
+	}
 	if v.InUseCount != nil {
 		s.WriteInt64(schemas.Image_inUseCount, *v.InUseCount)
 	}
@@ -9664,14 +10406,30 @@ func (v *ImageLayerAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageLayerAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudAccountIds, v.CloudAccountIds)
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudOrgIds, v.CloudOrgIds)
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudPartitions, v.CloudPartitions)
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudProviders, v.CloudProviders)
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudRegions, v.CloudRegions)
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_layerHashes, v.LayerHashes)
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_repositories, v.Repositories)
-	serializeStringFilterList(s, schemas.ImageLayerAggregation_resourceIds, v.ResourceIds)
+	if v.CloudAccountIds != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudAccountIds, v.CloudAccountIds)
+	}
+	if v.CloudOrgIds != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudOrgIds, v.CloudOrgIds)
+	}
+	if v.CloudPartitions != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudPartitions, v.CloudPartitions)
+	}
+	if v.CloudProviders != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudProviders, v.CloudProviders)
+	}
+	if v.CloudRegions != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_cloudRegions, v.CloudRegions)
+	}
+	if v.LayerHashes != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_layerHashes, v.LayerHashes)
+	}
+	if v.Repositories != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_repositories, v.Repositories)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.ImageLayerAggregation_resourceIds, v.ResourceIds)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.ImageLayerAggregation_sortBy, string(v.SortBy))
 	}
@@ -9926,10 +10684,18 @@ func (v *LambdaFunctionAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LambdaFunctionAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.LambdaFunctionAggregation_functionNames, v.FunctionNames)
-	serializeMapFilterList(s, schemas.LambdaFunctionAggregation_functionTags, v.FunctionTags)
-	serializeStringFilterList(s, schemas.LambdaFunctionAggregation_resourceIds, v.ResourceIds)
-	serializeStringFilterList(s, schemas.LambdaFunctionAggregation_runtimes, v.Runtimes)
+	if v.FunctionNames != nil {
+		serializeStringFilterList(s, schemas.LambdaFunctionAggregation_functionNames, v.FunctionNames)
+	}
+	if v.FunctionTags != nil {
+		serializeMapFilterList(s, schemas.LambdaFunctionAggregation_functionTags, v.FunctionTags)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.LambdaFunctionAggregation_resourceIds, v.ResourceIds)
+	}
+	if v.Runtimes != nil {
+		serializeStringFilterList(s, schemas.LambdaFunctionAggregation_runtimes, v.Runtimes)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.LambdaFunctionAggregation_sortBy, string(v.SortBy))
 	}
@@ -10013,7 +10779,9 @@ func (v *LambdaFunctionAggregationResponse) SerializeMembers(s smithy.ShapeSeria
 	if v.FunctionName != nil {
 		s.WriteString(schemas.LambdaFunctionAggregationResponse_functionName, *v.FunctionName)
 	}
-	serializeTagMap(s, schemas.LambdaFunctionAggregationResponse_lambdaTags, v.LambdaTags)
+	if v.LambdaTags != nil {
+		serializeTagMap(s, schemas.LambdaFunctionAggregationResponse_lambdaTags, v.LambdaTags)
+	}
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.LambdaFunctionAggregationResponse_lastModifiedAt, *v.LastModifiedAt)
 	}
@@ -10086,8 +10854,12 @@ func (v *LambdaFunctionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionName != nil {
 		s.WriteString(schemas.LambdaFunctionMetadata_functionName, *v.FunctionName)
 	}
-	serializeTagMap(s, schemas.LambdaFunctionMetadata_functionTags, v.FunctionTags)
-	serializeLambdaLayerList(s, schemas.LambdaFunctionMetadata_layers, v.Layers)
+	if v.FunctionTags != nil {
+		serializeTagMap(s, schemas.LambdaFunctionMetadata_functionTags, v.FunctionTags)
+	}
+	if v.Layers != nil {
+		serializeLambdaLayerList(s, schemas.LambdaFunctionMetadata_layers, v.Layers)
+	}
 	if v.Runtime != "" {
 		s.WriteString(schemas.LambdaFunctionMetadata_runtime, string(v.Runtime))
 	}
@@ -10145,9 +10917,15 @@ func (v *LambdaLayerAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LambdaLayerAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.LambdaLayerAggregation_functionNames, v.FunctionNames)
-	serializeStringFilterList(s, schemas.LambdaLayerAggregation_layerArns, v.LayerArns)
-	serializeStringFilterList(s, schemas.LambdaLayerAggregation_resourceIds, v.ResourceIds)
+	if v.FunctionNames != nil {
+		serializeStringFilterList(s, schemas.LambdaLayerAggregation_functionNames, v.FunctionNames)
+	}
+	if v.LayerArns != nil {
+		serializeStringFilterList(s, schemas.LambdaLayerAggregation_layerArns, v.LayerArns)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.LambdaLayerAggregation_resourceIds, v.ResourceIds)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.LambdaLayerAggregation_sortBy, string(v.SortBy))
 	}
@@ -10290,8 +11068,12 @@ func (v *LambdaVpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LambdaVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.LambdaVpcConfig_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.LambdaVpcConfig_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.LambdaVpcConfig_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.LambdaVpcConfig_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.LambdaVpcConfig_vpcId, *v.VpcId)
 	}
@@ -10333,9 +11115,15 @@ func (v *ListCisScanConfigurationsFilterCriteria) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListCisScanConfigurationsFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCisScanConfigurationArnFilterList(s, schemas.ListCisScanConfigurationsFilterCriteria_scanConfigurationArnFilters, v.ScanConfigurationArnFilters)
-	serializeCisScanNameFilterList(s, schemas.ListCisScanConfigurationsFilterCriteria_scanNameFilters, v.ScanNameFilters)
-	serializeResourceTagFilterList(s, schemas.ListCisScanConfigurationsFilterCriteria_targetResourceTagFilters, v.TargetResourceTagFilters)
+	if v.ScanConfigurationArnFilters != nil {
+		serializeCisScanConfigurationArnFilterList(s, schemas.ListCisScanConfigurationsFilterCriteria_scanConfigurationArnFilters, v.ScanConfigurationArnFilters)
+	}
+	if v.ScanNameFilters != nil {
+		serializeCisScanNameFilterList(s, schemas.ListCisScanConfigurationsFilterCriteria_scanNameFilters, v.ScanNameFilters)
+	}
+	if v.TargetResourceTagFilters != nil {
+		serializeResourceTagFilterList(s, schemas.ListCisScanConfigurationsFilterCriteria_targetResourceTagFilters, v.TargetResourceTagFilters)
+	}
 }
 func (v *ListCisScanConfigurationsFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCisScanConfigurationsFilterCriteria, func(s *smithy.Schema) error {
@@ -10394,16 +11182,36 @@ func (v *ListCisScansFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCisScansFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCisNumberFilterList(s, schemas.ListCisScansFilterCriteria_failedChecksFilters, v.FailedChecksFilters)
-	serializeCisScanArnFilterList(s, schemas.ListCisScansFilterCriteria_scanArnFilters, v.ScanArnFilters)
-	serializeCisScanDateFilterList(s, schemas.ListCisScansFilterCriteria_scanAtFilters, v.ScanAtFilters)
-	serializeCisScanConfigurationArnFilterList(s, schemas.ListCisScansFilterCriteria_scanConfigurationArnFilters, v.ScanConfigurationArnFilters)
-	serializeCisScanNameFilterList(s, schemas.ListCisScansFilterCriteria_scanNameFilters, v.ScanNameFilters)
-	serializeCisScanStatusFilterList(s, schemas.ListCisScansFilterCriteria_scanStatusFilters, v.ScanStatusFilters)
-	serializeCisScheduledByFilterList(s, schemas.ListCisScansFilterCriteria_scheduledByFilters, v.ScheduledByFilters)
-	serializeAccountIdFilterList(s, schemas.ListCisScansFilterCriteria_targetAccountIdFilters, v.TargetAccountIdFilters)
-	serializeResourceIdFilterList(s, schemas.ListCisScansFilterCriteria_targetResourceIdFilters, v.TargetResourceIdFilters)
-	serializeResourceTagFilterList(s, schemas.ListCisScansFilterCriteria_targetResourceTagFilters, v.TargetResourceTagFilters)
+	if v.FailedChecksFilters != nil {
+		serializeCisNumberFilterList(s, schemas.ListCisScansFilterCriteria_failedChecksFilters, v.FailedChecksFilters)
+	}
+	if v.ScanArnFilters != nil {
+		serializeCisScanArnFilterList(s, schemas.ListCisScansFilterCriteria_scanArnFilters, v.ScanArnFilters)
+	}
+	if v.ScanAtFilters != nil {
+		serializeCisScanDateFilterList(s, schemas.ListCisScansFilterCriteria_scanAtFilters, v.ScanAtFilters)
+	}
+	if v.ScanConfigurationArnFilters != nil {
+		serializeCisScanConfigurationArnFilterList(s, schemas.ListCisScansFilterCriteria_scanConfigurationArnFilters, v.ScanConfigurationArnFilters)
+	}
+	if v.ScanNameFilters != nil {
+		serializeCisScanNameFilterList(s, schemas.ListCisScansFilterCriteria_scanNameFilters, v.ScanNameFilters)
+	}
+	if v.ScanStatusFilters != nil {
+		serializeCisScanStatusFilterList(s, schemas.ListCisScansFilterCriteria_scanStatusFilters, v.ScanStatusFilters)
+	}
+	if v.ScheduledByFilters != nil {
+		serializeCisScheduledByFilterList(s, schemas.ListCisScansFilterCriteria_scheduledByFilters, v.ScheduledByFilters)
+	}
+	if v.TargetAccountIdFilters != nil {
+		serializeAccountIdFilterList(s, schemas.ListCisScansFilterCriteria_targetAccountIdFilters, v.TargetAccountIdFilters)
+	}
+	if v.TargetResourceIdFilters != nil {
+		serializeResourceIdFilterList(s, schemas.ListCisScansFilterCriteria_targetResourceIdFilters, v.TargetResourceIdFilters)
+	}
+	if v.TargetResourceTagFilters != nil {
+		serializeResourceTagFilterList(s, schemas.ListCisScansFilterCriteria_targetResourceTagFilters, v.TargetResourceTagFilters)
+	}
 }
 func (v *ListCisScansFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCisScansFilterCriteria, func(s *smithy.Schema) error {
@@ -10428,6 +11236,176 @@ func (v *ListCisScansFilterCriteria) Deserialize(d smithy.ShapeDeserializer) err
 			return deserializeResourceIdFilterList(d, schemas.ListCisScansFilterCriteria_targetResourceIdFilters, &v.TargetResourceIdFilters)
 		case schemas.ListCisScansFilterCriteria_targetResourceTagFilters:
 			return deserializeResourceTagFilterList(d, schemas.ListCisScansFilterCriteria_targetResourceTagFilters, &v.TargetResourceTagFilters)
+		}
+		return nil
+	})
+}
+
+// Details about a machine image resource scanned directly by Inspector.
+type MachineImageDetails struct {
+
+	// The machine image ID (e.g., ami-0abcdef1234567890)
+	//
+	// This member is required.
+	MachineImageId *string
+
+	// CPU architecture (x86_64/arm64)
+	Architecture Architecture
+
+	// When the image was created
+	CreationDate *time.Time
+
+	// Whether the image is publicly shared
+	IsPublic *bool
+
+	// Human-readable image name
+	Name *string
+
+	// Account ID that owns the image
+	OwnerAccountId *string
+
+	// OS platform (Linux/Windows)
+	Platform *string
+
+	// Root device type (ebs/instance-store) — AWS-specific
+	RootDeviceType *string
+
+	// Source resource the image was created from (nullable)
+	SourceResourceId *string
+
+	// Image state (available/pending/deregistered)
+	State *string
+
+	// Virtualization type (hvm/paravirtual) — AWS-specific
+	VirtualizationType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MachineImageDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineImageDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineImageDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != "" {
+		s.WriteString(schemas.MachineImageDetails_architecture, string(v.Architecture))
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.MachineImageDetails_creationDate, *v.CreationDate)
+	}
+	if v.IsPublic != nil {
+		s.WriteBool(schemas.MachineImageDetails_isPublic, *v.IsPublic)
+	}
+	if v.MachineImageId != nil {
+		s.WriteString(schemas.MachineImageDetails_machineImageId, *v.MachineImageId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MachineImageDetails_name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.MachineImageDetails_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.MachineImageDetails_platform, *v.Platform)
+	}
+	if v.RootDeviceType != nil {
+		s.WriteString(schemas.MachineImageDetails_rootDeviceType, *v.RootDeviceType)
+	}
+	if v.SourceResourceId != nil {
+		s.WriteString(schemas.MachineImageDetails_sourceResourceId, *v.SourceResourceId)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.MachineImageDetails_state, *v.State)
+	}
+	if v.VirtualizationType != nil {
+		s.WriteString(schemas.MachineImageDetails_virtualizationType, *v.VirtualizationType)
+	}
+}
+func (v *MachineImageDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineImageDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineImageDetails_architecture:
+			var ev string
+			if err := d.ReadString(schemas.MachineImageDetails_architecture, &ev); err != nil {
+				return err
+			}
+			v.Architecture = Architecture(ev)
+			return nil
+		case schemas.MachineImageDetails_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.MachineImageDetails_creationDate, v.CreationDate)
+		case schemas.MachineImageDetails_isPublic:
+			v.IsPublic = new(bool)
+			return d.ReadBool(schemas.MachineImageDetails_isPublic, v.IsPublic)
+		case schemas.MachineImageDetails_machineImageId:
+			v.MachineImageId = new(string)
+			return d.ReadString(schemas.MachineImageDetails_machineImageId, v.MachineImageId)
+		case schemas.MachineImageDetails_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MachineImageDetails_name, v.Name)
+		case schemas.MachineImageDetails_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.MachineImageDetails_ownerAccountId, v.OwnerAccountId)
+		case schemas.MachineImageDetails_platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.MachineImageDetails_platform, v.Platform)
+		case schemas.MachineImageDetails_rootDeviceType:
+			v.RootDeviceType = new(string)
+			return d.ReadString(schemas.MachineImageDetails_rootDeviceType, v.RootDeviceType)
+		case schemas.MachineImageDetails_sourceResourceId:
+			v.SourceResourceId = new(string)
+			return d.ReadString(schemas.MachineImageDetails_sourceResourceId, v.SourceResourceId)
+		case schemas.MachineImageDetails_state:
+			v.State = new(string)
+			return d.ReadString(schemas.MachineImageDetails_state, v.State)
+		case schemas.MachineImageDetails_virtualizationType:
+			v.VirtualizationType = new(string)
+			return d.ReadString(schemas.MachineImageDetails_virtualizationType, v.VirtualizationType)
+		}
+		return nil
+	})
+}
+
+// Contains metadata about a machine image associated with a covered resource.
+type MachineImageMetadata struct {
+
+	// The platform of the machine image.
+	Platform MachineImagePlatform
+
+	// The tags associated with the machine image.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MachineImageMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineImageMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineImageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Platform != "" {
+		s.WriteString(schemas.MachineImageMetadata_platform, string(v.Platform))
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.MachineImageMetadata_tags, v.Tags)
+	}
+}
+func (v *MachineImageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineImageMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineImageMetadata_platform:
+			var ev string
+			if err := d.ReadString(schemas.MachineImageMetadata_platform, &ev); err != nil {
+				return err
+			}
+			v.Platform = MachineImagePlatform(ev)
+			return nil
+		case schemas.MachineImageMetadata_tags:
+			return deserializeTagMap(d, schemas.MachineImageMetadata_tags, &v.Tags)
 		}
 		return nil
 	})
@@ -10724,7 +11702,9 @@ func (v *NetworkPath) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkPath) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStepList(s, schemas.NetworkPath_steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepList(s, schemas.NetworkPath_steps, v.Steps)
+	}
 }
 func (v *NetworkPath) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkPath, func(s *smithy.Schema) error {
@@ -10840,6 +11820,114 @@ func (v *NumberFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Details of a single on-demand scan of a resource.
+type OnDemandScan struct {
+
+	// The ID of the resource that was scanned.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The type of the resource that was scanned.
+	//
+	// This member is required.
+	ResourceType OnDemandResourceType
+
+	// The unique identifier of the on-demand scan.
+	//
+	// This member is required.
+	ScanId *string
+
+	// The current status of the on-demand scan.
+	//
+	// This member is required.
+	ScanStatus OnDemandScanStatus
+
+	// The date and time, in ISO 8601 format, when the on-demand scan started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The date and time, in ISO 8601 format, when the on-demand scan completed. This
+	// field is absent if the scan has not completed.
+	CompletedAt *time.Time
+
+	// The reason associated with the current on-demand scan status.
+	ScanStatusReason OnDemandScanStatusReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *OnDemandScan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnDemandScan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnDemandScan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.OnDemandScan_completedAt, *v.CompletedAt)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.OnDemandScan_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.OnDemandScan_resourceType, string(v.ResourceType))
+	}
+	if v.ScanId != nil {
+		s.WriteString(schemas.OnDemandScan_scanId, *v.ScanId)
+	}
+	if v.ScanStatus != "" {
+		s.WriteString(schemas.OnDemandScan_scanStatus, string(v.ScanStatus))
+	}
+	if v.ScanStatusReason != "" {
+		s.WriteString(schemas.OnDemandScan_scanStatusReason, string(v.ScanStatusReason))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.OnDemandScan_startedAt, *v.StartedAt)
+	}
+}
+func (v *OnDemandScan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnDemandScan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnDemandScan_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.OnDemandScan_completedAt, v.CompletedAt)
+		case schemas.OnDemandScan_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.OnDemandScan_resourceId, v.ResourceId)
+		case schemas.OnDemandScan_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandScan_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = OnDemandResourceType(ev)
+			return nil
+		case schemas.OnDemandScan_scanId:
+			v.ScanId = new(string)
+			return d.ReadString(schemas.OnDemandScan_scanId, v.ScanId)
+		case schemas.OnDemandScan_scanStatus:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandScan_scanStatus, &ev); err != nil {
+				return err
+			}
+			v.ScanStatus = OnDemandScanStatus(ev)
+			return nil
+		case schemas.OnDemandScan_scanStatusReason:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandScan_scanStatusReason, &ev); err != nil {
+				return err
+			}
+			v.ScanStatusReason = OnDemandScanStatusReason(ev)
+			return nil
+		case schemas.OnDemandScan_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.OnDemandScan_startedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
+
 // A one time schedule.
 type OneTimeSchedule struct {
 	noSmithyDocumentSerde
@@ -10883,7 +11971,9 @@ func (v *PackageAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PackageAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.PackageAggregation_packageNames, v.PackageNames)
+	if v.PackageNames != nil {
+		serializeStringFilterList(s, schemas.PackageAggregation_packageNames, v.PackageNames)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.PackageAggregation_sortBy, string(v.SortBy))
 	}
@@ -11126,9 +12216,15 @@ func (v *PackageVulnerabilityDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PackageVulnerabilityDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCvssScoreList(s, schemas.PackageVulnerabilityDetails_cvss, v.Cvss)
-	serializeNonEmptyStringList(s, schemas.PackageVulnerabilityDetails_referenceUrls, v.ReferenceUrls)
-	serializeVulnerabilityIdList(s, schemas.PackageVulnerabilityDetails_relatedVulnerabilities, v.RelatedVulnerabilities)
+	if v.Cvss != nil {
+		serializeCvssScoreList(s, schemas.PackageVulnerabilityDetails_cvss, v.Cvss)
+	}
+	if v.ReferenceUrls != nil {
+		serializeNonEmptyStringList(s, schemas.PackageVulnerabilityDetails_referenceUrls, v.ReferenceUrls)
+	}
+	if v.RelatedVulnerabilities != nil {
+		serializeVulnerabilityIdList(s, schemas.PackageVulnerabilityDetails_relatedVulnerabilities, v.RelatedVulnerabilities)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.PackageVulnerabilityDetails_source, *v.Source)
 	}
@@ -11147,7 +12243,9 @@ func (v *PackageVulnerabilityDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.VulnerabilityId != nil {
 		s.WriteString(schemas.PackageVulnerabilityDetails_vulnerabilityId, *v.VulnerabilityId)
 	}
-	serializeVulnerablePackageList(s, schemas.PackageVulnerabilityDetails_vulnerablePackages, v.VulnerablePackages)
+	if v.VulnerablePackages != nil {
+		serializeVulnerablePackageList(s, schemas.PackageVulnerabilityDetails_vulnerablePackages, v.VulnerablePackages)
+	}
 }
 func (v *PackageVulnerabilityDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PackageVulnerabilityDetails, func(s *smithy.Schema) error {
@@ -11388,8 +12486,12 @@ func (v *ProjectCodeSecurityScanConfiguration) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ProjectCodeSecurityScanConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProjectContinuousIntegrationScanConfigurationList(s, schemas.ProjectCodeSecurityScanConfiguration_continuousIntegrationScanConfigurations, v.ContinuousIntegrationScanConfigurations)
-	serializeProjectPeriodicScanConfigurationList(s, schemas.ProjectCodeSecurityScanConfiguration_periodicScanConfigurations, v.PeriodicScanConfigurations)
+	if v.ContinuousIntegrationScanConfigurations != nil {
+		serializeProjectContinuousIntegrationScanConfigurationList(s, schemas.ProjectCodeSecurityScanConfiguration_continuousIntegrationScanConfigurations, v.ContinuousIntegrationScanConfigurations)
+	}
+	if v.PeriodicScanConfigurations != nil {
+		serializeProjectPeriodicScanConfigurationList(s, schemas.ProjectCodeSecurityScanConfiguration_periodicScanConfigurations, v.PeriodicScanConfigurations)
+	}
 }
 func (v *ProjectCodeSecurityScanConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectCodeSecurityScanConfiguration, func(s *smithy.Schema) error {
@@ -11424,7 +12526,9 @@ func (v *ProjectContinuousIntegrationScanConfiguration) Serialize(s smithy.Shape
 }
 
 func (v *ProjectContinuousIntegrationScanConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleSetCategories(s, schemas.ProjectContinuousIntegrationScanConfiguration_ruleSetCategories, v.RuleSetCategories)
+	if v.RuleSetCategories != nil {
+		serializeRuleSetCategories(s, schemas.ProjectContinuousIntegrationScanConfiguration_ruleSetCategories, v.RuleSetCategories)
+	}
 	if v.SupportedEvent != "" {
 		s.WriteString(schemas.ProjectContinuousIntegrationScanConfiguration_supportedEvent, string(v.SupportedEvent))
 	}
@@ -11469,7 +12573,9 @@ func (v *ProjectPeriodicScanConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.FrequencyExpression != nil {
 		s.WriteString(schemas.ProjectPeriodicScanConfiguration_frequencyExpression, *v.FrequencyExpression)
 	}
-	serializeRuleSetCategories(s, schemas.ProjectPeriodicScanConfiguration_ruleSetCategories, v.RuleSetCategories)
+	if v.RuleSetCategories != nil {
+		serializeRuleSetCategories(s, schemas.ProjectPeriodicScanConfiguration_ruleSetCategories, v.RuleSetCategories)
+	}
 }
 func (v *ProjectPeriodicScanConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectPeriodicScanConfiguration, func(s *smithy.Schema) error {
@@ -11684,7 +12790,9 @@ func (v *RepositoryAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RepositoryAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.RepositoryAggregation_repositories, v.Repositories)
+	if v.Repositories != nil {
+		serializeStringFilterList(s, schemas.RepositoryAggregation_repositories, v.Repositories)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.RepositoryAggregation_sortBy, string(v.SortBy))
 	}
@@ -11914,7 +13022,9 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.Resource_region, *v.Region)
 	}
-	serializeTagMap(s, schemas.Resource_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Resource_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Resource_type, string(v.Type))
 	}
@@ -11982,6 +13092,9 @@ type ResourceDetails struct {
 	// An object that contains details about a container image involved in the finding.
 	Image *Image
 
+	// Details about a machine image resource scanned directly by Inspector.
+	MachineImage *MachineImageDetails
+
 	// An object that contains details about a serverless function involved in the
 	// finding.
 	ServerlessFunction *ServerlessFunction
@@ -12024,6 +13137,11 @@ func (v *ResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Image.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MachineImage != nil {
+		s.WriteStruct(schemas.ResourceDetails_machineImage)
+		v.MachineImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ServerlessFunction != nil {
 		s.WriteStruct(schemas.ResourceDetails_serverlessFunction)
 		v.ServerlessFunction.SerializeMembers(s)
@@ -12053,6 +13171,9 @@ func (v *ResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceDetails_image:
 			v.Image = &Image{}
 			return v.Image.Deserialize(d)
+		case schemas.ResourceDetails_machineImage:
+			v.MachineImage = &MachineImageDetails{}
+			return v.MachineImage.Deserialize(d)
 		case schemas.ResourceDetails_serverlessFunction:
 			v.ServerlessFunction = &ServerlessFunction{}
 			return v.ServerlessFunction.Deserialize(d)
@@ -12134,25 +13255,63 @@ func (v *ResourceFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_accountId, v.AccountId)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudContainerImageTags, v.CloudContainerImageTags)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudContainerRegistryName, v.CloudContainerRegistryName)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudContainerRepositoryName, v.CloudContainerRepositoryName)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProvider, v.CloudProvider)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProviderAccountId, v.CloudProviderAccountId)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProviderOrgId, v.CloudProviderOrgId)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProviderRegion, v.CloudProviderRegion)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudServerlessFunctionName, v.CloudServerlessFunctionName)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudServerlessFunctionRuntime, v.CloudServerlessFunctionRuntime)
-	serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_cloudServerlessFunctionTags, v.CloudServerlessFunctionTags)
-	serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_cloudVmInstanceTags, v.CloudVmInstanceTags)
-	serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_ec2InstanceTags, v.Ec2InstanceTags)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_ecrImageTags, v.EcrImageTags)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_ecrRepositoryName, v.EcrRepositoryName)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_lambdaFunctionName, v.LambdaFunctionName)
-	serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_lambdaFunctionTags, v.LambdaFunctionTags)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_resourceId, v.ResourceId)
-	serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_resourceType, v.ResourceType)
+	if v.AccountId != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_accountId, v.AccountId)
+	}
+	if v.CloudContainerImageTags != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudContainerImageTags, v.CloudContainerImageTags)
+	}
+	if v.CloudContainerRegistryName != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudContainerRegistryName, v.CloudContainerRegistryName)
+	}
+	if v.CloudContainerRepositoryName != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudContainerRepositoryName, v.CloudContainerRepositoryName)
+	}
+	if v.CloudProvider != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProvider, v.CloudProvider)
+	}
+	if v.CloudProviderAccountId != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProviderAccountId, v.CloudProviderAccountId)
+	}
+	if v.CloudProviderOrgId != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProviderOrgId, v.CloudProviderOrgId)
+	}
+	if v.CloudProviderRegion != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudProviderRegion, v.CloudProviderRegion)
+	}
+	if v.CloudServerlessFunctionName != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudServerlessFunctionName, v.CloudServerlessFunctionName)
+	}
+	if v.CloudServerlessFunctionRuntime != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_cloudServerlessFunctionRuntime, v.CloudServerlessFunctionRuntime)
+	}
+	if v.CloudServerlessFunctionTags != nil {
+		serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_cloudServerlessFunctionTags, v.CloudServerlessFunctionTags)
+	}
+	if v.CloudVmInstanceTags != nil {
+		serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_cloudVmInstanceTags, v.CloudVmInstanceTags)
+	}
+	if v.Ec2InstanceTags != nil {
+		serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_ec2InstanceTags, v.Ec2InstanceTags)
+	}
+	if v.EcrImageTags != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_ecrImageTags, v.EcrImageTags)
+	}
+	if v.EcrRepositoryName != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_ecrRepositoryName, v.EcrRepositoryName)
+	}
+	if v.LambdaFunctionName != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_lambdaFunctionName, v.LambdaFunctionName)
+	}
+	if v.LambdaFunctionTags != nil {
+		serializeResourceMapFilterList(s, schemas.ResourceFilterCriteria_lambdaFunctionTags, v.LambdaFunctionTags)
+	}
+	if v.ResourceId != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_resourceId, v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		serializeResourceStringFilterList(s, schemas.ResourceFilterCriteria_resourceType, v.ResourceType)
+	}
 }
 func (v *ResourceFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceFilterCriteria, func(s *smithy.Schema) error {
@@ -12287,6 +13446,9 @@ type ResourceScanMetadata struct {
 	// function.
 	LambdaFunction *LambdaFunctionMetadata
 
+	// The machine image metadata associated with a covered resource.
+	MachineImage *MachineImageMetadata
+
 	// The serverless function metadata associated with a covered resource.
 	ServerlessFunction *ServerlessFunctionMetadata
 
@@ -12343,6 +13505,11 @@ func (v *ResourceScanMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LambdaFunction.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MachineImage != nil {
+		s.WriteStruct(schemas.ResourceScanMetadata_machineImage)
+		v.MachineImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ServerlessFunction != nil {
 		s.WriteStruct(schemas.ResourceScanMetadata_serverlessFunction)
 		v.ServerlessFunction.SerializeMembers(s)
@@ -12381,6 +13548,9 @@ func (v *ResourceScanMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceScanMetadata_lambdaFunction:
 			v.LambdaFunction = &LambdaFunctionMetadata{}
 			return v.LambdaFunction.Deserialize(d)
+		case schemas.ResourceScanMetadata_machineImage:
+			v.MachineImage = &MachineImageMetadata{}
+			return v.MachineImage.Deserialize(d)
 		case schemas.ResourceScanMetadata_serverlessFunction:
 			v.ServerlessFunction = &ServerlessFunctionMetadata{}
 			return v.ServerlessFunction.Deserialize(d)
@@ -12409,6 +13579,9 @@ type ResourceState struct {
 	Ecr *State
 
 	// An object that described the state of Amazon Inspector scans for an account.
+	Ami *State
+
+	// An object that described the state of Amazon Inspector scans for an account.
 	CodeRepository *State
 
 	// An object that described the state of Amazon Inspector scans for an account.
@@ -12427,6 +13600,11 @@ func (v *ResourceState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ami != nil {
+		s.WriteStruct(schemas.ResourceState_ami)
+		v.Ami.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CodeRepository != nil {
 		s.WriteStruct(schemas.ResourceState_codeRepository)
 		v.CodeRepository.SerializeMembers(s)
@@ -12456,6 +13634,9 @@ func (v *ResourceState) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ResourceState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceState, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceState_ami:
+			v.Ami = &State{}
+			return v.Ami.Deserialize(d)
 		case schemas.ResourceState_codeRepository:
 			v.CodeRepository = &State{}
 			return v.CodeRepository.Deserialize(d)
@@ -12490,6 +13671,9 @@ type ResourceStatus struct {
 	// This member is required.
 	Ecr Status
 
+	// The status of Amazon Machine Image (AMI) scanning for the account.
+	Ami Status
+
 	// The status of Amazon Inspector scanning for code repositories.
 	CodeRepository Status
 
@@ -12510,6 +13694,9 @@ func (v *ResourceStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ami != "" {
+		s.WriteString(schemas.ResourceStatus_ami, string(v.Ami))
+	}
 	if v.CodeRepository != "" {
 		s.WriteString(schemas.ResourceStatus_codeRepository, string(v.CodeRepository))
 	}
@@ -12529,6 +13716,13 @@ func (v *ResourceStatus) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ResourceStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceStatus, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceStatus_ami:
+			var ev string
+			if err := d.ReadString(schemas.ResourceStatus_ami, &ev); err != nil {
+				return err
+			}
+			v.Ami = Status(ev)
+			return nil
 		case schemas.ResourceStatus_codeRepository:
 			var ev string
 			if err := d.ReadString(schemas.ResourceStatus_codeRepository, &ev); err != nil {
@@ -12664,6 +13858,9 @@ type ScanStatus struct {
 	// INTERNAL_ERROR - Amazon Inspector has encountered an internal error for this
 	// resource. Amazon Inspector service will automatically resolve the issue and
 	// resume the scanning. No action required from the user.
+	//
+	// INVALID_ARTIFACT - Amazon Inspector couldn't scan this resource because its
+	// artifact is malformed and couldn't be safely extracted.
 	//
 	// NO_INVENTORY - Amazon Inspector couldn't find software application inventory to
 	// scan for vulnerabilities. This might be caused due to required Amazon Inspector
@@ -12892,7 +14089,9 @@ func (v *ScopeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScopeType != "" {
 		s.WriteString(schemas.ScopeConfiguration_scopeType, string(v.ScopeType))
 	}
-	serializeScopeValueList(s, schemas.ScopeConfiguration_scopeValues, v.ScopeValues)
+	if v.ScopeValues != nil {
+		serializeScopeValueList(s, schemas.ScopeConfiguration_scopeValues, v.ScopeValues)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.ScopeConfiguration_state, string(v.State))
 	}
@@ -12955,7 +14154,9 @@ func (v *ScopeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScopeType != "" {
 		s.WriteString(schemas.ScopeConfigurationInput_scopeType, string(v.ScopeType))
 	}
-	serializeScopeValueList(s, schemas.ScopeConfigurationInput_scopeValues, v.ScopeValues)
+	if v.ScopeValues != nil {
+		serializeScopeValueList(s, schemas.ScopeConfigurationInput_scopeValues, v.ScopeValues)
+	}
 }
 func (v *ScopeConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScopeConfigurationInput, func(s *smithy.Schema) error {
@@ -13029,7 +14230,9 @@ func (v *SearchVulnerabilitiesFilterCriteria) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *SearchVulnerabilitiesFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVulnIdList(s, schemas.SearchVulnerabilitiesFilterCriteria_vulnerabilityIds, v.VulnerabilityIds)
+	if v.VulnerabilityIds != nil {
+		serializeVulnIdList(s, schemas.SearchVulnerabilitiesFilterCriteria_vulnerabilityIds, v.VulnerabilityIds)
+	}
 }
 func (v *SearchVulnerabilitiesFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchVulnerabilitiesFilterCriteria, func(s *smithy.Schema) error {
@@ -13090,7 +14293,9 @@ func (v *ServerlessFunction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServerlessFunction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchitectureList(s, schemas.ServerlessFunction_architectures, v.Architectures)
+	if v.Architectures != nil {
+		serializeArchitectureList(s, schemas.ServerlessFunction_architectures, v.Architectures)
+	}
 	if v.CodeDigest != nil {
 		s.WriteString(schemas.ServerlessFunction_codeDigest, *v.CodeDigest)
 	}
@@ -13100,7 +14305,9 @@ func (v *ServerlessFunction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.ServerlessFunction_lastModifiedAt, *v.LastModifiedAt)
 	}
-	serializeServerlessFunctionLayerList(s, schemas.ServerlessFunction_layers, v.Layers)
+	if v.Layers != nil {
+		serializeServerlessFunctionLayerList(s, schemas.ServerlessFunction_layers, v.Layers)
+	}
 	if v.NetworkId != nil {
 		s.WriteString(schemas.ServerlessFunction_networkId, *v.NetworkId)
 	}
@@ -13110,11 +14317,15 @@ func (v *ServerlessFunction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Runtime != nil {
 		s.WriteString(schemas.ServerlessFunction_runtime, *v.Runtime)
 	}
-	serializeCloudSecurityGroupIdList(s, schemas.ServerlessFunction_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeCloudSecurityGroupIdList(s, schemas.ServerlessFunction_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.ServerlessFunctionName != nil {
 		s.WriteString(schemas.ServerlessFunction_serverlessFunctionName, *v.ServerlessFunctionName)
 	}
-	serializeCloudSubnetIdList(s, schemas.ServerlessFunction_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeCloudSubnetIdList(s, schemas.ServerlessFunction_subnetIds, v.SubnetIds)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.ServerlessFunction_version, *v.Version)
 	}
@@ -13227,15 +14438,33 @@ func (v *ServerlessFunctionAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServerlessFunctionAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudAccountIds, v.CloudAccountIds)
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudOrgIds, v.CloudOrgIds)
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudPartitions, v.CloudPartitions)
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudProviders, v.CloudProviders)
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudRegions, v.CloudRegions)
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_functionNames, v.FunctionNames)
-	serializeMapFilterList(s, schemas.ServerlessFunctionAggregation_functionTags, v.FunctionTags)
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_resourceIds, v.ResourceIds)
-	serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_runtimes, v.Runtimes)
+	if v.CloudAccountIds != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudAccountIds, v.CloudAccountIds)
+	}
+	if v.CloudOrgIds != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudOrgIds, v.CloudOrgIds)
+	}
+	if v.CloudPartitions != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudPartitions, v.CloudPartitions)
+	}
+	if v.CloudProviders != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudProviders, v.CloudProviders)
+	}
+	if v.CloudRegions != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_cloudRegions, v.CloudRegions)
+	}
+	if v.FunctionNames != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_functionNames, v.FunctionNames)
+	}
+	if v.FunctionTags != nil {
+		serializeMapFilterList(s, schemas.ServerlessFunctionAggregation_functionTags, v.FunctionTags)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_resourceIds, v.ResourceIds)
+	}
+	if v.Runtimes != nil {
+		serializeStringFilterList(s, schemas.ServerlessFunctionAggregation_runtimes, v.Runtimes)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.ServerlessFunctionAggregation_sortBy, string(v.SortBy))
 	}
@@ -13401,7 +14630,9 @@ func (v *ServerlessFunctionAggregationResponse) SerializeMembers(s smithy.ShapeS
 		v.SeverityCounts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.ServerlessFunctionAggregationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ServerlessFunctionAggregationResponse_tags, v.Tags)
+	}
 }
 func (v *ServerlessFunctionAggregationResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServerlessFunctionAggregationResponse, func(s *smithy.Schema) error {
@@ -13479,7 +14710,9 @@ func (v *ServerlessFunctionMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServerlessFunctionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.ServerlessFunctionMetadata_functionTags, v.FunctionTags)
+	if v.FunctionTags != nil {
+		serializeTagMap(s, schemas.ServerlessFunctionMetadata_functionTags, v.FunctionTags)
+	}
 	if v.Runtime != nil {
 		s.WriteString(schemas.ServerlessFunctionMetadata_runtime, *v.Runtime)
 	}
@@ -14082,7 +15315,9 @@ func (v *SuccessfulAssociationResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SuccessfulAssociationResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityResource(s, schemas.SuccessfulAssociationResult_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.SuccessfulAssociationResult_resource, v.Resource)
+	}
 	if v.ScanConfigurationArn != nil {
 		s.WriteString(schemas.SuccessfulAssociationResult_scanConfigurationArn, *v.ScanConfigurationArn)
 	}
@@ -14286,8 +15521,12 @@ func (v *TitleAggregation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SortOrder != "" {
 		s.WriteString(schemas.TitleAggregation_sortOrder, string(v.SortOrder))
 	}
-	serializeStringFilterList(s, schemas.TitleAggregation_titles, v.Titles)
-	serializeStringFilterList(s, schemas.TitleAggregation_vulnerabilityIds, v.VulnerabilityIds)
+	if v.Titles != nil {
+		serializeStringFilterList(s, schemas.TitleAggregation_titles, v.Titles)
+	}
+	if v.VulnerabilityIds != nil {
+		serializeStringFilterList(s, schemas.TitleAggregation_vulnerabilityIds, v.VulnerabilityIds)
+	}
 }
 func (v *TitleAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TitleAggregation, func(s *smithy.Schema) error {
@@ -14411,8 +15650,12 @@ func (v *UpdateCisTargets) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateCisTargets) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetAccountList(s, schemas.UpdateCisTargets_accountIds, v.AccountIds)
-	serializeTargetResourceTags(s, schemas.UpdateCisTargets_targetResourceTags, v.TargetResourceTags)
+	if v.AccountIds != nil {
+		serializeTargetAccountList(s, schemas.UpdateCisTargets_accountIds, v.AccountIds)
+	}
+	if v.TargetResourceTags != nil {
+		serializeTargetResourceTags(s, schemas.UpdateCisTargets_targetResourceTags, v.TargetResourceTags)
+	}
 }
 func (v *UpdateCisTargets) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCisTargets, func(s *smithy.Schema) error {
@@ -14431,6 +15674,13 @@ func (v *UpdateCisTargets) Deserialize(d smithy.ShapeDeserializer) error {
 // structure resets that scan type's configuration to inherit from the delegated
 // administrator.
 type UpdateConfigurationInheritance struct {
+
+	// The inheritance behavior for a scan-type configuration. Used with
+	// UpdateConfigurationInheritance to reset a member account's configuration to
+	// inherit from the delegated administrator. The only valid value is
+	// INHERIT_FROM_ADMIN , which resets the member account's configuration so that it
+	// inherits scan settings from the delegated administrator.
+	AmiConfiguration InheritanceMode
 
 	// The inheritance mode for Amazon EC2 scan configuration. Set to
 	// INHERIT_FROM_ADMIN to reset the member account's Amazon EC2 scan configuration
@@ -14454,6 +15704,9 @@ func (v *UpdateConfigurationInheritance) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateConfigurationInheritance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiConfiguration != "" {
+		s.WriteString(schemas.UpdateConfigurationInheritance_amiConfiguration, string(v.AmiConfiguration))
+	}
 	if v.Ec2Configuration != "" {
 		s.WriteString(schemas.UpdateConfigurationInheritance_ec2Configuration, string(v.Ec2Configuration))
 	}
@@ -14464,6 +15717,13 @@ func (v *UpdateConfigurationInheritance) SerializeMembers(s smithy.ShapeSerializ
 func (v *UpdateConfigurationInheritance) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateConfigurationInheritance, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateConfigurationInheritance_amiConfiguration:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConfigurationInheritance_amiConfiguration, &ev); err != nil {
+				return err
+			}
+			v.AmiConfiguration = InheritanceMode(ev)
+			return nil
 		case schemas.UpdateConfigurationInheritance_ec2Configuration:
 			var ev string
 			if err := d.ReadString(schemas.UpdateConfigurationInheritance_ec2Configuration, &ev); err != nil {
@@ -14706,7 +15966,9 @@ func (v *UsageTotal) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.UsageTotal_accountId, *v.AccountId)
 	}
-	serializeUsageList(s, schemas.UsageTotal_usage, v.Usage)
+	if v.Usage != nil {
+		serializeUsageList(s, schemas.UsageTotal_usage, v.Usage)
+	}
 }
 func (v *UsageTotal) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageTotal, func(s *smithy.Schema) error {
@@ -14817,8 +16079,12 @@ func (v *Vm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRole != nil {
 		s.WriteString(schemas.Vm_executionRole, *v.ExecutionRole)
 	}
-	serializeIpV4AddressList(s, schemas.Vm_ipV4Addresses, v.IpV4Addresses)
-	serializeIpV6AddressList(s, schemas.Vm_ipV6Addresses, v.IpV6Addresses)
+	if v.IpV4Addresses != nil {
+		serializeIpV4AddressList(s, schemas.Vm_ipV4Addresses, v.IpV4Addresses)
+	}
+	if v.IpV6Addresses != nil {
+		serializeIpV6AddressList(s, schemas.Vm_ipV6Addresses, v.IpV6Addresses)
+	}
 	if v.KeyName != nil {
 		s.WriteString(schemas.Vm_keyName, *v.KeyName)
 	}
@@ -14831,8 +16097,12 @@ func (v *Vm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Platform != nil {
 		s.WriteString(schemas.Vm_platform, *v.Platform)
 	}
-	serializeCloudSecurityGroupIdList(s, schemas.Vm_securityGroupIds, v.SecurityGroupIds)
-	serializeCloudSubnetIdList(s, schemas.Vm_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeCloudSecurityGroupIdList(s, schemas.Vm_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeCloudSubnetIdList(s, schemas.Vm_subnetIds, v.SubnetIds)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Vm_type, *v.Type)
 	}
@@ -14947,21 +16217,39 @@ func (v *VmInstanceAggregation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VmInstanceAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudAccountIds, v.CloudAccountIds)
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudOrgIds, v.CloudOrgIds)
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudPartitions, v.CloudPartitions)
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudProviders, v.CloudProviders)
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudRegions, v.CloudRegions)
-	serializeMapFilterList(s, schemas.VmInstanceAggregation_instanceTags, v.InstanceTags)
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_operatingSystems, v.OperatingSystems)
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_resourceIds, v.ResourceIds)
+	if v.CloudAccountIds != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudAccountIds, v.CloudAccountIds)
+	}
+	if v.CloudOrgIds != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudOrgIds, v.CloudOrgIds)
+	}
+	if v.CloudPartitions != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudPartitions, v.CloudPartitions)
+	}
+	if v.CloudProviders != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudProviders, v.CloudProviders)
+	}
+	if v.CloudRegions != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_cloudRegions, v.CloudRegions)
+	}
+	if v.InstanceTags != nil {
+		serializeMapFilterList(s, schemas.VmInstanceAggregation_instanceTags, v.InstanceTags)
+	}
+	if v.OperatingSystems != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_operatingSystems, v.OperatingSystems)
+	}
+	if v.ResourceIds != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_resourceIds, v.ResourceIds)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.VmInstanceAggregation_sortBy, string(v.SortBy))
 	}
 	if v.SortOrder != "" {
 		s.WriteString(schemas.VmInstanceAggregation_sortOrder, string(v.SortOrder))
 	}
-	serializeStringFilterList(s, schemas.VmInstanceAggregation_vmImageReferences, v.VmImageReferences)
+	if v.VmImageReferences != nil {
+		serializeStringFilterList(s, schemas.VmInstanceAggregation_vmImageReferences, v.VmImageReferences)
+	}
 }
 func (v *VmInstanceAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VmInstanceAggregation, func(s *smithy.Schema) error {
@@ -15118,7 +16406,9 @@ func (v *VmInstanceAggregationResponse) SerializeMembers(s smithy.ShapeSerialize
 		v.SeverityCounts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.VmInstanceAggregationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.VmInstanceAggregationResponse_tags, v.Tags)
+	}
 	if v.VmImageReference != nil {
 		s.WriteString(schemas.VmInstanceAggregationResponse_vmImageReference, *v.VmImageReference)
 	}
@@ -15208,7 +16498,9 @@ func (v *VmInstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Platform != "" {
 		s.WriteString(schemas.VmInstanceMetadata_platform, string(v.Platform))
 	}
-	serializeTagMap(s, schemas.VmInstanceMetadata_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.VmInstanceMetadata_tags, v.Tags)
+	}
 	if v.VmImageReference != nil {
 		s.WriteString(schemas.VmInstanceMetadata_vmImageReference, *v.VmImageReference)
 	}
@@ -15390,11 +16682,15 @@ func (v *Vulnerability) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Cvss4.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCwes(s, schemas.Vulnerability_cwes, v.Cwes)
+	if v.Cwes != nil {
+		serializeCwes(s, schemas.Vulnerability_cwes, v.Cwes)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Vulnerability_description, *v.Description)
 	}
-	serializeDetectionPlatforms(s, schemas.Vulnerability_detectionPlatforms, v.DetectionPlatforms)
+	if v.DetectionPlatforms != nil {
+		serializeDetectionPlatforms(s, schemas.Vulnerability_detectionPlatforms, v.DetectionPlatforms)
+	}
 	if v.Epss != nil {
 		s.WriteStruct(schemas.Vulnerability_epss)
 		v.Epss.SerializeMembers(s)
@@ -15408,8 +16704,12 @@ func (v *Vulnerability) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Vulnerability_id, *v.Id)
 	}
-	serializeVulnerabilityReferenceUrls(s, schemas.Vulnerability_referenceUrls, v.ReferenceUrls)
-	serializeRelatedVulnerabilities(s, schemas.Vulnerability_relatedVulnerabilities, v.RelatedVulnerabilities)
+	if v.ReferenceUrls != nil {
+		serializeVulnerabilityReferenceUrls(s, schemas.Vulnerability_referenceUrls, v.ReferenceUrls)
+	}
+	if v.RelatedVulnerabilities != nil {
+		serializeRelatedVulnerabilities(s, schemas.Vulnerability_relatedVulnerabilities, v.RelatedVulnerabilities)
+	}
 	if v.Source != "" {
 		s.WriteString(schemas.Vulnerability_source, string(v.Source))
 	}
@@ -15640,7 +16940,9 @@ func (v *WeeklySchedule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WeeklySchedule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDaysList(s, schemas.WeeklySchedule_days, v.Days)
+	if v.Days != nil {
+		serializeDaysList(s, schemas.WeeklySchedule_days, v.Days)
+	}
 	if v.StartTime != nil {
 		s.WriteStruct(schemas.WeeklySchedule_startTime)
 		v.StartTime.SerializeMembers(s)

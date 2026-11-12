@@ -1406,40 +1406,7 @@ func TestCheckResponseSnapshot_UpdateFHIRDatastore(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_UpdateProfileWithAgent(t *testing.T) {
-	want := &UpdateProfileWithAgentOutput{
-		AgentResponse: &types.AgentOutputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentOutputMessageType("INITIAL_GREETING"),
-			OptionsList: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateProfileWithAgent.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProfileWithAgent.response", err)
-	}
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
@@ -1481,39 +1448,6 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 }
 
-func TestCheckResponseSnapshot_Error_AgentMessageOutOfContextException(t *testing.T) {
-	want := &types.AgentMessageOutOfContextException{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("AgentMessageOutOfContextException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.AgentMessageOutOfContextException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.AgentMessageOutOfContextException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "AgentMessageOutOfContextException.error", err)
-	}
-}
-
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
@@ -1550,39 +1484,6 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_ConversationNotFoundException(t *testing.T) {
-	want := &types.ConversationNotFoundException{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("ConversationNotFoundException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.ConversationNotFoundException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.ConversationNotFoundException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "ConversationNotFoundException.error", err)
 	}
 }
 
@@ -1658,39 +1559,6 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InternalServerException.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_NotImplementedOperationException(t *testing.T) {
-	want := &types.NotImplementedOperationException{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("NotImplementedOperationException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.NotImplementedOperationException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.NotImplementedOperationException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "NotImplementedOperationException.error", err)
 	}
 }
 
@@ -1808,72 +1676,6 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ThrottlingException.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
-	want := &types.UnauthorizedException{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UnauthorizedException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.UnauthorizedException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.UnauthorizedException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "UnauthorizedException.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_UnsupportedMIMETypeException(t *testing.T) {
-	want := &types.UnsupportedMIMETypeException{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UnsupportedMIMETypeException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.UnsupportedMIMETypeException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.UnsupportedMIMETypeException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "UnsupportedMIMETypeException.error", err)
 	}
 }
 

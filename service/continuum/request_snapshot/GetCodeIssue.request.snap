@@ -1,0 +1,3 @@
+GET /environments/__EnvironmentId__/code-issues/__IssueId__
+
+

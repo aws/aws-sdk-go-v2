@@ -498,6 +498,20 @@ var QueryAssistant = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/assistants/{assistantId}/query",
 	Code: 200})
 
+var RegisterAssistantReplicaKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RegisterAssistantReplicaKey",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/assistants/{assistantId}/replicaKey",
+	Code: 200})
+
+var RegisterKnowledgeBaseReplicaKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RegisterKnowledgeBaseReplicaKey",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/knowledgeBases/{knowledgeBaseId}/replicaKey",
+	Code: 200})
+
 var RemoveAssistantAIAgent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "RemoveAssistantAIAgent",
@@ -747,7 +761,7 @@ var _AIAgentConfigurationMap_value *smithy.Schema
 var AIAgentData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIAgentData",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 15)
 var AIAgentData_assistantId *smithy.Schema
 
 var AIAgentData_assistantArn *smithy.Schema
@@ -764,6 +778,10 @@ var AIAgentData_configuration *smithy.Schema
 
 var AIAgentData_modifiedTime *smithy.Schema
 
+var AIAgentData_lastModifiedTime *smithy.Schema
+
+var AIAgentData_lastModifiedRegion *smithy.Schema
+
 var AIAgentData_description *smithy.Schema
 
 var AIAgentData_visibilityStatus *smithy.Schema
@@ -777,7 +795,7 @@ var AIAgentData_status *smithy.Schema
 var AIAgentSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIAgentSummary",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 15)
 var AIAgentSummary_name *smithy.Schema
 
 var AIAgentSummary_assistantId *smithy.Schema
@@ -791,6 +809,10 @@ var AIAgentSummary_type *smithy.Schema
 var AIAgentSummary_aiAgentArn *smithy.Schema
 
 var AIAgentSummary_modifiedTime *smithy.Schema
+
+var AIAgentSummary_lastModifiedTime *smithy.Schema
+
+var AIAgentSummary_lastModifiedRegion *smithy.Schema
 
 var AIAgentSummary_visibilityStatus *smithy.Schema
 
@@ -855,7 +877,7 @@ var AIGuardrailContextualGroundingPolicyConfig_filtersConfig *smithy.Schema
 var AIGuardrailData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIGuardrailData",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 19)
 var AIGuardrailData_assistantId *smithy.Schema
 
 var AIGuardrailData_assistantArn *smithy.Schema
@@ -890,6 +912,10 @@ var AIGuardrailData_status *smithy.Schema
 
 var AIGuardrailData_modifiedTime *smithy.Schema
 
+var AIGuardrailData_lastModifiedTime *smithy.Schema
+
+var AIGuardrailData_lastModifiedRegion *smithy.Schema
+
 var _AIGuardrailDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIGuardrailDescription",
@@ -912,7 +938,7 @@ var _AIGuardrailSummariesList_member *smithy.Schema
 var AIGuardrailSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIGuardrailSummary",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var AIGuardrailSummary_name *smithy.Schema
 
 var AIGuardrailSummary_assistantId *smithy.Schema
@@ -924,6 +950,10 @@ var AIGuardrailSummary_aiGuardrailId *smithy.Schema
 var AIGuardrailSummary_aiGuardrailArn *smithy.Schema
 
 var AIGuardrailSummary_modifiedTime *smithy.Schema
+
+var AIGuardrailSummary_lastModifiedTime *smithy.Schema
+
+var AIGuardrailSummary_lastModifiedRegion *smithy.Schema
 
 var AIGuardrailSummary_visibilityStatus *smithy.Schema
 
@@ -969,7 +999,7 @@ var _AIPromptAPIFormat = smithy.NewSchema(smithy.ShapeID{
 var AIPromptData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIPromptData",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 19)
 var AIPromptData_assistantId *smithy.Schema
 
 var AIPromptData_assistantArn *smithy.Schema
@@ -993,6 +1023,10 @@ var AIPromptData_templateConfiguration *smithy.Schema
 var AIPromptData_inferenceConfiguration *smithy.Schema
 
 var AIPromptData_modifiedTime *smithy.Schema
+
+var AIPromptData_lastModifiedTime *smithy.Schema
+
+var AIPromptData_lastModifiedRegion *smithy.Schema
 
 var AIPromptData_description *smithy.Schema
 
@@ -1024,7 +1058,7 @@ var _AIPromptModelIdentifier = smithy.NewSchema(smithy.ShapeID{
 var AIPromptSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIPromptSummary",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var AIPromptSummary_name *smithy.Schema
 
 var AIPromptSummary_assistantId *smithy.Schema
@@ -1038,6 +1072,10 @@ var AIPromptSummary_type *smithy.Schema
 var AIPromptSummary_aiPromptArn *smithy.Schema
 
 var AIPromptSummary_modifiedTime *smithy.Schema
+
+var AIPromptSummary_lastModifiedTime *smithy.Schema
+
+var AIPromptSummary_lastModifiedRegion *smithy.Schema
 
 var AIPromptSummary_templateType *smithy.Schema
 
@@ -1156,7 +1194,7 @@ var _ArnWithQualifier = smithy.NewSchema(smithy.ShapeID{
 var AssistantAssociationData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AssistantAssociationData",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var AssistantAssociationData_assistantAssociationId *smithy.Schema
 
 var AssistantAssociationData_assistantAssociationArn *smithy.Schema
@@ -1170,6 +1208,10 @@ var AssistantAssociationData_associationType *smithy.Schema
 var AssistantAssociationData_associationData *smithy.Schema
 
 var AssistantAssociationData_tags *smithy.Schema
+
+var AssistantAssociationData_lastModifiedTime *smithy.Schema
+
+var AssistantAssociationData_lastModifiedRegion *smithy.Schema
 
 var _AssistantAssociationIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1196,7 +1238,7 @@ var AssistantAssociationOutputData_externalBedrockKnowledgeBaseConfig *smithy.Sc
 var AssistantAssociationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AssistantAssociationSummary",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var AssistantAssociationSummary_assistantAssociationId *smithy.Schema
 
 var AssistantAssociationSummary_assistantAssociationArn *smithy.Schema
@@ -1210,6 +1252,10 @@ var AssistantAssociationSummary_associationType *smithy.Schema
 var AssistantAssociationSummary_associationData *smithy.Schema
 
 var AssistantAssociationSummary_tags *smithy.Schema
+
+var AssistantAssociationSummary_lastModifiedTime *smithy.Schema
+
+var AssistantAssociationSummary_lastModifiedRegion *smithy.Schema
 
 var _AssistantAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1231,7 +1277,7 @@ var _AssistantCapabilityType = smithy.NewSchema(smithy.ShapeID{
 var AssistantData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AssistantData",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 15)
 var AssistantData_assistantId *smithy.Schema
 
 var AssistantData_assistantArn *smithy.Schema
@@ -1256,6 +1302,17 @@ var AssistantData_aiAgentConfiguration *smithy.Schema
 
 var AssistantData_orchestratorConfigurationList *smithy.Schema
 
+var AssistantData_lastModifiedTime *smithy.Schema
+
+var AssistantData_lastModifiedRegion *smithy.Schema
+
+var AssistantData_assistantGlobalResiliencyStatus *smithy.Schema
+
+var _AssistantGlobalResiliencyStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "AssistantGlobalResiliencyStatus",
+}, smithy.ShapeTypeString, 0)
+
 var AssistantIntegrationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AssistantIntegrationConfiguration",
@@ -1276,7 +1333,7 @@ var _AssistantStatus = smithy.NewSchema(smithy.ShapeID{
 var AssistantSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AssistantSummary",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var AssistantSummary_assistantId *smithy.Schema
 
 var AssistantSummary_assistantArn *smithy.Schema
@@ -1300,6 +1357,10 @@ var AssistantSummary_capabilityConfiguration *smithy.Schema
 var AssistantSummary_aiAgentConfiguration *smithy.Schema
 
 var AssistantSummary_orchestratorConfigurationList *smithy.Schema
+
+var AssistantSummary_lastModifiedTime *smithy.Schema
+
+var AssistantSummary_lastModifiedRegion *smithy.Schema
 
 var _AssistantType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1337,6 +1398,11 @@ var _AttachmentFileName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AttachmentFileName",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _AwsRegion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "AwsRegion",
+}, smithy.ShapeTypeString, 0)
 
 var BedrockFoundationModelConfigurationForParsing = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1565,7 +1631,7 @@ var _ContentAssociationType = smithy.NewSchema(smithy.ShapeID{
 var ContentData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ContentData",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 17)
 var ContentData_contentArn *smithy.Schema
 
 var ContentData_contentId *smithy.Schema
@@ -1593,6 +1659,12 @@ var ContentData_linkOutUri *smithy.Schema
 var ContentData_url *smithy.Schema
 
 var ContentData_urlExpiry *smithy.Schema
+
+var ContentData_lastModifiedTime *smithy.Schema
+
+var ContentData_lastModifiedRegion *smithy.Schema
+
+var ContentData_fileHash *smithy.Schema
 
 var ContentDataDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1645,7 +1717,7 @@ var _ContentStatus = smithy.NewSchema(smithy.ShapeID{
 var ContentSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ContentSummary",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 14)
 var ContentSummary_contentArn *smithy.Schema
 
 var ContentSummary_contentId *smithy.Schema
@@ -1667,6 +1739,12 @@ var ContentSummary_status *smithy.Schema
 var ContentSummary_metadata *smithy.Schema
 
 var ContentSummary_tags *smithy.Schema
+
+var ContentSummary_lastModifiedTime *smithy.Schema
+
+var ContentSummary_lastModifiedRegion *smithy.Schema
+
+var ContentSummary_fileHash *smithy.Schema
 
 var _ContentSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -2194,6 +2272,11 @@ var _GenericArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GenericArn",
 }, smithy.ShapeTypeString, 0)
 
+var _GlobalResiliencyStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "GlobalResiliencyStatus",
+}, smithy.ShapeTypeString, 0)
+
 var GroupingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "GroupingConfiguration",
@@ -2616,7 +2699,7 @@ var KnowledgeBaseAssociationData_knowledgeBaseArn *smithy.Schema
 var KnowledgeBaseData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "KnowledgeBaseData",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 16)
 var KnowledgeBaseData_knowledgeBaseId *smithy.Schema
 
 var KnowledgeBaseData_knowledgeBaseArn *smithy.Schema
@@ -2645,6 +2728,10 @@ var KnowledgeBaseData_ingestionStatus *smithy.Schema
 
 var KnowledgeBaseData_ingestionFailureReasons *smithy.Schema
 
+var KnowledgeBaseData_lastModifiedTime *smithy.Schema
+
+var KnowledgeBaseData_lastModifiedRegion *smithy.Schema
+
 var _KnowledgeBaseList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "KnowledgeBaseList",
@@ -2664,7 +2751,7 @@ var _KnowledgeBaseStatus = smithy.NewSchema(smithy.ShapeID{
 var KnowledgeBaseSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "KnowledgeBaseSummary",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 13)
 var KnowledgeBaseSummary_knowledgeBaseId *smithy.Schema
 
 var KnowledgeBaseSummary_knowledgeBaseArn *smithy.Schema
@@ -2686,6 +2773,10 @@ var KnowledgeBaseSummary_serverSideEncryptionConfiguration *smithy.Schema
 var KnowledgeBaseSummary_description *smithy.Schema
 
 var KnowledgeBaseSummary_tags *smithy.Schema
+
+var KnowledgeBaseSummary_lastModifiedTime *smithy.Schema
+
+var KnowledgeBaseSummary_lastModifiedRegion *smithy.Schema
 
 var _KnowledgeBaseType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -3150,7 +3241,7 @@ var _ModelLifecycle = smithy.NewSchema(smithy.ShapeID{
 var ModelSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ModelSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ModelSummary_modelId *smithy.Schema
 
 var ModelSummary_displayName *smithy.Schema
@@ -3166,6 +3257,8 @@ var ModelSummary_modelLifecycle *smithy.Schema
 var ModelSummary_legacyTimestamp *smithy.Schema
 
 var ModelSummary_endOfLifeTimestamp *smithy.Schema
+
+var ModelSummary_globalResiliencyStatus *smithy.Schema
 
 var _ModelSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -3578,7 +3671,7 @@ var QuickResponseContents_markdown *smithy.Schema
 var QuickResponseData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "QuickResponseData",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var QuickResponseData_quickResponseArn *smithy.Schema
 
 var QuickResponseData_quickResponseId *smithy.Schema
@@ -3596,6 +3689,8 @@ var QuickResponseData_status *smithy.Schema
 var QuickResponseData_createdTime *smithy.Schema
 
 var QuickResponseData_lastModifiedTime *smithy.Schema
+
+var QuickResponseData_lastModifiedRegion *smithy.Schema
 
 var QuickResponseData_contents *smithy.Schema
 
@@ -3722,7 +3817,7 @@ var QuickResponseSearchExpression_orderOnField *smithy.Schema
 var QuickResponseSearchResultData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "QuickResponseSearchResultData",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var QuickResponseSearchResultData_quickResponseArn *smithy.Schema
 
 var QuickResponseSearchResultData_quickResponseId *smithy.Schema
@@ -3742,6 +3837,8 @@ var QuickResponseSearchResultData_contents *smithy.Schema
 var QuickResponseSearchResultData_createdTime *smithy.Schema
 
 var QuickResponseSearchResultData_lastModifiedTime *smithy.Schema
+
+var QuickResponseSearchResultData_lastModifiedRegion *smithy.Schema
 
 var QuickResponseSearchResultData_isActive *smithy.Schema
 
@@ -3777,7 +3874,7 @@ var _QuickResponseStatus = smithy.NewSchema(smithy.ShapeID{
 var QuickResponseSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "QuickResponseSummary",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var QuickResponseSummary_quickResponseArn *smithy.Schema
 
 var QuickResponseSummary_quickResponseId *smithy.Schema
@@ -3795,6 +3892,8 @@ var QuickResponseSummary_status *smithy.Schema
 var QuickResponseSummary_createdTime *smithy.Schema
 
 var QuickResponseSummary_lastModifiedTime *smithy.Schema
+
+var QuickResponseSummary_lastModifiedRegion *smithy.Schema
 
 var QuickResponseSummary_description *smithy.Schema
 
@@ -3924,6 +4023,18 @@ var RenderingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RenderingConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var RenderingConfiguration_templateUri *smithy.Schema
+
+var ReplicaKmsKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ReplicaKmsKey",
+}, smithy.ShapeTypeStructure, 1)
+var ReplicaKmsKey_arn *smithy.Schema
+
+var _ReplicaKmsKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ReplicaKmsKeyList",
+}, smithy.ShapeTypeList, 1)
+var _ReplicaKmsKeyList_member *smithy.Schema
 
 var RequestTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -4133,8 +4244,10 @@ var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
 var ServerSideEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ServerSideEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ServerSideEncryptionConfiguration_kmsKeyId *smithy.Schema
+
+var ServerSideEncryptionConfiguration_replicaKmsKeys *smithy.Schema
 
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -4762,9 +4875,16 @@ var UnauthorizedException_message *smithy.Schema
 var UnprocessableContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "UnprocessableContentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 422})
 var UnprocessableContentException_message *smithy.Schema
+
+var UnprocessableContentException_reason *smithy.Schema
+
+var _UnprocessableContentReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "UnprocessableContentReason",
+}, smithy.ShapeTypeString, 0)
 
 var _UploadId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -6278,6 +6398,38 @@ var QueryAssistantResponse_results *smithy.Schema
 
 var QueryAssistantResponse_nextToken *smithy.Schema
 
+var RegisterAssistantReplicaKeyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RegisterAssistantReplicaKeyRequest",
+}, smithy.ShapeTypeStructure, 3)
+var RegisterAssistantReplicaKeyRequest_assistantId *smithy.Schema
+
+var RegisterAssistantReplicaKeyRequest_replicaKmsKey *smithy.Schema
+
+var RegisterAssistantReplicaKeyRequest_clientToken *smithy.Schema
+
+var RegisterAssistantReplicaKeyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RegisterAssistantReplicaKeyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var RegisterAssistantReplicaKeyResponse_assistant *smithy.Schema
+
+var RegisterKnowledgeBaseReplicaKeyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RegisterKnowledgeBaseReplicaKeyRequest",
+}, smithy.ShapeTypeStructure, 3)
+var RegisterKnowledgeBaseReplicaKeyRequest_knowledgeBaseId *smithy.Schema
+
+var RegisterKnowledgeBaseReplicaKeyRequest_replicaKmsKey *smithy.Schema
+
+var RegisterKnowledgeBaseReplicaKeyRequest_clientToken *smithy.Schema
+
+var RegisterKnowledgeBaseReplicaKeyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RegisterKnowledgeBaseReplicaKeyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var RegisterKnowledgeBaseReplicaKeyResponse_knowledgeBase *smithy.Schema
+
 var RemoveAssistantAIAgentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "RemoveAssistantAIAgentRequest",
@@ -7059,6 +7211,10 @@ func init() {
 
 	AIAgentData_modifiedTime = AIAgentData.AddMember("modifiedTime", smithyprelude.Timestamp)
 
+	AIAgentData_lastModifiedTime = AIAgentData.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AIAgentData_lastModifiedRegion = AIAgentData.AddMember("lastModifiedRegion", _AwsRegion)
+
 	AIAgentData_description = AIAgentData.AddMember("description", _Description)
 
 	AIAgentData_visibilityStatus = AIAgentData.AddMember("visibilityStatus", _VisibilityStatus)
@@ -7082,6 +7238,10 @@ func init() {
 	AIAgentSummary_aiAgentArn = AIAgentSummary.AddMember("aiAgentArn", _Arn)
 
 	AIAgentSummary_modifiedTime = AIAgentSummary.AddMember("modifiedTime", smithyprelude.Timestamp)
+
+	AIAgentSummary_lastModifiedTime = AIAgentSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AIAgentSummary_lastModifiedRegion = AIAgentSummary.AddMember("lastModifiedRegion", _AwsRegion)
 
 	AIAgentSummary_visibilityStatus = AIAgentSummary.AddMember("visibilityStatus", _VisibilityStatus)
 
@@ -7203,6 +7363,10 @@ func init() {
 
 	AIGuardrailData_modifiedTime = AIGuardrailData.AddMember("modifiedTime", smithyprelude.Timestamp)
 
+	AIGuardrailData_lastModifiedTime = AIGuardrailData.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AIGuardrailData_lastModifiedRegion = AIGuardrailData.AddMember("lastModifiedRegion", _AwsRegion)
+
 	AIGuardrailSummary_name = AIGuardrailSummary.AddMember("name", _Name)
 
 	AIGuardrailSummary_assistantId = AIGuardrailSummary.AddMember("assistantId", _Uuid)
@@ -7214,6 +7378,10 @@ func init() {
 	AIGuardrailSummary_aiGuardrailArn = AIGuardrailSummary.AddMember("aiGuardrailArn", _Arn)
 
 	AIGuardrailSummary_modifiedTime = AIGuardrailSummary.AddMember("modifiedTime", smithyprelude.Timestamp)
+
+	AIGuardrailSummary_lastModifiedTime = AIGuardrailSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AIGuardrailSummary_lastModifiedRegion = AIGuardrailSummary.AddMember("lastModifiedRegion", _AwsRegion)
 
 	AIGuardrailSummary_visibilityStatus = AIGuardrailSummary.AddMember("visibilityStatus", _VisibilityStatus)
 
@@ -7267,6 +7435,10 @@ func init() {
 
 	AIPromptData_modifiedTime = AIPromptData.AddMember("modifiedTime", smithyprelude.Timestamp)
 
+	AIPromptData_lastModifiedTime = AIPromptData.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AIPromptData_lastModifiedRegion = AIPromptData.AddMember("lastModifiedRegion", _AwsRegion)
+
 	AIPromptData_description = AIPromptData.AddMember("description", _Description)
 
 	AIPromptData_visibilityStatus = AIPromptData.AddMember("visibilityStatus", _VisibilityStatus)
@@ -7290,6 +7462,10 @@ func init() {
 	AIPromptSummary_aiPromptArn = AIPromptSummary.AddMember("aiPromptArn", _Arn)
 
 	AIPromptSummary_modifiedTime = AIPromptSummary.AddMember("modifiedTime", smithyprelude.Timestamp)
+
+	AIPromptSummary_lastModifiedTime = AIPromptSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AIPromptSummary_lastModifiedRegion = AIPromptSummary.AddMember("lastModifiedRegion", _AwsRegion)
 
 	AIPromptSummary_templateType = AIPromptSummary.AddMember("templateType", _AIPromptTemplateType)
 
@@ -7351,6 +7527,10 @@ func init() {
 
 	AssistantAssociationData_tags = AssistantAssociationData.AddMember("tags", _Tags)
 
+	AssistantAssociationData_lastModifiedTime = AssistantAssociationData.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AssistantAssociationData_lastModifiedRegion = AssistantAssociationData.AddMember("lastModifiedRegion", _AwsRegion)
+
 	_AssistantAssociationIdList_member = _AssistantAssociationIdList.AddMember("member", _UuidOrArn)
 
 	AssistantAssociationInputData_knowledgeBaseId = AssistantAssociationInputData.AddMember("knowledgeBaseId", _Uuid)
@@ -7371,11 +7551,21 @@ func init() {
 
 	AssistantAssociationSummary_tags = AssistantAssociationSummary.AddMember("tags", _Tags)
 
+	AssistantAssociationSummary_lastModifiedTime = AssistantAssociationSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AssistantAssociationSummary_lastModifiedRegion = AssistantAssociationSummary.AddMember("lastModifiedRegion", _AwsRegion)
+
 	_AssistantAssociationSummaryList_member = _AssistantAssociationSummaryList.AddMember("member", AssistantAssociationSummary)
 
 	AssistantCapabilityConfiguration_type = AssistantCapabilityConfiguration.AddMember("type", _AssistantCapabilityType)
 
+	ReplicaKmsKey_arn = ReplicaKmsKey.AddMember("arn", _NonEmptyString)
+
+	_ReplicaKmsKeyList_member = _ReplicaKmsKeyList.AddMember("member", ReplicaKmsKey)
+
 	ServerSideEncryptionConfiguration_kmsKeyId = ServerSideEncryptionConfiguration.AddMember("kmsKeyId", _NonEmptyString)
+
+	ServerSideEncryptionConfiguration_replicaKmsKeys = ServerSideEncryptionConfiguration.AddMember("replicaKmsKeys", _ReplicaKmsKeyList)
 
 	AssistantIntegrationConfiguration_topicIntegrationArn = AssistantIntegrationConfiguration.AddMember("topicIntegrationArn", _GenericArn)
 
@@ -7409,6 +7599,12 @@ func init() {
 
 	AssistantData_orchestratorConfigurationList = AssistantData.AddMember("orchestratorConfigurationList", _OrchestratorConfigurationList)
 
+	AssistantData_lastModifiedTime = AssistantData.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AssistantData_lastModifiedRegion = AssistantData.AddMember("lastModifiedRegion", _AwsRegion)
+
+	AssistantData_assistantGlobalResiliencyStatus = AssistantData.AddMember("assistantGlobalResiliencyStatus", _AssistantGlobalResiliencyStatus)
+
 	AssistantSummary_assistantId = AssistantSummary.AddMember("assistantId", _Uuid)
 
 	AssistantSummary_assistantArn = AssistantSummary.AddMember("assistantArn", _Arn)
@@ -7432,6 +7628,10 @@ func init() {
 	AssistantSummary_aiAgentConfiguration = AssistantSummary.AddMember("aiAgentConfiguration", _AIAgentConfigurationMap)
 
 	AssistantSummary_orchestratorConfigurationList = AssistantSummary.AddMember("orchestratorConfigurationList", _OrchestratorConfigurationList)
+
+	AssistantSummary_lastModifiedTime = AssistantSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	AssistantSummary_lastModifiedRegion = AssistantSummary.AddMember("lastModifiedRegion", _AwsRegion)
 
 	_AssistantList_member = _AssistantList.AddMember("member", AssistantSummary)
 
@@ -7577,6 +7777,12 @@ func init() {
 
 	ContentData_urlExpiry = ContentData.AddMember("urlExpiry", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
 
+	ContentData_lastModifiedTime = ContentData.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	ContentData_lastModifiedRegion = ContentData.AddMember("lastModifiedRegion", _AwsRegion)
+
+	ContentData_fileHash = ContentData.AddMember("fileHash", _NonEmptyString)
+
 	Highlight_beginOffsetInclusive = Highlight.AddMember("beginOffsetInclusive", _HighlightOffset)
 
 	Highlight_endOffsetExclusive = Highlight.AddMember("endOffsetExclusive", _HighlightOffset)
@@ -7636,6 +7842,12 @@ func init() {
 	ContentSummary_metadata = ContentSummary.AddMember("metadata", _ContentMetadata)
 
 	ContentSummary_tags = ContentSummary.AddMember("tags", _Tags)
+
+	ContentSummary_lastModifiedTime = ContentSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	ContentSummary_lastModifiedRegion = ContentSummary.AddMember("lastModifiedRegion", _AwsRegion)
+
+	ContentSummary_fileHash = ContentSummary.AddMember("fileHash", _NonEmptyString)
 
 	_ContentSummaryList_member = _ContentSummaryList.AddMember("member", ContentSummary)
 
@@ -8233,6 +8445,10 @@ func init() {
 
 	KnowledgeBaseData_ingestionFailureReasons = KnowledgeBaseData.AddMember("ingestionFailureReasons", _FailureReason)
 
+	KnowledgeBaseData_lastModifiedTime = KnowledgeBaseData.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	KnowledgeBaseData_lastModifiedRegion = KnowledgeBaseData.AddMember("lastModifiedRegion", _AwsRegion)
+
 	KnowledgeBaseSummary_knowledgeBaseId = KnowledgeBaseSummary.AddMember("knowledgeBaseId", _Uuid)
 
 	KnowledgeBaseSummary_knowledgeBaseArn = KnowledgeBaseSummary.AddMember("knowledgeBaseArn", _Arn)
@@ -8254,6 +8470,10 @@ func init() {
 	KnowledgeBaseSummary_description = KnowledgeBaseSummary.AddMember("description", _Description)
 
 	KnowledgeBaseSummary_tags = KnowledgeBaseSummary.AddMember("tags", _Tags)
+
+	KnowledgeBaseSummary_lastModifiedTime = KnowledgeBaseSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp)
+
+	KnowledgeBaseSummary_lastModifiedRegion = KnowledgeBaseSummary.AddMember("lastModifiedRegion", _AwsRegion)
 
 	_KnowledgeBaseList_member = _KnowledgeBaseList.AddMember("member", KnowledgeBaseSummary)
 
@@ -8485,6 +8705,8 @@ func init() {
 
 	ModelSummary_endOfLifeTimestamp = ModelSummary.AddMember("endOfLifeTimestamp", smithyprelude.Timestamp)
 
+	ModelSummary_globalResiliencyStatus = ModelSummary.AddMember("globalResiliencyStatus", _GlobalResiliencyStatus)
+
 	_ModelSummaryList_member = _ModelSummaryList.AddMember("member", ModelSummary)
 
 	NotifyRecommendationsReceivedError_recommendationId = NotifyRecommendationsReceivedError.AddMember("recommendationId", _RecommendationId)
@@ -8550,6 +8772,8 @@ func init() {
 	QuickResponseData_createdTime = QuickResponseData.AddMember("createdTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
 
 	QuickResponseData_lastModifiedTime = QuickResponseData.AddMember("lastModifiedTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
+
+	QuickResponseData_lastModifiedRegion = QuickResponseData.AddMember("lastModifiedRegion", _AwsRegion)
 
 	QuickResponseData_contents = QuickResponseData.AddMember("contents", QuickResponseContents)
 
@@ -8627,6 +8851,8 @@ func init() {
 
 	QuickResponseSearchResultData_lastModifiedTime = QuickResponseSearchResultData.AddMember("lastModifiedTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
 
+	QuickResponseSearchResultData_lastModifiedRegion = QuickResponseSearchResultData.AddMember("lastModifiedRegion", _AwsRegion)
+
 	QuickResponseSearchResultData_isActive = QuickResponseSearchResultData.AddMember("isActive", smithyprelude.Boolean)
 
 	QuickResponseSearchResultData_description = QuickResponseSearchResultData.AddMember("description", _QuickResponseDescription)
@@ -8666,6 +8892,8 @@ func init() {
 	QuickResponseSummary_createdTime = QuickResponseSummary.AddMember("createdTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
 
 	QuickResponseSummary_lastModifiedTime = QuickResponseSummary.AddMember("lastModifiedTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
+
+	QuickResponseSummary_lastModifiedRegion = QuickResponseSummary.AddMember("lastModifiedRegion", _AwsRegion)
 
 	QuickResponseSummary_description = QuickResponseSummary.AddMember("description", _QuickResponseDescription)
 
@@ -8994,6 +9222,8 @@ func init() {
 	UnauthorizedException_message = UnauthorizedException.AddMember("message", smithyprelude.String)
 
 	UnprocessableContentException_message = UnprocessableContentException.AddMember("message", smithyprelude.String)
+
+	UnprocessableContentException_reason = UnprocessableContentException.AddMember("reason", _UnprocessableContentReason)
 
 	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
 
@@ -9740,6 +9970,22 @@ func init() {
 	QueryAssistantResponse_results = QueryAssistantResponse.AddMember("results", _QueryResultsList)
 
 	QueryAssistantResponse_nextToken = QueryAssistantResponse.AddMember("nextToken", _NextToken)
+
+	RegisterAssistantReplicaKeyRequest_assistantId = RegisterAssistantReplicaKeyRequest.AddMember("assistantId", _UuidOrArn, &smithytraits.HTTPLabel{})
+
+	RegisterAssistantReplicaKeyRequest_replicaKmsKey = RegisterAssistantReplicaKeyRequest.AddMember("replicaKmsKey", ReplicaKmsKey)
+
+	RegisterAssistantReplicaKeyRequest_clientToken = RegisterAssistantReplicaKeyRequest.AddMember("clientToken", _ClientToken)
+
+	RegisterAssistantReplicaKeyResponse_assistant = RegisterAssistantReplicaKeyResponse.AddMember("assistant", AssistantData)
+
+	RegisterKnowledgeBaseReplicaKeyRequest_knowledgeBaseId = RegisterKnowledgeBaseReplicaKeyRequest.AddMember("knowledgeBaseId", _UuidOrArn, &smithytraits.HTTPLabel{})
+
+	RegisterKnowledgeBaseReplicaKeyRequest_replicaKmsKey = RegisterKnowledgeBaseReplicaKeyRequest.AddMember("replicaKmsKey", ReplicaKmsKey)
+
+	RegisterKnowledgeBaseReplicaKeyRequest_clientToken = RegisterKnowledgeBaseReplicaKeyRequest.AddMember("clientToken", _ClientToken)
+
+	RegisterKnowledgeBaseReplicaKeyResponse_knowledgeBase = RegisterKnowledgeBaseReplicaKeyResponse.AddMember("knowledgeBase", KnowledgeBaseData)
 
 	RemoveAssistantAIAgentRequest_assistantId = RemoveAssistantAIAgentRequest.AddMember("assistantId", _UuidOrArn, &smithytraits.HTTPLabel{})
 

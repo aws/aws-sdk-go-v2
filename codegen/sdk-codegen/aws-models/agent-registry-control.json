@@ -1078,7 +1078,7 @@
                 "discoveryUrl": {
                     "target": "com.amazonaws.agentregistrycontrol#DiscoveryUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.</p>",
+                        "smithy.api#documentation": "<p>The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL used to retrieve the identity provider's metadata and signing keys.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1491,12 +1491,12 @@
         "com.amazonaws.agentregistrycontrol#DiscoveryUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The OpenID Connect discovery URL, ending in /.well-known/openid-configuration, used to retrieve the identity provider's metadata and signing keys.</p>",
+                "smithy.api#documentation": "<p>The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL used to retrieve the identity provider's metadata and signing keys. The URL contains /.well-known/openid-configuration or /.well-known/oauth-authorization-server, respectively.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^.+/\\.well-known/openid-configuration$"
+                "smithy.api#pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"
             }
         },
         "com.amazonaws.agentregistrycontrol#EncryptionConfiguration": {

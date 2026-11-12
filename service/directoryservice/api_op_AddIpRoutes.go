@@ -127,7 +127,9 @@ func (v *AddIpRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.AddIpRoutesRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeIpRoutes(s, schemas.AddIpRoutesRequest_IpRoutes, v.IpRoutes)
+	if v.IpRoutes != nil {
+		serializeIpRoutes(s, schemas.AddIpRoutesRequest_IpRoutes, v.IpRoutes)
+	}
 	if v.UpdateSecurityGroupForDirectoryControllers != false {
 		s.WriteBool(schemas.AddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers, v.UpdateSecurityGroupForDirectoryControllers)
 	}
@@ -170,6 +172,9 @@ func (c *Client) addOperationAddIpRoutesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

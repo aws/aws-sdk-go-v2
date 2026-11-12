@@ -1,0 +1,5 @@
+PUT /resourcepolicy
+
+Content-Type: application/json
+
+{"arn":"__Arn__","expectedRevisionId":"__ExpectedRevisionId__","policy":"__Policy__"}

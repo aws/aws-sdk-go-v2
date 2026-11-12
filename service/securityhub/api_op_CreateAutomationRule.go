@@ -88,7 +88,9 @@ func (v *CreateAutomationRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAutomationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.CreateAutomationRuleRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.CreateAutomationRuleRequest_Actions, v.Actions)
+	}
 	if v.Criteria != nil {
 		s.WriteStruct(schemas.CreateAutomationRuleRequest_Criteria)
 		v.Criteria.SerializeMembers(s)
@@ -109,7 +111,9 @@ func (v *CreateAutomationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleStatus != "" {
 		s.WriteString(schemas.CreateAutomationRuleRequest_RuleStatus, string(v.RuleStatus))
 	}
-	serializeTagMap(s, schemas.CreateAutomationRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAutomationRuleRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAutomationRuleOutput struct {

@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteUserPermissionsBoundaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPermissionsBoundaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserPermissionsBoundaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPermissionsBoundaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserName != nil {
+		s.WriteString(schemas.DeleteUserPermissionsBoundaryRequest_UserName, *v.UserName)
+	}
+}
+
 type DeleteUserPermissionsBoundaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteUserPermissionsBoundaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPermissionsBoundaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPermissionsBoundaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUserPermissionsBoundaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserPermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteUserPermissionsBoundary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPermissionsBoundary, schemas.DeleteUserPermissionsBoundaryRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteUserPermissionsBoundary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPermissionsBoundary, schemas.DeleteUserPermissionsBoundaryRequest, nil), output: &DeleteUserPermissionsBoundaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -130,7 +130,9 @@ func (v *GetCommandOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetCommandResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeCommandParameterList(s, schemas.GetCommandResponse_mandatoryParameters, v.MandatoryParameters)
+	if v.MandatoryParameters != nil {
+		serializeCommandParameterList(s, schemas.GetCommandResponse_mandatoryParameters, v.MandatoryParameters)
+	}
 	if v.Namespace != "" {
 		s.WriteString(schemas.GetCommandResponse_namespace, string(v.Namespace))
 	}

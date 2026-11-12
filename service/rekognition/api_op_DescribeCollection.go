@@ -4,6 +4,8 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type DescribeCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.DescribeCollectionRequest_CollectionId, *v.CollectionId)
+	}
+}
+
 type DescribeCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the collection.
@@ -68,13 +82,56 @@ type DescribeCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionARN != nil {
+		s.WriteString(schemas.DescribeCollectionResponse_CollectionARN, *v.CollectionARN)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.DescribeCollectionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.FaceCount != nil {
+		s.WriteInt64(schemas.DescribeCollectionResponse_FaceCount, *v.FaceCount)
+	}
+	if v.FaceModelVersion != nil {
+		s.WriteString(schemas.DescribeCollectionResponse_FaceModelVersion, *v.FaceModelVersion)
+	}
+	if v.UserCount != nil {
+		s.WriteInt64(schemas.DescribeCollectionResponse_UserCount, *v.UserCount)
+	}
+}
+func (v *DescribeCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCollectionResponse_CollectionARN:
+			v.CollectionARN = new(string)
+			return d.ReadString(schemas.DescribeCollectionResponse_CollectionARN, v.CollectionARN)
+		case schemas.DescribeCollectionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeCollectionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.DescribeCollectionResponse_FaceCount:
+			v.FaceCount = new(int64)
+			return d.ReadInt64(schemas.DescribeCollectionResponse_FaceCount, v.FaceCount)
+		case schemas.DescribeCollectionResponse_FaceModelVersion:
+			v.FaceModelVersion = new(string)
+			return d.ReadString(schemas.DescribeCollectionResponse_FaceModelVersion, v.FaceModelVersion)
+		case schemas.DescribeCollectionResponse_UserCount:
+			v.UserCount = new(int64)
+			return d.ReadInt64(schemas.DescribeCollectionResponse_UserCount, v.UserCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCollection, schemas.DescribeCollectionRequest, schemas.DescribeCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCollection, schemas.DescribeCollectionRequest, schemas.DescribeCollectionResponse), output: &DescribeCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

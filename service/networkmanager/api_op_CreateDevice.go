@@ -106,7 +106,9 @@ func (v *CreateDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SiteId != nil {
 		s.WriteString(schemas.CreateDeviceRequest_SiteId, *v.SiteId)
 	}
-	serializeTagList(s, schemas.CreateDeviceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDeviceRequest_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateDeviceRequest_Type, *v.Type)
 	}

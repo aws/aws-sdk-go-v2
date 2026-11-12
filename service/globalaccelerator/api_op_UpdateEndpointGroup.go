@@ -92,7 +92,9 @@ func (v *UpdateEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointConfigurations(s, schemas.UpdateEndpointGroupRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointConfigurations != nil {
+		serializeEndpointConfigurations(s, schemas.UpdateEndpointGroupRequest_EndpointConfigurations, v.EndpointConfigurations)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.UpdateEndpointGroupRequest_EndpointGroupArn, *v.EndpointGroupArn)
 	}
@@ -108,7 +110,9 @@ func (v *UpdateEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HealthCheckProtocol != "" {
 		s.WriteString(schemas.UpdateEndpointGroupRequest_HealthCheckProtocol, string(v.HealthCheckProtocol))
 	}
-	serializePortOverrides(s, schemas.UpdateEndpointGroupRequest_PortOverrides, v.PortOverrides)
+	if v.PortOverrides != nil {
+		serializePortOverrides(s, schemas.UpdateEndpointGroupRequest_PortOverrides, v.PortOverrides)
+	}
 	if v.ThresholdCount != nil {
 		s.WriteInt32(schemas.UpdateEndpointGroupRequest_ThresholdCount, *v.ThresholdCount)
 	}

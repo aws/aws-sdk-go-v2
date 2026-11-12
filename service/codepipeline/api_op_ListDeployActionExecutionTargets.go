@@ -61,7 +61,9 @@ func (v *ListDeployActionExecutionTargetsInput) SerializeMembers(s smithy.ShapeS
 	if v.ActionExecutionId != nil {
 		s.WriteString(schemas.ListDeployActionExecutionTargetsInput_actionExecutionId, *v.ActionExecutionId)
 	}
-	serializeTargetFilterList(s, schemas.ListDeployActionExecutionTargetsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeTargetFilterList(s, schemas.ListDeployActionExecutionTargetsInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDeployActionExecutionTargetsInput_maxResults, *v.MaxResults)
 	}
@@ -98,7 +100,9 @@ func (v *ListDeployActionExecutionTargetsOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeployActionExecutionTargetsOutput_nextToken, *v.NextToken)
 	}
-	serializeDeployActionExecutionTargetList(s, schemas.ListDeployActionExecutionTargetsOutput_targets, v.Targets)
+	if v.Targets != nil {
+		serializeDeployActionExecutionTargetList(s, schemas.ListDeployActionExecutionTargetsOutput_targets, v.Targets)
+	}
 }
 func (v *ListDeployActionExecutionTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDeployActionExecutionTargetsOutput, func(s *smithy.Schema) error {
@@ -127,6 +131,9 @@ func (c *Client) addOperationListDeployActionExecutionTargetsMiddlewares(stack *
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

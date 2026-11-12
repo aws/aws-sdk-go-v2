@@ -58,7 +58,9 @@ func (v *DetachInstancesFromLoadBalancerInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DetachInstancesFromLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceNameList(s, schemas.DetachInstancesFromLoadBalancerRequest_instanceNames, v.InstanceNames)
+	if v.InstanceNames != nil {
+		serializeResourceNameList(s, schemas.DetachInstancesFromLoadBalancerRequest_instanceNames, v.InstanceNames)
+	}
 	if v.LoadBalancerName != nil {
 		s.WriteString(schemas.DetachInstancesFromLoadBalancerRequest_loadBalancerName, *v.LoadBalancerName)
 	}
@@ -84,7 +86,9 @@ func (v *DetachInstancesFromLoadBalancerOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DetachInstancesFromLoadBalancerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DetachInstancesFromLoadBalancerResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DetachInstancesFromLoadBalancerResult_operations, v.Operations)
+	}
 }
 func (v *DetachInstancesFromLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetachInstancesFromLoadBalancerResult, func(s *smithy.Schema) error {

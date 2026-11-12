@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeEnvironmentManagedActionsResponse><DescribeEnvironmentManagedActionsResult><ManagedActions><member><ActionDescription>__ActionDescription__</ActionDescription><ActionId>__ActionId__</ActionId><ActionType>InstanceRefresh</ActionType><Status>Scheduled</Status><WindowStartTime>2000-01-01T00:00:00Z</WindowStartTime></member><member><ActionDescription>__ActionDescription__</ActionDescription><ActionId>__ActionId__</ActionId><ActionType>InstanceRefresh</ActionType><Status>Scheduled</Status><WindowStartTime>2000-01-01T00:00:00Z</WindowStartTime></member></ManagedActions></DescribeEnvironmentManagedActionsResult></DescribeEnvironmentManagedActionsResponse>

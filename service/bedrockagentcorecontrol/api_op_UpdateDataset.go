@@ -5,6 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,24 @@ type UpdateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDatasetRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.UpdateDatasetRequest_datasetId, *v.DatasetId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDatasetRequest_description, *v.Description)
+	}
+}
+
 type UpdateDatasetOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the updated dataset.
@@ -72,13 +92,44 @@ type UpdateDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.UpdateDatasetResponse_datasetArn, *v.DatasetArn)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.UpdateDatasetResponse_datasetId, *v.DatasetId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateDatasetResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDatasetResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.UpdateDatasetResponse_datasetArn, v.DatasetArn)
+		case schemas.UpdateDatasetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.UpdateDatasetResponse_datasetId, v.DatasetId)
+		case schemas.UpdateDatasetResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDatasetResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataset, schemas.UpdateDatasetRequest, schemas.UpdateDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataset, schemas.UpdateDatasetRequest, schemas.UpdateDatasetResponse), output: &UpdateDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

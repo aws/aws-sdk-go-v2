@@ -4,7 +4,9 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetS3TableIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetS3TableIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetS3TableIntegrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetS3TableIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetS3TableIntegrationInput_Arn, *v.Arn)
+	}
+}
+
 type GetS3TableIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the S3 Table integration.
@@ -62,13 +76,68 @@ type GetS3TableIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetS3TableIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetS3TableIntegrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetS3TableIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetS3TableIntegrationOutput_Arn, *v.Arn)
+	}
+	if v.CreatedTimeStamp != nil {
+		s.WriteInt64(schemas.GetS3TableIntegrationOutput_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.DestinationTableBucketArn != nil {
+		s.WriteString(schemas.GetS3TableIntegrationOutput_DestinationTableBucketArn, *v.DestinationTableBucketArn)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.GetS3TableIntegrationOutput_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetS3TableIntegrationOutput_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetS3TableIntegrationOutput_Status, string(v.Status))
+	}
+}
+func (v *GetS3TableIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetS3TableIntegrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetS3TableIntegrationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetS3TableIntegrationOutput_Arn, v.Arn)
+		case schemas.GetS3TableIntegrationOutput_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(int64)
+			return d.ReadInt64(schemas.GetS3TableIntegrationOutput_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.GetS3TableIntegrationOutput_DestinationTableBucketArn:
+			v.DestinationTableBucketArn = new(string)
+			return d.ReadString(schemas.GetS3TableIntegrationOutput_DestinationTableBucketArn, v.DestinationTableBucketArn)
+		case schemas.GetS3TableIntegrationOutput_Encryption:
+			v.Encryption = &types.Encryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.GetS3TableIntegrationOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetS3TableIntegrationOutput_RoleArn, v.RoleArn)
+		case schemas.GetS3TableIntegrationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetS3TableIntegrationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IntegrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetS3TableIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetS3TableIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetS3TableIntegration, schemas.GetS3TableIntegrationInput, schemas.GetS3TableIntegrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetS3TableIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetS3TableIntegration, schemas.GetS3TableIntegrationInput, schemas.GetS3TableIntegrationOutput), output: &GetS3TableIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

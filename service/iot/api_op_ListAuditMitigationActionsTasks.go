@@ -120,7 +120,9 @@ func (v *ListAuditMitigationActionsTasksOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAuditMitigationActionsTasksResponse_nextToken, *v.NextToken)
 	}
-	serializeAuditMitigationActionsTaskMetadataList(s, schemas.ListAuditMitigationActionsTasksResponse_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeAuditMitigationActionsTaskMetadataList(s, schemas.ListAuditMitigationActionsTasksResponse_tasks, v.Tasks)
+	}
 }
 func (v *ListAuditMitigationActionsTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAuditMitigationActionsTasksResponse, func(s *smithy.Schema) error {

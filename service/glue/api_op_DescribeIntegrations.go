@@ -53,7 +53,9 @@ func (v *DescribeIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationFilterList(s, schemas.DescribeIntegrationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeIntegrationFilterList(s, schemas.DescribeIntegrationsRequest_Filters, v.Filters)
+	}
 	if v.IntegrationIdentifier != nil {
 		s.WriteString(schemas.DescribeIntegrationsRequest_IntegrationIdentifier, *v.IntegrationIdentifier)
 	}
@@ -87,7 +89,9 @@ func (v *DescribeIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationsList(s, schemas.DescribeIntegrationsResponse_Integrations, v.Integrations)
+	if v.Integrations != nil {
+		serializeIntegrationsList(s, schemas.DescribeIntegrationsResponse_Integrations, v.Integrations)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeIntegrationsResponse_Marker, *v.Marker)
 	}

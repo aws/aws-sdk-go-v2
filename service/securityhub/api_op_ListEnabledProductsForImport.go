@@ -82,7 +82,9 @@ func (v *ListEnabledProductsForImportOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnabledProductsForImportResponse_NextToken, *v.NextToken)
 	}
-	serializeProductSubscriptionArnList(s, schemas.ListEnabledProductsForImportResponse_ProductSubscriptions, v.ProductSubscriptions)
+	if v.ProductSubscriptions != nil {
+		serializeProductSubscriptionArnList(s, schemas.ListEnabledProductsForImportResponse_ProductSubscriptions, v.ProductSubscriptions)
+	}
 }
 func (v *ListEnabledProductsForImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEnabledProductsForImportResponse, func(s *smithy.Schema) error {

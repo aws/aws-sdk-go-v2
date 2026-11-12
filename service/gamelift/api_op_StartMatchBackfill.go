@@ -130,7 +130,9 @@ func (v *StartMatchBackfillInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GameSessionArn != nil {
 		s.WriteString(schemas.StartMatchBackfillInput_GameSessionArn, *v.GameSessionArn)
 	}
-	serializePlayerList(s, schemas.StartMatchBackfillInput_Players, v.Players)
+	if v.Players != nil {
+		serializePlayerList(s, schemas.StartMatchBackfillInput_Players, v.Players)
+	}
 	if v.TicketId != nil {
 		s.WriteString(schemas.StartMatchBackfillInput_TicketId, *v.TicketId)
 	}

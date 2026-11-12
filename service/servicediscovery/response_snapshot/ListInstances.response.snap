@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.ListInstances
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Instances":[{"Attributes":{"key0":"__Value__"},"CreatedByAccount":"__CreatedByAccount__","Id":"__Id__"},{"Attributes":{"key0":"__Value__"},"CreatedByAccount":"__CreatedByAccount__","Id":"__Id__"}],"NextToken":"__NextToken__","ResourceOwner":"__ResourceOwner__"}
+¿iInstancesŸ¿jAttributes¿dkey0i__Value__ÿpCreatedByAccountt__CreatedByAccount__bIdf__Id__ÿ¿jAttributes¿dkey0i__Value__ÿpCreatedByAccountt__CreatedByAccount__bIdf__Id__ÿÿiNextTokenm__NextToken__mResourceOwnerq__ResourceOwner__ÿ

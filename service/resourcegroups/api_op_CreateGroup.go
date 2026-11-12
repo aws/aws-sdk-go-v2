@@ -99,7 +99,9 @@ func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupConfigurationList(s, schemas.CreateGroupInput_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeGroupConfigurationList(s, schemas.CreateGroupInput_Configuration, v.Configuration)
+	}
 	if v.Criticality != nil {
 		s.WriteInt32(schemas.CreateGroupInput_Criticality, *v.Criticality)
 	}
@@ -120,7 +122,9 @@ func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ResourceQuery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateGroupInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateGroupInput_Tags, v.Tags)
+	}
 }
 
 type CreateGroupOutput struct {
@@ -171,7 +175,9 @@ func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ResourceQuery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateGroupOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateGroupOutput_Tags, v.Tags)
+	}
 }
 func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateGroupOutput, func(s *smithy.Schema) error {

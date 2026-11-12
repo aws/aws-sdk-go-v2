@@ -93,14 +93,18 @@ func (v *SendEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Destination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMessageTagList(s, schemas.SendEmailRequest_EmailTags, v.EmailTags)
+	if v.EmailTags != nil {
+		serializeMessageTagList(s, schemas.SendEmailRequest_EmailTags, v.EmailTags)
+	}
 	if v.FeedbackForwardingEmailAddress != nil {
 		s.WriteString(schemas.SendEmailRequest_FeedbackForwardingEmailAddress, *v.FeedbackForwardingEmailAddress)
 	}
 	if v.FromEmailAddress != nil {
 		s.WriteString(schemas.SendEmailRequest_FromEmailAddress, *v.FromEmailAddress)
 	}
-	serializeEmailAddressList(s, schemas.SendEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	if v.ReplyToAddresses != nil {
+		serializeEmailAddressList(s, schemas.SendEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	}
 }
 
 // A unique message ID that you receive when Amazon Pinpoint accepts an email for

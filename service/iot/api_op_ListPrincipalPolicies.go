@@ -108,7 +108,9 @@ func (v *ListPrincipalPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListPrincipalPoliciesResponse_nextMarker, *v.NextMarker)
 	}
-	serializePolicies(s, schemas.ListPrincipalPoliciesResponse_policies, v.Policies)
+	if v.Policies != nil {
+		serializePolicies(s, schemas.ListPrincipalPoliciesResponse_policies, v.Policies)
+	}
 }
 func (v *ListPrincipalPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPrincipalPoliciesResponse, func(s *smithy.Schema) error {

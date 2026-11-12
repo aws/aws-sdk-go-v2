@@ -112,7 +112,9 @@ func (v *StartSupportDataExportInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartSupportDataExportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerDefinedValues(s, schemas.StartSupportDataExportRequest_customerDefinedValues, v.CustomerDefinedValues)
+	if v.CustomerDefinedValues != nil {
+		serializeCustomerDefinedValues(s, schemas.StartSupportDataExportRequest_customerDefinedValues, v.CustomerDefinedValues)
+	}
 	if v.DataSetType != "" {
 		s.WriteString(schemas.StartSupportDataExportRequest_dataSetType, string(v.DataSetType))
 	}

@@ -172,7 +172,9 @@ func (v *RetryDataReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.StagingArea.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	}
 }
 func (v *RetryDataReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SourceServer, func(s *smithy.Schema) error {

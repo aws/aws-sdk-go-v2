@@ -85,7 +85,9 @@ func (v *CreateModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelType != "" {
 		s.WriteString(schemas.CreateModelVersionRequest_modelType, string(v.ModelType))
 	}
-	serializetagList(s, schemas.CreateModelVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreateModelVersionRequest_tags, v.Tags)
+	}
 	if v.TrainingDataSchema != nil {
 		s.WriteStruct(schemas.CreateModelVersionRequest_trainingDataSchema)
 		v.TrainingDataSchema.SerializeMembers(s)

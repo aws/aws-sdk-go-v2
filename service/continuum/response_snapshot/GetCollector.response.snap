@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"collectorArn":"__CollectorArn__","collectorId":"__CollectorId__","configRecorderArn":"__ConfigRecorderArn__","createdAt":"2000-01-01T00:00:00Z","k8ClusterRole":"__KubernetesClusterRoleArn__","status":"ACTIVE","type":"AWS_COLLECTOR","updatedAt":"2000-01-01T00:00:00Z"}

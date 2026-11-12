@@ -69,7 +69,9 @@ func (v *SetVisibleToAllUsersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetVisibleToAllUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeXmlStringList(s, schemas.SetVisibleToAllUsersInput_JobFlowIds, v.JobFlowIds)
+	if v.JobFlowIds != nil {
+		serializeXmlStringList(s, schemas.SetVisibleToAllUsersInput_JobFlowIds, v.JobFlowIds)
+	}
 	if v.VisibleToAllUsers != nil {
 		s.WriteBool(schemas.SetVisibleToAllUsersInput_VisibleToAllUsers, *v.VisibleToAllUsers)
 	}

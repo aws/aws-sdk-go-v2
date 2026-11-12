@@ -65,7 +65,9 @@ func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BranchName != nil {
 		s.WriteString(schemas.CreateDeploymentRequest_branchName, *v.BranchName)
 	}
-	serializeFileMap(s, schemas.CreateDeploymentRequest_fileMap, v.FileMap)
+	if v.FileMap != nil {
+		serializeFileMap(s, schemas.CreateDeploymentRequest_fileMap, v.FileMap)
+	}
 }
 
 // The result structure for the create a new deployment request.
@@ -99,7 +101,9 @@ func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileUploadUrls(s, schemas.CreateDeploymentResult_fileUploadUrls, v.FileUploadUrls)
+	if v.FileUploadUrls != nil {
+		serializeFileUploadUrls(s, schemas.CreateDeploymentResult_fileUploadUrls, v.FileUploadUrls)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.CreateDeploymentResult_jobId, *v.JobId)
 	}

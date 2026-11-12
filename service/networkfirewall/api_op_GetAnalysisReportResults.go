@@ -131,7 +131,9 @@ func (v *GetAnalysisReportResultsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAnalysisReportResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisReportResults(s, schemas.GetAnalysisReportResultsResponse_AnalysisReportResults, v.AnalysisReportResults)
+	if v.AnalysisReportResults != nil {
+		serializeAnalysisReportResults(s, schemas.GetAnalysisReportResultsResponse_AnalysisReportResults, v.AnalysisReportResults)
+	}
 	if v.AnalysisType != "" {
 		s.WriteString(schemas.GetAnalysisReportResultsResponse_AnalysisType, string(v.AnalysisType))
 	}
@@ -197,6 +199,9 @@ func (c *Client) addOperationGetAnalysisReportResultsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

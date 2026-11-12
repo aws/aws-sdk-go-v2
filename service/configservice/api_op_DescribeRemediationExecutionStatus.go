@@ -68,7 +68,9 @@ func (v *DescribeRemediationExecutionStatusInput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRemediationExecutionStatusRequest_NextToken, *v.NextToken)
 	}
-	serializeResourceKeys(s, schemas.DescribeRemediationExecutionStatusRequest_ResourceKeys, v.ResourceKeys)
+	if v.ResourceKeys != nil {
+		serializeResourceKeys(s, schemas.DescribeRemediationExecutionStatusRequest_ResourceKeys, v.ResourceKeys)
+	}
 }
 
 type DescribeRemediationExecutionStatusOutput struct {
@@ -96,7 +98,9 @@ func (v *DescribeRemediationExecutionStatusOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRemediationExecutionStatusResponse_NextToken, *v.NextToken)
 	}
-	serializeRemediationExecutionStatuses(s, schemas.DescribeRemediationExecutionStatusResponse_RemediationExecutionStatuses, v.RemediationExecutionStatuses)
+	if v.RemediationExecutionStatuses != nil {
+		serializeRemediationExecutionStatuses(s, schemas.DescribeRemediationExecutionStatusResponse_RemediationExecutionStatuses, v.RemediationExecutionStatuses)
+	}
 }
 func (v *DescribeRemediationExecutionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRemediationExecutionStatusResponse, func(s *smithy.Schema) error {

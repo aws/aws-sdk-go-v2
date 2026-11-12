@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeDomainEndpointOptionsResponse><DescribeDomainEndpointOptionsResult><DomainEndpointOptions><Options><EnforceHTTPS>true</EnforceHTTPS><TLSSecurityPolicy>Policy-Min-TLS-1-0-2019-07</TLSSecurityPolicy></Options><Status><CreationDate>2000-01-01T00:00:00Z</CreationDate><PendingDeletion>true</PendingDeletion><State>RequiresIndexDocuments</State><UpdateDate>2000-01-01T00:00:00Z</UpdateDate><UpdateVersion>1</UpdateVersion></Status></DomainEndpointOptions></DescribeDomainEndpointOptionsResult></DescribeDomainEndpointOptionsResponse>

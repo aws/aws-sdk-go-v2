@@ -86,7 +86,9 @@ func (v *ListRoleAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListRoleAliasesResponse_nextMarker, *v.NextMarker)
 	}
-	serializeRoleAliases(s, schemas.ListRoleAliasesResponse_roleAliases, v.RoleAliases)
+	if v.RoleAliases != nil {
+		serializeRoleAliases(s, schemas.ListRoleAliasesResponse_roleAliases, v.RoleAliases)
+	}
 }
 func (v *ListRoleAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoleAliasesResponse, func(s *smithy.Schema) error {

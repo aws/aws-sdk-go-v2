@@ -140,7 +140,9 @@ func (v *GetDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceId != nil {
 		s.WriteString(schemas.GetDataSetResponse_SourceId, *v.SourceId)
 	}
-	serializeMapOf__string(s, schemas.GetDataSetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.GetDataSetResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetDataSetResponse_UpdatedAt, *v.UpdatedAt)
 	}

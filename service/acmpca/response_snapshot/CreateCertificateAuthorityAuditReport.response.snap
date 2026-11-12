@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.CreateCertificateAuthorityAuditReport
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AuditReportId":"__AuditReportId__","S3Key":"__S3Key__"}
+¿mAuditReportIdq__AuditReportId__eS3Keyi__S3Key__ÿ

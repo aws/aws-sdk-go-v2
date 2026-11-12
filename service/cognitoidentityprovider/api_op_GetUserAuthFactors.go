@@ -104,11 +104,15 @@ func (v *GetUserAuthFactorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUserAuthFactorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredUserAuthFactorsListType(s, schemas.GetUserAuthFactorsResponse_ConfiguredUserAuthFactors, v.ConfiguredUserAuthFactors)
+	if v.ConfiguredUserAuthFactors != nil {
+		serializeConfiguredUserAuthFactorsListType(s, schemas.GetUserAuthFactorsResponse_ConfiguredUserAuthFactors, v.ConfiguredUserAuthFactors)
+	}
 	if v.PreferredMfaSetting != nil {
 		s.WriteString(schemas.GetUserAuthFactorsResponse_PreferredMfaSetting, *v.PreferredMfaSetting)
 	}
-	serializeUserMFASettingListType(s, schemas.GetUserAuthFactorsResponse_UserMFASettingList, v.UserMFASettingList)
+	if v.UserMFASettingList != nil {
+		serializeUserMFASettingListType(s, schemas.GetUserAuthFactorsResponse_UserMFASettingList, v.UserMFASettingList)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.GetUserAuthFactorsResponse_Username, *v.Username)
 	}

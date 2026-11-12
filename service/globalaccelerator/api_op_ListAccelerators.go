@@ -77,7 +77,9 @@ func (v *ListAcceleratorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAcceleratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccelerators(s, schemas.ListAcceleratorsResponse_Accelerators, v.Accelerators)
+	if v.Accelerators != nil {
+		serializeAccelerators(s, schemas.ListAcceleratorsResponse_Accelerators, v.Accelerators)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAcceleratorsResponse_NextToken, *v.NextToken)
 	}

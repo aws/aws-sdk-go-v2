@@ -2,4 +2,4 @@ POST /connect-attachments
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","EdgeLocation":"__EdgeLocation__","Options":{"Protocol":"GRE"},"RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TransportAttachmentId":"__TransportAttachmentId__"}
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","EdgeLocation":"__EdgeLocation__","NatGatewayRules":[{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1},{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1}],"NatGatewaySupport":"ENABLE","Options":{"Protocol":"GRE"},"RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TransportAttachmentId":"__TransportAttachmentId__"}

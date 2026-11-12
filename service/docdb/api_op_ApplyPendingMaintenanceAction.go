@@ -4,7 +4,9 @@ package docdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type ApplyPendingMaintenanceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyPendingMaintenanceActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyPendingMaintenanceActionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyPendingMaintenanceActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyAction != nil {
+		s.WriteString(schemas.ApplyPendingMaintenanceActionMessage_ApplyAction, *v.ApplyAction)
+	}
+	if v.OptInType != nil {
+		s.WriteString(schemas.ApplyPendingMaintenanceActionMessage_OptInType, *v.OptInType)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.ApplyPendingMaintenanceActionMessage_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+
 type ApplyPendingMaintenanceActionOutput struct {
 
 	// Represents the output of ApplyPendingMaintenanceAction.
@@ -70,13 +90,34 @@ type ApplyPendingMaintenanceActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyPendingMaintenanceActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyPendingMaintenanceActionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyPendingMaintenanceActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourcePendingMaintenanceActions != nil {
+		s.WriteStruct(schemas.ApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions)
+		v.ResourcePendingMaintenanceActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplyPendingMaintenanceActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplyPendingMaintenanceActionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplyPendingMaintenanceActionResult_ResourcePendingMaintenanceActions:
+			v.ResourcePendingMaintenanceActions = &types.ResourcePendingMaintenanceActions{}
+			return v.ResourcePendingMaintenanceActions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApplyPendingMaintenanceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpApplyPendingMaintenanceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyPendingMaintenanceAction, schemas.ApplyPendingMaintenanceActionMessage, schemas.ApplyPendingMaintenanceActionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpApplyPendingMaintenanceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyPendingMaintenanceAction, schemas.ApplyPendingMaintenanceActionMessage, schemas.ApplyPendingMaintenanceActionResult), output: &ApplyPendingMaintenanceActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

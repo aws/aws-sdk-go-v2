@@ -156,8 +156,12 @@ func (v *GetCommandExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetCommandExecutionResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeCommandExecutionParameterMap(s, schemas.GetCommandExecutionResponse_parameters, v.Parameters)
-	serializeCommandExecutionResultMap(s, schemas.GetCommandExecutionResponse_result, v.Result)
+	if v.Parameters != nil {
+		serializeCommandExecutionParameterMap(s, schemas.GetCommandExecutionResponse_parameters, v.Parameters)
+	}
+	if v.Result != nil {
+		serializeCommandExecutionResultMap(s, schemas.GetCommandExecutionResponse_result, v.Result)
+	}
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.GetCommandExecutionResponse_startedAt, *v.StartedAt)
 	}

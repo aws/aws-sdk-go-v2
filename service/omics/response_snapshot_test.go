@@ -2132,8 +2132,9 @@ func TestCheckResponseSnapshot_GetRun(t *testing.T) {
 			VpcId:             ptr.String("__VpcId__"),
 			VpcOwnerAccountId: ptr.String("__VpcOwnerAccountId__"),
 		},
-		EngineSettings: document.NewLazyDocument("__Document__"),
-		SessionPolicy:  ptr.String("__SessionPolicy__"),
+		EngineSettings:      document.NewLazyDocument("__Document__"),
+		SessionPolicy:       ptr.String("__SessionPolicy__"),
+		OutputUriPrefixMode: types.RunOutputUriPrefixMode("SERVICE_DEFINED"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRun.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4412,6 +4413,7 @@ func TestCheckResponseSnapshot_StartRun(t *testing.T) {
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
 		SessionPolicy:       ptr.String("__SessionPolicy__"),
 		EngineSettings:      document.NewLazyDocument("__Document__"),
+		OutputUriPrefixMode: types.RunOutputUriPrefixMode("SERVICE_DEFINED"),
 	})
 	if err != nil {
 		t.Fatal(err)

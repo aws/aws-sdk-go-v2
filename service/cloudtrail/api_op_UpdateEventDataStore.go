@@ -158,7 +158,9 @@ func (v *UpdateEventDataStoreInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEventDataStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.UpdateEventDataStoreRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.UpdateEventDataStoreRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.UpdateEventDataStoreRequest_BillingMode, string(v.BillingMode))
 	}
@@ -254,7 +256,9 @@ func (v *UpdateEventDataStoreOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEventDataStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.UpdateEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.UpdateEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.UpdateEventDataStoreResponse_BillingMode, string(v.BillingMode))
 	}

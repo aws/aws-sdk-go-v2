@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: ToggleCustomerAPI.GetRoutingControlState
+
+{"__type":"ResourceNotFoundException","message":"__Message__","resourceId":"__ResourceId__","resourceType":"__ResourceType__"}

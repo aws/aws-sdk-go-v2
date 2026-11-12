@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -109,6 +111,44 @@ type CreateDelegationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDelegationRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDelegationRequestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDelegationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDelegationRequestRequest_Description, *v.Description)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteString(schemas.CreateDelegationRequestRequest_NotificationChannel, *v.NotificationChannel)
+	}
+	if v.OnlySendByOwner != false {
+		s.WriteBool(schemas.CreateDelegationRequestRequest_OnlySendByOwner, v.OnlySendByOwner)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.CreateDelegationRequestRequest_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.Permissions != nil {
+		s.WriteStruct(schemas.CreateDelegationRequestRequest_Permissions)
+		v.Permissions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedirectUrl != nil {
+		s.WriteString(schemas.CreateDelegationRequestRequest_RedirectUrl, *v.RedirectUrl)
+	}
+	if v.RequestMessage != nil {
+		s.WriteString(schemas.CreateDelegationRequestRequest_RequestMessage, *v.RequestMessage)
+	}
+	if v.RequestorWorkflowId != nil {
+		s.WriteString(schemas.CreateDelegationRequestRequest_RequestorWorkflowId, *v.RequestorWorkflowId)
+	}
+	if v.SessionDuration != nil {
+		s.WriteInt32(schemas.CreateDelegationRequestRequest_SessionDuration, *v.SessionDuration)
+	}
+}
+
 type CreateDelegationRequestOutput struct {
 
 	// A deep link URL to the Amazon Web Services Management Console for managing the
@@ -129,13 +169,38 @@ type CreateDelegationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDelegationRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDelegationRequestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDelegationRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsoleDeepLink != nil {
+		s.WriteString(schemas.CreateDelegationRequestResponse_ConsoleDeepLink, *v.ConsoleDeepLink)
+	}
+	if v.DelegationRequestId != nil {
+		s.WriteString(schemas.CreateDelegationRequestResponse_DelegationRequestId, *v.DelegationRequestId)
+	}
+}
+func (v *CreateDelegationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDelegationRequestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDelegationRequestResponse_ConsoleDeepLink:
+			v.ConsoleDeepLink = new(string)
+			return d.ReadString(schemas.CreateDelegationRequestResponse_ConsoleDeepLink, v.ConsoleDeepLink)
+		case schemas.CreateDelegationRequestResponse_DelegationRequestId:
+			v.DelegationRequestId = new(string)
+			return d.ReadString(schemas.CreateDelegationRequestResponse_DelegationRequestId, v.DelegationRequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDelegationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDelegationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDelegationRequest, schemas.CreateDelegationRequestRequest, schemas.CreateDelegationRequestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDelegationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDelegationRequest, schemas.CreateDelegationRequestRequest, schemas.CreateDelegationRequestResponse), output: &CreateDelegationRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

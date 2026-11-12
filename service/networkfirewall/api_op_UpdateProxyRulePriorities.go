@@ -83,7 +83,9 @@ func (v *UpdateProxyRulePrioritiesInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.RuleGroupRequestPhase != "" {
 		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase, string(v.RuleGroupRequestPhase))
 	}
-	serializeProxyRulePriorityList(s, schemas.UpdateProxyRulePrioritiesRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeProxyRulePriorityList(s, schemas.UpdateProxyRulePrioritiesRequest_Rules, v.Rules)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_UpdateToken, *v.UpdateToken)
 	}
@@ -139,7 +141,9 @@ func (v *UpdateProxyRulePrioritiesOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.RuleGroupRequestPhase != "" {
 		s.WriteString(schemas.UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase, string(v.RuleGroupRequestPhase))
 	}
-	serializeProxyRulePriorityList(s, schemas.UpdateProxyRulePrioritiesResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeProxyRulePriorityList(s, schemas.UpdateProxyRulePrioritiesResponse_Rules, v.Rules)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateProxyRulePrioritiesResponse_UpdateToken, *v.UpdateToken)
 	}
@@ -184,6 +188,9 @@ func (c *Client) addOperationUpdateProxyRulePrioritiesMiddlewares(stack *middlew
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

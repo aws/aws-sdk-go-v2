@@ -493,7 +493,29 @@ func TestCheckResponseSnapshot_CreateScheduledQuery(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_DeleteAccountPolicy(t *testing.T) {
-	want := &DeleteAccountPolicyOutput{}
+	want := &DeleteAccountPolicyOutput{
+		DryRunResult: &types.DryRunResult{
+			TotalMatchedLogGroups:           1,
+			IncreasedRetentionLogGroupCount: 1,
+			DecreasedRetentionLogGroupCount: 1,
+			UnchangedRetentionLogGroupCount: 1,
+			FailedAnalysisCount:             1,
+			TopLogGroupsImpacted: []types.LogGroupImpact{
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+			},
+		},
+	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAccountPolicy.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -505,6 +527,7 @@ func TestCheckResponseSnapshot_DeleteAccountPolicy(t *testing.T) {
 	got, err := svc.DeleteAccountPolicy(context.Background(), &DeleteAccountPolicyInput{
 		PolicyName: ptr.String("__PolicyName__"),
 		PolicyType: types.PolicyType("DATA_PROTECTION_POLICY"),
+		DryRun:     true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1222,6 +1245,10 @@ func TestCheckResponseSnapshot_DescribeDeliveries(t *testing.T) {
 	got, err := svc.DescribeDeliveries(context.Background(), &DescribeDeliveriesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		DeliverySourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1274,6 +1301,10 @@ func TestCheckResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 	got, err := svc.DescribeDeliveryDestinations(context.Background(), &DescribeDeliveryDestinationsInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1336,6 +1367,10 @@ func TestCheckResponseSnapshot_DescribeDeliverySources(t *testing.T) {
 	got, err := svc.DescribeDeliverySources(context.Background(), &DescribeDeliverySourcesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1668,6 +1703,7 @@ func TestCheckResponseSnapshot_DescribeLogGroups(t *testing.T) {
 				LogGroupArn:                      ptr.String("__LogGroupArn__"),
 				DeletionProtectionEnabled:        ptr.Bool(true),
 				BearerTokenAuthenticationEnabled: ptr.Bool(true),
+				RetentionPolicyName:              ptr.String("__RetentionPolicyName__"),
 			},
 			{
 				LogGroupName:         ptr.String("__LogGroupName__"),
@@ -1686,6 +1722,7 @@ func TestCheckResponseSnapshot_DescribeLogGroups(t *testing.T) {
 				LogGroupArn:                      ptr.String("__LogGroupArn__"),
 				DeletionProtectionEnabled:        ptr.Bool(true),
 				BearerTokenAuthenticationEnabled: ptr.Bool(true),
+				RetentionPolicyName:              ptr.String("__RetentionPolicyName__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3992,6 +4029,27 @@ func TestCheckResponseSnapshot_PutAccountPolicy(t *testing.T) {
 			SelectionCriteria: ptr.String("__SelectionCriteria__"),
 			AccountId:         ptr.String("__AccountId__"),
 		},
+		DryRunResult: &types.DryRunResult{
+			TotalMatchedLogGroups:           1,
+			IncreasedRetentionLogGroupCount: 1,
+			DecreasedRetentionLogGroupCount: 1,
+			UnchangedRetentionLogGroupCount: 1,
+			FailedAnalysisCount:             1,
+			TopLogGroupsImpacted: []types.LogGroupImpact{
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutAccountPolicy.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4007,6 +4065,7 @@ func TestCheckResponseSnapshot_PutAccountPolicy(t *testing.T) {
 		PolicyType:        types.PolicyType("DATA_PROTECTION_POLICY"),
 		Scope:             types.Scope("ALL"),
 		SelectionCriteria: ptr.String("__SelectionCriteria__"),
+		DryRun:            true,
 	})
 	if err != nil {
 		t.Fatal(err)

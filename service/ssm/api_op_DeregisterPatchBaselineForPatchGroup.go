@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeregisterPatchBaselineForPatchGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterPatchBaselineForPatchGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterPatchBaselineForPatchGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterPatchBaselineForPatchGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.DeregisterPatchBaselineForPatchGroupRequest_BaselineId, *v.BaselineId)
+	}
+	if v.PatchGroup != nil {
+		s.WriteString(schemas.DeregisterPatchBaselineForPatchGroupRequest_PatchGroup, *v.PatchGroup)
+	}
+}
+
 type DeregisterPatchBaselineForPatchGroupOutput struct {
 
 	// The ID of the patch baseline the patch group was deregistered from.
@@ -52,13 +69,38 @@ type DeregisterPatchBaselineForPatchGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterPatchBaselineForPatchGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterPatchBaselineForPatchGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterPatchBaselineForPatchGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.DeregisterPatchBaselineForPatchGroupResult_BaselineId, *v.BaselineId)
+	}
+	if v.PatchGroup != nil {
+		s.WriteString(schemas.DeregisterPatchBaselineForPatchGroupResult_PatchGroup, *v.PatchGroup)
+	}
+}
+func (v *DeregisterPatchBaselineForPatchGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterPatchBaselineForPatchGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterPatchBaselineForPatchGroupResult_BaselineId:
+			v.BaselineId = new(string)
+			return d.ReadString(schemas.DeregisterPatchBaselineForPatchGroupResult_BaselineId, v.BaselineId)
+		case schemas.DeregisterPatchBaselineForPatchGroupResult_PatchGroup:
+			v.PatchGroup = new(string)
+			return d.ReadString(schemas.DeregisterPatchBaselineForPatchGroupResult_PatchGroup, v.PatchGroup)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterPatchBaselineForPatchGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterPatchBaselineForPatchGroup, schemas.DeregisterPatchBaselineForPatchGroupRequest, schemas.DeregisterPatchBaselineForPatchGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterPatchBaselineForPatchGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterPatchBaselineForPatchGroup, schemas.DeregisterPatchBaselineForPatchGroupRequest, schemas.DeregisterPatchBaselineForPatchGroupResult), output: &DeregisterPatchBaselineForPatchGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

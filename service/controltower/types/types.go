@@ -292,11 +292,21 @@ func (v *ControlOperationFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ControlOperationFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlIdentifiers(s, schemas.ControlOperationFilter_controlIdentifiers, v.ControlIdentifiers)
-	serializeControlOperationTypes(s, schemas.ControlOperationFilter_controlOperationTypes, v.ControlOperationTypes)
-	serializeEnabledControlIdentifiers(s, schemas.ControlOperationFilter_enabledControlIdentifiers, v.EnabledControlIdentifiers)
-	serializeControlOperationStatuses(s, schemas.ControlOperationFilter_statuses, v.Statuses)
-	serializeTargetIdentifiers(s, schemas.ControlOperationFilter_targetIdentifiers, v.TargetIdentifiers)
+	if v.ControlIdentifiers != nil {
+		serializeControlIdentifiers(s, schemas.ControlOperationFilter_controlIdentifiers, v.ControlIdentifiers)
+	}
+	if v.ControlOperationTypes != nil {
+		serializeControlOperationTypes(s, schemas.ControlOperationFilter_controlOperationTypes, v.ControlOperationTypes)
+	}
+	if v.EnabledControlIdentifiers != nil {
+		serializeEnabledControlIdentifiers(s, schemas.ControlOperationFilter_enabledControlIdentifiers, v.EnabledControlIdentifiers)
+	}
+	if v.Statuses != nil {
+		serializeControlOperationStatuses(s, schemas.ControlOperationFilter_statuses, v.Statuses)
+	}
+	if v.TargetIdentifiers != nil {
+		serializeTargetIdentifiers(s, schemas.ControlOperationFilter_targetIdentifiers, v.TargetIdentifiers)
+	}
 }
 func (v *ControlOperationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ControlOperationFilter, func(s *smithy.Schema) error {
@@ -554,7 +564,9 @@ func (v *EnabledBaselineDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DriftStatusSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEnabledBaselineParameterSummaries(s, schemas.EnabledBaselineDetails_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeEnabledBaselineParameterSummaries(s, schemas.EnabledBaselineDetails_parameters, v.Parameters)
+	}
 	if v.ParentIdentifier != nil {
 		s.WriteString(schemas.EnabledBaselineDetails_parentIdentifier, *v.ParentIdentifier)
 	}
@@ -727,11 +739,21 @@ func (v *EnabledBaselineFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnabledBaselineFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnabledBaselineBaselineIdentifiers(s, schemas.EnabledBaselineFilter_baselineIdentifiers, v.BaselineIdentifiers)
-	serializeEnabledBaselineDriftStatuses(s, schemas.EnabledBaselineFilter_inheritanceDriftStatuses, v.InheritanceDriftStatuses)
-	serializeEnabledBaselineParentIdentifiers(s, schemas.EnabledBaselineFilter_parentIdentifiers, v.ParentIdentifiers)
-	serializeEnabledBaselineEnablementStatuses(s, schemas.EnabledBaselineFilter_statuses, v.Statuses)
-	serializeEnabledBaselineTargetIdentifiers(s, schemas.EnabledBaselineFilter_targetIdentifiers, v.TargetIdentifiers)
+	if v.BaselineIdentifiers != nil {
+		serializeEnabledBaselineBaselineIdentifiers(s, schemas.EnabledBaselineFilter_baselineIdentifiers, v.BaselineIdentifiers)
+	}
+	if v.InheritanceDriftStatuses != nil {
+		serializeEnabledBaselineDriftStatuses(s, schemas.EnabledBaselineFilter_inheritanceDriftStatuses, v.InheritanceDriftStatuses)
+	}
+	if v.ParentIdentifiers != nil {
+		serializeEnabledBaselineParentIdentifiers(s, schemas.EnabledBaselineFilter_parentIdentifiers, v.ParentIdentifiers)
+	}
+	if v.Statuses != nil {
+		serializeEnabledBaselineEnablementStatuses(s, schemas.EnabledBaselineFilter_statuses, v.Statuses)
+	}
+	if v.TargetIdentifiers != nil {
+		serializeEnabledBaselineTargetIdentifiers(s, schemas.EnabledBaselineFilter_targetIdentifiers, v.TargetIdentifiers)
+	}
 }
 func (v *EnabledBaselineFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnabledBaselineFilter, func(s *smithy.Schema) error {
@@ -1041,7 +1063,9 @@ func (v *EnabledControlDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DriftStatusSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEnabledControlParameterSummaries(s, schemas.EnabledControlDetails_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeEnabledControlParameterSummaries(s, schemas.EnabledControlDetails_parameters, v.Parameters)
+	}
 	if v.ParentIdentifier != nil {
 		s.WriteString(schemas.EnabledControlDetails_parentIdentifier, *v.ParentIdentifier)
 	}
@@ -1053,7 +1077,9 @@ func (v *EnabledControlDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetIdentifier != nil {
 		s.WriteString(schemas.EnabledControlDetails_targetIdentifier, *v.TargetIdentifier)
 	}
-	serializeTargetRegions(s, schemas.EnabledControlDetails_targetRegions, v.TargetRegions)
+	if v.TargetRegions != nil {
+		serializeTargetRegions(s, schemas.EnabledControlDetails_targetRegions, v.TargetRegions)
+	}
 }
 func (v *EnabledControlDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnabledControlDetails, func(s *smithy.Schema) error {
@@ -1167,12 +1193,24 @@ func (v *EnabledControlFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnabledControlFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlIdentifiers(s, schemas.EnabledControlFilter_controlIdentifiers, v.ControlIdentifiers)
-	serializeDriftStatuses(s, schemas.EnabledControlFilter_driftStatuses, v.DriftStatuses)
-	serializeDriftStatuses(s, schemas.EnabledControlFilter_inheritanceDriftStatuses, v.InheritanceDriftStatuses)
-	serializeParentIdentifiers(s, schemas.EnabledControlFilter_parentIdentifiers, v.ParentIdentifiers)
-	serializeDriftStatuses(s, schemas.EnabledControlFilter_resourceDriftStatuses, v.ResourceDriftStatuses)
-	serializeEnablementStatuses(s, schemas.EnabledControlFilter_statuses, v.Statuses)
+	if v.ControlIdentifiers != nil {
+		serializeControlIdentifiers(s, schemas.EnabledControlFilter_controlIdentifiers, v.ControlIdentifiers)
+	}
+	if v.DriftStatuses != nil {
+		serializeDriftStatuses(s, schemas.EnabledControlFilter_driftStatuses, v.DriftStatuses)
+	}
+	if v.InheritanceDriftStatuses != nil {
+		serializeDriftStatuses(s, schemas.EnabledControlFilter_inheritanceDriftStatuses, v.InheritanceDriftStatuses)
+	}
+	if v.ParentIdentifiers != nil {
+		serializeParentIdentifiers(s, schemas.EnabledControlFilter_parentIdentifiers, v.ParentIdentifiers)
+	}
+	if v.ResourceDriftStatuses != nil {
+		serializeDriftStatuses(s, schemas.EnabledControlFilter_resourceDriftStatuses, v.ResourceDriftStatuses)
+	}
+	if v.Statuses != nil {
+		serializeEnablementStatuses(s, schemas.EnabledControlFilter_statuses, v.Statuses)
+	}
 }
 func (v *EnabledControlFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnabledControlFilter, func(s *smithy.Schema) error {
@@ -1558,7 +1596,9 @@ func (v *LandingZoneDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Manifest != nil {
 		s.WriteDocument(schemas.LandingZoneDetail_manifest, &smithydocument.Opaque{Value: v.Manifest})
 	}
-	serializeRemediationTypes(s, schemas.LandingZoneDetail_remediationTypes, v.RemediationTypes)
+	if v.RemediationTypes != nil {
+		serializeRemediationTypes(s, schemas.LandingZoneDetail_remediationTypes, v.RemediationTypes)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.LandingZoneDetail_status, string(v.Status))
 	}
@@ -1771,8 +1811,12 @@ func (v *LandingZoneOperationFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LandingZoneOperationFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLandingZoneOperationStatuses(s, schemas.LandingZoneOperationFilter_statuses, v.Statuses)
-	serializeLandingZoneOperationTypes(s, schemas.LandingZoneOperationFilter_types, v.Types)
+	if v.Statuses != nil {
+		serializeLandingZoneOperationStatuses(s, schemas.LandingZoneOperationFilter_statuses, v.Statuses)
+	}
+	if v.Types != nil {
+		serializeLandingZoneOperationTypes(s, schemas.LandingZoneOperationFilter_types, v.Types)
+	}
 }
 func (v *LandingZoneOperationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LandingZoneOperationFilter, func(s *smithy.Schema) error {

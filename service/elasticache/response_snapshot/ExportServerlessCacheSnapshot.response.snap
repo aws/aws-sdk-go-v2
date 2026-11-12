@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ExportServerlessCacheSnapshotResponse><ExportServerlessCacheSnapshotResult><ServerlessCacheSnapshot><ARN>__ARN__</ARN><BytesUsedForCache>__BytesUsedForCache__</BytesUsedForCache><CreateTime>2000-01-01T00:00:00Z</CreateTime><ExpiryTime>2000-01-01T00:00:00Z</ExpiryTime><KmsKeyId>__KmsKeyId__</KmsKeyId><ServerlessCacheConfiguration><Engine>__Engine__</Engine><MajorEngineVersion>__MajorEngineVersion__</MajorEngineVersion><ServerlessCacheName>__ServerlessCacheName__</ServerlessCacheName></ServerlessCacheConfiguration><ServerlessCacheSnapshotName>__ServerlessCacheSnapshotName__</ServerlessCacheSnapshotName><SnapshotType>__SnapshotType__</SnapshotType><Status>__Status__</Status></ServerlessCacheSnapshot></ExportServerlessCacheSnapshotResult></ExportServerlessCacheSnapshotResponse>

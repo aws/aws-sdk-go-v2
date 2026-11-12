@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.ListDbParameterGroups
+
+{"items":[{"arn":"__Arn__","description":"__Description__","id":"__Id__","name":"__Name__"},{"arn":"__Arn__","description":"__Description__","id":"__Id__","name":"__Name__"}],"nextToken":"__NextToken__"}

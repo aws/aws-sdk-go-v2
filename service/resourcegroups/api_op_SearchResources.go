@@ -128,8 +128,12 @@ func (v *SearchResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchResourcesOutput_NextToken, *v.NextToken)
 	}
-	serializeQueryErrorList(s, schemas.SearchResourcesOutput_QueryErrors, v.QueryErrors)
-	serializeResourceIdentifierList(s, schemas.SearchResourcesOutput_ResourceIdentifiers, v.ResourceIdentifiers)
+	if v.QueryErrors != nil {
+		serializeQueryErrorList(s, schemas.SearchResourcesOutput_QueryErrors, v.QueryErrors)
+	}
+	if v.ResourceIdentifiers != nil {
+		serializeResourceIdentifierList(s, schemas.SearchResourcesOutput_ResourceIdentifiers, v.ResourceIdentifiers)
+	}
 }
 func (v *SearchResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchResourcesOutput, func(s *smithy.Schema) error {

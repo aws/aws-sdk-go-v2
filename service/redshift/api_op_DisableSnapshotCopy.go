@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DisableSnapshotCopyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSnapshotCopyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSnapshotCopyMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSnapshotCopyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DisableSnapshotCopyMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+}
+
 type DisableSnapshotCopyOutput struct {
 
 	// Describes a cluster.
@@ -54,13 +68,34 @@ type DisableSnapshotCopyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSnapshotCopyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSnapshotCopyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSnapshotCopyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.DisableSnapshotCopyResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisableSnapshotCopyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableSnapshotCopyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableSnapshotCopyResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableSnapshotCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableSnapshotCopy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSnapshotCopy, schemas.DisableSnapshotCopyMessage, schemas.DisableSnapshotCopyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDisableSnapshotCopy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSnapshotCopy, schemas.DisableSnapshotCopyMessage, schemas.DisableSnapshotCopyResult), output: &DisableSnapshotCopyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

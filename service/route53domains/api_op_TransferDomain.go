@@ -220,7 +220,9 @@ func (v *TransferDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdnLangCode != nil {
 		s.WriteString(schemas.TransferDomainRequest_IdnLangCode, *v.IdnLangCode)
 	}
-	serializeNameserverList(s, schemas.TransferDomainRequest_Nameservers, v.Nameservers)
+	if v.Nameservers != nil {
+		serializeNameserverList(s, schemas.TransferDomainRequest_Nameservers, v.Nameservers)
+	}
 	if v.PrivacyProtectAdminContact != nil {
 		s.WriteBool(schemas.TransferDomainRequest_PrivacyProtectAdminContact, *v.PrivacyProtectAdminContact)
 	}
@@ -296,6 +298,9 @@ func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

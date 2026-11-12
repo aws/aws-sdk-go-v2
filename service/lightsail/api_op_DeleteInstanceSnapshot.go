@@ -74,7 +74,9 @@ func (v *DeleteInstanceSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteInstanceSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteInstanceSnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteInstanceSnapshotResult_operations, v.Operations)
+	}
 }
 func (v *DeleteInstanceSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteInstanceSnapshotResult, func(s *smithy.Schema) error {

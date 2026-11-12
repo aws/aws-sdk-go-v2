@@ -88,7 +88,9 @@ func (v *GetMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeaturesMap(s, schemas.GetMetadataResponse_features, v.Features)
+	if v.Features != nil {
+		serializeFeaturesMap(s, schemas.GetMetadataResponse_features, v.Features)
+	}
 }
 func (v *GetMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMetadataResponse, func(s *smithy.Schema) error {

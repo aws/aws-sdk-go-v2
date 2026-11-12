@@ -63,6 +63,30 @@ func (ContainerFormat) Values() []ContainerFormat {
 	}
 }
 
+type FailoverSlateConfigurationState string
+
+// Enum values for FailoverSlateConfigurationState
+const (
+	FailoverSlateConfigurationStateCreating     FailoverSlateConfigurationState = "CREATING"
+	FailoverSlateConfigurationStateCreateFailed FailoverSlateConfigurationState = "CREATE_FAILED"
+	FailoverSlateConfigurationStateCreated      FailoverSlateConfigurationState = "CREATED"
+	FailoverSlateConfigurationStateUpdating     FailoverSlateConfigurationState = "UPDATING"
+)
+
+// Values returns all known values for FailoverSlateConfigurationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FailoverSlateConfigurationState) Values() []FailoverSlateConfigurationState {
+	return []FailoverSlateConfigurationState{
+		"CREATING",
+		"CREATE_FAILED",
+		"CREATED",
+		"UPDATING",
+	}
+}
+
 type MultitrackMaximumResolution string
 
 // Enum values for MultitrackMaximumResolution

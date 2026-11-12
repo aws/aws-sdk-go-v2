@@ -66,7 +66,9 @@ func (v *ListAccessControlRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessControlRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlRulesList(s, schemas.ListAccessControlRulesResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeAccessControlRulesList(s, schemas.ListAccessControlRulesResponse_Rules, v.Rules)
+	}
 }
 func (v *ListAccessControlRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAccessControlRulesResponse, func(s *smithy.Schema) error {

@@ -63,8 +63,12 @@ func (v *DescribeRecommendationExportJobsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DescribeRecommendationExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobFilters(s, schemas.DescribeRecommendationExportJobsRequest_filters, v.Filters)
-	serializeJobIds(s, schemas.DescribeRecommendationExportJobsRequest_jobIds, v.JobIds)
+	if v.Filters != nil {
+		serializeJobFilters(s, schemas.DescribeRecommendationExportJobsRequest_filters, v.Filters)
+	}
+	if v.JobIds != nil {
+		serializeJobIds(s, schemas.DescribeRecommendationExportJobsRequest_jobIds, v.JobIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeRecommendationExportJobsRequest_maxResults, *v.MaxResults)
 	}
@@ -99,7 +103,9 @@ func (v *DescribeRecommendationExportJobsOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRecommendationExportJobsResponse_nextToken, *v.NextToken)
 	}
-	serializeRecommendationExportJobs(s, schemas.DescribeRecommendationExportJobsResponse_recommendationExportJobs, v.RecommendationExportJobs)
+	if v.RecommendationExportJobs != nil {
+		serializeRecommendationExportJobs(s, schemas.DescribeRecommendationExportJobsResponse_recommendationExportJobs, v.RecommendationExportJobs)
+	}
 }
 func (v *DescribeRecommendationExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRecommendationExportJobsResponse, func(s *smithy.Schema) error {

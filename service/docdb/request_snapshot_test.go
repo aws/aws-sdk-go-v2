@@ -1595,6 +1595,54 @@ func TestCheckRequestSnapshot_DescribePendingMaintenanceActions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeServerlessV2PlatformVersions(t *testing.T) {
+	input := &DescribeServerlessV2PlatformVersionsInput{
+		ServerlessV2PlatformVersion: ptr.String("__ServerlessV2PlatformVersion__"),
+		Engine:                      ptr.String("__Engine__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DefaultOnly: ptr.Bool(true),
+		IncludeAll:  ptr.Bool(true),
+		MaxRecords:  ptr.Int32(1),
+		Marker:      ptr.String("__Marker__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeServerlessV2PlatformVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeServerlessV2PlatformVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_FailoverDBCluster(t *testing.T) {
 	input := &FailoverDBClusterInput{
 		DBClusterIdentifier:        ptr.String("__DBClusterIdentifier__"),
@@ -3762,6 +3810,54 @@ func TestUpdateRequestSnapshot_DescribePendingMaintenanceActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribePendingMaintenanceActions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeServerlessV2PlatformVersions(t *testing.T) {
+	input := &DescribeServerlessV2PlatformVersionsInput{
+		ServerlessV2PlatformVersion: ptr.String("__ServerlessV2PlatformVersion__"),
+		Engine:                      ptr.String("__Engine__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DefaultOnly: ptr.Bool(true),
+		IncludeAll:  ptr.Bool(true),
+		MaxRecords:  ptr.Int32(1),
+		Marker:      ptr.String("__Marker__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeServerlessV2PlatformVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeServerlessV2PlatformVersions"); err != nil {
 		t.Fatal(err)
 	}
 }

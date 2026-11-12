@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.GetTextDetection
+
+{"JobId":"__JobId__","JobStatus":"IN_PROGRESS","JobTag":"__JobTag__","NextToken":"__NextToken__","StatusMessage":"__StatusMessage__","TextDetections":[{"TextDetection":{"Confidence":1,"DetectedText":"__DetectedText__","Geometry":{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]},"Id":1,"ParentId":1,"Type":"LINE"},"Timestamp":1},{"TextDetection":{"Confidence":1,"DetectedText":"__DetectedText__","Geometry":{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]},"Id":1,"ParentId":1,"Type":"LINE"},"Timestamp":1}],"TextModelVersion":"__TextModelVersion__","Video":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"VideoMetadata":{"Codec":"__Codec__","ColorRange":"FULL","DurationMillis":1,"Format":"__Format__","FrameHeight":1,"FrameRate":1,"FrameWidth":1}}

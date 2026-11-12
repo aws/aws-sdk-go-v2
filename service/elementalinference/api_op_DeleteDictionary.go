@@ -4,7 +4,9 @@ package elementalinference
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteDictionaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDictionaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDictionaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDictionaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteDictionaryRequest_id, *v.Id)
+	}
+}
+
 type DeleteDictionaryOutput struct {
 
 	// The ARN of the deleted dictionary.
@@ -59,13 +73,48 @@ type DeleteDictionaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDictionaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDictionaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDictionaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDictionaryResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteDictionaryResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteDictionaryResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteDictionaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDictionaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDictionaryResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDictionaryResponse_arn, v.Arn)
+		case schemas.DeleteDictionaryResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteDictionaryResponse_id, v.Id)
+		case schemas.DeleteDictionaryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDictionaryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DictionaryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDictionaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDictionary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDictionary, schemas.DeleteDictionaryRequest, schemas.DeleteDictionaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDictionary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDictionary, schemas.DeleteDictionaryRequest, schemas.DeleteDictionaryResponse), output: &DeleteDictionaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

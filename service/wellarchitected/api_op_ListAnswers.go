@@ -154,7 +154,9 @@ func (v *ListAnswersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnswerSummaries(s, schemas.ListAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	if v.AnswerSummaries != nil {
+		serializeAnswerSummaries(s, schemas.ListAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	}
 	if v.LensAlias != nil {
 		s.WriteString(schemas.ListAnswersOutput_LensAlias, *v.LensAlias)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"profileUpdatedAt":"2000-01-01T00:00:00Z","sensitivityScore":1,"sensitivityScoreOverridden":true,"statistics":{"totalBytesClassified":1,"totalDetections":1,"totalDetectionsSuppressed":1,"totalItemsClassified":1,"totalItemsSensitive":1,"totalItemsSkipped":1,"totalItemsSkippedInvalidEncryption":1,"totalItemsSkippedInvalidKms":1,"totalItemsSkippedPermissionDenied":1}}

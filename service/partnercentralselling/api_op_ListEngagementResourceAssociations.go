@@ -124,7 +124,9 @@ func (v *ListEngagementResourceAssociationsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListEngagementResourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEngagementResourceAssociationSummaryList(s, schemas.ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries, v.EngagementResourceAssociationSummaries)
+	if v.EngagementResourceAssociationSummaries != nil {
+		serializeEngagementResourceAssociationSummaryList(s, schemas.ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries, v.EngagementResourceAssociationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngagementResourceAssociationsResponse_NextToken, *v.NextToken)
 	}

@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/UpdateLocationNfs
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.UpdateLocationNfs
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"LocationArn":"__LocationArn__","MountOptions":{"Version":"AUTOMATIC"},"OnPremConfig":{"AgentArns":["__Member__","__Member__"]},"ServerHostname":"__ServerHostname__","Subdirectory":"__Subdirectory__"}
+¿kLocationArno__LocationArn__lMountOptions¿gVersioniAUTOMATICÿlOnPremConfig¿iAgentArnsŸj__Member__j__Member__ÿÿnServerHostnamer__ServerHostname__lSubdirectoryp__Subdirectory__ÿ

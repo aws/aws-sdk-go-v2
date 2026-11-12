@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","readiness":"READY","rules":[{"lastCheckedTimestamp":"2000-01-01T00:00:00Z","messages":[{"messageText":"__MessageText__"},{"messageText":"__MessageText__"}],"readiness":"READY","ruleId":"__RuleId__"},{"lastCheckedTimestamp":"2000-01-01T00:00:00Z","messages":[{"messageText":"__MessageText__"},{"messageText":"__MessageText__"}],"readiness":"READY","ruleId":"__RuleId__"}]}

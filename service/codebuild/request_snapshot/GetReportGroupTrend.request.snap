@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/GetReportGroupTrend
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.GetReportGroupTrend
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"numOfReports":1,"reportGroupArn":"__ReportGroupArn__","trendField":"PASS_RATE"}
+¿lnumOfReportsnreportGroupArnr__ReportGroupArn__jtrendFieldiPASS_RATEÿ

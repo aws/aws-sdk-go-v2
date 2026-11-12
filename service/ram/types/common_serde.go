@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAssociatedPermissionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AssociatedPermission) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,16 @@ func serializeAssociatedPermissionList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeAssociatedSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AssociatedSource) {
-	if v == nil {
-		return
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
+	s.CloseList()
+}
+
+func serializePermissionArnAndTemplateParametersList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PermissionArnAndTemplateParameters) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +37,44 @@ func serializeAssociatedSourceList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializePermissionArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
+	s.CloseList()
+}
+
+func serializePermissionTemplateParameterDeclarationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PermissionTemplateParameterDeclaration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePermissionTemplateParameterInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PermissionTemplateParameterInput) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePermissionTemplateParameterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PermissionTemplateParameter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePermissionTemplateParameterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -44,9 +83,6 @@ func serializePermissionArnList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializePolicyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -55,9 +91,6 @@ func serializePolicyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializePrincipalArnOrIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -66,9 +99,6 @@ func serializePrincipalArnOrIdList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializePrincipalList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Principal) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -79,9 +109,6 @@ func serializePrincipalList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeReplacePermissionAssociationsWorkIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -90,9 +117,6 @@ func serializeReplacePermissionAssociationsWorkIdList(s smithy.ShapeSerializer, 
 }
 
 func serializeReplacePermissionAssociationsWorkList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplacePermissionAssociationsWork) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -103,9 +127,6 @@ func serializeReplacePermissionAssociationsWorkList(s smithy.ShapeSerializer, sc
 }
 
 func serializeResourceArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -114,9 +135,6 @@ func serializeResourceArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Resource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -127,9 +145,6 @@ func serializeResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeResourceShareArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -138,9 +153,6 @@ func serializeResourceShareArnList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeResourceShareAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceShareAssociation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -151,9 +163,6 @@ func serializeResourceShareAssociationList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeResourceShareInvitationArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -162,9 +171,6 @@ func serializeResourceShareInvitationArnList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeResourceShareInvitationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceShareInvitation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -175,9 +181,6 @@ func serializeResourceShareInvitationList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeResourceShareList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceShare) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -188,9 +191,6 @@ func serializeResourceShareList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeResourceSharePermissionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceSharePermissionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -201,9 +201,6 @@ func serializeResourceSharePermissionList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeServiceNameAndResourceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ServiceNameAndResourceType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -214,9 +211,6 @@ func serializeServiceNameAndResourceTypeList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeSourceArnOrAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -225,9 +219,6 @@ func serializeSourceArnOrAccountList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeTagFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []TagFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -238,9 +229,6 @@ func serializeTagFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []Ta
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -249,9 +237,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -262,9 +247,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func serializeTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -316,7 +298,116 @@ func deserializeAssociatedSourceList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializePermissionArnAndTemplateParametersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PermissionArnAndTemplateParameters) error {
+	*v = make([]PermissionArnAndTemplateParameters, 0)
+	var vv PermissionArnAndTemplateParameters
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PermissionArnAndTemplateParameters
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = PermissionArnAndTemplateParameters{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePermissionArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePermissionTemplateParameterDeclarationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PermissionTemplateParameterDeclaration) error {
+	*v = make([]PermissionTemplateParameterDeclaration, 0)
+	var vv PermissionTemplateParameterDeclaration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PermissionTemplateParameterDeclaration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = PermissionTemplateParameterDeclaration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePermissionTemplateParameterInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PermissionTemplateParameterInput) error {
+	*v = make([]PermissionTemplateParameterInput, 0)
+	var vv PermissionTemplateParameterInput
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PermissionTemplateParameterInput
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = PermissionTemplateParameterInput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePermissionTemplateParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PermissionTemplateParameter) error {
+	*v = make([]PermissionTemplateParameter, 0)
+	var vv PermissionTemplateParameter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PermissionTemplateParameter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = PermissionTemplateParameter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePermissionTemplateParameterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

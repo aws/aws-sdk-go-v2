@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListUserTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListUserTagsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListUserTagsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ListUserTagsRequest_UserName, *v.UserName)
+	}
+}
+
 type ListUserTagsOutput struct {
 
 	// The list of tags that are currently attached to the user. Each tag consists of
@@ -89,13 +109,42 @@ type ListUserTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListUserTagsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListUserTagsResponse_Marker, *v.Marker)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.ListUserTagsResponse_Tags, v.Tags)
+	}
+}
+func (v *ListUserTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserTagsResponse_IsTruncated:
+			return d.ReadBool(schemas.ListUserTagsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListUserTagsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListUserTagsResponse_Marker, v.Marker)
+		case schemas.ListUserTagsResponse_Tags:
+			return deserializetagListType(d, schemas.ListUserTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListUserTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserTags, schemas.ListUserTagsRequest, schemas.ListUserTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListUserTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserTags, schemas.ListUserTagsRequest, schemas.ListUserTagsResponse), output: &ListUserTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

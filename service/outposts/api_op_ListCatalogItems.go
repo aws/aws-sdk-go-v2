@@ -59,15 +59,21 @@ func (v *ListCatalogItemsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCatalogItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEC2FamilyList(s, schemas.ListCatalogItemsInput_EC2FamilyFilter, v.EC2FamilyFilter)
-	serializeCatalogItemClassList(s, schemas.ListCatalogItemsInput_ItemClassFilter, v.ItemClassFilter)
+	if v.EC2FamilyFilter != nil {
+		serializeEC2FamilyList(s, schemas.ListCatalogItemsInput_EC2FamilyFilter, v.EC2FamilyFilter)
+	}
+	if v.ItemClassFilter != nil {
+		serializeCatalogItemClassList(s, schemas.ListCatalogItemsInput_ItemClassFilter, v.ItemClassFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCatalogItemsInput_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCatalogItemsInput_NextToken, *v.NextToken)
 	}
-	serializeSupportedStorageList(s, schemas.ListCatalogItemsInput_SupportedStorageFilter, v.SupportedStorageFilter)
+	if v.SupportedStorageFilter != nil {
+		serializeSupportedStorageList(s, schemas.ListCatalogItemsInput_SupportedStorageFilter, v.SupportedStorageFilter)
+	}
 }
 
 type ListCatalogItemsOutput struct {
@@ -91,7 +97,9 @@ func (v *ListCatalogItemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCatalogItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCatalogItemListDefinition(s, schemas.ListCatalogItemsOutput_CatalogItems, v.CatalogItems)
+	if v.CatalogItems != nil {
+		serializeCatalogItemListDefinition(s, schemas.ListCatalogItemsOutput_CatalogItems, v.CatalogItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCatalogItemsOutput_NextToken, *v.NextToken)
 	}

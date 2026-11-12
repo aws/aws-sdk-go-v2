@@ -107,7 +107,9 @@ func (v *GetSubscriptionDefinitionOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.GetSubscriptionDefinitionResponse_Name, *v.Name)
 	}
-	serializeTags(s, schemas.GetSubscriptionDefinitionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetSubscriptionDefinitionResponse_tags, v.Tags)
+	}
 }
 func (v *GetSubscriptionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSubscriptionDefinitionResponse, func(s *smithy.Schema) error {

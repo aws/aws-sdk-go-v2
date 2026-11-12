@@ -101,11 +101,11 @@ func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdomain != nil {
 		s.WriteString(schemas.CreateMonitorRequest_subdomain, *v.Subdomain)
 	}
-	serializeTags(s, schemas.CreateMonitorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateMonitorRequest_tags, v.Tags)
+	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateMonitorOutput struct {
 
 	// The Amazon Resource Name that IAM Identity Center assigns to the monitor.

@@ -73,7 +73,9 @@ func (v *AssociateResourcesToSubscriptionInput) SerializeMembers(s smithy.ShapeS
 	if v.IfMatch != nil {
 		s.WriteString(schemas.AssociateResourcesToSubscriptionInput_ifMatch, *v.IfMatch)
 	}
-	serializeResourceArns(s, schemas.AssociateResourcesToSubscriptionInput_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.AssociateResourcesToSubscriptionInput_resourceArns, v.ResourceArns)
+	}
 }
 
 type AssociateResourcesToSubscriptionOutput struct {

@@ -370,6 +370,26 @@ func (m *validateOpDescribeImages) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeReplicationBackfillResults struct {
+}
+
+func (*validateOpDescribeReplicationBackfillResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReplicationBackfillResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReplicationBackfillResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReplicationBackfillResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAccountSetting struct {
 }
 
@@ -810,6 +830,46 @@ func (m *validateOpStartLifecyclePolicyPreview) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartReplicationBackfill struct {
+}
+
+func (*validateOpStartReplicationBackfill) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartReplicationBackfill) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartReplicationBackfillInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartReplicationBackfillInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopReplicationBackfill struct {
+}
+
+func (*validateOpStopReplicationBackfill) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopReplicationBackfill) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopReplicationBackfillInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopReplicationBackfillInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1022,6 +1082,10 @@ func addOpDescribeImagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeImages{}, middleware.After)
 }
 
+func addOpDescribeReplicationBackfillResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReplicationBackfillResults{}, middleware.After)
+}
+
 func addOpGetAccountSettingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAccountSetting{}, middleware.After)
 }
@@ -1108,6 +1172,14 @@ func addOpStartImageScanValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartLifecyclePolicyPreviewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartLifecyclePolicyPreview{}, middleware.After)
+}
+
+func addOpStartReplicationBackfillValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartReplicationBackfill{}, middleware.After)
+}
+
+func addOpStopReplicationBackfillValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopReplicationBackfill{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1878,6 +1950,21 @@ func validateOpDescribeImagesInput(v *DescribeImagesInput) error {
 	}
 }
 
+func validateOpDescribeReplicationBackfillResultsInput(v *DescribeReplicationBackfillResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicationBackfillResultsInput"}
+	if v.ReplicationBackfillId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationBackfillId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAccountSettingInput(v *GetAccountSettingInput) error {
 	if v == nil {
 		return nil
@@ -2246,6 +2333,40 @@ func validateOpStartLifecyclePolicyPreviewInput(v *StartLifecyclePolicyPreviewIn
 	invalidParams := smithy.InvalidParamsError{Context: "StartLifecyclePolicyPreviewInput"}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartReplicationBackfillInput(v *StartReplicationBackfillInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartReplicationBackfillInput"}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateReplicationDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopReplicationBackfillInput(v *StopReplicationBackfillInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopReplicationBackfillInput"}
+	if v.ReplicationBackfillId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationBackfillId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

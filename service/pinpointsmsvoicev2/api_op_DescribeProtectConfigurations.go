@@ -53,14 +53,18 @@ func (v *DescribeProtectConfigurationsInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeProtectConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectConfigurationFilterList(s, schemas.DescribeProtectConfigurationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeProtectConfigurationFilterList(s, schemas.DescribeProtectConfigurationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeProtectConfigurationsRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeProtectConfigurationsRequest_NextToken, *v.NextToken)
 	}
-	serializeProtectConfigurationIdList(s, schemas.DescribeProtectConfigurationsRequest_ProtectConfigurationIds, v.ProtectConfigurationIds)
+	if v.ProtectConfigurationIds != nil {
+		serializeProtectConfigurationIdList(s, schemas.DescribeProtectConfigurationsRequest_ProtectConfigurationIds, v.ProtectConfigurationIds)
+	}
 }
 
 type DescribeProtectConfigurationsOutput struct {
@@ -89,7 +93,9 @@ func (v *DescribeProtectConfigurationsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeProtectConfigurationsResult_NextToken, *v.NextToken)
 	}
-	serializeProtectConfigurationInformationList(s, schemas.DescribeProtectConfigurationsResult_ProtectConfigurations, v.ProtectConfigurations)
+	if v.ProtectConfigurations != nil {
+		serializeProtectConfigurationInformationList(s, schemas.DescribeProtectConfigurationsResult_ProtectConfigurations, v.ProtectConfigurations)
+	}
 }
 func (v *DescribeProtectConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProtectConfigurationsResult, func(s *smithy.Schema) error {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","dimensionKeys":["__Member__","__Member__"],"entries":[{"connections":[{"period":"second","rate":1},{"period":"second","rate":1}],"dimensions":{"key0":"__Value__"},"requests":[{"period":"second","rate":1},{"period":"second","rate":1}],"tokens":[{"period":"second","rate":1},{"period":"second","rate":1}]},{"connections":[{"period":"second","rate":1},{"period":"second","rate":1}],"dimensions":{"key0":"__Value__"},"requests":[{"period":"second","rate":1},{"period":"second","rate":1}],"tokens":[{"period":"second","rate":1},{"period":"second","rate":1}]}],"gatewayIdentifier":"__GatewayIdentifier__","rateLimitId":"__RateLimitId__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}

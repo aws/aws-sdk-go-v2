@@ -55,14 +55,18 @@ func (v *DescribeStorageVirtualMachinesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeStorageVirtualMachinesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStorageVirtualMachineFilters(s, schemas.DescribeStorageVirtualMachinesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeStorageVirtualMachineFilters(s, schemas.DescribeStorageVirtualMachinesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeStorageVirtualMachinesRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeStorageVirtualMachinesRequest_NextToken, *v.NextToken)
 	}
-	serializeStorageVirtualMachineIds(s, schemas.DescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds, v.StorageVirtualMachineIds)
+	if v.StorageVirtualMachineIds != nil {
+		serializeStorageVirtualMachineIds(s, schemas.DescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds, v.StorageVirtualMachineIds)
+	}
 }
 
 type DescribeStorageVirtualMachinesOutput struct {
@@ -92,7 +96,9 @@ func (v *DescribeStorageVirtualMachinesOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeStorageVirtualMachinesResponse_NextToken, *v.NextToken)
 	}
-	serializeStorageVirtualMachines(s, schemas.DescribeStorageVirtualMachinesResponse_StorageVirtualMachines, v.StorageVirtualMachines)
+	if v.StorageVirtualMachines != nil {
+		serializeStorageVirtualMachines(s, schemas.DescribeStorageVirtualMachinesResponse_StorageVirtualMachines, v.StorageVirtualMachines)
+	}
 }
 func (v *DescribeStorageVirtualMachinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeStorageVirtualMachinesResponse, func(s *smithy.Schema) error {

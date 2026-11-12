@@ -1640,6 +1640,20 @@
                 }
             }
         },
+        "com.amazonaws.xray#CloudWatchLogsConfiguration": {
+            "type": "structure",
+            "members": {
+                "SpansLogGroupKmsKeyId": {
+                    "target": "com.amazonaws.xray#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of an AWS Key Management Service (AWS KMS) key that you create and manage, in the same account and Region, used to encrypt the <code>aws/spans</code> log group. Key IDs and alias ARNs are not supported.\n</p>\n         <p>\nX-Ray applies the key only when it creates <code>aws/spans</code>. If the account already has an <code>aws/spans</code> log group, X-Ray fails the request with an <code>InvalidRequestException</code> and does not change the log group. To enable Transaction Search with the existing log group as it is, call <code>UpdateTraceSegmentDestination</code> again without <code>SpansLogGroupKmsKeyId</code>. To set or change the key of the existing log group, use the CloudWatch Logs <code>AssociateKmsKey</code> operation.\n</p>\n         <p>\nYou need <code>kms:DescribeKey</code> permission on the key, and the key policy must allow CloudWatch Logs to use the key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html\">Encrypt log data in CloudWatch Logs using AWS Key Management Service</a>.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nContains the settings for the CloudWatch Logs log groups that X-Ray creates for Transaction Search.\n</p>"
+            }
+        },
         "com.amazonaws.xray#CooldownWindowMinutes": {
             "type": "integer",
             "traits": {
@@ -4456,6 +4470,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>The request is missing required parameters or has invalid parameters.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.xray#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.xray#LinksList": {
@@ -7354,6 +7377,12 @@
                     "target": "com.amazonaws.xray#TraceSegmentDestination",
                     "traits": {
                         "smithy.api#documentation": "<p>\nThe configured destination of trace segments.\n</p>"
+                    }
+                },
+                "CloudWatchLogsConfiguration": {
+                    "target": "com.amazonaws.xray#CloudWatchLogsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies settings for the CloudWatch Logs log groups that X-Ray creates for Transaction Search. Specify this only when <code>Destination</code> is <code>CloudWatchLogs</code>.\n</p>"
                     }
                 }
             },

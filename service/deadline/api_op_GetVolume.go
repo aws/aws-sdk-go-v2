@@ -67,8 +67,6 @@ func (v *GetVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetVolumeOutput struct {
 
 	// The Availability Zone ID of the volume.

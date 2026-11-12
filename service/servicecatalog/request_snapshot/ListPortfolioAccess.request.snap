@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/ListPortfolioAccess
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListPortfolioAccess
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","OrganizationParentId":"__OrganizationParentId__","PageSize":1,"PageToken":"__PageToken__","PortfolioId":"__PortfolioId__"}
+¿nAcceptLanguager__AcceptLanguage__tOrganizationParentIdx__OrganizationParentId__hPageSizeiPageTokenm__PageToken__kPortfolioIdo__PortfolioId__ÿ

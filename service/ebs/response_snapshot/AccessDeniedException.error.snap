@@ -1,0 +1,4 @@
+403
+Content-Type: application/json
+
+{"__type":"AccessDeniedException","Message":"__Message__","Reason":"UNAUTHORIZED_ACCOUNT"}

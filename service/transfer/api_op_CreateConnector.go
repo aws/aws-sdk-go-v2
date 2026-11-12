@@ -126,7 +126,9 @@ func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.As2Config.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectorEgressConfig(s, schemas.CreateConnectorRequest_EgressConfig, v.EgressConfig)
+	if v.EgressConfig != nil {
+		serializeConnectorEgressConfig(s, schemas.CreateConnectorRequest_EgressConfig, v.EgressConfig)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CreateConnectorRequest_IpAddressType, string(v.IpAddressType))
 	}
@@ -141,7 +143,9 @@ func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SftpConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.CreateConnectorRequest_Url, *v.Url)
 	}

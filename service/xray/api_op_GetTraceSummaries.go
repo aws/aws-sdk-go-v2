@@ -149,7 +149,9 @@ func (v *GetTraceSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTraceSummariesResult_NextToken, *v.NextToken)
 	}
-	serializeTraceSummaryList(s, schemas.GetTraceSummariesResult_TraceSummaries, v.TraceSummaries)
+	if v.TraceSummaries != nil {
+		serializeTraceSummaryList(s, schemas.GetTraceSummariesResult_TraceSummaries, v.TraceSummaries)
+	}
 	if v.TracesProcessedCount != nil {
 		s.WriteInt64(schemas.GetTraceSummariesResult_TracesProcessedCount, *v.TracesProcessedCount)
 	}

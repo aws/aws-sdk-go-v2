@@ -250,6 +250,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPauseConnector struct {
+}
+
+func (*validateOpPauseConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPauseConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PauseConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPauseConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRestartConnector struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpRestartConnector) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRestartConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResumeConnector struct {
+}
+
+func (*validateOpResumeConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResumeConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResumeConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResumeConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -378,8 +418,16 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPauseConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPauseConnector{}, middleware.After)
+}
+
 func addOpRestartConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestartConnector{}, middleware.After)
+}
+
+func addOpResumeConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResumeConnector{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -401,6 +449,23 @@ func validate__listOfPlugin(v []types.Plugin) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfPlugin"}
 	for i := range v {
 		if err := validatePlugin(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfPluginUpdate(v []types.PluginUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfPluginUpdate"}
+	for i := range v {
+		if err := validatePluginUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -571,6 +636,24 @@ func validateCustomPluginLocation(v *types.CustomPluginLocation) error {
 	}
 }
 
+func validateCustomPluginUpdate(v *types.CustomPluginUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomPluginUpdate"}
+	if v.CustomPluginArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPluginArn"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFirehoseLogDelivery(v *types.FirehoseLogDelivery) error {
 	if v == nil {
 		return nil
@@ -660,6 +743,25 @@ func validatePlugin(v *types.Plugin) error {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomPlugin"))
 	} else if v.CustomPlugin != nil {
 		if err := validateCustomPlugin(v.CustomPlugin); err != nil {
+			invalidParams.AddNested("CustomPlugin", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePluginUpdate(v *types.PluginUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PluginUpdate"}
+	if v.CustomPlugin == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPlugin"))
+	} else if v.CustomPlugin != nil {
+		if err := validateCustomPluginUpdate(v.CustomPlugin); err != nil {
 			invalidParams.AddNested("CustomPlugin", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -792,6 +894,24 @@ func validateWorkerConfiguration(v *types.WorkerConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WorkerConfiguration"}
+	if v.WorkerConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkerConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkerConfigurationUpdate(v *types.WorkerConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkerConfigurationUpdate"}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
+	}
 	if v.WorkerConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkerConfigurationArn"))
 	}
@@ -1076,11 +1196,41 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPauseConnectorInput(v *PauseConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PauseConnectorInput"}
+	if v.ConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRestartConnectorInput(v *RestartConnectorInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RestartConnectorInput"}
+	if v.ConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResumeConnectorInput(v *ResumeConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResumeConnectorInput"}
 	if v.ConnectorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
 	}
@@ -1142,6 +1292,16 @@ func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
 	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.Plugins != nil {
+		if err := validate__listOfPluginUpdate(v.Plugins); err != nil {
+			invalidParams.AddNested("Plugins", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WorkerConfiguration != nil {
+		if err := validateWorkerConfigurationUpdate(v.WorkerConfiguration); err != nil {
+			invalidParams.AddNested("WorkerConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

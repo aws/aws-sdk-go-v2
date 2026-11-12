@@ -134,15 +134,21 @@ func (v *CreateCustomModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateCustomModelRequest_clientRequestToken, *v.ClientRequestToken)
 	}
-	serializeCustomModelDataSource(s, schemas.CreateCustomModelRequest_customModelDataSource, v.CustomModelDataSource)
+	if v.CustomModelDataSource != nil {
+		serializeCustomModelDataSource(s, schemas.CreateCustomModelRequest_customModelDataSource, v.CustomModelDataSource)
+	}
 	if v.ModelKmsKeyArn != nil {
 		s.WriteString(schemas.CreateCustomModelRequest_modelKmsKeyArn, *v.ModelKmsKeyArn)
 	}
 	if v.ModelName != nil {
 		s.WriteString(schemas.CreateCustomModelRequest_modelName, *v.ModelName)
 	}
-	serializeModelDataSource(s, schemas.CreateCustomModelRequest_modelSourceConfig, v.ModelSourceConfig)
-	serializeTagList(s, schemas.CreateCustomModelRequest_modelTags, v.ModelTags)
+	if v.ModelSourceConfig != nil {
+		serializeModelDataSource(s, schemas.CreateCustomModelRequest_modelSourceConfig, v.ModelSourceConfig)
+	}
+	if v.ModelTags != nil {
+		serializeTagList(s, schemas.CreateCustomModelRequest_modelTags, v.ModelTags)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateCustomModelRequest_roleArn, *v.RoleArn)
 	}

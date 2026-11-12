@@ -47,7 +47,9 @@ func (v *DeleteIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityIdList(s, schemas.DeleteIdentitiesInput_IdentityIdsToDelete, v.IdentityIdsToDelete)
+	if v.IdentityIdsToDelete != nil {
+		serializeIdentityIdList(s, schemas.DeleteIdentitiesInput_IdentityIdsToDelete, v.IdentityIdsToDelete)
+	}
 }
 
 // Returned in response to a successful DeleteIdentities operation.
@@ -70,7 +72,9 @@ func (v *DeleteIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnprocessedIdentityIdList(s, schemas.DeleteIdentitiesResponse_UnprocessedIdentityIds, v.UnprocessedIdentityIds)
+	if v.UnprocessedIdentityIds != nil {
+		serializeUnprocessedIdentityIdList(s, schemas.DeleteIdentitiesResponse_UnprocessedIdentityIds, v.UnprocessedIdentityIds)
+	}
 }
 func (v *DeleteIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteIdentitiesResponse, func(s *smithy.Schema) error {

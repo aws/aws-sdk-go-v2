@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"code":"CLIENT_ERROR","findingId":"__FindingId__","message":"__Message__"},{"code":"CLIENT_ERROR","findingId":"__FindingId__","message":"__Message__"}],"results":[{"findingId":"__FindingId__","linkedIssue":{"integrationId":"__IntegrationId__","issueId":"__IssueId__","issueKey":"__IssueKey__","issueUrl":"__IssueUrl__","projectKey":"__ProjectKey__","provider":"GITHUB","siteUrl":"__SiteUrl__"}},{"findingId":"__FindingId__","linkedIssue":{"integrationId":"__IntegrationId__","issueId":"__IssueId__","issueKey":"__IssueKey__","issueUrl":"__IssueUrl__","projectKey":"__ProjectKey__","provider":"GITHUB","siteUrl":"__SiteUrl__"}}]}

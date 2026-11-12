@@ -124,8 +124,12 @@ func (v *GetCreditAllocationHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCreditAllocationHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreditAllocationHistoryList(s, schemas.GetCreditAllocationHistoryResponse_creditAllocationHistoryList, v.CreditAllocationHistoryList)
-	serializeFailedMonthsList(s, schemas.GetCreditAllocationHistoryResponse_failedMonths, v.FailedMonths)
+	if v.CreditAllocationHistoryList != nil {
+		serializeCreditAllocationHistoryList(s, schemas.GetCreditAllocationHistoryResponse_creditAllocationHistoryList, v.CreditAllocationHistoryList)
+	}
+	if v.FailedMonths != nil {
+		serializeFailedMonthsList(s, schemas.GetCreditAllocationHistoryResponse_failedMonths, v.FailedMonths)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCreditAllocationHistoryResponse_nextToken, *v.NextToken)
 	}

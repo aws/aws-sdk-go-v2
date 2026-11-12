@@ -67,7 +67,9 @@ func (v *DescribeMatchmakingInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeMatchmakingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchmakingIdList(s, schemas.DescribeMatchmakingInput_TicketIds, v.TicketIds)
+	if v.TicketIds != nil {
+		serializeMatchmakingIdList(s, schemas.DescribeMatchmakingInput_TicketIds, v.TicketIds)
+	}
 }
 
 type DescribeMatchmakingOutput struct {
@@ -88,7 +90,9 @@ func (v *DescribeMatchmakingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeMatchmakingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchmakingTicketList(s, schemas.DescribeMatchmakingOutput_TicketList, v.TicketList)
+	if v.TicketList != nil {
+		serializeMatchmakingTicketList(s, schemas.DescribeMatchmakingOutput_TicketList, v.TicketList)
+	}
 }
 func (v *DescribeMatchmakingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMatchmakingOutput, func(s *smithy.Schema) error {

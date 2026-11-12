@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DeletePlatformVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlatformVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlatformVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlatformVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.DeletePlatformVersionRequest_PlatformArn, *v.PlatformArn)
+	}
+}
+
 type DeletePlatformVersionOutput struct {
 
 	// Detailed information about the version of the custom platform.
@@ -43,13 +57,34 @@ type DeletePlatformVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlatformVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlatformVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlatformVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlatformSummary != nil {
+		s.WriteStruct(schemas.DeletePlatformVersionResult_PlatformSummary)
+		v.PlatformSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeletePlatformVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePlatformVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePlatformVersionResult_PlatformSummary:
+			v.PlatformSummary = &types.PlatformSummary{}
+			return v.PlatformSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeletePlatformVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlatformVersion, schemas.DeletePlatformVersionRequest, schemas.DeletePlatformVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeletePlatformVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlatformVersion, schemas.DeletePlatformVersionRequest, schemas.DeletePlatformVersionResult), output: &DeletePlatformVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

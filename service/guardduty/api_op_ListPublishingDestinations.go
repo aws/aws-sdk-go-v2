@@ -97,7 +97,9 @@ func (v *ListPublishingDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPublishingDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinations(s, schemas.ListPublishingDestinationsResponse_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.ListPublishingDestinationsResponse_Destinations, v.Destinations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPublishingDestinationsResponse_NextToken, *v.NextToken)
 	}

@@ -102,7 +102,9 @@ func (v *ListStandardsControlAssociationsOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStandardsControlAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeStandardsControlAssociationSummaries(s, schemas.ListStandardsControlAssociationsResponse_StandardsControlAssociationSummaries, v.StandardsControlAssociationSummaries)
+	if v.StandardsControlAssociationSummaries != nil {
+		serializeStandardsControlAssociationSummaries(s, schemas.ListStandardsControlAssociationsResponse_StandardsControlAssociationSummaries, v.StandardsControlAssociationSummaries)
+	}
 }
 func (v *ListStandardsControlAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStandardsControlAssociationsResponse, func(s *smithy.Schema) error {

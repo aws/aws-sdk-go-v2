@@ -586,7 +586,9 @@ func (v *DiscoverableRegistryRecordSummary) SerializeMembers(s smithy.ShapeSeria
 	if v.Description != nil {
 		s.WriteString(schemas.DiscoverableRegistryRecordSummary_description, *v.Description)
 	}
-	serializeDescriptorTypeList(s, schemas.DiscoverableRegistryRecordSummary_descriptorTypes, v.DescriptorTypes)
+	if v.DescriptorTypes != nil {
+		serializeDescriptorTypeList(s, schemas.DiscoverableRegistryRecordSummary_descriptorTypes, v.DescriptorTypes)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.DiscoverableRegistryRecordSummary_displayName, *v.DisplayName)
 	}
@@ -868,7 +870,9 @@ func (v *RegistryRecordFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.RegistryRecordFilter_name, string(v.Name))
 	}
-	serializeDiscoverableFilterValues(s, schemas.RegistryRecordFilter_values, v.Values)
+	if v.Values != nil {
+		serializeDiscoverableFilterValues(s, schemas.RegistryRecordFilter_values, v.Values)
+	}
 }
 func (v *RegistryRecordFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegistryRecordFilter, func(s *smithy.Schema) error {
@@ -912,7 +916,9 @@ func (v *RegistryRecordsEntry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegistryRecordsEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryRecordIdList(s, schemas.RegistryRecordsEntry_recordIds, v.RecordIds)
+	if v.RecordIds != nil {
+		serializeRegistryRecordIdList(s, schemas.RegistryRecordsEntry_recordIds, v.RecordIds)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.RegistryRecordsEntry_registryId, *v.RegistryId)
 	}

@@ -51,10 +51,18 @@ func (v *BatchDeleteInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.BatchDeleteRequest_ChannelIds, v.ChannelIds)
-	serialize__listOf__string(s, schemas.BatchDeleteRequest_InputIds, v.InputIds)
-	serialize__listOf__string(s, schemas.BatchDeleteRequest_InputSecurityGroupIds, v.InputSecurityGroupIds)
-	serialize__listOf__string(s, schemas.BatchDeleteRequest_MultiplexIds, v.MultiplexIds)
+	if v.ChannelIds != nil {
+		serialize__listOf__string(s, schemas.BatchDeleteRequest_ChannelIds, v.ChannelIds)
+	}
+	if v.InputIds != nil {
+		serialize__listOf__string(s, schemas.BatchDeleteRequest_InputIds, v.InputIds)
+	}
+	if v.InputSecurityGroupIds != nil {
+		serialize__listOf__string(s, schemas.BatchDeleteRequest_InputSecurityGroupIds, v.InputSecurityGroupIds)
+	}
+	if v.MultiplexIds != nil {
+		serialize__listOf__string(s, schemas.BatchDeleteRequest_MultiplexIds, v.MultiplexIds)
+	}
 }
 
 // Placeholder documentation for BatchDeleteResponse
@@ -79,8 +87,12 @@ func (v *BatchDeleteOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfBatchFailedResultModel(s, schemas.BatchDeleteResponse_Failed, v.Failed)
-	serialize__listOfBatchSuccessfulResultModel(s, schemas.BatchDeleteResponse_Successful, v.Successful)
+	if v.Failed != nil {
+		serialize__listOfBatchFailedResultModel(s, schemas.BatchDeleteResponse_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serialize__listOfBatchSuccessfulResultModel(s, schemas.BatchDeleteResponse_Successful, v.Successful)
+	}
 }
 func (v *BatchDeleteOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteResponse, func(s *smithy.Schema) error {

@@ -4,6 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type GetCustomEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetCustomEndpointOutput struct {
 
 	// The IoT managed integrations dedicated, custom endpoint for the device to route
@@ -41,13 +52,32 @@ type GetCustomEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointAddress != nil {
+		s.WriteString(schemas.GetCustomEndpointResponse_EndpointAddress, *v.EndpointAddress)
+	}
+}
+func (v *GetCustomEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomEndpointResponse_EndpointAddress:
+			v.EndpointAddress = new(string)
+			return d.ReadString(schemas.GetCustomEndpointResponse_EndpointAddress, v.EndpointAddress)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCustomEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomEndpoint, schemas.GetCustomEndpointRequest, schemas.GetCustomEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCustomEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomEndpoint, schemas.GetCustomEndpointRequest, schemas.GetCustomEndpointResponse), output: &GetCustomEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

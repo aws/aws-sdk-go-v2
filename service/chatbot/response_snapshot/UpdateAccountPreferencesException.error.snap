@@ -1,0 +1,4 @@
+500
+Content-Type: application/json
+
+{"__type":"UpdateAccountPreferencesException","Message":"__Message__"}

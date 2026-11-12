@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SummaryMetricQueryResults":[{"AggregationPeriod":"OneHour","Dimensions":[{"name":"DeviceId","value":"__Value__"},{"name":"DeviceId","value":"__Value__"}],"EndTimestamp":946684800,"Error":"__Error__","MetricName":"DeviceRSSI","QueryId":"__QueryId__","QueryStatus":"Succeeded","StartTimestamp":946684800,"Timestamps":[946684800,946684800],"Unit":"__Unit__","Values":[{"Avg":1,"Max":1,"Min":1,"P90":1,"Std":1,"Sum":1},{"Avg":1,"Max":1,"Min":1,"P90":1,"Std":1,"Sum":1}]},{"AggregationPeriod":"OneHour","Dimensions":[{"name":"DeviceId","value":"__Value__"},{"name":"DeviceId","value":"__Value__"}],"EndTimestamp":946684800,"Error":"__Error__","MetricName":"DeviceRSSI","QueryId":"__QueryId__","QueryStatus":"Succeeded","StartTimestamp":946684800,"Timestamps":[946684800,946684800],"Unit":"__Unit__","Values":[{"Avg":1,"Max":1,"Min":1,"P90":1,"Std":1,"Sum":1},{"Avg":1,"Max":1,"Min":1,"P90":1,"Std":1,"Sum":1}]}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"code":"__Code__","id":"__Id__","message":"__Message__"},{"code":"__Code__","id":"__Id__","message":"__Message__"}]}

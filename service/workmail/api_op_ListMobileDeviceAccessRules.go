@@ -67,7 +67,9 @@ func (v *ListMobileDeviceAccessRulesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListMobileDeviceAccessRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMobileDeviceAccessRulesList(s, schemas.ListMobileDeviceAccessRulesResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeMobileDeviceAccessRulesList(s, schemas.ListMobileDeviceAccessRulesResponse_Rules, v.Rules)
+	}
 }
 func (v *ListMobileDeviceAccessRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMobileDeviceAccessRulesResponse, func(s *smithy.Schema) error {

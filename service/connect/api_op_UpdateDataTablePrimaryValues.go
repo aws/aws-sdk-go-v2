@@ -85,8 +85,12 @@ func (v *UpdateDataTablePrimaryValuesInput) SerializeMembers(s smithy.ShapeSeria
 		v.LockVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_NewPrimaryValues, v.NewPrimaryValues)
-	serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_PrimaryValues, v.PrimaryValues)
+	if v.NewPrimaryValues != nil {
+		serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_NewPrimaryValues, v.NewPrimaryValues)
+	}
+	if v.PrimaryValues != nil {
+		serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_PrimaryValues, v.PrimaryValues)
+	}
 }
 
 type UpdateDataTablePrimaryValuesOutput struct {

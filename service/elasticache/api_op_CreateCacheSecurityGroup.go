@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type CreateCacheSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCacheSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCacheSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCacheSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroupName != nil {
+		s.WriteString(schemas.CreateCacheSecurityGroupMessage_CacheSecurityGroupName, *v.CacheSecurityGroupName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCacheSecurityGroupMessage_Description, *v.Description)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCacheSecurityGroupMessage_Tags, v.Tags)
+	}
+}
+
 type CreateCacheSecurityGroupOutput struct {
 
 	// Represents the output of one of the following operations:
@@ -73,13 +93,34 @@ type CreateCacheSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCacheSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCacheSecurityGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCacheSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroup != nil {
+		s.WriteStruct(schemas.CreateCacheSecurityGroupResult_CacheSecurityGroup)
+		v.CacheSecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCacheSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCacheSecurityGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCacheSecurityGroupResult_CacheSecurityGroup:
+			v.CacheSecurityGroup = &types.CacheSecurityGroup{}
+			return v.CacheSecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCacheSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCacheSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCacheSecurityGroup, schemas.CreateCacheSecurityGroupMessage, schemas.CreateCacheSecurityGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateCacheSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCacheSecurityGroup, schemas.CreateCacheSecurityGroupMessage, schemas.CreateCacheSecurityGroupResult), output: &CreateCacheSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

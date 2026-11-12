@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type DetectStackResourceDriftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectStackResourceDriftInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectStackResourceDriftInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectStackResourceDriftInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogicalResourceId != nil {
+		s.WriteString(schemas.DetectStackResourceDriftInput_LogicalResourceId, *v.LogicalResourceId)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DetectStackResourceDriftInput_StackName, *v.StackName)
+	}
+}
+
 type DetectStackResourceDriftOutput struct {
 
 	// Information about whether the resource's actual configuration has drifted from
@@ -69,13 +86,34 @@ type DetectStackResourceDriftOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectStackResourceDriftOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectStackResourceDriftOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectStackResourceDriftOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackResourceDrift != nil {
+		s.WriteStruct(schemas.DetectStackResourceDriftOutput_StackResourceDrift)
+		v.StackResourceDrift.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectStackResourceDriftOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectStackResourceDriftOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectStackResourceDriftOutput_StackResourceDrift:
+			v.StackResourceDrift = &types.StackResourceDrift{}
+			return v.StackResourceDrift.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectStackResourceDriftMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetectStackResourceDrift{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectStackResourceDrift, schemas.DetectStackResourceDriftInput, schemas.DetectStackResourceDriftOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetectStackResourceDrift{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectStackResourceDrift, schemas.DetectStackResourceDriftInput, schemas.DetectStackResourceDriftOutput), output: &DetectStackResourceDriftOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

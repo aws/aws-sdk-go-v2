@@ -82,7 +82,9 @@ func (v *GetListsMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetListsMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowDenyLists(s, schemas.GetListsMetadataResult_lists, v.Lists)
+	if v.Lists != nil {
+		serializeAllowDenyLists(s, schemas.GetListsMetadataResult_lists, v.Lists)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetListsMetadataResult_nextToken, *v.NextToken)
 	}

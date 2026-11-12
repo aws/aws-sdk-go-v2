@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -16,6 +18,11 @@ import (
 // ValidationException error.
 //
 // To get information about more than one parameter at a time, use the GetParameters operation.
+//
+// This operation is authorized against the ssm:GetParameter action. Denying that
+// action alone doesn't restrict GetParameters, GetParameterHistory, or GetParametersByPath, each of which is authorized against its
+// own action. For more information, see [How Parameter Store authorizes parameter retrieval]in the Amazon Web Services Systems
+// Manager User Guide.
 //
 // Parameter Store throughput defines the number of API transactions per second
 // (TPS) that Systems Manager can process. This applies to GetParameter ,
@@ -32,6 +39,7 @@ import (
 // ThrottlingException: Rate exceeded errors, enable higher throughput. For more
 // information, see [Changing Parameter Store throughput].
 //
+// [How Parameter Store authorizes parameter retrieval]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
 // [Changing Parameter Store throughput]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
 func (c *Client) GetParameter(ctx context.Context, params *GetParameterInput, optFns ...func(*Options)) (*GetParameterOutput, error) {
 	if params == nil {
@@ -71,6 +79,21 @@ type GetParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParameterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParameterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetParameterRequest_Name, *v.Name)
+	}
+	if v.WithDecryption != nil {
+		s.WriteBool(schemas.GetParameterRequest_WithDecryption, *v.WithDecryption)
+	}
+}
+
 type GetParameterOutput struct {
 
 	// Information about a parameter.
@@ -82,13 +105,34 @@ type GetParameterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParameterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParameterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParameterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Parameter != nil {
+		s.WriteStruct(schemas.GetParameterResult_Parameter)
+		v.Parameter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetParameterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParameterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParameterResult_Parameter:
+			v.Parameter = &types.Parameter{}
+			return v.Parameter.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameter, schemas.GetParameterRequest, schemas.GetParameterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParameter, schemas.GetParameterRequest, schemas.GetParameterResult), output: &GetParameterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

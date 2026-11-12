@@ -100,7 +100,9 @@ func (v *ListInsightsDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataType != "" {
 		s.WriteString(schemas.ListInsightsDataRequest_DataType, string(v.DataType))
 	}
-	serializeListInsightsDataDimensions(s, schemas.ListInsightsDataRequest_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeListInsightsDataDimensions(s, schemas.ListInsightsDataRequest_Dimensions, v.Dimensions)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListInsightsDataRequest_EndTime, *v.EndTime)
 	}
@@ -145,7 +147,9 @@ func (v *ListInsightsDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInsightsDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventsList(s, schemas.ListInsightsDataResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeEventsList(s, schemas.ListInsightsDataResponse_Events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInsightsDataResponse_NextToken, *v.NextToken)
 	}

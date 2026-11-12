@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ModifyActivityStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyActivityStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyActivityStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyActivityStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditPolicyState != "" {
+		s.WriteString(schemas.ModifyActivityStreamRequest_AuditPolicyState, string(v.AuditPolicyState))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ModifyActivityStreamRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type ModifyActivityStreamOutput struct {
 
 	// Indicates whether engine-native audit fields are included in the database
@@ -77,13 +94,74 @@ type ModifyActivityStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyActivityStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyActivityStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyActivityStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineNativeAuditFieldsIncluded != nil {
+		s.WriteBool(schemas.ModifyActivityStreamResponse_EngineNativeAuditFieldsIncluded, *v.EngineNativeAuditFieldsIncluded)
+	}
+	if v.KinesisStreamName != nil {
+		s.WriteString(schemas.ModifyActivityStreamResponse_KinesisStreamName, *v.KinesisStreamName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ModifyActivityStreamResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.ModifyActivityStreamResponse_Mode, string(v.Mode))
+	}
+	if v.PolicyStatus != "" {
+		s.WriteString(schemas.ModifyActivityStreamResponse_PolicyStatus, string(v.PolicyStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ModifyActivityStreamResponse_Status, string(v.Status))
+	}
+}
+func (v *ModifyActivityStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyActivityStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyActivityStreamResponse_EngineNativeAuditFieldsIncluded:
+			v.EngineNativeAuditFieldsIncluded = new(bool)
+			return d.ReadBool(schemas.ModifyActivityStreamResponse_EngineNativeAuditFieldsIncluded, v.EngineNativeAuditFieldsIncluded)
+		case schemas.ModifyActivityStreamResponse_KinesisStreamName:
+			v.KinesisStreamName = new(string)
+			return d.ReadString(schemas.ModifyActivityStreamResponse_KinesisStreamName, v.KinesisStreamName)
+		case schemas.ModifyActivityStreamResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ModifyActivityStreamResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.ModifyActivityStreamResponse_Mode:
+			var ev string
+			if err := d.ReadString(schemas.ModifyActivityStreamResponse_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = types.ActivityStreamMode(ev)
+			return nil
+		case schemas.ModifyActivityStreamResponse_PolicyStatus:
+			var ev string
+			if err := d.ReadString(schemas.ModifyActivityStreamResponse_PolicyStatus, &ev); err != nil {
+				return err
+			}
+			v.PolicyStatus = types.ActivityStreamPolicyStatus(ev)
+			return nil
+		case schemas.ModifyActivityStreamResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ModifyActivityStreamResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ActivityStreamStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyActivityStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyActivityStream, schemas.ModifyActivityStreamRequest, schemas.ModifyActivityStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyActivityStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyActivityStream, schemas.ModifyActivityStreamRequest, schemas.ModifyActivityStreamResponse), output: &ModifyActivityStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

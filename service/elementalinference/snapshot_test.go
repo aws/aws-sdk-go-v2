@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateScheduleAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateScheduleAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateScheduleAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDictionary(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDictionary(context.Background(), nil, func(o *Options) {
@@ -127,6 +139,18 @@ func TestCheckSnapshot_DeleteFeedPolicy(t *testing.T) {
 	_, err := svc.DeleteFeedPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteScheduleAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScheduleAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteScheduleAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_ListFeeds(t *testing.T) {
 	_, err := svc.ListFeeds(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFeeds")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListScheduleActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScheduleActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListScheduleActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -349,6 +385,18 @@ func TestUpdateSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateScheduleAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateScheduleAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateScheduleAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDictionary(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDictionary(context.Background(), nil, func(o *Options) {
@@ -378,6 +426,18 @@ func TestUpdateSnapshot_DeleteFeedPolicy(t *testing.T) {
 	_, err := svc.DeleteFeedPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteScheduleAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScheduleAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteScheduleAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -474,6 +534,18 @@ func TestUpdateSnapshot_ListFeeds(t *testing.T) {
 	_, err := svc.ListFeeds(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFeeds")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListScheduleActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScheduleActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListScheduleActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

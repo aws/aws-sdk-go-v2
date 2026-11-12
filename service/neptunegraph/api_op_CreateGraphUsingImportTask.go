@@ -149,7 +149,9 @@ func (v *CreateGraphUsingImportTaskInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.GraphName != nil {
 		s.WriteString(schemas.CreateGraphUsingImportTaskInput_graphName, *v.GraphName)
 	}
-	serializeImportOptions(s, schemas.CreateGraphUsingImportTaskInput_importOptions, v.ImportOptions)
+	if v.ImportOptions != nil {
+		serializeImportOptions(s, schemas.CreateGraphUsingImportTaskInput_importOptions, v.ImportOptions)
+	}
 	if v.KmsKeyIdentifier != nil {
 		s.WriteString(schemas.CreateGraphUsingImportTaskInput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
 	}
@@ -174,7 +176,9 @@ func (v *CreateGraphUsingImportTaskInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Source != nil {
 		s.WriteString(schemas.CreateGraphUsingImportTaskInput_source, *v.Source)
 	}
-	serializeTagMap(s, schemas.CreateGraphUsingImportTaskInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateGraphUsingImportTaskInput_tags, v.Tags)
+	}
 	if v.VectorSearchConfiguration != nil {
 		s.WriteStruct(schemas.CreateGraphUsingImportTaskInput_vectorSearchConfiguration)
 		v.VectorSearchConfiguration.SerializeMembers(s)
@@ -250,7 +254,9 @@ func (v *CreateGraphUsingImportTaskOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.GraphId != nil {
 		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_graphId, *v.GraphId)
 	}
-	serializeImportOptions(s, schemas.CreateGraphUsingImportTaskOutput_importOptions, v.ImportOptions)
+	if v.ImportOptions != nil {
+		serializeImportOptions(s, schemas.CreateGraphUsingImportTaskOutput_importOptions, v.ImportOptions)
+	}
 	if v.ParquetType != "" {
 		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_parquetType, string(v.ParquetType))
 	}

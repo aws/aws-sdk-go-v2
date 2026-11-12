@@ -104,12 +104,18 @@ func (v *CreateCostCategoryDefinitionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCostCategoryDefinitionRequest_Name, *v.Name)
 	}
-	serializeResourceTagList(s, schemas.CreateCostCategoryDefinitionRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateCostCategoryDefinitionRequest_ResourceTags, v.ResourceTags)
+	}
 	if v.RuleVersion != "" {
 		s.WriteString(schemas.CreateCostCategoryDefinitionRequest_RuleVersion, string(v.RuleVersion))
 	}
-	serializeCostCategoryRulesList(s, schemas.CreateCostCategoryDefinitionRequest_Rules, v.Rules)
-	serializeCostCategorySplitChargeRulesList(s, schemas.CreateCostCategoryDefinitionRequest_SplitChargeRules, v.SplitChargeRules)
+	if v.Rules != nil {
+		serializeCostCategoryRulesList(s, schemas.CreateCostCategoryDefinitionRequest_Rules, v.Rules)
+	}
+	if v.SplitChargeRules != nil {
+		serializeCostCategorySplitChargeRulesList(s, schemas.CreateCostCategoryDefinitionRequest_SplitChargeRules, v.SplitChargeRules)
+	}
 }
 
 type CreateCostCategoryDefinitionOutput struct {

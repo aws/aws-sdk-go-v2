@@ -31,8 +31,6 @@ func (c *Client) GetQueueFleetAssociation(ctx context.Context, params *GetQueueF
 	return out, nil
 }
 
-// Identifier mixin for queue-fleet association operations. Composes
-// QueueIdentifierMixin (farmId + queueId) and adds fleetId.
 type GetQueueFleetAssociationInput struct {
 
 	// The farm ID of the farm that contains the queue-fleet association.
@@ -71,8 +69,6 @@ func (v *GetQueueFleetAssociationInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 }
 
-// Domain fields for QueueFleetAssociation summary/response shapes, ordered before
-// timestamps.
 type GetQueueFleetAssociationOutput struct {
 
 	// The date and time the resource was created.

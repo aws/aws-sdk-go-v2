@@ -83,7 +83,9 @@ func (v *GetApiMappingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetApiMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfApiMapping(s, schemas.GetApiMappingsResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfApiMapping(s, schemas.GetApiMappingsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetApiMappingsResponse_NextToken, *v.NextToken)
 	}

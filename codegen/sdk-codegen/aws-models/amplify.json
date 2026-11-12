@@ -1258,7 +1258,7 @@
                 "computeRoleArn": {
                     "target": "com.amazonaws.amplify#ComputeRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for an SSR app. The\n            Compute role allows the Amplify Hosting compute service to securely\n            access specific Amazon Web Services resources based on the role's permissions. For more\n            information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>Amplify User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for an SSR app. The\n            Compute role allows the Amplify Hosting compute service to securely\n            access specific Amazon Web Services resources based on the role's permissions. For more\n            information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>\n               Amplify User Guide</i>.</p>"
                     }
                 },
                 "iamServiceRoleArn": {
@@ -1783,7 +1783,7 @@
                 "enableSkewProtection": {
                     "target": "com.amazonaws.amplify#EnableSkewProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the skew protection feature is enabled for the branch.</p>\n         <p>Deployment skew protection is available to Amplify applications to\n            eliminate version skew issues between client and servers in web applications. When you\n            apply skew protection to a branch, you can ensure that your clients always interact with\n            the correct version of server-side assets, regardless of when a deployment occurs. For\n            more information about skew protection, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html\">Skew protection for Amplify deployments</a> in the <i>Amplify User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the skew protection feature is enabled for the branch.</p>\n         <p>Deployment skew protection is available to Amplify applications to\n            eliminate version skew issues between client and servers in web applications. When you\n            apply skew protection to a branch, you can ensure that your clients always interact with\n            the correct version of server-side assets, regardless of when a deployment occurs. For\n            more information about skew protection, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html\">Skew protection for Amplify deployments</a> in the <i>\n               Amplify User\n                Guide</i>.</p>"
                     }
                 },
                 "customDomains": {
@@ -1895,7 +1895,7 @@
                 "computeRoleArn": {
                     "target": "com.amazonaws.amplify#ComputeRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for a branch of an SSR\n            app. The Compute role allows the Amplify Hosting compute service to\n            securely access specific Amazon Web Services resources based on the role's permissions.\n            For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>Amplify User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for a branch of an SSR\n            app. The Compute role allows the Amplify Hosting compute service to\n            securely access specific Amazon Web Services resources based on the role's permissions.\n            For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>\n               Amplify User Guide</i>.</p>"
                     }
                 }
             },
@@ -1982,7 +1982,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the cache configuration for an Amplify app.</p>\n         <p>For more information about how Amplify applies an optimal cache\n            configuration for your app based on the type of content that is being served, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/managing-cache-configuration\">Managing cache configuration</a> in the <i>Amplify User\n                guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the cache configuration for an Amplify app.</p>\n         <p>For more information about how Amplify applies an optimal cache\n            configuration for your app based on the type of content that is being served, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/managing-cache-configuration\">Managing cache configuration</a> in the <i>\n               Amplify User\n                guide</i>.</p>"
             }
         },
         "com.amazonaws.amplify#CacheConfigType": {
@@ -2008,7 +2008,7 @@
                 "type": {
                     "target": "com.amazonaws.amplify#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of SSL/TLS certificate that you want to use.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager</a> in the <i>ACM User\n                guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of SSL/TLS certificate that you want to use.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager\n            </a> in the <i>\n               ACM User\n                guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2045,7 +2045,7 @@
                 "type": {
                     "target": "com.amazonaws.amplify#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The certificate type.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager</a> in the <i>ACM User\n                guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The certificate type.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager\n            </a> in the <i>\n               ACM User\n                guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2200,7 +2200,7 @@
                 "computeRoleArn": {
                     "target": "com.amazonaws.amplify#ComputeRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.\n            The SSR Compute role allows the Amplify Hosting compute service to\n            securely access specific Amazon Web Services resources based on the role's permissions.\n            For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>Amplify User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.\n            The SSR Compute role allows the Amplify Hosting compute service to\n            securely access specific Amazon Web Services resources based on the role's permissions.\n            For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>\n               Amplify User Guide</i>.</p>"
                     }
                 },
                 "iamServiceRoleArn": {
@@ -2499,7 +2499,7 @@
                 "enableSkewProtection": {
                     "target": "com.amazonaws.amplify#EnableSkewProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the skew protection feature is enabled for the branch.</p>\n         <p>Deployment skew protection is available to Amplify applications to\n            eliminate version skew issues between client and servers in web applications. When you\n            apply skew protection to a branch, you can ensure that your clients always interact with\n            the correct version of server-side assets, regardless of when a deployment occurs. For\n            more information about skew protection, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html\">Skew protection for Amplify deployments</a> in the <i>Amplify User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the skew protection feature is enabled for the branch.</p>\n         <p>Deployment skew protection is available to Amplify applications to\n            eliminate version skew issues between client and servers in web applications. When you\n            apply skew protection to a branch, you can ensure that your clients always interact with\n            the correct version of server-side assets, regardless of when a deployment occurs. For\n            more information about skew protection, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html\">Skew protection for Amplify deployments</a> in the <i>\n               Amplify User\n                Guide</i>.</p>"
                     }
                 },
                 "environmentVariables": {
@@ -2577,7 +2577,7 @@
                 "computeRoleArn": {
                     "target": "com.amazonaws.amplify#ComputeRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to a branch of\n            an SSR app. The SSR Compute role allows the Amplify Hosting compute\n            service to securely access specific Amazon Web Services resources based on the role's\n            permissions. For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to a branch of\n            an SSR app. The SSR Compute role allows the Amplify Hosting compute\n            service to securely access specific Amazon Web Services resources based on the role's\n            permissions. For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>\n               Amplify User\n                Guide</i>.</p>"
                     }
                 }
             },
@@ -3503,7 +3503,7 @@
                 "updateStatus": {
                     "target": "com.amazonaws.amplify#UpdateStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the domain update operation that is currently in progress. The following\n            list describes the valid update states.</p>\n         <dl>\n            <dt>REQUESTING_CERTIFICATE</dt>\n            <dd>\n               <p>The certificate is in the process of being updated.</p>\n            </dd>\n            <dt>PENDING_VERIFICATION</dt>\n            <dd>\n               <p>Indicates that an Amplify managed certificate is in the\n                        process of being verified. This occurs during the creation of a custom\n                        domain or when a custom domain is updated to use a managed\n                        certificate.</p>\n            </dd>\n            <dt>IMPORTING_CUSTOM_CERTIFICATE</dt>\n            <dd>\n               <p>Indicates that an Amplify custom certificate is in the\n                        process of being imported. This occurs during the creation of a custom\n                        domain or when a custom domain is updated to use a custom\n                        certificate.</p>\n            </dd>\n            <dt>PENDING_DEPLOYMENT</dt>\n            <dd>\n               <p>Indicates that the subdomain or certificate changes are being\n                        propagated.</p>\n            </dd>\n            <dt>AWAITING_APP_CNAME</dt>\n            <dd>\n               <p>Amplify is waiting for CNAME records corresponding to\n                        subdomains to be propagated. If your custom domain is on Route 53,\n                            Amplify handles this for you automatically. For more\n                        information about custom domains, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html\">Setting up custom\n                            domains</a> in the <i>Amplify Hosting User\n                            Guide</i>. </p>\n            </dd>\n            <dt>UPDATE_COMPLETE</dt>\n            <dd>\n               <p>The certificate has been associated with a domain.</p>\n            </dd>\n            <dt>UPDATE_FAILED</dt>\n            <dd>\n               <p>The certificate has failed to be provisioned or associated, and there is\n                        no existing active certificate to roll back to.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The status of the domain update operation that is currently in progress. The following\n            list describes the valid update states.</p>\n         <dl>\n            <dt>REQUESTING_CERTIFICATE</dt>\n            <dd>\n               <p>The certificate is in the process of being updated.</p>\n            </dd>\n            <dt>PENDING_VERIFICATION</dt>\n            <dd>\n               <p>Indicates that an Amplify managed certificate is in the\n                        process of being verified. This occurs during the creation of a custom\n                        domain or when a custom domain is updated to use a managed\n                        certificate.</p>\n            </dd>\n            <dt>IMPORTING_CUSTOM_CERTIFICATE</dt>\n            <dd>\n               <p>Indicates that an Amplify custom certificate is in the\n                        process of being imported. This occurs during the creation of a custom\n                        domain or when a custom domain is updated to use a custom\n                        certificate.</p>\n            </dd>\n            <dt>PENDING_DEPLOYMENT</dt>\n            <dd>\n               <p>Indicates that the subdomain or certificate changes are being\n                        propagated.</p>\n            </dd>\n            <dt>AWAITING_APP_CNAME</dt>\n            <dd>\n               <p>\n                  Amplify is waiting for CNAME records corresponding to\n                        subdomains to be propagated. If your custom domain is on Route 53,\n                            Amplify handles this for you automatically. For more\n                        information about custom domains, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html\">Setting up custom\n                            domains</a> in the <i>\n                     Amplify Hosting User\n                            Guide</i>. </p>\n            </dd>\n            <dt>UPDATE_COMPLETE</dt>\n            <dd>\n               <p>The certificate has been associated with a domain.</p>\n            </dd>\n            <dt>UPDATE_FAILED</dt>\n            <dd>\n               <p>The certificate has failed to be provisioned or associated, and there is\n                        no existing active certificate to roll back to.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "statusReason": {
@@ -4398,7 +4398,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration details that apply to the jobs for an Amplify app.</p>\n         <p>Use <code>JobConfig</code> to apply configuration to jobs, such as customizing the build instance size when you create or\n            update an Amplify app. For more information about customizable build\n            instances, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/custom-build-instance.html\">Custom build instances</a> in the <i>Amplify User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration details that apply to the jobs for an Amplify app.</p>\n         <p>Use <code>JobConfig</code> to apply configuration to jobs, such as customizing the build instance size when you create or\n            update an Amplify app. For more information about customizable build\n            instances, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/custom-build-instance.html\">Custom build instances</a> in the <i>\n               Amplify User Guide</i>.</p>"
             }
         },
         "com.amazonaws.amplify#JobId": {
@@ -4716,7 +4716,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of end-to-end testing artifacts for a specified app, branch, and\n            job.</p>\n         <p>To return the build artifacts, use the <a href=\"https://docs.aws.amazon.com/amplify/latest/APIReference/API_GetJob.html\">GetJob</a> API.</p>\n         <p>For more information about Amplify testing support, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/running-tests.html\">Setting up\n                end-to-end Cypress tests for your Amplify application</a> in the\n                    <i>Amplify Hosting User Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Returns a list of end-to-end testing artifacts for a specified app, branch, and\n            job.</p>\n         <p>To return the build artifacts, use the <a href=\"https://docs.aws.amazon.com/amplify/latest/APIReference/API_GetJob.html\">GetJob</a> API.</p>\n         <p>For more information about Amplify testing support, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/running-tests.html\">Setting up\n                end-to-end Cypress tests for your Amplify application</a> in the\n                    <i>\n               Amplify Hosting User Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/branches/{branchName}/jobs/{jobId}/artifacts",
@@ -6415,7 +6415,7 @@
                 "computeRoleArn": {
                     "target": "com.amazonaws.amplify#ComputeRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.\n            The SSR Compute role allows the Amplify Hosting compute service to\n            securely access specific Amazon Web Services resources based on the role's permissions.\n            For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>Amplify User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.\n            The SSR Compute role allows the Amplify Hosting compute service to\n            securely access specific Amazon Web Services resources based on the role's permissions.\n            For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute\n                role</a> in the <i>\n               Amplify User Guide</i>.</p>"
                     }
                 },
                 "iamServiceRoleArn": {
@@ -6628,7 +6628,7 @@
                 "enableSkewProtection": {
                     "target": "com.amazonaws.amplify#EnableSkewProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the skew protection feature is enabled for the branch.</p>\n         <p>Deployment skew protection is available to Amplify applications to\n            eliminate version skew issues between client and servers in web applications. When you\n            apply skew protection to a branch, you can ensure that your clients always interact with\n            the correct version of server-side assets, regardless of when a deployment occurs. For\n            more information about skew protection, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html\">Skew protection for Amplify deployments</a> in the <i>Amplify User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the skew protection feature is enabled for the branch.</p>\n         <p>Deployment skew protection is available to Amplify applications to\n            eliminate version skew issues between client and servers in web applications. When you\n            apply skew protection to a branch, you can ensure that your clients always interact with\n            the correct version of server-side assets, regardless of when a deployment occurs. For\n            more information about skew protection, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html\">Skew protection for Amplify deployments</a> in the <i>\n               Amplify User\n                Guide</i>.</p>"
                     }
                 },
                 "environmentVariables": {
@@ -6700,7 +6700,7 @@
                 "computeRoleArn": {
                     "target": "com.amazonaws.amplify#ComputeRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to a branch of\n            an SSR app. The SSR Compute role allows the Amplify Hosting compute\n            service to securely access specific Amazon Web Services resources based on the role's\n            permissions. For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to a branch of\n            an SSR app. The SSR Compute role allows the Amplify Hosting compute\n            service to securely access specific Amazon Web Services resources based on the role's\n            permissions. For more information about the SSR Compute role, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>\n               Amplify User\n                Guide</i>.</p>"
                     }
                 }
             },
@@ -6994,7 +6994,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Firewall configuration for a hosted Amplify application.\n            Firewall support enables you to protect your web applications with a direct integration\n            with WAF. For more information about using WAF protections\n            for an Amplify application, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/WAF-integration.html\">Firewall support for hosted\n                sites</a> in the <i>Amplify User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Describes the Firewall configuration for a hosted Amplify application.\n            Firewall support enables you to protect your web applications with a direct integration\n            with WAF. For more information about using WAF protections\n            for an Amplify application, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/WAF-integration.html\">Firewall support for hosted\n                sites</a> in the <i>\n               Amplify User Guide</i>. </p>"
             }
         },
         "com.amazonaws.amplify#WafStatus": {

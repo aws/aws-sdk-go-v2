@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAccountAttributesResponse><DescribeAccountAttributesResult><AccountQuotas><AccountQuota><AccountQuotaName>__AccountQuotaName__</AccountQuotaName><Max>1</Max><Used>1</Used></AccountQuota><AccountQuota><AccountQuotaName>__AccountQuotaName__</AccountQuotaName><Max>1</Max><Used>1</Used></AccountQuota></AccountQuotas></DescribeAccountAttributesResult></DescribeAccountAttributesResponse>

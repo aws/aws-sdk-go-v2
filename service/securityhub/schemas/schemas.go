@@ -603,6 +603,27 @@ var GetSecurityControlDefinition = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/securityControl/definition",
 	Code: 200})
 
+var GetSoftwareResourcesV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareResourcesV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/softwarev2/resources",
+	Code: 200})
+
+var GetSoftwareStatisticsV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareStatisticsV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/softwarev2/statistics",
+	Code: 200})
+
+var GetSoftwareV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/softwarev2",
+	Code: 200})
+
 var InviteMembers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "InviteMembers",
@@ -14324,6 +14345,78 @@ var _SizeBytes = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SizeBytes",
 }, smithy.ShapeTypeLong, 0)
 
+var SoftwareCompositeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareCompositeFilter",
+}, smithy.ShapeTypeStructure, 3)
+var SoftwareCompositeFilter_StringFilters *smithy.Schema
+
+var SoftwareCompositeFilter_NestedCompositeFilters *smithy.Schema
+
+var SoftwareCompositeFilter_Operator *smithy.Schema
+
+var _SoftwareCompositeFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareCompositeFilterList",
+}, smithy.ShapeTypeList, 1)
+var _SoftwareCompositeFilterList_member *smithy.Schema
+
+var SoftwareFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareFilters",
+}, smithy.ShapeTypeStructure, 2)
+var SoftwareFilters_CompositeFilters *smithy.Schema
+
+var SoftwareFilters_CompositeOperator *smithy.Schema
+
+var SoftwareGroupByField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareGroupByField",
+}, smithy.ShapeTypeEnum, 12)
+var SoftwareGroupByField_ACCOUNT_ID *smithy.Schema
+
+var SoftwareGroupByField_PACKAGE_NAME *smithy.Schema
+
+var SoftwareGroupByField_PACKAGE_VERSION *smithy.Schema
+
+var SoftwareGroupByField_PACKAGE_TYPE *smithy.Schema
+
+var SoftwareGroupByField_REGION *smithy.Schema
+
+var SoftwareGroupByField_RESOURCE_REGION *smithy.Schema
+
+var SoftwareGroupByField_RESOURCE_TYPE *smithy.Schema
+
+var SoftwareGroupByField_RESOURCE_ID *smithy.Schema
+
+var SoftwareGroupByField_RESOURCE_PROVIDER *smithy.Schema
+
+var SoftwareGroupByField_RESOURCE_OWNER_ACCOUNT_ID *smithy.Schema
+
+var SoftwareGroupByField_RESOURCE_OWNER_ORG_ID *smithy.Schema
+
+var SoftwareGroupByField_RESOURCE_CLOUD_PARTITION *smithy.Schema
+
+var SoftwareGroupByRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareGroupByRule",
+}, smithy.ShapeTypeStructure, 2)
+var SoftwareGroupByRule_GroupByField *smithy.Schema
+
+var SoftwareGroupByRule_Filters *smithy.Schema
+
+var _SoftwareGroupByRules = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareGroupByRules",
+}, smithy.ShapeTypeList, 1)
+var _SoftwareGroupByRules_member *smithy.Schema
+
+var _SoftwareList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareList",
+}, smithy.ShapeTypeList, 1)
+var _SoftwareList_member *smithy.Schema
+
 var SoftwarePackage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "SoftwarePackage",
@@ -14355,6 +14448,94 @@ var _SoftwarePackageList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SoftwarePackageList",
 }, smithy.ShapeTypeList, 1)
 var _SoftwarePackageList_member *smithy.Schema
+
+var SoftwareResourceResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareResourceResult",
+}, smithy.ShapeTypeStructure, 9)
+var SoftwareResourceResult_AccountId *smithy.Schema
+
+var SoftwareResourceResult_ResourceType *smithy.Schema
+
+var SoftwareResourceResult_Region *smithy.Schema
+
+var SoftwareResourceResult_ResourceId *smithy.Schema
+
+var SoftwareResourceResult_ResourceProvider *smithy.Schema
+
+var SoftwareResourceResult_ResourceOwnerOrgId *smithy.Schema
+
+var SoftwareResourceResult_ResourceOwnerAccountId *smithy.Schema
+
+var SoftwareResourceResult_ResourceCloudPartition *smithy.Schema
+
+var SoftwareResourceResult_ResourceRegion *smithy.Schema
+
+var _SoftwareResourceResultList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareResourceResultList",
+}, smithy.ShapeTypeList, 1)
+var _SoftwareResourceResultList_member *smithy.Schema
+
+var SoftwareResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareResult",
+}, smithy.ShapeTypeStructure, 4)
+var SoftwareResult_PackageName *smithy.Schema
+
+var SoftwareResult_PackageVersion *smithy.Schema
+
+var SoftwareResult_PackageType *smithy.Schema
+
+var SoftwareResult_ResourceCount *smithy.Schema
+
+var SoftwareScopes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareScopes",
+}, smithy.ShapeTypeStructure, 1)
+var SoftwareScopes_AwsOrganizations *smithy.Schema
+
+var SoftwareStringField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareStringField",
+}, smithy.ShapeTypeEnum, 12)
+var SoftwareStringField_ACCOUNT_ID *smithy.Schema
+
+var SoftwareStringField_PACKAGE_NAME *smithy.Schema
+
+var SoftwareStringField_PACKAGE_VERSION *smithy.Schema
+
+var SoftwareStringField_PACKAGE_TYPE *smithy.Schema
+
+var SoftwareStringField_REGION *smithy.Schema
+
+var SoftwareStringField_RESOURCE_REGION *smithy.Schema
+
+var SoftwareStringField_RESOURCE_TYPE *smithy.Schema
+
+var SoftwareStringField_RESOURCE_ID *smithy.Schema
+
+var SoftwareStringField_RESOURCE_PROVIDER *smithy.Schema
+
+var SoftwareStringField_RESOURCE_OWNER_ACCOUNT_ID *smithy.Schema
+
+var SoftwareStringField_RESOURCE_OWNER_ORG_ID *smithy.Schema
+
+var SoftwareStringField_RESOURCE_CLOUD_PARTITION *smithy.Schema
+
+var SoftwareStringFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareStringFilter",
+}, smithy.ShapeTypeStructure, 2)
+var SoftwareStringFilter_FieldName *smithy.Schema
+
+var SoftwareStringFilter_Filter *smithy.Schema
+
+var _SoftwareStringFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "SoftwareStringFilterList",
+}, smithy.ShapeTypeList, 1)
+var _SoftwareStringFilterList_member *smithy.Schema
 
 var _SortCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -16721,6 +16902,74 @@ var GetSecurityControlDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetSecurityControlDefinitionResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetSecurityControlDefinitionResponse_SecurityControlDefinition *smithy.Schema
+
+var GetSoftwareResourcesV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareResourcesV2Request",
+}, smithy.ShapeTypeStructure, 8)
+var GetSoftwareResourcesV2Request_PackageName *smithy.Schema
+
+var GetSoftwareResourcesV2Request_PackageType *smithy.Schema
+
+var GetSoftwareResourcesV2Request_PackageVersion *smithy.Schema
+
+var GetSoftwareResourcesV2Request_Filters *smithy.Schema
+
+var GetSoftwareResourcesV2Request_Scopes *smithy.Schema
+
+var GetSoftwareResourcesV2Request_SortCriteria *smithy.Schema
+
+var GetSoftwareResourcesV2Request_NextToken *smithy.Schema
+
+var GetSoftwareResourcesV2Request_MaxResults *smithy.Schema
+
+var GetSoftwareResourcesV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareResourcesV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var GetSoftwareResourcesV2Response_SoftwareResources *smithy.Schema
+
+var GetSoftwareResourcesV2Response_NextToken *smithy.Schema
+
+var GetSoftwareStatisticsV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareStatisticsV2Request",
+}, smithy.ShapeTypeStructure, 4)
+var GetSoftwareStatisticsV2Request_GroupByRules *smithy.Schema
+
+var GetSoftwareStatisticsV2Request_Scopes *smithy.Schema
+
+var GetSoftwareStatisticsV2Request_SortOrder *smithy.Schema
+
+var GetSoftwareStatisticsV2Request_MaxStatisticResults *smithy.Schema
+
+var GetSoftwareStatisticsV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareStatisticsV2Response",
+}, smithy.ShapeTypeStructure, 1)
+var GetSoftwareStatisticsV2Response_GroupByResults *smithy.Schema
+
+var GetSoftwareV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareV2Request",
+}, smithy.ShapeTypeStructure, 5)
+var GetSoftwareV2Request_Filters *smithy.Schema
+
+var GetSoftwareV2Request_Scopes *smithy.Schema
+
+var GetSoftwareV2Request_SortCriteria *smithy.Schema
+
+var GetSoftwareV2Request_NextToken *smithy.Schema
+
+var GetSoftwareV2Request_MaxResults *smithy.Schema
+
+var GetSoftwareV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetSoftwareV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var GetSoftwareV2Response_Software *smithy.Schema
+
+var GetSoftwareV2Response_NextToken *smithy.Schema
 
 var InviteMembersRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -26372,6 +26621,110 @@ func init() {
 
 	SeverityTrendsCount_Other = SeverityTrendsCount.AddMember("Other", _TrendsValueCount)
 
+	SoftwareStringField_ACCOUNT_ID = SoftwareStringField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
+
+	SoftwareStringField_PACKAGE_NAME = SoftwareStringField.AddMember("PACKAGE_NAME", smithyprelude.Unit)
+
+	SoftwareStringField_PACKAGE_VERSION = SoftwareStringField.AddMember("PACKAGE_VERSION", smithyprelude.Unit)
+
+	SoftwareStringField_PACKAGE_TYPE = SoftwareStringField.AddMember("PACKAGE_TYPE", smithyprelude.Unit)
+
+	SoftwareStringField_REGION = SoftwareStringField.AddMember("REGION", smithyprelude.Unit)
+
+	SoftwareStringField_RESOURCE_REGION = SoftwareStringField.AddMember("RESOURCE_REGION", smithyprelude.Unit)
+
+	SoftwareStringField_RESOURCE_TYPE = SoftwareStringField.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
+
+	SoftwareStringField_RESOURCE_ID = SoftwareStringField.AddMember("RESOURCE_ID", smithyprelude.Unit)
+
+	SoftwareStringField_RESOURCE_PROVIDER = SoftwareStringField.AddMember("RESOURCE_PROVIDER", smithyprelude.Unit)
+
+	SoftwareStringField_RESOURCE_OWNER_ACCOUNT_ID = SoftwareStringField.AddMember("RESOURCE_OWNER_ACCOUNT_ID", smithyprelude.Unit)
+
+	SoftwareStringField_RESOURCE_OWNER_ORG_ID = SoftwareStringField.AddMember("RESOURCE_OWNER_ORG_ID", smithyprelude.Unit)
+
+	SoftwareStringField_RESOURCE_CLOUD_PARTITION = SoftwareStringField.AddMember("RESOURCE_CLOUD_PARTITION", smithyprelude.Unit)
+
+	SoftwareStringFilter_FieldName = SoftwareStringFilter.AddMember("FieldName", SoftwareStringField)
+
+	SoftwareStringFilter_Filter = SoftwareStringFilter.AddMember("Filter", StringFilter)
+
+	_SoftwareStringFilterList_member = _SoftwareStringFilterList.AddMember("member", SoftwareStringFilter)
+
+	_SoftwareCompositeFilterList_member = _SoftwareCompositeFilterList.AddMember("member", SoftwareCompositeFilter)
+
+	SoftwareCompositeFilter_StringFilters = SoftwareCompositeFilter.AddMember("StringFilters", _SoftwareStringFilterList)
+
+	SoftwareCompositeFilter_NestedCompositeFilters = SoftwareCompositeFilter.AddMember("NestedCompositeFilters", _SoftwareCompositeFilterList)
+
+	SoftwareCompositeFilter_Operator = SoftwareCompositeFilter.AddMember("Operator", AllowedOperators)
+
+	SoftwareFilters_CompositeFilters = SoftwareFilters.AddMember("CompositeFilters", _SoftwareCompositeFilterList)
+
+	SoftwareFilters_CompositeOperator = SoftwareFilters.AddMember("CompositeOperator", AllowedOperators)
+
+	SoftwareGroupByField_ACCOUNT_ID = SoftwareGroupByField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
+
+	SoftwareGroupByField_PACKAGE_NAME = SoftwareGroupByField.AddMember("PACKAGE_NAME", smithyprelude.Unit)
+
+	SoftwareGroupByField_PACKAGE_VERSION = SoftwareGroupByField.AddMember("PACKAGE_VERSION", smithyprelude.Unit)
+
+	SoftwareGroupByField_PACKAGE_TYPE = SoftwareGroupByField.AddMember("PACKAGE_TYPE", smithyprelude.Unit)
+
+	SoftwareGroupByField_REGION = SoftwareGroupByField.AddMember("REGION", smithyprelude.Unit)
+
+	SoftwareGroupByField_RESOURCE_REGION = SoftwareGroupByField.AddMember("RESOURCE_REGION", smithyprelude.Unit)
+
+	SoftwareGroupByField_RESOURCE_TYPE = SoftwareGroupByField.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
+
+	SoftwareGroupByField_RESOURCE_ID = SoftwareGroupByField.AddMember("RESOURCE_ID", smithyprelude.Unit)
+
+	SoftwareGroupByField_RESOURCE_PROVIDER = SoftwareGroupByField.AddMember("RESOURCE_PROVIDER", smithyprelude.Unit)
+
+	SoftwareGroupByField_RESOURCE_OWNER_ACCOUNT_ID = SoftwareGroupByField.AddMember("RESOURCE_OWNER_ACCOUNT_ID", smithyprelude.Unit)
+
+	SoftwareGroupByField_RESOURCE_OWNER_ORG_ID = SoftwareGroupByField.AddMember("RESOURCE_OWNER_ORG_ID", smithyprelude.Unit)
+
+	SoftwareGroupByField_RESOURCE_CLOUD_PARTITION = SoftwareGroupByField.AddMember("RESOURCE_CLOUD_PARTITION", smithyprelude.Unit)
+
+	SoftwareGroupByRule_GroupByField = SoftwareGroupByRule.AddMember("GroupByField", SoftwareGroupByField)
+
+	SoftwareGroupByRule_Filters = SoftwareGroupByRule.AddMember("Filters", SoftwareFilters)
+
+	_SoftwareGroupByRules_member = _SoftwareGroupByRules.AddMember("member", SoftwareGroupByRule)
+
+	SoftwareResult_PackageName = SoftwareResult.AddMember("PackageName", _NonEmptyString)
+
+	SoftwareResult_PackageVersion = SoftwareResult.AddMember("PackageVersion", _NonEmptyString)
+
+	SoftwareResult_PackageType = SoftwareResult.AddMember("PackageType", _NonEmptyString)
+
+	SoftwareResult_ResourceCount = SoftwareResult.AddMember("ResourceCount", _Integer)
+
+	_SoftwareList_member = _SoftwareList.AddMember("member", SoftwareResult)
+
+	SoftwareResourceResult_AccountId = SoftwareResourceResult.AddMember("AccountId", _NonEmptyString)
+
+	SoftwareResourceResult_ResourceType = SoftwareResourceResult.AddMember("ResourceType", _NonEmptyString)
+
+	SoftwareResourceResult_Region = SoftwareResourceResult.AddMember("Region", _NonEmptyString)
+
+	SoftwareResourceResult_ResourceId = SoftwareResourceResult.AddMember("ResourceId", _NonEmptyString)
+
+	SoftwareResourceResult_ResourceProvider = SoftwareResourceResult.AddMember("ResourceProvider", _NonEmptyString)
+
+	SoftwareResourceResult_ResourceOwnerOrgId = SoftwareResourceResult.AddMember("ResourceOwnerOrgId", _NonEmptyString)
+
+	SoftwareResourceResult_ResourceOwnerAccountId = SoftwareResourceResult.AddMember("ResourceOwnerAccountId", _NonEmptyString)
+
+	SoftwareResourceResult_ResourceCloudPartition = SoftwareResourceResult.AddMember("ResourceCloudPartition", _NonEmptyString)
+
+	SoftwareResourceResult_ResourceRegion = SoftwareResourceResult.AddMember("ResourceRegion", _NonEmptyString)
+
+	_SoftwareResourceResultList_member = _SoftwareResourceResultList.AddMember("member", SoftwareResourceResult)
+
+	SoftwareScopes_AwsOrganizations = SoftwareScopes.AddMember("AwsOrganizations", _AwsOrganizationScopeList)
+
 	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
 
 	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
@@ -27371,6 +27724,50 @@ func init() {
 	GetSecurityControlDefinitionRequest_SecurityControlId = GetSecurityControlDefinitionRequest.AddMember("SecurityControlId", _NonEmptyString, &smithytraits.HTTPQuery{Name: "SecurityControlId"})
 
 	GetSecurityControlDefinitionResponse_SecurityControlDefinition = GetSecurityControlDefinitionResponse.AddMember("SecurityControlDefinition", SecurityControlDefinition)
+
+	GetSoftwareResourcesV2Request_PackageName = GetSoftwareResourcesV2Request.AddMember("PackageName", _NonEmptyString)
+
+	GetSoftwareResourcesV2Request_PackageType = GetSoftwareResourcesV2Request.AddMember("PackageType", _NonEmptyString)
+
+	GetSoftwareResourcesV2Request_PackageVersion = GetSoftwareResourcesV2Request.AddMember("PackageVersion", _NonEmptyString)
+
+	GetSoftwareResourcesV2Request_Filters = GetSoftwareResourcesV2Request.AddMember("Filters", SoftwareFilters)
+
+	GetSoftwareResourcesV2Request_Scopes = GetSoftwareResourcesV2Request.AddMember("Scopes", SoftwareScopes)
+
+	GetSoftwareResourcesV2Request_SortCriteria = GetSoftwareResourcesV2Request.AddMember("SortCriteria", _SortCriteria)
+
+	GetSoftwareResourcesV2Request_NextToken = GetSoftwareResourcesV2Request.AddMember("NextToken", _NextToken)
+
+	GetSoftwareResourcesV2Request_MaxResults = GetSoftwareResourcesV2Request.AddMember("MaxResults", _MaxResults)
+
+	GetSoftwareResourcesV2Response_SoftwareResources = GetSoftwareResourcesV2Response.AddMember("SoftwareResources", _SoftwareResourceResultList)
+
+	GetSoftwareResourcesV2Response_NextToken = GetSoftwareResourcesV2Response.AddMember("NextToken", _NextToken)
+
+	GetSoftwareStatisticsV2Request_GroupByRules = GetSoftwareStatisticsV2Request.AddMember("GroupByRules", _SoftwareGroupByRules)
+
+	GetSoftwareStatisticsV2Request_Scopes = GetSoftwareStatisticsV2Request.AddMember("Scopes", SoftwareScopes)
+
+	GetSoftwareStatisticsV2Request_SortOrder = GetSoftwareStatisticsV2Request.AddMember("SortOrder", SortOrder)
+
+	GetSoftwareStatisticsV2Request_MaxStatisticResults = GetSoftwareStatisticsV2Request.AddMember("MaxStatisticResults", _MaxStatisticResults)
+
+	GetSoftwareStatisticsV2Response_GroupByResults = GetSoftwareStatisticsV2Response.AddMember("GroupByResults", _GroupByResults)
+
+	GetSoftwareV2Request_Filters = GetSoftwareV2Request.AddMember("Filters", SoftwareFilters)
+
+	GetSoftwareV2Request_Scopes = GetSoftwareV2Request.AddMember("Scopes", SoftwareScopes)
+
+	GetSoftwareV2Request_SortCriteria = GetSoftwareV2Request.AddMember("SortCriteria", _SortCriteria)
+
+	GetSoftwareV2Request_NextToken = GetSoftwareV2Request.AddMember("NextToken", _NextToken)
+
+	GetSoftwareV2Request_MaxResults = GetSoftwareV2Request.AddMember("MaxResults", _MaxResults)
+
+	GetSoftwareV2Response_Software = GetSoftwareV2Response.AddMember("Software", _SoftwareList)
+
+	GetSoftwareV2Response_NextToken = GetSoftwareV2Response.AddMember("NextToken", _NextToken)
 
 	InviteMembersRequest_AccountIds = InviteMembersRequest.AddMember("AccountIds", _AccountIdList)
 

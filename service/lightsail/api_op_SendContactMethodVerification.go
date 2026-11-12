@@ -84,7 +84,9 @@ func (v *SendContactMethodVerificationOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *SendContactMethodVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.SendContactMethodVerificationResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.SendContactMethodVerificationResult_operations, v.Operations)
+	}
 }
 func (v *SendContactMethodVerificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SendContactMethodVerificationResult, func(s *smithy.Schema) error {

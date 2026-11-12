@@ -157,7 +157,9 @@ func (v *CreateOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateOdbNetworkInput_clientToken, *v.ClientToken)
 	}
-	serializeStringList(s, schemas.CreateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable, v.CrossRegionS3RestoreSourcesToEnable)
+	if v.CrossRegionS3RestoreSourcesToEnable != nil {
+		serializeStringList(s, schemas.CreateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable, v.CrossRegionS3RestoreSourcesToEnable)
+	}
 	if v.CustomDomainName != nil {
 		s.WriteString(schemas.CreateOdbNetworkInput_customDomainName, *v.CustomDomainName)
 	}
@@ -185,7 +187,9 @@ func (v *CreateOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StsPolicyDocument != nil {
 		s.WriteString(schemas.CreateOdbNetworkInput_stsPolicyDocument, *v.StsPolicyDocument)
 	}
-	serializeRequestTagMap(s, schemas.CreateOdbNetworkInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateOdbNetworkInput_tags, v.Tags)
+	}
 	if v.ZeroEtlAccess != "" {
 		s.WriteString(schemas.CreateOdbNetworkInput_zeroEtlAccess, string(v.ZeroEtlAccess))
 	}

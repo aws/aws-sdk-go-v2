@@ -74,7 +74,9 @@ func (v *CreateSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SharingEnabled != nil {
 		s.WriteBool(schemas.CreateSystemRequest_sharingEnabled, *v.SharingEnabled)
 	}
-	serializeTagMap(s, schemas.CreateSystemRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSystemRequest_tags, v.Tags)
+	}
 }
 
 type CreateSystemOutput struct {

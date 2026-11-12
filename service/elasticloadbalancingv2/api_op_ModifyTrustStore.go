@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ModifyTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyTrustStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyTrustStoreInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyTrustStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaCertificatesBundleS3Bucket != nil {
+		s.WriteString(schemas.ModifyTrustStoreInput_CaCertificatesBundleS3Bucket, *v.CaCertificatesBundleS3Bucket)
+	}
+	if v.CaCertificatesBundleS3Key != nil {
+		s.WriteString(schemas.ModifyTrustStoreInput_CaCertificatesBundleS3Key, *v.CaCertificatesBundleS3Key)
+	}
+	if v.CaCertificatesBundleS3ObjectVersion != nil {
+		s.WriteString(schemas.ModifyTrustStoreInput_CaCertificatesBundleS3ObjectVersion, *v.CaCertificatesBundleS3ObjectVersion)
+	}
+	if v.TrustStoreArn != nil {
+		s.WriteString(schemas.ModifyTrustStoreInput_TrustStoreArn, *v.TrustStoreArn)
+	}
+}
+
 type ModifyTrustStoreOutput struct {
 
 	// Information about the modified trust store.
@@ -59,13 +82,31 @@ type ModifyTrustStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyTrustStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyTrustStoreOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyTrustStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustStores != nil {
+		serializeTrustStores(s, schemas.ModifyTrustStoreOutput_TrustStores, v.TrustStores)
+	}
+}
+func (v *ModifyTrustStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyTrustStoreOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyTrustStoreOutput_TrustStores:
+			return deserializeTrustStores(d, schemas.ModifyTrustStoreOutput_TrustStores, &v.TrustStores)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyTrustStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyTrustStore, schemas.ModifyTrustStoreInput, schemas.ModifyTrustStoreOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyTrustStore, schemas.ModifyTrustStoreInput, schemas.ModifyTrustStoreOutput), output: &ModifyTrustStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAccessPolicySummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []AccessPolicySummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeAccessPolicySummaries(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeCollectionDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []CollectionDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeCollectionDetails(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeCollectionErrorDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []CollectionErrorDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeCollectionErrorDetails(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeCollectionGroupDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []CollectionGroupDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeCollectionGroupDetails(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeCollectionGroupErrorDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []CollectionGroupErrorDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeCollectionGroupErrorDetails(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeCollectionGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -83,9 +65,6 @@ func serializeCollectionGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeCollectionGroupNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -94,9 +73,6 @@ func serializeCollectionGroupNames(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeCollectionGroupSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []CollectionGroupSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -107,9 +83,6 @@ func serializeCollectionGroupSummaries(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeCollectionIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -118,9 +91,6 @@ func serializeCollectionIds(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeCollectionNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -129,9 +99,6 @@ func serializeCollectionNames(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeCollectionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []CollectionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -142,9 +109,6 @@ func serializeCollectionSummaries(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeEffectiveLifecyclePolicyDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []EffectiveLifecyclePolicyDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -155,9 +119,46 @@ func serializeEffectiveLifecyclePolicyDetails(s smithy.ShapeSerializer, schema *
 }
 
 func serializeEffectiveLifecyclePolicyErrorDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []EffectiveLifecyclePolicyErrorDetail) {
-	if v == nil {
-		return
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
+	s.CloseList()
+}
+
+func serializeIngestionAlerts(s smithy.ShapeSerializer, schema *smithy.Schema, v []IngestionAlert) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIngestionFailureReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v []IngestionFailureReason) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIngestionJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []IngestionJobSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIngestionStreamSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []IngestionStreamSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -168,9 +169,6 @@ func serializeEffectiveLifecyclePolicyErrorDetails(s smithy.ShapeSerializer, sch
 }
 
 func serializeLifecyclePolicyDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []LifecyclePolicyDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -181,9 +179,6 @@ func serializeLifecyclePolicyDetails(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeLifecyclePolicyErrorDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []LifecyclePolicyErrorDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -194,9 +189,6 @@ func serializeLifecyclePolicyErrorDetails(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeLifecyclePolicyIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []LifecyclePolicyIdentifier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -207,9 +199,6 @@ func serializeLifecyclePolicyIdentifiers(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeLifecyclePolicyResourceIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []LifecyclePolicyResourceIdentifier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -220,9 +209,6 @@ func serializeLifecyclePolicyResourceIdentifiers(s smithy.ShapeSerializer, schem
 }
 
 func serializeLifecyclePolicySummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []LifecyclePolicySummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -233,9 +219,6 @@ func serializeLifecyclePolicySummaries(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeLifecycleResourceFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -244,9 +227,6 @@ func serializeLifecycleResourceFilter(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeResourceFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -255,9 +235,6 @@ func serializeResourceFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeSecurityConfigSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []SecurityConfigSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -268,9 +245,6 @@ func serializeSecurityConfigSummaries(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -279,9 +253,16 @@ func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSecurityPolicySummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []SecurityPolicySummary) {
-	if v == nil {
-		return
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
+	s.CloseList()
+}
+
+func serializeStreamBucketConfigs(s smithy.ShapeSerializer, schema *smithy.Schema, v []StreamBucketConfig) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -292,9 +273,6 @@ func serializeSecurityPolicySummaries(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeSubnetIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -303,9 +281,6 @@ func serializeSubnetIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -314,9 +289,6 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -327,9 +299,6 @@ func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
 }
 
 func serializeVpcEndpointDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []VpcEndpointDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -340,9 +309,6 @@ func serializeVpcEndpointDetails(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeVpcEndpointErrorDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []VpcEndpointErrorDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -353,9 +319,6 @@ func serializeVpcEndpointErrorDetails(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeVpcEndpointIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -364,9 +327,6 @@ func serializeVpcEndpointIds(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeVpcEndpointSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []VpcEndpointSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -658,6 +618,94 @@ func deserializeEffectiveLifecyclePolicyErrorDetails(d smithy.ShapeDeserializer,
 	})
 }
 
+func deserializeIngestionAlerts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IngestionAlert) error {
+	*v = make([]IngestionAlert, 0)
+	var vv IngestionAlert
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IngestionAlert
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = IngestionAlert{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIngestionFailureReasons(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IngestionFailureReason) error {
+	*v = make([]IngestionFailureReason, 0)
+	var vv IngestionFailureReason
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IngestionFailureReason
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = IngestionFailureReason{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIngestionJobSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IngestionJobSummary) error {
+	*v = make([]IngestionJobSummary, 0)
+	var vv IngestionJobSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IngestionJobSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = IngestionJobSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIngestionStreamSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IngestionStreamSummary) error {
+	*v = make([]IngestionStreamSummary, 0)
+	var vv IngestionStreamSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IngestionStreamSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = IngestionStreamSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeLifecyclePolicyDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LifecyclePolicyDetail) error {
 	*v = make([]LifecyclePolicyDetail, 0)
 	var vv LifecyclePolicyDetail
@@ -866,6 +914,28 @@ func deserializeSecurityPolicySummaries(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		vv = SecurityPolicySummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeStreamBucketConfigs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]StreamBucketConfig) error {
+	*v = make([]StreamBucketConfig, 0)
+	var vv StreamBucketConfig
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero StreamBucketConfig
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = StreamBucketConfig{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

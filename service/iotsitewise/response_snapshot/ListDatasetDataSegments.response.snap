@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataSegments":[{"alias":"__Alias__","dataType":"STRING","endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"enrichment":{"lastEnrichedAt":946684800,"status":"ENRICHED"},"sourceDatasetId":"__SourceDatasetId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"},{"alias":"__Alias__","dataType":"STRING","endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"enrichment":{"lastEnrichedAt":946684800,"status":"ENRICHED"},"sourceDatasetId":"__SourceDatasetId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"}],"nextToken":"__NextToken__"}

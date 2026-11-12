@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListConfigurationSetsResponse><ListConfigurationSetsResult><ConfigurationSets><member><Name>__Name__</Name></member><member><Name>__Name__</Name></member></ConfigurationSets><NextToken>__NextToken__</NextToken></ListConfigurationSetsResult></ListConfigurationSetsResponse>

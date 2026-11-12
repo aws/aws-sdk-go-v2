@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"intents":[{"createdDate":946684800,"description":"__Description__","lastUpdatedDate":946684800,"name":"__Name__","version":"__Version__"},{"createdDate":946684800,"description":"__Description__","lastUpdatedDate":946684800,"name":"__Name__","version":"__Version__"}],"nextToken":"__NextToken__"}

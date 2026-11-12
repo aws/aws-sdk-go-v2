@@ -182,7 +182,9 @@ func (v *DescribeStateMachineForExecutionOutput) SerializeMembers(s smithy.Shape
 	if v.UpdateDate != nil {
 		s.WriteTime(schemas.DescribeStateMachineForExecutionOutput_updateDate, *v.UpdateDate)
 	}
-	serializeVariableReferences(s, schemas.DescribeStateMachineForExecutionOutput_variableReferences, v.VariableReferences)
+	if v.VariableReferences != nil {
+		serializeVariableReferences(s, schemas.DescribeStateMachineForExecutionOutput_variableReferences, v.VariableReferences)
+	}
 }
 func (v *DescribeStateMachineForExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeStateMachineForExecutionOutput, func(s *smithy.Schema) error {

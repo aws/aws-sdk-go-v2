@@ -4,7 +4,9 @@ package codeartifact
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,30 @@ type GetAssociatedPackageGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedPackageGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedPackageGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedPackageGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.GetAssociatedPackageGroupRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.GetAssociatedPackageGroupRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetAssociatedPackageGroupRequest_format, string(v.Format))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetAssociatedPackageGroupRequest_namespace, *v.Namespace)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.GetAssociatedPackageGroupRequest_package, *v.Package)
+	}
+}
+
 type GetAssociatedPackageGroupOutput struct {
 
 	// Describes the strength of the association between the package and package
@@ -99,13 +125,44 @@ type GetAssociatedPackageGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedPackageGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedPackageGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedPackageGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationType != "" {
+		s.WriteString(schemas.GetAssociatedPackageGroupResult_associationType, string(v.AssociationType))
+	}
+	if v.PackageGroup != nil {
+		s.WriteStruct(schemas.GetAssociatedPackageGroupResult_packageGroup)
+		v.PackageGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssociatedPackageGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssociatedPackageGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssociatedPackageGroupResult_associationType:
+			var ev string
+			if err := d.ReadString(schemas.GetAssociatedPackageGroupResult_associationType, &ev); err != nil {
+				return err
+			}
+			v.AssociationType = types.PackageGroupAssociationType(ev)
+			return nil
+		case schemas.GetAssociatedPackageGroupResult_packageGroup:
+			v.PackageGroup = &types.PackageGroupDescription{}
+			return v.PackageGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssociatedPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssociatedPackageGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedPackageGroup, schemas.GetAssociatedPackageGroupRequest, schemas.GetAssociatedPackageGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssociatedPackageGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedPackageGroup, schemas.GetAssociatedPackageGroupRequest, schemas.GetAssociatedPackageGroupResult), output: &GetAssociatedPackageGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

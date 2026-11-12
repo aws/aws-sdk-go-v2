@@ -90,7 +90,9 @@ func (v *UpdateEngagementContextInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EngagementLastModifiedAt != nil {
 		s.WriteTime(schemas.UpdateEngagementContextRequest_EngagementLastModifiedAt, *v.EngagementLastModifiedAt)
 	}
-	serializeUpdateEngagementContextPayload(s, schemas.UpdateEngagementContextRequest_Payload, v.Payload)
+	if v.Payload != nil {
+		serializeUpdateEngagementContextPayload(s, schemas.UpdateEngagementContextRequest_Payload, v.Payload)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdateEngagementContextRequest_Type, string(v.Type))
 	}

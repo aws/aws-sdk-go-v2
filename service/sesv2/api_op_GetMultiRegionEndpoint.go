@@ -109,7 +109,9 @@ func (v *GetMultiRegionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.GetMultiRegionEndpointResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeRoutes(s, schemas.GetMultiRegionEndpointResponse_Routes, v.Routes)
+	if v.Routes != nil {
+		serializeRoutes(s, schemas.GetMultiRegionEndpointResponse_Routes, v.Routes)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetMultiRegionEndpointResponse_Status, string(v.Status))
 	}

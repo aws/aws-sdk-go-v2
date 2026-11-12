@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Status":"PENDING","WirelessGatewayTaskDefinitionId":"__WirelessGatewayTaskDefinitionId__"}

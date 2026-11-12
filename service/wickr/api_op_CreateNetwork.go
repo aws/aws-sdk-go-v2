@@ -4,7 +4,9 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type CreateNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLevel != "" {
+		s.WriteString(schemas.CreateNetworkRequest_accessLevel, string(v.AccessLevel))
+	}
+	if v.EnablePremiumFreeTrial != nil {
+		s.WriteBool(schemas.CreateNetworkRequest_enablePremiumFreeTrial, *v.EnablePremiumFreeTrial)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateNetworkRequest_encryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.NetworkName != nil {
+		s.WriteString(schemas.CreateNetworkRequest_networkName, *v.NetworkName)
+	}
+}
+
 type CreateNetworkOutput struct {
 
 	// The ARN of the KMS key being used to encrypt sensitive data in the network.
@@ -67,13 +90,44 @@ type CreateNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateNetworkResponse_encryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateNetworkResponse_networkId, *v.NetworkId)
+	}
+	if v.NetworkName != nil {
+		s.WriteString(schemas.CreateNetworkResponse_networkName, *v.NetworkName)
+	}
+}
+func (v *CreateNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNetworkResponse_encryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.CreateNetworkResponse_encryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.CreateNetworkResponse_networkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.CreateNetworkResponse_networkId, v.NetworkId)
+		case schemas.CreateNetworkResponse_networkName:
+			v.NetworkName = new(string)
+			return d.ReadString(schemas.CreateNetworkResponse_networkName, v.NetworkName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetwork, schemas.CreateNetworkRequest, schemas.CreateNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetwork, schemas.CreateNetworkRequest, schemas.CreateNetworkResponse), output: &CreateNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

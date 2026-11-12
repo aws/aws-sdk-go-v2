@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type DescribeDefaultClusterParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultClusterParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultClusterParametersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultClusterParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDefaultClusterParametersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDefaultClusterParametersMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeDefaultClusterParametersMessage_ParameterGroupFamily, *v.ParameterGroupFamily)
+	}
+}
+
 type DescribeDefaultClusterParametersOutput struct {
 
 	// Describes the default cluster parameters for a parameter group family.
@@ -68,13 +88,34 @@ type DescribeDefaultClusterParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultClusterParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultClusterParametersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultClusterParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultClusterParameters != nil {
+		s.WriteStruct(schemas.DescribeDefaultClusterParametersResult_DefaultClusterParameters)
+		v.DefaultClusterParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDefaultClusterParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDefaultClusterParametersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDefaultClusterParametersResult_DefaultClusterParameters:
+			v.DefaultClusterParameters = &types.DefaultClusterParameters{}
+			return v.DefaultClusterParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDefaultClusterParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDefaultClusterParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultClusterParameters, schemas.DescribeDefaultClusterParametersMessage, schemas.DescribeDefaultClusterParametersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDefaultClusterParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultClusterParameters, schemas.DescribeDefaultClusterParametersMessage, schemas.DescribeDefaultClusterParametersResult), output: &DescribeDefaultClusterParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

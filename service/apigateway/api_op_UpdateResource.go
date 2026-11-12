@@ -54,7 +54,9 @@ func (v *UpdateResourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateResourceRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateResourceRequest_patchOperations, v.PatchOperations)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.UpdateResourceRequest_resourceId, *v.ResourceId)
 	}
@@ -106,7 +108,9 @@ func (v *UpdateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PathPart != nil {
 		s.WriteString(schemas.Resource_pathPart, *v.PathPart)
 	}
-	serializeMapOfMethod(s, schemas.Resource_resourceMethods, v.ResourceMethods)
+	if v.ResourceMethods != nil {
+		serializeMapOfMethod(s, schemas.Resource_resourceMethods, v.ResourceMethods)
+	}
 }
 func (v *UpdateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {

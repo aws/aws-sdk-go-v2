@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,21 @@ type DescribeApplicationInput struct {
 	WorkspaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeApplicationRequest_id, *v.Id)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeApplicationRequest_workspaceName, *v.WorkspaceName)
+	}
 }
 
 type DescribeApplicationOutput struct {
@@ -98,13 +115,90 @@ type DescribeApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeApplicationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_description, *v.Description)
+	}
+	if v.DnsSubdomain != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_dnsSubdomain, *v.DnsSubdomain)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_id, *v.Id)
+	}
+	if v.IdcApplicationArn != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_idcApplicationArn, *v.IdcApplicationArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeApplicationResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeApplicationResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeApplicationResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *DescribeApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_arn, v.Arn)
+		case schemas.DescribeApplicationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeApplicationResponse_createdAt, v.CreatedAt)
+		case schemas.DescribeApplicationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_description, v.Description)
+		case schemas.DescribeApplicationResponse_dnsSubdomain:
+			v.DnsSubdomain = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_dnsSubdomain, v.DnsSubdomain)
+		case schemas.DescribeApplicationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_id, v.Id)
+		case schemas.DescribeApplicationResponse_idcApplicationArn:
+			v.IdcApplicationArn = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_idcApplicationArn, v.IdcApplicationArn)
+		case schemas.DescribeApplicationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_name, v.Name)
+		case schemas.DescribeApplicationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeApplicationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApplicationStatus(ev)
+			return nil
+		case schemas.DescribeApplicationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeApplicationResponse_updatedAt, v.UpdatedAt)
+		case schemas.DescribeApplicationResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.DescribeApplicationResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse), output: &DescribeApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

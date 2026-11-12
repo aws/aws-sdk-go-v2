@@ -58,7 +58,9 @@ func (v *CreateTemplateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateTemplateSnapshotInput_clientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.CreateTemplateSnapshotInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTemplateSnapshotInput_tags, v.Tags)
+	}
 	if v.TemplateIdentifier != nil {
 		s.WriteString(schemas.CreateTemplateSnapshotInput_templateIdentifier, *v.TemplateIdentifier)
 	}
@@ -132,7 +134,9 @@ func (v *CreateTemplateSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTemplateSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedRuleList(s, schemas.CreateTemplateSnapshotOutput_associatedRuleList, v.AssociatedRuleList)
+	if v.AssociatedRuleList != nil {
+		serializeAssociatedRuleList(s, schemas.CreateTemplateSnapshotOutput_associatedRuleList, v.AssociatedRuleList)
+	}
 	if v.FirewallType != "" {
 		s.WriteString(schemas.CreateTemplateSnapshotOutput_firewallType, string(v.FirewallType))
 	}

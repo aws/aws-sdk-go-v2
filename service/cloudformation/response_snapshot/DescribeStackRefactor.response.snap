@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeStackRefactorResponse><DescribeStackRefactorResult><Description>__Description__</Description><ExecutionStatus>UNAVAILABLE</ExecutionStatus><ExecutionStatusReason>__ExecutionStatusReason__</ExecutionStatusReason><StackIds><member>__Member__</member><member>__Member__</member></StackIds><StackRefactorId>__StackRefactorId__</StackRefactorId><Status>CREATE_IN_PROGRESS</Status><StatusReason>__StatusReason__</StatusReason></DescribeStackRefactorResult></DescribeStackRefactorResponse>

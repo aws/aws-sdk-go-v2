@@ -79,7 +79,9 @@ func (v *ListTargetResourceTypesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTargetResourceTypesResponse_nextToken, *v.NextToken)
 	}
-	serializeTargetResourceTypeSummaryList(s, schemas.ListTargetResourceTypesResponse_targetResourceTypes, v.TargetResourceTypes)
+	if v.TargetResourceTypes != nil {
+		serializeTargetResourceTypeSummaryList(s, schemas.ListTargetResourceTypesResponse_targetResourceTypes, v.TargetResourceTypes)
+	}
 }
 func (v *ListTargetResourceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTargetResourceTypesResponse, func(s *smithy.Schema) error {

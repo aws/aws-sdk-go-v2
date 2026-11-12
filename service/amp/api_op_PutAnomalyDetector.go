@@ -81,12 +81,18 @@ func (v *PutAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.PutAnomalyDetectorRequest_clientToken, *v.ClientToken)
 	}
-	serializeAnomalyDetectorConfiguration(s, schemas.PutAnomalyDetectorRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAnomalyDetectorConfiguration(s, schemas.PutAnomalyDetectorRequest_configuration, v.Configuration)
+	}
 	if v.EvaluationIntervalInSeconds != nil {
 		s.WriteInt32(schemas.PutAnomalyDetectorRequest_evaluationIntervalInSeconds, *v.EvaluationIntervalInSeconds)
 	}
-	serializePrometheusMetricLabelMap(s, schemas.PutAnomalyDetectorRequest_labels, v.Labels)
-	serializeAnomalyDetectorMissingDataAction(s, schemas.PutAnomalyDetectorRequest_missingDataAction, v.MissingDataAction)
+	if v.Labels != nil {
+		serializePrometheusMetricLabelMap(s, schemas.PutAnomalyDetectorRequest_labels, v.Labels)
+	}
+	if v.MissingDataAction != nil {
+		serializeAnomalyDetectorMissingDataAction(s, schemas.PutAnomalyDetectorRequest_missingDataAction, v.MissingDataAction)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.PutAnomalyDetectorRequest_workspaceId, *v.WorkspaceId)
 	}
@@ -136,7 +142,9 @@ func (v *PutAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.PutAnomalyDetectorResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutAnomalyDetectorResponse_tags, v.Tags)
+	}
 }
 func (v *PutAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAnomalyDetectorResponse, func(s *smithy.Schema) error {

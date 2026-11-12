@@ -27,34 +27,35 @@ type ArtifactType string
 
 // Enum values for ArtifactType
 const (
-	ArtifactTypeUnknown                ArtifactType = "UNKNOWN"
-	ArtifactTypeScreenshot             ArtifactType = "SCREENSHOT"
-	ArtifactTypeDeviceLog              ArtifactType = "DEVICE_LOG"
-	ArtifactTypeMessageLog             ArtifactType = "MESSAGE_LOG"
-	ArtifactTypeVideoLog               ArtifactType = "VIDEO_LOG"
-	ArtifactTypeResultLog              ArtifactType = "RESULT_LOG"
-	ArtifactTypeServiceLog             ArtifactType = "SERVICE_LOG"
-	ArtifactTypeWebkitLog              ArtifactType = "WEBKIT_LOG"
-	ArtifactTypeInstrumentationOutput  ArtifactType = "INSTRUMENTATION_OUTPUT"
-	ArtifactTypeExerciserMonkeyOutput  ArtifactType = "EXERCISER_MONKEY_OUTPUT"
-	ArtifactTypeCalabashJsonOutput     ArtifactType = "CALABASH_JSON_OUTPUT"
-	ArtifactTypeCalabashPrettyOutput   ArtifactType = "CALABASH_PRETTY_OUTPUT"
-	ArtifactTypeCalabashStandardOutput ArtifactType = "CALABASH_STANDARD_OUTPUT"
-	ArtifactTypeCalabashJavaXmlOutput  ArtifactType = "CALABASH_JAVA_XML_OUTPUT"
-	ArtifactTypeAutomationOutput       ArtifactType = "AUTOMATION_OUTPUT"
-	ArtifactTypeAppiumServerOutput     ArtifactType = "APPIUM_SERVER_OUTPUT"
-	ArtifactTypeAppiumJavaOutput       ArtifactType = "APPIUM_JAVA_OUTPUT"
-	ArtifactTypeAppiumJavaXmlOutput    ArtifactType = "APPIUM_JAVA_XML_OUTPUT"
-	ArtifactTypeAppiumPythonOutput     ArtifactType = "APPIUM_PYTHON_OUTPUT"
-	ArtifactTypeAppiumPythonXmlOutput  ArtifactType = "APPIUM_PYTHON_XML_OUTPUT"
-	ArtifactTypeExplorerEventLog       ArtifactType = "EXPLORER_EVENT_LOG"
-	ArtifactTypeExplorerSummaryLog     ArtifactType = "EXPLORER_SUMMARY_LOG"
-	ArtifactTypeApplicationCrashReport ArtifactType = "APPLICATION_CRASH_REPORT"
-	ArtifactTypeXctestLog              ArtifactType = "XCTEST_LOG"
-	ArtifactTypeVideo                  ArtifactType = "VIDEO"
-	ArtifactTypeCustomerArtifact       ArtifactType = "CUSTOMER_ARTIFACT"
-	ArtifactTypeCustomerArtifactLog    ArtifactType = "CUSTOMER_ARTIFACT_LOG"
-	ArtifactTypeTestspecOutput         ArtifactType = "TESTSPEC_OUTPUT"
+	ArtifactTypeUnknown                 ArtifactType = "UNKNOWN"
+	ArtifactTypeScreenshot              ArtifactType = "SCREENSHOT"
+	ArtifactTypeDeviceLog               ArtifactType = "DEVICE_LOG"
+	ArtifactTypeMessageLog              ArtifactType = "MESSAGE_LOG"
+	ArtifactTypeVideoLog                ArtifactType = "VIDEO_LOG"
+	ArtifactTypeResultLog               ArtifactType = "RESULT_LOG"
+	ArtifactTypeServiceLog              ArtifactType = "SERVICE_LOG"
+	ArtifactTypeWebkitLog               ArtifactType = "WEBKIT_LOG"
+	ArtifactTypeInstrumentationOutput   ArtifactType = "INSTRUMENTATION_OUTPUT"
+	ArtifactTypeExerciserMonkeyOutput   ArtifactType = "EXERCISER_MONKEY_OUTPUT"
+	ArtifactTypeCalabashJsonOutput      ArtifactType = "CALABASH_JSON_OUTPUT"
+	ArtifactTypeCalabashPrettyOutput    ArtifactType = "CALABASH_PRETTY_OUTPUT"
+	ArtifactTypeCalabashStandardOutput  ArtifactType = "CALABASH_STANDARD_OUTPUT"
+	ArtifactTypeCalabashJavaXmlOutput   ArtifactType = "CALABASH_JAVA_XML_OUTPUT"
+	ArtifactTypeAutomationOutput        ArtifactType = "AUTOMATION_OUTPUT"
+	ArtifactTypeAppiumServerOutput      ArtifactType = "APPIUM_SERVER_OUTPUT"
+	ArtifactTypeAppiumJavaOutput        ArtifactType = "APPIUM_JAVA_OUTPUT"
+	ArtifactTypeAppiumJavaXmlOutput     ArtifactType = "APPIUM_JAVA_XML_OUTPUT"
+	ArtifactTypeAppiumPythonOutput      ArtifactType = "APPIUM_PYTHON_OUTPUT"
+	ArtifactTypeAppiumPythonXmlOutput   ArtifactType = "APPIUM_PYTHON_XML_OUTPUT"
+	ArtifactTypeExplorerEventLog        ArtifactType = "EXPLORER_EVENT_LOG"
+	ArtifactTypeExplorerSummaryLog      ArtifactType = "EXPLORER_SUMMARY_LOG"
+	ArtifactTypeApplicationCrashReport  ArtifactType = "APPLICATION_CRASH_REPORT"
+	ArtifactTypeXctestLog               ArtifactType = "XCTEST_LOG"
+	ArtifactTypeVideo                   ArtifactType = "VIDEO"
+	ArtifactTypeCustomerArtifact        ArtifactType = "CUSTOMER_ARTIFACT"
+	ArtifactTypeCustomerArtifactLog     ArtifactType = "CUSTOMER_ARTIFACT_LOG"
+	ArtifactTypeTestspecOutput          ArtifactType = "TESTSPEC_OUTPUT"
+	ArtifactTypeDeviceConnectCommandLog ArtifactType = "DEVICE_CONNECT_COMMAND_LOG"
 )
 
 // Values returns all known values for ArtifactType. Note that this can be
@@ -91,6 +92,7 @@ func (ArtifactType) Values() []ArtifactType {
 		"CUSTOMER_ARTIFACT",
 		"CUSTOMER_ARTIFACT_LOG",
 		"TESTSPEC_OUTPUT",
+		"DEVICE_CONNECT_COMMAND_LOG",
 	}
 }
 
@@ -376,6 +378,7 @@ type InsightsType string
 // Enum values for InsightsType
 const (
 	InsightsTypeTestReport InsightsType = "TEST_REPORT"
+	InsightsTypeNone       InsightsType = "NONE"
 )
 
 // Values returns all known values for InsightsType. Note that this can be
@@ -385,6 +388,7 @@ const (
 func (InsightsType) Values() []InsightsType {
 	return []InsightsType{
 		"TEST_REPORT",
+		"NONE",
 	}
 }
 

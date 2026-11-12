@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type GetResourcePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.GetResourcePositionRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetResourcePositionRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type GetResourcePositionOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
@@ -60,13 +77,31 @@ type GetResourcePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePositionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePositionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeoJsonPayload != nil {
+		s.WriteBlob(schemas.GetResourcePositionResponse_GeoJsonPayload, v.GeoJsonPayload)
+	}
+}
+func (v *GetResourcePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcePositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcePositionResponse_GeoJsonPayload:
+			return d.ReadBlob(schemas.GetResourcePositionResponse_GeoJsonPayload, &v.GeoJsonPayload)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePosition, schemas.GetResourcePositionRequest, schemas.GetResourcePositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePosition, schemas.GetResourcePositionRequest, schemas.GetResourcePositionResponse), output: &GetResourcePositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

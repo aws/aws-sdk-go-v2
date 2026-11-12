@@ -107,6 +107,28 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AssociateContract(t *testing.T) {
+	want := &AssociateContractOutput{}
+	status, header, body, err := serdeRespReadSnapshot("AssociateContract.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateContract(context.Background(), &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateContract.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AssociateSourceViews(t *testing.T) {
 	want := &AssociateSourceViewsOutput{
 		Arn: ptr.String("__Arn__"),
@@ -131,6 +153,29 @@ func TestCheckResponseSnapshot_AssociateSourceViews(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "AssociateSourceViews.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CancelContractualInvestmentAttestation(t *testing.T) {
+	want := &CancelContractualInvestmentAttestationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("CancelContractualInvestmentAttestation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelContractualInvestmentAttestation(context.Background(), &CancelContractualInvestmentAttestationInput{
+		AttestationId: ptr.String("__AttestationId__"),
+		ContractArn:   ptr.String("__ContractArn__"),
+		Reason:        ptr.String("__Reason__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelContractualInvestmentAttestation.response", err)
 	}
 }
 
@@ -201,6 +246,71 @@ func TestCheckResponseSnapshot_CreateBillingView(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateContractualInvestmentAttestation(t *testing.T) {
+	want := &CreateContractualInvestmentAttestationOutput{
+		AttestationId: ptr.String("__AttestationId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateContractualInvestmentAttestation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateContractualInvestmentAttestation(context.Background(), &CreateContractualInvestmentAttestationInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		InvestmentId:        ptr.String("__InvestmentId__"),
+		ContractDocumentId:  ptr.String("__ContractDocumentId__"),
+		ApproverDetails: &types.ApproverDetails{
+			Name:  ptr.String("__Name__"),
+			Title: ptr.String("__Title__"),
+			Email: ptr.String("__Email__"),
+		},
+		InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AttestationDetails: &types.AttestationDetails{
+			AttestationValue: &types.AttestationValueMemberAttestationAmount{
+				Value: types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+			},
+			InvestmentDistributions: []types.InvestmentDistribution{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					InvestmentAmount: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					InvestmentAmount: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+				},
+			},
+		},
+		AdditionalRecipients: []types.AdditionalRecipient{
+			{
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateContractualInvestmentAttestation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteBillingView(t *testing.T) {
 	want := &DeleteBillingViewOutput{
 		Arn: ptr.String("__Arn__"),
@@ -222,6 +332,27 @@ func TestCheckResponseSnapshot_DeleteBillingView(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteBillingView.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisassociateContract(t *testing.T) {
+	want := &DisassociateContractOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateContract.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateContract(context.Background(), &DisassociateContractInput{
+		ContractArn: ptr.String("__ContractArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateContract.response", err)
 	}
 }
 
@@ -386,6 +517,57 @@ func TestCheckResponseSnapshot_GetBillingView(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetBillingView.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetContractInformation(t *testing.T) {
+	want := &GetContractInformationOutput{
+		Contract: &types.ContractDetailsMemberPrivatePricingAddendum{
+			Value: types.PrivatePricingAddendum{
+				ContractArn: ptr.String("__ContractArn__"),
+				ContractTerm: &types.Interval{
+					StartDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				EligiblePayerAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InvestmentAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LegalEntities: []types.LegalEntity{
+					{
+						LegalEntityName: ptr.String("__LegalEntityName__"),
+					},
+					{
+						LegalEntityName: ptr.String("__LegalEntityName__"),
+					},
+				},
+				ContractRestrictions: []types.ContractRestriction{
+					types.ContractRestriction("ATTESTATION_SELF_SERVICE_BLOCKED"),
+					types.ContractRestriction("ATTESTATION_SELF_SERVICE_BLOCKED"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetContractInformation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetContractInformation(context.Background(), &GetContractInformationInput{
+		ContractArn: ptr.String("__ContractArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetContractInformation.response", err)
 	}
 }
 
@@ -1087,6 +1269,245 @@ func TestCheckResponseSnapshot_ListBusinessSupportSubscriptionHistory(t *testing
 	}
 }
 
+func TestCheckResponseSnapshot_ListContracts(t *testing.T) {
+	want := &ListContractsOutput{
+		Items: []types.ContractSummary{
+			{
+				ContractArn: ptr.String("__ContractArn__"),
+				ContractTerm: &types.Interval{
+					StartDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ContractType:      types.ContractType("Cross-Service"),
+				AssociationStatus: types.AssociationStatus("ASSOCIATED"),
+				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ContractArn: ptr.String("__ContractArn__"),
+				ContractTerm: &types.Interval{
+					StartDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ContractType:      types.ContractType("Cross-Service"),
+				AssociationStatus: types.AssociationStatus("ASSOCIATED"),
+				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContracts.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContracts(context.Background(), &ListContractsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContracts.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListContractualInvestmentAttestations(t *testing.T) {
+	want := &ListContractualInvestmentAttestationsOutput{
+		Items: []types.InvestmentAttestation{
+			{
+				AttestationId:         ptr.String("__AttestationId__"),
+				InvestmentName:        ptr.String("__InvestmentName__"),
+				OutcomeDescription:    ptr.String("__OutcomeDescription__"),
+				InvestmentSummaryId:   ptr.String("__InvestmentSummaryId__"),
+				InvestmentId:          ptr.String("__InvestmentId__"),
+				AttestedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestationStatus:     types.InvestmentAttestationStatus("PENDING_REVIEW"),
+				InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestedValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+				InvestmentDistributions: []types.InvestmentDistribution{
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+				},
+				RejectionReasons: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IsCancellable: ptr.Bool(true),
+			},
+			{
+				AttestationId:         ptr.String("__AttestationId__"),
+				InvestmentName:        ptr.String("__InvestmentName__"),
+				OutcomeDescription:    ptr.String("__OutcomeDescription__"),
+				InvestmentSummaryId:   ptr.String("__InvestmentSummaryId__"),
+				InvestmentId:          ptr.String("__InvestmentId__"),
+				AttestedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestationStatus:     types.InvestmentAttestationStatus("PENDING_REVIEW"),
+				InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestedValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+				InvestmentDistributions: []types.InvestmentDistribution{
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+				},
+				RejectionReasons: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IsCancellable: ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContractualInvestmentAttestations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContractualInvestmentAttestations(context.Background(), &ListContractualInvestmentAttestationsInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContractualInvestmentAttestations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListContractualInvestmentSummaries(t *testing.T) {
+	want := &ListContractualInvestmentSummariesOutput{
+		Items: []types.InvestmentSummary{
+			{
+				InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+				InvestmentName:      ptr.String("__InvestmentName__"),
+				InvestmentType:      types.InvestmentType("MILESTONE_BASED"),
+				MaxAllowedInvestmentDisbursementValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+			},
+			{
+				InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+				InvestmentName:      ptr.String("__InvestmentName__"),
+				InvestmentType:      types.InvestmentType("MILESTONE_BASED"),
+				MaxAllowedInvestmentDisbursementValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContractualInvestmentSummaries.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContractualInvestmentSummaries(context.Background(), &ListContractualInvestmentSummariesInput{
+		ContractArn: ptr.String("__ContractArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContractualInvestmentSummaries.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListContractualInvestments(t *testing.T) {
+	want := &ListContractualInvestmentsOutput{
+		Items: []types.Investment{
+			&types.InvestmentMemberMilestoneBasedInvestment{
+				Value: types.MilestoneBasedInvestment{
+					InvestmentId: ptr.String("__InvestmentId__"),
+					InvestmentValue: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+					InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			&types.InvestmentMemberMilestoneBasedInvestment{
+				Value: types.MilestoneBasedInvestment{
+					InvestmentId: ptr.String("__InvestmentId__"),
+					InvestmentValue: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+					InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContractualInvestments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContractualInvestments(context.Background(), &ListContractualInvestmentsInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContractualInvestments.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
 	want := &ListEnterpriseSupportLinkedAccountChargesOutput{
 		LinkedAccount: []types.LinkedAccountCharge{
@@ -1431,12 +1852,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
-		Arn: ptr.String("__Arn__"),
-		SourceViews: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.AssociateContract(context.Background(), &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1495,12 +1913,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
-		Arn: ptr.String("__Arn__"),
-		SourceViews: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.AssociateContract(context.Background(), &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1526,12 +1941,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
-		Arn: ptr.String("__Arn__"),
-		SourceViews: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.AssociateContract(context.Background(), &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1559,12 +1971,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
-		Arn: ptr.String("__Arn__"),
-		SourceViews: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.AssociateContract(context.Background(), &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1625,12 +2034,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
-		Arn: ptr.String("__Arn__"),
-		SourceViews: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.AssociateContract(context.Background(), &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1667,12 +2073,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateSourceViews(context.Background(), &AssociateSourceViewsInput{
-		Arn: ptr.String("__Arn__"),
-		SourceViews: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.AssociateContract(context.Background(), &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

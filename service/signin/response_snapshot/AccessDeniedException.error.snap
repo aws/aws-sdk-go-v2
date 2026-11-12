@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"AccessDeniedException","error":"TOKEN_EXPIRED","message":"__Message__"}

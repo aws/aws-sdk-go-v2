@@ -97,7 +97,9 @@ func (v *DescribeFirewallMetadataOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeFirewallMetadataResponse_Status, string(v.Status))
 	}
-	serializeSupportedAvailabilityZones(s, schemas.DescribeFirewallMetadataResponse_SupportedAvailabilityZones, v.SupportedAvailabilityZones)
+	if v.SupportedAvailabilityZones != nil {
+		serializeSupportedAvailabilityZones(s, schemas.DescribeFirewallMetadataResponse_SupportedAvailabilityZones, v.SupportedAvailabilityZones)
+	}
 	if v.TransitGatewayAttachmentId != nil {
 		s.WriteString(schemas.DescribeFirewallMetadataResponse_TransitGatewayAttachmentId, *v.TransitGatewayAttachmentId)
 	}
@@ -145,6 +147,9 @@ func (c *Client) addOperationDescribeFirewallMetadataMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

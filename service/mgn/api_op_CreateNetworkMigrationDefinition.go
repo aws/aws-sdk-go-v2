@@ -4,6 +4,7 @@ package mgn
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
 	smithy "github.com/aws/smithy-go"
@@ -50,6 +51,10 @@ type CreateNetworkMigrationDefinitionInput struct {
 	// set to USE_EXISTING .
 	CidrMappings []types.CidrMapping
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
+
 	// A description of the network migration definition.
 	Description *string
 
@@ -81,16 +86,27 @@ func (v *CreateNetworkMigrationDefinitionInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateNetworkMigrationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCidrMappingsList(s, schemas.CreateNetworkMigrationDefinitionRequest_cidrMappings, v.CidrMappings)
+	if v.CidrMappings != nil {
+		serializeCidrMappingsList(s, schemas.CreateNetworkMigrationDefinitionRequest_cidrMappings, v.CidrMappings)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_clientToken, *v.ClientToken)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_description, *v.Description)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_name, *v.Name)
 	}
-	serializeScopeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_scopeTags, v.ScopeTags)
-	serializeSourceConfigurationList(s, schemas.CreateNetworkMigrationDefinitionRequest_sourceConfigurations, v.SourceConfigurations)
-	serializeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_tags, v.Tags)
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_scopeTags, v.ScopeTags)
+	}
+	if v.SourceConfigurations != nil {
+		serializeSourceConfigurationList(s, schemas.CreateNetworkMigrationDefinitionRequest_sourceConfigurations, v.SourceConfigurations)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_tags, v.Tags)
+	}
 	if v.TargetDeployment != "" {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_targetDeployment, string(v.TargetDeployment))
 	}
@@ -173,7 +189,9 @@ func (v *CreateNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.Shape
 	if v.Arn != nil {
 		s.WriteString(schemas.NetworkMigrationDefinition_arn, *v.Arn)
 	}
-	serializeCidrMappingsList(s, schemas.NetworkMigrationDefinition_cidrMappings, v.CidrMappings)
+	if v.CidrMappings != nil {
+		serializeCidrMappingsList(s, schemas.NetworkMigrationDefinition_cidrMappings, v.CidrMappings)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.NetworkMigrationDefinition_createdAt, *v.CreatedAt)
 	}
@@ -186,9 +204,15 @@ func (v *CreateNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.Shape
 	if v.NetworkMigrationDefinitionID != nil {
 		s.WriteString(schemas.NetworkMigrationDefinition_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
 	}
-	serializeScopeTagsMap(s, schemas.NetworkMigrationDefinition_scopeTags, v.ScopeTags)
-	serializeSourceConfigurationList(s, schemas.NetworkMigrationDefinition_sourceConfigurations, v.SourceConfigurations)
-	serializeTagsMap(s, schemas.NetworkMigrationDefinition_tags, v.Tags)
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.NetworkMigrationDefinition_scopeTags, v.ScopeTags)
+	}
+	if v.SourceConfigurations != nil {
+		serializeSourceConfigurationList(s, schemas.NetworkMigrationDefinition_sourceConfigurations, v.SourceConfigurations)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.NetworkMigrationDefinition_tags, v.Tags)
+	}
 	if v.TargetDeployment != "" {
 		s.WriteString(schemas.NetworkMigrationDefinition_targetDeployment, string(v.TargetDeployment))
 	}
@@ -282,6 +306,9 @@ func (c *Client) addOperationCreateNetworkMigrationDefinitionMiddlewares(stack *
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateNetworkMigrationDefinitionMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateNetworkMigrationDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -301,4 +328,37 @@ func (c *Client) addOperationCreateNetworkMigrationDefinitionMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateNetworkMigrationDefinition struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateNetworkMigrationDefinition) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateNetworkMigrationDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateNetworkMigrationDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateNetworkMigrationDefinitionInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateNetworkMigrationDefinitionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateNetworkMigrationDefinition{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }

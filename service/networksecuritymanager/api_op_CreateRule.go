@@ -112,7 +112,9 @@ func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleType != "" {
 		s.WriteString(schemas.CreateRuleInput_ruleType, string(v.RuleType))
 	}
-	serializeTagMap(s, schemas.CreateRuleInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRuleInput_tags, v.Tags)
+	}
 }
 
 type CreateRuleOutput struct {

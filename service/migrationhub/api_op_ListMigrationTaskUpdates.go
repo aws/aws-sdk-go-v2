@@ -108,7 +108,9 @@ func (v *ListMigrationTaskUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMigrationTaskUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMigrationTaskUpdateList(s, schemas.ListMigrationTaskUpdatesResult_MigrationTaskUpdateList, v.MigrationTaskUpdateList)
+	if v.MigrationTaskUpdateList != nil {
+		serializeMigrationTaskUpdateList(s, schemas.ListMigrationTaskUpdatesResult_MigrationTaskUpdateList, v.MigrationTaskUpdateList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMigrationTaskUpdatesResult_NextToken, *v.NextToken)
 	}

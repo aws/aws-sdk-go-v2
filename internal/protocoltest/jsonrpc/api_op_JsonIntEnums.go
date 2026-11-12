@@ -59,9 +59,15 @@ func (v *JsonIntEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntEnum3 != 0 {
 		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum3, int32(v.IntEnum3))
 	}
-	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_intEnumList, v.IntEnumList)
-	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_intEnumMap, v.IntEnumMap)
-	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_intEnumSet, v.IntEnumSet)
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_intEnumList, v.IntEnumList)
+	}
+	if v.IntEnumMap != nil {
+		serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_intEnumMap, v.IntEnumMap)
+	}
+	if v.IntEnumSet != nil {
+		serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_intEnumSet, v.IntEnumSet)
+	}
 }
 func (v *JsonIntEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {
@@ -133,9 +139,15 @@ func (v *JsonIntEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntEnum3 != 0 {
 		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum3, int32(v.IntEnum3))
 	}
-	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_intEnumList, v.IntEnumList)
-	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_intEnumMap, v.IntEnumMap)
-	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_intEnumSet, v.IntEnumSet)
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_intEnumList, v.IntEnumList)
+	}
+	if v.IntEnumMap != nil {
+		serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_intEnumMap, v.IntEnumMap)
+	}
+	if v.IntEnumSet != nil {
+		serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_intEnumSet, v.IntEnumSet)
+	}
 }
 func (v *JsonIntEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {

@@ -1,0 +1,5 @@
+POST /v1/token?x-amz-oauth-token-method=token-exchange
+
+Content-Type: application/json
+
+{"grant_type":"__GrantType__","resource":"__Resource__","scope":"__Scope__","subject_token":"__SubjectToken__","subject_token_type":"__SubjectTokenType__"}

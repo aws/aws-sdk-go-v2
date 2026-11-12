@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ServiceProfileList":[{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__"},{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__"}]}

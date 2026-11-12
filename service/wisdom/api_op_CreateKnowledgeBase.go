@@ -125,8 +125,12 @@ func (v *CreateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceConfiguration(s, schemas.CreateKnowledgeBaseRequest_sourceConfiguration, v.SourceConfiguration)
-	serializeTags(s, schemas.CreateKnowledgeBaseRequest_tags, v.Tags)
+	if v.SourceConfiguration != nil {
+		serializeSourceConfiguration(s, schemas.CreateKnowledgeBaseRequest_sourceConfiguration, v.SourceConfiguration)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateKnowledgeBaseRequest_tags, v.Tags)
+	}
 }
 func (v *CreateKnowledgeBaseInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateKnowledgeBaseRequest, func(s *smithy.Schema) error {

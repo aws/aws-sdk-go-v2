@@ -170,6 +170,26 @@ func (m *validateOpCreateFirewallPolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFirewallPolicyV2 struct {
+}
+
+func (*validateOpCreateFirewallPolicyV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFirewallPolicyV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFirewallPolicyV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFirewallPolicyV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProxyConfiguration struct {
 }
 
@@ -890,6 +910,26 @@ func (m *validateOpUpdateFirewallPolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFirewallPolicyV2 struct {
+}
+
+func (*validateOpUpdateFirewallPolicyV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFirewallPolicyV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFirewallPolicyV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFirewallPolicyV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLoggingConfiguration struct {
 }
 
@@ -1122,6 +1162,10 @@ func addOpCreateFirewallPolicyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateFirewallPolicy{}, middleware.After)
 }
 
+func addOpCreateFirewallPolicyV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFirewallPolicyV2{}, middleware.After)
+}
+
 func addOpCreateProxyConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProxyConfiguration{}, middleware.After)
 }
@@ -1264,6 +1308,10 @@ func addOpUpdateFirewallPolicyChangeProtectionValidationMiddleware(stack *middle
 
 func addOpUpdateFirewallPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFirewallPolicy{}, middleware.After)
+}
+
+func addOpUpdateFirewallPolicyV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFirewallPolicyV2{}, middleware.After)
 }
 
 func addOpUpdateLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1576,6 +1624,169 @@ func validateFirewallPolicy(v *types.FirewallPolicy) error {
 			invalidParams.AddNested("PolicyVariables", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Route53ResolvedIPValidation != nil {
+		if err := validateRoute53ResolvedIPValidation(v.Route53ResolvedIPValidation); err != nil {
+			invalidParams.AddNested("Route53ResolvedIPValidation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirewallPolicyV2(v *types.FirewallPolicyV2) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirewallPolicyV2"}
+	if v.FirewallRuleGroupEntries != nil {
+		if err := validateFirewallRuleGroupEntries(v.FirewallRuleGroupEntries); err != nil {
+			invalidParams.AddNested("FirewallRuleGroupEntries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IpsRuleGroupEntries != nil {
+		if err := validateIpsRuleGroupEntries(v.IpsRuleGroupEntries); err != nil {
+			invalidParams.AddNested("IpsRuleGroupEntries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PolicyVariables != nil {
+		if err := validatePolicyVariables(v.PolicyVariables); err != nil {
+			invalidParams.AddNested("PolicyVariables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Route53ResolvedIPValidation != nil {
+		if err := validateRoute53ResolvedIPValidation(v.Route53ResolvedIPValidation); err != nil {
+			invalidParams.AddNested("Route53ResolvedIPValidation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirewallRule(v *types.FirewallRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirewallRule"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if len(v.ActionScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionScope"))
+	}
+	if len(v.Hook) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Hook"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.RuleOptions != nil {
+		if err := validateRuleOptions(v.RuleOptions); err != nil {
+			invalidParams.AddNested("RuleOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirewallRuleGroup(v *types.FirewallRuleGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirewallRuleGroup"}
+	if v.RulesSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RulesSource"))
+	} else if v.RulesSource != nil {
+		if err := validateFirewallRulesSource(v.RulesSource); err != nil {
+			invalidParams.AddNested("RulesSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuleVariables != nil {
+		if err := validateRuleVariables(v.RuleVariables); err != nil {
+			invalidParams.AddNested("RuleVariables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirewallRuleGroupEntries(v []types.FirewallRuleGroupEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirewallRuleGroupEntries"}
+	for i := range v {
+		if err := validateFirewallRuleGroupEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirewallRuleGroupEntry(v *types.FirewallRuleGroupEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirewallRuleGroupEntry"}
+	if v.InlineRuleGroup != nil {
+		if err := validateFirewallRuleGroup(v.InlineRuleGroup); err != nil {
+			invalidParams.AddNested("InlineRuleGroup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirewallRules(v []types.FirewallRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirewallRules"}
+	for i := range v {
+		if err := validateFirewallRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirewallRulesSource(v *types.FirewallRulesSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirewallRulesSource"}
+	if v.FirewallRules != nil {
+		if err := validateFirewallRules(v.FirewallRules); err != nil {
+			invalidParams.AddNested("FirewallRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RulesSourceList != nil {
+		if err := validateRulesSourceList(v.RulesSourceList); err != nil {
+			invalidParams.AddNested("RulesSourceList", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1676,6 +1887,60 @@ func validateIPSets(v map[string]types.IPSet) error {
 		value := v[key]
 		if err := validateIPSet(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIpsRuleGroup(v *types.IpsRuleGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IpsRuleGroup"}
+	if v.RulesSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RulesSource"))
+	}
+	if v.RuleVariables != nil {
+		if err := validateRuleVariables(v.RuleVariables); err != nil {
+			invalidParams.AddNested("RuleVariables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIpsRuleGroupEntries(v []types.IpsRuleGroupEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IpsRuleGroupEntries"}
+	for i := range v {
+		if err := validateIpsRuleGroupEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIpsRuleGroupEntry(v *types.IpsRuleGroupEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IpsRuleGroupEntry"}
+	if v.InlineRuleGroup != nil {
+		if err := validateIpsRuleGroup(v.InlineRuleGroup); err != nil {
+			invalidParams.AddNested("InlineRuleGroup", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1917,6 +2182,54 @@ func validatePublishMetricAction(v *types.PublishMetricAction) error {
 	} else if v.Dimensions != nil {
 		if err := validateDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoute53ResolvedIPValidation(v *types.Route53ResolvedIPValidation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Route53ResolvedIPValidation"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.DNSFirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DNSFirewallRuleGroupId"))
+	}
+	if len(v.DNSExpiryExceptionPolicy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DNSExpiryExceptionPolicy"))
+	}
+	if v.BypassDestinationValidationIPRanges != nil {
+		if err := validateRoute53ResolvedIPValidationAddresses(v.BypassDestinationValidationIPRanges); err != nil {
+			invalidParams.AddNested("BypassDestinationValidationIPRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceIPRanges != nil {
+		if err := validateRoute53ResolvedIPValidationAddresses(v.SourceIPRanges); err != nil {
+			invalidParams.AddNested("SourceIPRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoute53ResolvedIPValidationAddresses(v []types.Address) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Route53ResolvedIPValidationAddresses"}
+	for i := range v {
+		if err := validateAddress(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2667,6 +2980,38 @@ func validateOpCreateFirewallPolicyInput(v *CreateFirewallPolicyInput) error {
 	}
 }
 
+func validateOpCreateFirewallPolicyV2Input(v *CreateFirewallPolicyV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFirewallPolicyV2Input"}
+	if v.FirewallPolicyV2Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallPolicyV2Name"))
+	}
+	if v.FirewallPolicyV2 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallPolicyV2"))
+	} else if v.FirewallPolicyV2 != nil {
+		if err := validateFirewallPolicyV2(v.FirewallPolicyV2); err != nil {
+			invalidParams.AddNested("FirewallPolicyV2", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateProxyConfigurationInput(v *CreateProxyConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2767,6 +3112,16 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 	if v.RuleGroup != nil {
 		if err := validateRuleGroup(v.RuleGroup); err != nil {
 			invalidParams.AddNested("RuleGroup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FirewallRuleGroup != nil {
+		if err := validateFirewallRuleGroup(v.FirewallRuleGroup); err != nil {
+			invalidParams.AddNested("FirewallRuleGroup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IpsRuleGroup != nil {
+		if err := validateIpsRuleGroup(v.IpsRuleGroup); err != nil {
+			invalidParams.AddNested("IpsRuleGroup", err.(smithy.InvalidParamsError))
 		}
 	}
 	if len(v.Type) == 0 {
@@ -3346,6 +3701,33 @@ func validateOpUpdateFirewallPolicyInput(v *UpdateFirewallPolicyInput) error {
 	}
 }
 
+func validateOpUpdateFirewallPolicyV2Input(v *UpdateFirewallPolicyV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallPolicyV2Input"}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if v.FirewallPolicyV2 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallPolicyV2"))
+	} else if v.FirewallPolicyV2 != nil {
+		if err := validateFirewallPolicyV2(v.FirewallPolicyV2); err != nil {
+			invalidParams.AddNested("FirewallPolicyV2", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateLoggingConfigurationInput(v *UpdateLoggingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -3494,6 +3876,16 @@ func validateOpUpdateRuleGroupInput(v *UpdateRuleGroupInput) error {
 	if v.RuleGroup != nil {
 		if err := validateRuleGroup(v.RuleGroup); err != nil {
 			invalidParams.AddNested("RuleGroup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FirewallRuleGroup != nil {
+		if err := validateFirewallRuleGroup(v.FirewallRuleGroup); err != nil {
+			invalidParams.AddNested("FirewallRuleGroup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IpsRuleGroup != nil {
+		if err := validateIpsRuleGroup(v.IpsRuleGroup); err != nil {
+			invalidParams.AddNested("IpsRuleGroup", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EncryptionConfiguration != nil {

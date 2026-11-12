@@ -95,7 +95,9 @@ func (v *CreateIntegrationAssociationInput) SerializeMembers(s smithy.ShapeSeria
 	if v.SourceType != "" {
 		s.WriteString(schemas.CreateIntegrationAssociationRequest_SourceType, string(v.SourceType))
 	}
-	serializeTagMap(s, schemas.CreateIntegrationAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIntegrationAssociationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateIntegrationAssociationOutput struct {

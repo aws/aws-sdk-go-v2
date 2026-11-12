@@ -1013,6 +1013,30 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateClusterExtension(t *testing.T) {
+	want := &CreateClusterExtensionOutput{
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.CreateClusterExtension, schemas.CreateClusterExtensionResponse, schemas.CreateClusterExtensionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateClusterExtension.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateClusterSchedulerConfig(t *testing.T) {
 	want := &CreateClusterSchedulerConfigOutput{
 		ClusterSchedulerConfigArn: ptr.String("__ClusterSchedulerConfigArn__"),
@@ -2742,6 +2766,30 @@ func TestUpdateResponseSnapshot_DeleteCluster(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteCluster.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteClusterExtension(t *testing.T) {
+	want := &DeleteClusterExtensionOutput{
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteClusterExtension, schemas.DeleteClusterExtensionResponse, schemas.DeleteClusterExtensionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteClusterExtension.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6484,6 +6532,43 @@ func TestUpdateResponseSnapshot_DescribeClusterEvent(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeClusterExtension(t *testing.T) {
+	want := &DescribeClusterExtensionOutput{
+		ExtensionDetails: &types.ExtensionDetails{
+			ClusterArn:          ptr.String("__ClusterArn__"),
+			ExtensionArn:        ptr.String("__ExtensionArn__"),
+			ExtensionName:       ptr.String("__ExtensionName__"),
+			ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+			Status:              types.ExtensionStatus("Creating"),
+			ConfigurationValues: ptr.String("__ConfigurationValues__"),
+			CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NodeSummary: &types.ExtensionNodeSummary{
+			TotalCount:  ptr.Int32(1),
+			ActiveCount: ptr.Int32(1),
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeClusterExtension, schemas.DescribeClusterExtensionResponse, schemas.DescribeClusterExtensionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeClusterExtension.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeClusterNode(t *testing.T) {
 	want := &DescribeClusterNodeOutput{
 		NodeDetails: &types.ClusterNodeDetails{
@@ -7905,6 +7990,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						},
 					},
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName: ptr.String("__VariantName__"),
@@ -7991,6 +8090,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							TotalInstanceCount:       ptr.Int32(1),
 							AvailableInstanceCount:   ptr.Int32(1),
 							UsedByCurrentEndpoint:    ptr.Int32(1),
+						},
+					},
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 				},
@@ -8137,6 +8250,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							ConcurrencyThreshold: ptr.Int32(1),
 						},
 					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				{
 					VariantName: ptr.String("__VariantName__"),
@@ -8205,6 +8332,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
 							PrefixLength:         ptr.Int32(1),
 							ConcurrencyThreshold: ptr.Int32(1),
+						},
+					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
 						},
 					},
 				},
@@ -8280,6 +8421,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							ConcurrencyThreshold: ptr.Int32(1),
 						},
 					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				{
 					VariantName: ptr.String("__VariantName__"),
@@ -8348,6 +8503,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
 							PrefixLength:         ptr.Int32(1),
 							ConcurrencyThreshold: ptr.Int32(1),
+						},
+					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
 						},
 					},
 				},
@@ -8483,6 +8652,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						},
 					},
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName: ptr.String("__VariantName__"),
@@ -8569,6 +8752,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							TotalInstanceCount:       ptr.Int32(1),
 							AvailableInstanceCount:   ptr.Int32(1),
 							UsedByCurrentEndpoint:    ptr.Int32(1),
+						},
+					},
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 				},
@@ -8660,6 +8857,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -8715,6 +8926,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -8859,6 +9084,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -8914,6 +9153,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -10439,6 +10692,7 @@ func TestUpdateResponseSnapshot_DescribeInferenceComponent(t *testing.T) {
 				NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 				MinMemoryRequiredInMb:              ptr.Int32(1),
 				MaxMemoryRequiredInMb:              ptr.Int32(1),
+				AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 			},
 			BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 			DataCacheConfig: &types.InferenceComponentDataCacheConfigSummary{
@@ -10488,6 +10742,7 @@ func TestUpdateResponseSnapshot_DescribeInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfigSummary{
@@ -10536,6 +10791,7 @@ func TestUpdateResponseSnapshot_DescribeInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfigSummary{
@@ -13591,6 +13847,10 @@ func TestUpdateResponseSnapshot_DescribePipeline(t *testing.T) {
 		},
 		PipelineVersionDisplayName: ptr.String("__PipelineVersionDisplayName__"),
 		PipelineVersionDescription: ptr.String("__PipelineVersionDescription__"),
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	proto := awsjson.New11(schemas.SageMaker)
 	opSchema := smithy.NewOperationSchema(schemas.DescribePipeline, schemas.DescribePipelineResponse, schemas.DescribePipelineResponse)
@@ -13690,6 +13950,11 @@ func TestUpdateResponseSnapshot_DescribePipelineExecution(t *testing.T) {
 			MlflowResourceArn:    ptr.String("__MlflowResourceArn__"),
 			MlflowExperimentName: ptr.String("__MlflowExperimentName__"),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
 	}
 	proto := awsjson.New11(schemas.SageMaker)
 	opSchema := smithy.NewOperationSchema(schemas.DescribePipelineExecution, schemas.DescribePipelineExecutionResponse, schemas.DescribePipelineExecutionResponse)
@@ -16907,6 +17172,46 @@ func TestUpdateResponseSnapshot_ListClusterEvents(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListClusterExtensions(t *testing.T) {
+	want := &ListClusterExtensionsOutput{
+		Extensions: []types.ExtensionSummary{
+			{
+				ExtensionArn:     ptr.String("__ExtensionArn__"),
+				ExtensionName:    ptr.String("__ExtensionName__"),
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+				Status:           types.ExtensionStatus("Creating"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ExtensionArn:     ptr.String("__ExtensionArn__"),
+				ExtensionName:    ptr.String("__ExtensionName__"),
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+				Status:           types.ExtensionStatus("Creating"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListClusterExtensions, schemas.ListClusterExtensionsResponse, schemas.ListClusterExtensionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListClusterExtensions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListClusterNodes(t *testing.T) {
 	want := &ListClusterNodesOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -19871,6 +20176,10 @@ func TestUpdateResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 							Index:    ptr.Int32(1),
 						},
 					},
+					HubContent: &types.HubContentStepMetadata{
+						HubArn:        ptr.String("__HubArn__"),
+						HubContentArn: ptr.String("__HubContentArn__"),
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
@@ -20065,6 +20374,10 @@ func TestUpdateResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 							Index:    ptr.Int32(1),
 						},
 					},
+					HubContent: &types.HubContentStepMetadata{
+						HubArn:        ptr.String("__HubArn__"),
+						HubContentArn: ptr.String("__HubContentArn__"),
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
@@ -20109,6 +20422,10 @@ func TestUpdateResponseSnapshot_ListPipelineExecutions(t *testing.T) {
 				PipelineExecutionDescription:   ptr.String("__PipelineExecutionDescription__"),
 				PipelineExecutionDisplayName:   ptr.String("__PipelineExecutionDisplayName__"),
 				PipelineExecutionFailureReason: ptr.String("__PipelineExecutionFailureReason__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				PipelineExecutionArn:           ptr.String("__PipelineExecutionArn__"),
@@ -20117,6 +20434,10 @@ func TestUpdateResponseSnapshot_ListPipelineExecutions(t *testing.T) {
 				PipelineExecutionDescription:   ptr.String("__PipelineExecutionDescription__"),
 				PipelineExecutionDisplayName:   ptr.String("__PipelineExecutionDisplayName__"),
 				PipelineExecutionFailureReason: ptr.String("__PipelineExecutionFailureReason__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -20185,6 +20506,10 @@ func TestUpdateResponseSnapshot_ListPipelineVersions(t *testing.T) {
 				PipelineVersionDescription:        ptr.String("__PipelineVersionDescription__"),
 				PipelineVersionDisplayName:        ptr.String("__PipelineVersionDisplayName__"),
 				LastExecutionPipelineExecutionArn: ptr.String("__LastExecutionPipelineExecutionArn__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				PipelineArn:                       ptr.String("__PipelineArn__"),
@@ -20193,6 +20518,10 @@ func TestUpdateResponseSnapshot_ListPipelineVersions(t *testing.T) {
 				PipelineVersionDescription:        ptr.String("__PipelineVersionDescription__"),
 				PipelineVersionDisplayName:        ptr.String("__PipelineVersionDisplayName__"),
 				LastExecutionPipelineExecutionArn: ptr.String("__LastExecutionPipelineExecutionArn__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -22887,6 +23216,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -22973,6 +23316,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},
@@ -23468,6 +23825,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -23554,6 +23925,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},
@@ -24593,6 +24978,10 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 					LastExecutedPipelineExecutionArn:         ptr.String("__LastExecutedPipelineExecutionArn__"),
 					LastExecutedPipelineExecutionDisplayName: ptr.String("__LastExecutedPipelineExecutionDisplayName__"),
 					LastExecutedPipelineExecutionStatus:      types.PipelineExecutionStatus("Executing"),
+					PipelineVersionAliases: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				FeatureGroup: &types.FeatureGroup{
 					FeatureGroupArn:             ptr.String("__FeatureGroupArn__"),
@@ -28085,6 +28474,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -28171,6 +28574,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},
@@ -28666,6 +29083,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -28752,6 +29183,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},
@@ -29791,6 +30236,10 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 					LastExecutedPipelineExecutionArn:         ptr.String("__LastExecutedPipelineExecutionArn__"),
 					LastExecutedPipelineExecutionDisplayName: ptr.String("__LastExecutedPipelineExecutionDisplayName__"),
 					LastExecutedPipelineExecutionStatus:      types.PipelineExecutionStatus("Executing"),
+					PipelineVersionAliases: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				FeatureGroup: &types.FeatureGroup{
 					FeatureGroupArn:             ptr.String("__FeatureGroupArn__"),
@@ -32938,6 +33387,30 @@ func TestUpdateResponseSnapshot_UpdateCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateClusterExtension(t *testing.T) {
+	want := &UpdateClusterExtensionOutput{
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateClusterExtension, schemas.UpdateClusterExtensionResponse, schemas.UpdateClusterExtensionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateClusterExtension.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateClusterSchedulerConfig(t *testing.T) {
 	want := &UpdateClusterSchedulerConfigOutput{
 		ClusterSchedulerConfigArn:     ptr.String("__ClusterSchedulerConfigArn__"),
@@ -34019,7 +34492,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.SageMaker)
-	opSchema := smithy.NewOperationSchema(schemas.CreateClusterSchedulerConfig, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateClusterExtension, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

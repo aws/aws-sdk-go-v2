@@ -80,7 +80,9 @@ func (v *DescribeAddressesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddressList(s, schemas.DescribeAddressesResult_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeAddressList(s, schemas.DescribeAddressesResult_Addresses, v.Addresses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAddressesResult_NextToken, *v.NextToken)
 	}

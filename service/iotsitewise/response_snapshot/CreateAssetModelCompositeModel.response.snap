@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assetModelCompositeModelId":"__AssetModelCompositeModelId__","assetModelCompositeModelPath":[{"id":"__Id__","name":"__Name__"},{"id":"__Id__","name":"__Name__"}],"assetModelId":"__AssetModelId__","assetModelStatus":{"error":{"code":"VALIDATION_ERROR","details":[{"code":"INCOMPATIBLE_COMPUTE_LOCATION","message":"__Message__"},{"code":"INCOMPATIBLE_COMPUTE_LOCATION","message":"__Message__"}],"message":"__Message__"},"state":"CREATING"}}

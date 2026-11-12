@@ -44,7 +44,9 @@ func (v *BatchGetInvoiceProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetInvoiceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.BatchGetInvoiceProfileRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.BatchGetInvoiceProfileRequest_AccountIds, v.AccountIds)
+	}
 }
 
 type BatchGetInvoiceProfileOutput struct {
@@ -65,7 +67,9 @@ func (v *BatchGetInvoiceProfileOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetInvoiceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProfileList(s, schemas.BatchGetInvoiceProfileResponse_Profiles, v.Profiles)
+	if v.Profiles != nil {
+		serializeProfileList(s, schemas.BatchGetInvoiceProfileResponse_Profiles, v.Profiles)
+	}
 }
 func (v *BatchGetInvoiceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetInvoiceProfileResponse, func(s *smithy.Schema) error {

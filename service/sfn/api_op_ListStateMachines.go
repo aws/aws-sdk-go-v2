@@ -99,7 +99,9 @@ func (v *ListStateMachinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStateMachinesOutput_nextToken, *v.NextToken)
 	}
-	serializeStateMachineList(s, schemas.ListStateMachinesOutput_stateMachines, v.StateMachines)
+	if v.StateMachines != nil {
+		serializeStateMachineList(s, schemas.ListStateMachinesOutput_stateMachines, v.StateMachines)
+	}
 }
 func (v *ListStateMachinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStateMachinesOutput, func(s *smithy.Schema) error {

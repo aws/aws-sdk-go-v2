@@ -82,7 +82,9 @@ func (v *CreateCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.Sha
 		v.ScopeSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateCodeSecurityScanConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCodeSecurityScanConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateCodeSecurityScanConfigurationOutput struct {

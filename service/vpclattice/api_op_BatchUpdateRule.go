@@ -64,7 +64,9 @@ func (v *BatchUpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ListenerIdentifier != nil {
 		s.WriteString(schemas.BatchUpdateRuleRequest_listenerIdentifier, *v.ListenerIdentifier)
 	}
-	serializeRuleUpdateList(s, schemas.BatchUpdateRuleRequest_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleUpdateList(s, schemas.BatchUpdateRuleRequest_rules, v.Rules)
+	}
 	if v.ServiceIdentifier != nil {
 		s.WriteString(schemas.BatchUpdateRuleRequest_serviceIdentifier, *v.ServiceIdentifier)
 	}
@@ -106,8 +108,12 @@ func (v *BatchUpdateRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleUpdateSuccessList(s, schemas.BatchUpdateRuleResponse_successful, v.Successful)
-	serializeRuleUpdateFailureList(s, schemas.BatchUpdateRuleResponse_unsuccessful, v.Unsuccessful)
+	if v.Successful != nil {
+		serializeRuleUpdateSuccessList(s, schemas.BatchUpdateRuleResponse_successful, v.Successful)
+	}
+	if v.Unsuccessful != nil {
+		serializeRuleUpdateFailureList(s, schemas.BatchUpdateRuleResponse_unsuccessful, v.Unsuccessful)
+	}
 }
 func (v *BatchUpdateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateRuleResponse, func(s *smithy.Schema) error {

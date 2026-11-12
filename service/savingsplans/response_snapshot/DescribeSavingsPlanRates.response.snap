@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","savingsPlanId":"__SavingsPlanId__","searchResults":[{"currency":"CNY","operation":"__Operation__","productType":"EC2","properties":[{"name":"region","value":"__Value__"},{"name":"region","value":"__Value__"}],"rate":"__Rate__","serviceCode":"AmazonEC2","unit":"Hrs","usageType":"__UsageType__"},{"currency":"CNY","operation":"__Operation__","productType":"EC2","properties":[{"name":"region","value":"__Value__"},{"name":"region","value":"__Value__"}],"rate":"__Rate__","serviceCode":"AmazonEC2","unit":"Hrs","usageType":"__UsageType__"}]}

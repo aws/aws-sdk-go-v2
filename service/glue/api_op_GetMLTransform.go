@@ -173,7 +173,9 @@ func (v *GetMLTransformOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GlueVersion != nil {
 		s.WriteString(schemas.GetMLTransformResponse_GlueVersion, *v.GlueVersion)
 	}
-	serializeGlueTables(s, schemas.GetMLTransformResponse_InputRecordTables, v.InputRecordTables)
+	if v.InputRecordTables != nil {
+		serializeGlueTables(s, schemas.GetMLTransformResponse_InputRecordTables, v.InputRecordTables)
+	}
 	if v.LabelCount != 0 {
 		s.WriteInt32(schemas.GetMLTransformResponse_LabelCount, v.LabelCount)
 	}
@@ -200,7 +202,9 @@ func (v *GetMLTransformOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != nil {
 		s.WriteString(schemas.GetMLTransformResponse_Role, *v.Role)
 	}
-	serializeTransformSchema(s, schemas.GetMLTransformResponse_Schema, v.Schema)
+	if v.Schema != nil {
+		serializeTransformSchema(s, schemas.GetMLTransformResponse_Schema, v.Schema)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetMLTransformResponse_Status, string(v.Status))
 	}

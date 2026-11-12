@@ -82,7 +82,9 @@ func (v *DeleteEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.DeleteEntitlementRequest_environmentId, *v.EnvironmentId)
 	}
-	serializeVmIdList(s, schemas.DeleteEntitlementRequest_vmIds, v.VmIds)
+	if v.VmIds != nil {
+		serializeVmIdList(s, schemas.DeleteEntitlementRequest_vmIds, v.VmIds)
+	}
 }
 
 type DeleteEntitlementOutput struct {
@@ -103,7 +105,9 @@ func (v *DeleteEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVmEntitlementList(s, schemas.DeleteEntitlementResponse_entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeVmEntitlementList(s, schemas.DeleteEntitlementResponse_entitlements, v.Entitlements)
+	}
 }
 func (v *DeleteEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteEntitlementResponse, func(s *smithy.Schema) error {

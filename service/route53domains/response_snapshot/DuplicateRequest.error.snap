@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.AssociateDelegationSignerToDomain
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"DuplicateRequest","message":"__Message__","requestId":"__RequestId__"}
+¿f__typepDuplicateRequestgmessagek__Message__irequestIdm__RequestId__ÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/ListTagsForResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.ListTagsForResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"maxResults":1,"nextToken":"__NextToken__","resourceArn":"__ResourceArn__"}
+¿jmaxResultsinextTokenm__NextToken__kresourceArno__ResourceArn__ÿ

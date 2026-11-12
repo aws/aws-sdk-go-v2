@@ -122,7 +122,9 @@ func (v *ListAgreementPaymentRequestsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListAgreementPaymentRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePaymentRequestSummaryList(s, schemas.ListAgreementPaymentRequestsOutput_items, v.Items)
+	if v.Items != nil {
+		serializePaymentRequestSummaryList(s, schemas.ListAgreementPaymentRequestsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgreementPaymentRequestsOutput_nextToken, *v.NextToken)
 	}

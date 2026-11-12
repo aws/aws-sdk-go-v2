@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"metadataLocation":"__MetadataLocation__","versionToken":"__VersionToken__","warehouseLocation":"__WarehouseLocation__"}

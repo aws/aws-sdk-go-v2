@@ -2649,6 +2649,7 @@ func TestCheckResponseSnapshot_CreateDatasetExportJob(t *testing.T) {
 				},
 			},
 		},
+		JobName: ptr.String("__JobName__"),
 		ErrorReportLocation: &types.ExportErrorReportLocation{
 			S3Uri: ptr.String("__S3Uri__"),
 		},
@@ -5905,6 +5906,7 @@ func TestCheckResponseSnapshot_DescribeDatasetExportJob(t *testing.T) {
 	want := &DescribeDatasetExportJobOutput{
 		JobId:            ptr.String("__JobId__"),
 		WorkspaceName:    ptr.String("__WorkspaceName__"),
+		JobName:          ptr.String("__JobName__"),
 		Status:           types.DatasetExportJobStatus("SUBMITTED"),
 		StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -8780,6 +8782,7 @@ func TestCheckResponseSnapshot_ListDatasetExportJobs(t *testing.T) {
 		Jobs: []types.ExportJobSummary{
 			{
 				JobId:            ptr.String("__JobId__"),
+				JobName:          ptr.String("__JobName__"),
 				Status:           types.DatasetExportJobStatus("SUBMITTED"),
 				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -8787,6 +8790,7 @@ func TestCheckResponseSnapshot_ListDatasetExportJobs(t *testing.T) {
 			},
 			{
 				JobId:            ptr.String("__JobId__"),
+				JobName:          ptr.String("__JobName__"),
 				Status:           types.DatasetExportJobStatus("SUBMITTED"),
 				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),

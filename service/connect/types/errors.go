@@ -567,7 +567,9 @@ func (v *InvalidContactFlowException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvalidContactFlowException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProblems(s, schemas.InvalidContactFlowException_problems, v.Problems)
+	if v.Problems != nil {
+		serializeProblems(s, schemas.InvalidContactFlowException_problems, v.Problems)
+	}
 }
 func (v *InvalidContactFlowException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidContactFlowException, func(s *smithy.Schema) error {
@@ -613,7 +615,9 @@ func (v *InvalidContactFlowModuleException) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *InvalidContactFlowModuleException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProblems(s, schemas.InvalidContactFlowModuleException_Problems, v.Problems)
+	if v.Problems != nil {
+		serializeProblems(s, schemas.InvalidContactFlowModuleException_Problems, v.Problems)
+	}
 }
 func (v *InvalidContactFlowModuleException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidContactFlowModuleException, func(s *smithy.Schema) error {
@@ -709,7 +713,9 @@ func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.InvalidRequestException_Message, *v.Message)
 	}
-	serializeInvalidRequestExceptionReason(s, schemas.InvalidRequestException_Reason, v.Reason)
+	if v.Reason != nil {
+		serializeInvalidRequestExceptionReason(s, schemas.InvalidRequestException_Reason, v.Reason)
+	}
 }
 func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
@@ -758,7 +764,9 @@ func (v *InvalidTestCaseException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvalidTestCaseException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProblems(s, schemas.InvalidTestCaseException_Problems, v.Problems)
+	if v.Problems != nil {
+		serializeProblems(s, schemas.InvalidTestCaseException_Problems, v.Problems)
+	}
 }
 func (v *InvalidTestCaseException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidTestCaseException, func(s *smithy.Schema) error {
@@ -1000,7 +1008,9 @@ func (v *PropertyValidationException) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Message != nil {
 		s.WriteString(schemas.PropertyValidationException_Message, *v.Message)
 	}
-	serializePropertyValidationExceptionPropertyList(s, schemas.PropertyValidationException_PropertyList, v.PropertyList)
+	if v.PropertyList != nil {
+		serializePropertyValidationExceptionPropertyList(s, schemas.PropertyValidationException_PropertyList, v.PropertyList)
+	}
 }
 func (v *PropertyValidationException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyValidationException, func(s *smithy.Schema) error {
@@ -1262,7 +1272,9 @@ func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerialize
 	if v.Message != nil {
 		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
 	}
-	serializeServiceQuotaExceededExceptionReason(s, schemas.ServiceQuotaExceededException_Reason, v.Reason)
+	if v.Reason != nil {
+		serializeServiceQuotaExceededExceptionReason(s, schemas.ServiceQuotaExceededException_Reason, v.Reason)
+	}
 }
 func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {

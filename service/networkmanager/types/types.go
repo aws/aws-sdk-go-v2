@@ -83,6 +83,15 @@ type Attachment struct {
 	// Describes the error associated with the attachment request.
 	LastModificationErrors []AttachmentError
 
+	// The state of NAT gateway support on the attachment. This is returned only to
+	// the core network owner for attachment types that support NAT.
+	NatGatewaySupport NatGatewaySupportState
+
+	// Indicates whether the core network installs system routes for the NAT CIDR
+	// blocks of the attachment's NAT rules. This is returned only to the core network
+	// owner for attachment types that support NAT.
+	NatSystemRouteSupport *bool
+
 	// The name of the network function group.
 	NetworkFunctionGroupName *string
 
@@ -142,8 +151,18 @@ func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.Attachment_EdgeLocation, *v.EdgeLocation)
 	}
-	serializeExternalRegionCodeList(s, schemas.Attachment_EdgeLocations, v.EdgeLocations)
-	serializeAttachmentErrorList(s, schemas.Attachment_LastModificationErrors, v.LastModificationErrors)
+	if v.EdgeLocations != nil {
+		serializeExternalRegionCodeList(s, schemas.Attachment_EdgeLocations, v.EdgeLocations)
+	}
+	if v.LastModificationErrors != nil {
+		serializeAttachmentErrorList(s, schemas.Attachment_LastModificationErrors, v.LastModificationErrors)
+	}
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.Attachment_NatGatewaySupport, string(v.NatGatewaySupport))
+	}
+	if v.NatSystemRouteSupport != nil {
+		s.WriteBool(schemas.Attachment_NatSystemRouteSupport, *v.NatSystemRouteSupport)
+	}
 	if v.NetworkFunctionGroupName != nil {
 		s.WriteString(schemas.Attachment_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
 	}
@@ -169,7 +188,9 @@ func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Attachment_State, string(v.State))
 	}
-	serializeTagList(s, schemas.Attachment_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Attachment_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Attachment_UpdatedAt, *v.UpdatedAt)
 	}
@@ -206,6 +227,16 @@ func (v *Attachment) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeExternalRegionCodeList(d, schemas.Attachment_EdgeLocations, &v.EdgeLocations)
 		case schemas.Attachment_LastModificationErrors:
 			return deserializeAttachmentErrorList(d, schemas.Attachment_LastModificationErrors, &v.LastModificationErrors)
+		case schemas.Attachment_NatGatewaySupport:
+			var ev string
+			if err := d.ReadString(schemas.Attachment_NatGatewaySupport, &ev); err != nil {
+				return err
+			}
+			v.NatGatewaySupport = NatGatewaySupportState(ev)
+			return nil
+		case schemas.Attachment_NatSystemRouteSupport:
+			v.NatSystemRouteSupport = new(bool)
+			return d.ReadBool(schemas.Attachment_NatSystemRouteSupport, v.NatSystemRouteSupport)
 		case schemas.Attachment_NetworkFunctionGroupName:
 			v.NetworkFunctionGroupName = new(string)
 			return d.ReadString(schemas.Attachment_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
@@ -303,6 +334,68 @@ func (v *AttachmentError) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes the NAT configuration of a core network attachment.
+type AttachmentNatConfiguration struct {
+
+	// The ID of the attachment.
+	AttachmentId *string
+
+	// The NAT rules of the attachment.
+	NatGatewayRules []NatRule
+
+	// The state of NAT gateway support on the attachment.
+	NatGatewaySupport NatGatewaySupportState
+
+	// Indicates whether the core network installs system routes for the NAT CIDR
+	// blocks of the attachment's NAT rules.
+	NatSystemRouteSupport *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *AttachmentNatConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachmentNatConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachmentNatConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.AttachmentNatConfiguration_AttachmentId, *v.AttachmentId)
+	}
+	if v.NatGatewayRules != nil {
+		serializeNatRuleList(s, schemas.AttachmentNatConfiguration_NatGatewayRules, v.NatGatewayRules)
+	}
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.AttachmentNatConfiguration_NatGatewaySupport, string(v.NatGatewaySupport))
+	}
+	if v.NatSystemRouteSupport != nil {
+		s.WriteBool(schemas.AttachmentNatConfiguration_NatSystemRouteSupport, *v.NatSystemRouteSupport)
+	}
+}
+func (v *AttachmentNatConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachmentNatConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachmentNatConfiguration_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.AttachmentNatConfiguration_AttachmentId, v.AttachmentId)
+		case schemas.AttachmentNatConfiguration_NatGatewayRules:
+			return deserializeNatRuleList(d, schemas.AttachmentNatConfiguration_NatGatewayRules, &v.NatGatewayRules)
+		case schemas.AttachmentNatConfiguration_NatGatewaySupport:
+			var ev string
+			if err := d.ReadString(schemas.AttachmentNatConfiguration_NatGatewaySupport, &ev); err != nil {
+				return err
+			}
+			v.NatGatewaySupport = NatGatewaySupportState(ev)
+			return nil
+		case schemas.AttachmentNatConfiguration_NatSystemRouteSupport:
+			v.NatSystemRouteSupport = new(bool)
+			return d.ReadBool(schemas.AttachmentNatConfiguration_NatSystemRouteSupport, v.NatSystemRouteSupport)
+		}
+		return nil
+	})
+}
+
 // Summary information about routing policy associations for an attachment.
 type AttachmentRoutingPolicyAssociationSummary struct {
 
@@ -328,11 +421,15 @@ func (v *AttachmentRoutingPolicyAssociationSummary) Serialize(s smithy.ShapeSeri
 }
 
 func (v *AttachmentRoutingPolicyAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstrainedStringList(s, schemas.AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies, v.AssociatedRoutingPolicies)
+	if v.AssociatedRoutingPolicies != nil {
+		serializeConstrainedStringList(s, schemas.AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies, v.AssociatedRoutingPolicies)
+	}
 	if v.AttachmentId != nil {
 		s.WriteString(schemas.AttachmentRoutingPolicyAssociationSummary_AttachmentId, *v.AttachmentId)
 	}
-	serializeConstrainedStringList(s, schemas.AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies, v.PendingRoutingPolicies)
+	if v.PendingRoutingPolicies != nil {
+		serializeConstrainedStringList(s, schemas.AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies, v.PendingRoutingPolicies)
+	}
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.AttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}
@@ -631,7 +728,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Connection_State, string(v.State))
 	}
-	serializeTagList(s, schemas.Connection_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Connection_Tags, v.Tags)
+	}
 }
 func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
@@ -798,14 +897,18 @@ func (v *ConnectPeer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.ConnectPeer_EdgeLocation, *v.EdgeLocation)
 	}
-	serializeConnectPeerErrorList(s, schemas.ConnectPeer_LastModificationErrors, v.LastModificationErrors)
+	if v.LastModificationErrors != nil {
+		serializeConnectPeerErrorList(s, schemas.ConnectPeer_LastModificationErrors, v.LastModificationErrors)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.ConnectPeer_State, string(v.State))
 	}
 	if v.SubnetArn != nil {
 		s.WriteString(schemas.ConnectPeer_SubnetArn, *v.SubnetArn)
 	}
-	serializeTagList(s, schemas.ConnectPeer_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ConnectPeer_Tags, v.Tags)
+	}
 }
 func (v *ConnectPeer) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectPeer, func(s *smithy.Schema) error {
@@ -1004,11 +1107,15 @@ func (v *ConnectPeerConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectPeerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectPeerBgpConfigurationList(s, schemas.ConnectPeerConfiguration_BgpConfigurations, v.BgpConfigurations)
+	if v.BgpConfigurations != nil {
+		serializeConnectPeerBgpConfigurationList(s, schemas.ConnectPeerConfiguration_BgpConfigurations, v.BgpConfigurations)
+	}
 	if v.CoreNetworkAddress != nil {
 		s.WriteString(schemas.ConnectPeerConfiguration_CoreNetworkAddress, *v.CoreNetworkAddress)
 	}
-	serializeConstrainedStringList(s, schemas.ConnectPeerConfiguration_InsideCidrBlocks, v.InsideCidrBlocks)
+	if v.InsideCidrBlocks != nil {
+		serializeConstrainedStringList(s, schemas.ConnectPeerConfiguration_InsideCidrBlocks, v.InsideCidrBlocks)
+	}
 	if v.PeerAddress != nil {
 		s.WriteString(schemas.ConnectPeerConfiguration_PeerAddress, *v.PeerAddress)
 	}
@@ -1161,7 +1268,9 @@ func (v *ConnectPeerSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubnetArn != nil {
 		s.WriteString(schemas.ConnectPeerSummary_SubnetArn, *v.SubnetArn)
 	}
-	serializeTagList(s, schemas.ConnectPeerSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ConnectPeerSummary_Tags, v.Tags)
+	}
 }
 func (v *ConnectPeerSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectPeerSummary, func(s *smithy.Schema) error {
@@ -1253,16 +1362,24 @@ func (v *CoreNetwork) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CoreNetwork_Description, *v.Description)
 	}
-	serializeCoreNetworkEdgeList(s, schemas.CoreNetwork_Edges, v.Edges)
+	if v.Edges != nil {
+		serializeCoreNetworkEdgeList(s, schemas.CoreNetwork_Edges, v.Edges)
+	}
 	if v.GlobalNetworkId != nil {
 		s.WriteString(schemas.CoreNetwork_GlobalNetworkId, *v.GlobalNetworkId)
 	}
-	serializeCoreNetworkNetworkFunctionGroupList(s, schemas.CoreNetwork_NetworkFunctionGroups, v.NetworkFunctionGroups)
-	serializeCoreNetworkSegmentList(s, schemas.CoreNetwork_Segments, v.Segments)
+	if v.NetworkFunctionGroups != nil {
+		serializeCoreNetworkNetworkFunctionGroupList(s, schemas.CoreNetwork_NetworkFunctionGroups, v.NetworkFunctionGroups)
+	}
+	if v.Segments != nil {
+		serializeCoreNetworkSegmentList(s, schemas.CoreNetwork_Segments, v.Segments)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.CoreNetwork_State, string(v.State))
 	}
-	serializeTagList(s, schemas.CoreNetwork_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CoreNetwork_Tags, v.Tags)
+	}
 }
 func (v *CoreNetwork) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CoreNetwork, func(s *smithy.Schema) error {
@@ -1503,8 +1620,8 @@ type CoreNetworkChangeEventValues struct {
 	// The edge location of the peer in a core network change event.
 	PeerEdgeLocation *string
 
-	// The names of the routing policies and other association details in the core
-	// network change values.
+	// The names of the routing policies and other association details in a core
+	// network change event.
 	RoutingPolicyAssociationDetails []RoutingPolicyAssociationDetail
 
 	// The routing policy direction (inbound/outbound) in a core network change event.
@@ -1538,7 +1655,9 @@ func (v *CoreNetworkChangeEventValues) SerializeMembers(s smithy.ShapeSerializer
 	if v.PeerEdgeLocation != nil {
 		s.WriteString(schemas.CoreNetworkChangeEventValues_PeerEdgeLocation, *v.PeerEdgeLocation)
 	}
-	serializeRoutingPolicyAssociationDetailsList(s, schemas.CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails, v.RoutingPolicyAssociationDetails)
+	if v.RoutingPolicyAssociationDetails != nil {
+		serializeRoutingPolicyAssociationDetailsList(s, schemas.CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails, v.RoutingPolicyAssociationDetails)
+	}
 	if v.RoutingPolicyDirection != "" {
 		s.WriteString(schemas.CoreNetworkChangeEventValues_RoutingPolicyDirection, string(v.RoutingPolicyDirection))
 	}
@@ -1619,7 +1738,8 @@ type CoreNetworkChangeValues struct {
 	// network change values.
 	RoutingPolicyAssociationDetails []RoutingPolicyAssociationDetail
 
-	// The routing policy direction (inbound/outbound) in a core network change event.
+	// The routing policy direction (inbound/outbound) in the core network change
+	// values.
 	RoutingPolicyDirection RoutingPolicyDirection
 
 	// Indicates whether security group referencing is enabled for the core network.
@@ -1662,16 +1782,24 @@ func (v *CoreNetworkChangeValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DnsSupport != false {
 		s.WriteBool(schemas.CoreNetworkChangeValues_DnsSupport, v.DnsSupport)
 	}
-	serializeExternalRegionCodeList(s, schemas.CoreNetworkChangeValues_EdgeLocations, v.EdgeLocations)
-	serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_InsideCidrBlocks, v.InsideCidrBlocks)
+	if v.EdgeLocations != nil {
+		serializeExternalRegionCodeList(s, schemas.CoreNetworkChangeValues_EdgeLocations, v.EdgeLocations)
+	}
+	if v.InsideCidrBlocks != nil {
+		serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_InsideCidrBlocks, v.InsideCidrBlocks)
+	}
 	if v.NetworkFunctionGroupName != nil {
 		s.WriteString(schemas.CoreNetworkChangeValues_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
 	}
-	serializeExternalRegionCodeList(s, schemas.CoreNetworkChangeValues_PeerEdgeLocations, v.PeerEdgeLocations)
+	if v.PeerEdgeLocations != nil {
+		serializeExternalRegionCodeList(s, schemas.CoreNetworkChangeValues_PeerEdgeLocations, v.PeerEdgeLocations)
+	}
 	if v.RoutingPolicy != nil {
 		s.WriteString(schemas.CoreNetworkChangeValues_RoutingPolicy, *v.RoutingPolicy)
 	}
-	serializeRoutingPolicyAssociationDetailsList(s, schemas.CoreNetworkChangeValues_RoutingPolicyAssociationDetails, v.RoutingPolicyAssociationDetails)
+	if v.RoutingPolicyAssociationDetails != nil {
+		serializeRoutingPolicyAssociationDetailsList(s, schemas.CoreNetworkChangeValues_RoutingPolicyAssociationDetails, v.RoutingPolicyAssociationDetails)
+	}
 	if v.RoutingPolicyDirection != "" {
 		s.WriteString(schemas.CoreNetworkChangeValues_RoutingPolicyDirection, string(v.RoutingPolicyDirection))
 	}
@@ -1681,8 +1809,12 @@ func (v *CoreNetworkChangeValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SegmentName != nil {
 		s.WriteString(schemas.CoreNetworkChangeValues_SegmentName, *v.SegmentName)
 	}
-	serializeServiceInsertionActionList(s, schemas.CoreNetworkChangeValues_ServiceInsertionActions, v.ServiceInsertionActions)
-	serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_SharedSegments, v.SharedSegments)
+	if v.ServiceInsertionActions != nil {
+		serializeServiceInsertionActionList(s, schemas.CoreNetworkChangeValues_ServiceInsertionActions, v.ServiceInsertionActions)
+	}
+	if v.SharedSegments != nil {
+		serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_SharedSegments, v.SharedSegments)
+	}
 	if v.VpnEcmpSupport != false {
 		s.WriteBool(schemas.CoreNetworkChangeValues_VpnEcmpSupport, v.VpnEcmpSupport)
 	}
@@ -1769,7 +1901,9 @@ func (v *CoreNetworkEdge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.CoreNetworkEdge_EdgeLocation, *v.EdgeLocation)
 	}
-	serializeConstrainedStringList(s, schemas.CoreNetworkEdge_InsideCidrBlocks, v.InsideCidrBlocks)
+	if v.InsideCidrBlocks != nil {
+		serializeConstrainedStringList(s, schemas.CoreNetworkEdge_InsideCidrBlocks, v.InsideCidrBlocks)
+	}
 }
 func (v *CoreNetworkEdge) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CoreNetworkEdge, func(s *smithy.Schema) error {
@@ -1809,7 +1943,9 @@ func (v *CoreNetworkNetworkFunctionGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CoreNetworkNetworkFunctionGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExternalRegionCodeList(s, schemas.CoreNetworkNetworkFunctionGroup_EdgeLocations, v.EdgeLocations)
+	if v.EdgeLocations != nil {
+		serializeExternalRegionCodeList(s, schemas.CoreNetworkNetworkFunctionGroup_EdgeLocations, v.EdgeLocations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CoreNetworkNetworkFunctionGroup_Name, *v.Name)
 	}
@@ -1942,7 +2078,9 @@ func (v *CoreNetworkPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyDocument != nil {
 		s.WriteString(schemas.CoreNetworkPolicy_PolicyDocument, *v.PolicyDocument)
 	}
-	serializeCoreNetworkPolicyErrorList(s, schemas.CoreNetworkPolicy_PolicyErrors, v.PolicyErrors)
+	if v.PolicyErrors != nil {
+		serializeCoreNetworkPolicyErrorList(s, schemas.CoreNetworkPolicy_PolicyErrors, v.PolicyErrors)
+	}
 	if v.PolicyVersionId != nil {
 		s.WriteInt32(schemas.CoreNetworkPolicy_PolicyVersionId, *v.PolicyVersionId)
 	}
@@ -2156,8 +2294,12 @@ func (v *CoreNetworkRoutingInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CoreNetworkRoutingInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstrainedStringList(s, schemas.CoreNetworkRoutingInformation_AsPath, v.AsPath)
-	serializeConstrainedStringList(s, schemas.CoreNetworkRoutingInformation_Communities, v.Communities)
+	if v.AsPath != nil {
+		serializeConstrainedStringList(s, schemas.CoreNetworkRoutingInformation_AsPath, v.AsPath)
+	}
+	if v.Communities != nil {
+		serializeConstrainedStringList(s, schemas.CoreNetworkRoutingInformation_Communities, v.Communities)
+	}
 	if v.LocalPreference != nil {
 		s.WriteString(schemas.CoreNetworkRoutingInformation_LocalPreference, *v.LocalPreference)
 	}
@@ -2220,11 +2362,15 @@ func (v *CoreNetworkSegment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CoreNetworkSegment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExternalRegionCodeList(s, schemas.CoreNetworkSegment_EdgeLocations, v.EdgeLocations)
+	if v.EdgeLocations != nil {
+		serializeExternalRegionCodeList(s, schemas.CoreNetworkSegment_EdgeLocations, v.EdgeLocations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CoreNetworkSegment_Name, *v.Name)
 	}
-	serializeConstrainedStringList(s, schemas.CoreNetworkSegment_SharedSegments, v.SharedSegments)
+	if v.SharedSegments != nil {
+		serializeConstrainedStringList(s, schemas.CoreNetworkSegment_SharedSegments, v.SharedSegments)
+	}
 }
 func (v *CoreNetworkSegment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CoreNetworkSegment, func(s *smithy.Schema) error {
@@ -2342,7 +2488,9 @@ func (v *CoreNetworkSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CoreNetworkSummary_State, string(v.State))
 	}
-	serializeTagList(s, schemas.CoreNetworkSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CoreNetworkSummary_Tags, v.Tags)
+	}
 }
 func (v *CoreNetworkSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CoreNetworkSummary, func(s *smithy.Schema) error {
@@ -2539,7 +2687,9 @@ func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Device_State, string(v.State))
 	}
-	serializeTagList(s, schemas.Device_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Device_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Device_Type, *v.Type)
 	}
@@ -2661,7 +2811,9 @@ func (v *EdgeOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EdgeOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeSetList(s, schemas.EdgeOverride_EdgeSets, v.EdgeSets)
+	if v.EdgeSets != nil {
+		serializeEdgeSetList(s, schemas.EdgeOverride_EdgeSets, v.EdgeSets)
+	}
 	if v.UseEdge != nil {
 		s.WriteString(schemas.EdgeOverride_UseEdge, *v.UseEdge)
 	}
@@ -2727,7 +2879,9 @@ func (v *GlobalNetwork) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.GlobalNetwork_State, string(v.State))
 	}
-	serializeTagList(s, schemas.GlobalNetwork_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GlobalNetwork_Tags, v.Tags)
+	}
 }
 func (v *GlobalNetwork) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GlobalNetwork, func(s *smithy.Schema) error {
@@ -2833,7 +2987,9 @@ func (v *Link) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Link_State, string(v.State))
 	}
-	serializeTagList(s, schemas.Link_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Link_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Link_Type, *v.Type)
 	}
@@ -2993,6 +3149,153 @@ func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes a NAT rule of an attachment.
+type NatRule struct {
+
+	// The source CIDR block that the rule matches for traffic from the attachment.
+	MatchSourceCidr *string
+
+	// The CIDR block that matching source addresses are translated to.
+	NatCidr *string
+
+	// The rule number. Rule numbers identify the rules of an attachment and don't set
+	// the order in which rules are evaluated.
+	RuleNumber *int32
+
+	// The state of the NAT rule. The possible values are the following:
+	//
+	//   - CREATING : The rule is being created.
+	//
+	//   - MODIFYING : The rule is being modified.
+	//
+	//   - DELETING : The rule is being deleted.
+	//
+	//   - ACTIVATING : NAT gateway support is being enabled, and the rule is being
+	//   applied.
+	//
+	//   - ACTIVATED : NAT gateway support is enabled, and the rule is applied.
+	//
+	//   - DEACTIVATING : NAT gateway support is being disabled, and the rule is being
+	//   removed from use.
+	//
+	//   - DEACTIVATED : NAT gateway support is disabled, and the rule isn't applied.
+	//
+	//   - FAILED : The attachment failed to be created, and the rule isn't applied.
+	//
+	//   - PENDING_ATTACHMENT_ACCEPTANCE : The attachment is pending acceptance. The
+	//   rule is applied after the attachment is accepted.
+	State NatRuleState
+
+	noSmithyDocumentSerde
+}
+
+func (v *NatRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NatRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NatRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchSourceCidr != nil {
+		s.WriteString(schemas.NatRule_MatchSourceCidr, *v.MatchSourceCidr)
+	}
+	if v.NatCidr != nil {
+		s.WriteString(schemas.NatRule_NatCidr, *v.NatCidr)
+	}
+	if v.RuleNumber != nil {
+		s.WriteInt32(schemas.NatRule_RuleNumber, *v.RuleNumber)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.NatRule_State, string(v.State))
+	}
+}
+func (v *NatRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NatRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NatRule_MatchSourceCidr:
+			v.MatchSourceCidr = new(string)
+			return d.ReadString(schemas.NatRule_MatchSourceCidr, v.MatchSourceCidr)
+		case schemas.NatRule_NatCidr:
+			v.NatCidr = new(string)
+			return d.ReadString(schemas.NatRule_NatCidr, v.NatCidr)
+		case schemas.NatRule_RuleNumber:
+			v.RuleNumber = new(int32)
+			return d.ReadInt32(schemas.NatRule_RuleNumber, v.RuleNumber)
+		case schemas.NatRule_State:
+			var ev string
+			if err := d.ReadString(schemas.NatRule_State, &ev); err != nil {
+				return err
+			}
+			v.State = NatRuleState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Describes a NAT rule to configure on an attachment. Source addresses in the
+// source CIDR block of traffic from the attachment are translated to the same host
+// addresses in the NAT CIDR block. Traffic to an address in the NAT CIDR block is
+// translated back to the matching address in the source CIDR block.
+type NatRuleRequest struct {
+
+	// The IPv4 CIDR block to match against the source address of traffic from the
+	// attachment. The CIDR block can't overlap with the multicast range (224.0.0.0/4).
+	//
+	// This member is required.
+	MatchSourceCidr *string
+
+	// The IPv4 CIDR block to translate matching source addresses to. The prefix
+	// length must be the same as the prefix length of MatchSourceCidr . The CIDR block
+	// must be within a private (RFC 1918) or shared address space (RFC 6598) range.
+	// The CIDR blocks of the NAT rules of an attachment can't overlap with each other.
+	//
+	// This member is required.
+	NatCidr *string
+
+	// The rule number, from 1 to 32766. Each rule number must be unique for the
+	// attachment.
+	//
+	// This member is required.
+	RuleNumber *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *NatRuleRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NatRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NatRuleRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchSourceCidr != nil {
+		s.WriteString(schemas.NatRuleRequest_MatchSourceCidr, *v.MatchSourceCidr)
+	}
+	if v.NatCidr != nil {
+		s.WriteString(schemas.NatRuleRequest_NatCidr, *v.NatCidr)
+	}
+	if v.RuleNumber != nil {
+		s.WriteInt32(schemas.NatRuleRequest_RuleNumber, *v.RuleNumber)
+	}
+}
+func (v *NatRuleRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NatRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NatRuleRequest_MatchSourceCidr:
+			v.MatchSourceCidr = new(string)
+			return d.ReadString(schemas.NatRuleRequest_MatchSourceCidr, v.MatchSourceCidr)
+		case schemas.NatRuleRequest_NatCidr:
+			v.NatCidr = new(string)
+			return d.ReadString(schemas.NatRuleRequest_NatCidr, v.NatCidr)
+		case schemas.NatRuleRequest_RuleNumber:
+			v.RuleNumber = new(int32)
+			return d.ReadInt32(schemas.NatRuleRequest_RuleNumber, v.RuleNumber)
+		}
+		return nil
+	})
+}
+
 // Describes a network function group for service insertion.
 type NetworkFunctionGroup struct {
 
@@ -3126,7 +3429,9 @@ func (v *NetworkResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefinitionTimestamp != nil {
 		s.WriteTime(schemas.NetworkResource_DefinitionTimestamp, *v.DefinitionTimestamp)
 	}
-	serializeNetworkResourceMetadataMap(s, schemas.NetworkResource_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeNetworkResourceMetadataMap(s, schemas.NetworkResource_Metadata, v.Metadata)
+	}
 	if v.RegisteredGatewayArn != nil {
 		s.WriteString(schemas.NetworkResource_RegisteredGatewayArn, *v.RegisteredGatewayArn)
 	}
@@ -3139,7 +3444,9 @@ func (v *NetworkResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != nil {
 		s.WriteString(schemas.NetworkResource_ResourceType, *v.ResourceType)
 	}
-	serializeTagList(s, schemas.NetworkResource_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.NetworkResource_Tags, v.Tags)
+	}
 }
 func (v *NetworkResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkResource, func(s *smithy.Schema) error {
@@ -3311,7 +3618,9 @@ type NetworkRoute struct {
 	// The route state. The possible values are active and blackhole .
 	State RouteState
 
-	// The route type. The possible values are propagated and static .
+	// The route type. The possible values are PROPAGATED , STATIC , and SYSTEM . A
+	// SYSTEM route is installed by the core network for the NAT CIDR block of an
+	// attachment's NAT rule.
 	Type RouteType
 
 	noSmithyDocumentSerde
@@ -3327,7 +3636,9 @@ func (v *NetworkRoute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DestinationCidrBlock != nil {
 		s.WriteString(schemas.NetworkRoute_DestinationCidrBlock, *v.DestinationCidrBlock)
 	}
-	serializeNetworkRouteDestinationList(s, schemas.NetworkRoute_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeNetworkRouteDestinationList(s, schemas.NetworkRoute_Destinations, v.Destinations)
+	}
 	if v.PrefixListId != nil {
 		s.WriteString(schemas.NetworkRoute_PrefixListId, *v.PrefixListId)
 	}
@@ -3587,7 +3898,9 @@ func (v *OrganizationStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrganizationStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountStatusList(s, schemas.OrganizationStatus_AccountStatusList, v.AccountStatusList)
+	if v.AccountStatusList != nil {
+		serializeAccountStatusList(s, schemas.OrganizationStatus_AccountStatusList, v.AccountStatusList)
+	}
 	if v.OrganizationAwsServiceAccessStatus != nil {
 		s.WriteString(schemas.OrganizationStatus_OrganizationAwsServiceAccessStatus, *v.OrganizationAwsServiceAccessStatus)
 	}
@@ -3683,7 +3996,7 @@ type Peering struct {
 	// The edge location for the peer.
 	EdgeLocation *string
 
-	// Describes the error associated with the Connect peer request.
+	// Describes the error associated with the peering request.
 	LastModificationErrors []PeeringError
 
 	// The ID of the account owner.
@@ -3726,7 +4039,9 @@ func (v *Peering) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.Peering_EdgeLocation, *v.EdgeLocation)
 	}
-	serializePeeringErrorList(s, schemas.Peering_LastModificationErrors, v.LastModificationErrors)
+	if v.LastModificationErrors != nil {
+		serializePeeringErrorList(s, schemas.Peering_LastModificationErrors, v.LastModificationErrors)
+	}
 	if v.OwnerAccountId != nil {
 		s.WriteString(schemas.Peering_OwnerAccountId, *v.OwnerAccountId)
 	}
@@ -3742,7 +4057,9 @@ func (v *Peering) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Peering_State, string(v.State))
 	}
-	serializeTagList(s, schemas.Peering_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Peering_Tags, v.Tags)
+	}
 }
 func (v *Peering) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Peering, func(s *smithy.Schema) error {
@@ -3898,7 +4215,7 @@ func (v *PermissionsErrorContext) Deserialize(d smithy.ShapeDeserializer) error 
 // Information about a prefix list association with a core network.
 type PrefixListAssociation struct {
 
-	// The core network id in the association.
+	// The ID of the core network in the association.
 	CoreNetworkId *string
 
 	// The alias of the prefix list in the association.
@@ -3973,7 +4290,9 @@ func (v *ProposedNetworkFunctionGroupChange) SerializeMembers(s smithy.ShapeSeri
 	if v.NetworkFunctionGroupName != nil {
 		s.WriteString(schemas.ProposedNetworkFunctionGroupChange_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
 	}
-	serializeTagList(s, schemas.ProposedNetworkFunctionGroupChange_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ProposedNetworkFunctionGroupChange_Tags, v.Tags)
+	}
 }
 func (v *ProposedNetworkFunctionGroupChange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProposedNetworkFunctionGroupChange, func(s *smithy.Schema) error {
@@ -4020,7 +4339,9 @@ func (v *ProposedSegmentChange) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SegmentName != nil {
 		s.WriteString(schemas.ProposedSegmentChange_SegmentName, *v.SegmentName)
 	}
-	serializeTagList(s, schemas.ProposedSegmentChange_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ProposedSegmentChange_Tags, v.Tags)
+	}
 }
 func (v *ProposedSegmentChange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProposedSegmentChange, func(s *smithy.Schema) error {
@@ -4263,7 +4584,9 @@ func (v *RouteAnalysisCompletion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReasonCode != "" {
 		s.WriteString(schemas.RouteAnalysisCompletion_ReasonCode, string(v.ReasonCode))
 	}
-	serializeReasonContextMap(s, schemas.RouteAnalysisCompletion_ReasonContext, v.ReasonContext)
+	if v.ReasonContext != nil {
+		serializeReasonContextMap(s, schemas.RouteAnalysisCompletion_ReasonContext, v.ReasonContext)
+	}
 	if v.ResultCode != "" {
 		s.WriteString(schemas.RouteAnalysisCompletion_ResultCode, string(v.ResultCode))
 	}
@@ -4405,7 +4728,9 @@ func (v *RouteAnalysisPath) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CompletionStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePathComponentList(s, schemas.RouteAnalysisPath_Path, v.Path)
+	if v.Path != nil {
+		serializePathComponentList(s, schemas.RouteAnalysisPath_Path, v.Path)
+	}
 }
 func (v *RouteAnalysisPath) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteAnalysisPath, func(s *smithy.Schema) error {
@@ -4571,8 +4896,12 @@ func (v *RoutingPolicyAssociationDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutingPolicyAssociationDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstrainedStringList(s, schemas.RoutingPolicyAssociationDetail_RoutingPolicyNames, v.RoutingPolicyNames)
-	serializeConstrainedStringList(s, schemas.RoutingPolicyAssociationDetail_SharedSegments, v.SharedSegments)
+	if v.RoutingPolicyNames != nil {
+		serializeConstrainedStringList(s, schemas.RoutingPolicyAssociationDetail_RoutingPolicyNames, v.RoutingPolicyNames)
+	}
+	if v.SharedSegments != nil {
+		serializeConstrainedStringList(s, schemas.RoutingPolicyAssociationDetail_SharedSegments, v.SharedSegments)
+	}
 }
 func (v *RoutingPolicyAssociationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoutingPolicyAssociationDetail, func(s *smithy.Schema) error {
@@ -4686,8 +5015,12 @@ func (v *ServiceInsertionSegments) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceInsertionSegments) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstrainedStringList(s, schemas.ServiceInsertionSegments_SendTo, v.SendTo)
-	serializeConstrainedStringList(s, schemas.ServiceInsertionSegments_SendVia, v.SendVia)
+	if v.SendTo != nil {
+		serializeConstrainedStringList(s, schemas.ServiceInsertionSegments_SendTo, v.SendTo)
+	}
+	if v.SendVia != nil {
+		serializeConstrainedStringList(s, schemas.ServiceInsertionSegments_SendVia, v.SendVia)
+	}
 }
 func (v *ServiceInsertionSegments) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceInsertionSegments, func(s *smithy.Schema) error {
@@ -4761,7 +5094,9 @@ func (v *Site) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Site_State, string(v.State))
 	}
-	serializeTagList(s, schemas.Site_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Site_Tags, v.Tags)
+	}
 }
 func (v *Site) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Site, func(s *smithy.Schema) error {
@@ -5221,8 +5556,12 @@ func (v *Via) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Via) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkFunctionGroupList(s, schemas.Via_NetworkFunctionGroups, v.NetworkFunctionGroups)
-	serializeWithEdgeOverridesList(s, schemas.Via_WithEdgeOverrides, v.WithEdgeOverrides)
+	if v.NetworkFunctionGroups != nil {
+		serializeNetworkFunctionGroupList(s, schemas.Via_NetworkFunctionGroups, v.NetworkFunctionGroups)
+	}
+	if v.WithEdgeOverrides != nil {
+		serializeWithEdgeOverridesList(s, schemas.Via_WithEdgeOverrides, v.WithEdgeOverrides)
+	}
 }
 func (v *Via) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Via, func(s *smithy.Schema) error {
@@ -5268,7 +5607,9 @@ func (v *VpcAttachment) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Options.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSubnetArnList(s, schemas.VpcAttachment_SubnetArns, v.SubnetArns)
+	if v.SubnetArns != nil {
+		serializeSubnetArnList(s, schemas.VpcAttachment_SubnetArns, v.SubnetArns)
+	}
 }
 func (v *VpcAttachment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcAttachment, func(s *smithy.Schema) error {
@@ -5365,7 +5706,9 @@ func (v *WhenSentTo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WhenSentTo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWhenSentToSegmentsList(s, schemas.WhenSentTo_WhenSentToSegmentsList, v.WhenSentToSegmentsList)
+	if v.WhenSentToSegmentsList != nil {
+		serializeWhenSentToSegmentsList(s, schemas.WhenSentTo_WhenSentToSegmentsList, v.WhenSentToSegmentsList)
+	}
 }
 func (v *WhenSentTo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WhenSentTo, func(s *smithy.Schema) error {

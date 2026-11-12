@@ -181,7 +181,9 @@ func (v *BatchGetItemInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetRequestMap(s, schemas.BatchGetItemInput_RequestItems, v.RequestItems)
+	if v.RequestItems != nil {
+		serializeBatchGetRequestMap(s, schemas.BatchGetItemInput_RequestItems, v.RequestItems)
+	}
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.BatchGetItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
@@ -250,9 +252,15 @@ func (v *BatchGetItemOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsumedCapacityMultiple(s, schemas.BatchGetItemOutput_ConsumedCapacity, v.ConsumedCapacity)
-	serializeBatchGetResponseMap(s, schemas.BatchGetItemOutput_Responses, v.Responses)
-	serializeBatchGetRequestMap(s, schemas.BatchGetItemOutput_UnprocessedKeys, v.UnprocessedKeys)
+	if v.ConsumedCapacity != nil {
+		serializeConsumedCapacityMultiple(s, schemas.BatchGetItemOutput_ConsumedCapacity, v.ConsumedCapacity)
+	}
+	if v.Responses != nil {
+		serializeBatchGetResponseMap(s, schemas.BatchGetItemOutput_Responses, v.Responses)
+	}
+	if v.UnprocessedKeys != nil {
+		serializeBatchGetRequestMap(s, schemas.BatchGetItemOutput_UnprocessedKeys, v.UnprocessedKeys)
+	}
 }
 func (v *BatchGetItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetItemOutput, func(s *smithy.Schema) error {

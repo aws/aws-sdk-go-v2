@@ -118,13 +118,17 @@ func (v *DescribeReplicatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsReplicatorReference != nil {
 		s.WriteBool(schemas.DescribeReplicatorResponse_IsReplicatorReference, *v.IsReplicatorReference)
 	}
-	serialize__listOfKafkaClusterDescription(s, schemas.DescribeReplicatorResponse_KafkaClusters, v.KafkaClusters)
+	if v.KafkaClusters != nil {
+		serialize__listOfKafkaClusterDescription(s, schemas.DescribeReplicatorResponse_KafkaClusters, v.KafkaClusters)
+	}
 	if v.LogDelivery != nil {
 		s.WriteStruct(schemas.DescribeReplicatorResponse_LogDelivery)
 		v.LogDelivery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfReplicationInfoDescription(s, schemas.DescribeReplicatorResponse_ReplicationInfoList, v.ReplicationInfoList)
+	if v.ReplicationInfoList != nil {
+		serialize__listOfReplicationInfoDescription(s, schemas.DescribeReplicatorResponse_ReplicationInfoList, v.ReplicationInfoList)
+	}
 	if v.ReplicatorArn != nil {
 		s.WriteString(schemas.DescribeReplicatorResponse_ReplicatorArn, *v.ReplicatorArn)
 	}
@@ -148,7 +152,9 @@ func (v *DescribeReplicatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StateInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.DescribeReplicatorResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeReplicatorResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeReplicatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicatorResponse, func(s *smithy.Schema) error {

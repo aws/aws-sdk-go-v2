@@ -88,7 +88,9 @@ func (v *DescribeApplicationFleetAssociationsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *DescribeApplicationFleetAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationFleetAssociationList(s, schemas.DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations, v.ApplicationFleetAssociations)
+	if v.ApplicationFleetAssociations != nil {
+		serializeApplicationFleetAssociationList(s, schemas.DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations, v.ApplicationFleetAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeApplicationFleetAssociationsResult_NextToken, *v.NextToken)
 	}

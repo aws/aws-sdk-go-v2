@@ -28,7 +28,6 @@ func (c *Client) ListQueueLimitAssociations(ctx context.Context, params *ListQue
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueueLimitAssociationsInput struct {
 
 	// The unique identifier of the farm that contains the limits and associations.
@@ -79,7 +78,6 @@ func (v *ListQueueLimitAssociationsInput) SerializeMembers(s smithy.ShapeSeriali
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListQueueLimitAssociationsOutput struct {
 
 	// A list of associations between limits and queues in the farm specified in the
@@ -112,7 +110,9 @@ func (v *ListQueueLimitAssociationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueueLimitAssociationsResponse_nextToken, *v.NextToken)
 	}
-	serializeQueueLimitAssociationSummaries(s, schemas.ListQueueLimitAssociationsResponse_queueLimitAssociations, v.QueueLimitAssociations)
+	if v.QueueLimitAssociations != nil {
+		serializeQueueLimitAssociationSummaries(s, schemas.ListQueueLimitAssociationsResponse_queueLimitAssociations, v.QueueLimitAssociations)
+	}
 }
 func (v *ListQueueLimitAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueueLimitAssociationsResponse, func(s *smithy.Schema) error {

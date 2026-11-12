@@ -4,6 +4,8 @@ package wafregional
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type DeleteRegexMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegexMatchSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegexMatchSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegexMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteRegexMatchSetRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.RegexMatchSetId != nil {
+		s.WriteString(schemas.DeleteRegexMatchSetRequest_RegexMatchSetId, *v.RegexMatchSetId)
+	}
+}
+
 type DeleteRegexMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRegexMatchSet request. You
@@ -75,13 +92,32 @@ type DeleteRegexMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegexMatchSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegexMatchSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegexMatchSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteRegexMatchSetResponse_ChangeToken, *v.ChangeToken)
+	}
+}
+func (v *DeleteRegexMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegexMatchSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegexMatchSetResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.DeleteRegexMatchSetResponse_ChangeToken, v.ChangeToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRegexMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegexMatchSet, schemas.DeleteRegexMatchSetRequest, schemas.DeleteRegexMatchSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRegexMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegexMatchSet, schemas.DeleteRegexMatchSetRequest, schemas.DeleteRegexMatchSetResponse), output: &DeleteRegexMatchSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

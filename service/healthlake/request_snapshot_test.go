@@ -1096,39 +1096,6 @@ func TestCheckRequestSnapshot_UpdateFHIRDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-
-func TestCheckRequestSnapshot_UpdateProfileWithAgent(t *testing.T) {
-	input := &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProfileWithAgent(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProfileWithAgent"); err != nil {
-		t.Fatal(err)
-	}
-}
 func TestUpdateRequestSnapshot_CreateDataTransformationProfile(t *testing.T) {
 	input := &CreateDataTransformationProfileInput{
 		SourceFormat: types.SourceFormat("CCDA"),
@@ -2016,39 +1983,6 @@ func TestUpdateRequestSnapshot_UpdateFHIRDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateFHIRDatastore"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_UpdateProfileWithAgent(t *testing.T) {
-	input := &UpdateProfileWithAgentInput{
-		ProfileId:    ptr.String("__ProfileId__"),
-		SourceFormat: types.SourceFormat("CCDA"),
-		InputMessage: &types.AgentInputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentInputMessageType("normal"),
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProfileWithAgent(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProfileWithAgent"); err != nil {
 		t.Fatal(err)
 	}
 }

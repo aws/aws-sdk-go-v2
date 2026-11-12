@@ -77,7 +77,9 @@ func (v *ListTestGridProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTestGridProjectsResult_nextToken, *v.NextToken)
 	}
-	serializeTestGridProjects(s, schemas.ListTestGridProjectsResult_testGridProjects, v.TestGridProjects)
+	if v.TestGridProjects != nil {
+		serializeTestGridProjects(s, schemas.ListTestGridProjectsResult_testGridProjects, v.TestGridProjects)
+	}
 }
 func (v *ListTestGridProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTestGridProjectsResult, func(s *smithy.Schema) error {

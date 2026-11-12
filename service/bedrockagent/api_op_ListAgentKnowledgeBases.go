@@ -102,7 +102,9 @@ func (v *ListAgentKnowledgeBasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentKnowledgeBasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentKnowledgeBaseSummaries(s, schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries, v.AgentKnowledgeBaseSummaries)
+	if v.AgentKnowledgeBaseSummaries != nil {
+		serializeAgentKnowledgeBaseSummaries(s, schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries, v.AgentKnowledgeBaseSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentKnowledgeBasesResponse_nextToken, *v.NextToken)
 	}

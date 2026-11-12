@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListOpenIDConnectProvidersResponse><ListOpenIDConnectProvidersResult><OpenIDConnectProviderList><member><Arn>__Arn__</Arn></member><member><Arn>__Arn__</Arn></member></OpenIDConnectProviderList></ListOpenIDConnectProvidersResult></ListOpenIDConnectProvidersResponse>

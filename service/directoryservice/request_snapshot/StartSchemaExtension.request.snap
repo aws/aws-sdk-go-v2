@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/StartSchemaExtension
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.StartSchemaExtension
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CreateSnapshotBeforeSchemaExtension":true,"Description":"__Description__","DirectoryId":"__DirectoryId__","LdifContent":"__LdifContent__"}
+¿x#CreateSnapshotBeforeSchemaExtensionõkDescriptiono__Description__kDirectoryIdo__DirectoryId__kLdifContento__LdifContent__ÿ

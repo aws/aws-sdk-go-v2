@@ -50,7 +50,9 @@ func (v *DescribeLaunchConfigurationTemplatesInput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeLaunchConfigurationTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLaunchConfigurationTemplateIDs(s, schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs, v.LaunchConfigurationTemplateIDs)
+	if v.LaunchConfigurationTemplateIDs != nil {
+		serializeLaunchConfigurationTemplateIDs(s, schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs, v.LaunchConfigurationTemplateIDs)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeLaunchConfigurationTemplatesRequest_maxResults, *v.MaxResults)
 	}
@@ -95,7 +97,9 @@ func (v *DescribeLaunchConfigurationTemplatesOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *DescribeLaunchConfigurationTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLaunchConfigurationTemplates(s, schemas.DescribeLaunchConfigurationTemplatesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeLaunchConfigurationTemplates(s, schemas.DescribeLaunchConfigurationTemplatesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeLaunchConfigurationTemplatesResponse_nextToken, *v.NextToken)
 	}

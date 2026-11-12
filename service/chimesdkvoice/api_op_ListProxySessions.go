@@ -98,7 +98,9 @@ func (v *ListProxySessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProxySessionsResponse_NextToken, *v.NextToken)
 	}
-	serializeProxySessions(s, schemas.ListProxySessionsResponse_ProxySessions, v.ProxySessions)
+	if v.ProxySessions != nil {
+		serializeProxySessions(s, schemas.ListProxySessionsResponse_ProxySessions, v.ProxySessions)
+	}
 }
 func (v *ListProxySessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProxySessionsResponse, func(s *smithy.Schema) error {

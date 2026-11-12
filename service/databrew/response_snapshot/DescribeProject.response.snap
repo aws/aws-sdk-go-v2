@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreateDate":946684800,"CreatedBy":"__CreatedBy__","DatasetName":"__DatasetName__","LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"Name":"__Name__","OpenDate":946684800,"OpenedBy":"__OpenedBy__","RecipeName":"__RecipeName__","ResourceArn":"__ResourceArn__","RoleArn":"__RoleArn__","Sample":{"Size":1,"Type":"FIRST_N"},"SessionStatus":"ASSIGNED","Tags":{"key0":"__Value__"}}

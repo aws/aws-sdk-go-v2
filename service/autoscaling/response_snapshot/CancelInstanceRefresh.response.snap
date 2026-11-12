@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CancelInstanceRefreshResponse><CancelInstanceRefreshResult><InstanceRefreshId>__InstanceRefreshId__</InstanceRefreshId></CancelInstanceRefreshResult></CancelInstanceRefreshResponse>

@@ -122,7 +122,9 @@ func (v *AddApplicationOutputOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ApplicationVersionId != nil {
 		s.WriteInt64(schemas.AddApplicationOutputResponse_ApplicationVersionId, *v.ApplicationVersionId)
 	}
-	serializeOutputDescriptions(s, schemas.AddApplicationOutputResponse_OutputDescriptions, v.OutputDescriptions)
+	if v.OutputDescriptions != nil {
+		serializeOutputDescriptions(s, schemas.AddApplicationOutputResponse_OutputDescriptions, v.OutputDescriptions)
+	}
 }
 func (v *AddApplicationOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddApplicationOutputResponse, func(s *smithy.Schema) error {

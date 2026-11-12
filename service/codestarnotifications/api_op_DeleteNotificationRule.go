@@ -4,6 +4,8 @@ package codestarnotifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteNotificationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotificationRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotificationRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotificationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteNotificationRuleRequest_Arn, *v.Arn)
+	}
+}
+
 type DeleteNotificationRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted notification rule.
@@ -44,13 +58,32 @@ type DeleteNotificationRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotificationRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotificationRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotificationRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteNotificationRuleResult_Arn, *v.Arn)
+	}
+}
+func (v *DeleteNotificationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNotificationRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNotificationRuleResult_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteNotificationRuleResult_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotificationRule, schemas.DeleteNotificationRuleRequest, schemas.DeleteNotificationRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotificationRule, schemas.DeleteNotificationRuleRequest, schemas.DeleteNotificationRuleResult), output: &DeleteNotificationRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

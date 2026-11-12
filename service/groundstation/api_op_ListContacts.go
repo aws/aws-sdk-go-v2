@@ -81,7 +81,9 @@ func (v *ListContactsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListContactsRequest_endTime, *v.EndTime)
 	}
-	serializeEphemerisFilter(s, schemas.ListContactsRequest_ephemeris, v.Ephemeris)
+	if v.Ephemeris != nil {
+		serializeEphemerisFilter(s, schemas.ListContactsRequest_ephemeris, v.Ephemeris)
+	}
 	if v.GroundStation != nil {
 		s.WriteString(schemas.ListContactsRequest_groundStation, *v.GroundStation)
 	}
@@ -100,7 +102,9 @@ func (v *ListContactsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ListContactsRequest_startTime, *v.StartTime)
 	}
-	serializeStatusList(s, schemas.ListContactsRequest_statusList, v.StatusList)
+	if v.StatusList != nil {
+		serializeStatusList(s, schemas.ListContactsRequest_statusList, v.StatusList)
+	}
 }
 
 // Output for the ListContacts operation.
@@ -126,7 +130,9 @@ func (v *ListContactsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactList(s, schemas.ListContactsResponse_contactList, v.ContactList)
+	if v.ContactList != nil {
+		serializeContactList(s, schemas.ListContactsResponse_contactList, v.ContactList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactsResponse_nextToken, *v.NextToken)
 	}

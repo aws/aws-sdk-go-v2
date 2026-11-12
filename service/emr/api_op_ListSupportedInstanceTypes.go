@@ -88,7 +88,9 @@ func (v *ListSupportedInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Marker != nil {
 		s.WriteString(schemas.ListSupportedInstanceTypesOutput_Marker, *v.Marker)
 	}
-	serializeSupportedInstanceTypesList(s, schemas.ListSupportedInstanceTypesOutput_SupportedInstanceTypes, v.SupportedInstanceTypes)
+	if v.SupportedInstanceTypes != nil {
+		serializeSupportedInstanceTypesList(s, schemas.ListSupportedInstanceTypesOutput_SupportedInstanceTypes, v.SupportedInstanceTypes)
+	}
 }
 func (v *ListSupportedInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSupportedInstanceTypesOutput, func(s *smithy.Schema) error {

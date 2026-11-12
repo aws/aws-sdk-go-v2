@@ -1,6 +1,7 @@
-POST /
+POST /service/ResourceGroupsTaggingAPI_20170126/operation/UntagResources
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.UntagResources
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceARNList":["__Member__","__Member__"],"TagKeys":["__Member__","__Member__"]}
+¿oResourceARNListŸj__Member__j__Member__ÿgTagKeysŸj__Member__j__Member__ÿÿ

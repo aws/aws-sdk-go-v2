@@ -389,6 +389,15 @@ func TestCheckRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
 					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
+				GermanyAdditionalInfo: &types.GermanyAdditionalInfo{
+					EconomicIdentificationNumber: ptr.String("__EconomicIdentificationNumber__"),
+					Steuernummer:                 ptr.String("__Steuernummer__"),
+				},
+				MexicoAdditionalInfo: &types.MexicoAdditionalInfo{
+					TaxRegime:         ptr.String("__TaxRegime__"),
+					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
+					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+				},
 			},
 			VerificationDetails: &types.VerificationDetails{
 				DateOfBirth: ptr.String("__DateOfBirth__"),
@@ -918,6 +927,15 @@ func TestCheckRequestSnapshot_PutTaxRegistration(t *testing.T) {
 				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
 					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
+				GermanyAdditionalInfo: &types.GermanyAdditionalInfo{
+					EconomicIdentificationNumber: ptr.String("__EconomicIdentificationNumber__"),
+					Steuernummer:                 ptr.String("__Steuernummer__"),
+				},
+				MexicoAdditionalInfo: &types.MexicoAdditionalInfo{
+					TaxRegime:         ptr.String("__TaxRegime__"),
+					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
+					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+				},
 			},
 			VerificationDetails: &types.VerificationDetails{
 				DateOfBirth: ptr.String("__DateOfBirth__"),
@@ -1152,6 +1170,15 @@ func TestUpdateRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 				},
 				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
 					BusinessNumber: ptr.String("__BusinessNumber__"),
+				},
+				GermanyAdditionalInfo: &types.GermanyAdditionalInfo{
+					EconomicIdentificationNumber: ptr.String("__EconomicIdentificationNumber__"),
+					Steuernummer:                 ptr.String("__Steuernummer__"),
+				},
+				MexicoAdditionalInfo: &types.MexicoAdditionalInfo{
+					TaxRegime:         ptr.String("__TaxRegime__"),
+					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
+					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -1681,6 +1708,15 @@ func TestUpdateRequestSnapshot_PutTaxRegistration(t *testing.T) {
 				},
 				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
 					BusinessNumber: ptr.String("__BusinessNumber__"),
+				},
+				GermanyAdditionalInfo: &types.GermanyAdditionalInfo{
+					EconomicIdentificationNumber: ptr.String("__EconomicIdentificationNumber__"),
+					Steuernummer:                 ptr.String("__Steuernummer__"),
+				},
+				MexicoAdditionalInfo: &types.MexicoAdditionalInfo{
+					TaxRegime:         ptr.String("__TaxRegime__"),
+					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
+					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{

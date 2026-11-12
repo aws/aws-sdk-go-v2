@@ -59,8 +59,12 @@ func (v *UpdateTopicPermissionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateTopicPermissionsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 	if v.TopicId != nil {
 		s.WriteString(schemas.UpdateTopicPermissionsRequest_TopicId, *v.TopicId)
 	}
@@ -97,7 +101,9 @@ func (v *UpdateTopicPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTopicPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourcePermissionList(s, schemas.UpdateTopicPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateTopicPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateTopicPermissionsResponse_RequestId, *v.RequestId)
 	}

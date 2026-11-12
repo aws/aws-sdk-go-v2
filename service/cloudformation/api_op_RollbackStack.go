@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,32 @@ type RollbackStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackStackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RollbackStackInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.RollbackStackInput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetainExceptOnCreate != nil {
+		s.WriteBool(schemas.RollbackStackInput_RetainExceptOnCreate, *v.RetainExceptOnCreate)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.RollbackStackInput_RoleARN, *v.RoleARN)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.RollbackStackInput_StackName, *v.StackName)
+	}
+}
+
 type RollbackStackOutput struct {
 
 	// A unique identifier for this rollback operation that can be used to track the
@@ -86,13 +114,38 @@ type RollbackStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackStackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.RollbackStackOutput_OperationId, *v.OperationId)
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.RollbackStackOutput_StackId, *v.StackId)
+	}
+}
+func (v *RollbackStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackStackOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackStackOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.RollbackStackOutput_OperationId, v.OperationId)
+		case schemas.RollbackStackOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.RollbackStackOutput_StackId, v.StackId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRollbackStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRollbackStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackStack, schemas.RollbackStackInput, schemas.RollbackStackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRollbackStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackStack, schemas.RollbackStackInput, schemas.RollbackStackOutput), output: &RollbackStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

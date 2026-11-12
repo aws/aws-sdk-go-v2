@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/CreateLocationEfs
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CreateLocationEfs
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccessPointArn":"__AccessPointArn__","Ec2Config":{"SecurityGroupArns":["__Member__","__Member__"],"SubnetArn":"__SubnetArn__"},"EfsFilesystemArn":"__EfsFilesystemArn__","FileSystemAccessRoleArn":"__FileSystemAccessRoleArn__","InTransitEncryption":"NONE","Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿nAccessPointArnr__AccessPointArn__iEc2Config¿qSecurityGroupArnsŸj__Member__j__Member__ÿiSubnetArnm__SubnetArn__ÿpEfsFilesystemArnt__EfsFilesystemArn__wFileSystemAccessRoleArnx__FileSystemAccessRoleArn__sInTransitEncryptiondNONElSubdirectoryp__Subdirectory__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

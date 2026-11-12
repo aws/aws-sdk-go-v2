@@ -83,8 +83,12 @@ func (v *GetIdentityPoolRolesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.GetIdentityPoolRolesResponse_IdentityPoolId, *v.IdentityPoolId)
 	}
-	serializeRoleMappingMap(s, schemas.GetIdentityPoolRolesResponse_RoleMappings, v.RoleMappings)
-	serializeRolesMap(s, schemas.GetIdentityPoolRolesResponse_Roles, v.Roles)
+	if v.RoleMappings != nil {
+		serializeRoleMappingMap(s, schemas.GetIdentityPoolRolesResponse_RoleMappings, v.RoleMappings)
+	}
+	if v.Roles != nil {
+		serializeRolesMap(s, schemas.GetIdentityPoolRolesResponse_Roles, v.Roles)
+	}
 }
 func (v *GetIdentityPoolRolesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetIdentityPoolRolesResponse, func(s *smithy.Schema) error {

@@ -115,7 +115,9 @@ func (v *GetResourceShareAssociationsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.GetResourceShareAssociationsRequest_resourceArn, *v.ResourceArn)
 	}
-	serializeResourceShareArnList(s, schemas.GetResourceShareAssociationsRequest_resourceShareArns, v.ResourceShareArns)
+	if v.ResourceShareArns != nil {
+		serializeResourceShareArnList(s, schemas.GetResourceShareAssociationsRequest_resourceShareArns, v.ResourceShareArns)
+	}
 }
 
 type GetResourceShareAssociationsOutput struct {
@@ -146,7 +148,9 @@ func (v *GetResourceShareAssociationsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceShareAssociationsResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceShareAssociationList(s, schemas.GetResourceShareAssociationsResponse_resourceShareAssociations, v.ResourceShareAssociations)
+	if v.ResourceShareAssociations != nil {
+		serializeResourceShareAssociationList(s, schemas.GetResourceShareAssociationsResponse_resourceShareAssociations, v.ResourceShareAssociations)
+	}
 }
 func (v *GetResourceShareAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourceShareAssociationsResponse, func(s *smithy.Schema) error {

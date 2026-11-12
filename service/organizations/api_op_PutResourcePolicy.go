@@ -65,7 +65,9 @@ func (v *PutResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Content != nil {
 		s.WriteString(schemas.PutResourcePolicyRequest_Content, *v.Content)
 	}
-	serializeTags(s, schemas.PutResourcePolicyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PutResourcePolicyRequest_Tags, v.Tags)
+	}
 }
 
 type PutResourcePolicyOutput struct {

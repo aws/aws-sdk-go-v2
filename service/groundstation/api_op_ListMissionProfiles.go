@@ -78,7 +78,9 @@ func (v *ListMissionProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMissionProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMissionProfileList(s, schemas.ListMissionProfilesResponse_missionProfileList, v.MissionProfileList)
+	if v.MissionProfileList != nil {
+		serializeMissionProfileList(s, schemas.ListMissionProfilesResponse_missionProfileList, v.MissionProfileList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMissionProfilesResponse_nextToken, *v.NextToken)
 	}

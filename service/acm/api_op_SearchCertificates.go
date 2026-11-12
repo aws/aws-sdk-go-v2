@@ -64,7 +64,9 @@ func (v *SearchCertificatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateFilterStatement(s, schemas.SearchCertificatesRequest_FilterStatement, v.FilterStatement)
+	if v.FilterStatement != nil {
+		serializeCertificateFilterStatement(s, schemas.SearchCertificatesRequest_FilterStatement, v.FilterStatement)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchCertificatesRequest_MaxResults, *v.MaxResults)
 	}
@@ -109,7 +111,9 @@ func (v *SearchCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchCertificatesResponse_NextToken, *v.NextToken)
 	}
-	serializeCertificateSearchResultList(s, schemas.SearchCertificatesResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeCertificateSearchResultList(s, schemas.SearchCertificatesResponse_Results, v.Results)
+	}
 }
 func (v *SearchCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchCertificatesResponse, func(s *smithy.Schema) error {

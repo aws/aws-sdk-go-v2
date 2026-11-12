@@ -63,8 +63,12 @@ func (v *AssociateRoutingProfileQueuesInput) SerializeMembers(s smithy.ShapeSeri
 	if v.InstanceId != nil {
 		s.WriteString(schemas.AssociateRoutingProfileQueuesRequest_InstanceId, *v.InstanceId)
 	}
-	serializeRoutingProfileManualAssignmentQueueConfigList(s, schemas.AssociateRoutingProfileQueuesRequest_ManualAssignmentQueueConfigs, v.ManualAssignmentQueueConfigs)
-	serializeRoutingProfileQueueConfigList(s, schemas.AssociateRoutingProfileQueuesRequest_QueueConfigs, v.QueueConfigs)
+	if v.ManualAssignmentQueueConfigs != nil {
+		serializeRoutingProfileManualAssignmentQueueConfigList(s, schemas.AssociateRoutingProfileQueuesRequest_ManualAssignmentQueueConfigs, v.ManualAssignmentQueueConfigs)
+	}
+	if v.QueueConfigs != nil {
+		serializeRoutingProfileQueueConfigList(s, schemas.AssociateRoutingProfileQueuesRequest_QueueConfigs, v.QueueConfigs)
+	}
 	if v.RoutingProfileId != nil {
 		s.WriteString(schemas.AssociateRoutingProfileQueuesRequest_RoutingProfileId, *v.RoutingProfileId)
 	}

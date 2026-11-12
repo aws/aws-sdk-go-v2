@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetCloudConnectorInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCloudConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetCloudConnectorRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetCloudConnectorOutput struct {
@@ -66,13 +80,72 @@ type GetCloudConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetCloudConnectorResponse_Description, *v.Description)
+	}
+	if v.EndpointConfig != nil {
+		s.WriteStruct(schemas.GetCloudConnectorResponse_EndpointConfig)
+		v.EndpointConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointType != "" {
+		s.WriteString(schemas.GetCloudConnectorResponse_EndpointType, string(v.EndpointType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetCloudConnectorResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCloudConnectorResponse_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetCloudConnectorResponse_Type, string(v.Type))
+	}
+}
+func (v *GetCloudConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCloudConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCloudConnectorResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResponse_Description, v.Description)
+		case schemas.GetCloudConnectorResponse_EndpointConfig:
+			v.EndpointConfig = &types.EndpointConfig{}
+			return v.EndpointConfig.Deserialize(d)
+		case schemas.GetCloudConnectorResponse_EndpointType:
+			var ev string
+			if err := d.ReadString(schemas.GetCloudConnectorResponse_EndpointType, &ev); err != nil {
+				return err
+			}
+			v.EndpointType = types.EndpointType(ev)
+			return nil
+		case schemas.GetCloudConnectorResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResponse_Id, v.Id)
+		case schemas.GetCloudConnectorResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResponse_Name, v.Name)
+		case schemas.GetCloudConnectorResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetCloudConnectorResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.CloudConnectorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCloudConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCloudConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudConnector, schemas.GetCloudConnectorRequest, schemas.GetCloudConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCloudConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudConnector, schemas.GetCloudConnectorRequest, schemas.GetCloudConnectorResponse), output: &GetCloudConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

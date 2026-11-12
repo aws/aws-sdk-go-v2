@@ -81,7 +81,9 @@ func (v *ListRescoreExecutionPlansOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRescoreExecutionPlansResponse_NextToken, *v.NextToken)
 	}
-	serializeRescoreExecutionPlanSummaryList(s, schemas.ListRescoreExecutionPlansResponse_SummaryItems, v.SummaryItems)
+	if v.SummaryItems != nil {
+		serializeRescoreExecutionPlanSummaryList(s, schemas.ListRescoreExecutionPlansResponse_SummaryItems, v.SummaryItems)
+	}
 }
 func (v *ListRescoreExecutionPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRescoreExecutionPlansResponse, func(s *smithy.Schema) error {

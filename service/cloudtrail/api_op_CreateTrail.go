@@ -186,7 +186,9 @@ func (v *CreateTrailInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnsTopicName != nil {
 		s.WriteString(schemas.CreateTrailRequest_SnsTopicName, *v.SnsTopicName)
 	}
-	serializeTagsList(s, schemas.CreateTrailRequest_TagsList, v.TagsList)
+	if v.TagsList != nil {
+		serializeTagsList(s, schemas.CreateTrailRequest_TagsList, v.TagsList)
+	}
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an

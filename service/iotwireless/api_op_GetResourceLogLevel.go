@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type GetResourceLogLevelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceLogLevelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceLogLevelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceLogLevelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.GetResourceLogLevelRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetResourceLogLevelRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetResourceLogLevelOutput struct {
 
 	// The log level for a log message. The log levels can be disabled, or set to ERROR
@@ -55,13 +72,36 @@ type GetResourceLogLevelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceLogLevelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceLogLevelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceLogLevelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogLevel != "" {
+		s.WriteString(schemas.GetResourceLogLevelResponse_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *GetResourceLogLevelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceLogLevelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceLogLevelResponse_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceLogLevelResponse_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = types.LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceLogLevel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceLogLevel, schemas.GetResourceLogLevelRequest, schemas.GetResourceLogLevelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceLogLevel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceLogLevel, schemas.GetResourceLogLevelRequest, schemas.GetResourceLogLevelResponse), output: &GetResourceLogLevelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

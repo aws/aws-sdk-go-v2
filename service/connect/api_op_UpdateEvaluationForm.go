@@ -135,7 +135,9 @@ func (v *UpdateEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateEvaluationFormRequest_InstanceId, *v.InstanceId)
 	}
-	serializeEvaluationFormItemsList(s, schemas.UpdateEvaluationFormRequest_Items, v.Items)
+	if v.Items != nil {
+		serializeEvaluationFormItemsList(s, schemas.UpdateEvaluationFormRequest_Items, v.Items)
+	}
 	if v.LanguageConfiguration != nil {
 		s.WriteStruct(schemas.UpdateEvaluationFormRequest_LanguageConfiguration)
 		v.LanguageConfiguration.SerializeMembers(s)

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","dnsSubdomain":"__DnsSubdomain__","id":"__Id__","idcApplicationArn":"__IdcApplicationArn__","name":"__Name__","status":"CREATING","updatedAt":946684800,"workspaceName":"__WorkspaceName__"}

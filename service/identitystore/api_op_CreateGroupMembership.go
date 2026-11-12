@@ -70,7 +70,9 @@ func (v *CreateGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.CreateGroupMembershipRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
-	serializeMemberId(s, schemas.CreateGroupMembershipRequest_MemberId, v.MemberId)
+	if v.MemberId != nil {
+		serializeMemberId(s, schemas.CreateGroupMembershipRequest_MemberId, v.MemberId)
+	}
 }
 
 type CreateGroupMembershipOutput struct {

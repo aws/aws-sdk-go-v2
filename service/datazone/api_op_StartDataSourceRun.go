@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,24 @@ type StartDataSourceRunInput struct {
 	ClientToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartDataSourceRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataSourceRunInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataSourceRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataSourceRunInput_clientToken, *v.ClientToken)
+	}
+	if v.DataSourceIdentifier != nil {
+		s.WriteString(schemas.StartDataSourceRunInput_dataSourceIdentifier, *v.DataSourceIdentifier)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.StartDataSourceRunInput_domainIdentifier, *v.DomainIdentifier)
+	}
 }
 
 type StartDataSourceRunOutput struct {
@@ -111,13 +131,116 @@ type StartDataSourceRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataSourceRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataSourceRunOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataSourceRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartDataSourceRunOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DataSourceConfigurationSnapshot != nil {
+		s.WriteString(schemas.StartDataSourceRunOutput_dataSourceConfigurationSnapshot, *v.DataSourceConfigurationSnapshot)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.StartDataSourceRunOutput_dataSourceId, *v.DataSourceId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.StartDataSourceRunOutput_domainId, *v.DomainId)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteStruct(schemas.StartDataSourceRunOutput_errorMessage)
+		v.ErrorMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartDataSourceRunOutput_id, *v.Id)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.StartDataSourceRunOutput_projectId, *v.ProjectId)
+	}
+	if v.RunStatisticsForAssets != nil {
+		s.WriteStruct(schemas.StartDataSourceRunOutput_runStatisticsForAssets)
+		v.RunStatisticsForAssets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.StartDataSourceRunOutput_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartDataSourceRunOutput_status, string(v.Status))
+	}
+	if v.StoppedAt != nil {
+		s.WriteTime(schemas.StartDataSourceRunOutput_stoppedAt, *v.StoppedAt)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartDataSourceRunOutput_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.StartDataSourceRunOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *StartDataSourceRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataSourceRunOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataSourceRunOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDataSourceRunOutput_createdAt, v.CreatedAt)
+		case schemas.StartDataSourceRunOutput_dataSourceConfigurationSnapshot:
+			v.DataSourceConfigurationSnapshot = new(string)
+			return d.ReadString(schemas.StartDataSourceRunOutput_dataSourceConfigurationSnapshot, v.DataSourceConfigurationSnapshot)
+		case schemas.StartDataSourceRunOutput_dataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.StartDataSourceRunOutput_dataSourceId, v.DataSourceId)
+		case schemas.StartDataSourceRunOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartDataSourceRunOutput_domainId, v.DomainId)
+		case schemas.StartDataSourceRunOutput_errorMessage:
+			v.ErrorMessage = &types.DataSourceErrorMessage{}
+			return v.ErrorMessage.Deserialize(d)
+		case schemas.StartDataSourceRunOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartDataSourceRunOutput_id, v.Id)
+		case schemas.StartDataSourceRunOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.StartDataSourceRunOutput_projectId, v.ProjectId)
+		case schemas.StartDataSourceRunOutput_runStatisticsForAssets:
+			v.RunStatisticsForAssets = &types.RunStatisticsForAssets{}
+			return v.RunStatisticsForAssets.Deserialize(d)
+		case schemas.StartDataSourceRunOutput_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDataSourceRunOutput_startedAt, v.StartedAt)
+		case schemas.StartDataSourceRunOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartDataSourceRunOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceRunStatus(ev)
+			return nil
+		case schemas.StartDataSourceRunOutput_stoppedAt:
+			v.StoppedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDataSourceRunOutput_stoppedAt, v.StoppedAt)
+		case schemas.StartDataSourceRunOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.StartDataSourceRunOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DataSourceRunType(ev)
+			return nil
+		case schemas.StartDataSourceRunOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDataSourceRunOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataSourceRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDataSourceRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataSourceRun, schemas.StartDataSourceRunInput, schemas.StartDataSourceRunOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDataSourceRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataSourceRun, schemas.StartDataSourceRunInput, schemas.StartDataSourceRunOutput), output: &StartDataSourceRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -78,11 +78,15 @@ func (v *RequestSenderIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsoCountryCode != nil {
 		s.WriteString(schemas.RequestSenderIdRequest_IsoCountryCode, *v.IsoCountryCode)
 	}
-	serializeMessageTypeList(s, schemas.RequestSenderIdRequest_MessageTypes, v.MessageTypes)
+	if v.MessageTypes != nil {
+		serializeMessageTypeList(s, schemas.RequestSenderIdRequest_MessageTypes, v.MessageTypes)
+	}
 	if v.SenderId != nil {
 		s.WriteString(schemas.RequestSenderIdRequest_SenderId, *v.SenderId)
 	}
-	serializeTagList(s, schemas.RequestSenderIdRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RequestSenderIdRequest_Tags, v.Tags)
+	}
 }
 
 type RequestSenderIdOutput struct {
@@ -145,7 +149,9 @@ func (v *RequestSenderIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsoCountryCode != nil {
 		s.WriteString(schemas.RequestSenderIdResult_IsoCountryCode, *v.IsoCountryCode)
 	}
-	serializeMessageTypeList(s, schemas.RequestSenderIdResult_MessageTypes, v.MessageTypes)
+	if v.MessageTypes != nil {
+		serializeMessageTypeList(s, schemas.RequestSenderIdResult_MessageTypes, v.MessageTypes)
+	}
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.RequestSenderIdResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
 	}
@@ -156,7 +162,9 @@ func (v *RequestSenderIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SenderIdArn != nil {
 		s.WriteString(schemas.RequestSenderIdResult_SenderIdArn, *v.SenderIdArn)
 	}
-	serializeTagList(s, schemas.RequestSenderIdResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RequestSenderIdResult_Tags, v.Tags)
+	}
 }
 func (v *RequestSenderIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestSenderIdResult, func(s *smithy.Schema) error {

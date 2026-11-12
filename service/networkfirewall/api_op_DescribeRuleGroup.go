@@ -44,9 +44,28 @@ type DescribeRuleGroupInput struct {
 	// You must specify the ARN or the name, and you can specify both.
 	RuleGroupName *string
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules.
+	// For a firewall engine rule group, the format in which to return the rules.
+	// Specify one of the following values:
+	//
+	//   - FIREWALL_RULES - Returns the rules as structured FirewallRule objects.
+	//
+	//   - RULES_STRING - Returns the rules as a Suricata-compatible firewall-mode rule
+	//   string.
+	//
+	// If you don't specify a format, Network Firewall returns the rules in the format
+	// you provided them in. This setting applies only to FIREWALL and IPS rule
+	// groups; IPS engine rule groups support only RULES_STRING .
+	RuleOutputFormat types.RuleOutputFormat
+
+	// Indicates the type of the rule group. Valid values are:
+	//
+	//   - STATELESS - Stateless rules, for use in a Classic Network Firewall policy.
+	//
+	//   - STATEFUL - Stateful rules, for use in a Classic Network Firewall policy.
+	//
+	//   - FIREWALL - Firewall engine rules, for use in a Next Generation policy.
+	//
+	//   - IPS - IPS engine rules, for use in a Next Generation policy.
 	//
 	// This setting is required for requests that do not include the RuleGroupARN .
 	Type types.RuleGroupType
@@ -69,6 +88,9 @@ func (v *DescribeRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RuleGroupName != nil {
 		s.WriteString(schemas.DescribeRuleGroupRequest_RuleGroupName, *v.RuleGroupName)
+	}
+	if v.RuleOutputFormat != "" {
+		s.WriteString(schemas.DescribeRuleGroupRequest_RuleOutputFormat, string(v.RuleOutputFormat))
 	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribeRuleGroupRequest_Type, string(v.Type))
@@ -97,6 +119,14 @@ type DescribeRuleGroupOutput struct {
 	// This member is required.
 	UpdateToken *string
 
+	// The object that defines the rules in a firewall engine rule group, for use in a
+	// Next Generation policy.
+	FirewallRuleGroup *types.FirewallRuleGroup
+
+	// The object that defines the rules in an IPS engine rule group, for use in a
+	// Next Generation policy.
+	IpsRuleGroup *types.IpsRuleGroup
+
 	// The object that defines the rules in a rule group. This, along with RuleGroupResponse, define
 	// the rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.
 	//
@@ -123,6 +153,16 @@ func (v *DescribeRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroup != nil {
+		s.WriteStruct(schemas.DescribeRuleGroupResponse_FirewallRuleGroup)
+		v.FirewallRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IpsRuleGroup != nil {
+		s.WriteStruct(schemas.DescribeRuleGroupResponse_IpsRuleGroup)
+		v.IpsRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.RuleGroup != nil {
 		s.WriteStruct(schemas.DescribeRuleGroupResponse_RuleGroup)
 		v.RuleGroup.SerializeMembers(s)
@@ -140,6 +180,12 @@ func (v *DescribeRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DescribeRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRuleGroupResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DescribeRuleGroupResponse_FirewallRuleGroup:
+			v.FirewallRuleGroup = &types.FirewallRuleGroup{}
+			return v.FirewallRuleGroup.Deserialize(d)
+		case schemas.DescribeRuleGroupResponse_IpsRuleGroup:
+			v.IpsRuleGroup = &types.IpsRuleGroup{}
+			return v.IpsRuleGroup.Deserialize(d)
 		case schemas.DescribeRuleGroupResponse_RuleGroup:
 			v.RuleGroup = &types.RuleGroup{}
 			return v.RuleGroup.Deserialize(d)
@@ -168,6 +214,9 @@ func (c *Client) addOperationDescribeRuleGroupMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

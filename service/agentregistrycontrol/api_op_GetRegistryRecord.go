@@ -186,7 +186,9 @@ func (v *GetRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetRegistryRecordResponse_name, *v.Name)
 	}
-	serializeProvenanceList(s, schemas.GetRegistryRecordResponse_provenance, v.Provenance)
+	if v.Provenance != nil {
+		serializeProvenanceList(s, schemas.GetRegistryRecordResponse_provenance, v.Provenance)
+	}
 	if v.RecordArn != nil {
 		s.WriteString(schemas.GetRegistryRecordResponse_recordArn, *v.RecordArn)
 	}

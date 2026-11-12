@@ -114,7 +114,9 @@ func (v *DescribeComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeComponentResponse_description, *v.Description)
 	}
-	serializeComponentPlatformList(s, schemas.DescribeComponentResponse_platforms, v.Platforms)
+	if v.Platforms != nil {
+		serializeComponentPlatformList(s, schemas.DescribeComponentResponse_platforms, v.Platforms)
+	}
 	if v.Publisher != nil {
 		s.WriteString(schemas.DescribeComponentResponse_publisher, *v.Publisher)
 	}
@@ -123,7 +125,9 @@ func (v *DescribeComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.DescribeComponentResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeComponentResponse_tags, v.Tags)
+	}
 }
 func (v *DescribeComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeComponentResponse, func(s *smithy.Schema) error {

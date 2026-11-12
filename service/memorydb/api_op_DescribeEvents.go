@@ -129,7 +129,9 @@ func (v *DescribeEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventList(s, schemas.DescribeEventsResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeEventList(s, schemas.DescribeEventsResponse_Events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEventsResponse_NextToken, *v.NextToken)
 	}
@@ -161,6 +163,9 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

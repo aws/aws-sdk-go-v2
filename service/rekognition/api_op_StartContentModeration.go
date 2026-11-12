@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,34 @@ type StartContentModerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContentModerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContentModerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContentModerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartContentModerationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartContentModerationRequest_JobTag, *v.JobTag)
+	}
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.StartContentModerationRequest_MinConfidence, *v.MinConfidence)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartContentModerationRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.StartContentModerationRequest_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartContentModerationOutput struct {
 
 	// The identifier for the content analysis job. Use JobId to identify the job in a
@@ -92,13 +122,32 @@ type StartContentModerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContentModerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContentModerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContentModerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartContentModerationResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartContentModerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContentModerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContentModerationResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartContentModerationResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContentModerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartContentModeration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContentModeration, schemas.StartContentModerationRequest, schemas.StartContentModerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartContentModeration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContentModeration, schemas.StartContentModerationRequest, schemas.StartContentModerationResponse), output: &StartContentModerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

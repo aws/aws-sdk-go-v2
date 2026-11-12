@@ -72,7 +72,9 @@ func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	}
 }
 func (v *CreateWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateWorkspaceRequest, func(s *smithy.Schema) error {
@@ -143,7 +145,9 @@ func (v *CreateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateWorkspaceResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkspaceResponse_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.CreateWorkspaceResponse_workspaceId, *v.WorkspaceId)
 	}

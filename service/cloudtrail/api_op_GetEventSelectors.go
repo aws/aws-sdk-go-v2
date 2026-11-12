@@ -115,8 +115,12 @@ func (v *GetEventSelectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEventSelectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.GetEventSelectorsResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
-	serializeEventSelectors(s, schemas.GetEventSelectorsResponse_EventSelectors, v.EventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.GetEventSelectorsResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
+	if v.EventSelectors != nil {
+		serializeEventSelectors(s, schemas.GetEventSelectorsResponse_EventSelectors, v.EventSelectors)
+	}
 	if v.TrailARN != nil {
 		s.WriteString(schemas.GetEventSelectorsResponse_TrailARN, *v.TrailARN)
 	}

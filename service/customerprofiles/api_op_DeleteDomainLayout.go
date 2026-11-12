@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteDomainLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainLayoutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainLayoutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteDomainLayoutRequest_DomainName, *v.DomainName)
+	}
+	if v.LayoutDefinitionName != nil {
+		s.WriteString(schemas.DeleteDomainLayoutRequest_LayoutDefinitionName, *v.LayoutDefinitionName)
+	}
+}
+
 type DeleteDomainLayoutOutput struct {
 
 	// A message that indicates the delete request is done.
@@ -52,13 +69,32 @@ type DeleteDomainLayoutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainLayoutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainLayoutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteDomainLayoutResponse_Message, *v.Message)
+	}
+}
+func (v *DeleteDomainLayoutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainLayoutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDomainLayoutResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteDomainLayoutResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainLayoutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainLayout, schemas.DeleteDomainLayoutRequest, schemas.DeleteDomainLayoutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomainLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainLayout, schemas.DeleteDomainLayoutRequest, schemas.DeleteDomainLayoutResponse), output: &DeleteDomainLayoutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

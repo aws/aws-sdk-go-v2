@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type GetDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataCellsFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataCellsFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataCellsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetDataCellsFilterRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDataCellsFilterRequest_Name, *v.Name)
+	}
+	if v.TableCatalogId != nil {
+		s.WriteString(schemas.GetDataCellsFilterRequest_TableCatalogId, *v.TableCatalogId)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetDataCellsFilterRequest_TableName, *v.TableName)
+	}
+}
+
 type GetDataCellsFilterOutput struct {
 
 	// A structure that describes certain columns on certain rows.
@@ -60,13 +83,34 @@ type GetDataCellsFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataCellsFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataCellsFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataCellsFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataCellsFilter != nil {
+		s.WriteStruct(schemas.GetDataCellsFilterResponse_DataCellsFilter)
+		v.DataCellsFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDataCellsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataCellsFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataCellsFilterResponse_DataCellsFilter:
+			v.DataCellsFilter = &types.DataCellsFilter{}
+			return v.DataCellsFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataCellsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataCellsFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataCellsFilter, schemas.GetDataCellsFilterRequest, schemas.GetDataCellsFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataCellsFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataCellsFilter, schemas.GetDataCellsFilterRequest, schemas.GetDataCellsFilterResponse), output: &GetDataCellsFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

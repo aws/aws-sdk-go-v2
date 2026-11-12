@@ -96,7 +96,9 @@ func (v *ListRecordingConfigurationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecordingConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serializeRecordingConfigurationList(s, schemas.ListRecordingConfigurationsResponse_recordingConfigurations, v.RecordingConfigurations)
+	if v.RecordingConfigurations != nil {
+		serializeRecordingConfigurationList(s, schemas.ListRecordingConfigurationsResponse_recordingConfigurations, v.RecordingConfigurations)
+	}
 }
 func (v *ListRecordingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecordingConfigurationsResponse, func(s *smithy.Schema) error {

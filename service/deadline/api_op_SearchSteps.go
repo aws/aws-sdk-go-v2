@@ -28,8 +28,6 @@ func (c *Client) SearchSteps(ctx context.Context, params *SearchStepsInput, optF
 	return out, nil
 }
 
-// Shared input fields for all Search operations (filterExpressions,
-// sortExpressions, itemOffset, pageSize).
 type SearchStepsInput struct {
 
 	// The farm ID to use for the step search.
@@ -86,11 +84,14 @@ func (v *SearchStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PageSize != nil {
 		s.WriteInt32(schemas.SearchStepsRequest_pageSize, *v.PageSize)
 	}
-	serializeQueueIds(s, schemas.SearchStepsRequest_queueIds, v.QueueIds)
-	serializeSearchSortExpressions(s, schemas.SearchStepsRequest_sortExpressions, v.SortExpressions)
+	if v.QueueIds != nil {
+		serializeQueueIds(s, schemas.SearchStepsRequest_queueIds, v.QueueIds)
+	}
+	if v.SortExpressions != nil {
+		serializeSearchSortExpressions(s, schemas.SearchStepsRequest_sortExpressions, v.SortExpressions)
+	}
 }
 
-// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchStepsOutput struct {
 
 	// The steps in the search.
@@ -122,7 +123,9 @@ func (v *SearchStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextItemOffset != nil {
 		s.WriteInt32(schemas.SearchStepsResponse_nextItemOffset, *v.NextItemOffset)
 	}
-	serializeStepSearchSummaries(s, schemas.SearchStepsResponse_steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepSearchSummaries(s, schemas.SearchStepsResponse_steps, v.Steps)
+	}
 	if v.TotalResults != nil {
 		s.WriteInt32(schemas.SearchStepsResponse_totalResults, *v.TotalResults)
 	}

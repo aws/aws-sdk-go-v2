@@ -3777,6 +3777,11 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -3815,8 +3820,9 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -3844,6 +3850,11 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -3951,6 +3962,13 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -4006,6 +4024,11 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -4044,8 +4067,9 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -4073,6 +4097,11 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -4180,6 +4209,13 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -4751,12 +4787,16 @@ func TestCheckRequestSnapshot_CreateInput(t *testing.T) {
 		MulticastSettings: &types.MulticastSettingsCreateRequest{
 			Sources: []types.MulticastSourceCreateRequest{
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 			},
 		},
@@ -10498,6 +10538,11 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -10536,8 +10581,9 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -10565,6 +10611,11 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -10672,6 +10723,13 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -10727,6 +10785,11 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -10765,8 +10828,9 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -10794,6 +10858,11 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -10901,6 +10970,13 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -11598,12 +11674,16 @@ func TestCheckRequestSnapshot_UpdateInput(t *testing.T) {
 		MulticastSettings: &types.MulticastSettingsUpdateRequest{
 			Sources: []types.MulticastSourceUpdateRequest{
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 			},
 		},
@@ -15675,6 +15755,11 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -15713,8 +15798,9 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -15742,6 +15828,11 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -15849,6 +15940,13 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -15904,6 +16002,11 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -15942,8 +16045,9 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -15971,6 +16075,11 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -16078,6 +16187,13 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -16649,12 +16765,16 @@ func TestUpdateRequestSnapshot_CreateInput(t *testing.T) {
 		MulticastSettings: &types.MulticastSettingsCreateRequest{
 			Sources: []types.MulticastSourceCreateRequest{
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 			},
 		},
@@ -22396,6 +22516,11 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -22434,8 +22559,9 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -22463,6 +22589,11 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -22570,6 +22701,13 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -22625,6 +22763,11 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
 								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
 							FlickerAq:            types.H264FlickerAq("DISABLED"),
@@ -22663,8 +22806,9 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
 								Prefix:   ptr.String("__Prefix__"),
 							},
-							MinQp:      ptr.Int32(1),
-							MinBitrate: ptr.Int32(1),
+							MinQp:                           ptr.Int32(1),
+							MinBitrate:                      ptr.Int32(1),
+							AllowExplicitWeightedPrediction: types.H264AllowExplicitWeightedPrediction("DISABLED"),
 						},
 						H265Settings: &types.H265Settings{
 							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
@@ -22692,6 +22836,11 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
 									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
 									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
 								},
 							},
 							FixedAfd:             types.FixedAfd("AFD_0000"),
@@ -22799,6 +22948,13 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 							TemporalAq:        types.Av1TemporalAq("DISABLED"),
 							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
 							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+							FilterSettings: &types.Av1FilterSettings{
+								AutoFilterSettings: &types.AutoFilterSettings{},
+								NoneFilterSettings: &types.NoneFilterSettings{},
+								PerceptualFilterSettings: &types.PerceptualFilterSettings{
+									Strength: types.PerceptualFilterStrength("STRENGTH_1"),
+								},
+							},
 						},
 					},
 					Height:          ptr.Int32(1),
@@ -23496,12 +23652,16 @@ func TestUpdateRequestSnapshot_UpdateInput(t *testing.T) {
 		MulticastSettings: &types.MulticastSettingsUpdateRequest{
 			Sources: []types.MulticastSourceUpdateRequest{
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 			},
 		},

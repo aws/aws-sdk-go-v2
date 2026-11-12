@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeTags
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeTags
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__"}
+¿jResourceIdn__ResourceId__ÿ

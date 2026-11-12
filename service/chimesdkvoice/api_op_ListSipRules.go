@@ -83,7 +83,9 @@ func (v *ListSipRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSipRulesResponse_NextToken, *v.NextToken)
 	}
-	serializeSipRuleList(s, schemas.ListSipRulesResponse_SipRules, v.SipRules)
+	if v.SipRules != nil {
+		serializeSipRuleList(s, schemas.ListSipRulesResponse_SipRules, v.SipRules)
+	}
 }
 func (v *ListSipRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSipRulesResponse, func(s *smithy.Schema) error {

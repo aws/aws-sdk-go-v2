@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-// Creates a label for an event.
+//	Creates a label for an event.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) CreateLabel(ctx context.Context, params *CreateLabelInput, optFns ...func(*Options)) (*CreateLabelOutput, error) {
 	if params == nil {
 		params = &CreateLabelInput{}

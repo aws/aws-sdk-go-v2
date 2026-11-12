@@ -73,7 +73,9 @@ func (v *GetCorsPolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCorsPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCorsPolicy(s, schemas.GetCorsPolicyOutput_CorsPolicy, v.CorsPolicy)
+	if v.CorsPolicy != nil {
+		serializeCorsPolicy(s, schemas.GetCorsPolicyOutput_CorsPolicy, v.CorsPolicy)
+	}
 }
 func (v *GetCorsPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCorsPolicyOutput, func(s *smithy.Schema) error {

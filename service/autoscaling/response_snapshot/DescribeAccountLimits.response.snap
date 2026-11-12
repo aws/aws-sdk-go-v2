@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAccountLimitsResponse><DescribeAccountLimitsResult><MaxNumberOfAutoScalingGroups>1</MaxNumberOfAutoScalingGroups><MaxNumberOfLaunchConfigurations>1</MaxNumberOfLaunchConfigurations><NumberOfAutoScalingGroups>1</NumberOfAutoScalingGroups><NumberOfLaunchConfigurations>1</NumberOfLaunchConfigurations></DescribeAccountLimitsResult></DescribeAccountLimitsResponse>

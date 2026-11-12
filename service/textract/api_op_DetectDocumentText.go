@@ -95,7 +95,9 @@ func (v *DetectDocumentTextOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectDocumentTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockList(s, schemas.DetectDocumentTextResponse_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlockList(s, schemas.DetectDocumentTextResponse_Blocks, v.Blocks)
+	}
 	if v.DetectDocumentTextModelVersion != nil {
 		s.WriteString(schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion, *v.DetectDocumentTextModelVersion)
 	}
@@ -135,6 +137,9 @@ func (c *Client) addOperationDetectDocumentTextMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

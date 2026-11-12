@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAccountLimitsResponse><DescribeAccountLimitsResult><AccountLimits><member><Name>__Name__</Name><Value>1</Value></member><member><Name>__Name__</Name><Value>1</Value></member></AccountLimits><NextToken>__NextToken__</NextToken></DescribeAccountLimitsResult></DescribeAccountLimitsResponse>

@@ -107,7 +107,9 @@ func (v *DescribeDimensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeDimensionResponse_name, *v.Name)
 	}
-	serializeDimensionStringValues(s, schemas.DescribeDimensionResponse_stringValues, v.StringValues)
+	if v.StringValues != nil {
+		serializeDimensionStringValues(s, schemas.DescribeDimensionResponse_stringValues, v.StringValues)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribeDimensionResponse_type, string(v.Type))
 	}

@@ -70,6 +70,10 @@ type UpdateDeploymentGroupInput struct {
 	// want to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *types.DeploymentStyle
 
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *types.EC2DeploymentOptions
+
 	// The replacement set of Amazon EC2 tags on which to filter, if you want to
 	// change them. To keep the existing tags, enter their names. To remove tags, do
 	// not enter any tag names.
@@ -163,7 +167,9 @@ func (v *UpdateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.AutoRollbackConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoScalingGroupNameList(s, schemas.UpdateDeploymentGroupInput_autoScalingGroups, v.AutoScalingGroups)
+	if v.AutoScalingGroups != nil {
+		serializeAutoScalingGroupNameList(s, schemas.UpdateDeploymentGroupInput_autoScalingGroups, v.AutoScalingGroups)
+	}
 	if v.BlueGreenDeploymentConfiguration != nil {
 		s.WriteStruct(schemas.UpdateDeploymentGroupInput_blueGreenDeploymentConfiguration)
 		v.BlueGreenDeploymentConfiguration.SerializeMembers(s)
@@ -180,13 +186,22 @@ func (v *UpdateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.DeploymentStyle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEC2TagFilterList(s, schemas.UpdateDeploymentGroupInput_ec2TagFilters, v.Ec2TagFilters)
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ec2TagFilters != nil {
+		serializeEC2TagFilterList(s, schemas.UpdateDeploymentGroupInput_ec2TagFilters, v.Ec2TagFilters)
+	}
 	if v.Ec2TagSet != nil {
 		s.WriteStruct(schemas.UpdateDeploymentGroupInput_ec2TagSet)
 		v.Ec2TagSet.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeECSServiceList(s, schemas.UpdateDeploymentGroupInput_ecsServices, v.EcsServices)
+	if v.EcsServices != nil {
+		serializeECSServiceList(s, schemas.UpdateDeploymentGroupInput_ecsServices, v.EcsServices)
+	}
 	if v.LoadBalancerInfo != nil {
 		s.WriteStruct(schemas.UpdateDeploymentGroupInput_loadBalancerInfo)
 		v.LoadBalancerInfo.SerializeMembers(s)
@@ -195,7 +210,9 @@ func (v *UpdateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NewDeploymentGroupName != nil {
 		s.WriteString(schemas.UpdateDeploymentGroupInput_newDeploymentGroupName, *v.NewDeploymentGroupName)
 	}
-	serializeTagFilterList(s, schemas.UpdateDeploymentGroupInput_onPremisesInstanceTagFilters, v.OnPremisesInstanceTagFilters)
+	if v.OnPremisesInstanceTagFilters != nil {
+		serializeTagFilterList(s, schemas.UpdateDeploymentGroupInput_onPremisesInstanceTagFilters, v.OnPremisesInstanceTagFilters)
+	}
 	if v.OnPremisesTagSet != nil {
 		s.WriteStruct(schemas.UpdateDeploymentGroupInput_onPremisesTagSet)
 		v.OnPremisesTagSet.SerializeMembers(s)
@@ -210,7 +227,9 @@ func (v *UpdateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.TerminationHookEnabled != nil {
 		s.WriteBool(schemas.UpdateDeploymentGroupInput_terminationHookEnabled, *v.TerminationHookEnabled)
 	}
-	serializeTriggerConfigList(s, schemas.UpdateDeploymentGroupInput_triggerConfigurations, v.TriggerConfigurations)
+	if v.TriggerConfigurations != nil {
+		serializeTriggerConfigList(s, schemas.UpdateDeploymentGroupInput_triggerConfigurations, v.TriggerConfigurations)
+	}
 }
 
 // Represents the output of an UpdateDeploymentGroup operation.
@@ -236,7 +255,9 @@ func (v *UpdateDeploymentGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDeploymentGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoScalingGroupList(s, schemas.UpdateDeploymentGroupOutput_hooksNotCleanedUp, v.HooksNotCleanedUp)
+	if v.HooksNotCleanedUp != nil {
+		serializeAutoScalingGroupList(s, schemas.UpdateDeploymentGroupOutput_hooksNotCleanedUp, v.HooksNotCleanedUp)
+	}
 }
 func (v *UpdateDeploymentGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateDeploymentGroupOutput, func(s *smithy.Schema) error {
@@ -262,6 +283,9 @@ func (c *Client) addOperationUpdateDeploymentGroupMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

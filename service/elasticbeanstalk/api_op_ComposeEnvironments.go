@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ComposeEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComposeEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComposeEnvironmentsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComposeEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ComposeEnvironmentsMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.ComposeEnvironmentsMessage_GroupName, *v.GroupName)
+	}
+	if v.VersionLabels != nil {
+		serializeVersionLabels(s, schemas.ComposeEnvironmentsMessage_VersionLabels, v.VersionLabels)
+	}
+}
+
 // Result message containing a list of environment descriptions.
 type ComposeEnvironmentsOutput struct {
 
@@ -69,13 +89,37 @@ type ComposeEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComposeEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentDescriptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComposeEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environments != nil {
+		serializeEnvironmentDescriptionsList(s, schemas.EnvironmentDescriptionsMessage_Environments, v.Environments)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.EnvironmentDescriptionsMessage_NextToken, *v.NextToken)
+	}
+}
+func (v *ComposeEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentDescriptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentDescriptionsMessage_Environments:
+			return deserializeEnvironmentDescriptionsList(d, schemas.EnvironmentDescriptionsMessage_Environments, &v.Environments)
+		case schemas.EnvironmentDescriptionsMessage_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.EnvironmentDescriptionsMessage_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationComposeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpComposeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ComposeEnvironments, schemas.ComposeEnvironmentsMessage, schemas.EnvironmentDescriptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpComposeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ComposeEnvironments, schemas.ComposeEnvironmentsMessage, schemas.EnvironmentDescriptionsMessage), output: &ComposeEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

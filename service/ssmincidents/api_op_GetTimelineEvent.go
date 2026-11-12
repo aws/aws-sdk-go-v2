@@ -4,7 +4,9 @@ package ssmincidents
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,34 @@ type GetTimelineEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTimelineEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTimelineEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTimelineEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.GetTimelineEventInput_eventId, *v.EventId)
+	}
+	if v.IncidentRecordArn != nil {
+		s.WriteString(schemas.GetTimelineEventInput_incidentRecordArn, *v.IncidentRecordArn)
+	}
+}
+func (v *GetTimelineEventInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTimelineEventInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTimelineEventInput_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.GetTimelineEventInput_eventId, v.EventId)
+		case schemas.GetTimelineEventInput_incidentRecordArn:
+			v.IncidentRecordArn = new(string)
+			return d.ReadString(schemas.GetTimelineEventInput_incidentRecordArn, v.IncidentRecordArn)
+		}
+		return nil
+	})
+}
+
 type GetTimelineEventOutput struct {
 
 	// Details about the timeline event.
@@ -53,13 +83,34 @@ type GetTimelineEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTimelineEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTimelineEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTimelineEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != nil {
+		s.WriteStruct(schemas.GetTimelineEventOutput_event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTimelineEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTimelineEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTimelineEventOutput_event:
+			v.Event = &types.TimelineEvent{}
+			return v.Event.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTimelineEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTimelineEvent, schemas.GetTimelineEventInput, schemas.GetTimelineEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTimelineEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTimelineEvent, schemas.GetTimelineEventInput, schemas.GetTimelineEventOutput), output: &GetTimelineEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

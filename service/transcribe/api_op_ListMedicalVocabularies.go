@@ -117,7 +117,9 @@ func (v *ListMedicalVocabulariesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Status != "" {
 		s.WriteString(schemas.ListMedicalVocabulariesResponse_Status, string(v.Status))
 	}
-	serializeVocabularies(s, schemas.ListMedicalVocabulariesResponse_Vocabularies, v.Vocabularies)
+	if v.Vocabularies != nil {
+		serializeVocabularies(s, schemas.ListMedicalVocabulariesResponse_Vocabularies, v.Vocabularies)
+	}
 }
 func (v *ListMedicalVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMedicalVocabulariesResponse, func(s *smithy.Schema) error {
@@ -153,6 +155,9 @@ func (c *Client) addOperationListMedicalVocabulariesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

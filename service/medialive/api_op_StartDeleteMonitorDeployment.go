@@ -127,7 +127,9 @@ func (v *StartDeleteMonitorDeploymentOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.Arn != nil {
 		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartDeleteMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	if v.CloudWatchAlarmTemplateGroupIds != nil {
+		serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartDeleteMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.StartDeleteMonitorDeploymentResponse_CreatedAt, *v.CreatedAt)
 	}
@@ -140,8 +142,12 @@ func (v *StartDeleteMonitorDeploymentOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_ErrorMessage, *v.ErrorMessage)
 	}
-	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartDeleteMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
-	serializeFailedMediaResourceMap(s, schemas.StartDeleteMonitorDeploymentResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	if v.EventBridgeRuleTemplateGroupIds != nil {
+		serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartDeleteMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
+	}
+	if v.FailedMediaResourceMap != nil {
+		serializeFailedMediaResourceMap(s, schemas.StartDeleteMonitorDeploymentResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Id, *v.Id)
 	}
@@ -153,7 +159,9 @@ func (v *StartDeleteMonitorDeploymentOutput) SerializeMembers(s smithy.ShapeSeri
 		v.LastSuccessfulMonitorDeployment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMediaResourceMap(s, schemas.StartDeleteMonitorDeploymentResponse_MediaResourceMap, v.MediaResourceMap)
+	if v.MediaResourceMap != nil {
+		serializeMediaResourceMap(s, schemas.StartDeleteMonitorDeploymentResponse_MediaResourceMap, v.MediaResourceMap)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.StartDeleteMonitorDeploymentResponse_ModifiedAt, *v.ModifiedAt)
 	}
@@ -171,7 +179,9 @@ func (v *StartDeleteMonitorDeploymentOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.Status != "" {
 		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.StartDeleteMonitorDeploymentResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartDeleteMonitorDeploymentResponse_Tags, v.Tags)
+	}
 }
 func (v *StartDeleteMonitorDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartDeleteMonitorDeploymentResponse, func(s *smithy.Schema) error {

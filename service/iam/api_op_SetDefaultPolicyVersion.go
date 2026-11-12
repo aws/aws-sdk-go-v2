@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,21 @@ type SetDefaultPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultPolicyVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDefaultPolicyVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultPolicyVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.SetDefaultPolicyVersionRequest_PolicyArn, *v.PolicyArn)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.SetDefaultPolicyVersionRequest_VersionId, *v.VersionId)
+	}
+}
+
 type SetDefaultPolicyVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +81,26 @@ type SetDefaultPolicyVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultPolicyVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultPolicyVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetDefaultPolicyVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetDefaultPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetDefaultPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultPolicyVersion, schemas.SetDefaultPolicyVersionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetDefaultPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultPolicyVersion, schemas.SetDefaultPolicyVersionRequest, nil), output: &SetDefaultPolicyVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

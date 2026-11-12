@@ -32,7 +32,9 @@ func (v *As2AsyncMdnConnectorConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *As2AsyncMdnConnectorConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAs2AsyncMdnServerIds(s, schemas.As2AsyncMdnConnectorConfig_ServerIds, v.ServerIds)
+	if v.ServerIds != nil {
+		serializeAs2AsyncMdnServerIds(s, schemas.As2AsyncMdnConnectorConfig_ServerIds, v.ServerIds)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.As2AsyncMdnConnectorConfig_Url, *v.Url)
 	}
@@ -937,7 +939,9 @@ func (v *DescribedAccess) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomeDirectory != nil {
 		s.WriteString(schemas.DescribedAccess_HomeDirectory, *v.HomeDirectory)
 	}
-	serializeHomeDirectoryMappings(s, schemas.DescribedAccess_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryMappings != nil {
+		serializeHomeDirectoryMappings(s, schemas.DescribedAccess_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	}
 	if v.HomeDirectoryType != "" {
 		s.WriteString(schemas.DescribedAccess_HomeDirectoryType, string(v.HomeDirectoryType))
 	}
@@ -1136,7 +1140,9 @@ func (v *DescribedAgreement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DescribedAgreement_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.DescribedAgreement_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedAgreement_Tags, v.Tags)
+	}
 }
 func (v *DescribedAgreement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribedAgreement, func(s *smithy.Schema) error {
@@ -1307,7 +1313,9 @@ func (v *DescribedCertificate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DescribedCertificate_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.DescribedCertificate_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedCertificate_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribedCertificate_Type, string(v.Type))
 	}
@@ -1502,7 +1510,9 @@ func (v *DescribedConnector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorId != nil {
 		s.WriteString(schemas.DescribedConnector_ConnectorId, *v.ConnectorId)
 	}
-	serializeDescribedConnectorEgressConfig(s, schemas.DescribedConnector_EgressConfig, v.EgressConfig)
+	if v.EgressConfig != nil {
+		serializeDescribedConnectorEgressConfig(s, schemas.DescribedConnector_EgressConfig, v.EgressConfig)
+	}
 	if v.EgressType != "" {
 		s.WriteString(schemas.DescribedConnector_EgressType, string(v.EgressType))
 	}
@@ -1518,7 +1528,9 @@ func (v *DescribedConnector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecurityPolicyName != nil {
 		s.WriteString(schemas.DescribedConnector_SecurityPolicyName, *v.SecurityPolicyName)
 	}
-	serializeServiceManagedEgressIpAddresses(s, schemas.DescribedConnector_ServiceManagedEgressIpAddresses, v.ServiceManagedEgressIpAddresses)
+	if v.ServiceManagedEgressIpAddresses != nil {
+		serializeServiceManagedEgressIpAddresses(s, schemas.DescribedConnector_ServiceManagedEgressIpAddresses, v.ServiceManagedEgressIpAddresses)
+	}
 	if v.SftpConfig != nil {
 		s.WriteStruct(schemas.DescribedConnector_SftpConfig)
 		v.SftpConfig.SerializeMembers(s)
@@ -1527,7 +1539,9 @@ func (v *DescribedConnector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DescribedConnector_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.DescribedConnector_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedConnector_Tags, v.Tags)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.DescribedConnector_Url, *v.Url)
 	}
@@ -1865,7 +1879,9 @@ func (v *DescribedHostKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.DescribedHostKey_StorageType, string(v.StorageType))
 	}
-	serializeTags(s, schemas.DescribedHostKey_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedHostKey_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.DescribedHostKey_Type, *v.Type)
 	}
@@ -2006,14 +2022,18 @@ func (v *DescribedProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.As2Id != nil {
 		s.WriteString(schemas.DescribedProfile_As2Id, *v.As2Id)
 	}
-	serializeCertificateIds(s, schemas.DescribedProfile_CertificateIds, v.CertificateIds)
+	if v.CertificateIds != nil {
+		serializeCertificateIds(s, schemas.DescribedProfile_CertificateIds, v.CertificateIds)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.DescribedProfile_ProfileId, *v.ProfileId)
 	}
 	if v.ProfileType != "" {
 		s.WriteString(schemas.DescribedProfile_ProfileType, string(v.ProfileType))
 	}
-	serializeTags(s, schemas.DescribedProfile_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedProfile_Tags, v.Tags)
+	}
 }
 func (v *DescribedProfile) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribedProfile, func(s *smithy.Schema) error {
@@ -2105,15 +2125,27 @@ func (v *DescribedSecurityPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Fips != nil {
 		s.WriteBool(schemas.DescribedSecurityPolicy_Fips, *v.Fips)
 	}
-	serializeSecurityPolicyProtocols(s, schemas.DescribedSecurityPolicy_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeSecurityPolicyProtocols(s, schemas.DescribedSecurityPolicy_Protocols, v.Protocols)
+	}
 	if v.SecurityPolicyName != nil {
 		s.WriteString(schemas.DescribedSecurityPolicy_SecurityPolicyName, *v.SecurityPolicyName)
 	}
-	serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshCiphers, v.SshCiphers)
-	serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshHostKeyAlgorithms, v.SshHostKeyAlgorithms)
-	serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshKexs, v.SshKexs)
-	serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshMacs, v.SshMacs)
-	serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_TlsCiphers, v.TlsCiphers)
+	if v.SshCiphers != nil {
+		serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshCiphers, v.SshCiphers)
+	}
+	if v.SshHostKeyAlgorithms != nil {
+		serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshHostKeyAlgorithms, v.SshHostKeyAlgorithms)
+	}
+	if v.SshKexs != nil {
+		serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshKexs, v.SshKexs)
+	}
+	if v.SshMacs != nil {
+		serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_SshMacs, v.SshMacs)
+	}
+	if v.TlsCiphers != nil {
+		serializeSecurityPolicyOptions(s, schemas.DescribedSecurityPolicy_TlsCiphers, v.TlsCiphers)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribedSecurityPolicy_Type, string(v.Type))
 	}
@@ -2395,7 +2427,9 @@ func (v *DescribedServer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribedServer_Arn, *v.Arn)
 	}
-	serializeServiceManagedEgressIpAddresses(s, schemas.DescribedServer_As2ServiceManagedEgressIpAddresses, v.As2ServiceManagedEgressIpAddresses)
+	if v.As2ServiceManagedEgressIpAddresses != nil {
+		serializeServiceManagedEgressIpAddresses(s, schemas.DescribedServer_As2ServiceManagedEgressIpAddresses, v.As2ServiceManagedEgressIpAddresses)
+	}
 	if v.Certificate != nil {
 		s.WriteString(schemas.DescribedServer_Certificate, *v.Certificate)
 	}
@@ -2438,7 +2472,9 @@ func (v *DescribedServer) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProtocolDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProtocols(s, schemas.DescribedServer_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocols(s, schemas.DescribedServer_Protocols, v.Protocols)
+	}
 	if v.S3StorageOptions != nil {
 		s.WriteStruct(schemas.DescribedServer_S3StorageOptions)
 		v.S3StorageOptions.SerializeMembers(s)
@@ -2453,8 +2489,12 @@ func (v *DescribedServer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DescribedServer_State, string(v.State))
 	}
-	serializeStructuredLogDestinations(s, schemas.DescribedServer_StructuredLogDestinations, v.StructuredLogDestinations)
-	serializeTags(s, schemas.DescribedServer_Tags, v.Tags)
+	if v.StructuredLogDestinations != nil {
+		serializeStructuredLogDestinations(s, schemas.DescribedServer_StructuredLogDestinations, v.StructuredLogDestinations)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedServer_Tags, v.Tags)
+	}
 	if v.UserCount != nil {
 		s.WriteInt32(schemas.DescribedServer_UserCount, *v.UserCount)
 	}
@@ -2658,7 +2698,9 @@ func (v *DescribedUser) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomeDirectory != nil {
 		s.WriteString(schemas.DescribedUser_HomeDirectory, *v.HomeDirectory)
 	}
-	serializeHomeDirectoryMappings(s, schemas.DescribedUser_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryMappings != nil {
+		serializeHomeDirectoryMappings(s, schemas.DescribedUser_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	}
 	if v.HomeDirectoryType != "" {
 		s.WriteString(schemas.DescribedUser_HomeDirectoryType, string(v.HomeDirectoryType))
 	}
@@ -2673,8 +2715,12 @@ func (v *DescribedUser) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != nil {
 		s.WriteString(schemas.DescribedUser_Role, *v.Role)
 	}
-	serializeSshPublicKeys(s, schemas.DescribedUser_SshPublicKeys, v.SshPublicKeys)
-	serializeTags(s, schemas.DescribedUser_Tags, v.Tags)
+	if v.SshPublicKeys != nil {
+		serializeSshPublicKeys(s, schemas.DescribedUser_SshPublicKeys, v.SshPublicKeys)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedUser_Tags, v.Tags)
+	}
 	if v.UserName != nil {
 		s.WriteString(schemas.DescribedUser_UserName, *v.UserName)
 	}
@@ -2786,12 +2832,18 @@ func (v *DescribedWebApp) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribedWebApp_Arn, *v.Arn)
 	}
-	serializeDescribedWebAppEndpointDetails(s, schemas.DescribedWebApp_DescribedEndpointDetails, v.DescribedEndpointDetails)
-	serializeDescribedWebAppIdentityProviderDetails(s, schemas.DescribedWebApp_DescribedIdentityProviderDetails, v.DescribedIdentityProviderDetails)
+	if v.DescribedEndpointDetails != nil {
+		serializeDescribedWebAppEndpointDetails(s, schemas.DescribedWebApp_DescribedEndpointDetails, v.DescribedEndpointDetails)
+	}
+	if v.DescribedIdentityProviderDetails != nil {
+		serializeDescribedWebAppIdentityProviderDetails(s, schemas.DescribedWebApp_DescribedIdentityProviderDetails, v.DescribedIdentityProviderDetails)
+	}
 	if v.EndpointType != "" {
 		s.WriteString(schemas.DescribedWebApp_EndpointType, string(v.EndpointType))
 	}
-	serializeTags(s, schemas.DescribedWebApp_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedWebApp_Tags, v.Tags)
+	}
 	if v.WebAppEndpoint != nil {
 		s.WriteString(schemas.DescribedWebApp_WebAppEndpoint, *v.WebAppEndpoint)
 	}
@@ -2801,7 +2853,9 @@ func (v *DescribedWebApp) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WebAppId != nil {
 		s.WriteString(schemas.DescribedWebApp_WebAppId, *v.WebAppId)
 	}
-	serializeWebAppUnits(s, schemas.DescribedWebApp_WebAppUnits, v.WebAppUnits)
+	if v.WebAppUnits != nil {
+		serializeWebAppUnits(s, schemas.DescribedWebApp_WebAppUnits, v.WebAppUnits)
+	}
 }
 func (v *DescribedWebApp) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribedWebApp, func(s *smithy.Schema) error {
@@ -2997,7 +3051,9 @@ func (v *DescribedWebAppVpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribedWebAppVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubnetIds(s, schemas.DescribedWebAppVpcConfig_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.DescribedWebAppVpcConfig_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.DescribedWebAppVpcConfig_VpcEndpointId, *v.VpcEndpointId)
 	}
@@ -3072,10 +3128,18 @@ func (v *DescribedWorkflow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribedWorkflow_Description, *v.Description)
 	}
-	serializeWorkflowSteps(s, schemas.DescribedWorkflow_OnExceptionSteps, v.OnExceptionSteps)
-	serializeWorkflowSteps(s, schemas.DescribedWorkflow_Steps, v.Steps)
-	serializeStructuredLogDestinations(s, schemas.DescribedWorkflow_StructuredLogDestinations, v.StructuredLogDestinations)
-	serializeTags(s, schemas.DescribedWorkflow_Tags, v.Tags)
+	if v.OnExceptionSteps != nil {
+		serializeWorkflowSteps(s, schemas.DescribedWorkflow_OnExceptionSteps, v.OnExceptionSteps)
+	}
+	if v.Steps != nil {
+		serializeWorkflowSteps(s, schemas.DescribedWorkflow_Steps, v.Steps)
+	}
+	if v.StructuredLogDestinations != nil {
+		serializeStructuredLogDestinations(s, schemas.DescribedWorkflow_StructuredLogDestinations, v.StructuredLogDestinations)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribedWorkflow_Tags, v.Tags)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.DescribedWorkflow_WorkflowId, *v.WorkflowId)
 	}
@@ -3255,9 +3319,15 @@ func (v *EndpointDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EndpointDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddressAllocationIds(s, schemas.EndpointDetails_AddressAllocationIds, v.AddressAllocationIds)
-	serializeSecurityGroupIds(s, schemas.EndpointDetails_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.EndpointDetails_SubnetIds, v.SubnetIds)
+	if v.AddressAllocationIds != nil {
+		serializeAddressAllocationIds(s, schemas.EndpointDetails_AddressAllocationIds, v.AddressAllocationIds)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.EndpointDetails_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.EndpointDetails_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.EndpointDetails_VpcEndpointId, *v.VpcEndpointId)
 	}
@@ -3381,8 +3451,12 @@ func (v *ExecutionResults) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExecutionResults) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecutionStepResults(s, schemas.ExecutionResults_OnExceptionSteps, v.OnExceptionSteps)
-	serializeExecutionStepResults(s, schemas.ExecutionResults_Steps, v.Steps)
+	if v.OnExceptionSteps != nil {
+		serializeExecutionStepResults(s, schemas.ExecutionResults_OnExceptionSteps, v.OnExceptionSteps)
+	}
+	if v.Steps != nil {
+		serializeExecutionStepResults(s, schemas.ExecutionResults_Steps, v.Steps)
+	}
 }
 func (v *ExecutionResults) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExecutionResults, func(s *smithy.Schema) error {
@@ -4829,7 +4903,9 @@ func (v *PosixProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Gid != nil {
 		s.WriteInt64(schemas.PosixProfile_Gid, *v.Gid)
 	}
-	serializeSecondaryGids(s, schemas.PosixProfile_SecondaryGids, v.SecondaryGids)
+	if v.SecondaryGids != nil {
+		serializeSecondaryGids(s, schemas.PosixProfile_SecondaryGids, v.SecondaryGids)
+	}
 	if v.Uid != nil {
 		s.WriteInt64(schemas.PosixProfile_Uid, *v.Uid)
 	}
@@ -4988,7 +5064,9 @@ func (v *ProtocolDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtocolDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAs2Transports(s, schemas.ProtocolDetails_As2Transports, v.As2Transports)
+	if v.As2Transports != nil {
+		serializeAs2Transports(s, schemas.ProtocolDetails_As2Transports, v.As2Transports)
+	}
 	if v.PassiveIp != nil {
 		s.WriteString(schemas.ProtocolDetails_PassiveIp, *v.PassiveIp)
 	}
@@ -5000,7 +5078,9 @@ func (v *ProtocolDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SetStatOption != "" {
 		s.WriteString(schemas.ProtocolDetails_SetStatOption, string(v.SetStatOption))
 	}
-	serializeSftpPorts(s, schemas.ProtocolDetails_SftpPorts, v.SftpPorts)
+	if v.SftpPorts != nil {
+		serializeSftpPorts(s, schemas.ProtocolDetails_SftpPorts, v.SftpPorts)
+	}
 	if v.TlsSessionResumptionMode != "" {
 		s.WriteString(schemas.ProtocolDetails_TlsSessionResumptionMode, string(v.TlsSessionResumptionMode))
 	}
@@ -5428,8 +5508,12 @@ func (v *SftpConnectorConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxConcurrentConnections != nil {
 		s.WriteInt32(schemas.SftpConnectorConfig_MaxConcurrentConnections, *v.MaxConcurrentConnections)
 	}
-	serializeSecretVersionStageList(s, schemas.SftpConnectorConfig_OrderedUserSecretVersionStages, v.OrderedUserSecretVersionStages)
-	serializeSftpConnectorTrustedHostKeyList(s, schemas.SftpConnectorConfig_TrustedHostKeys, v.TrustedHostKeys)
+	if v.OrderedUserSecretVersionStages != nil {
+		serializeSecretVersionStageList(s, schemas.SftpConnectorConfig_OrderedUserSecretVersionStages, v.OrderedUserSecretVersionStages)
+	}
+	if v.TrustedHostKeys != nil {
+		serializeSftpConnectorTrustedHostKeyList(s, schemas.SftpConnectorConfig_TrustedHostKeys, v.TrustedHostKeys)
+	}
 	if v.UserSecretId != nil {
 		s.WriteString(schemas.SftpConnectorConfig_UserSecretId, *v.UserSecretId)
 	}
@@ -5689,7 +5773,9 @@ func (v *TagStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceFileLocation != nil {
 		s.WriteString(schemas.TagStepDetails_SourceFileLocation, *v.SourceFileLocation)
 	}
-	serializeS3Tags(s, schemas.TagStepDetails_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeS3Tags(s, schemas.TagStepDetails_Tags, v.Tags)
+	}
 }
 func (v *TagStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagStepDetails, func(s *smithy.Schema) error {
@@ -5895,7 +5981,9 @@ func (v *UpdateWebAppVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.UpdateWebAppVpcConfig_IpAddressType, string(v.IpAddressType))
 	}
-	serializeSubnetIds(s, schemas.UpdateWebAppVpcConfig_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.UpdateWebAppVpcConfig_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *UpdateWebAppVpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateWebAppVpcConfig, func(s *smithy.Schema) error {
@@ -6086,8 +6174,12 @@ func (v *WebAppVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.WebAppVpcConfig_IpAddressType, string(v.IpAddressType))
 	}
-	serializeSecurityGroupIds(s, schemas.WebAppVpcConfig_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.WebAppVpcConfig_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.WebAppVpcConfig_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.WebAppVpcConfig_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.WebAppVpcConfig_VpcId, *v.VpcId)
 	}
@@ -6200,8 +6292,12 @@ func (v *WorkflowDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkflowDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOnPartialUploadWorkflowDetails(s, schemas.WorkflowDetails_OnPartialUpload, v.OnPartialUpload)
-	serializeOnUploadWorkflowDetails(s, schemas.WorkflowDetails_OnUpload, v.OnUpload)
+	if v.OnPartialUpload != nil {
+		serializeOnPartialUploadWorkflowDetails(s, schemas.WorkflowDetails_OnPartialUpload, v.OnPartialUpload)
+	}
+	if v.OnUpload != nil {
+		serializeOnUploadWorkflowDetails(s, schemas.WorkflowDetails_OnUpload, v.OnUpload)
+	}
 }
 func (v *WorkflowDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkflowDetails, func(s *smithy.Schema) error {

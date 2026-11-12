@@ -229,7 +229,9 @@ func (v *CreateSecretInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddReplicaRegionListType(s, schemas.CreateSecretRequest_AddReplicaRegions, v.AddReplicaRegions)
+	if v.AddReplicaRegions != nil {
+		serializeAddReplicaRegionListType(s, schemas.CreateSecretRequest_AddReplicaRegions, v.AddReplicaRegions)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateSecretRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
@@ -251,7 +253,9 @@ func (v *CreateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecretString != nil {
 		s.WriteString(schemas.CreateSecretRequest_SecretString, *v.SecretString)
 	}
-	serializeTagListType(s, schemas.CreateSecretRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagListType(s, schemas.CreateSecretRequest_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateSecretRequest_Type, *v.Type)
 	}
@@ -300,7 +304,9 @@ func (v *CreateSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSecretResponse_Name, *v.Name)
 	}
-	serializeReplicationStatusListType(s, schemas.CreateSecretResponse_ReplicationStatus, v.ReplicationStatus)
+	if v.ReplicationStatus != nil {
+		serializeReplicationStatusListType(s, schemas.CreateSecretResponse_ReplicationStatus, v.ReplicationStatus)
+	}
 	if v.VersionId != nil {
 		s.WriteString(schemas.CreateSecretResponse_VersionId, *v.VersionId)
 	}

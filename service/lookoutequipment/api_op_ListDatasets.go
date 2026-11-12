@@ -13,6 +13,10 @@ import (
 
 // Lists all datasets currently available in your account, filtering on the
 // dataset name.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}
@@ -84,7 +88,9 @@ func (v *ListDatasetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasetSummaries(s, schemas.ListDatasetsResponse_DatasetSummaries, v.DatasetSummaries)
+	if v.DatasetSummaries != nil {
+		serializeDatasetSummaries(s, schemas.ListDatasetsResponse_DatasetSummaries, v.DatasetSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetsResponse_NextToken, *v.NextToken)
 	}

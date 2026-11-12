@@ -4,6 +4,8 @@ package securityir
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,24 @@ type GetFindingMetricsInput struct {
 	StartDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFindingMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteTime(schemas.GetFindingMetricsRequest_endDate, *v.EndDate)
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.GetFindingMetricsRequest_membershipId, *v.MembershipId)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.GetFindingMetricsRequest_startDate, *v.StartDate)
+	}
 }
 
 // Finding-lifecycle metrics for a membership over the requested date range.
@@ -116,13 +136,92 @@ type GetFindingMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingsEscalated != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsEscalated, *v.FindingsEscalated)
+	}
+	if v.FindingsEscalatedFalsePositive != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsEscalatedFalsePositive, *v.FindingsEscalatedFalsePositive)
+	}
+	if v.FindingsEscalatedInProgress != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsEscalatedInProgress, *v.FindingsEscalatedInProgress)
+	}
+	if v.FindingsIngestedGuardDuty != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsIngestedGuardDuty, *v.FindingsIngestedGuardDuty)
+	}
+	if v.FindingsIngestedSecurityHub != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsIngestedSecurityHub, *v.FindingsIngestedSecurityHub)
+	}
+	if v.FindingsInvestigated != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsInvestigated, *v.FindingsInvestigated)
+	}
+	if v.FindingsInvestigatedFalsePositive != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsInvestigatedFalsePositive, *v.FindingsInvestigatedFalsePositive)
+	}
+	if v.FindingsInvestigatedInProgress != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsInvestigatedInProgress, *v.FindingsInvestigatedInProgress)
+	}
+	if v.FindingsTriaged != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsTriaged, *v.FindingsTriaged)
+	}
+	if v.FindingsTriagedFalsePositive != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsTriagedFalsePositive, *v.FindingsTriagedFalsePositive)
+	}
+	if v.FindingsTruePositive != nil {
+		s.WriteInt64(schemas.GetFindingMetricsResponse_findingsTruePositive, *v.FindingsTruePositive)
+	}
+}
+func (v *GetFindingMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingMetricsResponse_findingsEscalated:
+			v.FindingsEscalated = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsEscalated, v.FindingsEscalated)
+		case schemas.GetFindingMetricsResponse_findingsEscalatedFalsePositive:
+			v.FindingsEscalatedFalsePositive = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsEscalatedFalsePositive, v.FindingsEscalatedFalsePositive)
+		case schemas.GetFindingMetricsResponse_findingsEscalatedInProgress:
+			v.FindingsEscalatedInProgress = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsEscalatedInProgress, v.FindingsEscalatedInProgress)
+		case schemas.GetFindingMetricsResponse_findingsIngestedGuardDuty:
+			v.FindingsIngestedGuardDuty = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsIngestedGuardDuty, v.FindingsIngestedGuardDuty)
+		case schemas.GetFindingMetricsResponse_findingsIngestedSecurityHub:
+			v.FindingsIngestedSecurityHub = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsIngestedSecurityHub, v.FindingsIngestedSecurityHub)
+		case schemas.GetFindingMetricsResponse_findingsInvestigated:
+			v.FindingsInvestigated = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsInvestigated, v.FindingsInvestigated)
+		case schemas.GetFindingMetricsResponse_findingsInvestigatedFalsePositive:
+			v.FindingsInvestigatedFalsePositive = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsInvestigatedFalsePositive, v.FindingsInvestigatedFalsePositive)
+		case schemas.GetFindingMetricsResponse_findingsInvestigatedInProgress:
+			v.FindingsInvestigatedInProgress = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsInvestigatedInProgress, v.FindingsInvestigatedInProgress)
+		case schemas.GetFindingMetricsResponse_findingsTriaged:
+			v.FindingsTriaged = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsTriaged, v.FindingsTriaged)
+		case schemas.GetFindingMetricsResponse_findingsTriagedFalsePositive:
+			v.FindingsTriagedFalsePositive = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsTriagedFalsePositive, v.FindingsTriagedFalsePositive)
+		case schemas.GetFindingMetricsResponse_findingsTruePositive:
+			v.FindingsTruePositive = new(int64)
+			return d.ReadInt64(schemas.GetFindingMetricsResponse_findingsTruePositive, v.FindingsTruePositive)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingMetrics, schemas.GetFindingMetricsRequest, schemas.GetFindingMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingMetrics, schemas.GetFindingMetricsRequest, schemas.GetFindingMetricsResponse), output: &GetFindingMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

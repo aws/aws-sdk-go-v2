@@ -106,12 +106,18 @@ func (v *GetRequestAuthorizationDetailsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetRequestAuthorizationDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluations(s, schemas.GetRequestAuthorizationDetailsOutput_evaluations, v.Evaluations)
+	if v.Evaluations != nil {
+		serializeEvaluations(s, schemas.GetRequestAuthorizationDetailsOutput_evaluations, v.Evaluations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetRequestAuthorizationDetailsOutput_nextToken, *v.NextToken)
 	}
-	serializePolicyInfoList(s, schemas.GetRequestAuthorizationDetailsOutput_policies, v.Policies)
-	serializeAuthorizationContext(s, schemas.GetRequestAuthorizationDetailsOutput_requestContext, v.RequestContext)
+	if v.Policies != nil {
+		serializePolicyInfoList(s, schemas.GetRequestAuthorizationDetailsOutput_policies, v.Policies)
+	}
+	if v.RequestContext != nil {
+		serializeAuthorizationContext(s, schemas.GetRequestAuthorizationDetailsOutput_requestContext, v.RequestContext)
+	}
 }
 func (v *GetRequestAuthorizationDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRequestAuthorizationDetailsOutput, func(s *smithy.Schema) error {

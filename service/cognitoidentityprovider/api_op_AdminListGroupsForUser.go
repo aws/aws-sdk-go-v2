@@ -120,7 +120,9 @@ func (v *AdminListGroupsForUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminListGroupsForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupListType(s, schemas.AdminListGroupsForUserResponse_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroupListType(s, schemas.AdminListGroupsForUserResponse_Groups, v.Groups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.AdminListGroupsForUserResponse_NextToken, *v.NextToken)
 	}

@@ -77,7 +77,9 @@ func (v *ListLongTermPricingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLongTermPricingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLongTermPricingEntryList(s, schemas.ListLongTermPricingResult_LongTermPricingEntries, v.LongTermPricingEntries)
+	if v.LongTermPricingEntries != nil {
+		serializeLongTermPricingEntryList(s, schemas.ListLongTermPricingResult_LongTermPricingEntries, v.LongTermPricingEntries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLongTermPricingResult_NextToken, *v.NextToken)
 	}

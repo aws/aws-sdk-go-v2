@@ -108,7 +108,9 @@ func (v *StartDominantLanguageDetectionJobInput) SerializeMembers(s smithy.Shape
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartDominantLanguageDetectionJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartDominantLanguageDetectionJobRequest_Tags, v.Tags)
+	}
 	if v.VolumeKmsKeyId != nil {
 		s.WriteString(schemas.StartDominantLanguageDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
 	}
@@ -206,6 +208,9 @@ func (c *Client) addOperationStartDominantLanguageDetectionJobMiddlewares(stack 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

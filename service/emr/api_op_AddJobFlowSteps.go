@@ -87,7 +87,9 @@ func (v *AddJobFlowStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobFlowId != nil {
 		s.WriteString(schemas.AddJobFlowStepsInput_JobFlowId, *v.JobFlowId)
 	}
-	serializeStepConfigList(s, schemas.AddJobFlowStepsInput_Steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepConfigList(s, schemas.AddJobFlowStepsInput_Steps, v.Steps)
+	}
 }
 
 // The output for the AddJobFlowSteps operation.
@@ -109,7 +111,9 @@ func (v *AddJobFlowStepsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddJobFlowStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStepIdsList(s, schemas.AddJobFlowStepsOutput_StepIds, v.StepIds)
+	if v.StepIds != nil {
+		serializeStepIdsList(s, schemas.AddJobFlowStepsOutput_StepIds, v.StepIds)
+	}
 }
 func (v *AddJobFlowStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddJobFlowStepsOutput, func(s *smithy.Schema) error {

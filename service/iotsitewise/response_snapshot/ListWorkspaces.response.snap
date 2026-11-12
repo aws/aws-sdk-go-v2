@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","workspaceSummaries":[{"arn":"__Arn__","createdAt":946684800,"name":"__Name__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"name":"__Name__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"updatedAt":946684800}]}

@@ -87,7 +87,9 @@ func (v *DescribeInstanceTypeLimitsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstanceTypeLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLimitsByRole(s, schemas.DescribeInstanceTypeLimitsResponse_LimitsByRole, v.LimitsByRole)
+	if v.LimitsByRole != nil {
+		serializeLimitsByRole(s, schemas.DescribeInstanceTypeLimitsResponse_LimitsByRole, v.LimitsByRole)
+	}
 }
 func (v *DescribeInstanceTypeLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeInstanceTypeLimitsResponse, func(s *smithy.Schema) error {

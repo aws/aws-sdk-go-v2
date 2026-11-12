@@ -3,4 +3,4 @@ POST /participant/attachment
 Content-Type: application/json
 X-Amz-Bearer: __ConnectionToken__
 
-{"AttachmentId":"__AttachmentId__","UrlExpiryInSeconds":1}
+{"AttachmentId":"__AttachmentId__","UrlContentDisposition":"INLINE","UrlExpiryInSeconds":1}

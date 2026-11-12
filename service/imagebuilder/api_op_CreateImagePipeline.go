@@ -86,8 +86,8 @@ type CreateImagePipelineInput struct {
 	// containerRecipeArn , but not both.
 	ImageRecipeArn *string
 
-	// Contains settings for vulnerability scans that Amazon Inspector runs against
-	// the test instance during image creation.
+	// The settings that determine whether and how Amazon Inspector scans the images
+	// that this pipeline creates.
 	ImageScanningConfiguration *types.ImageScanningConfiguration
 
 	// The tags that Image Builder applies to the Image Builder image resource that
@@ -163,7 +163,9 @@ func (v *CreateImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ImageScanningConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateImagePipelineRequest_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeTagMap(s, schemas.CreateImagePipelineRequest_imageTags, v.ImageTags)
+	}
 	if v.ImageTestsConfiguration != nil {
 		s.WriteStruct(schemas.CreateImagePipelineRequest_imageTestsConfiguration)
 		v.ImageTestsConfiguration.SerializeMembers(s)
@@ -188,8 +190,12 @@ func (v *CreateImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateImagePipelineRequest_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateImagePipelineRequest_tags, v.Tags)
-	serializeWorkflowConfigurationList(s, schemas.CreateImagePipelineRequest_workflows, v.Workflows)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateImagePipelineRequest_tags, v.Tags)
+	}
+	if v.Workflows != nil {
+		serializeWorkflowConfigurationList(s, schemas.CreateImagePipelineRequest_workflows, v.Workflows)
+	}
 }
 
 type CreateImagePipelineOutput struct {

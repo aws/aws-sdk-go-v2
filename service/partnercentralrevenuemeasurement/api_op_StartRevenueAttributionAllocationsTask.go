@@ -82,7 +82,9 @@ func (v *StartRevenueAttributionAllocationsTaskInput) SerializeMembers(s smithy.
 	if v.RevenueAttributionRevision != nil {
 		s.WriteString(schemas.StartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision, *v.RevenueAttributionRevision)
 	}
-	serializeRevenueShareAllocationChangeList(s, schemas.StartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations, v.RevenueShareAllocations)
+	if v.RevenueShareAllocations != nil {
+		serializeRevenueShareAllocationChangeList(s, schemas.StartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations, v.RevenueShareAllocations)
+	}
 }
 
 type StartRevenueAttributionAllocationsTaskOutput struct {

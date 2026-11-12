@@ -119,7 +119,9 @@ func (v *ListSourceServerActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSourceServerActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceServerActionDocuments(s, schemas.ListSourceServerActionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeSourceServerActionDocuments(s, schemas.ListSourceServerActionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceServerActionsResponse_nextToken, *v.NextToken)
 	}

@@ -54,8 +54,8 @@ type StartWorkflowRunInput struct {
 	// syntax.
 	OverrideParameters map[string]document.Interface
 
-	// Optional. The specific version of the workflow to execute. If not specified,
-	// the latest version is used.
+	// Optional. The specific version of the workflow to execute. If you don't specify
+	// a version, we use the latest version.
 	WorkflowVersion *string
 
 	noSmithyDocumentSerde
@@ -71,7 +71,9 @@ func (v *StartWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartWorkflowRunRequest_ClientToken, *v.ClientToken)
 	}
-	serializeObjectMap(s, schemas.StartWorkflowRunRequest_OverrideParameters, v.OverrideParameters)
+	if v.OverrideParameters != nil {
+		serializeObjectMap(s, schemas.StartWorkflowRunRequest_OverrideParameters, v.OverrideParameters)
+	}
 	if v.WorkflowArn != nil {
 		s.WriteString(schemas.StartWorkflowRunRequest_WorkflowArn, *v.WorkflowArn)
 	}

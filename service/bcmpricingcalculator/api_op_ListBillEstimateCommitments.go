@@ -82,7 +82,9 @@ func (v *ListBillEstimateCommitmentsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListBillEstimateCommitmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillEstimateCommitmentSummaries(s, schemas.ListBillEstimateCommitmentsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBillEstimateCommitmentSummaries(s, schemas.ListBillEstimateCommitmentsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillEstimateCommitmentsResponse_nextToken, *v.NextToken)
 	}

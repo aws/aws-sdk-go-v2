@@ -771,6 +771,40 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AllowedPort": {
+            "type": "union",
+            "members": {
+                "port": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single port that is reachable through the runtime's session URL.</p>"
+                    }
+                },
+                "portRange": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PortRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An inclusive range of ports that are reachable through the runtime's session URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A port or port range that is reachable through the runtime's session URL. Specify exactly one of <code>port</code> or <code>portRange</code>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#AllowedPorts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPort"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. The list can contain up to five non-overlapping entries.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AllowedQueryParameters": {
             "type": "list",
             "member": {
@@ -913,6 +947,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PutResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterial"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#SetTokenVaultCMK"
@@ -2895,6 +2932,20 @@
                 "smithy.api#documentation": "<p>Contains summary information about a browser. A browser enables Amazon Bedrock AgentCore Agent to interact with web content.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#BuildLifecycleHooks": {
+            "type": "structure",
+            "members": {
+                "warmup": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleHook",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hook that warms up your agent before any sessions are created. Use this hook to load the resources that your sessions need, such as models, libraries, or caches. Your hook must complete within 120 seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle hooks that run when you create or update the AgentCore Runtime, before any sessions are created.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn": {
             "type": "string",
             "traits": {
@@ -3300,7 +3351,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A reference to a private certificate authority (CA) certificate that the gateway uses to verify TLS connections to the target endpoint. Use this when the target presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>"
+                "smithy.api#documentation": "<p>A reference to a private certificate authority (CA) certificate that AgentCore uses to verify TLS connections to an endpoint, such as a gateway target or an identity provider, that presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList": {
@@ -3350,6 +3401,38 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CircuitBreakerConfiguration": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CircuitBreakerMode",
+                    "traits": {
+                        "smithy.api#default": "ENABLED",
+                        "smithy.api#documentation": "<p>Specifies whether you want the circuit breaker turned on. To turn it off, set this value to <code>DISABLED</code>. The default is <code>ENABLED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the circuit breaker monitors failures for the targets in a fallback chain.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CircuitBreakerMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
                 }
             }
         },
@@ -4037,6 +4120,16 @@
                 "smithy.api#documentation": "<p>The compute configuration for a capacity provider. This structure defines the type and settings of the compute resources used to launch instances.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ConcreteModelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ConcurrentModificationException": {
             "type": "structure",
             "members": {
@@ -4067,10 +4160,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A condition that matches on the request path.</p>"
                     }
+                },
+                "matchModels": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MatchModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition that matches on the model requested in an inference request.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A condition that determines when a gateway rule applies. Conditions can match on principals or request paths.</p>"
+                "smithy.api#documentation": "<p>A condition that determines when a gateway rule applies. Conditions can match on principals, request paths, or the requested model.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#Conditions": {
@@ -4081,7 +4180,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2
+                    "max": 3
                 }
             }
         },
@@ -5167,12 +5266,21 @@
                     }
                 },
                 "protocolConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>"
+                    }
                 },
                 "lifecycleConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle configuration for the AgentCore Runtime.</p>"
+                    }
+                },
+                "hooksConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle hooks configuration for the AgentCore Runtime. Use lifecycle hooks to run actions in the agent's container at fixed points in the runtime's lifecycle, such as warming up the agent before sessions are created.</p>"
                     }
                 },
                 "environmentVariables": {
@@ -5203,6 +5311,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the runtime platform to use for the AgentCore Runtime.</p>"
+                    }
+                },
+                "allowedPorts": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>"
+                    }
+                },
+                "resourceConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configurations for the AgentCore Runtime, such as the minimum amount of memory to allocate to the runtime. You can specify at most one resource configuration.</p>"
                     }
                 }
             },
@@ -6885,6 +7005,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of key-value pairs to associate with the gateway as metadata tags.</p>"
                     }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header. Specify this when clients reach the gateway through your own proxy or custom domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7033,6 +7159,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
+                    }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>"
                     }
                 }
             },
@@ -7784,10 +7916,10 @@
                 "eventExpiryDuration": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The duration after which memory events expire. Specified as an ISO 8601 duration.</p>",
+                        "smithy.api#documentation": "<p>The number of days after which memory events expire, between 7 and 3650 days.</p>",
                         "smithy.api#range": {
                             "min": 3,
-                            "max": 365
+                            "max": 3650
                         },
                         "smithy.api#required": {}
                     }
@@ -9207,6 +9339,9 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
                 },
                 {
@@ -9885,6 +10020,12 @@
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom JWT authorizer configuration.</p>"
                     }
                 },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>"
+                    }
+                },
                 "allowedWorkloadConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#AllowedWorkloadConfiguration",
                     "traits": {
@@ -10018,6 +10159,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom OAuth2 provider configuration.</p>"
                     }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10062,6 +10209,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PrivateEndpointOverrides",
                     "traits": {
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom OAuth2 provider configuration.</p>"
+                    }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>"
                     }
                 },
                 "privateKeyJwtConfig": {
@@ -13278,6 +13431,27 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#DimensionRatingScale": {
+            "type": "union",
+            "members": {
+                "numerical": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NumericalScaleDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The numerical rating scale with defined score values and descriptions for quantitative evaluation of the dimension. </p>"
+                    }
+                },
+                "categorical": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CategoricalScaleDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The categorical rating scale with named categories and definitions for qualitative evaluation of the dimension. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The rating scale for one dimension of an LLM-as-a-judge evaluator, supporting either a numerical or a categorical scale. </p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#DimensionValue": {
             "type": "string",
             "traits": {
@@ -13307,17 +13481,39 @@
         "com.amazonaws.bedrockagentcorecontrol#DiscoveryUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^.+/\\.well-known/openid-configuration$"
+                "smithy.api#pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#DiscoveryUrlType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^.+/\\.well-known/(openid-configuration|oauth-authorization-server)$"
+                "smithy.api#pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#DomainName": {
             "type": "string"
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DomainOverride": {
+            "type": "structure",
+            "members": {
+                "defaultDomain": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PublicDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default public domain name for the gateway. The gateway advertises this domain when a request doesn't select a specific domain.</p>",
+                        "smithy.api#jsonName": "default",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alternateDomains": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PublicDomainNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional public domain names for the gateway, up to 10. Don't repeat the default domain or list a domain more than once. A request can select one of these domains, or the default domain, with the <code>x-amzn-bedrock-agentcore-gateway-domain</code> header. The gateway rejects a request that selects a domain that isn't configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The public domain names for a gateway that clients reach through your own proxy or custom domain. When you configure a domain override, the gateway advertises these domains instead of the inbound Host header in the URLs that it returns for OAuth discovery, such as the protected resource metadata and the <code>WWW-Authenticate</code> challenge.</p>"
+            }
         },
         "com.amazonaws.bedrockagentcorecontrol#DownloadUrl": {
             "type": "string",
@@ -14132,6 +14328,18 @@
                 "smithy.api#documentation": "<p>Contains configurations to override the default reflection step for the episodic memory strategy.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ErrorStatusCodePattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[4-5]([0-9]{2}|XX)$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ErrorStatusCodePatterns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ErrorStatusCodePattern"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#EvaluationConfigDescription": {
             "type": "string",
             "traits": {
@@ -14147,6 +14355,66 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EvaluationDimension": {
+            "type": "structure",
+            "members": {
+                "dimensionName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EvaluationDimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the dimension. This name is unique within the evaluator and identifies the dimension's results. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dimensionInstruction": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EvaluationDimensionInstruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The instruction to the evaluator model for this dimension, describing what the model should judge when scoring the dimension. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dimensionRatingScale": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DimensionRatingScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The rating scale for this dimension, which can be numerical or categorical. A dimension's rating scale cannot itself be multi-dimensional. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A single dimension of an LLM-as-a-judge evaluator, defining what the evaluator model should judge for that dimension and how it should be scored. </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EvaluationDimensionInstruction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p> The instruction to the evaluator model for one dimension of an LLM-as-a-judge evaluator, describing what the model should judge for that dimension. </p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EvaluationDimensionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p> The name of a dimension in an LLM-as-a-judge evaluator. </p>",
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EvaluationDimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#EvaluationDimension"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The list of dimensions for an LLM-as-a-judge evaluator that uses a multi-dimensional rating scale. An evaluator can have up to 50 dimensions. </p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#Evaluator": {
@@ -14562,6 +14830,144 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The extraction type for a metadata field, determining how the value is obtained during memory processing.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Fallback": {
+            "type": "structure",
+            "members": {
+                "triggerOn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#FallbackTriggers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status codes and errors from the route's target that cause the gateway to send the request to the first fallback target. If you omit <code>triggerOn</code>, the gateway falls back on <code>5XX</code> status codes and on the <code>CONNECTION_ERROR</code>, <code>FIRST_BYTE_TIMEOUT</code>, and <code>UNROUTABLE</code> errors. If you specify <code>triggerOn</code>, only the status codes and errors that you list trigger a fallback.</p>"
+                    }
+                },
+                "firstByteTimeoutMilliseconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in milliseconds, from sending the request to the route's target until the first byte of the response body arrives. If the time expires, the gateway abandons the request and treats it as a <code>FIRST_BYTE_TIMEOUT</code> error. If you don't specify a value, no timeout is enforced.</p>",
+                        "smithy.api#range": {
+                            "min": 50,
+                            "max": 900000
+                        }
+                    }
+                },
+                "circuitBreaker": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CircuitBreakerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the gateway temporarily stops sending your requests to a failing target. The circuit breaker tracks each combination of target and model separately. With the circuit breaker enabled, the gateway skips one or more targets and models that fail repeatedly, and your requests go to the next target in the chain. The gateway always tries the last remaining target in the chain. The gateway enables the circuit breaker by default.</p>"
+                    }
+                },
+                "targetFallback": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetFallbacks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of fallback targets. The gateway tries each target in order until a response doesn't match that target's triggers, and returns that response to the caller. If every target fails, the gateway returns the last response. You can specify up to two fallback targets. Each combination of target and model, including the route's target, can appear only once.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fallback configuration for a route to an inference target. Defines an ordered list of fallback targets to try when a request to the route's target fails, and the conditions that trigger a fallback. A fallback can occur only before the gateway sends the first byte of the response to the caller. After a streaming response starts, the gateway doesn't fall back.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#FallbackError": {
+            "type": "enum",
+            "members": {
+                "CONNECTION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The gateway could not establish a connection to the destination (connection refused/reset,\nor connection timeout) — the attempt never reached the provider. Feeds the circuit breaker.",
+                        "smithy.api#enumValue": "CONNECTION_ERROR"
+                    }
+                },
+                "FIRST_BYTE_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The destination accepted the connection but did not return the first response byte within\nfirstByteTimeoutMilliseconds; the attempt is abandoned before any byte reaches the client.\nFeeds the circuit breaker.",
+                        "smithy.api#enumValue": "FIRST_BYTE_TIMEOUT"
+                    }
+                },
+                "UNROUTABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Gateway-side: the target could not be routed to (target missing, or it does not support the\nrequest's API path). Deterministic — advances the chain but does NOT feed the breaker.",
+                        "smithy.api#enumValue": "UNROUTABLE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#FallbackErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#FallbackError"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#FallbackTarget": {
+            "type": "structure",
+            "members": {
+                "targetName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the gateway target to fall back to. The target must be an inference target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "model": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConcreteModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model ID to send to this fallback target. If you don't specify a model, the gateway sends the model from the original request.</p>"
+                    }
+                },
+                "triggerOn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#FallbackTriggers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status codes and errors from this target that cause the gateway to send the request to the next fallback target. This setting isn't inherited from the route. If you omit it, the gateway uses the default triggers: <code>5XX</code> status codes and the <code>CONNECTION_ERROR</code>, <code>FIRST_BYTE_TIMEOUT</code>, and <code>UNROUTABLE</code> errors.</p>"
+                    }
+                },
+                "firstByteTimeoutMilliseconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in milliseconds, from sending the request to this target until the first byte of the response body arrives. This setting isn't inherited from the route. If you don't specify a value, no timeout is enforced.</p>",
+                        "smithy.api#range": {
+                            "min": 50,
+                            "max": 900000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a target to send the request to when the previous target in the fallback chain fails. Includes the target name, the model to send, and the conditions that trigger a fallback from this target to the next one.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#FallbackTriggers": {
+            "type": "structure",
+            "members": {
+                "statusCodes": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ErrorStatusCodePatterns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status codes returned by the target that trigger a fallback. You can specify the following:</p> <ul> <li> <p>An exact status code – A three-digit code, such as <code>429</code>.</p> </li> <li> <p>A class of status codes – The first digit followed by <code>XX</code>, such as <code>5XX</code>, which matches every code from 500 to 599.</p> </li> </ul> <p>Only 4XX and 5XX codes are supported. Throttling by the gateway itself doesn't trigger a fallback.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        }
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#FallbackErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The errors that trigger a fallback. You can specify the following:</p> <ul> <li> <p> <code>CONNECTION_ERROR</code> – The gateway couldn't connect to the target because the connection was refused, reset, or timed out. The request didn't reach the target.</p> </li> <li> <p> <code>FIRST_BYTE_TIMEOUT</code> – The target accepted the connection but didn't return the first byte of the response within <code>firstByteTimeoutMilliseconds</code>. The gateway abandons the request before any of the response reaches you.</p> </li> <li> <p> <code>UNROUTABLE</code> – The gateway couldn't route the request to the target, for example because the target doesn't exist or doesn't support the request path. These errors don't count toward the circuit breaker.</p> </li> </ul>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 3
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conditions that trigger a fallback to the next target. A fallback occurs if the response matches any of the specified status codes or errors.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#FilesystemConfiguration": {
@@ -15961,6 +16367,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "hooksConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle hooks configuration for the AgentCore Runtime.</p>"
+                    }
+                },
                 "failureReason": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -15986,7 +16398,10 @@
                     }
                 },
                 "protocolConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>"
+                    }
                 },
                 "environmentVariables": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EnvironmentVariablesMap",
@@ -16028,6 +16443,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the runtime platform used by the AgentCore Runtime.</p>"
+                    }
+                },
+                "allowedPorts": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL.</p>"
+                    }
+                },
+                "resourceConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configurations for the AgentCore Runtime.</p>"
                     }
                 }
             },
@@ -17742,6 +18169,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
+                    }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>"
                     }
                 }
             },
@@ -21028,6 +21461,7 @@
                 "lifecycleConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
                     "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration for the harness's runtime environment. For a harness, <code>idleRuntimeSessionTimeout</code> and <code>maxLifetime</code> each accept a value between 60 and 28800 seconds (8 hours), and <code>idleRuntimeSessionTimeout</code> must be less than or equal to <code>maxLifetime</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21052,7 +21486,10 @@
             "type": "structure",
             "members": {
                 "lifecycleConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration for the harness's runtime environment. For a harness, <code>idleRuntimeSessionTimeout</code> and <code>maxLifetime</code> each accept a value between 60 and 28800 seconds (8 hours), and <code>idleRuntimeSessionTimeout</code> must be less than or equal to <code>maxLifetime</code>. Values above 28800 seconds are rejected with a <code>ValidationException</code>.</p>"
+                    }
                 },
                 "networkConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#NetworkConfiguration"
@@ -22066,10 +22503,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Custom headers to include when connecting to the remote MCP server.</p>"
                     }
+                },
+                "outboundAuth": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessRemoteMcpOutboundAuth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the harness authenticates to this MCP server. Defaults to no authentication.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for connecting to a remote MCP server.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessRemoteMcpOutboundAuth": {
+            "type": "union",
+            "members": {
+                "awsIam": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#IamCredentialProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sign requests to the remote MCP server with Signature Version 4 (SigV4) using the harness execution role. If you don't specify a Region, the harness Region is used.</p>"
+                    }
+                },
+                "none": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>No authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Authentication method for calling a remote MCP server.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessRemoteMcpUrl": {
@@ -22834,6 +23297,27 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HttpPostLifecycleHookAction": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleHookPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path in the agent's container that AgentCore Runtime sends the <code>POST</code> request to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port in the agent's container that AgentCore Runtime sends the <code>POST</code> request to. If you don't specify a port, the default is the runtime's server port: the port in the protocol configuration if one is set, otherwise the protocol's default port.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lifecycle hook action that sends an HTTP <code>POST</code> request to the agent's container. The path and port can't conflict with a path that your agent already serves for AgentCore Runtime, such as the protocol's invocation path or the health check path.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HttpQueryParameterName": {
             "type": "string",
             "traits": {
@@ -23242,7 +23726,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^/[a-zA-Z0-9\\-\\._/]+$"
+                "smithy.api#pattern": "^/[a-zA-Z0-9\\-\\._/{}]+$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#InferenceProviderTargetConfiguration": {
@@ -23881,6 +24365,46 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>LifecycleConfiguration lets you manage the lifecycle of runtime sessions and resources in AgentCore Runtime. This configuration helps optimize resource utilization by automatically cleaning up idle sessions and preventing long-running instances from consuming resources indefinitely.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LifecycleHook": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleHookAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that AgentCore Runtime runs for the hook. Specify exactly one action.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lifecycle hook, which defines the action that AgentCore Runtime runs at a point in the runtime's lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LifecycleHookAction": {
+            "type": "union",
+            "members": {
+                "httpPost": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HttpPostLifecycleHookAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sends an HTTP <code>POST</code> request to your agent's container on the specified port and path to run the hook. The hook succeeds if your container returns a <code>2xx</code> response. The hook fails if your container returns any other response or doesn't respond before the hook times out.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action that a lifecycle hook runs. Specify exactly one member. Currently, <code>httpPost</code> is the only supported action.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LifecycleHookPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The path for an HTTP <code>POST</code> lifecycle hook action. The path must begin with <code>/</code>, can contain up to 32 characters, and can contain only letters, numbers, and the characters <code>.</code>, <code>_</code>, <code>~</code>, <code>/</code>, and <code>-</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^/[A-Za-z0-9._~/-]*$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LimitEntries": {
@@ -27770,7 +28294,7 @@
                 "disableMcpListToolsPagination": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether pagination is disabled for the Model Context Protocol (MCP) <code>tools/list</code> operation. When set to <code>true</code>, the gateway returns the complete list of tools in a single response without a pagination cursor. When set to <code>false</code> or omitted, the gateway returns tools in paginated responses.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the gateway disables pagination for the Model Context Protocol (MCP) <code>tools/list</code> operation. When set to <code>true</code>, the gateway returns the complete list of tools in a single response without a pagination cursor. When set to <code>false</code> or omitted, the gateway returns tools in paginated responses. For information about changing this value on an existing gateway, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_UpdateGateway.html\">UpdateGateway</a>.</p>"
                     }
                 }
             },
@@ -27849,6 +28373,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for a managed VPC Lattice resource. The gateway creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#MatchModelEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#MatchModelEntry"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#MatchModelEntry": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModelPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model ID or pattern to match. With the <code>StringLike</code> operator, you can use <code>*</code> and <code>?</code> as wildcards, for example <code>anthropic.claude-*</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MatchOperator",
+                    "traits": {
+                        "smithy.api#default": "StringLike",
+                        "smithy.api#documentation": "<p>The operator to use when comparing the requested model to the value:</p> <ul> <li> <p> <code>StringEquals</code> – Requires an exact match.</p> </li> <li> <p> <code>StringLike</code> – Supports wildcard patterns using <code>*</code> and <code>?</code>. This is the default.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A model ID or pattern to match against the requested model, and the operator to use for the comparison.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#MatchModels": {
+            "type": "structure",
+            "members": {
+                "anyOf": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MatchModelEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of model entries. The condition is met if the requested model matches any of the entries.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A condition that matches inference requests based on the requested model.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#MatchOperator": {
+            "type": "enum",
+            "members": {
+                "StringEquals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringEquals"
+                    }
+                },
+                "StringLike": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringLike"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#MatchPathPattern": {
@@ -28182,7 +28770,7 @@
                         "smithy.api#documentation": "<p>The number of days after which memory events will expire.</p>",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 365
+                            "max": 3650
                         },
                         "smithy.api#required": {}
                     }
@@ -28879,9 +29467,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 256
+                    "max": 2048
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@]+(/[a-zA-Z0-9\\-\\._\\*\\?@]+)*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@:]+(/[a-zA-Z0-9\\-\\._\\*\\?@:]+)*$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ModifyConsolidationConfiguration": {
@@ -29851,6 +30439,32 @@
                 "smithy.api#documentation": "<p>Contains the output configuration for an OAuth2 provider.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfAuthenticationConfig": {
+            "type": "structure",
+            "members": {
+                "clientAuthenticationMethod": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfClientAuthenticationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client authentication method to use during the on-behalf-of token exchange. The <code>NO_CLIENT</code> option omits the <code>clientId</code> and <code>clientSecret</code> during the on-behalf-of token exchange with the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the client authentication method to use for the on-behalf-of token exchange.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfClientAuthenticationMethod": {
+            "type": "enum",
+            "members": {
+                "NO_CLIENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_CLIENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfTokenExchangeConfigType": {
             "type": "structure",
             "members": {
@@ -29865,6 +30479,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TokenExchangeGrantTypeConfigType",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693).</p>"
+                    }
+                },
+                "onBehalfOfAuthenticationConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfAuthenticationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the client authentication configuration to use for the on-behalf-of token exchange. With this configuration, you override the provider level client authentication method for the on-behalf-of exchange with the identity provider. If you don't specify this configuration, we use the provider level client authentication method.</p>"
                     }
                 }
             },
@@ -31900,6 +32520,38 @@
                 "smithy.api#default": "FAIL_ON_ANY_FINDINGS"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#Port": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>A port between <code>8000</code> and <code>12000</code>. Port <code>8443</code> is reserved and cannot be used.</p>",
+                "smithy.api#range": {
+                    "min": 8000,
+                    "max": 12000
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PortRange": {
+            "type": "structure",
+            "members": {
+                "from": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first port in the inclusive range.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "to": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last port in the inclusive range.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An inclusive range of ports. The value of <code>from</code> must be less than or equal to the value of <code>to</code>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#PortalUrlType": {
             "type": "string",
             "traits": {
@@ -32062,6 +32714,18 @@
                         "smithy.api#documentation": "<p>The server protocol for the agent runtime. This field specifies which protocol the agent runtime uses to communicate with clients.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "port": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port on which the agent server listens. The port must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>. When this field is omitted, the default is <code>8080</code> for <code>HTTP</code> and <code>AGUI</code>, <code>8000</code> for <code>MCP</code>, and <code>9000</code> for <code>A2A</code>.</p>"
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServerPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path on which the agent server accepts requests. The path must begin with <code>/</code>. When this field is omitted, the default is <code>/invocations</code> for <code>HTTP</code> and <code>AGUI</code>, <code>/mcp</code> for <code>MCP</code>, and <code>/</code> for <code>A2A</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -32121,6 +32785,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration that controls how a provider prefix is applied to model IDs during translation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PublicDomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PublicDomainNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#PublicDomainName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PutResourcePolicy": {
@@ -32248,6 +32934,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#CategoricalScaleDefinitions",
                     "traits": {
                         "smithy.api#documentation": "<p> The categorical rating scale with named categories and definitions for qualitative evaluation. </p>"
+                    }
+                },
+                "multiDimensional": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EvaluationDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of dimensions that lets an LLM-as-a-judge evaluator score several dimensions of the same target in a single evaluation. Each dimension has its own instruction and rating scale, and produces its own result. </p>"
                     }
                 }
             },
@@ -32956,6 +33648,90 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterial": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Resets the key material for a token vault whose customer managed KMS key has been deleted, and re-encrypts the token vault with an Amazon Web Services managed key so that you can use the token vault again.</p> <important> <p>This operation can't be undone. The reset permanently deletes the OAuth2 access tokens and refresh tokens stored in the token vault, including tokens obtained through all supported flows. After the reset, your agents must complete these flows again to get new tokens, and for user-delegated flows your users must authorize access again. The reset doesn't delete your credential providers or their configuration.</p> </important> <p>You can reset a token vault only if its customer managed key has been deleted. If the key still exists, including when it's disabled or scheduled for deletion, this operation returns a <code>ValidationException</code>. To use the token vault again, enable the key or cancel its scheduled deletion in KMS. To switch to a different key, use <code>SetTokenVaultCMK</code>.</p>",
+                "smithy.api#http": {
+                    "uri": "/identities/reset-token-vault-key-material",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialRequest": {
+            "type": "structure",
+            "members": {
+                "tokenVaultId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TokenVaultIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the token vault to reset. To reset your account's default token vault, specify <code>default</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialResponse": {
+            "type": "structure",
+            "members": {
+                "tokenVaultId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TokenVaultIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the token vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS configuration for the token vault after the reset. The token vault uses an Amazon Web Services managed key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the token vault was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#Resource": {
             "type": "union",
             "members": {
@@ -32976,6 +33752,21 @@
                 "smithy.api#pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-f]{17}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ResourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "minimumMemoryInMiB": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of memory, in mebibytes, to allocate to the AgentCore Runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource configuration for an AgentCore Runtime.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurationIdentifier": {
             "type": "string",
             "traits": {
@@ -32984,6 +33775,18 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of resource configurations for an AgentCore Runtime. The list can contain at most one resource configuration.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ResourceGatewayArn": {
@@ -33428,6 +34231,20 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration": {
+            "type": "structure",
+            "members": {
+                "build": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BuildLifecycleHooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hooks that run when you create or update the AgentCore Runtime, before any sessions are created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle hooks that AgentCore Runtime runs at fixed points in the runtime's lifecycle.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#RuntimeMetadataConfiguration": {
@@ -34298,6 +35115,27 @@
                 "smithy.api#documentation": "<p>The server definition for an MCP descriptor. Contains the schema version and inline content for the MCP server configuration.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ServerPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The path on which the agent server accepts requests. The path must begin with <code>/</code> and can contain up to 2,048 characters.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^/[A-Za-z0-9\\-._~/%]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ServerPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>A port between <code>8000</code> and <code>12000</code>. Port <code>8443</code> is reserved and cannot be used.</p>",
+                "smithy.api#range": {
+                    "min": 8000,
+                    "max": 12000
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ServerProtocol": {
             "type": "enum",
             "members": {
@@ -34436,6 +35274,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
@@ -34887,6 +35728,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the target to route requests to.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "model": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConcreteModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model ID to send to the target. Supported only for inference targets. If you don't specify a model, the gateway sends the model from the original request.</p>"
+                    }
+                },
+                "fallback": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Fallback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fallback configuration for this route. Supported only for inference targets.</p>"
                     }
                 }
             },
@@ -35830,6 +36683,12 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#TargetFallbacks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#FallbackTarget"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#TargetId": {
             "type": "string",
             "traits": {
@@ -36068,6 +36927,25 @@
         "com.amazonaws.bedrockagentcorecontrol#TargetTrafficSplitEntry": {
             "type": "structure",
             "members": {
+                "targetName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target to route traffic to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "model": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConcreteModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model ID to send to the target for this variant. Supported only for inference targets. If you don't specify a model, the gateway sends the model from the original request.</p>"
+                    }
+                },
+                "fallback": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Fallback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fallback configuration for this variant. Supported only for inference targets.</p>"
+                    }
+                },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -36088,13 +36966,6 @@
                             "min": 1,
                             "max": 99
                         },
-                        "smithy.api#required": {}
-                    }
-                },
-                "targetName": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetName",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the target to route traffic to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -36967,12 +37838,21 @@
                     }
                 },
                 "protocolConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>"
+                    }
                 },
                 "lifecycleConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated life cycle configuration for the AgentCore Runtime.</p>"
+                    }
+                },
+                "hooksConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated lifecycle hooks configuration for the AgentCore Runtime.</p>"
                     }
                 },
                 "metadataConfiguration": {
@@ -37003,6 +37883,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated version of the runtime platform to use for the AgentCore Runtime.</p>"
+                    }
+                },
+                "allowedPorts": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>"
+                    }
+                },
+                "resourceConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated resource configurations for the AgentCore Runtime. You can specify at most one resource configuration.</p>"
                     }
                 },
                 "clientToken": {
@@ -38023,7 +38915,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing gateway.</p>",
+                "smithy.api#documentation": "<p>Updates an existing gateway.</p> <p>Replaces the entire gateway configuration. Any optional field that you omit, including fields in <code>protocolConfiguration</code>, is reset. For information about retrieving the current configuration, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html\">GetGateway</a>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -38260,6 +39152,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated Amazon Web Services WAF configuration for the gateway.</p>"
                     }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header. Specify this when clients reach the gateway through your own proxy or custom domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -38405,6 +39303,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
+                    }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>"
                     }
                 }
             },
@@ -39139,10 +40043,10 @@
                 "eventExpiryDuration": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days after which memory events will expire, between 7 and 365 days.</p>",
+                        "smithy.api#documentation": "<p>The number of days after which memory events expire, between 7 and 3650 days.</p>",
                         "smithy.api#range": {
                             "min": 3,
-                            "max": 365
+                            "max": 3650
                         }
                     }
                 },
@@ -40791,6 +41695,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"

@@ -76,7 +76,9 @@ func (v *ListDomainVerificationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainVerificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainVerificationList(s, schemas.ListDomainVerificationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeDomainVerificationList(s, schemas.ListDomainVerificationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainVerificationsResponse_nextToken, *v.NextToken)
 	}

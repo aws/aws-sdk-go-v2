@@ -45,7 +45,9 @@ func (v *BatchGetCodeSnippetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCodeSnippetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingArns(s, schemas.BatchGetCodeSnippetRequest_findingArns, v.FindingArns)
+	if v.FindingArns != nil {
+		serializeFindingArns(s, schemas.BatchGetCodeSnippetRequest_findingArns, v.FindingArns)
+	}
 }
 
 type BatchGetCodeSnippetOutput struct {
@@ -70,8 +72,12 @@ func (v *BatchGetCodeSnippetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCodeSnippetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSnippetResultList(s, schemas.BatchGetCodeSnippetResponse_codeSnippetResults, v.CodeSnippetResults)
-	serializeCodeSnippetErrorList(s, schemas.BatchGetCodeSnippetResponse_errors, v.Errors)
+	if v.CodeSnippetResults != nil {
+		serializeCodeSnippetResultList(s, schemas.BatchGetCodeSnippetResponse_codeSnippetResults, v.CodeSnippetResults)
+	}
+	if v.Errors != nil {
+		serializeCodeSnippetErrorList(s, schemas.BatchGetCodeSnippetResponse_errors, v.Errors)
+	}
 }
 func (v *BatchGetCodeSnippetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCodeSnippetResponse, func(s *smithy.Schema) error {

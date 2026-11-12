@@ -10,8 +10,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Retrieves the content of an ingested document from a knowledge base. Returns a
-// pre-signed URL for secure document access.
+// Retrieves the content of an ingested document from a knowledge base, or of an
+// image embedded in the document. Returns a pre-signed URL for downloading the
+// content. Use this operation to display the source of a Retrieve result.
 func (c *Client) GetDocumentContent(ctx context.Context, params *GetDocumentContentInput, optFns ...func(*Options)) (*GetDocumentContentOutput, error) {
 	if params == nil {
 		params = &GetDocumentContentInput{}
@@ -44,8 +45,21 @@ type GetDocumentContentInput struct {
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The output format for the document content. RAW returns the original file.
-	// EXTRACTED returns parsed text as JSON. Defaults to RAW .
+	// The unique identifier (in UUID format) of an image embedded in the specified
+	// document. Set this parameter to the _media_id value in the metadata of the
+	// corresponding Retrieve result. If you specify this parameter, the response
+	// contains a pre-signed URL for the image instead of the document, and you must
+	// omit outputFormat or set it to RAW .
+	MediaId *string
+
+	// The output format for the content. You can specify one of the following values:
+	//
+	// RAW Returns the original document, or the selected image if you specify mediaId .
+	//
+	// EXTRACTED Returns parsed document text as JSON.
+	//
+	// If you omit this parameter, the default is RAW . You can't use EXTRACTED with
+	// mediaId .
 	OutputFormat types.DocumentOutputFormat
 
 	// Contains information about the user making the request. This is used for access
@@ -72,6 +86,9 @@ func (v *GetDocumentContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.GetDocumentContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
+	if v.MediaId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_mediaId, *v.MediaId)
+	}
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.GetDocumentContentRequest_outputFormat, string(v.OutputFormat))
 	}
@@ -84,20 +101,21 @@ func (v *GetDocumentContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetDocumentContentOutput struct {
 
-	// The MIME type of the document content. For RAW format, this is the original
-	// file type (for example, application/pdf ). For EXTRACTED format, this is always
+	// The MIME type of the returned content. For RAW format, this is the original
+	// file type (for example, application/pdf ), or the image type (for example,
+	// image/png ) if you specify mediaId . For EXTRACTED format, this is always
 	// application/json .
 	//
 	// This member is required.
 	MimeType *string
 
-	// A pre-signed URL for downloading the document content. The URL expires after 5
-	// minutes.
+	// A pre-signed URL for downloading the document content, or the selected image if
+	// you specify mediaId . The URL expires after 5 minutes.
 	//
 	// This member is required.
 	PresignedUrl *string
 
-	// The size of the document content in bytes available at the pre-signed URL.
+	// The size, in bytes, of the content available at the pre-signed URL.
 	DocumentContentLength *int64
 
 	// Metadata pertaining to the operation's result.

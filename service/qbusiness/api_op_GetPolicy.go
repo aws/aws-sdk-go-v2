@@ -4,6 +4,8 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetPolicyRequest_applicationId, *v.ApplicationId)
+	}
+}
+
 type GetPolicyOutput struct {
 
 	// The JSON representation of the permission policy.
@@ -46,13 +60,32 @@ type GetPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetPolicyResponse_policy, *v.Policy)
+	}
+}
+func (v *GetPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetPolicyResponse_policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyRequest, schemas.GetPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyRequest, schemas.GetPolicyResponse), output: &GetPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

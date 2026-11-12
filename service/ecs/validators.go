@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateGatewayWithCluster struct {
+}
+
+func (*validateOpAssociateGatewayWithCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateGatewayWithCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateGatewayWithClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateGatewayWithClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpContinueServiceDeployment struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreateExpressGatewayService) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateExpressGatewayServiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateGateway struct {
+}
+
+func (*validateOpCreateGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGatewayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +325,26 @@ func (m *validateOpDeleteExpressGatewayService) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteExpressGatewayServiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteGateway struct {
+}
+
+func (*validateOpDeleteGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteGatewayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +570,66 @@ func (m *validateOpDescribeExpressGatewayService) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeGateway struct {
+}
+
+func (*validateOpDescribeGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeGatewayResources struct {
+}
+
+func (*validateOpDescribeGatewayResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeGatewayResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeGatewayResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeGatewayResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeGatewayRoute struct {
+}
+
+func (*validateOpDescribeGatewayRoute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeGatewayRoute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeGatewayRouteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeGatewayRouteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeServiceDeployments struct {
 }
 
@@ -625,6 +745,26 @@ func (m *validateOpDescribeTasks) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateGatewayFromCluster struct {
+}
+
+func (*validateOpDisassociateGatewayFromCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateGatewayFromCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateGatewayFromClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateGatewayFromClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1210,6 +1350,26 @@ func (m *validateOpUpdateExpressGatewayService) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateGateway struct {
+}
+
+func (*validateOpUpdateGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateService struct {
 }
 
@@ -1290,6 +1450,10 @@ func (m *validateOpUpdateTaskSet) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateGatewayWithClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateGatewayWithCluster{}, middleware.After)
+}
+
 func addOpContinueServiceDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpContinueServiceDeployment{}, middleware.After)
 }
@@ -1308,6 +1472,10 @@ func addOpCreateDaemonValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateExpressGatewayServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExpressGatewayService{}, middleware.After)
+}
+
+func addOpCreateGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGateway{}, middleware.After)
 }
 
 func addOpCreateServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -1344,6 +1512,10 @@ func addOpDeleteDaemonTaskDefinitionValidationMiddleware(stack *middleware.Stack
 
 func addOpDeleteExpressGatewayServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteExpressGatewayService{}, middleware.After)
+}
+
+func addOpDeleteGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteGateway{}, middleware.After)
 }
 
 func addOpDeleteServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -1390,6 +1562,18 @@ func addOpDescribeExpressGatewayServiceValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeExpressGatewayService{}, middleware.After)
 }
 
+func addOpDescribeGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeGateway{}, middleware.After)
+}
+
+func addOpDescribeGatewayResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeGatewayResources{}, middleware.After)
+}
+
+func addOpDescribeGatewayRouteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeGatewayRoute{}, middleware.After)
+}
+
 func addOpDescribeServiceDeploymentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeServiceDeployments{}, middleware.After)
 }
@@ -1412,6 +1596,10 @@ func addOpDescribeTaskSetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTasks{}, middleware.After)
+}
+
+func addOpDisassociateGatewayFromClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateGatewayFromCluster{}, middleware.After)
 }
 
 func addOpExecuteCommandValidationMiddleware(stack *middleware.Stack) error {
@@ -1528,6 +1716,10 @@ func addOpUpdateDaemonValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateExpressGatewayServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateExpressGatewayService{}, middleware.After)
+}
+
+func addOpUpdateGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGateway{}, middleware.After)
 }
 
 func addOpUpdateServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -1994,6 +2186,40 @@ func validateDaemonLinuxParameters(v *types.DaemonLinuxParameters) error {
 	}
 }
 
+func validateDaemonVolume(v *types.DaemonVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DaemonVolume"}
+	if v.LogDriverVolumeConfiguration != nil {
+		if err := validateLogDriverVolumeConfiguration(v.LogDriverVolumeConfiguration); err != nil {
+			invalidParams.AddNested("LogDriverVolumeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDaemonVolumeList(v []types.DaemonVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DaemonVolumeList"}
+	for i := range v {
+		if err := validateDaemonVolume(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeploymentAlarms(v *types.DeploymentAlarms) error {
 	if v == nil {
 		return nil
@@ -2307,6 +2533,143 @@ func validateFSxWindowsFileServerVolumeConfiguration(v *types.FSxWindowsFileServ
 	}
 }
 
+func validateGatewayAlbTestTrafficRules(v *types.GatewayAlbTestTrafficRules) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayAlbTestTrafficRules"}
+	if v.Header != nil {
+		if err := validateGatewayTestTrafficHeader(v.Header); err != nil {
+			invalidParams.AddNested("Header", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayConfiguration(v types.GatewayConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayConfiguration"}
+	switch uv := v.(type) {
+	case *types.GatewayConfigurationMemberHostSharedAlb:
+		if err := validateHostSharedAlbConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[hostSharedAlb]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayConnector(v *types.GatewayConnector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayConnector"}
+	if v.PortName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayConnectorList(v []types.GatewayConnector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayConnectorList"}
+	for i := range v {
+		if err := validateGatewayConnector(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayElbAccessLogConfiguration(v *types.GatewayElbAccessLogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayElbAccessLogConfiguration"}
+	if v.Destination != nil {
+		if err := validateGatewayElbAccessLogDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayElbAccessLogDestination(v types.GatewayElbAccessLogDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayElbAccessLogDestination"}
+	switch uv := v.(type) {
+	case *types.GatewayElbAccessLogDestinationMemberS3:
+		if err := validateGatewayElbAccessLogS3Destination(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayElbAccessLogS3Destination(v *types.GatewayElbAccessLogS3Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayElbAccessLogS3Destination"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayTestTrafficHeader(v *types.GatewayTestTrafficHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayTestTrafficHeader"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHealthCheck(v *types.HealthCheck) error {
 	if v == nil {
 		return nil
@@ -2348,6 +2711,28 @@ func validateHostEntryList(v []types.HostEntry) error {
 	for i := range v {
 		if err := validateHostEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHostSharedAlbConfiguration(v *types.HostSharedAlbConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HostSharedAlbConfiguration"}
+	if v.AccessLogs != nil {
+		if err := validateGatewayElbAccessLogConfiguration(v.AccessLogs); err != nil {
+			invalidParams.AddNested("AccessLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TestTrafficRules != nil {
+		if err := validateGatewayAlbTestTrafficRules(v.TestTrafficRules); err != nil {
+			invalidParams.AddNested("TestTrafficRules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2500,6 +2885,21 @@ func validateLogConfiguration(v *types.LogConfiguration) error {
 	}
 }
 
+func validateLogDriverVolumeConfiguration(v *types.LogDriverVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogDriverVolumeConfiguration"}
+	if len(v.Driver) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Driver"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateManagedAgentStateChange(v *types.ManagedAgentStateChange) error {
 	if v == nil {
 		return nil
@@ -2622,6 +3022,21 @@ func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	}
 }
 
+func validateNvidiaMpsAllocation(v *types.NvidiaMpsAllocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NvidiaMpsAllocation"}
+	if v.Memory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Memory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePlatformDevice(v *types.PlatformDevice) error {
 	if v == nil {
 		return nil
@@ -2692,11 +3107,13 @@ func validateResourceRequirement(v *types.ResourceRequirement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRequirement"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.SharingStrategy != nil {
+		if err := validateSharingStrategy(v.SharingStrategy); err != nil {
+			invalidParams.AddNested("SharingStrategy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3019,6 +3436,25 @@ func validateServiceVolumeConfigurations(v []types.ServiceVolumeConfiguration) e
 	}
 }
 
+func validateSharingStrategy(v types.SharingStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharingStrategy"}
+	switch uv := v.(type) {
+	case *types.SharingStrategyMemberNvidiaMps:
+		if err := validateNvidiaMpsAllocation(&uv.Value); err != nil {
+			invalidParams.AddNested("[nvidiaMps]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTaskManagedEBSVolumeConfiguration(v *types.TaskManagedEBSVolumeConfiguration) error {
 	if v == nil {
 		return nil
@@ -3165,6 +3601,21 @@ func validateTmpfsList(v []types.Tmpfs) error {
 	}
 }
 
+func validateTrustedExecutionConfiguration(v *types.TrustedExecutionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrustedExecutionConfiguration"}
+	if len(v.IsolationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IsolationMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUlimit(v *types.Ulimit) error {
 	if v == nil {
 		return nil
@@ -3189,6 +3640,47 @@ func validateUlimitList(v []types.Ulimit) error {
 		if err := validateUlimit(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateGatewayAlbConfiguration(v *types.UpdateGatewayAlbConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayAlbConfiguration"}
+	if v.AccessLogs != nil {
+		if err := validateGatewayElbAccessLogConfiguration(v.AccessLogs); err != nil {
+			invalidParams.AddNested("AccessLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TestTrafficRules != nil {
+		if err := validateGatewayAlbTestTrafficRules(v.TestTrafficRules); err != nil {
+			invalidParams.AddNested("TestTrafficRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateGatewayConfiguration(v types.UpdateGatewayConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayConfiguration"}
+	switch uv := v.(type) {
+	case *types.UpdateGatewayConfigurationMemberHostSharedAlb:
+		if err := validateUpdateGatewayAlbConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[hostSharedAlb]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3316,6 +3808,24 @@ func validateVpcLatticeConfigurations(v []types.VpcLatticeConfiguration) error {
 	}
 }
 
+func validateOpAssociateGatewayWithClusterInput(v *AssociateGatewayWithClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateGatewayWithClusterInput"}
+	if v.Gateway == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gateway"))
+	}
+	if v.Cluster == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cluster"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpContinueServiceDeploymentInput(v *ContinueServiceDeploymentInput) error {
 	if v == nil {
 		return nil
@@ -3422,6 +3932,31 @@ func validateOpCreateExpressGatewayServiceInput(v *CreateExpressGatewayServiceIn
 	}
 }
 
+func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGatewayInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.InfrastructureRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureRoleArn"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateGatewayConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v == nil {
 		return nil
@@ -3463,6 +3998,11 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.VpcLatticeConfigurations != nil {
 		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
 			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GatewayConnectors != nil {
+		if err := validateGatewayConnectorList(v.GatewayConnectors); err != nil {
+			invalidParams.AddNested("GatewayConnectors", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Monitoring != nil {
@@ -3609,6 +4149,21 @@ func validateOpDeleteExpressGatewayServiceInput(v *DeleteExpressGatewayServiceIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteExpressGatewayServiceInput"}
 	if v.ServiceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteGatewayInput(v *DeleteGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteGatewayInput"}
+	if v.Gateway == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gateway"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3788,6 +4343,51 @@ func validateOpDescribeExpressGatewayServiceInput(v *DescribeExpressGatewayServi
 	}
 }
 
+func validateOpDescribeGatewayInput(v *DescribeGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeGatewayInput"}
+	if v.Gateway == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gateway"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeGatewayResourcesInput(v *DescribeGatewayResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeGatewayResourcesInput"}
+	if v.Gateway == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gateway"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeGatewayRouteInput(v *DescribeGatewayRouteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeGatewayRouteInput"}
+	if v.GatewayRouteArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayRouteArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeServiceDeploymentsInput(v *DescribeServiceDeploymentsInput) error {
 	if v == nil {
 		return nil
@@ -3873,6 +4473,24 @@ func validateOpDescribeTasksInput(v *DescribeTasksInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTasksInput"}
 	if v.Tasks == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tasks"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateGatewayFromClusterInput(v *DisassociateGatewayFromClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateGatewayFromClusterInput"}
+	if v.Gateway == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gateway"))
+	}
+	if v.Cluster == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cluster"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4106,6 +4724,11 @@ func validateOpRegisterDaemonTaskDefinitionInput(v *RegisterDaemonTaskDefinition
 			invalidParams.AddNested("ContainerDefinitions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Volumes != nil {
+		if err := validateDaemonVolumeList(v.Volumes); err != nil {
+			invalidParams.AddNested("Volumes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4146,6 +4769,11 @@ func validateOpRegisterTaskDefinitionInput(v *RegisterTaskDefinitionInput) error
 	if v.EphemeralStorage != nil {
 		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
 			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TrustedExecutionConfiguration != nil {
+		if err := validateTrustedExecutionConfiguration(v.TrustedExecutionConfiguration); err != nil {
+			invalidParams.AddNested("TrustedExecutionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4462,6 +5090,26 @@ func validateOpUpdateExpressGatewayServiceInput(v *UpdateExpressGatewayServiceIn
 	}
 }
 
+func validateOpUpdateGatewayInput(v *UpdateGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayInput"}
+	if v.Gateway == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gateway"))
+	}
+	if v.Configuration != nil {
+		if err := validateUpdateGatewayConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v == nil {
 		return nil
@@ -4503,6 +5151,11 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v.VpcLatticeConfigurations != nil {
 		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
 			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GatewayConnectors != nil {
+		if err := validateGatewayConnectorList(v.GatewayConnectors); err != nil {
+			invalidParams.AddNested("GatewayConnectors", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Monitoring != nil {

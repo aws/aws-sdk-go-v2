@@ -30,10 +30,18 @@ type AuditEvent struct {
 	// The type of audit history event.
 	//
 	// Valid Values: Case.Created | Case.Updated | RelatedItem.Created |
-	// RelatedItem.Updated | RelatedItem.Deleted
+	// RelatedItem.Updated | RelatedItem.Deleted | Case.Merged
+	//
+	// Case.Merged summarizes a merge on each of the two cases that took part in it.
 	//
 	// This member is required.
 	Type AuditEventType
+
+	// Information about the merge that produced this audit event. Present only on
+	// audit events produced by a merge. For more information, see [StartMergeCases].
+	//
+	// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
+	MergeMetadata *AuditMergeMetadata
 
 	// Information of the user which performed the audit.
 	PerformedBy *AuditEventPerformedBy
@@ -54,7 +62,14 @@ func (v *AuditEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventId != nil {
 		s.WriteString(schemas.AuditEvent_eventId, *v.EventId)
 	}
-	serializeAuditEventFieldList(s, schemas.AuditEvent_fields, v.Fields)
+	if v.Fields != nil {
+		serializeAuditEventFieldList(s, schemas.AuditEvent_fields, v.Fields)
+	}
+	if v.MergeMetadata != nil {
+		s.WriteStruct(schemas.AuditEvent_mergeMetadata)
+		v.MergeMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PerformedBy != nil {
 		s.WriteStruct(schemas.AuditEvent_performedBy)
 		v.PerformedBy.SerializeMembers(s)
@@ -78,6 +93,9 @@ func (v *AuditEvent) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.AuditEvent_eventId, v.EventId)
 		case schemas.AuditEvent_fields:
 			return deserializeAuditEventFieldList(d, schemas.AuditEvent_fields, &v.Fields)
+		case schemas.AuditEvent_mergeMetadata:
+			v.MergeMetadata = &AuditMergeMetadata{}
+			return v.MergeMetadata.Deserialize(d)
 		case schemas.AuditEvent_performedBy:
 			v.PerformedBy = &AuditEventPerformedBy{}
 			return v.PerformedBy.Deserialize(d)
@@ -132,8 +150,12 @@ func (v *AuditEventField) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventFieldId != nil {
 		s.WriteString(schemas.AuditEventField_eventFieldId, *v.EventFieldId)
 	}
-	serializeAuditEventFieldValueUnion(s, schemas.AuditEventField_newValue, v.NewValue)
-	serializeAuditEventFieldValueUnion(s, schemas.AuditEventField_oldValue, v.OldValue)
+	if v.NewValue != nil {
+		serializeAuditEventFieldValueUnion(s, schemas.AuditEventField_newValue, v.NewValue)
+	}
+	if v.OldValue != nil {
+		serializeAuditEventFieldValueUnion(s, schemas.AuditEventField_oldValue, v.OldValue)
+	}
 }
 func (v *AuditEventField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuditEventField, func(s *smithy.Schema) error {
@@ -270,7 +292,9 @@ func (v *AuditEventPerformedBy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IamPrincipalArn != nil {
 		s.WriteString(schemas.AuditEventPerformedBy_iamPrincipalArn, *v.IamPrincipalArn)
 	}
-	serializeUserUnion(s, schemas.AuditEventPerformedBy_user, v.User)
+	if v.User != nil {
+		serializeUserUnion(s, schemas.AuditEventPerformedBy_user, v.User)
+	}
 }
 func (v *AuditEventPerformedBy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuditEventPerformedBy, func(s *smithy.Schema) error {
@@ -280,6 +304,63 @@ func (v *AuditEventPerformedBy) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.AuditEventPerformedBy_iamPrincipalArn, v.IamPrincipalArn)
 		case schemas.AuditEventPerformedBy_user:
 			return deserializeUserUnion(d, schemas.AuditEventPerformedBy_user, &v.User)
+		}
+		return nil
+	})
+}
+
+// Information about the merge that produced an audit event.
+type AuditMergeMetadata struct {
+
+	// The unique identifier of the merge. All audit events produced by the same
+	// merge, on both cases, have the same value. Use it to group the changes that a
+	// merge made.
+	//
+	// This member is required.
+	MergeEventId *string
+
+	// The unique identifier of the primary case of the merge.
+	//
+	// This member is required.
+	PrimaryCaseId *string
+
+	// The unique identifier of the secondary case of the merge.
+	//
+	// This member is required.
+	SecondaryCaseId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AuditMergeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditMergeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuditMergeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MergeEventId != nil {
+		s.WriteString(schemas.AuditMergeMetadata_mergeEventId, *v.MergeEventId)
+	}
+	if v.PrimaryCaseId != nil {
+		s.WriteString(schemas.AuditMergeMetadata_primaryCaseId, *v.PrimaryCaseId)
+	}
+	if v.SecondaryCaseId != nil {
+		s.WriteString(schemas.AuditMergeMetadata_secondaryCaseId, *v.SecondaryCaseId)
+	}
+}
+func (v *AuditMergeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuditMergeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuditMergeMetadata_mergeEventId:
+			v.MergeEventId = new(string)
+			return d.ReadString(schemas.AuditMergeMetadata_mergeEventId, v.MergeEventId)
+		case schemas.AuditMergeMetadata_primaryCaseId:
+			v.PrimaryCaseId = new(string)
+			return d.ReadString(schemas.AuditMergeMetadata_primaryCaseId, v.PrimaryCaseId)
+		case schemas.AuditMergeMetadata_secondaryCaseId:
+			v.SecondaryCaseId = new(string)
+			return d.ReadString(schemas.AuditMergeMetadata_secondaryCaseId, v.SecondaryCaseId)
 		}
 		return nil
 	})
@@ -330,7 +411,280 @@ func (v *BasicLayout) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Boolean condition for a rule. In the Amazon Connect admin website, case rules
+// Information about a related item that wasn't created.
+type BatchCreateRelatedItemErrorEntry struct {
+
+	// The identifiers of the case that the related item wasn't created for.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	// The error code. For possible values, see failedItems .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// A message that describes the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateRelatedItemErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRelatedItemErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRelatedItemErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchCreateRelatedItemErrorEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemErrorEntry_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemErrorEntry_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchCreateRelatedItemErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateRelatedItemErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateRelatedItemErrorEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		case schemas.BatchCreateRelatedItemErrorEntry_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemErrorEntry_errorCode, v.ErrorCode)
+		case schemas.BatchCreateRelatedItemErrorEntry_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemErrorEntry_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// Identifies a case to associate the related item with in a BatchCreateRelatedItem
+// request.
+type BatchCreateRelatedItemIdentifier struct {
+
+	// The identifier of the case to associate the related item with. Specify either
+	// the case ID or the reference ID.
+	//
+	// This member is required.
+	CaseIdentifier CaseIdentifierUnion
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateRelatedItemIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRelatedItemIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRelatedItemIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		serializeCaseIdentifierUnion(s, schemas.BatchCreateRelatedItemIdentifier_caseIdentifier, v.CaseIdentifier)
+	}
+}
+func (v *BatchCreateRelatedItemIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateRelatedItemIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateRelatedItemIdentifier_caseIdentifier:
+			return deserializeCaseIdentifierUnion(d, schemas.BatchCreateRelatedItemIdentifier_caseIdentifier, &v.CaseIdentifier)
+		}
+		return nil
+	})
+}
+
+// Information about a related item that was created.
+type BatchCreateRelatedItemSuccessEntry struct {
+
+	// The identifiers of the case that the related item is associated with.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	// The Amazon Resource Name (ARN) of the related item.
+	//
+	// This member is required.
+	RelatedItemArn *string
+
+	// The unique identifier of the related item.
+	//
+	// This member is required.
+	RelatedItemId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateRelatedItemSuccessEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRelatedItemSuccessEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRelatedItemSuccessEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchCreateRelatedItemSuccessEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedItemArn != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemArn, *v.RelatedItemArn)
+	}
+	if v.RelatedItemId != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemId, *v.RelatedItemId)
+	}
+}
+func (v *BatchCreateRelatedItemSuccessEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateRelatedItemSuccessEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateRelatedItemSuccessEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		case schemas.BatchCreateRelatedItemSuccessEntry_relatedItemArn:
+			v.RelatedItemArn = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemArn, v.RelatedItemArn)
+		case schemas.BatchCreateRelatedItemSuccessEntry_relatedItemId:
+			v.RelatedItemId = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemId, v.RelatedItemId)
+		}
+		return nil
+	})
+}
+
+// Information about a case that wasn't updated.
+type BatchUpdateCaseErrorEntry struct {
+
+	// The identifiers of the case that wasn't updated.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	// The error code. For possible values, see failedCases .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// A message that describes the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateCaseErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateCaseErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCaseErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchUpdateCaseErrorEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchUpdateCaseErrorEntry_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchUpdateCaseErrorEntry_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchUpdateCaseErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateCaseErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateCaseErrorEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		case schemas.BatchUpdateCaseErrorEntry_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchUpdateCaseErrorEntry_errorCode, v.ErrorCode)
+		case schemas.BatchUpdateCaseErrorEntry_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchUpdateCaseErrorEntry_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// Identifies a case to update in a BatchUpdateCase request.
+type BatchUpdateCaseIdentifier struct {
+
+	// The identifier of the case to update. Specify either the case ID or the
+	// reference ID.
+	//
+	// This member is required.
+	CaseIdentifier CaseIdentifierUnion
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateCaseIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateCaseIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCaseIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		serializeCaseIdentifierUnion(s, schemas.BatchUpdateCaseIdentifier_caseIdentifier, v.CaseIdentifier)
+	}
+}
+func (v *BatchUpdateCaseIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateCaseIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateCaseIdentifier_caseIdentifier:
+			return deserializeCaseIdentifierUnion(d, schemas.BatchUpdateCaseIdentifier_caseIdentifier, &v.CaseIdentifier)
+		}
+		return nil
+	})
+}
+
+// Information about a case that was updated.
+type BatchUpdateCaseSuccessEntry struct {
+
+	// The identifiers of the updated case.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateCaseSuccessEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateCaseSuccessEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCaseSuccessEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchUpdateCaseSuccessEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchUpdateCaseSuccessEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateCaseSuccessEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateCaseSuccessEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Boolean condition for a rule. In the Connect Customer admin website, case rules
 // are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
@@ -416,7 +770,7 @@ func (v *BooleanConditionMemberOrAll) Deserialize(d smithy.ShapeDeserializer) er
 	return v.Value.Deserialize(d)
 }
 
-// Boolean operands for a condition. In the Amazon Connect admin website, case
+// Boolean operands for a condition. In the Connect Customer admin website, case
 // rules are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
@@ -448,8 +802,12 @@ func (v *BooleanOperands) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BooleanOperands) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperandOne(s, schemas.BooleanOperands_operandOne, v.OperandOne)
-	serializeOperandTwo(s, schemas.BooleanOperands_operandTwo, v.OperandTwo)
+	if v.OperandOne != nil {
+		serializeOperandOne(s, schemas.BooleanOperands_operandOne, v.OperandOne)
+	}
+	if v.OperandTwo != nil {
+		serializeOperandTwo(s, schemas.BooleanOperands_operandTwo, v.OperandTwo)
+	}
 	if v.Result != nil {
 		s.WriteBool(schemas.BooleanOperands_result, *v.Result)
 	}
@@ -487,7 +845,9 @@ func (v *CaseEventIncludedData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CaseEventIncludedData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldIdentifierList(s, schemas.CaseEventIncludedData_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldIdentifierList(s, schemas.CaseEventIncludedData_fields, v.Fields)
+	}
 }
 func (v *CaseEventIncludedData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CaseEventIncludedData, func(s *smithy.Schema) error {
@@ -587,9 +947,101 @@ func (v *CaseFilterMemberTag) Deserialize(d smithy.ShapeDeserializer) error {
 	return deserializeTagFilter(d, schemas.CaseFilter_tag, &v.Value)
 }
 
+// The identifiers of a case that a batch operation returns.
+type CaseIdentifier struct {
+
+	// The unique identifier of the case.
+	CaseId *string
+
+	// The reference ID of the case. Cases created before reference IDs were available
+	// don't have one.
+	ReferenceId *string
+
+	// The reference number of the case. Reference numbers aren't guaranteed to be
+	// unique. BatchUpdateCase and BatchCreateRelatedItem don't return this value.
+	ReferenceNumber *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CaseIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaseIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaseIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.CaseIdentifier_caseId, *v.CaseId)
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.CaseIdentifier_referenceId, *v.ReferenceId)
+	}
+	if v.ReferenceNumber != nil {
+		s.WriteString(schemas.CaseIdentifier_referenceNumber, *v.ReferenceNumber)
+	}
+}
+func (v *CaseIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaseIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaseIdentifier_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.CaseIdentifier_caseId, v.CaseId)
+		case schemas.CaseIdentifier_referenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.CaseIdentifier_referenceId, v.ReferenceId)
+		case schemas.CaseIdentifier_referenceNumber:
+			v.ReferenceNumber = new(string)
+			return d.ReadString(schemas.CaseIdentifier_referenceNumber, v.ReferenceNumber)
+		}
+		return nil
+	})
+}
+
+// Identifies a case by its case ID or its reference ID. Specify only one member.
+//
+// The following types satisfy this interface:
+//
+//	CaseIdentifierUnionMemberCaseId
+//	CaseIdentifierUnionMemberReferenceId
+type CaseIdentifierUnion interface {
+	isCaseIdentifierUnion()
+}
+
+// The unique identifier of the case.
+type CaseIdentifierUnionMemberCaseId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseIdentifierUnionMemberCaseId) isCaseIdentifierUnion() {}
+func (v *CaseIdentifierUnionMemberCaseId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CaseIdentifierUnion_caseId, v.Value)
+}
+func (v *CaseIdentifierUnionMemberCaseId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CaseIdentifierUnion_caseId, &v.Value)
+}
+
+// The reference ID of the case. Reference IDs are unique within a domain, and
+// uniqueness isn't case sensitive.
+type CaseIdentifierUnionMemberReferenceId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseIdentifierUnionMemberReferenceId) isCaseIdentifierUnion() {}
+func (v *CaseIdentifierUnionMemberReferenceId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CaseIdentifierUnion_referenceId, v.Value)
+}
+func (v *CaseIdentifierUnionMemberReferenceId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CaseIdentifierUnion_referenceId, &v.Value)
+}
+
 // Represents what rule type should take place, under what conditions. In the
-// Amazon Connect admin website, case rules are known as case field conditions. For
-// more information about case field conditions, see [Add case field conditions to a case template].
+// Connect Customer admin website, case rules are known as case field conditions.
+// For more information about case field conditions, see [Add case field conditions to a case template].
 //
 // The following types satisfy this interface:
 //
@@ -654,7 +1106,7 @@ func (v *CaseRuleDetailsMemberRequired) Deserialize(d smithy.ShapeDeserializer) 
 	return v.Value.Deserialize(d)
 }
 
-// Error for batch describe case rules API failure. In the Amazon Connect admin
+// Error for batch describe case rules API failure. In the Connect Customer admin
 // website, case rules are known as case field conditions. For more information
 // about case field conditions, see [Add case field conditions to a case template].
 //
@@ -744,7 +1196,7 @@ func (v *CaseRuleIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Summary information of this case rule. In the Amazon Connect admin website,
+// Summary information of this case rule. In the Connect Customer admin website,
 // case rules are known as case field conditions. For more information about case
 // field conditions, see [Add case field conditions to a case template].
 //
@@ -989,7 +1441,7 @@ func (v *CommentUpdateContent) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // A compound condition that combines multiple boolean conditions using logical
-// operators. In the Amazon Connect admin website, case rules are known as case
+// operators. In the Connect Customer admin website, case rules are known as case
 // field conditions. For more information about case field conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
@@ -1013,7 +1465,9 @@ func (v *CompoundCondition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompoundCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanConditionList(s, schemas.CompoundCondition_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeBooleanConditionList(s, schemas.CompoundCondition_conditions, v.Conditions)
+	}
 }
 func (v *CompoundCondition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompoundCondition, func(s *smithy.Schema) error {
@@ -1122,10 +1576,10 @@ func (v *ConnectCaseInputContent) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// An object that represents an Amazon Connect contact object.
+// An object that represents an Connect Customer contact object.
 type Contact struct {
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	//
 	// This member is required.
 	ContactArn *string
@@ -1155,7 +1609,7 @@ func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// An object that represents a content of an Amazon Connect contact object.
+// An object that represents a content of an Connect Customer contact object.
 type ContactContent struct {
 
 	// A list of channels to filter on for related items of type Contact .
@@ -1169,7 +1623,7 @@ type ContactContent struct {
 	// This member is required.
 	ConnectedToSystemTime *time.Time
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	//
 	// This member is required.
 	ContactArn *string
@@ -1217,7 +1671,7 @@ type ContactFilter struct {
 	// A list of channels to filter on for related items of type Contact .
 	Channel []string
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	ContactArn *string
 
 	noSmithyDocumentSerde
@@ -1230,7 +1684,9 @@ func (v *ContactFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContactFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelList(s, schemas.ContactFilter_channel, v.Channel)
+	if v.Channel != nil {
+		serializeChannelList(s, schemas.ContactFilter_channel, v.Channel)
+	}
 	if v.ContactArn != nil {
 		s.WriteString(schemas.ContactFilter_contactArn, *v.ContactArn)
 	}
@@ -1266,7 +1722,9 @@ func (v *CustomContent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldValueList(s, schemas.CustomContent_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.CustomContent_fields, v.Fields)
+	}
 }
 func (v *CustomContent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomContent, func(s *smithy.Schema) error {
@@ -1367,7 +1825,9 @@ func (v *CustomFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomFieldsFilter(s, schemas.CustomFilter_fields, v.Fields)
+	if v.Fields != nil {
+		serializeCustomFieldsFilter(s, schemas.CustomFilter_fields, v.Fields)
+	}
 }
 func (v *CustomFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomFilter, func(s *smithy.Schema) error {
@@ -1397,7 +1857,9 @@ func (v *CustomInputContent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomInputContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldValueList(s, schemas.CustomInputContent_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.CustomInputContent_fields, v.Fields)
+	}
 }
 func (v *CustomInputContent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomInputContent, func(s *smithy.Schema) error {
@@ -1429,7 +1891,9 @@ func (v *CustomUpdateContent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomUpdateContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldValueList(s, schemas.CustomUpdateContent_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.CustomUpdateContent_fields, v.Fields)
+	}
 }
 func (v *CustomUpdateContent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomUpdateContent, func(s *smithy.Schema) error {
@@ -1521,7 +1985,7 @@ func (v *EmptyFieldValue) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Represents an empty operand value. In the Amazon Connect admin website, case
+// Represents an empty operand value. In the Connect Customer admin website, case
 // rules are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
@@ -1853,7 +2317,9 @@ func (v *FieldGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FieldGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldList(s, schemas.FieldGroup_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldList(s, schemas.FieldGroup_fields, v.Fields)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.FieldGroup_name, *v.Name)
 	}
@@ -1902,6 +2368,47 @@ func (v *FieldIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// Identifies a field by its ID or by its name. Specify only one member.
+// Identifying a field by name is supported only in BatchUpdateCase .
+//
+// The following types satisfy this interface:
+//
+//	FieldIdentifierUnionMemberId
+//	FieldIdentifierUnionMemberName
+type FieldIdentifierUnion interface {
+	isFieldIdentifierUnion()
+}
+
+// The unique identifier of the field.
+type FieldIdentifierUnionMemberId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldIdentifierUnionMemberId) isFieldIdentifierUnion() {}
+func (v *FieldIdentifierUnionMemberId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.FieldIdentifierUnion_id, v.Value)
+}
+func (v *FieldIdentifierUnionMemberId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.FieldIdentifierUnion_id, &v.Value)
+}
+
+// The name of the field.
+type FieldIdentifierUnionMemberName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldIdentifierUnionMemberName) isFieldIdentifierUnion() {}
+func (v *FieldIdentifierUnionMemberName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.FieldIdentifierUnion_name, v.Value)
+}
+func (v *FieldIdentifierUnionMemberName) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.FieldIdentifierUnion_name, &v.Value)
 }
 
 // Object for field related information.
@@ -2076,7 +2583,9 @@ func (v *FieldOptionsCaseRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChildFieldId != nil {
 		s.WriteString(schemas.FieldOptionsCaseRule_childFieldId, *v.ChildFieldId)
 	}
-	serializeParentChildFieldOptionsMappingList(s, schemas.FieldOptionsCaseRule_parentChildFieldOptionsMappings, v.ParentChildFieldOptionsMappings)
+	if v.ParentChildFieldOptionsMappings != nil {
+		serializeParentChildFieldOptionsMappingList(s, schemas.FieldOptionsCaseRule_parentChildFieldOptionsMappings, v.ParentChildFieldOptionsMappings)
+	}
 	if v.ParentFieldId != nil {
 		s.WriteString(schemas.FieldOptionsCaseRule_parentFieldId, *v.ParentFieldId)
 	}
@@ -2092,6 +2601,53 @@ func (v *FieldOptionsCaseRule) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FieldOptionsCaseRule_parentFieldId:
 			v.ParentFieldId = new(string)
 			return d.ReadString(schemas.FieldOptionsCaseRule_parentFieldId, v.ParentFieldId)
+		}
+		return nil
+	})
+}
+
+// Specifies the fields whose values to take from the secondary case when you
+// merge cases.
+type FieldsConfiguration struct {
+
+	// The fields whose values to take from the source case. Each field must exist on
+	// the source case and must be a field that can be merged. Don't list the same
+	// field more than once.
+	//
+	// This member is required.
+	FieldIds []FieldIdentifier
+
+	// The unique identifier of the case to take the field values from. This must be
+	// the secondary case.
+	//
+	// This member is required.
+	SourceCaseId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FieldsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldIds != nil {
+		serializeFieldIdentifierList(s, schemas.FieldsConfiguration_fieldIds, v.FieldIds)
+	}
+	if v.SourceCaseId != nil {
+		s.WriteString(schemas.FieldsConfiguration_sourceCaseId, *v.SourceCaseId)
+	}
+}
+func (v *FieldsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldsConfiguration_fieldIds:
+			return deserializeFieldIdentifierList(d, schemas.FieldsConfiguration_fieldIds, &v.FieldIds)
+		case schemas.FieldsConfiguration_sourceCaseId:
+			v.SourceCaseId = new(string)
+			return d.ReadString(schemas.FieldsConfiguration_sourceCaseId, v.SourceCaseId)
 		}
 		return nil
 	})
@@ -2138,7 +2694,9 @@ func (v *FieldSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FieldSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldAttributes(s, schemas.FieldSummary_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeFieldAttributes(s, schemas.FieldSummary_attributes, v.Attributes)
+	}
 	if v.FieldArn != nil {
 		s.WriteString(schemas.FieldSummary_fieldArn, *v.FieldArn)
 	}
@@ -2214,7 +2772,9 @@ func (v *FieldValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.FieldValue_id, *v.Id)
 	}
-	serializeFieldValueUnion(s, schemas.FieldValue_value, v.Value)
+	if v.Value != nil {
+		serializeFieldValueUnion(s, schemas.FieldValue_value, v.Value)
+	}
 }
 func (v *FieldValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FieldValue, func(s *smithy.Schema) error {
@@ -2224,6 +2784,48 @@ func (v *FieldValue) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.FieldValue_id, v.Id)
 		case schemas.FieldValue_value:
 			return deserializeFieldValueUnion(d, schemas.FieldValue_value, &v.Value)
+		}
+		return nil
+	})
+}
+
+// A field and the value to set for it.
+type FieldValueInput struct {
+
+	// The field to update, identified by field ID or field name.
+	//
+	// This member is required.
+	FieldIdentifier FieldIdentifierUnion
+
+	// The value to set for the field.
+	//
+	// This member is required.
+	Value FieldValueUnion
+
+	noSmithyDocumentSerde
+}
+
+func (v *FieldValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldValueInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldIdentifier != nil {
+		serializeFieldIdentifierUnion(s, schemas.FieldValueInput_fieldIdentifier, v.FieldIdentifier)
+	}
+	if v.Value != nil {
+		serializeFieldValueUnion(s, schemas.FieldValueInput_value, v.Value)
+	}
+}
+func (v *FieldValueInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldValueInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldValueInput_fieldIdentifier:
+			return deserializeFieldIdentifierUnion(d, schemas.FieldValueInput_fieldIdentifier, &v.FieldIdentifier)
+		case schemas.FieldValueInput_value:
+			return deserializeFieldValueUnion(d, schemas.FieldValueInput_value, &v.Value)
 		}
 		return nil
 	})
@@ -2325,10 +2927,10 @@ func (v *FieldValueUnionMemberUserArnValue) Deserialize(d smithy.ShapeDeserializ
 	return d.ReadString(schemas.FieldValueUnion_userArnValue, &v.Value)
 }
 
-// An object that represents a content of an Amazon Connect file object.
+// An object that represents a content of an Connect Customer file object.
 type FileContent struct {
 
-	// The Amazon Resource Name (ARN) of a File in Amazon Connect.
+	// The Amazon Resource Name (ARN) of a File in Connect Customer.
 	//
 	// This member is required.
 	FileArn *string
@@ -2389,8 +2991,8 @@ func (v *FileFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Detailed case rule information. In the Amazon Connect admin website, case rules
-// are known as case field conditions. For more information about case field
+// Detailed case rule information. In the Connect Customer admin website, case
+// rules are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
@@ -2428,7 +3030,7 @@ type GetCaseRuleResponse struct {
 	// Timestamp when the resource was created or last modified.
 	LastModifiedTime *time.Time
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -2463,8 +3065,12 @@ func (v *GetCaseRuleResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetCaseRuleResponse_name, *v.Name)
 	}
-	serializeCaseRuleDetails(s, schemas.GetCaseRuleResponse_rule, v.Rule)
-	serializeTags(s, schemas.GetCaseRuleResponse_tags, v.Tags)
+	if v.Rule != nil {
+		serializeCaseRuleDetails(s, schemas.GetCaseRuleResponse_rule, v.Rule)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetCaseRuleResponse_tags, v.Tags)
+	}
 }
 func (v *GetCaseRuleResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCaseRuleResponse, func(s *smithy.Schema) error {
@@ -2541,7 +3147,7 @@ type GetFieldResponse struct {
 	// Timestamp at which the resource was created or last modified.
 	LastModifiedTime *time.Time
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -2555,7 +3161,9 @@ func (v *GetFieldResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFieldResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldAttributes(s, schemas.GetFieldResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeFieldAttributes(s, schemas.GetFieldResponse_attributes, v.Attributes)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.GetFieldResponse_createdTime, *v.CreatedTime)
 	}
@@ -2580,7 +3188,9 @@ func (v *GetFieldResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Namespace != "" {
 		s.WriteString(schemas.GetFieldResponse_namespace, string(v.Namespace))
 	}
-	serializeTags(s, schemas.GetFieldResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetFieldResponse_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetFieldResponse_type, string(v.Type))
 	}
@@ -2655,7 +3265,9 @@ func (v *HiddenCaseRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HiddenCaseRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanConditionList(s, schemas.HiddenCaseRule_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeBooleanConditionList(s, schemas.HiddenCaseRule_conditions, v.Conditions)
+	}
 	if v.DefaultValue != nil {
 		s.WriteBool(schemas.HiddenCaseRule_defaultValue, *v.DefaultValue)
 	}
@@ -2748,7 +3360,9 @@ func (v *LayoutSections) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LayoutSections) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSectionsList(s, schemas.LayoutSections_sections, v.Sections)
+	if v.Sections != nil {
+		serializeSectionsList(s, schemas.LayoutSections_sections, v.Sections)
+	}
 }
 func (v *LayoutSections) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LayoutSections, func(s *smithy.Schema) error {
@@ -2815,9 +3429,9 @@ func (v *LayoutSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Represents the left hand operand in the condition. In the Amazon Connect admin
-// website, case rules are known as case field conditions. For more information
-// about case field conditions, see [Add case field conditions to a case template].
+// Represents the left hand operand in the condition. In the Connect Customer
+// admin website, case rules are known as case field conditions. For more
+// information about case field conditions, see [Add case field conditions to a case template].
 //
 // The following types satisfy this interface:
 //
@@ -2843,9 +3457,9 @@ func (v *OperandOneMemberFieldId) Deserialize(d smithy.ShapeDeserializer) error 
 	return d.ReadString(schemas.OperandOne_fieldId, &v.Value)
 }
 
-// Represents the right hand operand in the condition. In the Amazon Connect admin
-// website, case rules are known as case field conditions. For more information
-// about case field conditions, see [Add case field conditions to a case template].
+// Represents the right hand operand in the condition. In the Connect Customer
+// admin website, case rules are known as case field conditions. For more
+// information about case field conditions, see [Add case field conditions to a case template].
 //
 // The following types satisfy this interface:
 //
@@ -2944,7 +3558,9 @@ func (v *ParentChildFieldOptionsMapping) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ParentChildFieldOptionsMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParentChildFieldOptionValueList(s, schemas.ParentChildFieldOptionsMapping_childFieldOptionValues, v.ChildFieldOptionValues)
+	if v.ChildFieldOptionValues != nil {
+		serializeParentChildFieldOptionValueList(s, schemas.ParentChildFieldOptionsMapping_childFieldOptionValues, v.ChildFieldOptionValues)
+	}
 	if v.ParentFieldOptionValue != nil {
 		s.WriteString(schemas.ParentChildFieldOptionsMapping_parentFieldOptionValue, *v.ParentFieldOptionValue)
 	}
@@ -2993,7 +3609,7 @@ func (v *RelatedItemContentMemberComment) Deserialize(d smithy.ShapeDeserializer
 	return v.Value.Deserialize(d)
 }
 
-// Represents the Amazon Connect case to be created as a related item.
+// Represents the Connect Customer case to be created as a related item.
 type RelatedItemContentMemberConnectCase struct {
 	Value ConnectCaseContent
 
@@ -3142,7 +3758,7 @@ func (v *RelatedItemInputContentMemberComment) Deserialize(d smithy.ShapeDeseria
 	return v.Value.Deserialize(d)
 }
 
-// Represents the Amazon Connect case to be created as a related item.
+// Represents the Connect Customer case to be created as a related item.
 type RelatedItemInputContentMemberConnectCase struct {
 	Value ConnectCaseInputContent
 
@@ -3159,7 +3775,7 @@ func (v *RelatedItemInputContentMemberConnectCase) Deserialize(d smithy.ShapeDes
 	return v.Value.Deserialize(d)
 }
 
-// Object representing a contact in Amazon Connect as an API request field.
+// Object representing a contact in Connect Customer as an API request field.
 type RelatedItemInputContentMemberContact struct {
 	Value Contact
 
@@ -3225,6 +3841,70 @@ func (v *RelatedItemInputContentMemberSla) Deserialize(d smithy.ShapeDeserialize
 	return deserializeSlaInputContent(d, schemas.RelatedItemInputContent_sla, &v.Value)
 }
 
+// Specifies which types of related items to move from the secondary case to the
+// primary case when you merge cases. Moved related items keep their related item
+// ID, creator, association time, and tags.
+type RelatedItemsConfiguration struct {
+
+	// Whether to move Comment related items to the primary case.
+	Comment *bool
+
+	// Whether to move Case related items to the primary case. If the primary case
+	// already links to the same case, the secondary case's link is removed instead of
+	// moved.
+	ConnectCase *bool
+
+	// Whether to move Contact related items to the primary case. If the same contact
+	// is related to both cases, the primary case keeps its related item and gets any
+	// tag keys that only the secondary case's related item has.
+	Contact *bool
+
+	// Whether to move Custom related items to the primary case.
+	Custom *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *RelatedItemsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedItemsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedItemsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_comment, *v.Comment)
+	}
+	if v.ConnectCase != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_connectCase, *v.ConnectCase)
+	}
+	if v.Contact != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_contact, *v.Contact)
+	}
+	if v.Custom != nil {
+		s.WriteBool(schemas.RelatedItemsConfiguration_custom, *v.Custom)
+	}
+}
+func (v *RelatedItemsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedItemsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedItemsConfiguration_comment:
+			v.Comment = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_comment, v.Comment)
+		case schemas.RelatedItemsConfiguration_connectCase:
+			v.ConnectCase = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_connectCase, v.ConnectCase)
+		case schemas.RelatedItemsConfiguration_contact:
+			v.Contact = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_contact, v.Contact)
+		case schemas.RelatedItemsConfiguration_custom:
+			v.Custom = new(bool)
+			return d.ReadBool(schemas.RelatedItemsConfiguration_custom, v.Custom)
+		}
+		return nil
+	})
+}
+
 // The list of types of related items and their parameters to use for filtering.
 //
 // The following types satisfy this interface:
@@ -3256,7 +3936,7 @@ func (v *RelatedItemTypeFilterMemberComment) Deserialize(d smithy.ShapeDeseriali
 	return v.Value.Deserialize(d)
 }
 
-// Represents the Amazon Connect case to be created as a related item.
+// Represents the Connect Customer case to be created as a related item.
 type RelatedItemTypeFilterMemberConnectCase struct {
 	Value ConnectCaseFilter
 
@@ -3386,9 +4066,9 @@ func (v *RelatedItemUpdateContentMemberCustom) Deserialize(d smithy.ShapeDeseria
 	return v.Value.Deserialize(d)
 }
 
-// Required rule type, used to indicate whether a field is required. In the Amazon
-// Connect admin website, case rules are known as case field conditions. For more
-// information about case field conditions, see [Add case field conditions to a case template].
+// Required rule type, used to indicate whether a field is required. In the
+// Connect Customer admin website, case rules are known as case field conditions.
+// For more information about case field conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
 type RequiredCaseRule struct {
@@ -3415,7 +4095,9 @@ func (v *RequiredCaseRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequiredCaseRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanConditionList(s, schemas.RequiredCaseRule_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeBooleanConditionList(s, schemas.RequiredCaseRule_conditions, v.Conditions)
+	}
 	if v.DefaultValue != nil {
 		s.WriteBool(schemas.RequiredCaseRule_defaultValue, *v.DefaultValue)
 	}
@@ -3500,7 +4182,7 @@ type SearchAllRelatedItemsResponseItem struct {
 	// Represents the entity that performed the action.
 	PerformedBy UserUnion
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -3520,12 +4202,18 @@ func (v *SearchAllRelatedItemsResponseItem) SerializeMembers(s smithy.ShapeSeria
 	if v.CaseId != nil {
 		s.WriteString(schemas.SearchAllRelatedItemsResponseItem_caseId, *v.CaseId)
 	}
-	serializeRelatedItemContent(s, schemas.SearchAllRelatedItemsResponseItem_content, v.Content)
-	serializeUserUnion(s, schemas.SearchAllRelatedItemsResponseItem_performedBy, v.PerformedBy)
+	if v.Content != nil {
+		serializeRelatedItemContent(s, schemas.SearchAllRelatedItemsResponseItem_content, v.Content)
+	}
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.SearchAllRelatedItemsResponseItem_performedBy, v.PerformedBy)
+	}
 	if v.RelatedItemId != nil {
 		s.WriteString(schemas.SearchAllRelatedItemsResponseItem_relatedItemId, *v.RelatedItemId)
 	}
-	serializeTags(s, schemas.SearchAllRelatedItemsResponseItem_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.SearchAllRelatedItemsResponseItem_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.SearchAllRelatedItemsResponseItem_type, string(v.Type))
 	}
@@ -3630,7 +4318,7 @@ type SearchCasesResponseItem struct {
 	// This member is required.
 	TemplateId *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -3647,8 +4335,12 @@ func (v *SearchCasesResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CaseId != nil {
 		s.WriteString(schemas.SearchCasesResponseItem_caseId, *v.CaseId)
 	}
-	serializeFieldValueList(s, schemas.SearchCasesResponseItem_fields, v.Fields)
-	serializeTags(s, schemas.SearchCasesResponseItem_tags, v.Tags)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.SearchCasesResponseItem_fields, v.Fields)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.SearchCasesResponseItem_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.SearchCasesResponseItem_templateId, *v.TemplateId)
 	}
@@ -3697,7 +4389,7 @@ type SearchRelatedItemsResponseItem struct {
 	// Represents the creator of the related item.
 	PerformedBy UserUnion
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -3714,12 +4406,18 @@ func (v *SearchRelatedItemsResponseItem) SerializeMembers(s smithy.ShapeSerializ
 	if v.AssociationTime != nil {
 		s.WriteTime(schemas.SearchRelatedItemsResponseItem_associationTime, *v.AssociationTime)
 	}
-	serializeRelatedItemContent(s, schemas.SearchRelatedItemsResponseItem_content, v.Content)
-	serializeUserUnion(s, schemas.SearchRelatedItemsResponseItem_performedBy, v.PerformedBy)
+	if v.Content != nil {
+		serializeRelatedItemContent(s, schemas.SearchRelatedItemsResponseItem_content, v.Content)
+	}
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.SearchRelatedItemsResponseItem_performedBy, v.PerformedBy)
+	}
 	if v.RelatedItemId != nil {
 		s.WriteString(schemas.SearchRelatedItemsResponseItem_relatedItemId, *v.RelatedItemId)
 	}
-	serializeTags(s, schemas.SearchRelatedItemsResponseItem_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.SearchRelatedItemsResponseItem_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.SearchRelatedItemsResponseItem_type, string(v.Type))
 	}
@@ -3832,7 +4530,9 @@ func (v *SlaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.SlaConfiguration_status, string(v.Status))
 	}
-	serializeSlaFieldValueUnionList(s, schemas.SlaConfiguration_targetFieldValues, v.TargetFieldValues)
+	if v.TargetFieldValues != nil {
+		serializeSlaFieldValueUnionList(s, schemas.SlaConfiguration_targetFieldValues, v.TargetFieldValues)
+	}
 	if v.TargetTime != nil {
 		s.WriteTime(schemas.SlaConfiguration_targetTime, *v.TargetTime)
 	}
@@ -3997,7 +4697,9 @@ func (v *SlaInputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SlaInputConfiguration_name, *v.Name)
 	}
-	serializeSlaFieldValueUnionList(s, schemas.SlaInputConfiguration_targetFieldValues, v.TargetFieldValues)
+	if v.TargetFieldValues != nil {
+		serializeSlaFieldValueUnionList(s, schemas.SlaInputConfiguration_targetFieldValues, v.TargetFieldValues)
+	}
 	if v.TargetSlaMinutes != nil {
 		s.WriteInt64(schemas.SlaInputConfiguration_targetSlaMinutes, *v.TargetSlaMinutes)
 	}
@@ -4065,7 +4767,7 @@ type Sort struct {
 	// This member is required.
 	FieldId *string
 
-	// A structured set of sort terms
+	// Whether results should be sorted in ascending or descending order.
 	//
 	// This member is required.
 	SortOrder Order
@@ -4160,7 +4862,9 @@ func (v *TagPropagationConfiguration) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ResourceType != "" {
 		s.WriteString(schemas.TagPropagationConfiguration_resourceType, string(v.ResourceType))
 	}
-	serializeMutableTags(s, schemas.TagPropagationConfiguration_tagMap, v.TagMap)
+	if v.TagMap != nil {
+		serializeMutableTags(s, schemas.TagPropagationConfiguration_tagMap, v.TagMap)
+	}
 }
 func (v *TagPropagationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagPropagationConfiguration, func(s *smithy.Schema) error {
@@ -4219,8 +4923,8 @@ func (v *TagValue) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// An association representing a case rule acting upon a field. In the Amazon
-// Connect admin website, case rules are known as case field conditions. For more
+// An association representing a case rule acting upon a field. In the Connect
+// Customer admin website, case rules are known as case field conditions. For more
 // information about case field conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
@@ -4309,7 +5013,9 @@ func (v *TemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.TemplateSummary_status, string(v.Status))
 	}
-	serializeTagPropagationConfigurationList(s, schemas.TemplateSummary_tagPropagationConfigurations, v.TagPropagationConfigurations)
+	if v.TagPropagationConfigurations != nil {
+		serializeTagPropagationConfigurationList(s, schemas.TemplateSummary_tagPropagationConfigurations, v.TagPropagationConfigurations)
+	}
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.TemplateSummary_templateArn, *v.TemplateArn)
 	}
@@ -4401,7 +5107,7 @@ func (v *UserUnionMemberCustomEntity) Deserialize(d smithy.ShapeDeserializer) er
 	return d.ReadString(schemas.UserUnion_customEntity, &v.Value)
 }
 
-// Represents the Amazon Connect ARN of the user.
+// Represents the Connect Customer ARN of the user.
 type UserUnionMemberUserArn struct {
 	Value string
 
@@ -4430,10 +5136,12 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAuditEventFieldValueUnion() {}
 func (*UnknownUnionMember) isBooleanCondition()          {}
 func (*UnknownUnionMember) isCaseFilter()                {}
+func (*UnknownUnionMember) isCaseIdentifierUnion()       {}
 func (*UnknownUnionMember) isCaseRuleDetails()           {}
 func (*UnknownUnionMember) isCustomFieldsFilter()        {}
 func (*UnknownUnionMember) isFieldAttributes()           {}
 func (*UnknownUnionMember) isFieldFilter()               {}
+func (*UnknownUnionMember) isFieldIdentifierUnion()      {}
 func (*UnknownUnionMember) isFieldValueUnion()           {}
 func (*UnknownUnionMember) isLayoutContent()             {}
 func (*UnknownUnionMember) isOperandOne()                {}

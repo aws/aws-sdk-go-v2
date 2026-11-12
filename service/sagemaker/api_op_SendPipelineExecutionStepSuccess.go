@@ -60,7 +60,9 @@ func (v *SendPipelineExecutionStepSuccessInput) SerializeMembers(s smithy.ShapeS
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.SendPipelineExecutionStepSuccessRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
-	serializeOutputParameterList(s, schemas.SendPipelineExecutionStepSuccessRequest_OutputParameters, v.OutputParameters)
+	if v.OutputParameters != nil {
+		serializeOutputParameterList(s, schemas.SendPipelineExecutionStepSuccessRequest_OutputParameters, v.OutputParameters)
+	}
 }
 
 type SendPipelineExecutionStepSuccessOutput struct {

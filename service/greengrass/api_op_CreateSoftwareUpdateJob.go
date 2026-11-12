@@ -87,7 +87,9 @@ func (v *CreateSoftwareUpdateJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.UpdateAgentLogLevel != "" {
 		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_UpdateAgentLogLevel, string(v.UpdateAgentLogLevel))
 	}
-	serializeUpdateTargets(s, schemas.CreateSoftwareUpdateJobRequest_UpdateTargets, v.UpdateTargets)
+	if v.UpdateTargets != nil {
+		serializeUpdateTargets(s, schemas.CreateSoftwareUpdateJobRequest_UpdateTargets, v.UpdateTargets)
+	}
 	if v.UpdateTargetsArchitecture != "" {
 		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_UpdateTargetsArchitecture, string(v.UpdateTargetsArchitecture))
 	}

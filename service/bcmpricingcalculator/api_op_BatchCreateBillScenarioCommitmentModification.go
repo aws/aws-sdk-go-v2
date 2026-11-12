@@ -67,7 +67,9 @@ func (v *BatchCreateBillScenarioCommitmentModificationInput) SerializeMembers(s 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationRequest_clientToken, *v.ClientToken)
 	}
-	serializeBatchCreateBillScenarioCommitmentModificationEntries(s, schemas.BatchCreateBillScenarioCommitmentModificationRequest_commitmentModifications, v.CommitmentModifications)
+	if v.CommitmentModifications != nil {
+		serializeBatchCreateBillScenarioCommitmentModificationEntries(s, schemas.BatchCreateBillScenarioCommitmentModificationRequest_commitmentModifications, v.CommitmentModifications)
+	}
 }
 
 type BatchCreateBillScenarioCommitmentModificationOutput struct {
@@ -93,8 +95,12 @@ func (v *BatchCreateBillScenarioCommitmentModificationOutput) Serialize(s smithy
 }
 
 func (v *BatchCreateBillScenarioCommitmentModificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateBillScenarioCommitmentModificationErrors(s, schemas.BatchCreateBillScenarioCommitmentModificationResponse_errors, v.Errors)
-	serializeBatchCreateBillScenarioCommitmentModificationItems(s, schemas.BatchCreateBillScenarioCommitmentModificationResponse_items, v.Items)
+	if v.Errors != nil {
+		serializeBatchCreateBillScenarioCommitmentModificationErrors(s, schemas.BatchCreateBillScenarioCommitmentModificationResponse_errors, v.Errors)
+	}
+	if v.Items != nil {
+		serializeBatchCreateBillScenarioCommitmentModificationItems(s, schemas.BatchCreateBillScenarioCommitmentModificationResponse_items, v.Items)
+	}
 }
 func (v *BatchCreateBillScenarioCommitmentModificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioCommitmentModificationResponse, func(s *smithy.Schema) error {

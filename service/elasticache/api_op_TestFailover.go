@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,21 @@ type TestFailoverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestFailoverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestFailoverMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestFailoverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeGroupId != nil {
+		s.WriteString(schemas.TestFailoverMessage_NodeGroupId, *v.NodeGroupId)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.TestFailoverMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+}
+
 type TestFailoverOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -105,13 +122,34 @@ type TestFailoverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestFailoverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestFailoverResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestFailoverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.TestFailoverResult_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TestFailoverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestFailoverResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestFailoverResult_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestFailoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTestFailover{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestFailover, schemas.TestFailoverMessage, schemas.TestFailoverResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTestFailover{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestFailover, schemas.TestFailoverMessage, schemas.TestFailoverResult), output: &TestFailoverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

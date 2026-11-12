@@ -4,6 +4,8 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetWirelessGatewayCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWirelessGatewayCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWirelessGatewayCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWirelessGatewayCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetWirelessGatewayCertificateRequest_Id, *v.Id)
+	}
+}
+
 type GetWirelessGatewayCertificateOutput struct {
 
 	// The ID of the certificate associated with the wireless gateway.
@@ -49,13 +63,38 @@ type GetWirelessGatewayCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWirelessGatewayCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWirelessGatewayCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWirelessGatewayCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IotCertificateId != nil {
+		s.WriteString(schemas.GetWirelessGatewayCertificateResponse_IotCertificateId, *v.IotCertificateId)
+	}
+	if v.LoRaWANNetworkServerCertificateId != nil {
+		s.WriteString(schemas.GetWirelessGatewayCertificateResponse_LoRaWANNetworkServerCertificateId, *v.LoRaWANNetworkServerCertificateId)
+	}
+}
+func (v *GetWirelessGatewayCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWirelessGatewayCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWirelessGatewayCertificateResponse_IotCertificateId:
+			v.IotCertificateId = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayCertificateResponse_IotCertificateId, v.IotCertificateId)
+		case schemas.GetWirelessGatewayCertificateResponse_LoRaWANNetworkServerCertificateId:
+			v.LoRaWANNetworkServerCertificateId = new(string)
+			return d.ReadString(schemas.GetWirelessGatewayCertificateResponse_LoRaWANNetworkServerCertificateId, v.LoRaWANNetworkServerCertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWirelessGatewayCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessGatewayCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayCertificate, schemas.GetWirelessGatewayCertificateRequest, schemas.GetWirelessGatewayCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWirelessGatewayCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayCertificate, schemas.GetWirelessGatewayCertificateRequest, schemas.GetWirelessGatewayCertificateResponse), output: &GetWirelessGatewayCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

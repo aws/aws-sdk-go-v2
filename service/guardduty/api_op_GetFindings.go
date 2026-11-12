@@ -60,7 +60,9 @@ func (v *GetFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectorId != nil {
 		s.WriteString(schemas.GetFindingsRequest_DetectorId, *v.DetectorId)
 	}
-	serializeFindingIds(s, schemas.GetFindingsRequest_FindingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIds(s, schemas.GetFindingsRequest_FindingIds, v.FindingIds)
+	}
 	if v.SortCriteria != nil {
 		s.WriteStruct(schemas.GetFindingsRequest_SortCriteria)
 		v.SortCriteria.SerializeMembers(s)
@@ -88,7 +90,9 @@ func (v *GetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindings(s, schemas.GetFindingsResponse_Findings, v.Findings)
+	if v.Findings != nil {
+		serializeFindings(s, schemas.GetFindingsResponse_Findings, v.Findings)
+	}
 }
 func (v *GetFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingsResponse, func(s *smithy.Schema) error {

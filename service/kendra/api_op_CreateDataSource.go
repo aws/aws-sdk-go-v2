@@ -168,7 +168,9 @@ func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Schedule != nil {
 		s.WriteString(schemas.CreateDataSourceRequest_Schedule, *v.Schedule)
 	}
-	serializeTagList(s, schemas.CreateDataSourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataSourceRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDataSourceRequest_Type, string(v.Type))
 	}

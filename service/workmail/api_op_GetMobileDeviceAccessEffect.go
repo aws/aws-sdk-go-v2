@@ -102,7 +102,9 @@ func (v *GetMobileDeviceAccessEffectOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Effect != "" {
 		s.WriteString(schemas.GetMobileDeviceAccessEffectResponse_Effect, string(v.Effect))
 	}
-	serializeMobileDeviceAccessMatchedRuleList(s, schemas.GetMobileDeviceAccessEffectResponse_MatchedRules, v.MatchedRules)
+	if v.MatchedRules != nil {
+		serializeMobileDeviceAccessMatchedRuleList(s, schemas.GetMobileDeviceAccessEffectResponse_MatchedRules, v.MatchedRules)
+	}
 }
 func (v *GetMobileDeviceAccessEffectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMobileDeviceAccessEffectResponse, func(s *smithy.Schema) error {

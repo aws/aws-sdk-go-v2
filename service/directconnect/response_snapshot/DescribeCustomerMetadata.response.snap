@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeCustomerMetadata
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"agreements":[{"agreementName":"__AgreementName__","status":"__Status__"},{"agreementName":"__AgreementName__","status":"__Status__"}],"nniPartnerType":"v1"}
+¿jagreementsŸ¿magreementNameq__AgreementName__fstatusj__Status__ÿ¿magreementNameq__AgreementName__fstatusj__Status__ÿÿnnniPartnerTypebv1ÿ

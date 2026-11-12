@@ -91,7 +91,9 @@ func (v *ListDatasetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasetPropertiesList(s, schemas.ListDatasetsResponse_DatasetPropertiesList, v.DatasetPropertiesList)
+	if v.DatasetPropertiesList != nil {
+		serializeDatasetPropertiesList(s, schemas.ListDatasetsResponse_DatasetPropertiesList, v.DatasetPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetsResponse_NextToken, *v.NextToken)
 	}
@@ -123,6 +125,9 @@ func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

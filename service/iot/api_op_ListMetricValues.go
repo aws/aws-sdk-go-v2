@@ -122,7 +122,9 @@ func (v *ListMetricValuesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMetricValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDatumList(s, schemas.ListMetricValuesResponse_metricDatumList, v.MetricDatumList)
+	if v.MetricDatumList != nil {
+		serializeMetricDatumList(s, schemas.ListMetricValuesResponse_metricDatumList, v.MetricDatumList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetricValuesResponse_nextToken, *v.NextToken)
 	}

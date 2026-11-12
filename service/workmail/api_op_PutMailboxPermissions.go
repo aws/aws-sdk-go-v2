@@ -97,7 +97,9 @@ func (v *PutMailboxPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.OrganizationId != nil {
 		s.WriteString(schemas.PutMailboxPermissionsRequest_OrganizationId, *v.OrganizationId)
 	}
-	serializePermissionValues(s, schemas.PutMailboxPermissionsRequest_PermissionValues, v.PermissionValues)
+	if v.PermissionValues != nil {
+		serializePermissionValues(s, schemas.PutMailboxPermissionsRequest_PermissionValues, v.PermissionValues)
+	}
 }
 
 type PutMailboxPermissionsOutput struct {

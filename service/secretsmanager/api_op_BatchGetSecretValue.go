@@ -81,14 +81,18 @@ func (v *BatchGetSecretValueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSecretValueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFiltersListType(s, schemas.BatchGetSecretValueRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFiltersListType(s, schemas.BatchGetSecretValueRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.BatchGetSecretValueRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetSecretValueRequest_NextToken, *v.NextToken)
 	}
-	serializeSecretIdListType(s, schemas.BatchGetSecretValueRequest_SecretIdList, v.SecretIdList)
+	if v.SecretIdList != nil {
+		serializeSecretIdListType(s, schemas.BatchGetSecretValueRequest_SecretIdList, v.SecretIdList)
+	}
 }
 
 type BatchGetSecretValueOutput struct {
@@ -119,11 +123,15 @@ func (v *BatchGetSecretValueOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSecretValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAPIErrorListType(s, schemas.BatchGetSecretValueResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeAPIErrorListType(s, schemas.BatchGetSecretValueResponse_Errors, v.Errors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetSecretValueResponse_NextToken, *v.NextToken)
 	}
-	serializeSecretValuesType(s, schemas.BatchGetSecretValueResponse_SecretValues, v.SecretValues)
+	if v.SecretValues != nil {
+		serializeSecretValuesType(s, schemas.BatchGetSecretValueResponse_SecretValues, v.SecretValues)
+	}
 }
 func (v *BatchGetSecretValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSecretValueResponse, func(s *smithy.Schema) error {

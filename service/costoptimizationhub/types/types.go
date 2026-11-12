@@ -777,7 +777,9 @@ func (v *Ec2AutoScalingGroupConfiguration) SerializeMembers(s smithy.ShapeSerial
 		v.Instance.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMixedInstanceConfigurationList(s, schemas.Ec2AutoScalingGroupConfiguration_mixedInstances, v.MixedInstances)
+	if v.MixedInstances != nil {
+		serializeMixedInstanceConfigurationList(s, schemas.Ec2AutoScalingGroupConfiguration_mixedInstances, v.MixedInstances)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Ec2AutoScalingGroupConfiguration_type, string(v.Type))
 	}
@@ -1336,7 +1338,9 @@ func (v *EfficiencyMetricsByGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.EfficiencyMetricsByGroup_message, *v.Message)
 	}
-	serializeMetricsByTimeList(s, schemas.EfficiencyMetricsByGroup_metricsByTime, v.MetricsByTime)
+	if v.MetricsByTime != nil {
+		serializeMetricsByTimeList(s, schemas.EfficiencyMetricsByGroup_metricsByTime, v.MetricsByTime)
+	}
 }
 func (v *EfficiencyMetricsByGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EfficiencyMetricsByGroup, func(s *smithy.Schema) error {
@@ -1669,21 +1673,39 @@ func (v *Filter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.Filter_accountIds, v.AccountIds)
-	serializeActionTypeList(s, schemas.Filter_actionTypes, v.ActionTypes)
-	serializeImplementationEffortList(s, schemas.Filter_implementationEfforts, v.ImplementationEfforts)
-	serializeRecommendationIdList(s, schemas.Filter_recommendationIds, v.RecommendationIds)
-	serializeRegionList(s, schemas.Filter_regions, v.Regions)
-	serializeResourceArnList(s, schemas.Filter_resourceArns, v.ResourceArns)
-	serializeResourceIdList(s, schemas.Filter_resourceIds, v.ResourceIds)
-	serializeResourceTypeList(s, schemas.Filter_resourceTypes, v.ResourceTypes)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.Filter_accountIds, v.AccountIds)
+	}
+	if v.ActionTypes != nil {
+		serializeActionTypeList(s, schemas.Filter_actionTypes, v.ActionTypes)
+	}
+	if v.ImplementationEfforts != nil {
+		serializeImplementationEffortList(s, schemas.Filter_implementationEfforts, v.ImplementationEfforts)
+	}
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.Filter_recommendationIds, v.RecommendationIds)
+	}
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.Filter_regions, v.Regions)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.Filter_resourceArns, v.ResourceArns)
+	}
+	if v.ResourceIds != nil {
+		serializeResourceIdList(s, schemas.Filter_resourceIds, v.ResourceIds)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.Filter_resourceTypes, v.ResourceTypes)
+	}
 	if v.RestartNeeded != nil {
 		s.WriteBool(schemas.Filter_restartNeeded, *v.RestartNeeded)
 	}
 	if v.RollbackPossible != nil {
 		s.WriteBool(schemas.Filter_rollbackPossible, *v.RollbackPossible)
 	}
-	serializeTagList(s, schemas.Filter_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Filter_tags, v.Tags)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -3047,7 +3069,9 @@ func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Source != "" {
 		s.WriteString(schemas.Recommendation_source, string(v.Source))
 	}
-	serializeTagList(s, schemas.Recommendation_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Recommendation_tags, v.Tags)
+	}
 }
 func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
@@ -3475,7 +3499,9 @@ func (v *ResourceCostCalculation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Pricing.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUsageList(s, schemas.ResourceCostCalculation_usages, v.Usages)
+	if v.Usages != nil {
+		serializeUsageList(s, schemas.ResourceCostCalculation_usages, v.Usages)
+	}
 }
 func (v *ResourceCostCalculation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceCostCalculation, func(s *smithy.Schema) error {

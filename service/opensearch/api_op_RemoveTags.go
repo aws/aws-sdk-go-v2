@@ -55,7 +55,9 @@ func (v *RemoveTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.RemoveTagsRequest_ARN, *v.ARN)
 	}
-	serializeStringList(s, schemas.RemoveTagsRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeStringList(s, schemas.RemoveTagsRequest_TagKeys, v.TagKeys)
+	}
 }
 
 type RemoveTagsOutput struct {

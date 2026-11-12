@@ -42,7 +42,9 @@ func (v *DescribeAssessmentTemplatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAssessmentTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDescribeArnList(s, schemas.DescribeAssessmentTemplatesRequest_assessmentTemplateArns, v.AssessmentTemplateArns)
+	if v.AssessmentTemplateArns != nil {
+		serializeBatchDescribeArnList(s, schemas.DescribeAssessmentTemplatesRequest_assessmentTemplateArns, v.AssessmentTemplateArns)
+	}
 }
 
 type DescribeAssessmentTemplatesOutput struct {
@@ -71,8 +73,12 @@ func (v *DescribeAssessmentTemplatesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeAssessmentTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentTemplateList(s, schemas.DescribeAssessmentTemplatesResponse_assessmentTemplates, v.AssessmentTemplates)
-	serializeFailedItems(s, schemas.DescribeAssessmentTemplatesResponse_failedItems, v.FailedItems)
+	if v.AssessmentTemplates != nil {
+		serializeAssessmentTemplateList(s, schemas.DescribeAssessmentTemplatesResponse_assessmentTemplates, v.AssessmentTemplates)
+	}
+	if v.FailedItems != nil {
+		serializeFailedItems(s, schemas.DescribeAssessmentTemplatesResponse_failedItems, v.FailedItems)
+	}
 }
 func (v *DescribeAssessmentTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAssessmentTemplatesResponse, func(s *smithy.Schema) error {

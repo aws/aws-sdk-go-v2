@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/designations
+
+Content-Type: application/json
+
+{"deletionProtection":true,"description":"__Description__","name":"__Name__","policy":"__Policy__"}

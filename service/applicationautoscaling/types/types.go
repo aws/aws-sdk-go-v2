@@ -79,8 +79,12 @@ func (v *CapacityForecast) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CapacityForecast) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePredictiveScalingForecastTimestamps(s, schemas.CapacityForecast_Timestamps, v.Timestamps)
-	serializePredictiveScalingForecastValues(s, schemas.CapacityForecast_Values, v.Values)
+	if v.Timestamps != nil {
+		serializePredictiveScalingForecastTimestamps(s, schemas.CapacityForecast_Timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializePredictiveScalingForecastValues(s, schemas.CapacityForecast_Values, v.Values)
+	}
 }
 func (v *CapacityForecast) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapacityForecast, func(s *smithy.Schema) error {
@@ -159,11 +163,15 @@ func (v *CustomizedMetricSpecification) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomizedMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensions(s, schemas.CustomizedMetricSpecification_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeMetricDimensions(s, schemas.CustomizedMetricSpecification_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.CustomizedMetricSpecification_MetricName, *v.MetricName)
 	}
-	serializeTargetTrackingMetricDataQueries(s, schemas.CustomizedMetricSpecification_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeTargetTrackingMetricDataQueries(s, schemas.CustomizedMetricSpecification_Metrics, v.Metrics)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.CustomizedMetricSpecification_Namespace, *v.Namespace)
 	}
@@ -238,8 +246,12 @@ func (v *LoadForecast) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MetricSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePredictiveScalingForecastTimestamps(s, schemas.LoadForecast_Timestamps, v.Timestamps)
-	serializePredictiveScalingForecastValues(s, schemas.LoadForecast_Values, v.Values)
+	if v.Timestamps != nil {
+		serializePredictiveScalingForecastTimestamps(s, schemas.LoadForecast_Timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializePredictiveScalingForecastValues(s, schemas.LoadForecast_Values, v.Values)
+	}
 }
 func (v *LoadForecast) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoadForecast, func(s *smithy.Schema) error {
@@ -483,7 +495,9 @@ func (v *PredictiveScalingCustomizedMetricSpecification) Serialize(s smithy.Shap
 }
 
 func (v *PredictiveScalingCustomizedMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePredictiveScalingMetricDataQueries(s, schemas.PredictiveScalingCustomizedMetricSpecification_MetricDataQueries, v.MetricDataQueries)
+	if v.MetricDataQueries != nil {
+		serializePredictiveScalingMetricDataQueries(s, schemas.PredictiveScalingCustomizedMetricSpecification_MetricDataQueries, v.MetricDataQueries)
+	}
 }
 func (v *PredictiveScalingCustomizedMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PredictiveScalingCustomizedMetricSpecification, func(s *smithy.Schema) error {
@@ -517,7 +531,9 @@ func (v *PredictiveScalingMetric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PredictiveScalingMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePredictiveScalingMetricDimensions(s, schemas.PredictiveScalingMetric_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializePredictiveScalingMetricDimensions(s, schemas.PredictiveScalingMetric_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.PredictiveScalingMetric_MetricName, *v.MetricName)
 	}
@@ -918,7 +934,9 @@ func (v *PredictiveScalingPolicyConfiguration) SerializeMembers(s smithy.ShapeSe
 	if v.MaxCapacityBuffer != nil {
 		s.WriteInt32(schemas.PredictiveScalingPolicyConfiguration_MaxCapacityBuffer, *v.MaxCapacityBuffer)
 	}
-	serializePredictiveScalingMetricSpecifications(s, schemas.PredictiveScalingPolicyConfiguration_MetricSpecifications, v.MetricSpecifications)
+	if v.MetricSpecifications != nil {
+		serializePredictiveScalingMetricSpecifications(s, schemas.PredictiveScalingPolicyConfiguration_MetricSpecifications, v.MetricSpecifications)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.PredictiveScalingPolicyConfiguration_Mode, string(v.Mode))
 	}
@@ -1729,7 +1747,9 @@ func (v *ScalingActivity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ScalingActivity_EndTime, *v.EndTime)
 	}
-	serializeNotScaledReasons(s, schemas.ScalingActivity_NotScaledReasons, v.NotScaledReasons)
+	if v.NotScaledReasons != nil {
+		serializeNotScaledReasons(s, schemas.ScalingActivity_NotScaledReasons, v.NotScaledReasons)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.ScalingActivity_ResourceId, *v.ResourceId)
 	}
@@ -2029,7 +2049,9 @@ func (v *ScalingPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarms(s, schemas.ScalingPolicy_Alarms, v.Alarms)
+	if v.Alarms != nil {
+		serializeAlarms(s, schemas.ScalingPolicy_Alarms, v.Alarms)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.ScalingPolicy_CreationTime, *v.CreationTime)
 	}
@@ -2600,7 +2622,9 @@ func (v *StepScalingPolicyConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.MinAdjustmentMagnitude != nil {
 		s.WriteInt32(schemas.StepScalingPolicyConfiguration_MinAdjustmentMagnitude, *v.MinAdjustmentMagnitude)
 	}
-	serializeStepAdjustments(s, schemas.StepScalingPolicyConfiguration_StepAdjustments, v.StepAdjustments)
+	if v.StepAdjustments != nil {
+		serializeStepAdjustments(s, schemas.StepScalingPolicyConfiguration_StepAdjustments, v.StepAdjustments)
+	}
 }
 func (v *StepScalingPolicyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StepScalingPolicyConfiguration, func(s *smithy.Schema) error {
@@ -2722,7 +2746,9 @@ func (v *TargetTrackingMetric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TargetTrackingMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetTrackingMetricDimensions(s, schemas.TargetTrackingMetric_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeTargetTrackingMetricDimensions(s, schemas.TargetTrackingMetric_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.TargetTrackingMetric_MetricName, *v.MetricName)
 	}

@@ -44,7 +44,9 @@ func (v *ActionFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MatchOption != "" {
 		s.WriteString(schemas.ActionFilter_matchOption, string(v.MatchOption))
 	}
-	serializeFilterValues(s, schemas.ActionFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.ActionFilter_values, v.Values)
+	}
 }
 func (v *ActionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ActionFilter, func(s *smithy.Schema) error {
@@ -110,7 +112,9 @@ func (v *RecommendedAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.RecommendedAction_accountId, *v.AccountId)
 	}
-	serializeContext(s, schemas.RecommendedAction_context, v.Context)
+	if v.Context != nil {
+		serializeContext(s, schemas.RecommendedAction_context, v.Context)
+	}
 	if v.Feature != "" {
 		s.WriteString(schemas.RecommendedAction_feature, string(v.Feature))
 	}
@@ -120,7 +124,9 @@ func (v *RecommendedAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimeStamp != nil {
 		s.WriteString(schemas.RecommendedAction_lastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
 	}
-	serializeNextSteps(s, schemas.RecommendedAction_nextSteps, v.NextSteps)
+	if v.NextSteps != nil {
+		serializeNextSteps(s, schemas.RecommendedAction_nextSteps, v.NextSteps)
+	}
 	if v.Severity != "" {
 		s.WriteString(schemas.RecommendedAction_severity, string(v.Severity))
 	}
@@ -189,7 +195,9 @@ func (v *RequestFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequestFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionFilterList(s, schemas.RequestFilter_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionFilterList(s, schemas.RequestFilter_actions, v.Actions)
+	}
 }
 func (v *RequestFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestFilter, func(s *smithy.Schema) error {

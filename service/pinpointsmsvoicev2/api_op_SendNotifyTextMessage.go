@@ -81,7 +81,9 @@ func (v *SendNotifyTextMessageInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.SendNotifyTextMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeContextMap(s, schemas.SendNotifyTextMessageRequest_Context, v.Context)
+	if v.Context != nil {
+		serializeContextMap(s, schemas.SendNotifyTextMessageRequest_Context, v.Context)
+	}
 	if v.DestinationPhoneNumber != nil {
 		s.WriteString(schemas.SendNotifyTextMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
 	}
@@ -97,7 +99,9 @@ func (v *SendNotifyTextMessageInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.TemplateId != nil {
 		s.WriteString(schemas.SendNotifyTextMessageRequest_TemplateId, *v.TemplateId)
 	}
-	serializeTemplateVariableSubstitutionMap(s, schemas.SendNotifyTextMessageRequest_TemplateVariables, v.TemplateVariables)
+	if v.TemplateVariables != nil {
+		serializeTemplateVariableSubstitutionMap(s, schemas.SendNotifyTextMessageRequest_TemplateVariables, v.TemplateVariables)
+	}
 	if v.TimeToLive != nil {
 		s.WriteInt32(schemas.SendNotifyTextMessageRequest_TimeToLive, *v.TimeToLive)
 	}

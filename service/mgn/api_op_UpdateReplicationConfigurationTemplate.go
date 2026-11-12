@@ -132,11 +132,15 @@ func (v *UpdateReplicationConfigurationTemplateInput) SerializeMembers(s smithy.
 	if v.ReplicationServerInstanceType != nil {
 		s.WriteString(schemas.UpdateReplicationConfigurationTemplateRequest_replicationServerInstanceType, *v.ReplicationServerInstanceType)
 	}
-	serializeReplicationServersSecurityGroupsIDs(s, schemas.UpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	if v.ReplicationServersSecurityGroupsIDs != nil {
+		serializeReplicationServersSecurityGroupsIDs(s, schemas.UpdateReplicationConfigurationTemplateRequest_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	}
 	if v.StagingAreaSubnetId != nil {
 		s.WriteString(schemas.UpdateReplicationConfigurationTemplateRequest_stagingAreaSubnetId, *v.StagingAreaSubnetId)
 	}
-	serializeTagsMap(s, schemas.UpdateReplicationConfigurationTemplateRequest_stagingAreaTags, v.StagingAreaTags)
+	if v.StagingAreaTags != nil {
+		serializeTagsMap(s, schemas.UpdateReplicationConfigurationTemplateRequest_stagingAreaTags, v.StagingAreaTags)
+	}
 	if v.StorageConfiguration != nil {
 		s.WriteStruct(schemas.UpdateReplicationConfigurationTemplateRequest_storageConfiguration)
 		v.StorageConfiguration.SerializeMembers(s)
@@ -335,11 +339,15 @@ func (v *UpdateReplicationConfigurationTemplateOutput) SerializeMembers(s smithy
 	if v.ReplicationServerInstanceType != nil {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_replicationServerInstanceType, *v.ReplicationServerInstanceType)
 	}
-	serializeReplicationServersSecurityGroupsIDs(s, schemas.ReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	if v.ReplicationServersSecurityGroupsIDs != nil {
+		serializeReplicationServersSecurityGroupsIDs(s, schemas.ReplicationConfigurationTemplate_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	}
 	if v.StagingAreaSubnetId != nil {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_stagingAreaSubnetId, *v.StagingAreaSubnetId)
 	}
-	serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_stagingAreaTags, v.StagingAreaTags)
+	if v.StagingAreaTags != nil {
+		serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_stagingAreaTags, v.StagingAreaTags)
+	}
 	if v.StorageConfiguration != nil {
 		s.WriteStruct(schemas.ReplicationConfigurationTemplate_storageConfiguration)
 		v.StorageConfiguration.SerializeMembers(s)
@@ -348,7 +356,9 @@ func (v *UpdateReplicationConfigurationTemplateOutput) SerializeMembers(s smithy
 	if v.StoreSnapshotOnLocalZone != nil {
 		s.WriteBool(schemas.ReplicationConfigurationTemplate_storeSnapshotOnLocalZone, *v.StoreSnapshotOnLocalZone)
 	}
-	serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ReplicationConfigurationTemplate_tags, v.Tags)
+	}
 	if v.UseDedicatedReplicationServer != nil {
 		s.WriteBool(schemas.ReplicationConfigurationTemplate_useDedicatedReplicationServer, *v.UseDedicatedReplicationServer)
 	}

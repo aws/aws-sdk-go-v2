@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dfeStatistics":{"count":1,"sizeInBytes":1},"dictionaries":{"blobs":{"count":1,"sizeInBytes":1},"total":{"count":1,"sizeInBytes":1}},"internals":{"count":1,"sizeInBytes":1},"quads":{"PG":{"GPSO":{"count":1,"sizeInBytes":1},"OSGP":{"count":1,"sizeInBytes":1},"POGS":{"count":1,"sizeInBytes":1},"PZSOG":{"count":1,"sizeInBytes":1},"SPOG":{"count":1,"sizeInBytes":1}},"RDF":{"GPSO":{"count":1,"sizeInBytes":1},"OSGP":{"count":1,"sizeInBytes":1},"POGS":{"count":1,"sizeInBytes":1},"PZSOG":{"count":1,"sizeInBytes":1},"SPOG":{"count":1,"sizeInBytes":1}}},"schema":{"count":1,"sizeInBytes":1},"streams":{"count":1,"sizeInBytes":1},"totalStorageBytesUsed":1,"undoLogs":{"listSize":1,"sizeInBytes":1}}

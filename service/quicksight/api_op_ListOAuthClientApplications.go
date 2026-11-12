@@ -92,7 +92,9 @@ func (v *ListOAuthClientApplicationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOAuthClientApplicationsResponse_NextToken, *v.NextToken)
 	}
-	serializeOAuthClientApplicationSummaryList(s, schemas.ListOAuthClientApplicationsResponse_OAuthClientApplications, v.OAuthClientApplications)
+	if v.OAuthClientApplications != nil {
+		serializeOAuthClientApplicationSummaryList(s, schemas.ListOAuthClientApplicationsResponse_OAuthClientApplications, v.OAuthClientApplications)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListOAuthClientApplicationsResponse_RequestId, *v.RequestId)
 	}

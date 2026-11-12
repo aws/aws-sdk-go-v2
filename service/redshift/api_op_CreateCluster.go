@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -425,6 +427,138 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalInfo != nil {
+		s.WriteString(schemas.CreateClusterMessage_AdditionalInfo, *v.AdditionalInfo)
+	}
+	if v.AllowVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateClusterMessage_AllowVersionUpgrade, *v.AllowVersionUpgrade)
+	}
+	if v.AquaConfigurationStatus != "" {
+		s.WriteString(schemas.CreateClusterMessage_AquaConfigurationStatus, string(v.AquaConfigurationStatus))
+	}
+	if v.AutomatedSnapshotRetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateClusterMessage_AutomatedSnapshotRetentionPeriod, *v.AutomatedSnapshotRetentionPeriod)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateClusterMessage_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneRelocation != nil {
+		s.WriteBool(schemas.CreateClusterMessage_AvailabilityZoneRelocation, *v.AvailabilityZoneRelocation)
+	}
+	if v.CatalogName != nil {
+		s.WriteString(schemas.CreateClusterMessage_CatalogName, *v.CatalogName)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.CreateClusterMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ClusterParameterGroupName != nil {
+		s.WriteString(schemas.CreateClusterMessage_ClusterParameterGroupName, *v.ClusterParameterGroupName)
+	}
+	if v.ClusterSecurityGroups != nil {
+		serializeClusterSecurityGroupNameList(s, schemas.CreateClusterMessage_ClusterSecurityGroups, v.ClusterSecurityGroups)
+	}
+	if v.ClusterSubnetGroupName != nil {
+		s.WriteString(schemas.CreateClusterMessage_ClusterSubnetGroupName, *v.ClusterSubnetGroupName)
+	}
+	if v.ClusterType != nil {
+		s.WriteString(schemas.CreateClusterMessage_ClusterType, *v.ClusterType)
+	}
+	if v.ClusterVersion != nil {
+		s.WriteString(schemas.CreateClusterMessage_ClusterVersion, *v.ClusterVersion)
+	}
+	if v.DBName != nil {
+		s.WriteString(schemas.CreateClusterMessage_DBName, *v.DBName)
+	}
+	if v.DefaultIamRoleArn != nil {
+		s.WriteString(schemas.CreateClusterMessage_DefaultIamRoleArn, *v.DefaultIamRoleArn)
+	}
+	if v.ElasticIp != nil {
+		s.WriteString(schemas.CreateClusterMessage_ElasticIp, *v.ElasticIp)
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.CreateClusterMessage_Encrypted, *v.Encrypted)
+	}
+	if v.EnhancedVpcRouting != nil {
+		s.WriteBool(schemas.CreateClusterMessage_EnhancedVpcRouting, *v.EnhancedVpcRouting)
+	}
+	if v.ExtraComputeForAutomaticOptimization != nil {
+		s.WriteBool(schemas.CreateClusterMessage_ExtraComputeForAutomaticOptimization, *v.ExtraComputeForAutomaticOptimization)
+	}
+	if v.HsmClientCertificateIdentifier != nil {
+		s.WriteString(schemas.CreateClusterMessage_HsmClientCertificateIdentifier, *v.HsmClientCertificateIdentifier)
+	}
+	if v.HsmConfigurationIdentifier != nil {
+		s.WriteString(schemas.CreateClusterMessage_HsmConfigurationIdentifier, *v.HsmConfigurationIdentifier)
+	}
+	if v.IamRoles != nil {
+		serializeIamRoleArnList(s, schemas.CreateClusterMessage_IamRoles, v.IamRoles)
+	}
+	if v.IpAddressType != nil {
+		s.WriteString(schemas.CreateClusterMessage_IpAddressType, *v.IpAddressType)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateClusterMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LoadSampleData != nil {
+		s.WriteString(schemas.CreateClusterMessage_LoadSampleData, *v.LoadSampleData)
+	}
+	if v.MaintenanceTrackName != nil {
+		s.WriteString(schemas.CreateClusterMessage_MaintenanceTrackName, *v.MaintenanceTrackName)
+	}
+	if v.ManageMasterPassword != nil {
+		s.WriteBool(schemas.CreateClusterMessage_ManageMasterPassword, *v.ManageMasterPassword)
+	}
+	if v.ManualSnapshotRetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateClusterMessage_ManualSnapshotRetentionPeriod, *v.ManualSnapshotRetentionPeriod)
+	}
+	if v.MasterPasswordSecretKmsKeyId != nil {
+		s.WriteString(schemas.CreateClusterMessage_MasterPasswordSecretKmsKeyId, *v.MasterPasswordSecretKmsKeyId)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.CreateClusterMessage_MasterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUsername != nil {
+		s.WriteString(schemas.CreateClusterMessage_MasterUsername, *v.MasterUsername)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.CreateClusterMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.CreateClusterMessage_NodeType, *v.NodeType)
+	}
+	if v.NumberOfNodes != nil {
+		s.WriteInt32(schemas.CreateClusterMessage_NumberOfNodes, *v.NumberOfNodes)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.CreateClusterMessage_Port, *v.Port)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateClusterMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.RedshiftIdcApplicationArn != nil {
+		s.WriteString(schemas.CreateClusterMessage_RedshiftIdcApplicationArn, *v.RedshiftIdcApplicationArn)
+	}
+	if v.SnapshotScheduleIdentifier != nil {
+		s.WriteString(schemas.CreateClusterMessage_SnapshotScheduleIdentifier, *v.SnapshotScheduleIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterMessage_Tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateClusterMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type CreateClusterOutput struct {
 
 	// Describes a cluster.
@@ -436,13 +570,34 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.CreateClusterResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterMessage, schemas.CreateClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterMessage, schemas.CreateClusterResult), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

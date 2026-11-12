@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"event":{"eventData":"__EventData__","eventId":"__EventId__","eventReferences":[{"resource":"__EventReferenceMemberResource__"},{"resource":"__EventReferenceMemberResource__"}],"eventTime":946684800,"eventType":"__EventType__","eventUpdatedTime":946684800,"incidentRecordArn":"__IncidentRecordArn__"}}

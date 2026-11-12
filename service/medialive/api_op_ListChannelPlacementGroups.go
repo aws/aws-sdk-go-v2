@@ -84,7 +84,9 @@ func (v *ListChannelPlacementGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChannelPlacementGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDescribeChannelPlacementGroupSummary(s, schemas.ListChannelPlacementGroupsResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ChannelPlacementGroups != nil {
+		serialize__listOfDescribeChannelPlacementGroupSummary(s, schemas.ListChannelPlacementGroupsResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelPlacementGroupsResponse_NextToken, *v.NextToken)
 	}

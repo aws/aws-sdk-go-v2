@@ -143,6 +143,11 @@ type PutCompositeAlarmInput struct {
 	// This member is required.
 	AlarmRule *string
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *types.ActionConfiguration
+
 	// Indicates whether actions should be executed during any changes to the alarm
 	// state of the composite alarm. The default is TRUE .
 	ActionsEnabled *bool
@@ -267,6 +272,11 @@ func (v *PutCompositeAlarmInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutCompositeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.PutCompositeAlarmInput_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.PutCompositeAlarmInput_ActionsEnabled, *v.ActionsEnabled)
 	}
@@ -279,7 +289,9 @@ func (v *PutCompositeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionsSuppressorWaitPeriod != nil {
 		s.WriteInt32(schemas.PutCompositeAlarmInput_ActionsSuppressorWaitPeriod, *v.ActionsSuppressorWaitPeriod)
 	}
-	serializeResourceList(s, schemas.PutCompositeAlarmInput_AlarmActions, v.AlarmActions)
+	if v.AlarmActions != nil {
+		serializeResourceList(s, schemas.PutCompositeAlarmInput_AlarmActions, v.AlarmActions)
+	}
 	if v.AlarmDescription != nil {
 		s.WriteString(schemas.PutCompositeAlarmInput_AlarmDescription, *v.AlarmDescription)
 	}
@@ -289,9 +301,15 @@ func (v *PutCompositeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlarmRule != nil {
 		s.WriteString(schemas.PutCompositeAlarmInput_AlarmRule, *v.AlarmRule)
 	}
-	serializeResourceList(s, schemas.PutCompositeAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
-	serializeResourceList(s, schemas.PutCompositeAlarmInput_OKActions, v.OKActions)
-	serializeTagList(s, schemas.PutCompositeAlarmInput_Tags, v.Tags)
+	if v.InsufficientDataActions != nil {
+		serializeResourceList(s, schemas.PutCompositeAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	}
+	if v.OKActions != nil {
+		serializeResourceList(s, schemas.PutCompositeAlarmInput_OKActions, v.OKActions)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutCompositeAlarmInput_Tags, v.Tags)
+	}
 }
 
 type PutCompositeAlarmOutput struct {

@@ -80,7 +80,9 @@ func (v *ImportCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.ImportCertificateMessage_KmsKeyId, *v.KmsKeyId)
 	}
-	serializeTagList(s, schemas.ImportCertificateMessage_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportCertificateMessage_Tags, v.Tags)
+	}
 }
 
 type ImportCertificateOutput struct {

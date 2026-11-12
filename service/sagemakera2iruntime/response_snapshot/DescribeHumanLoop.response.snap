@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreationTime":"2000-01-01T00:00:00Z","FailureCode":"__FailureCode__","FailureReason":"__FailureReason__","FlowDefinitionArn":"__FlowDefinitionArn__","HumanLoopArn":"__HumanLoopArn__","HumanLoopName":"__HumanLoopName__","HumanLoopOutput":{"OutputS3Uri":"__OutputS3Uri__"},"HumanLoopStatus":"InProgress"}

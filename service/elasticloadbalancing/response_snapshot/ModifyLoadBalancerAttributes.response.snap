@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyLoadBalancerAttributesResponse><ModifyLoadBalancerAttributesResult><LoadBalancerAttributes><AccessLog><EmitInterval>1</EmitInterval><Enabled>true</Enabled><S3BucketName>__S3BucketName__</S3BucketName><S3BucketPrefix>__S3BucketPrefix__</S3BucketPrefix></AccessLog><AdditionalAttributes><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></AdditionalAttributes><ConnectionDraining><Enabled>true</Enabled><Timeout>1</Timeout></ConnectionDraining><ConnectionSettings><IdleTimeout>1</IdleTimeout></ConnectionSettings><CrossZoneLoadBalancing><Enabled>true</Enabled></CrossZoneLoadBalancing></LoadBalancerAttributes><LoadBalancerName>__LoadBalancerName__</LoadBalancerName></ModifyLoadBalancerAttributesResult></ModifyLoadBalancerAttributesResponse>

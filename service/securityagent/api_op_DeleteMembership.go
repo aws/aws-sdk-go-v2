@@ -4,11 +4,13 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a membership, revoking a user's access to an agent space.
+// Deletes a membership, revoking a user's or group's access to an agent space.
 func (c *Client) DeleteMembership(ctx context.Context, params *DeleteMembershipInput, optFns ...func(*Options)) (*DeleteMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteMembershipInput{}
@@ -48,6 +50,27 @@ type DeleteMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.DeleteMembershipRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteMembershipRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MemberType != "" {
+		s.WriteString(schemas.DeleteMembershipRequest_memberType, string(v.MemberType))
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.DeleteMembershipRequest_membershipId, *v.MembershipId)
+	}
+}
+
 // Response structure for removing a single member from an agent space.
 type DeleteMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -56,13 +79,26 @@ type DeleteMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMembership, schemas.DeleteMembershipRequest, schemas.DeleteMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMembership, schemas.DeleteMembershipRequest, schemas.DeleteMembershipResponse), output: &DeleteMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -75,11 +75,15 @@ func (v *CreateRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRegexPatternSetRequest_Name, *v.Name)
 	}
-	serializeRegularExpressionList(s, schemas.CreateRegexPatternSetRequest_RegularExpressionList, v.RegularExpressionList)
+	if v.RegularExpressionList != nil {
+		serializeRegularExpressionList(s, schemas.CreateRegexPatternSetRequest_RegularExpressionList, v.RegularExpressionList)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.CreateRegexPatternSetRequest_Scope, string(v.Scope))
 	}
-	serializeTagList(s, schemas.CreateRegexPatternSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRegexPatternSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRegexPatternSetOutput struct {

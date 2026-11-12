@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShield_20160616/operation/ListResourcesInProtectionGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.ListResourcesInProtectionGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NextToken":"__NextToken__","ProtectionGroupId":"__ProtectionGroupId__"}
+¿jMaxResultsiNextTokenm__NextToken__qProtectionGroupIdu__ProtectionGroupId__ÿ

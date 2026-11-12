@@ -44,7 +44,10 @@ type ListImagePipelinesInput struct {
 	//   - status
 	Filters []types.Filter
 
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. Use the nextToken value from a
@@ -61,7 +64,9 @@ func (v *ListImagePipelinesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImagePipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListImagePipelinesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListImagePipelinesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListImagePipelinesRequest_maxResults, *v.MaxResults)
 	}
@@ -96,7 +101,9 @@ func (v *ListImagePipelinesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImagePipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImagePipelineList(s, schemas.ListImagePipelinesResponse_imagePipelineList, v.ImagePipelineList)
+	if v.ImagePipelineList != nil {
+		serializeImagePipelineList(s, schemas.ListImagePipelinesResponse_imagePipelineList, v.ImagePipelineList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImagePipelinesResponse_nextToken, *v.NextToken)
 	}
@@ -160,7 +167,10 @@ func (c *Client) addOperationListImagePipelinesMiddlewares(stack *middleware.Sta
 // ListImagePipelinesPaginatorOptions is the paginator options for
 // ListImagePipelines
 type ListImagePipelinesPaginatorOptions struct {
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

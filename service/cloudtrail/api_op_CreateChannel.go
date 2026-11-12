@@ -72,14 +72,18 @@ func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinations(s, schemas.CreateChannelRequest_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.CreateChannelRequest_Destinations, v.Destinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateChannelRequest_Name, *v.Name)
 	}
 	if v.Source != nil {
 		s.WriteString(schemas.CreateChannelRequest_Source, *v.Source)
 	}
-	serializeTagsList(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	}
 }
 
 type CreateChannelOutput struct {
@@ -115,14 +119,18 @@ func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.CreateChannelResponse_ChannelArn, *v.ChannelArn)
 	}
-	serializeDestinations(s, schemas.CreateChannelResponse_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.CreateChannelResponse_Destinations, v.Destinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateChannelResponse_Name, *v.Name)
 	}
 	if v.Source != nil {
 		s.WriteString(schemas.CreateChannelResponse_Source, *v.Source)
 	}
-	serializeTagsList(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {

@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,26 @@ type PutSegmentSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSegmentSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSegmentSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSegmentSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.PutSegmentSubscriptionRequest_DomainName, *v.DomainName)
+	}
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.PutSegmentSubscriptionRequest_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentDefinitionName != nil {
+		s.WriteString(schemas.PutSegmentSubscriptionRequest_SegmentDefinitionName, *v.SegmentDefinitionName)
+	}
+}
+
 type PutSegmentSubscriptionOutput struct {
 
 	// The schedule configuration for the subscription, if configured.
@@ -86,13 +108,50 @@ type PutSegmentSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSegmentSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSegmentSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSegmentSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.PutSegmentSubscriptionResponse_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.PutSegmentSubscriptionResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PutSegmentSubscriptionResponse_Status, string(v.Status))
+	}
+}
+func (v *PutSegmentSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSegmentSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSegmentSubscriptionResponse_ScheduleConfiguration:
+			v.ScheduleConfiguration = &types.ScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.PutSegmentSubscriptionResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.PutSegmentSubscriptionResponse_StartedAt, v.StartedAt)
+		case schemas.PutSegmentSubscriptionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.PutSegmentSubscriptionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SegmentSubscriptionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSegmentSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSegmentSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSegmentSubscription, schemas.PutSegmentSubscriptionRequest, schemas.PutSegmentSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSegmentSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSegmentSubscription, schemas.PutSegmentSubscriptionRequest, schemas.PutSegmentSubscriptionResponse), output: &PutSegmentSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

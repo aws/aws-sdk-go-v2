@@ -79,7 +79,9 @@ func (v *GetDevEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDevEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevEndpointList(s, schemas.GetDevEndpointsResponse_DevEndpoints, v.DevEndpoints)
+	if v.DevEndpoints != nil {
+		serializeDevEndpointList(s, schemas.GetDevEndpointsResponse_DevEndpoints, v.DevEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDevEndpointsResponse_NextToken, *v.NextToken)
 	}

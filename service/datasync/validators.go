@@ -1249,6 +1249,41 @@ func validateAzureBlobSasConfiguration(v *types.AzureBlobSasConfiguration) error
 	}
 }
 
+func validateAzureFederatedIdentityConfig(v *types.AzureFederatedIdentityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureFederatedIdentityConfig"}
+	if v.AzureOidc != nil {
+		if err := validateAzureOidcConfig(v.AzureOidc); err != nil {
+			invalidParams.AddNested("AzureOidc", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureOidcConfig(v *types.AzureOidcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureOidcConfig"}
+	if v.TenantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEc2Config(v *types.Ec2Config) error {
 	if v == nil {
 		return nil
@@ -1291,6 +1326,30 @@ func validateFsxProtocolSmb(v *types.FsxProtocolSmb) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FsxProtocolSmb"}
 	if v.User == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("User"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGoogleOidcConfig(v *types.GoogleOidcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GoogleOidcConfig"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.ProjectNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectNumber"))
+	}
+	if v.IdentityPoolName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))
+	}
+	if v.IdentityProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1397,6 +1456,40 @@ func validateManifestConfig(v *types.ManifestConfig) error {
 	if v.Source != nil {
 		if err := validateSourceManifestConfig(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectStorageExternalIdentityConfig(v *types.ObjectStorageExternalIdentityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectStorageExternalIdentityConfig"}
+	if v.GoogleOidc != nil {
+		if err := validateGoogleOidcConfig(v.GoogleOidc); err != nil {
+			invalidParams.AddNested("GoogleOidc", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectStorageFederatedIdentityConfig(v *types.ObjectStorageFederatedIdentityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectStorageFederatedIdentityConfig"}
+	if v.ExternalIdentity != nil {
+		if err := validateObjectStorageExternalIdentityConfig(v.ExternalIdentity); err != nil {
+			invalidParams.AddNested("ExternalIdentity", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1647,6 +1740,11 @@ func validateOpCreateLocationAzureBlobInput(v *CreateLocationAzureBlobInput) err
 			invalidParams.AddNested("SasConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FederatedIdentity != nil {
+		if err := validateAzureFederatedIdentityConfig(v.FederatedIdentity); err != nil {
+			invalidParams.AddNested("FederatedIdentity", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -1865,6 +1963,11 @@ func validateOpCreateLocationObjectStorageInput(v *CreateLocationObjectStorageIn
 	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.FederatedIdentity != nil {
+		if err := validateObjectStorageFederatedIdentityConfig(v.FederatedIdentity); err != nil {
+			invalidParams.AddNested("FederatedIdentity", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
@@ -2371,6 +2474,11 @@ func validateOpUpdateLocationAzureBlobInput(v *UpdateLocationAzureBlobInput) err
 			invalidParams.AddNested("SasConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FederatedIdentity != nil {
+		if err := validateAzureFederatedIdentityConfig(v.FederatedIdentity); err != nil {
+			invalidParams.AddNested("FederatedIdentity", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2505,6 +2613,11 @@ func validateOpUpdateLocationObjectStorageInput(v *UpdateLocationObjectStorageIn
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationObjectStorageInput"}
 	if v.LocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if v.FederatedIdentity != nil {
+		if err := validateObjectStorageFederatedIdentityConfig(v.FederatedIdentity); err != nil {
+			invalidParams.AddNested("FederatedIdentity", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

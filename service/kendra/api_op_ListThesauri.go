@@ -89,7 +89,9 @@ func (v *ListThesauriOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThesauriResponse_NextToken, *v.NextToken)
 	}
-	serializeThesaurusSummaryItems(s, schemas.ListThesauriResponse_ThesaurusSummaryItems, v.ThesaurusSummaryItems)
+	if v.ThesaurusSummaryItems != nil {
+		serializeThesaurusSummaryItems(s, schemas.ListThesauriResponse_ThesaurusSummaryItems, v.ThesaurusSummaryItems)
+	}
 }
 func (v *ListThesauriOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThesauriResponse, func(s *smithy.Schema) error {

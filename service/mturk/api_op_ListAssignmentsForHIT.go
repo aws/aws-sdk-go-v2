@@ -73,7 +73,9 @@ func (v *ListAssignmentsForHITInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssignmentsForHITInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssignmentStatusList(s, schemas.ListAssignmentsForHITRequest_AssignmentStatuses, v.AssignmentStatuses)
+	if v.AssignmentStatuses != nil {
+		serializeAssignmentStatusList(s, schemas.ListAssignmentsForHITRequest_AssignmentStatuses, v.AssignmentStatuses)
+	}
 	if v.HITId != nil {
 		s.WriteString(schemas.ListAssignmentsForHITRequest_HITId, *v.HITId)
 	}
@@ -112,7 +114,9 @@ func (v *ListAssignmentsForHITOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssignmentsForHITOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssignmentList(s, schemas.ListAssignmentsForHITResponse_Assignments, v.Assignments)
+	if v.Assignments != nil {
+		serializeAssignmentList(s, schemas.ListAssignmentsForHITResponse_Assignments, v.Assignments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssignmentsForHITResponse_NextToken, *v.NextToken)
 	}

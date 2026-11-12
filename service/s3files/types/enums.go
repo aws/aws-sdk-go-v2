@@ -46,12 +46,13 @@ type LifeCycleState string
 
 // Enum values for LifeCycleState
 const (
-	LifeCycleStateAvailable LifeCycleState = "available"
-	LifeCycleStateCreating  LifeCycleState = "creating"
-	LifeCycleStateDeleting  LifeCycleState = "deleting"
-	LifeCycleStateDeleted   LifeCycleState = "deleted"
-	LifeCycleStateError     LifeCycleState = "error"
-	LifeCycleStateUpdating  LifeCycleState = "updating"
+	LifeCycleStateAvailable     LifeCycleState = "available"
+	LifeCycleStateCreating      LifeCycleState = "creating"
+	LifeCycleStateDeleting      LifeCycleState = "deleting"
+	LifeCycleStateDeleted       LifeCycleState = "deleted"
+	LifeCycleStateError         LifeCycleState = "error"
+	LifeCycleStateUpdating      LifeCycleState = "updating"
+	LifeCycleStateMisconfigured LifeCycleState = "misconfigured"
 )
 
 // Values returns all known values for LifeCycleState. Note that this can be
@@ -66,5 +67,6 @@ func (LifeCycleState) Values() []LifeCycleState {
 		"deleted",
 		"error",
 		"updating",
+		"misconfigured",
 	}
 }

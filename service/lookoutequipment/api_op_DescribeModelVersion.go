@@ -12,6 +12,10 @@ import (
 )
 
 // Retrieves information about a specific machine learning model version.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DescribeModelVersion(ctx context.Context, params *DescribeModelVersionInput, optFns ...func(*Options)) (*DescribeModelVersionOutput, error) {
 	if params == nil {
 		params = &DescribeModelVersionInput{}

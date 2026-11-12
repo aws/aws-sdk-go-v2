@@ -4,6 +4,8 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteVectorBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVectorBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVectorBucketInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVectorBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.DeleteVectorBucketInput_vectorBucketArn, *v.VectorBucketArn)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.DeleteVectorBucketInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type DeleteVectorBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteVectorBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVectorBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVectorBucketOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVectorBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVectorBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVectorBucketOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVectorBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVectorBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVectorBucket, schemas.DeleteVectorBucketInput, schemas.DeleteVectorBucketOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVectorBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVectorBucket, schemas.DeleteVectorBucketInput, schemas.DeleteVectorBucketOutput), output: &DeleteVectorBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -150,7 +150,9 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SemanticVersion != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_semanticVersion, *v.SemanticVersion)
 	}
-	serializeTagMap(s, schemas.CreateWorkflowRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkflowRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateWorkflowRequest_type, string(v.Type))
 	}

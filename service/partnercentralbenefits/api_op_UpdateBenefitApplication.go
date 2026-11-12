@@ -93,14 +93,18 @@ func (v *UpdateBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateBenefitApplicationInput_Description, *v.Description)
 	}
-	serializeFileInputDetails(s, schemas.UpdateBenefitApplicationInput_FileDetails, v.FileDetails)
+	if v.FileDetails != nil {
+		serializeFileInputDetails(s, schemas.UpdateBenefitApplicationInput_FileDetails, v.FileDetails)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateBenefitApplicationInput_Identifier, *v.Identifier)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateBenefitApplicationInput_Name, *v.Name)
 	}
-	serializeContacts(s, schemas.UpdateBenefitApplicationInput_PartnerContacts, v.PartnerContacts)
+	if v.PartnerContacts != nil {
+		serializeContacts(s, schemas.UpdateBenefitApplicationInput_PartnerContacts, v.PartnerContacts)
+	}
 	if v.Revision != nil {
 		s.WriteString(schemas.UpdateBenefitApplicationInput_Revision, *v.Revision)
 	}

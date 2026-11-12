@@ -122,7 +122,9 @@ func (v *DescribePackagingConfigurationOutput) SerializeMembers(s smithy.ShapeSe
 	if v.PackagingGroupId != nil {
 		s.WriteString(schemas.DescribePackagingConfigurationResponse_PackagingGroupId, *v.PackagingGroupId)
 	}
-	serializeTags(s, schemas.DescribePackagingConfigurationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribePackagingConfigurationResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribePackagingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePackagingConfigurationResponse, func(s *smithy.Schema) error {

@@ -71,8 +71,12 @@ func (v *Algorithm) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DefaultHyperParameterRanges.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHyperParameters(s, schemas.Algorithm_defaultHyperParameters, v.DefaultHyperParameters)
-	serializeResourceConfig(s, schemas.Algorithm_defaultResourceConfig, v.DefaultResourceConfig)
+	if v.DefaultHyperParameters != nil {
+		serializeHyperParameters(s, schemas.Algorithm_defaultHyperParameters, v.DefaultHyperParameters)
+	}
+	if v.DefaultResourceConfig != nil {
+		serializeResourceConfig(s, schemas.Algorithm_defaultResourceConfig, v.DefaultResourceConfig)
+	}
 	if v.LastUpdatedDateTime != nil {
 		s.WriteTime(schemas.Algorithm_lastUpdatedDateTime, *v.LastUpdatedDateTime)
 	}
@@ -190,7 +194,9 @@ func (v *AutoMLConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MetricName != nil {
 		s.WriteString(schemas.AutoMLConfig_metricName, *v.MetricName)
 	}
-	serializeArnList(s, schemas.AutoMLConfig_recipeList, v.RecipeList)
+	if v.RecipeList != nil {
+		serializeArnList(s, schemas.AutoMLConfig_recipeList, v.RecipeList)
+	}
 }
 func (v *AutoMLConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoMLConfig, func(s *smithy.Schema) error {
@@ -489,8 +495,12 @@ func (v *BatchInferenceJobConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchInferenceJobConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHyperParameters(s, schemas.BatchInferenceJobConfig_itemExplorationConfig, v.ItemExplorationConfig)
-	serializeRankingInfluence(s, schemas.BatchInferenceJobConfig_rankingInfluence, v.RankingInfluence)
+	if v.ItemExplorationConfig != nil {
+		serializeHyperParameters(s, schemas.BatchInferenceJobConfig_itemExplorationConfig, v.ItemExplorationConfig)
+	}
+	if v.RankingInfluence != nil {
+		serializeRankingInfluence(s, schemas.BatchInferenceJobConfig_rankingInfluence, v.RankingInfluence)
+	}
 }
 func (v *BatchInferenceJobConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchInferenceJobConfig, func(s *smithy.Schema) error {
@@ -1191,8 +1201,12 @@ func (v *CampaignConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableMetadataWithRecommendations != nil {
 		s.WriteBool(schemas.CampaignConfig_enableMetadataWithRecommendations, *v.EnableMetadataWithRecommendations)
 	}
-	serializeHyperParameters(s, schemas.CampaignConfig_itemExplorationConfig, v.ItemExplorationConfig)
-	serializeRankingInfluence(s, schemas.CampaignConfig_rankingInfluence, v.RankingInfluence)
+	if v.ItemExplorationConfig != nil {
+		serializeHyperParameters(s, schemas.CampaignConfig_itemExplorationConfig, v.ItemExplorationConfig)
+	}
+	if v.RankingInfluence != nil {
+		serializeRankingInfluence(s, schemas.CampaignConfig_rankingInfluence, v.RankingInfluence)
+	}
 	if v.SyncWithLatestSolutionVersion != nil {
 		s.WriteBool(schemas.CampaignConfig_syncWithLatestSolutionVersion, *v.SyncWithLatestSolutionVersion)
 	}
@@ -1419,7 +1433,9 @@ func (v *CategoricalHyperParameterRange) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.CategoricalHyperParameterRange_name, *v.Name)
 	}
-	serializeCategoricalValues(s, schemas.CategoricalHyperParameterRange_values, v.Values)
+	if v.Values != nil {
+		serializeCategoricalValues(s, schemas.CategoricalHyperParameterRange_values, v.Values)
+	}
 }
 func (v *CategoricalHyperParameterRange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CategoricalHyperParameterRange, func(s *smithy.Schema) error {
@@ -2944,7 +2960,9 @@ func (v *DefaultCategoricalHyperParameterRange) SerializeMembers(s smithy.ShapeS
 	if v.Name != nil {
 		s.WriteString(schemas.DefaultCategoricalHyperParameterRange_name, *v.Name)
 	}
-	serializeCategoricalValues(s, schemas.DefaultCategoricalHyperParameterRange_values, v.Values)
+	if v.Values != nil {
+		serializeCategoricalValues(s, schemas.DefaultCategoricalHyperParameterRange_values, v.Values)
+	}
 }
 func (v *DefaultCategoricalHyperParameterRange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DefaultCategoricalHyperParameterRange, func(s *smithy.Schema) error {
@@ -3041,9 +3059,15 @@ func (v *DefaultHyperParameterRanges) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DefaultHyperParameterRanges) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDefaultCategoricalHyperParameterRanges(s, schemas.DefaultHyperParameterRanges_categoricalHyperParameterRanges, v.CategoricalHyperParameterRanges)
-	serializeDefaultContinuousHyperParameterRanges(s, schemas.DefaultHyperParameterRanges_continuousHyperParameterRanges, v.ContinuousHyperParameterRanges)
-	serializeDefaultIntegerHyperParameterRanges(s, schemas.DefaultHyperParameterRanges_integerHyperParameterRanges, v.IntegerHyperParameterRanges)
+	if v.CategoricalHyperParameterRanges != nil {
+		serializeDefaultCategoricalHyperParameterRanges(s, schemas.DefaultHyperParameterRanges_categoricalHyperParameterRanges, v.CategoricalHyperParameterRanges)
+	}
+	if v.ContinuousHyperParameterRanges != nil {
+		serializeDefaultContinuousHyperParameterRanges(s, schemas.DefaultHyperParameterRanges_continuousHyperParameterRanges, v.ContinuousHyperParameterRanges)
+	}
+	if v.IntegerHyperParameterRanges != nil {
+		serializeDefaultIntegerHyperParameterRanges(s, schemas.DefaultHyperParameterRanges_integerHyperParameterRanges, v.IntegerHyperParameterRanges)
+	}
 }
 func (v *DefaultHyperParameterRanges) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DefaultHyperParameterRanges, func(s *smithy.Schema) error {
@@ -3184,7 +3208,9 @@ func (v *EventsConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventParametersList(s, schemas.EventsConfig_eventParametersList, v.EventParametersList)
+	if v.EventParametersList != nil {
+		serializeEventParametersList(s, schemas.EventsConfig_eventParametersList, v.EventParametersList)
+	}
 }
 func (v *EventsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventsConfig, func(s *smithy.Schema) error {
@@ -3415,7 +3441,9 @@ func (v *FeatureTransformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.FeatureTransformation_creationDateTime, *v.CreationDateTime)
 	}
-	serializeFeaturizationParameters(s, schemas.FeatureTransformation_defaultParameters, v.DefaultParameters)
+	if v.DefaultParameters != nil {
+		serializeFeaturizationParameters(s, schemas.FeatureTransformation_defaultParameters, v.DefaultParameters)
+	}
 	if v.FeatureTransformationArn != nil {
 		s.WriteString(schemas.FeatureTransformation_featureTransformationArn, *v.FeatureTransformationArn)
 	}
@@ -3845,9 +3873,15 @@ func (v *HyperParameterRanges) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HyperParameterRanges) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoricalHyperParameterRanges(s, schemas.HyperParameterRanges_categoricalHyperParameterRanges, v.CategoricalHyperParameterRanges)
-	serializeContinuousHyperParameterRanges(s, schemas.HyperParameterRanges_continuousHyperParameterRanges, v.ContinuousHyperParameterRanges)
-	serializeIntegerHyperParameterRanges(s, schemas.HyperParameterRanges_integerHyperParameterRanges, v.IntegerHyperParameterRanges)
+	if v.CategoricalHyperParameterRanges != nil {
+		serializeCategoricalHyperParameterRanges(s, schemas.HyperParameterRanges_categoricalHyperParameterRanges, v.CategoricalHyperParameterRanges)
+	}
+	if v.ContinuousHyperParameterRanges != nil {
+		serializeContinuousHyperParameterRanges(s, schemas.HyperParameterRanges_continuousHyperParameterRanges, v.ContinuousHyperParameterRanges)
+	}
+	if v.IntegerHyperParameterRanges != nil {
+		serializeIntegerHyperParameterRanges(s, schemas.HyperParameterRanges_integerHyperParameterRanges, v.IntegerHyperParameterRanges)
+	}
 }
 func (v *HyperParameterRanges) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HyperParameterRanges, func(s *smithy.Schema) error {
@@ -4526,7 +4560,9 @@ func (v *Recommender) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LatestRecommenderUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetrics(s, schemas.Recommender_modelMetrics, v.ModelMetrics)
+	if v.ModelMetrics != nil {
+		serializeMetrics(s, schemas.Recommender_modelMetrics, v.ModelMetrics)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Recommender_name, *v.Name)
 	}
@@ -4633,7 +4669,9 @@ func (v *RecommenderConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableMetadataWithRecommendations != nil {
 		s.WriteBool(schemas.RecommenderConfig_enableMetadataWithRecommendations, *v.EnableMetadataWithRecommendations)
 	}
-	serializeHyperParameters(s, schemas.RecommenderConfig_itemExplorationConfig, v.ItemExplorationConfig)
+	if v.ItemExplorationConfig != nil {
+		serializeHyperParameters(s, schemas.RecommenderConfig_itemExplorationConfig, v.ItemExplorationConfig)
+	}
 	if v.MinRecommendationRequestsPerSecond != nil {
 		s.WriteInt32(schemas.RecommenderConfig_minRecommendationRequestsPerSecond, *v.MinRecommendationRequestsPerSecond)
 	}
@@ -5150,7 +5188,9 @@ func (v *SolutionConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SolutionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHyperParameters(s, schemas.SolutionConfig_algorithmHyperParameters, v.AlgorithmHyperParameters)
+	if v.AlgorithmHyperParameters != nil {
+		serializeHyperParameters(s, schemas.SolutionConfig_algorithmHyperParameters, v.AlgorithmHyperParameters)
+	}
 	if v.AutoMLConfig != nil {
 		s.WriteStruct(schemas.SolutionConfig_autoMLConfig)
 		v.AutoMLConfig.SerializeMembers(s)
@@ -5169,7 +5209,9 @@ func (v *SolutionConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EventsConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFeatureTransformationParameters(s, schemas.SolutionConfig_featureTransformationParameters, v.FeatureTransformationParameters)
+	if v.FeatureTransformationParameters != nil {
+		serializeFeatureTransformationParameters(s, schemas.SolutionConfig_featureTransformationParameters, v.FeatureTransformationParameters)
+	}
 	if v.HpoConfig != nil {
 		s.WriteStruct(schemas.SolutionConfig_hpoConfig)
 		v.HpoConfig.SerializeMembers(s)
@@ -5890,8 +5932,12 @@ func (v *TrainingDataConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrainingDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExcludedDatasetColumns(s, schemas.TrainingDataConfig_excludedDatasetColumns, v.ExcludedDatasetColumns)
-	serializeIncludedDatasetColumns(s, schemas.TrainingDataConfig_includedDatasetColumns, v.IncludedDatasetColumns)
+	if v.ExcludedDatasetColumns != nil {
+		serializeExcludedDatasetColumns(s, schemas.TrainingDataConfig_excludedDatasetColumns, v.ExcludedDatasetColumns)
+	}
+	if v.IncludedDatasetColumns != nil {
+		serializeIncludedDatasetColumns(s, schemas.TrainingDataConfig_includedDatasetColumns, v.IncludedDatasetColumns)
+	}
 }
 func (v *TrainingDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrainingDataConfig, func(s *smithy.Schema) error {
@@ -5922,7 +5968,9 @@ func (v *TunedHPOParams) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TunedHPOParams) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHyperParameters(s, schemas.TunedHPOParams_algorithmHyperParameters, v.AlgorithmHyperParameters)
+	if v.AlgorithmHyperParameters != nil {
+		serializeHyperParameters(s, schemas.TunedHPOParams_algorithmHyperParameters, v.AlgorithmHyperParameters)
+	}
 }
 func (v *TunedHPOParams) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TunedHPOParams, func(s *smithy.Schema) error {

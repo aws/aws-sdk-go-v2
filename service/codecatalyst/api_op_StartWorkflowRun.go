@@ -5,6 +5,8 @@ package codecatalyst
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type StartWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkflowRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartWorkflowRunRequest_clientToken, *v.ClientToken)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StartWorkflowRunRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.StartWorkflowRunRequest_spaceName, *v.SpaceName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.StartWorkflowRunRequest_workflowId, *v.WorkflowId)
+	}
+}
+
 type StartWorkflowRunOutput struct {
 
 	// The system-generated unique ID of the workflow run.
@@ -79,13 +102,50 @@ type StartWorkflowRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkflowRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkflowRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartWorkflowRunResponse_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StartWorkflowRunResponse_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.StartWorkflowRunResponse_spaceName, *v.SpaceName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.StartWorkflowRunResponse_workflowId, *v.WorkflowId)
+	}
+}
+func (v *StartWorkflowRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWorkflowRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartWorkflowRunResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartWorkflowRunResponse_id, v.Id)
+		case schemas.StartWorkflowRunResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.StartWorkflowRunResponse_projectName, v.ProjectName)
+		case schemas.StartWorkflowRunResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.StartWorkflowRunResponse_spaceName, v.SpaceName)
+		case schemas.StartWorkflowRunResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.StartWorkflowRunResponse_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflowRun, schemas.StartWorkflowRunRequest, schemas.StartWorkflowRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflowRun, schemas.StartWorkflowRunRequest, schemas.StartWorkflowRunResponse), output: &StartWorkflowRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

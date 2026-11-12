@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","trainingDatasets":[{"createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","status":"ACTIVE","trainingDatasetArn":"__TrainingDatasetArn__","updateTime":"2000-01-01T00:00:00Z"},{"createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","status":"ACTIVE","trainingDatasetArn":"__TrainingDatasetArn__","updateTime":"2000-01-01T00:00:00Z"}]}

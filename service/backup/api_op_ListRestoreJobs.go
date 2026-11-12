@@ -180,7 +180,9 @@ func (v *ListRestoreJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRestoreJobsOutput_NextToken, *v.NextToken)
 	}
-	serializeRestoreJobsList(s, schemas.ListRestoreJobsOutput_RestoreJobs, v.RestoreJobs)
+	if v.RestoreJobs != nil {
+		serializeRestoreJobsList(s, schemas.ListRestoreJobsOutput_RestoreJobs, v.RestoreJobs)
+	}
 }
 func (v *ListRestoreJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRestoreJobsOutput, func(s *smithy.Schema) error {

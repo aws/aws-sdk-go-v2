@@ -42,7 +42,9 @@ func (v *DeleteApplicationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationIdsList(s, schemas.DeleteApplicationsRequest_configurationIds, v.ConfigurationIds)
+	if v.ConfigurationIds != nil {
+		serializeApplicationIdsList(s, schemas.DeleteApplicationsRequest_configurationIds, v.ConfigurationIds)
+	}
 }
 
 type DeleteApplicationsOutput struct {

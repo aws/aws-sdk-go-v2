@@ -143,7 +143,9 @@ func (v *DescribeAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AssessmentTargetSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeControlAssessmentList(s, schemas.DescribeAssessmentResponse_ControlAssessments, v.ControlAssessments)
+	if v.ControlAssessments != nil {
+		serializeControlAssessmentList(s, schemas.DescribeAssessmentResponse_ControlAssessments, v.ControlAssessments)
+	}
 	if v.CreatedAt != nil {
 		s.WriteString(schemas.DescribeAssessmentResponse_CreatedAt, *v.CreatedAt)
 	}
@@ -153,7 +155,9 @@ func (v *DescribeAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FrameworkId != nil {
 		s.WriteString(schemas.DescribeAssessmentResponse_FrameworkId, *v.FrameworkId)
 	}
-	serializeFrameworkSummary(s, schemas.DescribeAssessmentResponse_FrameworkSummary, v.FrameworkSummary)
+	if v.FrameworkSummary != nil {
+		serializeFrameworkSummary(s, schemas.DescribeAssessmentResponse_FrameworkSummary, v.FrameworkSummary)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAssessmentResponse_NextToken, *v.NextToken)
 	}

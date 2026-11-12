@@ -100,7 +100,9 @@ func (v *ListUserPoolClientSecretsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUserPoolClientSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientSecretDescriptorListType(s, schemas.ListUserPoolClientSecretsResponse_ClientSecrets, v.ClientSecrets)
+	if v.ClientSecrets != nil {
+		serializeClientSecretDescriptorListType(s, schemas.ListUserPoolClientSecretsResponse_ClientSecrets, v.ClientSecrets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserPoolClientSecretsResponse_NextToken, *v.NextToken)
 	}

@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteUserGroupInput struct {
 	UserGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteUserGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserGroupId != nil {
+		s.WriteString(schemas.DeleteUserGroupMessage_UserGroupId, *v.UserGroupId)
+	}
 }
 
 type DeleteUserGroupOutput struct {
@@ -75,13 +89,79 @@ type DeleteUserGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.UserGroup_ARN, *v.ARN)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.UserGroup_Engine, *v.Engine)
+	}
+	if v.MinimumEngineVersion != nil {
+		s.WriteString(schemas.UserGroup_MinimumEngineVersion, *v.MinimumEngineVersion)
+	}
+	if v.PendingChanges != nil {
+		s.WriteStruct(schemas.UserGroup_PendingChanges)
+		v.PendingChanges.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationGroups != nil {
+		serializeUGReplicationGroupIdList(s, schemas.UserGroup_ReplicationGroups, v.ReplicationGroups)
+	}
+	if v.ServerlessCaches != nil {
+		serializeUGServerlessCacheIdList(s, schemas.UserGroup_ServerlessCaches, v.ServerlessCaches)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UserGroup_Status, *v.Status)
+	}
+	if v.UserGroupId != nil {
+		s.WriteString(schemas.UserGroup_UserGroupId, *v.UserGroupId)
+	}
+	if v.UserIds != nil {
+		serializeUserIdList(s, schemas.UserGroup_UserIds, v.UserIds)
+	}
+}
+func (v *DeleteUserGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserGroup_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.UserGroup_ARN, v.ARN)
+		case schemas.UserGroup_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.UserGroup_Engine, v.Engine)
+		case schemas.UserGroup_MinimumEngineVersion:
+			v.MinimumEngineVersion = new(string)
+			return d.ReadString(schemas.UserGroup_MinimumEngineVersion, v.MinimumEngineVersion)
+		case schemas.UserGroup_PendingChanges:
+			v.PendingChanges = &types.UserGroupPendingChanges{}
+			return v.PendingChanges.Deserialize(d)
+		case schemas.UserGroup_ReplicationGroups:
+			return deserializeUGReplicationGroupIdList(d, schemas.UserGroup_ReplicationGroups, &v.ReplicationGroups)
+		case schemas.UserGroup_ServerlessCaches:
+			return deserializeUGServerlessCacheIdList(d, schemas.UserGroup_ServerlessCaches, &v.ServerlessCaches)
+		case schemas.UserGroup_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UserGroup_Status, v.Status)
+		case schemas.UserGroup_UserGroupId:
+			v.UserGroupId = new(string)
+			return d.ReadString(schemas.UserGroup_UserGroupId, v.UserGroupId)
+		case schemas.UserGroup_UserIds:
+			return deserializeUserIdList(d, schemas.UserGroup_UserIds, &v.UserIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteUserGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserGroup, schemas.DeleteUserGroupMessage, schemas.UserGroup)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteUserGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserGroup, schemas.DeleteUserGroupMessage, schemas.UserGroup), output: &DeleteUserGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

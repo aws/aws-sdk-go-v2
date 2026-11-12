@@ -93,7 +93,9 @@ func (v *DescribeElasticsearchInstanceTypeLimitsOutput) Serialize(s smithy.Shape
 }
 
 func (v *DescribeElasticsearchInstanceTypeLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLimitsByRole(s, schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole, v.LimitsByRole)
+	if v.LimitsByRole != nil {
+		serializeLimitsByRole(s, schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole, v.LimitsByRole)
+	}
 }
 func (v *DescribeElasticsearchInstanceTypeLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeElasticsearchInstanceTypeLimitsResponse, func(s *smithy.Schema) error {

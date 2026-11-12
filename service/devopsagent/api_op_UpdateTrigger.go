@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,27 @@ type UpdateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateTriggerRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateTriggerRequest_clientToken, *v.ClientToken)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateTriggerRequest_status, *v.Status)
+	}
+	if v.TriggerId != nil {
+		s.WriteString(schemas.UpdateTriggerRequest_triggerId, *v.TriggerId)
+	}
+}
+
 // Response structure for updating a Trigger
 type UpdateTriggerOutput struct {
 
@@ -62,13 +85,34 @@ type UpdateTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Trigger != nil {
+		s.WriteStruct(schemas.UpdateTriggerResponse_trigger)
+		v.Trigger.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTriggerResponse_trigger:
+			v.Trigger = &types.Trigger{}
+			return v.Trigger.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrigger, schemas.UpdateTriggerRequest, schemas.UpdateTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrigger, schemas.UpdateTriggerRequest, schemas.UpdateTriggerResponse), output: &UpdateTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

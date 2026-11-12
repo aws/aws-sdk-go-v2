@@ -102,7 +102,9 @@ func (v *ListSelfUpgradesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListSelfUpgradesResponse_RequestId, *v.RequestId)
 	}
-	serializeSelfUpgradeRequestDetailList(s, schemas.ListSelfUpgradesResponse_SelfUpgradeRequestDetails, v.SelfUpgradeRequestDetails)
+	if v.SelfUpgradeRequestDetails != nil {
+		serializeSelfUpgradeRequestDetailList(s, schemas.ListSelfUpgradesResponse_SelfUpgradeRequestDetails, v.SelfUpgradeRequestDetails)
+	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListSelfUpgradesResponse_Status, v.Status)
 	}

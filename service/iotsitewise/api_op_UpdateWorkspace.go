@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,29 @@ type UpdateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_clientToken, *v.ClientToken)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkspaceRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceDescription != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_workspaceDescription, *v.WorkspaceDescription)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type UpdateWorkspaceOutput struct {
 
 	// The status of the workspace after the update, which is UPDATING when the
@@ -66,13 +91,34 @@ type UpdateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceStatus != nil {
+		s.WriteStruct(schemas.UpdateWorkspaceResponse_workspaceStatus)
+		v.WorkspaceStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceResponse_workspaceStatus:
+			v.WorkspaceStatus = &types.WorkspaceStatus{}
+			return v.WorkspaceStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspace, schemas.UpdateWorkspaceRequest, schemas.UpdateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspace, schemas.UpdateWorkspaceRequest, schemas.UpdateWorkspaceResponse), output: &UpdateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

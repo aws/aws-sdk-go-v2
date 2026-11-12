@@ -61,8 +61,12 @@ func (v *UpdateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateActionRequest_Description, *v.Description)
 	}
-	serializeLineageEntityParameters(s, schemas.UpdateActionRequest_Properties, v.Properties)
-	serializeListLineageEntityParameterKey(s, schemas.UpdateActionRequest_PropertiesToRemove, v.PropertiesToRemove)
+	if v.Properties != nil {
+		serializeLineageEntityParameters(s, schemas.UpdateActionRequest_Properties, v.Properties)
+	}
+	if v.PropertiesToRemove != nil {
+		serializeListLineageEntityParameterKey(s, schemas.UpdateActionRequest_PropertiesToRemove, v.PropertiesToRemove)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateActionRequest_Status, string(v.Status))
 	}

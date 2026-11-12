@@ -4,7 +4,9 @@ package connecthealth
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteDomainInput_domainId, *v.DomainId)
+	}
+}
+
 type DeleteDomainOutput struct {
 
 	// The ARN of the Domain that was requested for deletion
@@ -57,13 +71,48 @@ type DeleteDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDomainOutput_arn, *v.Arn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteDomainOutput_domainId, *v.DomainId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteDomainOutput_status, string(v.Status))
+	}
+}
+func (v *DeleteDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDomainOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDomainOutput_arn, v.Arn)
+		case schemas.DeleteDomainOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DeleteDomainOutput_domainId, v.DomainId)
+		case schemas.DeleteDomainOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDomainOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainInput, schemas.DeleteDomainOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainInput, schemas.DeleteDomainOutput), output: &DeleteDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package pcs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,7 +45,7 @@ type UpdateQueueInput struct {
 	// With an idempotent request, if the original request completes successfully, the
 	// subsequent retries with the same client token return the result from the
 	// original successful request and they have no additional effect. If you don't
-	// specify a client token, the CLI and SDK automatically generate 1 for you.
+	// specify a client token, the CLI and SDK automatically generate one for you.
 	ClientToken *string
 
 	// The list of compute node group configurations to associate with the queue.
@@ -54,6 +56,32 @@ type UpdateQueueInput struct {
 	SlurmConfiguration *types.UpdateQueueSlurmConfigurationRequest
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateQueueRequest_clientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.UpdateQueueRequest_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ComputeNodeGroupConfigurations != nil {
+		serializeComputeNodeGroupConfigurationList(s, schemas.UpdateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	}
+	if v.QueueIdentifier != nil {
+		s.WriteString(schemas.UpdateQueueRequest_queueIdentifier, *v.QueueIdentifier)
+	}
+	if v.SlurmConfiguration != nil {
+		s.WriteStruct(schemas.UpdateQueueRequest_slurmConfiguration)
+		v.SlurmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type UpdateQueueOutput struct {
@@ -67,13 +95,34 @@ type UpdateQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Queue != nil {
+		s.WriteStruct(schemas.UpdateQueueResponse_queue)
+		v.Queue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQueueResponse_queue:
+			v.Queue = &types.Queue{}
+			return v.Queue.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueue, schemas.UpdateQueueRequest, schemas.UpdateQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueue, schemas.UpdateQueueRequest, schemas.UpdateQueueResponse), output: &UpdateQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -93,7 +93,9 @@ func (v *ListBlockingInstancesForCapacityTaskOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListBlockingInstancesForCapacityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockingInstancesList(s, schemas.ListBlockingInstancesForCapacityTaskOutput_BlockingInstances, v.BlockingInstances)
+	if v.BlockingInstances != nil {
+		serializeBlockingInstancesList(s, schemas.ListBlockingInstancesForCapacityTaskOutput_BlockingInstances, v.BlockingInstances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBlockingInstancesForCapacityTaskOutput_NextToken, *v.NextToken)
 	}

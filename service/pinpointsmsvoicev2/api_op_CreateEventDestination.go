@@ -110,7 +110,9 @@ func (v *CreateEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.KinesisFirehoseDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventTypeList(s, schemas.CreateEventDestinationRequest_MatchingEventTypes, v.MatchingEventTypes)
+	if v.MatchingEventTypes != nil {
+		serializeEventTypeList(s, schemas.CreateEventDestinationRequest_MatchingEventTypes, v.MatchingEventTypes)
+	}
 	if v.SnsDestination != nil {
 		s.WriteStruct(schemas.CreateEventDestinationRequest_SnsDestination)
 		v.SnsDestination.SerializeMembers(s)

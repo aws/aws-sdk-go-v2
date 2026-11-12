@@ -48,7 +48,9 @@ func (v *GetCrawlerMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCrawlerMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlerNameList(s, schemas.GetCrawlerMetricsRequest_CrawlerNameList, v.CrawlerNameList)
+	if v.CrawlerNameList != nil {
+		serializeCrawlerNameList(s, schemas.GetCrawlerMetricsRequest_CrawlerNameList, v.CrawlerNameList)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetCrawlerMetricsRequest_MaxResults, *v.MaxResults)
 	}
@@ -79,7 +81,9 @@ func (v *GetCrawlerMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCrawlerMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlerMetricsList(s, schemas.GetCrawlerMetricsResponse_CrawlerMetricsList, v.CrawlerMetricsList)
+	if v.CrawlerMetricsList != nil {
+		serializeCrawlerMetricsList(s, schemas.GetCrawlerMetricsResponse_CrawlerMetricsList, v.CrawlerMetricsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCrawlerMetricsResponse_NextToken, *v.NextToken)
 	}

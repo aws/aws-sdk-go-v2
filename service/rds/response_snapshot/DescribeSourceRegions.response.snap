@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeSourceRegionsResponse><DescribeSourceRegionsResult><Marker>__Marker__</Marker><SourceRegions><SourceRegion><Endpoint>__Endpoint__</Endpoint><RegionName>__RegionName__</RegionName><Status>__Status__</Status><SupportsDBInstanceAutomatedBackupsReplication>true</SupportsDBInstanceAutomatedBackupsReplication></SourceRegion><SourceRegion><Endpoint>__Endpoint__</Endpoint><RegionName>__RegionName__</RegionName><Status>__Status__</Status><SupportsDBInstanceAutomatedBackupsReplication>true</SupportsDBInstanceAutomatedBackupsReplication></SourceRegion></SourceRegions></DescribeSourceRegionsResult></DescribeSourceRegionsResponse>

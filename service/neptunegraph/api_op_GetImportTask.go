@@ -159,7 +159,9 @@ func (v *GetImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GraphId != nil {
 		s.WriteString(schemas.GetImportTaskOutput_graphId, *v.GraphId)
 	}
-	serializeImportOptions(s, schemas.GetImportTaskOutput_importOptions, v.ImportOptions)
+	if v.ImportOptions != nil {
+		serializeImportOptions(s, schemas.GetImportTaskOutput_importOptions, v.ImportOptions)
+	}
 	if v.ImportTaskDetails != nil {
 		s.WriteStruct(schemas.GetImportTaskOutput_importTaskDetails)
 		v.ImportTaskDetails.SerializeMembers(s)

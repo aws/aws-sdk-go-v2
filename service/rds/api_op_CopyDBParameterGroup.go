@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,27 @@ type CopyDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyDBParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyDBParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyDBParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceDBParameterGroupIdentifier != nil {
+		s.WriteString(schemas.CopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier, *v.SourceDBParameterGroupIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopyDBParameterGroupMessage_Tags, v.Tags)
+	}
+	if v.TargetDBParameterGroupDescription != nil {
+		s.WriteString(schemas.CopyDBParameterGroupMessage_TargetDBParameterGroupDescription, *v.TargetDBParameterGroupDescription)
+	}
+	if v.TargetDBParameterGroupIdentifier != nil {
+		s.WriteString(schemas.CopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier, *v.TargetDBParameterGroupIdentifier)
+	}
+}
+
 type CopyDBParameterGroupOutput struct {
 
 	// Contains the details of an Amazon RDS DB parameter group.
@@ -90,13 +113,34 @@ type CopyDBParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyDBParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyDBParameterGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyDBParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroup != nil {
+		s.WriteStruct(schemas.CopyDBParameterGroupResult_DBParameterGroup)
+		v.DBParameterGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyDBParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyDBParameterGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyDBParameterGroupResult_DBParameterGroup:
+			v.DBParameterGroup = &types.DBParameterGroup{}
+			return v.DBParameterGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBParameterGroup, schemas.CopyDBParameterGroupMessage, schemas.CopyDBParameterGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBParameterGroup, schemas.CopyDBParameterGroupMessage, schemas.CopyDBParameterGroupResult), output: &CopyDBParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

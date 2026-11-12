@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,18 @@ type CancelVariantImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelVariantImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelVariantImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelVariantImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelVariantImportRequest_jobId, *v.JobId)
+	}
+}
+
 type CancelVariantImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type CancelVariantImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelVariantImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelVariantImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelVariantImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelVariantImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelVariantImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelVariantImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelVariantImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelVariantImportJob, schemas.CancelVariantImportRequest, schemas.CancelVariantImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelVariantImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelVariantImportJob, schemas.CancelVariantImportRequest, schemas.CancelVariantImportResponse), output: &CancelVariantImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

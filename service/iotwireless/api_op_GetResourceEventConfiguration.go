@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type GetResourceEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetResourceEventConfigurationRequest_Identifier, *v.Identifier)
+	}
+	if v.IdentifierType != "" {
+		s.WriteString(schemas.GetResourceEventConfigurationRequest_IdentifierType, string(v.IdentifierType))
+	}
+	if v.PartnerType != "" {
+		s.WriteString(schemas.GetResourceEventConfigurationRequest_PartnerType, string(v.PartnerType))
+	}
+}
+
 type GetResourceEventConfigurationOutput struct {
 
 	// Event configuration for the connection status event.
@@ -65,13 +85,66 @@ type GetResourceEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionStatus != nil {
+		s.WriteStruct(schemas.GetResourceEventConfigurationResponse_ConnectionStatus)
+		v.ConnectionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceRegistrationState != nil {
+		s.WriteStruct(schemas.GetResourceEventConfigurationResponse_DeviceRegistrationState)
+		v.DeviceRegistrationState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Join != nil {
+		s.WriteStruct(schemas.GetResourceEventConfigurationResponse_Join)
+		v.Join.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MessageDeliveryStatus != nil {
+		s.WriteStruct(schemas.GetResourceEventConfigurationResponse_MessageDeliveryStatus)
+		v.MessageDeliveryStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Proximity != nil {
+		s.WriteStruct(schemas.GetResourceEventConfigurationResponse_Proximity)
+		v.Proximity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetResourceEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceEventConfigurationResponse_ConnectionStatus:
+			v.ConnectionStatus = &types.ConnectionStatusEventConfiguration{}
+			return v.ConnectionStatus.Deserialize(d)
+		case schemas.GetResourceEventConfigurationResponse_DeviceRegistrationState:
+			v.DeviceRegistrationState = &types.DeviceRegistrationStateEventConfiguration{}
+			return v.DeviceRegistrationState.Deserialize(d)
+		case schemas.GetResourceEventConfigurationResponse_Join:
+			v.Join = &types.JoinEventConfiguration{}
+			return v.Join.Deserialize(d)
+		case schemas.GetResourceEventConfigurationResponse_MessageDeliveryStatus:
+			v.MessageDeliveryStatus = &types.MessageDeliveryStatusEventConfiguration{}
+			return v.MessageDeliveryStatus.Deserialize(d)
+		case schemas.GetResourceEventConfigurationResponse_Proximity:
+			v.Proximity = &types.ProximityEventConfiguration{}
+			return v.Proximity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceEventConfiguration, schemas.GetResourceEventConfigurationRequest, schemas.GetResourceEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceEventConfiguration, schemas.GetResourceEventConfigurationRequest, schemas.GetResourceEventConfigurationResponse), output: &GetResourceEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

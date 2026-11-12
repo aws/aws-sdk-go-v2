@@ -216,7 +216,9 @@ func (v *AliasRoutingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AliasRoutingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalVersionWeights(s, schemas.AliasRoutingConfiguration_AdditionalVersionWeights, v.AdditionalVersionWeights)
+	if v.AdditionalVersionWeights != nil {
+		serializeAdditionalVersionWeights(s, schemas.AliasRoutingConfiguration_AdditionalVersionWeights, v.AdditionalVersionWeights)
+	}
 }
 func (v *AliasRoutingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AliasRoutingConfiguration, func(s *smithy.Schema) error {
@@ -247,7 +249,9 @@ func (v *AllowedPublishers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AllowedPublishers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSigningProfileVersionArns(s, schemas.AllowedPublishers_SigningProfileVersionArns, v.SigningProfileVersionArns)
+	if v.SigningProfileVersionArns != nil {
+		serializeSigningProfileVersionArns(s, schemas.AllowedPublishers_SigningProfileVersionArns, v.SigningProfileVersionArns)
+	}
 }
 func (v *AllowedPublishers) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AllowedPublishers, func(s *smithy.Schema) error {
@@ -853,7 +857,9 @@ func (v *CapacityProviderScalingConfig) SerializeMembers(s smithy.ShapeSerialize
 	if v.ScalingMode != "" {
 		s.WriteString(schemas.CapacityProviderScalingConfig_ScalingMode, string(v.ScalingMode))
 	}
-	serializeCapacityProviderScalingPoliciesList(s, schemas.CapacityProviderScalingConfig_ScalingPolicies, v.ScalingPolicies)
+	if v.ScalingPolicies != nil {
+		serializeCapacityProviderScalingPoliciesList(s, schemas.CapacityProviderScalingConfig_ScalingPolicies, v.ScalingPolicies)
+	}
 }
 func (v *CapacityProviderScalingConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapacityProviderScalingConfig, func(s *smithy.Schema) error {
@@ -933,8 +939,12 @@ func (v *CapacityProviderVpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CapacityProviderVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviderSecurityGroupIds(s, schemas.CapacityProviderVpcConfig_SecurityGroupIds, v.SecurityGroupIds)
-	serializeCapacityProviderSubnetIds(s, schemas.CapacityProviderVpcConfig_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeCapacityProviderSecurityGroupIds(s, schemas.CapacityProviderVpcConfig_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeCapacityProviderSubnetIds(s, schemas.CapacityProviderVpcConfig_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *CapacityProviderVpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapacityProviderVpcConfig, func(s *smithy.Schema) error {
@@ -1039,9 +1049,9 @@ type ChainedInvokeOptions struct {
 	// The tenant identifier for the chained invocation.
 	TenantId *string
 
-	// The optional X-Ray trace header to use when starting the chained invocation. If
-	// you omit this value, the child invocation inherits the parent durable
-	// execution's trace header.
+	// The X-Ray trace header to use when starting the chained invocation. This
+	// parameter is optional. If you omit this value, the child invocation inherits the
+	// parent durable execution's trace header.
 	//
 	// Specify this value on the START update for the chained invocation operation.
 	// For more information about the header format, see [Tracing header]in the X-Ray Developer Guide.
@@ -1287,7 +1297,9 @@ func (v *CheckpointUpdatedExecutionState) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextMarker != nil {
 		s.WriteString(schemas.CheckpointUpdatedExecutionState_NextMarker, *v.NextMarker)
 	}
-	serializeOperations(s, schemas.CheckpointUpdatedExecutionState_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperations(s, schemas.CheckpointUpdatedExecutionState_Operations, v.Operations)
+	}
 }
 func (v *CheckpointUpdatedExecutionState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CheckpointUpdatedExecutionState, func(s *smithy.Schema) error {
@@ -1697,10 +1709,18 @@ func (v *Cors) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowCredentials != nil {
 		s.WriteBool(schemas.Cors_AllowCredentials, *v.AllowCredentials)
 	}
-	serializeHeadersList(s, schemas.Cors_AllowHeaders, v.AllowHeaders)
-	serializeAllowMethodsList(s, schemas.Cors_AllowMethods, v.AllowMethods)
-	serializeAllowOriginsList(s, schemas.Cors_AllowOrigins, v.AllowOrigins)
-	serializeHeadersList(s, schemas.Cors_ExposeHeaders, v.ExposeHeaders)
+	if v.AllowHeaders != nil {
+		serializeHeadersList(s, schemas.Cors_AllowHeaders, v.AllowHeaders)
+	}
+	if v.AllowMethods != nil {
+		serializeAllowMethodsList(s, schemas.Cors_AllowMethods, v.AllowMethods)
+	}
+	if v.AllowOrigins != nil {
+		serializeAllowOriginsList(s, schemas.Cors_AllowOrigins, v.AllowOrigins)
+	}
+	if v.ExposeHeaders != nil {
+		serializeHeadersList(s, schemas.Cors_ExposeHeaders, v.ExposeHeaders)
+	}
 	if v.MaxAge != nil {
 		s.WriteInt32(schemas.Cors_MaxAge, *v.MaxAge)
 	}
@@ -1946,7 +1966,9 @@ func (v *Environment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.Environment_Variables, v.Variables)
+	if v.Variables != nil {
+		serializeEnvironmentVariables(s, schemas.Environment_Variables, v.Variables)
+	}
 }
 func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
@@ -2024,7 +2046,9 @@ func (v *EnvironmentResponse) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEnvironmentVariables(s, schemas.EnvironmentResponse_Variables, v.Variables)
+	if v.Variables != nil {
+		serializeEnvironmentVariables(s, schemas.EnvironmentResponse_Variables, v.Variables)
+	}
 }
 func (v *EnvironmentResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentResponse, func(s *smithy.Schema) error {
@@ -2109,7 +2133,9 @@ func (v *ErrorObject) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorType != nil {
 		s.WriteString(schemas.ErrorObject_ErrorType, *v.ErrorType)
 	}
-	serializeStackTraceEntries(s, schemas.ErrorObject_StackTrace, v.StackTrace)
+	if v.StackTrace != nil {
+		serializeStackTraceEntries(s, schemas.ErrorObject_StackTrace, v.StackTrace)
+	}
 }
 func (v *ErrorObject) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ErrorObject, func(s *smithy.Schema) error {
@@ -2840,7 +2866,9 @@ func (v *EventSourceMappingConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_FunctionArn, *v.FunctionArn)
 	}
-	serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	if v.FunctionResponseTypes != nil {
+		serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	}
 	if v.KMSKeyArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_KMSKeyArn, *v.KMSKeyArn)
 	}
@@ -2877,7 +2905,9 @@ func (v *EventSourceMappingConfiguration) SerializeMembers(s smithy.ShapeSeriali
 		v.ProvisionedPollerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	if v.Queues != nil {
+		serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.EventSourceMappingConfiguration_ScalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -2893,7 +2923,9 @@ func (v *EventSourceMappingConfiguration) SerializeMembers(s smithy.ShapeSeriali
 		v.SelfManagedKafkaEventSourceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	if v.SourceAccessConfigurations != nil {
+		serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	}
 	if v.StartingPosition != "" {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StartingPosition, string(v.StartingPosition))
 	}
@@ -2906,7 +2938,9 @@ func (v *EventSourceMappingConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.StateTransitionReason != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StateTransitionReason, *v.StateTransitionReason)
 	}
-	serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	if v.Topics != nil {
+		serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	}
 	if v.TumblingWindowInSeconds != nil {
 		s.WriteInt32(schemas.EventSourceMappingConfiguration_TumblingWindowInSeconds, *v.TumblingWindowInSeconds)
 	}
@@ -3094,7 +3128,9 @@ func (v *EventSourceMappingMetricsConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventSourceMappingMetricsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventSourceMappingMetricList(s, schemas.EventSourceMappingMetricsConfig_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeEventSourceMappingMetricList(s, schemas.EventSourceMappingMetricsConfig_Metrics, v.Metrics)
+	}
 }
 func (v *EventSourceMappingMetricsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventSourceMappingMetricsConfig, func(s *smithy.Schema) error {
@@ -3557,7 +3593,9 @@ func (v *FilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.FilterCriteria_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.FilterCriteria_Filters, v.Filters)
+	}
 }
 func (v *FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterCriteria, func(s *smithy.Schema) error {
@@ -4044,7 +4082,9 @@ func (v *FunctionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FunctionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchitecturesList(s, schemas.FunctionConfiguration_Architectures, v.Architectures)
+	if v.Architectures != nil {
+		serializeArchitecturesList(s, schemas.FunctionConfiguration_Architectures, v.Architectures)
+	}
 	if v.CapacityProviderConfig != nil {
 		s.WriteStruct(schemas.FunctionConfiguration_CapacityProviderConfig)
 		v.CapacityProviderConfig.SerializeMembers(s)
@@ -4082,7 +4122,9 @@ func (v *FunctionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EphemeralStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFileSystemConfigList(s, schemas.FunctionConfiguration_FileSystemConfigs, v.FileSystemConfigs)
+	if v.FileSystemConfigs != nil {
+		serializeFileSystemConfigList(s, schemas.FunctionConfiguration_FileSystemConfigs, v.FileSystemConfigs)
+	}
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.FunctionConfiguration_FunctionArn, *v.FunctionArn)
 	}
@@ -4112,7 +4154,9 @@ func (v *FunctionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdateStatusReasonCode != "" {
 		s.WriteString(schemas.FunctionConfiguration_LastUpdateStatusReasonCode, string(v.LastUpdateStatusReasonCode))
 	}
-	serializeLayersReferenceList(s, schemas.FunctionConfiguration_Layers, v.Layers)
+	if v.Layers != nil {
+		serializeLayersReferenceList(s, schemas.FunctionConfiguration_Layers, v.Layers)
+	}
 	if v.LoggingConfig != nil {
 		s.WriteStruct(schemas.FunctionConfiguration_LoggingConfig)
 		v.LoggingConfig.SerializeMembers(s)
@@ -4657,8 +4701,12 @@ func (v *ImageConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ImageConfig_Command, v.Command)
-	serializeStringList(s, schemas.ImageConfig_EntryPoint, v.EntryPoint)
+	if v.Command != nil {
+		serializeStringList(s, schemas.ImageConfig_Command, v.Command)
+	}
+	if v.EntryPoint != nil {
+		serializeStringList(s, schemas.ImageConfig_EntryPoint, v.EntryPoint)
+	}
 	if v.WorkingDirectory != nil {
 		s.WriteString(schemas.ImageConfig_WorkingDirectory, *v.WorkingDirectory)
 	}
@@ -4788,9 +4836,15 @@ func (v *InstanceRequirements) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InstanceRequirements) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceTypeSet(s, schemas.InstanceRequirements_AllowedInstanceTypes, v.AllowedInstanceTypes)
-	serializeArchitecturesList(s, schemas.InstanceRequirements_Architectures, v.Architectures)
-	serializeInstanceTypeSet(s, schemas.InstanceRequirements_ExcludedInstanceTypes, v.ExcludedInstanceTypes)
+	if v.AllowedInstanceTypes != nil {
+		serializeInstanceTypeSet(s, schemas.InstanceRequirements_AllowedInstanceTypes, v.AllowedInstanceTypes)
+	}
+	if v.Architectures != nil {
+		serializeArchitecturesList(s, schemas.InstanceRequirements_Architectures, v.Architectures)
+	}
+	if v.ExcludedInstanceTypes != nil {
+		serializeInstanceTypeSet(s, schemas.InstanceRequirements_ExcludedInstanceTypes, v.ExcludedInstanceTypes)
+	}
 }
 func (v *InstanceRequirements) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceRequirements, func(s *smithy.Schema) error {
@@ -5114,14 +5168,18 @@ func (v *KafkaSchemaRegistryConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KafkaSchemaRegistryConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKafkaSchemaRegistryAccessConfigList(s, schemas.KafkaSchemaRegistryConfig_AccessConfigs, v.AccessConfigs)
+	if v.AccessConfigs != nil {
+		serializeKafkaSchemaRegistryAccessConfigList(s, schemas.KafkaSchemaRegistryConfig_AccessConfigs, v.AccessConfigs)
+	}
 	if v.EventRecordFormat != "" {
 		s.WriteString(schemas.KafkaSchemaRegistryConfig_EventRecordFormat, string(v.EventRecordFormat))
 	}
 	if v.SchemaRegistryURI != nil {
 		s.WriteString(schemas.KafkaSchemaRegistryConfig_SchemaRegistryURI, *v.SchemaRegistryURI)
 	}
-	serializeKafkaSchemaValidationConfigList(s, schemas.KafkaSchemaRegistryConfig_SchemaValidationConfigs, v.SchemaValidationConfigs)
+	if v.SchemaValidationConfigs != nil {
+		serializeKafkaSchemaValidationConfigList(s, schemas.KafkaSchemaRegistryConfig_SchemaValidationConfigs, v.SchemaValidationConfigs)
+	}
 }
 func (v *KafkaSchemaRegistryConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KafkaSchemaRegistryConfig, func(s *smithy.Schema) error {
@@ -5551,8 +5609,12 @@ func (v *LayerVersionsListItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LayerVersionsListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleArchitectures(s, schemas.LayerVersionsListItem_CompatibleArchitectures, v.CompatibleArchitectures)
-	serializeCompatibleRuntimes(s, schemas.LayerVersionsListItem_CompatibleRuntimes, v.CompatibleRuntimes)
+	if v.CompatibleArchitectures != nil {
+		serializeCompatibleArchitectures(s, schemas.LayerVersionsListItem_CompatibleArchitectures, v.CompatibleArchitectures)
+	}
+	if v.CompatibleRuntimes != nil {
+		serializeCompatibleRuntimes(s, schemas.LayerVersionsListItem_CompatibleRuntimes, v.CompatibleRuntimes)
+	}
 	if v.CreatedDate != nil {
 		s.WriteString(schemas.LayerVersionsListItem_CreatedDate, *v.CreatedDate)
 	}
@@ -5983,7 +6045,8 @@ type OperationUpdate struct {
 	// Options for context operations.
 	ContextOptions *ContextOptions
 
-	// The error information for failed operations.
+	// The error information for failed operations. The combined size of all error
+	// fields is limited to 1 MB.
 	Error *ErrorObject
 
 	// The customer-provided name for this operation.
@@ -5994,9 +6057,9 @@ type OperationUpdate struct {
 	ParentId *string
 
 	// The payload for successful operations. The maximum payload size is 6 MB for
-	// synchronous EXECUTION operations (RequestResponse invocationType), 1 MB for
-	// asynchronous EXECUTION (Event invocationType) and CHAINED_INVOKE operations,
-	// and 256 KB for CONTEXT , STEP , WAIT , and CALLBACK operations.
+	// synchronous EXECUTION operations (RequestResponse invocationType), and 1 MB for
+	// asynchronous EXECUTION (Event invocationType), CHAINED_INVOKE , CONTEXT , STEP ,
+	// WAIT , and CALLBACK operations.
 	Payload *string
 
 	// Options for step operations.
@@ -6147,7 +6210,9 @@ func (v *PropagateTags) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PropagateTags) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.PropagateTags_ExplicitTags, v.ExplicitTags)
+	if v.ExplicitTags != nil {
+		serializeTags(s, schemas.PropagateTags_ExplicitTags, v.ExplicitTags)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.PropagateTags_Mode, string(v.Mode))
 	}
@@ -6599,7 +6664,9 @@ func (v *SelfManagedEventSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SelfManagedEventSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpoints(s, schemas.SelfManagedEventSource_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpoints(s, schemas.SelfManagedEventSource_Endpoints, v.Endpoints)
+	}
 }
 func (v *SelfManagedEventSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SelfManagedEventSource, func(s *smithy.Schema) error {
@@ -6622,6 +6689,25 @@ type SelfManagedKafkaEventSourceConfig struct {
 	// [Customizable consumer group ID]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add
 	ConsumerGroupId *string
 
+	// The mode that Lambda uses to consume records from your self-managed Apache
+	// Kafka topic. The default is Stream .
+	//
+	//   - Stream – Lambda consumes records using a Kafka consumer group and preserves
+	//   the order of records within each partition. This is the default when you omit
+	//   ConsumptionMode .
+	//
+	//   - Queue – Lambda consumes records using a Kafka share group. Multiple
+	//   consumers can process records from the same partitions concurrently. Queue mode
+	//   does not preserve per-partition order. Queue mode requires an Apache Kafka
+	//   cluster running version 4.2 or later with share groups enabled.
+	//
+	// You cannot change ConsumptionMode after you create the event source mapping. To
+	// use a different consumption mode, create a new event source mapping.
+	//
+	// When ConsumptionMode is Queue , the StartingPosition , StartingPositionTimestamp
+	// , and MaximumBatchingWindowInSeconds parameters are not supported.
+	ConsumptionMode KafkaEventSourceMappingConsumptionMode
+
 	// Specific configuration settings for a Kafka schema registry.
 	SchemaRegistryConfig *KafkaSchemaRegistryConfig
 
@@ -6638,6 +6724,9 @@ func (v *SelfManagedKafkaEventSourceConfig) SerializeMembers(s smithy.ShapeSeria
 	if v.ConsumerGroupId != nil {
 		s.WriteString(schemas.SelfManagedKafkaEventSourceConfig_ConsumerGroupId, *v.ConsumerGroupId)
 	}
+	if v.ConsumptionMode != "" {
+		s.WriteString(schemas.SelfManagedKafkaEventSourceConfig_ConsumptionMode, string(v.ConsumptionMode))
+	}
 	if v.SchemaRegistryConfig != nil {
 		s.WriteStruct(schemas.SelfManagedKafkaEventSourceConfig_SchemaRegistryConfig)
 		v.SchemaRegistryConfig.SerializeMembers(s)
@@ -6650,6 +6739,13 @@ func (v *SelfManagedKafkaEventSourceConfig) Deserialize(d smithy.ShapeDeserializ
 		case schemas.SelfManagedKafkaEventSourceConfig_ConsumerGroupId:
 			v.ConsumerGroupId = new(string)
 			return d.ReadString(schemas.SelfManagedKafkaEventSourceConfig_ConsumerGroupId, v.ConsumerGroupId)
+		case schemas.SelfManagedKafkaEventSourceConfig_ConsumptionMode:
+			var ev string
+			if err := d.ReadString(schemas.SelfManagedKafkaEventSourceConfig_ConsumptionMode, &ev); err != nil {
+				return err
+			}
+			v.ConsumptionMode = KafkaEventSourceMappingConsumptionMode(ev)
+			return nil
 		case schemas.SelfManagedKafkaEventSourceConfig_SchemaRegistryConfig:
 			v.SchemaRegistryConfig = &KafkaSchemaRegistryConfig{}
 			return v.SchemaRegistryConfig.Deserialize(d)
@@ -7345,8 +7441,12 @@ func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6AllowedForDualStack != nil {
 		s.WriteBool(schemas.VpcConfig_Ipv6AllowedForDualStack, *v.Ipv6AllowedForDualStack)
 	}
-	serializeSecurityGroupIds(s, schemas.VpcConfig_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfig_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfig_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfig_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {
@@ -7392,8 +7492,12 @@ func (v *VpcConfigResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6AllowedForDualStack != nil {
 		s.WriteBool(schemas.VpcConfigResponse_Ipv6AllowedForDualStack, *v.Ipv6AllowedForDualStack)
 	}
-	serializeSecurityGroupIds(s, schemas.VpcConfigResponse_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfigResponse_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfigResponse_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfigResponse_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcConfigResponse_VpcId, *v.VpcId)
 	}

@@ -102,7 +102,9 @@ func (v *ListFieldsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFieldsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldSummaryList(s, schemas.ListFieldsResponse_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldSummaryList(s, schemas.ListFieldsResponse_fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFieldsResponse_nextToken, *v.NextToken)
 	}

@@ -465,8 +465,10 @@ var AssociatedResourceType_AGENTCORE_GATEWAY *smithy.Schema
 var AssociationConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "AssociationConfig",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var AssociationConfig_RequestBody *smithy.Schema
+
+var AssociationConfig_ChallengeJavascriptSdkInjection *smithy.Schema
 
 var _AttributeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -634,6 +636,19 @@ var ChallengeConfig = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ChallengeConfig_ImmunityTimeProperty *smithy.Schema
 
+var _ChallengeJavascriptSdkInjection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ChallengeJavascriptSdkInjection",
+}, smithy.ShapeTypeMap, 2)
+var _ChallengeJavascriptSdkInjection_key *smithy.Schema
+
+var _ChallengeJavascriptSdkInjection_value *smithy.Schema
+
+var ChallengeJavascriptSdkInjectionConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ChallengeJavascriptSdkInjectionConfig",
+}, smithy.ShapeTypeStructure, 0)
+
 var ChallengeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ChallengeResponse",
@@ -689,6 +704,66 @@ var _Conditions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Conditions",
 }, smithy.ShapeTypeList, 1)
 var _Conditions_member *smithy.Schema
+
+var _ConnectedAccountArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountArn",
+}, smithy.ShapeTypeString, 0)
+
+var ConnectedAccountChain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountChain",
+}, smithy.ShapeTypeEnum, 2)
+var ConnectedAccountChain_BASE *smithy.Schema
+
+var ConnectedAccountChain_SOLANA *smithy.Schema
+
+var ConnectedAccountChainConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountChainConfig",
+}, smithy.ShapeTypeStructure, 2)
+var ConnectedAccountChainConfig_Chain *smithy.Schema
+
+var ConnectedAccountChainConfig_Prices *smithy.Schema
+
+var ConnectedAccountConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountConfig",
+}, smithy.ShapeTypeStructure, 2)
+var ConnectedAccountConfig_ConnectedAccountArn *smithy.Schema
+
+var ConnectedAccountConfig_PaymentNetworks *smithy.Schema
+
+var _ConnectedAccountConfigs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountConfigs",
+}, smithy.ShapeTypeList, 1)
+var _ConnectedAccountConfigs_member *smithy.Schema
+
+var _ConnectedAccountPaymentNetworks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountPaymentNetworks",
+}, smithy.ShapeTypeList, 1)
+var _ConnectedAccountPaymentNetworks_member *smithy.Schema
+
+var ConnectedAccountPrice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountPrice",
+}, smithy.ShapeTypeStructure, 2)
+var ConnectedAccountPrice_Amount *smithy.Schema
+
+var ConnectedAccountPrice_Currency *smithy.Schema
+
+var _ConnectedAccountPriceAmount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountPriceAmount",
+}, smithy.ShapeTypeString, 0)
+
+var _ConnectedAccountPrices = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ConnectedAccountPrices",
+}, smithy.ShapeTypeList, 1)
+var _ConnectedAccountPrices_member *smithy.Schema
 
 var _ConsumedCapacity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -2272,8 +2347,10 @@ var _MonetizationAmountValue = smithy.NewSchema(smithy.ShapeID{
 var MonetizationConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "MonetizationConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var MonetizationConfig_CryptoConfig *smithy.Schema
+
+var MonetizationConfig_ConnectedAccountConfigs *smithy.Schema
 
 var MonetizationConfig_CurrencyMode *smithy.Schema
 
@@ -2377,7 +2454,7 @@ var _PaginationLimit = smithy.NewSchema(smithy.ShapeID{
 var ParameterExceptionField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ParameterExceptionField",
-}, smithy.ShapeTypeEnum, 77)
+}, smithy.ShapeTypeEnum, 78)
 var ParameterExceptionField_WEB_ACL *smithy.Schema
 
 var ParameterExceptionField_RULE_GROUP *smithy.Schema
@@ -2531,6 +2608,8 @@ var ParameterExceptionField_PRICE_AMOUNT *smithy.Schema
 var ParameterExceptionField_PAYMENT_NETWORK *smithy.Schema
 
 var ParameterExceptionField_PRE_PARSE_TEXT_TRANSFORMATION *smithy.Schema
+
+var ParameterExceptionField_CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG *smithy.Schema
 
 var _ParameterExceptionParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -6518,7 +6597,13 @@ func init() {
 
 	_RequestBody_value = _RequestBody.AddMember("value", RequestBodyAssociatedResourceTypeConfig)
 
+	_ChallengeJavascriptSdkInjection_key = _ChallengeJavascriptSdkInjection.AddMember("key", AssociatedResourceType)
+
+	_ChallengeJavascriptSdkInjection_value = _ChallengeJavascriptSdkInjection.AddMember("value", ChallengeJavascriptSdkInjectionConfig)
+
 	AssociationConfig_RequestBody = AssociationConfig.AddMember("RequestBody", _RequestBody)
+
+	AssociationConfig_ChallengeJavascriptSdkInjection = AssociationConfig.AddMember("ChallengeJavascriptSdkInjection", _ChallengeJavascriptSdkInjection)
 
 	BlockchainChain_BASE = BlockchainChain.AddMember("BASE", smithyprelude.Unit)
 
@@ -6570,7 +6655,29 @@ func init() {
 
 	_Conditions_member = _Conditions.AddMember("member", Condition)
 
+	ConnectedAccountChain_BASE = ConnectedAccountChain.AddMember("BASE", smithyprelude.Unit)
+
+	ConnectedAccountChain_SOLANA = ConnectedAccountChain.AddMember("SOLANA", smithyprelude.Unit)
+
 	CryptoCurrency_USDC = CryptoCurrency.AddMember("USDC", smithyprelude.Unit)
+
+	ConnectedAccountPrice_Amount = ConnectedAccountPrice.AddMember("Amount", _ConnectedAccountPriceAmount)
+
+	ConnectedAccountPrice_Currency = ConnectedAccountPrice.AddMember("Currency", CryptoCurrency)
+
+	_ConnectedAccountPrices_member = _ConnectedAccountPrices.AddMember("member", ConnectedAccountPrice)
+
+	ConnectedAccountChainConfig_Chain = ConnectedAccountChainConfig.AddMember("Chain", ConnectedAccountChain)
+
+	ConnectedAccountChainConfig_Prices = ConnectedAccountChainConfig.AddMember("Prices", _ConnectedAccountPrices)
+
+	_ConnectedAccountPaymentNetworks_member = _ConnectedAccountPaymentNetworks.AddMember("member", ConnectedAccountChainConfig)
+
+	ConnectedAccountConfig_ConnectedAccountArn = ConnectedAccountConfig.AddMember("ConnectedAccountArn", _ConnectedAccountArn)
+
+	ConnectedAccountConfig_PaymentNetworks = ConnectedAccountConfig.AddMember("PaymentNetworks", _ConnectedAccountPaymentNetworks)
+
+	_ConnectedAccountConfigs_member = _ConnectedAccountConfigs.AddMember("member", ConnectedAccountConfig)
 
 	Price_Amount = Price.AddMember("Amount", _PriceAmount)
 
@@ -6920,6 +7027,8 @@ func init() {
 
 	MonetizationConfig_CryptoConfig = MonetizationConfig.AddMember("CryptoConfig", CryptoConfig)
 
+	MonetizationConfig_ConnectedAccountConfigs = MonetizationConfig.AddMember("ConnectedAccountConfigs", _ConnectedAccountConfigs)
+
 	MonetizationConfig_CurrencyMode = MonetizationConfig.AddMember("CurrencyMode", CurrencyMode)
 
 	_MonetizationFilterValueList_member = _MonetizationFilterValueList.AddMember("member", _MonetizationFilterValue)
@@ -7085,6 +7194,8 @@ func init() {
 	ParameterExceptionField_PAYMENT_NETWORK = ParameterExceptionField.AddMember("PAYMENT_NETWORK", smithyprelude.Unit)
 
 	ParameterExceptionField_PRE_PARSE_TEXT_TRANSFORMATION = ParameterExceptionField.AddMember("PRE_PARSE_TEXT_TRANSFORMATION", smithyprelude.Unit)
+
+	ParameterExceptionField_CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG = ParameterExceptionField.AddMember("CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG", smithyprelude.Unit)
 
 	PathStatistics_Source = PathStatistics.AddMember("Source", FilterSource)
 

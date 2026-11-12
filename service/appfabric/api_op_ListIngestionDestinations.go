@@ -106,7 +106,9 @@ func (v *ListIngestionDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIngestionDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngestionDestinationList(s, schemas.ListIngestionDestinationsResponse_ingestionDestinations, v.IngestionDestinations)
+	if v.IngestionDestinations != nil {
+		serializeIngestionDestinationList(s, schemas.ListIngestionDestinationsResponse_ingestionDestinations, v.IngestionDestinations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIngestionDestinationsResponse_nextToken, *v.NextToken)
 	}

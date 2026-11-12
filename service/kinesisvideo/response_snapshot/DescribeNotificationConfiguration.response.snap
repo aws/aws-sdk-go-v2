@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NotificationConfiguration":{"DestinationConfig":{"Uri":"__Uri__"},"Status":"ENABLED"}}

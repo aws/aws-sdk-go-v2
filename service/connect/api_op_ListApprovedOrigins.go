@@ -90,7 +90,9 @@ func (v *ListApprovedOriginsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApprovedOriginsResponse_NextToken, *v.NextToken)
 	}
-	serializeOriginsList(s, schemas.ListApprovedOriginsResponse_Origins, v.Origins)
+	if v.Origins != nil {
+		serializeOriginsList(s, schemas.ListApprovedOriginsResponse_Origins, v.Origins)
+	}
 }
 func (v *ListApprovedOriginsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListApprovedOriginsResponse, func(s *smithy.Schema) error {

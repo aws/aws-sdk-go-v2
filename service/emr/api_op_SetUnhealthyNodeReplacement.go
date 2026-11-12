@@ -64,7 +64,9 @@ func (v *SetUnhealthyNodeReplacementInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetUnhealthyNodeReplacementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeXmlStringList(s, schemas.SetUnhealthyNodeReplacementInput_JobFlowIds, v.JobFlowIds)
+	if v.JobFlowIds != nil {
+		serializeXmlStringList(s, schemas.SetUnhealthyNodeReplacementInput_JobFlowIds, v.JobFlowIds)
+	}
 	if v.UnhealthyNodeReplacement != nil {
 		s.WriteBool(schemas.SetUnhealthyNodeReplacementInput_UnhealthyNodeReplacement, *v.UnhealthyNodeReplacement)
 	}

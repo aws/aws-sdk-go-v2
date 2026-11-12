@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"authorizationData":{"oauth2":{"authorizationUrl":"__AuthorizationUrl__","userId":"__UserId__"}},"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastSynchronizedAt":"2000-01-01T00:00:00Z","listingMode":"DEFAULT","name":"__Name__","resourcePriority":1,"status":"CREATING","targetId":"__TargetId__","targetType":"OPEN_API_SCHEMA","updatedAt":"2000-01-01T00:00:00Z"},{"authorizationData":{"oauth2":{"authorizationUrl":"__AuthorizationUrl__","userId":"__UserId__"}},"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastSynchronizedAt":"2000-01-01T00:00:00Z","listingMode":"DEFAULT","name":"__Name__","resourcePriority":1,"status":"CREATING","targetId":"__TargetId__","targetType":"OPEN_API_SCHEMA","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

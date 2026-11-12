@@ -105,7 +105,9 @@ func (v *ListThemeAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListThemeAliasesResponse_Status, v.Status)
 	}
-	serializeThemeAliasList(s, schemas.ListThemeAliasesResponse_ThemeAliasList, v.ThemeAliasList)
+	if v.ThemeAliasList != nil {
+		serializeThemeAliasList(s, schemas.ListThemeAliasesResponse_ThemeAliasList, v.ThemeAliasList)
+	}
 }
 func (v *ListThemeAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThemeAliasesResponse, func(s *smithy.Schema) error {

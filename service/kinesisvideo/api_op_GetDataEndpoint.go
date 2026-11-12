@@ -4,7 +4,9 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type GetDataEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APIName != "" {
+		s.WriteString(schemas.GetDataEndpointInput_APIName, string(v.APIName))
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.GetDataEndpointInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.GetDataEndpointInput_StreamName, *v.StreamName)
+	}
+}
+
 type GetDataEndpointOutput struct {
 
 	// The endpoint value. To read data from the stream or to write data to it,
@@ -62,13 +82,32 @@ type GetDataEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataEndpoint != nil {
+		s.WriteString(schemas.GetDataEndpointOutput_DataEndpoint, *v.DataEndpoint)
+	}
+}
+func (v *GetDataEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataEndpointOutput_DataEndpoint:
+			v.DataEndpoint = new(string)
+			return d.ReadString(schemas.GetDataEndpointOutput_DataEndpoint, v.DataEndpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataEndpoint, schemas.GetDataEndpointInput, schemas.GetDataEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataEndpoint, schemas.GetDataEndpointInput, schemas.GetDataEndpointOutput), output: &GetDataEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

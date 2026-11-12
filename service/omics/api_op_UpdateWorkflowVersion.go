@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,33 @@ type UpdateWorkflowVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkflowVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkflowVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkflowVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkflowVersionRequest_description, *v.Description)
+	}
+	if v.ReadmeMarkdown != nil {
+		s.WriteString(schemas.UpdateWorkflowVersionRequest_readmeMarkdown, *v.ReadmeMarkdown)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.UpdateWorkflowVersionRequest_storageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.UpdateWorkflowVersionRequest_storageType, string(v.StorageType))
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.UpdateWorkflowVersionRequest_versionName, *v.VersionName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.UpdateWorkflowVersionRequest_workflowId, *v.WorkflowId)
+	}
+}
+
 type UpdateWorkflowVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,13 +104,26 @@ type UpdateWorkflowVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkflowVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkflowVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkflowVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkflowVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkflowVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkflowVersion, schemas.UpdateWorkflowVersionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkflowVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkflowVersion, schemas.UpdateWorkflowVersionRequest, nil), output: &UpdateWorkflowVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

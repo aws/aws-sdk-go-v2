@@ -117,7 +117,9 @@ func (v *ListUserImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.ListUserImportJobsResponse_PaginationToken, *v.PaginationToken)
 	}
-	serializeUserImportJobsListType(s, schemas.ListUserImportJobsResponse_UserImportJobs, v.UserImportJobs)
+	if v.UserImportJobs != nil {
+		serializeUserImportJobsListType(s, schemas.ListUserImportJobsResponse_UserImportJobs, v.UserImportJobs)
+	}
 }
 func (v *ListUserImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUserImportJobsResponse, func(s *smithy.Schema) error {

@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/CreateLocationAzureBlob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CreateLocationAzureBlob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccessTier":"HOT","AgentArns":["__Member__","__Member__"],"AuthenticationType":"SAS","BlobType":"BLOCK","CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"ContainerUrl":"__ContainerUrl__","CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"SasConfiguration":{"Token":"__Token__"},"Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿jAccessTiercHOTiAgentArnsŸj__Member__j__Member__ÿrAuthenticationTypecSAShBlobTypeeBLOCKoCmkSecretConfig¿iKmsKeyArnm__KmsKeyArn__iSecretArnm__SecretArn__ÿlContainerUrlp__ContainerUrl__rCustomSecretConfig¿sSecretAccessRoleArnw__SecretAccessRoleArn__iSecretArnm__SecretArn__ÿqFederatedIdentity¿jAwsIamRolen__AwsIamRole__iAzureOidc¿hClientIdl__ClientId__hTenantIdl__TenantId__ÿÿpSasConfiguration¿eTokeni__Token__ÿlSubdirectoryp__Subdirectory__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

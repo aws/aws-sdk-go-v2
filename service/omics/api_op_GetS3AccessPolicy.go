@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,18 @@ type GetS3AccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetS3AccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetS3AccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetS3AccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3AccessPointArn != nil {
+		s.WriteString(schemas.GetS3AccessPolicyRequest_s3AccessPointArn, *v.S3AccessPointArn)
+	}
+}
+
 type GetS3AccessPolicyOutput struct {
 
 	// The current resource policy that controls S3 access on the store.
@@ -64,13 +78,60 @@ type GetS3AccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetS3AccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetS3AccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetS3AccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3AccessPointArn != nil {
+		s.WriteString(schemas.GetS3AccessPolicyResponse_s3AccessPointArn, *v.S3AccessPointArn)
+	}
+	if v.S3AccessPolicy != nil {
+		s.WriteString(schemas.GetS3AccessPolicyResponse_s3AccessPolicy, *v.S3AccessPolicy)
+	}
+	if v.StoreId != nil {
+		s.WriteString(schemas.GetS3AccessPolicyResponse_storeId, *v.StoreId)
+	}
+	if v.StoreType != "" {
+		s.WriteString(schemas.GetS3AccessPolicyResponse_storeType, string(v.StoreType))
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetS3AccessPolicyResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *GetS3AccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetS3AccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetS3AccessPolicyResponse_s3AccessPointArn:
+			v.S3AccessPointArn = new(string)
+			return d.ReadString(schemas.GetS3AccessPolicyResponse_s3AccessPointArn, v.S3AccessPointArn)
+		case schemas.GetS3AccessPolicyResponse_s3AccessPolicy:
+			v.S3AccessPolicy = new(string)
+			return d.ReadString(schemas.GetS3AccessPolicyResponse_s3AccessPolicy, v.S3AccessPolicy)
+		case schemas.GetS3AccessPolicyResponse_storeId:
+			v.StoreId = new(string)
+			return d.ReadString(schemas.GetS3AccessPolicyResponse_storeId, v.StoreId)
+		case schemas.GetS3AccessPolicyResponse_storeType:
+			var ev string
+			if err := d.ReadString(schemas.GetS3AccessPolicyResponse_storeType, &ev); err != nil {
+				return err
+			}
+			v.StoreType = types.StoreType(ev)
+			return nil
+		case schemas.GetS3AccessPolicyResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetS3AccessPolicyResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetS3AccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetS3AccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetS3AccessPolicy, schemas.GetS3AccessPolicyRequest, schemas.GetS3AccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetS3AccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetS3AccessPolicy, schemas.GetS3AccessPolicyRequest, schemas.GetS3AccessPolicyResponse), output: &GetS3AccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -25,6 +25,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -520,6 +521,34 @@ func TestCheckResponseSnapshot_BatchGetVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelIngestionJob(t *testing.T) {
+	want := &CancelIngestionJobOutput{
+		IngestionJobId:   ptr.String("__IngestionJobId__"),
+		CollectionId:     ptr.String("__CollectionId__"),
+		IngestionJobName: ptr.String("__IngestionJobName__"),
+		Status:           types.IngestionJobStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelIngestionJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelIngestionJob(context.Background(), &CancelIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelIngestionJob.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateAccessPolicy(t *testing.T) {
 	want := &CreateAccessPolicyOutput{
 		AccessPolicyDetail: &types.AccessPolicyDetail{
@@ -704,6 +733,208 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateIndex.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateIngestionJob(t *testing.T) {
+	want := &CreateIngestionJobOutput{
+		IngestionJobDetail: &types.IngestionJobDetail{
+			IngestionJobId:   ptr.String("__IngestionJobId__"),
+			Arn:              ptr.String("__Arn__"),
+			CollectionId:     ptr.String("__CollectionId__"),
+			IngestionJobName: ptr.String("__IngestionJobName__"),
+			IndexName:        ptr.String("__IndexName__"),
+			FailureIndexName: ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionJobSource{
+				S3: &types.IngestionJobS3Source{
+					Bucket:               ptr.String("__Bucket__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+					KeyPrefix:            ptr.String("__KeyPrefix__"),
+				},
+			},
+			Status: types.IngestionJobStatus("CREATING"),
+			State:  types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateIngestionJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateIngestionJob(context.Background(), &CreateIngestionJobInput{
+		CollectionId:     ptr.String("__CollectionId__"),
+		IngestionJobName: ptr.String("__IngestionJobName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		FailureIndexName: ptr.String("__FailureIndexName__"),
+		Source: &types.IngestionJobSource{
+			S3: &types.IngestionJobS3Source{
+				Bucket:               ptr.String("__Bucket__"),
+				BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				KeyPrefix:            ptr.String("__KeyPrefix__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateIngestionJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateIngestionStream(t *testing.T) {
+	want := &CreateIngestionStreamOutput{
+		IngestionStreamDetail: &types.IngestionStreamDetail{
+			IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+			Arn:                 ptr.String("__Arn__"),
+			CollectionId:        ptr.String("__CollectionId__"),
+			IngestionStreamName: ptr.String("__IngestionStreamName__"),
+			IndexName:           ptr.String("__IndexName__"),
+			FailureIndexName:    ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionStreamSource{
+				S3: &types.IngestionStreamS3Source{
+					SqsArn: ptr.String("__SqsArn__"),
+					Buckets: []types.StreamBucketConfig{
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+					},
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			Status:  types.IngestionStreamStatus("CREATING"),
+			State:   types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateIngestionStream.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateIngestionStream(context.Background(), &CreateIngestionStreamInput{
+		CollectionId:        ptr.String("__CollectionId__"),
+		IngestionStreamName: ptr.String("__IngestionStreamName__"),
+		IndexName:           ptr.String("__IndexName__"),
+		FailureIndexName:    ptr.String("__FailureIndexName__"),
+		Source: &types.IngestionStreamSource{
+			S3: &types.IngestionStreamS3Source{
+				SqsArn: ptr.String("__SqsArn__"),
+				Buckets: []types.StreamBucketConfig{
+					{
+						Bucket:               ptr.String("__Bucket__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						InitialScan:          types.InitialScan("ENABLED"),
+					},
+					{
+						Bucket:               ptr.String("__Bucket__"),
+						BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						InitialScan:          types.InitialScan("ENABLED"),
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateIngestionStream.response", err)
 	}
 }
 
@@ -978,6 +1209,34 @@ func TestCheckResponseSnapshot_DeleteIndex(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteIngestionStream(t *testing.T) {
+	want := &DeleteIngestionStreamOutput{
+		IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+		CollectionId:        ptr.String("__CollectionId__"),
+		IngestionStreamName: ptr.String("__IngestionStreamName__"),
+		Status:              types.IngestionStreamStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteIngestionStream.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteIngestionStream(context.Background(), &DeleteIngestionStreamInput{
+		CollectionId:      ptr.String("__CollectionId__"),
+		IngestionStreamId: ptr.String("__IngestionStreamId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteIngestionStream.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	want := &DeleteLifecyclePolicyOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteLifecyclePolicy.response")
@@ -1153,6 +1412,157 @@ func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetIndex.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIngestionJob(t *testing.T) {
+	want := &GetIngestionJobOutput{
+		IngestionJobDetail: &types.IngestionJobDetail{
+			IngestionJobId:   ptr.String("__IngestionJobId__"),
+			Arn:              ptr.String("__Arn__"),
+			CollectionId:     ptr.String("__CollectionId__"),
+			IngestionJobName: ptr.String("__IngestionJobName__"),
+			IndexName:        ptr.String("__IndexName__"),
+			FailureIndexName: ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionJobSource{
+				S3: &types.IngestionJobS3Source{
+					Bucket:               ptr.String("__Bucket__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+					KeyPrefix:            ptr.String("__KeyPrefix__"),
+				},
+			},
+			Status: types.IngestionJobStatus("CREATING"),
+			State:  types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIngestionJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIngestionJob(context.Background(), &GetIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIngestionJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIngestionStream(t *testing.T) {
+	want := &GetIngestionStreamOutput{
+		IngestionStreamDetail: &types.IngestionStreamDetail{
+			IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+			Arn:                 ptr.String("__Arn__"),
+			CollectionId:        ptr.String("__CollectionId__"),
+			IngestionStreamName: ptr.String("__IngestionStreamName__"),
+			IndexName:           ptr.String("__IndexName__"),
+			FailureIndexName:    ptr.String("__FailureIndexName__"),
+			Source: &types.IngestionStreamSource{
+				S3: &types.IngestionStreamS3Source{
+					SqsArn: ptr.String("__SqsArn__"),
+					Buckets: []types.StreamBucketConfig{
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+						{
+							Bucket:               ptr.String("__Bucket__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+							InitialScan:          types.InitialScan("ENABLED"),
+						},
+					},
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			Status:  types.IngestionStreamStatus("CREATING"),
+			State:   types.IngestionState("STARTING"),
+			Statistics: &types.IngestionStatistics{
+				S3: &types.S3Statistics{
+					ObjectsDiscovered: ptr.Int64(1),
+					ObjectsIngested:   ptr.Int64(1),
+					ObjectsFailed:     ptr.Int64(1),
+				},
+			},
+			Revision:  ptr.Int64(1),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			FailureReasons: []types.IngestionFailureReason{
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionFailureCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			ActiveAlerts: []types.IngestionAlert{
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+				{
+					Code:    types.IngestionAlertCode("SOURCE_ACCESS_DENIED"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIngestionStream.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIngestionStream(context.Background(), &GetIngestionStreamInput{
+		CollectionId:      ptr.String("__CollectionId__"),
+		IngestionStreamId: ptr.String("__IngestionStreamId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIngestionStream.response", err)
 	}
 }
 
@@ -1416,6 +1826,96 @@ func TestCheckResponseSnapshot_ListCollections(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListCollections.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListIngestionJobs(t *testing.T) {
+	want := &ListIngestionJobsOutput{
+		IngestionJobSummaries: []types.IngestionJobSummary{
+			{
+				IngestionJobId:   ptr.String("__IngestionJobId__"),
+				Arn:              ptr.String("__Arn__"),
+				IngestionJobName: ptr.String("__IngestionJobName__"),
+				IndexName:        ptr.String("__IndexName__"),
+				Status:           types.IngestionJobStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				IngestionJobId:   ptr.String("__IngestionJobId__"),
+				Arn:              ptr.String("__Arn__"),
+				IngestionJobName: ptr.String("__IngestionJobName__"),
+				IndexName:        ptr.String("__IndexName__"),
+				Status:           types.IngestionJobStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListIngestionJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListIngestionJobs(context.Background(), &ListIngestionJobsInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListIngestionJobs.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListIngestionStreams(t *testing.T) {
+	want := &ListIngestionStreamsOutput{
+		IngestionStreamSummaries: []types.IngestionStreamSummary{
+			{
+				IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+				Arn:                 ptr.String("__Arn__"),
+				IngestionStreamName: ptr.String("__IngestionStreamName__"),
+				IndexName:           ptr.String("__IndexName__"),
+				Status:              types.IngestionStreamStatus("CREATING"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				IngestionStreamId:   ptr.String("__IngestionStreamId__"),
+				Arn:                 ptr.String("__Arn__"),
+				IngestionStreamName: ptr.String("__IngestionStreamName__"),
+				IndexName:           ptr.String("__IndexName__"),
+				Status:              types.IngestionStreamStatus("CREATING"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListIngestionStreams.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListIngestionStreams(context.Background(), &ListIngestionStreamsInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListIngestionStreams.response", err)
 	}
 }
 
@@ -1761,6 +2261,7 @@ func TestCheckResponseSnapshot_UpdateCollection(t *testing.T) {
 			VectorOptions: &types.VectorOptions{
 				ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
 			},
+			KmsKeyArn:          ptr.String("__KmsKeyArn__"),
 			Arn:                ptr.String("__Arn__"),
 			CreatedDate:        ptr.Int64(1),
 			LastModifiedDate:   ptr.Int64(1),
@@ -1782,7 +2283,11 @@ func TestCheckResponseSnapshot_UpdateCollection(t *testing.T) {
 			ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
 		},
 		DeletionProtection: types.DeletionProtection("ENABLED"),
-		ClientToken:        ptr.String("__ClientToken__"),
+		EncryptionConfig: &types.EncryptionConfig{
+			AWSOwnedKey: ptr.Bool(true),
+			KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2064,12 +2569,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{
-		Type:        types.AccessPolicyType("data"),
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		Policy:      ptr.String("__Policy__"),
-		ClientToken: ptr.String("__ClientToken__"),
+	_, opErr := svc.CancelIngestionJob(context.Background(), &CancelIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2179,10 +2682,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
-		Id:          ptr.String("__Id__"),
-		IndexName:   ptr.String("__IndexName__"),
-		IndexSchema: document.NewLazyDocument("__Document__"),
+	_, opErr := svc.CancelIngestionJob(context.Background(), &CancelIngestionJobInput{
+		CollectionId:   ptr.String("__CollectionId__"),
+		IngestionJobId: ptr.String("__IngestionJobId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

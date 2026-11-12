@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeReservedNodesOfferings
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeReservedNodesOfferings
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Duration":"__Duration__","MaxResults":1,"NextToken":"__NextToken__","NodeType":"__NodeType__","OfferingType":"__OfferingType__","ReservedNodesOfferingId":"__ReservedNodesOfferingId__"}
+¿hDurationl__Duration__jMaxResultsiNextTokenm__NextToken__hNodeTypel__NodeType__lOfferingTypep__OfferingType__wReservedNodesOfferingIdx__ReservedNodesOfferingId__ÿ

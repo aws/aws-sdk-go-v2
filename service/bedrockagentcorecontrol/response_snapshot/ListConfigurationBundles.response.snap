@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"bundles":[{"bundleArn":"__BundleArn__","bundleId":"__BundleId__","bundleName":"__BundleName__","createdAt":946684800,"description":"__Description__"},{"bundleArn":"__BundleArn__","bundleId":"__BundleId__","bundleName":"__BundleName__","createdAt":946684800,"description":"__Description__"}],"nextToken":"__NextToken__"}

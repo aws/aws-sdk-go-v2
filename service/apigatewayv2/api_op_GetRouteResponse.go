@@ -98,8 +98,12 @@ func (v *GetRouteResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelSelectionExpression != nil {
 		s.WriteString(schemas.GetRouteResponseResponse_ModelSelectionExpression, *v.ModelSelectionExpression)
 	}
-	serializeRouteModels(s, schemas.GetRouteResponseResponse_ResponseModels, v.ResponseModels)
-	serializeRouteParameters(s, schemas.GetRouteResponseResponse_ResponseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeRouteModels(s, schemas.GetRouteResponseResponse_ResponseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeRouteParameters(s, schemas.GetRouteResponseResponse_ResponseParameters, v.ResponseParameters)
+	}
 	if v.RouteResponseId != nil {
 		s.WriteString(schemas.GetRouteResponseResponse_RouteResponseId, *v.RouteResponseId)
 	}

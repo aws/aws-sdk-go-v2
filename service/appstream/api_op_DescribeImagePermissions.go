@@ -66,7 +66,9 @@ func (v *DescribeImagePermissionsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeImagePermissionsRequest_NextToken, *v.NextToken)
 	}
-	serializeAwsAccountIdList(s, schemas.DescribeImagePermissionsRequest_SharedAwsAccountIds, v.SharedAwsAccountIds)
+	if v.SharedAwsAccountIds != nil {
+		serializeAwsAccountIdList(s, schemas.DescribeImagePermissionsRequest_SharedAwsAccountIds, v.SharedAwsAccountIds)
+	}
 }
 
 type DescribeImagePermissionsOutput struct {
@@ -100,7 +102,9 @@ func (v *DescribeImagePermissionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeImagePermissionsResult_NextToken, *v.NextToken)
 	}
-	serializeSharedImagePermissionsList(s, schemas.DescribeImagePermissionsResult_SharedImagePermissionsList, v.SharedImagePermissionsList)
+	if v.SharedImagePermissionsList != nil {
+		serializeSharedImagePermissionsList(s, schemas.DescribeImagePermissionsResult_SharedImagePermissionsList, v.SharedImagePermissionsList)
+	}
 }
 func (v *DescribeImagePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeImagePermissionsResult, func(s *smithy.Schema) error {

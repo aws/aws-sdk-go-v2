@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetServiceLinkedRoleDeletionStatusResponse><GetServiceLinkedRoleDeletionStatusResult><Reason><Reason>__Reason__</Reason><RoleUsageList><member><Region>__Region__</Region><Resources><member>__Member__</member><member>__Member__</member></Resources></member><member><Region>__Region__</Region><Resources><member>__Member__</member><member>__Member__</member></Resources></member></RoleUsageList></Reason><Status>SUCCEEDED</Status></GetServiceLinkedRoleDeletionStatusResult></GetServiceLinkedRoleDeletionStatusResponse>

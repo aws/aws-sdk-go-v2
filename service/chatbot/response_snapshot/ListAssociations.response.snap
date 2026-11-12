@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Associations":[{"Resource":"__Resource__"},{"Resource":"__Resource__"}],"NextToken":"__NextToken__"}

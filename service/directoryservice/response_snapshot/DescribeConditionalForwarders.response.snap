@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.DescribeConditionalForwarders
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ConditionalForwarders":[{"DnsIpAddrs":["__Member__","__Member__"],"DnsIpv6Addrs":["__Member__","__Member__"],"RemoteDomainName":"__RemoteDomainName__","ReplicationScope":"Domain"},{"DnsIpAddrs":["__Member__","__Member__"],"DnsIpv6Addrs":["__Member__","__Member__"],"RemoteDomainName":"__RemoteDomainName__","ReplicationScope":"Domain"}]}
+¿uConditionalForwardersŸ¿jDnsIpAddrsŸj__Member__j__Member__ÿlDnsIpv6AddrsŸj__Member__j__Member__ÿpRemoteDomainNamet__RemoteDomainName__pReplicationScopefDomainÿ¿jDnsIpAddrsŸj__Member__j__Member__ÿlDnsIpv6AddrsŸj__Member__j__Member__ÿpRemoteDomainNamet__RemoteDomainName__pReplicationScopefDomainÿÿÿ

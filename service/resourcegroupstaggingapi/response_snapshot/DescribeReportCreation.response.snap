@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.DescribeReportCreation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ErrorMessage":"__ErrorMessage__","S3Location":"__S3Location__","StartDate":"__StartDate__","Status":"__Status__"}
+¿lErrorMessagep__ErrorMessage__jS3Locationn__S3Location__iStartDatem__StartDate__fStatusj__Status__ÿ

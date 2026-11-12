@@ -63,7 +63,9 @@ func (v *BucketInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BucketInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBucketList(s, schemas.BucketInfo_buckets, v.Buckets)
+	if v.Buckets != nil {
+		serializeBucketList(s, schemas.BucketInfo_buckets, v.Buckets)
+	}
 }
 func (v *BucketInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BucketInfo, func(s *smithy.Schema) error {
@@ -245,9 +247,15 @@ func (v *Hit) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Hit) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExprs(s, schemas.Hit_exprs, v.Exprs)
-	serializeFields(s, schemas.Hit_fields, v.Fields)
-	serializeHighlights(s, schemas.Hit_highlights, v.Highlights)
+	if v.Exprs != nil {
+		serializeExprs(s, schemas.Hit_exprs, v.Exprs)
+	}
+	if v.Fields != nil {
+		serializeFields(s, schemas.Hit_fields, v.Fields)
+	}
+	if v.Highlights != nil {
+		serializeHighlights(s, schemas.Hit_highlights, v.Highlights)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Hit_id, *v.Id)
 	}
@@ -301,7 +309,9 @@ func (v *Hits) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Found != 0 {
 		s.WriteInt64(schemas.Hits_found, v.Found)
 	}
-	serializeHitList(s, schemas.Hits_hit, v.Hit)
+	if v.Hit != nil {
+		serializeHitList(s, schemas.Hits_hit, v.Hit)
+	}
 	if v.Start != 0 {
 		s.WriteInt64(schemas.Hits_start, v.Start)
 	}
@@ -440,7 +450,9 @@ func (v *SuggestModel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Query != nil {
 		s.WriteString(schemas.SuggestModel_query, *v.Query)
 	}
-	serializeSuggestions(s, schemas.SuggestModel_suggestions, v.Suggestions)
+	if v.Suggestions != nil {
+		serializeSuggestions(s, schemas.SuggestModel_suggestions, v.Suggestions)
+	}
 }
 func (v *SuggestModel) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SuggestModel, func(s *smithy.Schema) error {

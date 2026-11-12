@@ -224,7 +224,9 @@ func (v *ContactDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Email != nil {
 		s.WriteString(schemas.ContactDetail_Email, *v.Email)
 	}
-	serializeExtraParamList(s, schemas.ContactDetail_ExtraParams, v.ExtraParams)
+	if v.ExtraParams != nil {
+		serializeExtraParamList(s, schemas.ContactDetail_ExtraParams, v.ExtraParams)
+	}
 	if v.Fax != nil {
 		s.WriteString(schemas.ContactDetail_Fax, *v.Fax)
 	}
@@ -1307,7 +1309,9 @@ func (v *FilterCondition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.FilterCondition_Operator, string(v.Operator))
 	}
-	serializeValues(s, schemas.FilterCondition_Values, v.Values)
+	if v.Values != nil {
+		serializeValues(s, schemas.FilterCondition_Values, v.Values)
+	}
 }
 func (v *FilterCondition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterCondition, func(s *smithy.Schema) error {
@@ -1361,7 +1365,9 @@ func (v *Nameserver) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Nameserver) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlueIpList(s, schemas.Nameserver_GlueIps, v.GlueIps)
+	if v.GlueIps != nil {
+		serializeGlueIpList(s, schemas.Nameserver_GlueIps, v.GlueIps)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Nameserver_Name, *v.Name)
 	}

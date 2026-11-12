@@ -4,6 +4,8 @@ package redshiftdata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type CancelStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CancelStatementRequest_Id, *v.Id)
+	}
+}
+
 type CancelStatementOutput struct {
 
 	// A value that indicates whether the cancel statement succeeded (true).
@@ -51,13 +65,32 @@ type CancelStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteBool(schemas.CancelStatementResponse_Status, *v.Status)
+	}
+}
+func (v *CancelStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelStatementResponse_Status:
+			v.Status = new(bool)
+			return d.ReadBool(schemas.CancelStatementResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelStatement, schemas.CancelStatementRequest, schemas.CancelStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelStatement, schemas.CancelStatementRequest, schemas.CancelStatementResponse), output: &CancelStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

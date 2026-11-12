@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/UpdateLanguageModel
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.UpdateLanguageModel
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DataAccessRoleArn":"__DataAccessRoleArn__","EncryptionConfiguration":{"KMSEncryptionContext":{"key0":"__Value__"},"KMSKey":"__KMSKey__"},"ModelName":"__ModelName__"}
+¿qDataAccessRoleArnu__DataAccessRoleArn__wEncryptionConfiguration¿tKMSEncryptionContext¿dkey0i__Value__ÿfKMSKeyj__KMSKey__ÿiModelNamem__ModelName__ÿ

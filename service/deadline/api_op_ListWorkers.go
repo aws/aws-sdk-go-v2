@@ -28,7 +28,6 @@ func (c *Client) ListWorkers(ctx context.Context, params *ListWorkersInput, optF
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListWorkersInput struct {
 
 	// The farm ID connected to the workers.
@@ -72,7 +71,6 @@ func (v *ListWorkersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListWorkersOutput struct {
 
 	// The workers on the list.
@@ -104,7 +102,9 @@ func (v *ListWorkersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkersResponse_nextToken, *v.NextToken)
 	}
-	serializeWorkerSummaries(s, schemas.ListWorkersResponse_workers, v.Workers)
+	if v.Workers != nil {
+		serializeWorkerSummaries(s, schemas.ListWorkersResponse_workers, v.Workers)
+	}
 }
 func (v *ListWorkersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkersResponse, func(s *smithy.Schema) error {

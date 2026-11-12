@@ -56,7 +56,9 @@ func (v *CreateConnectorDefinitionVersionInput) SerializeMembers(s smithy.ShapeS
 	if v.ConnectorDefinitionId != nil {
 		s.WriteString(schemas.CreateConnectorDefinitionVersionRequest_ConnectorDefinitionId, *v.ConnectorDefinitionId)
 	}
-	serialize__listOfConnector(s, schemas.CreateConnectorDefinitionVersionRequest_Connectors, v.Connectors)
+	if v.Connectors != nil {
+		serialize__listOfConnector(s, schemas.CreateConnectorDefinitionVersionRequest_Connectors, v.Connectors)
+	}
 }
 
 type CreateConnectorDefinitionVersionOutput struct {

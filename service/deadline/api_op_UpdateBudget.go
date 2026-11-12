@@ -88,8 +88,12 @@ func (v *UpdateBudgetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgetActionsToAdd(s, schemas.UpdateBudgetRequest_actionsToAdd, v.ActionsToAdd)
-	serializeBudgetActionsToRemove(s, schemas.UpdateBudgetRequest_actionsToRemove, v.ActionsToRemove)
+	if v.ActionsToAdd != nil {
+		serializeBudgetActionsToAdd(s, schemas.UpdateBudgetRequest_actionsToAdd, v.ActionsToAdd)
+	}
+	if v.ActionsToRemove != nil {
+		serializeBudgetActionsToRemove(s, schemas.UpdateBudgetRequest_actionsToRemove, v.ActionsToRemove)
+	}
 	if v.ApproximateDollarLimit != nil {
 		s.WriteFloat32(schemas.UpdateBudgetRequest_approximateDollarLimit, *v.ApproximateDollarLimit)
 	}
@@ -108,7 +112,9 @@ func (v *UpdateBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FarmId != nil {
 		s.WriteString(schemas.UpdateBudgetRequest_farmId, *v.FarmId)
 	}
-	serializeBudgetSchedule(s, schemas.UpdateBudgetRequest_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeBudgetSchedule(s, schemas.UpdateBudgetRequest_schedule, v.Schedule)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateBudgetRequest_status, string(v.Status))
 	}

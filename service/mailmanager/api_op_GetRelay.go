@@ -91,7 +91,9 @@ func (v *GetRelayOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRelayOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelayAuthentication(s, schemas.GetRelayResponse_Authentication, v.Authentication)
+	if v.Authentication != nil {
+		serializeRelayAuthentication(s, schemas.GetRelayResponse_Authentication, v.Authentication)
+	}
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.GetRelayResponse_CreatedTimestamp, *v.CreatedTimestamp)
 	}

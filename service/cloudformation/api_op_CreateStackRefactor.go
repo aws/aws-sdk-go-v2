@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type CreateStackRefactorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackRefactorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackRefactorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackRefactorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStackRefactorInput_Description, *v.Description)
+	}
+	if v.EnableStackCreation != nil {
+		s.WriteBool(schemas.CreateStackRefactorInput_EnableStackCreation, *v.EnableStackCreation)
+	}
+	if v.ResourceMappings != nil {
+		serializeResourceMappings(s, schemas.CreateStackRefactorInput_ResourceMappings, v.ResourceMappings)
+	}
+	if v.StackDefinitions != nil {
+		serializeStackDefinitions(s, schemas.CreateStackRefactorInput_StackDefinitions, v.StackDefinitions)
+	}
+}
+
 type CreateStackRefactorOutput struct {
 
 	// The ID associated with the stack refactor created from the CreateStackRefactor action.
@@ -57,13 +80,32 @@ type CreateStackRefactorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackRefactorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackRefactorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackRefactorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackRefactorId != nil {
+		s.WriteString(schemas.CreateStackRefactorOutput_StackRefactorId, *v.StackRefactorId)
+	}
+}
+func (v *CreateStackRefactorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStackRefactorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStackRefactorOutput_StackRefactorId:
+			v.StackRefactorId = new(string)
+			return d.ReadString(schemas.CreateStackRefactorOutput_StackRefactorId, v.StackRefactorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStackRefactorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateStackRefactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStackRefactor, schemas.CreateStackRefactorInput, schemas.CreateStackRefactorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateStackRefactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStackRefactor, schemas.CreateStackRefactorInput, schemas.CreateStackRefactorOutput), output: &CreateStackRefactorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

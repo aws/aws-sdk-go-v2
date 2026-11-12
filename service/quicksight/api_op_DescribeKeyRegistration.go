@@ -89,7 +89,9 @@ func (v *DescribeKeyRegistrationOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.DescribeKeyRegistrationResponse_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeKeyRegistration(s, schemas.DescribeKeyRegistrationResponse_KeyRegistration, v.KeyRegistration)
+	if v.KeyRegistration != nil {
+		serializeKeyRegistration(s, schemas.DescribeKeyRegistrationResponse_KeyRegistration, v.KeyRegistration)
+	}
 	if v.QDataKey != nil {
 		s.WriteStruct(schemas.DescribeKeyRegistrationResponse_QDataKey)
 		v.QDataKey.SerializeMembers(s)

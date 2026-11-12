@@ -5,7 +5,11 @@ package neptunedata
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +76,21 @@ type ExecuteGremlinQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteGremlinQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteGremlinQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteGremlinQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GremlinQuery != nil {
+		s.WriteString(schemas.ExecuteGremlinQueryInput_gremlinQuery, *v.GremlinQuery)
+	}
+	if v.Serializer != nil {
+		s.WriteString(schemas.ExecuteGremlinQueryInput_serializer, *v.Serializer)
+	}
+}
+
 type ExecuteGremlinQueryOutput struct {
 
 	// Metadata about the Gremlin query.
@@ -92,13 +111,64 @@ type ExecuteGremlinQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteGremlinQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteGremlinQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteGremlinQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Meta != nil {
+		s.WriteDocument(schemas.ExecuteGremlinQueryOutput_meta, &smithydocument.Opaque{Value: v.Meta})
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ExecuteGremlinQueryOutput_requestId, *v.RequestId)
+	}
+	if v.Result != nil {
+		s.WriteDocument(schemas.ExecuteGremlinQueryOutput_result, &smithydocument.Opaque{Value: v.Result})
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.ExecuteGremlinQueryOutput_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExecuteGremlinQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteGremlinQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteGremlinQueryOutput_meta:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ExecuteGremlinQueryOutput_meta, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Meta = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.ExecuteGremlinQueryOutput_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ExecuteGremlinQueryOutput_requestId, v.RequestId)
+		case schemas.ExecuteGremlinQueryOutput_result:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ExecuteGremlinQueryOutput_result, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Result = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.ExecuteGremlinQueryOutput_status:
+			v.Status = &types.GremlinQueryStatusAttributes{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteGremlinQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteGremlinQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteGremlinQuery, schemas.ExecuteGremlinQueryInput, schemas.ExecuteGremlinQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteGremlinQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteGremlinQuery, schemas.ExecuteGremlinQueryInput, schemas.ExecuteGremlinQueryOutput), output: &ExecuteGremlinQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

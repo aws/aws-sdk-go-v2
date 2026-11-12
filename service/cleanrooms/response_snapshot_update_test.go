@@ -1121,6 +1121,7 @@ func TestUpdateResponseSnapshot_CreateConfiguredTable(t *testing.T) {
 					DatabaseName: ptr.String("__DatabaseName__"),
 				},
 			},
+			TableType:  types.TableReferenceType("GLUE"),
 			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -1785,8 +1786,9 @@ func TestUpdateResponseSnapshot_CreateMembership(t *testing.T) {
 			DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 				OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 					Value: types.ProtectedJobS3OutputConfigurationInput{
-						Bucket:    ptr.String("__Bucket__"),
-						KeyPrefix: ptr.String("__KeyPrefix__"),
+						ResultFormat: types.ResultFormat("CSV"),
+						Bucket:       ptr.String("__Bucket__"),
+						KeyPrefix:    ptr.String("__KeyPrefix__"),
 					},
 				},
 				RoleArn: ptr.String("__RoleArn__"),
@@ -2839,6 +2841,7 @@ func TestUpdateResponseSnapshot_GetConfiguredTable(t *testing.T) {
 					DatabaseName: ptr.String("__DatabaseName__"),
 				},
 			},
+			TableType:  types.TableReferenceType("GLUE"),
 			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -3503,8 +3506,9 @@ func TestUpdateResponseSnapshot_GetMembership(t *testing.T) {
 			DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 				OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 					Value: types.ProtectedJobS3OutputConfigurationInput{
-						Bucket:    ptr.String("__Bucket__"),
-						KeyPrefix: ptr.String("__KeyPrefix__"),
+						ResultFormat: types.ResultFormat("CSV"),
+						Bucket:       ptr.String("__Bucket__"),
+						KeyPrefix:    ptr.String("__KeyPrefix__"),
 					},
 				},
 				RoleArn: ptr.String("__RoleArn__"),
@@ -4736,6 +4740,7 @@ func TestUpdateResponseSnapshot_ListConfiguredTables(t *testing.T) {
 				Id:         ptr.String("__Id__"),
 				Arn:        ptr.String("__Arn__"),
 				Name:       ptr.String("__Name__"),
+				TableType:  types.TableReferenceType("GLUE"),
 				CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -4752,6 +4757,7 @@ func TestUpdateResponseSnapshot_ListConfiguredTables(t *testing.T) {
 				Id:         ptr.String("__Id__"),
 				Arn:        ptr.String("__Arn__"),
 				Name:       ptr.String("__Name__"),
+				TableType:  types.TableReferenceType("GLUE"),
 				CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -6329,6 +6335,7 @@ func TestUpdateResponseSnapshot_UpdateConfiguredTable(t *testing.T) {
 					DatabaseName: ptr.String("__DatabaseName__"),
 				},
 			},
+			TableType:  types.TableReferenceType("GLUE"),
 			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			AnalysisRuleTypes: []types.ConfiguredTableAnalysisRuleType{
@@ -6993,8 +7000,9 @@ func TestUpdateResponseSnapshot_UpdateMembership(t *testing.T) {
 			DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 				OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 					Value: types.ProtectedJobS3OutputConfigurationInput{
-						Bucket:    ptr.String("__Bucket__"),
-						KeyPrefix: ptr.String("__KeyPrefix__"),
+						ResultFormat: types.ResultFormat("CSV"),
+						Bucket:       ptr.String("__Bucket__"),
+						KeyPrefix:    ptr.String("__KeyPrefix__"),
 					},
 				},
 				RoleArn: ptr.String("__RoleArn__"),

@@ -121,19 +121,27 @@ func (v *ListSessionMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSessionMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyticsBinByList(s, schemas.ListSessionMetricsRequest_binBy, v.BinBy)
+	if v.BinBy != nil {
+		serializeAnalyticsBinByList(s, schemas.ListSessionMetricsRequest_binBy, v.BinBy)
+	}
 	if v.BotId != nil {
 		s.WriteString(schemas.ListSessionMetricsRequest_botId, *v.BotId)
 	}
 	if v.EndDateTime != nil {
 		s.WriteTime(schemas.ListSessionMetricsRequest_endDateTime, *v.EndDateTime)
 	}
-	serializeAnalyticsSessionFilters(s, schemas.ListSessionMetricsRequest_filters, v.Filters)
-	serializeAnalyticsSessionGroupByList(s, schemas.ListSessionMetricsRequest_groupBy, v.GroupBy)
+	if v.Filters != nil {
+		serializeAnalyticsSessionFilters(s, schemas.ListSessionMetricsRequest_filters, v.Filters)
+	}
+	if v.GroupBy != nil {
+		serializeAnalyticsSessionGroupByList(s, schemas.ListSessionMetricsRequest_groupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListSessionMetricsRequest_maxResults, *v.MaxResults)
 	}
-	serializeAnalyticsSessionMetrics(s, schemas.ListSessionMetricsRequest_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeAnalyticsSessionMetrics(s, schemas.ListSessionMetricsRequest_metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionMetricsRequest_nextToken, *v.NextToken)
 	}
@@ -178,7 +186,9 @@ func (v *ListSessionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionMetricsResponse_nextToken, *v.NextToken)
 	}
-	serializeAnalyticsSessionResults(s, schemas.ListSessionMetricsResponse_results, v.Results)
+	if v.Results != nil {
+		serializeAnalyticsSessionResults(s, schemas.ListSessionMetricsResponse_results, v.Results)
+	}
 }
 func (v *ListSessionMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionMetricsResponse, func(s *smithy.Schema) error {

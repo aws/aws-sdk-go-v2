@@ -108,7 +108,9 @@ func (v *ListAppComponentCompliancesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListAppComponentCompliancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentCompliancesList(s, schemas.ListAppComponentCompliancesResponse_componentCompliances, v.ComponentCompliances)
+	if v.ComponentCompliances != nil {
+		serializeComponentCompliancesList(s, schemas.ListAppComponentCompliancesResponse_componentCompliances, v.ComponentCompliances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppComponentCompliancesResponse_nextToken, *v.NextToken)
 	}

@@ -103,7 +103,9 @@ func (v *ListFirewallRuleTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFirewallRuleTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFirewallRuleTypeDefinitions(s, schemas.ListFirewallRuleTypesResponse_FirewallRuleTypes, v.FirewallRuleTypes)
+	if v.FirewallRuleTypes != nil {
+		serializeFirewallRuleTypeDefinitions(s, schemas.ListFirewallRuleTypesResponse_FirewallRuleTypes, v.FirewallRuleTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFirewallRuleTypesResponse_NextToken, *v.NextToken)
 	}

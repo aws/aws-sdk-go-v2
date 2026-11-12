@@ -89,15 +89,21 @@ func (v *DescribeIpRestrictionOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Enabled != nil {
 		s.WriteBool(schemas.DescribeIpRestrictionResponse_Enabled, *v.Enabled)
 	}
-	serializeIpRestrictionRuleMap(s, schemas.DescribeIpRestrictionResponse_IpRestrictionRuleMap, v.IpRestrictionRuleMap)
+	if v.IpRestrictionRuleMap != nil {
+		serializeIpRestrictionRuleMap(s, schemas.DescribeIpRestrictionResponse_IpRestrictionRuleMap, v.IpRestrictionRuleMap)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeIpRestrictionResponse_RequestId, *v.RequestId)
 	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.DescribeIpRestrictionResponse_Status, v.Status)
 	}
-	serializeVpcEndpointIdRestrictionRuleMap(s, schemas.DescribeIpRestrictionResponse_VpcEndpointIdRestrictionRuleMap, v.VpcEndpointIdRestrictionRuleMap)
-	serializeVpcIdRestrictionRuleMap(s, schemas.DescribeIpRestrictionResponse_VpcIdRestrictionRuleMap, v.VpcIdRestrictionRuleMap)
+	if v.VpcEndpointIdRestrictionRuleMap != nil {
+		serializeVpcEndpointIdRestrictionRuleMap(s, schemas.DescribeIpRestrictionResponse_VpcEndpointIdRestrictionRuleMap, v.VpcEndpointIdRestrictionRuleMap)
+	}
+	if v.VpcIdRestrictionRuleMap != nil {
+		serializeVpcIdRestrictionRuleMap(s, schemas.DescribeIpRestrictionResponse_VpcIdRestrictionRuleMap, v.VpcIdRestrictionRuleMap)
+	}
 }
 func (v *DescribeIpRestrictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeIpRestrictionResponse, func(s *smithy.Schema) error {

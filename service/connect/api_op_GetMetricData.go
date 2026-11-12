@@ -310,8 +310,12 @@ func (v *GetMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroupings(s, schemas.GetMetricDataRequest_Groupings, v.Groupings)
-	serializeHistoricalMetrics(s, schemas.GetMetricDataRequest_HistoricalMetrics, v.HistoricalMetrics)
+	if v.Groupings != nil {
+		serializeGroupings(s, schemas.GetMetricDataRequest_Groupings, v.Groupings)
+	}
+	if v.HistoricalMetrics != nil {
+		serializeHistoricalMetrics(s, schemas.GetMetricDataRequest_HistoricalMetrics, v.HistoricalMetrics)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.GetMetricDataRequest_InstanceId, *v.InstanceId)
 	}
@@ -353,7 +357,9 @@ func (v *GetMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHistoricalMetricResults(s, schemas.GetMetricDataResponse_MetricResults, v.MetricResults)
+	if v.MetricResults != nil {
+		serializeHistoricalMetricResults(s, schemas.GetMetricDataResponse_MetricResults, v.MetricResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMetricDataResponse_NextToken, *v.NextToken)
 	}

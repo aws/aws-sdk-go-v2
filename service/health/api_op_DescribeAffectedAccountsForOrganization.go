@@ -125,7 +125,9 @@ func (v *DescribeAffectedAccountsForOrganizationOutput) Serialize(s smithy.Shape
 }
 
 func (v *DescribeAffectedAccountsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeaffectedAccountsList(s, schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccounts, v.AffectedAccounts)
+	if v.AffectedAccounts != nil {
+		serializeaffectedAccountsList(s, schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccounts, v.AffectedAccounts)
+	}
 	if v.EventScopeCode != "" {
 		s.WriteString(schemas.DescribeAffectedAccountsForOrganizationResponse_eventScopeCode, string(v.EventScopeCode))
 	}

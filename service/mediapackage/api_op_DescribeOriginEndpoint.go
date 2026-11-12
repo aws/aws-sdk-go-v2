@@ -170,14 +170,18 @@ func (v *DescribeOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.StartoverWindowSeconds != nil {
 		s.WriteInt32(schemas.DescribeOriginEndpointResponse_StartoverWindowSeconds, *v.StartoverWindowSeconds)
 	}
-	serializeTags(s, schemas.DescribeOriginEndpointResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeOriginEndpointResponse_Tags, v.Tags)
+	}
 	if v.TimeDelaySeconds != nil {
 		s.WriteInt32(schemas.DescribeOriginEndpointResponse_TimeDelaySeconds, *v.TimeDelaySeconds)
 	}
 	if v.Url != nil {
 		s.WriteString(schemas.DescribeOriginEndpointResponse_Url, *v.Url)
 	}
-	serialize__listOf__string(s, schemas.DescribeOriginEndpointResponse_Whitelist, v.Whitelist)
+	if v.Whitelist != nil {
+		serialize__listOf__string(s, schemas.DescribeOriginEndpointResponse_Whitelist, v.Whitelist)
+	}
 }
 func (v *DescribeOriginEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOriginEndpointResponse, func(s *smithy.Schema) error {

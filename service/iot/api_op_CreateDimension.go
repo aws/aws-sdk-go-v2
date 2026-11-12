@@ -88,8 +88,12 @@ func (v *CreateDimensionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDimensionRequest_name, *v.Name)
 	}
-	serializeDimensionStringValues(s, schemas.CreateDimensionRequest_stringValues, v.StringValues)
-	serializeTagList(s, schemas.CreateDimensionRequest_tags, v.Tags)
+	if v.StringValues != nil {
+		serializeDimensionStringValues(s, schemas.CreateDimensionRequest_stringValues, v.StringValues)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDimensionRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDimensionRequest_type, string(v.Type))
 	}

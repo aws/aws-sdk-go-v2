@@ -64,8 +64,12 @@ func (v *ListFindingAggregationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingAggregationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringFilterList(s, schemas.ListFindingAggregationsRequest_accountIds, v.AccountIds)
-	serializeAggregationRequest(s, schemas.ListFindingAggregationsRequest_aggregationRequest, v.AggregationRequest)
+	if v.AccountIds != nil {
+		serializeStringFilterList(s, schemas.ListFindingAggregationsRequest_accountIds, v.AccountIds)
+	}
+	if v.AggregationRequest != nil {
+		serializeAggregationRequest(s, schemas.ListFindingAggregationsRequest_aggregationRequest, v.AggregationRequest)
+	}
 	if v.AggregationType != "" {
 		s.WriteString(schemas.ListFindingAggregationsRequest_aggregationType, string(v.AggregationType))
 	}
@@ -136,7 +140,9 @@ func (v *ListFindingAggregationsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingAggregationsResponse_nextToken, *v.NextToken)
 	}
-	serializeAggregationResponseList(s, schemas.ListFindingAggregationsResponse_responses, v.Responses)
+	if v.Responses != nil {
+		serializeAggregationResponseList(s, schemas.ListFindingAggregationsResponse_responses, v.Responses)
+	}
 }
 func (v *ListFindingAggregationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListFindingAggregationsResponse, func(s *smithy.Schema) error {

@@ -90,7 +90,9 @@ func (v *ListAnalyticsDataLakeDataSetsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnalyticsDataLakeDataSetsResponse_NextToken, *v.NextToken)
 	}
-	serializeAnalyticsDataSetsResults(s, schemas.ListAnalyticsDataLakeDataSetsResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeAnalyticsDataSetsResults(s, schemas.ListAnalyticsDataLakeDataSetsResponse_Results, v.Results)
+	}
 }
 func (v *ListAnalyticsDataLakeDataSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAnalyticsDataLakeDataSetsResponse, func(s *smithy.Schema) error {

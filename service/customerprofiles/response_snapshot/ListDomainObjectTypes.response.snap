@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"CreatedAt":946684800,"Description":"__Description__","LastUpdatedAt":946684800,"ObjectTypeName":"__ObjectTypeName__","Tags":{"key0":"__Value__"}},{"CreatedAt":946684800,"Description":"__Description__","LastUpdatedAt":946684800,"ObjectTypeName":"__ObjectTypeName__","Tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

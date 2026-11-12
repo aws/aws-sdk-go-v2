@@ -497,6 +497,9 @@
                     "target": "com.amazonaws.elasticsearchservice#StartElasticsearchServiceSoftwareUpdate"
                 },
                 {
+                    "target": "com.amazonaws.elasticsearchservice#UpdateClone"
+                },
+                {
                     "target": "com.amazonaws.elasticsearchservice#UpdateElasticsearchDomainConfig"
                 },
                 {
@@ -2747,6 +2750,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM principal who initiated the configuration change.</p>"
                     }
+                },
+                "ClonedBlueGreenUpgradeDetails": {
+                    "target": "com.amazonaws.elasticsearchservice#ClonedBlueGreenUpgradeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a cloned blue/green upgrade, when the change is one.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2760,6 +2769,86 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ClonedBlueGreenOptions": {
+            "type": "structure",
+            "members": {
+                "RetentionOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#RetentionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long to keep the cluster that you cut over from after cutover completes. When you start the upgrade, only <code>RetentionInHours</code> is accepted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options for a cloned blue/green upgrade.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ClonedBlueGreenScheduledAction": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.elasticsearchservice#ClonedBlueGreenScheduledActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that the service takes.</p>"
+                    }
+                },
+                "ScheduledTime": {
+                    "target": "com.amazonaws.elasticsearchservice#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the service takes the action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An action that the service takes automatically at a scheduled time during a cloned blue/green upgrade.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ClonedBlueGreenScheduledActionType": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC_CUTOVER_TO_PRIMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutomaticCutoverToPrimaryCluster"
+                    }
+                },
+                "DELETE_PRIMARY_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeletePrimaryCluster"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p><code>AutomaticCutoverToPrimaryCluster</code> cuts the domain back over to the primary cluster if you haven't cut over by the scheduled time. <code>DeletePrimaryCluster</code> deletes the primary cluster when the retention period ends.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ClonedBlueGreenUpgradeDetails": {
+            "type": "structure",
+            "members": {
+                "TrafficSplit": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficPercents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current split of search traffic between the primary and cloned clusters.</p>"
+                    }
+                },
+                "ScheduledAction": {
+                    "target": "com.amazonaws.elasticsearchservice#ClonedBlueGreenScheduledAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that the service takes automatically if you don't act before the scheduled time.</p>"
+                    }
+                },
+                "RetentionInHours": {
+                    "target": "com.amazonaws.elasticsearchservice#IntegerClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention period, in hours, for the cluster that you cut over from.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a cloned blue/green upgrade. Members that don't apply are omitted.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#CloudWatchLogsLogGroupArn": {
@@ -3413,6 +3502,89 @@
         "com.amazonaws.elasticsearchservice#CrossClusterSearchConnectionStatusMessage": {
             "type": "string"
         },
+        "com.amazonaws.elasticsearchservice#CutoverOptions": {
+            "type": "structure",
+            "members": {
+                "Target": {
+                    "target": "com.amazonaws.elasticsearchservice#CutoverTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster that the domain is cutting over to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#CutoverStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the cutover.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The cutover target and status for a cloned blue/green upgrade.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#CutoverRequestOptions": {
+            "type": "structure",
+            "members": {
+                "Target": {
+                    "target": "com.amazonaws.elasticsearchservice#CutoverTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster to cut over to. <code>ClonedCluster</code> makes the cloned cluster serve the domain. <code>PrimaryCluster</code> keeps the primary cluster and ends the upgrade.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The cutover to perform for a cloned blue/green upgrade.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#CutoverStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a cutover.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#CutoverTarget": {
+            "type": "enum",
+            "members": {
+                "CLONED_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClonedCluster"
+                    }
+                },
+                "PRIMARY_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PrimaryCluster"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The cluster to cut over to in a cloned blue/green upgrade.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#DeleteElasticsearchDomain": {
             "type": "operation",
             "input": {
@@ -3844,6 +4016,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the status of deployment strategy options for the specified Elasticsearch domain.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DeploymentStrategyOverride": {
+            "type": "enum",
+            "members": {
+                "CLONED_BLUE_GREEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClonedBlueGreen"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deployment strategy override for an operation. The only valid value is <code>ClonedBlueGreen</code>.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DeploymentStrategyOverrideOptions": {
+            "type": "structure",
+            "members": {
+                "DeploymentStrategy": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment strategy to use for this operation. The only valid value is <code>ClonedBlueGreen</code>, which creates a cloned cluster on the target version next to the primary cluster so that you can validate it and shift traffic to it before you cut over.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClonedBlueGreenOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#ClonedBlueGreenOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options that apply when <code>DeploymentStrategy</code> is <code>ClonedBlueGreen</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Overrides the deployment strategy for a single operation, such as a version upgrade.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#DeploymentType": {
@@ -8927,6 +9134,46 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.elasticsearchservice#RetentionAction": {
+            "type": "enum",
+            "members": {
+                "ROLLBACK_TO_PRIMARY_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RollbackToPrimaryCluster"
+                    }
+                },
+                "DELETE_PRIMARY_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeletePrimaryCluster"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action that ends the retention period. <code>RollbackToPrimaryCluster</code> moves the domain back to the primary cluster. <code>DeletePrimaryCluster</code> deletes the primary cluster.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#RetentionOptions": {
+            "type": "union",
+            "members": {
+                "RetentionInHours": {
+                    "target": "com.amazonaws.elasticsearchservice#IntegerClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours to keep the cluster that you cut over from. The retention period starts when cutover completes. The minimum is 1 hour. In an <code>UpdateClone</code> response after cutover completes, this value is the number of hours remaining in the retention period, rounded up.</p>"
+                    }
+                },
+                "RetentionAction": {
+                    "target": "com.amazonaws.elasticsearchservice#RetentionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ends the retention period now. Valid only after cutover completes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how long the cluster that you cut over from is kept after cutover completes. Specify exactly one of <code>RetentionInHours</code> or <code>RetentionAction</code>.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#RevokeVpcEndpointAccess": {
             "type": "operation",
             "input": {
@@ -9585,6 +9832,133 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.elasticsearchservice#TrafficPercent": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#documentation": "<p>A traffic percentage from 0 to 100.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#TrafficPercents": {
+            "type": "structure",
+            "members": {
+                "PrimaryReadTrafficPercent": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficPercent",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of search traffic sent to the primary cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CloneReadTrafficPercent": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficPercent",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of search traffic sent to the cloned cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The split of search traffic between the primary and cloned clusters.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#TrafficSplitOptions": {
+            "type": "structure",
+            "members": {
+                "Current": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficPercents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The traffic split currently in effect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficPercents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested traffic split.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficSplitStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the traffic shift.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The traffic split and status for a cloned blue/green upgrade.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#TrafficSplitRequestOptions": {
+            "type": "structure",
+            "members": {
+                "Strategy": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The traffic shifting strategy. The only valid value is <code>ShiftReadTrafficPercent</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CloneReadTrafficPercent": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficPercent",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of search traffic, from 0 to 100, to send to the cloned cluster. The rest goes to the primary cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The traffic shift to perform for a cloned blue/green upgrade.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#TrafficSplitStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a traffic shift.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#TrafficStrategy": {
+            "type": "enum",
+            "members": {
+                "SHIFT_READ_TRAFFIC_PERCENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ShiftReadTrafficPercent"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The strategy used to shift traffic between the primary and cloned clusters.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#UIntValue": {
             "type": "integer",
             "traits": {
@@ -9592,6 +9966,116 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#UpdateClone": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticsearchservice#UpdateCloneRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticsearchservice#UpdateCloneResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticsearchservice#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Manages a cloned blue/green upgrade that is in progress on a domain. Use it to shift a percentage of search traffic to the cloned cluster, to cut over to the cloned cluster or back to the primary cluster, or to change the retention period. Specify exactly one of <code>TrafficSplitOptions</code>, <code>CutoverOptions</code>, or <code>RetentionOptions</code> in each request.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2015-01-01/es/domain/{DomainName}/clone",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#UpdateCloneRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain that has a cloned blue/green upgrade in progress.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrafficSplitOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficSplitRequestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shifts a percentage of search traffic from the primary cluster to the cloned cluster.</p>"
+                    }
+                },
+                "CutoverOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#CutoverRequestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Cuts the domain over to the cloned cluster or back to the primary cluster.</p>"
+                    }
+                },
+                "RetentionOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#RetentionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Changes the retention period, or ends it after cutover completes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the request parameters to the <code>UpdateClone</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticsearchservice#UpdateCloneResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChangeId": {
+                    "target": "com.amazonaws.elasticsearchservice#GUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the configuration change. Use it with <code>DescribeDomainChangeProgress</code> to track the change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CutoverOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#CutoverOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested cutover target and the status of the cutover.</p>"
+                    }
+                },
+                "TrafficSplitOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#TrafficSplitOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current and requested traffic split, and the status of the traffic shift.</p>"
+                    }
+                },
+                "RetentionOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#RetentionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention settings for the upgrade.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the response returned by the <code>UpdateClone</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticsearchservice#UpdateElasticsearchDomainConfig": {
@@ -10001,6 +10485,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.\n      This will not actually perform the Upgrade.\n    </p>"
                     }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOverrideOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the deployment strategy for this upgrade. To run a cloned blue/green upgrade, set <code>DeploymentStrategy</code> to <code>ClonedBlueGreen</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10024,6 +10514,12 @@
                     "target": "com.amazonaws.elasticsearchservice#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.\n      This will not actually perform the Upgrade.\n    </p>"
+                    }
+                },
+                "DeploymentStrategyOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentStrategyOverrideOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment strategy override used for the upgrade.</p>"
                     }
                 },
                 "ChangeProgressDetails": {

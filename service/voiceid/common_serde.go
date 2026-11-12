@@ -8,9 +8,6 @@ import (
 )
 
 func serializeDomainSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DomainSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeDomainSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeEnrollmentJobFraudDetectionConfigWatchlistIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -32,9 +26,6 @@ func serializeEnrollmentJobFraudDetectionConfigWatchlistIds(s smithy.ShapeSerial
 }
 
 func serializeFraudDetectionReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FraudDetectionReason) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +34,6 @@ func serializeFraudDetectionReasons(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeFraudsterRegistrationJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FraudsterRegistrationJobSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeFraudsterRegistrationJobSummaries(s smithy.ShapeSerializer, schema
 }
 
 func serializeFraudsterSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FraudsterSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -69,9 +54,6 @@ func serializeFraudsterSummaries(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeRegistrationConfigWatchlistIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -80,9 +62,6 @@ func serializeRegistrationConfigWatchlistIds(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeResponseWatchlistIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -91,9 +70,6 @@ func serializeResponseWatchlistIds(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeSpeakerEnrollmentJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SpeakerEnrollmentJobSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -104,9 +80,6 @@ func serializeSpeakerEnrollmentJobSummaries(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeSpeakerSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SpeakerSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -117,9 +90,6 @@ func serializeSpeakerSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -128,9 +98,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -141,9 +108,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeWatchlistSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WatchlistSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

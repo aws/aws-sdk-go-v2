@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationTime":"__CreationTime__","description":"__Description__","id":"__Id__","name":"__Name__","next":["__Member__","__Member__"],"outputs":[{"dataType":"STRING","name":"__Name__","required":true},{"dataType":"STRING","name":"__Name__","required":true}],"previous":["__Member__","__Member__"],"stepActionType":"MANUAL","stepAutomationConfiguration":{"command":{"linux":"__Linux__","windows":"__Windows__"},"runEnvironment":"AWS","scriptLocationS3Bucket":"__ScriptLocationS3Bucket__","scriptLocationS3Key":{"linux":"__Linux__","windows":"__Windows__"},"targetType":"SINGLE"},"stepGroupId":"__StepGroupId__","templateId":"__TemplateId__"}

@@ -75,7 +75,9 @@ func (v *ListFunctionDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFunctionDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDefinitionInformation(s, schemas.ListFunctionDefinitionsResponse_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serialize__listOfDefinitionInformation(s, schemas.ListFunctionDefinitionsResponse_Definitions, v.Definitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFunctionDefinitionsResponse_NextToken, *v.NextToken)
 	}

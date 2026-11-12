@@ -114,7 +114,9 @@ func (v *ListBuildsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildList(s, schemas.ListBuildsOutput_Builds, v.Builds)
+	if v.Builds != nil {
+		serializeBuildList(s, schemas.ListBuildsOutput_Builds, v.Builds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBuildsOutput_NextToken, *v.NextToken)
 	}

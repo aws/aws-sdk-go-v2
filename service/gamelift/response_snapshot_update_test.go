@@ -870,6 +870,18 @@ func TestUpdateResponseSnapshot_CreateGameSessionQueue(t *testing.T) {
 			},
 			CustomEventData:    ptr.String("__CustomEventData__"),
 			NotificationTarget: ptr.String("__NotificationTarget__"),
+			LogConfiguration: &types.GameSessionQueueLogConfiguration{
+				DeliveryDestinations: []types.LogDeliveryDestination{
+					{
+						LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+						DestinationArn: ptr.String("__DestinationArn__"),
+					},
+					{
+						LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+						DestinationArn: ptr.String("__DestinationArn__"),
+					},
+				},
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.GameLift)
@@ -2993,6 +3005,18 @@ func TestUpdateResponseSnapshot_DescribeGameSessionQueues(t *testing.T) {
 				},
 				CustomEventData:    ptr.String("__CustomEventData__"),
 				NotificationTarget: ptr.String("__NotificationTarget__"),
+				LogConfiguration: &types.GameSessionQueueLogConfiguration{
+					DeliveryDestinations: []types.LogDeliveryDestination{
+						{
+							LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+							DestinationArn: ptr.String("__DestinationArn__"),
+						},
+						{
+							LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+							DestinationArn: ptr.String("__DestinationArn__"),
+						},
+					},
+				},
 			},
 			{
 				Name:                ptr.String("__Name__"),
@@ -3034,6 +3058,18 @@ func TestUpdateResponseSnapshot_DescribeGameSessionQueues(t *testing.T) {
 				},
 				CustomEventData:    ptr.String("__CustomEventData__"),
 				NotificationTarget: ptr.String("__NotificationTarget__"),
+				LogConfiguration: &types.GameSessionQueueLogConfiguration{
+					DeliveryDestinations: []types.LogDeliveryDestination{
+						{
+							LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+							DestinationArn: ptr.String("__DestinationArn__"),
+						},
+						{
+							LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+							DestinationArn: ptr.String("__DestinationArn__"),
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -7076,6 +7112,18 @@ func TestUpdateResponseSnapshot_UpdateGameSessionQueue(t *testing.T) {
 			},
 			CustomEventData:    ptr.String("__CustomEventData__"),
 			NotificationTarget: ptr.String("__NotificationTarget__"),
+			LogConfiguration: &types.GameSessionQueueLogConfiguration{
+				DeliveryDestinations: []types.LogDeliveryDestination{
+					{
+						LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+						DestinationArn: ptr.String("__DestinationArn__"),
+					},
+					{
+						LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+						DestinationArn: ptr.String("__DestinationArn__"),
+					},
+				},
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.GameLift)

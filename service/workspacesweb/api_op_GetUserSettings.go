@@ -4,7 +4,9 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserSettingsArn != nil {
+		s.WriteString(schemas.GetUserSettingsRequest_userSettingsArn, *v.UserSettingsArn)
+	}
+}
+
 type GetUserSettingsOutput struct {
 
 	// The user settings.
@@ -45,13 +59,34 @@ type GetUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserSettings != nil {
+		s.WriteStruct(schemas.GetUserSettingsResponse_userSettings)
+		v.UserSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserSettingsResponse_userSettings:
+			v.UserSettings = &types.UserSettings{}
+			return v.UserSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserSettings, schemas.GetUserSettingsRequest, schemas.GetUserSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserSettings, schemas.GetUserSettingsRequest, schemas.GetUserSettingsResponse), output: &GetUserSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

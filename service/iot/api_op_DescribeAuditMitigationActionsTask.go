@@ -92,8 +92,12 @@ func (v *DescribeAuditMitigationActionsTaskOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *DescribeAuditMitigationActionsTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMitigationActionList(s, schemas.DescribeAuditMitigationActionsTaskResponse_actionsDefinition, v.ActionsDefinition)
-	serializeAuditCheckToActionsMapping(s, schemas.DescribeAuditMitigationActionsTaskResponse_auditCheckToActionsMapping, v.AuditCheckToActionsMapping)
+	if v.ActionsDefinition != nil {
+		serializeMitigationActionList(s, schemas.DescribeAuditMitigationActionsTaskResponse_actionsDefinition, v.ActionsDefinition)
+	}
+	if v.AuditCheckToActionsMapping != nil {
+		serializeAuditCheckToActionsMapping(s, schemas.DescribeAuditMitigationActionsTaskResponse_auditCheckToActionsMapping, v.AuditCheckToActionsMapping)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.DescribeAuditMitigationActionsTaskResponse_endTime, *v.EndTime)
 	}
@@ -105,7 +109,9 @@ func (v *DescribeAuditMitigationActionsTaskOutput) SerializeMembers(s smithy.Sha
 		v.Target.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAuditMitigationActionsTaskStatistics(s, schemas.DescribeAuditMitigationActionsTaskResponse_taskStatistics, v.TaskStatistics)
+	if v.TaskStatistics != nil {
+		serializeAuditMitigationActionsTaskStatistics(s, schemas.DescribeAuditMitigationActionsTaskResponse_taskStatistics, v.TaskStatistics)
+	}
 	if v.TaskStatus != "" {
 		s.WriteString(schemas.DescribeAuditMitigationActionsTaskResponse_taskStatus, string(v.TaskStatus))
 	}

@@ -56,7 +56,9 @@ func (v *ListProtectConfigurationRuleSetNumberOverridesInput) Serialize(s smithy
 }
 
 func (v *ListProtectConfigurationRuleSetNumberOverridesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListProtectConfigurationRuleSetNumberOverrideFilter(s, schemas.ListProtectConfigurationRuleSetNumberOverridesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeListProtectConfigurationRuleSetNumberOverrideFilter(s, schemas.ListProtectConfigurationRuleSetNumberOverridesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListProtectConfigurationRuleSetNumberOverridesRequest_MaxResults, *v.MaxResults)
 	}
@@ -109,7 +111,9 @@ func (v *ListProtectConfigurationRuleSetNumberOverridesOutput) SerializeMembers(
 	if v.ProtectConfigurationId != nil {
 		s.WriteString(schemas.ListProtectConfigurationRuleSetNumberOverridesResult_ProtectConfigurationId, *v.ProtectConfigurationId)
 	}
-	serializeProtectConfigurationRuleSetNumberOverrideList(s, schemas.ListProtectConfigurationRuleSetNumberOverridesResult_RuleSetNumberOverrides, v.RuleSetNumberOverrides)
+	if v.RuleSetNumberOverrides != nil {
+		serializeProtectConfigurationRuleSetNumberOverrideList(s, schemas.ListProtectConfigurationRuleSetNumberOverridesResult_RuleSetNumberOverrides, v.RuleSetNumberOverrides)
+	}
 }
 func (v *ListProtectConfigurationRuleSetNumberOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProtectConfigurationRuleSetNumberOverridesResult, func(s *smithy.Schema) error {

@@ -4,11 +4,13 @@ package route53profiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53profiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Associates a DNS reource configuration to a Route 53 Profile.
+// Associates a DNS resource configuration to a Route 53 Profile.
 func (c *Client) AssociateResourceToProfile(ctx context.Context, params *AssociateResourceToProfileInput, optFns ...func(*Options)) (*AssociateResourceToProfileOutput, error) {
 	if params == nil {
 		params = &AssociateResourceToProfileInput{}
@@ -36,7 +38,9 @@ type AssociateResourceToProfileInput struct {
 	// This member is required.
 	ProfileId *string
 
-	//  Amazon resource number, ARN, of the DNS resource.
+	//  Amazon resource number, ARN, of the resource to associate. Either a private
+	// hosted zone, DNS Firewall rule group, Resolver rule, or an interface VPC
+	// endpoint.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -51,6 +55,27 @@ type AssociateResourceToProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceToProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceToProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceToProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_Name, *v.Name)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_ProfileId, *v.ProfileId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceProperties != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_ResourceProperties, *v.ResourceProperties)
+	}
+}
+
 type AssociateResourceToProfileOutput struct {
 
 	//  Infromation about the AssociateResourceToProfile , including a status message.
@@ -62,13 +87,34 @@ type AssociateResourceToProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceToProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceToProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceToProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileResourceAssociation != nil {
+		s.WriteStruct(schemas.AssociateResourceToProfileResponse_ProfileResourceAssociation)
+		v.ProfileResourceAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateResourceToProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceToProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceToProfileResponse_ProfileResourceAssociation:
+			v.ProfileResourceAssociation = &types.ProfileResourceAssociation{}
+			return v.ProfileResourceAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResourceToProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateResourceToProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceToProfile, schemas.AssociateResourceToProfileRequest, schemas.AssociateResourceToProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateResourceToProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceToProfile, schemas.AssociateResourceToProfileRequest, schemas.AssociateResourceToProfileResponse), output: &AssociateResourceToProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

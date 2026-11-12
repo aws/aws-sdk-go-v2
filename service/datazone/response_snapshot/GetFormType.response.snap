@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","imports":[{"name":"__Name__","revision":"__Revision__"},{"name":"__Name__","revision":"__Revision__"}],"model":{"smithy":"__ModelMemberSmithy__"},"name":"__Name__","originDomainId":"__OriginDomainId__","originProjectId":"__OriginProjectId__","owningProjectId":"__OwningProjectId__","revision":"__Revision__","status":"ENABLED"}

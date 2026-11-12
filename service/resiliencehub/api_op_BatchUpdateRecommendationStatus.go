@@ -57,7 +57,9 @@ func (v *BatchUpdateRecommendationStatusInput) SerializeMembers(s smithy.ShapeSe
 	if v.AppArn != nil {
 		s.WriteString(schemas.BatchUpdateRecommendationStatusRequest_appArn, *v.AppArn)
 	}
-	serializeUpdateRecommendationStatusRequestEntries(s, schemas.BatchUpdateRecommendationStatusRequest_requestEntries, v.RequestEntries)
+	if v.RequestEntries != nil {
+		serializeUpdateRecommendationStatusRequestEntries(s, schemas.BatchUpdateRecommendationStatusRequest_requestEntries, v.RequestEntries)
+	}
 }
 
 type BatchUpdateRecommendationStatusOutput struct {
@@ -99,8 +101,12 @@ func (v *BatchUpdateRecommendationStatusOutput) SerializeMembers(s smithy.ShapeS
 	if v.AppArn != nil {
 		s.WriteString(schemas.BatchUpdateRecommendationStatusResponse_appArn, *v.AppArn)
 	}
-	serializeBatchUpdateRecommendationStatusFailedEntries(s, schemas.BatchUpdateRecommendationStatusResponse_failedEntries, v.FailedEntries)
-	serializeBatchUpdateRecommendationStatusSuccessfulEntries(s, schemas.BatchUpdateRecommendationStatusResponse_successfulEntries, v.SuccessfulEntries)
+	if v.FailedEntries != nil {
+		serializeBatchUpdateRecommendationStatusFailedEntries(s, schemas.BatchUpdateRecommendationStatusResponse_failedEntries, v.FailedEntries)
+	}
+	if v.SuccessfulEntries != nil {
+		serializeBatchUpdateRecommendationStatusSuccessfulEntries(s, schemas.BatchUpdateRecommendationStatusResponse_successfulEntries, v.SuccessfulEntries)
+	}
 }
 func (v *BatchUpdateRecommendationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateRecommendationStatusResponse, func(s *smithy.Schema) error {

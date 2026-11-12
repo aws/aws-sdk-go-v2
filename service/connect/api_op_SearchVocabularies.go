@@ -111,7 +111,9 @@ func (v *SearchVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchVocabulariesResponse_NextToken, *v.NextToken)
 	}
-	serializeVocabularySummaryList(s, schemas.SearchVocabulariesResponse_VocabularySummaryList, v.VocabularySummaryList)
+	if v.VocabularySummaryList != nil {
+		serializeVocabularySummaryList(s, schemas.SearchVocabulariesResponse_VocabularySummaryList, v.VocabularySummaryList)
+	}
 }
 func (v *SearchVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchVocabulariesResponse, func(s *smithy.Schema) error {

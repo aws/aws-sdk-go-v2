@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","PipelineSummaries":[{"Arn":"__Arn__","ConfigurationSummary":{"DataSources":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"ProcessorCount":1,"Processors":["__Member__","__Member__"],"Sinks":["__Member__","__Member__"],"Sources":[{"Type":"__Type__"},{"Type":"__Type__"}]},"CreatedTimeStamp":1,"LastUpdateTimeStamp":1,"Name":"__Name__","Status":"CREATING","Tags":{"key0":"__Value__"}},{"Arn":"__Arn__","ConfigurationSummary":{"DataSources":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"ProcessorCount":1,"Processors":["__Member__","__Member__"],"Sinks":["__Member__","__Member__"],"Sources":[{"Type":"__Type__"},{"Type":"__Type__"}]},"CreatedTimeStamp":1,"LastUpdateTimeStamp":1,"Name":"__Name__","Status":"CREATING","Tags":{"key0":"__Value__"}}]}

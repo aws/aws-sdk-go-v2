@@ -1851,7 +1851,7 @@ var _Platforms_member *smithy.Schema
 var PlatformType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "PlatformType",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 10)
 var PlatformType_WINDOWS *smithy.Schema
 
 var PlatformType_WINDOWS_SERVER_2016 *smithy.Schema
@@ -1861,6 +1861,8 @@ var PlatformType_WINDOWS_SERVER_2019 *smithy.Schema
 var PlatformType_WINDOWS_SERVER_2022 *smithy.Schema
 
 var PlatformType_WINDOWS_SERVER_2025 *smithy.Schema
+
+var PlatformType_WINDOWS_11 *smithy.Schema
 
 var PlatformType_AMAZON_LINUX2 *smithy.Schema
 
@@ -4571,6 +4573,8 @@ func init() {
 	PlatformType_WINDOWS_SERVER_2022 = PlatformType.AddMember("WINDOWS_SERVER_2022", smithyprelude.Unit)
 
 	PlatformType_WINDOWS_SERVER_2025 = PlatformType.AddMember("WINDOWS_SERVER_2025", smithyprelude.Unit)
+
+	PlatformType_WINDOWS_11 = PlatformType.AddMember("WINDOWS_11", smithyprelude.Unit)
 
 	PlatformType_AMAZON_LINUX2 = PlatformType.AddMember("AMAZON_LINUX2", smithyprelude.Unit)
 

@@ -111,8 +111,12 @@ func (v *Document) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Title != nil {
 		s.WriteString(schemas.Document_Title, *v.Title)
 	}
-	serializeBodyTokensList(s, schemas.Document_TokenizedBody, v.TokenizedBody)
-	serializeTitleTokensList(s, schemas.Document_TokenizedTitle, v.TokenizedTitle)
+	if v.TokenizedBody != nil {
+		serializeBodyTokensList(s, schemas.Document_TokenizedBody, v.TokenizedBody)
+	}
+	if v.TokenizedTitle != nil {
+		serializeTitleTokensList(s, schemas.Document_TokenizedTitle, v.TokenizedTitle)
+	}
 }
 func (v *Document) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Document, func(s *smithy.Schema) error {

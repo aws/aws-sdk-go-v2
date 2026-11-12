@@ -61,7 +61,9 @@ func (v *ListBotsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBotsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotFilters(s, schemas.ListBotsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeBotFilters(s, schemas.ListBotsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBotsRequest_maxResults, *v.MaxResults)
 	}
@@ -102,7 +104,9 @@ func (v *ListBotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotSummaryList(s, schemas.ListBotsResponse_botSummaries, v.BotSummaries)
+	if v.BotSummaries != nil {
+		serializeBotSummaryList(s, schemas.ListBotsResponse_botSummaries, v.BotSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBotsResponse_nextToken, *v.NextToken)
 	}

@@ -69,6 +69,9 @@ type AgenticRetrieveStreamInput struct {
 	// Policy configuration for guardrails and content filtering.
 	PolicyConfiguration *types.AgenticRetrievePolicyConfiguration
 
+	// A retrieval instruction to apply to this request.
+	RetrievalInstructionConfiguration *types.AgenticRetrieveInstructionConfiguration
+
 	// Contains information about the user making the request. This is used for access
 	// control filtering to ensure that retrieval results only include documents the
 	// user is authorized to access.
@@ -97,7 +100,9 @@ func (v *AgenticRetrieveStreamInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.MemoryConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAgenticRetrieveMessages(s, schemas.AgenticRetrieveStreamRequest_messages, v.Messages)
+	if v.Messages != nil {
+		serializeAgenticRetrieveMessages(s, schemas.AgenticRetrieveStreamRequest_messages, v.Messages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.AgenticRetrieveStreamRequest_nextToken, *v.NextToken)
 	}
@@ -106,7 +111,14 @@ func (v *AgenticRetrieveStreamInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.PolicyConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAgenticRetrievers(s, schemas.AgenticRetrieveStreamRequest_retrievers, v.Retrievers)
+	if v.RetrievalInstructionConfiguration != nil {
+		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_retrievalInstructionConfiguration)
+		v.RetrievalInstructionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Retrievers != nil {
+		serializeAgenticRetrievers(s, schemas.AgenticRetrieveStreamRequest_retrievers, v.Retrievers)
+	}
 	if v.UserContext != nil {
 		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_userContext)
 		v.UserContext.SerializeMembers(s)
@@ -158,6 +170,13 @@ func (o *AgenticRetrieveStreamOutput) GetInitialReply() <-chan AgenticRetrieveSt
 	return o.initialReply
 }
 
+func (v *AgenticRetrieveStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAgenticRetrieveStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AgenticRetrieveStream, schemas.AgenticRetrieveStreamRequest, schemas.AgenticRetrieveStreamResponse)}, middleware.After); err != nil {
 		return err

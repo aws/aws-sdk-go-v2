@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetPatchBaselineForPatchGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPatchBaselineForPatchGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPatchBaselineForPatchGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPatchBaselineForPatchGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.GetPatchBaselineForPatchGroupRequest_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.PatchGroup != nil {
+		s.WriteString(schemas.GetPatchBaselineForPatchGroupRequest_PatchGroup, *v.PatchGroup)
+	}
+}
+
 type GetPatchBaselineForPatchGroupOutput struct {
 
 	// The ID of the patch baseline that should be used for the patch group.
@@ -55,13 +72,48 @@ type GetPatchBaselineForPatchGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPatchBaselineForPatchGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPatchBaselineForPatchGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPatchBaselineForPatchGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.GetPatchBaselineForPatchGroupResult_BaselineId, *v.BaselineId)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.GetPatchBaselineForPatchGroupResult_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.PatchGroup != nil {
+		s.WriteString(schemas.GetPatchBaselineForPatchGroupResult_PatchGroup, *v.PatchGroup)
+	}
+}
+func (v *GetPatchBaselineForPatchGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPatchBaselineForPatchGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPatchBaselineForPatchGroupResult_BaselineId:
+			v.BaselineId = new(string)
+			return d.ReadString(schemas.GetPatchBaselineForPatchGroupResult_BaselineId, v.BaselineId)
+		case schemas.GetPatchBaselineForPatchGroupResult_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.GetPatchBaselineForPatchGroupResult_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = types.OperatingSystem(ev)
+			return nil
+		case schemas.GetPatchBaselineForPatchGroupResult_PatchGroup:
+			v.PatchGroup = new(string)
+			return d.ReadString(schemas.GetPatchBaselineForPatchGroupResult_PatchGroup, v.PatchGroup)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPatchBaselineForPatchGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPatchBaselineForPatchGroup, schemas.GetPatchBaselineForPatchGroupRequest, schemas.GetPatchBaselineForPatchGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPatchBaselineForPatchGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPatchBaselineForPatchGroup, schemas.GetPatchBaselineForPatchGroupRequest, schemas.GetPatchBaselineForPatchGroupResult), output: &GetPatchBaselineForPatchGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

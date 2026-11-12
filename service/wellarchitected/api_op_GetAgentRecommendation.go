@@ -210,16 +210,24 @@ func (v *GetAgentRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAgentRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.GetAgentRecommendationResponse_applications, v.Applications)
-	serializeStringList(s, schemas.GetAgentRecommendationResponse_awsServices, v.AwsServices)
-	serializeStringList(s, schemas.GetAgentRecommendationResponse_businessUnits, v.BusinessUnits)
+	if v.Applications != nil {
+		serializeStringList(s, schemas.GetAgentRecommendationResponse_applications, v.Applications)
+	}
+	if v.AwsServices != nil {
+		serializeStringList(s, schemas.GetAgentRecommendationResponse_awsServices, v.AwsServices)
+	}
+	if v.BusinessUnits != nil {
+		serializeStringList(s, schemas.GetAgentRecommendationResponse_businessUnits, v.BusinessUnits)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetAgentRecommendationResponse_createdAt, *v.CreatedAt)
 	}
 	if v.CreatedBy != nil {
 		s.WriteString(schemas.GetAgentRecommendationResponse_createdBy, *v.CreatedBy)
 	}
-	serializeCrossPillarBenefits(s, schemas.GetAgentRecommendationResponse_crossPillarBenefits, v.CrossPillarBenefits)
+	if v.CrossPillarBenefits != nil {
+		serializeCrossPillarBenefits(s, schemas.GetAgentRecommendationResponse_crossPillarBenefits, v.CrossPillarBenefits)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetAgentRecommendationResponse_description, *v.Description)
 	}
@@ -229,13 +237,21 @@ func (v *GetAgentRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.GenerationId != nil {
 		s.WriteString(schemas.GetAgentRecommendationResponse_generationId, *v.GenerationId)
 	}
-	serializeRecommendationGoals(s, schemas.GetAgentRecommendationResponse_goals, v.Goals)
-	serializeHighlights(s, schemas.GetAgentRecommendationResponse_highlights, v.Highlights)
+	if v.Goals != nil {
+		serializeRecommendationGoals(s, schemas.GetAgentRecommendationResponse_goals, v.Goals)
+	}
+	if v.Highlights != nil {
+		serializeHighlights(s, schemas.GetAgentRecommendationResponse_highlights, v.Highlights)
+	}
 	if v.Impact != "" {
 		s.WriteString(schemas.GetAgentRecommendationResponse_impact, string(v.Impact))
 	}
-	serializeImpactDetails(s, schemas.GetAgentRecommendationResponse_impactDetails, v.ImpactDetails)
-	serializeInsightList(s, schemas.GetAgentRecommendationResponse_insights, v.Insights)
+	if v.ImpactDetails != nil {
+		serializeImpactDetails(s, schemas.GetAgentRecommendationResponse_impactDetails, v.ImpactDetails)
+	}
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.GetAgentRecommendationResponse_insights, v.Insights)
+	}
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.GetAgentRecommendationResponse_lastModifiedAt, *v.LastModifiedAt)
 	}
@@ -262,24 +278,32 @@ func (v *GetAgentRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.RemediationSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAgentRecommendationRemediations(s, schemas.GetAgentRecommendationResponse_remediations, v.Remediations)
+	if v.Remediations != nil {
+		serializeAgentRecommendationRemediations(s, schemas.GetAgentRecommendationResponse_remediations, v.Remediations)
+	}
 	if v.Roi != nil {
 		s.WriteStruct(schemas.GetAgentRecommendationResponse_roi)
 		v.Roi.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendationSourceList(s, schemas.GetAgentRecommendationResponse_sources, v.Sources)
+	if v.Sources != nil {
+		serializeRecommendationSourceList(s, schemas.GetAgentRecommendationResponse_sources, v.Sources)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.GetAgentRecommendationResponse_state, string(v.State))
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetAgentRecommendationResponse_status, string(v.Status))
 	}
-	serializeTags(s, schemas.GetAgentRecommendationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetAgentRecommendationResponse_tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.GetAgentRecommendationResponse_title, *v.Title)
 	}
-	serializeTradeOffs(s, schemas.GetAgentRecommendationResponse_tradeOffs, v.TradeOffs)
+	if v.TradeOffs != nil {
+		serializeTradeOffs(s, schemas.GetAgentRecommendationResponse_tradeOffs, v.TradeOffs)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetAgentRecommendationResponse_type, string(v.Type))
 	}

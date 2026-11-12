@@ -166,7 +166,9 @@ func (v *StartTextTranslationJobInput) SerializeMembers(s smithy.ShapeSerializer
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceNameList(s, schemas.StartTextTranslationJobRequest_ParallelDataNames, v.ParallelDataNames)
+	if v.ParallelDataNames != nil {
+		serializeResourceNameList(s, schemas.StartTextTranslationJobRequest_ParallelDataNames, v.ParallelDataNames)
+	}
 	if v.Settings != nil {
 		s.WriteStruct(schemas.StartTextTranslationJobRequest_Settings)
 		v.Settings.SerializeMembers(s)
@@ -175,8 +177,12 @@ func (v *StartTextTranslationJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.SourceLanguageCode != nil {
 		s.WriteString(schemas.StartTextTranslationJobRequest_SourceLanguageCode, *v.SourceLanguageCode)
 	}
-	serializeTargetLanguageCodeStringList(s, schemas.StartTextTranslationJobRequest_TargetLanguageCodes, v.TargetLanguageCodes)
-	serializeResourceNameList(s, schemas.StartTextTranslationJobRequest_TerminologyNames, v.TerminologyNames)
+	if v.TargetLanguageCodes != nil {
+		serializeTargetLanguageCodeStringList(s, schemas.StartTextTranslationJobRequest_TargetLanguageCodes, v.TargetLanguageCodes)
+	}
+	if v.TerminologyNames != nil {
+		serializeResourceNameList(s, schemas.StartTextTranslationJobRequest_TerminologyNames, v.TerminologyNames)
+	}
 }
 
 type StartTextTranslationJobOutput struct {

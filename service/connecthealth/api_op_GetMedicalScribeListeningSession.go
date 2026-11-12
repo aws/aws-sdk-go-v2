@@ -5,7 +5,9 @@ package connecthealth
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type GetMedicalScribeListeningSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMedicalScribeListeningSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMedicalScribeListeningSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMedicalScribeListeningSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetMedicalScribeListeningSessionInput_domainId, *v.DomainId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetMedicalScribeListeningSessionInput_sessionId, *v.SessionId)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.GetMedicalScribeListeningSessionInput_subscriptionId, *v.SubscriptionId)
+	}
+}
+
 type GetMedicalScribeListeningSessionOutput struct {
 
 	// Details about the Medical Scribe listening session
@@ -57,13 +77,34 @@ type GetMedicalScribeListeningSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMedicalScribeListeningSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMedicalScribeListeningSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMedicalScribeListeningSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MedicalScribeListeningSessionDetails != nil {
+		s.WriteStruct(schemas.GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails)
+		v.MedicalScribeListeningSessionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMedicalScribeListeningSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMedicalScribeListeningSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails:
+			v.MedicalScribeListeningSessionDetails = &types.MedicalScribeListeningSessionDetails{}
+			return v.MedicalScribeListeningSessionDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMedicalScribeListeningSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMedicalScribeListeningSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMedicalScribeListeningSession, schemas.GetMedicalScribeListeningSessionInput, schemas.GetMedicalScribeListeningSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMedicalScribeListeningSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMedicalScribeListeningSession, schemas.GetMedicalScribeListeningSessionInput, schemas.GetMedicalScribeListeningSessionOutput), output: &GetMedicalScribeListeningSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

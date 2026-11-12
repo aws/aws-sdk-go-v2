@@ -8,9 +8,6 @@ import (
 )
 
 func serializeReportDefinitionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ReportDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

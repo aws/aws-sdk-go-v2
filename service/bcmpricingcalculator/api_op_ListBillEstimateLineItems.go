@@ -56,7 +56,9 @@ func (v *ListBillEstimateLineItemsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.BillEstimateId != nil {
 		s.WriteString(schemas.ListBillEstimateLineItemsRequest_billEstimateId, *v.BillEstimateId)
 	}
-	serializeListBillEstimateLineItemsFilters(s, schemas.ListBillEstimateLineItemsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListBillEstimateLineItemsFilters(s, schemas.ListBillEstimateLineItemsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBillEstimateLineItemsRequest_maxResults, *v.MaxResults)
 	}
@@ -86,7 +88,9 @@ func (v *ListBillEstimateLineItemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBillEstimateLineItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillEstimateLineItemSummaries(s, schemas.ListBillEstimateLineItemsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBillEstimateLineItemSummaries(s, schemas.ListBillEstimateLineItemsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillEstimateLineItemsResponse_nextToken, *v.NextToken)
 	}

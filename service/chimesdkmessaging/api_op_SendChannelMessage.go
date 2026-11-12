@@ -123,7 +123,9 @@ func (v *SendChannelMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentType != nil {
 		s.WriteString(schemas.SendChannelMessageRequest_ContentType, *v.ContentType)
 	}
-	serializeMessageAttributeMap(s, schemas.SendChannelMessageRequest_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeMessageAttributeMap(s, schemas.SendChannelMessageRequest_MessageAttributes, v.MessageAttributes)
+	}
 	if v.Metadata != nil {
 		s.WriteString(schemas.SendChannelMessageRequest_Metadata, *v.Metadata)
 	}
@@ -138,7 +140,9 @@ func (v *SendChannelMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubChannelId != nil {
 		s.WriteString(schemas.SendChannelMessageRequest_SubChannelId, *v.SubChannelId)
 	}
-	serializeTargetList(s, schemas.SendChannelMessageRequest_Target, v.Target)
+	if v.Target != nil {
+		serializeTargetList(s, schemas.SendChannelMessageRequest_Target, v.Target)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.SendChannelMessageRequest_Type, string(v.Type))
 	}

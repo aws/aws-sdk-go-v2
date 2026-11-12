@@ -104,7 +104,9 @@ func (v *ListThirdPartyFirewallFirewallPoliciesOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThirdPartyFirewallFirewallPoliciesResponse_NextToken, *v.NextToken)
 	}
-	serializeThirdPartyFirewallFirewallPolicies(s, schemas.ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies, v.ThirdPartyFirewallFirewallPolicies)
+	if v.ThirdPartyFirewallFirewallPolicies != nil {
+		serializeThirdPartyFirewallFirewallPolicies(s, schemas.ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies, v.ThirdPartyFirewallFirewallPolicies)
+	}
 }
 func (v *ListThirdPartyFirewallFirewallPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThirdPartyFirewallFirewallPoliciesResponse, func(s *smithy.Schema) error {

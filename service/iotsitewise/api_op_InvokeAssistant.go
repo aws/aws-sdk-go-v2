@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,6 +50,24 @@ type InvokeAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAssistantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAssistantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConversationId != nil {
+		s.WriteString(schemas.InvokeAssistantRequest_conversationId, *v.ConversationId)
+	}
+	if v.EnableTrace != false {
+		s.WriteBool(schemas.InvokeAssistantRequest_enableTrace, v.EnableTrace)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvokeAssistantRequest_message, *v.Message)
+	}
+}
+
 type InvokeAssistantOutput struct {
 
 	// The ID of the conversation, in UUID format. This ID uniquely identifies the
@@ -64,24 +84,44 @@ type InvokeAssistantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAssistantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAssistantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAssistantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConversationId != nil {
+		s.WriteString(schemas.InvokeAssistantResponse_conversationId, *v.ConversationId)
+	}
+}
+func (v *InvokeAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeAssistantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeAssistantResponse_conversationId:
+			v.ConversationId = new(string)
+			return d.ReadString(schemas.InvokeAssistantResponse_conversationId, v.ConversationId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeAssistantOutput) GetStream() *InvokeAssistantEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeAssistantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAssistant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAssistant, schemas.InvokeAssistantRequest, schemas.InvokeAssistantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAssistant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAssistant, schemas.InvokeAssistantRequest, schemas.InvokeAssistantResponse), output: &InvokeAssistantOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeAssistant{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamInvokeAssistantMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

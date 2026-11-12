@@ -159,7 +159,9 @@ func (v *GetWebFunctionRevisionOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Description != nil {
 		s.WriteString(schemas.GetWebFunctionRevisionResponse_description, *v.Description)
 	}
-	serializeRevisionErrors(s, schemas.GetWebFunctionRevisionResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeRevisionErrors(s, schemas.GetWebFunctionRevisionResponse_errors, v.Errors)
+	}
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.GetWebFunctionRevisionResponse_functionArn, *v.FunctionArn)
 	}

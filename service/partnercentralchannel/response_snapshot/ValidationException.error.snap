@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.AcceptChannelHandshake
+
+{"__type":"ValidationException","fieldList":[{"code":"__Code__","message":"__Message__","name":"__Name__"},{"code":"__Code__","message":"__Message__","name":"__Name__"}],"message":"__Message__","reason":"REQUEST_VALIDATION_FAILED"}

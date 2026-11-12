@@ -143,7 +143,9 @@ func (v *GetConfigurationProfileOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurationProfile_Type, *v.Type)
 	}
-	serializeValidatorList(s, schemas.ConfigurationProfile_Validators, v.Validators)
+	if v.Validators != nil {
+		serializeValidatorList(s, schemas.ConfigurationProfile_Validators, v.Validators)
+	}
 }
 func (v *GetConfigurationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigurationProfile, func(s *smithy.Schema) error {

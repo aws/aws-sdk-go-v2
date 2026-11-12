@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListExportsResponse><ListExportsResult><Exports><member><ExportingStackId>__ExportingStackId__</ExportingStackId><Name>__Name__</Name><Value>__Value__</Value></member><member><ExportingStackId>__ExportingStackId__</ExportingStackId><Name>__Name__</Name><Value>__Value__</Value></member></Exports><NextToken>__NextToken__</NextToken></ListExportsResult></ListExportsResponse>

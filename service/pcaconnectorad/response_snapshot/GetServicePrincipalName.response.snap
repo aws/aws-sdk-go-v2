@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ServicePrincipalName":{"ConnectorArn":"__ConnectorArn__","CreatedAt":946684800,"DirectoryRegistrationArn":"__DirectoryRegistrationArn__","Status":"CREATING","StatusReason":"DIRECTORY_ACCESS_DENIED","UpdatedAt":946684800}}

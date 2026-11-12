@@ -4,6 +4,8 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeprecateWhatsAppFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecateWhatsAppFlowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.DeprecateWhatsAppFlowInput_flowId, *v.FlowId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeprecateWhatsAppFlowInput_id, *v.Id)
+	}
+}
+
 type DeprecateWhatsAppFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeprecateWhatsAppFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateWhatsAppFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecateWhatsAppFlowOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateWhatsAppFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeprecateWhatsAppFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeprecateWhatsAppFlowOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeprecateWhatsAppFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeprecateWhatsAppFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateWhatsAppFlow, schemas.DeprecateWhatsAppFlowInput, schemas.DeprecateWhatsAppFlowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeprecateWhatsAppFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateWhatsAppFlow, schemas.DeprecateWhatsAppFlowInput, schemas.DeprecateWhatsAppFlowOutput), output: &DeprecateWhatsAppFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

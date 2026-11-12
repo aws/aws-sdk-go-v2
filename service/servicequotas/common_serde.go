@@ -8,9 +8,6 @@ import (
 )
 
 func serializeExcludedQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeExcludedQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeInputTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -30,9 +24,6 @@ func serializeInputTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeInputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -43,9 +34,6 @@ func serializeInputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeOutputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeOutputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeQuotaInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.QuotaInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -69,9 +54,6 @@ func serializeQuotaInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeQuotaUtilizationInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.QuotaUtilizationInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -82,9 +64,6 @@ func serializeQuotaUtilizationInfoList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeRequestedServiceQuotaChangeHistoryListDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RequestedServiceQuotaChange) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -95,9 +74,6 @@ func serializeRequestedServiceQuotaChangeHistoryListDefinition(s smithy.ShapeSer
 }
 
 func serializeServiceInfoListDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServiceInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -108,9 +84,6 @@ func serializeServiceInfoListDefinition(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeServiceQuotaIncreaseRequestInTemplateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServiceQuotaIncreaseRequestInTemplate) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -121,9 +94,6 @@ func serializeServiceQuotaIncreaseRequestInTemplateList(s smithy.ShapeSerializer
 }
 
 func serializeServiceQuotaListDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServiceQuota) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -352,9 +322,6 @@ func deserializeServiceQuotaListDefinition(d smithy.ShapeDeserializer, s *smithy
 }
 
 func serializeExclusionList(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -364,9 +331,6 @@ func serializeExclusionList(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 }
 
 func serializeExclusionQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]types.QuotaInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -376,9 +340,6 @@ func serializeExclusionQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeMetricDimensionsMapDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

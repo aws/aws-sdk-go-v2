@@ -80,8 +80,12 @@ func (v *Account) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Account_Name, *v.Name)
 	}
-	serializeSigninDelegateGroupList(s, schemas.Account_SigninDelegateGroups, v.SigninDelegateGroups)
-	serializeLicenseList(s, schemas.Account_SupportedLicenses, v.SupportedLicenses)
+	if v.SigninDelegateGroups != nil {
+		serializeSigninDelegateGroupList(s, schemas.Account_SigninDelegateGroups, v.SigninDelegateGroups)
+	}
+	if v.SupportedLicenses != nil {
+		serializeLicenseList(s, schemas.Account_SupportedLicenses, v.SupportedLicenses)
+	}
 }
 func (v *Account) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Account, func(s *smithy.Schema) error {
@@ -772,7 +776,9 @@ func (v *PhoneNumber) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PhoneNumber) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhoneNumberAssociationList(s, schemas.PhoneNumber_Associations, v.Associations)
+	if v.Associations != nil {
+		serializePhoneNumberAssociationList(s, schemas.PhoneNumber_Associations, v.Associations)
+	}
 	if v.CallingName != nil {
 		s.WriteString(schemas.PhoneNumber_CallingName, *v.CallingName)
 	}
@@ -1029,7 +1035,9 @@ func (v *PhoneNumberCountry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CountryCode != nil {
 		s.WriteString(schemas.PhoneNumberCountry_CountryCode, *v.CountryCode)
 	}
-	serializePhoneNumberTypeList(s, schemas.PhoneNumberCountry_SupportedPhoneNumberTypes, v.SupportedPhoneNumberTypes)
+	if v.SupportedPhoneNumberTypes != nil {
+		serializePhoneNumberTypeList(s, schemas.PhoneNumberCountry_SupportedPhoneNumberTypes, v.SupportedPhoneNumberTypes)
+	}
 }
 func (v *PhoneNumberCountry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PhoneNumberCountry, func(s *smithy.Schema) error {
@@ -1134,7 +1142,9 @@ func (v *PhoneNumberOrder) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.PhoneNumberOrder_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeOrderedPhoneNumberList(s, schemas.PhoneNumberOrder_OrderedPhoneNumbers, v.OrderedPhoneNumbers)
+	if v.OrderedPhoneNumbers != nil {
+		serializeOrderedPhoneNumberList(s, schemas.PhoneNumberOrder_OrderedPhoneNumbers, v.OrderedPhoneNumbers)
+	}
 	if v.PhoneNumberOrderId != nil {
 		s.WriteString(schemas.PhoneNumberOrder_PhoneNumberOrderId, *v.PhoneNumberOrderId)
 	}

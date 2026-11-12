@@ -3529,7 +3529,8 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -3680,7 +3681,8 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -3884,6 +3886,9 @@ func TestCheckRequestSnapshot_CreateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -7416,6 +7421,7 @@ func TestCheckRequestSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9623,6 +9629,52 @@ func TestCheckRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9643,6 +9695,36 @@ func TestCheckRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRealtimeContactAnalysisSegmentsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListReplicationFindings(t *testing.T) {
+	input := &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListReplicationFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReplicationFindings"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14970,6 +15052,18 @@ func TestCheckRequestSnapshot_UpdateContact(t *testing.T) {
 			Type:    types.EndpointType("TELEPHONE_NUMBER"),
 			Address: ptr.String("__Address__"),
 		},
+		AdditionalRecipients: &types.NullableAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -16730,6 +16824,41 @@ func TestCheckRequestSnapshot_UpdateNotificationContent(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	input := &UpdateOutboundEmailContactMessageInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		EmailMessage: &types.UpdateOutboundEmailContent{
+			MessageSourceType: types.UpdateOutboundEmailMessageSourceType("RAW"),
+			RawMessage: &types.UpdateOutboundRawMessage{
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOutboundEmailContactMessage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOutboundEmailContactMessage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	input := &UpdateParticipantAuthenticationInput{
 		State:            ptr.String("__State__"),
@@ -17525,7 +17654,8 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -17676,7 +17806,8 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -17874,6 +18005,9 @@ func TestCheckRequestSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -22074,7 +22208,8 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -22225,7 +22360,8 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -22429,6 +22565,9 @@ func TestUpdateRequestSnapshot_CreateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -25961,6 +26100,7 @@ func TestUpdateRequestSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -28168,6 +28308,52 @@ func TestUpdateRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -28188,6 +28374,36 @@ func TestUpdateRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRealtimeContactAnalysisSegmentsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListReplicationFindings(t *testing.T) {
+	input := &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListReplicationFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReplicationFindings"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -33515,6 +33731,18 @@ func TestUpdateRequestSnapshot_UpdateContact(t *testing.T) {
 			Type:    types.EndpointType("TELEPHONE_NUMBER"),
 			Address: ptr.String("__Address__"),
 		},
+		AdditionalRecipients: &types.NullableAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -35275,6 +35503,41 @@ func TestUpdateRequestSnapshot_UpdateNotificationContent(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	input := &UpdateOutboundEmailContactMessageInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		EmailMessage: &types.UpdateOutboundEmailContent{
+			MessageSourceType: types.UpdateOutboundEmailMessageSourceType("RAW"),
+			RawMessage: &types.UpdateOutboundRawMessage{
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOutboundEmailContactMessage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOutboundEmailContactMessage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	input := &UpdateParticipantAuthenticationInput{
 		State:            ptr.String("__State__"),
@@ -36070,7 +36333,8 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -36221,7 +36485,8 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -36419,6 +36684,9 @@ func TestUpdateRequestSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{

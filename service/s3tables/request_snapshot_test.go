@@ -206,6 +206,33 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_CompleteTableMigration(t *testing.T) {
+	input := &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CompleteTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CompleteTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateNamespace(t *testing.T) {
 	input := &CreateNamespaceInput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -758,6 +785,33 @@ func TestCheckRequestSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetTableBucketLogging(t *testing.T) {
+	input := &GetTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTableBucketLogging(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTableBucketLogging"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	input := &GetTableBucketMaintenanceConfigurationInput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -1009,6 +1063,34 @@ func TestCheckRequestSnapshot_GetTableMetadataLocation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetTableMigration(t *testing.T) {
+	input := &GetTableMigrationInput{
+		MigrationId: ptr.String("__MigrationId__"),
+		TableARN:    ptr.String("__TableARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetTablePolicy(t *testing.T) {
 	input := &GetTablePolicyInput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -1235,6 +1317,40 @@ func TestCheckRequestSnapshot_ListTableBuckets(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTableMigrations(t *testing.T) {
+	input := &ListTableMigrationsInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		TableARN:       ptr.String("__TableARN__"),
+		State:          types.MigrationState("new"),
+		HasValidPlan:   ptr.Bool(true),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTableMigrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTableMigrations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTables(t *testing.T) {
 	input := &ListTablesInput{
 		TableBucketARN:    ptr.String("__TableBucketARN__"),
@@ -1320,6 +1436,44 @@ func TestCheckRequestSnapshot_PutTableBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTableBucketEncryption"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutTableBucketLogging(t *testing.T) {
+	input := &PutTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		TableBucketLoggingStatus: &types.TableBucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTableBucketLogging(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTableBucketLogging"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1686,6 +1840,165 @@ func TestCheckRequestSnapshot_RenameTable(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartTableMigration(t *testing.T) {
+	input := &StartTableMigrationInput{
+		RoleARN: ptr.String("__RoleARN__"),
+		DestinationTable: &types.DestinationTable{
+			TableBucketARN: ptr.String("__TableBucketARN__"),
+			Namespace:      ptr.String("__Namespace__"),
+			Name:           ptr.String("__Name__"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				SseAlgorithm: types.SSEAlgorithm("AES256"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+			StorageClassConfiguration: &types.StorageClassConfiguration{
+				StorageClass: types.StorageClass("STANDARD"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Properties: &types.MigrationTableProperties{
+				WriteFormat:          types.DataFileFormat("parquet"),
+				IcebergFormatVersion: ptr.Int32(1),
+				CompressionCodec:     types.CompressionCodec("zstd"),
+				DictionaryEncoding:   ptr.Bool(true),
+			},
+			Schema: &types.IcebergSchemaV2{
+				Type: types.SchemaV2FieldType("struct"),
+				Fields: []types.SchemaV2Field{
+					{
+						Id:       ptr.Int32(1),
+						Name:     ptr.String("__Name__"),
+						Type:     document.NewLazyDocument("__Document__"),
+						Required: ptr.Bool(true),
+						Doc:      ptr.String("__Doc__"),
+					},
+					{
+						Id:       ptr.Int32(1),
+						Name:     ptr.String("__Name__"),
+						Type:     document.NewLazyDocument("__Document__"),
+						Required: ptr.Bool(true),
+						Doc:      ptr.String("__Doc__"),
+					},
+				},
+				SchemaId: ptr.Int32(1),
+				IdentifierFieldIds: []int32{
+					1,
+					1,
+				},
+			},
+			IcebergSortOrder: &types.IcebergSortOrder{
+				OrderId: ptr.Int32(1),
+				Fields: []types.IcebergSortField{
+					{
+						SourceId:  ptr.Int32(1),
+						Transform: ptr.String("__Transform__"),
+						Direction: types.IcebergSortDirection("asc"),
+						NullOrder: types.IcebergNullOrder("nulls-first"),
+					},
+					{
+						SourceId:  ptr.Int32(1),
+						Transform: ptr.String("__Transform__"),
+						Direction: types.IcebergSortDirection("asc"),
+						NullOrder: types.IcebergNullOrder("nulls-first"),
+					},
+				},
+			},
+		},
+		SourceType: types.MigrationSourceType("glueTable"),
+		Source: &types.SourceConfigurationMemberGlueTable{
+			Value: types.GlueTableSource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+			},
+		},
+		DataMigration: &types.DataMigrationSettings{
+			MaintenanceSettings: &types.MaintenanceSettings{
+				IcebergCompaction: &types.MigrationCompactionSettings{
+					TargetFileSizeMB: ptr.Int32(1),
+					Strategy:         types.IcebergCompactionStrategy("auto"),
+				},
+				IcebergSnapshotManagement: &types.MigrationSnapshotManagementSettings{
+					MinSnapshotsToKeep:  ptr.Int32(1),
+					MaxSnapshotAgeHours: ptr.Int32(1),
+				},
+			},
+			MigrationPolicies: &types.MigrationPolicies{
+				UnmatchedSourceFieldsPolicy: types.UnmatchedSourceFieldsPolicy("fail"),
+				IncompatibleValuesPolicy:    types.IncompatibleValuesPolicy("fail"),
+			},
+		},
+		ReviewMigrationPlan: true,
+		MigrationOutput: &types.MigrationOutputConfiguration{
+			Bucket: ptr.String("__Bucket__"),
+			Prefixes: &types.MigrationReportPrefixes{
+				TableCompatibilityReport:  ptr.String("__TableCompatibilityReport__"),
+				ObjectCompatibilityReport: ptr.String("__ObjectCompatibilityReport__"),
+				ObjectMigrationReport:     ptr.String("__ObjectMigrationReport__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SyncTableMigration(t *testing.T) {
+	input := &SyncTableMigrationInput{
+		RoleARN:             ptr.String("__RoleARN__"),
+		TableARN:            ptr.String("__TableARN__"),
+		ReviewMigrationPlan: true,
+		MigrationOutput: &types.MigrationOutputConfiguration{
+			Bucket: ptr.String("__Bucket__"),
+			Prefixes: &types.MigrationReportPrefixes{
+				TableCompatibilityReport:  ptr.String("__TableCompatibilityReport__"),
+				ObjectCompatibilityReport: ptr.String("__ObjectCompatibilityReport__"),
+				ObjectMigrationReport:     ptr.String("__ObjectMigrationReport__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SyncTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SyncTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1777,6 +2090,63 @@ func TestCheckRequestSnapshot_UpdateTableMetadataLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateTableMigration(t *testing.T) {
+	input := &UpdateTableMigrationInput{
+		TableARN:          ptr.String("__TableARN__"),
+		MigrationId:       ptr.String("__MigrationId__"),
+		RequestedState:    types.MigrationRequestedState("queued"),
+		UpdateDescription: ptr.String("__UpdateDescription__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateRequestSnapshot_CompleteTableMigration(t *testing.T) {
+	input := &CompleteTableMigrationInput{
+		TableARN: ptr.String("__TableARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CompleteTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CompleteTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateNamespace(t *testing.T) {
 	input := &CreateNamespaceInput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -2329,6 +2699,33 @@ func TestUpdateRequestSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetTableBucketLogging(t *testing.T) {
+	input := &GetTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTableBucketLogging(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTableBucketLogging"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	input := &GetTableBucketMaintenanceConfigurationInput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -2580,6 +2977,34 @@ func TestUpdateRequestSnapshot_GetTableMetadataLocation(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetTableMigration(t *testing.T) {
+	input := &GetTableMigrationInput{
+		MigrationId: ptr.String("__MigrationId__"),
+		TableARN:    ptr.String("__TableARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetTablePolicy(t *testing.T) {
 	input := &GetTablePolicyInput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -2806,6 +3231,40 @@ func TestUpdateRequestSnapshot_ListTableBuckets(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTableMigrations(t *testing.T) {
+	input := &ListTableMigrationsInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		TableARN:       ptr.String("__TableARN__"),
+		State:          types.MigrationState("new"),
+		HasValidPlan:   ptr.Bool(true),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTableMigrations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTableMigrations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTables(t *testing.T) {
 	input := &ListTablesInput{
 		TableBucketARN:    ptr.String("__TableBucketARN__"),
@@ -2891,6 +3350,44 @@ func TestUpdateRequestSnapshot_PutTableBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTableBucketEncryption"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutTableBucketLogging(t *testing.T) {
+	input := &PutTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		TableBucketLoggingStatus: &types.TableBucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTableBucketLogging(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTableBucketLogging"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3257,6 +3754,165 @@ func TestUpdateRequestSnapshot_RenameTable(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartTableMigration(t *testing.T) {
+	input := &StartTableMigrationInput{
+		RoleARN: ptr.String("__RoleARN__"),
+		DestinationTable: &types.DestinationTable{
+			TableBucketARN: ptr.String("__TableBucketARN__"),
+			Namespace:      ptr.String("__Namespace__"),
+			Name:           ptr.String("__Name__"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				SseAlgorithm: types.SSEAlgorithm("AES256"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+			StorageClassConfiguration: &types.StorageClassConfiguration{
+				StorageClass: types.StorageClass("STANDARD"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Properties: &types.MigrationTableProperties{
+				WriteFormat:          types.DataFileFormat("parquet"),
+				IcebergFormatVersion: ptr.Int32(1),
+				CompressionCodec:     types.CompressionCodec("zstd"),
+				DictionaryEncoding:   ptr.Bool(true),
+			},
+			Schema: &types.IcebergSchemaV2{
+				Type: types.SchemaV2FieldType("struct"),
+				Fields: []types.SchemaV2Field{
+					{
+						Id:       ptr.Int32(1),
+						Name:     ptr.String("__Name__"),
+						Type:     document.NewLazyDocument("__Document__"),
+						Required: ptr.Bool(true),
+						Doc:      ptr.String("__Doc__"),
+					},
+					{
+						Id:       ptr.Int32(1),
+						Name:     ptr.String("__Name__"),
+						Type:     document.NewLazyDocument("__Document__"),
+						Required: ptr.Bool(true),
+						Doc:      ptr.String("__Doc__"),
+					},
+				},
+				SchemaId: ptr.Int32(1),
+				IdentifierFieldIds: []int32{
+					1,
+					1,
+				},
+			},
+			IcebergSortOrder: &types.IcebergSortOrder{
+				OrderId: ptr.Int32(1),
+				Fields: []types.IcebergSortField{
+					{
+						SourceId:  ptr.Int32(1),
+						Transform: ptr.String("__Transform__"),
+						Direction: types.IcebergSortDirection("asc"),
+						NullOrder: types.IcebergNullOrder("nulls-first"),
+					},
+					{
+						SourceId:  ptr.Int32(1),
+						Transform: ptr.String("__Transform__"),
+						Direction: types.IcebergSortDirection("asc"),
+						NullOrder: types.IcebergNullOrder("nulls-first"),
+					},
+				},
+			},
+		},
+		SourceType: types.MigrationSourceType("glueTable"),
+		Source: &types.SourceConfigurationMemberGlueTable{
+			Value: types.GlueTableSource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+			},
+		},
+		DataMigration: &types.DataMigrationSettings{
+			MaintenanceSettings: &types.MaintenanceSettings{
+				IcebergCompaction: &types.MigrationCompactionSettings{
+					TargetFileSizeMB: ptr.Int32(1),
+					Strategy:         types.IcebergCompactionStrategy("auto"),
+				},
+				IcebergSnapshotManagement: &types.MigrationSnapshotManagementSettings{
+					MinSnapshotsToKeep:  ptr.Int32(1),
+					MaxSnapshotAgeHours: ptr.Int32(1),
+				},
+			},
+			MigrationPolicies: &types.MigrationPolicies{
+				UnmatchedSourceFieldsPolicy: types.UnmatchedSourceFieldsPolicy("fail"),
+				IncompatibleValuesPolicy:    types.IncompatibleValuesPolicy("fail"),
+			},
+		},
+		ReviewMigrationPlan: true,
+		MigrationOutput: &types.MigrationOutputConfiguration{
+			Bucket: ptr.String("__Bucket__"),
+			Prefixes: &types.MigrationReportPrefixes{
+				TableCompatibilityReport:  ptr.String("__TableCompatibilityReport__"),
+				ObjectCompatibilityReport: ptr.String("__ObjectCompatibilityReport__"),
+				ObjectMigrationReport:     ptr.String("__ObjectMigrationReport__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SyncTableMigration(t *testing.T) {
+	input := &SyncTableMigrationInput{
+		RoleARN:             ptr.String("__RoleARN__"),
+		TableARN:            ptr.String("__TableARN__"),
+		ReviewMigrationPlan: true,
+		MigrationOutput: &types.MigrationOutputConfiguration{
+			Bucket: ptr.String("__Bucket__"),
+			Prefixes: &types.MigrationReportPrefixes{
+				TableCompatibilityReport:  ptr.String("__TableCompatibilityReport__"),
+				ObjectCompatibilityReport: ptr.String("__ObjectCompatibilityReport__"),
+				ObjectMigrationReport:     ptr.String("__ObjectMigrationReport__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SyncTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SyncTableMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -3345,6 +4001,36 @@ func TestUpdateRequestSnapshot_UpdateTableMetadataLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTableMetadataLocation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateTableMigration(t *testing.T) {
+	input := &UpdateTableMigrationInput{
+		TableARN:          ptr.String("__TableARN__"),
+		MigrationId:       ptr.String("__MigrationId__"),
+		RequestedState:    types.MigrationRequestedState("queued"),
+		UpdateDescription: ptr.String("__UpdateDescription__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTableMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTableMigration"); err != nil {
 		t.Fatal(err)
 	}
 }

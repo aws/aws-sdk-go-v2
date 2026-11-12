@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,36 @@ type ListTypeVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypeVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypeVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypeVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListTypeVersionsInput_Arn, *v.Arn)
+	}
+	if v.DeprecatedStatus != "" {
+		s.WriteString(schemas.ListTypeVersionsInput_DeprecatedStatus, string(v.DeprecatedStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTypeVersionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypeVersionsInput_NextToken, *v.NextToken)
+	}
+	if v.PublisherId != nil {
+		s.WriteString(schemas.ListTypeVersionsInput_PublisherId, *v.PublisherId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListTypeVersionsInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ListTypeVersionsInput_TypeName, *v.TypeName)
+	}
+}
+
 type ListTypeVersionsOutput struct {
 
 	// If the request doesn't return all of the remaining results, NextToken is set to
@@ -93,13 +125,37 @@ type ListTypeVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypeVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypeVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypeVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypeVersionsOutput_NextToken, *v.NextToken)
+	}
+	if v.TypeVersionSummaries != nil {
+		serializeTypeVersionSummaries(s, schemas.ListTypeVersionsOutput_TypeVersionSummaries, v.TypeVersionSummaries)
+	}
+}
+func (v *ListTypeVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTypeVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTypeVersionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTypeVersionsOutput_NextToken, v.NextToken)
+		case schemas.ListTypeVersionsOutput_TypeVersionSummaries:
+			return deserializeTypeVersionSummaries(d, schemas.ListTypeVersionsOutput_TypeVersionSummaries, &v.TypeVersionSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTypeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTypeVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypeVersions, schemas.ListTypeVersionsInput, schemas.ListTypeVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListTypeVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypeVersions, schemas.ListTypeVersionsInput, schemas.ListTypeVersionsOutput), output: &ListTypeVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

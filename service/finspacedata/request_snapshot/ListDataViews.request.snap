@@ -1,3 +1,0 @@
-GET /datasets/__DatasetId__/dataviewsv2?maxResults=1&nextToken=__NextToken__
-
-

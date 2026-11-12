@@ -26,6 +26,9 @@ import (
 //
 //   - To see field index policies, you must have the logs:DescribeIndexPolicies
 //     and logs:DescribeAccountPolicies permissions.
+//
+//   - To see retention policies, you must have the logs:DescribeAccountPolicies
+//     permission.
 func (c *Client) DescribeAccountPolicies(ctx context.Context, params *DescribeAccountPoliciesInput, optFns ...func(*Options)) (*DescribeAccountPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountPoliciesInput{}
@@ -76,7 +79,9 @@ func (v *DescribeAccountPoliciesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAccountPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.DescribeAccountPoliciesRequest_accountIdentifiers, v.AccountIdentifiers)
+	if v.AccountIdentifiers != nil {
+		serializeAccountIds(s, schemas.DescribeAccountPoliciesRequest_accountIdentifiers, v.AccountIdentifiers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAccountPoliciesRequest_nextToken, *v.NextToken)
 	}
@@ -111,7 +116,9 @@ func (v *DescribeAccountPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAccountPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountPolicies(s, schemas.DescribeAccountPoliciesResponse_accountPolicies, v.AccountPolicies)
+	if v.AccountPolicies != nil {
+		serializeAccountPolicies(s, schemas.DescribeAccountPoliciesResponse_accountPolicies, v.AccountPolicies)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAccountPoliciesResponse_nextToken, *v.NextToken)
 	}

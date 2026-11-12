@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"codeInterpreterId":"__CodeInterpreterId__","lastUpdatedAt":"2000-01-01T00:00:00Z","status":"CREATING"}

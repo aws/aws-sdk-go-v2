@@ -5,7 +5,9 @@ package sns
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListOriginationNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOriginationNumbersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOriginationNumbersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOriginationNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOriginationNumbersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOriginationNumbersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOriginationNumbersOutput struct {
 
 	// A NextToken string is returned when you call the ListOriginationNumbers
@@ -55,13 +72,37 @@ type ListOriginationNumbersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOriginationNumbersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOriginationNumbersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOriginationNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOriginationNumbersResult_NextToken, *v.NextToken)
+	}
+	if v.PhoneNumbers != nil {
+		serializePhoneNumberInformationList(s, schemas.ListOriginationNumbersResult_PhoneNumbers, v.PhoneNumbers)
+	}
+}
+func (v *ListOriginationNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOriginationNumbersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOriginationNumbersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOriginationNumbersResult_NextToken, v.NextToken)
+		case schemas.ListOriginationNumbersResult_PhoneNumbers:
+			return deserializePhoneNumberInformationList(d, schemas.ListOriginationNumbersResult_PhoneNumbers, &v.PhoneNumbers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOriginationNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListOriginationNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOriginationNumbers, schemas.ListOriginationNumbersRequest, schemas.ListOriginationNumbersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListOriginationNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOriginationNumbers, schemas.ListOriginationNumbersRequest, schemas.ListOriginationNumbersResult), output: &ListOriginationNumbersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

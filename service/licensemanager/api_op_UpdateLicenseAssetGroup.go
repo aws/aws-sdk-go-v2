@@ -69,7 +69,9 @@ func (v *UpdateLicenseAssetGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLicenseAssetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseAssetRulesetArnList(s, schemas.UpdateLicenseAssetGroupRequest_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	if v.AssociatedLicenseAssetRulesetARNs != nil {
+		serializeLicenseAssetRulesetArnList(s, schemas.UpdateLicenseAssetGroupRequest_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_ClientToken, *v.ClientToken)
 	}
@@ -79,11 +81,15 @@ func (v *UpdateLicenseAssetGroupInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.LicenseAssetGroupArn != nil {
 		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_LicenseAssetGroupArn, *v.LicenseAssetGroupArn)
 	}
-	serializeLicenseAssetGroupConfigurationList(s, schemas.UpdateLicenseAssetGroupRequest_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	if v.LicenseAssetGroupConfigurations != nil {
+		serializeLicenseAssetGroupConfigurationList(s, schemas.UpdateLicenseAssetGroupRequest_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_Name, *v.Name)
 	}
-	serializeLicenseAssetGroupPropertyList(s, schemas.UpdateLicenseAssetGroupRequest_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeLicenseAssetGroupPropertyList(s, schemas.UpdateLicenseAssetGroupRequest_Properties, v.Properties)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_Status, string(v.Status))
 	}

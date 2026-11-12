@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,22 @@ type DescribeAccountLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeAccountLimitsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeAccountLimitsOutput struct {
 
 	// The maximum number of groups allowed for your account. The default is 200
@@ -56,13 +74,50 @@ type DescribeAccountLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountLimitsAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxNumberOfAutoScalingGroups != nil {
+		s.WriteInt32(schemas.DescribeAccountLimitsAnswer_MaxNumberOfAutoScalingGroups, *v.MaxNumberOfAutoScalingGroups)
+	}
+	if v.MaxNumberOfLaunchConfigurations != nil {
+		s.WriteInt32(schemas.DescribeAccountLimitsAnswer_MaxNumberOfLaunchConfigurations, *v.MaxNumberOfLaunchConfigurations)
+	}
+	if v.NumberOfAutoScalingGroups != nil {
+		s.WriteInt32(schemas.DescribeAccountLimitsAnswer_NumberOfAutoScalingGroups, *v.NumberOfAutoScalingGroups)
+	}
+	if v.NumberOfLaunchConfigurations != nil {
+		s.WriteInt32(schemas.DescribeAccountLimitsAnswer_NumberOfLaunchConfigurations, *v.NumberOfLaunchConfigurations)
+	}
+}
+func (v *DescribeAccountLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountLimitsAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountLimitsAnswer_MaxNumberOfAutoScalingGroups:
+			v.MaxNumberOfAutoScalingGroups = new(int32)
+			return d.ReadInt32(schemas.DescribeAccountLimitsAnswer_MaxNumberOfAutoScalingGroups, v.MaxNumberOfAutoScalingGroups)
+		case schemas.DescribeAccountLimitsAnswer_MaxNumberOfLaunchConfigurations:
+			v.MaxNumberOfLaunchConfigurations = new(int32)
+			return d.ReadInt32(schemas.DescribeAccountLimitsAnswer_MaxNumberOfLaunchConfigurations, v.MaxNumberOfLaunchConfigurations)
+		case schemas.DescribeAccountLimitsAnswer_NumberOfAutoScalingGroups:
+			v.NumberOfAutoScalingGroups = new(int32)
+			return d.ReadInt32(schemas.DescribeAccountLimitsAnswer_NumberOfAutoScalingGroups, v.NumberOfAutoScalingGroups)
+		case schemas.DescribeAccountLimitsAnswer_NumberOfLaunchConfigurations:
+			v.NumberOfLaunchConfigurations = new(int32)
+			return d.ReadInt32(schemas.DescribeAccountLimitsAnswer_NumberOfLaunchConfigurations, v.NumberOfLaunchConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAccountLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountLimits, nil, schemas.DescribeAccountLimitsAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAccountLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountLimits, nil, schemas.DescribeAccountLimitsAnswer), output: &DescribeAccountLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

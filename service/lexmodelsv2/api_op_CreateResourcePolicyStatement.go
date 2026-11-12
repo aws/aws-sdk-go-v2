@@ -98,15 +98,21 @@ func (v *CreateResourcePolicyStatementInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CreateResourcePolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateResourcePolicyStatementRequest_action, v.Action)
-	serializeConditionMap(s, schemas.CreateResourcePolicyStatementRequest_condition, v.Condition)
+	if v.Action != nil {
+		serializeOperationList(s, schemas.CreateResourcePolicyStatementRequest_action, v.Action)
+	}
+	if v.Condition != nil {
+		serializeConditionMap(s, schemas.CreateResourcePolicyStatementRequest_condition, v.Condition)
+	}
 	if v.Effect != "" {
 		s.WriteString(schemas.CreateResourcePolicyStatementRequest_effect, string(v.Effect))
 	}
 	if v.ExpectedRevisionId != nil {
 		s.WriteString(schemas.CreateResourcePolicyStatementRequest_expectedRevisionId, *v.ExpectedRevisionId)
 	}
-	serializePrincipalList(s, schemas.CreateResourcePolicyStatementRequest_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipalList(s, schemas.CreateResourcePolicyStatementRequest_principal, v.Principal)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.CreateResourcePolicyStatementRequest_resourceArn, *v.ResourceArn)
 	}

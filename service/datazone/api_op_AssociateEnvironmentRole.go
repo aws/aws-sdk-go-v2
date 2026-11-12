@@ -4,6 +4,8 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type AssociateEnvironmentRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEnvironmentRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEnvironmentRoleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEnvironmentRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.AssociateEnvironmentRoleInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.AssociateEnvironmentRoleInput_environmentIdentifier, *v.EnvironmentIdentifier)
+	}
+	if v.EnvironmentRoleArn != nil {
+		s.WriteString(schemas.AssociateEnvironmentRoleInput_environmentRoleArn, *v.EnvironmentRoleArn)
+	}
+}
+
 type AssociateEnvironmentRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type AssociateEnvironmentRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEnvironmentRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEnvironmentRoleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEnvironmentRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateEnvironmentRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateEnvironmentRoleOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateEnvironmentRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateEnvironmentRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEnvironmentRole, schemas.AssociateEnvironmentRoleInput, schemas.AssociateEnvironmentRoleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateEnvironmentRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEnvironmentRole, schemas.AssociateEnvironmentRoleInput, schemas.AssociateEnvironmentRoleOutput), output: &AssociateEnvironmentRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

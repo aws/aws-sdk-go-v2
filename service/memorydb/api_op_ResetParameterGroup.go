@@ -62,7 +62,9 @@ func (v *ResetParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParameterGroupName != nil {
 		s.WriteString(schemas.ResetParameterGroupRequest_ParameterGroupName, *v.ParameterGroupName)
 	}
-	serializeParameterNameList(s, schemas.ResetParameterGroupRequest_ParameterNames, v.ParameterNames)
+	if v.ParameterNames != nil {
+		serializeParameterNameList(s, schemas.ResetParameterGroupRequest_ParameterNames, v.ParameterNames)
+	}
 }
 
 type ResetParameterGroupOutput struct {
@@ -114,6 +116,9 @@ func (c *Client) addOperationResetParameterGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

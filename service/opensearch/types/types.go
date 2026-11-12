@@ -87,7 +87,9 @@ func (v *AdditionalLimit) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LimitName != nil {
 		s.WriteString(schemas.AdditionalLimit_LimitName, *v.LimitName)
 	}
-	serializeLimitValueList(s, schemas.AdditionalLimit_LimitValues, v.LimitValues)
+	if v.LimitValues != nil {
+		serializeLimitValueList(s, schemas.AdditionalLimit_LimitValues, v.LimitValues)
+	}
 }
 func (v *AdditionalLimit) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdditionalLimit, func(s *smithy.Schema) error {
@@ -150,7 +152,9 @@ func (v *AdvancedOptionsStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdvancedOptionsStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedOptions(s, schemas.AdvancedOptionsStatus_Options, v.Options)
+	if v.Options != nil {
+		serializeAdvancedOptions(s, schemas.AdvancedOptionsStatus_Options, v.Options)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.AdvancedOptionsStatus_Status)
 		v.Status.SerializeMembers(s)
@@ -1160,7 +1164,9 @@ func (v *AutoTuneOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DesiredState != "" {
 		s.WriteString(schemas.AutoTuneOptions_DesiredState, string(v.DesiredState))
 	}
-	serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptions_MaintenanceSchedules, v.MaintenanceSchedules)
+	if v.MaintenanceSchedules != nil {
+		serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptions_MaintenanceSchedules, v.MaintenanceSchedules)
+	}
 	if v.RollbackOnDisable != "" {
 		s.WriteString(schemas.AutoTuneOptions_RollbackOnDisable, string(v.RollbackOnDisable))
 	}
@@ -1226,7 +1232,9 @@ func (v *AutoTuneOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DesiredState != "" {
 		s.WriteString(schemas.AutoTuneOptionsInput_DesiredState, string(v.DesiredState))
 	}
-	serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptionsInput_MaintenanceSchedules, v.MaintenanceSchedules)
+	if v.MaintenanceSchedules != nil {
+		serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptionsInput_MaintenanceSchedules, v.MaintenanceSchedules)
+	}
 	if v.UseOffPeakWindow != nil {
 		s.WriteBool(schemas.AutoTuneOptionsInput_UseOffPeakWindow, *v.UseOffPeakWindow)
 	}
@@ -1751,6 +1759,96 @@ func (v *CapabilityFailure) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The result of comparing one metadata category between two domains.
+type CategoryDiffResult struct {
+
+	// The number of items that exist on both domains but differ.
+	Diverged int32
+
+	// The number of items that are identical on both domains.
+	InSync int32
+
+	// The names of the items that differ, and for diverging items, the fields that
+	// differ.
+	Items *DiffItems
+
+	// The number of items that exist only on the source domain.
+	SourceOnly int32
+
+	// Whether the category was compared successfully. compared means the result is
+	// complete; error means the category could not be read.
+	Status DiffStatus
+
+	// The number of items that exist only on the target domain.
+	TargetOnly int32
+
+	// Whether Items omits some differences because the category contained more than
+	// the response can carry. The counts remain complete when this is true .
+	Truncated *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *CategoryDiffResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoryDiffResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoryDiffResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Diverged != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_Diverged, v.Diverged)
+	}
+	if v.InSync != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_InSync, v.InSync)
+	}
+	if v.Items != nil {
+		s.WriteStruct(schemas.CategoryDiffResult_Items)
+		v.Items.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceOnly != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_SourceOnly, v.SourceOnly)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CategoryDiffResult_Status, string(v.Status))
+	}
+	if v.TargetOnly != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_TargetOnly, v.TargetOnly)
+	}
+	if v.Truncated != nil {
+		s.WriteBool(schemas.CategoryDiffResult_Truncated, *v.Truncated)
+	}
+}
+func (v *CategoryDiffResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoryDiffResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoryDiffResult_Diverged:
+			return d.ReadInt32(schemas.CategoryDiffResult_Diverged, &v.Diverged)
+		case schemas.CategoryDiffResult_InSync:
+			return d.ReadInt32(schemas.CategoryDiffResult_InSync, &v.InSync)
+		case schemas.CategoryDiffResult_Items:
+			v.Items = &DiffItems{}
+			return v.Items.Deserialize(d)
+		case schemas.CategoryDiffResult_SourceOnly:
+			return d.ReadInt32(schemas.CategoryDiffResult_SourceOnly, &v.SourceOnly)
+		case schemas.CategoryDiffResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.CategoryDiffResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DiffStatus(ev)
+			return nil
+		case schemas.CategoryDiffResult_TargetOnly:
+			return d.ReadInt32(schemas.CategoryDiffResult_TargetOnly, &v.TargetOnly)
+		case schemas.CategoryDiffResult_Truncated:
+			v.Truncated = new(bool)
+			return d.ReadBool(schemas.CategoryDiffResult_Truncated, v.Truncated)
+		}
+		return nil
+	})
+}
+
 // Container for information about a configuration change happening on a domain.
 type ChangeProgressDetails struct {
 
@@ -1909,6 +2007,9 @@ type ChangeProgressStatusDetails struct {
 	// configuration change.
 	ChangeProgressStages []ChangeProgressStage
 
+	// Details about a cloned blue/green upgrade, when the change is one.
+	ClonedBlueGreenUpgradeDetails *ClonedBlueGreenUpgradeDetails
+
 	// The list of properties in the domain configuration change that have completed.
 	CompletedProperties []string
 
@@ -1947,12 +2048,23 @@ func (v *ChangeProgressStatusDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcceptedWarningsList(s, schemas.ChangeProgressStatusDetails_AcceptedWarnings, v.AcceptedWarnings)
+	if v.AcceptedWarnings != nil {
+		serializeAcceptedWarningsList(s, schemas.ChangeProgressStatusDetails_AcceptedWarnings, v.AcceptedWarnings)
+	}
 	if v.ChangeId != nil {
 		s.WriteString(schemas.ChangeProgressStatusDetails_ChangeId, *v.ChangeId)
 	}
-	serializeChangeProgressStageList(s, schemas.ChangeProgressStatusDetails_ChangeProgressStages, v.ChangeProgressStages)
-	serializeStringList(s, schemas.ChangeProgressStatusDetails_CompletedProperties, v.CompletedProperties)
+	if v.ChangeProgressStages != nil {
+		serializeChangeProgressStageList(s, schemas.ChangeProgressStatusDetails_ChangeProgressStages, v.ChangeProgressStages)
+	}
+	if v.ClonedBlueGreenUpgradeDetails != nil {
+		s.WriteStruct(schemas.ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails)
+		v.ClonedBlueGreenUpgradeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompletedProperties != nil {
+		serializeStringList(s, schemas.ChangeProgressStatusDetails_CompletedProperties, v.CompletedProperties)
+	}
 	if v.ConfigChangeStatus != "" {
 		s.WriteString(schemas.ChangeProgressStatusDetails_ConfigChangeStatus, string(v.ConfigChangeStatus))
 	}
@@ -1962,7 +2074,9 @@ func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.ChangeProgressStatusDetails_LastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeStringList(s, schemas.ChangeProgressStatusDetails_PendingProperties, v.PendingProperties)
+	if v.PendingProperties != nil {
+		serializeStringList(s, schemas.ChangeProgressStatusDetails_PendingProperties, v.PendingProperties)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ChangeProgressStatusDetails_StartTime, *v.StartTime)
 	}
@@ -1972,7 +2086,9 @@ func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TotalNumberOfStages != 0 {
 		s.WriteInt32(schemas.ChangeProgressStatusDetails_TotalNumberOfStages, v.TotalNumberOfStages)
 	}
-	serializeValidationFailures(s, schemas.ChangeProgressStatusDetails_ValidationFailures, v.ValidationFailures)
+	if v.ValidationFailures != nil {
+		serializeValidationFailures(s, schemas.ChangeProgressStatusDetails_ValidationFailures, v.ValidationFailures)
+	}
 }
 func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChangeProgressStatusDetails, func(s *smithy.Schema) error {
@@ -1984,6 +2100,9 @@ func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) er
 			return d.ReadString(schemas.ChangeProgressStatusDetails_ChangeId, v.ChangeId)
 		case schemas.ChangeProgressStatusDetails_ChangeProgressStages:
 			return deserializeChangeProgressStageList(d, schemas.ChangeProgressStatusDetails_ChangeProgressStages, &v.ChangeProgressStages)
+		case schemas.ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails:
+			v.ClonedBlueGreenUpgradeDetails = &ClonedBlueGreenUpgradeDetails{}
+			return v.ClonedBlueGreenUpgradeDetails.Deserialize(d)
 		case schemas.ChangeProgressStatusDetails_CompletedProperties:
 			return deserializeStringList(d, schemas.ChangeProgressStatusDetails_CompletedProperties, &v.CompletedProperties)
 		case schemas.ChangeProgressStatusDetails_ConfigChangeStatus:
@@ -2019,6 +2138,136 @@ func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) er
 			return d.ReadInt32(schemas.ChangeProgressStatusDetails_TotalNumberOfStages, &v.TotalNumberOfStages)
 		case schemas.ChangeProgressStatusDetails_ValidationFailures:
 			return deserializeValidationFailures(d, schemas.ChangeProgressStatusDetails_ValidationFailures, &v.ValidationFailures)
+		}
+		return nil
+	})
+}
+
+// Options for a cloned blue/green upgrade.
+type ClonedBlueGreenOptions struct {
+
+	// How long to keep the cluster that you cut over from after cutover completes.
+	// When you start the upgrade, only RetentionInHours is accepted.
+	RetentionOptions RetentionOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClonedBlueGreenOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClonedBlueGreenOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClonedBlueGreenOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionOptions != nil {
+		serializeRetentionOptions(s, schemas.ClonedBlueGreenOptions_RetentionOptions, v.RetentionOptions)
+	}
+}
+func (v *ClonedBlueGreenOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClonedBlueGreenOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClonedBlueGreenOptions_RetentionOptions:
+			return deserializeRetentionOptions(d, schemas.ClonedBlueGreenOptions_RetentionOptions, &v.RetentionOptions)
+		}
+		return nil
+	})
+}
+
+// An action that the service takes automatically at a scheduled time during a
+// cloned blue/green upgrade.
+type ClonedBlueGreenScheduledAction struct {
+
+	// The action that the service takes.
+	Action ClonedBlueGreenScheduledActionType
+
+	// The time at which the service takes the action.
+	ScheduledTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClonedBlueGreenScheduledAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClonedBlueGreenScheduledAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClonedBlueGreenScheduledAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ClonedBlueGreenScheduledAction_Action, string(v.Action))
+	}
+	if v.ScheduledTime != nil {
+		s.WriteTime(schemas.ClonedBlueGreenScheduledAction_ScheduledTime, *v.ScheduledTime)
+	}
+}
+func (v *ClonedBlueGreenScheduledAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClonedBlueGreenScheduledAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClonedBlueGreenScheduledAction_Action:
+			var ev string
+			if err := d.ReadString(schemas.ClonedBlueGreenScheduledAction_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ClonedBlueGreenScheduledActionType(ev)
+			return nil
+		case schemas.ClonedBlueGreenScheduledAction_ScheduledTime:
+			v.ScheduledTime = new(time.Time)
+			return d.ReadTime(schemas.ClonedBlueGreenScheduledAction_ScheduledTime, v.ScheduledTime)
+		}
+		return nil
+	})
+}
+
+// The state of a cloned blue/green upgrade. Members that don't apply are omitted.
+type ClonedBlueGreenUpgradeDetails struct {
+
+	// The retention period, in hours, for the cluster that you cut over from.
+	RetentionInHours *int32
+
+	// The action that the service takes automatically if you don't act before the
+	// scheduled time.
+	ScheduledAction *ClonedBlueGreenScheduledAction
+
+	// The current split of search traffic between the primary and cloned clusters.
+	TrafficSplit *TrafficPercents
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClonedBlueGreenUpgradeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClonedBlueGreenUpgradeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClonedBlueGreenUpgradeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionInHours != nil {
+		s.WriteInt32(schemas.ClonedBlueGreenUpgradeDetails_RetentionInHours, *v.RetentionInHours)
+	}
+	if v.ScheduledAction != nil {
+		s.WriteStruct(schemas.ClonedBlueGreenUpgradeDetails_ScheduledAction)
+		v.ScheduledAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrafficSplit != nil {
+		s.WriteStruct(schemas.ClonedBlueGreenUpgradeDetails_TrafficSplit)
+		v.TrafficSplit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClonedBlueGreenUpgradeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClonedBlueGreenUpgradeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClonedBlueGreenUpgradeDetails_RetentionInHours:
+			v.RetentionInHours = new(int32)
+			return d.ReadInt32(schemas.ClonedBlueGreenUpgradeDetails_RetentionInHours, v.RetentionInHours)
+		case schemas.ClonedBlueGreenUpgradeDetails_ScheduledAction:
+			v.ScheduledAction = &ClonedBlueGreenScheduledAction{}
+			return v.ScheduledAction.Deserialize(d)
+		case schemas.ClonedBlueGreenUpgradeDetails_TrafficSplit:
+			v.TrafficSplit = &TrafficPercents{}
+			return v.TrafficSplit.Deserialize(d)
 		}
 		return nil
 	})
@@ -2148,7 +2397,9 @@ func (v *ClusterConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MultiAZWithStandbyEnabled != nil {
 		s.WriteBool(schemas.ClusterConfig_MultiAZWithStandbyEnabled, *v.MultiAZWithStandbyEnabled)
 	}
-	serializeNodeOptionsList(s, schemas.ClusterConfig_NodeOptions, v.NodeOptions)
+	if v.NodeOptions != nil {
+		serializeNodeOptionsList(s, schemas.ClusterConfig_NodeOptions, v.NodeOptions)
+	}
 	if v.WarmCount != nil {
 		s.WriteInt32(schemas.ClusterConfig_WarmCount, *v.WarmCount)
 	}
@@ -2446,7 +2697,9 @@ func (v *CompatibleVersionsMap) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceVersion != nil {
 		s.WriteString(schemas.CompatibleVersionsMap_SourceVersion, *v.SourceVersion)
 	}
-	serializeVersionList(s, schemas.CompatibleVersionsMap_TargetVersions, v.TargetVersions)
+	if v.TargetVersions != nil {
+		serializeVersionList(s, schemas.CompatibleVersionsMap_TargetVersions, v.TargetVersions)
+	}
 }
 func (v *CompatibleVersionsMap) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompatibleVersionsMap, func(s *smithy.Schema) error {
@@ -2537,6 +2790,96 @@ func (v *CrossClusterSearchConnectionProperties) Deserialize(d smithy.ShapeDeser
 				return err
 			}
 			v.SkipUnavailable = SkipUnavailableStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The cutover target and status for a cloned blue/green upgrade.
+type CutoverOptions struct {
+
+	// The status of the cutover.
+	//
+	// This member is required.
+	Status CutoverStatus
+
+	// The cluster that the domain is cutting over to.
+	//
+	// This member is required.
+	Target CutoverTarget
+
+	noSmithyDocumentSerde
+}
+
+func (v *CutoverOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CutoverOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CutoverOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CutoverOptions_Status, string(v.Status))
+	}
+	if v.Target != "" {
+		s.WriteString(schemas.CutoverOptions_Target, string(v.Target))
+	}
+}
+func (v *CutoverOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CutoverOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CutoverOptions_Status:
+			var ev string
+			if err := d.ReadString(schemas.CutoverOptions_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CutoverStatus(ev)
+			return nil
+		case schemas.CutoverOptions_Target:
+			var ev string
+			if err := d.ReadString(schemas.CutoverOptions_Target, &ev); err != nil {
+				return err
+			}
+			v.Target = CutoverTarget(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The cutover to perform for a cloned blue/green upgrade.
+type CutoverRequestOptions struct {
+
+	// The cluster to cut over to. ClonedCluster makes the cloned cluster serve the
+	// domain. PrimaryCluster keeps the primary cluster and ends the upgrade.
+	//
+	// This member is required.
+	Target CutoverTarget
+
+	noSmithyDocumentSerde
+}
+
+func (v *CutoverRequestOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CutoverRequestOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CutoverRequestOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Target != "" {
+		s.WriteString(schemas.CutoverRequestOptions_Target, string(v.Target))
+	}
+}
+func (v *CutoverRequestOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CutoverRequestOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CutoverRequestOptions_Target:
+			var ev string
+			if err := d.ReadString(schemas.CutoverRequestOptions_Target, &ev); err != nil {
+				return err
+			}
+			v.Target = CutoverTarget(ev)
 			return nil
 		}
 		return nil
@@ -2679,7 +3022,9 @@ func (v *DataSourceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataSourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceType(s, schemas.DataSourceDetails_DataSourceType, v.DataSourceType)
+	if v.DataSourceType != nil {
+		serializeDataSourceType(s, schemas.DataSourceDetails_DataSourceType, v.DataSourceType)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DataSourceDetails_Description, *v.Description)
 	}
@@ -2825,6 +3170,58 @@ func (v *DeploymentStrategyOptionsStatus) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
+// Overrides the deployment strategy for a single operation, such as a version
+// upgrade.
+type DeploymentStrategyOverrideOptions struct {
+
+	// The deployment strategy to use for this operation. The only valid value is
+	// ClonedBlueGreen , which creates a cloned cluster on the target version next to
+	// the primary cluster so that you can validate it and shift traffic to it before
+	// you cut over.
+	//
+	// This member is required.
+	DeploymentStrategy DeploymentStrategyOverride
+
+	// Options that apply when DeploymentStrategy is ClonedBlueGreen .
+	ClonedBlueGreenOptions *ClonedBlueGreenOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeploymentStrategyOverrideOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentStrategyOverrideOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentStrategyOverrideOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClonedBlueGreenOptions != nil {
+		s.WriteStruct(schemas.DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions)
+		v.ClonedBlueGreenOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentStrategy != "" {
+		s.WriteString(schemas.DeploymentStrategyOverrideOptions_DeploymentStrategy, string(v.DeploymentStrategy))
+	}
+}
+func (v *DeploymentStrategyOverrideOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentStrategyOverrideOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions:
+			v.ClonedBlueGreenOptions = &ClonedBlueGreenOptions{}
+			return v.ClonedBlueGreenOptions.Deserialize(d)
+		case schemas.DeploymentStrategyOverrideOptions_DeploymentStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentStrategyOverrideOptions_DeploymentStrategy, &ev); err != nil {
+				return err
+			}
+			v.DeploymentStrategy = DeploymentStrategyOverride(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A filter to apply to the DescribePackage response.
 type DescribePackagesFilter struct {
 
@@ -2847,7 +3244,9 @@ func (v *DescribePackagesFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.DescribePackagesFilter_Name, string(v.Name))
 	}
-	serializeDescribePackagesFilterValues(s, schemas.DescribePackagesFilter_Value, v.Value)
+	if v.Value != nil {
+		serializeDescribePackagesFilterValues(s, schemas.DescribePackagesFilter_Value, v.Value)
+	}
 }
 func (v *DescribePackagesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePackagesFilter, func(s *smithy.Schema) error {
@@ -2861,6 +3260,52 @@ func (v *DescribePackagesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.DescribePackagesFilter_Value:
 			return deserializeDescribePackagesFilterValues(d, schemas.DescribePackagesFilter_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
+// The items that differ within one metadata category.
+type DiffItems struct {
+
+	// The items that exist on both domains but differ, with the diverging fields.
+	Diverged []DivergentItem
+
+	// The names of items that exist only on the source domain.
+	SourceOnly []string
+
+	// The names of items that exist only on the target domain.
+	TargetOnly []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DiffItems) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiffItems)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiffItems) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Diverged != nil {
+		serializeDivergentItemList(s, schemas.DiffItems_Diverged, v.Diverged)
+	}
+	if v.SourceOnly != nil {
+		serializeDiffItemNameList(s, schemas.DiffItems_SourceOnly, v.SourceOnly)
+	}
+	if v.TargetOnly != nil {
+		serializeDiffItemNameList(s, schemas.DiffItems_TargetOnly, v.TargetOnly)
+	}
+}
+func (v *DiffItems) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiffItems, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiffItems_Diverged:
+			return deserializeDivergentItemList(d, schemas.DiffItems_Diverged, &v.Diverged)
+		case schemas.DiffItems_SourceOnly:
+			return deserializeDiffItemNameList(d, schemas.DiffItems_SourceOnly, &v.SourceOnly)
+		case schemas.DiffItems_TargetOnly:
+			return deserializeDiffItemNameList(d, schemas.DiffItems_TargetOnly, &v.TargetOnly)
 		}
 		return nil
 	})
@@ -2907,12 +3352,18 @@ func (v *DirectQueryDataSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSourceName != nil {
 		s.WriteString(schemas.DirectQueryDataSource_DataSourceName, *v.DataSourceName)
 	}
-	serializeDirectQueryDataSourceType(s, schemas.DirectQueryDataSource_DataSourceType, v.DataSourceType)
+	if v.DataSourceType != nil {
+		serializeDirectQueryDataSourceType(s, schemas.DirectQueryDataSource_DataSourceType, v.DataSourceType)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DirectQueryDataSource_Description, *v.Description)
 	}
-	serializeDirectQueryOpenSearchARNList(s, schemas.DirectQueryDataSource_OpenSearchArns, v.OpenSearchArns)
-	serializeTagList(s, schemas.DirectQueryDataSource_TagList, v.TagList)
+	if v.OpenSearchArns != nil {
+		serializeDirectQueryOpenSearchARNList(s, schemas.DirectQueryDataSource_OpenSearchArns, v.OpenSearchArns)
+	}
+	if v.TagList != nil {
+		serializeTagList(s, schemas.DirectQueryDataSource_TagList, v.TagList)
+	}
 }
 func (v *DirectQueryDataSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DirectQueryDataSource, func(s *smithy.Schema) error {
@@ -2999,6 +3450,107 @@ func (v *DirectQueryDataSourceTypeMemberSecurityLake) Serialize(s smithy.ShapeSe
 }
 func (v *DirectQueryDataSourceTypeMemberSecurityLake) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// A single field that differs between the source and target copies of an item.
+type DivergentField struct {
+
+	// The location of the field within the item.
+	Path *string
+
+	// How the comparison treats this field.
+	Policy DiffFieldPolicy
+
+	// The field's value on the source domain.
+	SourceValue *string
+
+	// The field's value on the target domain.
+	TargetValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DivergentField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DivergentField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DivergentField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.DivergentField_Path, *v.Path)
+	}
+	if v.Policy != "" {
+		s.WriteString(schemas.DivergentField_Policy, string(v.Policy))
+	}
+	if v.SourceValue != nil {
+		s.WriteString(schemas.DivergentField_SourceValue, *v.SourceValue)
+	}
+	if v.TargetValue != nil {
+		s.WriteString(schemas.DivergentField_TargetValue, *v.TargetValue)
+	}
+}
+func (v *DivergentField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DivergentField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DivergentField_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.DivergentField_Path, v.Path)
+		case schemas.DivergentField_Policy:
+			var ev string
+			if err := d.ReadString(schemas.DivergentField_Policy, &ev); err != nil {
+				return err
+			}
+			v.Policy = DiffFieldPolicy(ev)
+			return nil
+		case schemas.DivergentField_SourceValue:
+			v.SourceValue = new(string)
+			return d.ReadString(schemas.DivergentField_SourceValue, v.SourceValue)
+		case schemas.DivergentField_TargetValue:
+			v.TargetValue = new(string)
+			return d.ReadString(schemas.DivergentField_TargetValue, v.TargetValue)
+		}
+		return nil
+	})
+}
+
+// An item that exists on both domains but whose contents differ.
+type DivergentItem struct {
+
+	// The fields of the item that differ.
+	Fields []DivergentField
+
+	// The name of the item.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DivergentItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DivergentItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DivergentItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fields != nil {
+		serializeDivergentFieldList(s, schemas.DivergentItem_Fields, v.Fields)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DivergentItem_Name, *v.Name)
+	}
+}
+func (v *DivergentItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DivergentItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DivergentItem_Fields:
+			return deserializeDivergentFieldList(d, schemas.DivergentItem_Fields, &v.Fields)
+		case schemas.DivergentItem_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DivergentItem_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Container for the configuration of an OpenSearch Service domain.
@@ -3190,7 +3742,9 @@ func (v *DomainConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogPublishingOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeModifyingPropertiesList(s, schemas.DomainConfig_ModifyingProperties, v.ModifyingProperties)
+	if v.ModifyingProperties != nil {
+		serializeModifyingPropertiesList(s, schemas.DomainConfig_ModifyingProperties, v.ModifyingProperties)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.DomainConfig_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
@@ -3334,6 +3888,9 @@ type DomainEndpointOptions struct {
 	//
 	//   - Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08: TLS security policy that supports
 	//   TLS version 1.3 with FIPS
+	//
+	//   - Policy-Min-TLS-1-2-FIPS-PQ-2026-10: TLS security policy that supports TLS
+	//   version 1.2 to TLS version 1.3 with FIPS and post-quantum cipher suites
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde
@@ -3811,7 +4368,9 @@ func (v *DomainPackageDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackageVersion != nil {
 		s.WriteString(schemas.DomainPackageDetails_PackageVersion, *v.PackageVersion)
 	}
-	serializePackageIDList(s, schemas.DomainPackageDetails_PrerequisitePackageIDList, v.PrerequisitePackageIDList)
+	if v.PrerequisitePackageIDList != nil {
+		serializePackageIDList(s, schemas.DomainPackageDetails_PrerequisitePackageIDList, v.PrerequisitePackageIDList)
+	}
 	if v.ReferencePath != nil {
 		s.WriteString(schemas.DomainPackageDetails_ReferencePath, *v.ReferencePath)
 	}
@@ -4038,7 +4597,9 @@ func (v *DomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.DomainStatus_AccessPolicies, *v.AccessPolicies)
 	}
-	serializeAdvancedOptions(s, schemas.DomainStatus_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.DomainStatus_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.AdvancedSecurityOptions != nil {
 		s.WriteStruct(schemas.DomainStatus_AdvancedSecurityOptions)
 		v.AdvancedSecurityOptions.SerializeMembers(s)
@@ -4113,7 +4674,9 @@ func (v *DomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointV2 != nil {
 		s.WriteString(schemas.DomainStatus_EndpointV2, *v.EndpointV2)
 	}
-	serializeEndpointsMap(s, schemas.DomainStatus_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpointsMap(s, schemas.DomainStatus_Endpoints, v.Endpoints)
+	}
 	if v.EngineMode != "" {
 		s.WriteString(schemas.DomainStatus_EngineMode, string(v.EngineMode))
 	}
@@ -4128,8 +4691,12 @@ func (v *DomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IdentityCenterOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLogPublishingOptions(s, schemas.DomainStatus_LogPublishingOptions, v.LogPublishingOptions)
-	serializeModifyingPropertiesList(s, schemas.DomainStatus_ModifyingProperties, v.ModifyingProperties)
+	if v.LogPublishingOptions != nil {
+		serializeLogPublishingOptions(s, schemas.DomainStatus_LogPublishingOptions, v.LogPublishingOptions)
+	}
+	if v.ModifyingProperties != nil {
+		serializeModifyingPropertiesList(s, schemas.DomainStatus_ModifyingProperties, v.ModifyingProperties)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.DomainStatus_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
@@ -4344,7 +4911,9 @@ func (v *DryRunProgressStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DryRunProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcceptedWarningsList(s, schemas.DryRunProgressStatus_AcceptedWarnings, v.AcceptedWarnings)
+	if v.AcceptedWarnings != nil {
+		serializeAcceptedWarningsList(s, schemas.DryRunProgressStatus_AcceptedWarnings, v.AcceptedWarnings)
+	}
 	if v.CreationDate != nil {
 		s.WriteString(schemas.DryRunProgressStatus_CreationDate, *v.CreationDate)
 	}
@@ -4357,7 +4926,9 @@ func (v *DryRunProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdateDate != nil {
 		s.WriteString(schemas.DryRunProgressStatus_UpdateDate, *v.UpdateDate)
 	}
-	serializeValidationFailures(s, schemas.DryRunProgressStatus_ValidationFailures, v.ValidationFailures)
+	if v.ValidationFailures != nil {
+		serializeValidationFailures(s, schemas.DryRunProgressStatus_ValidationFailures, v.ValidationFailures)
+	}
 }
 func (v *DryRunProgressStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DryRunProgressStatus, func(s *smithy.Schema) error {
@@ -4778,7 +5349,9 @@ func (v *EnvironmentInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneInfoList(s, schemas.EnvironmentInfo_AvailabilityZoneInformation, v.AvailabilityZoneInformation)
+	if v.AvailabilityZoneInformation != nil {
+		serializeAvailabilityZoneInfoList(s, schemas.EnvironmentInfo_AvailabilityZoneInformation, v.AvailabilityZoneInformation)
+	}
 }
 func (v *EnvironmentInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentInfo, func(s *smithy.Schema) error {
@@ -4858,8 +5431,12 @@ func (v *ExportOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncludeReferencesDeep != nil {
 		s.WriteBool(schemas.ExportOptions_includeReferencesDeep, *v.IncludeReferencesDeep)
 	}
-	serializeSavedObjectIdentifierList(s, schemas.ExportOptions_objects, v.Objects)
-	serializeStringList(s, schemas.ExportOptions_types, v.Types)
+	if v.Objects != nil {
+		serializeSavedObjectIdentifierList(s, schemas.ExportOptions_objects, v.Objects)
+	}
+	if v.Types != nil {
+		serializeStringList(s, schemas.ExportOptions_types, v.Types)
+	}
 }
 func (v *ExportOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportOptions, func(s *smithy.Schema) error {
@@ -4901,7 +5478,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_Name, *v.Name)
 	}
-	serializeValueStringList(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeValueStringList(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -5928,14 +6507,18 @@ func (v *InstanceTypeDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppLogsEnabled != nil {
 		s.WriteBool(schemas.InstanceTypeDetails_AppLogsEnabled, *v.AppLogsEnabled)
 	}
-	serializeAvailabilityZoneList(s, schemas.InstanceTypeDetails_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZoneList(s, schemas.InstanceTypeDetails_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.CognitoEnabled != nil {
 		s.WriteBool(schemas.InstanceTypeDetails_CognitoEnabled, *v.CognitoEnabled)
 	}
 	if v.EncryptionEnabled != nil {
 		s.WriteBool(schemas.InstanceTypeDetails_EncryptionEnabled, *v.EncryptionEnabled)
 	}
-	serializeInstanceRoleList(s, schemas.InstanceTypeDetails_InstanceRole, v.InstanceRole)
+	if v.InstanceRole != nil {
+		serializeInstanceRoleList(s, schemas.InstanceTypeDetails_InstanceRole, v.InstanceRole)
+	}
 	if v.InstanceType != "" {
 		s.WriteString(schemas.InstanceTypeDetails_InstanceType, string(v.InstanceType))
 	}
@@ -6230,13 +6813,17 @@ func (v *Limits) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Limits) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalLimitList(s, schemas.Limits_AdditionalLimits, v.AdditionalLimits)
+	if v.AdditionalLimits != nil {
+		serializeAdditionalLimitList(s, schemas.Limits_AdditionalLimits, v.AdditionalLimits)
+	}
 	if v.InstanceLimits != nil {
 		s.WriteStruct(schemas.Limits_InstanceLimits)
 		v.InstanceLimits.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStorageTypeList(s, schemas.Limits_StorageTypes, v.StorageTypes)
+	if v.StorageTypes != nil {
+		serializeStorageTypeList(s, schemas.Limits_StorageTypes, v.StorageTypes)
+	}
 }
 func (v *Limits) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Limits, func(s *smithy.Schema) error {
@@ -6318,7 +6905,9 @@ func (v *LogPublishingOptionsStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogPublishingOptionsStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogPublishingOptions(s, schemas.LogPublishingOptionsStatus_Options, v.Options)
+	if v.Options != nil {
+		serializeLogPublishingOptions(s, schemas.LogPublishingOptionsStatus_Options, v.Options)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.LogPublishingOptionsStatus_Status)
 		v.Status.SerializeMembers(s)
@@ -7593,7 +8182,9 @@ func (v *PackageDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PackageDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageUserList(s, schemas.PackageDetails_AllowListedUserList, v.AllowListedUserList)
+	if v.AllowListedUserList != nil {
+		serializePackageUserList(s, schemas.PackageDetails_AllowListedUserList, v.AllowListedUserList)
+	}
 	if v.AvailablePackageConfiguration != nil {
 		s.WriteStruct(schemas.PackageDetails_AvailablePackageConfiguration)
 		v.AvailablePackageConfiguration.SerializeMembers(s)
@@ -7746,7 +8337,9 @@ func (v *PackageDetailsForAssociation) SerializeMembers(s smithy.ShapeSerializer
 	if v.PackageID != nil {
 		s.WriteString(schemas.PackageDetailsForAssociation_PackageID, *v.PackageID)
 	}
-	serializePackageIDList(s, schemas.PackageDetailsForAssociation_PrerequisitePackageIDList, v.PrerequisitePackageIDList)
+	if v.PrerequisitePackageIDList != nil {
+		serializePackageIDList(s, schemas.PackageDetailsForAssociation_PrerequisitePackageIDList, v.PrerequisitePackageIDList)
+	}
 }
 func (v *PackageDetailsForAssociation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PackageDetailsForAssociation, func(s *smithy.Schema) error {
@@ -8109,6 +8702,95 @@ func (v *RecurringCharge) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A domain that another domain replicates with, and the state of that
+// relationship.
+type ReplicationPeer struct {
+
+	// The Amazon Resource Name (ARN) of the peer domain.
+	PeerDomainArn *string
+
+	// The peer's role in the relationship, either PRIMARY or SECONDARY .
+	PeerRole ReplicationRole
+
+	// The state of the relationship:
+	//
+	//   - PENDING_SETUP - replication is being established.
+	//
+	//   - ACTIVE - replication is running.
+	//
+	//   - SWITCHING_OVER - a planned promotion is in progress.
+	//
+	//   - FAILING_OVER - an unplanned promotion is in progress.
+	//
+	//   - PENDING_REMOVAL - replication is being stopped.
+	//
+	//   - DETACHED - the relationship has ended.
+	//
+	//   - EJECTED - a failover promoted the other domain. The former primary keeps the
+	//   data it had when it was ejected and stays read-only until you remove the peer,
+	//   or discard that data and pair again.
+	//
+	//   - FAILED - setup or teardown could not complete. You can still remove the
+	//   relationship.
+	//
+	// A relationship that is removed successfully no longer appears in Peers .
+	Status ReplicationStatus
+
+	// An explanation of why the relationship is in its current state, when more
+	// detail is available.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicationPeer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationPeer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationPeer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeerDomainArn != nil {
+		s.WriteString(schemas.ReplicationPeer_PeerDomainArn, *v.PeerDomainArn)
+	}
+	if v.PeerRole != "" {
+		s.WriteString(schemas.ReplicationPeer_PeerRole, string(v.PeerRole))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReplicationPeer_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ReplicationPeer_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ReplicationPeer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationPeer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationPeer_PeerDomainArn:
+			v.PeerDomainArn = new(string)
+			return d.ReadString(schemas.ReplicationPeer_PeerDomainArn, v.PeerDomainArn)
+		case schemas.ReplicationPeer_PeerRole:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationPeer_PeerRole, &ev); err != nil {
+				return err
+			}
+			v.PeerRole = ReplicationRole(ev)
+			return nil
+		case schemas.ReplicationPeer_Status:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationPeer_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplicationStatus(ev)
+			return nil
+		case schemas.ReplicationPeer_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ReplicationPeer_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Details of an OpenSearch Reserved Instance.
 type ReservedInstance struct {
 
@@ -8188,7 +8870,9 @@ func (v *ReservedInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaymentOption != "" {
 		s.WriteString(schemas.ReservedInstance_PaymentOption, string(v.PaymentOption))
 	}
-	serializeRecurringChargeList(s, schemas.ReservedInstance_RecurringCharges, v.RecurringCharges)
+	if v.RecurringCharges != nil {
+		serializeRecurringChargeList(s, schemas.ReservedInstance_RecurringCharges, v.RecurringCharges)
+	}
 	if v.ReservationName != nil {
 		s.WriteString(schemas.ReservedInstance_ReservationName, *v.ReservationName)
 	}
@@ -8319,7 +9003,9 @@ func (v *ReservedInstanceOffering) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaymentOption != "" {
 		s.WriteString(schemas.ReservedInstanceOffering_PaymentOption, string(v.PaymentOption))
 	}
-	serializeRecurringChargeList(s, schemas.ReservedInstanceOffering_RecurringCharges, v.RecurringCharges)
+	if v.RecurringCharges != nil {
+		serializeRecurringChargeList(s, schemas.ReservedInstanceOffering_RecurringCharges, v.RecurringCharges)
+	}
 	if v.ReservedInstanceOfferingId != nil {
 		s.WriteString(schemas.ReservedInstanceOffering_ReservedInstanceOfferingId, *v.ReservedInstanceOfferingId)
 	}
@@ -8363,6 +9049,55 @@ func (v *ReservedInstanceOffering) Deserialize(d smithy.ShapeDeserializer) error
 		}
 		return nil
 	})
+}
+
+// Controls how long the cluster that you cut over from is kept after cutover
+// completes. Specify exactly one of RetentionInHours or RetentionAction .
+//
+// The following types satisfy this interface:
+//
+//	RetentionOptionsMemberRetentionAction
+//	RetentionOptionsMemberRetentionInHours
+type RetentionOptions interface {
+	isRetentionOptions()
+}
+
+// Ends the retention period now. Valid only after cutover completes.
+type RetentionOptionsMemberRetentionAction struct {
+	Value RetentionAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RetentionOptionsMemberRetentionAction) isRetentionOptions() {}
+func (v *RetentionOptionsMemberRetentionAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.RetentionOptions_RetentionAction, string(v.Value))
+}
+func (v *RetentionOptionsMemberRetentionAction) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.RetentionOptions_RetentionAction, &s); err != nil {
+		return err
+	}
+	v.Value = RetentionAction(s)
+	return nil
+}
+
+// The number of hours to keep the cluster that you cut over from. The retention
+// period starts when cutover completes. The minimum is 1 hour. In an UpdateClone
+// response after cutover completes, this value is the number of hours remaining in
+// the retention period, rounded up.
+type RetentionOptionsMemberRetentionInHours struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*RetentionOptionsMemberRetentionInHours) isRetentionOptions() {}
+func (v *RetentionOptionsMemberRetentionInHours) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.RetentionOptions_RetentionInHours, v.Value)
+}
+func (v *RetentionOptionsMemberRetentionInHours) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.RetentionOptions_RetentionInHours, &v.Value)
 }
 
 // Details about the rollback options for a service software update.
@@ -9019,7 +9754,9 @@ func (v *ServiceOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionsList(s, schemas.ServiceOptions_SupportedRegions, v.SupportedRegions)
+	if v.SupportedRegions != nil {
+		serializeRegionsList(s, schemas.ServiceOptions_SupportedRegions, v.SupportedRegions)
+	}
 }
 func (v *ServiceOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceOptions, func(s *smithy.Schema) error {
@@ -9331,7 +10068,9 @@ func (v *StorageType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageSubTypeName != nil {
 		s.WriteString(schemas.StorageType_StorageSubTypeName, *v.StorageSubTypeName)
 	}
-	serializeStorageTypeLimitList(s, schemas.StorageType_StorageTypeLimits, v.StorageTypeLimits)
+	if v.StorageTypeLimits != nil {
+		serializeStorageTypeLimitList(s, schemas.StorageType_StorageTypeLimits, v.StorageTypeLimits)
+	}
 	if v.StorageTypeName != nil {
 		s.WriteString(schemas.StorageType_StorageTypeName, *v.StorageTypeName)
 	}
@@ -9393,7 +10132,9 @@ func (v *StorageTypeLimit) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LimitName != nil {
 		s.WriteString(schemas.StorageTypeLimit_LimitName, *v.LimitName)
 	}
-	serializeLimitValueList(s, schemas.StorageTypeLimit_LimitValues, v.LimitValues)
+	if v.LimitValues != nil {
+		serializeLimitValueList(s, schemas.StorageTypeLimit_LimitValues, v.LimitValues)
+	}
 }
 func (v *StorageTypeLimit) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StorageTypeLimit, func(s *smithy.Schema) error {
@@ -9454,6 +10195,153 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The split of search traffic between the primary and cloned clusters.
+type TrafficPercents struct {
+
+	// The percentage of search traffic sent to the cloned cluster.
+	//
+	// This member is required.
+	CloneReadTrafficPercent int32
+
+	// The percentage of search traffic sent to the primary cluster.
+	//
+	// This member is required.
+	PrimaryReadTrafficPercent int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrafficPercents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficPercents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficPercents) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.TrafficPercents_CloneReadTrafficPercent, v.CloneReadTrafficPercent)
+	s.WriteInt32(schemas.TrafficPercents_PrimaryReadTrafficPercent, v.PrimaryReadTrafficPercent)
+}
+func (v *TrafficPercents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficPercents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficPercents_CloneReadTrafficPercent:
+			return d.ReadInt32(schemas.TrafficPercents_CloneReadTrafficPercent, &v.CloneReadTrafficPercent)
+		case schemas.TrafficPercents_PrimaryReadTrafficPercent:
+			return d.ReadInt32(schemas.TrafficPercents_PrimaryReadTrafficPercent, &v.PrimaryReadTrafficPercent)
+		}
+		return nil
+	})
+}
+
+// The traffic split and status for a cloned blue/green upgrade.
+type TrafficSplitOptions struct {
+
+	// The traffic split currently in effect.
+	//
+	// This member is required.
+	Current *TrafficPercents
+
+	// The status of the traffic shift.
+	//
+	// This member is required.
+	Status TrafficSplitStatus
+
+	// The requested traffic split.
+	//
+	// This member is required.
+	Target *TrafficPercents
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrafficSplitOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficSplitOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficSplitOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Current != nil {
+		s.WriteStruct(schemas.TrafficSplitOptions_Current)
+		v.Current.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TrafficSplitOptions_Status, string(v.Status))
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.TrafficSplitOptions_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TrafficSplitOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficSplitOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficSplitOptions_Current:
+			v.Current = &TrafficPercents{}
+			return v.Current.Deserialize(d)
+		case schemas.TrafficSplitOptions_Status:
+			var ev string
+			if err := d.ReadString(schemas.TrafficSplitOptions_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TrafficSplitStatus(ev)
+			return nil
+		case schemas.TrafficSplitOptions_Target:
+			v.Target = &TrafficPercents{}
+			return v.Target.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The traffic shift to perform for a cloned blue/green upgrade.
+type TrafficSplitRequestOptions struct {
+
+	// The percentage of search traffic, from 0 to 100, to send to the cloned cluster.
+	// The rest goes to the primary cluster.
+	//
+	// This member is required.
+	CloneReadTrafficPercent int32
+
+	// The traffic shifting strategy. The only valid value is ShiftReadTrafficPercent .
+	//
+	// This member is required.
+	Strategy TrafficStrategy
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrafficSplitRequestOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficSplitRequestOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficSplitRequestOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.TrafficSplitRequestOptions_CloneReadTrafficPercent, v.CloneReadTrafficPercent)
+	if v.Strategy != "" {
+		s.WriteString(schemas.TrafficSplitRequestOptions_Strategy, string(v.Strategy))
+	}
+}
+func (v *TrafficSplitRequestOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficSplitRequestOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficSplitRequestOptions_CloneReadTrafficPercent:
+			return d.ReadInt32(schemas.TrafficSplitRequestOptions_CloneReadTrafficPercent, &v.CloneReadTrafficPercent)
+		case schemas.TrafficSplitRequestOptions_Strategy:
+			var ev string
+			if err := d.ReadString(schemas.TrafficSplitRequestOptions_Strategy, &ev); err != nil {
+				return err
+			}
+			v.Strategy = TrafficStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // History of the last 10 upgrades and upgrade eligibility checks for an Amazon
 // OpenSearch Service domain.
 type UpgradeHistory struct {
@@ -9494,7 +10382,9 @@ func (v *UpgradeHistory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTimestamp != nil {
 		s.WriteTime(schemas.UpgradeHistory_StartTimestamp, *v.StartTimestamp)
 	}
-	serializeUpgradeStepsList(s, schemas.UpgradeHistory_StepsList, v.StepsList)
+	if v.StepsList != nil {
+		serializeUpgradeStepsList(s, schemas.UpgradeHistory_StepsList, v.StepsList)
+	}
 	if v.UpgradeName != nil {
 		s.WriteString(schemas.UpgradeHistory_UpgradeName, *v.UpgradeName)
 	}
@@ -9567,7 +10457,9 @@ func (v *UpgradeStepItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpgradeStepItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIssues(s, schemas.UpgradeStepItem_Issues, v.Issues)
+	if v.Issues != nil {
+		serializeIssues(s, schemas.UpgradeStepItem_Issues, v.Issues)
+	}
 	if v.ProgressPercent != nil {
 		s.WriteFloat64(schemas.UpgradeStepItem_ProgressPercent, *v.ProgressPercent)
 	}
@@ -9791,12 +10683,18 @@ func (v *VPCDerivedInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VPCDerivedInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.VPCDerivedInfo_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serializeStringList(s, schemas.VPCDerivedInfo_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.EgressEnabled != nil {
 		s.WriteBool(schemas.VPCDerivedInfo_EgressEnabled, *v.EgressEnabled)
 	}
-	serializeStringList(s, schemas.VPCDerivedInfo_SecurityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.VPCDerivedInfo_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.VPCDerivedInfo_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.VPCDerivedInfo_SubnetIds, v.SubnetIds)
+	}
 	if v.VPCId != nil {
 		s.WriteString(schemas.VPCDerivedInfo_VPCId, *v.VPCId)
 	}
@@ -10103,8 +11001,12 @@ func (v *VPCOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EgressEnabled != nil {
 		s.WriteBool(schemas.VPCOptions_EgressEnabled, *v.EgressEnabled)
 	}
-	serializeStringList(s, schemas.VPCOptions_SecurityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.VPCOptions_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.VPCOptions_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.VPCOptions_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VPCOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VPCOptions, func(s *smithy.Schema) error {
@@ -10261,3 +11163,4 @@ func (*UnknownUnionMember) isCapabilityBaseResponseConfig()     {}
 func (*UnknownUnionMember) isCapabilityExtendedResponseConfig() {}
 func (*UnknownUnionMember) isDataSourceType()                   {}
 func (*UnknownUnionMember) isDirectQueryDataSourceType()        {}
+func (*UnknownUnionMember) isRetentionOptions()                 {}

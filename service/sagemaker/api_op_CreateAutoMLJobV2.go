@@ -178,7 +178,9 @@ func (v *CreateAutoMLJobV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoMLComputeConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoMLJobInputDataConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLJobInputDataConfig, v.AutoMLJobInputDataConfig)
+	if v.AutoMLJobInputDataConfig != nil {
+		serializeAutoMLJobInputDataConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLJobInputDataConfig, v.AutoMLJobInputDataConfig)
+	}
 	if v.AutoMLJobName != nil {
 		s.WriteString(schemas.CreateAutoMLJobV2Request_AutoMLJobName, *v.AutoMLJobName)
 	}
@@ -187,7 +189,9 @@ func (v *CreateAutoMLJobV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoMLJobObjective.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoMLProblemTypeConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLProblemTypeConfig, v.AutoMLProblemTypeConfig)
+	if v.AutoMLProblemTypeConfig != nil {
+		serializeAutoMLProblemTypeConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLProblemTypeConfig, v.AutoMLProblemTypeConfig)
+	}
 	if v.DataSplitConfig != nil {
 		s.WriteStruct(schemas.CreateAutoMLJobV2Request_DataSplitConfig)
 		v.DataSplitConfig.SerializeMembers(s)
@@ -211,7 +215,9 @@ func (v *CreateAutoMLJobV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SecurityConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAutoMLJobV2Request_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAutoMLJobV2Request_Tags, v.Tags)
+	}
 }
 
 type CreateAutoMLJobV2Output struct {

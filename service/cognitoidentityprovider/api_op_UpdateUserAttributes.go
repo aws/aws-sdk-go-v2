@@ -124,8 +124,12 @@ func (v *UpdateUserAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessToken != nil {
 		s.WriteString(schemas.UpdateUserAttributesRequest_AccessToken, *v.AccessToken)
 	}
-	serializeClientMetadataType(s, schemas.UpdateUserAttributesRequest_ClientMetadata, v.ClientMetadata)
-	serializeAttributeListType(s, schemas.UpdateUserAttributesRequest_UserAttributes, v.UserAttributes)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.UpdateUserAttributesRequest_ClientMetadata, v.ClientMetadata)
+	}
+	if v.UserAttributes != nil {
+		serializeAttributeListType(s, schemas.UpdateUserAttributesRequest_UserAttributes, v.UserAttributes)
+	}
 }
 
 // Represents the response from the server for the request to update user
@@ -155,7 +159,9 @@ func (v *UpdateUserAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUserAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeDeliveryDetailsListType(s, schemas.UpdateUserAttributesResponse_CodeDeliveryDetailsList, v.CodeDeliveryDetailsList)
+	if v.CodeDeliveryDetailsList != nil {
+		serializeCodeDeliveryDetailsListType(s, schemas.UpdateUserAttributesResponse_CodeDeliveryDetailsList, v.CodeDeliveryDetailsList)
+	}
 }
 func (v *UpdateUserAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateUserAttributesResponse, func(s *smithy.Schema) error {

@@ -4,7 +4,9 @@ package mpa
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetResourcePolicyRequest_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.GetResourcePolicyRequest_PolicyType, string(v.PolicyType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetResourcePolicyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type GetResourcePolicyOutput struct {
 
 	// Document that contains the contents for the policy.
@@ -75,13 +95,60 @@ type GetResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.GetResourcePolicyResponse_PolicyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetResourcePolicyResponse_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.GetResourcePolicyResponse_PolicyType, string(v.PolicyType))
+	}
+	if v.PolicyVersionArn != nil {
+		s.WriteString(schemas.GetResourcePolicyResponse_PolicyVersionArn, *v.PolicyVersionArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetResourcePolicyResponse_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *GetResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcePolicyResponse_PolicyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.GetResourcePolicyResponse_PolicyDocument, v.PolicyDocument)
+		case schemas.GetResourcePolicyResponse_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.GetResourcePolicyResponse_PolicyName, v.PolicyName)
+		case schemas.GetResourcePolicyResponse_PolicyType:
+			var ev string
+			if err := d.ReadString(schemas.GetResourcePolicyResponse_PolicyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = types.PolicyType(ev)
+			return nil
+		case schemas.GetResourcePolicyResponse_PolicyVersionArn:
+			v.PolicyVersionArn = new(string)
+			return d.ReadString(schemas.GetResourcePolicyResponse_PolicyVersionArn, v.PolicyVersionArn)
+		case schemas.GetResourcePolicyResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetResourcePolicyResponse_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyRequest, schemas.GetResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyRequest, schemas.GetResourcePolicyResponse), output: &GetResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

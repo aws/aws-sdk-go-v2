@@ -113,14 +113,18 @@ func (v *VerifyAuthRequestCryptogramInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AuthRequestCryptogram != nil {
 		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_AuthRequestCryptogram, *v.AuthRequestCryptogram)
 	}
-	serializeCryptogramAuthResponse(s, schemas.VerifyAuthRequestCryptogramInput_AuthResponseAttributes, v.AuthResponseAttributes)
+	if v.AuthResponseAttributes != nil {
+		serializeCryptogramAuthResponse(s, schemas.VerifyAuthRequestCryptogramInput_AuthResponseAttributes, v.AuthResponseAttributes)
+	}
 	if v.KeyIdentifier != nil {
 		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_KeyIdentifier, *v.KeyIdentifier)
 	}
 	if v.MajorKeyDerivationMode != "" {
 		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
 	}
-	serializeSessionKeyDerivation(s, schemas.VerifyAuthRequestCryptogramInput_SessionKeyDerivationAttributes, v.SessionKeyDerivationAttributes)
+	if v.SessionKeyDerivationAttributes != nil {
+		serializeSessionKeyDerivation(s, schemas.VerifyAuthRequestCryptogramInput_SessionKeyDerivationAttributes, v.SessionKeyDerivationAttributes)
+	}
 	if v.TransactionData != nil {
 		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_TransactionData, *v.TransactionData)
 	}

@@ -55,7 +55,9 @@ func (v *CreateDedicatedIpPoolInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PoolName != nil {
 		s.WriteString(schemas.CreateDedicatedIpPoolRequest_PoolName, *v.PoolName)
 	}
-	serializeTagList(s, schemas.CreateDedicatedIpPoolRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDedicatedIpPoolRequest_Tags, v.Tags)
+	}
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the

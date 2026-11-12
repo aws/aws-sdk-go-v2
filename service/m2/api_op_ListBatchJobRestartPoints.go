@@ -83,7 +83,9 @@ func (v *ListBatchJobRestartPointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchJobRestartPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchJobStepList(s, schemas.ListBatchJobRestartPointsResponse_batchJobSteps, v.BatchJobSteps)
+	if v.BatchJobSteps != nil {
+		serializeBatchJobStepList(s, schemas.ListBatchJobRestartPointsResponse_batchJobSteps, v.BatchJobSteps)
+	}
 }
 func (v *ListBatchJobRestartPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBatchJobRestartPointsResponse, func(s *smithy.Schema) error {

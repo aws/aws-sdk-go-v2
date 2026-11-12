@@ -66,7 +66,9 @@ func (v *CreateThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentGroupName != nil {
 		s.WriteString(schemas.CreateThingGroupRequest_parentGroupName, *v.ParentGroupName)
 	}
-	serializeTagList(s, schemas.CreateThingGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateThingGroupRequest_tags, v.Tags)
+	}
 	if v.ThingGroupName != nil {
 		s.WriteString(schemas.CreateThingGroupRequest_thingGroupName, *v.ThingGroupName)
 	}

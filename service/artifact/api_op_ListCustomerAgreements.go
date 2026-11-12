@@ -76,7 +76,9 @@ func (v *ListCustomerAgreementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomerAgreementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerAgreementList(s, schemas.ListCustomerAgreementsResponse_customerAgreements, v.CustomerAgreements)
+	if v.CustomerAgreements != nil {
+		serializeCustomerAgreementList(s, schemas.ListCustomerAgreementsResponse_customerAgreements, v.CustomerAgreements)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomerAgreementsResponse_nextToken, *v.NextToken)
 	}

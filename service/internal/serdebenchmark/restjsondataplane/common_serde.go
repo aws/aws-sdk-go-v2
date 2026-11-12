@@ -9,9 +9,6 @@ import (
 )
 
 func serializeCounts(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -20,9 +17,6 @@ func serializeCounts(s smithy.ShapeSerializer, schema *smithy.Schema, v []float6
 }
 
 func serializeDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Dimension) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeEntityMetricDataList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EntityMetricDatum) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeEntityMetricDataList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeMetricData(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MetricDatum) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeMetricData(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeMetricDataQueries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MetricDataQuery) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeMetricDataQueries(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMetricDataResultMessages(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MessageData) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -85,9 +67,6 @@ func serializeMetricDataResultMessages(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeMetricDataResults(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MetricDataResult) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -98,9 +77,6 @@ func serializeMetricDataResults(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeTimestamps(s smithy.ShapeSerializer, schema *smithy.Schema, v []time.Time) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteTime(schema.ListMember(), vv)
@@ -109,9 +85,6 @@ func serializeTimestamps(s smithy.ShapeSerializer, schema *smithy.Schema, v []ti
 }
 
 func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -315,9 +288,6 @@ func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float6
 }
 
 func serializeEntityAttributesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -327,9 +297,6 @@ func serializeEntityAttributesMap(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeEntityKeyAttributesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -339,9 +306,6 @@ func serializeEntityKeyAttributesMap(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

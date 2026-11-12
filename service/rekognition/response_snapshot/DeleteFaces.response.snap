@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DeleteFaces
+
+{"DeletedFaces":["__Member__","__Member__"],"UnsuccessfulFaceDeletions":[{"FaceId":"__FaceId__","Reasons":["ASSOCIATED_TO_AN_EXISTING_USER","ASSOCIATED_TO_AN_EXISTING_USER"],"UserId":"__UserId__"},{"FaceId":"__FaceId__","Reasons":["ASSOCIATED_TO_AN_EXISTING_USER","ASSOCIATED_TO_AN_EXISTING_USER"],"UserId":"__UserId__"}]}

@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,7 +48,48 @@ type StopDBInstanceInput struct {
 	// before the DB instance is stopped.
 	DBSnapshotIdentifier *string
 
+	// Specifies whether the DB instance stops using its DB capacity reservation when
+	// the DB instance stops. When you specify true , the DB instance belongs to no
+	// reservation after it stops, and a later start launches it outside the
+	// reservation.
+	//
+	// By default, a stopped DB instance keeps its DB capacity reservation, and a
+	// later start returns the DB instance to the same reservation.
+	//
+	// Every stop releases the unit of reserved capacity that the DB instance holds,
+	// for either value of this parameter. Another DB instance can then use that
+	// capacity. This parameter controls the reservation that the DB instance belongs
+	// to, and it does not control the release of the capacity.
+	//
+	// If the DB instance uses no DB capacity reservation, this parameter has no
+	// effect.
+	//
+	// Amazon RDS holds no capacity for a stopped DB instance. When the reservation
+	// has no available capacity in the Availability Zone of the DB instance, a later
+	// start waits for capacity in that Availability Zone. When the DB instance belongs
+	// to no reservation, a later start can fail because the Amazon Web Services Region
+	// has insufficient capacity for the DB instance class.
+	DetachFromDBCapacityReservation *bool
+
 	noSmithyDocumentSerde
+}
+
+func (v *StopDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.StopDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBSnapshotIdentifier != nil {
+		s.WriteString(schemas.StopDBInstanceMessage_DBSnapshotIdentifier, *v.DBSnapshotIdentifier)
+	}
+	if v.DetachFromDBCapacityReservation != nil {
+		s.WriteBool(schemas.StopDBInstanceMessage_DetachFromDBCapacityReservation, *v.DetachFromDBCapacityReservation)
+	}
 }
 
 type StopDBInstanceOutput struct {
@@ -66,13 +109,34 @@ type StopDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDBInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.StopDBInstanceResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDBInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDBInstanceResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDBInstance, schemas.StopDBInstanceMessage, schemas.StopDBInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStopDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDBInstance, schemas.StopDBInstanceMessage, schemas.StopDBInstanceResult), output: &StopDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

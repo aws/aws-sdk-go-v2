@@ -3,11 +3,15 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
 // Configuration for node modes in the DbCluster.
+//
+// Deprecated. Use deploymentConfiguration to define the cluster topology instead.
 type ClusterConfiguration struct {
 
 	// Indicates if the compactor instance is a standalone instance or not.
@@ -20,6 +24,40 @@ type ClusterConfiguration struct {
 	QueryOnlyInstances *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DedicatedCompactor != nil {
+		s.WriteBool(schemas.ClusterConfiguration_dedicatedCompactor, *v.DedicatedCompactor)
+	}
+	if v.IngestQueryInstances != nil {
+		s.WriteInt32(schemas.ClusterConfiguration_ingestQueryInstances, *v.IngestQueryInstances)
+	}
+	if v.QueryOnlyInstances != nil {
+		s.WriteInt32(schemas.ClusterConfiguration_queryOnlyInstances, *v.QueryOnlyInstances)
+	}
+}
+func (v *ClusterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterConfiguration_dedicatedCompactor:
+			v.DedicatedCompactor = new(bool)
+			return d.ReadBool(schemas.ClusterConfiguration_dedicatedCompactor, v.DedicatedCompactor)
+		case schemas.ClusterConfiguration_ingestQueryInstances:
+			v.IngestQueryInstances = new(int32)
+			return d.ReadInt32(schemas.ClusterConfiguration_ingestQueryInstances, v.IngestQueryInstances)
+		case schemas.ClusterConfiguration_queryOnlyInstances:
+			v.QueryOnlyInstances = new(int32)
+			return d.ReadInt32(schemas.ClusterConfiguration_queryOnlyInstances, v.QueryOnlyInstances)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for an automated backup schedule.
@@ -48,6 +86,50 @@ type DbBackupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DbBackupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DbBackupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DbBackupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomSchedule != nil {
+		s.WriteString(schemas.DbBackupConfiguration_customSchedule, *v.CustomSchedule)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.DbBackupConfiguration_enabled, *v.Enabled)
+	}
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.DbBackupConfiguration_retentionDays, *v.RetentionDays)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DbBackupConfiguration_type, string(v.Type))
+	}
+}
+func (v *DbBackupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DbBackupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DbBackupConfiguration_customSchedule:
+			v.CustomSchedule = new(string)
+			return d.ReadString(schemas.DbBackupConfiguration_customSchedule, v.CustomSchedule)
+		case schemas.DbBackupConfiguration_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DbBackupConfiguration_enabled, v.Enabled)
+		case schemas.DbBackupConfiguration_retentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.DbBackupConfiguration_retentionDays, v.RetentionDays)
+		case schemas.DbBackupConfiguration_type:
+			var ev string
+			if err := d.ReadString(schemas.DbBackupConfiguration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AutomatedDbBackupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the configuration and status for an automated backup schedule.
 type DbBackupConfigurationOutput struct {
 
@@ -73,6 +155,56 @@ type DbBackupConfigurationOutput struct {
 	NextAutomatedBackupTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DbBackupConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DbBackupConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DbBackupConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomSchedule != nil {
+		s.WriteString(schemas.DbBackupConfigurationOutput_customSchedule, *v.CustomSchedule)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.DbBackupConfigurationOutput_enabled, *v.Enabled)
+	}
+	if v.NextAutomatedBackupTime != nil {
+		s.WriteTime(schemas.DbBackupConfigurationOutput_nextAutomatedBackupTime, *v.NextAutomatedBackupTime)
+	}
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.DbBackupConfigurationOutput_retentionDays, *v.RetentionDays)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DbBackupConfigurationOutput_type, string(v.Type))
+	}
+}
+func (v *DbBackupConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DbBackupConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DbBackupConfigurationOutput_customSchedule:
+			v.CustomSchedule = new(string)
+			return d.ReadString(schemas.DbBackupConfigurationOutput_customSchedule, v.CustomSchedule)
+		case schemas.DbBackupConfigurationOutput_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DbBackupConfigurationOutput_enabled, v.Enabled)
+		case schemas.DbBackupConfigurationOutput_nextAutomatedBackupTime:
+			v.NextAutomatedBackupTime = new(time.Time)
+			return d.ReadTime(schemas.DbBackupConfigurationOutput_nextAutomatedBackupTime, v.NextAutomatedBackupTime)
+		case schemas.DbBackupConfigurationOutput_retentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.DbBackupConfigurationOutput_retentionDays, v.RetentionDays)
+		case schemas.DbBackupConfigurationOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.DbBackupConfigurationOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AutomatedDbBackupType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains a summary of a Timestream for InfluxDB backup.
@@ -119,6 +251,104 @@ type DbBackupSummary struct {
 	Type DbBackupType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DbBackupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DbBackupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DbBackupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DbBackupSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DbBackupSummary_createdAt, *v.CreatedAt)
+	}
+	if v.DbResourceId != nil {
+		s.WriteString(schemas.DbBackupSummary_dbResourceId, *v.DbResourceId)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.DbBackupSummary_deploymentType, string(v.DeploymentType))
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.DbBackupSummary_engineType, string(v.EngineType))
+	}
+	if v.ExpiresAfter != nil {
+		s.WriteString(schemas.DbBackupSummary_expiresAfter, *v.ExpiresAfter)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DbBackupSummary_id, *v.Id)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DbBackupSummary_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DbBackupSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DbBackupSummary_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DbBackupSummary_type, string(v.Type))
+	}
+}
+func (v *DbBackupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DbBackupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DbBackupSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DbBackupSummary_arn, v.Arn)
+		case schemas.DbBackupSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DbBackupSummary_createdAt, v.CreatedAt)
+		case schemas.DbBackupSummary_dbResourceId:
+			v.DbResourceId = new(string)
+			return d.ReadString(schemas.DbBackupSummary_dbResourceId, v.DbResourceId)
+		case schemas.DbBackupSummary_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.DbBackupSummary_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = ResourceDeploymentType(ev)
+			return nil
+		case schemas.DbBackupSummary_engineType:
+			var ev string
+			if err := d.ReadString(schemas.DbBackupSummary_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = EngineType(ev)
+			return nil
+		case schemas.DbBackupSummary_expiresAfter:
+			v.ExpiresAfter = new(string)
+			return d.ReadString(schemas.DbBackupSummary_expiresAfter, v.ExpiresAfter)
+		case schemas.DbBackupSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DbBackupSummary_id, v.Id)
+		case schemas.DbBackupSummary_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DbBackupSummary_kmsKeyId, v.KmsKeyId)
+		case schemas.DbBackupSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DbBackupSummary_name, v.Name)
+		case schemas.DbBackupSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DbBackupSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DbBackupStatus(ev)
+			return nil
+		case schemas.DbBackupSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.DbBackupSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DbBackupType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a summary of a Timestream for InfluxDB cluster.
@@ -176,6 +406,124 @@ type DbClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DbClusterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DbClusterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DbClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.DbClusterSummary_allocatedStorage, *v.AllocatedStorage)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DbClusterSummary_arn, *v.Arn)
+	}
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.DbClusterSummary_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbStorageType != "" {
+		s.WriteString(schemas.DbClusterSummary_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.DbClusterSummary_deploymentType, string(v.DeploymentType))
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DbClusterSummary_endpoint, *v.Endpoint)
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.DbClusterSummary_engineType, string(v.EngineType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DbClusterSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DbClusterSummary_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.DbClusterSummary_networkType, string(v.NetworkType))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.DbClusterSummary_port, *v.Port)
+	}
+	if v.ReaderEndpoint != nil {
+		s.WriteString(schemas.DbClusterSummary_readerEndpoint, *v.ReaderEndpoint)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DbClusterSummary_status, string(v.Status))
+	}
+}
+func (v *DbClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DbClusterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DbClusterSummary_allocatedStorage:
+			v.AllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.DbClusterSummary_allocatedStorage, v.AllocatedStorage)
+		case schemas.DbClusterSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DbClusterSummary_arn, v.Arn)
+		case schemas.DbClusterSummary_dbInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.DbClusterSummary_dbInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DbInstanceType = DbInstanceType(ev)
+			return nil
+		case schemas.DbClusterSummary_dbStorageType:
+			var ev string
+			if err := d.ReadString(schemas.DbClusterSummary_dbStorageType, &ev); err != nil {
+				return err
+			}
+			v.DbStorageType = DbStorageType(ev)
+			return nil
+		case schemas.DbClusterSummary_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.DbClusterSummary_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = ClusterDeploymentType(ev)
+			return nil
+		case schemas.DbClusterSummary_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DbClusterSummary_endpoint, v.Endpoint)
+		case schemas.DbClusterSummary_engineType:
+			var ev string
+			if err := d.ReadString(schemas.DbClusterSummary_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = EngineType(ev)
+			return nil
+		case schemas.DbClusterSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DbClusterSummary_id, v.Id)
+		case schemas.DbClusterSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DbClusterSummary_name, v.Name)
+		case schemas.DbClusterSummary_networkType:
+			var ev string
+			if err := d.ReadString(schemas.DbClusterSummary_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.DbClusterSummary_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.DbClusterSummary_port, v.Port)
+		case schemas.DbClusterSummary_readerEndpoint:
+			v.ReaderEndpoint = new(string)
+			return d.ReadString(schemas.DbClusterSummary_readerEndpoint, v.ReaderEndpoint)
+		case schemas.DbClusterSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DbClusterSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains a summary of a DB instance belonging to a DB cluster.
 type DbInstanceForClusterSummary struct {
 
@@ -230,6 +578,123 @@ type DbInstanceForClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DbInstanceForClusterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DbInstanceForClusterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DbInstanceForClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.DbInstanceForClusterSummary_allocatedStorage, *v.AllocatedStorage)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DbInstanceForClusterSummary_arn, *v.Arn)
+	}
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.DbInstanceForClusterSummary_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbStorageType != "" {
+		s.WriteString(schemas.DbInstanceForClusterSummary_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.DbInstanceForClusterSummary_deploymentType, string(v.DeploymentType))
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DbInstanceForClusterSummary_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DbInstanceForClusterSummary_id, *v.Id)
+	}
+	if v.InstanceMode != "" {
+		s.WriteString(schemas.DbInstanceForClusterSummary_instanceMode, string(v.InstanceMode))
+	}
+	if v.InstanceModes != nil {
+		serializeInstanceModeList(s, schemas.DbInstanceForClusterSummary_instanceModes, v.InstanceModes)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DbInstanceForClusterSummary_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.DbInstanceForClusterSummary_networkType, string(v.NetworkType))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.DbInstanceForClusterSummary_port, *v.Port)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DbInstanceForClusterSummary_status, string(v.Status))
+	}
+}
+func (v *DbInstanceForClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DbInstanceForClusterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DbInstanceForClusterSummary_allocatedStorage:
+			v.AllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.DbInstanceForClusterSummary_allocatedStorage, v.AllocatedStorage)
+		case schemas.DbInstanceForClusterSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DbInstanceForClusterSummary_arn, v.Arn)
+		case schemas.DbInstanceForClusterSummary_dbInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceForClusterSummary_dbInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DbInstanceType = DbInstanceType(ev)
+			return nil
+		case schemas.DbInstanceForClusterSummary_dbStorageType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceForClusterSummary_dbStorageType, &ev); err != nil {
+				return err
+			}
+			v.DbStorageType = DbStorageType(ev)
+			return nil
+		case schemas.DbInstanceForClusterSummary_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceForClusterSummary_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = DeploymentType(ev)
+			return nil
+		case schemas.DbInstanceForClusterSummary_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DbInstanceForClusterSummary_endpoint, v.Endpoint)
+		case schemas.DbInstanceForClusterSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DbInstanceForClusterSummary_id, v.Id)
+		case schemas.DbInstanceForClusterSummary_instanceMode:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceForClusterSummary_instanceMode, &ev); err != nil {
+				return err
+			}
+			v.InstanceMode = InstanceMode(ev)
+			return nil
+		case schemas.DbInstanceForClusterSummary_instanceModes:
+			return deserializeInstanceModeList(d, schemas.DbInstanceForClusterSummary_instanceModes, &v.InstanceModes)
+		case schemas.DbInstanceForClusterSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DbInstanceForClusterSummary_name, v.Name)
+		case schemas.DbInstanceForClusterSummary_networkType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceForClusterSummary_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.DbInstanceForClusterSummary_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.DbInstanceForClusterSummary_port, v.Port)
+		case schemas.DbInstanceForClusterSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceForClusterSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains a summary of a DB instance.
 type DbInstanceSummary struct {
 
@@ -278,6 +743,108 @@ type DbInstanceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DbInstanceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DbInstanceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DbInstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.DbInstanceSummary_allocatedStorage, *v.AllocatedStorage)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DbInstanceSummary_arn, *v.Arn)
+	}
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.DbInstanceSummary_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbStorageType != "" {
+		s.WriteString(schemas.DbInstanceSummary_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.DbInstanceSummary_deploymentType, string(v.DeploymentType))
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DbInstanceSummary_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DbInstanceSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DbInstanceSummary_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.DbInstanceSummary_networkType, string(v.NetworkType))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.DbInstanceSummary_port, *v.Port)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DbInstanceSummary_status, string(v.Status))
+	}
+}
+func (v *DbInstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DbInstanceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DbInstanceSummary_allocatedStorage:
+			v.AllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.DbInstanceSummary_allocatedStorage, v.AllocatedStorage)
+		case schemas.DbInstanceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DbInstanceSummary_arn, v.Arn)
+		case schemas.DbInstanceSummary_dbInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceSummary_dbInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DbInstanceType = DbInstanceType(ev)
+			return nil
+		case schemas.DbInstanceSummary_dbStorageType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceSummary_dbStorageType, &ev); err != nil {
+				return err
+			}
+			v.DbStorageType = DbStorageType(ev)
+			return nil
+		case schemas.DbInstanceSummary_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceSummary_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = DeploymentType(ev)
+			return nil
+		case schemas.DbInstanceSummary_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DbInstanceSummary_endpoint, v.Endpoint)
+		case schemas.DbInstanceSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DbInstanceSummary_id, v.Id)
+		case schemas.DbInstanceSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DbInstanceSummary_name, v.Name)
+		case schemas.DbInstanceSummary_networkType:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceSummary_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.DbInstanceSummary_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.DbInstanceSummary_port, v.Port)
+		case schemas.DbInstanceSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DbInstanceSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains a summary of a DB parameter group.
 type DbParameterGroupSummary struct {
 
@@ -302,6 +869,75 @@ type DbParameterGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DbParameterGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DbParameterGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DbParameterGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DbParameterGroupSummary_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DbParameterGroupSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DbParameterGroupSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DbParameterGroupSummary_name, *v.Name)
+	}
+}
+func (v *DbParameterGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DbParameterGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DbParameterGroupSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DbParameterGroupSummary_arn, v.Arn)
+		case schemas.DbParameterGroupSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DbParameterGroupSummary_description, v.Description)
+		case schemas.DbParameterGroupSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DbParameterGroupSummary_id, v.Id)
+		case schemas.DbParameterGroupSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DbParameterGroupSummary_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// Defines the compute topology of a Timestream for InfluxDB cluster as a set of
+// node groups for a specific database engine. For InfluxDB 3 Enterprise, use the
+// InfluxDBv3Enterprise member to allocate compute per function: ingest, query,
+// compaction, and processing.
+//
+// The following types satisfy this interface:
+//
+//	DeploymentConfigurationMemberInfluxDBv3Enterprise
+type DeploymentConfiguration interface {
+	isDeploymentConfiguration()
+}
+
+// The deployment configuration for an InfluxDB 3 Enterprise cluster.
+type DeploymentConfigurationMemberInfluxDBv3Enterprise struct {
+	Value InfluxDBv3EnterpriseDeploymentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DeploymentConfigurationMemberInfluxDBv3Enterprise) isDeploymentConfiguration() {}
+func (v *DeploymentConfigurationMemberInfluxDBv3Enterprise) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentConfiguration_InfluxDBv3Enterprise)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DeploymentConfigurationMemberInfluxDBv3Enterprise) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Duration for InfluxDB parameters in Timestream for InfluxDB.
 type Duration struct {
 
@@ -316,6 +952,38 @@ type Duration struct {
 	Value *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Duration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Duration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Duration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationType != "" {
+		s.WriteString(schemas.Duration_durationType, string(v.DurationType))
+	}
+	if v.Value != nil {
+		s.WriteInt64(schemas.Duration_value, *v.Value)
+	}
+}
+func (v *Duration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Duration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Duration_durationType:
+			var ev string
+			if err := d.ReadString(schemas.Duration_durationType, &ev); err != nil {
+				return err
+			}
+			v.DurationType = DurationType(ev)
+			return nil
+		case schemas.Duration_value:
+			v.Value = new(int64)
+			return d.ReadInt64(schemas.Duration_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.
@@ -539,6 +1207,250 @@ type InfluxDBv2Parameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InfluxDBv2Parameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InfluxDBv2Parameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InfluxDBv2Parameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FluxLogEnabled != nil {
+		s.WriteBool(schemas.InfluxDBv2Parameters_fluxLogEnabled, *v.FluxLogEnabled)
+	}
+	if v.HttpIdleTimeout != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_httpIdleTimeout)
+		v.HttpIdleTimeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpReadHeaderTimeout != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_httpReadHeaderTimeout)
+		v.HttpReadHeaderTimeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpReadTimeout != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_httpReadTimeout)
+		v.HttpReadTimeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpWriteTimeout != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_httpWriteTimeout)
+		v.HttpWriteTimeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InfluxqlMaxSelectBuckets != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_influxqlMaxSelectBuckets, *v.InfluxqlMaxSelectBuckets)
+	}
+	if v.InfluxqlMaxSelectPoint != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_influxqlMaxSelectPoint, *v.InfluxqlMaxSelectPoint)
+	}
+	if v.InfluxqlMaxSelectSeries != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_influxqlMaxSelectSeries, *v.InfluxqlMaxSelectSeries)
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.InfluxDBv2Parameters_logLevel, string(v.LogLevel))
+	}
+	if v.MetricsDisabled != nil {
+		s.WriteBool(schemas.InfluxDBv2Parameters_metricsDisabled, *v.MetricsDisabled)
+	}
+	if v.NoTasks != nil {
+		s.WriteBool(schemas.InfluxDBv2Parameters_noTasks, *v.NoTasks)
+	}
+	if v.PprofDisabled != nil {
+		s.WriteBool(schemas.InfluxDBv2Parameters_pprofDisabled, *v.PprofDisabled)
+	}
+	if v.QueryConcurrency != nil {
+		s.WriteInt32(schemas.InfluxDBv2Parameters_queryConcurrency, *v.QueryConcurrency)
+	}
+	if v.QueryInitialMemoryBytes != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_queryInitialMemoryBytes, *v.QueryInitialMemoryBytes)
+	}
+	if v.QueryMaxMemoryBytes != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_queryMaxMemoryBytes, *v.QueryMaxMemoryBytes)
+	}
+	if v.QueryMemoryBytes != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_queryMemoryBytes, *v.QueryMemoryBytes)
+	}
+	if v.QueryQueueSize != nil {
+		s.WriteInt32(schemas.InfluxDBv2Parameters_queryQueueSize, *v.QueryQueueSize)
+	}
+	if v.SessionLength != nil {
+		s.WriteInt32(schemas.InfluxDBv2Parameters_sessionLength, *v.SessionLength)
+	}
+	if v.SessionRenewDisabled != nil {
+		s.WriteBool(schemas.InfluxDBv2Parameters_sessionRenewDisabled, *v.SessionRenewDisabled)
+	}
+	if v.StorageCacheMaxMemorySize != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_storageCacheMaxMemorySize, *v.StorageCacheMaxMemorySize)
+	}
+	if v.StorageCacheSnapshotMemorySize != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_storageCacheSnapshotMemorySize, *v.StorageCacheSnapshotMemorySize)
+	}
+	if v.StorageCacheSnapshotWriteColdDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_storageCacheSnapshotWriteColdDuration)
+		v.StorageCacheSnapshotWriteColdDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageCompactFullWriteColdDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_storageCompactFullWriteColdDuration)
+		v.StorageCompactFullWriteColdDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageCompactThroughputBurst != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_storageCompactThroughputBurst, *v.StorageCompactThroughputBurst)
+	}
+	if v.StorageMaxConcurrentCompactions != nil {
+		s.WriteInt32(schemas.InfluxDBv2Parameters_storageMaxConcurrentCompactions, *v.StorageMaxConcurrentCompactions)
+	}
+	if v.StorageMaxIndexLogFileSize != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_storageMaxIndexLogFileSize, *v.StorageMaxIndexLogFileSize)
+	}
+	if v.StorageNoValidateFieldSize != nil {
+		s.WriteBool(schemas.InfluxDBv2Parameters_storageNoValidateFieldSize, *v.StorageNoValidateFieldSize)
+	}
+	if v.StorageRetentionCheckInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_storageRetentionCheckInterval)
+		v.StorageRetentionCheckInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageSeriesFileMaxConcurrentSnapshotCompactions != nil {
+		s.WriteInt32(schemas.InfluxDBv2Parameters_storageSeriesFileMaxConcurrentSnapshotCompactions, *v.StorageSeriesFileMaxConcurrentSnapshotCompactions)
+	}
+	if v.StorageSeriesIdSetCacheSize != nil {
+		s.WriteInt64(schemas.InfluxDBv2Parameters_storageSeriesIdSetCacheSize, *v.StorageSeriesIdSetCacheSize)
+	}
+	if v.StorageWalMaxConcurrentWrites != nil {
+		s.WriteInt32(schemas.InfluxDBv2Parameters_storageWalMaxConcurrentWrites, *v.StorageWalMaxConcurrentWrites)
+	}
+	if v.StorageWalMaxWriteDelay != nil {
+		s.WriteStruct(schemas.InfluxDBv2Parameters_storageWalMaxWriteDelay)
+		v.StorageWalMaxWriteDelay.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TracingType != "" {
+		s.WriteString(schemas.InfluxDBv2Parameters_tracingType, string(v.TracingType))
+	}
+	if v.UiDisabled != nil {
+		s.WriteBool(schemas.InfluxDBv2Parameters_uiDisabled, *v.UiDisabled)
+	}
+}
+func (v *InfluxDBv2Parameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InfluxDBv2Parameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InfluxDBv2Parameters_fluxLogEnabled:
+			v.FluxLogEnabled = new(bool)
+			return d.ReadBool(schemas.InfluxDBv2Parameters_fluxLogEnabled, v.FluxLogEnabled)
+		case schemas.InfluxDBv2Parameters_httpIdleTimeout:
+			v.HttpIdleTimeout = &Duration{}
+			return v.HttpIdleTimeout.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_httpReadHeaderTimeout:
+			v.HttpReadHeaderTimeout = &Duration{}
+			return v.HttpReadHeaderTimeout.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_httpReadTimeout:
+			v.HttpReadTimeout = &Duration{}
+			return v.HttpReadTimeout.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_httpWriteTimeout:
+			v.HttpWriteTimeout = &Duration{}
+			return v.HttpWriteTimeout.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_influxqlMaxSelectBuckets:
+			v.InfluxqlMaxSelectBuckets = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_influxqlMaxSelectBuckets, v.InfluxqlMaxSelectBuckets)
+		case schemas.InfluxDBv2Parameters_influxqlMaxSelectPoint:
+			v.InfluxqlMaxSelectPoint = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_influxqlMaxSelectPoint, v.InfluxqlMaxSelectPoint)
+		case schemas.InfluxDBv2Parameters_influxqlMaxSelectSeries:
+			v.InfluxqlMaxSelectSeries = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_influxqlMaxSelectSeries, v.InfluxqlMaxSelectSeries)
+		case schemas.InfluxDBv2Parameters_logLevel:
+			var ev string
+			if err := d.ReadString(schemas.InfluxDBv2Parameters_logLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.InfluxDBv2Parameters_metricsDisabled:
+			v.MetricsDisabled = new(bool)
+			return d.ReadBool(schemas.InfluxDBv2Parameters_metricsDisabled, v.MetricsDisabled)
+		case schemas.InfluxDBv2Parameters_noTasks:
+			v.NoTasks = new(bool)
+			return d.ReadBool(schemas.InfluxDBv2Parameters_noTasks, v.NoTasks)
+		case schemas.InfluxDBv2Parameters_pprofDisabled:
+			v.PprofDisabled = new(bool)
+			return d.ReadBool(schemas.InfluxDBv2Parameters_pprofDisabled, v.PprofDisabled)
+		case schemas.InfluxDBv2Parameters_queryConcurrency:
+			v.QueryConcurrency = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv2Parameters_queryConcurrency, v.QueryConcurrency)
+		case schemas.InfluxDBv2Parameters_queryInitialMemoryBytes:
+			v.QueryInitialMemoryBytes = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_queryInitialMemoryBytes, v.QueryInitialMemoryBytes)
+		case schemas.InfluxDBv2Parameters_queryMaxMemoryBytes:
+			v.QueryMaxMemoryBytes = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_queryMaxMemoryBytes, v.QueryMaxMemoryBytes)
+		case schemas.InfluxDBv2Parameters_queryMemoryBytes:
+			v.QueryMemoryBytes = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_queryMemoryBytes, v.QueryMemoryBytes)
+		case schemas.InfluxDBv2Parameters_queryQueueSize:
+			v.QueryQueueSize = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv2Parameters_queryQueueSize, v.QueryQueueSize)
+		case schemas.InfluxDBv2Parameters_sessionLength:
+			v.SessionLength = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv2Parameters_sessionLength, v.SessionLength)
+		case schemas.InfluxDBv2Parameters_sessionRenewDisabled:
+			v.SessionRenewDisabled = new(bool)
+			return d.ReadBool(schemas.InfluxDBv2Parameters_sessionRenewDisabled, v.SessionRenewDisabled)
+		case schemas.InfluxDBv2Parameters_storageCacheMaxMemorySize:
+			v.StorageCacheMaxMemorySize = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_storageCacheMaxMemorySize, v.StorageCacheMaxMemorySize)
+		case schemas.InfluxDBv2Parameters_storageCacheSnapshotMemorySize:
+			v.StorageCacheSnapshotMemorySize = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_storageCacheSnapshotMemorySize, v.StorageCacheSnapshotMemorySize)
+		case schemas.InfluxDBv2Parameters_storageCacheSnapshotWriteColdDuration:
+			v.StorageCacheSnapshotWriteColdDuration = &Duration{}
+			return v.StorageCacheSnapshotWriteColdDuration.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_storageCompactFullWriteColdDuration:
+			v.StorageCompactFullWriteColdDuration = &Duration{}
+			return v.StorageCompactFullWriteColdDuration.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_storageCompactThroughputBurst:
+			v.StorageCompactThroughputBurst = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_storageCompactThroughputBurst, v.StorageCompactThroughputBurst)
+		case schemas.InfluxDBv2Parameters_storageMaxConcurrentCompactions:
+			v.StorageMaxConcurrentCompactions = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv2Parameters_storageMaxConcurrentCompactions, v.StorageMaxConcurrentCompactions)
+		case schemas.InfluxDBv2Parameters_storageMaxIndexLogFileSize:
+			v.StorageMaxIndexLogFileSize = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_storageMaxIndexLogFileSize, v.StorageMaxIndexLogFileSize)
+		case schemas.InfluxDBv2Parameters_storageNoValidateFieldSize:
+			v.StorageNoValidateFieldSize = new(bool)
+			return d.ReadBool(schemas.InfluxDBv2Parameters_storageNoValidateFieldSize, v.StorageNoValidateFieldSize)
+		case schemas.InfluxDBv2Parameters_storageRetentionCheckInterval:
+			v.StorageRetentionCheckInterval = &Duration{}
+			return v.StorageRetentionCheckInterval.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_storageSeriesFileMaxConcurrentSnapshotCompactions:
+			v.StorageSeriesFileMaxConcurrentSnapshotCompactions = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv2Parameters_storageSeriesFileMaxConcurrentSnapshotCompactions, v.StorageSeriesFileMaxConcurrentSnapshotCompactions)
+		case schemas.InfluxDBv2Parameters_storageSeriesIdSetCacheSize:
+			v.StorageSeriesIdSetCacheSize = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv2Parameters_storageSeriesIdSetCacheSize, v.StorageSeriesIdSetCacheSize)
+		case schemas.InfluxDBv2Parameters_storageWalMaxConcurrentWrites:
+			v.StorageWalMaxConcurrentWrites = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv2Parameters_storageWalMaxConcurrentWrites, v.StorageWalMaxConcurrentWrites)
+		case schemas.InfluxDBv2Parameters_storageWalMaxWriteDelay:
+			v.StorageWalMaxWriteDelay = &Duration{}
+			return v.StorageWalMaxWriteDelay.Deserialize(d)
+		case schemas.InfluxDBv2Parameters_tracingType:
+			var ev string
+			if err := d.ReadString(schemas.InfluxDBv2Parameters_tracingType, &ev); err != nil {
+				return err
+			}
+			v.TracingType = TracingType(ev)
+			return nil
+		case schemas.InfluxDBv2Parameters_uiDisabled:
+			v.UiDisabled = new(bool)
+			return d.ReadBool(schemas.InfluxDBv2Parameters_uiDisabled, v.UiDisabled)
+		}
+		return nil
+	})
+}
+
 // All the customer-modifiable InfluxDB v3 Core parameters in Timestream for
 // InfluxDB.
 type InfluxDBv3CoreParameters struct {
@@ -751,24 +1663,333 @@ type InfluxDBv3CoreParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InfluxDBv3CoreParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InfluxDBv3CoreParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InfluxDBv3CoreParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFusionConfig != nil {
+		s.WriteString(schemas.InfluxDBv3CoreParameters_dataFusionConfig, *v.DataFusionConfig)
+	}
+	if v.DataFusionMaxParquetFanout != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_dataFusionMaxParquetFanout, *v.DataFusionMaxParquetFanout)
+	}
+	if v.DataFusionNumThreads != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_dataFusionNumThreads, *v.DataFusionNumThreads)
+	}
+	if v.DataFusionRuntimeDisableLifoSlot != nil {
+		s.WriteBool(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeDisableLifoSlot, *v.DataFusionRuntimeDisableLifoSlot)
+	}
+	if v.DataFusionRuntimeEventInterval != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeEventInterval, *v.DataFusionRuntimeEventInterval)
+	}
+	if v.DataFusionRuntimeGlobalQueueInterval != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeGlobalQueueInterval, *v.DataFusionRuntimeGlobalQueueInterval)
+	}
+	if v.DataFusionRuntimeMaxBlockingThreads != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeMaxBlockingThreads, *v.DataFusionRuntimeMaxBlockingThreads)
+	}
+	if v.DataFusionRuntimeMaxIoEventsPerTick != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeMaxIoEventsPerTick, *v.DataFusionRuntimeMaxIoEventsPerTick)
+	}
+	if v.DataFusionRuntimeThreadKeepAlive != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeThreadKeepAlive)
+		v.DataFusionRuntimeThreadKeepAlive.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataFusionRuntimeThreadPriority != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeThreadPriority, *v.DataFusionRuntimeThreadPriority)
+	}
+	if v.DataFusionRuntimeType != "" {
+		s.WriteString(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeType, string(v.DataFusionRuntimeType))
+	}
+	if v.DataFusionUseCachedParquetLoader != nil {
+		s.WriteBool(schemas.InfluxDBv3CoreParameters_dataFusionUseCachedParquetLoader, *v.DataFusionUseCachedParquetLoader)
+	}
+	if v.DeleteGracePeriod != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_deleteGracePeriod)
+		v.DeleteGracePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisableParquetMemCache != nil {
+		s.WriteBool(schemas.InfluxDBv3CoreParameters_disableParquetMemCache, *v.DisableParquetMemCache)
+	}
+	if v.DistinctCacheEvictionInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_distinctCacheEvictionInterval)
+		v.DistinctCacheEvictionInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecMemPoolBytes != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_execMemPoolBytes, v.ExecMemPoolBytes)
+	}
+	if v.ForceSnapshotMemThreshold != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_forceSnapshotMemThreshold, v.ForceSnapshotMemThreshold)
+	}
+	if v.Gen1Duration != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_gen1Duration)
+		v.Gen1Duration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Gen1LookbackDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_gen1LookbackDuration)
+		v.Gen1LookbackDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HardDeleteDefaultDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_hardDeleteDefaultDuration)
+		v.HardDeleteDefaultDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastCacheEvictionInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_lastCacheEvictionInterval)
+		v.LastCacheEvictionInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogFilter != nil {
+		s.WriteString(schemas.InfluxDBv3CoreParameters_logFilter, *v.LogFilter)
+	}
+	if v.LogFormat != "" {
+		s.WriteString(schemas.InfluxDBv3CoreParameters_logFormat, string(v.LogFormat))
+	}
+	if v.MaxHttpRequestSize != nil {
+		s.WriteInt64(schemas.InfluxDBv3CoreParameters_maxHttpRequestSize, *v.MaxHttpRequestSize)
+	}
+	if v.ParquetMemCachePruneInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_parquetMemCachePruneInterval)
+		v.ParquetMemCachePruneInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParquetMemCachePrunePercentage != nil {
+		s.WriteFloat32(schemas.InfluxDBv3CoreParameters_parquetMemCachePrunePercentage, *v.ParquetMemCachePrunePercentage)
+	}
+	if v.ParquetMemCacheQueryPathDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_parquetMemCacheQueryPathDuration)
+		v.ParquetMemCacheQueryPathDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParquetMemCacheSize != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_parquetMemCacheSize, v.ParquetMemCacheSize)
+	}
+	if v.PluginRepositorySecretArn != nil {
+		s.WriteString(schemas.InfluxDBv3CoreParameters_pluginRepositorySecretArn, *v.PluginRepositorySecretArn)
+	}
+	if v.PluginRepositoryUrl != nil {
+		s.WriteString(schemas.InfluxDBv3CoreParameters_pluginRepositoryUrl, *v.PluginRepositoryUrl)
+	}
+	if v.PreemptiveCacheAge != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_preemptiveCacheAge)
+		v.PreemptiveCacheAge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryFileLimit != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_queryFileLimit, *v.QueryFileLimit)
+	}
+	if v.QueryLogSize != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_queryLogSize, *v.QueryLogSize)
+	}
+	if v.RetentionCheckInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3CoreParameters_retentionCheckInterval)
+		v.RetentionCheckInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshottedWalFilesToKeep != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_snapshottedWalFilesToKeep, *v.SnapshottedWalFilesToKeep)
+	}
+	if v.TableIndexCacheConcurrencyLimit != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_tableIndexCacheConcurrencyLimit, *v.TableIndexCacheConcurrencyLimit)
+	}
+	if v.TableIndexCacheMaxEntries != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_tableIndexCacheMaxEntries, *v.TableIndexCacheMaxEntries)
+	}
+	if v.WalMaxWriteBufferSize != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_walMaxWriteBufferSize, *v.WalMaxWriteBufferSize)
+	}
+	if v.WalReplayConcurrencyLimit != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_walReplayConcurrencyLimit, *v.WalReplayConcurrencyLimit)
+	}
+	if v.WalReplayFailOnError != nil {
+		s.WriteBool(schemas.InfluxDBv3CoreParameters_walReplayFailOnError, *v.WalReplayFailOnError)
+	}
+	if v.WalSnapshotSize != nil {
+		s.WriteInt32(schemas.InfluxDBv3CoreParameters_walSnapshotSize, *v.WalSnapshotSize)
+	}
+}
+func (v *InfluxDBv3CoreParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InfluxDBv3CoreParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InfluxDBv3CoreParameters_dataFusionConfig:
+			v.DataFusionConfig = new(string)
+			return d.ReadString(schemas.InfluxDBv3CoreParameters_dataFusionConfig, v.DataFusionConfig)
+		case schemas.InfluxDBv3CoreParameters_dataFusionMaxParquetFanout:
+			v.DataFusionMaxParquetFanout = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_dataFusionMaxParquetFanout, v.DataFusionMaxParquetFanout)
+		case schemas.InfluxDBv3CoreParameters_dataFusionNumThreads:
+			v.DataFusionNumThreads = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_dataFusionNumThreads, v.DataFusionNumThreads)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeDisableLifoSlot:
+			v.DataFusionRuntimeDisableLifoSlot = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeDisableLifoSlot, v.DataFusionRuntimeDisableLifoSlot)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeEventInterval:
+			v.DataFusionRuntimeEventInterval = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeEventInterval, v.DataFusionRuntimeEventInterval)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeGlobalQueueInterval:
+			v.DataFusionRuntimeGlobalQueueInterval = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeGlobalQueueInterval, v.DataFusionRuntimeGlobalQueueInterval)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeMaxBlockingThreads:
+			v.DataFusionRuntimeMaxBlockingThreads = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeMaxBlockingThreads, v.DataFusionRuntimeMaxBlockingThreads)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeMaxIoEventsPerTick:
+			v.DataFusionRuntimeMaxIoEventsPerTick = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeMaxIoEventsPerTick, v.DataFusionRuntimeMaxIoEventsPerTick)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeThreadKeepAlive:
+			v.DataFusionRuntimeThreadKeepAlive = &Duration{}
+			return v.DataFusionRuntimeThreadKeepAlive.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeThreadPriority:
+			v.DataFusionRuntimeThreadPriority = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeThreadPriority, v.DataFusionRuntimeThreadPriority)
+		case schemas.InfluxDBv3CoreParameters_dataFusionRuntimeType:
+			var ev string
+			if err := d.ReadString(schemas.InfluxDBv3CoreParameters_dataFusionRuntimeType, &ev); err != nil {
+				return err
+			}
+			v.DataFusionRuntimeType = DataFusionRuntimeType(ev)
+			return nil
+		case schemas.InfluxDBv3CoreParameters_dataFusionUseCachedParquetLoader:
+			v.DataFusionUseCachedParquetLoader = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3CoreParameters_dataFusionUseCachedParquetLoader, v.DataFusionUseCachedParquetLoader)
+		case schemas.InfluxDBv3CoreParameters_deleteGracePeriod:
+			v.DeleteGracePeriod = &Duration{}
+			return v.DeleteGracePeriod.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_disableParquetMemCache:
+			v.DisableParquetMemCache = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3CoreParameters_disableParquetMemCache, v.DisableParquetMemCache)
+		case schemas.InfluxDBv3CoreParameters_distinctCacheEvictionInterval:
+			v.DistinctCacheEvictionInterval = &Duration{}
+			return v.DistinctCacheEvictionInterval.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_execMemPoolBytes:
+			return deserializePercentOrAbsoluteLong(d, schemas.InfluxDBv3CoreParameters_execMemPoolBytes, &v.ExecMemPoolBytes)
+		case schemas.InfluxDBv3CoreParameters_forceSnapshotMemThreshold:
+			return deserializePercentOrAbsoluteLong(d, schemas.InfluxDBv3CoreParameters_forceSnapshotMemThreshold, &v.ForceSnapshotMemThreshold)
+		case schemas.InfluxDBv3CoreParameters_gen1Duration:
+			v.Gen1Duration = &Duration{}
+			return v.Gen1Duration.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_gen1LookbackDuration:
+			v.Gen1LookbackDuration = &Duration{}
+			return v.Gen1LookbackDuration.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_hardDeleteDefaultDuration:
+			v.HardDeleteDefaultDuration = &Duration{}
+			return v.HardDeleteDefaultDuration.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_lastCacheEvictionInterval:
+			v.LastCacheEvictionInterval = &Duration{}
+			return v.LastCacheEvictionInterval.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_logFilter:
+			v.LogFilter = new(string)
+			return d.ReadString(schemas.InfluxDBv3CoreParameters_logFilter, v.LogFilter)
+		case schemas.InfluxDBv3CoreParameters_logFormat:
+			var ev string
+			if err := d.ReadString(schemas.InfluxDBv3CoreParameters_logFormat, &ev); err != nil {
+				return err
+			}
+			v.LogFormat = LogFormats(ev)
+			return nil
+		case schemas.InfluxDBv3CoreParameters_maxHttpRequestSize:
+			v.MaxHttpRequestSize = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv3CoreParameters_maxHttpRequestSize, v.MaxHttpRequestSize)
+		case schemas.InfluxDBv3CoreParameters_parquetMemCachePruneInterval:
+			v.ParquetMemCachePruneInterval = &Duration{}
+			return v.ParquetMemCachePruneInterval.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_parquetMemCachePrunePercentage:
+			v.ParquetMemCachePrunePercentage = new(float32)
+			return d.ReadFloat32(schemas.InfluxDBv3CoreParameters_parquetMemCachePrunePercentage, v.ParquetMemCachePrunePercentage)
+		case schemas.InfluxDBv3CoreParameters_parquetMemCacheQueryPathDuration:
+			v.ParquetMemCacheQueryPathDuration = &Duration{}
+			return v.ParquetMemCacheQueryPathDuration.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_parquetMemCacheSize:
+			return deserializePercentOrAbsoluteLong(d, schemas.InfluxDBv3CoreParameters_parquetMemCacheSize, &v.ParquetMemCacheSize)
+		case schemas.InfluxDBv3CoreParameters_pluginRepositorySecretArn:
+			v.PluginRepositorySecretArn = new(string)
+			return d.ReadString(schemas.InfluxDBv3CoreParameters_pluginRepositorySecretArn, v.PluginRepositorySecretArn)
+		case schemas.InfluxDBv3CoreParameters_pluginRepositoryUrl:
+			v.PluginRepositoryUrl = new(string)
+			return d.ReadString(schemas.InfluxDBv3CoreParameters_pluginRepositoryUrl, v.PluginRepositoryUrl)
+		case schemas.InfluxDBv3CoreParameters_preemptiveCacheAge:
+			v.PreemptiveCacheAge = &Duration{}
+			return v.PreemptiveCacheAge.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_queryFileLimit:
+			v.QueryFileLimit = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_queryFileLimit, v.QueryFileLimit)
+		case schemas.InfluxDBv3CoreParameters_queryLogSize:
+			v.QueryLogSize = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_queryLogSize, v.QueryLogSize)
+		case schemas.InfluxDBv3CoreParameters_retentionCheckInterval:
+			v.RetentionCheckInterval = &Duration{}
+			return v.RetentionCheckInterval.Deserialize(d)
+		case schemas.InfluxDBv3CoreParameters_snapshottedWalFilesToKeep:
+			v.SnapshottedWalFilesToKeep = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_snapshottedWalFilesToKeep, v.SnapshottedWalFilesToKeep)
+		case schemas.InfluxDBv3CoreParameters_tableIndexCacheConcurrencyLimit:
+			v.TableIndexCacheConcurrencyLimit = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_tableIndexCacheConcurrencyLimit, v.TableIndexCacheConcurrencyLimit)
+		case schemas.InfluxDBv3CoreParameters_tableIndexCacheMaxEntries:
+			v.TableIndexCacheMaxEntries = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_tableIndexCacheMaxEntries, v.TableIndexCacheMaxEntries)
+		case schemas.InfluxDBv3CoreParameters_walMaxWriteBufferSize:
+			v.WalMaxWriteBufferSize = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_walMaxWriteBufferSize, v.WalMaxWriteBufferSize)
+		case schemas.InfluxDBv3CoreParameters_walReplayConcurrencyLimit:
+			v.WalReplayConcurrencyLimit = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_walReplayConcurrencyLimit, v.WalReplayConcurrencyLimit)
+		case schemas.InfluxDBv3CoreParameters_walReplayFailOnError:
+			v.WalReplayFailOnError = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3CoreParameters_walReplayFailOnError, v.WalReplayFailOnError)
+		case schemas.InfluxDBv3CoreParameters_walSnapshotSize:
+			v.WalSnapshotSize = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3CoreParameters_walSnapshotSize, v.WalSnapshotSize)
+		}
+		return nil
+	})
+}
+
+// The compute topology for an InfluxDB 3 Enterprise cluster, expressed as a list
+// of node groups.
+type InfluxDBv3EnterpriseDeploymentConfiguration struct {
+
+	// The node groups that make up the cluster. Across all node groups, the cluster
+	// must include 1 to 4 nodes with the INGEST mode, 0 to 14 nodes with the QUERY
+	// mode, and exactly one node with the COMPACT mode.
+	//
+	// This member is required.
+	NodeGroups []NodeGroup
+
+	noSmithyDocumentSerde
+}
+
+func (v *InfluxDBv3EnterpriseDeploymentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InfluxDBv3EnterpriseDeploymentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InfluxDBv3EnterpriseDeploymentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeGroups != nil {
+		serializeNodeGroupList(s, schemas.InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups, v.NodeGroups)
+	}
+}
+func (v *InfluxDBv3EnterpriseDeploymentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InfluxDBv3EnterpriseDeploymentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups:
+			return deserializeNodeGroupList(d, schemas.InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups, &v.NodeGroups)
+		}
+		return nil
+	})
+}
+
 // All the customer-modifiable InfluxDB v3 Enterprise parameters in Timestream for
 // InfluxDB.
 type InfluxDBv3EnterpriseParameters struct {
-
-	// Specifies if the compactor instance should be a standalone instance or not.
-	//
-	// This member is required.
-	DedicatedCompactor *bool
-
-	// Specifies number of instances in the DbCluster which can both ingest and query.
-	//
-	// This member is required.
-	IngestQueryInstances *int32
-
-	// Specifies number of instances in the DbCluster which can only query.
-	//
-	// This member is required.
-	QueryOnlyInstances *int32
 
 	// Defines how often the catalog synchronizes across cluster nodes.
 	//
@@ -861,6 +2082,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	// Uses a cached parquet loader when reading parquet files from the object store.
 	DataFusionUseCachedParquetLoader *bool
 
+	// Specifies if the compactor instance should be a standalone instance or not.
+	//
+	// Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster
+	// to define the cluster topology instead. When you supply a deployment
+	// configuration, Timestream for InfluxDB ignores this parameter.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
+	DedicatedCompactor *bool
+
 	// Specifies the grace period before permanently deleting data.
 	//
 	// Default: 24h
@@ -910,6 +2140,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	//
 	// Default: 90d
 	HardDeleteDefaultDuration *Duration
+
+	// Specifies number of instances in the DbCluster which can both ingest and query.
+	//
+	// Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster
+	// to define the cluster topology instead. When you supply a deployment
+	// configuration, Timestream for InfluxDB ignores this parameter.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
+	IngestQueryInstances *int32
 
 	// Specifies the interval to evict expired entries from the Last-N-Value cache,
 	// expressed as a human-readable duration–for example: 20s, 1m, 1h.
@@ -980,6 +2219,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	// Default: 1000
 	QueryLogSize *int32
 
+	// Specifies number of instances in the DbCluster which can only query.
+	//
+	// Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster
+	// to define the cluster topology instead. When you supply a deployment
+	// configuration, Timestream for InfluxDB ignores this parameter.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
+	QueryOnlyInstances *int32
+
 	// Specifies the interval at which data replication occurs between cluster nodes.
 	//
 	// Default: 250ms
@@ -990,6 +2238,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	//
 	// Default: 30m
 	RetentionCheckInterval *Duration
+
+	// The time-based trigger that controls how often the ingester creates snapshots.
+	// This value is also used on query nodes as the bucket rotation interval for the
+	// replica buffer.
+	SnapshotDuration *Duration
+
+	// The maximum size of the active snapshot bucket before it is rotated for
+	// snapshotting.
+	SnapshotSize PercentOrAbsoluteLong
 
 	// Specifies the number of snapshotted WAL files to retain in the object store.
 	// Flushing the WAL files does not clear the WAL files immediately; they are
@@ -1007,6 +2264,16 @@ type InfluxDBv3EnterpriseParameters struct {
 	//
 	// Default: 1000
 	TableIndexCacheMaxEntries *int32
+
+	// Specifies whether to migrate the cluster from the Parquet storage engine to
+	// PachaTree. This action cannot be reversed. To create a new cluster on Parquet,
+	// set this to false.
+	UpgradePachaTree *bool
+
+	// The maximum size, in bytes, of the in-memory WAL buffer before a flush is
+	// triggered regardless of the flush interval. Increase this value if WAL files are
+	// flushed before the interval elapses.
+	WalBufferSize *int64
 
 	// Specifies the maximum number of write requests that can be buffered before a
 	// flush must be executed and succeed.
@@ -1034,6 +2301,408 @@ type InfluxDBv3EnterpriseParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InfluxDBv3EnterpriseParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InfluxDBv3EnterpriseParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogSyncInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_catalogSyncInterval)
+		v.CatalogSyncInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompactionCheckInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_compactionCheckInterval)
+		v.CompactionCheckInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompactionCleanupWait != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_compactionCleanupWait)
+		v.CompactionCleanupWait.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompactionGen2Duration != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_compactionGen2Duration)
+		v.CompactionGen2Duration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompactionMaxNumFilesPerPlan != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_compactionMaxNumFilesPerPlan, *v.CompactionMaxNumFilesPerPlan)
+	}
+	if v.CompactionMultipliers != nil {
+		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_compactionMultipliers, *v.CompactionMultipliers)
+	}
+	if v.CompactionRowLimit != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_compactionRowLimit, *v.CompactionRowLimit)
+	}
+	if v.DataFusionConfig != nil {
+		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_dataFusionConfig, *v.DataFusionConfig)
+	}
+	if v.DataFusionMaxParquetFanout != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionMaxParquetFanout, *v.DataFusionMaxParquetFanout)
+	}
+	if v.DataFusionNumThreads != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionNumThreads, *v.DataFusionNumThreads)
+	}
+	if v.DataFusionRuntimeDisableLifoSlot != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeDisableLifoSlot, *v.DataFusionRuntimeDisableLifoSlot)
+	}
+	if v.DataFusionRuntimeEventInterval != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeEventInterval, *v.DataFusionRuntimeEventInterval)
+	}
+	if v.DataFusionRuntimeGlobalQueueInterval != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeGlobalQueueInterval, *v.DataFusionRuntimeGlobalQueueInterval)
+	}
+	if v.DataFusionRuntimeMaxBlockingThreads != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeMaxBlockingThreads, *v.DataFusionRuntimeMaxBlockingThreads)
+	}
+	if v.DataFusionRuntimeMaxIoEventsPerTick != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeMaxIoEventsPerTick, *v.DataFusionRuntimeMaxIoEventsPerTick)
+	}
+	if v.DataFusionRuntimeThreadKeepAlive != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeThreadKeepAlive)
+		v.DataFusionRuntimeThreadKeepAlive.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataFusionRuntimeThreadPriority != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeThreadPriority, *v.DataFusionRuntimeThreadPriority)
+	}
+	if v.DataFusionRuntimeType != "" {
+		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeType, string(v.DataFusionRuntimeType))
+	}
+	if v.DataFusionUseCachedParquetLoader != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_dataFusionUseCachedParquetLoader, *v.DataFusionUseCachedParquetLoader)
+	}
+	if v.DedicatedCompactor != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_dedicatedCompactor, *v.DedicatedCompactor)
+	}
+	if v.DeleteGracePeriod != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_deleteGracePeriod)
+		v.DeleteGracePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisableParquetMemCache != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_disableParquetMemCache, *v.DisableParquetMemCache)
+	}
+	if v.DistinctCacheEvictionInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_distinctCacheEvictionInterval)
+		v.DistinctCacheEvictionInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DistinctValueCacheDisableFromHistory != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_distinctValueCacheDisableFromHistory, *v.DistinctValueCacheDisableFromHistory)
+	}
+	if v.ExecMemPoolBytes != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_execMemPoolBytes, v.ExecMemPoolBytes)
+	}
+	if v.ForceSnapshotMemThreshold != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_forceSnapshotMemThreshold, v.ForceSnapshotMemThreshold)
+	}
+	if v.Gen1Duration != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_gen1Duration)
+		v.Gen1Duration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Gen1LookbackDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_gen1LookbackDuration)
+		v.Gen1LookbackDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HardDeleteDefaultDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_hardDeleteDefaultDuration)
+		v.HardDeleteDefaultDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestQueryInstances != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_ingestQueryInstances, *v.IngestQueryInstances)
+	}
+	if v.LastCacheEvictionInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_lastCacheEvictionInterval)
+		v.LastCacheEvictionInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastValueCacheDisableFromHistory != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_lastValueCacheDisableFromHistory, *v.LastValueCacheDisableFromHistory)
+	}
+	if v.LogFilter != nil {
+		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_logFilter, *v.LogFilter)
+	}
+	if v.LogFormat != "" {
+		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_logFormat, string(v.LogFormat))
+	}
+	if v.MaxHttpRequestSize != nil {
+		s.WriteInt64(schemas.InfluxDBv3EnterpriseParameters_maxHttpRequestSize, *v.MaxHttpRequestSize)
+	}
+	if v.ParquetMemCachePruneInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_parquetMemCachePruneInterval)
+		v.ParquetMemCachePruneInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParquetMemCachePrunePercentage != nil {
+		s.WriteFloat32(schemas.InfluxDBv3EnterpriseParameters_parquetMemCachePrunePercentage, *v.ParquetMemCachePrunePercentage)
+	}
+	if v.ParquetMemCacheQueryPathDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_parquetMemCacheQueryPathDuration)
+		v.ParquetMemCacheQueryPathDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParquetMemCacheSize != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_parquetMemCacheSize, v.ParquetMemCacheSize)
+	}
+	if v.PluginRepositorySecretArn != nil {
+		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_pluginRepositorySecretArn, *v.PluginRepositorySecretArn)
+	}
+	if v.PluginRepositoryUrl != nil {
+		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_pluginRepositoryUrl, *v.PluginRepositoryUrl)
+	}
+	if v.PreemptiveCacheAge != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_preemptiveCacheAge)
+		v.PreemptiveCacheAge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryFileLimit != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_queryFileLimit, *v.QueryFileLimit)
+	}
+	if v.QueryLogSize != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_queryLogSize, *v.QueryLogSize)
+	}
+	if v.QueryOnlyInstances != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_queryOnlyInstances, *v.QueryOnlyInstances)
+	}
+	if v.ReplicationInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_replicationInterval)
+		v.ReplicationInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetentionCheckInterval != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_retentionCheckInterval)
+		v.RetentionCheckInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotDuration != nil {
+		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_snapshotDuration)
+		v.SnapshotDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotSize != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_snapshotSize, v.SnapshotSize)
+	}
+	if v.SnapshottedWalFilesToKeep != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_snapshottedWalFilesToKeep, *v.SnapshottedWalFilesToKeep)
+	}
+	if v.TableIndexCacheConcurrencyLimit != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_tableIndexCacheConcurrencyLimit, *v.TableIndexCacheConcurrencyLimit)
+	}
+	if v.TableIndexCacheMaxEntries != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_tableIndexCacheMaxEntries, *v.TableIndexCacheMaxEntries)
+	}
+	if v.UpgradePachaTree != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_upgradePachaTree, *v.UpgradePachaTree)
+	}
+	if v.WalBufferSize != nil {
+		s.WriteInt64(schemas.InfluxDBv3EnterpriseParameters_walBufferSize, *v.WalBufferSize)
+	}
+	if v.WalMaxWriteBufferSize != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_walMaxWriteBufferSize, *v.WalMaxWriteBufferSize)
+	}
+	if v.WalReplayConcurrencyLimit != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_walReplayConcurrencyLimit, *v.WalReplayConcurrencyLimit)
+	}
+	if v.WalReplayFailOnError != nil {
+		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_walReplayFailOnError, *v.WalReplayFailOnError)
+	}
+	if v.WalSnapshotSize != nil {
+		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_walSnapshotSize, *v.WalSnapshotSize)
+	}
+}
+func (v *InfluxDBv3EnterpriseParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InfluxDBv3EnterpriseParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InfluxDBv3EnterpriseParameters_catalogSyncInterval:
+			v.CatalogSyncInterval = &Duration{}
+			return v.CatalogSyncInterval.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_compactionCheckInterval:
+			v.CompactionCheckInterval = &Duration{}
+			return v.CompactionCheckInterval.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_compactionCleanupWait:
+			v.CompactionCleanupWait = &Duration{}
+			return v.CompactionCleanupWait.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_compactionGen2Duration:
+			v.CompactionGen2Duration = &Duration{}
+			return v.CompactionGen2Duration.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_compactionMaxNumFilesPerPlan:
+			v.CompactionMaxNumFilesPerPlan = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_compactionMaxNumFilesPerPlan, v.CompactionMaxNumFilesPerPlan)
+		case schemas.InfluxDBv3EnterpriseParameters_compactionMultipliers:
+			v.CompactionMultipliers = new(string)
+			return d.ReadString(schemas.InfluxDBv3EnterpriseParameters_compactionMultipliers, v.CompactionMultipliers)
+		case schemas.InfluxDBv3EnterpriseParameters_compactionRowLimit:
+			v.CompactionRowLimit = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_compactionRowLimit, v.CompactionRowLimit)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionConfig:
+			v.DataFusionConfig = new(string)
+			return d.ReadString(schemas.InfluxDBv3EnterpriseParameters_dataFusionConfig, v.DataFusionConfig)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionMaxParquetFanout:
+			v.DataFusionMaxParquetFanout = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionMaxParquetFanout, v.DataFusionMaxParquetFanout)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionNumThreads:
+			v.DataFusionNumThreads = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionNumThreads, v.DataFusionNumThreads)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeDisableLifoSlot:
+			v.DataFusionRuntimeDisableLifoSlot = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeDisableLifoSlot, v.DataFusionRuntimeDisableLifoSlot)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeEventInterval:
+			v.DataFusionRuntimeEventInterval = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeEventInterval, v.DataFusionRuntimeEventInterval)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeGlobalQueueInterval:
+			v.DataFusionRuntimeGlobalQueueInterval = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeGlobalQueueInterval, v.DataFusionRuntimeGlobalQueueInterval)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeMaxBlockingThreads:
+			v.DataFusionRuntimeMaxBlockingThreads = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeMaxBlockingThreads, v.DataFusionRuntimeMaxBlockingThreads)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeMaxIoEventsPerTick:
+			v.DataFusionRuntimeMaxIoEventsPerTick = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeMaxIoEventsPerTick, v.DataFusionRuntimeMaxIoEventsPerTick)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeThreadKeepAlive:
+			v.DataFusionRuntimeThreadKeepAlive = &Duration{}
+			return v.DataFusionRuntimeThreadKeepAlive.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeThreadPriority:
+			v.DataFusionRuntimeThreadPriority = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeThreadPriority, v.DataFusionRuntimeThreadPriority)
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeType:
+			var ev string
+			if err := d.ReadString(schemas.InfluxDBv3EnterpriseParameters_dataFusionRuntimeType, &ev); err != nil {
+				return err
+			}
+			v.DataFusionRuntimeType = DataFusionRuntimeType(ev)
+			return nil
+		case schemas.InfluxDBv3EnterpriseParameters_dataFusionUseCachedParquetLoader:
+			v.DataFusionUseCachedParquetLoader = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_dataFusionUseCachedParquetLoader, v.DataFusionUseCachedParquetLoader)
+		case schemas.InfluxDBv3EnterpriseParameters_dedicatedCompactor:
+			v.DedicatedCompactor = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_dedicatedCompactor, v.DedicatedCompactor)
+		case schemas.InfluxDBv3EnterpriseParameters_deleteGracePeriod:
+			v.DeleteGracePeriod = &Duration{}
+			return v.DeleteGracePeriod.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_disableParquetMemCache:
+			v.DisableParquetMemCache = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_disableParquetMemCache, v.DisableParquetMemCache)
+		case schemas.InfluxDBv3EnterpriseParameters_distinctCacheEvictionInterval:
+			v.DistinctCacheEvictionInterval = &Duration{}
+			return v.DistinctCacheEvictionInterval.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_distinctValueCacheDisableFromHistory:
+			v.DistinctValueCacheDisableFromHistory = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_distinctValueCacheDisableFromHistory, v.DistinctValueCacheDisableFromHistory)
+		case schemas.InfluxDBv3EnterpriseParameters_execMemPoolBytes:
+			return deserializePercentOrAbsoluteLong(d, schemas.InfluxDBv3EnterpriseParameters_execMemPoolBytes, &v.ExecMemPoolBytes)
+		case schemas.InfluxDBv3EnterpriseParameters_forceSnapshotMemThreshold:
+			return deserializePercentOrAbsoluteLong(d, schemas.InfluxDBv3EnterpriseParameters_forceSnapshotMemThreshold, &v.ForceSnapshotMemThreshold)
+		case schemas.InfluxDBv3EnterpriseParameters_gen1Duration:
+			v.Gen1Duration = &Duration{}
+			return v.Gen1Duration.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_gen1LookbackDuration:
+			v.Gen1LookbackDuration = &Duration{}
+			return v.Gen1LookbackDuration.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_hardDeleteDefaultDuration:
+			v.HardDeleteDefaultDuration = &Duration{}
+			return v.HardDeleteDefaultDuration.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_ingestQueryInstances:
+			v.IngestQueryInstances = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_ingestQueryInstances, v.IngestQueryInstances)
+		case schemas.InfluxDBv3EnterpriseParameters_lastCacheEvictionInterval:
+			v.LastCacheEvictionInterval = &Duration{}
+			return v.LastCacheEvictionInterval.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_lastValueCacheDisableFromHistory:
+			v.LastValueCacheDisableFromHistory = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_lastValueCacheDisableFromHistory, v.LastValueCacheDisableFromHistory)
+		case schemas.InfluxDBv3EnterpriseParameters_logFilter:
+			v.LogFilter = new(string)
+			return d.ReadString(schemas.InfluxDBv3EnterpriseParameters_logFilter, v.LogFilter)
+		case schemas.InfluxDBv3EnterpriseParameters_logFormat:
+			var ev string
+			if err := d.ReadString(schemas.InfluxDBv3EnterpriseParameters_logFormat, &ev); err != nil {
+				return err
+			}
+			v.LogFormat = LogFormats(ev)
+			return nil
+		case schemas.InfluxDBv3EnterpriseParameters_maxHttpRequestSize:
+			v.MaxHttpRequestSize = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv3EnterpriseParameters_maxHttpRequestSize, v.MaxHttpRequestSize)
+		case schemas.InfluxDBv3EnterpriseParameters_parquetMemCachePruneInterval:
+			v.ParquetMemCachePruneInterval = &Duration{}
+			return v.ParquetMemCachePruneInterval.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_parquetMemCachePrunePercentage:
+			v.ParquetMemCachePrunePercentage = new(float32)
+			return d.ReadFloat32(schemas.InfluxDBv3EnterpriseParameters_parquetMemCachePrunePercentage, v.ParquetMemCachePrunePercentage)
+		case schemas.InfluxDBv3EnterpriseParameters_parquetMemCacheQueryPathDuration:
+			v.ParquetMemCacheQueryPathDuration = &Duration{}
+			return v.ParquetMemCacheQueryPathDuration.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_parquetMemCacheSize:
+			return deserializePercentOrAbsoluteLong(d, schemas.InfluxDBv3EnterpriseParameters_parquetMemCacheSize, &v.ParquetMemCacheSize)
+		case schemas.InfluxDBv3EnterpriseParameters_pluginRepositorySecretArn:
+			v.PluginRepositorySecretArn = new(string)
+			return d.ReadString(schemas.InfluxDBv3EnterpriseParameters_pluginRepositorySecretArn, v.PluginRepositorySecretArn)
+		case schemas.InfluxDBv3EnterpriseParameters_pluginRepositoryUrl:
+			v.PluginRepositoryUrl = new(string)
+			return d.ReadString(schemas.InfluxDBv3EnterpriseParameters_pluginRepositoryUrl, v.PluginRepositoryUrl)
+		case schemas.InfluxDBv3EnterpriseParameters_preemptiveCacheAge:
+			v.PreemptiveCacheAge = &Duration{}
+			return v.PreemptiveCacheAge.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_queryFileLimit:
+			v.QueryFileLimit = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_queryFileLimit, v.QueryFileLimit)
+		case schemas.InfluxDBv3EnterpriseParameters_queryLogSize:
+			v.QueryLogSize = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_queryLogSize, v.QueryLogSize)
+		case schemas.InfluxDBv3EnterpriseParameters_queryOnlyInstances:
+			v.QueryOnlyInstances = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_queryOnlyInstances, v.QueryOnlyInstances)
+		case schemas.InfluxDBv3EnterpriseParameters_replicationInterval:
+			v.ReplicationInterval = &Duration{}
+			return v.ReplicationInterval.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_retentionCheckInterval:
+			v.RetentionCheckInterval = &Duration{}
+			return v.RetentionCheckInterval.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_snapshotDuration:
+			v.SnapshotDuration = &Duration{}
+			return v.SnapshotDuration.Deserialize(d)
+		case schemas.InfluxDBv3EnterpriseParameters_snapshotSize:
+			return deserializePercentOrAbsoluteLong(d, schemas.InfluxDBv3EnterpriseParameters_snapshotSize, &v.SnapshotSize)
+		case schemas.InfluxDBv3EnterpriseParameters_snapshottedWalFilesToKeep:
+			v.SnapshottedWalFilesToKeep = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_snapshottedWalFilesToKeep, v.SnapshottedWalFilesToKeep)
+		case schemas.InfluxDBv3EnterpriseParameters_tableIndexCacheConcurrencyLimit:
+			v.TableIndexCacheConcurrencyLimit = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_tableIndexCacheConcurrencyLimit, v.TableIndexCacheConcurrencyLimit)
+		case schemas.InfluxDBv3EnterpriseParameters_tableIndexCacheMaxEntries:
+			v.TableIndexCacheMaxEntries = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_tableIndexCacheMaxEntries, v.TableIndexCacheMaxEntries)
+		case schemas.InfluxDBv3EnterpriseParameters_upgradePachaTree:
+			v.UpgradePachaTree = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_upgradePachaTree, v.UpgradePachaTree)
+		case schemas.InfluxDBv3EnterpriseParameters_walBufferSize:
+			v.WalBufferSize = new(int64)
+			return d.ReadInt64(schemas.InfluxDBv3EnterpriseParameters_walBufferSize, v.WalBufferSize)
+		case schemas.InfluxDBv3EnterpriseParameters_walMaxWriteBufferSize:
+			v.WalMaxWriteBufferSize = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_walMaxWriteBufferSize, v.WalMaxWriteBufferSize)
+		case schemas.InfluxDBv3EnterpriseParameters_walReplayConcurrencyLimit:
+			v.WalReplayConcurrencyLimit = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_walReplayConcurrencyLimit, v.WalReplayConcurrencyLimit)
+		case schemas.InfluxDBv3EnterpriseParameters_walReplayFailOnError:
+			v.WalReplayFailOnError = new(bool)
+			return d.ReadBool(schemas.InfluxDBv3EnterpriseParameters_walReplayFailOnError, v.WalReplayFailOnError)
+		case schemas.InfluxDBv3EnterpriseParameters_walSnapshotSize:
+			v.WalSnapshotSize = new(int32)
+			return d.ReadInt32(schemas.InfluxDBv3EnterpriseParameters_walSnapshotSize, v.WalSnapshotSize)
+		}
+		return nil
+	})
+}
+
 // Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 type LogDeliveryConfiguration struct {
 
@@ -1043,6 +2712,30 @@ type LogDeliveryConfiguration struct {
 	S3Configuration *S3Configuration
 
 	noSmithyDocumentSerde
+}
+
+func (v *LogDeliveryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogDeliveryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogDeliveryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.LogDeliveryConfiguration_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LogDeliveryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogDeliveryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogDeliveryConfiguration_s3Configuration:
+			v.S3Configuration = &S3Configuration{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the maintenance schedule for a DB instance or cluster, defining when
@@ -1065,6 +2758,108 @@ type MaintenanceSchedule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MaintenanceSchedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MaintenanceSchedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MaintenanceSchedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.MaintenanceSchedule_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.MaintenanceSchedule_timezone, *v.Timezone)
+	}
+}
+func (v *MaintenanceSchedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MaintenanceSchedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MaintenanceSchedule_preferredMaintenanceWindow:
+			v.PreferredMaintenanceWindow = new(string)
+			return d.ReadString(schemas.MaintenanceSchedule_preferredMaintenanceWindow, v.PreferredMaintenanceWindow)
+		case schemas.MaintenanceSchedule_timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.MaintenanceSchedule_timezone, v.Timezone)
+		}
+		return nil
+	})
+}
+
+// A group of one or more nodes in a Timestream for InfluxDB cluster that share
+// the same instance modes and instance type. A cluster's compute topology is
+// defined as a list of node groups.
+type NodeGroup struct {
+
+	// The number of nodes in this group. Valid values are 1 to 13.
+	//
+	// This member is required.
+	Count *int32
+
+	// The functions that the nodes in this group perform. Provide from 1 to 4 unique
+	// modes. Valid modes:
+	//
+	//   - INGEST – Nodes in this mode ingest data. Across all node groups, INGEST
+	//   nodes must total between 1 and 4.
+	//
+	//   - QUERY – Nodes in this mode query data. Across all node groups, QUERY nodes
+	//   must total between 0 and 14.
+	//
+	//   - COMPACT – Nodes in this mode compact data. Exactly one node across all node
+	//   groups must have this mode. If the cluster has more than three non-compaction
+	//   nodes, place the COMPACT node in its own dedicated node group.
+	//
+	//   - PROCESS – Nodes in this mode process data with the processing engine.
+	//
+	// This member is required.
+	InstanceModes []InstanceMode
+
+	// The Timestream for InfluxDB DB instance type to run InfluxDB on for the nodes
+	// in this group.
+	//
+	// This member is required.
+	InstanceType DbInstanceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *NodeGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.NodeGroup_count, *v.Count)
+	}
+	if v.InstanceModes != nil {
+		serializeInstanceModeList(s, schemas.NodeGroup_instanceModes, v.InstanceModes)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.NodeGroup_instanceType, string(v.InstanceType))
+	}
+}
+func (v *NodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeGroup_count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.NodeGroup_count, v.Count)
+		case schemas.NodeGroup_instanceModes:
+			return deserializeInstanceModeList(d, schemas.NodeGroup_instanceModes, &v.InstanceModes)
+		case schemas.NodeGroup_instanceType:
+			var ev string
+			if err := d.ReadString(schemas.NodeGroup_instanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = DbInstanceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The parameters that comprise the parameter group.
 //
 // The following types satisfy this interface:
@@ -1084,6 +2879,14 @@ type ParametersMemberInfluxDBv2 struct {
 }
 
 func (*ParametersMemberInfluxDBv2) isParameters() {}
+func (v *ParametersMemberInfluxDBv2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Parameters_InfluxDBv2)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ParametersMemberInfluxDBv2) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // All the customer-modifiable InfluxDB v3 Core parameters in Timestream for
 // InfluxDB.
@@ -1094,6 +2897,14 @@ type ParametersMemberInfluxDBv3Core struct {
 }
 
 func (*ParametersMemberInfluxDBv3Core) isParameters() {}
+func (v *ParametersMemberInfluxDBv3Core) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Parameters_InfluxDBv3Core)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ParametersMemberInfluxDBv3Core) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // All the customer-modifiable InfluxDB v3 Enterprise parameters in Timestream for
 // InfluxDB.
@@ -1104,6 +2915,14 @@ type ParametersMemberInfluxDBv3Enterprise struct {
 }
 
 func (*ParametersMemberInfluxDBv3Enterprise) isParameters() {}
+func (v *ParametersMemberInfluxDBv3Enterprise) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Parameters_InfluxDBv3Enterprise)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ParametersMemberInfluxDBv3Enterprise) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Percent or Absolute Long for InfluxDB parameters
 //
@@ -1123,6 +2942,12 @@ type PercentOrAbsoluteLongMemberAbsolute struct {
 }
 
 func (*PercentOrAbsoluteLongMemberAbsolute) isPercentOrAbsoluteLong() {}
+func (v *PercentOrAbsoluteLongMemberAbsolute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.PercentOrAbsoluteLong_absolute, v.Value)
+}
+func (v *PercentOrAbsoluteLongMemberAbsolute) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt64(schemas.PercentOrAbsoluteLong_absolute, &v.Value)
+}
 
 // Percent for InfluxDB parameters.
 type PercentOrAbsoluteLongMemberPercent struct {
@@ -1132,6 +2957,12 @@ type PercentOrAbsoluteLongMemberPercent struct {
 }
 
 func (*PercentOrAbsoluteLongMemberPercent) isPercentOrAbsoluteLong() {}
+func (v *PercentOrAbsoluteLongMemberPercent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.PercentOrAbsoluteLong_percent, v.Value)
+}
+func (v *PercentOrAbsoluteLongMemberPercent) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.PercentOrAbsoluteLong_percent, &v.Value)
+}
 
 // Configuration for S3 bucket log delivery.
 type S3Configuration struct {
@@ -1149,6 +2980,34 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Configuration_bucketName, *v.BucketName)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.S3Configuration_enabled, *v.Enabled)
+	}
+}
+func (v *S3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Configuration_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Configuration_bucketName, v.BucketName)
+		case schemas.S3Configuration_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.S3Configuration_enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1160,5 +3019,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isParameters()            {}
-func (*UnknownUnionMember) isPercentOrAbsoluteLong() {}
+func (*UnknownUnionMember) isDeploymentConfiguration() {}
+func (*UnknownUnionMember) isParameters()              {}
+func (*UnknownUnionMember) isPercentOrAbsoluteLong()   {}

@@ -56,7 +56,9 @@ func (v *UpdateSecurityControlInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.LastUpdateReason != nil {
 		s.WriteString(schemas.UpdateSecurityControlRequest_LastUpdateReason, *v.LastUpdateReason)
 	}
-	serializeParameters(s, schemas.UpdateSecurityControlRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.UpdateSecurityControlRequest_Parameters, v.Parameters)
+	}
 	if v.SecurityControlId != nil {
 		s.WriteString(schemas.UpdateSecurityControlRequest_SecurityControlId, *v.SecurityControlId)
 	}

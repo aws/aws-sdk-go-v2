@@ -7,9 +7,6 @@ import (
 )
 
 func serializeCertificateHashes(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeCertificateHashes(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeEncryptionAlgorithms(s smithy.ShapeSerializer, schema *smithy.Schema, v []EncryptionAlgorithm) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serializeEncryptionAlgorithms(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeHashAlgorithms(s smithy.ShapeSerializer, schema *smithy.Schema, v []HashAlgorithm) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -40,9 +31,6 @@ func serializeHashAlgorithms(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeImageFormats(s smithy.ShapeSerializer, schema *smithy.Schema, v []ImageFormat) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -51,9 +39,6 @@ func serializeImageFormats(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializePermissions(s smithy.ShapeSerializer, schema *smithy.Schema, v []Permission) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -64,9 +49,6 @@ func serializePermissions(s smithy.ShapeSerializer, schema *smithy.Schema, v []P
 }
 
 func serializeRevokedEntities(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -75,9 +57,6 @@ func serializeRevokedEntities(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSigningJobs(s smithy.ShapeSerializer, schema *smithy.Schema, v []SigningJob) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -88,9 +67,6 @@ func serializeSigningJobs(s smithy.ShapeSerializer, schema *smithy.Schema, v []S
 }
 
 func serializeSigningPlatforms(s smithy.ShapeSerializer, schema *smithy.Schema, v []SigningPlatform) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -101,9 +77,6 @@ func serializeSigningPlatforms(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSigningProfiles(s smithy.ShapeSerializer, schema *smithy.Schema, v []SigningProfile) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -114,9 +87,6 @@ func serializeSigningProfiles(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeStatuses(s smithy.ShapeSerializer, schema *smithy.Schema, v []SigningProfileStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -125,9 +95,6 @@ func serializeStatuses(s smithy.ShapeSerializer, schema *smithy.Schema, v []Sign
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -371,9 +338,6 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func serializeMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -383,9 +347,6 @@ func serializeMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v map[st
 }
 
 func serializeSigningParameters(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -395,9 +356,6 @@ func serializeSigningParameters(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

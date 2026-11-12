@@ -1179,9 +1179,6 @@ func deserializeVideoSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *Vid
 }
 
 func serializeAdditionalModelResponseFieldPaths(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1190,9 +1187,6 @@ func serializeAdditionalModelResponseFieldPaths(s smithy.ShapeSerializer, schema
 }
 
 func serializeAsyncInvokeSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []AsyncInvokeSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1203,9 +1197,6 @@ func serializeAsyncInvokeSummaries(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeCacheDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CacheDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1216,9 +1207,6 @@ func serializeCacheDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeCitationGeneratedContentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CitationGeneratedContent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeCitationGeneratedContent(s, schema.ListMember(), vv)
@@ -1227,9 +1215,6 @@ func serializeCitationGeneratedContentList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeCitations(s smithy.ShapeSerializer, schema *smithy.Schema, v []Citation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1240,9 +1225,6 @@ func serializeCitations(s smithy.ShapeSerializer, schema *smithy.Schema, v []Cit
 }
 
 func serializeCitationSourceContentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CitationSourceContent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeCitationSourceContent(s, schema.ListMember(), vv)
@@ -1251,9 +1233,6 @@ func serializeCitationSourceContentList(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeCitationSourceContentListDelta(s smithy.ShapeSerializer, schema *smithy.Schema, v []CitationSourceContentDelta) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1264,9 +1243,6 @@ func serializeCitationSourceContentListDelta(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContentBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeContentBlock(s, schema.ListMember(), vv)
@@ -1275,9 +1251,6 @@ func serializeContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeDocumentContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []DocumentContentBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeDocumentContentBlock(s, schema.ListMember(), vv)
@@ -1286,9 +1259,6 @@ func serializeDocumentContentBlocks(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeGuardrailAssessmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAssessment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1299,9 +1269,6 @@ func serializeGuardrailAssessmentList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeGuardrailAutomatedReasoningDifferenceScenarioList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAutomatedReasoningScenario) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1312,9 +1279,6 @@ func serializeGuardrailAutomatedReasoningDifferenceScenarioList(s smithy.ShapeSe
 }
 
 func serializeGuardrailAutomatedReasoningFindingList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAutomatedReasoningFinding) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeGuardrailAutomatedReasoningFinding(s, schema.ListMember(), vv)
@@ -1323,9 +1287,6 @@ func serializeGuardrailAutomatedReasoningFindingList(s smithy.ShapeSerializer, s
 }
 
 func serializeGuardrailAutomatedReasoningInputTextReferenceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAutomatedReasoningInputTextReference) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1336,9 +1297,6 @@ func serializeGuardrailAutomatedReasoningInputTextReferenceList(s smithy.ShapeSe
 }
 
 func serializeGuardrailAutomatedReasoningRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAutomatedReasoningRule) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1349,9 +1307,6 @@ func serializeGuardrailAutomatedReasoningRuleList(s smithy.ShapeSerializer, sche
 }
 
 func serializeGuardrailAutomatedReasoningStatementList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAutomatedReasoningStatement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1362,9 +1317,6 @@ func serializeGuardrailAutomatedReasoningStatementList(s smithy.ShapeSerializer,
 }
 
 func serializeGuardrailAutomatedReasoningTranslationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAutomatedReasoningTranslation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1375,9 +1327,6 @@ func serializeGuardrailAutomatedReasoningTranslationList(s smithy.ShapeSerialize
 }
 
 func serializeGuardrailAutomatedReasoningTranslationOptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailAutomatedReasoningTranslationOption) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1388,9 +1337,6 @@ func serializeGuardrailAutomatedReasoningTranslationOptionList(s smithy.ShapeSer
 }
 
 func serializeGuardrailChecksContentBlockList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksContentBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeGuardrailChecksContentBlock(s, schema.ListMember(), vv)
@@ -1399,9 +1345,6 @@ func serializeGuardrailChecksContentBlockList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeGuardrailChecksContentFilterCategoryConfigList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksContentFilterCategoryConfig) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1412,9 +1355,6 @@ func serializeGuardrailChecksContentFilterCategoryConfigList(s smithy.ShapeSeria
 }
 
 func serializeGuardrailChecksContentFilterResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksContentFilterResultEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1425,9 +1365,6 @@ func serializeGuardrailChecksContentFilterResultList(s smithy.ShapeSerializer, s
 }
 
 func serializeGuardrailChecksMessageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksMessage) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1438,9 +1375,6 @@ func serializeGuardrailChecksMessageList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeGuardrailChecksPromptAttackCategoryConfigList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksPromptAttackCategoryConfig) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1451,9 +1385,6 @@ func serializeGuardrailChecksPromptAttackCategoryConfigList(s smithy.ShapeSerial
 }
 
 func serializeGuardrailChecksPromptAttackResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksPromptAttackResultEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1464,9 +1395,6 @@ func serializeGuardrailChecksPromptAttackResultList(s smithy.ShapeSerializer, sc
 }
 
 func serializeGuardrailChecksSensitiveInformationEntityConfigList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksSensitiveInformationEntityConfig) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1477,9 +1405,6 @@ func serializeGuardrailChecksSensitiveInformationEntityConfigList(s smithy.Shape
 }
 
 func serializeGuardrailChecksSensitiveInformationResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailChecksSensitiveInformationResultEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1490,9 +1415,6 @@ func serializeGuardrailChecksSensitiveInformationResultList(s smithy.ShapeSerial
 }
 
 func serializeGuardrailContentBlockList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailContentBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeGuardrailContentBlock(s, schema.ListMember(), vv)
@@ -1501,9 +1423,6 @@ func serializeGuardrailContentBlockList(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeGuardrailContentFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailContentFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1514,9 +1433,6 @@ func serializeGuardrailContentFilterList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeGuardrailContentQualifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailContentQualifier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1525,9 +1441,6 @@ func serializeGuardrailContentQualifierList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeGuardrailContextualGroundingFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailContextualGroundingFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1538,9 +1451,6 @@ func serializeGuardrailContextualGroundingFilters(s smithy.ShapeSerializer, sche
 }
 
 func serializeGuardrailConverseContentQualifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailConverseContentQualifier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1549,9 +1459,6 @@ func serializeGuardrailConverseContentQualifierList(s smithy.ShapeSerializer, sc
 }
 
 func serializeGuardrailCustomWordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailCustomWord) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1562,9 +1469,6 @@ func serializeGuardrailCustomWordList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeGuardrailManagedWordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailManagedWord) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1575,9 +1479,6 @@ func serializeGuardrailManagedWordList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeGuardrailOriginList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailOrigin) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1586,9 +1487,6 @@ func serializeGuardrailOriginList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeGuardrailOutputContentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailOutputContent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1599,9 +1497,6 @@ func serializeGuardrailOutputContentList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeGuardrailPiiEntityFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailPiiEntityFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1612,9 +1507,6 @@ func serializeGuardrailPiiEntityFilterList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeGuardrailRegexFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailRegexFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1625,9 +1517,6 @@ func serializeGuardrailRegexFilterList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeGuardrailTopicList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GuardrailTopic) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1638,9 +1527,6 @@ func serializeGuardrailTopicList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeMessages(s smithy.ShapeSerializer, schema *smithy.Schema, v []Message) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1651,9 +1537,6 @@ func serializeMessages(s smithy.ShapeSerializer, schema *smithy.Schema, v []Mess
 }
 
 func serializeModelOutputs(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1662,9 +1545,6 @@ func serializeModelOutputs(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeNonEmptyStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1673,9 +1553,6 @@ func serializeNonEmptyStringList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeSearchResultContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchResultContentBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1686,9 +1563,6 @@ func serializeSearchResultContentBlocks(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeSystemContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []SystemContentBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeSystemContentBlock(s, schema.ListMember(), vv)
@@ -1697,9 +1571,6 @@ func serializeSystemContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1710,9 +1581,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func serializeToolResultBlocksDelta(s smithy.ShapeSerializer, schema *smithy.Schema, v []ToolResultBlockDelta) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeToolResultBlockDelta(s, schema.ListMember(), vv)
@@ -1721,9 +1589,6 @@ func serializeToolResultBlocksDelta(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeToolResultContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []ToolResultContentBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeToolResultContentBlock(s, schema.ListMember(), vv)
@@ -1732,9 +1597,6 @@ func serializeToolResultContentBlocks(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeTools(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tool) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeTool(s, schema.ListMember(), vv)
@@ -2738,9 +2600,6 @@ func deserializeTools(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tool) e
 }
 
 func serializeGuardrailAssessmentListMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]GuardrailAssessment) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -2750,9 +2609,6 @@ func serializeGuardrailAssessmentListMap(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeGuardrailAssessmentMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]GuardrailAssessment) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -2764,9 +2620,6 @@ func serializeGuardrailAssessmentMap(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializePromptVariableMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]PromptVariableValues) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -2776,9 +2629,6 @@ func serializePromptVariableMap(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeRequestMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

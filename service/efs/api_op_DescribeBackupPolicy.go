@@ -4,7 +4,9 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeBackupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBackupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBackupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DescribeBackupPolicyRequest_FileSystemId, *v.FileSystemId)
+	}
+}
+
 type DescribeBackupPolicyOutput struct {
 
 	// Describes the file system's backup policy, indicating whether automatic backups
@@ -46,13 +60,34 @@ type DescribeBackupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBackupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupPolicyDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPolicy != nil {
+		s.WriteStruct(schemas.BackupPolicyDescription_BackupPolicy)
+		v.BackupPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBackupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupPolicyDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupPolicyDescription_BackupPolicy:
+			v.BackupPolicy = &types.BackupPolicy{}
+			return v.BackupPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBackupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBackupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupPolicy, schemas.DescribeBackupPolicyRequest, schemas.BackupPolicyDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBackupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupPolicy, schemas.DescribeBackupPolicyRequest, schemas.BackupPolicyDescription), output: &DescribeBackupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

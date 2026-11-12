@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"TransactionDescription":{"TransactionEndTime":946684800,"TransactionId":"__TransactionId__","TransactionStartTime":946684800,"TransactionStatus":"ACTIVE"}}

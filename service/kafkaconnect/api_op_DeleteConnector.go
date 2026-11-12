@@ -4,7 +4,9 @@ package kafkaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type DeleteConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.DeleteConnectorRequest_connectorArn, *v.ConnectorArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.DeleteConnectorRequest_currentVersion, *v.CurrentVersion)
+	}
+}
+
 type DeleteConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector that you requested to delete.
@@ -51,13 +68,42 @@ type DeleteConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.DeleteConnectorResponse_connectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorState != "" {
+		s.WriteString(schemas.DeleteConnectorResponse_connectorState, string(v.ConnectorState))
+	}
+}
+func (v *DeleteConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConnectorResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.DeleteConnectorResponse_connectorArn, v.ConnectorArn)
+		case schemas.DeleteConnectorResponse_connectorState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteConnectorResponse_connectorState, &ev); err != nil {
+				return err
+			}
+			v.ConnectorState = types.ConnectorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnector, schemas.DeleteConnectorRequest, schemas.DeleteConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnector, schemas.DeleteConnectorRequest, schemas.DeleteConnectorResponse), output: &DeleteConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -78,7 +78,9 @@ func (v *CreatePartnershipInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePartnershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartnershipCapabilities(s, schemas.CreatePartnershipRequest_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializePartnershipCapabilities(s, schemas.CreatePartnershipRequest_capabilities, v.Capabilities)
+	}
 	if v.CapabilityOptions != nil {
 		s.WriteStruct(schemas.CreatePartnershipRequest_capabilityOptions)
 		v.CapabilityOptions.SerializeMembers(s)
@@ -99,7 +101,9 @@ func (v *CreatePartnershipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileId != nil {
 		s.WriteString(schemas.CreatePartnershipRequest_profileId, *v.ProfileId)
 	}
-	serializeTagList(s, schemas.CreatePartnershipRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePartnershipRequest_tags, v.Tags)
+	}
 }
 
 type CreatePartnershipOutput struct {
@@ -157,7 +161,9 @@ func (v *CreatePartnershipOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePartnershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartnershipCapabilities(s, schemas.CreatePartnershipResponse_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializePartnershipCapabilities(s, schemas.CreatePartnershipResponse_capabilities, v.Capabilities)
+	}
 	if v.CapabilityOptions != nil {
 		s.WriteStruct(schemas.CreatePartnershipResponse_capabilityOptions)
 		v.CapabilityOptions.SerializeMembers(s)

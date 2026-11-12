@@ -141,7 +141,9 @@ func (v *StartBackupJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartBackupJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackupOptions(s, schemas.StartBackupJobInput_BackupOptions, v.BackupOptions)
+	if v.BackupOptions != nil {
+		serializeBackupOptions(s, schemas.StartBackupJobInput_BackupOptions, v.BackupOptions)
+	}
 	if v.BackupVaultName != nil {
 		s.WriteString(schemas.StartBackupJobInput_BackupVaultName, *v.BackupVaultName)
 	}
@@ -165,7 +167,9 @@ func (v *StartBackupJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogicallyAirGappedBackupVaultArn != nil {
 		s.WriteString(schemas.StartBackupJobInput_LogicallyAirGappedBackupVaultArn, *v.LogicallyAirGappedBackupVaultArn)
 	}
-	serializeTags(s, schemas.StartBackupJobInput_RecoveryPointTags, v.RecoveryPointTags)
+	if v.RecoveryPointTags != nil {
+		serializeTags(s, schemas.StartBackupJobInput_RecoveryPointTags, v.RecoveryPointTags)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.StartBackupJobInput_ResourceArn, *v.ResourceArn)
 	}

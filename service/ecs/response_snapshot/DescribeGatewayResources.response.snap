@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.DescribeGatewayResources
+
+{"gatewayResources":{"gatewayArn":"__GatewayArn__","resources":{"hostSharedAlb":[{"gatewayRouteArns":["__Member__","__Member__"],"listenerArn":"__ListenerArn__","loadBalancerArn":"__LoadBalancerArn__","securityGroup":"__SecurityGroup__"},{"gatewayRouteArns":["__Member__","__Member__"],"listenerArn":"__ListenerArn__","loadBalancerArn":"__LoadBalancerArn__","securityGroup":"__SecurityGroup__"}]}},"nextToken":"__NextToken__"}

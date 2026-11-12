@@ -104,7 +104,9 @@ func (v *DescribeEmailAddressOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEmailAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAliasConfigurationList(s, schemas.DescribeEmailAddressResponse_AliasConfigurations, v.AliasConfigurations)
+	if v.AliasConfigurations != nil {
+		serializeAliasConfigurationList(s, schemas.DescribeEmailAddressResponse_AliasConfigurations, v.AliasConfigurations)
+	}
 	if v.CreateTimestamp != nil {
 		s.WriteString(schemas.DescribeEmailAddressResponse_CreateTimestamp, *v.CreateTimestamp)
 	}
@@ -126,7 +128,9 @@ func (v *DescribeEmailAddressOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ModifiedTimestamp != nil {
 		s.WriteString(schemas.DescribeEmailAddressResponse_ModifiedTimestamp, *v.ModifiedTimestamp)
 	}
-	serializeTagMap(s, schemas.DescribeEmailAddressResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeEmailAddressResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeEmailAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEmailAddressResponse, func(s *smithy.Schema) error {

@@ -83,7 +83,9 @@ func (v *ListOrdersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrdersOutput_NextToken, *v.NextToken)
 	}
-	serializeOrderSummaryListDefinition(s, schemas.ListOrdersOutput_Orders, v.Orders)
+	if v.Orders != nil {
+		serializeOrderSummaryListDefinition(s, schemas.ListOrdersOutput_Orders, v.Orders)
+	}
 }
 func (v *ListOrdersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOrdersOutput, func(s *smithy.Schema) error {

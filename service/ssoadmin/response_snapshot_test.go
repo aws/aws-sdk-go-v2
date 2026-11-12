@@ -1994,8 +1994,9 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		RegionScope: types.RegionScope("CURRENT_REGION"),
 	})
 	if err != nil {
 		t.Fatal(err)

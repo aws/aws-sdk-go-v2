@@ -15,6 +15,10 @@ import (
 // each log group. You can return all your log groups or filter the results by
 // prefix. The results are ASCII-sorted by log group name.
 //
+// If an account-level retention policy applies to a log group, retentionInDays
+// shows the retention period from that policy, and retentionPolicyName shows the
+// name of the policy.
+//
 // CloudWatch Logs doesn't support IAM policies that control access to the
 // DescribeLogGroups action by using the aws:ResourceTag/key-name  condition key.
 // Other CloudWatch Logs actions do support the use of the
@@ -67,12 +71,18 @@ type DescribeLogGroupsInput struct {
 	// specified log group class. If you omit this parameter, log groups of all classes
 	// can be returned.
 	//
-	// Specifies the log group class for this log group. There are three classes:
+	// If you specify either INFREQUENT_ACCESS or ESSENTIALS , the results include log
+	// groups in both the Infrequent Access and Essentials log classes.
+	//
+	// Specifies the log group class for this log group. There are four classes:
 	//
 	//   - The Standard log class supports all CloudWatch Logs features.
 	//
 	//   - The Infrequent Access log class supports a subset of CloudWatch Logs
 	//   features and incurs lower costs.
+	//
+	//   - The Essentials log class supports a subset of CloudWatch Logs features and
+	//   incurs lower costs.
 	//
 	//   - Use the Delivery log class only for delivering Lambda logs to store in
 	//   Amazon S3 or Amazon Data Firehose. Log events in log groups in the Delivery
@@ -128,7 +138,9 @@ func (v *DescribeLogGroupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeLogGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.DescribeLogGroupsRequest_accountIdentifiers, v.AccountIdentifiers)
+	if v.AccountIdentifiers != nil {
+		serializeAccountIds(s, schemas.DescribeLogGroupsRequest_accountIdentifiers, v.AccountIdentifiers)
+	}
 	if v.IncludeLinkedAccounts != nil {
 		s.WriteBool(schemas.DescribeLogGroupsRequest_includeLinkedAccounts, *v.IncludeLinkedAccounts)
 	}
@@ -138,7 +150,9 @@ func (v *DescribeLogGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogGroupClass != "" {
 		s.WriteString(schemas.DescribeLogGroupsRequest_logGroupClass, string(v.LogGroupClass))
 	}
-	serializeDescribeLogGroupsLogGroupIdentifiers(s, schemas.DescribeLogGroupsRequest_logGroupIdentifiers, v.LogGroupIdentifiers)
+	if v.LogGroupIdentifiers != nil {
+		serializeDescribeLogGroupsLogGroupIdentifiers(s, schemas.DescribeLogGroupsRequest_logGroupIdentifiers, v.LogGroupIdentifiers)
+	}
 	if v.LogGroupNamePattern != nil {
 		s.WriteString(schemas.DescribeLogGroupsRequest_logGroupNamePattern, *v.LogGroupNamePattern)
 	}
@@ -172,7 +186,9 @@ func (v *DescribeLogGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeLogGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogGroups(s, schemas.DescribeLogGroupsResponse_logGroups, v.LogGroups)
+	if v.LogGroups != nil {
+		serializeLogGroups(s, schemas.DescribeLogGroupsResponse_logGroups, v.LogGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeLogGroupsResponse_nextToken, *v.NextToken)
 	}

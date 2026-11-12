@@ -28,8 +28,6 @@ func (c *Client) SearchTasks(ctx context.Context, params *SearchTasksInput, optF
 	return out, nil
 }
 
-// Shared input fields for all Search operations (filterExpressions,
-// sortExpressions, itemOffset, pageSize).
 type SearchTasksInput struct {
 
 	// The farm ID of the task.
@@ -86,11 +84,14 @@ func (v *SearchTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PageSize != nil {
 		s.WriteInt32(schemas.SearchTasksRequest_pageSize, *v.PageSize)
 	}
-	serializeQueueIds(s, schemas.SearchTasksRequest_queueIds, v.QueueIds)
-	serializeSearchSortExpressions(s, schemas.SearchTasksRequest_sortExpressions, v.SortExpressions)
+	if v.QueueIds != nil {
+		serializeQueueIds(s, schemas.SearchTasksRequest_queueIds, v.QueueIds)
+	}
+	if v.SortExpressions != nil {
+		serializeSearchSortExpressions(s, schemas.SearchTasksRequest_sortExpressions, v.SortExpressions)
+	}
 }
 
-// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchTasksOutput struct {
 
 	// Tasks in the search.
@@ -122,7 +123,9 @@ func (v *SearchTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextItemOffset != nil {
 		s.WriteInt32(schemas.SearchTasksResponse_nextItemOffset, *v.NextItemOffset)
 	}
-	serializeTaskSearchSummaries(s, schemas.SearchTasksResponse_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeTaskSearchSummaries(s, schemas.SearchTasksResponse_tasks, v.Tasks)
+	}
 	if v.TotalResults != nil {
 		s.WriteInt32(schemas.SearchTasksResponse_totalResults, *v.TotalResults)
 	}

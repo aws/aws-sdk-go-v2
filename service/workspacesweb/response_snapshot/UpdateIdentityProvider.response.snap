@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"identityProvider":{"identityProviderArn":"__IdentityProviderArn__","identityProviderDetails":{"key0":"__Value__"},"identityProviderName":"__IdentityProviderName__","identityProviderType":"SAML"}}

@@ -74,7 +74,9 @@ func (v *ListExportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportReferenceList(s, schemas.ListExportsResponse_Exports, v.Exports)
+	if v.Exports != nil {
+		serializeExportReferenceList(s, schemas.ListExportsResponse_Exports, v.Exports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExportsResponse_NextToken, *v.NextToken)
 	}

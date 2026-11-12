@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type DetachLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachLoadBalancersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachLoadBalancersType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachLoadBalancersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DetachLoadBalancersType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.LoadBalancerNames != nil {
+		serializeLoadBalancerNames(s, schemas.DetachLoadBalancersType_LoadBalancerNames, v.LoadBalancerNames)
+	}
+}
+func (v *DetachLoadBalancersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachLoadBalancersType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachLoadBalancersType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DetachLoadBalancersType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DetachLoadBalancersType_LoadBalancerNames:
+			return deserializeLoadBalancerNames(d, schemas.DetachLoadBalancersType_LoadBalancerNames, &v.LoadBalancerNames)
+		}
+		return nil
+	})
+}
+
 type DetachLoadBalancersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +94,26 @@ type DetachLoadBalancersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachLoadBalancersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachLoadBalancersResultType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachLoadBalancersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DetachLoadBalancersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachLoadBalancersResultType, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachLoadBalancers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachLoadBalancers, schemas.DetachLoadBalancersType, schemas.DetachLoadBalancersResultType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetachLoadBalancers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachLoadBalancers, schemas.DetachLoadBalancersType, schemas.DetachLoadBalancersResultType), output: &DetachLoadBalancersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

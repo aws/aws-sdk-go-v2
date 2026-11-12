@@ -352,7 +352,9 @@ func (v *UpdateServerInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProtocolDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProtocols(s, schemas.UpdateServerRequest_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocols(s, schemas.UpdateServerRequest_Protocols, v.Protocols)
+	}
 	if v.S3StorageOptions != nil {
 		s.WriteStruct(schemas.UpdateServerRequest_S3StorageOptions)
 		v.S3StorageOptions.SerializeMembers(s)
@@ -364,7 +366,9 @@ func (v *UpdateServerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServerId != nil {
 		s.WriteString(schemas.UpdateServerRequest_ServerId, *v.ServerId)
 	}
-	serializeStructuredLogDestinations(s, schemas.UpdateServerRequest_StructuredLogDestinations, v.StructuredLogDestinations)
+	if v.StructuredLogDestinations != nil {
+		serializeStructuredLogDestinations(s, schemas.UpdateServerRequest_StructuredLogDestinations, v.StructuredLogDestinations)
+	}
 	if v.WorkflowDetails != nil {
 		s.WriteStruct(schemas.UpdateServerRequest_WorkflowDetails)
 		v.WorkflowDetails.SerializeMembers(s)

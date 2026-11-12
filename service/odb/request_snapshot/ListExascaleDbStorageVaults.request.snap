@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: Odb.ListExascaleDbStorageVaults
 
-{"maxResults":1,"nextToken":"__NextToken__"}
+{"cloudExadataInfrastructureId":"__CloudExadataInfrastructureId__","maxResults":1,"nextToken":"__NextToken__","vaultType":"EXASCALE_INFRASTRUCTURE"}

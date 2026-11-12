@@ -580,6 +580,9 @@
                     "target": "com.amazonaws.ssm#DeleteResourcePolicy"
                 },
                 {
+                    "target": "com.amazonaws.ssm#DeregisterDefaultHostManagementConfiguration"
+                },
+                {
                     "target": "com.amazonaws.ssm#DeregisterManagedInstance"
                 },
                 {
@@ -851,6 +854,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#PutResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.ssm#RegisterDefaultHostManagementConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ssm#RegisterDefaultPatchBaseline"
@@ -7796,6 +7802,33 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ssm#DHMCPermissionModel": {
+            "type": "enum",
+            "members": {
+                "SERVICE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_MANAGED"
+                    }
+                },
+                "SELF_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF_MANAGED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#DHMCRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z0-9-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$"
+            }
+        },
         "com.amazonaws.ssm#DateTime": {
             "type": "timestamp"
         },
@@ -8287,7 +8320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds\n   to create a parameter with the same name.</p>"
+                "smithy.api#documentation": "<p>Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds\n   to create a parameter with the same name.</p>\n         <note>\n            <p>This operation is authorized against the <code>ssm:DeleteParameter</code> action. Denying\n    that action alone doesn't restrict <a>DeleteParameters</a>, which is authorized\n    against its own action. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html\">Restricting access to\n     specific parameters and paths</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#DeleteParameterRequest": {
@@ -8326,7 +8359,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to\n   create a parameter with the same name.</p>"
+                "smithy.api#documentation": "<p>Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to\n   create a parameter with the same name.</p>\n         <important>\n            <p>This operation is authorized against the <code>ssm:DeleteParameters</code> action, not\n    against <code>ssm:DeleteParameter</code>. Denying <code>ssm:DeleteParameter</code> for a\n    parameter doesn't prevent a principal from deleting that parameter with this operation. For more\n    information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html\">Restricting access to\n     specific parameters and paths</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>"
             }
         },
         "com.amazonaws.ssm#DeleteParametersRequest": {
@@ -8559,6 +8592,38 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.ssm#DeregisterDefaultHostManagementConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#DeregisterDefaultHostManagementConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#DeregisterDefaultHostManagementConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the Default Host Management Configuration (DHMC) for an Amazon Web Services account and\n   Amazon Web Services Region. After you deregister DHMC, Amazon EC2 instances are no longer automatically managed as\n   managed nodes by Amazon Web Services Systems Manager.</p>\n         <p>To use this operation, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>You need the <code>ssm:GetServiceSetting</code> and <code>ssm:ResetServiceSetting</code>\n      permissions for the <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n      service setting.</p>\n            </li>\n         </ul>\n         <p>If the registered role is service-managed, you also need the <code>iam:DeleteRole</code>\n   permission so that Amazon Web Services Systems Manager can remove the role it created.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssm#DeregisterDefaultHostManagementConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#DeregisterDefaultHostManagementConfigurationResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DeregisterManagedInstance": {
@@ -15157,7 +15222,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get information about a single parameter by specifying the parameter name.</p>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>\n         <note>\n            <p>To get information about more than one parameter at a time, use the <a>GetParameters</a> operation.</p>\n         </note>\n         <note>\n            <p>Parameter Store throughput defines the number of API transactions per second (TPS) that\n    Systems Manager can process. This applies to <code>GetParameter</code>,\n    <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and\n    Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable\n    for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently\n    or operate at smaller scale can use this default setting without additional cost.</p>\n            <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum\n    number of supported transactions per second for your account and Region. Increased throughput\n    supports applications and workloads that need concurrent access to multiple parameters. If you\n    experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For\n    more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html\">Changing Parameter Store\n     throughput</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Get information about a single parameter by specifying the parameter name.</p>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>\n         <note>\n            <p>To get information about more than one parameter at a time, use the <a>GetParameters</a> operation.</p>\n         </note>\n         <note>\n            <p>This operation is authorized against the <code>ssm:GetParameter</code> action. Denying that\n    action alone doesn't restrict <a>GetParameters</a>, <a>GetParameterHistory</a>, or <a>GetParametersByPath</a>, each of which is\n    authorized against its own action. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html\">How Parameter Store\n     authorizes parameter retrieval</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <note>\n            <p>Parameter Store throughput defines the number of API transactions per second (TPS) that\n    Systems Manager can process. This applies to <code>GetParameter</code>,\n    <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and\n    Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable\n    for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently\n    or operate at smaller scale can use this default setting without additional cost.</p>\n            <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum\n    number of supported transactions per second for your account and Region. Increased throughput\n    supports applications and workloads that need concurrent access to multiple parameters. If you\n    experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For\n    more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html\">Changing Parameter Store\n     throughput</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetParameterHistory": {
@@ -15183,7 +15248,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the history of all changes to a parameter.</p>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter,\n    then you must also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>GetParameterHistory</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Retrieves the history of all changes to a parameter.</p>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter,\n    then you must also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>GetParameterHistory</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>\n         <important>\n            <p>This operation is authorized against the <code>ssm:GetParameterHistory</code> action, not\n    against <code>ssm:GetParameter</code>. Because parameter history includes every version of a\n    parameter, including the current one, a principal who is denied\n    <code>ssm:GetParameter</code>, <code>ssm:GetParameters</code>, and\n     <code>ssm:GetParametersByPath</code> but allowed <code>ssm:GetParameterHistory</code> can still\n    read the current value. To restrict access to a parameter value, deny every action that can\n    return it. For more information, see\n     <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html\">How Parameter Store\n     authorizes parameter retrieval</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -15298,7 +15363,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get information about one or more parameters by specifying multiple parameter names.</p>\n         <note>\n            <p>To get information about a single parameter, you can use the <a>GetParameter</a>\n    operation instead.</p>\n         </note>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>\n         <note>\n            <p>Parameter Store throughput defines the number of API transactions per second (TPS) that\n    Systems Manager can process. This applies to <code>GetParameter</code>,\n    <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and\n    Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable\n    for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently\n    or operate at smaller scale can use this default setting without additional cost.</p>\n            <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum\n    number of supported transactions per second for your account and Region. Increased throughput\n    supports applications and workloads that need concurrent access to multiple parameters. If you\n    experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For\n    more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html\">Changing Parameter Store\n     throughput</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Get information about one or more parameters by specifying multiple parameter names.</p>\n         <note>\n            <p>To get information about a single parameter, you can use the <a>GetParameter</a>\n    operation instead.</p>\n         </note>\n         <important>\n            <p>This operation is authorized against the <code>ssm:GetParameters</code> action, not against\n     <code>ssm:GetParameter</code>. Denying <code>ssm:GetParameter</code> for a parameter doesn't\n    prevent a principal from retrieving that parameter with this operation. To restrict access to a\n    parameter value, deny every action that can return it. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html\">How Parameter Store\n     authorizes parameter retrieval</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>\n         <note>\n            <p>Parameter Store throughput defines the number of API transactions per second (TPS) that\n    Systems Manager can process. This applies to <code>GetParameter</code>,\n    <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and\n    Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable\n    for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently\n    or operate at smaller scale can use this default setting without additional cost.</p>\n            <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum\n    number of supported transactions per second for your account and Region. Increased throughput\n    supports applications and workloads that need concurrent access to multiple parameters. If you\n    experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For\n    more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html\">Changing Parameter Store\n     throughput</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetParametersByPath": {
@@ -15330,7 +15395,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve information about one or more parameters under a specified level in a hierarchy. </p>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>",
+                "smithy.api#documentation": "<p>Retrieve information about one or more parameters under a specified level in a hierarchy. </p>\n         <important>\n            <p>This operation is authorized against the <code>ssm:GetParametersByPath</code> action for\n    the path that you specify in the request. It isn't authorized against the individual parameters\n    that it returns, and it isn't authorized against <code>ssm:GetParameter</code>. A principal who\n    is allowed to call this operation for the path <code>/a</code> with <code>Recursive</code> set\n    to <code>true</code> receives every parameter under that path, including <code>/a/b</code>,\n    even if a policy explicitly denies access to <code>/a/b</code>.</p>\n            <p>To prevent a parameter from being returned by this operation, deny the\n     <code>ssm:GetParametersByPath</code> action on every ancestor path that could include the\n    parameter in its results. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html\">Restricting access to\n     specific parameters and paths</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>\n         <p>Parameter names can't contain spaces. The service removes any spaces specified for the\n   beginning or end of a parameter name. If the specified name for a parameter contains spaces\n   between characters, the request fails with a <code>ValidationException</code> error.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -15361,7 +15426,7 @@
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Retrieve all parameters within a hierarchy.</p>\n         <important>\n            <p>If a user has access to a path, then the user can access all levels of that path. For\n    example, if a user has permission to access path <code>/a</code>, then the user can also access\n     <code>/a/b</code>. Even if a user has explicitly been denied access in IAM for\n    parameter <code>/a/b</code>, they can still call the GetParametersByPath API operation\n    recursively for <code>/a</code> and view <code>/a/b</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>Retrieve all parameters within a hierarchy.</p>"
                     }
                 },
                 "ParameterFilters": {
@@ -27326,6 +27391,66 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.ssm#RegisterDefaultHostManagementConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#RegisterDefaultHostManagementConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#RegisterDefaultHostManagementConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables Default Host Management Configuration (DHMC) for the current Amazon Web Services account and\n   Amazon Web Services Region. With DHMC enabled, you don't need to configure additional resources, such as an\n   instance profile, to use your Amazon EC2 instances as managed nodes in Amazon Web Services Systems Manager.</p>\n         <p>To use this operation, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>You need the <code>ssm:GetServiceSetting</code> and <code>ssm:UpdateServiceSetting</code>\n      permissions for the <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n      service setting.</p>\n            </li>\n            <li>\n               <p>You need the <code>iam:GetRole</code> and <code>iam:PassRole</code> permissions for the\n      role used for Default Host Management Configuration.</p>\n            </li>\n         </ul>\n         <p>If <code>PermissionModel</code> is <code>SERVICE_MANAGED</code>, you also need the\n   <code>iam:CreateRole</code> and <code>iam:AttachRolePolicy</code> permissions so that Amazon Web Services Systems Manager\n   can create and configure the role on your behalf.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssm#RegisterDefaultHostManagementConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "PermissionModel": {
+                    "target": "com.amazonaws.ssm#DHMCPermissionModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permission model that determines how the IAM role for Default Host\n   Management Configuration is provided.</p>\n         <p>The permission model can be one of the following values:</p>\n         <dl>\n            <dt>SERVICE_MANAGED</dt>\n            <dd>\n               <p>Amazon Web Services Systems Manager creates and manages the role on your behalf.</p>\n            </dd>\n            <dt>SELF_MANAGED</dt>\n            <dd>\n               <p>You provide the role to register in <code>RoleArn</code>.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.ssm#DHMCRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the self-managed IAM role that you register\n   for Default Host Management Configuration. The requirement for this value depends on the\n   permission model:</p>\n         <ul>\n            <li>\n               <p>If <code>PermissionModel</code> is <code>SELF_MANAGED</code>, this value is\n     required.</p>\n            </li>\n            <li>\n               <p>If <code>PermissionModel</code> is <code>SERVICE_MANAGED</code>, this value must not be\n     set.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Overwrite": {
+                    "target": "com.amazonaws.ssm#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to override the role that is currently registered for Default Host\n   Management Configuration. The default is <code>false</code>, which acts as a guardrail against\n   accidentally replacing an existing configuration. Set this to <code>true</code> to replace the\n   currently registered role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#RegisterDefaultHostManagementConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.ssm#DHMCRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role registered for Default Host\n   Management Configuration. The value depends on the permission model:</p>\n         <dl>\n            <dt>SERVICE_MANAGED</dt>\n            <dd>\n               <p>The ARN of the role that Amazon Web Services Systems Manager created in the IAM reserved\n      path.</p>\n            </dd>\n            <dt>SELF_MANAGED</dt>\n            <dd>\n               <p>The <code>RoleArn</code> that you provided.</p>\n            </dd>\n         </dl>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#RegisterDefaultPatchBaseline": {

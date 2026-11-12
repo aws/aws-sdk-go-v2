@@ -47,7 +47,9 @@ func (v *BatchGetSecurityControlsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSecurityControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.BatchGetSecurityControlsRequest_SecurityControlIds, v.SecurityControlIds)
+	if v.SecurityControlIds != nil {
+		serializeStringList(s, schemas.BatchGetSecurityControlsRequest_SecurityControlIds, v.SecurityControlIds)
+	}
 }
 
 type BatchGetSecurityControlsOutput struct {
@@ -76,8 +78,12 @@ func (v *BatchGetSecurityControlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSecurityControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityControls(s, schemas.BatchGetSecurityControlsResponse_SecurityControls, v.SecurityControls)
-	serializeUnprocessedSecurityControls(s, schemas.BatchGetSecurityControlsResponse_UnprocessedIds, v.UnprocessedIds)
+	if v.SecurityControls != nil {
+		serializeSecurityControls(s, schemas.BatchGetSecurityControlsResponse_SecurityControls, v.SecurityControls)
+	}
+	if v.UnprocessedIds != nil {
+		serializeUnprocessedSecurityControls(s, schemas.BatchGetSecurityControlsResponse_UnprocessedIds, v.UnprocessedIds)
+	}
 }
 func (v *BatchGetSecurityControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSecurityControlsResponse, func(s *smithy.Schema) error {

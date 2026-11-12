@@ -67,7 +67,9 @@ func (v *AddTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.AddTagsInput_ResourceId, *v.ResourceId)
 	}
-	serializeTagList(s, schemas.AddTagsInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AddTagsInput_Tags, v.Tags)
+	}
 }
 
 // This output indicates the result of adding tags to a resource.

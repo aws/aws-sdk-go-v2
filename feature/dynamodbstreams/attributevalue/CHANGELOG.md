@@ -1,3 +1,44 @@
+# v1.20.21 (2026-11-10)
+
+* **Bug Fix**: Fix a panic in `Marshal` and `MarshalMap` when a typed nil pointer with a pointer-receiver `Marshaler` is held in an interface or is the inner pointer of a double pointer. These values are encoded as `AttributeValueMemberNULL` again.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.20 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.19 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.18 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.17 (2026-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.16 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.15 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.14 (2026-10-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.13 (2026-10-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.12 (2026-10-14)
 
 * **Bug Fix**: attributevalue marshal to AttributeValueMemberNULL with double pointer when outer pointer is not nil

@@ -121,7 +121,9 @@ func (v *GetAggregateDiscoveredResourceCountsOutput) SerializeMembers(s smithy.S
 	if v.GroupByKey != nil {
 		s.WriteString(schemas.GetAggregateDiscoveredResourceCountsResponse_GroupByKey, *v.GroupByKey)
 	}
-	serializeGroupedResourceCountList(s, schemas.GetAggregateDiscoveredResourceCountsResponse_GroupedResourceCounts, v.GroupedResourceCounts)
+	if v.GroupedResourceCounts != nil {
+		serializeGroupedResourceCountList(s, schemas.GetAggregateDiscoveredResourceCountsResponse_GroupedResourceCounts, v.GroupedResourceCounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAggregateDiscoveredResourceCountsResponse_NextToken, *v.NextToken)
 	}

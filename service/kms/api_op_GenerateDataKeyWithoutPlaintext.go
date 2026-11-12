@@ -185,8 +185,12 @@ func (v *GenerateDataKeyWithoutPlaintextInput) SerializeMembers(s smithy.ShapeSe
 	if v.DryRun != nil {
 		s.WriteBool(schemas.GenerateDataKeyWithoutPlaintextRequest_DryRun, *v.DryRun)
 	}
-	serializeEncryptionContextType(s, schemas.GenerateDataKeyWithoutPlaintextRequest_EncryptionContext, v.EncryptionContext)
-	serializeGrantTokenList(s, schemas.GenerateDataKeyWithoutPlaintextRequest_GrantTokens, v.GrantTokens)
+	if v.EncryptionContext != nil {
+		serializeEncryptionContextType(s, schemas.GenerateDataKeyWithoutPlaintextRequest_EncryptionContext, v.EncryptionContext)
+	}
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.GenerateDataKeyWithoutPlaintextRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.GenerateDataKeyWithoutPlaintextRequest_KeyId, *v.KeyId)
 	}

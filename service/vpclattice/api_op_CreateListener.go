@@ -83,7 +83,9 @@ func (v *CreateListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateListenerRequest_clientToken, *v.ClientToken)
 	}
-	serializeRuleAction(s, schemas.CreateListenerRequest_defaultAction, v.DefaultAction)
+	if v.DefaultAction != nil {
+		serializeRuleAction(s, schemas.CreateListenerRequest_defaultAction, v.DefaultAction)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateListenerRequest_name, *v.Name)
 	}
@@ -96,7 +98,9 @@ func (v *CreateListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceIdentifier != nil {
 		s.WriteString(schemas.CreateListenerRequest_serviceIdentifier, *v.ServiceIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateListenerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateListenerRequest_tags, v.Tags)
+	}
 }
 func (v *CreateListenerInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateListenerRequest, func(s *smithy.Schema) error {
@@ -171,7 +175,9 @@ func (v *CreateListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateListenerResponse_arn, *v.Arn)
 	}
-	serializeRuleAction(s, schemas.CreateListenerResponse_defaultAction, v.DefaultAction)
+	if v.DefaultAction != nil {
+		serializeRuleAction(s, schemas.CreateListenerResponse_defaultAction, v.DefaultAction)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateListenerResponse_id, *v.Id)
 	}

@@ -49,7 +49,9 @@ func (v *ProbeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfProbeInputFile(s, schemas.ProbeRequest_InputFiles, v.InputFiles)
+	if v.InputFiles != nil {
+		serialize__listOfProbeInputFile(s, schemas.ProbeRequest_InputFiles, v.InputFiles)
+	}
 }
 
 type ProbeOutput struct {
@@ -70,7 +72,9 @@ func (v *ProbeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProbeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfProbeResult(s, schemas.ProbeResponse_ProbeResults, v.ProbeResults)
+	if v.ProbeResults != nil {
+		serialize__listOfProbeResult(s, schemas.ProbeResponse_ProbeResults, v.ProbeResults)
+	}
 }
 func (v *ProbeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProbeResponse, func(s *smithy.Schema) error {

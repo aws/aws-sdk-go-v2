@@ -127,7 +127,9 @@ func (v *ListReservationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReservationsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfReservation(s, schemas.ListReservationsResponse_Reservations, v.Reservations)
+	if v.Reservations != nil {
+		serialize__listOfReservation(s, schemas.ListReservationsResponse_Reservations, v.Reservations)
+	}
 }
 func (v *ListReservationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReservationsResponse, func(s *smithy.Schema) error {

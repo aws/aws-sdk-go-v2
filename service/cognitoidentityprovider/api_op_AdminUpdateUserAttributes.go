@@ -145,8 +145,12 @@ func (v *AdminUpdateUserAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminUpdateUserAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientMetadataType(s, schemas.AdminUpdateUserAttributesRequest_ClientMetadata, v.ClientMetadata)
-	serializeAttributeListType(s, schemas.AdminUpdateUserAttributesRequest_UserAttributes, v.UserAttributes)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.AdminUpdateUserAttributesRequest_ClientMetadata, v.ClientMetadata)
+	}
+	if v.UserAttributes != nil {
+		serializeAttributeListType(s, schemas.AdminUpdateUserAttributesRequest_UserAttributes, v.UserAttributes)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.AdminUpdateUserAttributesRequest_UserPoolId, *v.UserPoolId)
 	}

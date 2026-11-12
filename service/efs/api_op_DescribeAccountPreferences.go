@@ -4,7 +4,9 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeAccountPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAccountPreferencesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountPreferencesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAccountPreferencesOutput struct {
 
 	// Present if there are more records than returned in the response. You can use
@@ -58,13 +75,40 @@ type DescribeAccountPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountPreferencesResponse_NextToken, *v.NextToken)
+	}
+	if v.ResourceIdPreference != nil {
+		s.WriteStruct(schemas.DescribeAccountPreferencesResponse_ResourceIdPreference)
+		v.ResourceIdPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccountPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountPreferencesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAccountPreferencesResponse_NextToken, v.NextToken)
+		case schemas.DescribeAccountPreferencesResponse_ResourceIdPreference:
+			v.ResourceIdPreference = &types.ResourceIdPreference{}
+			return v.ResourceIdPreference.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountPreferences, schemas.DescribeAccountPreferencesRequest, schemas.DescribeAccountPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccountPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountPreferences, schemas.DescribeAccountPreferencesRequest, schemas.DescribeAccountPreferencesResponse), output: &DescribeAccountPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

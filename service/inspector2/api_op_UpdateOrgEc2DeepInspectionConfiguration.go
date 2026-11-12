@@ -45,7 +45,9 @@ func (v *UpdateOrgEc2DeepInspectionConfigurationInput) Serialize(s smithy.ShapeS
 }
 
 func (v *UpdateOrgEc2DeepInspectionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePathList(s, schemas.UpdateOrgEc2DeepInspectionConfigurationRequest_orgPackagePaths, v.OrgPackagePaths)
+	if v.OrgPackagePaths != nil {
+		serializePathList(s, schemas.UpdateOrgEc2DeepInspectionConfigurationRequest_orgPackagePaths, v.OrgPackagePaths)
+	}
 }
 
 type UpdateOrgEc2DeepInspectionConfigurationOutput struct {

@@ -472,12 +472,14 @@ var _AgentCoreMemorySessionId = smithy.NewSchema(smithy.ShapeID{
 var AgenticRetrieveAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveAction",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var AgenticRetrieveAction_retrieve *smithy.Schema
 
 var AgenticRetrieveAction_fullDocumentExpansion *smithy.Schema
 
 var AgenticRetrieveAction_memoryRetrieve *smithy.Schema
+
+var AgenticRetrieveAction_codeExecution *smithy.Schema
 
 var AgenticRetrieveActionDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -492,6 +494,14 @@ var _AgenticRetrieveActions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AgenticRetrieveActions",
 }, smithy.ShapeTypeList, 1)
 var _AgenticRetrieveActions_member *smithy.Schema
+
+var AgenticRetrieveAppliedInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveAppliedInstruction",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveAppliedInstruction_id *smithy.Schema
+
+var AgenticRetrieveAppliedInstruction_version *smithy.Schema
 
 var AgenticRetrieveBedrockGuardrailConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -540,6 +550,26 @@ var _AgenticRetrieveCitationReferenceList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AgenticRetrieveCitationReferenceList",
 }, smithy.ShapeTypeList, 1)
 var _AgenticRetrieveCitationReferenceList_member *smithy.Schema
+
+var AgenticRetrieveCodeExecutionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveCodeExecutionDetails",
+}, smithy.ShapeTypeStructure, 1)
+var AgenticRetrieveCodeExecutionDetails_documents *smithy.Schema
+
+var AgenticRetrieveCodeExecutionDocument = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveCodeExecutionDocument",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveCodeExecutionDocument_documentId *smithy.Schema
+
+var AgenticRetrieveCodeExecutionDocument_sourceRetriever *smithy.Schema
+
+var _AgenticRetrieveCodeExecutionDocumentList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveCodeExecutionDocumentList",
+}, smithy.ShapeTypeList, 1)
+var _AgenticRetrieveCodeExecutionDocumentList_member *smithy.Schema
 
 var AgenticRetrieveConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -594,6 +624,14 @@ var AgenticRetrieveGuardrailWarning_version *smithy.Schema
 var AgenticRetrieveGuardrailWarning_action *smithy.Schema
 
 var AgenticRetrieveGuardrailWarning_message *smithy.Schema
+
+var AgenticRetrieveInstructionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveInstructionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveInstructionConfiguration_retrievalInstructionId *smithy.Schema
+
+var AgenticRetrieveInstructionConfiguration_version *smithy.Schema
 
 var AgenticRetrieveMemoryConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -883,7 +921,7 @@ var AgenticRetrieveStatus_FAILED *smithy.Schema
 var AgenticRetrieveStep = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveStep",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var AgenticRetrieveStep_PLANNING *smithy.Schema
 
 var AgenticRetrieveStep_RETRIEVAL *smithy.Schema
@@ -893,6 +931,8 @@ var AgenticRetrieveStep_SPECULATIVE_RETRIEVAL *smithy.Schema
 var AgenticRetrieveStep_FULL_DOCUMENT_EXPANSION *smithy.Schema
 
 var AgenticRetrieveStep_SESSION_HISTORY_LOAD *smithy.Schema
+
+var AgenticRetrieveStep_CODE_EXECUTION *smithy.Schema
 
 var AgenticRetrieveStreamResponseOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -935,7 +975,7 @@ var AgenticRetrieveTraceEvent_attributes *smithy.Schema
 var AgenticRetrieveTraceEventAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveTraceEventAttributes",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgenticRetrieveTraceEventAttributes_step *smithy.Schema
 
 var AgenticRetrieveTraceEventAttributes_status *smithy.Schema
@@ -951,6 +991,8 @@ var AgenticRetrieveTraceEventAttributes_failures *smithy.Schema
 var AgenticRetrieveTraceEventAttributes_retrievalMetadata *smithy.Schema
 
 var AgenticRetrieveTraceEventAttributes_retrievalResponse *smithy.Schema
+
+var AgenticRetrieveTraceEventAttributes_appliedInstruction *smithy.Schema
 
 var AgenticRetrieveTraceResultItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -3331,6 +3373,11 @@ var _MaxTokens = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxTokens",
 }, smithy.ShapeTypeInteger, 0)
 
+var _MediaId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MediaId",
+}, smithy.ShapeTypeString, 0)
+
 var _Memories = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "Memories",
@@ -4398,6 +4445,16 @@ var _RetrievalFilterList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RetrievalFilterList_member *smithy.Schema
 
+var _RetrievalInstructionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "RetrievalInstructionId",
+}, smithy.ShapeTypeString, 0)
+
+var _RetrievalInstructionVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "RetrievalInstructionVersion",
+}, smithy.ShapeTypeString, 0)
+
 var RetrievalOverrides = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "RetrievalOverrides",
@@ -5190,7 +5247,7 @@ var VideoSegment_summary *smithy.Schema
 var AgenticRetrieveStreamRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveStreamRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgenticRetrieveStreamRequest_messages *smithy.Schema
 
 var AgenticRetrieveStreamRequest_retrievers *smithy.Schema
@@ -5204,6 +5261,8 @@ var AgenticRetrieveStreamRequest_nextToken *smithy.Schema
 var AgenticRetrieveStreamRequest_userContext *smithy.Schema
 
 var AgenticRetrieveStreamRequest_memoryConfiguration *smithy.Schema
+
+var AgenticRetrieveStreamRequest_retrievalInstructionConfiguration *smithy.Schema
 
 var AgenticRetrieveStreamRequest_generateResponse *smithy.Schema
 
@@ -5358,12 +5417,14 @@ var GetAgentMemoryResponse_memoryContents *smithy.Schema
 var GetDocumentContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "GetDocumentContentRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var GetDocumentContentRequest_knowledgeBaseId *smithy.Schema
 
 var GetDocumentContentRequest_dataSourceId *smithy.Schema
 
 var GetDocumentContentRequest_documentId *smithy.Schema
+
+var GetDocumentContentRequest_mediaId *smithy.Schema
 
 var GetDocumentContentRequest_outputFormat *smithy.Schema
 
@@ -6280,13 +6341,27 @@ func init() {
 
 	AgenticRetrieveMemoryRetrieveDetails_strategyId = AgenticRetrieveMemoryRetrieveDetails.AddMember("strategyId", smithyprelude.String)
 
+	AgenticRetrieveCodeExecutionDocument_documentId = AgenticRetrieveCodeExecutionDocument.AddMember("documentId", smithyprelude.String)
+
+	AgenticRetrieveCodeExecutionDocument_sourceRetriever = AgenticRetrieveCodeExecutionDocument.AddMember("sourceRetriever", AgenticRetrieveSourceRetriever)
+
+	_AgenticRetrieveCodeExecutionDocumentList_member = _AgenticRetrieveCodeExecutionDocumentList.AddMember("member", AgenticRetrieveCodeExecutionDocument)
+
+	AgenticRetrieveCodeExecutionDetails_documents = AgenticRetrieveCodeExecutionDetails.AddMember("documents", _AgenticRetrieveCodeExecutionDocumentList)
+
 	AgenticRetrieveAction_retrieve = AgenticRetrieveAction.AddMember("retrieve", AgenticRetrieveActionDetails)
 
 	AgenticRetrieveAction_fullDocumentExpansion = AgenticRetrieveAction.AddMember("fullDocumentExpansion", AgenticRetrieveFullDocExpansionDetails)
 
 	AgenticRetrieveAction_memoryRetrieve = AgenticRetrieveAction.AddMember("memoryRetrieve", AgenticRetrieveMemoryRetrieveDetails)
 
+	AgenticRetrieveAction_codeExecution = AgenticRetrieveAction.AddMember("codeExecution", AgenticRetrieveCodeExecutionDetails)
+
 	_AgenticRetrieveActions_member = _AgenticRetrieveActions.AddMember("member", AgenticRetrieveAction)
+
+	AgenticRetrieveAppliedInstruction_id = AgenticRetrieveAppliedInstruction.AddMember("id", _RetrievalInstructionId)
+
+	AgenticRetrieveAppliedInstruction_version = AgenticRetrieveAppliedInstruction.AddMember("version", _RetrievalInstructionVersion)
 
 	AgenticRetrieveBedrockGuardrailConfiguration_guardrailId = AgenticRetrieveBedrockGuardrailConfiguration.AddMember("guardrailId", smithyprelude.String)
 
@@ -6373,6 +6448,10 @@ func init() {
 	AgenticRetrieveGuardrailWarning_action = AgenticRetrieveGuardrailWarning.AddMember("action", GuardrailAction)
 
 	AgenticRetrieveGuardrailWarning_message = AgenticRetrieveGuardrailWarning.AddMember("message", smithyprelude.String)
+
+	AgenticRetrieveInstructionConfiguration_retrievalInstructionId = AgenticRetrieveInstructionConfiguration.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	AgenticRetrieveInstructionConfiguration_version = AgenticRetrieveInstructionConfiguration.AddMember("version", _RetrievalInstructionVersion)
 
 	AgenticRetrieveMemorySessionBinding_actorId = AgenticRetrieveMemorySessionBinding.AddMember("actorId", _AgentCoreMemoryActorId)
 
@@ -6554,6 +6633,8 @@ func init() {
 
 	AgenticRetrieveStep_SESSION_HISTORY_LOAD = AgenticRetrieveStep.AddMember("SESSION_HISTORY_LOAD", smithyprelude.Unit)
 
+	AgenticRetrieveStep_CODE_EXECUTION = AgenticRetrieveStep.AddMember("CODE_EXECUTION", smithyprelude.Unit)
+
 	AgenticRetrieveWarningMessage_message = AgenticRetrieveWarningMessage.AddMember("message", smithyprelude.String)
 
 	AgenticRetrieveWarning_message = AgenticRetrieveWarning.AddMember("message", AgenticRetrieveWarningMessage)
@@ -6585,6 +6666,8 @@ func init() {
 	AgenticRetrieveTraceEventAttributes_retrievalMetadata = AgenticRetrieveTraceEventAttributes.AddMember("retrievalMetadata", _AgenticRetrieveSourceMetadataList)
 
 	AgenticRetrieveTraceEventAttributes_retrievalResponse = AgenticRetrieveTraceEventAttributes.AddMember("retrievalResponse", _AgenticRetrieveTraceResults)
+
+	AgenticRetrieveTraceEventAttributes_appliedInstruction = AgenticRetrieveTraceEventAttributes.AddMember("appliedInstruction", AgenticRetrieveAppliedInstruction)
 
 	AgenticRetrieveTraceEvent_id = AgenticRetrieveTraceEvent.AddMember("id", smithyprelude.String)
 
@@ -8426,6 +8509,8 @@ func init() {
 
 	AgenticRetrieveStreamRequest_memoryConfiguration = AgenticRetrieveStreamRequest.AddMember("memoryConfiguration", AgenticRetrieveMemoryConfiguration)
 
+	AgenticRetrieveStreamRequest_retrievalInstructionConfiguration = AgenticRetrieveStreamRequest.AddMember("retrievalInstructionConfiguration", AgenticRetrieveInstructionConfiguration)
+
 	AgenticRetrieveStreamRequest_generateResponse = AgenticRetrieveStreamRequest.AddMember("generateResponse", smithyprelude.Boolean)
 
 	AgenticRetrieveStreamResponse_stream = AgenticRetrieveStreamResponse.AddMember("stream", AgenticRetrieveStreamResponseOutput, &smithytraits.HTTPPayload{})
@@ -8511,6 +8596,8 @@ func init() {
 	GetDocumentContentRequest_dataSourceId = GetDocumentContentRequest.AddMember("dataSourceId", _DataSourceId, &smithytraits.HTTPLabel{})
 
 	GetDocumentContentRequest_documentId = GetDocumentContentRequest.AddMember("documentId", _DocumentId, &smithytraits.HTTPLabel{})
+
+	GetDocumentContentRequest_mediaId = GetDocumentContentRequest.AddMember("mediaId", _MediaId)
 
 	GetDocumentContentRequest_outputFormat = GetDocumentContentRequest.AddMember("outputFormat", DocumentOutputFormat)
 

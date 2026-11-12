@@ -1,0 +1,5 @@
+POST /cases:batchCreateRelatedItem
+
+Content-Type: application/json
+
+{"cases":[{"caseIdentifier":{"caseId":"__CaseIdentifierUnionMemberCaseId__"}},{"caseIdentifier":{"caseId":"__CaseIdentifierUnionMemberCaseId__"}}],"clientToken":"__ClientToken__","content":{"contact":{"contactArn":"__ContactArn__"}},"domainId":"__DomainId__","performedBy":{"userArn":"__UserUnionMemberUserArn__"}}

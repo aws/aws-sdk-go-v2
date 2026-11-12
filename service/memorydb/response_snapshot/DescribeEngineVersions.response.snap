@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeEngineVersions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"EngineVersions":[{"Engine":"__Engine__","EnginePatchVersion":"__EnginePatchVersion__","EngineVersion":"__EngineVersion__","ParameterGroupFamily":"__ParameterGroupFamily__"},{"Engine":"__Engine__","EnginePatchVersion":"__EnginePatchVersion__","EngineVersion":"__EngineVersion__","ParameterGroupFamily":"__ParameterGroupFamily__"}],"NextToken":"__NextToken__"}
+¿nEngineVersionsŸ¿fEnginej__Engine__rEnginePatchVersionv__EnginePatchVersion__mEngineVersionq__EngineVersion__tParameterGroupFamilyx__ParameterGroupFamily__ÿ¿fEnginej__Engine__rEnginePatchVersionv__EnginePatchVersion__mEngineVersionq__EngineVersion__tParameterGroupFamilyx__ParameterGroupFamily__ÿÿiNextTokenm__NextToken__ÿ

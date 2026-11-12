@@ -154,7 +154,9 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReplicaConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupIdsList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.ShardConfiguration != nil {
 		s.WriteStruct(schemas.UpdateClusterRequest_ShardConfiguration)
 		v.ShardConfiguration.SerializeMembers(s)
@@ -223,6 +225,9 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

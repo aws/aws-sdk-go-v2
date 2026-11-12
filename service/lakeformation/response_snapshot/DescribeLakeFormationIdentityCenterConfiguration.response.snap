@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationArn":"__ApplicationArn__","CatalogId":"__CatalogId__","ExternalFiltering":{"AuthorizedTargets":["__Member__","__Member__"],"Status":"ENABLED"},"InstanceArn":"__InstanceArn__","ResourceShare":"__ResourceShare__","ServiceIntegrations":[{"Redshift":[{"RedshiftConnect":{"Authorization":"ENABLED"}},{"RedshiftConnect":{"Authorization":"ENABLED"}}]},{"Redshift":[{"RedshiftConnect":{"Authorization":"ENABLED"}},{"RedshiftConnect":{"Authorization":"ENABLED"}}]}],"ShareRecipients":[{"DataLakePrincipalIdentifier":"__DataLakePrincipalIdentifier__"},{"DataLakePrincipalIdentifier":"__DataLakePrincipalIdentifier__"}]}

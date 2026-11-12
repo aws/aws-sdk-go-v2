@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"acmCertificateArn":"__AcmCertificateArn__","associatedAt":946684800,"gatewayId":"__GatewayId__","status":"PENDING_ASSOCIATION","updatedAt":946684800}

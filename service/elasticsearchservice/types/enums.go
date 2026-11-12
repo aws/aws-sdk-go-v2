@@ -71,6 +71,26 @@ func (AutoTuneType) Values() []AutoTuneType {
 	}
 }
 
+type ClonedBlueGreenScheduledActionType string
+
+// Enum values for ClonedBlueGreenScheduledActionType
+const (
+	ClonedBlueGreenScheduledActionTypeAutomaticCutoverToPrimary ClonedBlueGreenScheduledActionType = "AutomaticCutoverToPrimaryCluster"
+	ClonedBlueGreenScheduledActionTypeDeletePrimaryCluster      ClonedBlueGreenScheduledActionType = "DeletePrimaryCluster"
+)
+
+// Values returns all known values for ClonedBlueGreenScheduledActionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClonedBlueGreenScheduledActionType) Values() []ClonedBlueGreenScheduledActionType {
+	return []ClonedBlueGreenScheduledActionType{
+		"AutomaticCutoverToPrimaryCluster",
+		"DeletePrimaryCluster",
+	}
+}
+
 type ConfigChangeStatus string
 
 // Enum values for ConfigChangeStatus
@@ -99,6 +119,46 @@ func (ConfigChangeStatus) Values() []ConfigChangeStatus {
 		"Completed",
 		"PendingUserInput",
 		"Cancelled",
+	}
+}
+
+type CutoverStatus string
+
+// Enum values for CutoverStatus
+const (
+	CutoverStatusInProgress CutoverStatus = "InProgress"
+	CutoverStatusCompleted  CutoverStatus = "Completed"
+	CutoverStatusFailed     CutoverStatus = "Failed"
+)
+
+// Values returns all known values for CutoverStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CutoverStatus) Values() []CutoverStatus {
+	return []CutoverStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+	}
+}
+
+type CutoverTarget string
+
+// Enum values for CutoverTarget
+const (
+	CutoverTargetClonedCluster  CutoverTarget = "ClonedCluster"
+	CutoverTargetPrimaryCluster CutoverTarget = "PrimaryCluster"
+)
+
+// Values returns all known values for CutoverTarget. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CutoverTarget) Values() []CutoverTarget {
+	return []CutoverTarget{
+		"ClonedCluster",
+		"PrimaryCluster",
 	}
 }
 
@@ -143,6 +203,23 @@ func (DeploymentStrategy) Values() []DeploymentStrategy {
 	return []DeploymentStrategy{
 		"Default",
 		"CapacityOptimized",
+	}
+}
+
+type DeploymentStrategyOverride string
+
+// Enum values for DeploymentStrategyOverride
+const (
+	DeploymentStrategyOverrideClonedBlueGreen DeploymentStrategyOverride = "ClonedBlueGreen"
+)
+
+// Values returns all known values for DeploymentStrategyOverride. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentStrategyOverride) Values() []DeploymentStrategyOverride {
+	return []DeploymentStrategyOverride{
+		"ClonedBlueGreen",
 	}
 }
 
@@ -709,6 +786,25 @@ func (ReservedElasticsearchInstancePaymentOption) Values() []ReservedElasticsear
 	}
 }
 
+type RetentionAction string
+
+// Enum values for RetentionAction
+const (
+	RetentionActionRollbackToPrimaryCluster RetentionAction = "RollbackToPrimaryCluster"
+	RetentionActionDeletePrimaryCluster     RetentionAction = "DeletePrimaryCluster"
+)
+
+// Values returns all known values for RetentionAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetentionAction) Values() []RetentionAction {
+	return []RetentionAction{
+		"RollbackToPrimaryCluster",
+		"DeletePrimaryCluster",
+	}
+}
+
 type RollbackOnDisable string
 
 // Enum values for RollbackOnDisable
@@ -806,6 +902,44 @@ func (TLSSecurityPolicy) Values() []TLSSecurityPolicy {
 		"Policy-Min-TLS-1-2-2019-07",
 		"Policy-Min-TLS-1-2-PFS-2023-10",
 		"Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08",
+	}
+}
+
+type TrafficSplitStatus string
+
+// Enum values for TrafficSplitStatus
+const (
+	TrafficSplitStatusInProgress TrafficSplitStatus = "InProgress"
+	TrafficSplitStatusCompleted  TrafficSplitStatus = "Completed"
+	TrafficSplitStatusFailed     TrafficSplitStatus = "Failed"
+)
+
+// Values returns all known values for TrafficSplitStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrafficSplitStatus) Values() []TrafficSplitStatus {
+	return []TrafficSplitStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+	}
+}
+
+type TrafficStrategy string
+
+// Enum values for TrafficStrategy
+const (
+	TrafficStrategyShiftReadTrafficPercent TrafficStrategy = "ShiftReadTrafficPercent"
+)
+
+// Values returns all known values for TrafficStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrafficStrategy) Values() []TrafficStrategy {
+	return []TrafficStrategy{
+		"ShiftReadTrafficPercent",
 	}
 }
 

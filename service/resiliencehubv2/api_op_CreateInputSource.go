@@ -55,7 +55,9 @@ func (v *CreateInputSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateInputSourceRequest_clientToken, *v.ClientToken)
 	}
-	serializeResourceConfiguration(s, schemas.CreateInputSourceRequest_resourceConfiguration, v.ResourceConfiguration)
+	if v.ResourceConfiguration != nil {
+		serializeResourceConfiguration(s, schemas.CreateInputSourceRequest_resourceConfiguration, v.ResourceConfiguration)
+	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.CreateInputSourceRequest_serviceArn, *v.ServiceArn)
 	}

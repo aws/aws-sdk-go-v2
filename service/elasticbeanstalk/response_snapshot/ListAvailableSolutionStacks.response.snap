@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListAvailableSolutionStacksResponse><ListAvailableSolutionStacksResult><SolutionStackDetails><member><PermittedFileTypes><member>__Member__</member><member>__Member__</member></PermittedFileTypes><SolutionStackName>__SolutionStackName__</SolutionStackName></member><member><PermittedFileTypes><member>__Member__</member><member>__Member__</member></PermittedFileTypes><SolutionStackName>__SolutionStackName__</SolutionStackName></member></SolutionStackDetails><SolutionStacks><member>__Member__</member><member>__Member__</member></SolutionStacks></ListAvailableSolutionStacksResult></ListAvailableSolutionStacksResponse>

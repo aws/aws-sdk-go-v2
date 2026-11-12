@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CliToken":"__CliToken__","WebServerHostname":"__WebServerHostname__"}

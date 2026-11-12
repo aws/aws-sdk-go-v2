@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,33 @@ type UpdateRunGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRunGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRunGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRunGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRunGroupRequest_id, *v.Id)
+	}
+	if v.MaxCpus != nil {
+		s.WriteInt32(schemas.UpdateRunGroupRequest_maxCpus, *v.MaxCpus)
+	}
+	if v.MaxDuration != nil {
+		s.WriteInt32(schemas.UpdateRunGroupRequest_maxDuration, *v.MaxDuration)
+	}
+	if v.MaxGpus != nil {
+		s.WriteInt32(schemas.UpdateRunGroupRequest_maxGpus, *v.MaxGpus)
+	}
+	if v.MaxRuns != nil {
+		s.WriteInt32(schemas.UpdateRunGroupRequest_maxRuns, *v.MaxRuns)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRunGroupRequest_name, *v.Name)
+	}
+}
+
 type UpdateRunGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,13 +103,26 @@ type UpdateRunGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRunGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRunGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRunGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRunGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRunGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRunGroup, schemas.UpdateRunGroupRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRunGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRunGroup, schemas.UpdateRunGroupRequest, nil), output: &UpdateRunGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

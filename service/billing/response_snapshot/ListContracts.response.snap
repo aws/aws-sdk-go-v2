@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListContracts
+
+{"items":[{"associationStatus":"ASSOCIATED","contractArn":"__ContractArn__","contractTerm":{"endDateInclusive":946684800,"startDateInclusive":946684800},"contractType":"Cross-Service","lastUpdatedAt":946684800},{"associationStatus":"ASSOCIATED","contractArn":"__ContractArn__","contractTerm":{"endDateInclusive":946684800,"startDateInclusive":946684800},"contractType":"Cross-Service","lastUpdatedAt":946684800}],"nextToken":"__NextToken__"}

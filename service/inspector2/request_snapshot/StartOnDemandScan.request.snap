@@ -1,0 +1,5 @@
+POST /ondemand/scan
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","resourceId":"__ResourceId__","resourceType":"AMI"}

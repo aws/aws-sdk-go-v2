@@ -152,7 +152,9 @@ func (v *ListClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterNodeSummaries(s, schemas.ListClusterNodesResponse_ClusterNodeSummaries, v.ClusterNodeSummaries)
+	if v.ClusterNodeSummaries != nil {
+		serializeClusterNodeSummaries(s, schemas.ListClusterNodesResponse_ClusterNodeSummaries, v.ClusterNodeSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClusterNodesResponse_NextToken, *v.NextToken)
 	}

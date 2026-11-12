@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Url":"__Url__","ValidUntil":946684800}

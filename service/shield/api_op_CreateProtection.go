@@ -89,7 +89,9 @@ func (v *CreateProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.CreateProtectionRequest_ResourceArn, *v.ResourceArn)
 	}
-	serializeTagList(s, schemas.CreateProtectionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProtectionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProtectionOutput struct {
@@ -139,6 +141,9 @@ func (c *Client) addOperationCreateProtectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

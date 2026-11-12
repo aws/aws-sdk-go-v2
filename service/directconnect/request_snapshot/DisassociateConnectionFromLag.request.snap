@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DisassociateConnectionFromLag
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DisassociateConnectionFromLag
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"connectionId":"__ConnectionId__","lagId":"__LagId__"}
+¿lconnectionIdp__ConnectionId__elagIdi__LagId__ÿ

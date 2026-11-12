@@ -9954,6 +9954,25 @@
                         "smithy.api#documentation": "<p>The source of the object template.</p>"
                     }
                 },
+                "DefaultMaxProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize0",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default maximum number of objects of this object type that can be stored per\n         profile. This default applies when you don't set <code>MaxProfileObjectCount</code> on an\n         object type created from this template. If this value isn't present, no default limit\n         applies.</p>"
+                    }
+                },
+                "DefaultMaxProfileObjectCountEffectiveAfter": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp after which <code>DefaultMaxProfileObjectCount</code> takes effect. The\n         default limit applies only to domains created after this time.</p>"
+                    }
+                },
+                "StoreOnly": {
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the template is store-only. Objects of an object type created from a\n         store-only template are ingested and stored, but the object type can't be used by\n         calculated attributes or event triggers.</p>"
+                    }
+                },
                 "AllowProfileCreation": {
                     "target": "com.amazonaws.customerprofiles#boolean",
                     "traits": {

@@ -100,7 +100,9 @@ func (v *ListViewVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListViewVersionsResponse_NextToken, *v.NextToken)
 	}
-	serializeViewVersionSummaryList(s, schemas.ListViewVersionsResponse_ViewVersionSummaryList, v.ViewVersionSummaryList)
+	if v.ViewVersionSummaryList != nil {
+		serializeViewVersionSummaryList(s, schemas.ListViewVersionsResponse_ViewVersionSummaryList, v.ViewVersionSummaryList)
+	}
 }
 func (v *ListViewVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListViewVersionsResponse, func(s *smithy.Schema) error {

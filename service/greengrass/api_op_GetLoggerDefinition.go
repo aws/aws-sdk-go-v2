@@ -107,7 +107,9 @@ func (v *GetLoggerDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetLoggerDefinitionResponse_Name, *v.Name)
 	}
-	serializeTags(s, schemas.GetLoggerDefinitionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetLoggerDefinitionResponse_tags, v.Tags)
+	}
 }
 func (v *GetLoggerDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLoggerDefinitionResponse, func(s *smithy.Schema) error {

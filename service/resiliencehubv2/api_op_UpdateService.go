@@ -69,7 +69,9 @@ func (v *UpdateServiceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedSystemList(s, schemas.UpdateServiceRequest_associatedSystems, v.AssociatedSystems)
+	if v.AssociatedSystems != nil {
+		serializeAssociatedSystemList(s, schemas.UpdateServiceRequest_associatedSystems, v.AssociatedSystems)
+	}
 	if v.DependencyDiscovery != "" {
 		s.WriteString(schemas.UpdateServiceRequest_dependencyDiscovery, string(v.DependencyDiscovery))
 	}
@@ -89,7 +91,9 @@ func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.UpdateServiceRequest_policyArn, *v.PolicyArn)
 	}
-	serializeRegionList(s, schemas.UpdateServiceRequest_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.UpdateServiceRequest_regions, v.Regions)
+	}
 	if v.ReportConfiguration != nil {
 		s.WriteStruct(schemas.UpdateServiceRequest_reportConfiguration)
 		v.ReportConfiguration.SerializeMembers(s)

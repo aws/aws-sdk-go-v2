@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/UpdatePortfolioShare
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.UpdatePortfolioShare
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","AccountId":"__AccountId__","OrganizationNode":{"Type":"ORGANIZATION","Value":"__Value__"},"PortfolioId":"__PortfolioId__","SharePrincipals":true,"ShareTagOptions":true}
+¿nAcceptLanguager__AcceptLanguage__iAccountIdm__AccountId__pOrganizationNode¿dTypelORGANIZATIONeValuei__Value__ÿkPortfolioIdo__PortfolioId__oSharePrincipalsõoShareTagOptionsõÿ

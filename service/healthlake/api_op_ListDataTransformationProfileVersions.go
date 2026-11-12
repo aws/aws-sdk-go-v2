@@ -93,7 +93,9 @@ func (v *ListDataTransformationProfileVersionsOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListDataTransformationProfileVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataTransformationProfileVersionSummaryList(s, schemas.ListDataTransformationProfileVersionsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeDataTransformationProfileVersionSummaryList(s, schemas.ListDataTransformationProfileVersionsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataTransformationProfileVersionsResponse_NextToken, *v.NextToken)
 	}

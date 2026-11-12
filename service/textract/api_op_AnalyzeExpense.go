@@ -105,7 +105,9 @@ func (v *AnalyzeExpenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DocumentMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpenseDocumentList(s, schemas.AnalyzeExpenseResponse_ExpenseDocuments, v.ExpenseDocuments)
+	if v.ExpenseDocuments != nil {
+		serializeExpenseDocumentList(s, schemas.AnalyzeExpenseResponse_ExpenseDocuments, v.ExpenseDocuments)
+	}
 }
 func (v *AnalyzeExpenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalyzeExpenseResponse, func(s *smithy.Schema) error {
@@ -134,6 +136,9 @@ func (c *Client) addOperationAnalyzeExpenseMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

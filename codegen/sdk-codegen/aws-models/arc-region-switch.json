@@ -5715,6 +5715,35 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.arcregionswitch#RetryableConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource involved in the concurrent modification.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource involved in the concurrent modification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicted with a concurrent modification of the same resource and did not take effect.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#retryable": {}
+            }
+        },
         "com.amazonaws.arcregionswitch#RoleArn": {
             "type": "string"
         },
@@ -6917,6 +6946,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.arcregionswitch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.arcregionswitch#RetryableConflictException"
                 }
             ],
             "traits": {

@@ -119,7 +119,9 @@ func (v *GetIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetIPSetResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetIPSetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetIPSetResponse_Tags, v.Tags)
+	}
 }
 func (v *GetIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetIPSetResponse, func(s *smithy.Schema) error {

@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,39 @@ type CreateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.CreateIntegrationMessage_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
+	if v.DataFilter != nil {
+		s.WriteString(schemas.CreateIntegrationMessage_DataFilter, *v.DataFilter)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIntegrationMessage_Description, *v.Description)
+	}
+	if v.IntegrationName != nil {
+		s.WriteString(schemas.CreateIntegrationMessage_IntegrationName, *v.IntegrationName)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.CreateIntegrationMessage_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateIntegrationMessage_SourceArn, *v.SourceArn)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIntegrationMessage_Tags, v.Tags)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.CreateIntegrationMessage_TargetArn, *v.TargetArn)
+	}
+}
+
 // A zero-ETL integration with Amazon Redshift.
 type CreateIntegrationOutput struct {
 
@@ -135,13 +170,99 @@ type CreateIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Integration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.Integration_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.Integration_CreateTime, *v.CreateTime)
+	}
+	if v.DataFilter != nil {
+		s.WriteString(schemas.Integration_DataFilter, *v.DataFilter)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Integration_Description, *v.Description)
+	}
+	if v.Errors != nil {
+		serializeIntegrationErrorList(s, schemas.Integration_Errors, v.Errors)
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.Integration_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.IntegrationName != nil {
+		s.WriteString(schemas.Integration_IntegrationName, *v.IntegrationName)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.Integration_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.Integration_SourceArn, *v.SourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Integration_Status, string(v.Status))
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Integration_Tags, v.Tags)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.Integration_TargetArn, *v.TargetArn)
+	}
+}
+func (v *CreateIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Integration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Integration_AdditionalEncryptionContext:
+			return deserializeEncryptionContextMap(d, schemas.Integration_AdditionalEncryptionContext, &v.AdditionalEncryptionContext)
+		case schemas.Integration_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.Integration_CreateTime, v.CreateTime)
+		case schemas.Integration_DataFilter:
+			v.DataFilter = new(string)
+			return d.ReadString(schemas.Integration_DataFilter, v.DataFilter)
+		case schemas.Integration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Integration_Description, v.Description)
+		case schemas.Integration_Errors:
+			return deserializeIntegrationErrorList(d, schemas.Integration_Errors, &v.Errors)
+		case schemas.Integration_IntegrationArn:
+			v.IntegrationArn = new(string)
+			return d.ReadString(schemas.Integration_IntegrationArn, v.IntegrationArn)
+		case schemas.Integration_IntegrationName:
+			v.IntegrationName = new(string)
+			return d.ReadString(schemas.Integration_IntegrationName, v.IntegrationName)
+		case schemas.Integration_KMSKeyId:
+			v.KMSKeyId = new(string)
+			return d.ReadString(schemas.Integration_KMSKeyId, v.KMSKeyId)
+		case schemas.Integration_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.Integration_SourceArn, v.SourceArn)
+		case schemas.Integration_Status:
+			var ev string
+			if err := d.ReadString(schemas.Integration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IntegrationStatus(ev)
+			return nil
+		case schemas.Integration_Tags:
+			return deserializeTagList(d, schemas.Integration_Tags, &v.Tags)
+		case schemas.Integration_TargetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.Integration_TargetArn, v.TargetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegration, schemas.CreateIntegrationMessage, schemas.Integration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegration, schemas.CreateIntegrationMessage, schemas.Integration), output: &CreateIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

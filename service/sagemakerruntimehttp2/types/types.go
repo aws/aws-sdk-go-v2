@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -25,6 +27,45 @@ type RequestPayloadPart struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestPayloadPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestPayloadPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestPayloadPart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.RequestPayloadPart_Bytes, v.Bytes)
+	}
+	if v.CompletionState != nil {
+		s.WriteString(schemas.RequestPayloadPart_CompletionState, *v.CompletionState)
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.RequestPayloadPart_DataType, *v.DataType)
+	}
+	if v.P != nil {
+		s.WriteString(schemas.RequestPayloadPart_P, *v.P)
+	}
+}
+func (v *RequestPayloadPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestPayloadPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestPayloadPart_Bytes:
+			return d.ReadBlob(schemas.RequestPayloadPart_Bytes, &v.Bytes)
+		case schemas.RequestPayloadPart_CompletionState:
+			v.CompletionState = new(string)
+			return d.ReadString(schemas.RequestPayloadPart_CompletionState, v.CompletionState)
+		case schemas.RequestPayloadPart_DataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.RequestPayloadPart_DataType, v.DataType)
+		case schemas.RequestPayloadPart_P:
+			v.P = new(string)
+			return d.ReadString(schemas.RequestPayloadPart_P, v.P)
+		}
+		return nil
+	})
+}
+
 // Request stream event union.
 //
 // The following types satisfy this interface:
@@ -42,6 +83,14 @@ type RequestStreamEventMemberPayloadPart struct {
 }
 
 func (*RequestStreamEventMemberPayloadPart) isRequestStreamEvent() {}
+func (v *RequestStreamEventMemberPayloadPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestStreamEvent_PayloadPart)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RequestStreamEventMemberPayloadPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Response payload part structure.
 type ResponsePayloadPart struct {
@@ -62,6 +111,45 @@ type ResponsePayloadPart struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponsePayloadPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponsePayloadPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponsePayloadPart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.ResponsePayloadPart_Bytes, v.Bytes)
+	}
+	if v.CompletionState != nil {
+		s.WriteString(schemas.ResponsePayloadPart_CompletionState, *v.CompletionState)
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.ResponsePayloadPart_DataType, *v.DataType)
+	}
+	if v.P != nil {
+		s.WriteString(schemas.ResponsePayloadPart_P, *v.P)
+	}
+}
+func (v *ResponsePayloadPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponsePayloadPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponsePayloadPart_Bytes:
+			return d.ReadBlob(schemas.ResponsePayloadPart_Bytes, &v.Bytes)
+		case schemas.ResponsePayloadPart_CompletionState:
+			v.CompletionState = new(string)
+			return d.ReadString(schemas.ResponsePayloadPart_CompletionState, v.CompletionState)
+		case schemas.ResponsePayloadPart_DataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.ResponsePayloadPart_DataType, v.DataType)
+		case schemas.ResponsePayloadPart_P:
+			v.P = new(string)
+			return d.ReadString(schemas.ResponsePayloadPart_P, v.P)
+		}
+		return nil
+	})
+}
+
 // Response stream event union.
 //
 // The following types satisfy this interface:
@@ -79,6 +167,14 @@ type ResponseStreamEventMemberPayloadPart struct {
 }
 
 func (*ResponseStreamEventMemberPayloadPart) isResponseStreamEvent() {}
+func (v *ResponseStreamEventMemberPayloadPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseStreamEvent_PayloadPart)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResponseStreamEventMemberPayloadPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

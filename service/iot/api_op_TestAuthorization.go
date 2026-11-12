@@ -68,15 +68,21 @@ func (v *TestAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthInfos(s, schemas.TestAuthorizationRequest_authInfos, v.AuthInfos)
+	if v.AuthInfos != nil {
+		serializeAuthInfos(s, schemas.TestAuthorizationRequest_authInfos, v.AuthInfos)
+	}
 	if v.ClientId != nil {
 		s.WriteString(schemas.TestAuthorizationRequest_clientId, *v.ClientId)
 	}
 	if v.CognitoIdentityPoolId != nil {
 		s.WriteString(schemas.TestAuthorizationRequest_cognitoIdentityPoolId, *v.CognitoIdentityPoolId)
 	}
-	serializePolicyNames(s, schemas.TestAuthorizationRequest_policyNamesToAdd, v.PolicyNamesToAdd)
-	serializePolicyNames(s, schemas.TestAuthorizationRequest_policyNamesToSkip, v.PolicyNamesToSkip)
+	if v.PolicyNamesToAdd != nil {
+		serializePolicyNames(s, schemas.TestAuthorizationRequest_policyNamesToAdd, v.PolicyNamesToAdd)
+	}
+	if v.PolicyNamesToSkip != nil {
+		serializePolicyNames(s, schemas.TestAuthorizationRequest_policyNamesToSkip, v.PolicyNamesToSkip)
+	}
 	if v.Principal != nil {
 		s.WriteString(schemas.TestAuthorizationRequest_principal, *v.Principal)
 	}
@@ -100,7 +106,9 @@ func (v *TestAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthResults(s, schemas.TestAuthorizationResponse_authResults, v.AuthResults)
+	if v.AuthResults != nil {
+		serializeAuthResults(s, schemas.TestAuthorizationResponse_authResults, v.AuthResults)
+	}
 }
 func (v *TestAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TestAuthorizationResponse, func(s *smithy.Schema) error {

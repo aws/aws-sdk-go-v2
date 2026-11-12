@@ -602,6 +602,33 @@ func TestUpdateResponseSnapshot_CreatePresignedNotebookUrl(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateSystemTableConfiguration(t *testing.T) {
+	want := &CreateSystemTableConfigurationOutput{
+		TableName:      types.SystemTableName("ALL"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New11(schemas.AmazonAthena)
+	opSchema := smithy.NewOperationSchema(schemas.CreateSystemTableConfiguration, schemas.CreateSystemTableConfigurationOutput, schemas.CreateSystemTableConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateSystemTableConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateWorkGroup(t *testing.T) {
 	want := &CreateWorkGroupOutput{}
 	proto := awsjson.New11(schemas.AmazonAthena)
@@ -742,6 +769,28 @@ func TestUpdateResponseSnapshot_DeletePreparedStatement(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeletePreparedStatement.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteSystemTableConfiguration(t *testing.T) {
+	want := &DeleteSystemTableConfigurationOutput{}
+	proto := awsjson.New11(schemas.AmazonAthena)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteSystemTableConfiguration, schemas.DeleteSystemTableConfigurationOutput, schemas.DeleteSystemTableConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteSystemTableConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1548,6 +1597,33 @@ func TestUpdateResponseSnapshot_GetSessionStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetSystemTableConfiguration(t *testing.T) {
+	want := &GetSystemTableConfigurationOutput{
+		TableName:      types.SystemTableName("ALL"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New11(schemas.AmazonAthena)
+	opSchema := smithy.NewOperationSchema(schemas.GetSystemTableConfiguration, schemas.GetSystemTableConfigurationOutput, schemas.GetSystemTableConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSystemTableConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetTableMetadata(t *testing.T) {
 	want := &GetTableMetadataOutput{
 		TableMetadata: &types.TableMetadata{
@@ -1696,6 +1772,16 @@ func TestUpdateResponseSnapshot_GetWorkGroup(t *testing.T) {
 					EnableS3AccessGrants:  ptr.Bool(true),
 					CreateUserLevelPrefix: ptr.Bool(true),
 					AuthenticationType:    types.AuthenticationType("DIRECTORY_IDENTITY"),
+				},
+				SystemTableStatuses: []types.SystemTableStatus{
+					{
+						TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+						Enabled:   ptr.Bool(true),
+					},
+					{
+						TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+						Enabled:   ptr.Bool(true),
+					},
 				},
 			},
 			Description:                  ptr.String("__Description__"),
@@ -2270,6 +2356,40 @@ func TestUpdateResponseSnapshot_ListSessions(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListSystemTableStatuses(t *testing.T) {
+	want := &ListSystemTableStatusesOutput{
+		Items: []types.SystemTableStatus{
+			{
+				TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AmazonAthena)
+	opSchema := smithy.NewOperationSchema(schemas.ListSystemTableStatuses, schemas.ListSystemTableStatusesOutput, schemas.ListSystemTableStatusesOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListSystemTableStatuses.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListTableMetadata(t *testing.T) {
 	want := &ListTableMetadataOutput{
 		TableMetadataList: []types.TableMetadata{
@@ -2782,6 +2902,33 @@ func TestUpdateResponseSnapshot_UpdatePreparedStatement(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdatePreparedStatement.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateSystemTableConfiguration(t *testing.T) {
+	want := &UpdateSystemTableConfigurationOutput{
+		TableName:      types.SystemTableName("ALL"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New11(schemas.AmazonAthena)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateSystemTableConfiguration, schemas.UpdateSystemTableConfigurationOutput, schemas.UpdateSystemTableConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateSystemTableConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

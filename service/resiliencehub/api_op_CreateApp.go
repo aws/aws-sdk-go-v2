@@ -111,7 +111,9 @@ func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAppRequest_description, *v.Description)
 	}
-	serializeEventSubscriptionList(s, schemas.CreateAppRequest_eventSubscriptions, v.EventSubscriptions)
+	if v.EventSubscriptions != nil {
+		serializeEventSubscriptionList(s, schemas.CreateAppRequest_eventSubscriptions, v.EventSubscriptions)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAppRequest_name, *v.Name)
 	}
@@ -123,7 +125,9 @@ func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.CreateAppRequest_policyArn, *v.PolicyArn)
 	}
-	serializeTagMap(s, schemas.CreateAppRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAppRequest_tags, v.Tags)
+	}
 }
 func (v *CreateAppInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAppRequest, func(s *smithy.Schema) error {

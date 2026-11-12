@@ -74,7 +74,9 @@ func (v *GetJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobList(s, schemas.GetJobsResponse_Jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeJobList(s, schemas.GetJobsResponse_Jobs, v.Jobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetJobsResponse_NextToken, *v.NextToken)
 	}

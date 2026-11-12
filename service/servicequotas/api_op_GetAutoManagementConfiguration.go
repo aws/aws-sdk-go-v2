@@ -79,7 +79,9 @@ func (v *GetAutoManagementConfigurationOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetAutoManagementConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionQuotaList(s, schemas.GetAutoManagementConfigurationResponse_ExclusionList, v.ExclusionList)
+	if v.ExclusionList != nil {
+		serializeExclusionQuotaList(s, schemas.GetAutoManagementConfigurationResponse_ExclusionList, v.ExclusionList)
+	}
 	if v.NotificationArn != nil {
 		s.WriteString(schemas.GetAutoManagementConfigurationResponse_NotificationArn, *v.NotificationArn)
 	}

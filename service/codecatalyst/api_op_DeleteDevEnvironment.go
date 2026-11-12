@@ -4,6 +4,8 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDevEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDevEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteDevEnvironmentRequest_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.DeleteDevEnvironmentRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.DeleteDevEnvironmentRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type DeleteDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the deleted Dev Environment.
@@ -67,13 +87,44 @@ type DeleteDevEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDevEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDevEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDevEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteDevEnvironmentResponse_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.DeleteDevEnvironmentResponse_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.DeleteDevEnvironmentResponse_spaceName, *v.SpaceName)
+	}
+}
+func (v *DeleteDevEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDevEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDevEnvironmentResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteDevEnvironmentResponse_id, v.Id)
+		case schemas.DeleteDevEnvironmentResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.DeleteDevEnvironmentResponse_projectName, v.ProjectName)
+		case schemas.DeleteDevEnvironmentResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.DeleteDevEnvironmentResponse_spaceName, v.SpaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDevEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevEnvironment, schemas.DeleteDevEnvironmentRequest, schemas.DeleteDevEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevEnvironment, schemas.DeleteDevEnvironmentRequest, schemas.DeleteDevEnvironmentResponse), output: &DeleteDevEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

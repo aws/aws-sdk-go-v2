@@ -1,3 +1,44 @@
+# v1.101.8 (2026-11-11)
+
+* No change notes available for this release.
+
+# v1.101.7 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.6 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.5 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.4 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.3 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
+# v1.101.2 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.0 (2026-10-19)
+
+* **Feature**: Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs
+* **Bug Fix**: Fix deserialization failure when `Observations.Text` lists contains a null value.
+
 # v1.100.0 (2026-10-14)
 
 * **Feature**: Releasing support for Custom Detection Rule Runtime Monitoring

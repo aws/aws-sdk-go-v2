@@ -102,7 +102,9 @@ func (v *ListDomainMaintenancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainMaintenancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainMaintenanceList(s, schemas.ListDomainMaintenancesResponse_DomainMaintenances, v.DomainMaintenances)
+	if v.DomainMaintenances != nil {
+		serializeDomainMaintenanceList(s, schemas.ListDomainMaintenancesResponse_DomainMaintenances, v.DomainMaintenances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainMaintenancesResponse_NextToken, *v.NextToken)
 	}

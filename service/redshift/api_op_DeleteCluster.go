@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,27 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteClusterMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.FinalClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.DeleteClusterMessage_FinalClusterSnapshotIdentifier, *v.FinalClusterSnapshotIdentifier)
+	}
+	if v.FinalClusterSnapshotRetentionPeriod != nil {
+		s.WriteInt32(schemas.DeleteClusterMessage_FinalClusterSnapshotRetentionPeriod, *v.FinalClusterSnapshotRetentionPeriod)
+	}
+	if v.SkipFinalClusterSnapshot != nil {
+		s.WriteBool(schemas.DeleteClusterMessage_SkipFinalClusterSnapshot, *v.SkipFinalClusterSnapshot)
+	}
+}
+
 type DeleteClusterOutput struct {
 
 	// Describes a cluster.
@@ -102,13 +125,34 @@ type DeleteClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.DeleteClusterResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterMessage, schemas.DeleteClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterMessage, schemas.DeleteClusterResult), output: &DeleteClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

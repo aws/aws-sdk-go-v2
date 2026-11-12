@@ -15,9 +15,10 @@ import (
 	"time"
 )
 
-// Returns information about the function or function version, with a link to
-// download the deployment package that's valid for 10 minutes. If you specify a
-// function version, only details that are specific to that version are returned.
+// Returns information about a Lambda Event Function or function version, with a
+// link to download the deployment package that's valid for 10 minutes. If you
+// specify a function version, only details that are specific to that version are
+// returned.
 func (c *Client) GetFunction(ctx context.Context, params *GetFunctionInput, optFns ...func(*Options)) (*GetFunctionOutput, error) {
 	if params == nil {
 		params = &GetFunctionInput{}
@@ -125,7 +126,9 @@ func (v *GetFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.GetFunctionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetFunctionResponse_Tags, v.Tags)
+	}
 	if v.TagsError != nil {
 		s.WriteStruct(schemas.GetFunctionResponse_TagsError)
 		v.TagsError.SerializeMembers(s)

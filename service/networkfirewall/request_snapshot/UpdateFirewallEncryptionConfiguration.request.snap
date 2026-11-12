@@ -1,6 +1,7 @@
-POST /
+POST /service/NetworkFirewall_20201112/operation/UpdateFirewallEncryptionConfiguration
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.UpdateFirewallEncryptionConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"EncryptionConfiguration":{"KeyId":"__KeyId__","Type":"CUSTOMER_KMS"},"FirewallArn":"__FirewallArn__","FirewallName":"__FirewallName__","UpdateToken":"__UpdateToken__"}
+¿wEncryptionConfiguration¿eKeyIdi__KeyId__dTypelCUSTOMER_KMSÿkFirewallArno__FirewallArn__lFirewallNamep__FirewallName__kUpdateTokeno__UpdateToken__ÿ

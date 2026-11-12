@@ -65,7 +65,9 @@ func (v *ListTapePoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListTapePoolsInput_Marker, *v.Marker)
 	}
-	serializePoolARNs(s, schemas.ListTapePoolsInput_PoolARNs, v.PoolARNs)
+	if v.PoolARNs != nil {
+		serializePoolARNs(s, schemas.ListTapePoolsInput_PoolARNs, v.PoolARNs)
+	}
 }
 
 type ListTapePoolsOutput struct {
@@ -96,7 +98,9 @@ func (v *ListTapePoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListTapePoolsOutput_Marker, *v.Marker)
 	}
-	serializePoolInfos(s, schemas.ListTapePoolsOutput_PoolInfos, v.PoolInfos)
+	if v.PoolInfos != nil {
+		serializePoolInfos(s, schemas.ListTapePoolsOutput_PoolInfos, v.PoolInfos)
+	}
 }
 func (v *ListTapePoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTapePoolsOutput, func(s *smithy.Schema) error {

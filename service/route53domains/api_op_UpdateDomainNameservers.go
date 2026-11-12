@@ -73,7 +73,9 @@ func (v *UpdateDomainNameserversInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.FIAuthKey != nil {
 		s.WriteString(schemas.UpdateDomainNameserversRequest_FIAuthKey, *v.FIAuthKey)
 	}
-	serializeNameserverList(s, schemas.UpdateDomainNameserversRequest_Nameservers, v.Nameservers)
+	if v.Nameservers != nil {
+		serializeNameserverList(s, schemas.UpdateDomainNameserversRequest_Nameservers, v.Nameservers)
+	}
 }
 
 // The UpdateDomainNameservers response includes the following element.
@@ -127,6 +129,9 @@ func (c *Client) addOperationUpdateDomainNameserversMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

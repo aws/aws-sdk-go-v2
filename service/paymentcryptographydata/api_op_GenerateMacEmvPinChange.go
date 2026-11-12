@@ -117,7 +117,9 @@ func (v *GenerateMacEmvPinChangeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateMacEmvPinChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDerivationMethodAttributes(s, schemas.GenerateMacEmvPinChangeInput_DerivationMethodAttributes, v.DerivationMethodAttributes)
+	if v.DerivationMethodAttributes != nil {
+		serializeDerivationMethodAttributes(s, schemas.GenerateMacEmvPinChangeInput_DerivationMethodAttributes, v.DerivationMethodAttributes)
+	}
 	if v.MessageData != nil {
 		s.WriteString(schemas.GenerateMacEmvPinChangeInput_MessageData, *v.MessageData)
 	}

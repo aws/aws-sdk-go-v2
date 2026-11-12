@@ -75,15 +75,21 @@ func (v *GetLicenseRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLicenseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetLicenseRecommendationsRequest_accountIds, v.AccountIds)
-	serializeLicenseRecommendationFilters(s, schemas.GetLicenseRecommendationsRequest_filters, v.Filters)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetLicenseRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.Filters != nil {
+		serializeLicenseRecommendationFilters(s, schemas.GetLicenseRecommendationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetLicenseRecommendationsRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLicenseRecommendationsRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceArns(s, schemas.GetLicenseRecommendationsRequest_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.GetLicenseRecommendationsRequest_resourceArns, v.ResourceArns)
+	}
 }
 
 type GetLicenseRecommendationsOutput struct {
@@ -110,8 +116,12 @@ func (v *GetLicenseRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLicenseRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetRecommendationErrors(s, schemas.GetLicenseRecommendationsResponse_errors, v.Errors)
-	serializeLicenseRecommendations(s, schemas.GetLicenseRecommendationsResponse_licenseRecommendations, v.LicenseRecommendations)
+	if v.Errors != nil {
+		serializeGetRecommendationErrors(s, schemas.GetLicenseRecommendationsResponse_errors, v.Errors)
+	}
+	if v.LicenseRecommendations != nil {
+		serializeLicenseRecommendations(s, schemas.GetLicenseRecommendationsResponse_licenseRecommendations, v.LicenseRecommendations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLicenseRecommendationsResponse_nextToken, *v.NextToken)
 	}

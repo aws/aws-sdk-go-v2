@@ -4,7 +4,9 @@ package iotdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,45 @@ type PublishInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.PublishRequest_contentType, *v.ContentType)
+	}
+	if v.CorrelationData != nil {
+		s.WriteString(schemas.PublishRequest_correlationData, *v.CorrelationData)
+	}
+	if v.MessageExpiry != 0 {
+		s.WriteInt64(schemas.PublishRequest_messageExpiry, v.MessageExpiry)
+	}
+	if v.Payload != nil {
+		s.WriteBlob(schemas.PublishRequest_payload, v.Payload)
+	}
+	if v.PayloadFormatIndicator != "" {
+		s.WriteString(schemas.PublishRequest_payloadFormatIndicator, string(v.PayloadFormatIndicator))
+	}
+	if v.Qos != 0 {
+		s.WriteInt32(schemas.PublishRequest_qos, v.Qos)
+	}
+	if v.ResponseTopic != nil {
+		s.WriteString(schemas.PublishRequest_responseTopic, *v.ResponseTopic)
+	}
+	if v.Retain != false {
+		s.WriteBool(schemas.PublishRequest_retain, v.Retain)
+	}
+	if v.Topic != nil {
+		s.WriteString(schemas.PublishRequest_topic, *v.Topic)
+	}
+	if v.UserProperties != nil {
+		s.WriteString(schemas.PublishRequest_userProperties, *v.UserProperties)
+	}
+}
+
 type PublishOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -109,13 +150,26 @@ type PublishOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PublishOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublish{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Publish, schemas.PublishRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublish{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Publish, schemas.PublishRequest, nil), output: &PublishOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

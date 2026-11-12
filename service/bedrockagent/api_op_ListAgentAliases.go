@@ -92,7 +92,9 @@ func (v *ListAgentAliasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentAliasSummaries(s, schemas.ListAgentAliasesResponse_agentAliasSummaries, v.AgentAliasSummaries)
+	if v.AgentAliasSummaries != nil {
+		serializeAgentAliasSummaries(s, schemas.ListAgentAliasesResponse_agentAliasSummaries, v.AgentAliasSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentAliasesResponse_nextToken, *v.NextToken)
 	}

@@ -4,6 +4,8 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,42 @@ type CreateMLEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateMLEndpointInput_id, *v.Id)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.CreateMLEndpointInput_instanceCount, *v.InstanceCount)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateMLEndpointInput_instanceType, *v.InstanceType)
+	}
+	if v.MlModelTrainingJobId != nil {
+		s.WriteString(schemas.CreateMLEndpointInput_mlModelTrainingJobId, *v.MlModelTrainingJobId)
+	}
+	if v.MlModelTransformJobId != nil {
+		s.WriteString(schemas.CreateMLEndpointInput_mlModelTransformJobId, *v.MlModelTransformJobId)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateMLEndpointInput_modelName, *v.ModelName)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.CreateMLEndpointInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+	if v.Update != nil {
+		s.WriteBool(schemas.CreateMLEndpointInput_update, *v.Update)
+	}
+	if v.VolumeEncryptionKMSKey != nil {
+		s.WriteString(schemas.CreateMLEndpointInput_volumeEncryptionKMSKey, *v.VolumeEncryptionKMSKey)
+	}
+}
+
 type CreateMLEndpointOutput struct {
 
 	// The ARN for the new inference endpoint.
@@ -97,13 +135,44 @@ type CreateMLEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateMLEndpointOutput_arn, *v.Arn)
+	}
+	if v.CreationTimeInMillis != nil {
+		s.WriteInt64(schemas.CreateMLEndpointOutput_creationTimeInMillis, *v.CreationTimeInMillis)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateMLEndpointOutput_id, *v.Id)
+	}
+}
+func (v *CreateMLEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMLEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMLEndpointOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateMLEndpointOutput_arn, v.Arn)
+		case schemas.CreateMLEndpointOutput_creationTimeInMillis:
+			v.CreationTimeInMillis = new(int64)
+			return d.ReadInt64(schemas.CreateMLEndpointOutput_creationTimeInMillis, v.CreationTimeInMillis)
+		case schemas.CreateMLEndpointOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateMLEndpointOutput_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMLEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMLEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLEndpoint, schemas.CreateMLEndpointInput, schemas.CreateMLEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMLEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLEndpoint, schemas.CreateMLEndpointInput, schemas.CreateMLEndpointOutput), output: &CreateMLEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

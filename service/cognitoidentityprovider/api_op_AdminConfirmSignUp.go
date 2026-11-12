@@ -104,7 +104,9 @@ func (v *AdminConfirmSignUpInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminConfirmSignUpInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientMetadataType(s, schemas.AdminConfirmSignUpRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.AdminConfirmSignUpRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.AdminConfirmSignUpRequest_UserPoolId, *v.UserPoolId)
 	}

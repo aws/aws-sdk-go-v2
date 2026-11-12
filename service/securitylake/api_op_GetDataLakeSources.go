@@ -58,7 +58,9 @@ func (v *GetDataLakeSourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDataLakeSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.GetDataLakeSourcesRequest_accounts, v.Accounts)
+	if v.Accounts != nil {
+		serializeAccountList(s, schemas.GetDataLakeSourcesRequest_accounts, v.Accounts)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetDataLakeSourcesRequest_maxResults, *v.MaxResults)
 	}
@@ -102,7 +104,9 @@ func (v *GetDataLakeSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataLakeArn != nil {
 		s.WriteString(schemas.GetDataLakeSourcesResponse_dataLakeArn, *v.DataLakeArn)
 	}
-	serializeDataLakeSourceList(s, schemas.GetDataLakeSourcesResponse_dataLakeSources, v.DataLakeSources)
+	if v.DataLakeSources != nil {
+		serializeDataLakeSourceList(s, schemas.GetDataLakeSourcesResponse_dataLakeSources, v.DataLakeSources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDataLakeSourcesResponse_nextToken, *v.NextToken)
 	}

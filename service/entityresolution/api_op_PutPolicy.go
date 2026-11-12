@@ -4,6 +4,8 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type PutPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutPolicyInput_arn, *v.Arn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutPolicyInput_policy, *v.Policy)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.PutPolicyInput_token, *v.Token)
+	}
+}
+
 type PutPolicyOutput struct {
 
 	// The Entity Resolution resource ARN.
@@ -67,13 +87,44 @@ type PutPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutPolicyOutput_arn, *v.Arn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutPolicyOutput_policy, *v.Policy)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.PutPolicyOutput_token, *v.Token)
+	}
+}
+func (v *PutPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutPolicyOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutPolicyOutput_arn, v.Arn)
+		case schemas.PutPolicyOutput_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.PutPolicyOutput_policy, v.Policy)
+		case schemas.PutPolicyOutput_token:
+			v.Token = new(string)
+			return d.ReadString(schemas.PutPolicyOutput_token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPolicy, schemas.PutPolicyInput, schemas.PutPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPolicy, schemas.PutPolicyInput, schemas.PutPolicyOutput), output: &PutPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

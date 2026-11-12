@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type BatchGetSecurityRequirementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecurityRequirementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecurityRequirementsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecurityRequirementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackId != nil {
+		s.WriteString(schemas.BatchGetSecurityRequirementsInput_packId, *v.PackId)
+	}
+	if v.SecurityRequirementNames != nil {
+		serializeSecurityRequirementNameList(s, schemas.BatchGetSecurityRequirementsInput_securityRequirementNames, v.SecurityRequirementNames)
+	}
+}
+
 type BatchGetSecurityRequirementsOutput struct {
 
 	// The list of errors for security requirements that failed to be retrieved.
@@ -58,13 +75,36 @@ type BatchGetSecurityRequirementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecurityRequirementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecurityRequirementsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecurityRequirementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Errors != nil {
+		serializeBatchSecurityRequirementErrors(s, schemas.BatchGetSecurityRequirementsOutput_errors, v.Errors)
+	}
+	if v.SecurityRequirements != nil {
+		serializeBatchGetSecurityRequirementResultList(s, schemas.BatchGetSecurityRequirementsOutput_securityRequirements, v.SecurityRequirements)
+	}
+}
+func (v *BatchGetSecurityRequirementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSecurityRequirementsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSecurityRequirementsOutput_errors:
+			return deserializeBatchSecurityRequirementErrors(d, schemas.BatchGetSecurityRequirementsOutput_errors, &v.Errors)
+		case schemas.BatchGetSecurityRequirementsOutput_securityRequirements:
+			return deserializeBatchGetSecurityRequirementResultList(d, schemas.BatchGetSecurityRequirementsOutput_securityRequirements, &v.SecurityRequirements)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSecurityRequirementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSecurityRequirements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecurityRequirements, schemas.BatchGetSecurityRequirementsInput, schemas.BatchGetSecurityRequirementsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSecurityRequirements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecurityRequirements, schemas.BatchGetSecurityRequirementsInput, schemas.BatchGetSecurityRequirementsOutput), output: &BatchGetSecurityRequirementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

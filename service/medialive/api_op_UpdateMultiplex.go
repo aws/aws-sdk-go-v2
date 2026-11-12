@@ -64,7 +64,9 @@ func (v *UpdateMultiplexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateMultiplexRequest_Name, *v.Name)
 	}
-	serializeMultiplexPacketIdentifiersMapping(s, schemas.UpdateMultiplexRequest_PacketIdentifiersMapping, v.PacketIdentifiersMapping)
+	if v.PacketIdentifiersMapping != nil {
+		serializeMultiplexPacketIdentifiersMapping(s, schemas.UpdateMultiplexRequest_PacketIdentifiersMapping, v.PacketIdentifiersMapping)
+	}
 }
 
 // Placeholder documentation for UpdateMultiplexResponse

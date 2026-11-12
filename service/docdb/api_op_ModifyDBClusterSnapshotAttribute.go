@@ -4,7 +4,9 @@ package docdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,27 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBClusterSnapshotAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBClusterSnapshotAttributeMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBClusterSnapshotAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ModifyDBClusterSnapshotAttributeMessage_AttributeName, *v.AttributeName)
+	}
+	if v.DBClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.ModifyDBClusterSnapshotAttributeMessage_DBClusterSnapshotIdentifier, *v.DBClusterSnapshotIdentifier)
+	}
+	if v.ValuesToAdd != nil {
+		serializeAttributeValueList(s, schemas.ModifyDBClusterSnapshotAttributeMessage_ValuesToAdd, v.ValuesToAdd)
+	}
+	if v.ValuesToRemove != nil {
+		serializeAttributeValueList(s, schemas.ModifyDBClusterSnapshotAttributeMessage_ValuesToRemove, v.ValuesToRemove)
+	}
+}
+
 type ModifyDBClusterSnapshotAttributeOutput struct {
 
 	// Detailed information about the attributes that are associated with a cluster
@@ -91,13 +114,34 @@ type ModifyDBClusterSnapshotAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBClusterSnapshotAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBClusterSnapshotAttributeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBClusterSnapshotAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterSnapshotAttributesResult != nil {
+		s.WriteStruct(schemas.ModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult)
+		v.DBClusterSnapshotAttributesResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBClusterSnapshotAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBClusterSnapshotAttributeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBClusterSnapshotAttributeResult_DBClusterSnapshotAttributesResult:
+			v.DBClusterSnapshotAttributesResult = &types.DBClusterSnapshotAttributesResult{}
+			return v.DBClusterSnapshotAttributesResult.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBClusterSnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBClusterSnapshotAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBClusterSnapshotAttribute, schemas.ModifyDBClusterSnapshotAttributeMessage, schemas.ModifyDBClusterSnapshotAttributeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBClusterSnapshotAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBClusterSnapshotAttribute, schemas.ModifyDBClusterSnapshotAttributeMessage, schemas.ModifyDBClusterSnapshotAttributeResult), output: &ModifyDBClusterSnapshotAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

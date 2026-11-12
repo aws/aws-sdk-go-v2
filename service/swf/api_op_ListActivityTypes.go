@@ -146,7 +146,9 @@ func (v *ListActivityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ActivityTypeInfos_nextPageToken, *v.NextPageToken)
 	}
-	serializeActivityTypeInfoList(s, schemas.ActivityTypeInfos_typeInfos, v.TypeInfos)
+	if v.TypeInfos != nil {
+		serializeActivityTypeInfoList(s, schemas.ActivityTypeInfos_typeInfos, v.TypeInfos)
+	}
 }
 func (v *ListActivityTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ActivityTypeInfos, func(s *smithy.Schema) error {

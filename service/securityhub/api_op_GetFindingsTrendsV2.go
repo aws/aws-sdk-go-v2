@@ -118,7 +118,9 @@ func (v *GetFindingsTrendsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFindingsTrendsV2Response_NextToken, *v.NextToken)
 	}
-	serializeTrendsMetrics(s, schemas.GetFindingsTrendsV2Response_TrendsMetrics, v.TrendsMetrics)
+	if v.TrendsMetrics != nil {
+		serializeTrendsMetrics(s, schemas.GetFindingsTrendsV2Response_TrendsMetrics, v.TrendsMetrics)
+	}
 }
 func (v *GetFindingsTrendsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingsTrendsV2Response, func(s *smithy.Schema) error {

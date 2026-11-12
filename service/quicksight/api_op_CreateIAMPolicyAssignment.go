@@ -89,7 +89,9 @@ func (v *CreateIAMPolicyAssignmentInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.CreateIAMPolicyAssignmentRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeIdentityMap(s, schemas.CreateIAMPolicyAssignmentRequest_Identities, v.Identities)
+	if v.Identities != nil {
+		serializeIdentityMap(s, schemas.CreateIAMPolicyAssignmentRequest_Identities, v.Identities)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.CreateIAMPolicyAssignmentRequest_Namespace, *v.Namespace)
 	}
@@ -154,7 +156,9 @@ func (v *CreateIAMPolicyAssignmentOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AssignmentStatus != "" {
 		s.WriteString(schemas.CreateIAMPolicyAssignmentResponse_AssignmentStatus, string(v.AssignmentStatus))
 	}
-	serializeIdentityMap(s, schemas.CreateIAMPolicyAssignmentResponse_Identities, v.Identities)
+	if v.Identities != nil {
+		serializeIdentityMap(s, schemas.CreateIAMPolicyAssignmentResponse_Identities, v.Identities)
+	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.CreateIAMPolicyAssignmentResponse_PolicyArn, *v.PolicyArn)
 	}

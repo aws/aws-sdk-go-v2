@@ -89,7 +89,9 @@ func (v *ListIntentPathsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndDateTime != nil {
 		s.WriteTime(schemas.ListIntentPathsRequest_endDateTime, *v.EndDateTime)
 	}
-	serializeAnalyticsPathFilters(s, schemas.ListIntentPathsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeAnalyticsPathFilters(s, schemas.ListIntentPathsRequest_filters, v.Filters)
+	}
 	if v.IntentPath != nil {
 		s.WriteString(schemas.ListIntentPathsRequest_intentPath, *v.IntentPath)
 	}
@@ -117,7 +119,9 @@ func (v *ListIntentPathsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIntentPathsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyticsIntentNodeSummaries(s, schemas.ListIntentPathsResponse_nodeSummaries, v.NodeSummaries)
+	if v.NodeSummaries != nil {
+		serializeAnalyticsIntentNodeSummaries(s, schemas.ListIntentPathsResponse_nodeSummaries, v.NodeSummaries)
+	}
 }
 func (v *ListIntentPathsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListIntentPathsResponse, func(s *smithy.Schema) error {

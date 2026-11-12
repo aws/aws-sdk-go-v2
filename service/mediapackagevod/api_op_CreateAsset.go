@@ -80,7 +80,9 @@ func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceRoleArn != nil {
 		s.WriteString(schemas.CreateAssetRequest_SourceRoleArn, *v.SourceRoleArn)
 	}
-	serializeTags(s, schemas.CreateAssetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAssetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAssetOutput struct {
@@ -131,7 +133,9 @@ func (v *CreateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteString(schemas.CreateAssetResponse_CreatedAt, *v.CreatedAt)
 	}
-	serialize__listOfEgressEndpoint(s, schemas.CreateAssetResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.EgressEndpoints != nil {
+		serialize__listOfEgressEndpoint(s, schemas.CreateAssetResponse_EgressEndpoints, v.EgressEndpoints)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateAssetResponse_Id, *v.Id)
 	}
@@ -147,7 +151,9 @@ func (v *CreateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceRoleArn != nil {
 		s.WriteString(schemas.CreateAssetResponse_SourceRoleArn, *v.SourceRoleArn)
 	}
-	serializeTags(s, schemas.CreateAssetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAssetResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAssetResponse, func(s *smithy.Schema) error {

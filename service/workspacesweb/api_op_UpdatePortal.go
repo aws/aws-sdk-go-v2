@@ -4,7 +4,9 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,33 @@ type UpdatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.UpdatePortalRequest_authenticationType, string(v.AuthenticationType))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdatePortalRequest_displayName, *v.DisplayName)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.UpdatePortalRequest_instanceType, string(v.InstanceType))
+	}
+	if v.MaxConcurrentSessions != nil {
+		s.WriteInt32(schemas.UpdatePortalRequest_maxConcurrentSessions, *v.MaxConcurrentSessions)
+	}
+	if v.PortalArn != nil {
+		s.WriteString(schemas.UpdatePortalRequest_portalArn, *v.PortalArn)
+	}
+	if v.PortalCustomDomain != nil {
+		s.WriteString(schemas.UpdatePortalRequest_portalCustomDomain, *v.PortalCustomDomain)
+	}
+}
+
 type UpdatePortalOutput struct {
 
 	// The web portal.
@@ -73,13 +102,34 @@ type UpdatePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Portal != nil {
+		s.WriteStruct(schemas.UpdatePortalResponse_portal)
+		v.Portal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePortalResponse_portal:
+			v.Portal = &types.Portal{}
+			return v.Portal.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortal, schemas.UpdatePortalRequest, schemas.UpdatePortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortal, schemas.UpdatePortalRequest, schemas.UpdatePortalResponse), output: &UpdatePortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

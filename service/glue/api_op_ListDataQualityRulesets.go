@@ -62,7 +62,9 @@ func (v *ListDataQualityRulesetsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityRulesetsRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListDataQualityRulesetsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListDataQualityRulesetsRequest_Tags, v.Tags)
+	}
 }
 
 type ListDataQualityRulesetsOutput struct {
@@ -89,7 +91,9 @@ func (v *ListDataQualityRulesetsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityRulesetsResponse_NextToken, *v.NextToken)
 	}
-	serializeDataQualityRulesetList(s, schemas.ListDataQualityRulesetsResponse_Rulesets, v.Rulesets)
+	if v.Rulesets != nil {
+		serializeDataQualityRulesetList(s, schemas.ListDataQualityRulesetsResponse_Rulesets, v.Rulesets)
+	}
 }
 func (v *ListDataQualityRulesetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataQualityRulesetsResponse, func(s *smithy.Schema) error {

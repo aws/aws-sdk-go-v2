@@ -174,7 +174,9 @@ func (v *CreateInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.KmsKey != nil {
 		s.WriteString(schemas.CreateInferenceExperimentRequest_KmsKey, *v.KmsKey)
 	}
-	serializeModelVariantConfigList(s, schemas.CreateInferenceExperimentRequest_ModelVariants, v.ModelVariants)
+	if v.ModelVariants != nil {
+		serializeModelVariantConfigList(s, schemas.CreateInferenceExperimentRequest_ModelVariants, v.ModelVariants)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateInferenceExperimentRequest_Name, *v.Name)
 	}
@@ -191,7 +193,9 @@ func (v *CreateInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializ
 		v.ShadowModeConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateInferenceExperimentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInferenceExperimentRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateInferenceExperimentRequest_Type, string(v.Type))
 	}

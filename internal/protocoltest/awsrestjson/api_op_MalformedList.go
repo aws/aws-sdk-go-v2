@@ -37,7 +37,9 @@ func (v *MalformedListInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MalformedListInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSimpleList(s, schemas.MalformedListInput_bodyList, v.BodyList)
+	if v.BodyList != nil {
+		serializeSimpleList(s, schemas.MalformedListInput_bodyList, v.BodyList)
+	}
 }
 func (v *MalformedListInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MalformedListInput, func(s *smithy.Schema) error {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"browserSettings":[{"browserSettingsArn":"__BrowserSettingsArn__"},{"browserSettingsArn":"__BrowserSettingsArn__"}],"nextToken":"__NextToken__"}

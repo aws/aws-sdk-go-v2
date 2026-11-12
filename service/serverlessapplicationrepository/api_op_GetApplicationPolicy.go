@@ -66,7 +66,9 @@ func (v *GetApplicationPolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetApplicationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfApplicationPolicyStatement(s, schemas.GetApplicationPolicyResponse_Statements, v.Statements)
+	if v.Statements != nil {
+		serialize__listOfApplicationPolicyStatement(s, schemas.GetApplicationPolicyResponse_Statements, v.Statements)
+	}
 }
 func (v *GetApplicationPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationPolicyResponse, func(s *smithy.Schema) error {

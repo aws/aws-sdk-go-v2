@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateChangeSetResponse><CreateChangeSetResult><Id>__Id__</Id><StackId>__StackId__</StackId></CreateChangeSetResult></CreateChangeSetResponse>

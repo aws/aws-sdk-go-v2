@@ -4,6 +4,8 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type StopCodeReviewJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCodeReviewJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCodeReviewJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCodeReviewJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.StopCodeReviewJobInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CodeReviewJobId != nil {
+		s.WriteString(schemas.StopCodeReviewJobInput_codeReviewJobId, *v.CodeReviewJobId)
+	}
+}
+
 // Output for the StopCodeReviewJob operation.
 type StopCodeReviewJobOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -48,13 +65,26 @@ type StopCodeReviewJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCodeReviewJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCodeReviewJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCodeReviewJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopCodeReviewJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopCodeReviewJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopCodeReviewJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopCodeReviewJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCodeReviewJob, schemas.StopCodeReviewJobInput, schemas.StopCodeReviewJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopCodeReviewJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCodeReviewJob, schemas.StopCodeReviewJobInput, schemas.StopCodeReviewJobOutput), output: &StopCodeReviewJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeSnapshots
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeSnapshots
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterName":"__ClusterName__","MaxResults":1,"NextToken":"__NextToken__","ShowDetail":true,"SnapshotName":"__SnapshotName__","Source":"__Source__"}
+¿kClusterNameo__ClusterName__jMaxResultsiNextTokenm__NextToken__jShowDetailõlSnapshotNamep__SnapshotName__fSourcej__Source__ÿ

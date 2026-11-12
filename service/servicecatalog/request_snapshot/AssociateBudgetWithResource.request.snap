@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/AssociateBudgetWithResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.AssociateBudgetWithResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"BudgetName":"__BudgetName__","ResourceId":"__ResourceId__"}
+¿jBudgetNamen__BudgetName__jResourceIdn__ResourceId__ÿ

@@ -54,7 +54,9 @@ func (v *UpdateEventSourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEventSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventSourceConfiguration(s, schemas.UpdateEventSourceRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeEventSourceConfiguration(s, schemas.UpdateEventSourceRequest_Configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateEventSourceRequest_Description, *v.Description)
 	}

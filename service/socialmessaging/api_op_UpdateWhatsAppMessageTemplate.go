@@ -4,6 +4,8 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,39 @@ type UpdateWhatsAppMessageTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWhatsAppMessageTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWhatsAppMessageTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWhatsAppMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CtaUrlLinkTrackingOptedOut != nil {
+		s.WriteBool(schemas.UpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut, *v.CtaUrlLinkTrackingOptedOut)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateWhatsAppMessageTemplateInput_id, *v.Id)
+	}
+	if v.MetaTemplateId != nil {
+		s.WriteString(schemas.UpdateWhatsAppMessageTemplateInput_metaTemplateId, *v.MetaTemplateId)
+	}
+	if v.ParameterFormat != nil {
+		s.WriteString(schemas.UpdateWhatsAppMessageTemplateInput_parameterFormat, *v.ParameterFormat)
+	}
+	if v.TemplateCategory != nil {
+		s.WriteString(schemas.UpdateWhatsAppMessageTemplateInput_templateCategory, *v.TemplateCategory)
+	}
+	if v.TemplateComponents != nil {
+		s.WriteBlob(schemas.UpdateWhatsAppMessageTemplateInput_templateComponents, v.TemplateComponents)
+	}
+	if v.TemplateLanguageCode != nil {
+		s.WriteString(schemas.UpdateWhatsAppMessageTemplateInput_templateLanguageCode, *v.TemplateLanguageCode)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateWhatsAppMessageTemplateInput_templateName, *v.TemplateName)
+	}
+}
+
 type UpdateWhatsAppMessageTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +101,26 @@ type UpdateWhatsAppMessageTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWhatsAppMessageTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWhatsAppMessageTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWhatsAppMessageTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWhatsAppMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWhatsAppMessageTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWhatsAppMessageTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWhatsAppMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWhatsAppMessageTemplate, schemas.UpdateWhatsAppMessageTemplateInput, schemas.UpdateWhatsAppMessageTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWhatsAppMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWhatsAppMessageTemplate, schemas.UpdateWhatsAppMessageTemplateInput, schemas.UpdateWhatsAppMessageTemplateOutput), output: &UpdateWhatsAppMessageTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

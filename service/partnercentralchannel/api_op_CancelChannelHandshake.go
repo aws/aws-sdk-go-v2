@@ -4,7 +4,9 @@ package partnercentralchannel
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type CancelChannelHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelChannelHandshakeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelChannelHandshakeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelChannelHandshakeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelChannelHandshakeRequest_catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelChannelHandshakeRequest_identifier, *v.Identifier)
+	}
+}
+
 type CancelChannelHandshakeOutput struct {
 
 	// Details of the canceled channel handshake.
@@ -50,13 +67,34 @@ type CancelChannelHandshakeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelChannelHandshakeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelChannelHandshakeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelChannelHandshakeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelHandshakeDetail != nil {
+		s.WriteStruct(schemas.CancelChannelHandshakeResponse_channelHandshakeDetail)
+		v.ChannelHandshakeDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelChannelHandshakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelChannelHandshakeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelChannelHandshakeResponse_channelHandshakeDetail:
+			v.ChannelHandshakeDetail = &types.CancelChannelHandshakeDetail{}
+			return v.ChannelHandshakeDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelChannelHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelChannelHandshake{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelChannelHandshake, schemas.CancelChannelHandshakeRequest, schemas.CancelChannelHandshakeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelChannelHandshake{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelChannelHandshake, schemas.CancelChannelHandshakeRequest, schemas.CancelChannelHandshakeResponse), output: &CancelChannelHandshakeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

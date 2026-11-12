@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/PutApprovalResult
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.PutApprovalResult
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"actionName":"__ActionName__","pipelineName":"__PipelineName__","result":{"status":"Approved","summary":"__Summary__"},"stageName":"__StageName__","token":"__Token__"}
+¿jactionNamen__ActionName__lpipelineNamep__PipelineName__fresult¿fstatushApprovedgsummaryk__Summary__ÿistageNamem__StageName__etokeni__Token__ÿ

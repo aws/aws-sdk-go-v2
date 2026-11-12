@@ -5,6 +5,8 @@ package pcs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,10 +44,28 @@ type DeleteComputeNodeGroupInput struct {
 	// With an idempotent request, if the original request completes successfully, the
 	// subsequent retries with the same client token return the result from the
 	// original successful request and they have no additional effect. If you don't
-	// specify a client token, the CLI and SDK automatically generate 1 for you.
+	// specify a client token, the CLI and SDK automatically generate one for you.
 	ClientToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteComputeNodeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComputeNodeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteComputeNodeGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteComputeNodeGroupRequest_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ComputeNodeGroupIdentifier != nil {
+		s.WriteString(schemas.DeleteComputeNodeGroupRequest_computeNodeGroupIdentifier, *v.ComputeNodeGroupIdentifier)
+	}
 }
 
 type DeleteComputeNodeGroupOutput struct {
@@ -55,13 +75,26 @@ type DeleteComputeNodeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComputeNodeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComputeNodeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComputeNodeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteComputeNodeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteComputeNodeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteComputeNodeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteComputeNodeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComputeNodeGroup, schemas.DeleteComputeNodeGroupRequest, schemas.DeleteComputeNodeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteComputeNodeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComputeNodeGroup, schemas.DeleteComputeNodeGroupRequest, schemas.DeleteComputeNodeGroupResponse), output: &DeleteComputeNodeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

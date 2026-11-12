@@ -443,8 +443,12 @@ func (v *GrantConstraints) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GrantConstraints) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextType(s, schemas.GrantConstraints_EncryptionContextEquals, v.EncryptionContextEquals)
-	serializeEncryptionContextType(s, schemas.GrantConstraints_EncryptionContextSubset, v.EncryptionContextSubset)
+	if v.EncryptionContextEquals != nil {
+		serializeEncryptionContextType(s, schemas.GrantConstraints_EncryptionContextEquals, v.EncryptionContextEquals)
+	}
+	if v.EncryptionContextSubset != nil {
+		serializeEncryptionContextType(s, schemas.GrantConstraints_EncryptionContextSubset, v.EncryptionContextSubset)
+	}
 	if v.SourceArn != nil {
 		s.WriteString(schemas.GrantConstraints_SourceArn, *v.SourceArn)
 	}
@@ -551,7 +555,9 @@ func (v *GrantListEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GrantListEntry_Name, *v.Name)
 	}
-	serializeGrantOperationList(s, schemas.GrantListEntry_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeGrantOperationList(s, schemas.GrantListEntry_Operations, v.Operations)
+	}
 	if v.RetiringPrincipal != nil {
 		s.WriteString(schemas.GrantListEntry_RetiringPrincipal, *v.RetiringPrincipal)
 	}
@@ -776,6 +782,10 @@ type KeyMetadata struct {
 	// is true, otherwise it is false.
 	Enabled bool
 
+	// The key encapsulation algorithm that the KMS key supports. This field appears
+	// only for KMS keys with a KeyUsage value of ENCAPSULATE_DECAPSULATE .
+	EncapsulationAlgorithms []EncapsulationAlgorithmSpec
+
 	// The encryption algorithms that the KMS key supports. You cannot use the KMS key
 	// with other encryption algorithms within KMS.
 	//
@@ -926,11 +936,18 @@ func (v *KeyMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != false {
 		s.WriteBool(schemas.KeyMetadata_Enabled, v.Enabled)
 	}
-	serializeEncryptionAlgorithmSpecList(s, schemas.KeyMetadata_EncryptionAlgorithms, v.EncryptionAlgorithms)
+	if v.EncapsulationAlgorithms != nil {
+		serializeEncapsulationAlgorithmSpecList(s, schemas.KeyMetadata_EncapsulationAlgorithms, v.EncapsulationAlgorithms)
+	}
+	if v.EncryptionAlgorithms != nil {
+		serializeEncryptionAlgorithmSpecList(s, schemas.KeyMetadata_EncryptionAlgorithms, v.EncryptionAlgorithms)
+	}
 	if v.ExpirationModel != "" {
 		s.WriteString(schemas.KeyMetadata_ExpirationModel, string(v.ExpirationModel))
 	}
-	serializeKeyAgreementAlgorithmSpecList(s, schemas.KeyMetadata_KeyAgreementAlgorithms, v.KeyAgreementAlgorithms)
+	if v.KeyAgreementAlgorithms != nil {
+		serializeKeyAgreementAlgorithmSpecList(s, schemas.KeyMetadata_KeyAgreementAlgorithms, v.KeyAgreementAlgorithms)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.KeyMetadata_KeyId, *v.KeyId)
 	}
@@ -946,7 +963,9 @@ func (v *KeyMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyUsage != "" {
 		s.WriteString(schemas.KeyMetadata_KeyUsage, string(v.KeyUsage))
 	}
-	serializeMacAlgorithmSpecList(s, schemas.KeyMetadata_MacAlgorithms, v.MacAlgorithms)
+	if v.MacAlgorithms != nil {
+		serializeMacAlgorithmSpecList(s, schemas.KeyMetadata_MacAlgorithms, v.MacAlgorithms)
+	}
 	if v.MultiRegion != nil {
 		s.WriteBool(schemas.KeyMetadata_MultiRegion, *v.MultiRegion)
 	}
@@ -961,7 +980,9 @@ func (v *KeyMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PendingDeletionWindowInDays != nil {
 		s.WriteInt32(schemas.KeyMetadata_PendingDeletionWindowInDays, *v.PendingDeletionWindowInDays)
 	}
-	serializeSigningAlgorithmSpecList(s, schemas.KeyMetadata_SigningAlgorithms, v.SigningAlgorithms)
+	if v.SigningAlgorithms != nil {
+		serializeSigningAlgorithmSpecList(s, schemas.KeyMetadata_SigningAlgorithms, v.SigningAlgorithms)
+	}
 	if v.ValidTo != nil {
 		s.WriteTime(schemas.KeyMetadata_ValidTo, *v.ValidTo)
 	}
@@ -1007,6 +1028,8 @@ func (v *KeyMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.KeyMetadata_Description, v.Description)
 		case schemas.KeyMetadata_Enabled:
 			return d.ReadBool(schemas.KeyMetadata_Enabled, &v.Enabled)
+		case schemas.KeyMetadata_EncapsulationAlgorithms:
+			return deserializeEncapsulationAlgorithmSpecList(d, schemas.KeyMetadata_EncapsulationAlgorithms, &v.EncapsulationAlgorithms)
 		case schemas.KeyMetadata_EncryptionAlgorithms:
 			return deserializeEncryptionAlgorithmSpecList(d, schemas.KeyMetadata_EncryptionAlgorithms, &v.EncryptionAlgorithms)
 		case schemas.KeyMetadata_ExpirationModel:
@@ -1115,7 +1138,9 @@ func (v *MultiRegionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PrimaryKey.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMultiRegionKeyList(s, schemas.MultiRegionConfiguration_ReplicaKeys, v.ReplicaKeys)
+	if v.ReplicaKeys != nil {
+		serializeMultiRegionKeyList(s, schemas.MultiRegionConfiguration_ReplicaKeys, v.ReplicaKeys)
+	}
 }
 func (v *MultiRegionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MultiRegionConfiguration, func(s *smithy.Schema) error {

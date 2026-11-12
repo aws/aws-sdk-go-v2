@@ -64,7 +64,9 @@ func (v *TagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamId != nil {
 		s.WriteString(schemas.TagResourceInput_StreamId, *v.StreamId)
 	}
-	serializeTagMap(s, schemas.TagResourceInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.TagResourceInput_Tags, v.Tags)
+	}
 }
 func (in *TagResourceInput) bindEndpointParams(p *EndpointParameters) {
 

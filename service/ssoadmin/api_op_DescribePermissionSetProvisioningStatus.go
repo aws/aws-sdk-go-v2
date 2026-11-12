@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribePermissionSetProvisioningStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePermissionSetProvisioningStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePermissionSetProvisioningStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePermissionSetProvisioningStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribePermissionSetProvisioningStatusRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.ProvisionPermissionSetRequestId != nil {
+		s.WriteString(schemas.DescribePermissionSetProvisioningStatusRequest_ProvisionPermissionSetRequestId, *v.ProvisionPermissionSetRequestId)
+	}
+}
+
 type DescribePermissionSetProvisioningStatusOutput struct {
 
 	// The status object for the permission set provisioning operation.
@@ -53,13 +70,34 @@ type DescribePermissionSetProvisioningStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePermissionSetProvisioningStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePermissionSetProvisioningStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePermissionSetProvisioningStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PermissionSetProvisioningStatus != nil {
+		s.WriteStruct(schemas.DescribePermissionSetProvisioningStatusResponse_PermissionSetProvisioningStatus)
+		v.PermissionSetProvisioningStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePermissionSetProvisioningStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePermissionSetProvisioningStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePermissionSetProvisioningStatusResponse_PermissionSetProvisioningStatus:
+			v.PermissionSetProvisioningStatus = &types.PermissionSetProvisioningStatus{}
+			return v.PermissionSetProvisioningStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePermissionSetProvisioningStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePermissionSetProvisioningStatus, schemas.DescribePermissionSetProvisioningStatusRequest, schemas.DescribePermissionSetProvisioningStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePermissionSetProvisioningStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePermissionSetProvisioningStatus, schemas.DescribePermissionSetProvisioningStatusRequest, schemas.DescribePermissionSetProvisioningStatusResponse), output: &DescribePermissionSetProvisioningStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

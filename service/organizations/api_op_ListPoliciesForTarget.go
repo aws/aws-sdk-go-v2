@@ -171,7 +171,9 @@ func (v *ListPoliciesForTargetOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPoliciesForTargetResponse_NextToken, *v.NextToken)
 	}
-	serializePolicies(s, schemas.ListPoliciesForTargetResponse_Policies, v.Policies)
+	if v.Policies != nil {
+		serializePolicies(s, schemas.ListPoliciesForTargetResponse_Policies, v.Policies)
+	}
 }
 func (v *ListPoliciesForTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPoliciesForTargetResponse, func(s *smithy.Schema) error {

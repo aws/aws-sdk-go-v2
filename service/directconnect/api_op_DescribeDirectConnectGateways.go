@@ -83,7 +83,9 @@ func (v *DescribeDirectConnectGatewaysOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeDirectConnectGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectConnectGatewayList(s, schemas.DescribeDirectConnectGatewaysResult_directConnectGateways, v.DirectConnectGateways)
+	if v.DirectConnectGateways != nil {
+		serializeDirectConnectGatewayList(s, schemas.DescribeDirectConnectGatewaysResult_directConnectGateways, v.DirectConnectGateways)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDirectConnectGatewaysResult_nextToken, *v.NextToken)
 	}
@@ -115,6 +117,9 @@ func (c *Client) addOperationDescribeDirectConnectGatewaysMiddlewares(stack *mid
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

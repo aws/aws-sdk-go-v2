@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/ListTagsForResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.ListTagsForResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NextToken":"__NextToken__","ResourceArn":"__ResourceArn__"}
+¿jMaxResultsiNextTokenm__NextToken__kResourceArno__ResourceArn__ÿ

@@ -32,6 +32,7 @@ const (
 	AllowedOperationExtendConsumptionLicense AllowedOperation = "ExtendConsumptionLicense"
 	AllowedOperationListPurchasedLicenses    AllowedOperation = "ListPurchasedLicenses"
 	AllowedOperationCreateToken              AllowedOperation = "CreateToken"
+	AllowedOperationListReceivedLicenses     AllowedOperation = "ListReceivedLicenses"
 )
 
 // Values returns all known values for AllowedOperation. Note that this can be
@@ -47,6 +48,7 @@ func (AllowedOperation) Values() []AllowedOperation {
 		"ExtendConsumptionLicense",
 		"ListPurchasedLicenses",
 		"CreateToken",
+		"ListReceivedLicenses",
 	}
 }
 
@@ -254,6 +256,25 @@ func (GrantStatus) Values() []GrantStatus {
 		"PENDING_DELETE",
 		"DISABLED",
 		"WORKFLOW_COMPLETED",
+	}
+}
+
+type GrantType string
+
+// Enum values for GrantType
+const (
+	GrantTypeBuyerGrant    GrantType = "BuyerGrant"
+	GrantTypeDelegateGrant GrantType = "DelegateGrant"
+)
+
+// Values returns all known values for GrantType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GrantType) Values() []GrantType {
+	return []GrantType{
+		"BuyerGrant",
+		"DelegateGrant",
 	}
 }
 

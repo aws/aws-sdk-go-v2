@@ -991,6 +991,9 @@ func TestCheckRequestSnapshot_CreateGuardrail(t *testing.T) {
 					Enabled:   ptr.Bool(true),
 				},
 			},
+			TierConfig: &types.GuardrailContextualGroundingTierConfig{
+				TierName: types.GuardrailContextualGroundingTierName("CLASSIC"),
+			},
 		},
 		AutomatedReasoningPolicyConfig: &types.GuardrailAutomatedReasoningPolicyConfig{
 			Policies: []string{
@@ -4314,6 +4317,9 @@ func TestCheckRequestSnapshot_UpdateGuardrail(t *testing.T) {
 					Enabled:   ptr.Bool(true),
 				},
 			},
+			TierConfig: &types.GuardrailContextualGroundingTierConfig{
+				TierName: types.GuardrailContextualGroundingTierName("CLASSIC"),
+			},
 		},
 		AutomatedReasoningPolicyConfig: &types.GuardrailAutomatedReasoningPolicyConfig{
 			Policies: []string{
@@ -5209,6 +5215,9 @@ func TestUpdateRequestSnapshot_CreateGuardrail(t *testing.T) {
 					Action:    types.GuardrailContextualGroundingAction("BLOCK"),
 					Enabled:   ptr.Bool(true),
 				},
+			},
+			TierConfig: &types.GuardrailContextualGroundingTierConfig{
+				TierName: types.GuardrailContextualGroundingTierName("CLASSIC"),
 			},
 		},
 		AutomatedReasoningPolicyConfig: &types.GuardrailAutomatedReasoningPolicyConfig{
@@ -8532,6 +8541,9 @@ func TestUpdateRequestSnapshot_UpdateGuardrail(t *testing.T) {
 					Action:    types.GuardrailContextualGroundingAction("BLOCK"),
 					Enabled:   ptr.Bool(true),
 				},
+			},
+			TierConfig: &types.GuardrailContextualGroundingTierConfig{
+				TierName: types.GuardrailContextualGroundingTierName("CLASSIC"),
 			},
 		},
 		AutomatedReasoningPolicyConfig: &types.GuardrailAutomatedReasoningPolicyConfig{

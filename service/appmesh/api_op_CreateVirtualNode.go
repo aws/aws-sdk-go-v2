@@ -115,7 +115,9 @@ func (v *CreateVirtualNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Spec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateVirtualNodeInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVirtualNodeInput_tags, v.Tags)
+	}
 	if v.VirtualNodeName != nil {
 		s.WriteString(schemas.CreateVirtualNodeInput_virtualNodeName, *v.VirtualNodeName)
 	}

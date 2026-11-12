@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,26 @@ type CreateReceiptRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReceiptRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReceiptRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReceiptRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.After != nil {
+		s.WriteString(schemas.CreateReceiptRuleRequest_After, *v.After)
+	}
+	if v.Rule != nil {
+		s.WriteStruct(schemas.CreateReceiptRuleRequest_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.CreateReceiptRuleRequest_RuleSetName, *v.RuleSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type CreateReceiptRuleOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -62,13 +84,26 @@ type CreateReceiptRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReceiptRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReceiptRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReceiptRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateReceiptRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReceiptRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReceiptRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateReceiptRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReceiptRule, schemas.CreateReceiptRuleRequest, schemas.CreateReceiptRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateReceiptRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReceiptRule, schemas.CreateReceiptRuleRequest, schemas.CreateReceiptRuleResponse), output: &CreateReceiptRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

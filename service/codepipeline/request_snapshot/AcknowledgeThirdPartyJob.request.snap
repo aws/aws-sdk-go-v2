@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/AcknowledgeThirdPartyJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.AcknowledgeThirdPartyJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"clientToken":"__ClientToken__","jobId":"__JobId__","nonce":"__Nonce__"}
+¿kclientTokeno__ClientToken__ejobIdi__JobId__enoncei__Nonce__ÿ

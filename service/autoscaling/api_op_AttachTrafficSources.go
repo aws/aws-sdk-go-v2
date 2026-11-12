@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,39 @@ type AttachTrafficSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachTrafficSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachTrafficSourcesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachTrafficSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.AttachTrafficSourcesType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.SkipZonalShiftValidation != nil {
+		s.WriteBool(schemas.AttachTrafficSourcesType_SkipZonalShiftValidation, *v.SkipZonalShiftValidation)
+	}
+	if v.TrafficSources != nil {
+		serializeTrafficSources(s, schemas.AttachTrafficSourcesType_TrafficSources, v.TrafficSources)
+	}
+}
+func (v *AttachTrafficSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachTrafficSourcesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachTrafficSourcesType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.AttachTrafficSourcesType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.AttachTrafficSourcesType_SkipZonalShiftValidation:
+			v.SkipZonalShiftValidation = new(bool)
+			return d.ReadBool(schemas.AttachTrafficSourcesType_SkipZonalShiftValidation, v.SkipZonalShiftValidation)
+		case schemas.AttachTrafficSourcesType_TrafficSources:
+			return deserializeTrafficSources(d, schemas.AttachTrafficSourcesType_TrafficSources, &v.TrafficSources)
+		}
+		return nil
+	})
+}
+
 type AttachTrafficSourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,13 +112,26 @@ type AttachTrafficSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachTrafficSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachTrafficSourcesResultType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachTrafficSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AttachTrafficSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachTrafficSourcesResultType, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachTrafficSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachTrafficSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachTrafficSources, schemas.AttachTrafficSourcesType, schemas.AttachTrafficSourcesResultType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAttachTrafficSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachTrafficSources, schemas.AttachTrafficSourcesType, schemas.AttachTrafficSourcesResultType), output: &AttachTrafficSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -112,7 +112,9 @@ func (v *CreateAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Definition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFolderArnList(s, schemas.CreateAnalysisRequest_FolderArns, v.FolderArns)
+	if v.FolderArns != nil {
+		serializeFolderArnList(s, schemas.CreateAnalysisRequest_FolderArns, v.FolderArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAnalysisRequest_Name, *v.Name)
 	}
@@ -121,13 +123,17 @@ func (v *CreateAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Parameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourcePermissionList(s, schemas.CreateAnalysisRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateAnalysisRequest_Permissions, v.Permissions)
+	}
 	if v.SourceEntity != nil {
 		s.WriteStruct(schemas.CreateAnalysisRequest_SourceEntity)
 		v.SourceEntity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAnalysisRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAnalysisRequest_Tags, v.Tags)
+	}
 	if v.ThemeArn != nil {
 		s.WriteString(schemas.CreateAnalysisRequest_ThemeArn, *v.ThemeArn)
 	}

@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DescribeTags
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeTags
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"resourceArns":["__Member__","__Member__"]}
+¿lresourceArnsŸj__Member__j__Member__ÿÿ

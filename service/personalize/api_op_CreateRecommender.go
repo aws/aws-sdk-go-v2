@@ -145,7 +145,9 @@ func (v *CreateRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RecommenderConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateRecommenderRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateRecommenderRequest_tags, v.Tags)
+	}
 }
 
 type CreateRecommenderOutput struct {

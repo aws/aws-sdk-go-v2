@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"documentDetailList":[{"createdAt":946684800,"documentId":"__DocumentId__","error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"status":"RECEIVED","updatedAt":946684800},{"createdAt":946684800,"documentId":"__DocumentId__","error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"status":"RECEIVED","updatedAt":946684800}],"nextToken":"__NextToken__"}

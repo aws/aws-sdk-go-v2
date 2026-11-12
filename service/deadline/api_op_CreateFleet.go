@@ -30,9 +30,6 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 	return out, nil
 }
 
-// Shared displayName + description for Create operations where both are present.
-// displayName is @required here - this mixin is Create-only by design (Update has
-// optional displayName).
 type CreateFleetInput struct {
 
 	// The configuration settings for the fleet. Customer managed fleets are
@@ -107,7 +104,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateFleetRequest_clientToken, *v.ClientToken)
 	}
-	serializeFleetConfiguration(s, schemas.CreateFleetRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeFleetConfiguration(s, schemas.CreateFleetRequest_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateFleetRequest_description, *v.Description)
 	}
@@ -131,11 +130,11 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateFleetRequest_roleArn, *v.RoleArn)
 	}
-	serializeTags(s, schemas.CreateFleetRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFleetRequest_tags, v.Tags)
+	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateFleetOutput struct {
 
 	// The fleet ID.

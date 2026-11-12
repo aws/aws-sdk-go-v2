@@ -4,6 +4,8 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,18 @@ type DeleteDBSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSecurityGroupName != nil {
+		s.WriteString(schemas.DeleteDBSecurityGroupMessage_DBSecurityGroupName, *v.DBSecurityGroupName)
+	}
+}
+
 type DeleteDBSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +77,26 @@ type DeleteDBSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDBSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBSecurityGroup, schemas.DeleteDBSecurityGroupMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBSecurityGroup, schemas.DeleteDBSecurityGroupMessage, nil), output: &DeleteDBSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

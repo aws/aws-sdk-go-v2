@@ -47,7 +47,9 @@ func (v *EnableInsightRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableInsightRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInsightRuleNames(s, schemas.EnableInsightRulesInput_RuleNames, v.RuleNames)
+	if v.RuleNames != nil {
+		serializeInsightRuleNames(s, schemas.EnableInsightRulesInput_RuleNames, v.RuleNames)
+	}
 }
 
 type EnableInsightRulesOutput struct {
@@ -69,7 +71,9 @@ func (v *EnableInsightRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableInsightRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchFailures(s, schemas.EnableInsightRulesOutput_Failures, v.Failures)
+	if v.Failures != nil {
+		serializeBatchFailures(s, schemas.EnableInsightRulesOutput_Failures, v.Failures)
+	}
 }
 func (v *EnableInsightRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnableInsightRulesOutput, func(s *smithy.Schema) error {

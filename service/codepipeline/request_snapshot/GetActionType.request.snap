@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/GetActionType
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.GetActionType
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"category":"Source","owner":"__Owner__","provider":"__Provider__","version":"__Version__"}
+¿hcategoryfSourceeowneri__Owner__hproviderl__Provider__gversionk__Version__ÿ

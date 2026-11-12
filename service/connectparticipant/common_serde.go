@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAttachmentIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeAttachmentIdList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeAttachments(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AttachmentItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeAttachments(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func serializeConnectionTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectionType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +34,6 @@ func serializeConnectionTypeList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeReceipts(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Receipt) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeReceipts(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeTranscript(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Item) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -69,9 +54,6 @@ func serializeTranscript(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeViewActions(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -208,10 +190,7 @@ func deserializeViewActions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 	})
 }
 
-func serializeUploadMetadataSignedHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
+func serializeUrlMetadataSignedHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -220,7 +199,7 @@ func serializeUploadMetadataSignedHeaders(s smithy.ShapeSerializer, schema *smit
 	s.CloseMap()
 }
 
-func deserializeUploadMetadataSignedHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+func deserializeUrlMetadataSignedHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

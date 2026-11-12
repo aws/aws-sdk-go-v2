@@ -1058,8 +1058,9 @@ func TestUpdateResponseSnapshot_DescribePublishingDestination(t *testing.T) {
 		Status:                          types.PublishingStatus("PENDING_VERIFICATION"),
 		PublishingFailureStartTimestamp: ptr.Int64(1),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",

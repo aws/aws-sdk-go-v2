@@ -83,7 +83,9 @@ func (v *ListKeywordsForDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListKeywordsForDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeywords(s, schemas.ListKeywordsForDataSourceResponse_keywords, v.Keywords)
+	if v.Keywords != nil {
+		serializeKeywords(s, schemas.ListKeywordsForDataSourceResponse_keywords, v.Keywords)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListKeywordsForDataSourceResponse_nextToken, *v.NextToken)
 	}

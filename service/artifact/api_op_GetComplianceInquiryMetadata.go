@@ -74,7 +74,9 @@ func (v *GetComplianceInquiryMetadataOutput) SerializeMembers(s smithy.ShapeSeri
 		v.ComplianceInquiryDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.GetComplianceInquiryMetadataResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetComplianceInquiryMetadataResponse_tags, v.Tags)
+	}
 }
 func (v *GetComplianceInquiryMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetComplianceInquiryMetadataResponse, func(s *smithy.Schema) error {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<EstimateTemplateCostResponse><EstimateTemplateCostResult><Url>__Url__</Url></EstimateTemplateCostResult></EstimateTemplateCostResponse>

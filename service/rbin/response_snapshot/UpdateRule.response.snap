@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Description":"__Description__","ExcludeResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"Identifier":"__Identifier__","LockEndTime":946684800,"LockState":"locked","ResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"ResourceType":"EBS_SNAPSHOT","RetentionPeriod":{"RetentionPeriodUnit":"DAYS","RetentionPeriodValue":1},"RuleArn":"__RuleArn__","Status":"pending"}

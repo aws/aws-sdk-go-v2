@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -511,6 +513,135 @@ type CreateReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AtRestEncryptionEnabled != nil {
+		s.WriteBool(schemas.CreateReplicationGroupMessage_AtRestEncryptionEnabled, *v.AtRestEncryptionEnabled)
+	}
+	if v.AuthToken != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_AuthToken, *v.AuthToken)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateReplicationGroupMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AutomaticFailoverEnabled != nil {
+		s.WriteBool(schemas.CreateReplicationGroupMessage_AutomaticFailoverEnabled, *v.AutomaticFailoverEnabled)
+	}
+	if v.CacheNodeType != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_CacheNodeType, *v.CacheNodeType)
+	}
+	if v.CacheParameterGroupName != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_CacheParameterGroupName, *v.CacheParameterGroupName)
+	}
+	if v.CacheSecurityGroupNames != nil {
+		serializeCacheSecurityGroupNameList(s, schemas.CreateReplicationGroupMessage_CacheSecurityGroupNames, v.CacheSecurityGroupNames)
+	}
+	if v.CacheSubnetGroupName != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_CacheSubnetGroupName, *v.CacheSubnetGroupName)
+	}
+	if v.ClusterMode != "" {
+		s.WriteString(schemas.CreateReplicationGroupMessage_ClusterMode, string(v.ClusterMode))
+	}
+	if v.DataTieringEnabled != nil {
+		s.WriteBool(schemas.CreateReplicationGroupMessage_DataTieringEnabled, *v.DataTieringEnabled)
+	}
+	if v.Durability != "" {
+		s.WriteString(schemas.CreateReplicationGroupMessage_Durability, string(v.Durability))
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.GlobalReplicationGroupId != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_GlobalReplicationGroupId, *v.GlobalReplicationGroupId)
+	}
+	if v.IpDiscovery != "" {
+		s.WriteString(schemas.CreateReplicationGroupMessage_IpDiscovery, string(v.IpDiscovery))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LogDeliveryConfigurations != nil {
+		serializeLogDeliveryConfigurationRequestList(s, schemas.CreateReplicationGroupMessage_LogDeliveryConfigurations, v.LogDeliveryConfigurations)
+	}
+	if v.MultiAZEnabled != nil {
+		s.WriteBool(schemas.CreateReplicationGroupMessage_MultiAZEnabled, *v.MultiAZEnabled)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateReplicationGroupMessage_NetworkType, string(v.NetworkType))
+	}
+	if v.NodeGroupConfiguration != nil {
+		serializeNodeGroupConfigurationList(s, schemas.CreateReplicationGroupMessage_NodeGroupConfiguration, v.NodeGroupConfiguration)
+	}
+	if v.NotificationTopicArn != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_NotificationTopicArn, *v.NotificationTopicArn)
+	}
+	if v.NumCacheClusters != nil {
+		s.WriteInt32(schemas.CreateReplicationGroupMessage_NumCacheClusters, *v.NumCacheClusters)
+	}
+	if v.NumNodeGroups != nil {
+		s.WriteInt32(schemas.CreateReplicationGroupMessage_NumNodeGroups, *v.NumNodeGroups)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.CreateReplicationGroupMessage_Port, *v.Port)
+	}
+	if v.PreferredCacheClusterAZs != nil {
+		serializeAvailabilityZonesList(s, schemas.CreateReplicationGroupMessage_PreferredCacheClusterAZs, v.PreferredCacheClusterAZs)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PrimaryClusterId != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_PrimaryClusterId, *v.PrimaryClusterId)
+	}
+	if v.ReplicasPerNodeGroup != nil {
+		s.WriteInt32(schemas.CreateReplicationGroupMessage_ReplicasPerNodeGroup, *v.ReplicasPerNodeGroup)
+	}
+	if v.ReplicationGroupDescription != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_ReplicationGroupDescription, *v.ReplicationGroupDescription)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.CreateReplicationGroupMessage_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.ServerlessCacheSnapshotName != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_ServerlessCacheSnapshotName, *v.ServerlessCacheSnapshotName)
+	}
+	if v.SnapshotArns != nil {
+		serializeSnapshotArnsList(s, schemas.CreateReplicationGroupMessage_SnapshotArns, v.SnapshotArns)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_SnapshotName, *v.SnapshotName)
+	}
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.CreateReplicationGroupMessage_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SnapshotWindow != nil {
+		s.WriteString(schemas.CreateReplicationGroupMessage_SnapshotWindow, *v.SnapshotWindow)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateReplicationGroupMessage_Tags, v.Tags)
+	}
+	if v.TransitEncryptionEnabled != nil {
+		s.WriteBool(schemas.CreateReplicationGroupMessage_TransitEncryptionEnabled, *v.TransitEncryptionEnabled)
+	}
+	if v.TransitEncryptionMode != "" {
+		s.WriteString(schemas.CreateReplicationGroupMessage_TransitEncryptionMode, string(v.TransitEncryptionMode))
+	}
+	if v.UserGroupIds != nil {
+		serializeUserGroupIdListInput(s, schemas.CreateReplicationGroupMessage_UserGroupIds, v.UserGroupIds)
+	}
+}
+
 type CreateReplicationGroupOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -523,13 +654,34 @@ type CreateReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.CreateReplicationGroupResult_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReplicationGroupResult_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationGroup, schemas.CreateReplicationGroupMessage, schemas.CreateReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationGroup, schemas.CreateReplicationGroupMessage, schemas.CreateReplicationGroupResult), output: &CreateReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

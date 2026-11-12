@@ -71,7 +71,9 @@ func (v *DescribeUserInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtensionNames(s, schemas.DescribeUserRequest_Extensions, v.Extensions)
+	if v.Extensions != nil {
+		serializeExtensionNames(s, schemas.DescribeUserRequest_Extensions, v.Extensions)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.DescribeUserRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
@@ -197,7 +199,9 @@ func (v *DescribeUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddresses(s, schemas.DescribeUserResponse_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeAddresses(s, schemas.DescribeUserResponse_Addresses, v.Addresses)
+	}
 	if v.Birthdate != nil {
 		s.WriteString(schemas.DescribeUserResponse_Birthdate, *v.Birthdate)
 	}
@@ -210,9 +214,15 @@ func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.DescribeUserResponse_DisplayName, *v.DisplayName)
 	}
-	serializeEmails(s, schemas.DescribeUserResponse_Emails, v.Emails)
-	serializeExtensions(s, schemas.DescribeUserResponse_Extensions, v.Extensions)
-	serializeExternalIds(s, schemas.DescribeUserResponse_ExternalIds, v.ExternalIds)
+	if v.Emails != nil {
+		serializeEmails(s, schemas.DescribeUserResponse_Emails, v.Emails)
+	}
+	if v.Extensions != nil {
+		serializeExtensions(s, schemas.DescribeUserResponse_Extensions, v.Extensions)
+	}
+	if v.ExternalIds != nil {
+		serializeExternalIds(s, schemas.DescribeUserResponse_ExternalIds, v.ExternalIds)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.DescribeUserResponse_IdentityStoreId, *v.IdentityStoreId)
 	}
@@ -227,8 +237,12 @@ func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NickName != nil {
 		s.WriteString(schemas.DescribeUserResponse_NickName, *v.NickName)
 	}
-	serializePhoneNumbers(s, schemas.DescribeUserResponse_PhoneNumbers, v.PhoneNumbers)
-	serializePhotos(s, schemas.DescribeUserResponse_Photos, v.Photos)
+	if v.PhoneNumbers != nil {
+		serializePhoneNumbers(s, schemas.DescribeUserResponse_PhoneNumbers, v.PhoneNumbers)
+	}
+	if v.Photos != nil {
+		serializePhotos(s, schemas.DescribeUserResponse_Photos, v.Photos)
+	}
 	if v.PreferredLanguage != nil {
 		s.WriteString(schemas.DescribeUserResponse_PreferredLanguage, *v.PreferredLanguage)
 	}
@@ -238,7 +252,9 @@ func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Revision != nil {
 		s.WriteString(schemas.DescribeUserResponse_Revision, *v.Revision)
 	}
-	serializeRoles(s, schemas.DescribeUserResponse_Roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.DescribeUserResponse_Roles, v.Roles)
+	}
 	if v.Timezone != nil {
 		s.WriteString(schemas.DescribeUserResponse_Timezone, *v.Timezone)
 	}

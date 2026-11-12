@@ -35,5 +35,9 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ResourceNotFoundException,
 			New:    func() any { return &types.ResourceNotFoundException{} },
 		},
+		"com.amazonaws.arcregionswitch#RetryableConflictException": {
+			Schema: schemas.RetryableConflictException,
+			New:    func() any { return &types.RetryableConflictException{} },
+		},
 	},
 }

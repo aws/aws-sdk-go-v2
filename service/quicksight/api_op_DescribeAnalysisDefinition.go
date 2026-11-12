@@ -128,7 +128,9 @@ func (v *DescribeAnalysisDefinitionOutput) SerializeMembers(s smithy.ShapeSerial
 		v.Definition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalysisErrorList(s, schemas.DescribeAnalysisDefinitionResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeAnalysisErrorList(s, schemas.DescribeAnalysisDefinitionResponse_Errors, v.Errors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeAnalysisDefinitionResponse_Name, *v.Name)
 	}

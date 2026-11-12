@@ -105,7 +105,9 @@ func (v *DeleteRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordIdentifierValueAsString != nil {
 		s.WriteString(schemas.DeleteRecordRequest_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
 	}
-	serializeTargetStores(s, schemas.DeleteRecordRequest_TargetStores, v.TargetStores)
+	if v.TargetStores != nil {
+		serializeTargetStores(s, schemas.DeleteRecordRequest_TargetStores, v.TargetStores)
+	}
 }
 
 type DeleteRecordOutput struct {

@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifyEndpointEncryptionMode
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifyEndpointEncryptionMode
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DirectoryId":"__DirectoryId__","EndpointEncryptionMode":"STANDARD_TLS"}
+¿kDirectoryIdo__DirectoryId__vEndpointEncryptionModelSTANDARD_TLSÿ

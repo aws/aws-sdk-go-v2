@@ -64,7 +64,9 @@ func (v *BatchDeleteImageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteImageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageIdentifierList(s, schemas.BatchDeleteImageRequest_imageIds, v.ImageIds)
+	if v.ImageIds != nil {
+		serializeImageIdentifierList(s, schemas.BatchDeleteImageRequest_imageIds, v.ImageIds)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.BatchDeleteImageRequest_registryId, *v.RegistryId)
 	}
@@ -94,8 +96,12 @@ func (v *BatchDeleteImageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageFailureList(s, schemas.BatchDeleteImageResponse_failures, v.Failures)
-	serializeImageIdentifierList(s, schemas.BatchDeleteImageResponse_imageIds, v.ImageIds)
+	if v.Failures != nil {
+		serializeImageFailureList(s, schemas.BatchDeleteImageResponse_failures, v.Failures)
+	}
+	if v.ImageIds != nil {
+		serializeImageIdentifierList(s, schemas.BatchDeleteImageResponse_imageIds, v.ImageIds)
+	}
 }
 func (v *BatchDeleteImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteImageResponse, func(s *smithy.Schema) error {

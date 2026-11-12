@@ -59,7 +59,9 @@ func (v *ListSourceCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSourceCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceCredentialsInfos(s, schemas.ListSourceCredentialsOutput_sourceCredentialsInfos, v.SourceCredentialsInfos)
+	if v.SourceCredentialsInfos != nil {
+		serializeSourceCredentialsInfos(s, schemas.ListSourceCredentialsOutput_sourceCredentialsInfos, v.SourceCredentialsInfos)
+	}
 }
 func (v *ListSourceCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSourceCredentialsOutput, func(s *smithy.Schema) error {
@@ -85,6 +87,9 @@ func (c *Client) addOperationListSourceCredentialsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -74,7 +74,9 @@ func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfApplicationSummary(s, schemas.ListApplicationsResponse_Applications, v.Applications)
+	if v.Applications != nil {
+		serialize__listOfApplicationSummary(s, schemas.ListApplicationsResponse_Applications, v.Applications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationsResponse_NextToken, *v.NextToken)
 	}

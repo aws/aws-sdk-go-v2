@@ -81,7 +81,9 @@ func (v *StartCompositionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartCompositionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationConfigurationList(s, schemas.StartCompositionRequest_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinationConfigurationList(s, schemas.StartCompositionRequest_destinations, v.Destinations)
+	}
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.StartCompositionRequest_idempotencyToken, *v.IdempotencyToken)
 	}
@@ -93,7 +95,9 @@ func (v *StartCompositionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StageArn != nil {
 		s.WriteString(schemas.StartCompositionRequest_stageArn, *v.StageArn)
 	}
-	serializeTags(s, schemas.StartCompositionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartCompositionRequest_tags, v.Tags)
+	}
 }
 
 type StartCompositionOutput struct {

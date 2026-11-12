@@ -61,7 +61,9 @@ func (v *ListCrossAccountResourceAccountsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListCrossAccountResourceAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsAccountIds(s, schemas.ListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds, v.ResourceOwnerAwsAccountIds)
+	if v.ResourceOwnerAwsAccountIds != nil {
+		serializeAwsAccountIds(s, schemas.ListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds, v.ResourceOwnerAwsAccountIds)
+	}
 }
 func (v *ListCrossAccountResourceAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCrossAccountResourceAccountsResponse, func(s *smithy.Schema) error {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Events":[{"Event":"JOINED","EventType":"LIVE","ProfileId":"__ProfileId__","UpdatedAt":946684800},{"Event":"JOINED","EventType":"LIVE","ProfileId":"__ProfileId__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

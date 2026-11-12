@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","retrievalInstructionSummaries":[{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastTransitionStatus":"CREATING","name":"__Name__","retrievalInstructionArn":"__RetrievalInstructionArn__","retrievalInstructionId":"__RetrievalInstructionId__","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastTransitionStatus":"CREATING","name":"__Name__","retrievalInstructionArn":"__RetrievalInstructionArn__","retrievalInstructionId":"__RetrievalInstructionId__","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z"}]}

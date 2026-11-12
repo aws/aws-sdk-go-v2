@@ -49,7 +49,9 @@ func (v *GrantFlowEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GrantFlowEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfGrantEntitlementRequest(s, schemas.GrantFlowEntitlementsRequest_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serialize__listOfGrantEntitlementRequest(s, schemas.GrantFlowEntitlementsRequest_Entitlements, v.Entitlements)
+	}
 	if v.FlowArn != nil {
 		s.WriteString(schemas.GrantFlowEntitlementsRequest_FlowArn, *v.FlowArn)
 	}
@@ -76,7 +78,9 @@ func (v *GrantFlowEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GrantFlowEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfEntitlement(s, schemas.GrantFlowEntitlementsResponse_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serialize__listOfEntitlement(s, schemas.GrantFlowEntitlementsResponse_Entitlements, v.Entitlements)
+	}
 	if v.FlowArn != nil {
 		s.WriteString(schemas.GrantFlowEntitlementsResponse_FlowArn, *v.FlowArn)
 	}

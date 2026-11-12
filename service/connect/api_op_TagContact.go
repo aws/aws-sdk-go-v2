@@ -67,7 +67,9 @@ func (v *TagContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.TagContactRequest_InstanceId, *v.InstanceId)
 	}
-	serializeContactTagMap(s, schemas.TagContactRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeContactTagMap(s, schemas.TagContactRequest_Tags, v.Tags)
+	}
 }
 
 type TagContactOutput struct {

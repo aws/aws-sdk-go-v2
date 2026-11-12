@@ -551,10 +551,23 @@ func TestCheckResponseSnapshot_CreateCloudVmCluster(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CreateCloudVmCluster(context.Background(), &CreateCloudVmClusterInput{
 		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
-		CpuCoreCount:                 ptr.Int32(1),
-		DisplayName:                  ptr.String("__DisplayName__"),
-		GiVersion:                    ptr.String("__GiVersion__"),
-		Hostname:                     ptr.String("__Hostname__"),
+		ExascaleDbStorageVaultId:     ptr.String("__ExascaleDbStorageVaultId__"),
+		VmFileSystemStorageType:      types.VmStorageType("LOCAL"),
+		VmBackupStorageType:          types.VmStorageType("LOCAL"),
+		FileSystemConfigurationDetails: []types.FileSystemConfigurationDetails{
+			{
+				MountPoint:          ptr.String("__MountPoint__"),
+				FileSystemSizeInGBs: ptr.Int32(1),
+			},
+			{
+				MountPoint:          ptr.String("__MountPoint__"),
+				FileSystemSizeInGBs: ptr.Int32(1),
+			},
+		},
+		CpuCoreCount: ptr.Int32(1),
+		DisplayName:  ptr.String("__DisplayName__"),
+		GiVersion:    ptr.String("__GiVersion__"),
+		Hostname:     ptr.String("__Hostname__"),
 		SshPublicKeys: []string{
 			"__Member__",
 			"__Member__",
@@ -667,6 +680,7 @@ func TestCheckResponseSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
 		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
 		AdditionalFlashCacheInPercent:             ptr.Int32(1),
 		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		CloudExadataInfrastructureId:              ptr.String("__CloudExadataInfrastructureId__"),
 		AvailabilityZoneId:                        ptr.String("__AvailabilityZoneId__"),
 		AvailabilityZone:                          ptr.String("__AvailabilityZone__"),
 		Description:                               ptr.String("__Description__"),
@@ -1600,6 +1614,12 @@ func TestCheckResponseSnapshot_GetCloudExadataInfrastructure(t *testing.T) {
 			DatabaseServerType:          ptr.String("__DatabaseServerType__"),
 			StorageServerType:           ptr.String("__StorageServerType__"),
 			ComputeModel:                types.ComputeModel("ECPU"),
+			ExascaleConfiguration: &types.ExascaleConfiguration{
+				TotalStorageSizeInGBs:       ptr.Int32(1),
+				AvailableStorageSizeInGBs:   ptr.Int32(1),
+				TotalVmStorageSizeInGBs:     ptr.Int32(1),
+				AvailableVmStorageSizeInGBs: ptr.Int32(1),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetCloudExadataInfrastructure.response")
@@ -1675,8 +1695,23 @@ func TestCheckResponseSnapshot_GetCloudVmCluster(t *testing.T) {
 			CloudVmClusterArn:             ptr.String("__CloudVmClusterArn__"),
 			CloudExadataInfrastructureId:  ptr.String("__CloudExadataInfrastructureId__"),
 			CloudExadataInfrastructureArn: ptr.String("__CloudExadataInfrastructureArn__"),
-			ClusterName:                   ptr.String("__ClusterName__"),
-			CpuCoreCount:                  ptr.Int32(1),
+			ExascaleDbStorageVaultId:      ptr.String("__ExascaleDbStorageVaultId__"),
+			ExascaleDbStorageVaultArn:     ptr.String("__ExascaleDbStorageVaultArn__"),
+			StorageManagementType:         types.StorageManagementType("ASM"),
+			VmFileSystemStorageType:       types.VmStorageType("LOCAL"),
+			VmBackupStorageType:           types.VmStorageType("LOCAL"),
+			FileSystemConfigurationDetails: []types.FileSystemConfigurationDetails{
+				{
+					MountPoint:          ptr.String("__MountPoint__"),
+					FileSystemSizeInGBs: ptr.Int32(1),
+				},
+				{
+					MountPoint:          ptr.String("__MountPoint__"),
+					FileSystemSizeInGBs: ptr.Int32(1),
+				},
+			},
+			ClusterName:  ptr.String("__ClusterName__"),
+			CpuCoreCount: ptr.Int32(1),
 			DataCollectionOptions: &types.DataCollectionOptions{
 				IsDiagnosticsEventsEnabled: ptr.Bool(true),
 				IsHealthMonitoringEnabled:  ptr.Bool(true),
@@ -2015,12 +2050,14 @@ func TestCheckResponseSnapshot_GetExascaleDbStorageVault(t *testing.T) {
 				types.ShapeAttribute("SMART_STORAGE"),
 				types.ShapeAttribute("SMART_STORAGE"),
 			},
-			AutoscaleLimitInGBs: ptr.Int32(1),
-			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
-			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
-			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Description:         ptr.String("__Description__"),
-			DisplayName:         ptr.String("__DisplayName__"),
+			AutoscaleLimitInGBs:           ptr.Int32(1),
+			AvailabilityZone:              ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:            ptr.String("__AvailabilityZoneId__"),
+			CloudExadataInfrastructureArn: ptr.String("__CloudExadataInfrastructureArn__"),
+			CloudExadataInfrastructureId:  ptr.String("__CloudExadataInfrastructureId__"),
+			CreatedAt:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Description:                   ptr.String("__Description__"),
+			DisplayName:                   ptr.String("__DisplayName__"),
 			VmClusterArns: []string{
 				"__Member__",
 				"__Member__",
@@ -2043,6 +2080,7 @@ func TestCheckResponseSnapshot_GetExascaleDbStorageVault(t *testing.T) {
 			Status:                types.ResourceStatus("AVAILABLE"),
 			StatusReason:          ptr.String("__StatusReason__"),
 			TimeZone:              ptr.String("__TimeZone__"),
+			VaultType:             types.ExascaleDbStorageVaultType("EXASCALE_INFRASTRUCTURE"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetExascaleDbStorageVault.response")
@@ -3935,6 +3973,12 @@ func TestCheckResponseSnapshot_ListCloudExadataInfrastructures(t *testing.T) {
 				DatabaseServerType:          ptr.String("__DatabaseServerType__"),
 				StorageServerType:           ptr.String("__StorageServerType__"),
 				ComputeModel:                types.ComputeModel("ECPU"),
+				ExascaleConfiguration: &types.ExascaleConfiguration{
+					TotalStorageSizeInGBs:       ptr.Int32(1),
+					AvailableStorageSizeInGBs:   ptr.Int32(1),
+					TotalVmStorageSizeInGBs:     ptr.Int32(1),
+					AvailableVmStorageSizeInGBs: ptr.Int32(1),
+				},
 			},
 			{
 				CloudExadataInfrastructureId:  ptr.String("__CloudExadataInfrastructureId__"),
@@ -4013,6 +4057,12 @@ func TestCheckResponseSnapshot_ListCloudExadataInfrastructures(t *testing.T) {
 				DatabaseServerType:          ptr.String("__DatabaseServerType__"),
 				StorageServerType:           ptr.String("__StorageServerType__"),
 				ComputeModel:                types.ComputeModel("ECPU"),
+				ExascaleConfiguration: &types.ExascaleConfiguration{
+					TotalStorageSizeInGBs:       ptr.Int32(1),
+					AvailableStorageSizeInGBs:   ptr.Int32(1),
+					TotalVmStorageSizeInGBs:     ptr.Int32(1),
+					AvailableVmStorageSizeInGBs: ptr.Int32(1),
+				},
 			},
 		},
 	}
@@ -4048,8 +4098,23 @@ func TestCheckResponseSnapshot_ListCloudVmClusters(t *testing.T) {
 				CloudVmClusterArn:             ptr.String("__CloudVmClusterArn__"),
 				CloudExadataInfrastructureId:  ptr.String("__CloudExadataInfrastructureId__"),
 				CloudExadataInfrastructureArn: ptr.String("__CloudExadataInfrastructureArn__"),
-				ClusterName:                   ptr.String("__ClusterName__"),
-				CpuCoreCount:                  ptr.Int32(1),
+				ExascaleDbStorageVaultId:      ptr.String("__ExascaleDbStorageVaultId__"),
+				ExascaleDbStorageVaultArn:     ptr.String("__ExascaleDbStorageVaultArn__"),
+				StorageManagementType:         types.StorageManagementType("ASM"),
+				VmFileSystemStorageType:       types.VmStorageType("LOCAL"),
+				VmBackupStorageType:           types.VmStorageType("LOCAL"),
+				FileSystemConfigurationDetails: []types.FileSystemConfigurationDetails{
+					{
+						MountPoint:          ptr.String("__MountPoint__"),
+						FileSystemSizeInGBs: ptr.Int32(1),
+					},
+					{
+						MountPoint:          ptr.String("__MountPoint__"),
+						FileSystemSizeInGBs: ptr.Int32(1),
+					},
+				},
+				ClusterName:  ptr.String("__ClusterName__"),
+				CpuCoreCount: ptr.Int32(1),
 				DataCollectionOptions: &types.DataCollectionOptions{
 					IsDiagnosticsEventsEnabled: ptr.Bool(true),
 					IsHealthMonitoringEnabled:  ptr.Bool(true),
@@ -4138,8 +4203,23 @@ func TestCheckResponseSnapshot_ListCloudVmClusters(t *testing.T) {
 				CloudVmClusterArn:             ptr.String("__CloudVmClusterArn__"),
 				CloudExadataInfrastructureId:  ptr.String("__CloudExadataInfrastructureId__"),
 				CloudExadataInfrastructureArn: ptr.String("__CloudExadataInfrastructureArn__"),
-				ClusterName:                   ptr.String("__ClusterName__"),
-				CpuCoreCount:                  ptr.Int32(1),
+				ExascaleDbStorageVaultId:      ptr.String("__ExascaleDbStorageVaultId__"),
+				ExascaleDbStorageVaultArn:     ptr.String("__ExascaleDbStorageVaultArn__"),
+				StorageManagementType:         types.StorageManagementType("ASM"),
+				VmFileSystemStorageType:       types.VmStorageType("LOCAL"),
+				VmBackupStorageType:           types.VmStorageType("LOCAL"),
+				FileSystemConfigurationDetails: []types.FileSystemConfigurationDetails{
+					{
+						MountPoint:          ptr.String("__MountPoint__"),
+						FileSystemSizeInGBs: ptr.Int32(1),
+					},
+					{
+						MountPoint:          ptr.String("__MountPoint__"),
+						FileSystemSizeInGBs: ptr.Int32(1),
+					},
+				},
+				ClusterName:  ptr.String("__ClusterName__"),
+				CpuCoreCount: ptr.Int32(1),
 				DataCollectionOptions: &types.DataCollectionOptions{
 					IsDiagnosticsEventsEnabled: ptr.Bool(true),
 					IsHealthMonitoringEnabled:  ptr.Bool(true),
@@ -4741,12 +4821,14 @@ func TestCheckResponseSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 					types.ShapeAttribute("SMART_STORAGE"),
 					types.ShapeAttribute("SMART_STORAGE"),
 				},
-				AutoscaleLimitInGBs: ptr.Int32(1),
-				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
-				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
-				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Description:         ptr.String("__Description__"),
-				DisplayName:         ptr.String("__DisplayName__"),
+				AutoscaleLimitInGBs:           ptr.Int32(1),
+				AvailabilityZone:              ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:            ptr.String("__AvailabilityZoneId__"),
+				CloudExadataInfrastructureArn: ptr.String("__CloudExadataInfrastructureArn__"),
+				CloudExadataInfrastructureId:  ptr.String("__CloudExadataInfrastructureId__"),
+				CreatedAt:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:                   ptr.String("__Description__"),
+				DisplayName:                   ptr.String("__DisplayName__"),
 				VmClusterArns: []string{
 					"__Member__",
 					"__Member__",
@@ -4769,6 +4851,7 @@ func TestCheckResponseSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 				Status:                types.ResourceStatus("AVAILABLE"),
 				StatusReason:          ptr.String("__StatusReason__"),
 				TimeZone:              ptr.String("__TimeZone__"),
+				VaultType:             types.ExascaleDbStorageVaultType("EXASCALE_INFRASTRUCTURE"),
 			},
 			{
 				ExascaleDbStorageVaultId:      ptr.String("__ExascaleDbStorageVaultId__"),
@@ -4777,12 +4860,14 @@ func TestCheckResponseSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 					types.ShapeAttribute("SMART_STORAGE"),
 					types.ShapeAttribute("SMART_STORAGE"),
 				},
-				AutoscaleLimitInGBs: ptr.Int32(1),
-				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
-				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
-				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Description:         ptr.String("__Description__"),
-				DisplayName:         ptr.String("__DisplayName__"),
+				AutoscaleLimitInGBs:           ptr.Int32(1),
+				AvailabilityZone:              ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:            ptr.String("__AvailabilityZoneId__"),
+				CloudExadataInfrastructureArn: ptr.String("__CloudExadataInfrastructureArn__"),
+				CloudExadataInfrastructureId:  ptr.String("__CloudExadataInfrastructureId__"),
+				CreatedAt:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:                   ptr.String("__Description__"),
+				DisplayName:                   ptr.String("__DisplayName__"),
 				VmClusterArns: []string{
 					"__Member__",
 					"__Member__",
@@ -4805,6 +4890,7 @@ func TestCheckResponseSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 				Status:                types.ResourceStatus("AVAILABLE"),
 				StatusReason:          ptr.String("__StatusReason__"),
 				TimeZone:              ptr.String("__TimeZone__"),
+				VaultType:             types.ExascaleDbStorageVaultType("EXASCALE_INFRASTRUCTURE"),
 			},
 		},
 	}
@@ -4817,8 +4903,10 @@ func TestCheckResponseSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListExascaleDbStorageVaults(context.Background(), &ListExascaleDbStorageVaultsInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		VaultType:                    types.ExascaleDbStorageVaultType("EXASCALE_INFRASTRUCTURE"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5867,6 +5955,34 @@ func TestCheckResponseSnapshot_UpdateExadbVmCluster(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateExadbVmCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateExascaleCloudExadataInfrastructure(t *testing.T) {
+	want := &UpdateExascaleCloudExadataInfrastructureOutput{
+		DisplayName:                  ptr.String("__DisplayName__"),
+		Status:                       types.ResourceStatus("AVAILABLE"),
+		StatusReason:                 ptr.String("__StatusReason__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateExascaleCloudExadataInfrastructure.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateExascaleCloudExadataInfrastructure(context.Background(), &UpdateExascaleCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		TotalStorageSizeInGBs:        ptr.Int32(1),
+		TotalVmStorageSizeInGBs:      ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateExascaleCloudExadataInfrastructure.response", err)
 	}
 }
 

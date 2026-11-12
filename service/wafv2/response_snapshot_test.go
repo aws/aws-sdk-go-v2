@@ -6643,6 +6643,70 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 			},
+			ConnectedAccountConfigs: []types.ConnectedAccountConfig{
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+			},
 			CurrencyMode: types.CurrencyMode("REAL"),
 		},
 	})
@@ -9923,6 +9987,9 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
 				},
 			},
+			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
+				"key0": {},
+			},
 		},
 		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
 			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
@@ -9973,6 +10040,70 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Amount:   ptr.String("__Amount__"),
 								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			ConnectedAccountConfigs: []types.ConnectedAccountConfig{
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
 							},
 						},
 					},
@@ -14408,6 +14539,70 @@ func TestCheckResponseSnapshot_GetRuleGroup(t *testing.T) {
 								{
 									Amount:   ptr.String("__Amount__"),
 									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+				ConnectedAccountConfigs: []types.ConnectedAccountConfig{
+					{
+						ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+						PaymentNetworks: []types.ConnectedAccountChainConfig{
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+								},
+							},
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+								},
+							},
+						},
+					},
+					{
+						ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+						PaymentNetworks: []types.ConnectedAccountChainConfig{
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+								},
+							},
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
 								},
 							},
 						},
@@ -26211,6 +26406,70 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 			},
+			ConnectedAccountConfigs: []types.ConnectedAccountConfig{
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+			},
 			CurrencyMode: types.CurrencyMode("REAL"),
 		},
 	})
@@ -29477,6 +29736,9 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
 				},
 			},
+			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
+				"key0": {},
+			},
 		},
 		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
 			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
@@ -29527,6 +29789,70 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Amount:   ptr.String("__Amount__"),
 								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			ConnectedAccountConfigs: []types.ConnectedAccountConfig{
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
 							},
 						},
 					},
@@ -32836,6 +33162,9 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
 				},
 			},
+			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
+				"key0": {},
+			},
 		},
 		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
 			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
@@ -32886,6 +33215,70 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 							{
 								Amount:   ptr.String("__Amount__"),
 								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			ConnectedAccountConfigs: []types.ConnectedAccountConfig{
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+					},
+				},
+				{
+					ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+					PaymentNetworks: []types.ConnectedAccountChainConfig{
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+							},
+						},
+						{
+							Chain: types.ConnectedAccountChain("BASE"),
+							Prices: []types.ConnectedAccountPrice{
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
+								{
+									Amount:   ptr.String("__Amount__"),
+									Currency: types.CryptoCurrency("USDC"),
+								},
 							},
 						},
 					},

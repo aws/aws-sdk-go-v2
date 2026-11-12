@@ -107,7 +107,9 @@ func (v *GetDeviceDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetDeviceDefinitionResponse_Name, *v.Name)
 	}
-	serializeTags(s, schemas.GetDeviceDefinitionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetDeviceDefinitionResponse_tags, v.Tags)
+	}
 }
 func (v *GetDeviceDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDeviceDefinitionResponse, func(s *smithy.Schema) error {

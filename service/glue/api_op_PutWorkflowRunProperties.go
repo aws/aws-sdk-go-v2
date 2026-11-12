@@ -65,7 +65,9 @@ func (v *PutWorkflowRunPropertiesInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RunId != nil {
 		s.WriteString(schemas.PutWorkflowRunPropertiesRequest_RunId, *v.RunId)
 	}
-	serializeWorkflowRunProperties(s, schemas.PutWorkflowRunPropertiesRequest_RunProperties, v.RunProperties)
+	if v.RunProperties != nil {
+		serializeWorkflowRunProperties(s, schemas.PutWorkflowRunPropertiesRequest_RunProperties, v.RunProperties)
+	}
 }
 
 type PutWorkflowRunPropertiesOutput struct {

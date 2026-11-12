@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.DescribePage
+
+{"ContactArn":"__ContactArn__","Content":"__Content__","DeliveryTime":946684800,"EngagementArn":"__EngagementArn__","IncidentId":"__IncidentId__","PageArn":"__PageArn__","PublicContent":"__PublicContent__","PublicSubject":"__PublicSubject__","ReadTime":946684800,"Sender":"__Sender__","SentTime":946684800,"Subject":"__Subject__"}

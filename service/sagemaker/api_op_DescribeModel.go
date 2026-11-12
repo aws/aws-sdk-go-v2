@@ -106,7 +106,9 @@ func (v *DescribeModelOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerDefinitionList(s, schemas.DescribeModelOutput_Containers, v.Containers)
+	if v.Containers != nil {
+		serializeContainerDefinitionList(s, schemas.DescribeModelOutput_Containers, v.Containers)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeModelOutput_CreationTime, *v.CreationTime)
 	}

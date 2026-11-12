@@ -908,6 +908,63 @@ func TestCheckResponseSnapshot_AdminListUserAuthEvents(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AdminListUserSessions(t *testing.T) {
+	want := &AdminListUserSessionsOutput{
+		Sessions: []types.SessionDescriptionType{
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AdminListUserSessions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AdminListUserSessions(context.Background(), &AdminListUserSessionsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AdminListUserSessions.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AdminRemoveUserFromGroup(t *testing.T) {
 	want := &AdminRemoveUserFromGroupOutput{}
 	status, header, body, err := serdeRespReadSnapshot("AdminRemoveUserFromGroup.response")
@@ -1023,6 +1080,30 @@ func TestCheckResponseSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "AdminRespondToAuthChallenge.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_AdminRevokeUserSession(t *testing.T) {
+	want := &AdminRevokeUserSessionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("AdminRevokeUserSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AdminRevokeUserSession(context.Background(), &AdminRevokeUserSessionInput{
+		UserPoolId:               ptr.String("__UserPoolId__"),
+		Username:                 ptr.String("__Username__"),
+		SessionId:                ptr.String("__SessionId__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AdminRevokeUserSession.response", err)
 	}
 }
 
@@ -3848,6 +3929,34 @@ func TestCheckResponseSnapshot_GetUserAuthFactors(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetUserPoolClientSessionConfiguration(t *testing.T) {
+	want := &GetUserPoolClientSessionConfigurationOutput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		SSOSession: &types.ClientSSOSessionConfigType{
+			MaxValidityMinutes: ptr.Int32(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetUserPoolClientSessionConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetUserPoolClientSessionConfiguration(context.Background(), &GetUserPoolClientSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetUserPoolClientSessionConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	want := &GetUserPoolMfaConfigOutput{
 		SmsMfaConfiguration: &types.SmsMfaConfigType{
@@ -3897,6 +4006,33 @@ func TestCheckResponseSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetUserPoolMfaConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetUserPoolSessionConfiguration(t *testing.T) {
+	want := &GetUserPoolSessionConfigurationOutput{
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		UserSessionTracking: types.UserSessionTrackingType("ENABLED"),
+		TokenSession: &types.UserPoolTokenSessionConfigType{
+			MaxPerUser: ptr.Int32(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetUserPoolSessionConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetUserPoolSessionConfiguration(context.Background(), &GetUserPoolSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetUserPoolSessionConfiguration.response", err)
 	}
 }
 
@@ -4521,6 +4657,62 @@ func TestCheckResponseSnapshot_ListUserPools(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListUserSessions(t *testing.T) {
+	want := &ListUserSessionsOutput{
+		Sessions: []types.SessionDescriptionType{
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+			{
+				SessionId:      ptr.String("__SessionId__"),
+				SessionType:    types.SessionTypeType("TOKEN"),
+				ClientId:       ptr.String("__ClientId__"),
+				CreateDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastActiveDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeviceType:     ptr.String("__DeviceType__"),
+				LastIPAddress:  ptr.String("__LastIPAddress__"),
+				LastLocation: &types.SessionLocationType{
+					City:    ptr.String("__City__"),
+					Country: ptr.String("__Country__"),
+				},
+				OriginSessionId:  ptr.String("__OriginSessionId__"),
+				IsCurrentSession: ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListUserSessions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListUserSessions(context.Background(), &ListUserSessionsInput{
+		AccessToken: ptr.String("__AccessToken__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListUserSessions.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 	want := &ListUsersOutput{
 		Users: []types.UserType{
@@ -4845,15 +5037,39 @@ func TestCheckResponseSnapshot_RevokeToken(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.RevokeToken(context.Background(), &RevokeTokenInput{
-		Token:        ptr.String("__Token__"),
-		ClientId:     ptr.String("__ClientId__"),
-		ClientSecret: ptr.String("__ClientSecret__"),
+		Token:                    ptr.String("__Token__"),
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RevokeToken.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RevokeUserSession(t *testing.T) {
+	want := &RevokeUserSessionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("RevokeUserSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RevokeUserSession(context.Background(), &RevokeUserSessionInput{
+		AccessToken:              ptr.String("__AccessToken__"),
+		SessionId:                ptr.String("__SessionId__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RevokeUserSession.response", err)
 	}
 }
 
@@ -5146,6 +5362,37 @@ func TestCheckResponseSnapshot_SetUserMFAPreference(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SetUserPoolClientSessionConfiguration(t *testing.T) {
+	want := &SetUserPoolClientSessionConfigurationOutput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		SSOSession: &types.ClientSSOSessionConfigType{
+			MaxValidityMinutes: ptr.Int32(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("SetUserPoolClientSessionConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SetUserPoolClientSessionConfiguration(context.Background(), &SetUserPoolClientSessionConfigurationInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		SSOSession: &types.ClientSSOSessionConfigType{
+			MaxValidityMinutes: ptr.Int32(1),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SetUserPoolClientSessionConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 	want := &SetUserPoolMfaConfigOutput{
 		SmsMfaConfiguration: &types.SmsMfaConfigType{
@@ -5225,6 +5472,37 @@ func TestCheckResponseSnapshot_SetUserPoolMfaConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "SetUserPoolMfaConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SetUserPoolSessionConfiguration(t *testing.T) {
+	want := &SetUserPoolSessionConfigurationOutput{
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		UserSessionTracking: types.UserSessionTrackingType("ENABLED"),
+		TokenSession: &types.UserPoolTokenSessionConfigType{
+			MaxPerUser: ptr.Int32(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("SetUserPoolSessionConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SetUserPoolSessionConfiguration(context.Background(), &SetUserPoolSessionConfigurationInput{
+		UserPoolId:          ptr.String("__UserPoolId__"),
+		UserSessionTracking: types.UserSessionTrackingType("ENABLED"),
+		TokenSession: &types.UserPoolTokenSessionConfigType{
+			MaxPerUser: ptr.Int32(1),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SetUserPoolSessionConfiguration.response", err)
 	}
 }
 
@@ -8308,9 +8586,10 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.RevokeToken(context.Background(), &RevokeTokenInput{
-		Token:        ptr.String("__Token__"),
-		ClientId:     ptr.String("__ClientId__"),
-		ClientSecret: ptr.String("__ClientSecret__"),
+		Token:                    ptr.String("__Token__"),
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8451,9 +8730,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedTokenTypeException(t *testing.T)
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.RevokeToken(context.Background(), &RevokeTokenInput{
-		Token:        ptr.String("__Token__"),
-		ClientId:     ptr.String("__ClientId__"),
-		ClientSecret: ptr.String("__ClientSecret__"),
+		Token:                    ptr.String("__Token__"),
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		RevokeAssociatedSessions: types.RevokeAssociatedSessionsType("NONE"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

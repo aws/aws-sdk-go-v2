@@ -136,7 +136,9 @@ func (v *ListTrialComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrialComponentsResponse_NextToken, *v.NextToken)
 	}
-	serializeTrialComponentSummaries(s, schemas.ListTrialComponentsResponse_TrialComponentSummaries, v.TrialComponentSummaries)
+	if v.TrialComponentSummaries != nil {
+		serializeTrialComponentSummaries(s, schemas.ListTrialComponentsResponse_TrialComponentSummaries, v.TrialComponentSummaries)
+	}
 }
 func (v *ListTrialComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrialComponentsResponse, func(s *smithy.Schema) error {

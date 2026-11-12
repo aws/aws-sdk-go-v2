@@ -250,6 +250,46 @@ func (m *validateOpCreatePromptVersion) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRetrievalInstruction struct {
+}
+
+func (*validateOpCreateRetrievalInstruction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRetrievalInstruction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRetrievalInstructionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRetrievalInstructionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRetrievalInstructionVersion struct {
+}
+
+func (*validateOpCreateRetrievalInstructionVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRetrievalInstructionVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRetrievalInstructionVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRetrievalInstructionVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVpcConfiguration struct {
 }
 
@@ -505,6 +545,26 @@ func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRetrievalInstruction struct {
+}
+
+func (*validateOpDeleteRetrievalInstruction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRetrievalInstruction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRetrievalInstructionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRetrievalInstructionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +930,26 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRetrievalInstruction struct {
+}
+
+func (*validateOpGetRetrievalInstruction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRetrievalInstruction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRetrievalInstructionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRetrievalInstructionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetVpcConfiguration struct {
 }
 
@@ -1105,6 +1185,26 @@ func (m *validateOpListKnowledgeBaseDocuments) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListKnowledgeBaseDocumentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRetrievalInstructionVersions struct {
+}
+
+func (*validateOpListRetrievalInstructionVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRetrievalInstructionVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRetrievalInstructionVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRetrievalInstructionVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1490,6 +1590,26 @@ func (m *validateOpUpdatePrompt) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRetrievalInstruction struct {
+}
+
+func (*validateOpUpdateRetrievalInstruction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRetrievalInstruction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRetrievalInstructionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRetrievalInstructionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpValidateFlowDefinition struct {
 }
 
@@ -1558,6 +1678,14 @@ func addOpCreatePromptVersionValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreatePromptVersion{}, middleware.After)
 }
 
+func addOpCreateRetrievalInstructionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRetrievalInstruction{}, middleware.After)
+}
+
+func addOpCreateRetrievalInstructionVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRetrievalInstructionVersion{}, middleware.After)
+}
+
 func addOpCreateVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVpcConfiguration{}, middleware.After)
 }
@@ -1608,6 +1736,10 @@ func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
+func addOpDeleteRetrievalInstructionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRetrievalInstruction{}, middleware.After)
 }
 
 func addOpDeleteVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1682,6 +1814,10 @@ func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
 
+func addOpGetRetrievalInstructionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRetrievalInstruction{}, middleware.After)
+}
+
 func addOpGetVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetVpcConfiguration{}, middleware.After)
 }
@@ -1728,6 +1864,10 @@ func addOpListIngestionJobsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListKnowledgeBaseDocuments{}, middleware.After)
+}
+
+func addOpListRetrievalInstructionVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRetrievalInstructionVersions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1804,6 +1944,10 @@ func addOpUpdateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdatePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePrompt{}, middleware.After)
+}
+
+func addOpUpdateRetrievalInstructionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRetrievalInstruction{}, middleware.After)
 }
 
 func addOpValidateFlowDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -3580,6 +3724,27 @@ func validateMetadataAttributeValue(v *types.MetadataAttributeValue) error {
 	}
 }
 
+func validateMetadataConfiguration(v *types.MetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Searchability) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Searchability"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetadataConfigurationForReranking(v *types.MetadataConfigurationForReranking) error {
 	if v == nil {
 		return nil
@@ -3591,6 +3756,23 @@ func validateMetadataConfigurationForReranking(v *types.MetadataConfigurationFor
 	if v.SelectiveModeConfiguration != nil {
 		if err := validateRerankingMetadataSelectiveModeConfiguration(v.SelectiveModeConfiguration); err != nil {
 			invalidParams.AddNested("SelectiveModeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataConfigurations(v []types.MetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfigurations"}
+	for i := range v {
+		if err := validateMetadataConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5838,6 +6020,39 @@ func validateOpCreatePromptVersionInput(v *CreatePromptVersionInput) error {
 	}
 }
 
+func validateOpCreateRetrievalInstructionInput(v *CreateRetrievalInstructionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRetrievalInstructionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Instruction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Instruction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRetrievalInstructionVersionInput(v *CreateRetrievalInstructionVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRetrievalInstructionVersionInput"}
+	if v.RetrievalInstructionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalInstructionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVpcConfigurationInput(v *CreateVpcConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -6074,6 +6289,21 @@ func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRetrievalInstructionInput(v *DeleteRetrievalInstructionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRetrievalInstructionInput"}
+	if v.RetrievalInstructionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalInstructionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6416,6 +6646,21 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	}
 }
 
+func validateOpGetRetrievalInstructionInput(v *GetRetrievalInstructionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRetrievalInstructionInput"}
+	if v.RetrievalInstructionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalInstructionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetVpcConfigurationInput(v *GetVpcConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -6626,6 +6871,21 @@ func validateOpListKnowledgeBaseDocumentsInput(v *ListKnowledgeBaseDocumentsInpu
 	}
 	if v.DataSourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRetrievalInstructionVersionsInput(v *ListRetrievalInstructionVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRetrievalInstructionVersionsInput"}
+	if v.RetrievalInstructionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalInstructionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7036,6 +7296,11 @@ func validateOpUpdateKnowledgeBaseInput(v *UpdateKnowledgeBaseInput) error {
 			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MetadataConfigurations != nil {
+		if err := validateMetadataConfigurations(v.MetadataConfigurations); err != nil {
+			invalidParams.AddNested("MetadataConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7058,6 +7323,24 @@ func validateOpUpdatePromptInput(v *UpdatePromptInput) error {
 	}
 	if v.PromptIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRetrievalInstructionInput(v *UpdateRetrievalInstructionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRetrievalInstructionInput"}
+	if v.RetrievalInstructionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalInstructionId"))
+	}
+	if v.Instruction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Instruction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

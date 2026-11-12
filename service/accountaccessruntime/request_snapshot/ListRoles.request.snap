@@ -1,0 +1,3 @@
+GET /access?maxResults=1&nextToken=__NextToken__&tenantId=__TenantId__
+
+

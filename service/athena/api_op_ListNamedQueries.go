@@ -87,7 +87,9 @@ func (v *ListNamedQueriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNamedQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNamedQueryIdList(s, schemas.ListNamedQueriesOutput_NamedQueryIds, v.NamedQueryIds)
+	if v.NamedQueryIds != nil {
+		serializeNamedQueryIdList(s, schemas.ListNamedQueriesOutput_NamedQueryIds, v.NamedQueryIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNamedQueriesOutput_NextToken, *v.NextToken)
 	}

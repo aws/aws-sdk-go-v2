@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,6 +46,21 @@ type DescribeSearchInput struct {
 	WorkspaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchId != nil {
+		s.WriteString(schemas.DescribeSearchRequest_searchId, *v.SearchId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeSearchRequest_workspaceName, *v.WorkspaceName)
+	}
 }
 
 // Output of the DescribeSearch operation.
@@ -91,13 +108,82 @@ type DescribeSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSearchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeSearchResponse_groupId, *v.GroupId)
+	}
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.DescribeSearchResponse_queryStatement, *v.QueryStatement)
+	}
+	if v.SearchId != nil {
+		s.WriteString(schemas.DescribeSearchResponse_searchId, *v.SearchId)
+	}
+	if v.SearchType != "" {
+		s.WriteString(schemas.DescribeSearchResponse_searchType, string(v.SearchType))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.DescribeSearchResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeSearchResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeSearchResponse_statusReason, *v.StatusReason)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeSearchResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *DescribeSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSearchResponse_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribeSearchResponse_groupId, v.GroupId)
+		case schemas.DescribeSearchResponse_queryStatement:
+			v.QueryStatement = new(string)
+			return d.ReadString(schemas.DescribeSearchResponse_queryStatement, v.QueryStatement)
+		case schemas.DescribeSearchResponse_searchId:
+			v.SearchId = new(string)
+			return d.ReadString(schemas.DescribeSearchResponse_searchId, v.SearchId)
+		case schemas.DescribeSearchResponse_searchType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSearchResponse_searchType, &ev); err != nil {
+				return err
+			}
+			v.SearchType = types.SearchType(ev)
+			return nil
+		case schemas.DescribeSearchResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeSearchResponse_startedAt, v.StartedAt)
+		case schemas.DescribeSearchResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSearchResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SearchStatus(ev)
+			return nil
+		case schemas.DescribeSearchResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeSearchResponse_statusReason, v.StatusReason)
+		case schemas.DescribeSearchResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.DescribeSearchResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSearch, schemas.DescribeSearchRequest, schemas.DescribeSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSearch, schemas.DescribeSearchRequest, schemas.DescribeSearchResponse), output: &DescribeSearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

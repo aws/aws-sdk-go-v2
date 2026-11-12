@@ -4,7 +4,9 @@ package codeartifact
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type GetRepositoryPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryPermissionsPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryPermissionsPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryPermissionsPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.GetRepositoryPermissionsPolicyRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.GetRepositoryPermissionsPolicyRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.GetRepositoryPermissionsPolicyRequest_repository, *v.Repository)
+	}
+}
+
 type GetRepositoryPermissionsPolicyOutput struct {
 
 	//  The returned resource policy.
@@ -56,13 +76,34 @@ type GetRepositoryPermissionsPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryPermissionsPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryPermissionsPolicyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryPermissionsPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.GetRepositoryPermissionsPolicyResult_policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRepositoryPermissionsPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositoryPermissionsPolicyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositoryPermissionsPolicyResult_policy:
+			v.Policy = &types.ResourcePolicy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRepositoryPermissionsPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryPermissionsPolicy, schemas.GetRepositoryPermissionsPolicyRequest, schemas.GetRepositoryPermissionsPolicyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRepositoryPermissionsPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryPermissionsPolicy, schemas.GetRepositoryPermissionsPolicyRequest, schemas.GetRepositoryPermissionsPolicyResult), output: &GetRepositoryPermissionsPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

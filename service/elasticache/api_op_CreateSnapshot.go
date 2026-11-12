@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type CreateSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.CreateSnapshotMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateSnapshotMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.CreateSnapshotMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.CreateSnapshotMessage_SnapshotName, *v.SnapshotName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSnapshotMessage_Tags, v.Tags)
+	}
+}
+
 type CreateSnapshotOutput struct {
 
 	// Represents a copy of an entire Valkey or Redis OSS cluster as of the time when
@@ -66,13 +92,34 @@ type CreateSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.CreateSnapshotResult_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSnapshotResult_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.CreateSnapshotMessage, schemas.CreateSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.CreateSnapshotMessage, schemas.CreateSnapshotResult), output: &CreateSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

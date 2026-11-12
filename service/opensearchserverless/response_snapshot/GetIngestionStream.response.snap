@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.GetIngestionStream
+
+{"ingestionStreamDetail":{"activeAlerts":[{"code":"SOURCE_ACCESS_DENIED","message":"__Message__"},{"code":"SOURCE_ACCESS_DENIED","message":"__Message__"}],"arn":"__Arn__","collectionId":"__CollectionId__","createdAt":946684800,"failureIndexName":"__FailureIndexName__","failureReasons":[{"code":"SOURCE_ACCESS_DENIED","message":"__Message__"},{"code":"SOURCE_ACCESS_DENIED","message":"__Message__"}],"indexName":"__IndexName__","ingestionStreamId":"__IngestionStreamId__","ingestionStreamName":"__IngestionStreamName__","revision":1,"roleArn":"__RoleArn__","source":{"s3":{"buckets":[{"bucket":"__Bucket__","bucketOwnerAccountId":"__BucketOwnerAccountId__","initialScan":"ENABLED"},{"bucket":"__Bucket__","bucketOwnerAccountId":"__BucketOwnerAccountId__","initialScan":"ENABLED"}],"sqsArn":"__SqsArn__"}},"state":"STARTING","statistics":{"s3":{"objectsDiscovered":1,"objectsFailed":1,"objectsIngested":1}},"status":"CREATING","updatedAt":946684800}}

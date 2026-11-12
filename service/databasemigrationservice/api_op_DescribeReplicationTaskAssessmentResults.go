@@ -108,7 +108,9 @@ func (v *DescribeReplicationTaskAssessmentResultsOutput) SerializeMembers(s smit
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeReplicationTaskAssessmentResultsResponse_Marker, *v.Marker)
 	}
-	serializeReplicationTaskAssessmentResultList(s, schemas.DescribeReplicationTaskAssessmentResultsResponse_ReplicationTaskAssessmentResults, v.ReplicationTaskAssessmentResults)
+	if v.ReplicationTaskAssessmentResults != nil {
+		serializeReplicationTaskAssessmentResultList(s, schemas.DescribeReplicationTaskAssessmentResultsResponse_ReplicationTaskAssessmentResults, v.ReplicationTaskAssessmentResults)
+	}
 }
 func (v *DescribeReplicationTaskAssessmentResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicationTaskAssessmentResultsResponse, func(s *smithy.Schema) error {

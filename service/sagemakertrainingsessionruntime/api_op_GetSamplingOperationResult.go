@@ -91,7 +91,9 @@ func (v *GetSamplingOperationResultOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.ErrorDetails != nil {
 		s.WriteString(schemas.GetSamplingOperationResultOutput_errorDetails, *v.ErrorDetails)
 	}
-	serializeSampleOperationResult(s, schemas.GetSamplingOperationResultOutput_operationResult, v.OperationResult)
+	if v.OperationResult != nil {
+		serializeSampleOperationResult(s, schemas.GetSamplingOperationResultOutput_operationResult, v.OperationResult)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetSamplingOperationResultOutput_status, string(v.Status))
 	}

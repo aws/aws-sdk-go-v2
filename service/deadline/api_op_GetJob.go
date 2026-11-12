@@ -69,8 +69,6 @@ func (v *GetJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetJobOutput struct {
 
 	// The date and time the resource was created.
@@ -217,7 +215,9 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetJobResponse_name, *v.Name)
 	}
-	serializeJobParameters(s, schemas.GetJobResponse_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeJobParameters(s, schemas.GetJobResponse_parameters, v.Parameters)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.GetJobResponse_priority, *v.Priority)
 	}
@@ -239,7 +239,9 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TaskRunStatus != "" {
 		s.WriteString(schemas.GetJobResponse_taskRunStatus, string(v.TaskRunStatus))
 	}
-	serializeTaskRunStatusCounts(s, schemas.GetJobResponse_taskRunStatusCounts, v.TaskRunStatusCounts)
+	if v.TaskRunStatusCounts != nil {
+		serializeTaskRunStatusCounts(s, schemas.GetJobResponse_taskRunStatusCounts, v.TaskRunStatusCounts)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetJobResponse_updatedAt, *v.UpdatedAt)
 	}

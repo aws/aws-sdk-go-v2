@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DescribeInterconnects
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeInterconnects
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"interconnectId":"__InterconnectId__","maxResults":1,"nextToken":"__NextToken__"}
+¿ninterconnectIdr__InterconnectId__jmaxResultsinextTokenm__NextToken__ÿ

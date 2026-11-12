@@ -150,7 +150,9 @@ func (v *UpdateIPSetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIPAddresses(s, schemas.UpdateIPSetRequest_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeIPAddresses(s, schemas.UpdateIPSetRequest_Addresses, v.Addresses)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateIPSetRequest_Description, *v.Description)
 	}

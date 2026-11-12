@@ -100,7 +100,9 @@ func (v *ListEntityEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListEntityEventsInput_EndTime, *v.EndTime)
 	}
-	serializeAttributes(s, schemas.ListEntityEventsInput_Entity, v.Entity)
+	if v.Entity != nil {
+		serializeAttributes(s, schemas.ListEntityEventsInput_Entity, v.Entity)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListEntityEventsInput_MaxResults, *v.MaxResults)
 	}
@@ -152,7 +154,9 @@ func (v *ListEntityEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEntityEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeEvents(s, schemas.ListEntityEventsOutput_ChangeEvents, v.ChangeEvents)
+	if v.ChangeEvents != nil {
+		serializeChangeEvents(s, schemas.ListEntityEventsOutput_ChangeEvents, v.ChangeEvents)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListEntityEventsOutput_EndTime, *v.EndTime)
 	}

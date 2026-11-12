@@ -96,6 +96,9 @@
                     "target": "com.amazonaws.athena#CreatePresignedNotebookUrl"
                 },
                 {
+                    "target": "com.amazonaws.athena#CreateSystemTableConfiguration"
+                },
+                {
                     "target": "com.amazonaws.athena#CreateWorkGroup"
                 },
                 {
@@ -112,6 +115,9 @@
                 },
                 {
                     "target": "com.amazonaws.athena#DeletePreparedStatement"
+                },
+                {
+                    "target": "com.amazonaws.athena#DeleteSystemTableConfiguration"
                 },
                 {
                     "target": "com.amazonaws.athena#DeleteWorkGroup"
@@ -171,6 +177,9 @@
                     "target": "com.amazonaws.athena#GetSessionStatus"
                 },
                 {
+                    "target": "com.amazonaws.athena#GetSystemTableConfiguration"
+                },
+                {
                     "target": "com.amazonaws.athena#GetTableMetadata"
                 },
                 {
@@ -217,6 +226,9 @@
                 },
                 {
                     "target": "com.amazonaws.athena#ListSessions"
+                },
+                {
+                    "target": "com.amazonaws.athena#ListSystemTableStatuses"
                 },
                 {
                     "target": "com.amazonaws.athena#ListTableMetadata"
@@ -271,6 +283,9 @@
                 },
                 {
                     "target": "com.amazonaws.athena#UpdatePreparedStatement"
+                },
+                {
+                    "target": "com.amazonaws.athena#UpdateSystemTableConfiguration"
                 },
                 {
                     "target": "com.amazonaws.athena#UpdateWorkGroup"
@@ -2207,7 +2222,7 @@
                 "LogGroup": {
                     "target": "com.amazonaws.athena#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group in Amazon CloudWatch Logs where you want to publish \n            your logs.</p>"
+                        "smithy.api#documentation": "<p>The name of the log group in Amazon CloudWatch Logs where you want to publish\n            your logs.</p>"
                     }
                 },
                 "LogStreamNamePrefix": {
@@ -2919,6 +2934,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.athena#CreateSystemTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#CreateSystemTableConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#CreateSystemTableConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables system tables for the current account. System tables are enabled or disabled for\n            the entire account: creating this configuration enables them. If a configuration\n            already exists, use <a>UpdateSystemTableConfiguration</a> to update it.</p>"
+            }
+        },
+        "com.amazonaws.athena#CreateSystemTableConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.athena#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to create the system table\n            configuration is idempotent (executes only once). If another\n            <code>CreateSystemTableConfiguration</code> request is received with the same client\n            token but different parameters, the request fails with an\n            <code>InvalidRequestException</code>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system table configuration to create. The only accepted value is <code>ALL</code>,\n            the reserved keyword that enables all system tables for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.athena#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key to use\n            for encrypting the system table data.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.athena#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the system table configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#CreateSystemTableConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system table configuration that was created. Always <code>ALL</code>.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.athena#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used\n            for encrypting the system table data.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the system table configuration was created.</p>"
+                    }
+                },
+                "LastModifiedAt": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the system table configuration was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.athena#CreateWorkGroup": {
             "type": "operation",
             "input": {
@@ -3477,6 +3581,52 @@
             }
         },
         "com.amazonaws.athena#DeletePreparedStatementOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.athena#DeleteSystemTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#DeleteSystemTableConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#DeleteSystemTableConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables system tables for the current account by deleting the account-level\n            configuration. If the configuration doesn't exist, the operation succeeds without making\n            any changes. The system table and previously published data are left intact.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.athena#DeleteSystemTableConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system table configuration to delete. The only accepted value is\n            <code>ALL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#DeleteSystemTableConfigurationOutput": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -4967,6 +5117,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.athena#GetSystemTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#GetSystemTableConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#GetSystemTableConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.athena#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the account-level system tables configuration. Fails with a\n            <code>ResourceNotFoundException</code> if system tables are not enabled for the\n            account.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.athena#GetSystemTableConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system table configuration to retrieve. The only accepted value is\n            <code>ALL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#GetSystemTableConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system table configuration. Always <code>ALL</code>.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.athena#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used\n            for encrypting the system table data.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the system table configuration was created.</p>"
+                    }
+                },
+                "LastModifiedAt": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the system table configuration was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.athena#GetTableMetadata": {
             "type": "operation",
             "input": {
@@ -5271,7 +5495,17 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:kms:([a-z0-9\\-]+):\\d{12}:key/?[a-zA-Z_0-9+=,.@\\-_/]+$|^arn:aws[a-z\\-]*:kms:([a-z0-9\\-]+):\\d{12}:alias/?[a-zA-Z_0-9+=,.@\\-_/]+$|^alias/[a-zA-Z0-9/_-]+$|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:kms:([a-z0-9\\-]+):\\d{12}:key/?[a-zA-Z_0-9+=,.@\\-_/]+|arn:aws[a-z\\-]*:kms:([a-z0-9\\-]+):\\d{12}:alias/?[a-zA-Z_0-9+=,.@\\-_/]+|alias/[a-zA-Z0-9/_-]+|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$"
+            }
+        },
+        "com.amazonaws.athena#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:kms:[a-z0-9\\-]+:\\d{12}:(key/(mrk-)?[0-9a-f\\-]+|alias/[a-zA-Z0-9/_\\-]+)$"
             }
         },
         "com.amazonaws.athena#ListApplicationDPUSizes": {
@@ -6251,6 +6485,77 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.athena#ListSystemTableStatuses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#ListSystemTableStatusesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#ListSystemTableStatusesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the system tables that the account-level configuration activates, along with\n            whether each is currently enabled. Because system tables are enabled at the account\n            level, every entry reflects the same account-wide state.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.athena#ListSystemTableStatusesInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.athena#MaxSystemTableStatusesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#ListSystemTableStatusesOutput": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.athena#SystemTableStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of system tables and their enablement status for the current account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue\n            pagination if a previous request was truncated. To obtain the next set of pages, pass in\n            the NextToken from the response object of the previous page call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.athena#ListTableMetadata": {
             "type": "operation",
             "input": {
@@ -6571,7 +6876,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The configuration for storing results in Athena owned storage, which includes whether this feature is enabled; whether encryption configuration, if any, is used for encrypting query results. \n        </p>"
+                "smithy.api#documentation": "<p>\n            The configuration for storing results in Athena owned storage, which includes whether this feature is enabled; whether encryption configuration, if any, is used for encrypting query results.\n        </p>"
             }
         },
         "com.amazonaws.athena#ManagedQueryResultsConfigurationUpdates": {
@@ -6741,6 +7046,15 @@
                 }
             }
         },
+        "com.amazonaws.athena#MaxSystemTableStatusesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.athena#MaxTableMetadataCount": {
             "type": "integer",
             "traits": {
@@ -6802,7 +7116,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, \n            Amazon CloudWatch log groups etc.</p>"
+                "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,\n            Amazon CloudWatch log groups etc.</p>"
             }
         },
         "com.amazonaws.athena#NameString": {
@@ -8385,7 +8699,7 @@
                 "EngineConfiguration": {
                     "target": "com.amazonaws.athena#EngineConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine configuration for the workgroup, which includes the minimum/maximum number of Data Processing Units (DPU) that queries should use when\n            running in provisioned capacity. If not specified, Athena uses default values (Default value for min is 4 and for max is Minimum of 124 and allocated DPUs).</p>\n         <p>To specify minimum and maximum DPU values for Capacity Reservations queries, the workgroup containing <code>EngineConfiguration</code> should have the following values: The name of\n            the <code>Classifications</code> should be <code>athena-query-engine-properties</code>, with the only allowed properties as <code>max-dpu-count</code> and <code>min-dpu-count</code>.</p>"
+                        "smithy.api#documentation": "<p>The engine configuration for the workgroup, which includes the minimum/maximum number of Data Processing Units (DPU) that queries should use when\n            running in provisioned capacity. If not specified, Athena uses default values (Default value for min is 4 and for max is Minimum of 124 and allocated DPUs).</p>\n         <p>To specify minimum and maximum DPU values for Capacity Reservations queries, the workgroup containing <code>EngineConfiguration</code> should have the following values: The name of\n            the <code>Classifications</code> should be <code>athena-query-engine-properties</code>, with the only allowed properties as <code>max-dpu-count</code> and <code>min-dpu-count</code>.</p>\n         <p>\n            <b>Note:</b> When using StartQueryExecution, only the Classifications field applies. Do not specify the other fields (AdditionalConfigs, CoordinatorDpuSize, DefaultExecutorDpuSize, MaxConcurrentDpus, and SparkProperties), as these are used only with StartSession to configure Apache Spark-based sessions.</p>"
                     }
                 }
             },
@@ -8468,7 +8782,7 @@
                 "MonitoringConfiguration": {
                     "target": "com.amazonaws.athena#MonitoringConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, \n            Amazon CloudWatch log groups etc.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,\n            Amazon CloudWatch log groups etc.</p>"
                     }
                 },
                 "NotebookVersion": {
@@ -8668,6 +8982,62 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.athena#Integer"
+            }
+        },
+        "com.amazonaws.athena#SystemTableName": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#SystemTableStatus": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the system table, such as <code>QUERY_EXECUTIONS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the system table is enabled for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The enablement status of a single system table. Because system tables are enabled at\n            the account level, every status reflects the same account-wide state.</p>"
+            }
+        },
+        "com.amazonaws.athena#SystemTableStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#SystemTableStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.athena#SystemTableType": {
+            "type": "enum",
+            "members": {
+                "QUERY_EXECUTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_EXECUTIONS"
+                    }
+                }
             }
         },
         "com.amazonaws.athena#TableMetadata": {
@@ -9464,6 +9834,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.athena#UpdateSystemTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#UpdateSystemTableConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#UpdateSystemTableConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.athena#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the account-level system tables configuration. If no configuration exists, use\n            <a>CreateSystemTableConfiguration</a> to create one. Fields that you omit\n            retain their current values.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.athena#UpdateSystemTableConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system table configuration to update. The only accepted value is\n            <code>ALL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.athena#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key to use\n            for encrypting the system table data. The encryption key is immutable while the system\n            table exists, so a change takes effect only after the table has been deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#UpdateSystemTableConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.athena#SystemTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system table configuration. Always <code>ALL</code>.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.athena#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used\n            for encrypting the system table data.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the system table configuration was created.</p>"
+                    }
+                },
+                "LastModifiedAt": {
+                    "target": "com.amazonaws.athena#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the system table configuration was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.athena#UpdateWorkGroup": {
             "type": "operation",
             "input": {
@@ -9629,7 +10079,7 @@
                 "MonitoringConfiguration": {
                     "target": "com.amazonaws.athena#MonitoringConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, \n            Amazon CloudWatch log groups etc.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,\n            Amazon CloudWatch log groups etc.</p>"
                     }
                 },
                 "EngineConfiguration": {
@@ -9657,6 +10107,12 @@
                     "target": "com.amazonaws.athena#QueryResultsS3AccessGrantsConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 access grants are enabled for query\n            results.</p>"
+                    }
+                },
+                "SystemTableStatuses": {
+                    "target": "com.amazonaws.athena#SystemTableStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The read-only enablement status of each system table for the account. This field is\n            returned by <a>GetWorkGroup</a> and is ignored on write.</p>"
                     }
                 }
             },
@@ -9751,7 +10207,7 @@
                 "MonitoringConfiguration": {
                     "target": "com.amazonaws.athena#MonitoringConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, \n            Amazon CloudWatch log groups etc.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,\n            Amazon CloudWatch log groups etc.</p>"
                     }
                 },
                 "EngineConfiguration": {

@@ -1697,10 +1697,12 @@ var _AnswerField = smithy.NewSchema(smithy.ShapeID{
 var AssistedNluMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "AssistedNluMode",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var AssistedNluMode_Primary *smithy.Schema
 
 var AssistedNluMode_Fallback *smithy.Schema
+
+var AssistedNluMode_DialogManager *smithy.Schema
 
 var AssociatedTranscript = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -9743,6 +9745,8 @@ func init() {
 	AssistedNluMode_Primary = AssistedNluMode.AddMember("Primary", smithyprelude.Unit)
 
 	AssistedNluMode_Fallback = AssistedNluMode.AddMember("Fallback", smithyprelude.Unit)
+
+	AssistedNluMode_DialogManager = AssistedNluMode.AddMember("DialogManager", smithyprelude.Unit)
 
 	AssociatedTranscript_transcript = AssociatedTranscript.AddMember("transcript", _Transcript)
 

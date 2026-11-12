@@ -4,7 +4,9 @@ package route53recoverycontrolconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSafetyRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSafetyRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSafetyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SafetyRuleArn != nil {
+		s.WriteString(schemas.DescribeSafetyRuleRequest_SafetyRuleArn, *v.SafetyRuleArn)
+	}
+}
+
 type DescribeSafetyRuleOutput struct {
 
 	// The assertion rule in the response.
@@ -48,13 +62,42 @@ type DescribeSafetyRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSafetyRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSafetyRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSafetyRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssertionRule != nil {
+		s.WriteStruct(schemas.DescribeSafetyRuleResponse_AssertionRule)
+		v.AssertionRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatingRule != nil {
+		s.WriteStruct(schemas.DescribeSafetyRuleResponse_GatingRule)
+		v.GatingRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSafetyRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSafetyRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSafetyRuleResponse_AssertionRule:
+			v.AssertionRule = &types.AssertionRule{}
+			return v.AssertionRule.Deserialize(d)
+		case schemas.DescribeSafetyRuleResponse_GatingRule:
+			v.GatingRule = &types.GatingRule{}
+			return v.GatingRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSafetyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSafetyRule, schemas.DescribeSafetyRuleRequest, schemas.DescribeSafetyRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSafetyRule, schemas.DescribeSafetyRuleRequest, schemas.DescribeSafetyRuleResponse), output: &DescribeSafetyRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

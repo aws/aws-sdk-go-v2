@@ -63,7 +63,9 @@ func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.CreateMonitorRequest_ResourceArn, *v.ResourceArn)
 	}
-	serializeTags(s, schemas.CreateMonitorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateMonitorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMonitorOutput struct {

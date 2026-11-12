@@ -82,7 +82,9 @@ func (v *ListFindingAggregatorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingAggregatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingAggregatorList(s, schemas.ListFindingAggregatorsResponse_FindingAggregators, v.FindingAggregators)
+	if v.FindingAggregators != nil {
+		serializeFindingAggregatorList(s, schemas.ListFindingAggregatorsResponse_FindingAggregators, v.FindingAggregators)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingAggregatorsResponse_NextToken, *v.NextToken)
 	}

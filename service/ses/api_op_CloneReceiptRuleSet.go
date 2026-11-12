@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type CloneReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloneReceiptRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneReceiptRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneReceiptRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OriginalRuleSetName != nil {
+		s.WriteString(schemas.CloneReceiptRuleSetRequest_OriginalRuleSetName, *v.OriginalRuleSetName)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.CloneReceiptRuleSetRequest_RuleSetName, *v.RuleSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type CloneReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -67,13 +84,26 @@ type CloneReceiptRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloneReceiptRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneReceiptRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneReceiptRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CloneReceiptRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloneReceiptRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCloneReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCloneReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloneReceiptRuleSet, schemas.CloneReceiptRuleSetRequest, schemas.CloneReceiptRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCloneReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloneReceiptRuleSet, schemas.CloneReceiptRuleSetRequest, schemas.CloneReceiptRuleSetResponse), output: &CloneReceiptRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

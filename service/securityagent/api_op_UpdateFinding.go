@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,48 @@ type UpdateFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFindingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateFindingInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AttackScript != nil {
+		s.WriteString(schemas.UpdateFindingInput_attackScript, *v.AttackScript)
+	}
+	if v.CustomerNote != nil {
+		s.WriteString(schemas.UpdateFindingInput_customerNote, *v.CustomerNote)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFindingInput_description, *v.Description)
+	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.UpdateFindingInput_findingId, *v.FindingId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFindingInput_name, *v.Name)
+	}
+	if v.Reasoning != nil {
+		s.WriteString(schemas.UpdateFindingInput_reasoning, *v.Reasoning)
+	}
+	if v.RiskLevel != "" {
+		s.WriteString(schemas.UpdateFindingInput_riskLevel, string(v.RiskLevel))
+	}
+	if v.RiskScore != nil {
+		s.WriteString(schemas.UpdateFindingInput_riskScore, *v.RiskScore)
+	}
+	if v.RiskType != nil {
+		s.WriteString(schemas.UpdateFindingInput_riskType, *v.RiskType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateFindingInput_status, string(v.Status))
+	}
+}
+
 // Output for the UpdateFinding operation.
 type UpdateFindingOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -75,13 +119,26 @@ type UpdateFindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFindingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFindingOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFinding, schemas.UpdateFindingInput, schemas.UpdateFindingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFinding, schemas.UpdateFindingInput, schemas.UpdateFindingOutput), output: &UpdateFindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

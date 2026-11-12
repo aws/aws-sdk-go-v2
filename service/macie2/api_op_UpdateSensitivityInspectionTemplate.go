@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,31 @@ type UpdateSensitivityInspectionTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSensitivityInspectionTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSensitivityInspectionTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSensitivityInspectionTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSensitivityInspectionTemplateRequest_description, *v.Description)
+	}
+	if v.Excludes != nil {
+		s.WriteStruct(schemas.UpdateSensitivityInspectionTemplateRequest_excludes)
+		v.Excludes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateSensitivityInspectionTemplateRequest_id, *v.Id)
+	}
+	if v.Includes != nil {
+		s.WriteStruct(schemas.UpdateSensitivityInspectionTemplateRequest_includes)
+		v.Includes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSensitivityInspectionTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +86,26 @@ type UpdateSensitivityInspectionTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSensitivityInspectionTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSensitivityInspectionTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSensitivityInspectionTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateSensitivityInspectionTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSensitivityInspectionTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSensitivityInspectionTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSensitivityInspectionTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSensitivityInspectionTemplate, schemas.UpdateSensitivityInspectionTemplateRequest, schemas.UpdateSensitivityInspectionTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSensitivityInspectionTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSensitivityInspectionTemplate, schemas.UpdateSensitivityInspectionTemplateRequest, schemas.UpdateSensitivityInspectionTemplateResponse), output: &UpdateSensitivityInspectionTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

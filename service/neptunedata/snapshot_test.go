@@ -74,6 +74,18 @@ func TestCheckSnapshot_CancelGremlinQuery(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelIndexRebuild(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelIndexRebuild(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelIndexRebuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelLoaderJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelLoaderJob(context.Background(), nil, func(o *Options) {
@@ -278,6 +290,18 @@ func TestCheckSnapshot_GetGremlinQueryStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIndexRebuildStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIndexRebuildStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIndexRebuildStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLoaderJobStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLoaderJobStatus(context.Background(), nil, func(o *Options) {
@@ -422,11 +446,35 @@ func TestCheckSnapshot_GetSparqlStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetStorageInfo(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStorageInfo(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetStorageInfo")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListGremlinQueries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListGremlinQueries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListGremlinQueries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIndexRebuilds(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIndexRebuilds(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIndexRebuilds")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -530,6 +578,18 @@ func TestCheckSnapshot_ManageSparqlStatistics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartIndexRebuild(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartIndexRebuild(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartIndexRebuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartLoaderJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartLoaderJob(context.Background(), nil, func(o *Options) {
@@ -582,6 +642,18 @@ func TestUpdateSnapshot_CancelGremlinQuery(t *testing.T) {
 	_, err := svc.CancelGremlinQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelGremlinQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelIndexRebuild(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelIndexRebuild(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelIndexRebuild")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -793,6 +865,18 @@ func TestUpdateSnapshot_GetGremlinQueryStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIndexRebuildStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIndexRebuildStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIndexRebuildStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLoaderJobStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLoaderJobStatus(context.Background(), nil, func(o *Options) {
@@ -937,11 +1021,35 @@ func TestUpdateSnapshot_GetSparqlStream(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetStorageInfo(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStorageInfo(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetStorageInfo")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListGremlinQueries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListGremlinQueries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListGremlinQueries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIndexRebuilds(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIndexRebuilds(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIndexRebuilds")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1038,6 +1146,18 @@ func TestUpdateSnapshot_ManageSparqlStatistics(t *testing.T) {
 	_, err := svc.ManageSparqlStatistics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ManageSparqlStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartIndexRebuild(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartIndexRebuild(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartIndexRebuild")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

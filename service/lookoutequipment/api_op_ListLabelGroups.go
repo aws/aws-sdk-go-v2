@@ -11,7 +11,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of the label groups.
+//	Returns a list of the label groups.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListLabelGroups(ctx context.Context, params *ListLabelGroupsInput, optFns ...func(*Options)) (*ListLabelGroupsOutput, error) {
 	if params == nil {
 		params = &ListLabelGroupsInput{}
@@ -82,7 +86,9 @@ func (v *ListLabelGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLabelGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLabelGroupSummaries(s, schemas.ListLabelGroupsResponse_LabelGroupSummaries, v.LabelGroupSummaries)
+	if v.LabelGroupSummaries != nil {
+		serializeLabelGroupSummaries(s, schemas.ListLabelGroupsResponse_LabelGroupSummaries, v.LabelGroupSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLabelGroupsResponse_NextToken, *v.NextToken)
 	}

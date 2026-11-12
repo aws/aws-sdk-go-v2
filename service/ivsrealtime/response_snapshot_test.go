@@ -1581,6 +1581,27 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RevokeConnectionToken(t *testing.T) {
+	want := &RevokeConnectionTokenOutput{}
+	status, header, body, err := serdeRespReadSnapshot("RevokeConnectionToken.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RevokeConnectionToken(context.Background(), &RevokeConnectionTokenInput{
+		TokenId: ptr.String("__TokenId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RevokeConnectionToken.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartComposition(t *testing.T) {
 	want := &StartCompositionOutput{
 		Composition: &types.Composition{

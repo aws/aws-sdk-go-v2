@@ -167,7 +167,9 @@ func (v *DescribeBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.DescribeBotLocaleResponse_botId, *v.BotId)
 	}
-	serializeBotLocaleHistoryEventsList(s, schemas.DescribeBotLocaleResponse_botLocaleHistoryEvents, v.BotLocaleHistoryEvents)
+	if v.BotLocaleHistoryEvents != nil {
+		serializeBotLocaleHistoryEventsList(s, schemas.DescribeBotLocaleResponse_botLocaleHistoryEvents, v.BotLocaleHistoryEvents)
+	}
 	if v.BotLocaleStatus != "" {
 		s.WriteString(schemas.DescribeBotLocaleResponse_botLocaleStatus, string(v.BotLocaleStatus))
 	}
@@ -180,7 +182,9 @@ func (v *DescribeBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeBotLocaleResponse_description, *v.Description)
 	}
-	serializeFailureReasons(s, schemas.DescribeBotLocaleResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeBotLocaleResponse_failureReasons, v.FailureReasons)
+	}
 	if v.GenerativeAISettings != nil {
 		s.WriteStruct(schemas.DescribeBotLocaleResponse_generativeAISettings)
 		v.GenerativeAISettings.SerializeMembers(s)
@@ -204,7 +208,9 @@ func (v *DescribeBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NluIntentConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.DescribeBotLocaleResponse_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
 	}
-	serializeRecommendedActions(s, schemas.DescribeBotLocaleResponse_recommendedActions, v.RecommendedActions)
+	if v.RecommendedActions != nil {
+		serializeRecommendedActions(s, schemas.DescribeBotLocaleResponse_recommendedActions, v.RecommendedActions)
+	}
 	if v.SlotTypesCount != nil {
 		s.WriteInt32(schemas.DescribeBotLocaleResponse_slotTypesCount, *v.SlotTypesCount)
 	}

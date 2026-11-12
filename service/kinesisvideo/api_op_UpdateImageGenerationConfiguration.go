@@ -4,7 +4,9 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,26 @@ type UpdateImageGenerationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageGenerationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageGenerationConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageGenerationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageGenerationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateImageGenerationConfigurationInput_ImageGenerationConfiguration)
+		v.ImageGenerationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateImageGenerationConfigurationInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateImageGenerationConfigurationInput_StreamName, *v.StreamName)
+	}
+}
+
 type UpdateImageGenerationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +72,26 @@ type UpdateImageGenerationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageGenerationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageGenerationConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageGenerationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateImageGenerationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateImageGenerationConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateImageGenerationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateImageGenerationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageGenerationConfiguration, schemas.UpdateImageGenerationConfigurationInput, schemas.UpdateImageGenerationConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateImageGenerationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageGenerationConfiguration, schemas.UpdateImageGenerationConfigurationInput, schemas.UpdateImageGenerationConfigurationOutput), output: &UpdateImageGenerationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ExecutionSummaries":[{"ManagedThingId":"__ManagedThingId__","TaskExecutionSummary":{"ExecutionNumber":1,"LastUpdatedAt":946684800,"QueuedAt":946684800,"RetryAttempt":1,"StartedAt":946684800,"Status":"QUEUED"}},{"ManagedThingId":"__ManagedThingId__","TaskExecutionSummary":{"ExecutionNumber":1,"LastUpdatedAt":946684800,"QueuedAt":946684800,"RetryAttempt":1,"StartedAt":946684800,"Status":"QUEUED"}}],"NextToken":"__NextToken__"}

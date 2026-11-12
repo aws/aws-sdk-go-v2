@@ -51,7 +51,9 @@ func (v *DeregisterDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceFleetName != nil {
 		s.WriteString(schemas.DeregisterDevicesRequest_DeviceFleetName, *v.DeviceFleetName)
 	}
-	serializeDeviceNames(s, schemas.DeregisterDevicesRequest_DeviceNames, v.DeviceNames)
+	if v.DeviceNames != nil {
+		serializeDeviceNames(s, schemas.DeregisterDevicesRequest_DeviceNames, v.DeviceNames)
+	}
 }
 
 type DeregisterDevicesOutput struct {

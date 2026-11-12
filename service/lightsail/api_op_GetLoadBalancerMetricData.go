@@ -222,7 +222,9 @@ func (v *GetLoadBalancerMetricDataInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetLoadBalancerMetricDataRequest_startTime, *v.StartTime)
 	}
-	serializeMetricStatisticList(s, schemas.GetLoadBalancerMetricDataRequest_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeMetricStatisticList(s, schemas.GetLoadBalancerMetricDataRequest_statistics, v.Statistics)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.GetLoadBalancerMetricDataRequest_unit, string(v.Unit))
 	}
@@ -249,7 +251,9 @@ func (v *GetLoadBalancerMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLoadBalancerMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDatapointList(s, schemas.GetLoadBalancerMetricDataResult_metricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricDatapointList(s, schemas.GetLoadBalancerMetricDataResult_metricData, v.MetricData)
+	}
 	if v.MetricName != "" {
 		s.WriteString(schemas.GetLoadBalancerMetricDataResult_metricName, string(v.MetricName))
 	}

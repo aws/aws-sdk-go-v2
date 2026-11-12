@@ -68,12 +68,18 @@ func (v *UpdateWebAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessEndpoint != nil {
 		s.WriteString(schemas.UpdateWebAppRequest_AccessEndpoint, *v.AccessEndpoint)
 	}
-	serializeUpdateWebAppEndpointDetails(s, schemas.UpdateWebAppRequest_EndpointDetails, v.EndpointDetails)
-	serializeUpdateWebAppIdentityProviderDetails(s, schemas.UpdateWebAppRequest_IdentityProviderDetails, v.IdentityProviderDetails)
+	if v.EndpointDetails != nil {
+		serializeUpdateWebAppEndpointDetails(s, schemas.UpdateWebAppRequest_EndpointDetails, v.EndpointDetails)
+	}
+	if v.IdentityProviderDetails != nil {
+		serializeUpdateWebAppIdentityProviderDetails(s, schemas.UpdateWebAppRequest_IdentityProviderDetails, v.IdentityProviderDetails)
+	}
 	if v.WebAppId != nil {
 		s.WriteString(schemas.UpdateWebAppRequest_WebAppId, *v.WebAppId)
 	}
-	serializeWebAppUnits(s, schemas.UpdateWebAppRequest_WebAppUnits, v.WebAppUnits)
+	if v.WebAppUnits != nil {
+		serializeWebAppUnits(s, schemas.UpdateWebAppRequest_WebAppUnits, v.WebAppUnits)
+	}
 }
 
 type UpdateWebAppOutput struct {

@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,40 @@ type UpdateWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWirelessDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWirelessDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWirelessDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWirelessDeviceRequest_Description, *v.Description)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.UpdateWirelessDeviceRequest_DestinationName, *v.DestinationName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateWirelessDeviceRequest_Id, *v.Id)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.UpdateWirelessDeviceRequest_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateWirelessDeviceRequest_Name, *v.Name)
+	}
+	if v.Positioning != "" {
+		s.WriteString(schemas.UpdateWirelessDeviceRequest_Positioning, string(v.Positioning))
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.UpdateWirelessDeviceRequest_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateWirelessDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +98,26 @@ type UpdateWirelessDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWirelessDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWirelessDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWirelessDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWirelessDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWirelessDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWirelessDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWirelessDevice, schemas.UpdateWirelessDeviceRequest, schemas.UpdateWirelessDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWirelessDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWirelessDevice, schemas.UpdateWirelessDeviceRequest, schemas.UpdateWirelessDeviceResponse), output: &UpdateWirelessDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

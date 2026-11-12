@@ -135,11 +135,15 @@ func (v *DescribeInferenceRecommendationsJobOutput) SerializeMembers(s smithy.Sh
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeInferenceRecommendationsJobResponse_CreationTime, *v.CreationTime)
 	}
-	serializeEndpointPerformances(s, schemas.DescribeInferenceRecommendationsJobResponse_EndpointPerformances, v.EndpointPerformances)
+	if v.EndpointPerformances != nil {
+		serializeEndpointPerformances(s, schemas.DescribeInferenceRecommendationsJobResponse_EndpointPerformances, v.EndpointPerformances)
+	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.DescribeInferenceRecommendationsJobResponse_FailureReason, *v.FailureReason)
 	}
-	serializeInferenceRecommendations(s, schemas.DescribeInferenceRecommendationsJobResponse_InferenceRecommendations, v.InferenceRecommendations)
+	if v.InferenceRecommendations != nil {
+		serializeInferenceRecommendations(s, schemas.DescribeInferenceRecommendationsJobResponse_InferenceRecommendations, v.InferenceRecommendations)
+	}
 	if v.InputConfig != nil {
 		s.WriteStruct(schemas.DescribeInferenceRecommendationsJobResponse_InputConfig)
 		v.InputConfig.SerializeMembers(s)

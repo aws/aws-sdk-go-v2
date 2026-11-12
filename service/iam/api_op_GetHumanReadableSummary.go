@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type GetHumanReadableSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHumanReadableSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHumanReadableSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHumanReadableSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityArn != nil {
+		s.WriteString(schemas.GetHumanReadableSummaryRequest_EntityArn, *v.EntityArn)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.GetHumanReadableSummaryRequest_Locale, *v.Locale)
+	}
+}
+
 type GetHumanReadableSummaryOutput struct {
 
 	// The locale that this response was generated for. This maps to the input locale.
@@ -73,13 +90,48 @@ type GetHumanReadableSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHumanReadableSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHumanReadableSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHumanReadableSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != nil {
+		s.WriteString(schemas.GetHumanReadableSummaryResponse_Locale, *v.Locale)
+	}
+	if v.SummaryContent != nil {
+		s.WriteString(schemas.GetHumanReadableSummaryResponse_SummaryContent, *v.SummaryContent)
+	}
+	if v.SummaryState != "" {
+		s.WriteString(schemas.GetHumanReadableSummaryResponse_SummaryState, string(v.SummaryState))
+	}
+}
+func (v *GetHumanReadableSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHumanReadableSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHumanReadableSummaryResponse_Locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.GetHumanReadableSummaryResponse_Locale, v.Locale)
+		case schemas.GetHumanReadableSummaryResponse_SummaryContent:
+			v.SummaryContent = new(string)
+			return d.ReadString(schemas.GetHumanReadableSummaryResponse_SummaryContent, v.SummaryContent)
+		case schemas.GetHumanReadableSummaryResponse_SummaryState:
+			var ev string
+			if err := d.ReadString(schemas.GetHumanReadableSummaryResponse_SummaryState, &ev); err != nil {
+				return err
+			}
+			v.SummaryState = types.SummaryStateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHumanReadableSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetHumanReadableSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHumanReadableSummary, schemas.GetHumanReadableSummaryRequest, schemas.GetHumanReadableSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetHumanReadableSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHumanReadableSummary, schemas.GetHumanReadableSummaryRequest, schemas.GetHumanReadableSummaryResponse), output: &GetHumanReadableSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

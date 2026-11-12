@@ -1279,6 +1279,25 @@ var _EksContainerEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _EksContainerEnvironmentVariables_member *smithy.Schema
 
+var EksContainerLinuxCapabilities = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksContainerLinuxCapabilities",
+}, smithy.ShapeTypeStructure, 2)
+var EksContainerLinuxCapabilities_add *smithy.Schema
+
+var EksContainerLinuxCapabilities_drop *smithy.Schema
+
+var _EksContainerLinuxCapability = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksContainerLinuxCapability",
+}, smithy.ShapeTypeString, 0)
+
+var _EksContainerLinuxCapabilityList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksContainerLinuxCapabilityList",
+}, smithy.ShapeTypeList, 1)
+var _EksContainerLinuxCapabilityList_member *smithy.Schema
+
 var EksContainerOverride = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "EksContainerOverride",
@@ -1318,7 +1337,7 @@ var _EksContainers_member *smithy.Schema
 var EksContainerSecurityContext = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "EksContainerSecurityContext",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var EksContainerSecurityContext_runAsUser *smithy.Schema
 
 var EksContainerSecurityContext_runAsGroup *smithy.Schema
@@ -1330,6 +1349,10 @@ var EksContainerSecurityContext_allowPrivilegeEscalation *smithy.Schema
 var EksContainerSecurityContext_readOnlyRootFilesystem *smithy.Schema
 
 var EksContainerSecurityContext_runAsNonRoot *smithy.Schema
+
+var EksContainerSecurityContext_capabilities *smithy.Schema
+
+var EksContainerSecurityContext_seccompProfile *smithy.Schema
 
 var EksContainerVolumeMount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
@@ -1400,7 +1423,7 @@ var EksPersistentVolumeClaim_readOnly *smithy.Schema
 var EksPodProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "EksPodProperties",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var EksPodProperties_serviceAccountName *smithy.Schema
 
 var EksPodProperties_hostNetwork *smithy.Schema
@@ -1419,10 +1442,12 @@ var EksPodProperties_metadata *smithy.Schema
 
 var EksPodProperties_shareProcessNamespace *smithy.Schema
 
+var EksPodProperties_securityContext *smithy.Schema
+
 var EksPodPropertiesDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "EksPodPropertiesDetail",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var EksPodPropertiesDetail_serviceAccountName *smithy.Schema
 
 var EksPodPropertiesDetail_hostNetwork *smithy.Schema
@@ -1445,6 +1470,8 @@ var EksPodPropertiesDetail_metadata *smithy.Schema
 
 var EksPodPropertiesDetail_shareProcessNamespace *smithy.Schema
 
+var EksPodPropertiesDetail_securityContext *smithy.Schema
+
 var EksPodPropertiesOverride = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "EksPodPropertiesOverride",
@@ -1454,6 +1481,20 @@ var EksPodPropertiesOverride_containers *smithy.Schema
 var EksPodPropertiesOverride_initContainers *smithy.Schema
 
 var EksPodPropertiesOverride_metadata *smithy.Schema
+
+var EksPodSecurityContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksPodSecurityContext",
+}, smithy.ShapeTypeStructure, 5)
+var EksPodSecurityContext_runAsUser *smithy.Schema
+
+var EksPodSecurityContext_runAsGroup *smithy.Schema
+
+var EksPodSecurityContext_runAsNonRoot *smithy.Schema
+
+var EksPodSecurityContext_seccompProfile *smithy.Schema
+
+var EksPodSecurityContext_fsGroup *smithy.Schema
 
 var EksProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
@@ -1480,6 +1521,29 @@ var _EksRequests = smithy.NewSchema(smithy.ShapeID{
 var _EksRequests_key *smithy.Schema
 
 var _EksRequests_value *smithy.Schema
+
+var _EksSeccompLocalhostProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksSeccompLocalhostProfile",
+}, smithy.ShapeTypeString, 0)
+
+var EksSeccompProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksSeccompProfile",
+}, smithy.ShapeTypeStructure, 2)
+var EksSeccompProfile_type *smithy.Schema
+
+var EksSeccompProfile_localhostProfile *smithy.Schema
+
+var EksSeccompProfileType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksSeccompProfileType",
+}, smithy.ShapeTypeEnum, 3)
+var EksSeccompProfileType_RUNTIME_DEFAULT *smithy.Schema
+
+var EksSeccompProfileType_LOCALHOST *smithy.Schema
+
+var EksSeccompProfileType_UNCONFINED *smithy.Schema
 
 var EksSecret = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
@@ -5285,6 +5349,22 @@ func init() {
 
 	_EksContainerVolumeMounts_member = _EksContainerVolumeMounts.AddMember("member", EksContainerVolumeMount)
 
+	_EksContainerLinuxCapabilityList_member = _EksContainerLinuxCapabilityList.AddMember("member", _EksContainerLinuxCapability)
+
+	EksContainerLinuxCapabilities_add = EksContainerLinuxCapabilities.AddMember("add", _EksContainerLinuxCapabilityList)
+
+	EksContainerLinuxCapabilities_drop = EksContainerLinuxCapabilities.AddMember("drop", _EksContainerLinuxCapabilityList)
+
+	EksSeccompProfileType_RUNTIME_DEFAULT = EksSeccompProfileType.AddMember("RUNTIME_DEFAULT", smithyprelude.Unit)
+
+	EksSeccompProfileType_LOCALHOST = EksSeccompProfileType.AddMember("LOCALHOST", smithyprelude.Unit)
+
+	EksSeccompProfileType_UNCONFINED = EksSeccompProfileType.AddMember("UNCONFINED", smithyprelude.Unit)
+
+	EksSeccompProfile_type = EksSeccompProfile.AddMember("type", EksSeccompProfileType)
+
+	EksSeccompProfile_localhostProfile = EksSeccompProfile.AddMember("localhostProfile", _EksSeccompLocalhostProfile)
+
 	EksContainerSecurityContext_runAsUser = EksContainerSecurityContext.AddMember("runAsUser", _Long)
 
 	EksContainerSecurityContext_runAsGroup = EksContainerSecurityContext.AddMember("runAsGroup", _Long)
@@ -5296,6 +5376,10 @@ func init() {
 	EksContainerSecurityContext_readOnlyRootFilesystem = EksContainerSecurityContext.AddMember("readOnlyRootFilesystem", _Boolean)
 
 	EksContainerSecurityContext_runAsNonRoot = EksContainerSecurityContext.AddMember("runAsNonRoot", _Boolean)
+
+	EksContainerSecurityContext_capabilities = EksContainerSecurityContext.AddMember("capabilities", EksContainerLinuxCapabilities)
+
+	EksContainerSecurityContext_seccompProfile = EksContainerSecurityContext.AddMember("seccompProfile", EksSeccompProfile)
 
 	EksContainer_name = EksContainer.AddMember("name", _String)
 
@@ -5395,6 +5479,16 @@ func init() {
 
 	_EksVolumes_member = _EksVolumes.AddMember("member", EksVolume)
 
+	EksPodSecurityContext_runAsUser = EksPodSecurityContext.AddMember("runAsUser", _Long)
+
+	EksPodSecurityContext_runAsGroup = EksPodSecurityContext.AddMember("runAsGroup", _Long)
+
+	EksPodSecurityContext_runAsNonRoot = EksPodSecurityContext.AddMember("runAsNonRoot", _Boolean)
+
+	EksPodSecurityContext_seccompProfile = EksPodSecurityContext.AddMember("seccompProfile", EksSeccompProfile)
+
+	EksPodSecurityContext_fsGroup = EksPodSecurityContext.AddMember("fsGroup", _Long)
+
 	EksPodProperties_serviceAccountName = EksPodProperties.AddMember("serviceAccountName", _String)
 
 	EksPodProperties_hostNetwork = EksPodProperties.AddMember("hostNetwork", _Boolean)
@@ -5412,6 +5506,8 @@ func init() {
 	EksPodProperties_metadata = EksPodProperties.AddMember("metadata", EksMetadata)
 
 	EksPodProperties_shareProcessNamespace = EksPodProperties.AddMember("shareProcessNamespace", _Boolean)
+
+	EksPodProperties_securityContext = EksPodProperties.AddMember("securityContext", EksPodSecurityContext)
 
 	EksPodPropertiesDetail_serviceAccountName = EksPodPropertiesDetail.AddMember("serviceAccountName", _String)
 
@@ -5434,6 +5530,8 @@ func init() {
 	EksPodPropertiesDetail_metadata = EksPodPropertiesDetail.AddMember("metadata", EksMetadata)
 
 	EksPodPropertiesDetail_shareProcessNamespace = EksPodPropertiesDetail.AddMember("shareProcessNamespace", _Boolean)
+
+	EksPodPropertiesDetail_securityContext = EksPodPropertiesDetail.AddMember("securityContext", EksPodSecurityContext)
 
 	EksPodPropertiesOverride_containers = EksPodPropertiesOverride.AddMember("containers", _EksContainerOverrideList)
 

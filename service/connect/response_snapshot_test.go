@@ -3639,7 +3639,8 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -3790,7 +3791,8 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -3988,6 +3990,9 @@ func TestCheckResponseSnapshot_CreateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -6058,6 +6063,16 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 				Arn:  ptr.String("__Arn__"),
 				Name: ptr.String("__Name__"),
 			},
+			Cases: []types.CaseEntry{
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+			},
 			ContactDetails: &types.ContactDetails{
 				Name:        ptr.String("__Name__"),
 				Description: ptr.String("__Description__"),
@@ -6111,6 +6126,46 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 				ActiveRegion:               ptr.String("__ActiveRegion__"),
 				OriginRegion:               ptr.String("__OriginRegion__"),
 				TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+			},
+			ContactLens: &types.ContactLens{
+				ConversationalAnalytics: &types.ConversationalAnalytics{
+					Configuration: &types.ConversationalAnalyticsConfiguration{
+						Enabled:        ptr.Bool(true),
+						LanguageLocale: ptr.String("__LanguageLocale__"),
+						LanguageLocales: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ChannelConfiguration: &types.ContactLensChannelConfiguration{
+							AnalyticsModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RedactionConfiguration: &types.ContactLensRedactionConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+							Policy:   ptr.String("__Policy__"),
+							Entities: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MaskMode: ptr.String("__MaskMode__"),
+						},
+						SummaryConfiguration: &types.ContactLensSummaryConfiguration{
+							SummaryModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						SentimentConfiguration: &types.ContactLensSentimentConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+						},
+					},
+					ContactAnalysisReferenceState: &types.ContactAnalysisReferenceState{
+						Status:       ptr.String("__Status__"),
+						StatusReason: ptr.String("__StatusReason__"),
+					},
+				},
 			},
 		},
 	}
@@ -8770,7 +8825,8 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -8921,7 +8977,8 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -9057,6 +9114,7 @@ func TestCheckResponseSnapshot_DescribeSecurityProfile(t *testing.T) {
 					},
 				},
 			},
+			Type: types.SecurityProfileType("AWS_MANAGED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeSecurityProfile.response")
@@ -10262,6 +10320,7 @@ func TestCheckResponseSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -11487,6 +11546,9 @@ func TestCheckResponseSnapshot_GetTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -11665,6 +11727,7 @@ func TestCheckResponseSnapshot_GetTrafficDistribution(t *testing.T) {
 				},
 			},
 		},
+		LastFailoverTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTrafficDistribution.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -14161,12 +14224,128 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListRealtimeContactAnalysisSegmentsV2.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListReplicationFindings(t *testing.T) {
+	want := &ListReplicationFindingsOutput{
+		ReplicationFindingsList: []types.ReplicationFinding{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+		},
+		ApproximateDriftedResourceCounts: []types.ApproximateDriftedResourceCount{
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		ResourceReplicationStatuses: []types.ResourceReplicationStatus{
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListReplicationFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListReplicationFindings(context.Background(), &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListReplicationFindings.response", err)
 	}
 }
 
@@ -14570,6 +14749,7 @@ func TestCheckResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                 ptr.String("__Id__"),
@@ -14577,6 +14757,7 @@ func TestCheckResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -19023,6 +19204,7 @@ func TestCheckResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                     ptr.String("__Id__"),
@@ -19033,6 +19215,7 @@ func TestCheckResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken:             ptr.String("__NextToken__"),
@@ -21716,6 +21899,18 @@ func TestCheckResponseSnapshot_UpdateContact(t *testing.T) {
 			Type:    types.EndpointType("TELEPHONE_NUMBER"),
 			Address: ptr.String("__Address__"),
 		},
+		AdditionalRecipients: &types.NullableAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -23337,6 +23532,37 @@ func TestCheckResponseSnapshot_UpdateNotificationContent(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	want := &UpdateOutboundEmailContactMessageOutput{
+		ContactId: ptr.String("__ContactId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateOutboundEmailContactMessage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateOutboundEmailContactMessage(context.Background(), &UpdateOutboundEmailContactMessageInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		EmailMessage: &types.UpdateOutboundEmailContent{
+			MessageSourceType: types.UpdateOutboundEmailMessageSourceType("RAW"),
+			RawMessage: &types.UpdateOutboundRawMessage{
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateOutboundEmailContactMessage.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	want := &UpdateParticipantAuthenticationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateParticipantAuthentication.response")
@@ -24033,7 +24259,8 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -24184,7 +24411,8 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -24362,6 +24590,9 @@ func TestCheckResponseSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -24459,6 +24690,9 @@ func TestCheckResponseSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -26034,6 +26268,52 @@ func TestCheckResponseSnapshot_Error_OutputTypeNotFoundException(t *testing.T) {
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -26077,6 +26357,9 @@ func TestCheckResponseSnapshot_Error_PropertyValidationException(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{

@@ -28,7 +28,6 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListJobsInput struct {
 
 	// The farm ID for the jobs.
@@ -78,7 +77,6 @@ func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListJobsOutput struct {
 
 	// The jobs on the list.
@@ -107,7 +105,9 @@ func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobSummaries(s, schemas.ListJobsResponse_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeJobSummaries(s, schemas.ListJobsResponse_jobs, v.Jobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobsResponse_nextToken, *v.NextToken)
 	}

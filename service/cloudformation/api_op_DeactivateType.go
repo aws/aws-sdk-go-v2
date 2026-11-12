@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,24 @@ type DeactivateTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeactivateTypeInput_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DeactivateTypeInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.DeactivateTypeInput_TypeName, *v.TypeName)
+	}
+}
+
 type DeactivateTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +87,26 @@ type DeactivateTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeactivateTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeactivateTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeactivateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeactivateType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateType, schemas.DeactivateTypeInput, schemas.DeactivateTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeactivateType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateType, schemas.DeactivateTypeInput, schemas.DeactivateTypeOutput), output: &DeactivateTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

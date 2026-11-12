@@ -119,7 +119,9 @@ func (v *ListImagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageIdentifierList(s, schemas.ListImagesResponse_imageIds, v.ImageIds)
+	if v.ImageIds != nil {
+		serializeImageIdentifierList(s, schemas.ListImagesResponse_imageIds, v.ImageIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImagesResponse_nextToken, *v.NextToken)
 	}

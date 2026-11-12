@@ -85,7 +85,9 @@ func (v *GetLifecyclePolicyPreviewInput) SerializeMembers(s smithy.ShapeSerializ
 		v.Filter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeImageIdentifierList(s, schemas.GetLifecyclePolicyPreviewRequest_imageIds, v.ImageIds)
+	if v.ImageIds != nil {
+		serializeImageIdentifierList(s, schemas.GetLifecyclePolicyPreviewRequest_imageIds, v.ImageIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetLifecyclePolicyPreviewRequest_maxResults, *v.MaxResults)
 	}
@@ -145,7 +147,9 @@ func (v *GetLifecyclePolicyPreviewOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLifecyclePolicyPreviewResponse_nextToken, *v.NextToken)
 	}
-	serializeLifecyclePolicyPreviewResultList(s, schemas.GetLifecyclePolicyPreviewResponse_previewResults, v.PreviewResults)
+	if v.PreviewResults != nil {
+		serializeLifecyclePolicyPreviewResultList(s, schemas.GetLifecyclePolicyPreviewResponse_previewResults, v.PreviewResults)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.GetLifecyclePolicyPreviewResponse_registryId, *v.RegistryId)
 	}

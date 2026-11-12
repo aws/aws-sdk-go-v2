@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type SetStackPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetStackPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetStackPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetStackPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackName != nil {
+		s.WriteString(schemas.SetStackPolicyInput_StackName, *v.StackName)
+	}
+	if v.StackPolicyBody != nil {
+		s.WriteString(schemas.SetStackPolicyInput_StackPolicyBody, *v.StackPolicyBody)
+	}
+	if v.StackPolicyURL != nil {
+		s.WriteString(schemas.SetStackPolicyInput_StackPolicyURL, *v.StackPolicyURL)
+	}
+}
+
 type SetStackPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type SetStackPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetStackPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetStackPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetStackPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetStackPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetStackPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetStackPolicy, schemas.SetStackPolicyInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetStackPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetStackPolicy, schemas.SetStackPolicyInput, nil), output: &SetStackPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

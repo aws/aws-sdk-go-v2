@@ -92,7 +92,9 @@ func (v *CreateExtractionDefinitionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.CreateExtractionDefinitionRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateExtractionDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateExtractionDefinitionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateExtractionDefinitionOutput struct {

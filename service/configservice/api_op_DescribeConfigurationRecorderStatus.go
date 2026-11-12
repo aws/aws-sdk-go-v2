@@ -71,7 +71,9 @@ func (v *DescribeConfigurationRecorderStatusInput) SerializeMembers(s smithy.Sha
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeConfigurationRecorderStatusRequest_Arn, *v.Arn)
 	}
-	serializeConfigurationRecorderNameList(s, schemas.DescribeConfigurationRecorderStatusRequest_ConfigurationRecorderNames, v.ConfigurationRecorderNames)
+	if v.ConfigurationRecorderNames != nil {
+		serializeConfigurationRecorderNameList(s, schemas.DescribeConfigurationRecorderStatusRequest_ConfigurationRecorderNames, v.ConfigurationRecorderNames)
+	}
 	if v.ServicePrincipal != nil {
 		s.WriteString(schemas.DescribeConfigurationRecorderStatusRequest_ServicePrincipal, *v.ServicePrincipal)
 	}
@@ -96,7 +98,9 @@ func (v *DescribeConfigurationRecorderStatusOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeConfigurationRecorderStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationRecorderStatusList(s, schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus, v.ConfigurationRecordersStatus)
+	if v.ConfigurationRecordersStatus != nil {
+		serializeConfigurationRecorderStatusList(s, schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus, v.ConfigurationRecordersStatus)
+	}
 }
 func (v *DescribeConfigurationRecorderStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeConfigurationRecorderStatusResponse, func(s *smithy.Schema) error {

@@ -9,8 +9,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Sets the maximum number of simultaneous executions for a function, and reserves
-// capacity for that concurrency level.
+// Sets the maximum number of simultaneous executions for a Lambda Event Function,
+// and reserves capacity for that concurrency level.
 //
 // Concurrency settings apply to the function as a whole, including all published
 // versions and the unpublished version. Reserving concurrency both ensures that

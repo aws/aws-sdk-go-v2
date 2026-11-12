@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accessToken":"__AccessToken__","authorizationUrl":"__AuthorizationUrl__","sessionStatus":"IN_PROGRESS","sessionUri":"__SessionUri__"}

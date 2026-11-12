@@ -94,7 +94,9 @@ func (v *StartNotebookExecutionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.EditorId != nil {
 		s.WriteString(schemas.StartNotebookExecutionInput_EditorId, *v.EditorId)
 	}
-	serializeEnvironmentVariablesMap(s, schemas.StartNotebookExecutionInput_EnvironmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.StartNotebookExecutionInput_EnvironmentVariables, v.EnvironmentVariables)
+	}
 	if v.ExecutionEngine != nil {
 		s.WriteStruct(schemas.StartNotebookExecutionInput_ExecutionEngine)
 		v.ExecutionEngine.SerializeMembers(s)
@@ -128,7 +130,9 @@ func (v *StartNotebookExecutionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.StartNotebookExecutionInput_ServiceRole, *v.ServiceRole)
 	}
-	serializeTagList(s, schemas.StartNotebookExecutionInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartNotebookExecutionInput_Tags, v.Tags)
+	}
 }
 
 type StartNotebookExecutionOutput struct {

@@ -4,7 +4,9 @@ package timestreaminfluxdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,27 @@ type CreateDbBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDbBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDbBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDbBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbResourceId != nil {
+		s.WriteString(schemas.CreateDbBackupInput_dbResourceId, *v.DbResourceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDbBackupInput_name, *v.Name)
+	}
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.CreateDbBackupInput_retentionDays, *v.RetentionDays)
+	}
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateDbBackupInput_tags, v.Tags)
+	}
+}
+
 type CreateDbBackupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the backup.
@@ -62,6 +85,10 @@ type CreateDbBackupOutput struct {
 	AllocatedStorage *int32
 
 	// The cluster configuration of the resource at the time of backup.
+	//
+	// Deprecated. Use deploymentConfiguration to view the cluster topology instead.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
 	ClusterConfiguration *types.ClusterConfiguration
 
 	// The time when the backup was created.
@@ -78,6 +105,9 @@ type CreateDbBackupOutput struct {
 
 	// The storage type of the resource at the time of backup.
 	DbStorageType types.DbStorageType
+
+	// The deployment configuration of the resource at the time of backup.
+	DeploymentConfiguration types.DeploymentConfiguration
 
 	// The deployment type of the resource that the backup was created from.
 	DeploymentType types.ResourceDeploymentType
@@ -134,13 +164,217 @@ type CreateDbBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDbBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDbBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.CreateDbBackupOutput_allocatedStorage, *v.AllocatedStorage)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_arn, *v.Arn)
+	}
+	if v.ClusterConfiguration != nil {
+		s.WriteStruct(schemas.CreateDbBackupOutput_clusterConfiguration)
+		v.ClusterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDbBackupOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbParameterGroupId != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_dbParameterGroupId, *v.DbParameterGroupId)
+	}
+	if v.DbResourceId != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_dbResourceId, *v.DbResourceId)
+	}
+	if v.DbStorageType != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentConfiguration != nil {
+		serializeDeploymentConfiguration(s, schemas.CreateDbBackupOutput_deploymentConfiguration, v.DeploymentConfiguration)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_deploymentType, string(v.DeploymentType))
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_engineType, string(v.EngineType))
+	}
+	if v.ExpiresAfter != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_expiresAfter, *v.ExpiresAfter)
+	}
+	if v.FailoverMode != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_failoverMode, string(v.FailoverMode))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_id, *v.Id)
+	}
+	if v.InfluxAuthParametersSecretArn != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_influxAuthParametersSecretArn, *v.InfluxAuthParametersSecretArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LogDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.CreateDbBackupOutput_logDeliveryConfiguration)
+		v.LogDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceSchedule != nil {
+		s.WriteStruct(schemas.CreateDbBackupOutput_maintenanceSchedule)
+		v.MaintenanceSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDbBackupOutput_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_networkType, string(v.NetworkType))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.CreateDbBackupOutput_port, *v.Port)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateDbBackupOutput_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateDbBackupOutput_type, string(v.Type))
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.CreateDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
+}
+func (v *CreateDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDbBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDbBackupOutput_allocatedStorage:
+			v.AllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.CreateDbBackupOutput_allocatedStorage, v.AllocatedStorage)
+		case schemas.CreateDbBackupOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_arn, v.Arn)
+		case schemas.CreateDbBackupOutput_clusterConfiguration:
+			v.ClusterConfiguration = &types.ClusterConfiguration{}
+			return v.ClusterConfiguration.Deserialize(d)
+		case schemas.CreateDbBackupOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDbBackupOutput_createdAt, v.CreatedAt)
+		case schemas.CreateDbBackupOutput_dbInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_dbInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DbInstanceType = types.DbInstanceType(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_dbParameterGroupId:
+			v.DbParameterGroupId = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_dbParameterGroupId, v.DbParameterGroupId)
+		case schemas.CreateDbBackupOutput_dbResourceId:
+			v.DbResourceId = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_dbResourceId, v.DbResourceId)
+		case schemas.CreateDbBackupOutput_dbStorageType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_dbStorageType, &ev); err != nil {
+				return err
+			}
+			v.DbStorageType = types.DbStorageType(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_deploymentConfiguration:
+			return deserializeDeploymentConfiguration(d, schemas.CreateDbBackupOutput_deploymentConfiguration, &v.DeploymentConfiguration)
+		case schemas.CreateDbBackupOutput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.ResourceDeploymentType(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_engineType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_expiresAfter:
+			v.ExpiresAfter = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_expiresAfter, v.ExpiresAfter)
+		case schemas.CreateDbBackupOutput_failoverMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_failoverMode, &ev); err != nil {
+				return err
+			}
+			v.FailoverMode = types.FailoverMode(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_id, v.Id)
+		case schemas.CreateDbBackupOutput_influxAuthParametersSecretArn:
+			v.InfluxAuthParametersSecretArn = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
+		case schemas.CreateDbBackupOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.CreateDbBackupOutput_logDeliveryConfiguration:
+			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
+			return v.LogDeliveryConfiguration.Deserialize(d)
+		case schemas.CreateDbBackupOutput_maintenanceSchedule:
+			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
+			return v.MaintenanceSchedule.Deserialize(d)
+		case schemas.CreateDbBackupOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDbBackupOutput_name, v.Name)
+		case schemas.CreateDbBackupOutput_networkType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.NetworkType(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.CreateDbBackupOutput_port, v.Port)
+		case schemas.CreateDbBackupOutput_publiclyAccessible:
+			v.PubliclyAccessible = new(bool)
+			return d.ReadBool(schemas.CreateDbBackupOutput_publiclyAccessible, v.PubliclyAccessible)
+		case schemas.CreateDbBackupOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DbBackupStatus(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateDbBackupOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DbBackupType(ev)
+			return nil
+		case schemas.CreateDbBackupOutput_vpcSecurityGroupIds:
+			return deserializeVpcSecurityGroupIdList(d, schemas.CreateDbBackupOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
+		case schemas.CreateDbBackupOutput_vpcSubnetIds:
+			return deserializeVpcSubnetIdList(d, schemas.CreateDbBackupOutput_vpcSubnetIds, &v.VpcSubnetIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDbBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDbBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDbBackup, schemas.CreateDbBackupInput, schemas.CreateDbBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateDbBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDbBackup, schemas.CreateDbBackupInput, schemas.CreateDbBackupOutput), output: &CreateDbBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

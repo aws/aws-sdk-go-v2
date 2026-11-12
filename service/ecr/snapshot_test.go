@@ -326,6 +326,18 @@ func TestCheckSnapshot_DescribeRegistry(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeReplicationBackfillResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeReplicationBackfillResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeReplicationBackfillResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeRepositories(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRepositories(context.Background(), nil, func(o *Options) {
@@ -506,6 +518,18 @@ func TestCheckSnapshot_ListPullTimeUpdateExclusions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListReplicationBackfills(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReplicationBackfills(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListReplicationBackfills")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -667,6 +691,30 @@ func TestCheckSnapshot_StartLifecyclePolicyPreview(t *testing.T) {
 	_, err := svc.StartLifecyclePolicyPreview(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartLifecyclePolicyPreview")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartReplicationBackfill(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartReplicationBackfill(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartReplicationBackfill")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopReplicationBackfill(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopReplicationBackfill(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopReplicationBackfill")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1021,6 +1069,18 @@ func TestUpdateSnapshot_DescribeRegistry(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeReplicationBackfillResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeReplicationBackfillResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeReplicationBackfillResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeRepositories(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRepositories(context.Background(), nil, func(o *Options) {
@@ -1201,6 +1261,18 @@ func TestUpdateSnapshot_ListPullTimeUpdateExclusions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListReplicationBackfills(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReplicationBackfills(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListReplicationBackfills")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1362,6 +1434,30 @@ func TestUpdateSnapshot_StartLifecyclePolicyPreview(t *testing.T) {
 	_, err := svc.StartLifecyclePolicyPreview(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartLifecyclePolicyPreview")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartReplicationBackfill(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartReplicationBackfill(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartReplicationBackfill")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopReplicationBackfill(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopReplicationBackfill(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopReplicationBackfill")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -160,8 +160,12 @@ func (v *DescribeServiceJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeServiceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceJobAttemptDetails(s, schemas.DescribeServiceJobResponse_attempts, v.Attempts)
-	serializeServiceJobCapacityUsageDetailList(s, schemas.DescribeServiceJobResponse_capacityUsage, v.CapacityUsage)
+	if v.Attempts != nil {
+		serializeServiceJobAttemptDetails(s, schemas.DescribeServiceJobResponse_attempts, v.Attempts)
+	}
+	if v.CapacityUsage != nil {
+		serializeServiceJobCapacityUsageDetailList(s, schemas.DescribeServiceJobResponse_capacityUsage, v.CapacityUsage)
+	}
 	if v.CreatedAt != nil {
 		s.WriteInt64(schemas.DescribeServiceJobResponse_createdAt, *v.CreatedAt)
 	}
@@ -230,7 +234,9 @@ func (v *DescribeServiceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StoppedAt != nil {
 		s.WriteInt64(schemas.DescribeServiceJobResponse_stoppedAt, *v.StoppedAt)
 	}
-	serializeTagrisTagsMap(s, schemas.DescribeServiceJobResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.DescribeServiceJobResponse_tags, v.Tags)
+	}
 	if v.TimeoutConfig != nil {
 		s.WriteStruct(schemas.DescribeServiceJobResponse_timeoutConfig)
 		v.TimeoutConfig.SerializeMembers(s)

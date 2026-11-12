@@ -57,7 +57,9 @@ func (v *CreateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistryName != nil {
 		s.WriteString(schemas.CreateRegistryInput_RegistryName, *v.RegistryName)
 	}
-	serializeTagsMap(s, schemas.CreateRegistryInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateRegistryInput_Tags, v.Tags)
+	}
 }
 
 type CreateRegistryOutput struct {
@@ -96,7 +98,9 @@ func (v *CreateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistryName != nil {
 		s.WriteString(schemas.CreateRegistryResponse_RegistryName, *v.RegistryName)
 	}
-	serializeTagsMap(s, schemas.CreateRegistryResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateRegistryResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRegistryResponse, func(s *smithy.Schema) error {

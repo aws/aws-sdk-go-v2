@@ -90,7 +90,9 @@ func (v *ListBackupSelectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBackupSelectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackupSelectionsList(s, schemas.ListBackupSelectionsOutput_BackupSelectionsList, v.BackupSelectionsList)
+	if v.BackupSelectionsList != nil {
+		serializeBackupSelectionsList(s, schemas.ListBackupSelectionsOutput_BackupSelectionsList, v.BackupSelectionsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBackupSelectionsOutput_NextToken, *v.NextToken)
 	}

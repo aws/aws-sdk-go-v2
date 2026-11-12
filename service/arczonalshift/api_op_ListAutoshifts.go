@@ -88,7 +88,9 @@ func (v *ListAutoshiftsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAutoshiftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoshiftSummaries(s, schemas.ListAutoshiftsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAutoshiftSummaries(s, schemas.ListAutoshiftsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutoshiftsResponse_nextToken, *v.NextToken)
 	}

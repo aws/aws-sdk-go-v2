@@ -161,7 +161,9 @@ func (v *DescribeAutoPredictorOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.DataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeArnList(s, schemas.DescribeAutoPredictorResponse_DatasetImportJobArns, v.DatasetImportJobArns)
+	if v.DatasetImportJobArns != nil {
+		serializeArnList(s, schemas.DescribeAutoPredictorResponse_DatasetImportJobArns, v.DatasetImportJobArns)
+	}
 	if v.EncryptionConfig != nil {
 		s.WriteStruct(schemas.DescribeAutoPredictorResponse_EncryptionConfig)
 		v.EncryptionConfig.SerializeMembers(s)
@@ -175,14 +177,18 @@ func (v *DescribeAutoPredictorOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ExplainabilityInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeForecastDimensions(s, schemas.DescribeAutoPredictorResponse_ForecastDimensions, v.ForecastDimensions)
+	if v.ForecastDimensions != nil {
+		serializeForecastDimensions(s, schemas.DescribeAutoPredictorResponse_ForecastDimensions, v.ForecastDimensions)
+	}
 	if v.ForecastFrequency != nil {
 		s.WriteString(schemas.DescribeAutoPredictorResponse_ForecastFrequency, *v.ForecastFrequency)
 	}
 	if v.ForecastHorizon != nil {
 		s.WriteInt32(schemas.DescribeAutoPredictorResponse_ForecastHorizon, *v.ForecastHorizon)
 	}
-	serializeForecastTypes(s, schemas.DescribeAutoPredictorResponse_ForecastTypes, v.ForecastTypes)
+	if v.ForecastTypes != nil {
+		serializeForecastTypes(s, schemas.DescribeAutoPredictorResponse_ForecastTypes, v.ForecastTypes)
+	}
 	if v.LastModificationTime != nil {
 		s.WriteTime(schemas.DescribeAutoPredictorResponse_LastModificationTime, *v.LastModificationTime)
 	}

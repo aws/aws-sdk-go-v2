@@ -190,7 +190,9 @@ func (v *CreateTransformJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DataProcessing.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTransformEnvironmentMap(s, schemas.CreateTransformJobRequest_Environment, v.Environment)
+	if v.Environment != nil {
+		serializeTransformEnvironmentMap(s, schemas.CreateTransformJobRequest_Environment, v.Environment)
+	}
 	if v.ExperimentConfig != nil {
 		s.WriteStruct(schemas.CreateTransformJobRequest_ExperimentConfig)
 		v.ExperimentConfig.SerializeMembers(s)
@@ -210,7 +212,9 @@ func (v *CreateTransformJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelName != nil {
 		s.WriteString(schemas.CreateTransformJobRequest_ModelName, *v.ModelName)
 	}
-	serializeTagList(s, schemas.CreateTransformJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTransformJobRequest_Tags, v.Tags)
+	}
 	if v.TransformInput != nil {
 		s.WriteStruct(schemas.CreateTransformJobRequest_TransformInput)
 		v.TransformInput.SerializeMembers(s)

@@ -4,6 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteApiKeyCredentialProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApiKeyCredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApiKeyCredentialProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApiKeyCredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteApiKeyCredentialProviderRequest_name, *v.Name)
+	}
+}
+
 type DeleteApiKeyCredentialProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteApiKeyCredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApiKeyCredentialProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApiKeyCredentialProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApiKeyCredentialProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApiKeyCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApiKeyCredentialProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApiKeyCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApiKeyCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApiKeyCredentialProvider, schemas.DeleteApiKeyCredentialProviderRequest, schemas.DeleteApiKeyCredentialProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApiKeyCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApiKeyCredentialProvider, schemas.DeleteApiKeyCredentialProviderRequest, schemas.DeleteApiKeyCredentialProviderResponse), output: &DeleteApiKeyCredentialProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

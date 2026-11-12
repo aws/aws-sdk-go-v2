@@ -103,7 +103,9 @@ func (v *SignPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobOwner != nil {
 		s.WriteString(schemas.SignPayloadResponse_jobOwner, *v.JobOwner)
 	}
-	serializeMetadata(s, schemas.SignPayloadResponse_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.SignPayloadResponse_metadata, v.Metadata)
+	}
 	if v.Signature != nil {
 		s.WriteBlob(schemas.SignPayloadResponse_signature, v.Signature)
 	}

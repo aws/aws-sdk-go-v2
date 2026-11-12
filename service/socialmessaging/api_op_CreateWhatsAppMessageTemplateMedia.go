@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,23 @@ type CreateWhatsAppMessageTemplateMediaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppMessageTemplateMediaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatsAppMessageTemplateMediaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatsAppMessageTemplateMediaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWhatsAppMessageTemplateMediaInput_id, *v.Id)
+	}
+	if v.SourceS3File != nil {
+		s.WriteStruct(schemas.CreateWhatsAppMessageTemplateMediaInput_sourceS3File)
+		v.SourceS3File.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWhatsAppMessageTemplateMediaOutput struct {
 
 	// The handle assigned to the uploaded media by Meta, used to reference the media
@@ -49,13 +68,32 @@ type CreateWhatsAppMessageTemplateMediaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppMessageTemplateMediaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatsAppMessageTemplateMediaOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatsAppMessageTemplateMediaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetaHeaderHandle != nil {
+		s.WriteString(schemas.CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle, *v.MetaHeaderHandle)
+	}
+}
+func (v *CreateWhatsAppMessageTemplateMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWhatsAppMessageTemplateMediaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle:
+			v.MetaHeaderHandle = new(string)
+			return d.ReadString(schemas.CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle, v.MetaHeaderHandle)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWhatsAppMessageTemplateMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWhatsAppMessageTemplateMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppMessageTemplateMedia, schemas.CreateWhatsAppMessageTemplateMediaInput, schemas.CreateWhatsAppMessageTemplateMediaOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWhatsAppMessageTemplateMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppMessageTemplateMedia, schemas.CreateWhatsAppMessageTemplateMediaInput, schemas.CreateWhatsAppMessageTemplateMediaOutput), output: &CreateWhatsAppMessageTemplateMediaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

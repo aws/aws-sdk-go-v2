@@ -102,7 +102,9 @@ func (v *ListAccessPreviewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessPreviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPreviewsList(s, schemas.ListAccessPreviewsResponse_accessPreviews, v.AccessPreviews)
+	if v.AccessPreviews != nil {
+		serializeAccessPreviewsList(s, schemas.ListAccessPreviewsResponse_accessPreviews, v.AccessPreviews)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessPreviewsResponse_nextToken, *v.NextToken)
 	}

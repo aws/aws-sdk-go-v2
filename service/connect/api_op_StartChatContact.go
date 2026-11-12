@@ -216,7 +216,9 @@ func (v *StartChatContactInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartChatContactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.StartChatContactRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.StartChatContactRequest_Attributes, v.Attributes)
+	}
 	if v.ChatDurationInMinutes != nil {
 		s.WriteInt32(schemas.StartChatContactRequest_ChatDurationInMinutes, *v.ChatDurationInMinutes)
 	}
@@ -228,14 +230,18 @@ func (v *StartChatContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartChatContactRequest_ClientToken, *v.ClientToken)
 	}
-	serializeConnectionTypeList(s, schemas.StartChatContactRequest_ConnectionTypes, v.ConnectionTypes)
+	if v.ConnectionTypes != nil {
+		serializeConnectionTypeList(s, schemas.StartChatContactRequest_ConnectionTypes, v.ConnectionTypes)
+	}
 	if v.ContactFlowId != nil {
 		s.WriteString(schemas.StartChatContactRequest_ContactFlowId, *v.ContactFlowId)
 	}
 	if v.CustomerId != nil {
 		s.WriteString(schemas.StartChatContactRequest_CustomerId, *v.CustomerId)
 	}
-	serializeDisconnectOnCustomerExit(s, schemas.StartChatContactRequest_DisconnectOnCustomerExit, v.DisconnectOnCustomerExit)
+	if v.DisconnectOnCustomerExit != nil {
+		serializeDisconnectOnCustomerExit(s, schemas.StartChatContactRequest_DisconnectOnCustomerExit, v.DisconnectOnCustomerExit)
+	}
 	if v.InitialMessage != nil {
 		s.WriteStruct(schemas.StartChatContactRequest_InitialMessage)
 		v.InitialMessage.SerializeMembers(s)
@@ -262,8 +268,12 @@ func (v *StartChatContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RelatedContactId != nil {
 		s.WriteString(schemas.StartChatContactRequest_RelatedContactId, *v.RelatedContactId)
 	}
-	serializeSegmentAttributes(s, schemas.StartChatContactRequest_SegmentAttributes, v.SegmentAttributes)
-	serializeSupportedMessagingContentTypes(s, schemas.StartChatContactRequest_SupportedMessagingContentTypes, v.SupportedMessagingContentTypes)
+	if v.SegmentAttributes != nil {
+		serializeSegmentAttributes(s, schemas.StartChatContactRequest_SegmentAttributes, v.SegmentAttributes)
+	}
+	if v.SupportedMessagingContentTypes != nil {
+		serializeSupportedMessagingContentTypes(s, schemas.StartChatContactRequest_SupportedMessagingContentTypes, v.SupportedMessagingContentTypes)
+	}
 }
 
 type StartChatContactOutput struct {

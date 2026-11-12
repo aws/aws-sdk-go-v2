@@ -146,7 +146,9 @@ func (v *DescribeInputDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacAddress != nil {
 		s.WriteString(schemas.DescribeInputDeviceResponse_MacAddress, *v.MacAddress)
 	}
-	serialize__listOf__string(s, schemas.DescribeInputDeviceResponse_MedialiveInputArns, v.MedialiveInputArns)
+	if v.MedialiveInputArns != nil {
+		serialize__listOf__string(s, schemas.DescribeInputDeviceResponse_MedialiveInputArns, v.MedialiveInputArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeInputDeviceResponse_Name, *v.Name)
 	}
@@ -161,7 +163,9 @@ func (v *DescribeInputDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SerialNumber != nil {
 		s.WriteString(schemas.DescribeInputDeviceResponse_SerialNumber, *v.SerialNumber)
 	}
-	serializeTags(s, schemas.DescribeInputDeviceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeInputDeviceResponse_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribeInputDeviceResponse_Type, string(v.Type))
 	}

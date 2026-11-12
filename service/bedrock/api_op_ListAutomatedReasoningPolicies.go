@@ -87,7 +87,9 @@ func (v *ListAutomatedReasoningPoliciesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListAutomatedReasoningPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicySummaries(s, schemas.ListAutomatedReasoningPoliciesResponse_automatedReasoningPolicySummaries, v.AutomatedReasoningPolicySummaries)
+	if v.AutomatedReasoningPolicySummaries != nil {
+		serializeAutomatedReasoningPolicySummaries(s, schemas.ListAutomatedReasoningPoliciesResponse_automatedReasoningPolicySummaries, v.AutomatedReasoningPolicySummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomatedReasoningPoliciesResponse_nextToken, *v.NextToken)
 	}

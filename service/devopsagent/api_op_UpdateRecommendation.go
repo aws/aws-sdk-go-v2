@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,30 @@ type UpdateRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalContext != nil {
+		s.WriteString(schemas.UpdateRecommendationRequest_additionalContext, *v.AdditionalContext)
+	}
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateRecommendationRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateRecommendationRequest_clientToken, *v.ClientToken)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.UpdateRecommendationRequest_recommendationId, *v.RecommendationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateRecommendationRequest_status, string(v.Status))
+	}
+}
+
 // Response structure containing the updated recommendation
 type UpdateRecommendationOutput struct {
 
@@ -65,13 +91,34 @@ type UpdateRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Recommendation != nil {
+		s.WriteStruct(schemas.UpdateRecommendationResponse_recommendation)
+		v.Recommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecommendationResponse_recommendation:
+			v.Recommendation = &types.Recommendation{}
+			return v.Recommendation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecommendation, schemas.UpdateRecommendationRequest, schemas.UpdateRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecommendation, schemas.UpdateRecommendationRequest, schemas.UpdateRecommendationResponse), output: &UpdateRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

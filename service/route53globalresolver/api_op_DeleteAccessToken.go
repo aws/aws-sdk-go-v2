@@ -4,7 +4,9 @@ package route53globalresolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,18 @@ type DeleteAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessTokenInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessTokenId != nil {
+		s.WriteString(schemas.DeleteAccessTokenInput_accessTokenId, *v.AccessTokenId)
+	}
+}
+
 type DeleteAccessTokenOutput struct {
 
 	// The date and time when the access token was deleted.
@@ -64,13 +78,48 @@ type DeleteAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessTokenOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.DeleteAccessTokenOutput_deletedAt, *v.DeletedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteAccessTokenOutput_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteAccessTokenOutput_status, string(v.Status))
+	}
+}
+func (v *DeleteAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessTokenOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccessTokenOutput_deletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteAccessTokenOutput_deletedAt, v.DeletedAt)
+		case schemas.DeleteAccessTokenOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteAccessTokenOutput_id, v.Id)
+		case schemas.DeleteAccessTokenOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAccessTokenOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TokenStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessToken, schemas.DeleteAccessTokenInput, schemas.DeleteAccessTokenOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessToken, schemas.DeleteAccessTokenInput, schemas.DeleteAccessTokenOutput), output: &DeleteAccessTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

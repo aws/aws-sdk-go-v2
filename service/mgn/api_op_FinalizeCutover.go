@@ -19,7 +19,7 @@ import (
 // dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The
 // SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes
 // property for each of dataReplicationInfo.replicatedDisks will be set to zero;
-// dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be
+// dataReplicationInfo.lagDuration and dataReplicationInfo.etaDateTime will be
 // nullified.
 func (c *Client) FinalizeCutover(ctx context.Context, params *FinalizeCutoverInput, optFns ...func(*Options)) (*FinalizeCutoverOutput, error) {
 	if params == nil {
@@ -177,7 +177,9 @@ func (v *FinalizeCutoverOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceServerID != nil {
 		s.WriteString(schemas.SourceServer_sourceServerID, *v.SourceServerID)
 	}
-	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	}
 	if v.UserProvidedID != nil {
 		s.WriteString(schemas.SourceServer_userProvidedID, *v.UserProvidedID)
 	}

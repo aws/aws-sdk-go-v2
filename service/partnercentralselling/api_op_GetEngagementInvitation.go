@@ -174,7 +174,9 @@ func (v *GetEngagementInvitationOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.EnrichmentContext.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEngagementMemberSummaries(s, schemas.GetEngagementInvitationResponse_ExistingMembers, v.ExistingMembers)
+	if v.ExistingMembers != nil {
+		serializeEngagementMemberSummaries(s, schemas.GetEngagementInvitationResponse_ExistingMembers, v.ExistingMembers)
+	}
 	if v.ExpirationDate != nil {
 		s.WriteTime(schemas.GetEngagementInvitationResponse_ExpirationDate, *v.ExpirationDate)
 	}
@@ -187,11 +189,15 @@ func (v *GetEngagementInvitationOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.InvitationMessage != nil {
 		s.WriteString(schemas.GetEngagementInvitationResponse_InvitationMessage, *v.InvitationMessage)
 	}
-	serializePayload(s, schemas.GetEngagementInvitationResponse_Payload, v.Payload)
+	if v.Payload != nil {
+		serializePayload(s, schemas.GetEngagementInvitationResponse_Payload, v.Payload)
+	}
 	if v.PayloadType != "" {
 		s.WriteString(schemas.GetEngagementInvitationResponse_PayloadType, string(v.PayloadType))
 	}
-	serializeReceiver(s, schemas.GetEngagementInvitationResponse_Receiver, v.Receiver)
+	if v.Receiver != nil {
+		serializeReceiver(s, schemas.GetEngagementInvitationResponse_Receiver, v.Receiver)
+	}
 	if v.RejectionReason != nil {
 		s.WriteString(schemas.GetEngagementInvitationResponse_RejectionReason, *v.RejectionReason)
 	}

@@ -161,7 +161,9 @@ func (v *UpdateTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnDefinitionList(s, schemas.UpdateTableRequest_addColumns, v.AddColumns)
+	if v.AddColumns != nil {
+		serializeColumnDefinitionList(s, schemas.UpdateTableRequest_addColumns, v.AddColumns)
+	}
 	if v.AutoScalingSpecification != nil {
 		s.WriteStruct(schemas.UpdateTableRequest_autoScalingSpecification)
 		v.AutoScalingSpecification.SerializeMembers(s)
@@ -198,7 +200,9 @@ func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PointInTimeRecovery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicaSpecificationList(s, schemas.UpdateTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	if v.ReplicaSpecifications != nil {
+		serializeReplicaSpecificationList(s, schemas.UpdateTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.UpdateTableRequest_tableName, *v.TableName)
 	}

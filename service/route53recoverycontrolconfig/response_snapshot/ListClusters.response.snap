@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Clusters":[{"ClusterArn":"__ClusterArn__","ClusterEndpoints":[{"Endpoint":"__Endpoint__","Region":"__Region__"},{"Endpoint":"__Endpoint__","Region":"__Region__"}],"Name":"__Name__","NetworkType":"IPV4","Owner":"__Owner__","Status":"PENDING"},{"ClusterArn":"__ClusterArn__","ClusterEndpoints":[{"Endpoint":"__Endpoint__","Region":"__Region__"},{"Endpoint":"__Endpoint__","Region":"__Region__"}],"Name":"__Name__","NetworkType":"IPV4","Owner":"__Owner__","Status":"PENDING"}],"NextToken":"__NextToken__"}

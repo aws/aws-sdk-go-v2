@@ -113,7 +113,9 @@ func (v *CreateAlgorithmInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAlgorithmInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAlgorithmInput_Tags, v.Tags)
+	}
 	if v.TrainingSpecification != nil {
 		s.WriteStruct(schemas.CreateAlgorithmInput_TrainingSpecification)
 		v.TrainingSpecification.SerializeMembers(s)

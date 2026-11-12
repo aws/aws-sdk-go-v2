@@ -217,7 +217,9 @@ func (v *DescribeHyperParameterTuningJobOutput) SerializeMembers(s smithy.ShapeS
 		v.TrainingJobDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHyperParameterTrainingJobDefinitions(s, schemas.DescribeHyperParameterTuningJobResponse_TrainingJobDefinitions, v.TrainingJobDefinitions)
+	if v.TrainingJobDefinitions != nil {
+		serializeHyperParameterTrainingJobDefinitions(s, schemas.DescribeHyperParameterTuningJobResponse_TrainingJobDefinitions, v.TrainingJobDefinitions)
+	}
 	if v.TrainingJobStatusCounters != nil {
 		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_TrainingJobStatusCounters)
 		v.TrainingJobStatusCounters.SerializeMembers(s)

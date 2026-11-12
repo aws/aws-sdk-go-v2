@@ -83,7 +83,9 @@ func (v *ListAdminAccountsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAdminAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdminAccountSummaryList(s, schemas.ListAdminAccountsResponse_adminAccounts, v.AdminAccounts)
+	if v.AdminAccounts != nil {
+		serializeAdminAccountSummaryList(s, schemas.ListAdminAccountsResponse_adminAccounts, v.AdminAccounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAdminAccountsResponse_nextToken, *v.NextToken)
 	}

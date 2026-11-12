@@ -102,7 +102,9 @@ func (v *ListPresetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPresetsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfPreset(s, schemas.ListPresetsResponse_Presets, v.Presets)
+	if v.Presets != nil {
+		serialize__listOfPreset(s, schemas.ListPresetsResponse_Presets, v.Presets)
+	}
 }
 func (v *ListPresetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPresetsResponse, func(s *smithy.Schema) error {

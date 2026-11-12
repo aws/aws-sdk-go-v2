@@ -44,14 +44,11 @@ type SearchPrincipalsInput struct {
 	// This member is required.
 	SearchQuery *string
 
-	// The maximum number of results to return. Defaults to 10. Valid only when
-	// searchQuery is *; other searches reject this parameter and return at most 10
-	// results.
+	// The maximum number of results to return. Defaults to 100.
 	MaxResults *int32
 
-	// A token to retrieve the next page of results. Valid only when searchQuery is *;
-	// other searches do not paginate and reject this parameter. Tokens expire after 24
-	// hours.
+	// A token to retrieve the next page of results. Supply the same searchQuery used
+	// on the request that returned it. Tokens expire after 24 hours.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -105,7 +102,9 @@ func (v *SearchPrincipalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchPrincipalsOutput_nextToken, *v.NextToken)
 	}
-	serializePrincipalSearchResultList(s, schemas.SearchPrincipalsOutput_results, v.Results)
+	if v.Results != nil {
+		serializePrincipalSearchResultList(s, schemas.SearchPrincipalsOutput_results, v.Results)
+	}
 }
 func (v *SearchPrincipalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchPrincipalsOutput, func(s *smithy.Schema) error {
@@ -165,9 +164,7 @@ func (c *Client) addOperationSearchPrincipalsMiddlewares(stack *middleware.Stack
 
 // SearchPrincipalsPaginatorOptions is the paginator options for SearchPrincipals
 type SearchPrincipalsPaginatorOptions struct {
-	// The maximum number of results to return. Defaults to 10. Valid only when
-	// searchQuery is *; other searches reject this parameter and return at most 10
-	// results.
+	// The maximum number of results to return. Defaults to 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

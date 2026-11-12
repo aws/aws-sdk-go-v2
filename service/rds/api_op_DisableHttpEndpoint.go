@@ -4,6 +4,8 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type DisableHttpEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableHttpEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableHttpEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableHttpEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DisableHttpEndpointRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type DisableHttpEndpointOutput struct {
 
 	// Indicates whether the HTTP endpoint is enabled or disabled for the DB cluster.
@@ -56,13 +70,38 @@ type DisableHttpEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableHttpEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableHttpEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableHttpEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpEndpointEnabled != nil {
+		s.WriteBool(schemas.DisableHttpEndpointResponse_HttpEndpointEnabled, *v.HttpEndpointEnabled)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DisableHttpEndpointResponse_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *DisableHttpEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableHttpEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableHttpEndpointResponse_HttpEndpointEnabled:
+			v.HttpEndpointEnabled = new(bool)
+			return d.ReadBool(schemas.DisableHttpEndpointResponse_HttpEndpointEnabled, v.HttpEndpointEnabled)
+		case schemas.DisableHttpEndpointResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DisableHttpEndpointResponse_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableHttpEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableHttpEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableHttpEndpoint, schemas.DisableHttpEndpointRequest, schemas.DisableHttpEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDisableHttpEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableHttpEndpoint, schemas.DisableHttpEndpointRequest, schemas.DisableHttpEndpointResponse), output: &DisableHttpEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

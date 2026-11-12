@@ -90,7 +90,9 @@ func (v *ListSpaceResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListSpaceResourcesResponse_RequestId, *v.RequestId)
 	}
-	serializeSpaceResourceSummaries(s, schemas.ListSpaceResourcesResponse_SpaceResources, v.SpaceResources)
+	if v.SpaceResources != nil {
+		serializeSpaceResourceSummaries(s, schemas.ListSpaceResourcesResponse_SpaceResources, v.SpaceResources)
+	}
 	if v.SpaceArn != nil {
 		s.WriteString(schemas.ListSpaceResourcesResponse_spaceArn, *v.SpaceArn)
 	}

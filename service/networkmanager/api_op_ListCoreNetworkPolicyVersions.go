@@ -82,7 +82,9 @@ func (v *ListCoreNetworkPolicyVersionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListCoreNetworkPolicyVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreNetworkPolicyVersionList(s, schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions, v.CoreNetworkPolicyVersions)
+	if v.CoreNetworkPolicyVersions != nil {
+		serializeCoreNetworkPolicyVersionList(s, schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions, v.CoreNetworkPolicyVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreNetworkPolicyVersionsResponse_NextToken, *v.NextToken)
 	}

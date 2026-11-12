@@ -371,6 +371,73 @@ func TestCheckResponseSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateScheduleAction(t *testing.T) {
+	want := &CreateScheduleActionOutput{
+		ActionName: ptr.String("__ActionName__"),
+		StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+			Value: types.FixedModeScheduleActionStartSettings{
+				ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Operations: []types.ScheduleActionOperation{
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+		},
+		Status: types.ScheduleActionStatus("PENDING"),
+		Error: &types.ScheduleActionError{
+			ErrorCode:    types.ScheduleActionErrorCode("INVALID_ACTION_TARGET"),
+			ErrorMessage: ptr.String("__ErrorMessage__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateScheduleAction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateScheduleAction(context.Background(), &CreateScheduleActionInput{
+		Id:         ptr.String("__Id__"),
+		ActionName: ptr.String("__ActionName__"),
+		StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+			Value: types.FixedModeScheduleActionStartSettings{
+				ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Operations: []types.ScheduleActionOperation{
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateScheduleAction.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteDictionary(t *testing.T) {
 	want := &DeleteDictionaryOutput{
 		Arn:    ptr.String("__Arn__"),
@@ -439,6 +506,30 @@ func TestCheckResponseSnapshot_DeleteFeedPolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteFeedPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteScheduleAction(t *testing.T) {
+	want := &DeleteScheduleActionOutput{
+		ActionName: ptr.String("__ActionName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteScheduleAction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteScheduleAction(context.Background(), &DeleteScheduleActionInput{
+		Id:         ptr.String("__Id__"),
+		ActionName: ptr.String("__ActionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteScheduleAction.response", err)
 	}
 }
 
@@ -757,6 +848,87 @@ func TestCheckResponseSnapshot_ListFeeds(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListFeeds.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListScheduleActions(t *testing.T) {
+	want := &ListScheduleActionsOutput{
+		ScheduleActions: []types.ScheduleAction{
+			{
+				ActionName: ptr.String("__ActionName__"),
+				StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+					Value: types.FixedModeScheduleActionStartSettings{
+						ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				Operations: []types.ScheduleActionOperation{
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+				},
+				Status: types.ScheduleActionStatus("PENDING"),
+				Error: &types.ScheduleActionError{
+					ErrorCode:    types.ScheduleActionErrorCode("INVALID_ACTION_TARGET"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+				},
+			},
+			{
+				ActionName: ptr.String("__ActionName__"),
+				StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+					Value: types.FixedModeScheduleActionStartSettings{
+						ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				Operations: []types.ScheduleActionOperation{
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+				},
+				Status: types.ScheduleActionStatus("PENDING"),
+				Error: &types.ScheduleActionError{
+					ErrorCode:    types.ScheduleActionErrorCode("INVALID_ACTION_TARGET"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListScheduleActions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListScheduleActions(context.Background(), &ListScheduleActionsInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListScheduleActions.response", err)
 	}
 }
 

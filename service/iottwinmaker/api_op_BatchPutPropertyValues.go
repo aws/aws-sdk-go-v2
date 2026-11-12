@@ -51,7 +51,9 @@ func (v *BatchPutPropertyValuesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutPropertyValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntries(s, schemas.BatchPutPropertyValuesRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeEntries(s, schemas.BatchPutPropertyValuesRequest_entries, v.Entries)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.BatchPutPropertyValuesRequest_workspaceId, *v.WorkspaceId)
 	}
@@ -89,7 +91,9 @@ func (v *BatchPutPropertyValuesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutPropertyValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeErrorEntries(s, schemas.BatchPutPropertyValuesResponse_errorEntries, v.ErrorEntries)
+	if v.ErrorEntries != nil {
+		serializeErrorEntries(s, schemas.BatchPutPropertyValuesResponse_errorEntries, v.ErrorEntries)
+	}
 }
 func (v *BatchPutPropertyValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutPropertyValuesResponse, func(s *smithy.Schema) error {

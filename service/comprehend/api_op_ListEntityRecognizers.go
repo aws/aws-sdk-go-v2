@@ -90,7 +90,9 @@ func (v *ListEntityRecognizersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEntityRecognizersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityRecognizerPropertiesList(s, schemas.ListEntityRecognizersResponse_EntityRecognizerPropertiesList, v.EntityRecognizerPropertiesList)
+	if v.EntityRecognizerPropertiesList != nil {
+		serializeEntityRecognizerPropertiesList(s, schemas.ListEntityRecognizersResponse_EntityRecognizerPropertiesList, v.EntityRecognizerPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEntityRecognizersResponse_NextToken, *v.NextToken)
 	}
@@ -122,6 +124,9 @@ func (c *Client) addOperationListEntityRecognizersMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

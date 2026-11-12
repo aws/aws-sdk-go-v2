@@ -107,7 +107,9 @@ func (v *PutInsightRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleState != nil {
 		s.WriteString(schemas.PutInsightRuleInput_RuleState, *v.RuleState)
 	}
-	serializeTagList(s, schemas.PutInsightRuleInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutInsightRuleInput_Tags, v.Tags)
+	}
 }
 
 type PutInsightRuleOutput struct {

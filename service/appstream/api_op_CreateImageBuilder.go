@@ -327,7 +327,9 @@ func (v *CreateImageBuilderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.CreateImageBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.CreateImageBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	}
 	if v.AppstreamAgentVersion != nil {
 		s.WriteString(schemas.CreateImageBuilderRequest_AppstreamAgentVersion, *v.AppstreamAgentVersion)
 	}
@@ -368,9 +370,15 @@ func (v *CreateImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RootVolumeConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.CreateImageBuilderRequest_SoftwaresToInstall, v.SoftwaresToInstall)
-	serializeStringList(s, schemas.CreateImageBuilderRequest_SoftwaresToUninstall, v.SoftwaresToUninstall)
-	serializeTags(s, schemas.CreateImageBuilderRequest_Tags, v.Tags)
+	if v.SoftwaresToInstall != nil {
+		serializeStringList(s, schemas.CreateImageBuilderRequest_SoftwaresToInstall, v.SoftwaresToInstall)
+	}
+	if v.SoftwaresToUninstall != nil {
+		serializeStringList(s, schemas.CreateImageBuilderRequest_SoftwaresToUninstall, v.SoftwaresToUninstall)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateImageBuilderRequest_Tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateImageBuilderRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

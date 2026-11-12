@@ -62,7 +62,9 @@ func (v *CreateAdConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAdConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaTailorPlaybackConfigurationsList(s, schemas.CreateAdConfigurationRequest_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	if v.MediaTailorPlaybackConfigurations != nil {
+		serializeMediaTailorPlaybackConfigurationsList(s, schemas.CreateAdConfigurationRequest_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAdConfigurationRequest_name, *v.Name)
 	}
@@ -71,7 +73,9 @@ func (v *CreateAdConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.PostRollConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateAdConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAdConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateAdConfigurationOutput struct {

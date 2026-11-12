@@ -4,7 +4,9 @@ package docdbelastic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type StopClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.StopClusterInput_clusterArn, *v.ClusterArn)
+	}
+}
+
 type StopClusterOutput struct {
 
 	// Returns information about a specific elastic cluster.
@@ -48,13 +62,34 @@ type StopClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.StopClusterOutput_cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopClusterOutput_cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCluster, schemas.StopClusterInput, schemas.StopClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCluster, schemas.StopClusterInput, schemas.StopClusterOutput), output: &StopClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

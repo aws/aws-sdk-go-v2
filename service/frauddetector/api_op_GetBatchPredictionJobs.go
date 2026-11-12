@@ -85,7 +85,9 @@ func (v *GetBatchPredictionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBatchPredictionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPredictionList(s, schemas.GetBatchPredictionJobsResult_batchPredictions, v.BatchPredictions)
+	if v.BatchPredictions != nil {
+		serializeBatchPredictionList(s, schemas.GetBatchPredictionJobsResult_batchPredictions, v.BatchPredictions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBatchPredictionJobsResult_nextToken, *v.NextToken)
 	}

@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,33 @@ type DescribeTypeInput struct {
 	VersionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeTypeInput_Arn, *v.Arn)
+	}
+	if v.PublicVersionNumber != nil {
+		s.WriteString(schemas.DescribeTypeInput_PublicVersionNumber, *v.PublicVersionNumber)
+	}
+	if v.PublisherId != nil {
+		s.WriteString(schemas.DescribeTypeInput_PublisherId, *v.PublisherId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeTypeInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.DescribeTypeInput_TypeName, *v.TypeName)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DescribeTypeInput_VersionId, *v.VersionId)
+	}
 }
 
 type DescribeTypeOutput struct {
@@ -311,13 +340,209 @@ type DescribeTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeTypeOutput_Arn, *v.Arn)
+	}
+	if v.AutoUpdate != nil {
+		s.WriteBool(schemas.DescribeTypeOutput_AutoUpdate, *v.AutoUpdate)
+	}
+	if v.ConfigurationSchema != nil {
+		s.WriteString(schemas.DescribeTypeOutput_ConfigurationSchema, *v.ConfigurationSchema)
+	}
+	if v.DefaultVersionId != nil {
+		s.WriteString(schemas.DescribeTypeOutput_DefaultVersionId, *v.DefaultVersionId)
+	}
+	if v.DeprecatedStatus != "" {
+		s.WriteString(schemas.DescribeTypeOutput_DeprecatedStatus, string(v.DeprecatedStatus))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeTypeOutput_Description, *v.Description)
+	}
+	if v.DocumentationUrl != nil {
+		s.WriteString(schemas.DescribeTypeOutput_DocumentationUrl, *v.DocumentationUrl)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.DescribeTypeOutput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IsActivated != nil {
+		s.WriteBool(schemas.DescribeTypeOutput_IsActivated, *v.IsActivated)
+	}
+	if v.IsDefaultVersion != nil {
+		s.WriteBool(schemas.DescribeTypeOutput_IsDefaultVersion, *v.IsDefaultVersion)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.DescribeTypeOutput_LastUpdated, *v.LastUpdated)
+	}
+	if v.LatestPublicVersion != nil {
+		s.WriteString(schemas.DescribeTypeOutput_LatestPublicVersion, *v.LatestPublicVersion)
+	}
+	if v.LoggingConfig != nil {
+		s.WriteStruct(schemas.DescribeTypeOutput_LoggingConfig)
+		v.LoggingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OriginalTypeArn != nil {
+		s.WriteString(schemas.DescribeTypeOutput_OriginalTypeArn, *v.OriginalTypeArn)
+	}
+	if v.OriginalTypeName != nil {
+		s.WriteString(schemas.DescribeTypeOutput_OriginalTypeName, *v.OriginalTypeName)
+	}
+	if v.ProvisioningType != "" {
+		s.WriteString(schemas.DescribeTypeOutput_ProvisioningType, string(v.ProvisioningType))
+	}
+	if v.PublicVersionNumber != nil {
+		s.WriteString(schemas.DescribeTypeOutput_PublicVersionNumber, *v.PublicVersionNumber)
+	}
+	if v.PublisherId != nil {
+		s.WriteString(schemas.DescribeTypeOutput_PublisherId, *v.PublisherId)
+	}
+	if v.RequiredActivatedTypes != nil {
+		serializeRequiredActivatedTypes(s, schemas.DescribeTypeOutput_RequiredActivatedTypes, v.RequiredActivatedTypes)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.DescribeTypeOutput_Schema, *v.Schema)
+	}
+	if v.SourceUrl != nil {
+		s.WriteString(schemas.DescribeTypeOutput_SourceUrl, *v.SourceUrl)
+	}
+	if v.TimeCreated != nil {
+		s.WriteTime(schemas.DescribeTypeOutput_TimeCreated, *v.TimeCreated)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeTypeOutput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.DescribeTypeOutput_TypeName, *v.TypeName)
+	}
+	if v.TypeTestsStatus != "" {
+		s.WriteString(schemas.DescribeTypeOutput_TypeTestsStatus, string(v.TypeTestsStatus))
+	}
+	if v.TypeTestsStatusDescription != nil {
+		s.WriteString(schemas.DescribeTypeOutput_TypeTestsStatusDescription, *v.TypeTestsStatusDescription)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.DescribeTypeOutput_Visibility, string(v.Visibility))
+	}
+}
+func (v *DescribeTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTypeOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_Arn, v.Arn)
+		case schemas.DescribeTypeOutput_AutoUpdate:
+			v.AutoUpdate = new(bool)
+			return d.ReadBool(schemas.DescribeTypeOutput_AutoUpdate, v.AutoUpdate)
+		case schemas.DescribeTypeOutput_ConfigurationSchema:
+			v.ConfigurationSchema = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_ConfigurationSchema, v.ConfigurationSchema)
+		case schemas.DescribeTypeOutput_DefaultVersionId:
+			v.DefaultVersionId = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_DefaultVersionId, v.DefaultVersionId)
+		case schemas.DescribeTypeOutput_DeprecatedStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTypeOutput_DeprecatedStatus, &ev); err != nil {
+				return err
+			}
+			v.DeprecatedStatus = types.DeprecatedStatus(ev)
+			return nil
+		case schemas.DescribeTypeOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_Description, v.Description)
+		case schemas.DescribeTypeOutput_DocumentationUrl:
+			v.DocumentationUrl = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_DocumentationUrl, v.DocumentationUrl)
+		case schemas.DescribeTypeOutput_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.DescribeTypeOutput_IsActivated:
+			v.IsActivated = new(bool)
+			return d.ReadBool(schemas.DescribeTypeOutput_IsActivated, v.IsActivated)
+		case schemas.DescribeTypeOutput_IsDefaultVersion:
+			v.IsDefaultVersion = new(bool)
+			return d.ReadBool(schemas.DescribeTypeOutput_IsDefaultVersion, v.IsDefaultVersion)
+		case schemas.DescribeTypeOutput_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.DescribeTypeOutput_LastUpdated, v.LastUpdated)
+		case schemas.DescribeTypeOutput_LatestPublicVersion:
+			v.LatestPublicVersion = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_LatestPublicVersion, v.LatestPublicVersion)
+		case schemas.DescribeTypeOutput_LoggingConfig:
+			v.LoggingConfig = &types.LoggingConfig{}
+			return v.LoggingConfig.Deserialize(d)
+		case schemas.DescribeTypeOutput_OriginalTypeArn:
+			v.OriginalTypeArn = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_OriginalTypeArn, v.OriginalTypeArn)
+		case schemas.DescribeTypeOutput_OriginalTypeName:
+			v.OriginalTypeName = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_OriginalTypeName, v.OriginalTypeName)
+		case schemas.DescribeTypeOutput_ProvisioningType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTypeOutput_ProvisioningType, &ev); err != nil {
+				return err
+			}
+			v.ProvisioningType = types.ProvisioningType(ev)
+			return nil
+		case schemas.DescribeTypeOutput_PublicVersionNumber:
+			v.PublicVersionNumber = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_PublicVersionNumber, v.PublicVersionNumber)
+		case schemas.DescribeTypeOutput_PublisherId:
+			v.PublisherId = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_PublisherId, v.PublisherId)
+		case schemas.DescribeTypeOutput_RequiredActivatedTypes:
+			return deserializeRequiredActivatedTypes(d, schemas.DescribeTypeOutput_RequiredActivatedTypes, &v.RequiredActivatedTypes)
+		case schemas.DescribeTypeOutput_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_Schema, v.Schema)
+		case schemas.DescribeTypeOutput_SourceUrl:
+			v.SourceUrl = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_SourceUrl, v.SourceUrl)
+		case schemas.DescribeTypeOutput_TimeCreated:
+			v.TimeCreated = new(time.Time)
+			return d.ReadTime(schemas.DescribeTypeOutput_TimeCreated, v.TimeCreated)
+		case schemas.DescribeTypeOutput_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTypeOutput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.RegistryType(ev)
+			return nil
+		case schemas.DescribeTypeOutput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_TypeName, v.TypeName)
+		case schemas.DescribeTypeOutput_TypeTestsStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTypeOutput_TypeTestsStatus, &ev); err != nil {
+				return err
+			}
+			v.TypeTestsStatus = types.TypeTestsStatus(ev)
+			return nil
+		case schemas.DescribeTypeOutput_TypeTestsStatusDescription:
+			v.TypeTestsStatusDescription = new(string)
+			return d.ReadString(schemas.DescribeTypeOutput_TypeTestsStatusDescription, v.TypeTestsStatusDescription)
+		case schemas.DescribeTypeOutput_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTypeOutput_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = types.Visibility(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeType, schemas.DescribeTypeInput, schemas.DescribeTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeType, schemas.DescribeTypeInput, schemas.DescribeTypeOutput), output: &DescribeTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

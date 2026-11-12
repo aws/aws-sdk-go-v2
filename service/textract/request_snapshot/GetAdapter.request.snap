@@ -1,6 +1,7 @@
-POST /
+POST /service/Textract/operation/GetAdapter
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.GetAdapter
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AdapterId":"__AdapterId__"}
+¿iAdapterIdm__AdapterId__ÿ

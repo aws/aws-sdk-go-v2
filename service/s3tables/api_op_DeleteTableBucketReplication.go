@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteTableBucketReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableBucketReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTableBucketReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableBucketReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.DeleteTableBucketReplicationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.DeleteTableBucketReplicationRequest_versionToken, *v.VersionToken)
+	}
+}
+
 type DeleteTableBucketReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteTableBucketReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableBucketReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableBucketReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTableBucketReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTableBucketReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTableBucketReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTableBucketReplication, schemas.DeleteTableBucketReplicationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTableBucketReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTableBucketReplication, schemas.DeleteTableBucketReplicationRequest, nil), output: &DeleteTableBucketReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

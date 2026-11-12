@@ -183,7 +183,9 @@ func (v *DescribeSigningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SigningMaterial.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningParameters(s, schemas.DescribeSigningJobResponse_signingParameters, v.SigningParameters)
+	if v.SigningParameters != nil {
+		serializeSigningParameters(s, schemas.DescribeSigningJobResponse_signingParameters, v.SigningParameters)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.DescribeSigningJobResponse_source)
 		v.Source.SerializeMembers(s)

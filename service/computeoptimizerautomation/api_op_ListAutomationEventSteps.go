@@ -86,7 +86,9 @@ func (v *ListAutomationEventStepsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAutomationEventStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationEventSteps(s, schemas.ListAutomationEventStepsResponse_automationEventSteps, v.AutomationEventSteps)
+	if v.AutomationEventSteps != nil {
+		serializeAutomationEventSteps(s, schemas.ListAutomationEventStepsResponse_automationEventSteps, v.AutomationEventSteps)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomationEventStepsResponse_nextToken, *v.NextToken)
 	}

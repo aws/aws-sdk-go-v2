@@ -148,7 +148,9 @@ func (v *UpdateLocationSmbInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLocationSmbInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.UpdateLocationSmbRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.UpdateLocationSmbRequest_AgentArns, v.AgentArns)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.UpdateLocationSmbRequest_AuthenticationType, string(v.AuthenticationType))
 	}
@@ -162,7 +164,9 @@ func (v *UpdateLocationSmbInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomSecretConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDnsIpList(s, schemas.UpdateLocationSmbRequest_DnsIpAddresses, v.DnsIpAddresses)
+	if v.DnsIpAddresses != nil {
+		serializeDnsIpList(s, schemas.UpdateLocationSmbRequest_DnsIpAddresses, v.DnsIpAddresses)
+	}
 	if v.Domain != nil {
 		s.WriteString(schemas.UpdateLocationSmbRequest_Domain, *v.Domain)
 	}
@@ -234,6 +238,9 @@ func (c *Client) addOperationUpdateLocationSmbMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

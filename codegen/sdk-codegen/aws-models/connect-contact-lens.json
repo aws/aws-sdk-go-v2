@@ -957,6 +957,58 @@
                 "smithy.api#documentation": "<p>Provides the category rules that are used to automatically categorize contacts based\n            on uttered keywords and phrases.</p>"
             }
         },
+        "com.amazonaws.connectcontactlens#CategoriesAttributeAndCondition": {
+            "type": "structure",
+            "members": {
+                "TagConditions": {
+                    "target": "com.amazonaws.connectcontactlens#TagAndConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag conditions. All of the tag conditions must be met for the condition to\n            match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of tag conditions that the filter evaluates together using AND logic. A\n            category segment matches only when the tags on its rule satisfy every tag condition in\n            the list.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#CategoriesAttributeFilter": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connectcontactlens#CategoriesAttributeOrConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that the filter evaluates using OR logic. A category segment\n            matches when at least one of the conditions in the list is met.</p>"
+                    }
+                },
+                "AndCondition": {
+                    "target": "com.amazonaws.connectcontactlens#CategoriesAttributeAndCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition that the filter evaluates using AND logic. A category segment matches only\n            when all of the tag conditions in the condition are met.</p>"
+                    }
+                },
+                "TagCondition": {
+                    "target": "com.amazonaws.connectcontactlens#TagCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single tag condition that a category segment must match. The category's rule must\n            have the specified tag.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches category segments based on the tags assigned to the rules that\n            create the categories. Provide exactly one of <code>OrConditions</code>,\n            <code>AndCondition</code>, or <code>TagCondition</code>.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#CategoriesAttributeOrConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcontactlens#CategoriesAttributeAndCondition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.connectcontactlens#CategoryDetails": {
             "type": "structure",
             "members": {
@@ -966,6 +1018,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The section of audio where the category rule was detected.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.connectcontactlens#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rule that created the matched category.</p>"
                     }
                 }
             },
@@ -1303,6 +1361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
                     }
+                },
+                "ListFilter": {
+                    "target": "com.amazonaws.connectcontactlens#RealTimeContactAnalysisSegmentsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that limits the category segments returned by the operation. When provided,\n            use <code>CategoriesAttributeFilter</code> to return only the category segments whose\n            rules have tags that match the filter. This enforces tag-based access control on the\n            categories that the caller can view.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1533,6 +1597,20 @@
                 }
             }
         },
+        "com.amazonaws.connectcontactlens#RealTimeContactAnalysisSegmentsFilter": {
+            "type": "structure",
+            "members": {
+                "CategoriesAttributeFilter": {
+                    "target": "com.amazonaws.connectcontactlens#CategoriesAttributeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter applied to category segments based on the tags of the rules that create the\n            matched categories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that restricts the segments returned by\n            <code>ListRealtimeContactAnalysisSegments</code>. It supports filtering category\n            segments by the tags on the rules that create them, which enforces tag-based access\n            control on the categories a caller can view.</p>"
+            }
+        },
         "com.amazonaws.connectcontactlens#RealtimeContactAnalysisSegment": {
             "type": "structure",
             "members": {
@@ -1590,6 +1668,16 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.connectcontactlens#RuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
         "com.amazonaws.connectcontactlens#SentimentValue": {
             "type": "enum",
             "members": {
@@ -1610,6 +1698,79 @@
                     "traits": {
                         "smithy.api#enumValue": "NEGATIVE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#TagAndConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcontactlens#TagCondition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#TagComparisonType": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "NOT_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#TagCondition": {
+            "type": "structure",
+            "members": {
+                "TagKey": {
+                    "target": "com.amazonaws.connectcontactlens#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key in the tag condition.</p>"
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.connectcontactlens#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value in the tag condition.</p>"
+                    }
+                },
+                "ComparisonType": {
+                    "target": "com.amazonaws.connectcontactlens#TagComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator for the tag condition. Valid values: <code>EQUALS</code> |\n            <code>NOT_EQUALS</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag condition that consists of a tag key, a tag value, and a comparison\n            operator.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
                 }
             }
         },

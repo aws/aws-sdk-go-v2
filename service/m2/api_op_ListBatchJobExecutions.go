@@ -71,7 +71,9 @@ func (v *ListBatchJobExecutionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.ListBatchJobExecutionsRequest_applicationId, *v.ApplicationId)
 	}
-	serializeIdentifierList(s, schemas.ListBatchJobExecutionsRequest_executionIds, v.ExecutionIds)
+	if v.ExecutionIds != nil {
+		serializeIdentifierList(s, schemas.ListBatchJobExecutionsRequest_executionIds, v.ExecutionIds)
+	}
 	if v.JobName != nil {
 		s.WriteString(schemas.ListBatchJobExecutionsRequest_jobName, *v.JobName)
 	}
@@ -150,7 +152,9 @@ func (v *ListBatchJobExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchJobExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchJobExecutionSummaryList(s, schemas.ListBatchJobExecutionsResponse_batchJobExecutions, v.BatchJobExecutions)
+	if v.BatchJobExecutions != nil {
+		serializeBatchJobExecutionSummaryList(s, schemas.ListBatchJobExecutionsResponse_batchJobExecutions, v.BatchJobExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBatchJobExecutionsResponse_nextToken, *v.NextToken)
 	}

@@ -112,7 +112,9 @@ func (v *ListAutoScalingConfigurationsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListAutoScalingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoScalingConfigurationSummaryList(s, schemas.ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList, v.AutoScalingConfigurationSummaryList)
+	if v.AutoScalingConfigurationSummaryList != nil {
+		serializeAutoScalingConfigurationSummaryList(s, schemas.ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList, v.AutoScalingConfigurationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutoScalingConfigurationsResponse_NextToken, *v.NextToken)
 	}

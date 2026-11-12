@@ -104,7 +104,9 @@ func (v *UpdateTransformerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTransformerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdiType(s, schemas.UpdateTransformerRequest_ediType, v.EdiType)
+	if v.EdiType != nil {
+		serializeEdiType(s, schemas.UpdateTransformerRequest_ediType, v.EdiType)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.UpdateTransformerRequest_fileFormat, string(v.FileFormat))
 	}
@@ -241,7 +243,9 @@ func (v *UpdateTransformerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateTransformerResponse_createdAt, *v.CreatedAt)
 	}
-	serializeEdiType(s, schemas.UpdateTransformerResponse_ediType, v.EdiType)
+	if v.EdiType != nil {
+		serializeEdiType(s, schemas.UpdateTransformerResponse_ediType, v.EdiType)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.UpdateTransformerResponse_fileFormat, string(v.FileFormat))
 	}

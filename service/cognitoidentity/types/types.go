@@ -160,7 +160,9 @@ func (v *IdentityDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.IdentityDescription_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeLoginsList(s, schemas.IdentityDescription_Logins, v.Logins)
+	if v.Logins != nil {
+		serializeLoginsList(s, schemas.IdentityDescription_Logins, v.Logins)
+	}
 }
 func (v *IdentityDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdentityDescription, func(s *smithy.Schema) error {
@@ -382,7 +384,9 @@ func (v *RulesConfigurationType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RulesConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMappingRulesList(s, schemas.RulesConfigurationType_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeMappingRulesList(s, schemas.RulesConfigurationType_Rules, v.Rules)
+	}
 }
 func (v *RulesConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RulesConfigurationType, func(s *smithy.Schema) error {

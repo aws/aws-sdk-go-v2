@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/domain/__DomainName__/replication/failover
+
+Content-Type: application/json
+
+{"AllowDataLoss":true,"PeerDomainArn":"__PeerDomainArn__"}

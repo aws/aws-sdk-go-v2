@@ -71,7 +71,9 @@ func (v *GetSamplingStatisticSummariesOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSamplingStatisticSummariesResult_NextToken, *v.NextToken)
 	}
-	serializeSamplingStatisticSummaryList(s, schemas.GetSamplingStatisticSummariesResult_SamplingStatisticSummaries, v.SamplingStatisticSummaries)
+	if v.SamplingStatisticSummaries != nil {
+		serializeSamplingStatisticSummaryList(s, schemas.GetSamplingStatisticSummariesResult_SamplingStatisticSummaries, v.SamplingStatisticSummaries)
+	}
 }
 func (v *GetSamplingStatisticSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSamplingStatisticSummariesResult, func(s *smithy.Schema) error {

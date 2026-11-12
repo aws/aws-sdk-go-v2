@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createTime":"2000-01-01T00:00:00Z","destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"id":"__Id__","name":"__Name__","state":"CREATING","tags":{"key0":"__Value__"},"updateTime":"2000-01-01T00:00:00Z"}

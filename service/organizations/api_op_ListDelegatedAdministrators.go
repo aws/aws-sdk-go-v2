@@ -96,7 +96,9 @@ func (v *ListDelegatedAdministratorsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListDelegatedAdministratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDelegatedAdministrators(s, schemas.ListDelegatedAdministratorsResponse_DelegatedAdministrators, v.DelegatedAdministrators)
+	if v.DelegatedAdministrators != nil {
+		serializeDelegatedAdministrators(s, schemas.ListDelegatedAdministratorsResponse_DelegatedAdministrators, v.DelegatedAdministrators)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDelegatedAdministratorsResponse_NextToken, *v.NextToken)
 	}

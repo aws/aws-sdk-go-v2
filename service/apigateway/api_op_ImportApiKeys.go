@@ -89,8 +89,12 @@ func (v *ImportApiKeysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImportApiKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfString(s, schemas.ApiKeyIds_ids, v.Ids)
-	serializeListOfString(s, schemas.ApiKeyIds_warnings, v.Warnings)
+	if v.Ids != nil {
+		serializeListOfString(s, schemas.ApiKeyIds_ids, v.Ids)
+	}
+	if v.Warnings != nil {
+		serializeListOfString(s, schemas.ApiKeyIds_warnings, v.Warnings)
+	}
 }
 func (v *ImportApiKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApiKeyIds, func(s *smithy.Schema) error {

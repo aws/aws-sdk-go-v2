@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetComplianceSummary
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PaginationToken":"__PaginationToken__","SummaryList":[{"LastUpdated":"__LastUpdated__","NonCompliantResources":1,"Region":"__Region__","ResourceType":"__ResourceType__","TargetId":"__TargetId__","TargetIdType":"ACCOUNT"},{"LastUpdated":"__LastUpdated__","NonCompliantResources":1,"Region":"__Region__","ResourceType":"__ResourceType__","TargetId":"__TargetId__","TargetIdType":"ACCOUNT"}]}
+¿oPaginationTokens__PaginationToken__kSummaryListŸ¿kLastUpdatedo__LastUpdated__uNonCompliantResourcesfRegionj__Region__lResourceTypep__ResourceType__hTargetIdl__TargetId__lTargetIdTypegACCOUNTÿ¿kLastUpdatedo__LastUpdated__uNonCompliantResourcesfRegionj__Region__lResourceTypep__ResourceType__hTargetIdl__TargetId__lTargetIdTypegACCOUNTÿÿÿ

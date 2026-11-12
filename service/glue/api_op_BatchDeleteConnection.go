@@ -50,7 +50,9 @@ func (v *BatchDeleteConnectionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CatalogId != nil {
 		s.WriteString(schemas.BatchDeleteConnectionRequest_CatalogId, *v.CatalogId)
 	}
-	serializeDeleteConnectionNameList(s, schemas.BatchDeleteConnectionRequest_ConnectionNameList, v.ConnectionNameList)
+	if v.ConnectionNameList != nil {
+		serializeDeleteConnectionNameList(s, schemas.BatchDeleteConnectionRequest_ConnectionNameList, v.ConnectionNameList)
+	}
 }
 
 type BatchDeleteConnectionOutput struct {
@@ -75,8 +77,12 @@ func (v *BatchDeleteConnectionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeErrorByName(s, schemas.BatchDeleteConnectionResponse_Errors, v.Errors)
-	serializeNameStringList(s, schemas.BatchDeleteConnectionResponse_Succeeded, v.Succeeded)
+	if v.Errors != nil {
+		serializeErrorByName(s, schemas.BatchDeleteConnectionResponse_Errors, v.Errors)
+	}
+	if v.Succeeded != nil {
+		serializeNameStringList(s, schemas.BatchDeleteConnectionResponse_Succeeded, v.Succeeded)
+	}
 }
 func (v *BatchDeleteConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteConnectionResponse, func(s *smithy.Schema) error {

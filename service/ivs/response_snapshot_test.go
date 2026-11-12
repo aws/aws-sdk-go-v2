@@ -141,8 +141,9 @@ func TestCheckResponseSnapshot_BatchGetChannel(t *testing.T) {
 					Policy:            types.MultitrackPolicy("ALLOW"),
 					MaximumResolution: types.MultitrackMaximumResolution("SD"),
 				},
-				ContainerFormat:    types.ContainerFormat("TS"),
-				AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+				ContainerFormat:               types.ContainerFormat("TS"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 			{
 				Arn:                       ptr.String("__Arn__"),
@@ -168,8 +169,9 @@ func TestCheckResponseSnapshot_BatchGetChannel(t *testing.T) {
 					Policy:            types.MultitrackPolicy("ALLOW"),
 					MaximumResolution: types.MultitrackMaximumResolution("SD"),
 				},
-				ContainerFormat:    types.ContainerFormat("TS"),
-				AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+				ContainerFormat:               types.ContainerFormat("TS"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 		},
 		Errors: []types.BatchError{
@@ -405,8 +407,9 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 				Policy:            types.MultitrackPolicy("ALLOW"),
 				MaximumResolution: types.MultitrackMaximumResolution("SD"),
 			},
-			ContainerFormat:    types.ContainerFormat("TS"),
-			AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+			ContainerFormat:               types.ContainerFormat("TS"),
+			AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+			FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 		},
 		StreamKey: &types.StreamKey{
 			Arn:        ptr.String("__Arn__"),
@@ -442,14 +445,54 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 			Policy:            types.MultitrackPolicy("ALLOW"),
 			MaximumResolution: types.MultitrackMaximumResolution("SD"),
 		},
-		ContainerFormat:    types.ContainerFormat("TS"),
-		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+		ContainerFormat:               types.ContainerFormat("TS"),
+		AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+		FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateChannel.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateFailoverSlateConfiguration(t *testing.T) {
+	want := &CreateFailoverSlateConfigurationOutput{
+		FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+			Arn:                        ptr.String("__Arn__"),
+			Name:                       ptr.String("__Name__"),
+			ActivationThresholdSeconds: ptr.Int32(1),
+			MinSlateDisplaySeconds:     ptr.Int32(1),
+			MaxSlateDisplaySeconds:     ptr.Int32(1),
+			State:                      types.FailoverSlateConfigurationState("CREATING"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateFailoverSlateConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateFailoverSlateConfiguration(context.Background(), &CreateFailoverSlateConfigurationInput{
+		Name:                       ptr.String("__Name__"),
+		ActivationThresholdSeconds: ptr.Int32(1),
+		MinSlateDisplaySeconds:     ptr.Int32(1),
+		MaxSlateDisplaySeconds:     ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateFailoverSlateConfiguration.response", err)
 	}
 }
 
@@ -655,6 +698,27 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteFailoverSlateConfiguration(t *testing.T) {
+	want := &DeleteFailoverSlateConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteFailoverSlateConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteFailoverSlateConfiguration(context.Background(), &DeleteFailoverSlateConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteFailoverSlateConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeletePlaybackKeyPair(t *testing.T) {
 	want := &DeletePlaybackKeyPairOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeletePlaybackKeyPair.response")
@@ -806,8 +870,9 @@ func TestCheckResponseSnapshot_GetChannel(t *testing.T) {
 				Policy:            types.MultitrackPolicy("ALLOW"),
 				MaximumResolution: types.MultitrackMaximumResolution("SD"),
 			},
-			ContainerFormat:    types.ContainerFormat("TS"),
-			AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+			ContainerFormat:               types.ContainerFormat("TS"),
+			AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+			FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetChannel.response")
@@ -826,6 +891,39 @@ func TestCheckResponseSnapshot_GetChannel(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetChannel.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetFailoverSlateConfiguration(t *testing.T) {
+	want := &GetFailoverSlateConfigurationOutput{
+		FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+			Arn:                        ptr.String("__Arn__"),
+			Name:                       ptr.String("__Name__"),
+			ActivationThresholdSeconds: ptr.Int32(1),
+			MinSlateDisplaySeconds:     ptr.Int32(1),
+			MaxSlateDisplaySeconds:     ptr.Int32(1),
+			State:                      types.FailoverSlateConfigurationState("CREATING"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetFailoverSlateConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetFailoverSlateConfiguration(context.Background(), &GetFailoverSlateConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetFailoverSlateConfiguration.response", err)
 	}
 }
 
@@ -1040,8 +1138,9 @@ func TestCheckResponseSnapshot_GetStreamSession(t *testing.T) {
 					Policy:            types.MultitrackPolicy("ALLOW"),
 					MaximumResolution: types.MultitrackMaximumResolution("SD"),
 				},
-				ContainerFormat:    types.ContainerFormat("TS"),
-				AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+				ContainerFormat:               types.ContainerFormat("TS"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 			IngestConfiguration: &types.IngestConfiguration{
 				Video: &types.VideoConfiguration{
@@ -1155,6 +1254,17 @@ func TestCheckResponseSnapshot_GetStreamSession(t *testing.T) {
 					Code:      ptr.String("__Code__"),
 				},
 			},
+			FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				ActivationThresholdSeconds: ptr.Int32(1),
+				MinSlateDisplaySeconds:     ptr.Int32(1),
+				MaxSlateDisplaySeconds:     ptr.Int32(1),
+				State:                      types.FailoverSlateConfigurationState("CREATING"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetStreamSession.response")
@@ -1213,7 +1323,8 @@ func TestCheckResponseSnapshot_ImportPlaybackKeyPair(t *testing.T) {
 
 func TestCheckResponseSnapshot_InsertAdBreak(t *testing.T) {
 	want := &InsertAdBreakOutput{
-		AdBreakId: ptr.String("__AdBreakId__"),
+		AdBreakId:     ptr.String("__AdBreakId__"),
+		TargetStartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InsertAdBreak.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1226,6 +1337,8 @@ func TestCheckResponseSnapshot_InsertAdBreak(t *testing.T) {
 	got, err := svc.InsertAdBreak(context.Background(), &InsertAdBreakInput{
 		ChannelArn:      ptr.String("__ChannelArn__"),
 		DurationSeconds: ptr.Int32(1),
+		AdBreakId:       ptr.String("__AdBreakId__"),
+		TargetStartAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1311,11 +1424,12 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				InsecureIngest:               true,
-				Type:                         types.ChannelType("BASIC"),
-				Preset:                       types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
-				PlaybackRestrictionPolicyArn: ptr.String("__PlaybackRestrictionPolicyArn__"),
-				AdConfigurationArn:           ptr.String("__AdConfigurationArn__"),
+				InsecureIngest:                true,
+				Type:                          types.ChannelType("BASIC"),
+				Preset:                        types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
+				PlaybackRestrictionPolicyArn:  ptr.String("__PlaybackRestrictionPolicyArn__"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 			{
 				Arn:                       ptr.String("__Arn__"),
@@ -1326,11 +1440,12 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
-				InsecureIngest:               true,
-				Type:                         types.ChannelType("BASIC"),
-				Preset:                       types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
-				PlaybackRestrictionPolicyArn: ptr.String("__PlaybackRestrictionPolicyArn__"),
-				AdConfigurationArn:           ptr.String("__AdConfigurationArn__"),
+				InsecureIngest:                true,
+				Type:                          types.ChannelType("BASIC"),
+				Preset:                        types.TranscodePreset("HIGHER_BANDWIDTH_DELIVERY"),
+				PlaybackRestrictionPolicyArn:  ptr.String("__PlaybackRestrictionPolicyArn__"),
+				AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+				FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1344,18 +1459,67 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
-		FilterByName:                         ptr.String("__FilterByName__"),
-		FilterByRecordingConfigurationArn:    ptr.String("__FilterByRecordingConfigurationArn__"),
-		FilterByPlaybackRestrictionPolicyArn: ptr.String("__FilterByPlaybackRestrictionPolicyArn__"),
-		FilterByAdConfigurationArn:           ptr.String("__FilterByAdConfigurationArn__"),
-		NextToken:                            ptr.String("__NextToken__"),
-		MaxResults:                           ptr.Int32(1),
+		FilterByName:                          ptr.String("__FilterByName__"),
+		FilterByRecordingConfigurationArn:     ptr.String("__FilterByRecordingConfigurationArn__"),
+		FilterByPlaybackRestrictionPolicyArn:  ptr.String("__FilterByPlaybackRestrictionPolicyArn__"),
+		FilterByAdConfigurationArn:            ptr.String("__FilterByAdConfigurationArn__"),
+		FilterByFailoverSlateConfigurationArn: ptr.String("__FilterByFailoverSlateConfigurationArn__"),
+		NextToken:                             ptr.String("__NextToken__"),
+		MaxResults:                            ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListChannels.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListFailoverSlateConfigurations(t *testing.T) {
+	want := &ListFailoverSlateConfigurationsOutput{
+		FailoverSlateConfigurations: []types.FailoverSlateConfigurationSummary{
+			{
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				ActivationThresholdSeconds: ptr.Int32(1),
+				MinSlateDisplaySeconds:     ptr.Int32(1),
+				MaxSlateDisplaySeconds:     ptr.Int32(1),
+				State:                      types.FailoverSlateConfigurationState("CREATING"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				ActivationThresholdSeconds: ptr.Int32(1),
+				MinSlateDisplaySeconds:     ptr.Int32(1),
+				MaxSlateDisplaySeconds:     ptr.Int32(1),
+				State:                      types.FailoverSlateConfigurationState("CREATING"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListFailoverSlateConfigurations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListFailoverSlateConfigurations(context.Background(), &ListFailoverSlateConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListFailoverSlateConfigurations.response", err)
 	}
 }
 
@@ -1854,8 +2018,9 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 				Policy:            types.MultitrackPolicy("ALLOW"),
 				MaximumResolution: types.MultitrackMaximumResolution("SD"),
 			},
-			ContainerFormat:    types.ContainerFormat("TS"),
-			AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+			ContainerFormat:               types.ContainerFormat("TS"),
+			AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+			FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateChannel.response")
@@ -1881,14 +2046,52 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 			Policy:            types.MultitrackPolicy("ALLOW"),
 			MaximumResolution: types.MultitrackMaximumResolution("SD"),
 		},
-		ContainerFormat:    types.ContainerFormat("TS"),
-		AdConfigurationArn: ptr.String("__AdConfigurationArn__"),
+		ContainerFormat:               types.ContainerFormat("TS"),
+		AdConfigurationArn:            ptr.String("__AdConfigurationArn__"),
+		FailoverSlateConfigurationArn: ptr.String("__FailoverSlateConfigurationArn__"),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateChannel.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateFailoverSlateConfiguration(t *testing.T) {
+	want := &UpdateFailoverSlateConfigurationOutput{
+		FailoverSlateConfiguration: &types.FailoverSlateConfiguration{
+			Arn:                        ptr.String("__Arn__"),
+			Name:                       ptr.String("__Name__"),
+			ActivationThresholdSeconds: ptr.Int32(1),
+			MinSlateDisplaySeconds:     ptr.Int32(1),
+			MaxSlateDisplaySeconds:     ptr.Int32(1),
+			State:                      types.FailoverSlateConfigurationState("CREATING"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateFailoverSlateConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateFailoverSlateConfiguration(context.Background(), &UpdateFailoverSlateConfigurationInput{
+		Arn:                        ptr.String("__Arn__"),
+		Name:                       ptr.String("__Name__"),
+		ActivationThresholdSeconds: ptr.Int32(1),
+		MinSlateDisplaySeconds:     ptr.Int32(1),
+		MaxSlateDisplaySeconds:     ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateFailoverSlateConfiguration.response", err)
 	}
 }
 

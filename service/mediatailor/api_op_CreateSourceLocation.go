@@ -84,11 +84,15 @@ func (v *CreateSourceLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.HttpConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfSegmentDeliveryConfiguration(s, schemas.CreateSourceLocationRequest_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SegmentDeliveryConfigurations != nil {
+		serialize__listOfSegmentDeliveryConfiguration(s, schemas.CreateSourceLocationRequest_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateSourceLocationRequest_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateSourceLocationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateSourceLocationRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateSourceLocationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSourceLocationRequest, func(s *smithy.Schema) error {
@@ -188,11 +192,15 @@ func (v *CreateSourceLocationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.CreateSourceLocationResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serialize__listOfSegmentDeliveryConfiguration(s, schemas.CreateSourceLocationResponse_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SegmentDeliveryConfigurations != nil {
+		serialize__listOfSegmentDeliveryConfiguration(s, schemas.CreateSourceLocationResponse_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateSourceLocationResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateSourceLocationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateSourceLocationResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateSourceLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSourceLocationResponse, func(s *smithy.Schema) error {

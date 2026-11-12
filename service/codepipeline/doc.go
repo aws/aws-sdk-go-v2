@@ -3,9 +3,7 @@
 // Package codepipeline provides the API client, operations, and parameter types
 // for AWS CodePipeline.
 //
-// # CodePipeline
-//
-// # Overview
+// # CodePipeline  Overview
 //
 // This is the CodePipeline API Reference. This guide provides descriptions of the
 // actions and data types for CodePipeline. Some functionality for your pipeline

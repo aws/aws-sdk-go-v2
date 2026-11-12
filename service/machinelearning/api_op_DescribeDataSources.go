@@ -175,7 +175,9 @@ func (v *DescribeDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDataSourcesOutput_NextToken, *v.NextToken)
 	}
-	serializeDataSources(s, schemas.DescribeDataSourcesOutput_Results, v.Results)
+	if v.Results != nil {
+		serializeDataSources(s, schemas.DescribeDataSourcesOutput_Results, v.Results)
+	}
 }
 func (v *DescribeDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDataSourcesOutput, func(s *smithy.Schema) error {

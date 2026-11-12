@@ -5,6 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type UpdateRootDomainUnitOwnerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRootDomainUnitOwnerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRootDomainUnitOwnerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRootDomainUnitOwnerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateRootDomainUnitOwnerInput_clientToken, *v.ClientToken)
+	}
+	if v.CurrentOwner != nil {
+		s.WriteString(schemas.UpdateRootDomainUnitOwnerInput_currentOwner, *v.CurrentOwner)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateRootDomainUnitOwnerInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.NewOwner != nil {
+		s.WriteString(schemas.UpdateRootDomainUnitOwnerInput_newOwner, *v.NewOwner)
+	}
+}
+
 type UpdateRootDomainUnitOwnerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +78,26 @@ type UpdateRootDomainUnitOwnerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRootDomainUnitOwnerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRootDomainUnitOwnerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRootDomainUnitOwnerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRootDomainUnitOwnerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRootDomainUnitOwnerOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRootDomainUnitOwnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRootDomainUnitOwner{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRootDomainUnitOwner, schemas.UpdateRootDomainUnitOwnerInput, schemas.UpdateRootDomainUnitOwnerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRootDomainUnitOwner{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRootDomainUnitOwner, schemas.UpdateRootDomainUnitOwnerInput, schemas.UpdateRootDomainUnitOwnerOutput), output: &UpdateRootDomainUnitOwnerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

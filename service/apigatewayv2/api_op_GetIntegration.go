@@ -295,9 +295,15 @@ func (v *GetIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PayloadFormatVersion != nil {
 		s.WriteString(schemas.GetIntegrationResult_PayloadFormatVersion, *v.PayloadFormatVersion)
 	}
-	serializeIntegrationParameters(s, schemas.GetIntegrationResult_RequestParameters, v.RequestParameters)
-	serializeTemplateMap(s, schemas.GetIntegrationResult_RequestTemplates, v.RequestTemplates)
-	serializeResponseParameters(s, schemas.GetIntegrationResult_ResponseParameters, v.ResponseParameters)
+	if v.RequestParameters != nil {
+		serializeIntegrationParameters(s, schemas.GetIntegrationResult_RequestParameters, v.RequestParameters)
+	}
+	if v.RequestTemplates != nil {
+		serializeTemplateMap(s, schemas.GetIntegrationResult_RequestTemplates, v.RequestTemplates)
+	}
+	if v.ResponseParameters != nil {
+		serializeResponseParameters(s, schemas.GetIntegrationResult_ResponseParameters, v.ResponseParameters)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.GetIntegrationResult_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}

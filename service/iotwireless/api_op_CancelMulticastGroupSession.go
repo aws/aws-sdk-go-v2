@@ -4,6 +4,8 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type CancelMulticastGroupSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMulticastGroupSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMulticastGroupSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMulticastGroupSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CancelMulticastGroupSessionRequest_Id, *v.Id)
+	}
+}
+
 type CancelMulticastGroupSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type CancelMulticastGroupSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMulticastGroupSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMulticastGroupSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMulticastGroupSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelMulticastGroupSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMulticastGroupSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMulticastGroupSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelMulticastGroupSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMulticastGroupSession, schemas.CancelMulticastGroupSessionRequest, schemas.CancelMulticastGroupSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelMulticastGroupSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMulticastGroupSession, schemas.CancelMulticastGroupSessionRequest, schemas.CancelMulticastGroupSessionResponse), output: &CancelMulticastGroupSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

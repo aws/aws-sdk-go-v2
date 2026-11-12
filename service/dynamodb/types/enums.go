@@ -164,6 +164,72 @@ func (BillingMode) Values() []BillingMode {
 	}
 }
 
+type BulkOperationInputFormat string
+
+// Enum values for BulkOperationInputFormat
+const (
+	BulkOperationInputFormatDynamodbJson BulkOperationInputFormat = "DYNAMODB_JSON"
+	BulkOperationInputFormatIon          BulkOperationInputFormat = "ION"
+)
+
+// Values returns all known values for BulkOperationInputFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkOperationInputFormat) Values() []BulkOperationInputFormat {
+	return []BulkOperationInputFormat{
+		"DYNAMODB_JSON",
+		"ION",
+	}
+}
+
+type BulkOperationPerformanceTier string
+
+// Enum values for BulkOperationPerformanceTier
+const (
+	BulkOperationPerformanceTierStandard    BulkOperationPerformanceTier = "STANDARD"
+	BulkOperationPerformanceTierAccelerated BulkOperationPerformanceTier = "ACCELERATED"
+)
+
+// Values returns all known values for BulkOperationPerformanceTier. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkOperationPerformanceTier) Values() []BulkOperationPerformanceTier {
+	return []BulkOperationPerformanceTier{
+		"STANDARD",
+		"ACCELERATED",
+	}
+}
+
+type BulkOperationStatus string
+
+// Enum values for BulkOperationStatus
+const (
+	BulkOperationStatusInProgress          BulkOperationStatus = "IN_PROGRESS"
+	BulkOperationStatusCompleted           BulkOperationStatus = "COMPLETED"
+	BulkOperationStatusCompletedWithErrors BulkOperationStatus = "COMPLETED_WITH_ERRORS"
+	BulkOperationStatusCancelling          BulkOperationStatus = "CANCELLING"
+	BulkOperationStatusCancelled           BulkOperationStatus = "CANCELLED"
+	BulkOperationStatusFailed              BulkOperationStatus = "FAILED"
+)
+
+// Values returns all known values for BulkOperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkOperationStatus) Values() []BulkOperationStatus {
+	return []BulkOperationStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"CANCELLING",
+		"CANCELLED",
+		"FAILED",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -330,6 +396,23 @@ func (DestinationStatus) Values() []DestinationStatus {
 		"DISABLED",
 		"ENABLE_FAILED",
 		"UPDATING",
+	}
+}
+
+type DisassociationMode string
+
+// Enum values for DisassociationMode
+const (
+	DisassociationModeWaitForReplication DisassociationMode = "WAIT_FOR_REPLICATION"
+)
+
+// Values returns all known values for DisassociationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DisassociationMode) Values() []DisassociationMode {
+	return []DisassociationMode{
+		"WAIT_FOR_REPLICATION",
 	}
 }
 
@@ -581,6 +664,25 @@ func (MultiRegionConsistency) Values() []MultiRegionConsistency {
 	return []MultiRegionConsistency{
 		"EVENTUAL",
 		"STRONG",
+	}
+}
+
+type OutputTypeEnum string
+
+// Enum values for OutputTypeEnum
+const (
+	OutputTypeEnumError                 OutputTypeEnum = "ERROR"
+	OutputTypeEnumConditionCheckFailure OutputTypeEnum = "CONDITION_CHECK_FAILURE"
+)
+
+// Values returns all known values for OutputTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputTypeEnum) Values() []OutputTypeEnum {
+	return []OutputTypeEnum{
+		"ERROR",
+		"CONDITION_CHECK_FAILURE",
 	}
 }
 

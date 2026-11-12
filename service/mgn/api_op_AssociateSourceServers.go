@@ -56,7 +56,9 @@ func (v *AssociateSourceServersInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ApplicationID != nil {
 		s.WriteString(schemas.AssociateSourceServersRequest_applicationID, *v.ApplicationID)
 	}
-	serializeAssociateSourceServersRequestSourceServerIDs(s, schemas.AssociateSourceServersRequest_sourceServerIDs, v.SourceServerIDs)
+	if v.SourceServerIDs != nil {
+		serializeAssociateSourceServersRequestSourceServerIDs(s, schemas.AssociateSourceServersRequest_sourceServerIDs, v.SourceServerIDs)
+	}
 }
 func (v *AssociateSourceServersInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateSourceServersRequest, func(s *smithy.Schema) error {

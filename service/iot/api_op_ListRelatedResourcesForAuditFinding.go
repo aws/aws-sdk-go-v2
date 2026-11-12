@@ -115,7 +115,9 @@ func (v *ListRelatedResourcesForAuditFindingOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRelatedResourcesForAuditFindingResponse_nextToken, *v.NextToken)
 	}
-	serializeRelatedResources(s, schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources, v.RelatedResources)
+	if v.RelatedResources != nil {
+		serializeRelatedResources(s, schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources, v.RelatedResources)
+	}
 }
 func (v *ListRelatedResourcesForAuditFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRelatedResourcesForAuditFindingResponse, func(s *smithy.Schema) error {

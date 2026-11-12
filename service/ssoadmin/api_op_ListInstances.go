@@ -5,7 +5,9 @@ package ssoadmin
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,7 +37,37 @@ type ListInstancesInput struct {
 	// output of previous API calls to make subsequent calls.
 	NextToken *string
 
+	// Specifies which Amazon Web Services Regions to list IAM Identity Center
+	// instances from. Valid values:
+	//
+	//   - CURRENT_REGION - Lists only the instances in the Region that you call this
+	//   API from.
+	//
+	//   - ALL_REGIONS - Lists the instances that the caller owns or that are shared
+	//   with the caller across all Regions.
+	//
+	// If you don't specify a value, the default is CURRENT_REGION .
+	RegionScope types.RegionScope
+
 	noSmithyDocumentSerde
+}
+
+func (v *ListInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInstancesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstancesRequest_NextToken, *v.NextToken)
+	}
+	if v.RegionScope != "" {
+		s.WriteString(schemas.ListInstancesRequest_RegionScope, string(v.RegionScope))
+	}
 }
 
 type ListInstancesOutput struct {
@@ -53,13 +85,37 @@ type ListInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.ListInstancesResponse_Instances, v.Instances)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstancesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstancesResponse_Instances:
+			return deserializeInstanceList(d, schemas.ListInstancesResponse_Instances, &v.Instances)
+		case schemas.ListInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstancesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstances, schemas.ListInstancesRequest, schemas.ListInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstances, schemas.ListInstancesRequest, schemas.ListInstancesResponse), output: &ListInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

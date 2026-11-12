@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,7 +41,53 @@ type StartDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
+	// The identifier or the name of the DB capacity reservation for the DB instance
+	// to use after it starts. You can specify the identifier, which has the prefix
+	// dbcr- , or the reservation name.
+	//
+	// Specify this parameter when the DB instance stopped using a reservation, or
+	// when you want the DB instance to use a different reservation.
+	//
+	// If you omit this parameter, and the DB instance kept a DB capacity reservation
+	// when it stopped, Amazon RDS starts the DB instance in that reservation.
+	//
+	// If that reservation is deleted, ended, or cancelled, the DB instance still
+	// starts. Amazon RDS starts the DB instance outside the reservation, on unreserved
+	// capacity, and it charges on-demand prices for the DB instance.
+	//
+	// If that reservation has no available capacity in the Availability Zone of the
+	// DB instance, the request fails. Amazon RDS doesn't start the DB instance, and it
+	// doesn't wait for capacity in that Availability Zone. Specify a reservation that
+	// has available capacity in that Availability Zone, or retry the request after the
+	// reservation has available capacity.
+	//
+	// Constraints:
+	//
+	//   - The reservation must be in the active state.
+	//
+	//   - The reservation must reserve capacity for the DB instance class and the
+	//   engine of the DB instance.
+	//
+	//   - The reservation must cover the Availability Zone of the DB instance, and it
+	//   must have available capacity in that Availability Zone.
+	DBCapacityReservationIdentifier *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *StartDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.StartDBInstanceMessage_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.StartDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
 }
 
 type StartDBInstanceOutput struct {
@@ -59,13 +107,34 @@ type StartDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDBInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.StartDBInstanceResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDBInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDBInstanceResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDBInstance, schemas.StartDBInstanceMessage, schemas.StartDBInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDBInstance, schemas.StartDBInstanceMessage, schemas.StartDBInstanceResult), output: &StartDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

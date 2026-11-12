@@ -88,7 +88,9 @@ func (v *UpdateResourceServerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateResourceServerRequest_Name, *v.Name)
 	}
-	serializeResourceServerScopeListType(s, schemas.UpdateResourceServerRequest_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeResourceServerScopeListType(s, schemas.UpdateResourceServerRequest_Scopes, v.Scopes)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.UpdateResourceServerRequest_UserPoolId, *v.UserPoolId)
 	}

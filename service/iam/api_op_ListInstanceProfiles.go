@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,24 @@ type ListInstanceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceProfilesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListInstanceProfilesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.PathPrefix != nil {
+		s.WriteString(schemas.ListInstanceProfilesRequest_PathPrefix, *v.PathPrefix)
+	}
+}
+
 // Contains the response to a successful [ListInstanceProfiles] request.
 //
 // [ListInstanceProfiles]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListInstanceProfiles.html
@@ -101,13 +121,42 @@ type ListInstanceProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfiles != nil {
+		serializeinstanceProfileListType(s, schemas.ListInstanceProfilesResponse_InstanceProfiles, v.InstanceProfiles)
+	}
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListInstanceProfilesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceProfilesResponse_Marker, *v.Marker)
+	}
+}
+func (v *ListInstanceProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceProfilesResponse_InstanceProfiles:
+			return deserializeinstanceProfileListType(d, schemas.ListInstanceProfilesResponse_InstanceProfiles, &v.InstanceProfiles)
+		case schemas.ListInstanceProfilesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListInstanceProfilesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListInstanceProfilesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListInstanceProfilesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListInstanceProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceProfiles, schemas.ListInstanceProfilesRequest, schemas.ListInstanceProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListInstanceProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceProfiles, schemas.ListInstanceProfilesRequest, schemas.ListInstanceProfilesResponse), output: &ListInstanceProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

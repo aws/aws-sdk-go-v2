@@ -74,7 +74,9 @@ func (v *ListCoreNetworksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCoreNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreNetworkSummaryList(s, schemas.ListCoreNetworksResponse_CoreNetworks, v.CoreNetworks)
+	if v.CoreNetworks != nil {
+		serializeCoreNetworkSummaryList(s, schemas.ListCoreNetworksResponse_CoreNetworks, v.CoreNetworks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreNetworksResponse_NextToken, *v.NextToken)
 	}

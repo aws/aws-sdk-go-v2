@@ -86,7 +86,9 @@ func (v *QueryForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndDate != nil {
 		s.WriteString(schemas.QueryForecastRequest_EndDate, *v.EndDate)
 	}
-	serializeFilters(s, schemas.QueryForecastRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.QueryForecastRequest_Filters, v.Filters)
+	}
 	if v.ForecastArn != nil {
 		s.WriteString(schemas.QueryForecastRequest_ForecastArn, *v.ForecastArn)
 	}

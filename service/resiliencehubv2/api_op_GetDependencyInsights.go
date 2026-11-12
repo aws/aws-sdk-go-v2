@@ -114,7 +114,9 @@ func (v *GetDependencyInsightsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.GetDependencyInsightsResponse_errorMessage, *v.ErrorMessage)
 	}
-	serializeDependencyInsightsList(s, schemas.GetDependencyInsightsResponse_insights, v.Insights)
+	if v.Insights != nil {
+		serializeDependencyInsightsList(s, schemas.GetDependencyInsightsResponse_insights, v.Insights)
+	}
 	if v.Overview != nil {
 		s.WriteString(schemas.GetDependencyInsightsResponse_overview, *v.Overview)
 	}

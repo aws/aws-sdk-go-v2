@@ -77,7 +77,9 @@ func (v *GetClientCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetClientCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfClientCertificate(s, schemas.ClientCertificates_items, v.Items)
+	if v.Items != nil {
+		serializeListOfClientCertificate(s, schemas.ClientCertificates_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.ClientCertificates_position, *v.Position)
 	}
