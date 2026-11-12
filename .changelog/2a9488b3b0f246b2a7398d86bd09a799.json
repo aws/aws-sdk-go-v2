@@ -1,8 +1,0 @@
-{
-    "id": "2a9488b3-b0f2-46b2-a739-8d86bd09a799",
-    "type": "feature",
-    "description": "Adds CreatedBy and LastModifiedBy to the DescribeHub and DescribeHubContent responses and to HubContent records returned by the Search API, identifying the IAM identity or SageMaker Studio user profile that created or last modified a hub or hub content.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

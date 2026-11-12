@@ -1,3 +1,7 @@
+# v1.28.0 (2026-11-12)
+
+* **Feature**: ODB now supports scaling for Exadata Dedicated offerings. Customers can scale database and storage servers on Exadata infrastructure, resize VM clusters and Autonomous VM clusters, and add or remove virtual machines in a VM cluster.
+
 # v1.27.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

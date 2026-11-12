@@ -1,3 +1,7 @@
+# v1.64.0 (2026-11-12)
+
+* **Feature**: MediaConnect adds four features. (1) RTMP Push on Router Input and Flows (RTMP, RTMPS, eRTMP). (2) PID Remapping on Router rewrites PIDs inline without transcoding. (3) Key Frame Switching transitions router inputs on video boundaries. (4) SRT Merge Input bonds redundant SRT streams.
+
 # v1.63.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

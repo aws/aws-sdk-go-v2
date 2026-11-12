@@ -1,3 +1,7 @@
+# v1.53.0 (2026-11-12)
+
+* **Feature**: This release updates range of maxInQueueDepth and maxConcurrency limit from 10000 to 1000.
+
 # v1.52.7 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,3 +1,7 @@
+# v1.53.0 (2026-11-12)
+
+* **Feature**: Adds support for Network Controls on IAM Identity Center instances. You can now require that access to your instance and AWS managed applications originate from VPC endpoints in your organization, and optionally narrow that perimeter to specific VPCs, IP ranges, or application exceptions.
+
 # v1.52.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

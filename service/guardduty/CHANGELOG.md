@@ -1,3 +1,7 @@
+# v1.102.0 (2026-11-12)
+
+* **Feature**: Adds the ListInvestigationRecords API, which returns the step-by-step records of a completed investigation. Adds investigation scope details and an optional structured summary to GetInvestigation. Adds filter criteria and investigation type to ListInvestigations.
+
 # v1.101.8 (2026-11-11)
 
 * No change notes available for this release.

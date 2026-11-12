@@ -1,8 +1,0 @@
-{
-    "id": "47da006f-fc6f-4d19-a86d-2556a2d28caa",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions.",
-    "modules": [
-        "service/medialive"
-    ]
-}

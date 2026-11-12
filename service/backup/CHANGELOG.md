@@ -1,3 +1,7 @@
+# v1.70.0 (2026-11-12)
+
+* **Feature**: Adding new notification types for SNS notifications
+
 # v1.69.9 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

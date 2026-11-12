@@ -1,3 +1,7 @@
+# v1.60.0 (2026-11-12)
+
+* **Feature**: Adds a retry signal to protected query and protected job errors that indicates whether running the same request again might succeed, and defines error codes that identify the category of the failure.
+
 # v1.59.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,8 +1,0 @@
-{
-    "id": "c4e0f990-dcfd-4892-b511-99205088b580",
-    "type": "feature",
-    "description": "Adds support for Airflow UI in MWAA Serverless",
-    "modules": [
-        "service/mwaaserverless"
-    ]
-}

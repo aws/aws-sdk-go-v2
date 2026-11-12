@@ -1,8 +1,0 @@
-{
-    "id": "add0a71c-bc70-43d2-bc97-f3a4225a6e93",
-    "type": "feature",
-    "description": "Adds support for cleanup strategy in CreatePentestInput and UpdatePentestInput.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "1829f936-a538-4512-9f99-129ff81a0118",
-    "type": "feature",
-    "description": "Adding new notification types for SNS notifications",
-    "modules": [
-        "service/backup"
-    ]
-}

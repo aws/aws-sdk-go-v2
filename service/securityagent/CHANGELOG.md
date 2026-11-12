@@ -1,3 +1,7 @@
+# v1.29.0 (2026-11-12)
+
+* **Feature**: Adds support for cleanup strategy in CreatePentestInput and UpdatePentestInput.
+
 # v1.28.2 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

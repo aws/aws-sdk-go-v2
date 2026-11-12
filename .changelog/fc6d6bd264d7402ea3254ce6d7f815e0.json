@@ -1,8 +1,0 @@
-{
-    "id": "fc6d6bd2-64d7-402e-a325-4ce6d7f815e0",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports Record Set Protection, which blocks changes to protected records in a hosted zone.",
-    "modules": [
-        "service/route53"
-    ]
-}

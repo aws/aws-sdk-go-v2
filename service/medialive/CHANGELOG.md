@@ -1,3 +1,7 @@
+# v1.115.0 (2026-11-12)
+
+* **Feature**: AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions.
+
 # v1.114.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

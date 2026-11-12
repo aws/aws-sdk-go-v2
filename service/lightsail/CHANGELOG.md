@@ -1,3 +1,7 @@
+# v1.72.0 (2026-11-12)
+
+* **Feature**: Amazon Lightsail now offers web addresses, so you can quickly make a website or application reachable at a name like mysite.amazonlightsail.com. A web address is free while attached to a Lightsail CDN, with no domain to register and no SSL TLS certificate to create or renew.
+
 # v1.71.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

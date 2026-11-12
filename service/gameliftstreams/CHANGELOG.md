@@ -1,3 +1,7 @@
+# v1.25.0 (2026-11-12)
+
+* **Feature**: Adds support for ApplicationStartedAt on stream sessions, a timestamp that indicates when the application launched for the stream session, returned by GetStreamSession and StartStreamSession. Also added streamingStartedAt and streamingEndedAt.
+
 # v1.24.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

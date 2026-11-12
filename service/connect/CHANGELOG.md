@@ -1,3 +1,7 @@
+# v1.216.0 (2026-11-12)
+
+* **Feature**: This release adds a LastModifiedTime and LastModifiedRegion field to ListIntegrationAssociations so customers can see at what time and in which Region an IntegrationAssociation was last modified in.
+
 # v1.215.0 (2026-11-11)
 
 * **Feature**: Added support for 96 new languages for AI-powered automated evaluations. Chat interactions support all 96 languages. Voice interactions support 57 languages, those with transcription available through post-call conversational analytics.

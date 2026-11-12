@@ -1,3 +1,7 @@
+# v1.289.0 (2026-11-12)
+
+* **Feature**: Adds CreatedBy and LastModifiedBy to the DescribeHub and DescribeHubContent responses and to HubContent records returned by the Search API, identifying the IAM identity or SageMaker Studio user profile that created or last modified a hub or hub content.
+
 # v1.288.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

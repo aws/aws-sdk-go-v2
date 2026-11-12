@@ -1,8 +1,0 @@
-{
-    "id": "12af3a6f-5c2e-4258-9726-c37ed1f01b3f",
-    "type": "feature",
-    "description": "ODB now supports scaling for Exadata Dedicated offerings. Customers can scale database and storage servers on Exadata infrastructure, resize VM clusters and Autonomous VM clusters, and add or remove virtual machines in a VM cluster.",
-    "modules": [
-        "service/odb"
-    ]
-}

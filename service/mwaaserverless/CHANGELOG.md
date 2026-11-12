@@ -1,3 +1,7 @@
+# v1.15.0 (2026-11-12)
+
+* **Feature**: Adds support for Airflow UI in MWAA Serverless
+
 # v1.14.3 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

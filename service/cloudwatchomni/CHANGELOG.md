@@ -1,3 +1,7 @@
+# v1.4.0 (2026-11-12)
+
+* **Feature**: Add aggregationTemporality and monotonicity to GetContextGraph MetricMetadata
+
 # v1.3.0 (2026-11-10)
 
 * **Feature**: Release of GetSpaceDataAccess API - Used to get temporary credentials, limited to the requested actions, for working with data in a space.

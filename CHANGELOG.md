@@ -1,3 +1,51 @@
+# Release (2026-11-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.82.0](service/autoscaling/CHANGELOG.md#v1820-2026-11-12)
+  * **Feature**: Amazon EC2 Auto Scaling now supports ASGAverageCPUUtilizationHighResolution as a predefined metric type for target tracking scaling policies.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.70.0](service/backup/CHANGELOG.md#v1700-2026-11-12)
+  * **Feature**: Adding new notification types for SNS notifications
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.60.0](service/cleanrooms/CHANGELOG.md#v1600-2026-11-12)
+  * **Feature**: Adds a retry signal to protected query and protected job errors that indicates whether running the same request again might succeed, and defines error codes that identify the category of the failure.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.76.0](service/cloudwatch/CHANGELOG.md#v1760-2026-11-12)
+  * **Feature**: Adds support for saving, retrieving, listing, and deleting CloudWatch metric data query definitions.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchomni`: [v1.4.0](service/cloudwatchomni/CHANGELOG.md#v140-2026-11-12)
+  * **Feature**: Add aggregationTemporality and monotonicity to GetContextGraph MetricMetadata
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.216.0](service/connect/CHANGELOG.md#v12160-2026-11-12)
+  * **Feature**: This release adds a LastModifiedTime and LastModifiedRegion field to ListIntegrationAssociations so customers can see at what time and in which Region an IntegrationAssociation was last modified in.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.346.0](service/ec2/CHANGELOG.md#v13460-2026-11-12)
+  * **Feature**: This release adds support for multiple features, including EC2 Image Builder image recipes and container recipes in AMI usage reports, Amazon EC2 Detailed Monitoring adds opt-in metrics, and Global Accelerator and API Gateway V2 as resource exclusions for VPC Encryption Control.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.53.0](service/emrcontainers/CHANGELOG.md#v1530-2026-11-12)
+  * **Feature**: This release updates range of maxInQueueDepth and maxConcurrency limit from 10000 to 1000.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.25.0](service/gameliftstreams/CHANGELOG.md#v1250-2026-11-12)
+  * **Feature**: Adds support for ApplicationStartedAt on stream sessions, a timestamp that indicates when the application launched for the stream session, returned by GetStreamSession and StartStreamSession. Also added streamingStartedAt and streamingEndedAt.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.102.0](service/guardduty/CHANGELOG.md#v11020-2026-11-12)
+  * **Feature**: Adds the ListInvestigationRecords API, which returns the step-by-step records of a completed investigation. Adds investigation scope details and an optional structured summary to GetInvestigation. Adds filter criteria and investigation type to ListInvestigations.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.72.0](service/lightsail/CHANGELOG.md#v1720-2026-11-12)
+  * **Feature**: Amazon Lightsail now offers web addresses, so you can quickly make a website or application reachable at a name like mysite.amazonlightsail.com. A web address is free while attached to a Lightsail CDN, with no domain to register and no SSL TLS certificate to create or renew.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.64.0](service/mediaconnect/CHANGELOG.md#v1640-2026-11-12)
+  * **Feature**: MediaConnect adds four features. (1) RTMP Push on Router Input and Flows (RTMP, RTMPS, eRTMP). (2) PID Remapping on Router rewrites PIDs inline without transcoding. (3) Key Frame Switching transitions router inputs on video boundaries. (4) SRT Merge Input bonds redundant SRT streams.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.115.0](service/medialive/CHANGELOG.md#v11150-2026-11-12)
+  * **Feature**: AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.74.0](service/mediatailor/CHANGELOG.md#v1740-2026-11-12)
+  * **Feature**: Add post origin manifest hook, add HLS tag processor
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.50.0](service/mwaa/CHANGELOG.md#v1500-2026-11-12)
+  * **Feature**: Amazon MWAA now supports Airflow environments with IAM Identity Center (IDC) integration and exposes OSS Airflow Multi-Team feature. Users can configure individual IDC-backed identities and fine-grained authorization, and define Dags on per-team basis.
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.15.0](service/mwaaserverless/CHANGELOG.md#v1150-2026-11-12)
+  * **Feature**: Adds support for Airflow UI in MWAA Serverless
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.28.0](service/odb/CHANGELOG.md#v1280-2026-11-12)
+  * **Feature**: ODB now supports scaling for Exadata Dedicated offerings. Customers can scale database and storage servers on Exadata infrastructure, resize VM clusters and Autonomous VM clusters, and add or remove virtual machines in a VM cluster.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.71.0](service/route53/CHANGELOG.md#v1710-2026-11-12)
+  * **Feature**: Amazon Route 53 now supports Record Set Protection, which blocks changes to protected records in a hosted zone.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.289.0](service/sagemaker/CHANGELOG.md#v12890-2026-11-12)
+  * **Feature**: Adds CreatedBy and LastModifiedBy to the DescribeHub and DescribeHubContent responses and to HubContent records returned by the Search API, identifying the IAM identity or SageMaker Studio user profile that created or last modified a hub or hub content.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.51.0](service/secretsmanager/CHANGELOG.md#v1510-2026-11-12)
+  * **Feature**: Adds support for cross-account replication with the new AssociateCrossAccountReplica, DisassociateCrossAccountReplica, and ListResourcePolicies APIs, CrossAccountPrimaryARN in CreateSecret, cross-account replication status in DescribeSecret, and PolicyName in the resource policy APIs.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.29.0](service/securityagent/CHANGELOG.md#v1290-2026-11-12)
+  * **Feature**: Adds support for cleanup strategy in CreatePentestInput and UpdatePentestInput.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.53.0](service/ssoadmin/CHANGELOG.md#v1530-2026-11-12)
+  * **Feature**: Adds support for Network Controls on IAM Identity Center instances. You can now require that access to your instance and AWS managed applications originate from VPC endpoints in your organization, and optionally narrow that perimeter to specific VPCs, IP ranges, or application exceptions.
+
 # Release (2026-11-11)
 
 ## Module Highlights

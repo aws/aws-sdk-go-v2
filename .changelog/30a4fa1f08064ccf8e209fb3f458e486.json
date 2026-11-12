@@ -1,8 +1,0 @@
-{
-    "id": "30a4fa1f-0806-4ccf-8e20-9fb3f458e486",
-    "type": "feature",
-    "description": "Amazon EC2 Auto Scaling now supports ASGAverageCPUUtilizationHighResolution as a predefined metric type for target tracking scaling policies.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

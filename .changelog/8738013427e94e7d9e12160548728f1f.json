@@ -1,8 +1,0 @@
-{
-    "id": "87380134-27e9-4e7d-9e12-160548728f1f",
-    "type": "feature",
-    "description": "Adds the ListInvestigationRecords API, which returns the step-by-step records of a completed investigation. Adds investigation scope details and an optional structured summary to GetInvestigation. Adds filter criteria and investigation type to ListInvestigations.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

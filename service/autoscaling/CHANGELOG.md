@@ -1,3 +1,7 @@
+# v1.82.0 (2026-11-12)
+
+* **Feature**: Amazon EC2 Auto Scaling now supports ASGAverageCPUUtilizationHighResolution as a predefined metric type for target tracking scaling policies.
+
 # v1.81.0 (2026-11-10)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

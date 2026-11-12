@@ -1,3 +1,7 @@
+# v1.71.0 (2026-11-12)
+
+* **Feature**: Amazon Route 53 now supports Record Set Protection, which blocks changes to protected records in a hosted zone.
+
 # v1.70.10 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

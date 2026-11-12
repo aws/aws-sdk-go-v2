@@ -1,8 +1,0 @@
-{
-    "id": "c324475f-e05f-4fdb-b3fd-ad14ada7d9ac",
-    "type": "feature",
-    "description": "Amazon MWAA now supports Airflow environments with IAM Identity Center (IDC) integration and exposes OSS Airflow Multi-Team feature. Users can configure individual IDC-backed identities and fine-grained authorization, and define Dags on per-team basis.",
-    "modules": [
-        "service/mwaa"
-    ]
-}
