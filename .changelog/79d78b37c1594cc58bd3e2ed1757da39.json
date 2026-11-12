@@ -1,0 +1,9 @@
+{
+    "id": "79d78b37-c159-4cc5-8bd3-e2ed1757da39",
+    "type": "bugfix",
+    "description": "Resolve the app ID before the defaults mode and credentials, so that the EC2 IMDS, STS, SSO, SSO OIDC and sign-in clients created during config loading include it in the User-Agent header.",
+    "collapse": false,
+    "modules": [
+        "config"
+    ]
+}
