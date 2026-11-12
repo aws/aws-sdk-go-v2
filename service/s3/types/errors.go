@@ -5,6 +5,7 @@ package types
 import (
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 //	You might receive this error for several reasons. For details, see the
@@ -35,6 +36,12 @@ func (e *AccessDenied) ErrorCode() string {
 }
 func (e *AccessDenied) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AccessDenied) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The request would exceed the maximum number of annotations allowed per object.
 type AnnotationLimitExceeded struct {
 	Message *string
@@ -60,6 +67,12 @@ func (e *AnnotationLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AnnotationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AnnotationLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The annotation name exceeds 512 bytes.
 type AnnotationNameTooLong struct {
@@ -87,6 +100,12 @@ func (e *AnnotationNameTooLong) ErrorCode() string {
 }
 func (e *AnnotationNameTooLong) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AnnotationNameTooLong) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The requested bucket name is not available. The bucket namespace is shared by
 // all users of the system. Select a different name and try again.
 type BucketAlreadyExists struct {
@@ -113,6 +132,12 @@ func (e *BucketAlreadyExists) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BucketAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *BucketAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The bucket you tried to create already exists, and you own it. Amazon S3
 // returns this error in all Amazon Web Services Regions except in the North
@@ -144,6 +169,12 @@ func (e *BucketAlreadyOwnedByYou) ErrorCode() string {
 }
 func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *BucketAlreadyOwnedByYou) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 //	The existing object was created with a different encryption type. Subsequent
 //
 // write requests must include the appropriate encryption parameters in the request
@@ -172,6 +203,12 @@ func (e *EncryptionTypeMismatch) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EncryptionTypeMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *EncryptionTypeMismatch) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Parameters on this idempotent request are inconsistent with parameters used in
 // previous request(s).
@@ -208,6 +245,12 @@ func (e *IdempotencyParameterMismatch) ErrorCode() string {
 }
 func (e *IdempotencyParameterMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *IdempotencyParameterMismatch) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The annotation name you provided is invalid.
 type InvalidAnnotationName struct {
 	Message *string
@@ -233,6 +276,12 @@ func (e *InvalidAnnotationName) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidAnnotationName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidAnnotationName) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Object is archived and inaccessible until restored.
 //
@@ -273,6 +322,12 @@ func (e *InvalidObjectState) ErrorCode() string {
 }
 func (e *InvalidObjectState) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidObjectState) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The annotation prefix you provided is invalid.
 type InvalidPrefix struct {
 	Message *string
@@ -298,6 +353,12 @@ func (e *InvalidPrefix) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPrefix) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidPrefix) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A parameter or header in your request isn't valid. For details, see the
 // description of this API operation.
@@ -325,6 +386,12 @@ func (e *InvalidRequest) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidRequest) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 //	The write offset value that you specified does not match the current object
 //
@@ -354,6 +421,12 @@ func (e *InvalidWriteOffset) ErrorCode() string {
 }
 func (e *InvalidWriteOffset) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidWriteOffset) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified annotation does not exist on this object.
 type NoSuchAnnotation struct {
 	Message *string
@@ -379,6 +452,12 @@ func (e *NoSuchAnnotation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchAnnotation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchAnnotation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified bucket does not exist.
 type NoSuchBucket struct {
@@ -406,6 +485,12 @@ func (e *NoSuchBucket) ErrorCode() string {
 }
 func (e *NoSuchBucket) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchBucket) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified key does not exist.
 type NoSuchKey struct {
 	Message *string
@@ -431,6 +516,12 @@ func (e *NoSuchKey) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchKey) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified multipart upload does not exist.
 type NoSuchUpload struct {
@@ -458,6 +549,12 @@ func (e *NoSuchUpload) ErrorCode() string {
 }
 func (e *NoSuchUpload) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchUpload) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified content does not exist.
 type NotFound struct {
 	Message *string
@@ -483,6 +580,12 @@ func (e *NotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // This action is not allowed against this storage tier.
 type ObjectAlreadyInActiveTierError struct {
@@ -510,6 +613,12 @@ func (e *ObjectAlreadyInActiveTierError) ErrorCode() string {
 }
 func (e *ObjectAlreadyInActiveTierError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ObjectAlreadyInActiveTierError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The source object of the COPY action is not in the active tier and is only
 // stored in Amazon S3 Glacier.
 type ObjectNotInActiveTierError struct {
@@ -536,6 +645,12 @@ func (e *ObjectNotInActiveTierError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ObjectNotInActiveTierError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ObjectNotInActiveTierError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 //	You have attempted to add more parts than the maximum of 10000 that are
 //
@@ -566,6 +681,12 @@ func (e *TooManyParts) ErrorCode() string {
 }
 func (e *TooManyParts) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyParts) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The annotation payload is not valid UTF-8 encoded text.
 type UnsupportedMediaType struct {
 	Message *string
@@ -591,3 +712,9 @@ func (e *UnsupportedMediaType) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedMediaType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *UnsupportedMediaType) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}

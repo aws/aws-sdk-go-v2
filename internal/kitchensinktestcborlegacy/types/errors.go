@@ -5,6 +5,7 @@ package types
 import (
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 type CborItemNotFound struct {
@@ -31,3 +32,9 @@ func (e *CborItemNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CborItemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CborItemNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The container that you specified in the request already exists or is being
@@ -34,6 +35,13 @@ func (e *ContainerInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContainerInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ContainerInUseException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ContainerInUseException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ContainerInUseException)
 	v.SerializeMembers(s)
@@ -81,6 +89,13 @@ func (e *ContainerNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ContainerNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ContainerNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ContainerNotFoundException)
 	v.SerializeMembers(s)
@@ -128,6 +143,13 @@ func (e *CorsPolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CorsPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CorsPolicyNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CorsPolicyNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CorsPolicyNotFoundException)
 	v.SerializeMembers(s)
@@ -175,6 +197,13 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServerError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServerError)
 	v.SerializeMembers(s)
@@ -222,6 +251,13 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *LimitExceededException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.LimitExceededException)
 	v.SerializeMembers(s)
@@ -269,6 +305,13 @@ func (e *PolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PolicyNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *PolicyNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.PolicyNotFoundException)
 	v.SerializeMembers(s)

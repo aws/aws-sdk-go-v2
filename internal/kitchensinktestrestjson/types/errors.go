@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktestrestjson/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 type ResourceNotFound struct {
@@ -32,6 +33,13 @@ func (e *ResourceNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ResourceNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ResourceNotFound)
 	v.SerializeMembers(s)

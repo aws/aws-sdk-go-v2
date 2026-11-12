@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktestcbor/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 type CborItemNotFound struct {
@@ -32,6 +33,13 @@ func (e *CborItemNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CborItemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CborItemNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CborItemNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CborItemNotFound)
 	v.SerializeMembers(s)

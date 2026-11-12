@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cborquerycompatible/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 type ItemNotFound struct {
@@ -32,6 +33,13 @@ func (e *ItemNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ItemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ItemNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ItemNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ItemNotFound)
 	v.SerializeMembers(s)

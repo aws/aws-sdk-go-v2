@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // [EnableHealthServiceAccessForOrganization] is already in progress. Wait for the action to complete before trying again.
@@ -37,6 +38,13 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ConcurrentModificationException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ConcurrentModificationException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ConcurrentModificationException)
 	v.SerializeMembers(s)
@@ -84,6 +92,13 @@ func (e *InvalidPaginationToken) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidPaginationToken) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidPaginationToken) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidPaginationToken)
 	v.SerializeMembers(s)
@@ -131,6 +146,13 @@ func (e *UnsupportedLocale) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedLocale) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *UnsupportedLocale) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *UnsupportedLocale) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.UnsupportedLocale)
 	v.SerializeMembers(s)

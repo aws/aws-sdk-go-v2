@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // This error is thrown when a request is invalid.
@@ -36,6 +37,13 @@ func (e *ComplexError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ComplexError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ComplexError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ComplexError)
 	v.SerializeMembers(s)
@@ -91,6 +99,13 @@ func (e *InvalidGreeting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidGreeting) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidGreeting) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidGreeting)
 	v.SerializeMembers(s)

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // There was a conflict when you attempted to modify a SageMaker entity such as an
@@ -34,6 +35,13 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ConflictException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ConflictException)
 	v.SerializeMembers(s)
@@ -81,6 +89,13 @@ func (e *ResourceInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ResourceInUse) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ResourceInUse)
 	v.SerializeMembers(s)
@@ -130,6 +145,13 @@ func (e *ResourceLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ResourceLimitExceeded) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ResourceLimitExceeded)
 	v.SerializeMembers(s)
@@ -177,6 +199,13 @@ func (e *ResourceNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ResourceNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ResourceNotFound)
 	v.SerializeMembers(s)

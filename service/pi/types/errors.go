@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The request failed due to an unknown error.
@@ -33,6 +34,13 @@ func (e *InternalServiceError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServiceError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServiceError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServiceError)
 	v.SerializeMembers(s)
@@ -80,6 +88,13 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidArgumentException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidArgumentException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidArgumentException)
 	v.SerializeMembers(s)
@@ -127,6 +142,13 @@ func (e *NotAuthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NotAuthorizedException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *NotAuthorizedException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.NotAuthorizedException)
 	v.SerializeMembers(s)

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // A report with the specified name already exists in the account. Specify a
@@ -34,6 +35,13 @@ func (e *DuplicateReportNameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateReportNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DuplicateReportNameException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *DuplicateReportNameException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.DuplicateReportNameException)
 	v.SerializeMembers(s)
@@ -82,6 +90,13 @@ func (e *InternalErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalErrorException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalErrorException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalErrorException)
 	v.SerializeMembers(s)
@@ -130,6 +145,13 @@ func (e *ReportLimitReachedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReportLimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ReportLimitReachedException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ReportLimitReachedException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ReportLimitReachedException)
 	v.SerializeMembers(s)
@@ -177,6 +199,13 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ResourceNotFoundException)
 	v.SerializeMembers(s)
@@ -225,6 +254,13 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ValidationException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ValidationException)
 	v.SerializeMembers(s)

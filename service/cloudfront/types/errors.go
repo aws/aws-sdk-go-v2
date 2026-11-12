@@ -5,6 +5,7 @@ package types
 import (
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // Access denied.
@@ -33,6 +34,12 @@ func (e *AccessDenied) ErrorCode() string {
 }
 func (e *AccessDenied) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AccessDenied) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Invalidation batch specified is too large.
 type BatchTooLarge struct {
 	Message *string
@@ -58,6 +65,12 @@ func (e *BatchTooLarge) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BatchTooLarge) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *BatchTooLarge) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A cache policy with this name already exists. You must provide a unique name.
 // To modify an existing cache policy, use UpdateCachePolicy .
@@ -86,6 +99,12 @@ func (e *CachePolicyAlreadyExists) ErrorCode() string {
 }
 func (e *CachePolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CachePolicyAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Cannot delete the cache policy because it is attached to one or more cache
 // behaviors.
 type CachePolicyInUse struct {
@@ -112,6 +131,12 @@ func (e *CachePolicyInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CachePolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CachePolicyInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // You can't change the value of a public key.
 type CannotChangeImmutablePublicKeyFields struct {
@@ -141,6 +166,12 @@ func (e *CannotChangeImmutablePublicKeyFields) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CannotChangeImmutablePublicKeyFields) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The entity cannot be deleted while it is in use.
 type CannotDeleteEntityWhileInUse struct {
 	Message *string
@@ -167,6 +198,12 @@ func (e *CannotDeleteEntityWhileInUse) ErrorCode() string {
 }
 func (e *CannotDeleteEntityWhileInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CannotDeleteEntityWhileInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The entity cannot be updated while it is in use.
 type CannotUpdateEntityWhileInUse struct {
 	Message *string
@@ -192,6 +229,12 @@ func (e *CannotUpdateEntityWhileInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CannotUpdateEntityWhileInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CannotUpdateEntityWhileInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // If the CallerReference is a value you already sent in a previous request to
 // create an identity but the content of the CloudFrontOriginAccessIdentityConfig
@@ -224,6 +267,12 @@ func (e *CloudFrontOriginAccessIdentityAlreadyExists) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudFrontOriginAccessIdentityAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The Origin Access Identity specified is already in use.
 type CloudFrontOriginAccessIdentityInUse struct {
 	Message *string
@@ -252,6 +301,12 @@ func (e *CloudFrontOriginAccessIdentityInUse) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudFrontOriginAccessIdentityInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The CNAME specified is already defined for CloudFront.
 type CNAMEAlreadyExists struct {
 	Message *string
@@ -277,6 +332,12 @@ func (e *CNAMEAlreadyExists) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CNAMEAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CNAMEAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A continuous deployment policy with this configuration already exists.
 type ContinuousDeploymentPolicyAlreadyExists struct {
@@ -306,6 +367,12 @@ func (e *ContinuousDeploymentPolicyAlreadyExists) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ContinuousDeploymentPolicyAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You cannot delete a continuous deployment policy that is associated with a
 // primary distribution.
 type ContinuousDeploymentPolicyInUse struct {
@@ -332,6 +399,12 @@ func (e *ContinuousDeploymentPolicyInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContinuousDeploymentPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ContinuousDeploymentPolicyInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The caller reference you attempted to create the distribution with is
 // associated with another distribution.
@@ -360,6 +433,12 @@ func (e *DistributionAlreadyExists) ErrorCode() string {
 }
 func (e *DistributionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DistributionAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified CloudFront distribution is not disabled. You must disable the
 // distribution before you can delete it.
 type DistributionNotDisabled struct {
@@ -387,6 +466,12 @@ func (e *DistributionNotDisabled) ErrorCode() string {
 }
 func (e *DistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DistributionNotDisabled) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The entity already exists. You must provide a unique entity.
 type EntityAlreadyExists struct {
 	Message *string
@@ -412,6 +497,12 @@ func (e *EntityAlreadyExists) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *EntityAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The entity limit has been exceeded.
 type EntityLimitExceeded struct {
@@ -439,6 +530,12 @@ func (e *EntityLimitExceeded) ErrorCode() string {
 }
 func (e *EntityLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *EntityLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The entity was not found.
 type EntityNotFound struct {
 	Message *string
@@ -465,6 +562,12 @@ func (e *EntityNotFound) ErrorCode() string {
 }
 func (e *EntityNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *EntityNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The entity size limit was exceeded.
 type EntitySizeLimitExceeded struct {
 	Message *string
@@ -490,6 +593,12 @@ func (e *EntitySizeLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntitySizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *EntitySizeLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified configuration for field-level encryption already exists.
 type FieldLevelEncryptionConfigAlreadyExists struct {
@@ -519,6 +628,12 @@ func (e *FieldLevelEncryptionConfigAlreadyExists) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FieldLevelEncryptionConfigAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified configuration for field-level encryption is in use.
 type FieldLevelEncryptionConfigInUse struct {
 	Message *string
@@ -544,6 +659,12 @@ func (e *FieldLevelEncryptionConfigInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FieldLevelEncryptionConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FieldLevelEncryptionConfigInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified profile for field-level encryption already exists.
 type FieldLevelEncryptionProfileAlreadyExists struct {
@@ -573,6 +694,12 @@ func (e *FieldLevelEncryptionProfileAlreadyExists) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FieldLevelEncryptionProfileAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified profile for field-level encryption is in use.
 type FieldLevelEncryptionProfileInUse struct {
 	Message *string
@@ -598,6 +725,12 @@ func (e *FieldLevelEncryptionProfileInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FieldLevelEncryptionProfileInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FieldLevelEncryptionProfileInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The maximum size of a profile for field-level encryption was exceeded.
 type FieldLevelEncryptionProfileSizeExceeded struct {
@@ -625,6 +758,12 @@ func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorCode() string {
 }
 func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FieldLevelEncryptionProfileSizeExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // A function with the same name already exists in this Amazon Web Services
@@ -655,6 +794,12 @@ func (e *FunctionAlreadyExists) ErrorCode() string {
 }
 func (e *FunctionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FunctionAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Cannot delete the function because it's attached to one or more cache behaviors.
 type FunctionInUse struct {
 	Message *string
@@ -680,6 +825,12 @@ func (e *FunctionInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FunctionInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FunctionInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The function is too large. For more information, see [Quotas] (formerly known as
 // limits) in the Amazon CloudFront Developer Guide.
@@ -710,6 +861,12 @@ func (e *FunctionSizeLimitExceeded) ErrorCode() string {
 }
 func (e *FunctionSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *FunctionSizeLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Deletion is not allowed for this entity.
 type IllegalDelete struct {
 	Message *string
@@ -735,6 +892,12 @@ func (e *IllegalDelete) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IllegalDelete) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *IllegalDelete) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified configuration for field-level encryption can't be associated with
 // the specified cache behavior.
@@ -765,6 +928,12 @@ func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) ErrorFau
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // An origin cannot contain both an origin access control (OAC) and an origin
 // access identity (OAI).
 type IllegalOriginAccessConfiguration struct {
@@ -792,6 +961,12 @@ func (e *IllegalOriginAccessConfiguration) ErrorCode() string {
 }
 func (e *IllegalOriginAccessConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *IllegalOriginAccessConfiguration) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The update contains modifications that are not allowed.
 type IllegalUpdate struct {
 	Message *string
@@ -817,6 +992,12 @@ func (e *IllegalUpdate) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IllegalUpdate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *IllegalUpdate) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The value of Quantity and the size of Items don't match.
 type InconsistentQuantities struct {
@@ -844,6 +1025,12 @@ func (e *InconsistentQuantities) ErrorCode() string {
 }
 func (e *InconsistentQuantities) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InconsistentQuantities) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // An argument is invalid.
 type InvalidArgument struct {
 	Message *string
@@ -869,6 +1056,12 @@ func (e *InvalidArgument) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidArgument) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified CloudFront resource can't be associated.
 type InvalidAssociation struct {
@@ -896,6 +1089,12 @@ func (e *InvalidAssociation) ErrorCode() string {
 }
 func (e *InvalidAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidAssociation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The default root object file name is too big or contains an invalid character.
 type InvalidDefaultRootObject struct {
 	Message *string
@@ -921,6 +1120,12 @@ func (e *InvalidDefaultRootObject) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidDefaultRootObject) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidDefaultRootObject) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // An origin access control is associated with an origin whose domain name is not
 // supported.
@@ -951,6 +1156,12 @@ func (e *InvalidDomainNameForOriginAccessControl) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidDomainNameForOriginAccessControl) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // An invalid error code was specified.
 type InvalidErrorCode struct {
 	Message *string
@@ -976,6 +1187,12 @@ func (e *InvalidErrorCode) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidErrorCode) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidErrorCode) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Your request contains forward cookies option which doesn't match with the
 // expectation for the whitelisted list of cookie names. Either list of cookie
@@ -1006,6 +1223,12 @@ func (e *InvalidForwardCookies) ErrorCode() string {
 }
 func (e *InvalidForwardCookies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidForwardCookies) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A CloudFront function association is invalid.
 type InvalidFunctionAssociation struct {
 	Message *string
@@ -1031,6 +1254,12 @@ func (e *InvalidFunctionAssociation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidFunctionAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidFunctionAssociation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified geo restriction parameter is not valid.
 type InvalidGeoRestrictionParameter struct {
@@ -1058,6 +1287,12 @@ func (e *InvalidGeoRestrictionParameter) ErrorCode() string {
 }
 func (e *InvalidGeoRestrictionParameter) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidGeoRestrictionParameter) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The headers specified are not valid for an Amazon S3 origin.
 type InvalidHeadersForS3Origin struct {
 	Message *string
@@ -1083,6 +1318,12 @@ func (e *InvalidHeadersForS3Origin) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidHeadersForS3Origin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidHeadersForS3Origin) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The If-Match version is missing or not valid.
 type InvalidIfMatchVersion struct {
@@ -1110,6 +1351,12 @@ func (e *InvalidIfMatchVersion) ErrorCode() string {
 }
 func (e *InvalidIfMatchVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidIfMatchVersion) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified Lambda@Edge function association is invalid.
 type InvalidLambdaFunctionAssociation struct {
 	Message *string
@@ -1135,6 +1382,12 @@ func (e *InvalidLambdaFunctionAssociation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidLambdaFunctionAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidLambdaFunctionAssociation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The location code specified is not valid.
 type InvalidLocationCode struct {
@@ -1162,6 +1415,12 @@ func (e *InvalidLocationCode) ErrorCode() string {
 }
 func (e *InvalidLocationCode) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidLocationCode) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The minimum protocol version specified is not valid.
 type InvalidMinimumProtocolVersion struct {
 	Message *string
@@ -1187,6 +1446,12 @@ func (e *InvalidMinimumProtocolVersion) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidMinimumProtocolVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidMinimumProtocolVersion) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The Amazon S3 origin server specified does not refer to a valid Amazon S3
 // bucket.
@@ -1215,6 +1480,12 @@ func (e *InvalidOrigin) ErrorCode() string {
 }
 func (e *InvalidOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidOrigin) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The origin access control is not valid.
 type InvalidOriginAccessControl struct {
 	Message *string
@@ -1240,6 +1511,12 @@ func (e *InvalidOriginAccessControl) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidOriginAccessControl) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidOriginAccessControl) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The origin access identity is not valid or doesn't exist.
 type InvalidOriginAccessIdentity struct {
@@ -1267,6 +1544,12 @@ func (e *InvalidOriginAccessIdentity) ErrorCode() string {
 }
 func (e *InvalidOriginAccessIdentity) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidOriginAccessIdentity) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The keep alive timeout specified for the origin is not valid.
 type InvalidOriginKeepaliveTimeout struct {
 	Message *string
@@ -1293,6 +1576,12 @@ func (e *InvalidOriginKeepaliveTimeout) ErrorCode() string {
 }
 func (e *InvalidOriginKeepaliveTimeout) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidOriginKeepaliveTimeout) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The read timeout specified for the origin is not valid.
 type InvalidOriginReadTimeout struct {
 	Message *string
@@ -1318,6 +1607,12 @@ func (e *InvalidOriginReadTimeout) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidOriginReadTimeout) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidOriginReadTimeout) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // You cannot specify SSLv3 as the minimum protocol version if you only want to
 // support only clients that support Server Name Indication (SNI).
@@ -1346,6 +1641,12 @@ func (e *InvalidProtocolSettings) ErrorCode() string {
 }
 func (e *InvalidProtocolSettings) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidProtocolSettings) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The query string parameters specified are not valid.
 type InvalidQueryStringParameters struct {
 	Message *string
@@ -1371,6 +1672,12 @@ func (e *InvalidQueryStringParameters) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidQueryStringParameters) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidQueryStringParameters) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The relative path is too big, is not URL-encoded, or does not begin with a
 // slash (/).
@@ -1398,6 +1705,12 @@ func (e *InvalidRelativePath) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRelativePath) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidRelativePath) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // This operation requires the HTTPS protocol. Ensure that you specify the HTTPS
 // protocol in your request, or omit the RequiredProtocols element from your
@@ -1427,6 +1740,12 @@ func (e *InvalidRequiredProtocol) ErrorCode() string {
 }
 func (e *InvalidRequiredProtocol) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidRequiredProtocol) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A response code is not valid.
 type InvalidResponseCode struct {
 	Message *string
@@ -1452,6 +1771,12 @@ func (e *InvalidResponseCode) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidResponseCode) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidResponseCode) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The tagging specified is not valid.
 type InvalidTagging struct {
@@ -1479,6 +1804,12 @@ func (e *InvalidTagging) ErrorCode() string {
 }
 func (e *InvalidTagging) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidTagging) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The TTL order specified is not valid.
 type InvalidTTLOrder struct {
 	Message *string
@@ -1505,6 +1836,12 @@ func (e *InvalidTTLOrder) ErrorCode() string {
 }
 func (e *InvalidTTLOrder) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidTTLOrder) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A viewer certificate specified is not valid.
 type InvalidViewerCertificate struct {
 	Message *string
@@ -1530,6 +1867,12 @@ func (e *InvalidViewerCertificate) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidViewerCertificate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidViewerCertificate) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A web ACL ID specified is not valid. To specify a web ACL created using the
 // latest version of WAF, use the ACL ARN, for example
@@ -1561,6 +1904,12 @@ func (e *InvalidWebACLId) ErrorCode() string {
 }
 func (e *InvalidWebACLId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidWebACLId) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A key group with this name already exists. You must provide a unique name. To
 // modify an existing key group, use UpdateKeyGroup .
 type KeyGroupAlreadyExists struct {
@@ -1588,6 +1937,12 @@ func (e *KeyGroupAlreadyExists) ErrorCode() string {
 }
 func (e *KeyGroupAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *KeyGroupAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // This operation requires a body. Ensure that the body is present and the
 // Content-Type header is set.
 type MissingBody struct {
@@ -1614,6 +1969,12 @@ func (e *MissingBody) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingBody) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *MissingBody) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A monitoring subscription already exists for the specified distribution.
 type MonitoringSubscriptionAlreadyExists struct {
@@ -1643,6 +2004,12 @@ func (e *MonitoringSubscriptionAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *MonitoringSubscriptionAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The cache policy does not exist.
 type NoSuchCachePolicy struct {
 	Message *string
@@ -1668,6 +2035,12 @@ func (e *NoSuchCachePolicy) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchCachePolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified origin access identity does not exist.
 type NoSuchCloudFrontOriginAccessIdentity struct {
@@ -1697,6 +2070,12 @@ func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchCloudFrontOriginAccessIdentity) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The continuous deployment policy doesn't exist.
 type NoSuchContinuousDeploymentPolicy struct {
 	Message *string
@@ -1722,6 +2101,12 @@ func (e *NoSuchContinuousDeploymentPolicy) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchContinuousDeploymentPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchContinuousDeploymentPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified distribution does not exist.
 type NoSuchDistribution struct {
@@ -1749,6 +2134,12 @@ func (e *NoSuchDistribution) ErrorCode() string {
 }
 func (e *NoSuchDistribution) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchDistribution) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified configuration for field-level encryption doesn't exist.
 type NoSuchFieldLevelEncryptionConfig struct {
 	Message *string
@@ -1774,6 +2165,12 @@ func (e *NoSuchFieldLevelEncryptionConfig) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchFieldLevelEncryptionConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchFieldLevelEncryptionConfig) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified profile for field-level encryption doesn't exist.
 type NoSuchFieldLevelEncryptionProfile struct {
@@ -1801,6 +2198,12 @@ func (e *NoSuchFieldLevelEncryptionProfile) ErrorCode() string {
 }
 func (e *NoSuchFieldLevelEncryptionProfile) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchFieldLevelEncryptionProfile) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The function does not exist.
 type NoSuchFunctionExists struct {
 	Message *string
@@ -1826,6 +2229,12 @@ func (e *NoSuchFunctionExists) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchFunctionExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchFunctionExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified invalidation does not exist.
 type NoSuchInvalidation struct {
@@ -1853,6 +2262,12 @@ func (e *NoSuchInvalidation) ErrorCode() string {
 }
 func (e *NoSuchInvalidation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchInvalidation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A monitoring subscription does not exist for the specified distribution.
 type NoSuchMonitoringSubscription struct {
 	Message *string
@@ -1878,6 +2293,12 @@ func (e *NoSuchMonitoringSubscription) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchMonitoringSubscription) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchMonitoringSubscription) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // No origin exists with the specified Origin Id .
 type NoSuchOrigin struct {
@@ -1905,6 +2326,12 @@ func (e *NoSuchOrigin) ErrorCode() string {
 }
 func (e *NoSuchOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchOrigin) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The origin access control does not exist.
 type NoSuchOriginAccessControl struct {
 	Message *string
@@ -1930,6 +2357,12 @@ func (e *NoSuchOriginAccessControl) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchOriginAccessControl) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchOriginAccessControl) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The origin request policy does not exist.
 type NoSuchOriginRequestPolicy struct {
@@ -1957,6 +2390,12 @@ func (e *NoSuchOriginRequestPolicy) ErrorCode() string {
 }
 func (e *NoSuchOriginRequestPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchOriginRequestPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified public key doesn't exist.
 type NoSuchPublicKey struct {
 	Message *string
@@ -1982,6 +2421,12 @@ func (e *NoSuchPublicKey) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchPublicKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchPublicKey) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The real-time log configuration does not exist.
 type NoSuchRealtimeLogConfig struct {
@@ -2009,6 +2454,12 @@ func (e *NoSuchRealtimeLogConfig) ErrorCode() string {
 }
 func (e *NoSuchRealtimeLogConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchRealtimeLogConfig) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A resource that was specified is not valid.
 type NoSuchResource struct {
 	Message *string
@@ -2034,6 +2485,12 @@ func (e *NoSuchResource) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchResource) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchResource) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The response headers policy does not exist.
 type NoSuchResponseHeadersPolicy struct {
@@ -2061,6 +2518,12 @@ func (e *NoSuchResponseHeadersPolicy) ErrorCode() string {
 }
 func (e *NoSuchResponseHeadersPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchResponseHeadersPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified streaming distribution does not exist.
 type NoSuchStreamingDistribution struct {
 	Message *string
@@ -2086,6 +2549,12 @@ func (e *NoSuchStreamingDistribution) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchStreamingDistribution) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoSuchStreamingDistribution) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // An origin access control with the specified parameters already exists.
 type OriginAccessControlAlreadyExists struct {
@@ -2113,6 +2582,12 @@ func (e *OriginAccessControlAlreadyExists) ErrorCode() string {
 }
 func (e *OriginAccessControlAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *OriginAccessControlAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Cannot delete the origin access control because it's in use by one or more
 // distributions.
 type OriginAccessControlInUse struct {
@@ -2139,6 +2614,12 @@ func (e *OriginAccessControlInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OriginAccessControlInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *OriginAccessControlInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // An origin request policy with this name already exists. You must provide a
 // unique name. To modify an existing origin request policy, use
@@ -2168,6 +2649,12 @@ func (e *OriginRequestPolicyAlreadyExists) ErrorCode() string {
 }
 func (e *OriginRequestPolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *OriginRequestPolicyAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Cannot delete the origin request policy because it is attached to one or more
 // cache behaviors.
 type OriginRequestPolicyInUse struct {
@@ -2195,6 +2682,12 @@ func (e *OriginRequestPolicyInUse) ErrorCode() string {
 }
 func (e *OriginRequestPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *OriginRequestPolicyInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The precondition in one or more of the request fields evaluated to false .
 type PreconditionFailed struct {
 	Message *string
@@ -2220,6 +2713,12 @@ func (e *PreconditionFailed) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PreconditionFailed) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PreconditionFailed) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified public key already exists.
 type PublicKeyAlreadyExists struct {
@@ -2247,6 +2746,12 @@ func (e *PublicKeyAlreadyExists) ErrorCode() string {
 }
 func (e *PublicKeyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PublicKeyAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified public key is in use.
 type PublicKeyInUse struct {
 	Message *string
@@ -2273,6 +2778,12 @@ func (e *PublicKeyInUse) ErrorCode() string {
 }
 func (e *PublicKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PublicKeyInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // No profile specified for the field-level encryption query argument.
 type QueryArgProfileEmpty struct {
 	Message *string
@@ -2298,6 +2809,12 @@ func (e *QueryArgProfileEmpty) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *QueryArgProfileEmpty) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *QueryArgProfileEmpty) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A real-time log configuration with this name already exists. You must provide a
 // unique name. To modify an existing real-time log configuration, use
@@ -2327,6 +2844,12 @@ func (e *RealtimeLogConfigAlreadyExists) ErrorCode() string {
 }
 func (e *RealtimeLogConfigAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *RealtimeLogConfigAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Cannot delete the real-time log configuration because it is attached to one or
 // more cache behaviors.
 type RealtimeLogConfigInUse struct {
@@ -2353,6 +2876,12 @@ func (e *RealtimeLogConfigInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RealtimeLogConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *RealtimeLogConfigInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified real-time log configuration belongs to a different Amazon Web
 // Services account.
@@ -2381,6 +2910,12 @@ func (e *RealtimeLogConfigOwnerMismatch) ErrorCode() string {
 }
 func (e *RealtimeLogConfigOwnerMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *RealtimeLogConfigOwnerMismatch) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Cannot delete this resource because it is in use.
 type ResourceInUse struct {
 	Message *string
@@ -2407,6 +2942,12 @@ func (e *ResourceInUse) ErrorCode() string {
 }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified CloudFront resource hasn't been disabled yet.
 type ResourceNotDisabled struct {
 	Message *string
@@ -2432,6 +2973,12 @@ func (e *ResourceNotDisabled) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceNotDisabled) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // A response headers policy with this name already exists. You must provide a
 // unique name. To modify an existing response headers policy, use
@@ -2463,6 +3010,12 @@ func (e *ResponseHeadersPolicyAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResponseHeadersPolicyAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Cannot delete the response headers policy because it is attached to one or more
 // cache behaviors in a CloudFront distribution.
 type ResponseHeadersPolicyInUse struct {
@@ -2490,6 +3043,12 @@ func (e *ResponseHeadersPolicyInUse) ErrorCode() string {
 }
 func (e *ResponseHeadersPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResponseHeadersPolicyInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // A continuous deployment policy for this staging distribution already exists.
 type StagingDistributionInUse struct {
 	Message *string
@@ -2515,6 +3074,12 @@ func (e *StagingDistributionInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StagingDistributionInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *StagingDistributionInUse) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The caller reference you attempted to create the streaming distribution with is
 // associated with another distribution
@@ -2545,6 +3110,12 @@ func (e *StreamingDistributionAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *StreamingDistributionAlreadyExists) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The specified CloudFront distribution is not disabled. You must disable the
 // distribution before you can delete it.
 type StreamingDistributionNotDisabled struct {
@@ -2572,6 +3143,12 @@ func (e *StreamingDistributionNotDisabled) ErrorCode() string {
 }
 func (e *StreamingDistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *StreamingDistributionNotDisabled) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The CloudFront function failed.
 type TestFunctionFailed struct {
 	Message *string
@@ -2597,6 +3174,12 @@ func (e *TestFunctionFailed) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TestFunctionFailed) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TestFunctionFailed) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The length of the Content-Security-Policy header value in the response headers
 // policy exceeds the maximum.
@@ -2630,6 +3213,12 @@ func (e *TooLongCSPInResponseHeadersPolicy) ErrorCode() string {
 }
 func (e *TooLongCSPInResponseHeadersPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooLongCSPInResponseHeadersPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You cannot create more cache behaviors for the distribution.
 type TooManyCacheBehaviors struct {
 	Message *string
@@ -2655,6 +3244,12 @@ func (e *TooManyCacheBehaviors) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyCacheBehaviors) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCacheBehaviors) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // You have reached the maximum number of cache policies for this Amazon Web
 // Services account. For more information, see [Quotas](formerly known as limits) in the
@@ -2686,6 +3281,12 @@ func (e *TooManyCachePolicies) ErrorCode() string {
 }
 func (e *TooManyCachePolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCachePolicies) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You cannot create anymore custom SSL/TLS certificates.
 type TooManyCertificates struct {
 	Message *string
@@ -2711,6 +3312,12 @@ func (e *TooManyCertificates) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyCertificates) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCertificates) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Processing your request would cause you to exceed the maximum number of origin
 // access identities allowed.
@@ -2739,6 +3346,12 @@ func (e *TooManyCloudFrontOriginAccessIdentities) ErrorCode() string {
 }
 func (e *TooManyCloudFrontOriginAccessIdentities) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCloudFrontOriginAccessIdentities) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // You have reached the maximum number of continuous deployment policies for this
@@ -2770,6 +3383,12 @@ func (e *TooManyContinuousDeploymentPolicies) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyContinuousDeploymentPolicies) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains more cookie names in the whitelist than are allowed per
 // cache behavior.
 type TooManyCookieNamesInWhiteList struct {
@@ -2796,6 +3415,12 @@ func (e *TooManyCookieNamesInWhiteList) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyCookieNamesInWhiteList) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCookieNamesInWhiteList) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of cookies in the cache policy exceeds the maximum. For more
 // information, see [Quotas](formerly known as limits) in the Amazon CloudFront Developer
@@ -2827,6 +3452,12 @@ func (e *TooManyCookiesInCachePolicy) ErrorCode() string {
 }
 func (e *TooManyCookiesInCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCookiesInCachePolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The number of cookies in the origin request policy exceeds the maximum. For
 // more information, see [Quotas](formerly known as limits) in the Amazon CloudFront
 // Developer Guide.
@@ -2857,6 +3488,12 @@ func (e *TooManyCookiesInOriginRequestPolicy) ErrorCode() string {
 }
 func (e *TooManyCookiesInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCookiesInOriginRequestPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The number of custom headers in the response headers policy exceeds the maximum.
@@ -2892,6 +3529,12 @@ func (e *TooManyCustomHeadersInResponseHeadersPolicy) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyCustomHeadersInResponseHeadersPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyDistributionCNAMEs struct {
 	Message *string
@@ -2917,6 +3560,12 @@ func (e *TooManyDistributionCNAMEs) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyDistributionCNAMEs) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionCNAMEs) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Processing your request would cause you to exceed the maximum number of
 // distributions allowed.
@@ -2944,6 +3593,12 @@ func (e *TooManyDistributions) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyDistributions) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributions) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The maximum number of distributions have been associated with the specified
 // cache policy. For more information, see [Quotas](formerly known as limits) in the
@@ -2977,6 +3632,12 @@ func (e *TooManyDistributionsAssociatedToCachePolicy) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsAssociatedToCachePolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The maximum number of distributions have been associated with the specified
 // configuration for field-level encryption.
 type TooManyDistributionsAssociatedToFieldLevelEncryptionConfig struct {
@@ -3004,6 +3665,12 @@ func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorCode()
 }
 func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The number of distributions that reference this key group is more than the
@@ -3036,6 +3703,12 @@ func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorCode() string {
 }
 func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsAssociatedToKeyGroup) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The maximum number of distributions have been associated with the specified
@@ -3072,6 +3745,12 @@ func (e *TooManyDistributionsAssociatedToOriginAccessControl) ErrorFault() smith
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsAssociatedToOriginAccessControl) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The maximum number of distributions have been associated with the specified
 // origin request policy. For more information, see [Quotas](formerly known as limits) in
 // the Amazon CloudFront Developer Guide.
@@ -3102,6 +3781,12 @@ func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorCode() string
 }
 func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The maximum number of distributions have been associated with the specified
@@ -3138,6 +3823,12 @@ func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) ErrorFault() smi
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You have reached the maximum number of distributions that are associated with a
 // CloudFront function. For more information, see [Quotas](formerly known as limits) in
 // the Amazon CloudFront Developer Guide.
@@ -3170,6 +3861,12 @@ func (e *TooManyDistributionsWithFunctionAssociations) ErrorFault() smithy.Error
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsWithFunctionAssociations) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Processing your request would cause the maximum number of distributions with
 // Lambda@Edge function associations per owner to be exceeded.
 type TooManyDistributionsWithLambdaAssociations struct {
@@ -3197,6 +3894,12 @@ func (e *TooManyDistributionsWithLambdaAssociations) ErrorCode() string {
 }
 func (e *TooManyDistributionsWithLambdaAssociations) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsWithLambdaAssociations) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The maximum number of distributions have been associated with the specified
@@ -3228,6 +3931,12 @@ func (e *TooManyDistributionsWithSingleFunctionARN) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyDistributionsWithSingleFunctionARN) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The maximum number of configurations for field-level encryption have been
 // created.
 type TooManyFieldLevelEncryptionConfigs struct {
@@ -3255,6 +3964,12 @@ func (e *TooManyFieldLevelEncryptionConfigs) ErrorCode() string {
 }
 func (e *TooManyFieldLevelEncryptionConfigs) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFieldLevelEncryptionConfigs) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The maximum number of content type profiles for field-level encryption have
@@ -3286,6 +4001,12 @@ func (e *TooManyFieldLevelEncryptionContentTypeProfiles) ErrorFault() smithy.Err
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFieldLevelEncryptionContentTypeProfiles) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The maximum number of encryption entities for field-level encryption have been
 // created.
 type TooManyFieldLevelEncryptionEncryptionEntities struct {
@@ -3313,6 +4034,12 @@ func (e *TooManyFieldLevelEncryptionEncryptionEntities) ErrorCode() string {
 }
 func (e *TooManyFieldLevelEncryptionEncryptionEntities) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFieldLevelEncryptionEncryptionEntities) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The maximum number of field patterns for field-level encryption have been
@@ -3344,6 +4071,12 @@ func (e *TooManyFieldLevelEncryptionFieldPatterns) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFieldLevelEncryptionFieldPatterns) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // The maximum number of profiles for field-level encryption have been created.
 type TooManyFieldLevelEncryptionProfiles struct {
 	Message *string
@@ -3370,6 +4103,12 @@ func (e *TooManyFieldLevelEncryptionProfiles) ErrorCode() string {
 }
 func (e *TooManyFieldLevelEncryptionProfiles) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFieldLevelEncryptionProfiles) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // The maximum number of query arg profiles for field-level encryption have been
@@ -3399,6 +4138,12 @@ func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorCode() string {
 }
 func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFieldLevelEncryptionQueryArgProfiles) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // You have reached the maximum number of CloudFront function associations for
@@ -3431,6 +4176,12 @@ func (e *TooManyFunctionAssociations) ErrorCode() string {
 }
 func (e *TooManyFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFunctionAssociations) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You have reached the maximum number of CloudFront functions for this Amazon Web
 // Services account. For more information, see [Quotas](formerly known as limits) in the
 // Amazon CloudFront Developer Guide.
@@ -3460,6 +4211,12 @@ func (e *TooManyFunctions) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyFunctions) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyFunctions) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of headers in the cache policy exceeds the maximum. For more
 // information, see [Quotas](formerly known as limits) in the Amazon CloudFront Developer
@@ -3491,6 +4248,12 @@ func (e *TooManyHeadersInCachePolicy) ErrorCode() string {
 }
 func (e *TooManyHeadersInCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyHeadersInCachePolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains too many headers in forwarded values.
 type TooManyHeadersInForwardedValues struct {
 	Message *string
@@ -3516,6 +4279,12 @@ func (e *TooManyHeadersInForwardedValues) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyHeadersInForwardedValues) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyHeadersInForwardedValues) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of headers in the origin request policy exceeds the maximum. For
 // more information, see [Quotas](formerly known as limits) in the Amazon CloudFront
@@ -3549,6 +4318,12 @@ func (e *TooManyHeadersInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyHeadersInOriginRequestPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You have exceeded the maximum number of allowable InProgress invalidation batch
 // requests, or invalidation objects.
 type TooManyInvalidationsInProgress struct {
@@ -3575,6 +4350,12 @@ func (e *TooManyInvalidationsInProgress) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyInvalidationsInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyInvalidationsInProgress) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // You have reached the maximum number of key groups for this Amazon Web Services
 // account. For more information, see [Quotas](formerly known as limits) in the Amazon
@@ -3605,6 +4386,12 @@ func (e *TooManyKeyGroups) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyKeyGroups) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyKeyGroups) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of key groups referenced by this distribution is more than the
 // maximum allowed. For more information, see [Quotas](formerly known as limits) in the
@@ -3638,6 +4425,12 @@ func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyKeyGroupsAssociatedToDistribution) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains more Lambda@Edge function associations than are allowed
 // per distribution.
 type TooManyLambdaFunctionAssociations struct {
@@ -3664,6 +4457,12 @@ func (e *TooManyLambdaFunctionAssociations) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyLambdaFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyLambdaFunctionAssociations) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of origin access controls in your Amazon Web Services account
 // exceeds the maximum allowed.
@@ -3697,6 +4496,12 @@ func (e *TooManyOriginAccessControls) ErrorCode() string {
 }
 func (e *TooManyOriginAccessControls) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyOriginAccessControls) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains too many origin custom headers.
 type TooManyOriginCustomHeaders struct {
 	Message *string
@@ -3722,6 +4527,12 @@ func (e *TooManyOriginCustomHeaders) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyOriginCustomHeaders) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyOriginCustomHeaders) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // Processing your request would cause you to exceed the maximum number of origin
 // groups allowed.
@@ -3750,6 +4561,12 @@ func (e *TooManyOriginGroupsPerDistribution) ErrorCode() string {
 }
 func (e *TooManyOriginGroupsPerDistribution) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyOriginGroupsPerDistribution) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // You have reached the maximum number of origin request policies for this Amazon
@@ -3782,6 +4599,12 @@ func (e *TooManyOriginRequestPolicies) ErrorCode() string {
 }
 func (e *TooManyOriginRequestPolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyOriginRequestPolicies) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You cannot create more origins for the distribution.
 type TooManyOrigins struct {
 	Message *string
@@ -3807,6 +4630,12 @@ func (e *TooManyOrigins) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyOrigins) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyOrigins) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The maximum number of public keys for field-level encryption have been created.
 // To create a new public key, delete one of the existing keys.
@@ -3834,6 +4663,12 @@ func (e *TooManyPublicKeys) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyPublicKeys) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyPublicKeys) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of public keys in this key group is more than the maximum allowed.
 // For more information, see [Quotas](formerly known as limits) in the Amazon CloudFront
@@ -3865,6 +4700,12 @@ func (e *TooManyPublicKeysInKeyGroup) ErrorCode() string {
 }
 func (e *TooManyPublicKeysInKeyGroup) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyPublicKeysInKeyGroup) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains too many query string parameters.
 type TooManyQueryStringParameters struct {
 	Message *string
@@ -3890,6 +4731,12 @@ func (e *TooManyQueryStringParameters) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyQueryStringParameters) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyQueryStringParameters) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of query strings in the cache policy exceeds the maximum. For more
 // information, see [Quotas](formerly known as limits) in the Amazon CloudFront Developer
@@ -3920,6 +4767,12 @@ func (e *TooManyQueryStringsInCachePolicy) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyQueryStringsInCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyQueryStringsInCachePolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of query strings in the origin request policy exceeds the maximum.
 // For more information, see [Quotas](formerly known as limits) in the Amazon CloudFront
@@ -3953,6 +4806,12 @@ func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyQueryStringsInOriginRequestPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You have reached the maximum number of real-time log configurations for this
 // Amazon Web Services account. For more information, see [Quotas](formerly known as
 // limits) in the Amazon CloudFront Developer Guide.
@@ -3982,6 +4841,12 @@ func (e *TooManyRealtimeLogConfigs) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRealtimeLogConfigs) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyRealtimeLogConfigs) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The number of headers in RemoveHeadersConfig in the response headers policy
 // exceeds the maximum.
@@ -4017,6 +4882,12 @@ func (e *TooManyRemoveHeadersInResponseHeadersPolicy) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyRemoveHeadersInResponseHeadersPolicy) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // You have reached the maximum number of response headers policies for this
 // Amazon Web Services account.
 //
@@ -4049,6 +4920,12 @@ func (e *TooManyResponseHeadersPolicies) ErrorCode() string {
 }
 func (e *TooManyResponseHeadersPolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyResponseHeadersPolicies) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyStreamingDistributionCNAMEs struct {
 	Message *string
@@ -4075,6 +4952,12 @@ func (e *TooManyStreamingDistributionCNAMEs) ErrorCode() string {
 }
 func (e *TooManyStreamingDistributionCNAMEs) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyStreamingDistributionCNAMEs) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
 }
 
 // Processing your request would cause you to exceed the maximum number of
@@ -4104,6 +4987,12 @@ func (e *TooManyStreamingDistributions) ErrorCode() string {
 }
 func (e *TooManyStreamingDistributions) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyStreamingDistributions) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // Your request contains more trusted signers than are allowed per distribution.
 type TooManyTrustedSigners struct {
 	Message *string
@@ -4129,6 +5018,12 @@ func (e *TooManyTrustedSigners) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTrustedSigners) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TooManyTrustedSigners) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
 
 // The specified key group does not exist.
 type TrustedKeyGroupDoesNotExist struct {
@@ -4156,6 +5051,12 @@ func (e *TrustedKeyGroupDoesNotExist) ErrorCode() string {
 }
 func (e *TrustedKeyGroupDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TrustedKeyGroupDoesNotExist) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // One or more of your trusted signers don't exist.
 type TrustedSignerDoesNotExist struct {
 	Message *string
@@ -4182,6 +5083,12 @@ func (e *TrustedSignerDoesNotExist) ErrorCode() string {
 }
 func (e *TrustedSignerDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *TrustedSignerDoesNotExist) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 // This operation is not supported in this Amazon Web Services Region.
 type UnsupportedOperation struct {
 	Message *string
@@ -4207,3 +5114,9 @@ func (e *UnsupportedOperation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *UnsupportedOperation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}

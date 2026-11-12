@@ -18,6 +18,7 @@ const (
 // DefaultThrottles provides the set of errors considered throttle errors that
 // are checked by default.
 var DefaultThrottles = []IsErrorThrottle{
+	ThrottleTrait{},
 	ThrottleErrorCode{
 		Codes: DefaultThrottleErrorCodes,
 	},

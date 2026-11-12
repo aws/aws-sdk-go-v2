@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // Indicates that an internal error occurred.
@@ -35,6 +36,13 @@ func (e *CloudHsmInternalException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmInternalException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmInternalException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmInternalException)
 	v.SerializeMembers(s)
@@ -89,6 +97,13 @@ func (e *CloudHsmServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmServiceException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmServiceException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmServiceException)
 	v.SerializeMembers(s)
@@ -143,6 +158,13 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidRequestException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidRequestException)
 	v.SerializeMembers(s)

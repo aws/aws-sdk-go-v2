@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The request was rejected because the requester does not have permission to
@@ -34,6 +35,13 @@ func (e *CloudHsmAccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmAccessDeniedException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmAccessDeniedException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmAccessDeniedException)
 	v.SerializeMembers(s)
@@ -82,6 +90,13 @@ func (e *CloudHsmInternalFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmInternalFailureException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmInternalFailureException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmInternalFailureException)
 	v.SerializeMembers(s)
@@ -129,6 +144,13 @@ func (e *CloudHsmInvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmInvalidRequestException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmInvalidRequestException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmInvalidRequestException)
 	v.SerializeMembers(s)
@@ -178,6 +200,13 @@ func (e *CloudHsmResourceLimitExceededException) ErrorCode() string {
 func (e *CloudHsmResourceLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmResourceLimitExceededException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmResourceLimitExceededException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmResourceLimitExceededException)
 	v.SerializeMembers(s)
@@ -225,6 +254,13 @@ func (e *CloudHsmResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmResourceNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmResourceNotFoundException)
 	v.SerializeMembers(s)
@@ -272,6 +308,13 @@ func (e *CloudHsmServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmServiceException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmServiceException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmServiceException)
 	v.SerializeMembers(s)
@@ -320,6 +363,13 @@ func (e *CloudHsmTagException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CloudHsmTagException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CloudHsmTagException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CloudHsmTagException)
 	v.SerializeMembers(s)

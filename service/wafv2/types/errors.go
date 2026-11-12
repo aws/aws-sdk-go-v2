@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // WAF couldn’t perform the operation because your resource is being used by
@@ -34,6 +35,13 @@ func (e *WAFAssociatedItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFAssociatedItemException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFAssociatedItemException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFAssociatedItemException)
 	v.SerializeMembers(s)
@@ -92,6 +100,13 @@ func (e *WAFConfigurationWarningException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFConfigurationWarningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFConfigurationWarningException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFConfigurationWarningException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFConfigurationWarningException)
 	v.SerializeMembers(s)
@@ -140,6 +155,13 @@ func (e *WAFDuplicateItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFDuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFDuplicateItemException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFDuplicateItemException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFDuplicateItemException)
 	v.SerializeMembers(s)
@@ -191,6 +213,13 @@ func (e *WAFExpiredManagedRuleGroupVersionException) ErrorCode() string {
 func (e *WAFExpiredManagedRuleGroupVersionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFExpiredManagedRuleGroupVersionException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFExpiredManagedRuleGroupVersionException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFExpiredManagedRuleGroupVersionException)
 	v.SerializeMembers(s)
@@ -243,6 +272,13 @@ func (e *WAFFeatureNotIncludedInPricingPlanException) ErrorCode() string {
 func (e *WAFFeatureNotIncludedInPricingPlanException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFFeatureNotIncludedInPricingPlanException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFFeatureNotIncludedInPricingPlanException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFFeatureNotIncludedInPricingPlanException)
 	v.SerializeMembers(s)
@@ -296,6 +332,13 @@ func (e *WAFInternalErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFInternalErrorException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFInternalErrorException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFInternalErrorException)
 	v.SerializeMembers(s)
@@ -343,6 +386,13 @@ func (e *WAFInvalidOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFInvalidOperationException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFInvalidOperationException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFInvalidOperationException)
 	v.SerializeMembers(s)
@@ -406,6 +456,13 @@ func (e *WAFInvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFInvalidParameterException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFInvalidParameterException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFInvalidParameterException)
 	v.SerializeMembers(s)
@@ -496,6 +553,13 @@ func (e *WAFInvalidPermissionPolicyException) ErrorCode() string {
 func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFInvalidPermissionPolicyException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFInvalidPermissionPolicyException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFInvalidPermissionPolicyException)
 	v.SerializeMembers(s)
@@ -544,6 +608,13 @@ func (e *WAFInvalidResourceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFInvalidResourceException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFInvalidResourceException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFInvalidResourceException)
 	v.SerializeMembers(s)
@@ -598,6 +669,13 @@ func (e *WAFLimitsExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFLimitsExceededException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFLimitsExceededException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFLimitsExceededException)
 	v.SerializeMembers(s)
@@ -656,6 +734,13 @@ func (e *WAFLogDestinationPermissionIssueException) ErrorCode() string {
 func (e *WAFLogDestinationPermissionIssueException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFLogDestinationPermissionIssueException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFLogDestinationPermissionIssueException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFLogDestinationPermissionIssueException)
 	v.SerializeMembers(s)
@@ -706,6 +791,13 @@ func (e *WAFNonexistentItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFNonexistentItemException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFNonexistentItemException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFNonexistentItemException)
 	v.SerializeMembers(s)
@@ -755,6 +847,13 @@ func (e *WAFOptimisticLockException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFOptimisticLockException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFOptimisticLockException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFOptimisticLockException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFOptimisticLockException)
 	v.SerializeMembers(s)
@@ -811,6 +910,13 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorCode() string {
 func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFServiceLinkedRoleErrorException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFServiceLinkedRoleErrorException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFServiceLinkedRoleErrorException)
 	v.SerializeMembers(s)
@@ -859,6 +965,13 @@ func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFSubscriptionNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFSubscriptionNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFSubscriptionNotFoundException)
 	v.SerializeMembers(s)
@@ -906,6 +1019,13 @@ func (e *WAFTagOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFTagOperationException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFTagOperationException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFTagOperationException)
 	v.SerializeMembers(s)
@@ -956,6 +1076,13 @@ func (e *WAFTagOperationInternalErrorException) ErrorCode() string {
 func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFTagOperationInternalErrorException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFTagOperationInternalErrorException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFTagOperationInternalErrorException)
 	v.SerializeMembers(s)
@@ -1007,6 +1134,13 @@ func (e *WAFUnavailableEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFUnavailableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFUnavailableEntityException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFUnavailableEntityException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFUnavailableEntityException)
 	v.SerializeMembers(s)
@@ -1058,6 +1192,13 @@ func (e *WAFUnsupportedAggregateKeyTypeException) ErrorCode() string {
 func (e *WAFUnsupportedAggregateKeyTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *WAFUnsupportedAggregateKeyTypeException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *WAFUnsupportedAggregateKeyTypeException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.WAFUnsupportedAggregateKeyTypeException)
 	v.SerializeMembers(s)

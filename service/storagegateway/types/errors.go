@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // An internal server error has occurred during the request. For more information,
@@ -36,6 +37,13 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServerError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServerError)
 	v.SerializeMembers(s)
@@ -94,6 +102,13 @@ func (e *InvalidGatewayRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGatewayRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidGatewayRequestException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidGatewayRequestException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidGatewayRequestException)
 	v.SerializeMembers(s)
@@ -152,6 +167,13 @@ func (e *ServiceUnavailableError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ServiceUnavailableError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ServiceUnavailableError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ServiceUnavailableError)
 	v.SerializeMembers(s)

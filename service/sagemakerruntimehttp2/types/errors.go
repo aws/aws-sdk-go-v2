@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The input fails to satisfy the constraints specified by an AWS service.
@@ -35,6 +36,13 @@ func (e *InputValidationError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InputValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InputValidationError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InputValidationError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InputValidationError)
 	v.SerializeMembers(s)
@@ -91,6 +99,13 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServerError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServerError)
 	v.SerializeMembers(s)
@@ -144,6 +159,13 @@ func (e *InternalStreamFailure) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalStreamFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalStreamFailure) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalStreamFailure) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalStreamFailure)
 	v.SerializeMembers(s)
@@ -196,6 +218,13 @@ func (e *ModelError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ModelError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ModelError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ModelError)
 	v.SerializeMembers(s)
@@ -269,6 +298,13 @@ func (e *ModelStreamError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelStreamError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ModelStreamError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ModelStreamError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ModelStreamError)
 	v.SerializeMembers(s)
@@ -324,6 +360,13 @@ func (e *ServiceUnavailableError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ServiceUnavailableError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ServiceUnavailableError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ServiceUnavailableError)
 	v.SerializeMembers(s)

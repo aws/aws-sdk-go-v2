@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblerpcv2protocol/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 type CustomCodeError struct {
@@ -32,6 +33,13 @@ func (e *CustomCodeError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CustomCodeError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CustomCodeError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CustomCodeError)
 	v.SerializeMembers(s)
@@ -78,6 +86,13 @@ func (e *NoCustomCodeError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoCustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *NoCustomCodeError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *NoCustomCodeError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.NoCustomCodeError)
 	v.SerializeMembers(s)

@@ -254,3 +254,59 @@ func TestCheckResponseSnapshot_Error_ItemNotFound(t *testing.T) {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ItemNotFound.error", err)
 	}
 }
+
+func TestCheckResponseSnapshot_Error_RetryableTraitError(t *testing.T) {
+	want := &types.RetryableTraitError{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RetryableTraitError.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetItem(context.Background(), &GetItemInput{
+		Item: &types.Item{},
+		Id:   ptr.String("__Id__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.RetryableTraitError
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.RetryableTraitError, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "RetryableTraitError.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ThrottlingRetryableTraitError(t *testing.T) {
+	want := &types.ThrottlingRetryableTraitError{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ThrottlingRetryableTraitError.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetItem(context.Background(), &GetItemInput{
+		Item: &types.Item{},
+		Id:   ptr.String("__Id__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ThrottlingRetryableTraitError
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ThrottlingRetryableTraitError, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ThrottlingRetryableTraitError.error", err)
+	}
+}

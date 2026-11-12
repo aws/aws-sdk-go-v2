@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // The caller is not authorized to invoke this operation.
@@ -33,6 +34,13 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ForbiddenException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ForbiddenException)
 	v.SerializeMembers(s)
@@ -74,6 +82,13 @@ func (e *GoneException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *GoneException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *GoneException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.GoneException)
 	v.SerializeMembers(s)
@@ -116,6 +131,13 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *LimitExceededException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.LimitExceededException)
 	v.SerializeMembers(s)
@@ -157,6 +179,13 @@ func (e *PayloadTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *PayloadTooLargeException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *PayloadTooLargeException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.PayloadTooLargeException)
 	v.SerializeMembers(s)

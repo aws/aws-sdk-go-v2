@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // These errors are usually caused by a client action. One example cause is using
@@ -36,6 +37,13 @@ func (e *ClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ClientException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ClientException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ClientException)
 	v.SerializeMembers(s)
@@ -83,6 +91,13 @@ func (e *ServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ServerException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ServerException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ServerException)
 	v.SerializeMembers(s)

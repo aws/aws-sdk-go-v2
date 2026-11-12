@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // An attachment with the specified ID could not be found.
@@ -33,6 +34,13 @@ func (e *AttachmentIdNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AttachmentIdNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *AttachmentIdNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.AttachmentIdNotFound)
 	v.SerializeMembers(s)
@@ -81,6 +89,13 @@ func (e *AttachmentLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AttachmentLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *AttachmentLimitExceeded) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.AttachmentLimitExceeded)
 	v.SerializeMembers(s)
@@ -129,6 +144,13 @@ func (e *AttachmentSetExpired) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentSetExpired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AttachmentSetExpired) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *AttachmentSetExpired) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.AttachmentSetExpired)
 	v.SerializeMembers(s)
@@ -176,6 +198,13 @@ func (e *AttachmentSetIdNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentSetIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AttachmentSetIdNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *AttachmentSetIdNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.AttachmentSetIdNotFound)
 	v.SerializeMembers(s)
@@ -224,6 +253,13 @@ func (e *AttachmentSetSizeLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentSetSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *AttachmentSetSizeLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *AttachmentSetSizeLimitExceeded) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.AttachmentSetSizeLimitExceeded)
 	v.SerializeMembers(s)
@@ -271,6 +307,13 @@ func (e *CaseCreationLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CaseCreationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CaseCreationLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CaseCreationLimitExceeded) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CaseCreationLimitExceeded)
 	v.SerializeMembers(s)
@@ -318,6 +361,13 @@ func (e *CaseIdNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *CaseIdNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *CaseIdNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.CaseIdNotFound)
 	v.SerializeMembers(s)
@@ -366,6 +416,13 @@ func (e *DescribeAttachmentLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DescribeAttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DescribeAttachmentLimitExceeded) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *DescribeAttachmentLimitExceeded) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.DescribeAttachmentLimitExceeded)
 	v.SerializeMembers(s)
@@ -414,6 +471,13 @@ func (e *DryRunOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *DryRunOperationException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *DryRunOperationException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.DryRunOperationException)
 	v.SerializeMembers(s)
@@ -461,6 +525,13 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServerError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServerError)
 	v.SerializeMembers(s)
@@ -512,6 +583,13 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ThrottlingException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ThrottlingException)
 	v.SerializeMembers(s)
@@ -564,6 +642,13 @@ func (e *UploadIdNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UploadIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *UploadIdNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *UploadIdNotFound) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.UploadIdNotFound)
 	v.SerializeMembers(s)

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // This exception is thrown when an internal service error occurs.
@@ -35,6 +36,13 @@ func (e *MarketplaceCommerceAnalyticsException) ErrorCode() string {
 func (e *MarketplaceCommerceAnalyticsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *MarketplaceCommerceAnalyticsException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *MarketplaceCommerceAnalyticsException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.MarketplaceCommerceAnalyticsException)
 	v.SerializeMembers(s)

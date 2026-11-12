@@ -19,5 +19,13 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.MessageEvent,
 			New:    func() any { return &types.MessageEvent{} },
 		},
+		"aws.kitchensinktest#RetryableTraitError": {
+			Schema: schemas.RetryableTraitError,
+			New:    func() any { return &types.RetryableTraitError{} },
+		},
+		"aws.kitchensinktest#ThrottlingRetryableTraitError": {
+			Schema: schemas.ThrottlingRetryableTraitError,
+			New:    func() any { return &types.ThrottlingRetryableTraitError{} },
+		},
 	},
 }

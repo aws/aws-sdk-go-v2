@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // Your request is invalid.
@@ -35,6 +36,13 @@ func (e *RequestError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *RequestError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *RequestError) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.RequestError)
 	v.SerializeMembers(s)
@@ -91,6 +99,13 @@ func (e *ServiceFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ServiceFault) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ServiceFault) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ServiceFault)
 	v.SerializeMembers(s)

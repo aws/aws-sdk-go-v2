@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakeredge/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // An internal failure occurred. Try your request again. If the problem persists,
@@ -34,6 +35,13 @@ func (e *InternalServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InternalServiceException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InternalServiceException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InternalServiceException)
 	v.SerializeMembers(s)

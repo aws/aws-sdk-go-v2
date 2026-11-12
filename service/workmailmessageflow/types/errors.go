@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 // WorkMail could not access the updated email content. Possible reasons:
@@ -43,6 +44,13 @@ func (e *InvalidContentLocation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidContentLocation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *InvalidContentLocation) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *InvalidContentLocation) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.InvalidContentLocation)
 	v.SerializeMembers(s)
@@ -91,6 +99,13 @@ func (e *MessageFrozen) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MessageFrozen) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *MessageFrozen) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *MessageFrozen) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.MessageFrozen)
 	v.SerializeMembers(s)
@@ -139,6 +154,13 @@ func (e *MessageRejected) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *MessageRejected) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *MessageRejected) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.MessageRejected)
 	v.SerializeMembers(s)
@@ -186,6 +208,13 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ResourceNotFoundException) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
 func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
 	s.WriteStruct(schemas.ResourceNotFoundException)
 	v.SerializeMembers(s)

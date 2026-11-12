@@ -99,6 +99,7 @@ var DefaultThrottleErrorCodes = map[string]struct{}{
 var DefaultRetryables = []IsErrorRetryable{
 	NoRetryCanceledError{},
 	RetryableError{},
+	RetryableTrait{},
 	RetryableConnectionError{},
 	RetryableHTTPStatusCode{
 		Codes: DefaultRetryableHTTPStatusCodes,
